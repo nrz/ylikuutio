@@ -3368,3 +3368,216 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     material->bind_to_new_parent(scene2);
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
 }
+
+TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_material_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials,
+            &shader->master_of_materials);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    shader->bind_to_new_parent(scene);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+}
+
+TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_symbiosis_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    shader->bind_to_new_parent(scene);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+}
+
+TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_material_and_symbiosis_apprentices)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials,
+            &shader->master_of_materials);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 2);
+
+    shader->bind_to_new_parent(scene);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 2);
+}
+
+TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_material_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene1;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials,
+            &shader->master_of_materials);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    shader->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+}
+
+TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_symbiosis_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene1;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &scene1->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    shader->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+}
+
+TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_material_and_symbiosis_apprentices)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene1->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene1;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene1->parent_of_materials,
+            &shader->master_of_materials);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene1;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &scene1->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 2);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    shader->bind_to_new_parent(scene2);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+}
