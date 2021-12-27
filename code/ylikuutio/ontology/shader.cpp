@@ -157,7 +157,8 @@ namespace yli::ontology
 
     std::size_t Shader::get_number_of_apprentices() const
     {
-        return this->master_of_materials.get_number_of_apprentices();
+        return this->master_of_materials.get_number_of_apprentices() +
+            this->master_of_symbioses.get_number_of_apprentices();
     }
 
     GLuint Shader::get_program_id() const
