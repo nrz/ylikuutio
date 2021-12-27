@@ -72,6 +72,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent == scene)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return;
+        }
+
         if (new_parent == nullptr)
         {
             std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
