@@ -68,6 +68,7 @@ namespace yli::ontology
             return;
         }
 
+        this->master_of_objects.unbind_all_apprentice_modules();
         this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_species);
     }
 
@@ -117,6 +118,11 @@ namespace yli::ontology
     yli::ontology::Entity* Species::get_parent() const
     {
         return this->child_of_scene.get_parent();
+    }
+
+    std::size_t Species::get_number_of_apprentices() const
+    {
+        return this->master_of_objects.get_number_of_apprentices();
     }
 
     void Species::render()

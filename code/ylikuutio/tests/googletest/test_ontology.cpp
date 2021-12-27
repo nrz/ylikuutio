@@ -3581,3 +3581,74 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
     shader->bind_to_new_parent(scene2);
     ASSERT_EQ(shader->get_number_of_apprentices(), 0);
 }
+
+TEST(species_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_object_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct1;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene->parent_of_species,
+            nullptr);
+
+    yli::ontology::ObjectStruct object_struct(scene);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &scene->parent_of_objects,
+            &species->master_of_objects,
+            nullptr);
+
+    ASSERT_EQ(species->get_number_of_apprentices(), 1);
+
+    species->bind_to_new_parent(scene);
+    ASSERT_EQ(species->get_number_of_apprentices(), 1);
+}
+
+TEST(species_must_unbind_all_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_object_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct1;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene1;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            universe,
+            model_struct,
+            &scene1->parent_of_species,
+            nullptr);
+
+    yli::ontology::ObjectStruct object_struct(scene1);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            universe,
+            object_struct,
+            &scene1->parent_of_objects,
+            &species->master_of_objects,
+            nullptr);
+
+    ASSERT_EQ(species->get_number_of_apprentices(), 1);
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            universe,
+            scene_struct1,
+            &universe->parent_of_scenes);
+
+    species->bind_to_new_parent(scene2);
+    ASSERT_EQ(species->get_number_of_apprentices(), 0);
+}
