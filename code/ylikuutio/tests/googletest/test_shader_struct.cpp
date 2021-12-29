@@ -18,10 +18,13 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 
+// Include standard headers
+#include <variant> // std::holds_alternative, std::monostate, std::variant
+
 TEST(shader_struct_must_be_initialized_appropriately, shader_struct)
 {
     const yli::ontology::ShaderStruct test_shader_struct;
-    ASSERT_EQ(test_shader_struct.parent, nullptr);
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_shader_struct.parent));
     ASSERT_TRUE(test_shader_struct.vertex_shader.empty());
     ASSERT_TRUE(test_shader_struct.fragment_shader.empty());
 }

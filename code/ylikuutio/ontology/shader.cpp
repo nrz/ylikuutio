@@ -18,6 +18,7 @@
 #include "shader.hpp"
 #include "master_module.hpp"
 #include "universe.hpp"
+#include "ecosystem.hpp"
 #include "scene.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -36,6 +37,46 @@ namespace yli::ontology
 {
     class Entity;
 
+    void Shader::bind_to_new_ecosystem_parent(yli::ontology::Ecosystem* const new_parent)
+    {
+        // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
+        // and requests a new `childID` from the new `Ecosystem`.
+        //
+        // requirements:
+        // `this->parent` must not be `nullptr`.
+        // `new_parent` must not be `nullptr`.
+
+        yli::ontology::Entity* const old_parent = this->get_parent();
+
+        if (old_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Shader::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent == old_parent)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return;
+        }
+
+        if (new_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Shader::bind_to_new_ecosystem_parent`: `new_parent` is `nullptr`!\n";
+            return;
+        }
+
+        if (new_parent->has_child(this->local_name))
+        {
+            std::cerr << "ERROR: `Shader::bind_to_new_ecosystem_parent`: local name is already in use!\n";
+            return;
+        }
+
+        // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
+        // so binding to an `Ecosystem` does not unbind any apprentices.
+        this->child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent->parent_of_shaders);
+    }
+
     void Shader::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
     {
         // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
@@ -45,15 +86,15 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const scene = this->child_of_scene.get_parent();
+        yli::ontology::Entity* const old_parent = this->get_parent();
 
-        if (scene == nullptr)
+        if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `old_parent` is `nullptr`!\n";
             return;
         }
 
-        if (new_parent == scene)
+        if (new_parent == old_parent)
         {
             // Setting current parent as the new parent. Nothing to do.
             return;
@@ -71,9 +112,9 @@ namespace yli::ontology
             return;
         }
 
-        this->master_of_materials.unbind_all_apprentice_modules();
-        this->master_of_symbioses.unbind_all_apprentice_modules();
-        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_shaders);
+        this->master_of_materials.unbind_all_apprentice_modules_belonging_to_other_scenes(new_parent);
+        this->master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(new_parent);
+        this->child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent->parent_of_shaders);
     }
 
     void Shader::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -85,15 +126,24 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
+        yli::ontology::Ecosystem* const ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(new_parent);
 
-        if (scene == nullptr)
+        if (ecosystem != nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
+            this->bind_to_new_ecosystem_parent(ecosystem);
             return;
         }
 
-        this->bind_to_new_scene_parent(scene);
+        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
+
+        if (scene != nullptr)
+        {
+            this->bind_to_new_scene_parent(scene);
+            return;
+        }
+
+        std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is neither `yli::ontology::Ecosystem*` nor `yli::ontology::Scene*`!\n";
+        return;
     }
 
     Shader::~Shader()
@@ -139,12 +189,12 @@ namespace yli::ontology
 
     yli::ontology::Scene* Shader::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+        return this->child_of_scene_or_ecosystem.get_scene();
     }
 
     yli::ontology::Entity* Shader::get_parent() const
     {
-        return this->child_of_scene.get_parent();
+        return this->child_of_scene_or_ecosystem.get_parent();
     }
 
     std::size_t Shader::get_number_of_children() const

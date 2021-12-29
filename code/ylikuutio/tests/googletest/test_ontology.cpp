@@ -451,6 +451,41 @@ TEST(scene_must_be_initialized_appropriately, no_universe_no_ecosystem)
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);
 }
 
+TEST(shader_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = ecosystem;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &ecosystem->parent_of_shaders);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
+
+    // `Shader` member functions.
+    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(shader->get_childID(), 0);
+    ASSERT_EQ(shader->get_type(), "yli::ontology::Shader*");
+    ASSERT_TRUE(shader->get_can_be_erased());
+    ASSERT_EQ(shader->get_universe(), universe);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem);
+    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+}
+
 TEST(shader_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
@@ -518,7 +553,6 @@ TEST(shader_must_be_initialized_appropriately, no_universe)
 TEST(shader_must_be_initialized_appropriately, no_universe_no_scene)
 {
     yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = nullptr;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, nullptr);
 
     // `Shader` member functions.
@@ -632,7 +666,6 @@ TEST(material_must_be_initialized_appropriately, no_universe)
 TEST(material_must_be_initialized_appropriately, no_universe_no_scene)
 {
     yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = nullptr;
     yli::ontology::Shader* const shader = new yli::ontology::Shader(nullptr, shader_struct, nullptr);
 
     yli::ontology::MaterialStruct material_struct;
@@ -1940,6 +1973,48 @@ TEST(scene_must_be_activated_appropriately, scene)
     ASSERT_EQ(universe->get_active_scene(), scene);
 }
 
+TEST(shader_must_bind_to_ecosystem_appropriately, ecosystem)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = ecosystem1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &ecosystem1->parent_of_shaders);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem1);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
+
+    yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem1);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
+
+    shader->bind_to_new_parent(ecosystem2);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem2);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
+
+    shader->bind_to_new_parent(ecosystem1);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem1);
+    ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
+}
+
 TEST(shader_must_bind_to_scene_appropriately, scenes)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
@@ -1979,6 +2054,84 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
+}
+
+TEST(shader_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+    ASSERT_EQ(shader->get_scene(), scene);
+    ASSERT_EQ(shader->get_parent(), scene);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
+
+    shader->bind_to_new_parent(ecosystem);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);     // Default `Camera`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `ecosystem`, `scene`.
+
+    shader->bind_to_new_parent(scene);
+    ASSERT_EQ(shader->get_scene(), scene);
+    ASSERT_EQ(shader->get_parent(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);     // Default `Camera`, `shader`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `ecosystem`, `scene`.
+}
+
+TEST(shader_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = ecosystem;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &ecosystem->parent_of_shaders);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    shader->bind_to_new_parent(scene);
+    ASSERT_EQ(shader->get_scene(), scene);
+    ASSERT_EQ(shader->get_parent(), scene);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);     // Default `Camera`, `shader`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
+
+    shader->bind_to_new_parent(ecosystem);
+    ASSERT_EQ(shader->get_scene(), nullptr);
+    ASSERT_EQ(shader->get_parent(), ecosystem);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);     // Default `Camera`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
 }
 
 TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
@@ -3367,6 +3520,78 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
     material->bind_to_new_parent(scene2);
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
+}
+
+TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_ecosystem, headless_universe_material_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            universe,
+            material_struct,
+            &scene->parent_of_materials,
+            &shader->master_of_materials);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    shader->bind_to_new_parent(ecosystem);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+}
+
+TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_ecosystem, headless_universe_symbiosis_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            universe,
+            model_struct,
+            &scene->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    shader->bind_to_new_parent(ecosystem);
+    ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 }
 
 TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_material_apprentice)

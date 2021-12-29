@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "brain.hpp"
 #include "movable.hpp"
+#include "ecosystem.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -54,6 +55,7 @@ namespace yli::ontology
             yli::ontology::Entity& parent_or_master_entity)
     {
         yli::ontology::Shader* const child_or_apprentice_shader = dynamic_cast<yli::ontology::Shader*>(&child_or_apprentice_entity);
+        yli::ontology::Ecosystem* const parent_or_master_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(&parent_or_master_entity);
         yli::ontology::Scene* const parent_or_master_scene = dynamic_cast<yli::ontology::Scene*>(&parent_or_master_entity);
 
         yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(&child_or_apprentice_entity);
@@ -69,7 +71,11 @@ namespace yli::ontology
         yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(&child_or_apprentice_entity);
         yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(&parent_or_master_entity);
 
-        if (child_or_apprentice_shader != nullptr && parent_or_master_scene != nullptr)
+        if (child_or_apprentice_shader != nullptr && parent_or_master_ecosystem != nullptr)
+        {
+            child_or_apprentice_shader->bind_to_new_ecosystem_parent(parent_or_master_ecosystem);
+        }
+        else if (child_or_apprentice_shader != nullptr && parent_or_master_scene != nullptr)
         {
             child_or_apprentice_shader->bind_to_new_scene_parent(parent_or_master_scene);
         }

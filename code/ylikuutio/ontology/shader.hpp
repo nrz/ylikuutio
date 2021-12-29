@@ -44,12 +44,16 @@
 
 namespace yli::ontology
 {
+    class Ecosystem;
     class Scene;
     class ShaderCompare;
 
     class Shader: public yli::ontology::Entity
     {
         public:
+            // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Ecosystem`.
+            void bind_to_new_ecosystem_parent(yli::ontology::Ecosystem* const new_parent);
+
             // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
             void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
@@ -57,9 +61,9 @@ namespace yli::ontology
             Shader(
                     yli::ontology::Universe* const universe,
                     const yli::ontology::ShaderStruct& shader_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module)
+                    yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
                 : Entity(universe, shader_struct),
-                child_of_scene(scene_parent_module, this),
+                child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
                 parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
                 master_of_materials(this, &this->registry, "materials", nullptr),
                 master_of_symbioses(this, &this->registry, "symbioses")
@@ -118,7 +122,7 @@ namespace yli::ontology
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
-            yli::ontology::ChildModule child_of_scene;
+            yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_compute_tasks;
             yli::ontology::MasterModule<yli::ontology::Shader*> master_of_materials;
             yli::ontology::GenericMasterModule master_of_symbioses;

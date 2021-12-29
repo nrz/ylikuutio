@@ -23,6 +23,7 @@
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
 #include "code/ylikuutio/ontology/parent_of_shaders_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -205,6 +206,29 @@ namespace yli::render
 
         // Swap buffers.
         SDL_GL_SwapWindow(render_struct.window);
+    }
+
+    void RenderMaster::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
+    {
+        for (auto it = parent.child_pointer_vector.begin(); it != parent.child_pointer_vector.end(); it++)
+        {
+            yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
+
+            if (ecosystem != nullptr && ecosystem->should_be_rendered)
+            {
+                this->render_shaders_of_an_ecosystem(ecosystem->parent_of_shaders, scene);
+            }
+        }
+    }
+
+    void RenderMaster::render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
+    {
+        yli::render::render_children_of_given_scene_or_of_all_scenes<
+            yli::ontology::ParentOfShadersModule&,
+            yli::ontology::Entity*,
+            yli::ontology::Shader*>(
+                parent,
+                scene);
     }
 
     void RenderMaster::render_shaders(yli::ontology::ParentOfShadersModule& parent) const

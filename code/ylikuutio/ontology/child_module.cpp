@@ -21,6 +21,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void ChildModule::bind_to_parent_module()
     {
         // requirements:
@@ -77,6 +79,16 @@ namespace yli::ontology
         return this->entity;
     }
 
+    yli::ontology::Scene* ChildModule::get_scene() const
+    {
+        if (this->parent_module != nullptr)
+        {
+            return this->parent_module->get_scene();
+        }
+
+        return nullptr;
+    }
+
     void ChildModule::unbind_child() const
     {
         if (this->parent_module == nullptr)
@@ -89,7 +101,7 @@ namespace yli::ontology
             return;
         }
 
-        this->parent_module->unbind_child(entity->get_childID());
+        this->parent_module->unbind_child(this->entity->get_childID());
     }
 
     void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)

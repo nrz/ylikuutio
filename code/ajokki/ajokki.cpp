@@ -51,6 +51,7 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
@@ -59,6 +60,7 @@
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
@@ -290,6 +292,36 @@ namespace ajokki
                 yli::snippets::set_console(my_universe, 15, 0, 0, 39);
 
                 my_universe->set_active_console(my_console);
+
+                // Create an Earth `Ecosystem`.
+
+                std::cout << "Creating yli::ontology::Entity* earth_ecosystem and its contents ...\n";
+                yli::ontology::EcosystemStruct earth_ecosystem_struct;
+                earth_ecosystem_struct.global_name = "earth_ecosystem";
+                yli::ontology::Entity* const earth_ecosystem_entity = entity_factory->create_ecosystem(earth_ecosystem_struct);
+
+                std::cout << "Creating yli::ontology::Ecosystem* earth_ecosystem ...\n";
+                yli::ontology::Ecosystem* const earth_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(earth_ecosystem_entity);
+
+                if (earth_ecosystem == nullptr)
+                {
+                    return false;
+                }
+
+                // Create a Mars `Ecosystem`.
+
+                std::cout << "Creating yli::ontology::Entity* mars_ecosystem and its contents ...\n";
+                yli::ontology::EcosystemStruct mars_ecosystem_struct;
+                mars_ecosystem_struct.global_name = "mars_ecosystem";
+                yli::ontology::Entity* const mars_ecosystem_entity = entity_factory->create_ecosystem(mars_ecosystem_struct);
+
+                std::cout << "Creating yli::ontology::Ecosystem* mars_ecosystem ...\n";
+                yli::ontology::Ecosystem* const mars_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(mars_ecosystem_entity);
+
+                if (mars_ecosystem == nullptr)
+                {
+                    return false;
+                }
 
                 // Create the `Scene`s.
                 // The `Scene`s will be created in the following order:

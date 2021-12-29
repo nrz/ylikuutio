@@ -28,6 +28,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     bool GenericParentModule::bind_child(yli::ontology::Entity* const child)
     {
         if (this->entity == nullptr || child == nullptr)
@@ -116,6 +118,11 @@ namespace yli::ontology
     std::size_t GenericParentModule::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
+    }
+
+    yli::ontology::Scene* GenericParentModule::get_scene() const
+    {
+        return this->entity->get_scene();
     }
 
     yli::ontology::Entity* GenericParentModule::get(const std::size_t index) const

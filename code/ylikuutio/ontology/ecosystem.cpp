@@ -46,13 +46,11 @@ namespace yli::ontology
 
     std::size_t Ecosystem::get_number_of_children() const
     {
-        return 0; // `Ecosystem` has no children.
-        // TODO: add children!
+        return this->parent_of_shaders.get_number_of_children();
     }
 
     std::size_t Ecosystem::get_number_of_descendants() const
     {
-        return 0; // `Ecosystem` has no children.
-        // TODO: add children!
+        return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector);
     }
 }

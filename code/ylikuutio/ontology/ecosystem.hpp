@@ -20,56 +20,15 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "parent_of_shaders_module.hpp"
 #include "ecosystem_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-// `Ecosystem`s can be owners of some common resources, like `VectorFont`s.
+// `Ecosystem`s can be owners of some common resources (Entities).
 // Compared to `Scene`s which are actual game/simulation locations,
 // `Ecosystem`s only function as owners of resources shared between `Scene`s.
-//
-// Most child classes of `Scene` and below classes can be converted
-// into corresponding ecosystem-bound classes:
-// * `Shader` -> `EcosystemShader`.
-// * `Material` -> `EcosystemMaterial`.
-// * `Species` -> `EcosystemSpecies`.
-// * `Symbiosis` -> `EcosystemSymbiosis`.
-// * `Brain` -> `EcosystemBrain`.
-// * etc.
-//
-// Each `Ecosystem`-bound `Entity` class inherits its base class.
-//
-// This conversion does not affect already existing children.
-// They function just like before their parent's or parent's parent's etc.
-// conversion into a `Ecosystem`-bound `Entity`.
-//
-// So, e.g. `EcosystemShader` may have the following kinds of children:
-// 1. `Material`,
-// 2. `Symbiosis`,
-// 3. `ComputeTask`,
-// 4. `EcosystemMaterial`,
-// 5. `EcosystemSymbiosis`,
-// 6. `EcosystemComputeTask`.
-//
-// The storage of `Material`, `Symbiosis`, and `ComputeTask` entities is
-// inherited from the `Shader` base class.
-//
-// Rendering of `EcosystemShader`s works as follows:
-// 1. `Scene::render` calls the following function:
-//    `Ecosystem::render_ecosystem_shaders(const std::size_t entityID)`.
-// 2. `Ecosystem::render_ecosystem_shaders then calls `EcosystemShader::render` for
-//    its every `EcosystemShader` child.
-// 3. `EcosystemShader::render` then renders only those `Material`, `Symbiosis`,
-//    and `ComputeTask` entities which belong to the `Scene` with that
-//    specific `entityID`.
-// 4. `EcosystemShader::render` also renders all `EcosystemMaterial`, `EcosystemSymbiosis`,
-//    and `EcosystemComputeTask` entities. Each of these renders only those regular
-//    children entities, i.e. not `Ecosystem`-bound entities, that belong to
-//    the `Scene` with the specific `entityID`, and also all `Ecosystem`-bound
-//    entities, in a similar fashion compared to `EcosystemShader`.
-//
-// TODO: implement `Ecosystem`-bound entities!
 
 namespace yli::ontology
 {
@@ -85,7 +44,8 @@ namespace yli::ontology
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, ecosystem_struct),
-                child_of_universe(parent_module, this)
+                child_of_universe(parent_module, this),
+                parent_of_shaders(this, &this->registry, "shaders")
             {
                 // constructor.
 
@@ -103,6 +63,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::ChildModule child_of_universe;
+            yli::ontology::ParentOfShadersModule parent_of_shaders;
 
             yli::ontology::Scene* get_scene() const override;
 
