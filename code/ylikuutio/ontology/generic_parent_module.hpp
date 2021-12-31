@@ -31,6 +31,7 @@ namespace yli::ontology
 {
     class Registry;
     class Entity;
+    class Scene;
 
     class GenericParentModule: public yli::ontology::Indexable
     {
@@ -57,6 +58,8 @@ namespace yli::ontology
             yli::ontology::Entity* get_entity() const;
             std::size_t get_number_of_children() const;
             std::size_t get_number_of_descendants() const;
+
+            yli::ontology::Scene* get_scene() const;
 
             yli::ontology::Entity* get(const std::size_t index) const override;
 

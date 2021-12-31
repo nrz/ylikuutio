@@ -18,6 +18,8 @@
 #ifndef __YLIKUUTIO_LOAD_IMAGE_LOADER_STRUCT_HPP_INCLUDED
 #define __YLIKUUTIO_LOAD_IMAGE_LOADER_STRUCT_HPP_INCLUDED
 
+#include <ofbx.h>
+
 // Include standard headers
 #include <utility> // std::pair
 #include <vector>  // std::vector
@@ -59,6 +61,7 @@ namespace yli::load
             }
         }
 
+        ofbx::Texture* ofbx_texture          { nullptr };
         bool should_convert_grayscale_to_rgb { false };
         bool should_discard_alpha_channel    { false };
         bool should_flip_vertically          { false };

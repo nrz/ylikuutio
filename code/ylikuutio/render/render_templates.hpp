@@ -25,6 +25,11 @@
 #include <type_traits> // std::decay
 #include <vector>  // std::vector
 
+namespace yli::ontology
+{
+    class Scene;
+}
+
 namespace yli::render
 {
     template<typename T>
@@ -40,6 +45,27 @@ namespace yli::render
                 if (child_pointer != nullptr && child_pointer->should_be_rendered)
                 {
                     child_pointer->render();
+                }
+            }
+        }
+
+    template<typename ContainerType, typename StoredType, typename CastType>
+        void render_children_of_given_scene_or_of_all_scenes(
+                ContainerType& child_container,
+                const yli::ontology::Scene* const scene)
+        {
+            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); it++)
+            {
+                CastType child_pointer = static_cast<CastType>(*it);
+
+                if (child_pointer != nullptr && child_pointer->should_be_rendered)
+                {
+                    yli::ontology::Scene* const scene_of_child = child_pointer->get_scene();
+
+                    if (scene_of_child == scene || scene_of_child == nullptr)
+                    {
+                        child_pointer->render();
+                    }
                 }
             }
         }

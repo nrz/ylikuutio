@@ -50,6 +50,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent == scene)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return;
+        }
+
         if (new_parent == nullptr)
         {
             std::cerr << "ERROR: `Species::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
@@ -62,11 +68,8 @@ namespace yli::ontology
             return;
         }
 
-        // unbind from the old parent `Scene`.
-        this->child_of_scene.unbind_child();
-
-        // get `childID` from `Scene` and set pointer to this `Species`.
-        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_species);
+        this->master_of_objects.unbind_all_apprentice_modules();
+        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_species);
     }
 
     void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -115,6 +118,11 @@ namespace yli::ontology
     yli::ontology::Entity* Species::get_parent() const
     {
         return this->child_of_scene.get_parent();
+    }
+
+    std::size_t Species::get_number_of_apprentices() const
+    {
+        return this->master_of_objects.get_number_of_apprentices();
     }
 
     void Species::render()

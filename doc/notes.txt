@@ -138,3 +138,6 @@ Study Finite Element Method (FEM) for water, snow, and ice simulations.
 Grid-based approach.
 Boundary-element method.
 Hydrostatics for water.
+
+Terrain rendering in Far Cry 5:
+https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry

@@ -31,6 +31,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class Scene;
     class SymbiontSpecies;
     class Glyph;
     class GenericParentModule;
@@ -66,6 +67,8 @@ namespace yli::render
             // This function renders everything.
             void render(const yli::render::RenderStruct& render_struct) const;
 
+            void render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
+            void render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const;
             void render_shaders(yli::ontology::ParentOfShadersModule& parent) const;
             void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
             void render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const;

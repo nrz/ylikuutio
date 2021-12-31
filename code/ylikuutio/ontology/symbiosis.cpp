@@ -69,6 +69,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent == scene)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return;
+        }
+
         if (new_parent == nullptr)
         {
             std::cerr << "ERROR: `Symbiosis::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
@@ -81,11 +87,7 @@ namespace yli::ontology
             return;
         }
 
-        // unbind from the old parent `Scene`.
-        this->child_of_scene.unbind_child();
-
-        // get `childID` from `Scene` and set pointer to this `Symbiosis`.
-        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
+        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
     }
 
     void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)
@@ -394,7 +396,7 @@ namespace yli::ontology
     uint32_t Symbiosis::get_texture(const std::size_t biontID) const
     {
         yli::ontology::SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
-        return symbiont_material->get_texture();
+        return symbiont_material->texture.get_texture();
     }
 
     GLint Symbiosis::get_openGL_textureID(const std::size_t biontID) const

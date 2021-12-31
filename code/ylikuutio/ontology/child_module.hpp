@@ -22,6 +22,7 @@ namespace yli::ontology
 {
     class Entity;
     class GenericParentModule;
+    class Scene;
 
     class ChildModule
     {
@@ -42,8 +43,10 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const;
             yli::ontology::Entity* get_child() const;
+            yli::ontology::Scene* get_scene() const;
             void unbind_child() const;
             void set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
+            void unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
 
         private:
             void bind_to_parent_module();

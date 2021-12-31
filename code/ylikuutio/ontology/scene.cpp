@@ -110,6 +110,7 @@ namespace yli::ontology
         }
 
         this->prerender();
+        render_master->render_shaders_of_ecosystems(this->universe->get_ecosystem_shaders(), this);
         render_master->render_shaders(this->parent_of_shaders);
         this->postrender();
     }

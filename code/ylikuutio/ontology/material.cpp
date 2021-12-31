@@ -51,6 +51,12 @@ namespace yli::ontology
             return;
         }
 
+        if (new_parent == scene)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return;
+        }
+
         if (new_parent == nullptr)
         {
             std::cerr << "ERROR: `Material::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
@@ -63,11 +69,8 @@ namespace yli::ontology
             return;
         }
 
-        // Unbind from the old parent `Scene`.
-        scene->parent_of_materials.unbind_child(this->childID);
-
-        // Get `childID` from `Scene` and set pointer to this `Material`.
-        this->child_of_scene.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_materials);
+        this->master_of_species.unbind_all_apprentice_modules();
+        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_materials);
     }
 
     void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)

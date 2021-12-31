@@ -33,8 +33,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "entity.hpp"
 #include "universe.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "font_2d.hpp"
 #include "text_2d.hpp"
@@ -97,6 +97,7 @@ namespace yli::input
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Font2D;
 
     const std::string Universe::version = "0.0.9";
@@ -736,6 +737,11 @@ namespace yli::ontology
     {
         // `Universe` has no parent.
         return nullptr;
+    }
+
+    yli::ontology::GenericParentModule& Universe::get_ecosystem_shaders()
+    {
+        return this->parent_of_ecosystems;
     }
 
     yli::ontology::Scene* Universe::get_scene() const

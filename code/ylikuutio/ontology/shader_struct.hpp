@@ -22,16 +22,18 @@
 
 // Include standard headers
 #include <string> // std::string
+#include <variant> // std::holds_alternative, std::monostate, std::variant
 
 namespace yli::ontology
 {
+    class Ecosystem;
     class Scene;
 
     struct ShaderStruct: public yli::ontology::EntityStruct
     {
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        yli::ontology::Scene* parent { nullptr }; // pointer to the `Scene`.
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent; // Pointer to `Ecosystem` or `Scene`.
         bool is_gpgpu_shader         { false };   // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }

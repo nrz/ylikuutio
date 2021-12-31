@@ -60,11 +60,7 @@ namespace yli::ontology
             return;
         }
 
-        // Unbind from the old parent `VectorFont`.
-        this->child_of_vector_font.unbind_child();
-
-        // Get `childID` from `VectorFont` and set pointer to this `Text3D`.
-        this->child_of_vector_font.set_parent_module_and_bind_to_new_parent(&new_parent->parent_of_text_3ds);
+        this->child_of_vector_font.unbind_and_bind_to_new_parent(&new_parent->parent_of_text_3ds);
     }
 
     void Text3D::bind_to_new_parent(yli::ontology::Entity* const new_parent)

@@ -28,6 +28,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
     {
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
@@ -37,13 +39,41 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_apprentice_module(std::size_t apprenticeID)
+    void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID)
     {
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
                 this->number_of_apprentices);
+    }
+
+    void GenericMasterModule::unbind_all_apprentice_modules()
+    {
+        for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
+        {
+            this->unbind_apprentice_module(apprenticeID);
+        }
+    }
+
+    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(yli::ontology::Scene* const scene)
+    {
+        for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
+        {
+            yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
+
+            if (apprentice_module != nullptr)
+            {
+                yli::ontology::Entity* const apprentice = apprentice_module->get_apprentice();
+
+                if (apprentice->get_scene() != scene)
+                {
+                    // If the `Scene` of the apprentice is some other `Scene` or `nullptr`,
+                    // then unbind the apprentice from this `GenericMasterModule`.
+                    this->unbind_apprentice_module(apprenticeID);
+                }
+            }
+        }
     }
 
     GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name)

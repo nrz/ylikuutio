@@ -28,7 +28,7 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (this->is_texture_loaded)
+        if (this->get_is_texture_loaded())
         {
             // Delete texture.
             glDeleteTextures(1, &this->texture);
@@ -72,6 +72,6 @@ namespace yli::ontology
 
     bool TextureModule::get_is_texture_loaded() const
     {
-        return this->is_texture_loaded;
+        return this->texture != GL_INVALID_VALUE;
     }
 }
