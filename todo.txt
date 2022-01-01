@@ -7,7 +7,9 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Implement `yli::ontology::Ecosystem` class for storing assets independently of `Scene`s so that they can be used in multiple `Scene`s.
+[ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
+[ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
+[ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
@@ -297,3 +299,4 @@ Ready:
 [x] Add roll rotation.
 [x] Make `Object` a child of the `Scene`.
 [x] Make `Symbiosis` a child of the `Scene`.
+[x] Implement `yli::ontology::Ecosystem` class for storing `Shader`s independently of `Scene`s so that they can be used in multiple `Scene`s.
