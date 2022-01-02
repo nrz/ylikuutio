@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -195,11 +195,11 @@ namespace yli::command_line
 
         const std::vector<std::string> args = yli::map::get_keys(this->arg_map);
 
-        for (auto arg_it = args.begin(); arg_it != args.end(); arg_it++)
+        for (auto arg_it = args.begin(); arg_it != args.end(); ++arg_it)
         {
             bool is_valid_key = false;
 
-            for (auto valid_keys_it = valid_keys.begin(); valid_keys_it != valid_keys.end(); valid_keys_it++)
+            for (auto valid_keys_it = valid_keys.begin(); valid_keys_it != valid_keys.end(); ++valid_keys_it)
             {
                 if (*arg_it == *valid_keys_it)
                 {

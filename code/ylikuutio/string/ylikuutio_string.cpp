@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -273,7 +273,7 @@ namespace yli::string
         std::size_t length_of_last_part_of_string = 0;
         auto separator_it = data_string.end(); // by default no last part.
 
-        for (auto it = data_string.begin(); it != data_string.end(); it++)
+        for (auto it = data_string.begin(); it != data_string.end(); ++it)
         {
             if (*it == separator)
             {
@@ -292,7 +292,7 @@ namespace yli::string
             return 0;
         }
 
-        separator_it++;
+        ++separator_it;
         dest_string = std::string(separator_it, data_string.end());
         return length_of_last_part_of_string;
     }
@@ -1179,7 +1179,7 @@ namespace yli::string
         std::string current_line_ascii = "";
         std::string current_line_hex = "";
 
-        for (auto it = my_string.begin(); it != my_string.end(); it++)
+        for (auto it = my_string.begin(); it != my_string.end(); ++it)
         {
             const uint8_t data_byte = static_cast<uint8_t>(*it);
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');

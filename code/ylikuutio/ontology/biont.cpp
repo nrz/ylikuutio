@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -78,7 +78,7 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child_of_holobiont.get_parent());
+        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
         if (holobiont == nullptr)
         {
@@ -124,7 +124,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->child_of_holobiont.get_parent());
+        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
         if (holobiont == nullptr)
         {

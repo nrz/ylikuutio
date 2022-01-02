@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -61,7 +61,7 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const scene = this->child_of_scene.get_parent();
+        yli::ontology::Entity* const scene = this->get_parent();
 
         if (scene == nullptr)
         {
@@ -234,7 +234,7 @@ namespace yli::ontology
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
 
-            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->get_shader());
+            yli::ontology::Shader* const shader = this->get_shader();
 
             if (shader == nullptr)
             {

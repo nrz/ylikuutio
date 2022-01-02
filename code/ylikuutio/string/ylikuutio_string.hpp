@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -301,7 +301,7 @@ namespace yli::string
             std::string my_string;
             std::size_t remaining_characters_on_this_line = first_line_length;
 
-            for (auto it = char_container.begin(); it != char_container.end(); it++)
+            for (auto it = char_container.begin(); it != char_container.end(); ++it)
             {
                 if (remaining_characters_on_this_line == 0)
                 {
@@ -326,7 +326,7 @@ namespace yli::string
             std::string my_string;
             std::size_t remaining_characters_on_this_line = line_length;
 
-            for (auto it = char_container.begin(); it != char_container.end(); it++)
+            for (auto it = char_container.begin(); it != char_container.end(); ++it)
             {
                 if (remaining_characters_on_this_line == 0)
                 {

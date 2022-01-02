@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -45,6 +45,8 @@ namespace yli::ontology
     void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
     {
         // Unbind from the current `Font2D` if there is such.
+
+        this->apprentice_of_font_2d.unbind_from_generic_master_module();
 
         if (new_font_2d != nullptr)
         {
@@ -329,7 +331,7 @@ namespace yli::ontology
 
     bool Console::enter_console()
     {
-        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
+        yli::ontology::Universe* const universe = this->universe;
 
         if (universe != nullptr &&
                 universe->get_active_console() == this &&
@@ -354,7 +356,7 @@ namespace yli::ontology
 
     bool Console::exit_console()
     {
-        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
+        yli::ontology::Universe* const universe = this->universe;
 
         if (this->in_console && universe != nullptr)
         {

@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -46,7 +46,7 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const font_2d = this->child_of_font_2d.get_parent();
+        yli::ontology::Entity* const font_2d = this->get_parent();
 
         if (font_2d == nullptr)
         {
@@ -105,7 +105,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->child_of_font_2d.get_parent() == nullptr)
+        if (this->get_parent() == nullptr)
         {
             return;
         }
@@ -266,7 +266,7 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->child_of_font_2d.get_parent());
+            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
             const std::string& font_texture_file_format = font_2d->get_font_texture_file_format();
 

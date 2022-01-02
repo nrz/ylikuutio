@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -90,7 +90,7 @@ namespace yli::ontology
                     return std::nullopt;
                 }
 
-                yli::ontology::Entity* const lisp_function_entity = this->child_of_lisp_function.get_parent();
+                yli::ontology::Entity* const lisp_function_entity = this->get_parent();
 
                 yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 

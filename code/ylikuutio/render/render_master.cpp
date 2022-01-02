@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -210,7 +210,7 @@ namespace yli::render
 
     void RenderMaster::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
     {
-        for (auto it = parent.child_pointer_vector.begin(); it != parent.child_pointer_vector.end(); it++)
+        for (auto it = parent.child_pointer_vector.begin(); it != parent.child_pointer_vector.end(); ++it)
         {
             yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
 

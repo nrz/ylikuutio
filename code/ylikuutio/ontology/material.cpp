@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -43,7 +43,7 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->get_parent());
 
         if (scene == nullptr)
         {
@@ -96,6 +96,8 @@ namespace yli::ontology
     {
         // Unbind from the current `Shader` if there is such.
 
+        this->apprentice_of_shader.unbind_from_generic_master_module();
+
         if (new_shader != nullptr)
         {
             this->apprentice_of_shader.bind_to_new_generic_master_module(&new_shader->master_of_materials);
@@ -124,6 +126,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `Material::render`: `render_master` is `nullptr`!\n";
             return;
         }
 

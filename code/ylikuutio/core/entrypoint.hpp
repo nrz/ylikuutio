@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -119,7 +119,7 @@ int main(const int argc, const char* const argv[]) try
 
         const std::vector<std::string> invalid_keys = application->command_line_master.get_invalid_keys(valid_keys);
 
-        for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); it++)
+        for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); ++it)
         {
             std::cerr << "ERROR: Invalid command line parameter: " << *it << "\n";
         }

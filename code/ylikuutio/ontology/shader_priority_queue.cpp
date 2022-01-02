@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -34,7 +34,7 @@ namespace yli::ontology
 
     bool ShaderPriorityQueue::remove(const std::size_t childID)
     {
-        for (auto it = this->c.begin(); it != this->c.end(); it++)
+        for (auto it = this->c.begin(); it != this->c.end(); ++it)
         {
             if ((*it)->get_childID() == childID)
             {

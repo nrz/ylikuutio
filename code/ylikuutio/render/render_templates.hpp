@@ -1,6 +1,6 @@
 // Ylikuutio - A 3D game and simulation engine.
 //
-// Copyright (C) 2015-2021 Antti Nuortimo.
+// Copyright (C) 2015-2022 Antti Nuortimo.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -38,7 +38,7 @@ namespace yli::render
     template<typename ContainerType, typename StoredType, typename CastType>
         void render_children(ContainerType& child_container)
         {
-            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); it++)
+            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
             {
                 CastType child_pointer = static_cast<CastType>(*it);
 
@@ -54,7 +54,7 @@ namespace yli::render
                 ContainerType& child_container,
                 const yli::ontology::Scene* const scene)
         {
-            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); it++)
+            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
             {
                 CastType child_pointer = static_cast<CastType>(*it);
 
