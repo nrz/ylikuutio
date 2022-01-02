@@ -159,7 +159,7 @@ namespace yli::audio
                     this->playlist_map[playlist].erase(it--);
                 }
 
-                it++;
+                ++it;
             }
         }
     }

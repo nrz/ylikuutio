@@ -34,7 +34,7 @@ namespace yli::ontology
 
     bool ShaderPriorityQueue::remove(const std::size_t childID)
     {
-        for (auto it = this->c.begin(); it != this->c.end(); it++)
+        for (auto it = this->c.begin(); it != this->c.end(); ++it)
         {
             if ((*it)->get_childID() == childID)
             {
