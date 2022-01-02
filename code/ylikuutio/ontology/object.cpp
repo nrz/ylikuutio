@@ -121,6 +121,8 @@ namespace yli::ontology
         {
             // Unbind from the current `Species` if there is such.
 
+            this->apprentice_of_mesh.unbind_from_generic_master_module();
+
             if (new_species != nullptr)
             {
                 this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_species->master_of_objects);
@@ -141,6 +143,8 @@ namespace yli::ontology
         {
             // Unbind from the current `ShapeshifterSequence` if there is such.
 
+            this->apprentice_of_mesh.unbind_from_generic_master_module();
+
             if (new_shapeshifter_sequence != nullptr)
             {
                 this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_shapeshifter_sequence->master_of_objects);
@@ -160,6 +164,8 @@ namespace yli::ontology
         if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
             // Unbind from the current `Text3D` if there is such.
+
+            this->apprentice_of_mesh.unbind_from_generic_master_module();
 
             if (new_text_3d != nullptr)
             {

@@ -48,6 +48,8 @@ namespace yli::ontology
     {
         // Unbind from the current `Brain` if there is such.
 
+        this->apprentice_of_brain.unbind_from_generic_master_module();
+
         if (new_brain != nullptr)
         {
             this->apprentice_of_brain.bind_to_new_generic_master_module(&new_brain->master_of_movables);

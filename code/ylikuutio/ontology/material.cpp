@@ -96,6 +96,8 @@ namespace yli::ontology
     {
         // Unbind from the current `Shader` if there is such.
 
+        this->apprentice_of_shader.unbind_from_generic_master_module();
+
         if (new_shader != nullptr)
         {
             this->apprentice_of_shader.bind_to_new_generic_master_module(&new_shader->master_of_materials);

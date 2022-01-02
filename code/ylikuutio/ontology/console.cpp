@@ -46,6 +46,8 @@ namespace yli::ontology
     {
         // Unbind from the current `Font2D` if there is such.
 
+        this->apprentice_of_font_2d.unbind_from_generic_master_module();
+
         if (new_font_2d != nullptr)
         {
             this->apprentice_of_font_2d.bind_to_new_generic_master_module(&new_font_2d->master_of_consoles);
