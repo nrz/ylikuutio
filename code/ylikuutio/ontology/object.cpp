@@ -382,7 +382,7 @@ namespace yli::ontology
     {
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->child_of_scene.get_parent());
+            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
             if (species != nullptr)
             {
