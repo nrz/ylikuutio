@@ -142,6 +142,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `Font2D::render`: `render_master` is `nullptr`!\n";
             return;
         }
 

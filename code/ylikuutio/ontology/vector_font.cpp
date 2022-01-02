@@ -159,6 +159,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `VectorFont::render`: `render_master` is `nullptr`!\n";
             return;
         }
 

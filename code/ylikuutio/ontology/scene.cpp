@@ -106,6 +106,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `Scene::render`: `render_master` is `nullptr`!\n";
             return;
         }
 

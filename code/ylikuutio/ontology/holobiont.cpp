@@ -71,6 +71,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `Holobiont::render`: `render_master` is `nullptr`!\n";
             return;
         }
 

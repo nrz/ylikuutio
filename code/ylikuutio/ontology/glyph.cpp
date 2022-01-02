@@ -80,6 +80,7 @@ namespace yli::ontology
 
         if (render_master == nullptr)
         {
+            std::cerr << "ERROR: `Glyph::render`: `render_master` is `nullptr`!\n";
             return;
         }
 
