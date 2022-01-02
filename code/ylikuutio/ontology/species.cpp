@@ -170,7 +170,7 @@ namespace yli::ontology
 
     yli::ontology::Shader* Species::get_shader() const
     {
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->apprentice_of_material.get_master());
 
         if (material != nullptr)
         {
