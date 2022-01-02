@@ -294,39 +294,39 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        yli::ontology::MeshModule* parent_model = nullptr;
+        yli::ontology::MeshModule* master_model = nullptr;
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const parent_species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
+            yli::ontology::Species* const master_species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
-            if (parent_species != nullptr)
+            if (master_species != nullptr)
             {
-                parent_model = &parent_species->mesh;
+                master_model = &master_species->mesh;
             }
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            // TODO: set `parent_model` so that it points to the correct `ShapeshifterForm` for the current frame!
+            // TODO: set `master_model` so that it points to the correct `ShapeshifterForm` for the current frame!
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            yli::ontology::Glyph* const parent_glyph = this->glyph;
+            yli::ontology::Glyph* const master_glyph = this->glyph;
 
-            if (parent_glyph != nullptr)
+            if (master_glyph != nullptr)
             {
-                parent_model = &parent_glyph->mesh;
+                master_model = &master_glyph->mesh;
             }
         }
 
-        GLuint vertexbuffer                    = parent_model->get_vertexbuffer();
-        uint32_t vertex_position_modelspace_id = parent_model->get_vertex_position_modelspace_id();
-        GLuint uvbuffer                        = parent_model->get_uvbuffer();
-        uint32_t vertex_uv_id                  = parent_model->get_vertex_uv_id();
-        GLuint normalbuffer                    = parent_model->get_normalbuffer();
-        uint32_t vertex_normal_modelspace_id   = parent_model->get_vertex_normal_modelspace_id();
-        GLuint elementbuffer                   = parent_model->get_elementbuffer();
-        uint32_t indices_size                  = parent_model->get_indices().size();
+        GLuint vertexbuffer                    = master_model->get_vertexbuffer();
+        uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
+        GLuint uvbuffer                        = master_model->get_uvbuffer();
+        uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
+        GLuint normalbuffer                    = master_model->get_normalbuffer();
+        uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
+        GLuint elementbuffer                   = master_model->get_elementbuffer();
+        uint32_t indices_size                  = master_model->get_indices().size();
 
         // 1st attribute buffer: vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
