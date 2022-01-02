@@ -329,7 +329,7 @@ namespace yli::ontology
 
     bool Console::enter_console()
     {
-        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
+        yli::ontology::Universe* const universe = this->universe;
 
         if (universe != nullptr &&
                 universe->get_active_console() == this &&
@@ -354,7 +354,7 @@ namespace yli::ontology
 
     bool Console::exit_console()
     {
-        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
+        yli::ontology::Universe* const universe = this->universe;
 
         if (this->in_console && universe != nullptr)
         {

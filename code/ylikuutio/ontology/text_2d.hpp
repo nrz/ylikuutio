@@ -81,7 +81,7 @@ namespace yli::ontology
                     glGenBuffers(1, &this->uvbuffer);
 
                     // Get a handle for our buffers.
-                    yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->child_of_font_2d.get_parent());
+                    yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
                     if (font_2d != nullptr)
                     {

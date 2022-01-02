@@ -42,7 +42,7 @@ namespace yli::ontology
         // `this->scene_parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const scene = this->child_of_scene.get_parent();
+        yli::ontology::Entity* const scene = this->get_parent();
 
         if (scene == nullptr)
         {

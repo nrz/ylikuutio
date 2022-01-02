@@ -42,7 +42,7 @@ namespace yli::ontology
         // requirements:
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const material = this->child_of_material.get_parent();
+        yli::ontology::Entity* const material = this->get_parent();
 
         if (material == nullptr)
         {

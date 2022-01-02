@@ -40,7 +40,7 @@ namespace yli::ontology
         // `this->parent` must not be `nullptr`.
         // `new_parent` must not be `nullptr`.
 
-        yli::ontology::Entity* const vector_font = this->child_of_vector_font.get_parent();
+        yli::ontology::Entity* const vector_font = this->get_parent();
 
         if (vector_font == nullptr)
         {
