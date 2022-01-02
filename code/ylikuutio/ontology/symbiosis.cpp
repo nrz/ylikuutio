@@ -234,7 +234,7 @@ namespace yli::ontology
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
 
-            yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(this->get_shader());
+            yli::ontology::Shader* const shader = this->get_shader();
 
             if (shader == nullptr)
             {
