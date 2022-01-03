@@ -20,7 +20,6 @@
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "shader.hpp"
-#include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
@@ -200,43 +199,17 @@ namespace yli::ontology
 
         if (this->should_be_rendered)
         {
-            if (this->object_type == yli::ontology::ObjectType::REGULAR)
+            if (this->object_type == yli::ontology::ObjectType::REGULAR ||
+                    this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
-                yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
-
-                if (species == nullptr)
-                {
-                    return;
-                }
-
-                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->apprentice_of_material.get_master());
-
-                if (material == nullptr)
-                {
-                    return;
-                }
-
-                yli::ontology::Shader* const shader = material->get_shader();
-
-                if (shader == nullptr)
-                {
-                    return;
-                }
-
                 this->prerender();
-                this->render_this_object(shader);
+                this->render_this_object(this->get_shader());
                 this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
                 this->prerender();
                 // TODO.
-                this->postrender();
-            }
-            else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                this->prerender();
-                this->render_this_object(static_cast<yli::ontology::Shader*>(this->get_shader()));
                 this->postrender();
             }
         }
