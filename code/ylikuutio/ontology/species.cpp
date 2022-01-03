@@ -94,17 +94,13 @@ namespace yli::ontology
 
     void Species::bind_to_new_material(yli::ontology::Material* const new_material)
     {
-        // Unbind from the current `Material` if there is such.
-
-        this->apprentice_of_material.unbind_from_generic_master_module();
-
         if (new_material != nullptr)
         {
-            this->apprentice_of_material.bind_to_new_generic_master_module(&new_material->master_of_species);
+            this->apprentice_of_material.unbind_and_bind_to_new_generic_master_module(&new_material->master_of_species);
         }
         else
         {
-            this->apprentice_of_material.bind_to_new_generic_master_module(nullptr);
+            this->apprentice_of_material.unbind_and_bind_to_new_generic_master_module(nullptr);
         }
     }
 

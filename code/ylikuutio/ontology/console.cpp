@@ -44,17 +44,13 @@ namespace yli::ontology
 
     void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
     {
-        // Unbind from the current `Font2D` if there is such.
-
-        this->apprentice_of_font_2d.unbind_from_generic_master_module();
-
         if (new_font_2d != nullptr)
         {
-            this->apprentice_of_font_2d.bind_to_new_generic_master_module(&new_font_2d->master_of_consoles);
+            this->apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(&new_font_2d->master_of_consoles);
         }
         else
         {
-            this->apprentice_of_font_2d.bind_to_new_generic_master_module(nullptr);
+            this->apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(nullptr);
         }
     }
 
