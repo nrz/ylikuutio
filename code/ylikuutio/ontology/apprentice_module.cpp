@@ -19,6 +19,9 @@
 #include "generic_master_module.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include standard headers
+#include <limits>  // std::numeric_limits
+
 namespace yli::ontology
 {
     class Entity;
@@ -33,7 +36,7 @@ namespace yli::ontology
 
     void ApprenticeModule::unbind_from_generic_master_module()
     {
-        if (this->generic_master_module != nullptr)
+        if (this->generic_master_module != nullptr && this->apprenticeID != std::numeric_limits<std::size_t>::max())
         {
             this->generic_master_module->unbind_apprentice_module(this->apprenticeID);
         }
