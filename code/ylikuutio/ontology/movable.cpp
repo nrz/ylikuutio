@@ -46,17 +46,13 @@ namespace yli::ontology
 {
     void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
     {
-        // Unbind from the current `Brain` if there is such.
-
-        this->apprentice_of_brain.unbind_from_generic_master_module();
-
         if (new_brain != nullptr)
         {
-            this->apprentice_of_brain.bind_to_new_generic_master_module(&new_brain->master_of_movables);
+            this->apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(&new_brain->master_of_movables);
         }
         else
         {
-            this->apprentice_of_brain.bind_to_new_generic_master_module(nullptr);
+            this->apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(nullptr);
         }
     }
 

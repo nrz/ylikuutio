@@ -39,7 +39,12 @@ namespace yli::ontology
         public:
             void bind_to_generic_master_module();
             void unbind_from_generic_master_module();
+
+        private:
             void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
+
+        public:
+            void unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
 
             // constructor.
             ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice);

@@ -20,7 +20,6 @@
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "shader.hpp"
-#include "material.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
@@ -119,17 +118,13 @@ namespace yli::ontology
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            // Unbind from the current `Species` if there is such.
-
-            this->apprentice_of_mesh.unbind_from_generic_master_module();
-
             if (new_species != nullptr)
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_species->master_of_objects);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_species->master_of_objects);
             }
             else
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
             }
         }
     }
@@ -141,17 +136,13 @@ namespace yli::ontology
 
         if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            // Unbind from the current `ShapeshifterSequence` if there is such.
-
-            this->apprentice_of_mesh.unbind_from_generic_master_module();
-
             if (new_shapeshifter_sequence != nullptr)
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_shapeshifter_sequence->master_of_objects);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_shapeshifter_sequence->master_of_objects);
             }
             else
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
             }
         }
     }
@@ -163,17 +154,13 @@ namespace yli::ontology
 
         if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            // Unbind from the current `Text3D` if there is such.
-
-            this->apprentice_of_mesh.unbind_from_generic_master_module();
-
             if (new_text_3d != nullptr)
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(&new_text_3d->master_of_objects);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_text_3d->master_of_objects);
             }
             else
             {
-                this->apprentice_of_mesh.bind_to_new_generic_master_module(nullptr);
+                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
             }
         }
     }
@@ -200,43 +187,17 @@ namespace yli::ontology
 
         if (this->should_be_rendered)
         {
-            if (this->object_type == yli::ontology::ObjectType::REGULAR)
+            if (this->object_type == yli::ontology::ObjectType::REGULAR ||
+                    this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
-                yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
-
-                if (species == nullptr)
-                {
-                    return;
-                }
-
-                yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(species->apprentice_of_material.get_master());
-
-                if (material == nullptr)
-                {
-                    return;
-                }
-
-                yli::ontology::Shader* const shader = material->get_shader();
-
-                if (shader == nullptr)
-                {
-                    return;
-                }
-
                 this->prerender();
-                this->render_this_object(shader);
+                this->render_this_object(this->get_shader());
                 this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
                 this->prerender();
                 // TODO.
-                this->postrender();
-            }
-            else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                this->prerender();
-                this->render_this_object(static_cast<yli::ontology::Shader*>(this->get_shader()));
                 this->postrender();
             }
         }
@@ -317,6 +278,10 @@ namespace yli::ontology
             {
                 master_model = &master_glyph->mesh;
             }
+            else
+            {
+                return;
+            }
         }
 
         GLuint vertexbuffer                    = master_model->get_vertexbuffer();
@@ -382,7 +347,7 @@ namespace yli::ontology
     {
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
+            const yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
             if (species != nullptr)
             {
@@ -391,7 +356,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->apprentice_of_mesh.get_master());
+            const yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(this->apprentice_of_mesh.get_master());
 
             if (shapeshifter_sequence != nullptr)
             {
@@ -400,7 +365,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master());
+            const yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master());
 
             if (text_3d != nullptr)
             {

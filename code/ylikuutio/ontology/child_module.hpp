@@ -44,8 +44,12 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const;
             yli::ontology::Entity* get_child() const;
             yli::ontology::Scene* get_scene() const;
+
+        private:
             void unbind_child() const;
             void set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
+
+        public:
             void unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module);
 
         private:
