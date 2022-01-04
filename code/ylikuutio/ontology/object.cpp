@@ -278,6 +278,10 @@ namespace yli::ontology
             {
                 master_model = &master_glyph->mesh;
             }
+            else
+            {
+                return;
+            }
         }
 
         GLuint vertexbuffer                    = master_model->get_vertexbuffer();
