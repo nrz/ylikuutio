@@ -2,6 +2,9 @@ Kansallisen maastotietokannan laatumalli - Korkeusmallit
 * in Finnish, the quality document of Elevation model (2 m and 10 m) of the National Land Survey of Finland)
 https://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/KMTK_korkeusmallit_laatukasikirja_2017-01-02.pdf
 
+Järvien ja jokien syvyysaineisto
+https://ckan.ymparisto.fi/dataset/%7BDC4AD1E9-F4E5-4998-825D-D2CA4836A2F5%7D
+
 Høgdedata og djupnedata
 https://www.kartverket.no/api-og-data/terrengdata
 
