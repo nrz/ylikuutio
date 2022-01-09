@@ -255,22 +255,7 @@ namespace yli::ontology
             // Ping pong.
             std::swap(this->source_texture, this->target_texture);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
-
-            GLenum error;
-
-            while (true)
-            {
-                error = glGetError();
-
-                if (error == GL_NO_ERROR)
-                {
-                    break;
-                }
-
-                std::stringstream opengl_error_stringstream;
-                opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
-                std::cout << opengl_error_stringstream.str();
-            }
+            yli::opengl::print_opengl_errors("glFramebufferTexture2D");
 
             this->postiterate();
         }

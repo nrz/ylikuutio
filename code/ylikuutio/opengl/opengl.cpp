@@ -22,8 +22,10 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <sstream>  // std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -38,6 +40,24 @@ namespace yli::opengl
             return false;
         }
         return true;
+    }
+
+    void print_opengl_errors(const std::string& my_string)
+    {
+        while (true)
+        {
+            GLenum error = glGetError();
+
+            if (error == GL_NO_ERROR)
+            {
+                return;
+            }
+
+            std::cout << my_string << "\n";
+            std::stringstream opengl_error_stringstream;
+            opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
+            std::cout << opengl_error_stringstream.str();
+        }
     }
 
     void enable_depth_test()
