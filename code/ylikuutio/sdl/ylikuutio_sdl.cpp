@@ -24,7 +24,7 @@
 
 namespace yli::sdl
 {
-    yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend)
+    [[nodiscard]] yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend)
     {
         if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
         {
@@ -50,7 +50,7 @@ namespace yli::sdl
         return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
     }
 
-    SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
+    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
     {
         return SDL_CreateWindow(
                 title,
@@ -61,7 +61,7 @@ namespace yli::sdl
                 flags);
     }
 
-    SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
+    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
     {
         Uint32 flags = SDL_WINDOW_OPENGL; // `Uint32` is a SDL datatype.
 
@@ -73,7 +73,7 @@ namespace yli::sdl
         return create_window(window_width, window_height, title, flags);
     }
 
-    SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
+    [[nodiscard]] SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
     {
         Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN; // `Uint32` is a SDL datatype.
 
@@ -85,7 +85,7 @@ namespace yli::sdl
         return create_window(window_width, window_height, title, flags);
     }
 
-    SDL_GLContext create_context(SDL_Window* const window)
+    [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
     {
         return SDL_GL_CreateContext(window);
     }
@@ -95,7 +95,7 @@ namespace yli::sdl
         SDL_SetWindowSize(window, window_width, window_height);
     }
 
-    int set_window_windowed(SDL_Window* window)
+    [[nodiscard]] int set_window_windowed(SDL_Window* window)
     {
         return SDL_SetWindowFullscreen(window, 0);
     }
