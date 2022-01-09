@@ -57,8 +57,8 @@ namespace yli::render
             ~RenderMaster();
 
             void create_context_and_make_it_current();
-            void setup_context(SDL_Window* window);
-            void setup_context();
+            [[nodiscard]] bool setup_context(SDL_Window* window);
+            [[nodiscard]] bool setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering(const float window_width, const float window_height) const;
             void set_opengl_background_color() const;

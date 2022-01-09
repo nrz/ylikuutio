@@ -123,20 +123,33 @@ namespace yli::render
         this->context = yli::sdl::create_context(this->hidden_sdl_window);
     }
 
-    void RenderMaster::setup_context(SDL_Window* window)
+    [[nodiscard]] bool RenderMaster::setup_context(SDL_Window* window)
     {
         if (this->context != nullptr)
         {
-            yli::sdl::make_context_current(window, this->context);
+            if (yli::sdl::make_context_current(window, this->context))
+            {
+                std::cout << "OpenGL context set up successfully.\n";
+                return true; // Success.
+            }
+            else
+            {
+                std::cerr << "ERROR: `RenderMaster::setup_context`: setting context failed!\n";
+                return false; // Fail.
+            }
         }
+
+        return false; // Fail.
     }
 
-    void RenderMaster::setup_context()
+    [[nodiscard]] bool RenderMaster::setup_context()
     {
         if (this->context != nullptr)
         {
-            yli::sdl::make_context_current(this->hidden_sdl_window, this->context);
+            return yli::sdl::make_context_current(this->hidden_sdl_window, this->context);
         }
+
+        return false; // Fail.
     }
 
     void RenderMaster::set_swap_interval(const int32_t interval)
