@@ -607,7 +607,7 @@ namespace yli::ontology
         // TODO: implement software rendering!
         if ((this->get_is_opengl_in_use() ||
                 this->get_is_vulkan_in_use() ||
-                this->get_is_software_rendering_in_use()) ||
+                this->get_is_software_rendering_in_use()) &&
                 this->should_be_rendered &&
                 this->render_master != nullptr)
         {
