@@ -115,7 +115,7 @@ namespace yli::opengl
         }
         else
         {
-            glPolygonMode(GL_FRONT, GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
     }
 
