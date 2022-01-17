@@ -190,7 +190,7 @@ namespace yli::load
 
             glGenBuffers(1, elementbuffer);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
         }
 
         // TODO: Compute the graph of the mesh of this `Species` to enable object vertex modification!
