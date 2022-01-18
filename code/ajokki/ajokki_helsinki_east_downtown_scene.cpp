@@ -30,7 +30,6 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -40,7 +39,6 @@
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
-#include "code/ylikuutio/ontology/text_3d_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
@@ -796,30 +794,6 @@ namespace ajokki
 
         turbo_polizei_png2->set_global_name("turbo_polizei_png2");
         turbo_polizei_png2->set_local_name("sinivuokko2");
-
-        yli::ontology::VectorFontStruct kongtext_vector_font_struct;
-        kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
-        kongtext_vector_font_struct.font_file_format = "svg";
-        kongtext_vector_font_struct.font_filename = "kongtext.svg";
-
-        std::cout << "Creating yli::ontology::Entity* kongtext_font_entity ...\n";
-        yli::ontology::Entity* const kongtext_font_entity = entity_factory->create_vector_font(kongtext_vector_font_struct);
-        std::cout << "Creating yli::ontology::VectorFont* kongtext_font ...\n";
-        yli::ontology::VectorFont* const kongtext_font = dynamic_cast<yli::ontology::VectorFont*>(kongtext_font_entity);
-
-        if (kongtext_font == nullptr)
-        {
-            std::cerr << "Failed to create kongtext VectorFont.\n";
-            return nullptr;
-        }
-
-        yli::ontology::Text3DStruct text_3d_struct;
-        text_3d_struct.scene = helsinki_east_downtown_scene;
-        text_3d_struct.parent = kongtext_font;
-        text_3d_struct.text_string = "Hello world &#x26; its habitants!";
-        text_3d_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        text_3d_struct.cartesian_coordinates = glm::vec3(100.00f, 100.00f, 100.00f);
-        entity_factory->create_text3d(text_3d_struct);
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
