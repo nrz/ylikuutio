@@ -60,6 +60,9 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
+            // Delete vertex array.
+            glDeleteVertexArrays(1, &this->vao);
+
             // Delete shader.
             glDeleteProgram(this->program_id);
         }
@@ -343,6 +346,7 @@ namespace yli::ontology
 
         if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
         {
+            glBindVertexArray(this->vao);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);

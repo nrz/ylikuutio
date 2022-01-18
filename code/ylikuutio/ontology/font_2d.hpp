@@ -70,6 +70,7 @@ namespace yli::ontology
                 this->font_size = font_struct.font_size;
 
                 // Initialize class members with some dummy values.
+                this->vao                               = 0;
                 this->vertexbuffer                      = 0;
                 this->uvbuffer                          = 0;
                 this->program_id                        = 0;
@@ -83,12 +84,17 @@ namespace yli::ontology
                 {
                     if (this->universe->get_is_opengl_in_use())
                     {
+                        // Initialize VAO.
+                        glGenVertexArrays(1, &this->vao);
+                        glBindVertexArray(this->vao);
+
                         // Initialize VBO.
                         glGenBuffers(1, &this->vertexbuffer);
                         glGenBuffers(1, &this->uvbuffer);
 
                         // Initialize `Shader`.
                         this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+                        glUseProgram(this->program_id);
 
                         // Get a handle for our buffers.
                         this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
@@ -163,6 +169,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+            GLuint vao;
             GLuint vertexbuffer;                     // Buffer containing the vertices.
             GLuint uvbuffer;                         // Buffer containing the UVs.
             GLuint program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
