@@ -111,7 +111,7 @@ namespace yli::ontology
 
     void Font2D::prepare_to_print() const
     {
-        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->should_be_rendered && this->universe != nullptr && this->universe->get_is_opengl_in_use())
         {
             // Bind shader.
             glUseProgram(this->program_id);
