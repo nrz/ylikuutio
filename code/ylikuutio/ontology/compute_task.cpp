@@ -219,7 +219,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw the triangles!
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // Draw 2 triangles (6 vertices).
 
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
