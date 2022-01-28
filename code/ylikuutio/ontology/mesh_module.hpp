@@ -118,10 +118,10 @@ namespace yli::ontology
                             this->indexed_vertices,
                             this->indexed_uvs,
                             this->indexed_normals,
-                            &this->vertexbuffer,
-                            &this->uvbuffer,
-                            &this->normalbuffer,
-                            &this->elementbuffer,
+                            this->vertexbuffer,
+                            this->uvbuffer,
+                            this->normalbuffer,
+                            this->elementbuffer,
                             universe->get_graphics_api_backend(),
                             is_debug_mode);
 
