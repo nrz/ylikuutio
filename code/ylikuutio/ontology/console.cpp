@@ -204,12 +204,10 @@ namespace yli::ontology
 
     void Console::render()
     {
-        if (!this->in_console || !this->should_be_rendered)
-        {
-            return;
-        }
-
-        if (this->universe == nullptr)
+        if (!this->in_console ||
+                !this->should_be_rendered ||
+                this->universe == nullptr ||
+                this->universe->get_active_console() != this)
         {
             return;
         }

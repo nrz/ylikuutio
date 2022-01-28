@@ -202,11 +202,6 @@ namespace yli::render
             yli::opengl::disable_depth_test();
         }
 
-        if (render_struct.console != nullptr)
-        {
-            render_struct.console->render();
-        }
-
         if (render_struct.parent_of_font_2ds != nullptr)
         {
             yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::Font2D*>(*render_struct.parent_of_font_2ds);
@@ -297,11 +292,17 @@ namespace yli::render
     void RenderMaster::render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Chunk*>(chunk_pointer_vector);
+        glDisable(GL_BLEND);
     }
 
     void RenderMaster::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Text2D*>(text_2d_pointer_vector);
+    }
+
+    void RenderMaster::render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const
+    {
+        yli::render::render_apprentices<yli::ontology::Console*>(console_apprentice_pointer_vector);
     }
 
     void RenderMaster::render_vector_fonts(yli::ontology::GenericParentModule& parent) const

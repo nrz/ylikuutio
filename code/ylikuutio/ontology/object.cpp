@@ -284,6 +284,7 @@ namespace yli::ontology
             }
         }
 
+        GLuint vao                             = master_model->get_vao();
         GLuint vertexbuffer                    = master_model->get_vertexbuffer();
         uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
         GLuint uvbuffer                        = master_model->get_uvbuffer();
@@ -292,6 +293,8 @@ namespace yli::ontology
         uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
         GLuint elementbuffer                   = master_model->get_elementbuffer();
         uint32_t indices_size                  = master_model->get_indices().size();
+
+        glBindVertexArray(vao);
 
         // 1st attribute buffer: vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -303,6 +306,7 @@ namespace yli::ontology
                 0,                           // stride
                 (void*) 0                    // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
         // 2nd attribute buffer: UVs.
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
@@ -314,6 +318,7 @@ namespace yli::ontology
                 0,          // stride
                 (void*) 0   // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
         // 3rd attribute buffer: normals.
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
@@ -325,6 +330,7 @@ namespace yli::ontology
                 0,                         // stride
                 (void*) 0                  // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
         // Index buffer.
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
@@ -336,6 +342,10 @@ namespace yli::ontology
                 GL_UNSIGNED_INT, // type
                 (void*) 0        // element array buffer offset
                 );
+
+        yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
+        yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
+        yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
     }
 
     yli::ontology::Scene* Object::get_scene() const

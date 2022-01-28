@@ -204,6 +204,7 @@ namespace yli::ontology
                     0,                                  // stride
                     (void*) 0                           // array buffer offset
                     );
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
@@ -215,6 +216,7 @@ namespace yli::ontology
                     0,                // stride
                     (void*) 0         // array buffer offset
                     );
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw the triangles!
             glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).

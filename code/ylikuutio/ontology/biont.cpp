@@ -207,6 +207,7 @@ namespace yli::ontology
         glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
         glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
+        GLuint vao                             = mesh.get_vao();
         GLuint vertexbuffer                    = mesh.get_vertexbuffer();
         uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
         GLuint uvbuffer                        = mesh.get_uvbuffer();
@@ -215,6 +216,8 @@ namespace yli::ontology
         uint32_t vertex_normal_modelspace_id   = mesh.get_vertex_normal_modelspace_id();
         GLuint elementbuffer                   = mesh.get_elementbuffer();
         uint32_t indices_size                  = mesh.get_indices_size();
+
+        glBindVertexArray(vao);
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -226,6 +229,7 @@ namespace yli::ontology
                 0,                            // stride
                 (void*) 0                     // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
         // 2nd attribute buffer : UVs.
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
@@ -237,6 +241,7 @@ namespace yli::ontology
                 0,                            // stride
                 (void*) 0                     // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
         // 3rd attribute buffer : normals.
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
@@ -248,6 +253,7 @@ namespace yli::ontology
                 0,                            // stride
                 (void*) 0                     // array buffer offset
                 );
+        yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
         // Index buffer.
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
@@ -259,6 +265,13 @@ namespace yli::ontology
                 GL_UNSIGNED_INT,              // type
                 (void*) 0                     // element array buffer offset
                 );
+
+        yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
+        yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_uv_id());
+        yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_normal_modelspace_id());
+        yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
+        yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
+        yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
     }
 
     yli::ontology::Scene* Biont::get_scene() const
