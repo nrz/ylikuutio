@@ -302,7 +302,6 @@ namespace yli::render
     void RenderMaster::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Text2D*>(text_2d_pointer_vector);
-        glDisable(GL_BLEND);
     }
 
     void RenderMaster::render_vector_fonts(yli::ontology::GenericParentModule& parent) const

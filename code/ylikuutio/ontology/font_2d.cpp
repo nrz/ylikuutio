@@ -136,7 +136,7 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered || this->universe == nullptr || !this->universe->get_is_opengl_in_use())
         {
             return;
         }
@@ -152,6 +152,7 @@ namespace yli::ontology
         this->prerender();
         this->prepare_to_print();
         render_master->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
+        glDisable(GL_BLEND);
         this->postrender();
     }
 
