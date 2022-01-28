@@ -315,16 +315,6 @@ namespace yli::ontology
         glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
         glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        // 1st attribute buffer: vertices.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        // 2nd attribute buffer: UVs.
-        yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
-        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
