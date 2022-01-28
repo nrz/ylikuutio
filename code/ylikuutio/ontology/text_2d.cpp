@@ -100,7 +100,7 @@ namespace yli::ontology
 
     void Text2D::render()
     {
-        if (!this->should_be_rendered)
+        if (!this->should_be_rendered || this->universe == nullptr || !this->universe->get_is_opengl_in_use())
         {
             return;
         }
