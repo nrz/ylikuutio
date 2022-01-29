@@ -196,6 +196,7 @@ namespace yli::ontology
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+
             glVertexAttribPointer(
                     this->vertex_position_modelspace_id, // The attribute we want to configure
                     2,                                  // size
