@@ -390,6 +390,11 @@ namespace ajokki
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 
+                mini_console->bind_to_new_font_2d(my_font_2d);
+                mini_console->print_text("Welcome to mini_console!");
+                mini_console->print_text("Please write \"miniactivate my_console\"");
+                mini_console->print_text("to get back to \"my_console\".");
+
                 /*********************************************************************
                  *  Callback engines for action mode keyreleases begin here.         *
                  *********************************************************************/
