@@ -1,4 +1,4 @@
-#version 130
+#version 330 core
 
 // Interpolated values from the vertex shaders.
 varying vec2 UV;

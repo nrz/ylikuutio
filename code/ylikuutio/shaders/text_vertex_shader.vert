@@ -1,4 +1,4 @@
-#version 130
+#version 330 core
 
 // Input vertex data, different for all executions of this shader.
 attribute vec2 vertex_position_screenspace;

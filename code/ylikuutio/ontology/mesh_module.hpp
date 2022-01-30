@@ -74,6 +74,9 @@ namespace yli::ontology
                         model_struct.scene != nullptr &&
                         model_struct.shader != nullptr)
                 {
+                    // VAO.
+                    glGenVertexArrays(1, &this->vao);
+
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
                     this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");

@@ -27,9 +27,7 @@ Ylikuutio aims to run fast and support also older hardware.
 Currently Ylikuutio works on 64-bit GNU/Linux, MacOS, and Windows systems.
 Android support is a work in progress.
 iOS will be supported in the future.
-OpenGL 2.1 or newer is required for MacOS.
-OpenGL 3.0 is required for other platforms.
-Support for OpenGL 2.1 on GNU/Linux and Windows is a work in progress.
+OpenGL 3.3 is required.
 
 ## Ylikuutio 0.0.8 screenshots
 ![View of Helsinki with cats and Ylikuutio console](https://github.com/nrz/ylikuutio/blob/master/screenshots/helsinki_cats_2020-10-08.png?raw=true)
@@ -352,11 +350,11 @@ A: Ylikuutio targets Linux, Windows and Android, in this order.
    Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
-A: Ylikuutio targets OpenGL version 3.0.
+A: Ylikuutio targets OpenGL version 3.3.
 
 Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
-   OpenGL 3.0 fulfils my requirements. Vulkan needs to be considered.
+   OpenGL 3.3 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs)?
 A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and index buffers.

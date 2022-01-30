@@ -615,6 +615,8 @@ namespace yli::ontology
             this->render_master->render(render_struct);
             this->postrender();
         }
+
+        yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
     }
 
     void Universe::render()

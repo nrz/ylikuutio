@@ -121,6 +121,7 @@ namespace yli::ontology
                 this->iteration_i_uniform_id        = 0; // some dummy value.
                 this->vertexbuffer                  = 0; // some dummy value.
                 this->uvbuffer                      = 0; // some dummy value.
+                this->elementbuffer                 = 0; // some dummy value.
 
                 this->format                                     = compute_task_struct.format;
                 this->internal_format                            = compute_task_struct.internal_format;
@@ -233,7 +234,12 @@ namespace yli::ontology
                     { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f } };
                     this->uvs_size = uvs.size();
 
-                    // Load model into a VBO.
+                    const std::vector<GLuint> indices { 0, 1 };
+
+                    // Load model.
+
+                    // VAO.
+                    glGenVertexArrays(1, &this->vao);
 
                     // Vertices.
                     glGenBuffers(1, &this->vertexbuffer);
@@ -244,6 +250,11 @@ namespace yli::ontology
                     glGenBuffers(1, &this->uvbuffer);
                     glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
                     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+
+                    // Index buffer.
+                    glGenBuffers(1, &this->elementbuffer);
+                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
+                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2, &indices[0], GL_STATIC_DRAW);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -319,8 +330,10 @@ namespace yli::ontology
             GLint screen_height_uniform_id;      // Location of the program's window height uniform.
             GLint iteration_i_uniform_id;        // Location of the program's iteration index uniform.
 
+            GLuint vao;
             GLuint vertexbuffer;
             GLuint uvbuffer;
+            GLuint elementbuffer;
 
             GLenum format;
             GLenum internal_format;
