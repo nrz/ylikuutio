@@ -188,6 +188,9 @@ namespace yli::ontology
             // Set our "texture_sampler" sampler to use Texture Unit 0.
             yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
+            // Bind VAO.
+            glBindVertexArray(this->vao);
+
             // 1st attribute buffer: vertices.
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
@@ -196,6 +199,7 @@ namespace yli::ontology
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+
             glVertexAttribPointer(
                     this->vertex_position_modelspace_id, // The attribute we want to configure
                     2,                                  // size
@@ -204,6 +208,7 @@ namespace yli::ontology
                     0,                                  // stride
                     (void*) 0                           // array buffer offset
                     );
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
@@ -215,9 +220,10 @@ namespace yli::ontology
                     0,                // stride
                     (void*) 0         // array buffer offset
                     );
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw the triangles!
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // draw 2 triangles (6 vertices, no VBO indexing).
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // Draw 2 triangles (6 vertices).
 
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
@@ -255,22 +261,7 @@ namespace yli::ontology
             // Ping pong.
             std::swap(this->source_texture, this->target_texture);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
-
-            GLenum error;
-
-            while (true)
-            {
-                error = glGetError();
-
-                if (error == GL_NO_ERROR)
-                {
-                    break;
-                }
-
-                std::stringstream opengl_error_stringstream;
-                opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
-                std::cout << opengl_error_stringstream.str();
-            }
+            yli::opengl::print_opengl_errors("glFramebufferTexture2D");
 
             this->postiterate();
         }

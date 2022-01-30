@@ -123,20 +123,33 @@ namespace yli::render
         this->context = yli::sdl::create_context(this->hidden_sdl_window);
     }
 
-    void RenderMaster::setup_context(SDL_Window* window)
+    [[nodiscard]] bool RenderMaster::setup_context(SDL_Window* window)
     {
         if (this->context != nullptr)
         {
-            yli::sdl::make_context_current(window, this->context);
+            if (yli::sdl::make_context_current(window, this->context))
+            {
+                std::cout << "OpenGL context set up successfully.\n";
+                return true; // Success.
+            }
+            else
+            {
+                std::cerr << "ERROR: `RenderMaster::setup_context`: setting context failed!\n";
+                return false; // Fail.
+            }
         }
+
+        return false; // Fail.
     }
 
-    void RenderMaster::setup_context()
+    [[nodiscard]] bool RenderMaster::setup_context()
     {
         if (this->context != nullptr)
         {
-            yli::sdl::make_context_current(this->hidden_sdl_window, this->context);
+            return yli::sdl::make_context_current(this->hidden_sdl_window, this->context);
         }
+
+        return false; // Fail.
     }
 
     void RenderMaster::set_swap_interval(const int32_t interval)
@@ -187,11 +200,6 @@ namespace yli::render
         if (render_struct.should_change_depth_test)
         {
             yli::opengl::disable_depth_test();
-        }
-
-        if (render_struct.console != nullptr)
-        {
-            render_struct.console->render();
         }
 
         if (render_struct.parent_of_font_2ds != nullptr)
@@ -284,12 +292,17 @@ namespace yli::render
     void RenderMaster::render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Chunk*>(chunk_pointer_vector);
+        glDisable(GL_BLEND);
     }
 
     void RenderMaster::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Text2D*>(text_2d_pointer_vector);
-        glDisable(GL_BLEND);
+    }
+
+    void RenderMaster::render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const
+    {
+        yli::render::render_apprentices<yli::ontology::Console*>(console_apprentice_pointer_vector);
     }
 
     void RenderMaster::render_vector_fonts(yli::ontology::GenericParentModule& parent) const

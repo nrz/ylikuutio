@@ -61,34 +61,29 @@ namespace yli::ontology
                         font_struct.texture_filename,
                         font_struct.font_texture_file_format,
                         yli::load::ImageLoaderStruct({ std::pair(yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
-                        "texture")
+                        "texture"),
+                screen_width  { font_struct.screen_width },
+                screen_height { font_struct.screen_height },
+                text_size     { font_struct.text_size },
+                font_size     { font_struct.font_size }
         {
                 // constructor.
-                this->screen_width = font_struct.screen_width;
-                this->screen_height = font_struct.screen_height;
-                this->text_size = font_struct.text_size;
-                this->font_size = font_struct.font_size;
-
-                // Initialize class members with some dummy values.
-                this->vertexbuffer                      = 0;
-                this->uvbuffer                          = 0;
-                this->program_id                        = 0;
-                this->vertex_position_in_screenspace_id = 0;
-                this->vertex_uv_id                      = 0;
-                this->text_2d_uniform_id                = 0;
-                this->screen_width_uniform_id           = 0;
-                this->screen_height_uniform_id          = 0;
 
                 if (this->texture.get_is_texture_loaded())
                 {
                     if (this->universe->get_is_opengl_in_use())
                     {
+                        // Initialize VAO.
+                        glGenVertexArrays(1, &this->vao);
+                        glBindVertexArray(this->vao);
+
                         // Initialize VBO.
                         glGenBuffers(1, &this->vertexbuffer);
                         glGenBuffers(1, &this->uvbuffer);
 
                         // Initialize `Shader`.
                         this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+                        glUseProgram(this->program_id);
 
                         // Get a handle for our buffers.
                         this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
@@ -163,14 +158,15 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            GLuint vertexbuffer;                     // Buffer containing the vertices.
-            GLuint uvbuffer;                         // Buffer containing the UVs.
-            GLuint program_id;                       // The `program_id` of the shader used to display the text, returned by `load_shaders`.
-            GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
-            GLint text_2d_uniform_id;                // Location of the program's texture attribute.
-            GLint screen_width_uniform_id;           // Location of the program's window width uniform.
-            GLint screen_height_uniform_id;          // Location of the program's window height uniform.
+            GLuint vao                               { 0 };
+            GLuint vertexbuffer                      { 0 }; // Buffer containing the vertices.
+            GLuint uvbuffer                          { 0 }; // Buffer containing the UVs.
+            GLuint program_id                        { 0 }; // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+            GLint vertex_position_in_screenspace_id  { 0 }; // Location of the program's `vertex_position_screenspace` attribute.
+            GLint vertex_uv_id                       { 0 }; // Location of the program's `vertexUV` attribute.
+            GLint text_2d_uniform_id                 { 0 }; // Location of the program's texture attribute.
+            GLint screen_width_uniform_id            { 0 }; // Location of the program's window width uniform.
+            GLint screen_height_uniform_id           { 0 }; // Location of the program's window height uniform.
 
             uint32_t screen_width;
             uint32_t screen_height;

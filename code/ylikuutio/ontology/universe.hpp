@@ -440,9 +440,9 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            void create_window();
-            void setup_context();
-            void create_window_and_setup_context();
+            [[nodiscard]] bool create_window();
+            [[nodiscard]] bool setup_context();
+            [[nodiscard]] bool create_window_and_setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;

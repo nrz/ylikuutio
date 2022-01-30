@@ -21,7 +21,7 @@
 #include "entity_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>  // std::string
 
 namespace yli::ontology
@@ -30,10 +30,10 @@ namespace yli::ontology
     {
         std::string texture_filename;
         std::string font_texture_file_format;
-        std::size_t screen_width  { 0 };
-        std::size_t screen_height { 0 };
-        std::size_t text_size     { 0 };
-        std::size_t font_size     { 0 };
+        uint32_t screen_width  { 0 };
+        uint32_t screen_height { 0 };
+        uint32_t text_size     { 0 };
+        uint32_t font_size     { 0 };
     };
 }
 

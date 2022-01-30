@@ -607,7 +607,7 @@ namespace yli::ontology
         // TODO: implement software rendering!
         if ((this->get_is_opengl_in_use() ||
                 this->get_is_vulkan_in_use() ||
-                this->get_is_software_rendering_in_use()) ||
+                this->get_is_software_rendering_in_use()) &&
                 this->should_be_rendered &&
                 this->render_master != nullptr)
         {
@@ -615,13 +615,14 @@ namespace yli::ontology
             this->render_master->render(render_struct);
             this->postrender();
         }
+
+        yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
     }
 
     void Universe::render()
     {
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
-        render_struct.console = this->active_console;
         render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
         this->render(render_struct);
@@ -631,7 +632,6 @@ namespace yli::ontology
     {
         yli::render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
-        render_struct.console = this->active_console;
         render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
         render_struct.should_change_depth_test = false;
@@ -770,7 +770,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
     }
 
-    void Universe::create_window()
+    [[nodiscard]] bool Universe::create_window()
     {
         // Create the window only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
@@ -785,31 +785,54 @@ namespace yli::ontology
             if (this->window != nullptr)
             {
                 std::cerr << "SDL Window created successfully.\n";
+                return true;
             }
-            else
-            {
-                std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
-            }
+
+            std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+            return false;
         }
+
+        return true;
     }
 
-    void Universe::setup_context()
+    [[nodiscard]] bool Universe::setup_context()
     {
         // Setup graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
-            this->render_master->setup_context(this->window);
+            if (!this->render_master->setup_context(this->window))
+            {
+                // Setting up context failed.
+                return false;
+            }
+
+            return true;
         }
+
+        // No need to setup context.
+        return true;
     }
 
-    void Universe::create_window_and_setup_context()
+    [[nodiscard]] bool Universe::create_window_and_setup_context()
     {
         // Create window and setup graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
-            this->create_window();
-            this->setup_context();
+            if (!this->create_window())
+            {
+                return false;
+            }
+
+            if (this->setup_context())
+            {
+                return true;
+            }
+
+            return false;
         }
+
+        // No need to create a window or to setup a context.
+        return true;
     }
 
     void Universe::set_swap_interval(const int32_t interval)

@@ -89,6 +89,11 @@ namespace yli::ontology
         return this->vertex_normal_modelspace_id;
     }
 
+    GLuint MeshModule::get_vao() const
+    {
+        return this->vao;
+    }
+
     GLuint MeshModule::get_vertexbuffer() const
     {
         return this->vertexbuffer;

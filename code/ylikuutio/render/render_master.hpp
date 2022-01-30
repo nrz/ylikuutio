@@ -57,8 +57,8 @@ namespace yli::render
             ~RenderMaster();
 
             void create_context_and_make_it_current();
-            void setup_context(SDL_Window* window);
-            void setup_context();
+            [[nodiscard]] bool setup_context(SDL_Window* window);
+            [[nodiscard]] bool setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering(const float window_width, const float window_height) const;
             void set_opengl_background_color() const;
@@ -81,6 +81,7 @@ namespace yli::render
             void render_chunk_masters(yli::ontology::GenericParentModule& parent) const;
             void render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const;
             void render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const;
+            void render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const;
             void render_vector_fonts(yli::ontology::GenericParentModule& parent) const;
             void render_glyph(yli::ontology::Glyph* const glyph) const;
             void render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const;

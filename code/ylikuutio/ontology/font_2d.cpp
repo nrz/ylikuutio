@@ -60,6 +60,9 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->vertexbuffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
+            // Delete vertex array.
+            glDeleteVertexArrays(1, &this->vao);
+
             // Delete shader.
             glDeleteProgram(this->program_id);
         }
@@ -108,7 +111,7 @@ namespace yli::ontology
 
     void Font2D::prepare_to_print() const
     {
-        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->should_be_rendered && this->universe != nullptr && this->universe->get_is_opengl_in_use())
         {
             // Bind shader.
             glUseProgram(this->program_id);
@@ -133,7 +136,7 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered || this->universe == nullptr || !this->universe->get_is_opengl_in_use())
         {
             return;
         }
@@ -149,6 +152,8 @@ namespace yli::ontology
         this->prerender();
         this->prepare_to_print();
         render_master->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
+        render_master->render_consoles(this->master_of_consoles.get_apprentice_module_pointer_vector_reference());
+        glDisable(GL_BLEND);
         this->postrender();
     }
 
@@ -343,28 +348,27 @@ namespace yli::ontology
 
         if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
         {
+            glBindVertexArray(this->vao);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
             // 1st attribute buffer: vertices.
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw call.
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
             yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
-
-            glDisable(GL_BLEND);
         }
     }
 

@@ -74,6 +74,9 @@ namespace yli::ontology
                         model_struct.scene != nullptr &&
                         model_struct.shader != nullptr)
                 {
+                    // VAO.
+                    glGenVertexArrays(1, &this->vao);
+
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
                     this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");
@@ -118,10 +121,11 @@ namespace yli::ontology
                             this->indexed_vertices,
                             this->indexed_uvs,
                             this->indexed_normals,
-                            &this->vertexbuffer,
-                            &this->uvbuffer,
-                            &this->normalbuffer,
-                            &this->elementbuffer,
+                            this->vao,
+                            this->vertexbuffer,
+                            this->uvbuffer,
+                            this->normalbuffer,
+                            this->elementbuffer,
                             universe->get_graphics_api_backend(),
                             is_debug_mode);
 
@@ -161,6 +165,7 @@ namespace yli::ontology
             GLint get_vertex_uv_id() const;
             GLint get_vertex_normal_modelspace_id() const;
 
+            GLuint get_vao() const;
             GLuint get_vertexbuffer() const;
             GLuint get_uvbuffer() const;
             GLuint get_normalbuffer() const;
@@ -217,6 +222,7 @@ namespace yli::ontology
             std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;
 
+            GLuint vao           { 0 }; // Dummy value.
             GLuint vertexbuffer  { 0 }; // Dummy value.
             GLuint uvbuffer      { 0 }; // Dummy value.
             GLuint normalbuffer  { 0 }; // Dummy value.

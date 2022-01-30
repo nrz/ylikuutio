@@ -48,10 +48,11 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
-            GLuint* vertexbuffer,
-            GLuint* uvbuffer,
-            GLuint* normalbuffer,
-            GLuint* elementbuffer,
+            GLuint& vao,
+            GLuint& vertexbuffer,
+            GLuint& uvbuffer,
+            GLuint& normalbuffer,
+            GLuint& elementbuffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode);
 }

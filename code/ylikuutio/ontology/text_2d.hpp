@@ -62,6 +62,7 @@ namespace yli::ontology
                 this->font_size = text_struct.font_size;
 
                 // Initialize class members with some dummy values.
+                this->vao                               = 0;
                 this->vertexbuffer                      = 0;
                 this->uvbuffer                          = 0;
                 this->vertex_position_in_screenspace_id = 0;
@@ -76,6 +77,9 @@ namespace yli::ontology
 
                 if (should_load_vertices_and_uvs)
                 {
+                    // Initialize VAO.
+                    glGenVertexArrays(1, &this->vao);
+
                     // Initialize VBO.
                     glGenBuffers(1, &this->vertexbuffer);
                     glGenBuffers(1, &this->uvbuffer);
@@ -113,6 +117,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+            GLuint vao;
             GLuint vertexbuffer;                     // Buffer containing the vertices
             GLuint uvbuffer;                         // Buffer containing the UVs
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.

@@ -51,10 +51,11 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
-            GLuint* vertexbuffer,
-            GLuint* uvbuffer,
-            GLuint* normalbuffer,
-            GLuint* elementbuffer,
+            GLuint& vao,
+            GLuint& vertexbuffer,
+            GLuint& uvbuffer,
+            GLuint& normalbuffer,
+            GLuint& elementbuffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode)
     {
@@ -169,28 +170,28 @@ namespace yli::load
 
         std::cout << "Indexing completed successfully.\n";
 
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL &&
-                vertexbuffer != nullptr &&
-                uvbuffer != nullptr &&
-                normalbuffer != nullptr &&
-                elementbuffer != nullptr)
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
         {
+            glGenVertexArrays(1, &vao);
+            glGenBuffers(1, &vertexbuffer);
+            glGenBuffers(1, &uvbuffer);
+            glGenBuffers(1, &normalbuffer);
+            glGenBuffers(1, &elementbuffer);
+
+            glBindVertexArray(vao);
+
             // Load it into a VBO.
-            glGenBuffers(1, vertexbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
-            glGenBuffers(1, uvbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
-            glGenBuffers(1, normalbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
-            glGenBuffers(1, elementbuffer);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0] , GL_STATIC_DRAW);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
         }
 
         // TODO: Compute the graph of the mesh of this `Species` to enable object vertex modification!

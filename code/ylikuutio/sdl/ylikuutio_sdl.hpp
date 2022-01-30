@@ -29,16 +29,17 @@ namespace yli::render
 
 namespace yli::sdl
 {
-    yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend);
-    SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
-    SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
-    SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
-    SDL_GLContext create_context(SDL_Window* const window);
+    [[nodiscard]] yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend);
+    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
+    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
+    [[nodiscard]] SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
+    [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window);
     void set_window_size(SDL_Window* window, const int window_width, const int window_height);
-    int set_window_windowed(SDL_Window* window);
-    void make_context_current(SDL_Window* window, SDL_GLContext context);
-    void set_swap_interval(const int interval);
+    [[nodiscard]] bool set_window_windowed(SDL_Window* window);
+    [[nodiscard]] bool make_context_current(SDL_Window* window, SDL_GLContext context);
+    [[nodiscard]] bool set_swap_interval(const int interval);
     void flush_sdl_event_queue();
+    void print_sdl_error();
 }
 
 #endif
