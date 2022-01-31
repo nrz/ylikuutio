@@ -248,7 +248,10 @@ namespace yli::ontology
         }
         else
         {
-            const std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
+            const std::size_t n_chars_on_noncomplete_line = (this->prompt.size() + this->current_input.size()) % this->n_columns;
+            const std::size_t n_lines_of_current_input = (n_chars_on_noncomplete_line > 0 ?
+                    (this->prompt.size() + this->current_input.size()) / this->n_columns + 1 :
+                    (this->prompt.size() + this->current_input.size()) / this->n_columns);
 
             if (n_lines_of_current_input > this->n_rows)
             {
