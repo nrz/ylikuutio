@@ -203,7 +203,7 @@ namespace yli::ontology
         }
     }
 
-    void Console::render()
+    void Console::render() const
     {
         if (!this->in_console ||
                 !this->should_be_rendered ||
