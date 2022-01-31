@@ -88,6 +88,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Font2D;
+    class Registry;
 
     class Console: public yli::ontology::Entity
     {
@@ -187,7 +188,7 @@ namespace yli::ontology
             void set_console_right_x(const uint32_t console_right_x);
             void print_text(const std::string& text);
             void print_help();
-            void render();
+            void render() const;
 
             bool enter_console();
             bool exit_console();
@@ -447,11 +448,13 @@ namespace yli::ontology
             // Callbacks end here.
 
             void copy_historical_input_into_current_input();
+            std::string convert_current_input_into_string() const;
             void delete_character();
             void move_cursor_left();
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
+            void print_completions(const yli::ontology::Registry& registry, const std::string& input);
 
             std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;

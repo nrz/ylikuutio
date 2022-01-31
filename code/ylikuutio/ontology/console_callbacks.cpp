@@ -577,6 +577,9 @@ namespace yli::ontology
                 {
                     // If `input_string` is empty, then complete the command.
                     // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
+
+                    console->print_completions(universe->registry, command);
+
                     const std::string completion = universe->registry.complete(command);
                     console->current_input.clear();
                     std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
@@ -587,6 +590,9 @@ namespace yli::ontology
                     // then complete the parameter using the empty string.
 
                     // If `input_string` is empty, then complete the parameter.
+
+                    console->print_completions(universe->registry, "");
+
                     const std::string completion = universe->registry.complete("");
 
                     if (!completion.empty())
@@ -598,6 +604,8 @@ namespace yli::ontology
                 {
                     // If `input_string` does not end with a space,
                     // then complete the current parameter.
+
+                    console->print_completions(universe->registry, parameter_vector.back());
 
                     const std::string completion = universe->registry.complete(parameter_vector.back());
                     console->current_input.clear();

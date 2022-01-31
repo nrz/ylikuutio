@@ -179,16 +179,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
-[ ] Implement `Species` morphing using marching cubes algorithm.
-[ ] Implement creation of vertex graphs of the vertices and edges of a `Species`, to be used in `Species` morphing code.
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
-[ ] Disable executing system commands from s7.
-[ ] Disable listing directories from s7.
-[ ] Disable deleting files from s7.
-[ ] Disable writing to files from s7.
-[ ] Disable reading from files from s7, with the exception of filenames matching the whitelisting regex.
-[ ] Disable writing to ports from s7.
-[ ] Disable reading from ports from s7.
 
 Less urgent:
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D

@@ -19,6 +19,7 @@
 #include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
+#include "registry.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
@@ -202,7 +203,7 @@ namespace yli::ontology
         }
     }
 
-    void Console::render()
+    void Console::render() const
     {
         if (!this->in_console ||
                 !this->should_be_rendered ||
@@ -247,7 +248,10 @@ namespace yli::ontology
         }
         else
         {
-            const std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
+            const std::size_t n_chars_on_noncomplete_line = (this->prompt.size() + this->current_input.size()) % this->n_columns;
+            const std::size_t n_lines_of_current_input = (n_chars_on_noncomplete_line > 0 ?
+                    (this->prompt.size() + this->current_input.size()) / this->n_columns + 1 :
+                    (this->prompt.size() + this->current_input.size()) / this->n_columns);
 
             if (n_lines_of_current_input > this->n_rows)
             {
@@ -277,6 +281,8 @@ namespace yli::ontology
             }
             else
             {
+                const std::string current_input_string = this->convert_current_input_into_string();
+
                 // Current input fits completely in the console 'window'.
                 std::size_t history_start_i { 0 }; // Assume everything does fit in the console 'window'.
 
@@ -292,10 +298,8 @@ namespace yli::ontology
                     const std::list<char> historical_text = this->console_history.at(history_i);
                     text_struct.text += yli::string::convert_char_container_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                 }
-                text_struct.text += this->prompt + yli::string::convert_char_container_to_std_string(
-                        this->current_input,
-                        characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
-                        characters_for_line);                      // The rest lines have full length.
+
+                text_struct.text += this->convert_current_input_into_string();
             }
         }
 
@@ -501,6 +505,22 @@ namespace yli::ontology
         }
     }
 
+    std::string Console::convert_current_input_into_string() const
+    {
+        if (this->universe == nullptr)
+        {
+            std::cerr << "ERROR: `Console::convert_current_input_into_string`: `this->universe` is `nullptr`!\n";
+            return "";
+        }
+
+        const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+
+        return this->prompt + yli::string::convert_char_container_to_std_string(
+                this->current_input,
+                characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
+                characters_for_line);                      // The rest lines have full length.
+    }
+
     void Console::delete_character()
     {
         if (this->in_console)
@@ -554,6 +574,21 @@ namespace yli::ontology
             this->in_history = false;
             this->cursor_it = this->current_input.end();
             this->cursor_index = this->current_input.size();
+        }
+    }
+
+    void Console::print_completions(const yli::ontology::Registry& registry, const std::string& input)
+    {
+        if (registry.get_number_of_completions(input) > 1)
+        {
+            this->print_text(this->convert_current_input_into_string());
+
+            const std::vector<std::string> completions = registry.get_completions(input);
+
+            for (const std::string completion :  completions)
+            {
+                this->print_text(completion);
+            }
         }
     }
 
