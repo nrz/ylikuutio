@@ -448,6 +448,7 @@ namespace yli::ontology
             // Callbacks end here.
 
             void copy_historical_input_into_current_input();
+            std::string convert_current_input_into_string() const;
             void delete_character();
             void move_cursor_left();
             void move_cursor_right();
