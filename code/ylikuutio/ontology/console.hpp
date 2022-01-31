@@ -88,6 +88,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Font2D;
+    class Registry;
 
     class Console: public yli::ontology::Entity
     {
@@ -452,6 +453,7 @@ namespace yli::ontology
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
+            void print_completions(const yli::ontology::Registry& registry, const std::string& input);
 
             std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;

@@ -19,6 +19,7 @@
 #include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
+#include "registry.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
@@ -554,6 +555,19 @@ namespace yli::ontology
             this->in_history = false;
             this->cursor_it = this->current_input.end();
             this->cursor_index = this->current_input.size();
+        }
+    }
+
+    void Console::print_completions(const yli::ontology::Registry& registry, const std::string& input)
+    {
+        if (registry.get_number_of_completions(input) > 1)
+        {
+            const std::vector<std::string> completions = registry.get_completions(input);
+
+            for (const std::string completion :  completions)
+            {
+                this->print_text(completion);
+            }
         }
     }
 
