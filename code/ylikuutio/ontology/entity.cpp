@@ -197,12 +197,6 @@ namespace yli::ontology
         const std::string first = std::string(name, 0, first_dot_pos);
         const std::string rest = std::string(name, ++first_dot_pos);
 
-        if (first.empty())
-        {
-            // Name must not be empty.
-            return nullptr;
-        }
-
         if (!this->registry.is_entity(first))
         {
             return nullptr;
