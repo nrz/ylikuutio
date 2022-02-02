@@ -61,22 +61,18 @@
 //
 // Each ontological class inherits `yli::ontology::Entity` either directly or indirectly.
 // See `doc/class_diagram.tex` for a partial class diagram.
-// Inheriting `yli::ontology::Entity` enables the use of virtual functions common for all ontological entities.
+// Inheriting `yli::ontology::Entity` enables the use of virtual functions common for all ontological Entities.
 //
-// The recommended way to create entities in a game or simulation is to first create `yli::ontology::Universe`
+// The recommended way to create Entities in a game or simulation is to first create `yli::ontology::Universe`
 // and then get a `yli::ontology::EntityFactory*` pointer using `Universe::get_entity_factory` and then
-// create all the rest entities using the member functions of that `EntityFactory`.
+// create all the rest Entities using the member functions of that `EntityFactory`.
 //
-// There is no support for multiple simultaneous `Universe` entities. Do not create more than 1 `Universe`.
+// There is no support for multiple simultaneous `Universe` Entities. Do not create more than 1 `Universe`.
 //
-// `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
-// `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
 // `Universe` must be created before any `Scene`. `parent` must be given to each `Scene`.
-// `Scene` must be created before any `Shader`. `parent` must be given to each `Shader`.
-// `Shader` must be created before any `Material`. `parent` must be given to each `Material`.
-// `Material` must be created before any `Species`. `parent` must be given to each `Species`.
-// `Species` must be create before any `Object` of that `Species`. `parent` must be given to each `Object` of the `Species`.
 //
+// Ontological hierarchy affects how objects can be created and how they can be destroyed,
+// though the precise ways how Entities can be created depends on the functions available.
 //
 // Hierarchy of regular `Object`s (including terrain `Species`):
 //
@@ -84,17 +80,28 @@
 //       ^
 //     Scene
 //       ^
-//     Shader
-//       ^
-//    Material
-//       ^
-//    Species : Model
-//       ^
-//     Object : Movable
+//     Object
 //
-// Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
+// Ontological hierarchy of `Symbiosis` Entities:
 //
-// Ontological hierarchy of `Glyph` (character) entities:
+//    Universe
+//       ^
+//     Scene
+//       ^
+//   Symbiosis           < SymbiontMaterial
+//       ^                        ^
+//   Holobiont : Movable   SymbiontSpecies
+//       ^
+//     Biont : Movable
+//
+// Each `Holobiont` is a composite organism which consists of 0 more `Bionts`.
+// The `Biont`s of the `Holobiont` each belong to their corresponding
+// `SymbiontSpecies`.
+//
+// For more information about holobionts, check Wikipedia:
+// https://en.wikipedia.org/wiki/Holobiont
+//
+// Rendering hierarchy of `Symbiosis` Entities:
 //
 //    Universe
 //       ^
@@ -102,18 +109,13 @@
 //       ^
 //     Shader
 //       ^
-//    Material
+//   Symbiosis : Entity  > SymbiontMaterial : Material
 //       ^
-//   VectorFont < Glyph : Model
+//   Holobiont : Movable   SymbiontSpecies : Species
 //       ^
-//     Text3D
-//       ^
-//     Object : Movable
+//     Biont : Movable -----------^
 //
-// Ontological hierarchy affects how objects can be created and how they can be destroyed,
-// though the precise ways how objects can be created depends on the functions available.
-//
-// Rendering hierarchy of `Glyph` (character) entities:
+// Rendering hierarchy of `Glyph` (character) Entities (work in progress!):
 //
 //    Universe
 //       ^
@@ -129,94 +131,40 @@
 //       ^
 //     Object : Movable
 //
+// TODO: implement `Glyph` Entities!
+//
 // Please note that rendering hierarchy does not include `Text3D` at all, as each `Glyph` points directly to `VectorFont`.
 // So, `render_model` is called only once for each glyph, and that call renders all the children of that `Glyph`,
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //
-// Ontological hierarchy of `Symbiosis` entities:
-//
-//    Universe
-//       ^
-//     Scene
-//       ^
-//     Shader
-//       ^
-//   Symbiosis : Entity  < SymbiontMaterial : Material
-//       ^                        ^
-//   Holobiont : Movable   SymbiontSpecies : Species
-//       ^
-//     Biont : Movable
-//
-// Each `Holobiont` is a composite organism which consists of 0 more `Bionts`.
-// The `Biont`s of the `Holobiont` each belong to their corresponding
-// `SymbiontSpecies`.
-//
-// For more information about holobionts, check Wikipedia:
-// https://en.wikipedia.org/wiki/Holobiont
-//
-// Ontological hierarchy affects how objects can be created and how they can be destroyed,
-// though the precise ways how objects can be created depends on the functions available.
-//
-// Rendering hierarchy of `Symbiosis` entities:
-//
-//    Universe
-//       ^
-//     Scene
-//       ^
-//     Shader
-//       ^
-//   Symbiosis : Entity  > SymbiontMaterial : Material
-//       ^                        v
-//   Holobiont : Movable   SymbiontSpecies : Species
-//       ^
-//     Biont : Movable
-//
-// Optimized rendering hierarchy of `Symbiosis` entities:
+// Ontological hierarchy of `ShaderSymbiosis` Entities (work in progress!):
 //
 //      Universe
 //         ^
 //       Scene
 //         ^
-//       Shader
-//         ^
-//     Symbiosis
-//         ^
-//  SymbiontMaterial : Material
-//         ^
-//  SymbiontSpecies : Species
-//         ^
-//       Biont : Movable
-//
-// TODO: implement optimized rendering hierarchy for `Symbiosis` entities!
-//
-// Ontological hierarchy of `ShaderSymbiosis` entities:
-//
-//      Universe
-//         ^
-//       Scene
-//         ^
-//  ShaderSymbiosis : Symbiosis < SymbiontShader : Shader
+//  ShaderSymbiosis             < SymbiontShader : Shader
 //         ^                            ^
 //     Holobiont : Movable       SymbiontMaterial : Material
 //         ^                            ^
 //       Biont : Movable         SymbiontSpecies : Species
 //
-// Rendering hierarchy of `ShaderSymbiosis` entities:
+// Rendering hierarchy of `ShaderSymbiosis` Entities:
 //
 //      Universe
 //         ^
 //       Scene
 //         ^
-//  ShaderSymbiosis : Symbiosis  > SymbiontShader : Shader
+//  ShaderSymbiosis              > SymbiontShader : Shader
 //         ^                             v
 //     Holobiont : Movable        SymbiontMaterial : Material
 //         ^                             v
 //       Biont : Movable          SymbiontSpecies : Species
 //
-// TODO: implement `ShaderSymbiosis` entities!
+// TODO: implement `ShaderSymbiosis` Entities!
 //
-// Optimized rendering hierarchy of `ShaderSymbiosis` entities:
+// Optimized rendering hierarchy of `ShaderSymbiosis` Entities (work in progress!):
 //
 //      Universe
 //         ^
@@ -232,44 +180,7 @@
 //         ^
 //       Biont : Movable
 //
-// TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` entities!
-//
-// Deleting a `Universe` also deletes all ecosystems, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
-// Deleting an `Ecosystem` also deletes all shaders, materials, species, fonts and glyphs that are bound to the same `Ecosystem`.
-// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Scene`.
-// Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are bound to the same `Shader`.
-// Deleting a `Material` also deletes all species, fonts, glyphs and objects that are bound to the same `Material`.
-// Deleting a `Species` also deletes all objects that are bound to the same `Species`.
-// Deleting an `Object` only deletes the object.
-
-// Characteristics of object type graphs: TODO: implement object type graphs!
-// 1. Each object must be an undirected graph.
-// 2. Each edge must be a link in the graph.
-// 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
-//
-// Modifying object type graphs:
-// 1. Translation of a vertex does not require changes in any other nodes of the graph.
-// 2. Adding a vertex always requires changes in some other nodes of the graph (unless the graph is empty before adding the vertex).
-// 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph (unless the vertex is the only vertex of the graph).
-// 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
-//
-// Adding a vertex or several vertices:
-// 1. The new edges must be connected to the existing graph with appropriate links.
-// 2. Each new face must be a triangle.
-//
-// Deleting a vertex or several vertices:
-// 1. When a vertex or several vertices are deleted, their links must be deleted too (`Node` destructor handles this).
-// 2. If the vertex to be deleted is on the border of a [terrain] object, it can be deleted.
-// 3. If the vertices that are neighbors to the vertex to be deleted form only triangeles, the vertex can be deleted without vertex additions.
-// 4. Otherwise the vertex cannot be deleted without appropriate vertex and edge additions.
-//
-// Complex modifications:
-// 1. In complex modifications one or more vertices and edges are deleted and one or more vertices and edges are added.
-// 2. Complex modifications may also change the topology of the object (tunnels, arcs, etc.).
-// 3. If a complex modification causes splitting the object in two or more pieces, each piece becomes a separate object.
-// 4. If the splitted object is a terrain object, then the lowest vertex (any vertex with smallest y-coordinate) of each piece is searched and the
-//    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
-//    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
+// TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` Entities!
 
 namespace yli::data
 {
