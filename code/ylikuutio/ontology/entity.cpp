@@ -172,6 +172,12 @@ namespace yli::ontology
         // `name` must not be empty.
         // `name` must not begin with a dot.
         // `name` must not end with a dot.
+
+        if (name.empty() || name.front() == '.' || name.back() == '.')
+        {
+            return nullptr;
+        }
+
         std::size_t first_dot_pos = name.find_first_of('.');
 
         if (first_dot_pos == std::string::npos)
