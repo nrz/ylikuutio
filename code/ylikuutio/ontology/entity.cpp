@@ -169,6 +169,7 @@ namespace yli::ontology
     yli::ontology::Entity* Entity::get_entity(const std::string& name) const
     {
         // Requirements:
+        // `name` must not be empty.
         // `name` must not begin with a dot.
         // `name` must not end with a dot.
         std::size_t first_dot_pos = name.find_first_of('.');
