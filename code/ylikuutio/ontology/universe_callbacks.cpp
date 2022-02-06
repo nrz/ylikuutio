@@ -176,7 +176,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        // Command parameters must form a valid AngelScript expression.
+        // Command parameters must form a valid YliLisp expression.
 
         std::string expression;
 
