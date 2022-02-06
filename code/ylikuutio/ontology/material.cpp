@@ -113,20 +113,18 @@ namespace yli::ontology
 
     void Material::render()
     {
-        if (!this->texture.get_is_texture_loaded() || !this->should_be_rendered || this->universe == nullptr)
+        if (!this->texture.get_is_texture_loaded() || !this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
             std::cerr << "ERROR: `Material::render`: `render_master` is `nullptr`!\n";
             return;
         }
-
-        this->prerender();
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
@@ -138,8 +136,6 @@ namespace yli::ontology
         render_master->render_species(this->master_of_species.get_apprentice_module_pointer_vector_reference());
         render_master->render_vector_fonts(this->parent_of_vector_fonts);
         render_master->render_chunk_masters(this->parent_of_chunk_masters);
-
-        this->postrender();
     }
 
     yli::ontology::Entity* Material::get_parent() const

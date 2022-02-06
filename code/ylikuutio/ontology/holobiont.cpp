@@ -62,12 +62,12 @@ namespace yli::ontology
 
     void Holobiont::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -75,9 +75,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         render_master->render_bionts(this->parent_of_bionts.child_pointer_vector);
-        this->postrender();
     }
 
     void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)

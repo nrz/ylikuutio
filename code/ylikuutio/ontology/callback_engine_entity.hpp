@@ -36,9 +36,10 @@ namespace yli::ontology
     {
         public:
             CallbackEngineEntity(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, yli::ontology::EntityStruct()),
+                : yli::callback::CallbackEngine(universe),
+                Entity(universe, yli::ontology::EntityStruct()),
                 child_of_universe(parent_module, this)
             {
                 // constructor.

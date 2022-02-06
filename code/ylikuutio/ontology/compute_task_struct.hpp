@@ -19,8 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_COMPUTE_TASK_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
-#include "pre_iterate_callback.hpp"
-#include "post_iterate_callback.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -59,8 +57,6 @@ namespace yli::ontology
         GLenum type                    { GL_UNSIGNED_BYTE };
         bool should_save_intermediate_results    { false };
         bool should_flip_texture                 { true };
-        PreIterateCallback preiterate_callback   { nullptr };
-        PostIterateCallback postiterate_callback { nullptr };
     };
 }
 

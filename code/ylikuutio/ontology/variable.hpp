@@ -54,7 +54,7 @@ namespace yli::ontology
     class Variable: public yli::ontology::Entity 
     {
         public:
-            Variable(yli::ontology::Universe* const universe, const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
+            Variable(yli::ontology::Universe& universe, const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
                 : Entity(universe, variable_struct),
                 parent            { variable_struct.parent },
                 variable_value    { any_value },

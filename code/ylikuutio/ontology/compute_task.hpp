@@ -22,8 +22,6 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "compute_task_struct.hpp"
-#include "pre_iterate_callback.hpp"
-#include "post_iterate_callback.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/csv_texture_loader.hpp"
@@ -65,13 +63,6 @@
 // value, that is, not an `AnyValue` which contains `common::BOOL`,
 // `end_condition_callback_engine->execute(nullptr)` is still called and taken into account
 // in every iteration.
-//
-// When iterating, there is a `PreIterateCallback` which is executed before each iteration,
-// and also a `PostIterateCallback` which is executed correspondingly after each iteration.
-// Of course `PreRenderCallback` and `PostRenderCallback` can be used as well.
-// `PreRenderCallback` gets executed before the first `PreIterateCallback` call, and
-// `PostRenderCallback` gets executed after the last `PostRenderCallback` call.
-// All these callbacks are optional and can be left to `nullptr` if they are not needed.
 
 namespace yli::callback
 {
@@ -86,7 +77,7 @@ namespace yli::ontology
     class ComputeTask: public yli::ontology::Entity
     {
         public:
-            ComputeTask(yli::ontology::Universe* const universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
+            ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
                 : Entity(universe, compute_task_struct)
             {
                 // constructor.
@@ -130,20 +121,17 @@ namespace yli::ontology
                 this->should_save_intermediate_results = compute_task_struct.should_save_intermediate_results;
                 this->should_flip_texture              = compute_task_struct.should_flip_texture;
 
-                this->preiterate_callback                        = compute_task_struct.preiterate_callback;
-                this->postiterate_callback                       = compute_task_struct.postiterate_callback;
-
                 // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
                 this->bind_to_parent();
 
                 // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
                 // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
                 // then `ComputeTask` could and should support software rendering as well.
-                const bool should_load_texture = (this->universe != nullptr &&
-                        (this->universe->get_is_opengl_in_use() ||
-                         this->universe->get_is_vulkan_in_use()));
+                const bool should_load_texture =
+                    this->universe.get_is_opengl_in_use() ||
+                    this->universe.get_is_vulkan_in_use();
 
-                if (should_load_texture && this->universe->get_is_opengl_in_use())
+                if (should_load_texture && this->universe.get_is_opengl_in_use())
                 {
                     // Get a handle for our buffers.
                     this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
@@ -165,7 +153,7 @@ namespace yli::ontology
                                 this->texture_size,
                                 n_color_channels,
                                 this->source_texture,
-                                this->universe->get_graphics_api_backend()))
+                                this->universe.get_graphics_api_backend()))
                     {
                         std::cerr << "ERROR: loading PNG texture failed!\n";
                     }
@@ -201,7 +189,7 @@ namespace yli::ontology
                     std::cerr << "texture file format: " << this->texture_file_format << "\n";
                 }
 
-                if (this->is_texture_loaded && this->universe->get_is_opengl_in_use())
+                if (this->is_texture_loaded && this->universe.get_is_opengl_in_use())
                 {
                     // Get a handle for our "texture_sampler" uniform.
                     this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
@@ -282,9 +270,6 @@ namespace yli::ontology
             void render();
 
         private:
-            void preiterate() const;
-            void postiterate() const;
-
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
@@ -342,9 +327,6 @@ namespace yli::ontology
 
             bool should_save_intermediate_results;
             bool should_flip_texture;
-
-            PreIterateCallback preiterate_callback;
-            PostIterateCallback postiterate_callback;
     };
 }
 

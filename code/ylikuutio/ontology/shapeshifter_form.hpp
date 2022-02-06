@@ -39,7 +39,7 @@ namespace yli::ontology
     {
         public:
             ShapeshifterForm(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
                 : Entity(universe, model_struct),

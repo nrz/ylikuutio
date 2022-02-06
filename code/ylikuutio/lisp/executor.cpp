@@ -37,21 +37,18 @@ namespace yli::lisp
         // `LispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
 
-        yli::ontology::Universe* universe = console.get_universe();
+        yli::ontology::Universe& universe = console.get_universe();
 
-        if (universe != nullptr)
+        yli::ontology::Entity* const lisp_function_entity = universe.get_entity(command);
+
+        if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == &console)
         {
-            yli::ontology::Entity* const lisp_function_entity = universe->get_entity(command);
+            yli::ontology::LispFunction* const lisp_function =
+                dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-            if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == &console)
+            if (lisp_function != nullptr)
             {
-                yli::ontology::LispFunction* const lisp_function =
-                    dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
-
-                if (lisp_function != nullptr)
-                {
-                    return lisp_function->execute(parameter_vector);
-                }
+                return lisp_function->execute(parameter_vector);
             }
         }
 

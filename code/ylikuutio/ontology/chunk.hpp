@@ -42,11 +42,15 @@
 
 namespace yli::ontology
 {
+    class Universe;
+
     class Chunk: public yli::ontology::Entity
     {
         public:
-            Chunk(const yli::ontology::ChunkStruct& chunk_struct)
-                : Entity(chunk_struct.universe, chunk_struct)
+            Chunk(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::ChunkStruct& chunk_struct)
+                : Entity(universe, chunk_struct)
             {
                 // constructor.
                 this->is_original = true;

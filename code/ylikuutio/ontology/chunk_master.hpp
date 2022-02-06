@@ -39,7 +39,7 @@ namespace yli::ontology
     class ChunkMaster: public yli::ontology::Entity
     {
         public:
-            ChunkMaster(yli::ontology::Universe* universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
+            ChunkMaster(yli::ontology::Universe& universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
                 : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
                 parent_of_chunks(this, &this->registry, "chunks")
             {

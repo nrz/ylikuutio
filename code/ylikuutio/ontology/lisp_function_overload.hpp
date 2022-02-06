@@ -59,7 +59,7 @@ namespace yli::ontology
     {
         public:
             LispFunctionOverload(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module,
                     std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
                 : GenericLispFunctionOverload(universe, parent_module),
@@ -82,13 +82,7 @@ namespace yli::ontology
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {
-                yli::ontology::Universe* const universe = this->get_universe();
-
-                if (universe == nullptr)
-                {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `universe` is `nullptr`!\n";
-                    return std::nullopt;
-                }
+                yli::ontology::Universe& universe = this->get_universe();
 
                 yli::ontology::Entity* const lisp_function_entity = this->get_parent();
 
@@ -183,11 +177,6 @@ namespace yli::ontology
             {
                 // Start processing the arguments.
 
-                if (this->universe == nullptr)
-                {
-                    return std::nullopt;
-                }
-
                 yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
 
                 if (lisp_function == nullptr)
@@ -203,12 +192,12 @@ namespace yli::ontology
                 }
 
                 std::size_t parameter_i = 0;                     // Start from the first parameter.
-                yli::ontology::Entity* context = this->universe; // `Universe` is the default context.
+                yli::ontology::Entity* context = &this->universe; // `Universe` is the default context.
 
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
                         std::size_t {},
-                        *this->universe,
+                        this->universe,
                         *console,
                         context,
                         parameter_vector,

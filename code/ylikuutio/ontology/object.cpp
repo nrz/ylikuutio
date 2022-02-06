@@ -190,15 +190,11 @@ namespace yli::ontology
             if (this->object_type == yli::ontology::ObjectType::REGULAR ||
                     this->object_type == yli::ontology::ObjectType::CHARACTER)
             {
-                this->prerender();
                 this->render_this_object(this->get_shader());
-                this->postrender();
             }
             else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
             {
-                this->prerender();
                 // TODO.
-                this->postrender();
             }
         }
     }
@@ -248,7 +244,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = this->cartesian_coordinates.y;
         this->model_matrix[3][2] = this->cartesian_coordinates.z;
 
-        this->mvp_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.

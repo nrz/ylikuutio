@@ -53,18 +53,8 @@ namespace yli::ontology
 
     void Entity::bind_to_universe()
     {
-        // Requirements:
-        // `this->universe` must not be `nullptr`.
-        yli::ontology::Universe* const universe = this->universe;
-
-        if (universe == nullptr)
-        {
-            // When `Application` is created, `universe` is still `nullptr`.
-            return;
-        }
-
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-        universe->bind_entity(this);
+        universe.bind_entity(this);
     }
 
     void Entity::bind_to_new_parent(yli::ontology::Entity* /* new_parent */)
@@ -74,7 +64,7 @@ namespace yli::ontology
         // this `yli::ontology::Entity` base class implementation.
     }
 
-    Entity::Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct)
+    Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
         : registry(),
         parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.
         parent_of_any_struct_entities(this, &this->registry, "any_struct_entities"),
@@ -86,9 +76,9 @@ namespace yli::ontology
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        if (!this->is_variable && this->universe != nullptr && this->universe != this)
+        if (!this->is_variable && &this->universe != this)
         {
-            this->should_be_rendered = !this->universe->get_is_headless();
+            this->should_be_rendered = !this->universe.get_is_headless();
 
             yli::ontology::VariableStruct should_be_rendered_variable_struct;
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
@@ -103,19 +93,12 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (this->universe == nullptr)
-        {
-            // When leaving the `main` before binding `Application` to `Universe`,
-            // `this->universe` is still `nullptr`.
-            return;
-        }
+        this->universe.unbind_entity(this->entityID);
 
-        this->universe->unbind_entity(this->entityID);
-
-        if (!this->global_name.empty() && this->universe != nullptr)
+        if (!this->global_name.empty())
         {
             // OK, this `Entity` had a global name, so it's global name shall be erased.
-            this->universe->erase_entity(this->global_name);
+            this->universe.erase_entity(this->global_name);
         }
 
         // Local names must be erased in the destructors
@@ -146,19 +129,14 @@ namespace yli::ontology
         return this->can_be_erased;
     }
 
-    yli::ontology::Universe* Entity::get_universe() const
+    yli::ontology::Universe& Entity::get_universe() const
     {
         return this->universe;
     }
 
     yli::ontology::EntityFactory* Entity::get_entity_factory() const
     {
-        if (this->universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        return this->universe->get_entity_factory();
+        return this->universe.get_entity_factory();
     }
 
     bool Entity::has_child(const std::string& name) const
@@ -169,8 +147,15 @@ namespace yli::ontology
     yli::ontology::Entity* Entity::get_entity(const std::string& name) const
     {
         // Requirements:
+        // `name` must not be empty.
         // `name` must not begin with a dot.
         // `name` must not end with a dot.
+
+        if (name.empty() || name.front() == '.' || name.back() == '.')
+        {
+            return nullptr;
+        }
+
         std::size_t first_dot_pos = name.find_first_of('.');
 
         if (first_dot_pos == std::string::npos)
@@ -189,12 +174,6 @@ namespace yli::ontology
 
         const std::string first = std::string(name, 0, first_dot_pos);
         const std::string rest = std::string(name, ++first_dot_pos);
-
-        if (first.empty())
-        {
-            // Name must not be empty.
-            return nullptr;
-        }
 
         if (!this->registry.is_entity(first))
         {
@@ -228,12 +207,7 @@ namespace yli::ontology
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
-        yli::ontology::EntityFactory* const entity_factory = this->universe->get_entity_factory();
+        yli::ontology::EntityFactory* const entity_factory = this->universe.get_entity_factory();
 
         if (entity_factory == nullptr)
         {
@@ -290,32 +264,6 @@ namespace yli::ontology
         return variable->help();
     }
 
-    void Entity::prerender() const
-    {
-        // Requirements:
-        // `this->prerender_callback` must not be `nullptr`.
-        // `this->universe` must not be `nullptr`.
-
-        if (this->prerender_callback != nullptr &&
-                this->universe != nullptr)
-        {
-            this->prerender_callback(this->universe);
-        }
-    }
-
-    void Entity::postrender() const
-    {
-        // Requirements:
-        // `this->postrender_callback` must not be `nullptr`.
-        // `this->universe` must not be `nullptr`.
-
-        if (this->postrender_callback != nullptr &&
-                this->universe != nullptr)
-        {
-            this->postrender_callback(this->universe);
-        }
-    }
-
     std::string Entity::get_global_name() const
     {
         return this->global_name;
@@ -366,25 +314,20 @@ namespace yli::ontology
             return;
         }
 
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
-        if (this->universe->has_child(global_name))
+        if (this->universe.has_child(global_name))
         {
             // The global name is already in use.
             return;
         }
 
         // Erase old global name.
-        this->universe->erase_entity(this->global_name);
+        this->universe.erase_entity(this->global_name);
 
         // Set new global name.
         this->global_name = global_name;
-        this->universe->add_entity(global_name, this);
+        this->universe.add_entity(global_name, this);
 
-        if (this->universe == this->get_parent())
+        if (&this->universe == this->get_parent())
         {
             // `Universe` is the parent of this `Entity`.
             // Therefore, local name and global name
@@ -425,7 +368,7 @@ namespace yli::ontology
         parent->add_entity(local_name, this);
         this->local_name = local_name;
 
-        if (parent == this->universe)
+        if (parent == &this->universe)
         {
             // Special case: this `Entity` is a child of the `Universe`!
             // Therefore, the local name is also the global name,

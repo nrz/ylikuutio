@@ -784,8 +784,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/parent_of_shaders_module.cpp
     code/ylikuutio/ontology/parent_of_shaders_module.hpp
-    code/ylikuutio/ontology/post_render_callback.hpp
-    code/ylikuutio/ontology/pre_render_callback.hpp
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp

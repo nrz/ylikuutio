@@ -22,12 +22,10 @@
 
 namespace yli::ontology
 {
-    class Universe;
     class ChunkMaster;
 
     struct ChunkStruct: public yli::ontology::EntityStruct
     {
-        yli::ontology::Universe* universe  { nullptr }; // pointer to the `Universe`.
         yli::ontology::ChunkMaster* parent { nullptr }; // pointer to the `ChunkMaster`.
     };
 }

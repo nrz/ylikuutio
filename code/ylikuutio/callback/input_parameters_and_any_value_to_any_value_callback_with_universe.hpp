@@ -40,7 +40,7 @@ namespace yli::ontology
 }
 
 typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
-        yli::ontology::Universe*,
+        yli::ontology::Universe&,
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,

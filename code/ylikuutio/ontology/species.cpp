@@ -128,10 +128,8 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(
                 this->mesh, this->master_of_objects);
-        this->postrender();
     }
 
     uint32_t Species::get_x_step() const

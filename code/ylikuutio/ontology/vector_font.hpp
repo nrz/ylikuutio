@@ -58,7 +58,7 @@ namespace yli::ontology
             void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
-            VectorFont(yli::ontology::Universe* const universe, const yli::ontology::VectorFontStruct& vector_font_struct)
+            VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                 : Entity(universe, vector_font_struct),
                 parent_of_glyphs(this, &this->registry, "glyphs"),
                 parent_of_text_3ds(this, &this->registry, "text_3ds"),

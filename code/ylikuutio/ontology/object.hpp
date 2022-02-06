@@ -61,7 +61,7 @@ namespace yli::ontology
             void bind_to_new_text_3d_master(yli::ontology::Text3D* const new_text_3d);
 
             Object(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& object_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const mesh_master,

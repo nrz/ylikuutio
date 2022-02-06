@@ -53,7 +53,7 @@ namespace yli::ontology
     {
         public:
             // constructor.
-            explicit EntityFactory(yli::ontology::Universe* const universe);
+            explicit EntityFactory(yli::ontology::Universe& universe);
 
             EntityFactory(const EntityFactory&) = delete;            // Delete copy constructor.
             EntityFactory& operator=(const EntityFactory&) = delete; // Delete copy assignment.
@@ -61,7 +61,7 @@ namespace yli::ontology
             // destructor.
             ~EntityFactory();
 
-            yli::ontology::Universe* get_universe() const;
+            yli::ontology::Universe& get_universe() const;
 
             yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const;
@@ -84,7 +84,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_callback_engine_entity() const;
 
         private:
-            yli::ontology::Universe* universe;
+            yli::ontology::Universe& universe;
     };
 }
 

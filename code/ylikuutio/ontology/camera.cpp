@@ -61,10 +61,7 @@ namespace yli::ontology
 
     void Camera::activate()
     {
-        if (this->universe != nullptr)
-        {
-            this->universe->set_active_camera(this);
-        }
+        this->universe.set_active_camera(this);
     }
 
     yli::ontology::Scene* Camera::get_scene() const

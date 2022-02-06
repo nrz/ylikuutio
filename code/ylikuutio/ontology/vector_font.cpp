@@ -150,12 +150,12 @@ namespace yli::ontology
 
     void VectorFont::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -163,9 +163,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         render_master->render_glyphs(this->parent_of_glyphs.child_pointer_vector);
-        this->postrender();
     }
 
     yli::ontology::Entity* VectorFont::get_parent() const

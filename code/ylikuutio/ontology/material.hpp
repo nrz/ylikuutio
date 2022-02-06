@@ -55,7 +55,7 @@ namespace yli::ontology
             void bind_to_new_shader(yli::ontology::Shader* const new_shader);
 
             Material(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
                     yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)

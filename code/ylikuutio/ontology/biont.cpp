@@ -96,9 +96,7 @@ namespace yli::ontology
 
         if (this->should_render)
         {
-            this->prerender();
             this->render_this_biont(symbiosis->get_shader());
-            this->postrender();
         }
     }
 
@@ -110,13 +108,7 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
-        yli::ontology::Universe* const universe = this->universe;
-
-        if (universe == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `universe` is `nullptr`!\n";
-            return;
-        }
+        yli::ontology::Universe& universe = this->universe;
 
         if (shader == nullptr)
         {
@@ -169,7 +161,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont->cartesian_coordinates.y;
         this->model_matrix[3][2] = holobiont->cartesian_coordinates.z;
 
-        this->mvp_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = universe.get_projection_matrix() * universe.get_view_matrix() * this->model_matrix;
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);

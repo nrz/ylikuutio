@@ -65,10 +65,10 @@
 
 namespace yli::ontology
 {
-    EntityFactory::EntityFactory(yli::ontology::Universe* const universe)
+    EntityFactory::EntityFactory(yli::ontology::Universe& universe)
+        : universe { universe }
     {
         // constructor.
-        this->universe = universe;
     }
 
     EntityFactory::~EntityFactory()
@@ -76,7 +76,7 @@ namespace yli::ontology
         // destructor.
     }
 
-    yli::ontology::Universe* EntityFactory::get_universe() const
+    yli::ontology::Universe& EntityFactory::get_universe() const
     {
         return this->universe;
     }
@@ -85,7 +85,7 @@ namespace yli::ontology
     {
         yli::ontology::Entity* variable_entity = new yli::ontology::Variable(this->universe, variable_struct, any_value);
 
-        if (this->universe == variable_struct.parent)
+        if (&this->universe == variable_struct.parent)
         {
             // OK, this is a `variable` of the `Universe`.
 
@@ -127,7 +127,7 @@ namespace yli::ontology
         yli::ontology::Entity* ecosystem_entity = new yli::ontology::Ecosystem(
                 this->universe,
                 ecosystem_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_ecosystems));
+                &this->universe.parent_of_ecosystems);
 
         if (!ecosystem_struct.global_name.empty() && ecosystem_struct.local_name.empty())
         {
@@ -154,7 +154,7 @@ namespace yli::ontology
         yli::ontology::Entity* scene_entity = new yli::ontology::Scene(
                 this->universe,
                 scene_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_scenes));
+                &this->universe.parent_of_scenes);
 
         if (!scene_struct.global_name.empty() && scene_struct.local_name.empty())
         {
@@ -313,7 +313,7 @@ namespace yli::ontology
         yli::ontology::Entity* font2d_entity = new yli::ontology::Font2D(
                 this->universe,
                 font_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_font_2ds));
+                &this->universe.parent_of_font_2ds);
 
         if (!font_struct.global_name.empty() && font_struct.local_name.empty())
         {
@@ -340,7 +340,7 @@ namespace yli::ontology
         yli::ontology::Entity* console_entity = new yli::ontology::Console(
                 this->universe,
                 console_struct,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_consoles),
+                &this->universe.parent_of_consoles,
                 (console_struct.font_2d == nullptr ? nullptr : &console_struct.font_2d->master_of_consoles));
 
         if (!console_struct.global_name.empty() && console_struct.local_name.empty())
@@ -412,6 +412,6 @@ namespace yli::ontology
     {
         return new yli::ontology::CallbackEngineEntity(
                 this->universe,
-                (this->universe == nullptr ? nullptr : &this->universe->parent_of_callback_engine_entities));
+                &this->universe.parent_of_callback_engine_entities);
     }
 }

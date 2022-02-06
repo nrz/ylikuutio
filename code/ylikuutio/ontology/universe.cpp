@@ -611,9 +611,7 @@ namespace yli::ontology
                 this->should_be_rendered &&
                 this->render_master != nullptr)
         {
-            this->prerender();
             this->render_master->render(render_struct);
-            this->postrender();
         }
 
         yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
@@ -846,13 +844,13 @@ namespace yli::ontology
         yli::opengl::bind_gl_framebuffer(0);
 
         // Set background color for the default framebuffer.
-        universe->set_opengl_background_color();
+        this->set_opengl_background_color();
 
         // Clear the default framebuffer.
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Adjust viewport for the default framebuffer.
-        universe->adjust_opengl_viewport();
+        this->adjust_opengl_viewport();
     }
 
     void Universe::set_opengl_background_color() const

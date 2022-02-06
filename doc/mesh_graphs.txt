@@ -1,0 +1,30 @@
+// Characteristics of mesh graphs:
+// TODO: implement mesh graphs!
+// 1. Each mesh must be an undirected graph.
+// 2. Each edge must be a link in the graph.
+// 3. The faces of each mesh must form a closed surface. The only exception is the terrain mesh, which may have borders.
+//
+// Modifying mesh graphs:
+// 1. Translation of a vertex does not require changes in any other nodes of the graph.
+// 2. Adding a vertex always requires changes in some other nodes of the graph (unless the graph is empty before adding the vertex).
+// 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph (unless the vertex is the only vertex of the graph).
+// 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
+//
+// Adding a vertex or several vertices:
+// 1. The new edges must be connected to the existing graph with appropriate links.
+// 2. Each new face must be a triangle.
+//
+// Deleting a vertex or several vertices:
+// 1. When a vertex or several vertices are deleted, their links must be deleted too (`Node` destructor handles this).
+// 2. If the vertex to be deleted is on the border of a [terrain] mesh, it can be deleted.
+// 3. If the vertices that are neighbors to the vertex to be deleted form only triangeles, the vertex can be deleted without vertex additions.
+// 4. Otherwise the vertex cannot be deleted without appropriate vertex and edge additions.
+//
+// Complex modifications:
+// 1. In complex modifications one or more vertices and edges are deleted and one or more vertices and edges are added.
+// 2. Complex modifications may also change the topology of the mesh (tunnels, arcs, etc.).
+// 3. If a complex modification causes splitting the mesh in two or more pieces, each piece becomes a separate mesh.
+// 4. If the splitted mesh is a terrain mesh, then the lowest vertex (any vertex with smallest y-coordinate) of each piece is searched and the
+//    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
+//    regular meshs. The pieces that become regular meshs will be subject to gravity the same way as any regular mesh.
+

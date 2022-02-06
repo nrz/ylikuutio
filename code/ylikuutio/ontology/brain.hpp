@@ -63,7 +63,7 @@ namespace yli::ontology
     {
         public:
             Brain(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::BrainStruct& brain_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, brain_struct),

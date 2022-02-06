@@ -44,7 +44,7 @@ namespace yli::ontology
     {
         public:
             LispFunction(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::LispFunctionStruct& lisp_function_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, lisp_function_struct),

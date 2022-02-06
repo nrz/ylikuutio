@@ -104,12 +104,12 @@ namespace yli::ontology
 
     void ShapeshifterTransformation::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -117,9 +117,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         render_master->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences.child_pointer_vector);
-        this->postrender();
     }
 
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const

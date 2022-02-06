@@ -51,18 +51,13 @@ namespace yli::ontology
     // Action mode keypress callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::enter_console(
-            yli::ontology::Universe* universe,
+            yli::ontology::Universe& universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
             const yli::data::AnyValue&)
     {
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Console* const console = universe->get_active_console();
+        yli::ontology::Console* const console = universe.get_active_console();
 
         if (console == nullptr)
         {
@@ -87,11 +82,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_left_control_pressed = false;
+            console.is_left_control_pressed = false;
         }
         return std::nullopt;
     }
@@ -100,11 +95,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_right_control_pressed = false;
+            console.is_right_control_pressed = false;
         }
         return std::nullopt;
     }
@@ -113,11 +108,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_left_alt_pressed = false;
+            console.is_left_alt_pressed = false;
         }
         return std::nullopt;
     }
@@ -126,11 +121,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_right_alt_pressed = false;
+            console.is_right_alt_pressed = false;
         }
         return std::nullopt;
     }
@@ -139,11 +134,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_left_shift_pressed = false;
+            console.is_left_shift_pressed = false;
         }
         return std::nullopt;
     }
@@ -152,11 +147,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->is_right_shift_pressed = false;
+            console.is_right_shift_pressed = false;
         }
         return std::nullopt;
     }
@@ -165,11 +160,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_move_to_previous_input = true;
+            console.can_move_to_previous_input = true;
         }
         return std::nullopt;
     }
@@ -178,11 +173,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_move_to_next_input = true;
+            console.can_move_to_next_input = true;
         }
         return std::nullopt;
     }
@@ -191,11 +186,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_backspace = true;
+            console.can_backspace = true;
         }
         return std::nullopt;
     }
@@ -204,11 +199,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_tab = true;
+            console.can_tab = true;
         }
         return std::nullopt;
     }
@@ -217,11 +212,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_enter_key = true;
+            console.can_enter_key = true;
         }
         return std::nullopt;
     }
@@ -230,11 +225,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_ctrl_c = true;
+            console.can_ctrl_c = true;
         }
         return std::nullopt;
     }
@@ -243,11 +238,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_ctrl_w = true;
+            console.can_ctrl_w = true;
         }
         return std::nullopt;
     }
@@ -256,11 +251,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_page_up = true;
+            console.can_page_up = true;
         }
         return std::nullopt;
     }
@@ -269,11 +264,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_page_down = true;
+            console.can_page_down = true;
         }
         return std::nullopt;
     }
@@ -282,11 +277,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_home = true;
+            console.can_home = true;
         }
         return std::nullopt;
     }
@@ -295,11 +290,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console->in_console)
+        if (console.in_console)
         {
-            console->can_end = true;
+            console.can_end = true;
         }
         return std::nullopt;
     }
@@ -310,15 +305,9 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
-        {
-            // We did not exit the console.
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->exit_console())
+        if (console.in_console && console.exit_console())
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
@@ -333,16 +322,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_left_control_pressed = true;
+            console.is_left_control_pressed = true;
         }
         return std::nullopt;
     }
@@ -351,16 +335,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_right_control_pressed = true;
+            console.is_right_control_pressed = true;
         }
         return std::nullopt;
     }
@@ -369,16 +348,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_left_alt_pressed = true;
+            console.is_left_alt_pressed = true;
         }
         return std::nullopt;
     }
@@ -387,16 +361,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_right_alt_pressed = true;
+            console.is_right_alt_pressed = true;
         }
         return std::nullopt;
     }
@@ -405,16 +374,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_left_shift_pressed = true;
+            console.is_left_shift_pressed = true;
         }
         return std::nullopt;
     }
@@ -423,16 +387,11 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console)
-        {
-            console->is_right_shift_pressed = true;
+            console.is_right_shift_pressed = true;
         }
         return std::nullopt;
     }
@@ -441,42 +400,37 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_move_to_previous_input)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_move_to_previous_input)
-        {
-            if (!console->in_historical_input && !console->command_history.empty())
+            if (!console.in_historical_input && !console.command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
-                console->in_historical_input = true;
-                console->historical_input_i = console->command_history.size() - 1;
+                console.in_historical_input = true;
+                console.historical_input_i = console.command_history.size() - 1;
 
                 // Copy the new input into temp input.
-                console->temp_input.clear();
-                std::copy(console->current_input.begin(), console->current_input.end(), std::back_inserter(console->temp_input));
+                console.temp_input.clear();
+                std::copy(console.current_input.begin(), console.current_input.end(), std::back_inserter(console.temp_input));
 
                 // Copy the historical input into current input.
-                console->current_input.clear();
-                console->copy_historical_input_into_current_input();
+                console.current_input.clear();
+                console.copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_previous_input = false;
+                console.move_cursor_to_end_of_line();
+                console.can_move_to_previous_input = false;
             }
-            else if (console->in_historical_input && console->historical_input_i > 0)
+            else if (console.in_historical_input && console.historical_input_i > 0)
             {
                 // OK, we moved to the previous historical input.
-                console->historical_input_i--;
+                console.historical_input_i--;
 
                 // Copy the historical input into current input.
-                console->copy_historical_input_into_current_input();
+                console.copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_previous_input = false;
+                console.move_cursor_to_end_of_line();
+                console.can_move_to_previous_input = false;
             }
         }
         return std::nullopt;
@@ -486,37 +440,32 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_move_to_next_input && !console.command_history.empty())
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_move_to_next_input && !console->command_history.empty())
-        {
-            if (console->in_historical_input && console->historical_input_i == console->command_history.size() - 1)
+            if (console.in_historical_input && console.historical_input_i == console.command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
-                console->in_historical_input = false;
+                console.in_historical_input = false;
 
                 // Copy temp input into current input.
-                console->current_input.clear();
-                std::copy(console->temp_input.begin(), console->temp_input.end(), std::back_inserter(console->current_input));
+                console.current_input.clear();
+                std::copy(console.temp_input.begin(), console.temp_input.end(), std::back_inserter(console.current_input));
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_next_input = false;
+                console.move_cursor_to_end_of_line();
+                console.can_move_to_next_input = false;
             }
-            else if (console->in_historical_input && console->historical_input_i < console->command_history.size() - 1)
+            else if (console.in_historical_input && console.historical_input_i < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
-                console->historical_input_i++;
+                console.historical_input_i++;
 
                 // Copy the historical input into current input.
-                console->copy_historical_input_into_current_input();
+                console.copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_next_input = false;
+                console.move_cursor_to_end_of_line();
+                console.can_move_to_next_input = false;
             }
         }
         return std::nullopt;
@@ -526,20 +475,15 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console &&
+                console.can_backspace &&
+                console.cursor_it != console.current_input.begin())
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console &&
-                console->can_backspace &&
-                console->cursor_it != console->current_input.begin())
-        {
-            console->cursor_it = console->current_input.erase(--console->cursor_it);
-            console->cursor_index--;
-            console->can_backspace = false;
+            console.cursor_it = console.current_input.erase(--console.cursor_it);
+            console.cursor_index--;
+            console.can_backspace = false;
         }
         return std::nullopt;
     }
@@ -548,24 +492,14 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
-        {
-            return std::nullopt;
-        }
+        yli::ontology::Universe& universe = console.get_universe();
 
-        yli::ontology::Universe* const universe = console->get_universe();
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_tab)
+        if (console.in_console && console.can_tab)
         {
             // Copy current input into a `std::string`.
-            std::string input_string(console->current_input.begin(), console->current_input.end());
+            std::string input_string(console.current_input.begin(), console.current_input.end());
 
             std::vector<std::string> parameter_vector;
             std::string command;
@@ -578,11 +512,11 @@ namespace yli::ontology
                 // If `input_string` is empty, then complete the command.
                 // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
 
-                console->print_completions(universe->registry, command);
+                console.print_completions(universe.registry, command);
 
-                const std::string completion = universe->registry.complete(command);
-                console->current_input.clear();
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                const std::string completion = universe.registry.complete(command);
+                console.current_input.clear();
+                std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
             }
             else if (parameter_vector.empty())
             {
@@ -591,13 +525,13 @@ namespace yli::ontology
 
                 // If `input_string` is empty, then complete the parameter.
 
-                console->print_completions(universe->registry, "");
+                console.print_completions(universe.registry, "");
 
-                const std::string completion = universe->registry.complete("");
+                const std::string completion = universe.registry.complete("");
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
                 }
             }
             else if (input_string.back() != ' ')
@@ -605,40 +539,40 @@ namespace yli::ontology
                 // If `input_string` does not end with a space,
                 // then complete the current parameter.
 
-                console->print_completions(universe->registry, parameter_vector.back());
+                console.print_completions(universe.registry, parameter_vector.back());
 
-                const std::string completion = universe->registry.complete(parameter_vector.back());
-                console->current_input.clear();
-                std::copy(command.begin(), command.end(), std::back_inserter(console->current_input));
-                console->current_input.emplace_back(' ');
+                const std::string completion = universe.registry.complete(parameter_vector.back());
+                console.current_input.clear();
+                std::copy(command.begin(), command.end(), std::back_inserter(console.current_input));
+                console.current_input.emplace_back(' ');
 
                 // Copy the old parameters except the last.
 
                 for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
                 {
-                    std::copy(parameter_vector[i].begin(), parameter_vector[i].end(), std::back_inserter(console->current_input));
-                    console->move_cursor_to_end_of_line();
-                    console->current_input.emplace_back(' ');
+                    std::copy(parameter_vector[i].begin(), parameter_vector[i].end(), std::back_inserter(console.current_input));
+                    console.move_cursor_to_end_of_line();
+                    console.current_input.emplace_back(' ');
                 }
 
                 // Copy the completed parameter.
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
             }
             else
             {
                 // Complete the next parameter.
 
-                const std::string completion = universe->registry.complete("");
+                const std::string completion = universe.registry.complete("");
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console->current_input));
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
                 }
             }
 
-            console->move_cursor_to_end_of_line();
+            console.move_cursor_to_end_of_line();
 
-            console->can_tab = false;
+            console.can_tab = false;
         }
         return std::nullopt;
     }
@@ -647,65 +581,65 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr || !console->in_console || !console->can_enter_key)
+        if (!console.in_console || !console.can_enter_key)
         {
             return std::nullopt;
         }
 
         // Copy current input into a `std::string`.
-        std::string input_string(console->current_input.begin(), console->current_input.end());
+        std::string input_string(console.current_input.begin(), console.current_input.end());
 
         // Copy current input into the command history.
-        console->command_history.emplace_back(console->current_input);
+        console.command_history.emplace_back(console.current_input);
 
         // Prefix current input with the prompt, for saving into `console_history`.
-        std::list<char>::iterator it = console->current_input.begin();
+        std::list<char>::iterator it = console.current_input.begin();
 
-        for (const char& my_char : console->prompt)
+        for (const char& my_char : console.prompt)
         {
-            console->current_input.insert(it, my_char);
+            console.current_input.insert(it, my_char);
         }
 
         std::list<char> current_input_char_list;
 
         // Split into lines, emplace_back each line into `console_history` separately.
-        for (const char& my_char : console->current_input)
+        for (const char& my_char : console.current_input)
         {
             current_input_char_list.emplace_back(my_char);
 
-            if (current_input_char_list.size () >= console->n_columns)
+            if (current_input_char_list.size () >= console.n_columns)
             {
-                console->console_history.emplace_back(current_input_char_list);
+                console.console_history.emplace_back(current_input_char_list);
                 current_input_char_list.clear();
             }
         }
 
         if (current_input_char_list.size() > 0)
         {
-            console->console_history.emplace_back(current_input_char_list);
+            console.console_history.emplace_back(current_input_char_list);
         }
 
         std::vector<std::string> parameter_vector;
         std::string command;
 
-        console->current_input.clear();
+        console.current_input.clear();
 
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
-            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(*console, command, parameter_vector);
-            console->in_historical_input = false;
-            console->cursor_it = console->current_input.begin();
-            console->cursor_index = 0;
-            console->can_enter_key = false;
+            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
+            console.in_historical_input = false;
+            console.cursor_it = console.current_input.begin();
+            console.cursor_index = 0;
+            console.can_enter_key = false;
             return any_value;
         }
 
-        console->in_historical_input = false;
-        console->cursor_it = console->current_input.begin();
-        console->cursor_index = 0;
-        console->can_enter_key = false;
+        console.in_historical_input = false;
+        console.cursor_it = console.current_input.begin();
+        console.cursor_index = 0;
+        console.can_enter_key = false;
 
         return std::nullopt;
     }
@@ -714,24 +648,19 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console &&
+                console.can_ctrl_c &&
+                (console.is_left_control_pressed || console.is_right_control_pressed) &&
+                !console.is_left_alt_pressed && !console.is_right_alt_pressed &&
+                !console.is_left_shift_pressed && !console.is_right_shift_pressed)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console &&
-                console->can_ctrl_c &&
-                (console->is_left_control_pressed || console->is_right_control_pressed) &&
-                !console->is_left_alt_pressed && !console->is_right_alt_pressed &&
-                !console->is_left_shift_pressed && !console->is_right_shift_pressed)
-        {
-            console->current_input.clear();
-            console->in_historical_input = false;
-            console->cursor_it = console->current_input.begin();
-            console->cursor_index = 0;
-            console->can_ctrl_c = false;
+            console.current_input.clear();
+            console.in_historical_input = false;
+            console.cursor_it = console.current_input.begin();
+            console.cursor_index = 0;
+            console.can_ctrl_c = false;
         }
         return std::nullopt;
     }
@@ -740,48 +669,43 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console &&
+                console.can_ctrl_w &&
+                (console.is_left_control_pressed || console.is_right_control_pressed) &&
+                !console.is_left_alt_pressed && !console.is_right_alt_pressed &&
+                !console.is_left_shift_pressed && !console.is_right_shift_pressed)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console &&
-                console->can_ctrl_w &&
-                (console->is_left_control_pressed || console->is_right_control_pressed) &&
-                !console->is_left_alt_pressed && !console->is_right_alt_pressed &&
-                !console->is_left_shift_pressed && !console->is_right_shift_pressed)
-        {
-            console->in_historical_input = false;
+            console.in_historical_input = false;
 
             // First, remove all spaces until a non-space is encountered.
-            while (console->cursor_it != console->current_input.begin())
+            while (console.cursor_it != console.current_input.begin())
             {
-                if (*--console->cursor_it == ' ')
+                if (*--console.cursor_it == ' ')
                 {
-                    ++console->cursor_it;
+                    ++console.cursor_it;
                     break;
                 }
 
-                console->cursor_it = console->current_input.erase(console->cursor_it);
-                console->cursor_index--;
+                console.cursor_it = console.current_input.erase(console.cursor_it);
+                console.cursor_index--;
             }
 
             // Then, remove all non-spaces until a space is encountered.
-            while (console->cursor_it != console->current_input.begin())
+            while (console.cursor_it != console.current_input.begin())
             {
-                if (*--console->cursor_it != ' ')
+                if (*--console.cursor_it != ' ')
                 {
-                    ++console->cursor_it;
+                    ++console.cursor_it;
                     break;
                 }
 
-                console->cursor_it = console->current_input.erase(console->cursor_it);
-                console->cursor_index--;
+                console.cursor_it = console.current_input.erase(console.cursor_it);
+                console.cursor_index--;
             }
 
-            console->can_ctrl_w = false;
+            console.can_ctrl_w = false;
         }
         return std::nullopt;
     }
@@ -790,31 +714,26 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_page_up)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_page_up)
-        {
-            if (console->in_history)
+            if (console.in_history)
             {
-                console->history_line_i = console->history_line_i > console->n_rows ? console->history_line_i - console->n_rows : 0;
+                console.history_line_i = console.history_line_i > console.n_rows ? console.history_line_i - console.n_rows : 0;
             }
             else
             {
-                console->in_history = true;
-                console->history_line_i = console->console_history.size() > 2 * console->n_rows ? console->console_history.size() > 2 * console->n_rows : 0;
+                console.in_history = true;
+                console.history_line_i = console.console_history.size() > 2 * console.n_rows ? console.console_history.size() > 2 * console.n_rows : 0;
             }
 
-            if (console->history_line_i + console->n_rows >= console->console_history.size())
+            if (console.history_line_i + console.n_rows >= console.console_history.size())
             {
-                console->in_history = false;
+                console.in_history = false;
             }
 
-            console->can_page_up = false;
+            console.can_page_up = false;
         }
 
         return std::nullopt;
@@ -824,26 +743,21 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_page_down)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_page_down)
-        {
-            if (console->in_history)
+            if (console.in_history)
             {
-                console->history_line_i += console->n_rows;
+                console.history_line_i += console.n_rows;
 
-                if (console->history_line_i + console->n_rows >= console->console_history.size())
+                if (console.history_line_i + console.n_rows >= console.console_history.size())
                 {
-                    console->in_history = false;
+                    console.in_history = false;
                 }
             }
 
-            console->can_page_down = false;
+            console.can_page_down = false;
         }
         return std::nullopt;
     }
@@ -852,27 +766,22 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_home)
         {
-            return std::nullopt;
-        }
+            console.history_line_i = 0;
 
-        if (console->in_console && console->can_home)
-        {
-            console->history_line_i = 0;
-
-            if (console->history_line_i + console->n_rows >= console->console_history.size())
+            if (console.history_line_i + console.n_rows >= console.console_history.size())
             {
-                console->in_history = false;
+                console.in_history = false;
             }
             else
             {
-                console->in_history = true;
+                console.in_history = true;
             }
 
-            console->can_home = false;
+            console.can_home = false;
         }
         return std::nullopt;
     }
@@ -881,17 +790,12 @@ namespace yli::ontology
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
-            yli::ontology::Console* console)
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
+        if (console.in_console && console.can_end)
         {
-            return std::nullopt;
-        }
-
-        if (console->in_console && console->can_end)
-        {
-            console->in_history = false;
-            console->can_home = false;
+            console.in_history = false;
+            console.can_home = false;
         }
         return std::nullopt;
     }

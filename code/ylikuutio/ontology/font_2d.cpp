@@ -54,7 +54,7 @@ namespace yli::ontology
         // destructor.
         std::cout << "This `Font2D` will be destroyed.\n";
 
-        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use())
         {
             // Delete buffers.
             glDeleteBuffers(1, &this->vertexbuffer);
@@ -111,7 +111,7 @@ namespace yli::ontology
 
     void Font2D::prepare_to_print() const
     {
-        if (this->should_be_rendered && this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->should_be_rendered && this->universe.get_is_opengl_in_use())
         {
             // Bind shader.
             glUseProgram(this->program_id);
@@ -136,12 +136,12 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr || !this->universe->get_is_opengl_in_use())
+        if (!this->should_be_rendered || !this->universe.get_is_opengl_in_use())
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -149,12 +149,10 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         this->prepare_to_print();
         render_master->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
         render_master->render_consoles(this->master_of_consoles.get_apprentice_module_pointer_vector_reference());
         glDisable(GL_BLEND);
-        this->postrender();
     }
 
     void Font2D::print_text_2d(
@@ -346,7 +344,7 @@ namespace yli::ontology
             UVs.emplace_back(uv_down_left);
         }
 
-        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use())
         {
             glBindVertexArray(this->vao);
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);

@@ -93,12 +93,9 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
-
         if (this->is_ready)
         {
             // If `ComputeTask` is ready, it does not need to be rendered.
-            this->postrender();
             return;
         }
 
@@ -153,7 +150,7 @@ namespace yli::ontology
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
 
             // Set background color for the framebuffer.
-            this->universe->set_opengl_background_color();
+            this->universe.set_opengl_background_color();
 
             this->is_framebuffer_initialized = true;
         }
@@ -178,8 +175,6 @@ namespace yli::ontology
 
             // Update the value of `uniform` variable `iteration_i`.
             yli::opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
-
-            this->preiterate();
 
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
@@ -262,8 +257,6 @@ namespace yli::ontology
             std::swap(this->source_texture, this->target_texture);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
             yli::opengl::print_opengl_errors("glFramebufferTexture2D");
-
-            this->postiterate();
         }
 
         // Ping pong once more, so that last output target texture gets saved to file.
@@ -294,11 +287,9 @@ namespace yli::ontology
                     this->should_flip_texture);
         }
 
-        universe->restore_onscreen_rendering();
+        this->universe.restore_onscreen_rendering();
 
         this->is_ready = true;
-
-        this->postrender();
     }
 
     yli::ontology::Entity* ComputeTask::get_parent() const
@@ -326,31 +317,5 @@ namespace yli::ontology
     std::size_t ComputeTask::get_number_of_descendants() const
     {
         return 0; // `ComputeTask` has no children.
-    }
-
-    void ComputeTask::preiterate() const
-    {
-        // Requirements:
-        // `this->preiterate_callback` must not be `nullptr`.
-        // `this->universe` must not be `nullptr`.
-
-        if (this->preiterate_callback != nullptr &&
-                this->universe != nullptr)
-        {
-            this->preiterate_callback(this->universe);
-        }
-    }
-
-    void ComputeTask::postiterate() const
-    {
-        // Requirements:
-        // `this->postiterate_callback` must not be `nullptr`.
-        // `this->universe` must not be `nullptr`.
-
-        if (this->postiterate_callback != nullptr &&
-                this->universe != nullptr)
-        {
-            this->postiterate_callback(this->universe);
-        }
     }
 }

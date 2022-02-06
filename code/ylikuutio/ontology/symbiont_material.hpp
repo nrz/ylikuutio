@@ -40,7 +40,7 @@ namespace yli::ontology
     {
         public:
             SymbiontMaterial(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
                 : Entity(universe, material_struct),
