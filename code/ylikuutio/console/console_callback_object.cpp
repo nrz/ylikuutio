@@ -38,9 +38,9 @@ namespace yli::console
 
     std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
     {
-        if (this->console_callback != nullptr)
+        if (this->console_callback != nullptr && this->console_pointer != nullptr)
         {
-            return yli::data::AnyValue(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, this->console_pointer));
+            return yli::data::AnyValue(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, *this->console_pointer));
         }
         return std::nullopt;
     }

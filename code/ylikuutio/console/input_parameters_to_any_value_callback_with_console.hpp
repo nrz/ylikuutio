@@ -43,6 +43,6 @@ typedef std::optional<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWi
         yli::callback::CallbackEngine*,
         yli::callback::CallbackObject*,
         std::vector<yli::callback::CallbackParameter*>&,
-        yli::ontology::Console*);
+        yli::ontology::Console&);
 
 #endif
