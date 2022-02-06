@@ -44,6 +44,4 @@ TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct)
     ASSERT_EQ(test_compute_task_struct.type, GL_UNSIGNED_BYTE);
     ASSERT_EQ(test_compute_task_struct.should_save_intermediate_results, false);
     ASSERT_EQ(test_compute_task_struct.should_flip_texture, true);
-    ASSERT_EQ(test_compute_task_struct.preiterate_callback, nullptr);
-    ASSERT_EQ(test_compute_task_struct.postiterate_callback, nullptr);
 }

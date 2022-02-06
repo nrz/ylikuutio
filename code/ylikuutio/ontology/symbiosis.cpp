@@ -130,9 +130,9 @@ namespace yli::ontology
 
     void Symbiosis::render()
     {
-        if (this->should_be_rendered && this->universe != nullptr)
+        if (this->should_be_rendered)
         {
-            yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+            yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
             if (render_master == nullptr)
             {
@@ -140,9 +140,7 @@ namespace yli::ontology
                 return;
             }
 
-            this->prerender();
             render_master->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
-            this->postrender();
         }
     }
 

@@ -66,7 +66,7 @@ namespace yli::ontology
         public:
             void bind_to_new_brain(yli::ontology::Brain* const new_brain);
 
-            Movable(yli::ontology::Universe* const universe,
+            Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::GenericMasterModule* const brain_master)
                 : Entity(universe, movable_struct),

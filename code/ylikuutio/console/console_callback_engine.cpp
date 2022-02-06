@@ -18,10 +18,17 @@
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
+#include "code/ylikuutio/callback/callback_engine.hpp"
+
+namespace yli::ontology
+{
+    class Universe;
+}
 
 namespace yli::console
 {
-    ConsoleCallbackEngine::ConsoleCallbackEngine()
+    ConsoleCallbackEngine::ConsoleCallbackEngine(yli::ontology::Universe& universe)
+        : yli::callback::CallbackEngine(universe)
     {
         // constructor.
     }

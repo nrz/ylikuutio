@@ -48,21 +48,16 @@ namespace yli::ontology
                 return nullptr;
             }
 
-            yli::ontology::Universe* const universe = console->get_universe();
+            yli::ontology::Universe& universe = console->get_universe();
 
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::EntityFactory* const entity_factory = universe->get_entity_factory();
+            yli::ontology::EntityFactory* const entity_factory = universe.get_entity_factory();
 
             if (entity_factory == nullptr)
             {
                 return nullptr;
             }
 
-            yli::ontology::Entity* const lisp_function_entity = universe->get_entity(name);
+            yli::ontology::Entity* const lisp_function_entity = universe.get_entity(name);
 
             yli::ontology::LispFunction* lisp_function = nullptr;
 

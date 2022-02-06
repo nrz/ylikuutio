@@ -21,6 +21,11 @@
 #ifndef __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 #define __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
+namespace yli::ontology
+{
+    class Universe;
+}
+
 namespace yli::console
 {
     class ConsoleCallbackObject;
@@ -29,7 +34,7 @@ namespace yli::console
     {
         public:
             // constructor.
-            ConsoleCallbackEngine();
+            ConsoleCallbackEngine(yli::ontology::Universe& universe);
 
             // destructor.
             ~ConsoleCallbackEngine();

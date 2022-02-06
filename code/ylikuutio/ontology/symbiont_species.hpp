@@ -60,7 +60,7 @@ namespace yli::ontology
     {
         public:
             SymbiontSpecies(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const symbiont_material_parent_module)
                 : Entity(universe, model_struct),

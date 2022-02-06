@@ -95,7 +95,7 @@ namespace yli::ontology
         public:
             void bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d);
 
-            Console(yli::ontology::Universe* const universe,
+            Console(yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::GenericParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module)
@@ -195,14 +195,14 @@ namespace yli::ontology
             bool get_in_console() const;
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
-            yli::ontology::Universe* get_universe() const;
+            yli::ontology::Universe& get_universe() const;
 
             // Public callbacks.
 
             // Action mode keypress callbacks begin here.
 
             static std::optional<yli::data::AnyValue> enter_console(
-                    yli::ontology::Universe* universe,
+                    yli::ontology::Universe& universe,
                     yli::callback::CallbackEngine*,
                     yli::callback::CallbackObject*,
                     std::vector<yli::callback::CallbackParameter*>&,

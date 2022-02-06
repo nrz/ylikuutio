@@ -211,7 +211,7 @@ namespace yli::ontology
             void unbind_entity(const std::size_t entityID);
 
             explicit Universe(const yli::ontology::UniverseStruct& universe_struct)
-                : Entity(this, universe_struct), // `Universe` has no parent.
+                : Entity(*this, universe_struct), // `Universe` has no parent.
                 parent_of_ecosystems(this, &this->registry, "ecosystems"),
                 parent_of_scenes(this, &this->registry, "scenes"),
                 parent_of_font_2ds(this, &this->registry, "font_2ds"),
@@ -543,7 +543,7 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(this) };
+            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(*this) };
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;

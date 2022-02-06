@@ -51,18 +51,13 @@ namespace yli::ontology
     // Action mode keypress callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::enter_console(
-            yli::ontology::Universe* universe,
+            yli::ontology::Universe& universe,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
             const yli::data::AnyValue&)
     {
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        yli::ontology::Console* const console = universe->get_active_console();
+        yli::ontology::Console* const console = universe.get_active_console();
 
         if (console == nullptr)
         {
@@ -499,12 +494,7 @@ namespace yli::ontology
             std::vector<yli::callback::CallbackParameter*>&,
             yli::ontology::Console& console)
     {
-        yli::ontology::Universe* const universe = console.get_universe();
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
+        yli::ontology::Universe& universe = console.get_universe();
 
         if (console.in_console && console.can_tab)
         {
@@ -522,9 +512,9 @@ namespace yli::ontology
                 // If `input_string` is empty, then complete the command.
                 // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
 
-                console.print_completions(universe->registry, command);
+                console.print_completions(universe.registry, command);
 
-                const std::string completion = universe->registry.complete(command);
+                const std::string completion = universe.registry.complete(command);
                 console.current_input.clear();
                 std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
             }
@@ -535,9 +525,9 @@ namespace yli::ontology
 
                 // If `input_string` is empty, then complete the parameter.
 
-                console.print_completions(universe->registry, "");
+                console.print_completions(universe.registry, "");
 
-                const std::string completion = universe->registry.complete("");
+                const std::string completion = universe.registry.complete("");
 
                 if (!completion.empty())
                 {
@@ -549,9 +539,9 @@ namespace yli::ontology
                 // If `input_string` does not end with a space,
                 // then complete the current parameter.
 
-                console.print_completions(universe->registry, parameter_vector.back());
+                console.print_completions(universe.registry, parameter_vector.back());
 
-                const std::string completion = universe->registry.complete(parameter_vector.back());
+                const std::string completion = universe.registry.complete(parameter_vector.back());
                 console.current_input.clear();
                 std::copy(command.begin(), command.end(), std::back_inserter(console.current_input));
                 console.current_input.emplace_back(' ');
@@ -572,7 +562,7 @@ namespace yli::ontology
             {
                 // Complete the next parameter.
 
-                const std::string completion = universe->registry.complete("");
+                const std::string completion = universe.registry.complete("");
 
                 if (!completion.empty())
                 {

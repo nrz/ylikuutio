@@ -43,7 +43,7 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Text2D(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::TextStruct& text_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, text_struct),
@@ -70,10 +70,10 @@ namespace yli::ontology
 
                 // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
                 // but they can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_vertices_and_uvs = (this->universe != nullptr &&
-                        (this->universe->get_is_opengl_in_use() ||
-                         this->universe->get_is_vulkan_in_use() ||
-                         this->universe->get_is_software_rendering_in_use()));
+                const bool should_load_vertices_and_uvs =
+                    this->universe.get_is_opengl_in_use() ||
+                    this->universe.get_is_vulkan_in_use() ||
+                    this->universe.get_is_software_rendering_in_use();
 
                 if (should_load_vertices_and_uvs)
                 {

@@ -71,12 +71,12 @@ namespace yli::ontology
 
     void Glyph::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr || this->universe->get_is_headless())
+        if (!this->should_be_rendered || this->universe.get_is_headless())
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -84,9 +84,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         render_master->render_glyph(this);
-        this->postrender();
     }
 
     yli::ontology::GenericMasterModule* Glyph::get_renderables_container()

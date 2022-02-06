@@ -55,20 +55,15 @@ namespace yli::ontology
         // destructor.
         std::cout << "`Scene` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        if (this->universe != nullptr && this->universe->get_active_scene() == this)
+        if (this->universe.get_active_scene() == this)
         {
             // Set active `Scene` to `nullptr`.
-            this->universe->set_active_scene(nullptr);
+            this->universe.set_active_scene(nullptr);
         }
     }
 
     void Scene::do_physics()
     {
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
         // TODO: implement physics using Bullet!
     }
 
@@ -89,20 +84,17 @@ namespace yli::ontology
 
     void Scene::activate()
     {
-        if (this->universe != nullptr)
-        {
-            this->universe->set_active_scene(this);
-        }
+        this->universe.set_active_scene(this);
     }
 
     void Scene::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -110,10 +102,8 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
-        render_master->render_shaders_of_ecosystems(this->universe->get_ecosystem_shaders(), this);
+        render_master->render_shaders_of_ecosystems(this->universe.get_ecosystem_shaders(), this);
         render_master->render_shaders(this->parent_of_shaders);
-        this->postrender();
     }
 
     yli::ontology::Camera* Scene::get_active_camera() const
@@ -132,16 +122,15 @@ namespace yli::ontology
 
         yli::ontology::Camera* const old_active_camera = this->active_camera;
 
-        if (this->universe != nullptr &&
-                old_active_camera != nullptr &&
+        if (old_active_camera != nullptr &&
                 !old_active_camera->get_is_static_view())
         {
             // OK, there is an old active `Camera`, and it is not a static view `Camera`.
             // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
-            old_active_camera->set_cartesian_coordinates(this->universe->current_camera_cartesian_coordinates);
-            old_active_camera->set_roll(this->universe->current_camera_roll);
-            old_active_camera->set_yaw(this->universe->current_camera_yaw);
-            old_active_camera->set_pitch(this->universe->current_camera_pitch);
+            old_active_camera->set_cartesian_coordinates(this->universe.current_camera_cartesian_coordinates);
+            old_active_camera->set_roll(this->universe.current_camera_roll);
+            old_active_camera->set_yaw(this->universe.current_camera_yaw);
+            old_active_camera->set_pitch(this->universe.current_camera_pitch);
         }
 
         // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
@@ -151,12 +140,7 @@ namespace yli::ontology
         // `this->universe` must not be `nullptr`.
         // `this->parent` must not be `nullptr`.
 
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
-        yli::ontology::Scene* const active_scene = this->universe->get_active_scene();
+        yli::ontology::Scene* const active_scene = this->universe.get_active_scene();
 
         if (active_scene == nullptr)
         {
@@ -168,10 +152,10 @@ namespace yli::ontology
             // OK, the newly activated `Camera` is not `nullptr`,
             // and this is the active `Scene` in the active `Universe`.
             // Copy `Camera`'s coordinates and angles to the `Universe`.
-            this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
-            this->universe->current_camera_roll = camera->get_roll();
-            this->universe->current_camera_yaw = camera->get_yaw();
-            this->universe->current_camera_pitch = camera->get_pitch();
+            this->universe.current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+            this->universe.current_camera_roll = camera->get_roll();
+            this->universe.current_camera_yaw = camera->get_yaw();
+            this->universe.current_camera_pitch = camera->get_pitch();
         }
     }
 
@@ -211,10 +195,9 @@ namespace yli::ontology
 
     float Scene::get_turbo_factor() const
     {
-        if (this->universe != nullptr &&
-                this == this->universe->get_active_scene())
+        if (this == this->universe.get_active_scene())
         {
-            return this->universe->turbo_factor;
+            return this->universe.turbo_factor;
         }
 
         return NAN;
@@ -224,19 +207,17 @@ namespace yli::ontology
     {
         this->turbo_factor = turbo_factor;
 
-        if (this->universe != nullptr &&
-                this == this->universe->get_active_scene())
+        if (this == this->universe.get_active_scene())
         {
-            this->universe->turbo_factor = this->turbo_factor;
+            this->universe.turbo_factor = this->turbo_factor;
         }
     }
 
     float Scene::get_twin_turbo_factor() const
     {
-        if (this->universe != nullptr &&
-                this == this->universe->get_active_scene())
+        if (this == this->universe.get_active_scene())
         {
-            return this->universe->twin_turbo_factor;
+            return this->universe.twin_turbo_factor;
         }
 
         return NAN;
@@ -246,10 +227,9 @@ namespace yli::ontology
     {
         this->twin_turbo_factor = twin_turbo_factor;
 
-        if (this->universe != nullptr &&
-                this == this->universe->get_active_scene())
+        if (this == this->universe.get_active_scene())
         {
-            this->universe->twin_turbo_factor = this->twin_turbo_factor;
+            this->universe.twin_turbo_factor = this->twin_turbo_factor;
         }
     }
 

@@ -65,7 +65,7 @@ namespace yli::ontology
             void bind_to_new_shader(yli::ontology::Shader* const new_shader);
 
             Symbiosis(
-                    yli::ontology::Universe* universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const shader_master)

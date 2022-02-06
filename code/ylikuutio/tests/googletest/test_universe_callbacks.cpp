@@ -66,7 +66,7 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            universe,
+            *universe,
             scene_struct,
             &universe->parent_of_scenes);
     scene->set_global_name(scene_name);
@@ -90,7 +90,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            universe,
+            *universe,
             scene_struct,
             &universe->parent_of_scenes);
     scene->set_global_name(scene_name);
@@ -110,7 +110,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = new yli::ontology::Console(
-            universe,
+            *universe,
             console_struct,
             &universe->parent_of_consoles, nullptr);
     console->set_global_name(console_name);
@@ -127,7 +127,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
     yli::ontology::Font2D* font_2d = new yli::ontology::Font2D(
-            universe,
+            *universe,
             yli::ontology::FontStruct(),
             &universe->parent_of_font_2ds);
 
@@ -135,7 +135,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = new yli::ontology::Console(
-            universe,
+            *universe,
             console_struct,
             &universe->parent_of_consoles, nullptr);
     console->set_global_name(console_name);
@@ -157,14 +157,14 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            universe,
+            *universe,
             scene_struct,
             &universe->parent_of_scenes);
     scene->set_global_name(scene_name);
 
     const std::string camera_name = "bar";
     yli::ontology::Camera* const camera = new yli::ontology::Camera(
-            universe,
+            *universe,
             yli::ontology::CameraStruct(),
             &scene->parent_of_cameras, nullptr);
     camera->set_global_name(camera_name);

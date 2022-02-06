@@ -45,7 +45,7 @@ namespace yli::ontology
     {
         public:
             MeshModule(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct)
                 : model_filename { model_struct.model_filename },
                 model_file_format { model_struct.model_file_format },
@@ -64,13 +64,13 @@ namespace yli::ontology
 
                 // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
                 // but they can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_vertices_uvs_and_normals = (universe != nullptr &&
-                        (universe->get_is_opengl_in_use() ||
-                         universe->get_is_vulkan_in_use() ||
-                         universe->get_is_software_rendering_in_use()));
+                const bool should_load_vertices_uvs_and_normals =
+                    universe.get_is_opengl_in_use() ||
+                    universe.get_is_vulkan_in_use() ||
+                    universe.get_is_software_rendering_in_use();
 
                 if (should_load_vertices_uvs_and_normals &&
-                        universe->get_is_opengl_in_use() &&
+                        universe.get_is_opengl_in_use() &&
                         model_struct.scene != nullptr &&
                         model_struct.shader != nullptr)
                 {
@@ -126,12 +126,12 @@ namespace yli::ontology
                             this->uvbuffer,
                             this->normalbuffer,
                             this->elementbuffer,
-                            universe->get_graphics_api_backend(),
+                            universe.get_graphics_api_backend(),
                             is_debug_mode);
 
                     this->are_opengl_buffers_initialized = true;
                 }
-                else if (should_load_vertices_uvs_and_normals && universe->get_is_opengl_in_use())
+                else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
                 {
                     if (model_struct.scene == nullptr)
                     {

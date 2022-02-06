@@ -20,8 +20,6 @@
 
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
-#include "pre_render_callback.hpp"
-#include "post_render_callback.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -57,7 +55,7 @@ namespace yli::ontology
             void bind_to_universe();
 
             // constructor.
-            Entity(yli::ontology::Universe* const universe, const yli::ontology::EntityStruct& entity_struct);
+            Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct);
 
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity& operator=(const Entity&) = delete; // Delete copy assignment.
@@ -72,7 +70,7 @@ namespace yli::ontology
 
             bool get_can_be_erased() const;
 
-            yli::ontology::Universe* get_universe() const;
+            yli::ontology::Universe& get_universe() const;
 
             // Different classes are bound to `Scene` in different ways,
             // so they need to `override` this to provide the functionality.
@@ -147,10 +145,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_any_struct_entities;
 
         protected:
-            void prerender() const;
-            void postrender() const;
-
-            yli::ontology::Universe* universe { nullptr }; // pointer to the `Universe`.
+            yli::ontology::Universe& universe;
             std::size_t entityID { std::numeric_limits<std::size_t>::max() };
 
             std::string type_string;
@@ -159,9 +154,6 @@ namespace yli::ontology
             std::string local_name;  // local name of this `Entity`.
 
             bool can_be_erased { false };
-
-            PreRenderCallback prerender_callback { nullptr };
-            PostRenderCallback postrender_callback { nullptr };
 
         private:
             virtual std::size_t get_number_of_children() const = 0;

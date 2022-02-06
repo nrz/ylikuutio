@@ -60,7 +60,7 @@ namespace yli::ontology
 
         private:
             Glyph(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module)
                 : Entity(universe, model_struct),
@@ -75,10 +75,10 @@ namespace yli::ontology
 
                 // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
                 // but they can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture = (this->universe != nullptr &&
-                        (this->universe->get_is_opengl_in_use() ||
-                         this->universe->get_is_vulkan_in_use() ||
-                         this->universe->get_is_software_rendering_in_use()));
+                const bool should_load_texture =
+                    this->universe.get_is_opengl_in_use() ||
+                    this->universe.get_is_vulkan_in_use() ||
+                    this->universe.get_is_software_rendering_in_use();
 
                 if (should_load_texture && model_struct.shader != nullptr)
                 {

@@ -48,7 +48,7 @@ namespace yli::ontology
     {
         public:
             Font2D(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::FontStruct& font_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, font_struct),
@@ -71,7 +71,7 @@ namespace yli::ontology
 
                 if (this->texture.get_is_texture_loaded())
                 {
-                    if (this->universe->get_is_opengl_in_use())
+                    if (this->universe.get_is_opengl_in_use())
                     {
                         // Initialize VAO.
                         glGenVertexArrays(1, &this->vao);
@@ -100,7 +100,7 @@ namespace yli::ontology
                         this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
                         yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
                     }
-                    else if (this->universe->get_is_vulkan_in_use())
+                    else if (this->universe.get_is_vulkan_in_use())
                     {
                         std::cerr << "ERROR: `Font2D::Font2D`: Vulkan is not supported yet!\n";
                     }

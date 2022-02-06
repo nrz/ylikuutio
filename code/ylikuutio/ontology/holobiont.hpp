@@ -45,7 +45,7 @@ namespace yli::ontology
     {
         public:
             Holobiont(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
                     yli::ontology::GenericParentModule* const symbiosis_parent_module,
                     yli::ontology::GenericMasterModule* const brain_master)

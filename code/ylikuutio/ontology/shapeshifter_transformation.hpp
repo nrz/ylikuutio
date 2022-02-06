@@ -46,7 +46,7 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             ShapeshifterTransformation(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const material_parent_module)
                 : Entity(universe, model_struct),

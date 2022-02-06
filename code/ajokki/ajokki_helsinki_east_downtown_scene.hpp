@@ -23,13 +23,16 @@ namespace yli
     namespace ontology
     {
         class Entity;
+        class Universe;
         class EntityFactory;
     }
 }
 
 namespace ajokki
 {
-    yli::ontology::Entity* create_helsinki_east_downtown_scene(yli::ontology::EntityFactory* const entity_factory);
+    yli::ontology::Entity* create_helsinki_east_downtown_scene(
+            yli::ontology::Universe& universe,
+            yli::ontology::EntityFactory* const entity_factory);
 }
 
 #endif

@@ -66,10 +66,7 @@ namespace yli::callback
             void bind_callback_object(yli::callback::CallbackObject* const callback_object);
 
             // constructor.
-            CallbackEngine();
-
-            // constructor.
-            explicit CallbackEngine(yli::ontology::Universe* const universe);
+            explicit CallbackEngine(yli::ontology::Universe& universe);
 
             // destructor.
             ~CallbackEngine();
@@ -84,13 +81,13 @@ namespace yli::callback
             std::optional<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
             std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
-            yli::ontology::Universe* get_universe() const;
+            yli::ontology::Universe& get_universe() const;
 
         private:
             // `CallbackEngine` is not an `Entity`.
             // Therefore they are not descendants of the `Universe`.
-            // Some `CallbackEngine`s just have a pointer to the `Universe`.
-            yli::ontology::Universe* universe { nullptr };
+            // `CallbackEngine`s just have a `Universe` reference.
+            yli::ontology::Universe& universe;
 
             // this method sets a callback object pointer.
             void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);

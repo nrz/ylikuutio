@@ -44,15 +44,10 @@ namespace yli::callback
                 this->number_of_callback_objects);
     }
 
-    CallbackEngine::CallbackEngine()
+    CallbackEngine::CallbackEngine(yli::ontology::Universe& universe)
+        : universe { universe }
     {
         // constructor.
-    }
-
-    CallbackEngine::CallbackEngine(yli::ontology::Universe* const universe)
-    {
-        // constructor.
-        this->universe = universe;
     }
 
     CallbackEngine::~CallbackEngine()
@@ -143,7 +138,7 @@ namespace yli::callback
         return this->return_values.back();
     }
 
-    yli::ontology::Universe* CallbackEngine::get_universe() const
+    yli::ontology::Universe& CallbackEngine::get_universe() const
     {
         return this->universe;
     }

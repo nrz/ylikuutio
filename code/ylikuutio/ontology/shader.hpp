@@ -59,7 +59,7 @@ namespace yli::ontology
             void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
             Shader(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ShaderStruct& shader_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
                 : Entity(universe, shader_struct),
@@ -82,7 +82,7 @@ namespace yli::ontology
                 // a given GPGPU `Shader` as its texture.
                 this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
 
-                if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+                if (this->universe.get_is_opengl_in_use())
                 {
                     // Create and compile our GLSL program from the shaders.
                     this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);

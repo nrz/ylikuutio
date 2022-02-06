@@ -55,13 +55,7 @@ namespace yli::ontology
 
     void SymbiontSpecies::render()
     {
-        if (this->universe == nullptr)
-        {
-            std::cerr << "ERROR: `SymbiontSpecies::render`: `this->universe` is `nullptr`!\n";
-            return;
-        }
-
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -69,9 +63,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
         render_master->render_symbiont_species(this);
-        this->postrender();
     }
 
     yli::ontology::GenericMasterModule* SymbiontSpecies::get_renderables_container() const

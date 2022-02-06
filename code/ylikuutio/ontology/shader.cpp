@@ -151,7 +151,7 @@ namespace yli::ontology
         // destructor.
         std::cout << "`Shader` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        if (this->universe != nullptr && this->universe->get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use())
         {
             glDeleteProgram(this->program_id);
         }
@@ -159,12 +159,12 @@ namespace yli::ontology
 
     void Shader::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -172,20 +172,16 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
-
         // [Re]bind `program_id` shader.
         glUseProgram(this->program_id);
 
         // `glUniformMatrix4fv` doesn't change between objects,
         // so this can be done once for all objects that use the same `program_id`.
-        glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]);
+        glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe.get_view_matrix()[0][0]);
 
         render_master->render_compute_tasks(this->parent_of_compute_tasks);
         render_master->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
         render_master->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
-
-        this->postrender();
     }
 
     yli::ontology::Scene* Shader::get_scene() const

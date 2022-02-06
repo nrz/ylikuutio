@@ -40,7 +40,7 @@ namespace yli::ontology
     {
         public:
             Ecosystem(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, ecosystem_struct),

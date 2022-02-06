@@ -79,7 +79,7 @@ namespace yli::ontology
     {
         public:
             Scene(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::SceneStruct& scene_struct,
                     yli::ontology::GenericParentModule* const parent_module)
                 : Entity(universe, scene_struct),
@@ -104,26 +104,20 @@ namespace yli::ontology
                 new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
                 // Bullet variables.
-                if (this->universe != nullptr && this->universe->get_is_physical())
+                if (this->universe.get_is_physical())
                 {
-                    yli::ontology::Universe* const universe = this->universe;
+                    yli::ontology::Universe& universe = this->universe;
 
                     this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
-                            universe->get_dispatcher(),
-                            universe->get_overlapping_pair_cache(),
-                            universe->get_solver(),
-                            universe->get_collision_configuration());
+                            universe.get_dispatcher(),
+                            universe.get_overlapping_pair_cache(),
+                            universe.get_solver(),
+                            universe.get_collision_configuration());
 
                     // Gravity is stored as a non-negative value, make it negative for Bullet.
                     this->dynamics_world->setGravity(btVector3(0.0f, -this->gravity, 0.0f));
 
                     // Bullet is now initialized for this `Scene`.
-                }
-                else if (this->universe == nullptr)
-                {
-                    // Dynamics world could not be created.
-
-                    std::cerr << "ERROR: `Scene::Scene`: `this->universe` is `nullptr`!\n";
                 }
 
                 // `yli::ontology::Entity` member variables begin here.

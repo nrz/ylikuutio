@@ -60,37 +60,27 @@ namespace yli::ontology
         // destructor.
         this->exit_console();
 
-        if (this->universe != nullptr && this->universe->get_active_console() == this)
+        if (this->universe.get_active_console() == this)
         {
-            this->universe->set_active_console(nullptr);
+            this->universe.set_active_console(nullptr);
         }
     }
 
     void Console::adjust_n_columns()
     {
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
-        if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
+        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
         {
             // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
         }
     }
 
     void Console::adjust_n_rows()
     {
-        if (this->universe == nullptr)
-        {
-            return;
-        }
-
-        if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
         {
             // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
         }
     }
 
@@ -104,10 +94,10 @@ namespace yli::ontology
         this->console_top_y = console_top_y;
         this->n_rows = this->console_top_y - this->console_bottom_y + 1;
 
-        if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
         {
             // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
         }
     }
 
@@ -116,10 +106,10 @@ namespace yli::ontology
         this->console_bottom_y = console_bottom_y;
         this->n_rows = this->console_top_y - this->console_bottom_y + 1;
 
-        if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
         {
             // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
         }
     }
 
@@ -128,10 +118,10 @@ namespace yli::ontology
         this->console_left_x = console_left_x;
         this->n_columns = this->console_right_x - this->console_left_x + 1;
 
-        if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
+        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
         {
             // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
         }
     }
 
@@ -140,10 +130,10 @@ namespace yli::ontology
         this->console_right_x = console_right_x;
         this->n_columns = this->console_right_x - this->console_left_x + 1;
 
-        if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
+        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
         {
             // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
         }
     }
 
@@ -191,24 +181,20 @@ namespace yli::ontology
 
     void Console::activate()
     {
-        if (this->universe != nullptr)
+        if (this->universe.get_active_console() != nullptr)
         {
-            if (this->universe->get_active_console() != nullptr)
-            {
-                this->universe->get_active_console()->exit_console();
-            }
-
-            this->universe->set_active_console(this);
-            this->enter_console();
+            this->universe.get_active_console()->exit_console();
         }
+
+        this->universe.set_active_console(this);
+        this->enter_console();
     }
 
     void Console::render() const
     {
         if (!this->in_console ||
                 !this->should_be_rendered ||
-                this->universe == nullptr ||
-                this->universe->get_active_console() != this)
+                this->universe.get_active_console() != this)
         {
             return;
         }
@@ -221,18 +207,18 @@ namespace yli::ontology
         }
 
         // Convert current input into std::string.
-        const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+        const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         // Draw the console to screen using `font_2d::print_text_2d`.
         yli::ontology::TextStruct text_struct;
-        text_struct.screen_width = this->universe->get_window_width();
-        text_struct.screen_height = this->universe->get_window_height();
-        text_struct.text_size = this->universe->get_text_size();
-        text_struct.font_size = this->universe->get_font_size();
+        text_struct.screen_width = this->universe.get_window_width();
+        text_struct.screen_height = this->universe.get_window_height();
+        text_struct.text_size = this->universe.get_text_size();
+        text_struct.font_size = this->universe.get_font_size();
         text_struct.font_texture_file_format = "png";
 
         text_struct.x = 0;
-        text_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
+        text_struct.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
         text_struct.horizontal_alignment = "left";
         text_struct.vertical_alignment = "top";
 
@@ -329,20 +315,19 @@ namespace yli::ontology
 
     bool Console::enter_console()
     {
-        yli::ontology::Universe* const universe = this->universe;
+        yli::ontology::Universe& universe = this->universe;
 
-        if (universe != nullptr &&
-                universe->get_active_console() == this &&
+        if (universe.get_active_console() == this &&
                 !this->in_console &&
                 this->input_mode != nullptr)
         {
             this->input_mode->activate();
 
             // Do not display help screen when in console.
-            universe->can_display_help_screen = false;
+            universe.can_display_help_screen = false;
 
             // Mark that we're in console.
-            universe->in_console = true;
+            universe.in_console = true;
             this->in_console = true;
             this->in_historical_input = false;
             return true;
@@ -354,9 +339,9 @@ namespace yli::ontology
 
     bool Console::exit_console()
     {
-        yli::ontology::Universe* const universe = this->universe;
+        yli::ontology::Universe& universe = this->universe;
 
-        if (this->in_console && universe != nullptr)
+        if (this->in_console)
         {
             // Restore previous input mode.
             if (this->input_mode != nullptr)
@@ -365,10 +350,10 @@ namespace yli::ontology
             }
 
             // Enable display help screen when not in console.
-            universe->can_display_help_screen = true;
+            universe.can_display_help_screen = true;
 
             // Mark that we have exited the console.
-            universe->in_console = false;
+            universe.in_console = false;
             this->in_console = false;
 
             return true;
@@ -488,7 +473,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Universe* Console::get_universe() const
+    yli::ontology::Universe& Console::get_universe() const
     {
         return this->universe;
     }
@@ -507,13 +492,7 @@ namespace yli::ontology
 
     std::string Console::convert_current_input_into_string() const
     {
-        if (this->universe == nullptr)
-        {
-            std::cerr << "ERROR: `Console::convert_current_input_into_string`: `this->universe` is `nullptr`!\n";
-            return "";
-        }
-
-        const std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+        const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         return this->prompt + yli::string::convert_char_container_to_std_string(
                 this->current_input,

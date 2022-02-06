@@ -49,7 +49,7 @@ namespace yli::ontology
 namespace yli::snippets
 {
     std::optional<yli::data::AnyValue> rest(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -60,7 +60,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> go_east(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -84,7 +84,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> go_west(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -108,7 +108,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> go_north(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -132,7 +132,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> go_south(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -156,7 +156,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_to_east(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -180,7 +180,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_to_west(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -204,7 +204,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_to_north(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -228,7 +228,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_to_south(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -252,7 +252,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_and_go_east(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -277,7 +277,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_and_go_west(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -302,7 +302,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_and_go_north(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -327,7 +327,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> orient_and_go_south(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -352,7 +352,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> rotate_clockwise(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,
@@ -376,7 +376,7 @@ namespace yli::snippets
     }
 
     std::optional<yli::data::AnyValue> rotate_counterclockwise(
-            yli::ontology::Universe*,
+            yli::ontology::Universe&,
             yli::callback::CallbackEngine*,
             yli::callback::CallbackObject*,
             std::vector<yli::callback::CallbackParameter*>&,

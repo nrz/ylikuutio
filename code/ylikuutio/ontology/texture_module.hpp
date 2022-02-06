@@ -35,7 +35,7 @@ namespace yli::ontology
     {
         public:
             TextureModule(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     yli::ontology::Registry* const registry,
                     const std::string& texture_filename,
                     const std::string& texture_file_format,
@@ -49,10 +49,10 @@ namespace yli::ontology
 
                 // If software rendering is in use, the texture can not be loaded into GPU memory,
                 // but it can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture = (universe != nullptr &&
-                        (universe->get_is_opengl_in_use() ||
-                         universe->get_is_vulkan_in_use() ||
-                         universe->get_is_software_rendering_in_use()));
+                const bool should_load_texture =
+                    universe.get_is_opengl_in_use() ||
+                    universe.get_is_vulkan_in_use() ||
+                    universe.get_is_software_rendering_in_use();
 
                 if (should_load_texture)
                 {
@@ -68,7 +68,7 @@ namespace yli::ontology
                                 this->image_size,
                                 n_color_channels,
                                 this->texture,
-                                universe->get_graphics_api_backend());
+                                universe.get_graphics_api_backend());
                     }
                     else
                     {
@@ -83,7 +83,7 @@ namespace yli::ontology
             }
 
             TextureModule(
-                    yli::ontology::Universe* const universe,
+                    yli::ontology::Universe& universe,
                     yli::ontology::Registry* const registry,
                     const ofbx::Texture* ofbx_texture,
                     const yli::load::ImageLoaderStruct& image_loader_struct,
@@ -92,10 +92,10 @@ namespace yli::ontology
             {
                 // If software rendering is in use, the texture can not be loaded into GPU memory,
                 // but it can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture = (universe != nullptr &&
-                        (universe->get_is_opengl_in_use() ||
-                         universe->get_is_vulkan_in_use() ||
-                         universe->get_is_software_rendering_in_use()));
+                const bool should_load_texture =
+                    universe.get_is_opengl_in_use() ||
+                    universe.get_is_vulkan_in_use() ||
+                    universe.get_is_software_rendering_in_use();
 
                 if (should_load_texture)
                 {
@@ -106,7 +106,7 @@ namespace yli::ontology
                                 this->image_size,
                                 n_color_channels,
                                 this->texture,
-                                universe->get_graphics_api_backend());
+                                universe.get_graphics_api_backend());
 
                     if (!is_texture_loading_successful)
                     {

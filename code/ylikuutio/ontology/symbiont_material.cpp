@@ -74,12 +74,12 @@ namespace yli::ontology
 
     void SymbiontMaterial::render()
     {
-        if (!this->should_be_rendered || this->universe == nullptr)
+        if (!this->should_be_rendered)
         {
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe->get_render_master();
+        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
 
         if (render_master == nullptr)
         {
@@ -87,9 +87,7 @@ namespace yli::ontology
             return;
         }
 
-        this->prerender();
-
-        if (this->universe->get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use())
         {
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
@@ -99,8 +97,6 @@ namespace yli::ontology
         }
 
         render_master->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
-
-        this->postrender();
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const
