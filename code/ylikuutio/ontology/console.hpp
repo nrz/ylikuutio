@@ -105,62 +105,6 @@ namespace yli::ontology
                 apprentice_of_font_2d(generic_master_module, this)
             {
                 // constructor.
-                this->cursor_it = this->current_input.begin();
-                this->cursor_index = 0;
-                this->in_history = false;
-                this->in_historical_input = false;
-                this->history_line_i = std::numeric_limits<std::size_t>::max();     // some dummy value.
-                this->historical_input_i = std::numeric_limits<std::size_t>::max(); // some dummy value.
-                this->in_console = false;
-                this->can_move_to_previous_input = false;
-                this->can_move_to_next_input = false;
-                this->can_backspace = false;
-                this->can_tab = false;
-                this->can_enter_key = false;
-                this->can_ctrl_c = false;
-                this->can_ctrl_w = false;
-                this->can_page_up = false;
-                this->can_page_down = false;
-                this->can_home = false;
-                this->can_end = false;
-                this->is_left_control_pressed = false;
-                this->is_right_control_pressed = false;
-                this->is_left_alt_pressed = false;
-                this->is_right_alt_pressed = false;
-                this->is_left_shift_pressed = false;
-                this->is_right_shift_pressed = false;
-
-                this->input_mode = nullptr;
-
-                // Initialize `console_top_y` to 9.
-                // `console_top_y` should be set by `activate_console_top_y` anyway.
-                std::cout << "Initializing console_top_y\n";
-                this->console_top_y = 9;
-
-                // Initialize `console_bottom_y` to 0.
-                // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
-                std::cout << "Initializing console_bottom_y\n";
-                this->console_bottom_y = 0;
-
-                // Initialize `console_left_x` to 0.
-                // `console_left_x` should be set by `activate_console_left_x` anyway.
-                std::cout << "Initializing console_left_x\n";
-                this->console_left_x = 0;
-
-                // Initialize `console_right_x` to 9.
-                // `console_right_x` should be set by `activate_console_right_x` anyway.
-                std::cout << "Initializing console_right_x\n";
-                this->console_right_x = 9;
-
-                // Initialize `n_rows`.
-                // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.
-                std::cout << "Initializing n_rows\n";
-                this->n_rows = this->console_top_y - this->console_bottom_y + 1;
-
-                // Initialize `n_columns`.
-                // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
-                std::cout << "Initializing n_columns\n";
-                this->n_columns = this->console_right_x - this->console_left_x + 1;
 
                 this->adjust_n_columns();
                 this->adjust_n_rows();
@@ -455,47 +399,63 @@ namespace yli::ontology
             void print_completions(const yli::ontology::Registry& registry, const std::string& input);
 
             std::list<char> current_input; // This is used for actual inputs.
-            std::list<char>::iterator cursor_it;
-            std::size_t cursor_index;
-            bool in_console;
-            bool can_move_to_previous_input;
-            bool can_move_to_next_input;
-            bool can_backspace;
-            bool can_tab;
-            bool can_enter_key;
-            bool can_ctrl_c;
-            bool can_ctrl_w;
-            bool can_page_up;
-            bool can_page_down;
-            bool can_home;
-            bool can_end;
-            bool is_left_control_pressed;
-            bool is_right_control_pressed;
-            bool is_left_alt_pressed;
-            bool is_right_alt_pressed;
-            bool is_left_shift_pressed;
-            bool is_right_shift_pressed;
+            std::list<char>::iterator cursor_it { this->current_input.begin() };
+            std::size_t cursor_index            { 0 };
+            bool in_console                     { false };
+            bool can_move_to_previous_input     { false };
+            bool can_move_to_next_input         { false };
+            bool can_backspace                  { false };
+            bool can_tab                        { false };
+            bool can_enter_key                  { false };
+            bool can_ctrl_c                     { false };
+            bool can_ctrl_w                     { false };
+            bool can_page_up                    { false };
+            bool can_page_down                  { false };
+            bool can_home                       { false };
+            bool can_end                        { false };
+            bool is_left_control_pressed        { false };
+            bool is_right_control_pressed       { false };
+            bool is_left_alt_pressed            { false };
+            bool is_right_alt_pressed           { false };
+            bool is_left_shift_pressed          { false };
+            bool is_right_shift_pressed         { false };
 
             std::vector<std::list<char>> command_history;
             std::vector<std::list<char>> console_history;
 
-            bool in_history;
-            bool in_historical_input;
-            std::size_t history_line_i;
-            std::size_t historical_input_i;
+            bool in_history                { false };
+            bool in_historical_input       { false };
+            std::size_t history_line_i     { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
+            std::size_t historical_input_i { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
-            yli::input::InputMode* input_mode;
+            yli::input::InputMode* input_mode { nullptr };
 
-            std::size_t console_top_y;
-            std::size_t console_bottom_y;
-            std::size_t console_left_x;
-            std::size_t console_right_x;
+            // Initialize `console_top_y` to 9.
+            // `console_top_y` should be set by `activate_console_top_y` anyway.
+            std::size_t console_top_y    { 9 };
 
-            std::size_t n_rows;
-            std::size_t n_columns;
+            // Initialize `console_bottom_y` to 0.
+            // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
+            std::size_t console_bottom_y { 0 };
 
-            const std::string prompt = "$ ";
+            // Initialize `console_left_x` to 0.
+            // `console_left_x` should be set by `activate_console_left_x` anyway.
+            std::size_t console_left_x   { 0 };
+
+            // Initialize `console_right_x` to 9.
+            // `console_right_x` should be set by `activate_console_right_x` anyway.
+            std::size_t console_right_x  { 9 };
+
+            // Initialize `n_rows`.
+            // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.
+            std::size_t n_rows           { this->console_top_y - this->console_bottom_y + 1 };
+
+            // Initialize `n_columns`.
+            // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
+            std::size_t n_columns        { this->console_right_x - this->console_left_x + 1 };
+
+            const std::string prompt     { "$ " };
     };
 }
 
