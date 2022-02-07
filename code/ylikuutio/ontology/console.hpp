@@ -409,7 +409,7 @@ namespace yli::ontology
 
             yli::input::InputMode* input_mode   { nullptr };
 
-            std::size_t cursor_index            { 0 };
+            std::size_t cursor_index            { 0 }; // Name `cursor_index` is chosen to distinguish from `cursor_it`.
             std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
             std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
