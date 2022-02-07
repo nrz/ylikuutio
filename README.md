@@ -486,7 +486,7 @@ A: YliLisp scripting language is a work in progress.
 
 ## Contributions and bugfixes
 * Antti Nuortimo (most of Ylikuutio code)
-* Mikko Rasa (bugfixes)
+* Mikko Rasa (programming advice and bugfixes)
 * Ronja Koistinen (support for building in a Podman container)
 
 ## Contact info
