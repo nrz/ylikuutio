@@ -315,19 +315,17 @@ namespace yli::ontology
 
     bool Console::enter_console()
     {
-        yli::ontology::Universe& universe = this->universe;
-
-        if (universe.get_active_console() == this &&
+        if (this->universe.get_active_console() == this &&
                 !this->in_console &&
                 this->input_mode != nullptr)
         {
             this->input_mode->activate();
 
             // Do not display help screen when in console.
-            universe.can_display_help_screen = false;
+            this->universe.can_display_help_screen = false;
 
             // Mark that we're in console.
-            universe.in_console = true;
+            this->universe.in_console = true;
             this->in_console = true;
             this->in_historical_input = false;
             return true;
@@ -339,8 +337,6 @@ namespace yli::ontology
 
     bool Console::exit_console()
     {
-        yli::ontology::Universe& universe = this->universe;
-
         if (this->in_console)
         {
             // Restore previous input mode.
@@ -350,10 +346,10 @@ namespace yli::ontology
             }
 
             // Enable display help screen when not in console.
-            universe.can_display_help_screen = true;
+            this->universe.can_display_help_screen = true;
 
             // Mark that we have exited the console.
-            universe.in_console = false;
+            this->universe.in_console = false;
             this->in_console = false;
 
             return true;
