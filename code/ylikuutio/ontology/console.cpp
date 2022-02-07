@@ -473,11 +473,6 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Universe& Console::get_universe() const
-    {
-        return this->universe;
-    }
-
     void Console::copy_historical_input_into_current_input()
     {
         if (this->in_console)
