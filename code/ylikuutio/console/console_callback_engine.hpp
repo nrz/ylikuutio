@@ -34,7 +34,7 @@ namespace yli::console
     {
         public:
             // constructor.
-            ConsoleCallbackEngine(yli::ontology::Universe& universe);
+            explicit ConsoleCallbackEngine(yli::ontology::Universe& universe);
 
             // destructor.
             ~ConsoleCallbackEngine();
