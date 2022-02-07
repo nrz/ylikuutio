@@ -1767,6 +1767,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
     ASSERT_EQ(ecosystem->get_global_name(), "foo");
     ASSERT_EQ(ecosystem->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), ecosystem);
 }
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
@@ -1787,6 +1788,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
     ASSERT_EQ(ecosystem->get_global_name(), "foo");
     ASSERT_EQ(ecosystem->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), ecosystem);
 }
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -1809,6 +1811,8 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_
     ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), ecosystem);
 }
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -1831,6 +1835,8 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_na
     ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), ecosystem);
 }
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -1853,6 +1859,8 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_n
     ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), ecosystem);
 }
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -1875,6 +1883,8 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_n
     ASSERT_EQ(ecosystem->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), ecosystem);
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately, headless)
@@ -1895,6 +1905,7 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), scene);
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately, headless)
@@ -1915,6 +1926,7 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
     ASSERT_EQ(scene->get_global_name(), "foo");
     ASSERT_EQ(scene->get_local_name(), "foo");
     ASSERT_TRUE(universe->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), scene);
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -1937,6 +1949,8 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
     ASSERT_EQ(scene->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), scene);
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -1959,6 +1973,8 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
     ASSERT_EQ(scene->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), scene);
 }
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -1981,6 +1997,8 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
     ASSERT_EQ(scene->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), scene);
 }
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2003,6 +2021,8 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
     ASSERT_EQ(scene->get_local_name(), "bar");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(universe->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), scene);
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately, headless)
@@ -2027,6 +2047,8 @@ TEST(shader_must_be_given_a_global_name_appropriately, headless)
     ASSERT_EQ(shader->get_local_name(), "");
     ASSERT_TRUE(universe->has_child("foo"));
     ASSERT_FALSE(scene->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), shader);
+    ASSERT_EQ(scene->get_entity("foo"), nullptr);
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately, headless)
@@ -2051,6 +2073,8 @@ TEST(shader_must_be_given_a_local_name_appropriately, headless)
     ASSERT_EQ(shader->get_local_name(), "foo");
     ASSERT_FALSE(universe->has_child("foo"));
     ASSERT_TRUE(scene->has_child("foo"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(scene->get_entity("foo"), shader);
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
@@ -2078,6 +2102,10 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_global_nam
     ASSERT_TRUE(universe->has_child("bar"));
     ASSERT_FALSE(scene->has_child("foo"));
     ASSERT_FALSE(scene->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), shader);
+    ASSERT_EQ(scene->get_entity("foo"), nullptr);
+    ASSERT_EQ(scene->get_entity("bar"), nullptr);
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
@@ -2105,6 +2133,10 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_local_name,
     ASSERT_FALSE(universe->has_child("bar"));
     ASSERT_FALSE(scene->has_child("foo"));
     ASSERT_TRUE(scene->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), nullptr);
+    ASSERT_EQ(scene->get_entity("foo"), nullptr);
+    ASSERT_EQ(scene->get_entity("bar"), shader);
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
@@ -2132,6 +2164,10 @@ TEST(shader_must_be_given_a_global_name_appropriately_after_setting_a_local_name
     ASSERT_TRUE(universe->has_child("bar"));
     ASSERT_TRUE(scene->has_child("foo"));
     ASSERT_FALSE(scene->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), nullptr);
+    ASSERT_EQ(universe->get_entity("bar"), shader);
+    ASSERT_EQ(scene->get_entity("foo"), shader);
+    ASSERT_EQ(scene->get_entity("bar"), nullptr);
 }
 
 TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
@@ -2159,6 +2195,10 @@ TEST(shader_must_be_given_a_local_name_appropriately_after_setting_a_global_name
     ASSERT_FALSE(universe->has_child("bar"));
     ASSERT_FALSE(scene->has_child("foo"));
     ASSERT_TRUE(scene->has_child("bar"));
+    ASSERT_EQ(universe->get_entity("foo"), shader);
+    ASSERT_EQ(universe->get_entity("bar"), nullptr);
+    ASSERT_EQ(scene->get_entity("foo"), nullptr);
+    ASSERT_EQ(scene->get_entity("bar"), shader);
 }
 
 TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_shader_with_only_local_name)

@@ -195,8 +195,6 @@ namespace yli::ontology
             bool get_in_console() const;
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
-            yli::ontology::Universe& get_universe() const;
-
             // Public callbacks.
 
             // Action mode keypress callbacks begin here.
