@@ -55,18 +55,15 @@ namespace yli::lisp
     //    some subtype of `Entity` as an argument, then the string will be looked up and converted into that.
     //    The `Entity` is set as context.
     //
-    // 4. If the callback has `yli::ontology::Variable&*` or `yli::ontology::Variable*` as an argument,
-    //    then the `Variable` with that name will be looked up from the current context.
+    // 4. If the callback has `bool` as an argument, then the string will be converted into that.
     //
-    // 5. If the callback has `bool` as an argument, then the string will be converted into that.
+    // 5. If the callback has `float` as an argument, then the string will be converted into that.
     //
-    // 6. If the callback has `float` as an argument, then the string will be converted into that.
+    // 6. If the callback has `double` as an argument, then the string will be converted into that.
     //
-    // 7. If the callback has `double` as an argument, then the string will be converted into that.
+    // 7. If the callback has `int32_t` as an argument, then the string will be converted into that.
     //
-    // 8. If the callback has `int32_t` as an argument, then the string will be converted into that.
-    //
-    // 9. If the callback has `uint32_t` as an argument, then the string will be converted into that.
+    // 8. If the callback has `uint32_t` as an argument, then the string will be converted into that.
 
     template<typename T1>
         std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
