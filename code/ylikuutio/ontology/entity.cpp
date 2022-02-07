@@ -195,6 +195,11 @@ namespace yli::ontology
         return this->registry.get_entity_names();
     }
 
+    std::string Entity::complete(const std::string& input) const
+    {
+        return this->registry.complete(input);
+    }
+
     void Entity::add_entity(const std::string& name, yli::ontology::Entity* const entity)
     {
         this->registry.add_entity(entity, name);
