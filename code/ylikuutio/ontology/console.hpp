@@ -398,38 +398,20 @@ namespace yli::ontology
             void move_cursor_to_end_of_line();
             void print_completions(const yli::ontology::Registry& registry, const std::string& input);
 
-            std::list<char> current_input; // This is used for actual inputs.
-            std::list<char>::iterator cursor_it { this->current_input.begin() };
-            std::size_t cursor_index            { 0 };
-            bool in_console                     { false };
-            bool can_move_to_previous_input     { false };
-            bool can_move_to_next_input         { false };
-            bool can_backspace                  { false };
-            bool can_tab                        { false };
-            bool can_enter_key                  { false };
-            bool can_ctrl_c                     { false };
-            bool can_ctrl_w                     { false };
-            bool can_page_up                    { false };
-            bool can_page_down                  { false };
-            bool can_home                       { false };
-            bool can_end                        { false };
-            bool is_left_control_pressed        { false };
-            bool is_right_control_pressed       { false };
-            bool is_left_alt_pressed            { false };
-            bool is_right_alt_pressed           { false };
-            bool is_left_shift_pressed          { false };
-            bool is_right_shift_pressed         { false };
-
             std::vector<std::list<char>> command_history;
             std::vector<std::list<char>> console_history;
 
-            bool in_history                { false };
-            bool in_historical_input       { false };
-            std::size_t history_line_i     { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
-            std::size_t historical_input_i { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
+            std::list<char> current_input; // This is used for actual inputs.
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
+            std::list<char>::iterator cursor_it { this->current_input.begin() };
 
-            yli::input::InputMode* input_mode { nullptr };
+            const std::string prompt            { "$ " };
+
+            yli::input::InputMode* input_mode   { nullptr };
+
+            std::size_t cursor_index            { 0 };
+            std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
+            std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
             // Initialize `console_top_y` to 9.
             // `console_top_y` should be set by `activate_console_top_y` anyway.
@@ -455,7 +437,26 @@ namespace yli::ontology
             // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
             std::size_t n_columns        { this->console_right_x - this->console_left_x + 1 };
 
-            const std::string prompt     { "$ " };
+            bool in_console                 { false };
+            bool can_move_to_previous_input { false };
+            bool can_move_to_next_input     { false };
+            bool can_backspace              { false };
+            bool can_tab                    { false };
+            bool can_enter_key              { false };
+            bool can_ctrl_c                 { false };
+            bool can_ctrl_w                 { false };
+            bool can_page_up                { false };
+            bool can_page_down              { false };
+            bool can_home                   { false };
+            bool can_end                    { false };
+            bool is_left_control_pressed    { false };
+            bool is_right_control_pressed   { false };
+            bool is_left_alt_pressed        { false };
+            bool is_right_alt_pressed       { false };
+            bool is_left_shift_pressed      { false };
+            bool is_right_shift_pressed     { false };
+            bool in_history                 { false };
+            bool in_historical_input        { false };
     };
 }
 
