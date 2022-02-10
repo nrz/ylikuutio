@@ -35,6 +35,7 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 
 Tasks which are necessary for the second stage:
+[ ] Add support for multiple displays.
 [ ] Implement support for multiple light sources in each `Scene`.
 [ ] Implement shadows.
 [ ] Implement HDR rendering.
