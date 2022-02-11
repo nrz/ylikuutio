@@ -59,11 +59,22 @@ Vectors:
 
 Structs:
 * Struct syntax: `(struct foo)`.
-* Member syntax: `(member (member foo bar) baz)`.
+* Member syntax: `(member (member foo 'bar) 'baz)`.
+* Member syntax: `(member (member foo "bar") "baz")`.
 * Struct syntax (syntactic sugar): `foo.bar.baz`
   (whitespace around dot operators is free).
 * Generic setter can be used for struct members as well:
   `(set! (member foo bar) 123)`.
+
+Parents and children:
+* `(child (child foo 'bar) 'baz)`.
+* `(child (child foo "bar") "baz")`.
+* Syntactic sugar: `foo.bar.baz`
+
+Masters and apprentices:
+* `(apprentice (apprentice foo 'bar) 'baz)`.
+* `(apprentice (apprentice foo "bar") "baz")`.
+* Syntactic sugar: `foo:bar:baz`
 
 Indexing:
 * Indexing syntax: `(nth foo bar)`
