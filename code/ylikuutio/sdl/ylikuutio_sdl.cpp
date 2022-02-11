@@ -47,6 +47,37 @@ namespace yli::sdl
         return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
     }
 
+    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend)
+    {
+        std::vector<SDL_DisplayMode> display_modes;
+
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS ||
+            graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
+        {
+            return display_modes;
+        }
+
+        const int n_displays = SDL_GetNumVideoDisplays();
+
+        if (n_displays < 0)
+        {
+            std::cerr << "ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " << n_displays << "\n";
+            return display_modes;
+        }
+
+        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+        {
+            display_modes.resize(n_displays);
+
+            for (int i = 0; i < n_displays; i++)
+            {
+                SDL_GetCurrentDisplayMode(i, &display_modes[i]);
+            }
+        }
+
+        return display_modes;
+    }
+
     [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
     {
         SDL_Window* const window = SDL_CreateWindow(

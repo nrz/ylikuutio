@@ -94,6 +94,7 @@ namespace yli::ontology
             bool has_child(const std::string& name) const;
             yli::ontology::Entity* get_entity(const std::string& name) const;
             std::string get_entity_names() const;
+            std::string complete(const std::string& input) const;
             void add_entity(const std::string& name, yli::ontology::Entity* const entity);
             void erase_entity(const std::string& name);
 

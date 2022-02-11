@@ -37,7 +37,8 @@ namespace yli::ontology
         // requirements for further actions:
         // `this->child_of_shapeshifter_transformation.get_parent()` must not be `nullptr`.
 
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = static_cast<yli::ontology::ShapeshifterTransformation*>(this->child_of_shapeshifter_transformation.get_parent());
+        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
+            static_cast<yli::ontology::ShapeshifterTransformation*>(this->child_of_shapeshifter_transformation.get_parent());
 
         if (shapeshifter_transformation == nullptr)
         {
@@ -67,7 +68,8 @@ namespace yli::ontology
 
     yli::ontology::Shader* ShapeshifterSequence::get_shader() const
     {
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
+        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
+            static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
 
         if (shapeshifter_transformation != nullptr)
         {

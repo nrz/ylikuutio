@@ -22,6 +22,9 @@
 
 #define SDL_main main
 
+// Include standard headers
+#include <vector> // std::vector
+
 namespace yli::render
 {
     enum class GraphicsApiBackend;
@@ -30,6 +33,7 @@ namespace yli::render
 namespace yli::sdl
 {
     [[nodiscard]] yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend);
+    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend);
     [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
     [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
     [[nodiscard]] SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);

@@ -514,7 +514,7 @@ namespace yli::ontology
 
                 console.print_completions(universe.registry, command);
 
-                const std::string completion = universe.registry.complete(command);
+                const std::string completion = universe.complete(command);
                 console.current_input.clear();
                 std::copy(completion.begin(), completion.end(), std::back_inserter(console.current_input));
             }
@@ -527,7 +527,7 @@ namespace yli::ontology
 
                 console.print_completions(universe.registry, "");
 
-                const std::string completion = universe.registry.complete("");
+                const std::string completion = universe.complete("");
 
                 if (!completion.empty())
                 {
@@ -541,7 +541,7 @@ namespace yli::ontology
 
                 console.print_completions(universe.registry, parameter_vector.back());
 
-                const std::string completion = universe.registry.complete(parameter_vector.back());
+                const std::string completion = universe.complete(parameter_vector.back());
                 console.current_input.clear();
                 std::copy(command.begin(), command.end(), std::back_inserter(console.current_input));
                 console.current_input.emplace_back(' ');
@@ -562,7 +562,7 @@ namespace yli::ontology
             {
                 // Complete the next parameter.
 
-                const std::string completion = universe.registry.complete("");
+                const std::string completion = universe.complete("");
 
                 if (!completion.empty())
                 {
