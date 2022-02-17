@@ -35,6 +35,7 @@
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
