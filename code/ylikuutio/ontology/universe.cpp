@@ -649,7 +649,7 @@ namespace yli::ontology
 
     void Universe::set_active_camera(yli::ontology::Camera* const camera) const
     {
-        // Variable the active `Camera` does not change the active `Scene`!
+        // Changing the active `Camera` does not change the active `Scene`!
 
         yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(camera->get_parent());
 
