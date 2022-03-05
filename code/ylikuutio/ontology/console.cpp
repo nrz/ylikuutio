@@ -357,11 +357,6 @@ namespace yli::ontology
         return false;
     }
 
-    bool Console::get_in_console() const
-    {
-        return this->in_console;
-    }
-
     void Console::process_key_event(const SDL_KeyboardEvent& keyboard_event)
     {
         const uint16_t modifiers = keyboard_event.keysym.mod;
@@ -560,6 +555,173 @@ namespace yli::ontology
                 this->print_text(completion);
             }
         }
+    }
+
+    // Getters for unit tests and for building upon `Console`.
+
+    const std::list<char>& Console::get_current_input() const
+    {
+        return this->current_input;
+    }
+
+    const std::list<char>& Console::get_temp_input() const
+    {
+        return this->temp_input;
+    }
+
+    const std::string& Console::get_prompt() const
+    {
+        return this->prompt;
+    }
+
+    yli::input::InputMode* Console::get_input_mode() const
+    {
+        return this->input_mode;
+    }
+
+    std::size_t Console::get_cursor_index() const
+    {
+        return this->cursor_index;
+    }
+
+    std::size_t Console::get_history_line_i() const
+    {
+        return this->history_line_i;
+    }
+
+    std::size_t Console::get_historical_input_i() const
+    {
+        return this->historical_input_i;
+    }
+
+    std::size_t Console::get_console_top_y() const
+    {
+        return this->console_top_y;
+    }
+
+    std::size_t Console::get_console_bottom_y() const
+    {
+        return this->console_bottom_y;
+    }
+
+    std::size_t Console::get_console_left_x() const
+    {
+        return this->console_left_x;
+    }
+
+    std::size_t Console::get_console_right_x() const
+    {
+        return this->console_right_x;
+    }
+
+    std::size_t Console::get_n_rows() const
+    {
+        return this->n_rows;
+    }
+
+    std::size_t Console::get_n_columns() const
+    {
+        return this->n_columns;
+    }
+
+    bool Console::get_in_console() const
+    {
+        return this->in_console;
+    }
+
+    bool Console::get_can_move_to_previous_input() const
+    {
+        return this->can_move_to_previous_input;
+    }
+
+    bool Console::get_can_move_to_next_input() const
+    {
+        return this->can_move_to_next_input;
+    }
+
+    bool Console::get_can_backspace() const
+    {
+        return this->can_backspace;
+    }
+
+    bool Console::get_can_tab() const
+    {
+        return this->can_tab;
+    }
+
+    bool Console::get_can_enter_key() const
+    {
+        return this->can_enter_key;
+    }
+
+    bool Console::get_can_ctrl_c() const
+    {
+        return this->can_ctrl_c;
+    }
+
+    bool Console::get_can_ctrl_w() const
+    {
+        return this->can_ctrl_w;
+    }
+
+    bool Console::get_can_page_up() const
+    {
+        return this->can_page_up;
+    }
+
+    bool Console::get_can_page_down() const
+    {
+        return this->can_page_down;
+    }
+
+    bool Console::get_can_home() const
+    {
+        return this->can_home;
+    }
+
+    bool Console::get_can_end() const
+    {
+        return this->can_end;
+    }
+
+    bool Console::get_is_left_control_pressed() const
+    {
+        return this->is_left_control_pressed;
+    }
+
+    bool Console::get_is_right_control_pressed() const
+    {
+        return this->is_right_control_pressed;
+    }
+
+    bool Console::get_is_left_alt_pressed() const
+    {
+        return this->is_left_alt_pressed;
+    }
+
+    bool Console::get_is_right_alt_pressed() const
+    {
+        return this->is_right_alt_pressed;
+    }
+
+    bool Console::get_is_left_shift_pressed() const
+    {
+        return this->is_left_shift_pressed;
+    }
+
+    bool Console::get_is_right_shift_pressed() const
+    {
+        return this->is_right_shift_pressed;
+    }
+
+    bool Console::get_in_history() const
+    {
+        return this->in_history;
+    }
+
+    bool Console::get_in_historical_input() const
+    {
+        return this->in_historical_input;
     }
 
     // Console command callbacks begin here.

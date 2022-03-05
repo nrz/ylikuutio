@@ -1142,6 +1142,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/graph/shortest_paths.cpp
         code/ylikuutio/graph/shortest_paths.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/input/input_master.cpp
+        code/ylikuutio/input/input_master.hpp
+        code/ylikuutio/input/input_mode.cpp
+        code/ylikuutio/input/input_mode.hpp
         code/ylikuutio/interpolation/bilinear_interpolation.hpp
         code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
@@ -1258,6 +1262,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
         code/ylikuutio/tests/googletest/test_compute_struct.cpp
+        code/ylikuutio/tests/googletest/test_console.cpp
         code/ylikuutio/tests/googletest/test_csv_loader.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
