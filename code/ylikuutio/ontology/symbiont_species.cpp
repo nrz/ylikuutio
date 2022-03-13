@@ -24,7 +24,6 @@
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::ontology
 {
