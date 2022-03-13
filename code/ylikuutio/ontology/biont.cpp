@@ -163,6 +163,8 @@ namespace yli::ontology
 
         this->mvp_matrix = universe.get_projection_matrix() * universe.get_view_matrix() * this->model_matrix;
 
+        // '`Material`' part begins here.
+
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, symbiosis->get_texture(this->biontID));
