@@ -275,7 +275,6 @@ namespace yli::ontology
                     model_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
                     model_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
                     model_struct.mesh_i = mesh_i;
-                    model_struct.light_position = this->light_position;
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
@@ -397,16 +396,5 @@ namespace yli::ontology
     {
         yli::ontology::SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
         return symbiont_material->get_openGL_textureID();
-    }
-
-    GLint Symbiosis::get_light_id(const std::size_t biontID) const
-    {
-        yli::ontology::SymbiontSpecies* const symbiont_species = this->biontID_symbiont_species_vector.at(biontID);
-        return symbiont_species->get_light_id();
-    }
-
-    const glm::vec3& Symbiosis::get_light_position(const std::size_t /* biontID */) const
-    {
-        return this->light_position;
     }
 }

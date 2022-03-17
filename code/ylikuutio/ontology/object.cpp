@@ -34,6 +34,11 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#ifndef __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#define __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+#endif
+
 #ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #include <glm/gtc/matrix_transform.hpp>
@@ -201,6 +206,12 @@ namespace yli::ontology
 
     void Object::render_this_object(yli::ontology::Shader* const shader)
     {
+        if (this->universe.get_render_master() == nullptr)
+        {
+            std::cerr << "ERROR: `Biont::render_this_biont`: `this->universe.get_render_master()` is `nullptr`!\n";
+            return;
+        }
+
         if (shader == nullptr)
         {
             return;
@@ -246,10 +257,20 @@ namespace yli::ontology
 
         this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
-        // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform.
-        glUniformMatrix4fv(shader->get_matrix_id(), 1, GL_FALSE, &this->mvp_matrix[0][0]);
-        glUniformMatrix4fv(shader->get_model_matrix_id(), 1, GL_FALSE, &this->model_matrix[0][0]);
+        if (this->universe.get_is_opengl_in_use())
+        {
+            // Send our transformation to the uniform buffer object (UBO).
+            glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
+            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
+            glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+            glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
+        }
+        else if (this->universe.get_is_vulkan_in_use())
+        {
+            std::cerr << "ERROR: `Object::render_this_object`: Vulkan is not supported yet!\n";
+        }
 
         yli::ontology::MeshModule* master_model = nullptr;
 
@@ -280,68 +301,75 @@ namespace yli::ontology
             }
         }
 
-        GLuint vao                             = master_model->get_vao();
-        GLuint vertexbuffer                    = master_model->get_vertexbuffer();
-        uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
-        GLuint uvbuffer                        = master_model->get_uvbuffer();
-        uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
-        GLuint normalbuffer                    = master_model->get_normalbuffer();
-        uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
-        GLuint elementbuffer                   = master_model->get_elementbuffer();
-        uint32_t indices_size                  = master_model->get_indices().size();
+        if (this->universe.get_is_opengl_in_use())
+        {
+            GLuint vao                             = master_model->get_vao();
+            GLuint vertexbuffer                    = master_model->get_vertexbuffer();
+            uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
+            GLuint uvbuffer                        = master_model->get_uvbuffer();
+            uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
+            GLuint normalbuffer                    = master_model->get_normalbuffer();
+            uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
+            GLuint elementbuffer                   = master_model->get_elementbuffer();
+            uint32_t indices_size                  = master_model->get_indices().size();
 
-        glBindVertexArray(vao);
+            glBindVertexArray(vao);
 
-        // 1st attribute buffer: vertices.
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(
-                vertex_position_modelspace_id, // The attribute we want to configure
-                3,                           // size
-                GL_FLOAT,                    // type
-                GL_FALSE,                    // normalized?
-                0,                           // stride
-                (void*) 0                    // array buffer offset
-                );
-        yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
+            // 1st attribute buffer: vertices.
+            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+            glVertexAttribPointer(
+                    vertex_position_modelspace_id, // The attribute we want to configure
+                    3,                           // size
+                    GL_FLOAT,                    // type
+                    GL_FALSE,                    // normalized?
+                    0,                           // stride
+                    (void*) 0                    // array buffer offset
+                    );
+            yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
-        // 2nd attribute buffer: UVs.
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(
-                vertex_uv_id, // The attribute we want to configure
-                2,          // size : U+V => 2
-                GL_FLOAT,   // type
-                GL_FALSE,   // normalized?
-                0,          // stride
-                (void*) 0   // array buffer offset
-                );
-        yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
+            // 2nd attribute buffer: UVs.
+            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+            glVertexAttribPointer(
+                    vertex_uv_id, // The attribute we want to configure
+                    2,          // size : U+V => 2
+                    GL_FLOAT,   // type
+                    GL_FALSE,   // normalized?
+                    0,          // stride
+                    (void*) 0   // array buffer offset
+                    );
+            yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
-        // 3rd attribute buffer: normals.
-        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-        glVertexAttribPointer(
-                vertex_normal_modelspace_id, // The attribute we want to configure
-                3,                         // size
-                GL_FLOAT,                  // type
-                GL_FALSE,                  // normalized?
-                0,                         // stride
-                (void*) 0                  // array buffer offset
-                );
-        yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
+            // 3rd attribute buffer: normals.
+            glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+            glVertexAttribPointer(
+                    vertex_normal_modelspace_id, // The attribute we want to configure
+                    3,                         // size
+                    GL_FLOAT,                  // type
+                    GL_FALSE,                  // normalized?
+                    0,                         // stride
+                    (void*) 0                  // array buffer offset
+                    );
+            yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
-        // Index buffer.
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+            // Index buffer.
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
-        // Draw the triangles!
-        glDrawElements(
-                GL_TRIANGLES,    // mode
-                indices_size,    // count
-                GL_UNSIGNED_INT, // type
-                (void*) 0        // element array buffer offset
-                );
+            // Draw the triangles!
+            glDrawElements(
+                    GL_TRIANGLES,    // mode
+                    indices_size,    // count
+                    GL_UNSIGNED_INT, // type
+                    (void*) 0        // element array buffer offset
+                    );
 
-        yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
-        yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
-        yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
+            yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
+            yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
+            yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
+        }
+        else if (this->universe.get_is_vulkan_in_use())
+        {
+            std::cerr << "ERROR: `Object::render_this_object`: Vulkan is not supported yet!\n";
+        }
     }
 
     yli::ontology::Scene* Object::get_scene() const

@@ -9,7 +9,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Use uniform buffer objects to enable sharing uniforms between shaders.
 [ ] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
 [ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
@@ -297,3 +296,4 @@ Ready:
 [x] Implement `yli::ontology::Ecosystem` class for storing `Shader`s independently of `Scene`s so that they can be used in multiple `Scene`s.
 [x] Change OpenGL requirement to 3.3.
 [x] Print alternative completions in `Console`.
+[x] Use uniform buffer objects to enable sharing uniforms between shaders.

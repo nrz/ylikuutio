@@ -316,6 +316,8 @@ namespace yli::ontology
             // This method sets the active `Scene`.
             void set_active_scene(yli::ontology::Scene* const scene);
 
+            yli::ontology::Camera* get_active_camera() const;
+
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
             void set_active_camera(yli::ontology::Camera* const camera) const;

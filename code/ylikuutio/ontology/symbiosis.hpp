@@ -76,8 +76,7 @@ namespace yli::ontology
                 apprentice_of_shader(shader_master, this),
                 model_filename     { model_struct.model_filename },
                 model_file_format  { model_struct.model_file_format },
-                triangulation_type { model_struct.triangulation_type },
-                light_position     { model_struct.light_position }
+                triangulation_type { model_struct.triangulation_type }
             {
                 // constructor.
 
@@ -124,9 +123,6 @@ namespace yli::ontology
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
-            GLint get_light_id(const std::size_t biontID) const;
-            const glm::vec3& get_light_position(const std::size_t /* biontID */) const;
-
             yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
             yli::ontology::GenericParentModule parent_of_holobionts;
@@ -143,8 +139,6 @@ namespace yli::ontology
             std::string model_filename;     // filename of the model file.
             std::string model_file_format;  // type of the model file, eg. `"fbx"`.
             std::string triangulation_type;
-
-            glm::vec3 light_position;       // light position.
 
             std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
             std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.

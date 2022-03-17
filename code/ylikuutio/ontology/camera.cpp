@@ -28,6 +28,8 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -61,7 +63,20 @@ namespace yli::ontology
 
     void Camera::activate()
     {
-        this->universe.set_active_camera(this);
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (scene != nullptr)
+        {
+            scene->set_active_camera(this);
+        }
+    }
+
+    void Camera::render()
+    {
+        // Set the uniform values specific to a `Camera`.
+        // This is a work in progress.
+
+        glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::CAMERA, this->camera_uniform_block);
     }
 
     yli::ontology::Scene* Camera::get_scene() const
@@ -87,6 +102,11 @@ namespace yli::ontology
     const glm::mat4& Camera::get_view_matrix() const
     {
         return this->view_matrix;
+    }
+
+    GLuint Camera::get_camera_uniform_block() const
+    {
+        return this->camera_uniform_block;
     }
 
     bool Camera::get_is_static_view() const

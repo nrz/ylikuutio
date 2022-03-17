@@ -65,7 +65,6 @@ namespace yli::ontology
         uint32_t mesh_i     { 0 };    // For FBX.
         uint32_t x_step     { 1 };    // Step in x-dimension for input data (set to 1 to load all data points/measurements).
         uint32_t z_step     { 1 };    // Step in z-dimension for input data (set to 1 to load all data points/measurements).
-        glm::vec3 light_position { 0.0f, 0.0f, 0.0f };
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;

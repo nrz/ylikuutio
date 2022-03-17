@@ -12,11 +12,25 @@ varying vec3 normal_cameraspace;
 varying vec3 eye_direction_cameraspace;
 varying vec3 light_direction_cameraspace;
 
-// Values that stay constant for the whole mesh.
-uniform mat4 MVP;
-uniform mat4 V;
-uniform mat4 M;
-uniform vec3 light_position_worldspace;
+// Values that stay constant for each `Scene`.
+layout (std140) uniform scene_uniform_block
+{
+    vec4 light_position_worldspace;
+    float water_level;
+};
+
+// Values that stay constant for each `Movable`.
+layout (std140) uniform movable_uniform_block
+{
+    mat4 MVP;
+    mat4 M;
+};
+
+// Values that stay constant for each `Camera`.
+layout (std140) uniform camera_uniform_block
+{
+    mat4 V;
+};
 
 void main()
 {
@@ -32,7 +46,7 @@ void main()
     eye_direction_cameraspace = vec3(0, 0, 0) - vertex_position_cameraspace;
 
     // Vector that goes from the vertex to the light, in camera space. M is ommited because it's identity.
-    vec3 light_position_cameraspace = (V * vec4(light_position_worldspace, 1)).xyz;
+    vec3 light_position_cameraspace = (V * light_position_worldspace).xyz;
     light_direction_cameraspace = light_position_cameraspace + eye_direction_cameraspace;
 
     // Normal of the the vertex, in camera space

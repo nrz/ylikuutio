@@ -175,10 +175,6 @@ namespace yli::ontology
         // [Re]bind `program_id` shader.
         glUseProgram(this->program_id);
 
-        // `glUniformMatrix4fv` doesn't change between objects,
-        // so this can be done once for all objects that use the same `program_id`.
-        glUniformMatrix4fv(this->view_matrix_id, 1, GL_FALSE, &this->universe.get_view_matrix()[0][0]);
-
         render_master->render_compute_tasks(this->parent_of_compute_tasks);
         render_master->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
         render_master->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
@@ -213,15 +209,5 @@ namespace yli::ontology
     GLuint Shader::get_program_id() const
     {
         return this->program_id;
-    }
-
-    GLint Shader::get_matrix_id() const
-    {
-        return this->matrix_id;
-    }
-
-    GLint Shader::get_model_matrix_id() const
-    {
-        return this->model_matrix_id;
     }
 }

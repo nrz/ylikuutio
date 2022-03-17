@@ -171,11 +171,11 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     camera->set_global_name(camera_name);
 
     ASSERT_EQ(universe->get_active_scene(), nullptr);
-    ASSERT_EQ(scene->get_active_camera(), nullptr);
+    ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.
 
     universe->activate_entity(*scene);
     ASSERT_EQ(universe->get_active_scene(), scene);
-    ASSERT_EQ(scene->get_active_camera(), nullptr);
+    ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.
 
     universe->activate_entity(*camera);
     ASSERT_EQ(universe->get_active_scene(), scene);

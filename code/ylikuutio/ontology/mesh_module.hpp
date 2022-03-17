@@ -57,8 +57,7 @@ namespace yli::ontology
                 longitude { model_struct.longitude },
                 mesh_i { model_struct.mesh_i },
                 x_step { model_struct.x_step },
-                z_step { model_struct.z_step },
-                light_position { model_struct.light_position }
+                z_step { model_struct.z_step }
             {
                 // constructor.
 
@@ -81,14 +80,6 @@ namespace yli::ontology
                     this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
                     this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");
                     this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_normal_modelspace");
-
-                    // Get a handle for our "LightPosition" uniform.
-                    glUseProgram(model_struct.shader->get_program_id());
-                    this->light_id = glGetUniformLocation(model_struct.shader->get_program_id(), "light_position_worldspace");
-
-                    // water level.
-                    GLint water_level_uniform_location = glGetUniformLocation(model_struct.shader->get_program_id(), "water_level");
-                    glUniform1f(water_level_uniform_location, model_struct.scene->get_water_level());
 
                     yli::load::ModelLoaderStruct model_loader_struct;
                     model_loader_struct.model_struct.model_filename               = this->model_filename;
@@ -209,9 +200,6 @@ namespace yli::ontology
             std::vector<glm::vec3> normals;  // Normals of the `MeshModule`.
 
         public:
-            glm::vec3 light_position { NAN, NAN, NAN };
-
-            GLint light_id                      { 0 }; // Dummy value.
             GLint vertex_position_modelspace_id { 0 }; // Dummy value.
             GLint vertex_uv_id                  { 0 }; // Dummy value.
             GLint vertex_normal_modelspace_id   { 0 }; // Dummy value.

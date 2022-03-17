@@ -20,7 +20,10 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
+#include "universe.hpp"
 #include "camera_struct.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -89,7 +92,21 @@ namespace yli::ontology
             {
                 // constructor.
 
+                if (this->universe.get_is_opengl_in_use())
+                {
+                    // Uniform block for this `Camera`.
+                    glGenBuffers(1, &this->camera_uniform_block);
+                    glBindBuffer(GL_UNIFORM_BUFFER, this->camera_uniform_block);
+                    glBufferData(GL_UNIFORM_BUFFER, yli::opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+                    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+                }
+                else if (this->universe.get_is_vulkan_in_use())
+                {
+                    std::cerr << "ERROR: `Camera::Camera`: Vulkan is not supported yet!\n";
+                }
+
                 this->is_static_view = camera_struct.is_static_view;
+                this->activate();
 
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::Camera*";
@@ -105,8 +122,11 @@ namespace yli::ontology
 
             void activate() override;
 
+            void render();
+
             const glm::mat4& get_projection_matrix() const;
             const glm::mat4& get_view_matrix() const;
+            GLuint get_camera_uniform_block() const;
             bool get_is_static_view() const;
 
             friend class yli::ontology::Universe;
@@ -121,6 +141,8 @@ namespace yli::ontology
             // variables related to the projection.
             glm::mat4 projection_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
             glm::mat4 view_matrix { glm::mat4(1.0f) };       // identity matrix (dummy value).
+
+            GLuint camera_uniform_block { 0 };
 
             bool is_static_view;
     };

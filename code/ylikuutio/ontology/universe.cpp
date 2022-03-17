@@ -54,6 +54,7 @@
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
@@ -66,6 +67,11 @@
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
+#endif
+
+#ifndef __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#define __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #endif
 
 #ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
@@ -605,12 +611,24 @@ namespace yli::ontology
         // Software rendering renders to a CPU memory region or to file.
         // TODO: implement Vulkan rendering!
         // TODO: implement software rendering!
-        if ((this->get_is_opengl_in_use() ||
-                this->get_is_vulkan_in_use() ||
-                this->get_is_software_rendering_in_use()) &&
-                this->should_be_rendered &&
+        if (this->should_be_rendered &&
+                this->get_active_camera() != nullptr &&
                 this->render_master != nullptr)
         {
+            if (this->get_is_opengl_in_use())
+            {
+                // Send our view matrix to the uniform buffer object (UBO).
+                glBindBuffer(GL_UNIFORM_BUFFER, this->get_active_camera()->get_camera_uniform_block());
+                glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::camera_ubo::CameraUboBlockOffsets::V, sizeof(glm::mat4), glm::value_ptr(this->current_camera_view_matrix)); // mat4
+                glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+                this->get_active_camera()->render();
+            }
+            else if (this->get_is_vulkan_in_use())
+            {
+                std::cerr << "ERROR: `Universe::render`: Vulkan is not supported yet!\n";
+            }
+
             this->render_master->render(render_struct);
         }
 
@@ -645,6 +663,16 @@ namespace yli::ontology
             this->turbo_factor = this->active_scene->get_turbo_factor();
             this->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
+    }
+
+    yli::ontology::Camera* Universe::get_active_camera() const
+    {
+        if (this->active_scene != nullptr)
+        {
+            return this->active_scene->get_active_camera();
+        }
+
+        return nullptr; // No active `Scene`, so no active `Camera` either.
     }
 
     void Universe::set_active_camera(yli::ontology::Camera* const camera) const

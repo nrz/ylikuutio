@@ -23,7 +23,6 @@
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -76,8 +75,6 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             std::size_t get_number_of_apprentices() const;
-
-            GLint get_light_id() const;
 
         private:
             void bind_to_parent();

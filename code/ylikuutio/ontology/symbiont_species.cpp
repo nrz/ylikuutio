@@ -17,7 +17,6 @@
 
 #include "symbiont_species.hpp"
 #include "universe.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
 
 // Include standard headers
@@ -45,11 +44,6 @@ namespace yli::ontology
     std::size_t SymbiontSpecies::get_number_of_apprentices() const
     {
         return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
-    }
-
-    GLint SymbiontSpecies::get_light_id() const
-    {
-        return this->mesh.light_id;
     }
 
     void SymbiontSpecies::render()
