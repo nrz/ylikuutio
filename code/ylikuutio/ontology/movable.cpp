@@ -19,9 +19,9 @@
 #define PI 3.14159265359f
 #endif
 
-#include "variable.hpp"
 #include "movable.hpp"
 #include "apprentice_module.hpp"
+#include "variable.hpp"
 #include "brain.hpp"
 #include "scene.hpp"
 #include "movable_variable_activation.hpp"
