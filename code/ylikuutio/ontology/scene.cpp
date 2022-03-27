@@ -31,7 +31,6 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
-#include "rigid_body_module.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
