@@ -86,7 +86,7 @@ Including files
   unit. Do not expect any `#include`d file to `#include` anything.
 * Always use forward reference instead of `#include`, if possible.
 * In general, the `#include` order shall be as follows:
-  1a. The header of the implementation file (for implementation files).
+  1a. The corresponding header file (for implementation files).
   1b. The headers of the inherited class files (for header files).
   2. Other headers of the same `namespace`.
   3. The headers of the other namespaces, in the alphabetical order of the namespaces.
