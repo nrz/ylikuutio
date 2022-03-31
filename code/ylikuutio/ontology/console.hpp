@@ -136,7 +136,6 @@ namespace yli::ontology
 
             bool enter_console();
             bool exit_console();
-            bool get_in_console() const;
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
             // Public callbacks.
@@ -398,6 +397,49 @@ namespace yli::ontology
             void move_cursor_to_end_of_line();
             void print_completions(const yli::ontology::Registry& registry, const std::string& input);
 
+            // Getters for unit tests and for building upon `Console`.
+
+        public:
+            const std::list<char>& get_current_input() const;
+            const std::list<char>& get_temp_input() const;
+
+            const std::string& get_prompt() const;
+
+            yli::input::InputMode* get_input_mode() const;
+            std::size_t get_cursor_index() const;
+            std::size_t get_history_line_i() const;
+            std::size_t get_historical_input_i() const;
+            std::size_t get_console_top_y() const;
+            std::size_t get_console_bottom_y() const;
+            std::size_t get_console_left_x() const;
+            std::size_t get_console_right_x() const;
+            std::size_t get_n_rows() const;
+            std::size_t get_n_columns() const;
+
+            bool get_in_console() const;
+            bool get_can_move_to_previous_input() const;
+            bool get_can_move_to_next_input() const;
+            bool get_can_backspace() const;
+            bool get_can_tab() const;
+            bool get_can_enter_key() const;
+            bool get_can_ctrl_c() const;
+            bool get_can_ctrl_w() const;
+            bool get_can_page_up() const;
+            bool get_can_page_down() const;
+            bool get_can_home() const;
+            bool get_can_end() const;
+            bool get_is_left_control_pressed() const;
+            bool get_is_right_control_pressed() const;
+            bool get_is_left_alt_pressed() const;
+            bool get_is_right_alt_pressed() const;
+            bool get_is_left_shift_pressed() const;
+            bool get_is_right_shift_pressed() const;
+            bool get_in_history() const;
+            bool get_in_historical_input() const;
+
+            // Getters end here.
+
+        private:
             std::vector<std::list<char>> command_history;
             std::vector<std::list<char>> console_history;
 

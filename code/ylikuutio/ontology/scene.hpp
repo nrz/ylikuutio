@@ -19,13 +19,15 @@
 #define __YLIKUUTIO_ONTOLOGY_SCENE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
-#include "camera.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "parent_of_shaders_module.hpp"
+#include "universe.hpp"
+#include "camera.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -93,10 +95,27 @@ namespace yli::ontology
                 parent_of_objects(this, &this->registry, "objects"),
                 parent_of_symbioses(this, &this->registry, "symbioses"),
                 gravity               { scene_struct.gravity },
+                light_position        { scene_struct.light_position },
                 water_level           { scene_struct.water_level },
                 is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
             {
                 // constructor.
+
+                if (this->universe.get_is_opengl_in_use())
+                {
+                    // Uniform block for data related to this `Scene`.
+                    // Multiple uniform blocks may be rendered in the same frame
+                    // by using multiple `Camera`s.
+                    // TODO: add support for using multiple `Camera`s in the same frame!
+                    glGenBuffers(1, &this->scene_uniform_block);
+                    glBindBuffer(GL_UNIFORM_BUFFER, this->scene_uniform_block);
+                    glBufferData(GL_UNIFORM_BUFFER, yli::opengl::scene_ubo::SceneUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+                    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+                }
+                else if (this->universe.get_is_vulkan_in_use())
+                {
+                    std::cerr << "ERROR: `Scene::Scene`: Vulkan is not supported yet!\n";
+                }
 
                 // create the default `Camera`.
                 yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
@@ -144,6 +163,8 @@ namespace yli::ontology
             // this method renders all `Shader`s of this `Scene`.
             void render();
 
+            yli::ontology::Camera* get_default_camera() const;
+
             yli::ontology::Camera* get_active_camera() const;
             void set_active_camera(yli::ontology::Camera* camera);
 
@@ -159,6 +180,7 @@ namespace yli::ontology
 
             void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene* const scene);
 
+            const glm::vec4& get_light_position() const;
             float get_water_level() const;
 
             bool get_is_flight_mode_in_use() const;
@@ -199,6 +221,8 @@ namespace yli::ontology
             std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world { nullptr };
             btAlignedObjectArray<btCollisionShape*> collision_shapes;
 
+            GLuint scene_uniform_block { 0 };
+
             float roll  { NAN };
             float yaw   { NAN };
             float pitch { NAN };
@@ -209,6 +233,7 @@ namespace yli::ontology
             // Variables related to physics.
             float gravity;
 
+            glm::vec4 light_position;
             float water_level;
 
             bool is_flight_mode_in_use;

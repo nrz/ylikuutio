@@ -31,10 +31,21 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
-#include "rigid_body_module.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+#ifndef __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#define __GLM_GTC_TYPE_PTR_HPP_INCLUDED
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+#endif
 
 // Include Bullet
 #include <btBulletDynamicsCommon.h>
@@ -84,6 +95,9 @@ namespace yli::ontology
 
     void Scene::activate()
     {
+        // This function should be called upon `Camera::render`
+        // of any `Camera` located in this `Scene`.
+
         this->universe.set_active_scene(this);
     }
 
@@ -102,8 +116,28 @@ namespace yli::ontology
             return;
         }
 
+        if (this->universe.get_is_opengl_in_use())
+        {
+            // Set the uniform values specific to a `Scene`.
+            glBindBuffer(GL_UNIFORM_BUFFER, this->scene_uniform_block);
+            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::scene_ubo::SceneUboBlockOffsets::LIGHT_POSITION_WORLDSPACE, sizeof(glm::vec4), glm::value_ptr(this->light_position));
+            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::scene_ubo::SceneUboBlockOffsets::WATER_LEVEL, sizeof(float), &this->water_level);
+            glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+            glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::SCENE, this->scene_uniform_block);
+        }
+        else if (this->universe.get_is_vulkan_in_use())
+        {
+            std::cerr << "ERROR: `Scene::render`: Vulkan is not supported yet!\n";
+        }
+
         render_master->render_shaders_of_ecosystems(this->universe.get_ecosystem_shaders(), this);
         render_master->render_shaders(this->parent_of_shaders);
+    }
+
+    yli::ontology::Camera* Scene::get_default_camera() const
+    {
+        return static_cast<yli::ontology::Camera*>(this->parent_of_default_camera.get(0));
     }
 
     yli::ontology::Camera* Scene::get_active_camera() const
@@ -266,6 +300,11 @@ namespace yli::ontology
         }
 
         this->dynamics_world->addRigidBody(bullet_rigid_body);
+    }
+
+    const glm::vec4& Scene::get_light_position() const
+    {
+        return this->light_position;
     }
 
     float Scene::get_water_level() const

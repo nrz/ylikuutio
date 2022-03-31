@@ -21,6 +21,12 @@
 #include "entity_struct.hpp"
 #include "camera_struct.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 namespace yli::ontology
 {
     struct SceneStruct: public yli::ontology::EntityStruct
@@ -30,6 +36,7 @@ namespace yli::ontology
         float gravity { 9.81f / 60.0f };         // Default gravity: Earth gravity, 9.81 m/s^2.
                                                  // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `btSoftRigidDynamicsWorld`
                                                  // (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
+        glm::vec4 light_position { 0.0f, 0.0f, 0.0f, 1.0f }; // Default light position: origin.
         float water_level { 0.0f };              // Default water level: 0.0 meters.
         bool is_flight_mode_in_use { true };
     };

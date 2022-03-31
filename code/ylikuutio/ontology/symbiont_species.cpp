@@ -17,14 +17,12 @@
 
 #include "symbiont_species.hpp"
 #include "universe.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::ontology
 {
@@ -46,11 +44,6 @@ namespace yli::ontology
     std::size_t SymbiontSpecies::get_number_of_apprentices() const
     {
         return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
-    }
-
-    GLint SymbiontSpecies::get_light_id() const
-    {
-        return this->mesh.light_id;
     }
 
     void SymbiontSpecies::render()

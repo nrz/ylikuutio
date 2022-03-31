@@ -7,10 +7,14 @@ varying vec3 normal_cameraspace;
 varying vec3 eye_direction_cameraspace;
 varying vec3 light_direction_cameraspace;
 
-// Values that stay constant for the whole mesh.
+// Values that stay constant for each `Scene`.
+layout (std140) uniform scene_uniform_block
+{
+    vec4 light_position_worldspace;
+    float water_level;
+};
+
 uniform sampler2D texture_sampler;
-uniform vec3 light_position_worldspace;
-uniform float water_level;
 
 out vec3 color;
 
@@ -32,7 +36,7 @@ void main()
     vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 
     // Distance to the light
-    float distance = length(light_position_worldspace - position_worldspace);
+    float distance = length(light_position_worldspace.xyz - position_worldspace);
 
     // Normal of the computed fragment, in camera space
     vec3 n = normalize(normal_cameraspace);

@@ -21,7 +21,6 @@
 #include "render_templates.hpp"
 #include "code/ylikuutio/ontology/mesh_module.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 namespace yli::render
 {
@@ -29,13 +28,6 @@ namespace yli::render
     template<typename ContainerType, typename StoredType, typename CastType>
         void render_model(const yli::ontology::MeshModule& mesh, ContainerType& renderables_container)
         {
-            // Compute the MVP matrix from keyboard and mouse input.
-            glUniform3f(
-                    mesh.light_id,
-                    mesh.light_position.x,
-                    mesh.light_position.y,
-                    mesh.light_position.z);
-
             // 1st attribute buffer: vertices.
             yli::opengl::enable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
 

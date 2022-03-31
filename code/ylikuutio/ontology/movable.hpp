@@ -22,9 +22,12 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "rigid_body_module.hpp"
+#include "universe.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -83,6 +86,16 @@ namespace yli::ontology
                 input_method { movable_struct.input_method }
             {
                 // constructor.
+
+                if (this->universe.get_is_opengl_in_use())
+                {
+                    // Uniform block for data related to this `Movable`.
+
+                    glGenBuffers(1, &this->movable_uniform_block);
+                    glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
+                    glBufferData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+                    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+                }
 
                 // Initialize speed, angular speed and maximum speed variables.
                 // These are to be used from the `Brain` callbacks.
@@ -303,6 +316,7 @@ namespace yli::ontology
             glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
             glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
 
+            GLuint movable_uniform_block { 0 };
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
                                                                    // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.

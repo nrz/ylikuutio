@@ -33,6 +33,7 @@
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
+#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -87,10 +88,13 @@ namespace yli::ontology
                     // Create and compile our GLSL program from the shaders.
                     this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
-                    // Get a handle for our "MVP" uniform.
-                    this->matrix_id = glGetUniformLocation(this->program_id, "MVP");
-                    this->view_matrix_id = glGetUniformLocation(this->program_id, "V");
-                    this->model_matrix_id = glGetUniformLocation(this->program_id, "M");
+                    this->scene_uniform_block_index = glGetUniformBlockIndex(this->program_id, "scene_uniform_block");
+                    this->movable_uniform_block_index = glGetUniformBlockIndex(this->program_id, "movable_uniform_block");
+                    this->camera_uniform_block_index = glGetUniformBlockIndex(this->program_id, "camera_uniform_block");
+
+                    glUniformBlockBinding(this->program_id, this->scene_uniform_block_index, yli::opengl::UboBlockIndices::SCENE);
+                    glUniformBlockBinding(this->program_id, this->movable_uniform_block_index, yli::opengl::UboBlockIndices::MOVABLE);
+                    glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, yli::opengl::UboBlockIndices::CAMERA);
                 }
 
                 // `yli::ontology::Entity` member variables begin here.
@@ -115,8 +119,6 @@ namespace yli::ontology
             std::size_t get_number_of_apprentices() const;
 
             GLuint get_program_id() const;
-            GLint get_matrix_id() const;
-            GLint get_model_matrix_id() const;
 
             friend class yli::ontology::ShaderCompare;
             template<typename T1>
@@ -137,9 +139,9 @@ namespace yli::ontology
 
         private:
             GLuint program_id     { 0 };          // This `Shader`'s `program_id`, returned by `load_shaders`. Dummy value.
-            GLint matrix_id       { 0 };          // Dummy value.
-            GLint view_matrix_id  { 0 };          // Dummy value.
-            GLint model_matrix_id { 0 };          // Dummy value.
+            GLuint scene_uniform_block_index   { 0 }; // Dummy value.
+            GLuint movable_uniform_block_index { 0 }; // Dummy value.
+            GLuint camera_uniform_block_index  { 0 }; // Dummy value.
 
             std::string vertex_shader;            // Filename of vertex shader.
             std::string fragment_shader;          // Filename of fragment shader.

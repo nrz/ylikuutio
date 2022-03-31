@@ -54,6 +54,7 @@ namespace ajokki
 
         std::cout << "Creating yli::ontology::Entity* tallinn_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
+        scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         yli::ontology::Entity* const tallinn_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* tallinn_scene ...\n";
@@ -116,7 +117,6 @@ namespace ajokki
         tallinn_terrain_model_struct.shader = tallinn_shader;
         tallinn_terrain_model_struct.material = tallinn_grass_material;
         tallinn_terrain_model_struct.model_file_format = "SRTM";
-        tallinn_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
         tallinn_terrain_model_struct.latitude = 59.437222f;  // in degrees.
         tallinn_terrain_model_struct.longitude = 24.745278f; // in degrees.
         tallinn_terrain_model_struct.x_step = 1;

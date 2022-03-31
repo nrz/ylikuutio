@@ -54,6 +54,7 @@ namespace ajokki
 
         std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
+        scene_struct.light_position = { 0.0f, 100000.0f, 0.0f, 1.0f };
         scene_struct.water_level = 3815.51f;
         yli::ontology::Entity* const altiplano_scene_entity = entity_factory->create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
@@ -116,7 +117,6 @@ namespace ajokki
         altiplano_terrain_model_struct.shader = altiplano_shader;
         altiplano_terrain_model_struct.material = altiplano_grass_material;
         altiplano_terrain_model_struct.model_file_format = "SRTM";
-        altiplano_terrain_model_struct.light_position = glm::vec3(0, 100000, 0);
         altiplano_terrain_model_struct.latitude = -16.50f;  // in degrees.
         altiplano_terrain_model_struct.longitude = -68.15f; // in degrees.
         altiplano_terrain_model_struct.x_step = 1;
