@@ -570,7 +570,7 @@ namespace yli::ontology
 
             const yli::render::GraphicsApiBackend graphics_api_backend;
             const std::vector<SDL_DisplayMode> display_modes;
-            const int n_displays;
+            const uint32_t n_displays;
             const bool is_silent;
             const bool is_physical;
             bool is_fullscreen;
