@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix compiling on Clang.
 [ ] Fix binding `Object` apprentice to `Species` master.
 [ ] Fix downloading of Google Test in `CMakeLists.txt`.
 [ ] Fix compiling on Visual Studio.
@@ -299,3 +298,4 @@ Ready:
 [x] Change OpenGL requirement to 3.3.
 [x] Print alternative completions in `Console`.
 [x] Use uniform buffer objects to enable sharing uniforms between shaders.
+[x] Fix compiling on Clang.
