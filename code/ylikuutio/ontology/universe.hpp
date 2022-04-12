@@ -222,7 +222,7 @@ namespace yli::ontology
                 application_name  { universe_struct.application_name },
                 graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
                 display_modes     { yli::sdl::get_display_modes(this->graphics_api_backend) },
-                n_displays        { this->display_modes.size() },
+                n_displays        { static_cast<uint32_t>(this->display_modes.size()) },
                 is_silent         { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
                 is_physical       { universe_struct.is_physical },
                 is_fullscreen     { universe_struct.is_fullscreen },
@@ -570,7 +570,7 @@ namespace yli::ontology
 
             const yli::render::GraphicsApiBackend graphics_api_backend;
             const std::vector<SDL_DisplayMode> display_modes;
-            const int n_displays;
+            const uint32_t n_displays;
             const bool is_silent;
             const bool is_physical;
             bool is_fullscreen;

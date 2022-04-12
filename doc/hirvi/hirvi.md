@@ -274,6 +274,7 @@ Planned languages on launch:
 * [ ] Naaraista.
 * [ ] Uroksista.
 * [ ] Sekä että.
+* [ ] Jostain muusta.
 * [ ] Pidän omana tietonani.
 
 ### Tehtävä #0: pako Helsingistä
@@ -305,7 +306,8 @@ Planned languages on launch:
 ### Loppuanimaatio: Hirvet juhlivat
 * Hirvet juhlivat yleistä nisäkäskansalaisuutta tanssimalla iloisen rytmimusiikin tahtiin eri puolilla Suomea,
   mm. eduskuntatalon tuntumassa.
-* Lopuksi kamera nousee hirvien tasolta taivaaseen kuvakulma kohti tanssivia hirviä ja ilta vaihtuu yöksi. Lopputekstit tulevat ruutuun.
+* Lopuksi kamera nousee hirvien tasolta taivaaseen kuvakulma kohti tanssivia hirviä ja ilta vaihtuu yöksi.
+* Tähdet syttyvät taivaalle, sitten näkyviin tulee revontulia. Revontulet morffautuvat lopputeksteiksi.
 
 ## Story
 
@@ -317,18 +319,19 @@ Planned languages on launch:
 * [ ] suomi
 * [ ] svenska
 
-### Selection of sex of Hirvi
-* What is the sex of Hirvi?
+### Selection of gender of Hirvi
+* What is the gender of Hirvi?
 * [ ] Female
 * [ ] Male.
 * [ ] Something else.
 * [ ] I'll keep that to myself.
 
-### Mistä Hirvi tykkää?
+### What does Hirvi like?
 * What does Hirvi like?
 * [ ] Females.
 * [ ] Males.
 * [ ] Both.
+* [ ] Something else.
 * [ ] I'll keep that to myself.
 
 ### Prelude: escape from Helsinki
@@ -360,7 +363,8 @@ Planned languages on launch:
 ### End scene: elks/moose celebrating
 * Elks/moose celebrate the general mammal citizenship by dancing to jolly rhytmic music around Finland,
   including next to the parlament.
-* Finally camera rises from elk/moose-level up to the sky while looking at dancing elks/moose, then evening light turns to night. Closing credits roll to screen.
+* Finally camera rises from elk/moose-level up to the sky while looking at dancing elks/moose, then evening light turns to night.
+* Stars light up in the sky, then northern lights appear. Northers lights morph into closing credits.
 
 ## La historía
 
@@ -379,9 +383,10 @@ Planned languages on launch:
 * [ ] Algo más.
 * [ ] Prefiero no decirlo.
 
-### Mistä Hirvi tykkää?
+### Qué le gustan a Hirvi?
 * Qué le gustan a Hirvi?
 * [ ] Las hembras.
 * [ ] Los machos.
 * [ ] Lxs dos.
+* [ ] Algo más.
 * [ ] Prefiero no decirlo.
