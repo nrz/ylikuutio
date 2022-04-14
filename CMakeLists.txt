@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.14)
 cmake_policy(SET CMP0003 NEW)
 cmake_policy(SET CMP0004 NEW)
 cmake_policy(SET CMP0048 NEW)
@@ -48,8 +48,8 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Crosscompiling from Linux to Windows must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # Crosscompiling from Linux to Windows does not need to compile zlib from source.
-    set(COMPILE_ZLIB_FROM_SOURCE false)
+    # Crosscompiling from Linux to Windows must compile zlib from source.
+    set(COMPILE_ZLIB_FROM_SOURCE true)
 
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -104,23 +104,10 @@ if(CMAKE_BINARY_DIR MATCHES " ")
     message("WARNING: Your build directory contains spaces. If you experience problems when compiling, this can be the cause.")
 endif()
 
-# On Visual 2005 and above, this module can set the debug working directory
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-1c73e35")
-include(CreateLaunchers)
-include(MSVCMultipleProcessCompile) # /MP
-
 # Set the build type if it isn't already
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
-
-include(ExternalProject) # for ExternalProject_Add
-
-# for Google Test.
-enable_testing()
-
-# Set default ExternalProject root directory
-set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 
 if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
@@ -237,116 +224,19 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
-    include_directories(
-        external/googletest/googletest/include/
-        external/googletest/googlemock/include/
-        ${CMAKE_CURRENT_BINARY_DIR}/gtest/src/googletest/googletest/include/
-        ${CMAKE_CURRENT_BINARY_DIR}/gmock/src/googletest/googletest/include/
+    # for Google Test.
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/77962730563eece3525f40b8769e4ca0c6baf64c.zip
         )
 
-    if(DISABLE_UPDATE_STEP)
-        # Download and install GoogleTest
-        ExternalProject_Add(
-            googletest
-            GIT_REPOSITORY https://github.com/abseil/googletest
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-            # Disable install step
-            INSTALL_COMMAND ""
-            # Disable update step
-            UPDATE_COMMAND ""
-            # custom patch command
-            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
-    else()
-        # Download and install GoogleTest
-        ExternalProject_Add(
-            googletest
-            GIT_REPOSITORY https://github.com/abseil/googletest
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-            # Disable install step
-            INSTALL_COMMAND ""
-            # custom patch command
-            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
+    FetchContent_MakeAvailable(googletest)
+
+    if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        # For Windows: Prevent overriding the parent project's compiler/linker settings
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     endif()
-
-    # Create a libgtest target to be used as a dependency by test programs
-    add_library(libgtest IMPORTED STATIC GLOBAL)
-    add_dependencies(libgtest googletest)
-
-    # Set gtest properties
-    ExternalProject_Get_Property(googletest source_dir binary_dir)
-    set_target_properties(libgtest PROPERTIES
-        "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
-        "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-        #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
-        )
-    # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-    # include_directories("${source_dir}/external/googletest/googletest/include")
-
-    # specify include directory.
-    set(GTEST_INCLUDE_DIR ${source_dir}/include)
-
-    # library.
-    # set(GTEST_LIBRARY_PATH ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a)
-    set(GTEST_LIBRARY_PATH ${binary_dir}/googlemock/gtest/libgtest.a)
-    set(GTEST_LIBRARY yli_gtest)
-    set(GTEST_MAIN_LIBRARY yli_gtest_main)
-    find_package(GTest REQUIRED)
-    add_library(${GTEST_LIBRARY} UNKNOWN IMPORTED)
-    set_property(TARGET ${GTEST_LIBRARY} PROPERTY IMPORTED_LOCATION
-        ${GTEST_LIBRARY_PATH} )
-    add_dependencies(${GTEST_LIBRARY} googletest)
-
-    if(DISABLE_UPDATE_STEP)
-        # Download and install GoogleMock
-        ExternalProject_Add(
-            googlemock
-            GIT_REPOSITORY https://github.com/abseil/googletest
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
-            # Disable install step
-            INSTALL_COMMAND ""
-            # Disable update step
-            UPDATE_COMMAND ""
-            # custom patch command
-            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
-    else()
-        # Download and install GoogleMock
-        ExternalProject_Add(
-            googlemock
-            GIT_REPOSITORY https://github.com/abseil/googletest
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
-            # Disable install step
-            INSTALL_COMMAND ""
-            # custom patch command
-            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
-    endif()
-
-    # Create a libgmock target to be used as a dependency by test programs
-    add_library(libgmock IMPORTED STATIC GLOBAL)
-    add_dependencies(libgmock googlemock)
-
-    # Set gmock properties
-    ExternalProject_Get_Property(googlemock source_dir binary_dir)
-    set_target_properties(libgmock PROPERTIES
-        "IMPORTED_LOCATION" "${binary_dir}/googlemock/gmock/libgmock.a"
-        "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-        #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
-        )
-    # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-    # include_directories("${source_dir}/external/googletest/googlemock/include")
-
-    include_directories(${GTEST_INCLUDE_DIRS})
 endif()
 
 set(ALL_LIBS
@@ -1101,157 +991,10 @@ add_executable(dining_philosophers
     )
 target_link_libraries(dining_philosophers pthread)
 
-# Xcode and Visual working directories
-set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
-create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
-
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
-    set(FILES_TO_TEST
-        code/ylikuutio/audio/audio_master.cpp
-        code/ylikuutio/audio/audio_master.hpp
-        code/ylikuutio/callback/callback_engine.cpp
-        code/ylikuutio/callback/callback_engine.hpp
-        code/ylikuutio/callback/callback_object.cpp
-        code/ylikuutio/callback/callback_object.hpp
-        code/ylikuutio/callback/callback_parameter.cpp
-        code/ylikuutio/callback/callback_parameter.hpp
-        code/ylikuutio/command_line/command_line_master.cpp
-        code/ylikuutio/command_line/command_line_master.hpp
-        code/ylikuutio/data/any_struct.cpp
-        code/ylikuutio/data/any_struct.hpp
-        code/ylikuutio/data/any_value.cpp
-        code/ylikuutio/data/any_value.hpp
-        code/ylikuutio/data/datatype.hpp
-        code/ylikuutio/data/spherical_coordinates_struct.hpp
-        code/ylikuutio/file/file_loader.cpp
-        code/ylikuutio/file/file_loader.hpp
-        code/ylikuutio/file/file_writer.hpp
-        code/ylikuutio/geometry/line.cpp
-        code/ylikuutio/geometry/line.hpp
-        code/ylikuutio/geometry/line_2d.cpp
-        code/ylikuutio/geometry/line_2d.hpp
-        code/ylikuutio/geometry/line_line_intersection.cpp
-        code/ylikuutio/geometry/line_line_intersection.hpp
-        code/ylikuutio/geometry/line_segment_2d.cpp
-        code/ylikuutio/geometry/line_segment_2d.hpp
-        code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
-        code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-        code/ylikuutio/geometry/transformation.cpp
-        code/ylikuutio/geometry/transformation.hpp
-        code/ylikuutio/graph/node_struct.hpp
-        code/ylikuutio/graph/shortest_paths.cpp
-        code/ylikuutio/graph/shortest_paths.hpp
-        code/ylikuutio/hierarchy/hierarchy_templates.hpp
-        code/ylikuutio/input/input_master.cpp
-        code/ylikuutio/input/input_master.hpp
-        code/ylikuutio/input/input_mode.cpp
-        code/ylikuutio/input/input_mode.hpp
-        code/ylikuutio/interpolation/bilinear_interpolation.hpp
-        code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
-        code/ylikuutio/linear_algebra/matrix.cpp
-        code/ylikuutio/linear_algebra/matrix.hpp
-        code/ylikuutio/linear_algebra/matrix_functions.cpp
-        code/ylikuutio/linear_algebra/matrix_functions.hpp
-        code/ylikuutio/linear_algebra/tensor3.cpp
-        code/ylikuutio/linear_algebra/tensor3.hpp
-        code/ylikuutio/linear_algebra/vector_functions.hpp
-        code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
-        code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
-        code/ylikuutio/load/csv_loader.hpp
-        code/ylikuutio/load/fbx_model_loader.cpp
-        code/ylikuutio/load/fbx_model_loader.hpp
-        code/ylikuutio/load/font_loader.cpp
-        code/ylikuutio/load/font_loader.hpp
-        code/ylikuutio/load/heightmap_loader_struct.hpp
-        code/ylikuutio/load/image_file_loader.cpp
-        code/ylikuutio/load/image_file_loader.hpp
-        code/ylikuutio/load/image_loader_struct.hpp
-        code/ylikuutio/load/obj_loader.cpp
-        code/ylikuutio/load/obj_loader.hpp
-        code/ylikuutio/load/png_heightmap_loader.cpp
-        code/ylikuutio/load/png_heightmap_loader.hpp
-        code/ylikuutio/load/png_loader.cpp
-        code/ylikuutio/load/png_loader.hpp
-        code/ylikuutio/memory/memory_templates.hpp
-        code/ylikuutio/ontology/brain.cpp
-        code/ylikuutio/ontology/brain.hpp
-        code/ylikuutio/ontology/brain_struct.hpp
-        code/ylikuutio/ontology/camera.cpp
-        code/ylikuutio/ontology/camera.hpp
-        code/ylikuutio/ontology/camera_struct.hpp
-        code/ylikuutio/ontology/compute_task_struct.hpp
-        code/ylikuutio/ontology/registry.cpp
-        code/ylikuutio/ontology/registry.hpp
-        code/ylikuutio/ontology/child_module.cpp
-        code/ylikuutio/ontology/child_module.hpp
-        code/ylikuutio/ontology/console.cpp
-        code/ylikuutio/ontology/console.hpp
-        code/ylikuutio/ontology/console_struct.hpp
-        code/ylikuutio/ontology/font_2d.cpp
-        code/ylikuutio/ontology/font_2d.hpp
-        code/ylikuutio/ontology/font_struct.hpp
-        code/ylikuutio/ontology/holobiont.cpp
-        code/ylikuutio/ontology/holobiont.hpp
-        code/ylikuutio/ontology/holobiont_struct.hpp
-        code/ylikuutio/ontology/material.cpp
-        code/ylikuutio/ontology/material.hpp
-        code/ylikuutio/ontology/material_struct.hpp
-        code/ylikuutio/ontology/model_struct.hpp
-        code/ylikuutio/ontology/object.cpp
-        code/ylikuutio/ontology/object.hpp
-        code/ylikuutio/ontology/object_struct.hpp
-        code/ylikuutio/ontology/object_type.hpp
-        code/ylikuutio/ontology/generic_parent_module.cpp
-        code/ylikuutio/ontology/generic_parent_module.hpp
-        code/ylikuutio/ontology/parent_of_shaders_module.cpp
-        code/ylikuutio/ontology/parent_of_shaders_module.hpp
-        code/ylikuutio/ontology/scene.cpp
-        code/ylikuutio/ontology/scene.hpp
-        code/ylikuutio/ontology/scene_struct.hpp
-        code/ylikuutio/ontology/variable.cpp
-        code/ylikuutio/ontology/variable.hpp
-        code/ylikuutio/ontology/variable_callbacks.cpp
-        code/ylikuutio/ontology/variable_struct.hpp
-        code/ylikuutio/ontology/shader.cpp
-        code/ylikuutio/ontology/shader.hpp
-        code/ylikuutio/ontology/shader_struct.hpp
-        code/ylikuutio/ontology/shapeshifter_form.cpp
-        code/ylikuutio/ontology/shapeshifter_form.hpp
-        code/ylikuutio/ontology/shapeshifter_sequence.cpp
-        code/ylikuutio/ontology/shapeshifter_sequence.hpp
-        code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
-        code/ylikuutio/ontology/shapeshifter_transformation.cpp
-        code/ylikuutio/ontology/shapeshifter_transformation.hpp
-        code/ylikuutio/ontology/species.cpp
-        code/ylikuutio/ontology/species.hpp
-        code/ylikuutio/ontology/symbiosis.cpp
-        code/ylikuutio/ontology/symbiosis.hpp
-        code/ylikuutio/ontology/text_3d_struct.hpp
-        code/ylikuutio/ontology/universe.cpp
-        code/ylikuutio/ontology/universe.hpp
-        code/ylikuutio/ontology/universe_callbacks.cpp
-        code/ylikuutio/ontology/universe_struct.hpp
-        code/ylikuutio/ontology/variable_struct.hpp
-        code/ylikuutio/ontology/vector_font_struct.hpp
-        code/ylikuutio/ontology/ecosystem.cpp
-        code/ylikuutio/ontology/ecosystem.hpp
-        code/ylikuutio/ontology/ecosystem_struct.hpp
-        code/ylikuutio/string/ylikuutio_string.cpp
-        code/ylikuutio/string/ylikuutio_string.hpp
-        code/ylikuutio/triangulation/face_normals.cpp
-        code/ylikuutio/triangulation/face_normals.hpp
-        code/ylikuutio/triangulation/indexing.hpp
-        code/ylikuutio/triangulation/quad_triangulation.hpp
-        code/ylikuutio/triangulation/triangulate_quads_struct.hpp
-        code/ylikuutio/triangulation/triangulation_enums.hpp
-        code/ylikuutio/triangulation/triangulation_templates.hpp
-        code/ylikuutio/triangulation/vertex_normals.cpp
-        code/ylikuutio/triangulation/vertex_normals.hpp
-        code/ylikuutio/triangulation/vertices.cpp
-        code/ylikuutio/triangulation/vertices.hpp
-        code/ylikuutio/map/ylikuutio_map.hpp
-        )
+    enable_testing()
+
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_struct.cpp
         code/ylikuutio/tests/googletest/test_any_value.cpp
@@ -1299,17 +1042,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ylikuutio_map.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
-    add_library(code_to_test ${FILES_TO_TEST})
-    add_dependencies(code_to_test ylikuutio ${ALL_LIBS} pthread)
-
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest code_to_test ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(unit_tests_with_googletest gtest_main ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()
-        target_link_libraries(unit_tests_with_googletest yli_gtest libgtest code_to_test ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(unit_tests_with_googletest gtest_main ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
     endif()
 
-    # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
-    create_target_launcher(unit_tests_with_googletest WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
+    include(GoogleTest)
+    gtest_discover_tests(unit_tests_with_googletest)
 endif()
