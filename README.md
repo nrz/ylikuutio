@@ -30,10 +30,10 @@ iOS will be supported in the future.
 OpenGL 3.3 is required.
 
 ## Ylikuutio 0.0.8 screenshots
-![View of Helsinki with cats and Ylikuutio console](https://github.com/nrz/ylikuutio/blob/master/screenshots/helsinki_cats_2020-10-08.png?raw=true)
-![Turbo polizei and cats](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_2020-10-08.png?raw=true)
-![Cats and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/cats_2020-10-08.png?raw=true)
-![Turbo polizei and debug console commands](https://github.com/nrz/ylikuutio/blob/master/screenshots/turbo_polizei_info_2020-10-08.png?raw=true)
+![View of Helsinki with cats and Ylikuutio console](screenshots/helsinki_cats_2020-10-08.png?raw=true)
+![Turbo polizei and cats](screenshots/turbo_polizei_2020-10-08.png?raw=true)
+![Cats and debug console commands](screenshots/cats_2020-10-08.png?raw=true)
+![Turbo polizei and debug console commands](screenshots/turbo_polizei_info_2020-10-08.png?raw=true)
 
 ## Articles
 In [Skrolli 2018.4](https://skrolli.fi/numerot/2018-4/) there is an article
@@ -49,9 +49,7 @@ Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
 C++17 support is required.
-CMake 2.8.12 or newer is needed for the compiling process, but
-external libraries such as `glm` require CMake 3.2 or a newer version.
-CMake uses git for downloading Google Test testing framework.
+CMake 3.14 or newer is needed for the compiling process.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `master` is the branch that should be up to date and it's the one to build.
@@ -326,7 +324,7 @@ A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-),
 
 Q: How is Ylikuutio software developed?
 A: In [Debian GNU/Linux](https://www.debian.org/)
-   ([Debian Buster](https://wiki.debian.org/DebianBuster) at the moment),
+   ([Debian Bullseye](https://wiki.debian.org/DebianBullseye) at the moment),
    using [Vim](https://www.vim.org/). Other tools in use include
    [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
    [GDB](https://www.gnu.org/software/gdb/), [Travis CI](https://travis-ci.com/),
@@ -356,9 +354,9 @@ Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
    OpenGL 3.3 fulfils my requirements. Vulkan needs to be considered.
 
-Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs)?
-A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and index buffers.
-   VAOs (vertex array objects) are a work in progress.
+Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs etc.)?
+A: Yes, Ylikuutio uses VAOs (vertex array objects), VBOs (vertex buffer
+   objects), index buffers, and UBOs (uniform buffer objects).
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
@@ -374,7 +372,7 @@ A: Ylikuutio uses right-handed world coordinates,
    so X grows eastward, Z grows southward, and Y grows upwards.
 
 Q: Is there a scripting language in Ylikuutio?
-A: YliLisp scripting language is a work in progress.
+A: YliLisp scripting language is a work in progress. See [YliLisp design notes](doc/ylilisp.txt).
 
 ## Implemented functionality
 * 3D rendering
