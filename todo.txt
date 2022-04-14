@@ -3,7 +3,6 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix binding `Object` apprentice to `Species` master.
-[ ] Fix downloading of Google Test in `CMakeLists.txt`.
 [ ] Fix compiling on Visual Studio.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
@@ -300,3 +299,4 @@ Ready:
 [x] Print alternative completions in `Console`.
 [x] Use uniform buffer objects to enable sharing uniforms between shaders.
 [x] Fix compiling on Clang.
+[x] Fix downloading of Google Test in `CMakeLists.txt`.
