@@ -2,6 +2,7 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
+[ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix binding `Object` apprentice to `Species` master.
 [ ] Fix compiling on Visual Studio.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
