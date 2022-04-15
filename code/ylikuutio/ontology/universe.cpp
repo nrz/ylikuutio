@@ -941,12 +941,12 @@ namespace yli::ontology
         }
     }
 
-    std::size_t Universe::get_text_size() const
+    uint32_t Universe::get_text_size() const
     {
         return this->text_size;
     }
 
-    std::size_t Universe::get_font_size() const
+    uint32_t Universe::get_font_size() const
     {
         return this->font_size;
     }
@@ -976,7 +976,7 @@ namespace yli::ontology
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
-    std::size_t Universe::get_max_fps() const
+    uint32_t Universe::get_max_fps() const
     {
         return this->max_fps;
     }

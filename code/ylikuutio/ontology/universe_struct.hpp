@@ -24,7 +24,6 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -42,9 +41,9 @@ namespace yli::ontology
         std::string window_title;
         uint32_t window_width   { 1600 };
         uint32_t window_height  { 900 };
-        std::size_t text_size   { 40 };
-        std::size_t font_size   { 16 };
-        std::size_t max_fps     { 50000 };   // Default value max 50000 frames per second.
+        uint32_t text_size      { 40 };
+        uint32_t font_size      { 16 };
+        uint32_t max_fps        { 50000 };   // Default value max 50000 frames per second.
         float speed             { 0.1f };    // Default value 0.1 units / second.
         float turbo_factor      { 5.0f };    // Default value 5.0 x speed.
         float twin_turbo_factor { 100.0f };  // Default value 100.0 x speed.
