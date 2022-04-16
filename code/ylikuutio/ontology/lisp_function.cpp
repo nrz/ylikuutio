@@ -72,9 +72,9 @@ namespace yli::ontology
         // `GenericLispFunctionOverload` in attempted etc.
         //
         // If variable binding fails for all `GenericLispFunctionOverload`s,
-        // then 'std::nullopt` is returned.
+        // then `std::nullopt` is returned.
         //
-        // If there is are `GenericLispFunctionOverload`s,
+        // If there are no `GenericLispFunctionOverload`s,
         // then `std::nullopt` is returned as well.
 
         for (std::vector<yli::ontology::Entity*>::const_iterator it = this->parent_of_generic_lisp_function_overloads.child_pointer_vector.begin();
