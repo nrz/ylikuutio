@@ -166,16 +166,9 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Universe::eval(
             yli::ontology::Console& console,
-            yli::ontology::Entity& universe_entity,
+            yli::ontology::Universe& universe,
             const std::vector<std::string>& command_parameters)
     {
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&universe_entity);
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
         // Command parameters must form a valid YliLisp expression.
 
         std::string expression;
@@ -190,7 +183,7 @@ namespace yli::ontology
             }
         }
 
-        const std::string result = universe->eval_string(expression);
+        const std::string result = universe.eval_string(expression);
         console.print_text(result);
 
         return std::nullopt;

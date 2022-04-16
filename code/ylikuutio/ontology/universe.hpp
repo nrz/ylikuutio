@@ -452,7 +452,7 @@ namespace yli::ontology
 
             static std::optional<yli::data::AnyValue> eval(
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& universe_entity,
+                    yli::ontology::Universe& universe,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
