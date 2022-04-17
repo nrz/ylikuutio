@@ -20,6 +20,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology
