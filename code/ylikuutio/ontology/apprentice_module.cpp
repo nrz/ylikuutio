@@ -85,4 +85,9 @@ namespace yli::ontology
     {
         return this->apprentice;
     }
+
+    std::size_t ApprenticeModule::get_apprenticeID() const
+    {
+        return this->apprenticeID;
+    }
 }
