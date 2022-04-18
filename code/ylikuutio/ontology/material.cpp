@@ -20,6 +20,7 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -30,6 +31,7 @@
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -37,71 +39,56 @@ namespace yli::ontology
 {
     class Entity;
 
-    void Material::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
+    std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(yli::ontology::Material& material, yli::ontology::Scene& new_parent)
     {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `material` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(material.get_parent());
 
         if (scene == nullptr)
         {
             std::cerr << "ERROR: `Material::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == scene)
+        if (&new_parent == scene)
         {
             // Setting current parent as the new parent. Nothing to do.
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Material::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(material.local_name))
         {
             std::cerr << "ERROR: `Material::bind_to_new_scene_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->master_of_species.unbind_all_apprentice_modules();
-        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_materials);
+        material.master_of_species.unbind_all_apprentice_modules();
+        material.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        material.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
+        return std::nullopt;
     }
 
-    void Material::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    std::optional<yli::data::AnyValue> Material::bind_to_new_shader(yli::ontology::Material& material, yli::ontology::Shader& new_shader)
     {
-        // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Scene`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `material` to `nullptr`, set shader according to the input,
+        // and request a new apprenticeID from `new_parent`.
 
-        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
-
-        if (scene != nullptr)
+        // Master and apprentice must belong to the same `Scene`,
+        // if both belong to some `Scene`, and not `Ecosystem`.
+        if (material.get_scene() == new_shader.get_scene() ||
+                material.get_scene() == nullptr ||
+                new_shader.get_scene() == nullptr)
         {
-            this->bind_to_new_scene_parent(scene);
-            return;
-        }
-
-        std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
-    }
-
-    void Material::bind_to_new_shader(yli::ontology::Shader* const new_shader)
-    {
-        if (new_shader != nullptr)
-        {
-            this->apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader->master_of_materials);
+            material.apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader.master_of_materials);
         }
         else
         {
-            this->apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(nullptr);
+            std::cerr << "ERROR: `Material::bind_to_new_shader`: master and apprentice can not belong to different `Scene`s!\n";
         }
+
+        return std::nullopt;
     }
 
     Material::~Material()

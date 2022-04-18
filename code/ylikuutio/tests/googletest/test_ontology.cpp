@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
@@ -510,6 +511,9 @@ TEST(material_must_be_initialized_appropriately, headless)
     // `Material` member functions.
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
+    ASSERT_EQ(material->apprentice_of_shader.get_master(), shader);
+    ASSERT_EQ(material->apprentice_of_shader.get_apprenticeID(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(material->get_childID(), 0);
     ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
@@ -567,6 +571,9 @@ TEST(species_must_be_initialized_appropriately, headless)
 
     // `Material` member functions.
     ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
+
+    ASSERT_EQ(species->apprentice_of_material.get_master(), material);
+    ASSERT_EQ(species->apprentice_of_material.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(species->get_childID(), 0);
@@ -642,6 +649,11 @@ TEST(object_must_be_initialized_appropriately, headless)
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 
+    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
+    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
     ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
@@ -688,6 +700,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -736,6 +751,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -1238,6 +1256,9 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     // `Material` member functions.
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), shapeshifter_sequence);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
     // `Entity` member functions.
     ASSERT_EQ(object->get_childID(), 0);
     ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
@@ -1406,14 +1427,14 @@ TEST(shader_must_bind_to_ecosystem_appropriately, ecosystem)
     ASSERT_EQ(shader->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    shader->bind_to_new_parent(ecosystem2);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem2);
     ASSERT_EQ(shader->get_scene(), nullptr);
     ASSERT_EQ(shader->get_parent(), ecosystem2);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
 
-    shader->bind_to_new_parent(ecosystem1);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem1);
     ASSERT_EQ(shader->get_scene(), nullptr);
     ASSERT_EQ(shader->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
@@ -1447,14 +1468,14 @@ TEST(shader_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
 
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_EQ(shader->get_scene(), scene2);
     ASSERT_EQ(shader->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2);
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    shader->bind_to_new_parent(scene1);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene1);
     ASSERT_EQ(shader->get_scene(), scene1);
     ASSERT_EQ(shader->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
@@ -1486,14 +1507,14 @@ TEST(shader_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosyst
     ASSERT_EQ(shader->get_parent(), scene);
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
 
-    shader->bind_to_new_parent(ecosystem);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem);
     ASSERT_EQ(shader->get_scene(), nullptr);
     ASSERT_EQ(shader->get_parent(), ecosystem);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);     // Default `Camera`.
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `ecosystem`, `scene`.
 
-    shader->bind_to_new_parent(scene);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene);
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_parent(), scene);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);     // Default `Camera`, `shader`.
@@ -1525,14 +1546,14 @@ TEST(shader_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_e
     ASSERT_EQ(shader->get_parent(), ecosystem);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
 
-    shader->bind_to_new_parent(scene);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene);
     ASSERT_EQ(shader->get_scene(), scene);
     ASSERT_EQ(shader->get_parent(), scene);
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);     // Default `Camera`, `shader`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
 
-    shader->bind_to_new_parent(ecosystem);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem);
     ASSERT_EQ(shader->get_scene(), nullptr);
     ASSERT_EQ(shader->get_parent(), ecosystem);
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
@@ -1569,14 +1590,14 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_shaders)
     ASSERT_EQ(material->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1);
 
-    material->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene2);
     ASSERT_EQ(material->get_scene(), scene2);
     ASSERT_EQ(material->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    material->bind_to_new_parent(scene1);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene1);
     ASSERT_EQ(material->get_scene(), scene1);
     ASSERT_EQ(material->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
@@ -1615,14 +1636,14 @@ TEST(species_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials)
     ASSERT_EQ(species->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 
-    species->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene2);
     ASSERT_EQ(species->get_scene(), scene2);
     ASSERT_EQ(species->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    species->bind_to_new_parent(scene1);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene1);
     ASSERT_EQ(species->get_scene(), scene1);
     ASSERT_EQ(species->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
@@ -1661,19 +1682,113 @@ TEST(object_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials_no_
     ASSERT_EQ(object->get_parent(), scene1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 
-    object->bind_to_new_parent(scene2);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene2);
     ASSERT_EQ(object->get_scene(), scene2);
     ASSERT_EQ(object->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `object`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
-    object->bind_to_new_parent(scene1);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene1);
     ASSERT_EQ(object->get_scene(), scene1);
     ASSERT_EQ(object->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `object`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
+}
+
+TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene1;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene1->parent_of_shaders);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene1;
+    model_struct.shader = shader;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            *universe,
+            model_struct,
+            &scene1->parent_of_symbioses,
+            &shader->master_of_symbioses);
+
+    ASSERT_EQ(symbiosis->get_scene(), scene1);
+    ASSERT_EQ(symbiosis->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+
+    yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+    ASSERT_EQ(symbiosis->get_scene(), scene1);
+    ASSERT_EQ(symbiosis->get_parent(), scene1);
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    yli::ontology::Symbiosis::bind_to_new_scene_parent(*symbiosis, *scene2);
+    ASSERT_EQ(symbiosis->get_scene(), scene2);
+    ASSERT_EQ(symbiosis->get_parent(), scene2);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `symbiosis`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
+
+    yli::ontology::Symbiosis::bind_to_new_scene_parent(*symbiosis, *scene1);
+    ASSERT_EQ(symbiosis->get_scene(), scene1);
+    ASSERT_EQ(symbiosis->get_parent(), scene1);
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
+    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
+}
+
+TEST(material_must_bind_to_shader_appropriately, master_and_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    material_struct.shader = shader1;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            *universe,
+            material_struct,
+            &scene->parent_of_materials, &shader1->master_of_materials);
+
+    ASSERT_EQ(shader1->get_number_of_apprentices(), 1);
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    ASSERT_EQ(shader1->get_number_of_apprentices(), 1);
+    ASSERT_EQ(shader2->get_number_of_apprentices(), 0);
+    ASSERT_EQ(material->apprentice_of_shader.get_master(), shader1);
+    ASSERT_EQ(material->apprentice_of_shader.get_apprenticeID(), 0);
+
+    yli::ontology::Material::bind_to_new_shader(*material, *shader2);
+    ASSERT_EQ(shader1->get_number_of_apprentices(), 0);
+    ASSERT_EQ(shader2->get_number_of_apprentices(), 1);
+    ASSERT_EQ(material->apprentice_of_shader.get_master(), shader2);
+    ASSERT_EQ(material->apprentice_of_shader.get_apprenticeID(), 0);
+
+    yli::ontology::Material::bind_to_new_shader(*material, *shader1);
+    ASSERT_EQ(shader1->get_number_of_apprentices(), 1);
+    ASSERT_EQ(shader2->get_number_of_apprentices(), 0);
+    ASSERT_EQ(material->apprentice_of_shader.get_master(), shader1);
+    ASSERT_EQ(material->apprentice_of_shader.get_apprenticeID(), 0);
 }
 
 TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
@@ -1726,8 +1841,119 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
             nullptr);
 
     ASSERT_EQ(brain->get_number_of_apprentices(), 0);
-    object->bind_to_new_brain(brain);
+    yli::ontology::Movable::bind_to_new_brain(*object, *brain);
     ASSERT_EQ(brain->get_number_of_apprentices(), 1);
+
+    ASSERT_EQ(object->apprentice_of_brain.get_master(), brain);
+    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), 0);
+}
+
+TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::MaterialStruct material_struct;
+    material_struct.parent = scene;
+    material_struct.shader = shader;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            *universe,
+            material_struct,
+            &scene->parent_of_materials, &shader->master_of_materials);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.shader = shader;
+    model_struct.material = material;
+    yli::ontology::Species* const species1 = new yli::ontology::Species(
+            *universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
+
+    yli::ontology::ObjectStruct object_struct(scene);
+    object_struct.mesh_master = species1;
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            *universe,
+            object_struct,
+            &scene->parent_of_objects,
+            &species1->master_of_objects,
+            nullptr);
+
+    ASSERT_EQ(species1->get_number_of_apprentices(), 1);
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species1);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
+    yli::ontology::Species* const species2 = new yli::ontology::Species(
+            *universe,
+            model_struct,
+            &scene->parent_of_species,
+            &material->master_of_species);
+
+    yli::ontology::Object::bind_to_new_species_master(*object, *species2);
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species2);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+    ASSERT_EQ(species1->get_number_of_apprentices(), 0);
+    ASSERT_EQ(species2->get_number_of_apprentices(), 1);
+
+    yli::ontology::Object::bind_to_new_species_master(*object, *species1);
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species1);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+    ASSERT_EQ(species1->get_number_of_apprentices(), 1);
+    ASSERT_EQ(species2->get_number_of_apprentices(), 0);
+}
+
+TEST(symbiosis_must_bind_to_shader_appropriately, master_and_apprentice)
+{
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ShaderStruct shader_struct;
+    shader_struct.parent = scene;
+    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    model_struct.shader = shader1;
+    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    model_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            *universe,
+            model_struct,
+            &scene->parent_of_symbioses,
+            &shader1->master_of_symbioses);
+    ASSERT_EQ(symbiosis->get_shader(), shader1);
+
+    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    ASSERT_EQ(symbiosis->get_shader(), shader1);
+
+    yli::ontology::Symbiosis::bind_to_new_shader(*symbiosis, *shader2);
+    ASSERT_EQ(symbiosis->get_shader(), shader2);
+
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader2);
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+
+    yli::ontology::Symbiosis::bind_to_new_shader(*symbiosis, *shader1);
+    ASSERT_EQ(symbiosis->get_shader(), shader1);
+
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader1);
+    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
 }
 
 TEST(universe_must_be_given_a_global_name_appropriately, headless)
@@ -2241,14 +2467,14 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
             &universe->parent_of_scenes);
 
     shader->set_local_name("foo");
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_TRUE(scene2->has_child("foo"));
     ASSERT_EQ(shader->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2);
 
-    shader->bind_to_new_parent(scene1);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene1);
     ASSERT_TRUE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_EQ(shader->get_parent(), scene1);
@@ -2279,7 +2505,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     shader->set_global_name("foo");
     shader->set_local_name("bar");
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_FALSE(scene1->has_child("bar"));
@@ -2288,7 +2514,7 @@ TEST(shader_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1);
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2);
 
-    shader->bind_to_new_parent(scene1);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene1);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_TRUE(scene1->has_child("bar"));
@@ -2325,7 +2551,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     shader1->set_local_name("foo");
     shader2->set_local_name("foo");
-    shader1->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader1, *scene2);
     ASSERT_EQ(shader1->get_scene(), scene1);
     ASSERT_EQ(shader1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
@@ -2363,7 +2589,7 @@ TEST(shader_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     shader2->set_global_name("bar");
     shader1->set_local_name("baz");
     shader2->set_local_name("baz");
-    shader1->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader1, *scene2);
     ASSERT_EQ(shader1->get_scene(), scene1);
     ASSERT_EQ(shader1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
@@ -2401,14 +2627,14 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
             &universe->parent_of_scenes);
 
     material->set_local_name("foo");
-    material->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_TRUE(scene2->has_child("foo"));
     ASSERT_EQ(material->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
 
-    material->bind_to_new_parent(scene1);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene1);
     ASSERT_TRUE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_EQ(material->get_parent(), scene1);
@@ -2442,7 +2668,7 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
     material->set_global_name("foo");
     material->set_local_name("bar");
-    material->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_FALSE(scene1->has_child("bar"));
@@ -2451,7 +2677,7 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `material`.
 
-    material->bind_to_new_parent(scene1);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene1);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_TRUE(scene1->has_child("bar"));
@@ -2494,7 +2720,7 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
     material1->set_local_name("foo");
     material2->set_local_name("foo");
-    material1->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material1, *scene2);
     ASSERT_EQ(material1->get_scene(), scene1);
     ASSERT_EQ(material1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material1`.
@@ -2538,7 +2764,7 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     material2->set_global_name("bar");
     material1->set_local_name("baz");
     material2->set_local_name("baz");
-    material1->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material1, *scene2);
     ASSERT_EQ(material1->get_scene(), scene1);
     ASSERT_EQ(material1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `material1`.
@@ -2575,14 +2801,14 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
             nullptr);
 
     species->set_local_name("foo");
-    species->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_TRUE(scene2->has_child("foo"));
     ASSERT_EQ(species->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
-    species->bind_to_new_parent(scene1);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene1);
     ASSERT_TRUE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_EQ(species->get_parent(), scene1);
@@ -2615,7 +2841,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 
     species->set_global_name("foo");
     species->set_local_name("bar");
-    species->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_FALSE(scene1->has_child("bar"));
@@ -2624,7 +2850,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
-    species->bind_to_new_parent(scene1);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene1);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_TRUE(scene1->has_child("bar"));
@@ -2667,7 +2893,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
 
     species1->set_local_name("foo");
     species2->set_local_name("foo");
-    species1->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species1, *scene2);
     ASSERT_EQ(species1->get_scene(), scene1);
     ASSERT_EQ(species1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species1`.
@@ -2711,7 +2937,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     species2->set_global_name("bar");
     species1->set_local_name("baz");
     species2->set_local_name("baz");
-    species1->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species1, *scene2);
     ASSERT_EQ(species1->get_scene(), scene1);
     ASSERT_EQ(species1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species1`.
@@ -2748,14 +2974,14 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
             nullptr);
 
     object->set_local_name("foo");
-    object->bind_to_new_parent(scene2);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_TRUE(scene2->has_child("foo"));
     ASSERT_EQ(object->get_parent(), scene2);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `object`.
 
-    object->bind_to_new_parent(scene1);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene1);
     ASSERT_TRUE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_EQ(object->get_parent(), scene1);
@@ -2788,7 +3014,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
 
     object->set_global_name("foo");
     object->set_local_name("bar");
-    object->bind_to_new_parent(scene2);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene2);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_FALSE(scene1->has_child("bar"));
@@ -2797,7 +3023,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2) ;// Default `Camera`, `object`.
 
-    object->bind_to_new_parent(scene1);
+    yli::ontology::Object::bind_to_new_scene_parent(*object, *scene1);
     ASSERT_FALSE(scene1->has_child("foo"));
     ASSERT_FALSE(scene2->has_child("foo"));
     ASSERT_TRUE(scene1->has_child("bar"));
@@ -2840,7 +3066,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
 
     object1->set_local_name("foo");
     object2->set_local_name("foo");
-    object1->bind_to_new_parent(scene2);
+    yli::ontology::Object::bind_to_new_scene_parent(*object1, *scene2);
     ASSERT_EQ(object1->get_scene(), scene1);
     ASSERT_EQ(object1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `object1`.
@@ -2884,7 +3110,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     object2->set_global_name("bar");
     object1->set_local_name("baz");
     object2->set_local_name("baz");
-    object1->bind_to_new_parent(scene2);
+    yli::ontology::Object::bind_to_new_scene_parent(*object1, *scene2);
     ASSERT_EQ(object1->get_scene(), scene1);
     ASSERT_EQ(object1->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `object1`.
@@ -2926,7 +3152,7 @@ TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
     ASSERT_EQ(material->get_number_of_apprentices(), 1);
 
-    material->bind_to_new_parent(scene);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene);
     ASSERT_EQ(material->get_number_of_apprentices(), 1);
 }
 
@@ -2964,7 +3190,7 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
             scene_struct,
             &universe->parent_of_scenes);
 
-    material->bind_to_new_parent(scene2);
+    yli::ontology::Material::bind_to_new_scene_parent(*material, *scene2);
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
 }
 
@@ -3000,7 +3226,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_eco
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
-    shader->bind_to_new_parent(ecosystem);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem);
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 }
 
@@ -3036,7 +3262,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_eco
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
-    shader->bind_to_new_parent(ecosystem);
+    yli::ontology::Shader::bind_to_new_ecosystem_parent(*shader, *ecosystem);
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 }
 
@@ -3066,7 +3292,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_cu
 
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 
-    shader->bind_to_new_parent(scene);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene);
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 }
 
@@ -3096,7 +3322,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_cu
 
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 
-    shader->bind_to_new_parent(scene);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene);
     ASSERT_EQ(shader->get_number_of_apprentices(), 1);
 }
 
@@ -3135,7 +3361,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_cu
 
     ASSERT_EQ(shader->get_number_of_apprentices(), 2);
 
-    shader->bind_to_new_parent(scene);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene);
     ASSERT_EQ(shader->get_number_of_apprentices(), 2);
 }
 
@@ -3170,7 +3396,7 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
             scene_struct,
             &universe->parent_of_scenes);
 
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_EQ(shader->get_number_of_apprentices(), 0);
 }
 
@@ -3205,7 +3431,7 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
             scene_struct,
             &universe->parent_of_scenes);
 
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_EQ(shader->get_number_of_apprentices(), 0);
 }
 
@@ -3249,7 +3475,7 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
             scene_struct,
             &universe->parent_of_scenes);
 
-    shader->bind_to_new_parent(scene2);
+    yli::ontology::Shader::bind_to_new_scene_parent(*shader, *scene2);
     ASSERT_EQ(shader->get_number_of_apprentices(), 0);
 }
 
@@ -3282,7 +3508,7 @@ TEST(species_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_c
 
     ASSERT_EQ(species->get_number_of_apprentices(), 1);
 
-    species->bind_to_new_parent(scene);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene);
     ASSERT_EQ(species->get_number_of_apprentices(), 1);
 }
 
@@ -3320,6 +3546,6 @@ TEST(species_must_unbind_all_its_apprentice_modules_when_binding_to_a_different_
             scene_struct1,
             &universe->parent_of_scenes);
 
-    species->bind_to_new_parent(scene2);
+    yli::ontology::Species::bind_to_new_scene_parent(*species, *scene2);
     ASSERT_EQ(species->get_number_of_apprentices(), 0);
 }

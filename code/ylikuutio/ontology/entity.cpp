@@ -57,13 +57,6 @@ namespace yli::ontology
         universe.bind_entity(this);
     }
 
-    void Entity::bind_to_new_parent(yli::ontology::Entity* /* new_parent */)
-    {
-        // Do nothing.
-        // `yli::ontology` classes which support binding must `override`
-        // this `yli::ontology::Entity` base class implementation.
-    }
-
     Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
         : registry(),
         parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.

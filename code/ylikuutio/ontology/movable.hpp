@@ -38,6 +38,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -50,6 +51,11 @@
 // `Camera`    - non-material `Movable`, child of `Scene`.
 //
 // `Text3D`, child of `VectorFont`, is not implemented yet.
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::input
 {
@@ -66,7 +72,10 @@ namespace yli::ontology
     class Movable: public yli::ontology::Entity
     {
         public:
-            void bind_to_new_brain(yli::ontology::Brain* const new_brain);
+            // Set pointer to `movable` to `nullptr`, set brain according to the input,
+            // and request a new apprenticeID from `new_brain`.
+            static std::optional<yli::data::AnyValue> bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain);
+            static std::optional<yli::data::AnyValue> unbind_from_brain(yli::ontology::Movable& movable);
 
             Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,

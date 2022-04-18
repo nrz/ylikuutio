@@ -25,10 +25,16 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <optional> // std::optional
 
 // `ShapeshifterTransformation` is a series of `ShapeshifterForm`s that
 // make up the transition that may be e.g. a walk cycle or
 // a metamorphosis of some kind.
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -40,10 +46,9 @@ namespace yli::ontology
     class ShapeshifterTransformation: public yli::ontology::Entity
     {
         public:
-            // This method sets pointer to this `ShapeshifterTransformation` to `nullptr`,
-            // sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent);
 
             ShapeshifterTransformation(
                     yli::ontology::Universe& universe,

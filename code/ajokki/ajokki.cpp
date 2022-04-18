@@ -51,12 +51,19 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
+#include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -386,11 +393,11 @@ namespace ajokki
                 std::cout << "Font2D created successfully.\n";
                 my_font_2d->set_global_name("my_font_2d");
 
-                my_console->bind_to_new_font_2d(my_font_2d);
+                yli::ontology::Console::bind_to_new_font_2d(*my_console, *my_font_2d);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 
-                mini_console->bind_to_new_font_2d(my_font_2d);
+                yli::ontology::Console::bind_to_new_font_2d(*mini_console, *my_font_2d);
                 mini_console->print_text("Welcome to mini_console!");
                 mini_console->print_text("Please write \"miniactivate my_console\"");
                 mini_console->print_text("to get back to \"my_console\".");
@@ -985,7 +992,46 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
+
+                // `Entity` binding callbacks, `Movable`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Movable::bind_to_new_brain));
+                yli::ontology::create_lisp_function_overload("unbind-from-brain", my_console, std::function(&yli::ontology::Movable::unbind_from_brain));
+
+                // `Entity` binding callbacks, `Shader`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_scene_parent));
+
+                // `Entity` binding callbacks, `Material`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_shader));
+
+                // `Entity` binding callbacks, `Species`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_material));
+
+                // `Entity` binding callbacks, `Object`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_species_master));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_shapeshifter_sequence_master));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_text_3d_master));
+
+                // `Entity` binding callbacks, `Symbiosis`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_shader));
+
+                // `Entity` binding callbacks, `ShapeshifterTransformation`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::ShapeshifterTransformation::bind_to_new_material_parent));
+
+                // `Entity` binding callbacks, `Text2D`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Text2D::bind_to_new_font_2d_parent));
+
+                // `Entity` binding callbacks, `Text3D`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Text3D::bind_to_new_vector_font_parent));
+
+                // `Entity` binding callbacks, `Console`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Console::bind_to_new_font_2d));
+
+                // `Entity` naming callbacks.
                 yli::ontology::create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
                 yli::ontology::create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
 

@@ -17,16 +17,6 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
-#include "brain.hpp"
-#include "movable.hpp"
-#include "ecosystem.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
-#include "material.hpp"
-#include "species.hpp"
-#include "object.hpp"
-#include "symbiosis.hpp"
-#include "font_2d.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
@@ -47,73 +37,6 @@
 namespace yli::ontology
 {
     // Public callbacks.
-
-    // Public `Entity` bind callbacks.
-
-    std::optional<yli::data::AnyValue> Universe::bind(
-            yli::ontology::Universe& universe,
-            yli::ontology::Entity& child_or_apprentice_entity,
-            yli::ontology::Entity& parent_or_master_entity)
-    {
-        yli::ontology::Shader* const child_or_apprentice_shader = dynamic_cast<yli::ontology::Shader*>(&child_or_apprentice_entity);
-        yli::ontology::Ecosystem* const parent_or_master_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(&parent_or_master_entity);
-        yli::ontology::Scene* const parent_or_master_scene = dynamic_cast<yli::ontology::Scene*>(&parent_or_master_entity);
-
-        yli::ontology::Material* const child_or_apprentice_material = dynamic_cast<yli::ontology::Material*>(&child_or_apprentice_entity);
-        yli::ontology::Symbiosis* const child_or_apprentice_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(&child_or_apprentice_entity);
-        yli::ontology::Shader* const parent_or_master_shader = dynamic_cast<yli::ontology::Shader*>(&parent_or_master_entity);
-
-        yli::ontology::Species* const child_or_apprentice_species = dynamic_cast<yli::ontology::Species*>(&child_or_apprentice_entity);
-        yli::ontology::Material* const parent_or_master_material = dynamic_cast<yli::ontology::Material*>(&parent_or_master_entity);
-
-        yli::ontology::Object* const child_or_apprentice_object = dynamic_cast<yli::ontology::Object*>(&child_or_apprentice_entity);
-        yli::ontology::Species* const parent_or_master_species = dynamic_cast<yli::ontology::Species*>(&parent_or_master_entity);
-
-        yli::ontology::Movable* const child_or_apprentice_movable = dynamic_cast<yli::ontology::Movable*>(&child_or_apprentice_entity);
-        yli::ontology::Brain* const parent_or_master_brain = dynamic_cast<yli::ontology::Brain*>(&parent_or_master_entity);
-
-        yli::ontology::Console* const child_or_apprentice_console = dynamic_cast<yli::ontology::Console*>(&child_or_apprentice_entity);
-        yli::ontology::Font2D* const parent_or_master_font_2d = dynamic_cast<yli::ontology::Font2D*>(&parent_or_master_entity);
-
-        if (child_or_apprentice_shader != nullptr && parent_or_master_ecosystem != nullptr)
-        {
-            child_or_apprentice_shader->bind_to_new_ecosystem_parent(parent_or_master_ecosystem);
-        }
-        else if (child_or_apprentice_shader != nullptr && parent_or_master_scene != nullptr)
-        {
-            child_or_apprentice_shader->bind_to_new_scene_parent(parent_or_master_scene);
-        }
-        else if (child_or_apprentice_material != nullptr && parent_or_master_shader != nullptr)
-        {
-            child_or_apprentice_material->bind_to_new_shader(parent_or_master_shader);
-        }
-        else if (child_or_apprentice_species != nullptr && parent_or_master_material != nullptr)
-        {
-            child_or_apprentice_species->bind_to_new_material(parent_or_master_material);
-        }
-        else if (child_or_apprentice_object != nullptr && parent_or_master_species != nullptr)
-        {
-            child_or_apprentice_object->bind_to_new_species_master(parent_or_master_species);
-        }
-        else if (child_or_apprentice_movable != nullptr && parent_or_master_brain != nullptr)
-        {
-            child_or_apprentice_movable->bind_to_new_brain(parent_or_master_brain);
-        }
-        else if (child_or_apprentice_symbiosis != nullptr && parent_or_master_shader != nullptr)
-        {
-            child_or_apprentice_symbiosis->bind_to_new_shader(parent_or_master_shader);
-        }
-        else if (child_or_apprentice_console != nullptr && parent_or_master_font_2d != nullptr)
-        {
-            child_or_apprentice_console->bind_to_new_font_2d(parent_or_master_font_2d);
-        }
-        else
-        {
-            child_or_apprentice_entity.bind_to_new_parent(&parent_or_master_entity);
-        }
-
-        return std::nullopt;
-    }
 
     // Public `Entity` create callbacks.
 

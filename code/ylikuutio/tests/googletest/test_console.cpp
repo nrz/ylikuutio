@@ -73,6 +73,9 @@ TEST(console_must_be_initialized_appropriately, no_font)
     ASSERT_FALSE(console->get_is_right_shift_pressed());
     ASSERT_FALSE(console->get_in_history());
     ASSERT_FALSE(console->get_in_historical_input());
+
+    ASSERT_EQ(console->apprentice_of_font_2d.get_master(), nullptr);
+    ASSERT_EQ(console->apprentice_of_font_2d.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
 }
 
 TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
@@ -91,6 +94,9 @@ TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
     yli::input::InputMode* const input_mode = input_master->create_input_mode();
     console->set_input_mode(input_mode);
     ASSERT_EQ(console->get_input_mode(), input_mode);
+
+    ASSERT_EQ(console->apprentice_of_font_2d.get_master(), nullptr);
+    ASSERT_EQ(console->apprentice_of_font_2d.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
 }
 
 TEST(setting_console_top_y_must_function_appropriately, no_font)

@@ -323,7 +323,7 @@ namespace hirvi
                 std::cout << "Font2D created successfully.\n";
                 my_font_2d->set_global_name("my_font_2d");
 
-                my_console->bind_to_new_font_2d(my_font_2d);
+                yli::ontology::Console::bind_to_new_font_2d(*my_console, *my_font_2d);
                 my_console->print_text("Welcome! Please write \"help\" for more");
                 my_console->print_text("information.");
 
@@ -669,7 +669,6 @@ namespace hirvi
                 yli::ontology::create_lisp_function_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Universe::bind));
                 yli::ontology::create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
                 yli::ontology::create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
 

@@ -201,7 +201,6 @@ namespace yli::ontology
 {
     class Scene;
     class Camera;
-    class Font2D;
     class Console;
 
     class Universe: public yli::ontology::Entity
@@ -418,13 +417,6 @@ namespace yli::ontology
             float get_initial_fov() const;
 
             // Public callbacks.
-
-            // Public `Entity` bind callbacks.
-
-            static std::optional<yli::data::AnyValue> bind(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Entity& child_or_apprentice_entity,
-                    yli::ontology::Entity& parent_or_master_entity);
 
             // Public `Entity` create callbacks.
 

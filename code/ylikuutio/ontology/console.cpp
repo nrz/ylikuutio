@@ -43,16 +43,25 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void Console::bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d)
+    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d)
     {
-        if (new_font_2d != nullptr)
+        // Set pointer to `console` to `nullptr`, set font according to the input,
+        // and request a new apprenticeID from `new_font_2d`.
+
+        // Master and apprentice must belong to the same `Scene`,
+        // if both belong to some `Scene`, and not `Ecosystem`.
+        if (console.get_scene() == new_font_2d.get_scene() ||
+                console.get_scene() == nullptr ||
+                new_font_2d.get_scene() == nullptr)
         {
-            this->apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(&new_font_2d->master_of_consoles);
+            console.apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(&new_font_2d.master_of_consoles);
         }
         else
         {
-            this->apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(nullptr);
+            std::cerr << "ERROR: `Console::bind_to_new_font_2d`: master and apprentice can not belong to different `Scene`s!\n";
         }
+
+        return std::nullopt;
     }
 
     Console::~Console()

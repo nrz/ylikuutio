@@ -17,6 +17,7 @@
 
 #include "text_2d.hpp"
 #include "font_2d.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -29,6 +30,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -37,55 +39,27 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void Text2D::bind_to_new_font_2d_parent(yli::ontology::Font2D* const new_parent)
+    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(yli::ontology::Text2D& text_2d, yli::ontology::Font2D& new_parent)
     {
-        // This method sets pointer to this `Text2D` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Font2D`.
-        //
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const font_2d = this->get_parent();
+        yli::ontology::Entity* const font_2d = text_2d.get_parent();
 
         if (font_2d == nullptr)
         {
             std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: `font_2d` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(text_2d.local_name))
         {
             std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->child_of_font_2d.unbind_and_bind_to_new_parent(&new_parent->parent_of_text_2ds);
-    }
-
-    void Text2D::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `Text2D` to `nullptr`, sets parent according to the input,
-        // and requests a new `childID` from the new `Font2D`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Font2D* const font_2d_parent = dynamic_cast<yli::ontology::Font2D*>(new_parent);
-
-        if (font_2d_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Text2D::bind_to_new_parent`: `new_parent` is not `yli::ontology::Font2D*`!\n";
-            return;
-        }
-
-        this->bind_to_new_font_2d_parent(font_2d_parent);
+        text_2d.child_of_font_2d.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_2ds);
+        return std::nullopt;
     }
 
     Text2D::~Text2D()

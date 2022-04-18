@@ -93,7 +93,9 @@ namespace yli::ontology
     class Console: public yli::ontology::Entity
     {
         public:
-            void bind_to_new_font_2d(yli::ontology::Font2D* const new_font_2d);
+            // Set pointer to `console` to `nullptr`, set font according to the input,
+            // and request a new apprenticeID from `new_font_2d`.
+            static std::optional<yli::data::AnyValue> bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d);
 
             Console(yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,

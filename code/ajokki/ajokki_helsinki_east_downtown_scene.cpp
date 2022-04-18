@@ -395,7 +395,7 @@ namespace ajokki
         yli::ontology::ShaderStruct helsinki_east_downtown_shader_struct;
         helsinki_east_downtown_shader_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_shader_struct.global_name = "helsinki_east_downtown_shader";
-        helsinki_east_downtown_shader_struct.local_name = "regular_shader";
+        helsinki_east_downtown_shader_struct.local_name = "helsinki_regular_shader";
         helsinki_east_downtown_shader_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_shader_struct.fragment_shader = "standard_shading.frag";
 
@@ -414,7 +414,7 @@ namespace ajokki
         yli::ontology::ShaderStruct helsinki_east_downtown_grayscale_shader_struct;
         helsinki_east_downtown_grayscale_shader_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_grayscale_shader_struct.global_name = "helsinki_east_downtown_grayscale_shader";
-        helsinki_east_downtown_grayscale_shader_struct.local_name = "grayscale_shader";
+        helsinki_east_downtown_grayscale_shader_struct.local_name = "helsinki_grayscale_shader";
         helsinki_east_downtown_grayscale_shader_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_grayscale_shader_struct.fragment_shader = "grayscale_standard_shading.frag";
 

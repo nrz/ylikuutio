@@ -38,10 +38,16 @@
 #include <cstddef>       // std::size_t
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <optional>      // std::optional
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -53,10 +59,9 @@ namespace yli::ontology
     class VectorFont: public yli::ontology::Entity
     {
         public:
-            // This method sets pointer to this `VectorFont` to `nullptr`, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Material`.
-            void bind_to_new_material_parent(yli::ontology::Material* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_material_parent(yli::ontology::VectorFont& vector_font, yli::ontology::Material& new_parent);
 
             VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct)
                 : Entity(universe, vector_font_struct),

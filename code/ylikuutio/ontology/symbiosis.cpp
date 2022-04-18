@@ -23,6 +23,7 @@
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -42,6 +43,7 @@
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -52,74 +54,55 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void Symbiosis::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent)
     {
-        // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Scene`.
-        //
-        // requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const scene = this->get_parent();
+        yli::ontology::Entity* const scene = symbiosis.get_parent();
 
         if (scene == nullptr)
         {
             std::cerr << "ERROR: `Symbiosis::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == scene)
+        if (&new_parent == scene)
         {
             // Setting current parent as the new parent. Nothing to do.
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(symbiosis.local_name))
         {
             std::cerr << "ERROR: `Symbiosis::bind_to_new_scene_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_symbioses);
+        symbiosis.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        symbiosis.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
+        return std::nullopt;
     }
 
-    void Symbiosis::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader)
     {
-        // this method sets pointer to this `Symbiosis` to `nullptr`, sets `scene_parent` according to the input,
-        // and requests a new `childID` from the new `Scene`.
-        //
-        // requirements:
-        // `this->scene_parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `symbiosis` to `nullptr`, set shader according to the input,
+        // and request a new apprenticeID from `new_shader`.
 
-        yli::ontology::Scene* const scene_parent = dynamic_cast<yli::ontology::Scene*>(new_parent);
-
-        if (scene_parent == nullptr)
+        // Master and apprentice must belong to the same `Scene`,
+        // if both belong to some `Scene`, and not `Ecosystem`.
+        if (symbiosis.get_scene() == new_shader.get_scene() ||
+                symbiosis.get_scene() == nullptr ||
+                new_shader.get_scene() == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
-            return;
-        }
-
-        this->bind_to_new_scene_parent(scene_parent);
-    }
-
-    void Symbiosis::bind_to_new_shader(yli::ontology::Shader* const new_shader)
-    {
-        if (new_shader != nullptr)
-        {
-            this->apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader->master_of_symbioses);
+            symbiosis.apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader.master_of_symbioses);
         }
         else
         {
-            this->apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(nullptr);
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_shader`: master and apprentice can not belong to different `Scene`s!\n";
         }
+
+        return std::nullopt;
     }
 
     Symbiosis::~Symbiosis()
