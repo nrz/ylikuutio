@@ -10,6 +10,7 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] When running in fullscreen mode, restore original window resolution upon program termination.
 [ ] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
+[ ] Do not bind to any master that belongs to a different `Scene`.
 [ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
