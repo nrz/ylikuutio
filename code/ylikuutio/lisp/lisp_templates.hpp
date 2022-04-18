@@ -20,8 +20,8 @@
 
 #include "code/ylikuutio/data/wrap.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
