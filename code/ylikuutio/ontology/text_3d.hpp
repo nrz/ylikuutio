@@ -26,7 +26,13 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <optional> // std::optional
 #include <string>   // std::string
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -42,13 +48,13 @@ namespace yli::ontology
     class Text3D: public yli::ontology::Movable
     {
         public:
-            // This method disables all character `Object`s of this `Text3D`,
-            // sets `parent` according to the input, requests a new `childID`
-            // from the new `VectorFont`, and creates and enables the needed
-            // character `Object`s of this `Text3D`.
+            // Disable all character `Object`s of `text_3d`,
+            // set `parent` according to the input, request a new childID
+            // from the `new_parent`, and create and enable the needed
+            // character `Object`s of `text_3d`.
+            // TODO: implement creation and enabling the character `Object`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
-            void bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent);
 
             Text3D(
                     yli::ontology::Universe& universe,

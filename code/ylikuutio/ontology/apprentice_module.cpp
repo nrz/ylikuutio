@@ -17,20 +17,40 @@
 
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
+#include "entity.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
 
     void ApprenticeModule::bind_to_generic_master_module()
     {
         if (this->generic_master_module != nullptr)
         {
             this->generic_master_module->bind_apprentice_module(this);
+        }
+    }
+
+    void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene)
+    {
+        yli::ontology::Entity* const master = this->get_master();
+
+        if (master != nullptr)
+        {
+            const yli::ontology::Scene* const master_scene = master->get_scene();
+
+            if (master_scene != nullptr && &scene != nullptr && master_scene != &scene)
+            {
+                // Master belongs to a different `Scene` compared to what apprentice plans to bind to.
+                // Therefore apprentice will unbind from master.
+                this->unbind_from_generic_master_module();
+            }
         }
     }
 
@@ -83,5 +103,10 @@ namespace yli::ontology
     yli::ontology::Entity* ApprenticeModule::get_apprentice() const
     {
         return this->apprentice;
+    }
+
+    std::size_t ApprenticeModule::get_apprenticeID() const
+    {
+        return this->apprenticeID;
     }
 }

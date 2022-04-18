@@ -473,8 +473,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        species->bind_to_new_material(new_material);
-        return std::nullopt;
+        return yli::ontology::Species::bind_to_new_material(*species, *new_material);
     }
 
     std::optional<yli::data::AnyValue> transform_into_new_species(
@@ -583,7 +582,6 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        object->bind_to_new_species_master(new_species);
-        return std::nullopt;
+        return yli::ontology::Object::bind_to_new_species_master(*object, *new_species);
     }
 }

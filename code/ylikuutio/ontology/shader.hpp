@@ -38,10 +38,16 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <optional> // std::optional
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -52,12 +58,13 @@ namespace yli::ontology
     class Shader: public yli::ontology::Entity
     {
         public:
-            // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Ecosystem`.
-            void bind_to_new_ecosystem_parent(yli::ontology::Ecosystem* const new_parent);
+            // Set pointer to `Shader` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent);
 
-            // This method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `shader` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent);
 
             Shader(
                     yli::ontology::Universe& universe,

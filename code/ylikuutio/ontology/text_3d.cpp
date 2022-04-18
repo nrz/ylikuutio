@@ -18,12 +18,14 @@
 #include "text_3d.hpp"
 #include "vector_font.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 
 namespace yli::ontology
 {
@@ -31,55 +33,31 @@ namespace yli::ontology
     class Scene;
     class Shader;
 
-    void Text3D::bind_to_new_vector_font_parent(yli::ontology::VectorFont* const new_parent)
+    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent)
     {
-        // This method sets pointer to this `Text3D` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `VectorFont`.
-        //
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Disable all character `Object`s of `text_3d`,
+        // set `parent` according to the input, request a new childID
+        // from the `new_parent`, and create and enable the needed
+        // character `Object`s of `text_3d`.
+        // TODO: implement creation and enabling the character `Object`s!
+        // Note: different fonts may provide glyphs for different Unicode code points!
 
-        yli::ontology::Entity* const vector_font = this->get_parent();
+        yli::ontology::Entity* const vector_font = text_3d.get_parent();
 
         if (vector_font == nullptr)
         {
             std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(text_3d.local_name))
         {
             std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->child_of_vector_font.unbind_and_bind_to_new_parent(&new_parent->parent_of_text_3ds);
-    }
-
-    void Text3D::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `Text3D` to `nullptr`, sets parent according to the input,
-        // and requests a new `childID` from the new `VectorFont`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::VectorFont* const vector_font_parent = dynamic_cast<yli::ontology::VectorFont*>(new_parent);
-
-        if (vector_font_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Text3D::bind_to_new_parent`: `new_parent` is not `yli::ontology::VectorFont*`!\n";
-            return;
-        }
-
-        this->bind_to_new_vector_font_parent(vector_font_parent);
+        text_3d.child_of_vector_font.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_3ds);
+        return std::nullopt;
     }
 
     Text3D::~Text3D()

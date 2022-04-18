@@ -30,6 +30,7 @@ namespace yli::ontology
 {
     class GenericMasterModule;
     class Entity;
+    class Scene;
 
     template<typename M>
         class MasterModule;
@@ -44,6 +45,7 @@ namespace yli::ontology
             void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
 
         public:
+            void unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene);
             void unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
 
             // constructor.
@@ -54,6 +56,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_master() const;
             yli::ontology::Entity* get_apprentice() const;
+            std::size_t get_apprenticeID() const;
 
             ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
             ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.

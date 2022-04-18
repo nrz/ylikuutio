@@ -101,7 +101,13 @@ namespace yli::ontology
             yli::ontology::Entity* operator*()
             {
                 yli::ontology::ApprenticeModule* const apprentice_module = *(this->it);
-                return apprentice_module->get_apprentice();
+
+                if (apprentice_module != nullptr)
+                {
+                    return apprentice_module->get_apprentice();
+                }
+
+                return nullptr;
             }
 
         private:

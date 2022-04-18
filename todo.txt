@@ -2,14 +2,13 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix binding `Object` apprentice to `Species` master.
+[ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix compiling on Visual Studio.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] When running in fullscreen mode, restore original window resolution upon program termination.
-[ ] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
 [ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
@@ -300,3 +299,6 @@ Ready:
 [x] Use uniform buffer objects to enable sharing uniforms between shaders.
 [x] Fix compiling on Clang.
 [x] Fix downloading of Google Test in `CMakeLists.txt`.
+[x] Fix binding `Object` apprentice to `Species` master.
+[x] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
+[x] Do not bind to any master that belongs to a different `Scene`.

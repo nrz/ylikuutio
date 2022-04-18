@@ -22,6 +22,7 @@
 #include "text_3d.hpp"
 #include "family_templates.hpp"
 #include "vector_font_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -30,6 +31,7 @@
 #include <cstddef>       // std::size_t
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <optional>      // std::optional
 #include <stdint.h>      // uint32_t etc.
 
 namespace yli::ontology
@@ -56,61 +58,32 @@ namespace yli::ontology
         material->parent_of_vector_fonts.bind_child(this);
     }
 
-    void VectorFont::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
+    std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(yli::ontology::VectorFont& vector_font, yli::ontology::Material& new_parent)
     {
-        // This method sets pointer to this `VectorFont` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Material`.
-        //
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Material* const material = this->parent;
+        yli::ontology::Material* const material = vector_font.parent;
 
         if (material == nullptr)
         {
             std::cerr << "ERROR: `VectorFont::bind_to_new_material_parent`: `material` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::bind_to_new_material_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(vector_font.local_name))
         {
             std::cerr << "ERROR: `VectorFont::bind_to_new_material_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
         // Unbind from the old parent `Material`.
-        material->parent_of_vector_fonts.unbind_child(this->childID);
+        material->parent_of_vector_fonts.unbind_child(vector_font.childID);
 
         // Get `childID` from `Material` and set pointer to this `VectorFont`.
-        this->parent = new_parent;
-        this->parent->parent_of_vector_fonts.bind_child(this);
-    }
-
-    void VectorFont::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `VectorFont` to `nullptr`, sets `material` according to the input,
-        // and requests a new `childID` from the new `Material`.
-        //
-        // requirements:
-        // `this->material_parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
-
-        if (material_parent == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
-            return;
-        }
-
-        this->bind_to_new_material_parent(material_parent);
+        vector_font.parent = &new_parent;
+        vector_font.parent->parent_of_vector_fonts.bind_child(&vector_font);
+        return std::nullopt;
     }
 
     // This method returns a pointer to `Glyph` that matches the given `unicode_value`,

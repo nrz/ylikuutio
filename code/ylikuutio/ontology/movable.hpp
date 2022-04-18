@@ -25,7 +25,6 @@
 #include "universe.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -39,6 +38,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <optional> // std::optional
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
@@ -51,6 +51,11 @@
 // `Camera`    - non-material `Movable`, child of `Scene`.
 //
 // `Text3D`, child of `VectorFont`, is not implemented yet.
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::input
 {
@@ -67,7 +72,10 @@ namespace yli::ontology
     class Movable: public yli::ontology::Entity
     {
         public:
-            void bind_to_new_brain(yli::ontology::Brain* const new_brain);
+            // Set pointer to `movable` to `nullptr`, set brain according to the input,
+            // and request a new apprenticeID from `new_brain`.
+            static std::optional<yli::data::AnyValue> bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain);
+            static std::optional<yli::data::AnyValue> unbind_from_brain(yli::ontology::Movable& movable);
 
             Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
@@ -140,94 +148,94 @@ namespace yli::ontology
             // Set target towards which to move.
             static void set_spherical_dest(yli::ontology::Movable* const movable, const float rho, const float theta, const float phi);
 
-            // Get x coordinate of `object`.
+            // Get x coordinate of `movable`.
             static float get_x(const yli::ontology::Movable* const movable);
 
-            // Get y coordinate of `object`.
+            // Get y coordinate of `movable`.
             static float get_y(const yli::ontology::Movable* const movable);
 
-            // Get z destination coordinate of `object`.
+            // Get z destination coordinate of `movable`.
             static float get_z(const yli::ontology::Movable* const movable);
 
-            // Get rho coordinate of `object`.
+            // Get rho coordinate of `movable`.
             static float get_rho(const yli::ontology::Movable* const movable);
 
-            // Get theta coordinate of `object`.
+            // Get theta coordinate of `movable`.
             static float get_theta(const yli::ontology::Movable* const movable);
 
-            // Get phi destination coordinate of `object`.
+            // Get phi destination coordinate of `movable`.
             static float get_phi(const yli::ontology::Movable* const movable);
 
-            // Get x destination coordinate of `object`.
+            // Get x destination coordinate of `movable`.
             static float get_dest_x(const yli::ontology::Movable* const movable);
 
-            // Get y destination coordinate of `object`.
+            // Get y destination coordinate of `movable`.
             static float get_dest_y(const yli::ontology::Movable* const movable);
 
-            // Get z coordinate of `object`.
+            // Get z coordinate of `movable`.
             static float get_dest_z(const yli::ontology::Movable* const movable);
 
-            // Get rho destination coordinate of `object`.
+            // Get rho destination coordinate of `movable`.
             static float get_dest_rho(const yli::ontology::Movable* const movable);
 
-            // Get theta destination coordinate of `object`.
+            // Get theta destination coordinate of `movable`.
             static float get_dest_theta(const yli::ontology::Movable* const movable);
 
-            // Get phi destination destination coordinate of `object`.
+            // Get phi destination destination coordinate of `movable`.
             static float get_dest_phi(const yli::ontology::Movable* const movable);
 
-            // Allied-object-centric path and map information callbacks.
+            // Allied-movable-centric path and map information callbacks.
 
             // This method returns `true` if destination is visible, `false` otherwise.
             // destination may be visible directly (line of sight) or eg. by radar (without line of sight).
             static bool is_visible(const float x, const float y, const float z);
 
-            // This method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
+            // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
             static bool is_line_of_sight_for_any(const float x, const float y, const float z);
 
-            // This method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
-            static bool is_line_of_sight(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
+            static bool is_line_of_sight(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // This method returns `true` if there is any known ground path between `Object` and (x, y, z),  `false` otherwise.
-            static bool is_ground_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if there is any known ground path between `Movable` and (x, y, z),  `false` otherwise.
+            static bool is_ground_path_known(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // This method returns `true` if there is any known rail path between `Object` and (x, y, z),  `false` otherwise.
-            static bool is_rail_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if there is any known rail path between `Movable` and (x, y, z),  `false` otherwise.
+            static bool is_rail_path_known(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // This method returns `true` if there is known air path between objects, `false` otherwise.
-            static bool is_air_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if there is known air path between movables, `false` otherwise.
+            static bool is_air_path_known(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // This method returns `true` if there is known ballistic path between `Object` and (x, y, z), `false` otherwise.
-            static bool is_ballistic_path_known(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if there is known ballistic path between `Movable` and (x, y, z), `false` otherwise.
+            static bool is_ballistic_path_known(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // This method returns `true` if there may be ballistic path between objects, `false` otherwise.
-            static bool may_have_ballistic_path(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // This method returns `true` if there may be ballistic path between movables, `false` otherwise.
+            static bool may_have_ballistic_path(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
             // These functions return the coordinates of the farthest point.
-            static float get_closest_visible_ground_dest_x_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_closest_visible_ground_dest_y_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_closest_visible_ground_dest_z_towards(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            static float get_closest_visible_ground_dest_x_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_closest_visible_ground_dest_y_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_closest_visible_ground_dest_z_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
             // This method returns `true` if complete path is visible, `false` otherwise.
-            static bool is_complete_ground_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static bool is_complete_rail_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static bool is_complete_air_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static bool is_complete_ballistic_path_visible(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            static bool is_complete_ground_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static bool is_complete_rail_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static bool is_complete_air_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static bool is_complete_ballistic_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // These methods return the coordinates of the point closest to `object` from which there is known ballistic path to (x, y, z).
-            static float get_nearest_known_ballistic_launch_site_x(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_nearest_known_ballistic_launch_site_y(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_nearest_known_ballistic_launch_site_z(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // These methods return the coordinates of the point closest to `movable` from which there is known ballistic path to (x, y, z).
+            static float get_nearest_known_ballistic_launch_site_x(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_known_ballistic_launch_site_y(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_known_ballistic_launch_site_z(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // These methods return the coordinates of the point closest to `object` from which there may be a ballistic path to (x, y, z).
-            static float get_nearest_possible_ballistic_launch_site_x(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_nearest_possible_ballistic_launch_site_y(const yli::ontology::Object* const object, const float x, const float y, const float z);
-            static float get_nearest_possible_ballistic_launch_site_z(const yli::ontology::Object* const object, const float x, const float y, const float z);
+            // These methods return the coordinates of the point closest to `movable` from which there may be a ballistic path to (x, y, z).
+            static float get_nearest_possible_ballistic_launch_site_x(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_possible_ballistic_launch_site_y(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_possible_ballistic_launch_site_z(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
             // This method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
 
             // Coordinate-centric path and map information callbacks.
-            // The conditions for returning `true` match the conditions of the corresponding allied-object-centric callbacks.
+            // The conditions for returning `true` match the conditions of the corresponding allied-movable-centric callbacks.
 
             static bool is_line_of_sight_between_from(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
             static bool may_have_line_of_sight_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
@@ -249,13 +257,13 @@ namespace yli::ontology
             static float get_closest_visible_dest_y_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
             static float get_closest_visible_dest_z_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
 
-            // Callbacks for looping through objects.
-            static void* get_first_allied_object(yli::ontology::Object& object);       // point `allied_iterator` to the first object, `nullptr` if N/A.
-            static void* get_next_allied_object(yli::ontology::Object& object);        // advance `allied_iterator`, `nullptr` if N/A.
-            static void* get_first_other_allied_object(yli::ontology::Object& object); // point `allied_other_iterator` to the first other object, `nullptr` if N/A.
-            static void* get_next_other_allied_object(yli::ontology::Object& object);  // advance `allied_other_iterator`, `nullptr` if N/A.
-            static void* get_first_opponent_object(yli::ontology::Object& object);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
-            static void* get_next_opponent_object(yli::ontology::Object& object);      // advance `opponent_iterator`, `nullptr` if N/A.
+            // Callbacks for looping through movables.
+            static void* get_first_allied_movable(yli::ontology::Movable& movable);       // point `allied_iterator` to the first movable, `nullptr` if N/A.
+            static void* get_next_allied_movable(yli::ontology::Movable& movable);        // advance `allied_iterator`, `nullptr` if N/A.
+            static void* get_first_other_allied_movable(yli::ontology::Movable& movable); // point `allied_other_iterator` to the first other movable, `nullptr` if N/A.
+            static void* get_next_other_allied_movable(yli::ontology::Movable& movable);  // advance `allied_other_iterator`, `nullptr` if N/A.
+            static void* get_first_opponent_movable(yli::ontology::Movable& movable);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
+            static void* get_next_opponent_movable(yli::ontology::Movable& movable);      // advance `opponent_iterator`, `nullptr` if N/A.
 
             // Public callbacks end here.
 

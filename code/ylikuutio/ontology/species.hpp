@@ -26,8 +26,14 @@
 #include "model_struct.hpp"
 
 // Include standard headers
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -40,11 +46,13 @@ namespace yli::ontology
     class Species: public yli::ontology::Entity
     {
         public:
-            // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `species` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent);
 
-            void bind_to_new_material(yli::ontology::Material* const new_material);
+            // Set pointer to `species` to `nullptr`, set material according to the input,
+            // and request a new apprenticeID from `new_material`.
+            static std::optional<yli::data::AnyValue> bind_to_new_material(yli::ontology::Species& species, yli::ontology::Material& new_material);
 
             Species(
                     yli::ontology::Universe& universe,

@@ -49,9 +49,6 @@ namespace yli::ontology
 
             void unbind_variable(const std::size_t childID);
 
-            // Each class that supports binding to a new parent needs to `override` this function.
-            virtual void bind_to_new_parent(yli::ontology::Entity* const /* new_parent */);
-
             void bind_to_universe();
 
             // constructor.

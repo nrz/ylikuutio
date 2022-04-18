@@ -201,7 +201,6 @@ namespace yli::ontology
 {
     class Scene;
     class Camera;
-    class Font2D;
     class Console;
 
     class Universe: public yli::ontology::Entity
@@ -381,10 +380,10 @@ namespace yli::ontology
             void set_window_height(const uint32_t window_height);
 
             // This method returns current `text_size`.
-            std::size_t get_text_size() const;
+            uint32_t get_text_size() const;
 
             // This method returns current `font_size`.
-            std::size_t get_font_size() const;
+            uint32_t get_font_size() const;
 
             // This method computes the new delta time and returns it.
             float compute_delta_time();
@@ -396,7 +395,7 @@ namespace yli::ontology
             void finalize_delta_time_loop();
 
             // This method returns current `max_fps`.
-            std::size_t get_max_fps() const;
+            uint32_t get_max_fps() const;
             float get_last_time_to_display_fps() const;
             float get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
@@ -418,13 +417,6 @@ namespace yli::ontology
             float get_initial_fov() const;
 
             // Public callbacks.
-
-            // Public `Entity` bind callbacks.
-
-            static std::optional<yli::data::AnyValue> bind(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Entity& child_or_apprentice_entity,
-                    yli::ontology::Entity& parent_or_master_entity);
 
             // Public `Entity` create callbacks.
 
@@ -452,7 +444,7 @@ namespace yli::ontology
 
             static std::optional<yli::data::AnyValue> eval(
                     yli::ontology::Console& console,
-                    yli::ontology::Entity& universe_entity,
+                    yli::ontology::Universe& universe,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
@@ -604,11 +596,11 @@ namespace yli::ontology
             float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
 
             // variables related to the fonts and texts used.
-            std::size_t text_size;
-            std::size_t font_size;
+            uint32_t text_size;
+            uint32_t font_size;
 
             // variables related to timing of events.
-            std::size_t max_fps;
+            uint32_t max_fps;
             float last_time_to_display_fps   { yli::time::get_time() };
             float last_time_for_display_sync { yli::time::get_time() };
             float delta_time                 { NAN };

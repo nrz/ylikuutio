@@ -80,7 +80,7 @@ namespace ajokki
         yli::ontology::ShaderStruct joensuu_center_west_shader_struct;
         joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
         joensuu_center_west_shader_struct.global_name = "joensuu_center_west_shader";
-        joensuu_center_west_shader_struct.local_name = "regular_shader";
+        joensuu_center_west_shader_struct.local_name = "joensuu_regular_shader";
         joensuu_center_west_shader_struct.vertex_shader = "standard_shading.vert";
         joensuu_center_west_shader_struct.fragment_shader = "standard_shading.frag";
 

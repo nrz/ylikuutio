@@ -42,10 +42,16 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <optional>      // std::optional
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
+
+namespace yli::data
+{
+    class AnyValue;
+}
 
 namespace yli::ontology
 {
@@ -58,11 +64,13 @@ namespace yli::ontology
     class Symbiosis: public yli::ontology::Entity
     {
         public:
-            // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent);
 
-            void bind_to_new_shader(yli::ontology::Shader* const new_shader);
+            // Set pointer to `symbiosis` to `nullptr`, set shader according to the input,
+            // and request a new apprenticeID from `new_shader`.
+            static std::optional<yli::data::AnyValue> bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader);
 
             Symbiosis(
                     yli::ontology::Universe& universe,

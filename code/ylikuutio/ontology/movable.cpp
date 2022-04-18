@@ -39,21 +39,37 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 
 // `Movable` is a mixin class, not intended to be instantiated.
 
 namespace yli::ontology
 {
-    void Movable::bind_to_new_brain(yli::ontology::Brain* const new_brain)
+    std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain)
     {
-        if (new_brain != nullptr)
+        // Set pointer to `movable` to `nullptr`, set brain according to the input,
+        // and request a new apprenticeID from `new_brain`.
+
+        // Master and apprentice must belong to the same `Scene`,
+        // if both belong to some `Scene`, and not `Ecosystem`.
+        if (movable.get_scene() == new_brain.get_scene() ||
+                movable.get_scene() == nullptr ||
+                new_brain.get_scene() == nullptr)
         {
-            this->apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(&new_brain->master_of_movables);
+            movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(&new_brain.master_of_movables);
         }
         else
         {
-            this->apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(nullptr);
+            std::cerr << "ERROR: `Movable::bind_to_new_brain`: master and apprentice can not belong to different `Scene`s!\n";
         }
+
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> Movable::unbind_from_brain(yli::ontology::Movable& movable)
+    {
+        movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(nullptr);
+        return std::nullopt;
     }
 
     Movable::~Movable()

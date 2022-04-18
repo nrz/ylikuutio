@@ -52,13 +52,21 @@ namespace yli::ontology
     class Object: public yli::ontology::Movable
     {
         public:
-            // This method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_scene_parent(yli::ontology::Scene* const new_parent);
-            void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
+            // Set pointer to `object` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Object& object, yli::ontology::Scene& new_parent);
 
-            void bind_to_new_species_master(yli::ontology::Species* const new_species);
-            void bind_to_new_shapeshifter_sequence_master(yli::ontology::ShapeshifterSequence* const new_shapeshifter_sequence);
-            void bind_to_new_text_3d_master(yli::ontology::Text3D* const new_text_3d);
+            // Set pointer to `object` to `nullptr`, set mesh according to the input,
+            // and request a new apprenticeID from `new_species`.
+            static std::optional<yli::data::AnyValue> bind_to_new_species_master(yli::ontology::Object& object, yli::ontology::Species& new_species);
+
+            // Set pointer to `object` to `nullptr`, set mesh according to the input,
+            // and request a new apprenticeID from `new_shapeshifter_sequence`.
+            static std::optional<yli::data::AnyValue> bind_to_new_shapeshifter_sequence_master(yli::ontology::Object& object, yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence);
+
+            // Set pointer to `object` to `nullptr`, set mesh according to the input,
+            // and request a new apprenticeID from `new_text_3d`.
+            static std::optional<yli::data::AnyValue> bind_to_new_text_3d_master(yli::ontology::Object& object, yli::ontology::Text3D& new_text_3d);
 
             Object(
                     yli::ontology::Universe& universe,

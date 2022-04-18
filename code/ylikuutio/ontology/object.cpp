@@ -62,112 +62,96 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void Object::bind_to_new_scene_parent(yli::ontology::Scene* const new_parent)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(yli::ontology::Object& object, yli::ontology::Scene& new_parent)
     {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `object` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(object.get_parent());
 
         if (scene == nullptr)
         {
             std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == scene)
+        if (&new_parent == scene)
         {
             // Setting current parent as the new parent. Nothing to do.
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(object.local_name))
         {
             std::cerr << "ERROR: `Object::bind_to_new_scene_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->child_of_scene.unbind_and_bind_to_new_parent(&new_parent->parent_of_objects);
+        object.apprentice_of_mesh.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        object.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_objects);
+        return std::nullopt;
     }
 
-    void Object::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_species_master(yli::ontology::Object& object, yli::ontology::Species& new_species)
     {
-        // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Scene`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `object` to `nullptr`, set mesh according to the input,
+        // and request a new apprenticeID from `new_species`.
 
-        yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(new_parent);
-
-        if (scene != nullptr)
+        if (object.object_type == yli::ontology::ObjectType::REGULAR)
         {
-            this->bind_to_new_scene_parent(scene);
-            return;
-        }
-
-        std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is not `yli::ontology::Scene*`!\n";
-    }
-
-    void Object::bind_to_new_species_master(yli::ontology::Species* const new_species)
-    {
-        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
-        // and requests a new `apprenticeID` from the new `Species`.
-
-        if (this->object_type == yli::ontology::ObjectType::REGULAR)
-        {
-            if (new_species != nullptr)
+            // Master and apprentice must belong to the same `Scene`,
+            // if both belong to some `Scene`, and not `Ecosystem`.
+            if (object.get_scene() == new_species.get_scene() ||
+                    object.get_scene() == nullptr ||
+                    new_species.get_scene() == nullptr)
             {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_species->master_of_objects);
+                object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_species.master_of_objects);
             }
             else
             {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
+                std::cerr << "ERROR: `Object::bind_to_new_species_master`: master and apprentice can not belong to different `Scene`s!\n";
             }
         }
+        else
+        {
+            std::cerr << "ERROR: `Object::bind_to_new_species_master`: only `REGULAR` type `Object`s can be bound to `Species`!\n";
+        }
+
+        return std::nullopt;
     }
 
-    void Object::bind_to_new_shapeshifter_sequence_master(yli::ontology::ShapeshifterSequence* const new_shapeshifter_sequence)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_shapeshifter_sequence_master(yli::ontology::Object& object, yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence)
     {
-        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
-        // and requests a new `apprenticeID` from the new `ShapeshifterSequence`.
+        // Set pointer to `object` to `nullptr`, set mesh according to the input,
+        // and request a new apprenticeID from `new_shapeshifter_sequence`.
 
-        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        if (object.object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            if (new_shapeshifter_sequence != nullptr)
-            {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_shapeshifter_sequence->master_of_objects);
-            }
-            else
-            {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
-            }
+            object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_shapeshifter_sequence.master_of_objects);
         }
+        else
+        {
+            std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_master`: only `SHAPESHIFTER` type `Object`s can be bound to `ShapeshifterSequence`!\n";
+        }
+
+        return std::nullopt;
     }
 
-    void Object::bind_to_new_text_3d_master(yli::ontology::Text3D* const new_text_3d)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_text_3d_master(yli::ontology::Object& object, yli::ontology::Text3D& new_text_3d)
     {
-        // This method sets pointer to this `Object` to `nullptr`, sets `master` according to the input,
-        // and requests a new `apprenticeID` from the new `Text3D`.
+        // Set pointer to `object` to `nullptr`, set mesh according to the input,
+        // and request a new apprenticeID from `new_text_3d`.
 
-        if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        if (object.object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            if (new_text_3d != nullptr)
-            {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_text_3d->master_of_objects);
-            }
-            else
-            {
-                this->apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(nullptr);
-            }
+            object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(&new_text_3d.master_of_objects);
         }
+        else
+        {
+            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `CHARACTER` type `Object`s can be bound to `Text3D`!\n";
+        }
+
+        return std::nullopt;
     }
 
     Object::~Object()

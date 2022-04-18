@@ -20,12 +20,14 @@
 #include "material.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_master.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <optional> // std::optional
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
@@ -34,54 +36,27 @@ namespace yli::ontology
     class Scene;
     class Shader;
 
-    void ShapeshifterTransformation::bind_to_new_material_parent(yli::ontology::Material* const new_parent)
+    std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent)
     {
-        // this method sets pointer to this `ShapeshifterTransformation` to `nullptr`, sets `material_parent` according to the input,
-        // and requests a new `childID` from the new `Material`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
+        // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const material = this->get_parent();
+        yli::ontology::Entity* const material = shapeshifter_transformation.get_parent();
 
         if (material == nullptr)
         {
             std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material` is `nullptr`!\n";
-            return;
+            return std::nullopt;
         }
 
-        if (new_parent == nullptr)
-        {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `new_parent` is `nullptr`!\n";
-            return;
-        }
-
-        if (new_parent->has_child(this->local_name))
+        if (new_parent.has_child(shapeshifter_transformation.local_name))
         {
             std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: local name is already in use!\n";
-            return;
+            return std::nullopt;
         }
 
-        this->child_of_material.unbind_and_bind_to_new_parent(&new_parent->parent_of_shapeshifter_transformations);
-    }
-
-    void ShapeshifterTransformation::bind_to_new_parent(yli::ontology::Entity* const new_parent)
-    {
-        // this method sets pointer to this `ShapeshifterTransformation` to `nullptr`, sets `material_parent` according to the input,
-        // and requests a new `childID` from the new `Material`.
-        //
-        // requirements:
-        // `new_parent` must not be `nullptr`.
-
-        yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
-
-        if (material_parent == nullptr)
-        {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
-            return;
-        }
-
-        this->bind_to_new_material_parent(material_parent);
+        shapeshifter_transformation.child_of_material.unbind_and_bind_to_new_parent(&new_parent.parent_of_shapeshifter_transformations);
+        return std::nullopt;
     }
 
     ShapeshifterTransformation::~ShapeshifterTransformation()
