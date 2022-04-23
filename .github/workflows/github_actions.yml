@@ -31,5 +31,5 @@ jobs:
       - run: x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
       - run: mkdir build_crosscompile_linux_to_windows_gcc
       - run: echo "Running cmake for MinGW-w64 GCC cross compiler"
-      - run: cmake -Bbuild_crosscompile_linux_to_windows_gcc -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
+      - run: cmake -Bbuild_crosscompile_linux_to_windows_gcc -DCMAKE_TOOLCHAIN_FILE=w64.cmake
       - run: cmake --build build_crosscompile_linux_to_windows_gcc
