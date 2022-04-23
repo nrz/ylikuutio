@@ -12,7 +12,7 @@ jobs:
       - run: echo "Running cmake for GCC native compiler"
       - run: CC=$(which gcc) CXX=$(which g++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: make -j 4
-      - run: - ./unit_tests_with_googletest
+      - run: ./unit_tests_with_googletest
   build-and-test-on-ubuntu-clang-native-compiler:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
       - run: echo "Running cmake for Clang native compiler"
       - run: CC=$(which clang) CXX=$(which clang++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: make -j 4
-      - run: - ./unit_tests_with_googletest
+      - run: ./unit_tests_with_googletest
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
     runs-on: ubuntu-latest
     steps:
