@@ -8,10 +8,9 @@ jobs:
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
       - run: gcc -v && g++ -v
       - run: mkdir build_native_gcc
-      - run: cd build_native_gcc
-      - run: pwd
       - run: echo "Running cmake for GCC native compiler"
-      - run: CC=$(which gcc) CXX=$(which g++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: CC=$(which gcc) CXX=$(which g++) cmake -Bbuild_native_gcc -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: cd build_native_gcc
       - run: make -j 4
       - run: ./unit_tests_with_googletest
   build-and-test-on-ubuntu-clang-native-compiler:
@@ -21,10 +20,9 @@ jobs:
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
       - run: clang -v && clang++ -v
       - run: mkdir build_native_clang
-      - run: cd build_native_clang
-      - run: pwd
       - run: echo "Running cmake for Clang native compiler"
-      - run: CC=$(which clang) CXX=$(which clang++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: CC=$(which clang) CXX=$(which clang++) cmake -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: cd build_native_clang
       - run: make -j 4
       - run: ./unit_tests_with_googletest
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
@@ -34,8 +32,7 @@ jobs:
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
       - run: x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
       - run: mkdir build_crosscompile_linux_to_windows_gcc
-      - run: cd build_crosscompile_linux_to_windows_gcc
-      - run: pwd
       - run: echo "Running cmake for MinGW-w64 GCC cross compiler"
-      - run: cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
+      - run: cmake -Bbuild_crosscompile_linux_to_windows_gcc -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
+      - run: cd build_crosscompile_linux_to_windows_gcc
       - run: make -j 4
