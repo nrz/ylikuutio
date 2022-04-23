@@ -9,6 +9,7 @@ jobs:
       - run: gcc -v && g++ -v
       - run: mkdir build_native_gcc
       - run: cd build_native_gcc
+      - run: pwd
       - run: echo "Running cmake for GCC native compiler"
       - run: CC=$(which gcc) CXX=$(which g++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: make -j 4
@@ -21,6 +22,7 @@ jobs:
       - run: clang -v && clang++ -v
       - run: mkdir build_native_clang
       - run: cd build_native_clang
+      - run: pwd
       - run: echo "Running cmake for Clang native compiler"
       - run: CC=$(which clang) CXX=$(which clang++) cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: make -j 4
@@ -33,6 +35,7 @@ jobs:
       - run: x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
       - run: mkdir build_crosscompile_linux_to_windows_gcc
       - run: cd build_crosscompile_linux_to_windows_gcc
+      - run: pwd
       - run: echo "Running cmake for MinGW-w64 GCC cross compiler"
       - run: cmake .. -DCMAKE_TOOLCHAIN_FILE=../w64.cmake
       - run: make -j 4
