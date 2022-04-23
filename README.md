@@ -138,7 +138,7 @@ To cross compile from GNU/Linux to Windows:
 
     $ mkdir build_windows
     $ cd build_windows
-    $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
+    $ cmake -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
 
 Crosscompiling from GNU/Linux to Windows fails to compile tests.
