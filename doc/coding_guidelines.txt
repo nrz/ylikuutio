@@ -177,5 +177,5 @@ Compiling
 * All code should compile with both GCC and Clang in amd64 Debian Buster.
 * All code should crosscompile with MinGW-GCC from amd64 Debian Buster
   to a 64-bit Windows (Google Test unfortunately does not).
-* All code should compile in the environment provided by Travis CI.
+* All code should compile in the environment provided by GitHub Actions.
 * All code should compile in one `cmake .. && make` run.

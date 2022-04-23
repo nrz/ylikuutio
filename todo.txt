@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
 [ ] When running in fullscreen mode, restore original window resolution upon program termination.
 [ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
@@ -303,3 +302,4 @@ Ready:
 [x] Fix binding `Object` apprentice to `Species` master.
 [x] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
 [x] Do not bind to any master that belongs to a different `Scene`.
+[x] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
