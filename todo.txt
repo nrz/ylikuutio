@@ -3,6 +3,7 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
+[ ] Fix compiling on MacOS.
 [ ] Fix compiling on Visual Studio.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
@@ -13,6 +14,8 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
+[ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
+[ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
 [ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Add support for Tab complete for local names in `Console`.
