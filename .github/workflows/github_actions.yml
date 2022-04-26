@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
       - run: gcc -v && g++ -v
       - run: mkdir build_native_gcc
@@ -16,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
       - run: clang -v && clang++ -v
       - run: mkdir build_native_clang
@@ -27,6 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
       - run: x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
       - run: mkdir build_crosscompile_linux_to_windows_gcc
