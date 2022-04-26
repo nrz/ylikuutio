@@ -75,6 +75,10 @@ If you are doing a cross compile from Linux to Android™, you need also:
 
 However, cross compiling from Linux to Android does not work yet!
 
+Ylikuutio uses Git submodules, so you need to update them:
+
+    $ git submodule update --init --recursive
+
 Then, to compile with GCC, in Ylikuutio install directory:
 
     $ mkdir build
@@ -101,6 +105,10 @@ to compile tests, in CMakeLists.txt comment out the line that says:
 
 #### MacOS
 MacOS 10.14 or newer is needed for compiling in MacOS.
+
+Ylikuutio uses Git submodules, so you need to update them:
+
+    $ git submodule update --init --recursive
 
 Install command line building tools:
 
