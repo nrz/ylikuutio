@@ -16,3 +16,6 @@
 [submodule "external/OpenFBX"]
 	path = external/OpenFBX
 	url = https://github.com/nem0/OpenFBX.git
+[submodule "external/pugixml"]
+	path = external/pugixml
+	url = https://github.com/zeux/pugixml.git
