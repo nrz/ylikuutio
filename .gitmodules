@@ -10,3 +10,6 @@
 [submodule "external/glog"]
 	path = external/glog
 	url = https://github.com/google/glog.git
+[submodule "external/libpng"]
+	path = external/libpng
+	url = https://github.com/glennrp/libpng.git
