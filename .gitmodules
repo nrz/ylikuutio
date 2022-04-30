@@ -13,3 +13,6 @@
 [submodule "external/libpng"]
 	path = external/libpng
 	url = https://github.com/glennrp/libpng.git
+[submodule "external/OpenFBX"]
+	path = external/OpenFBX
+	url = https://github.com/nem0/OpenFBX.git
