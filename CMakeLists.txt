@@ -121,7 +121,7 @@ endif()
 
 if(COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(
-        external/libpng/
+        external/libpng-1.6.37/
         )
 else()
     # Use libsdl shipped with the GNU/Linux distribution.

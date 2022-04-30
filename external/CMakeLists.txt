@@ -137,7 +137,7 @@ if(COMPILE_ZLIB_FROM_SOURCE)
 endif()
 
 if(COMPILE_LIBPNG_FROM_SOURCE)
-    add_subdirectory(libpng)
+    add_subdirectory(libpng-1.6.37)
 endif()
 
 add_library(miniz STATIC
