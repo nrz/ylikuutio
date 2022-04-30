@@ -140,7 +140,7 @@ endif()
 
 if(COMPILE_ZLIB_FROM_SOURCE)
     include_directories(
-        external/zlib-1.2.11/
+        external/zlib/
         )
 else()
     # Use zlib shipped with the GNU/Linux distribution.

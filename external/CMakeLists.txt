@@ -133,7 +133,7 @@ if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
 endif()
 
 if(COMPILE_ZLIB_FROM_SOURCE)
-    add_subdirectory(zlib-1.2.11)
+    add_subdirectory(zlib)
 endif()
 
 if(COMPILE_LIBPNG_FROM_SOURCE)
