@@ -3,7 +3,6 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
-[ ] Fix compiling on MacOS.
 [ ] Fix compiling on Visual Studio.
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
@@ -306,3 +305,4 @@ Ready:
 [x] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
 [x] Do not bind to any master that belongs to a different `Scene`.
 [x] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
+[x] Fix compiling on MacOS.
