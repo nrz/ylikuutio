@@ -31,9 +31,12 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
+#include "scene_struct.hpp"
+#include "camera_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
+#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
 
 // Include GLM
@@ -60,6 +63,70 @@
 namespace yli::ontology
 {
     class Entity;
+
+    Scene::Scene(
+            yli::ontology::Universe& universe,
+            const yli::ontology::SceneStruct& scene_struct,
+            yli::ontology::GenericParentModule* const parent_module)
+    : Entity(universe, scene_struct),
+        child_of_universe(parent_module, this),
+        parent_of_shaders(this, &this->registry, "shaders"),
+        parent_of_default_camera(this, &this->registry, "default_camera"),
+        parent_of_cameras(this, &this->registry, "cameras"),
+        parent_of_brains(this, &this->registry, "brains"),
+        parent_of_materials(this, &this->registry, "materials"),
+        parent_of_species(this, &this->registry, "species"),
+        parent_of_objects(this, &this->registry, "objects"),
+        parent_of_symbioses(this, &this->registry, "symbioses"),
+        gravity               { scene_struct.gravity },
+        light_position        { scene_struct.light_position },
+        water_level           { scene_struct.water_level },
+        is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
+    {
+        // constructor.
+
+        if (this->universe.get_is_opengl_in_use())
+        {
+            // Uniform block for data related to this `Scene`.
+            // Multiple uniform blocks may be rendered in the same frame
+            // by using multiple `Camera`s.
+            // TODO: add support for using multiple `Camera`s in the same frame!
+            glGenBuffers(1, &this->scene_uniform_block);
+            glBindBuffer(GL_UNIFORM_BUFFER, this->scene_uniform_block);
+            glBufferData(GL_UNIFORM_BUFFER, yli::opengl::scene_ubo::SceneUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        }
+        else if (this->universe.get_is_vulkan_in_use())
+        {
+            std::cerr << "ERROR: `Scene::Scene`: Vulkan is not supported yet!\n";
+        }
+
+        // create the default `Camera`.
+        yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
+        camera_struct.scene = this;
+        new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
+
+        // Bullet variables.
+        if (this->universe.get_is_physical())
+        {
+            yli::ontology::Universe& universe = this->universe;
+
+            this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
+                    universe.get_dispatcher(),
+                    universe.get_overlapping_pair_cache(),
+                    universe.get_solver(),
+                    universe.get_collision_configuration());
+
+            // Gravity is stored as a non-negative value, make it negative for Bullet.
+            this->dynamics_world->setGravity(btVector3(0.0f, -this->gravity, 0.0f));
+
+            // Bullet is now initialized for this `Scene`.
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Scene*";
+        this->can_be_erased = true;
+    }
 
     Scene::~Scene()
     {
