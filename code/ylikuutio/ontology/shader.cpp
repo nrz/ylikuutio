@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shader.hpp"
-#include "master_module.hpp"
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"

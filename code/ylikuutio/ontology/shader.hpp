@@ -29,7 +29,6 @@
 #include "master_module.hpp"
 #include "universe.hpp"
 #include "shader_struct.hpp"
-#include "family_templates.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
