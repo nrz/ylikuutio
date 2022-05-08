@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
+#include "shader_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -98,6 +99,49 @@ namespace yli::ontology
         shader.master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         shader.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_shaders);
         return std::nullopt;
+    }
+
+    Shader::Shader(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ShaderStruct& shader_struct,
+            yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
+        : Entity(universe, shader_struct),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
+        parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
+        master_of_materials(this, &this->registry, "materials", nullptr),
+        master_of_symbioses(this, &this->registry, "symbioses")
+    {
+        // constructor.
+
+        this->vertex_shader        = shader_struct.vertex_shader;
+        this->fragment_shader      = shader_struct.fragment_shader;
+
+        this->char_vertex_shader   = this->vertex_shader.c_str();
+        this->char_fragment_shader = this->fragment_shader.c_str();
+
+        // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
+        // Each `Material` rendered after a given GPGPU `Shader`
+        // may also use the output `ComputeTask`s offered by
+        // a given GPGPU `Shader` as its texture.
+        this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
+
+        if (this->universe.get_is_opengl_in_use())
+        {
+            // Create and compile our GLSL program from the shaders.
+            this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+
+            this->scene_uniform_block_index = glGetUniformBlockIndex(this->program_id, "scene_uniform_block");
+            this->movable_uniform_block_index = glGetUniformBlockIndex(this->program_id, "movable_uniform_block");
+            this->camera_uniform_block_index = glGetUniformBlockIndex(this->program_id, "camera_uniform_block");
+
+            glUniformBlockBinding(this->program_id, this->scene_uniform_block_index, yli::opengl::UboBlockIndices::SCENE);
+            glUniformBlockBinding(this->program_id, this->movable_uniform_block_index, yli::opengl::UboBlockIndices::MOVABLE);
+            glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, yli::opengl::UboBlockIndices::CAMERA);
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Shader*";
+        this->can_be_erased = true;
     }
 
     Shader::~Shader()
