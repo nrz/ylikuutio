@@ -19,9 +19,11 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
+#include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_master.hpp"
@@ -89,6 +91,40 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    Material::Material(
+            yli::ontology::Universe& universe,
+            const yli::ontology::MaterialStruct& material_struct,
+            yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
+            yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
+        : Entity(universe, material_struct),
+        child_of_scene(scene_parent_module, this),
+        parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
+        parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
+        parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
+        apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
+        master_of_species(this, &this->registry, "species"),
+        texture(
+                universe,
+                &this->registry,
+                material_struct.texture_filename,
+                material_struct.texture_file_format,
+                yli::load::ImageLoaderStruct(),
+                "texture")
+    {
+        // constructor.
+
+        if (this->texture.get_is_texture_loaded() && this->get_shader() != nullptr)
+        {
+            // Get a handle for our "texture_sampler" uniform.
+            yli::ontology::Shader* const shader = this->get_shader();
+            this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Material*";
+        this->can_be_erased = true;
     }
 
     Material::~Material()

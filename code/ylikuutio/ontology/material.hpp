@@ -25,18 +25,12 @@
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "texture_module.hpp"
-#include "universe.hpp"
-#include "shader.hpp"
-#include "material_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/load/common_texture_loader.hpp"
-#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -49,7 +43,10 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class Universe;
     class Scene;
+    class Shader;
+    struct MaterialStruct;
 
     class Material: public yli::ontology::Entity
     {
@@ -66,35 +63,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
-                    yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
-                : Entity(universe, material_struct),
-                child_of_scene(scene_parent_module, this),
-                parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
-                parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
-                parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
-                apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
-                master_of_species(this, &this->registry, "species"),
-                texture(
-                        universe,
-                        &this->registry,
-                        material_struct.texture_filename,
-                        material_struct.texture_file_format,
-                        yli::load::ImageLoaderStruct(),
-                        "texture")
-            {
-                // constructor.
-
-                if (this->texture.get_is_texture_loaded() && this->get_shader() != nullptr)
-                {
-                    // Get a handle for our "texture_sampler" uniform.
-                    yli::ontology::Shader* const shader = this->get_shader();
-                    this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Material*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module);
 
             Material(const Material&) = delete;            // Delete copy constructor.
             Material& operator=(const Material&) = delete; // Delete copy assignment.
