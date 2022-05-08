@@ -22,15 +22,7 @@
 #include "generic_parent_module.hpp"
 #include "framebuffer_module.hpp"
 #include "entity_factory.hpp"
-#include "universe_struct.hpp"
-#include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/input/input_master.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
-#include "code/ylikuutio/render/render_master_struct.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
@@ -47,13 +39,11 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -182,6 +172,11 @@
 //
 // TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` Entities!
 
+namespace yli::audio
+{
+    class AudioMaster;
+}
+
 namespace yli::data
 {
     class AnyValue;
@@ -189,11 +184,13 @@ namespace yli::data
 
 namespace yli::input
 {
+    class InputMaster;
     enum class InputMethod;
 }
 
 namespace yli::render
 {
+    class RenderMaster;
     struct RenderStruct;
 }
 
@@ -203,87 +200,15 @@ namespace yli::ontology
     class Camera;
     class Console;
 
+    struct UniverseStruct;
+
     class Universe: public yli::ontology::Entity
     {
         public:
             void bind_entity(yli::ontology::Entity* const entity);
             void unbind_entity(const std::size_t entityID);
 
-            explicit Universe(const yli::ontology::UniverseStruct& universe_struct)
-                : Entity(*this, universe_struct), // `Universe` has no parent.
-                parent_of_ecosystems(this, &this->registry, "ecosystems"),
-                parent_of_scenes(this, &this->registry, "scenes"),
-                parent_of_font_2ds(this, &this->registry, "font_2ds"),
-                parent_of_consoles(this, &this->registry, "consoles"),
-                parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
-                parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
-                framebuffer_module(universe_struct.framebuffer_module_struct),
-                application_name  { universe_struct.application_name },
-                graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
-                display_modes     { yli::sdl::get_display_modes(this->graphics_api_backend) },
-                n_displays        { static_cast<uint32_t>(this->display_modes.size()) },
-                is_silent         { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
-                is_physical       { universe_struct.is_physical },
-                is_fullscreen     { universe_struct.is_fullscreen },
-                window_width      { universe_struct.window_width },
-                window_height     { universe_struct.window_height },
-                window_title      { universe_struct.window_title },
-                mouse_x           { static_cast<int32_t>(this->window_width / 2) },
-                mouse_y           { static_cast<int32_t>(this->window_height / 2) },
-                speed             { universe_struct.speed },
-                turbo_factor      { universe_struct.turbo_factor },
-                twin_turbo_factor { universe_struct.twin_turbo_factor },
-                mouse_speed       { universe_struct.mouse_speed },
-                znear             { universe_struct.znear },
-                zfar              { universe_struct.zfar },
-                aspect_ratio      { static_cast<float>(this->window_width) / static_cast<float>(this->window_height) },
-                text_size         { universe_struct.text_size },
-                font_size         { universe_struct.font_size },
-                max_fps           { universe_struct.max_fps }
-            {
-                // constructor.
-
-                // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
-                this->bind_entity(this);
-
-                // call `set_global_name` here because it can't be done in `Entity` constructor.
-                this->set_global_name(universe_struct.global_name);
-
-                this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
-                this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
-                this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
-
-                if (this->window_title.empty())
-                {
-                    std::stringstream window_title_stringstream;
-                    window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
-                    this->window_title = window_title_stringstream.str();
-                }
-
-                // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
-                this->should_be_rendered = !this->get_is_headless();
-
-                this->create_should_be_rendered_variable();
-
-                if (!this->is_silent)
-                {
-                    this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
-                }
-
-                if (this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS)
-                {
-                    this->is_exit_requested = true;
-                }
-                else
-                {
-                    yli::render::RenderMasterStruct render_master_struct;
-                    this->render_master = std::make_unique<yli::render::RenderMaster>(this, render_master_struct);
-                    this->input_master = std::make_unique<yli::input::InputMaster>(this);
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Universe*";
-            }
+            explicit Universe(const yli::ontology::UniverseStruct& universe_struct);
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
             Universe& operator=(const Universe&) = delete; // Delete copy assignment.
