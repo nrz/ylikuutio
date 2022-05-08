@@ -20,6 +20,7 @@
 
 #include "application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/universe_struct.hpp"
 
 // Include standard headers
 #include <cstdlib>   // EXIT_FAILURE, EXIT_SUCCESS
