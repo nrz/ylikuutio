@@ -174,7 +174,7 @@
 
 namespace yli::audio
 {
-    class AudioMaster;
+    class AudioSystem;
 }
 
 namespace yli::data
@@ -262,7 +262,7 @@ namespace yli::ontology
             std::string eval_string(const std::string& my_string) const;
 
             yli::render::RenderSystem* get_render_system() const;
-            yli::audio::AudioMaster* get_audio_master() const;
+            yli::audio::AudioSystem* get_audio_system() const;
             yli::input::InputMaster* get_input_master() const;
 
             btDefaultCollisionConfiguration* get_collision_configuration() const;
@@ -474,7 +474,7 @@ namespace yli::ontology
             yli::ontology::Console* active_console { nullptr };
 
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr }; // pointer to `RenderSystem`.
-            std::unique_ptr<yli::audio::AudioMaster> audio_master    { nullptr }; // pointer to `AudioMaster`.
+            std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr }; // pointer to `AudioSystem`.
             std::unique_ptr<yli::input::InputMaster> input_master    { nullptr }; // pointer to `InputMaster`.
 
             // Bullet variables.

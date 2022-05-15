@@ -29,7 +29,7 @@
 #endif
 
 #include "yli_edit_console_callbacks.hpp"
-#include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -240,7 +240,7 @@ namespace yli_edit
 
                 yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-                yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
+                yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 
                 yli::input::InputMaster* const input_master = my_universe->get_input_master();
 

@@ -46,7 +46,7 @@
 #include "universe_struct.hpp"
 #include "variable_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -193,7 +193,7 @@ namespace yli::ontology
 
         if (!this->is_silent)
         {
-            this->audio_master = std::make_unique<yli::audio::AudioMaster>(this);
+            this->audio_system = std::make_unique<yli::audio::AudioSystem>(this);
         }
 
         if (this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS)
@@ -387,9 +387,9 @@ namespace yli::ontology
                     this->increment_last_time_to_display_fps();
 
                     // Update audio also (in case the sound has reached the end).
-                    if (audio_master != nullptr)
+                    if (audio_system != nullptr)
                     {
-                        audio_master->update();
+                        audio_system->update();
                     }
                 }
 
@@ -1119,14 +1119,14 @@ namespace yli::ontology
         return this->render_system.get();
     }
 
-    yli::audio::AudioMaster* Universe::get_audio_master() const
+    yli::audio::AudioSystem* Universe::get_audio_system() const
     {
-        if (this->audio_master == nullptr)
+        if (this->audio_system == nullptr)
         {
             return nullptr;
         }
 
-        return this->audio_master.get();
+        return this->audio_system.get();
     }
 
     yli::input::InputMaster* Universe::get_input_master() const

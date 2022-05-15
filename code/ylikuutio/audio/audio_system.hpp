@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
-#define __YLIKUUTIO_AUDIO_AUDIO_MASTER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
+#define __YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
@@ -33,17 +33,17 @@ namespace yli::ontology
 
 namespace yli::audio
 {
-    class AudioMaster
+    class AudioSystem
     {
         public:
             // constructor.
-            explicit AudioMaster(yli::ontology::Universe* const universe);
+            explicit AudioSystem(yli::ontology::Universe* const universe);
 
-            AudioMaster(const AudioMaster&) = delete;            // Delete copy constructor.
-            AudioMaster& operator=(const AudioMaster&) = delete; // Delete copy assignment.
+            AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
+            AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~AudioMaster();
+            ~AudioSystem();
 
             bool load_and_play(const std::string& audio_file);
             void unload(const std::string& audio_file);
@@ -61,7 +61,7 @@ namespace yli::audio
         private:
             void play_audio(void* userdata, uint8_t* stream, int length);
             static void play_audio_callback(void* userdata, uint8_t* stream, int length);
-            static yli::audio::AudioMaster* audio_master;
+            static yli::audio::AudioSystem* audio_system;
 
             yli::ontology::Universe* const universe { nullptr };
 

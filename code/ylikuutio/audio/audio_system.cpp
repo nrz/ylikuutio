@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "audio_master.hpp"
+#include "audio_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
@@ -28,9 +28,9 @@
 
 namespace yli::audio
 {
-    yli::audio::AudioMaster* AudioMaster::audio_master;
+    yli::audio::AudioSystem* AudioSystem::audio_system;
 
-    AudioMaster::AudioMaster(yli::ontology::Universe* const universe)
+    AudioSystem::AudioSystem(yli::ontology::Universe* const universe)
         : universe { universe }
     {
         // constructor.
@@ -48,7 +48,7 @@ namespace yli::audio
         this->audio_spec.padding = 0;        // dummy value.
         this->audio_spec.samples = 4096;
         this->audio_spec.size = 0;           // dummy value.
-        this->audio_spec.callback = yli::audio::AudioMaster::play_audio_callback;
+        this->audio_spec.callback = yli::audio::AudioSystem::play_audio_callback;
         this->audio_spec.userdata = nullptr; // this is a pointer that is passed to the callback.
 
         // initialize `device` member variable.
@@ -56,10 +56,10 @@ namespace yli::audio
         this->device = SDL_OpenAudioDevice(nullptr, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
         SDL_PauseAudioDevice(this->device, 1); // stop playing.
 
-        this->audio_master = this;   // `this` is the `AudioMaster`. Do not create more than 1 `AudioMaster`!
+        this->audio_system = this;   // `this` is the `AudioSystem`. Do not create more than 1 `AudioSystem`!
     }
 
-    AudioMaster::~AudioMaster()
+    AudioSystem::~AudioSystem()
     {
         // destructor.
 
@@ -69,7 +69,7 @@ namespace yli::audio
         }
     }
 
-    bool AudioMaster::load_and_play(const std::string& audio_file)
+    bool AudioSystem::load_and_play(const std::string& audio_file)
     {
         if (this->wav_buffer_pointer_map.count(audio_file) == 1)
         {
@@ -94,7 +94,7 @@ namespace yli::audio
             // https://wiki.libsdl.org/SDL_OpenAudioDevice
             wav_spec.channels = 2;
             wav_spec.samples = 4096;
-            wav_spec.callback = yli::audio::AudioMaster::play_audio_callback;
+            wav_spec.callback = yli::audio::AudioSystem::play_audio_callback;
 
             this->device = SDL_OpenAudioDevice(nullptr, 0, &wav_spec, &this->audio_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
 
@@ -119,7 +119,7 @@ namespace yli::audio
         return true;
     }
 
-    void AudioMaster::unload(const std::string& audio_file)
+    void AudioSystem::unload(const std::string& audio_file)
     {
         if (this->universe != nullptr && !this->universe->get_is_silent())
         {
@@ -137,7 +137,7 @@ namespace yli::audio
         }
     }
 
-    void AudioMaster::add_to_playlist(const std::string& playlist, const std::string& audio_file)
+    void AudioSystem::add_to_playlist(const std::string& playlist, const std::string& audio_file)
     {
         // Playlist must have a name. Empty string is not accepted.
         if (!playlist.empty() && this->playlist_map.count(playlist) == 0)
@@ -148,7 +148,7 @@ namespace yli::audio
         this->playlist_map[playlist].emplace_back(audio_file);
     }
 
-    void AudioMaster::remove_from_playlist(const std::string& playlist, const std::string& audio_file)
+    void AudioSystem::remove_from_playlist(const std::string& playlist, const std::string& audio_file)
     {
         if (this->playlist_map.count(playlist) == 1)
         {
@@ -164,7 +164,7 @@ namespace yli::audio
         }
     }
 
-    void AudioMaster::play_playlist(const std::string& playlist)
+    void AudioSystem::play_playlist(const std::string& playlist)
     {
         // This function starts playing the playlist "from the top".
         // Playlist must have a name. Empty string is not accepted.
@@ -176,7 +176,7 @@ namespace yli::audio
         }
     }
 
-    void AudioMaster::update()
+    void AudioSystem::update()
     {
         if (this->universe != nullptr && !this->universe->get_is_silent())
         {
@@ -222,33 +222,33 @@ namespace yli::audio
         }
     }
 
-    void AudioMaster::pause()
+    void AudioSystem::pause()
     {
         // TODO: implement pause!
     }
 
-    void AudioMaster::continue_after_pause()
+    void AudioSystem::continue_after_pause()
     {
         // TODO: implement continue after pause!
     }
 
-    void AudioMaster::clear_playlist(const std::string& playlist)
+    void AudioSystem::clear_playlist(const std::string& playlist)
     {
         // TODO: implement clear playlist!
     }
 
-    void AudioMaster::erase_playlist(const std::string& playlist)
+    void AudioSystem::erase_playlist(const std::string& playlist)
     {
         // TODO: implement erase playlist!
     }
 
-    int AudioMaster::get_remaining_length()
+    int AudioSystem::get_remaining_length()
     {
         // This function is not `const` due to use of `SDL_AtomicGet`.
         return SDL_AtomicGet(&this->remaining_length);
     }
 
-    void AudioMaster::play_audio(void* userdata, uint8_t* stream, int length)
+    void AudioSystem::play_audio(void* userdata, uint8_t* stream, int length)
     {
         if (this->universe != nullptr && !this->universe->get_is_silent())
         {
@@ -276,9 +276,9 @@ namespace yli::audio
         }
     }
 
-    void AudioMaster::play_audio_callback(void* userdata, uint8_t* stream, int length)
+    void AudioSystem::play_audio_callback(void* userdata, uint8_t* stream, int length)
     {
-        yli::audio::AudioMaster* audio_master = yli::audio::AudioMaster::audio_master;
-        audio_master->play_audio(userdata, stream, length);
+        yli::audio::AudioSystem* audio_system = yli::audio::AudioSystem::audio_system;
+        audio_system->play_audio(userdata, stream, length);
     }
 }

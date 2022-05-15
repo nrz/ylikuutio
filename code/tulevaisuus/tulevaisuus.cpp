@@ -31,7 +31,7 @@
 #include "tulevaisuus_console_callbacks.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
-#include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -244,7 +244,7 @@ namespace tulevaisuus
 
                 yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-                yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
+                yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 
                 yli::input::InputMaster* const input_master = my_universe->get_input_master();
 
@@ -686,11 +686,11 @@ namespace tulevaisuus
                 yli::ontology::create_lisp_function_overload("clear", my_console, std::function(&yli::ontology::Console::clear));
                 yli::ontology::create_lisp_function_overload("screenshot", my_console, std::function(&yli::ontology::Universe::screenshot));
 
-                if (audio_master != nullptr)
+                if (audio_system != nullptr)
                 {
-                    audio_master->add_to_playlist("Tulevaisuus_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-                    audio_master->add_to_playlist("Tulevaisuus_playlist", "414270__greek555__sample-97-bpm.wav");
-                    audio_master->play_playlist("Tulevaisuus_playlist");
+                    audio_system->add_to_playlist("Tulevaisuus_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+                    audio_system->add_to_playlist("Tulevaisuus_playlist", "414270__greek555__sample-97-bpm.wav");
+                    audio_system->play_playlist("Tulevaisuus_playlist");
                 }
 
                 std::cout << "Setting up window size ...\n";

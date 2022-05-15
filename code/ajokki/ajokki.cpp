@@ -31,7 +31,7 @@
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
-#include "code/ylikuutio/audio/audio_master.hpp"
+#include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
@@ -252,7 +252,7 @@ namespace ajokki
 
                 yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-                yli::audio::AudioMaster* const audio_master = my_universe->get_audio_master();
+                yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 
                 yli::input::InputMaster* const input_master = my_universe->get_input_master();
 
@@ -1055,11 +1055,11 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("miniinfo", mini_console, std::function(&yli::ontology::Universe::info0));
                 yli::ontology::create_lisp_function_overload("miniinfo", mini_console, std::function(&yli::ontology::Universe::info1));
 
-                if (audio_master != nullptr)
+                if (audio_system != nullptr)
                 {
-                    audio_master->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-                    audio_master->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
-                    audio_master->play_playlist("Ajokki_playlist");
+                    audio_system->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+                    audio_system->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+                    audio_system->play_playlist("Ajokki_playlist");
                 }
 
                 std::cout << "Setting up window size ...\n";

@@ -409,8 +409,8 @@ configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
 # Ylikuutio
 add_library(ylikuutio STATIC
     # audio, in alphabetical order
-    code/ylikuutio/audio/audio_master.cpp
-    code/ylikuutio/audio/audio_master.hpp
+    code/ylikuutio/audio/audio_system.cpp
+    code/ylikuutio/audio/audio_system.hpp
 
     # callback, in alphabetical order
     code/ylikuutio/callback/callback_engine.cpp
