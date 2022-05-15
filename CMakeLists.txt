@@ -730,11 +730,11 @@ add_library(ylikuutio STATIC
 
     # render, in alphabetical order
     code/ylikuutio/render/graphics_api_backend.hpp
-    code/ylikuutio/render/render_master.cpp
-    code/ylikuutio/render/render_master.hpp
-    code/ylikuutio/render/render_master_struct.hpp
     code/ylikuutio/render/render_model.hpp
     code/ylikuutio/render/render_struct.hpp
+    code/ylikuutio/render/render_system.cpp
+    code/ylikuutio/render/render_system.hpp
+    code/ylikuutio/render/render_system_struct.hpp
     code/ylikuutio/render/render_templates.hpp
 
     # sdl, in alphabetical order

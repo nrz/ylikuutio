@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "render_master.hpp"
+#include "render_system.hpp"
 #include "render_model.hpp"
 #include "render_templates.hpp"
-#include "render_master_struct.hpp"
+#include "render_system_struct.hpp"
 #include "render_struct.hpp"
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
 #include "code/ylikuutio/ontology/parent_of_shaders_module.hpp"
@@ -57,12 +57,12 @@ namespace yli::ontology
 
 namespace yli::render
 {
-    RenderMaster::RenderMaster(yli::ontology::Universe* const universe, const yli::render::RenderMasterStruct& render_master_struct)
+    RenderSystem::RenderSystem(yli::ontology::Universe* const universe, const yli::render::RenderSystemStruct& render_system_struct)
         : universe { universe },
-        hidden_window_title { render_master_struct.hidden_window_title },
-        hidden_window_width { render_master_struct.hidden_window_width },
-        hidden_window_height { render_master_struct.hidden_window_height },
-        is_hidden_window_fullscreen { render_master_struct.is_hidden_window_fullscreen }
+        hidden_window_title { render_system_struct.hidden_window_title },
+        hidden_window_width { render_system_struct.hidden_window_width },
+        hidden_window_height { render_system_struct.hidden_window_height },
+        is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
     {
         // constructor.
 
@@ -112,18 +112,18 @@ namespace yli::render
         }
     }
 
-    RenderMaster::~RenderMaster()
+    RenderSystem::~RenderSystem()
     {
         // destructor.
     }
 
-    void RenderMaster::create_context_and_make_it_current()
+    void RenderSystem::create_context_and_make_it_current()
     {
         std::cout << "Creating OpenGL context and making it current...\n";
         this->context = yli::sdl::create_context(this->hidden_sdl_window);
     }
 
-    [[nodiscard]] bool RenderMaster::setup_context(SDL_Window* window)
+    [[nodiscard]] bool RenderSystem::setup_context(SDL_Window* window)
     {
         if (this->context != nullptr)
         {
@@ -134,7 +134,7 @@ namespace yli::render
             }
             else
             {
-                std::cerr << "ERROR: `RenderMaster::setup_context`: setting context failed!\n";
+                std::cerr << "ERROR: `RenderSystem::setup_context`: setting context failed!\n";
                 return false; // Fail.
             }
         }
@@ -142,7 +142,7 @@ namespace yli::render
         return false; // Fail.
     }
 
-    [[nodiscard]] bool RenderMaster::setup_context()
+    [[nodiscard]] bool RenderSystem::setup_context()
     {
         if (this->context != nullptr)
         {
@@ -152,12 +152,12 @@ namespace yli::render
         return false; // Fail.
     }
 
-    void RenderMaster::set_swap_interval(const int32_t interval)
+    void RenderSystem::set_swap_interval(const int32_t interval)
     {
         yli::sdl::set_swap_interval(static_cast<int>(interval));
     }
 
-    void RenderMaster::restore_onscreen_rendering(const float window_width, const float window_height) const
+    void RenderSystem::restore_onscreen_rendering(const float window_width, const float window_height) const
     {
         // Bind the default framebuffer for on-screen rendering.
         yli::opengl::bind_gl_framebuffer(0);
@@ -172,7 +172,7 @@ namespace yli::render
         this->adjust_opengl_viewport(window_width, window_height);
     }
 
-    void RenderMaster::set_opengl_background_color() const
+    void RenderSystem::set_opengl_background_color() const
     {
         yli::opengl::set_background_color(
                 this->background_red,
@@ -181,7 +181,7 @@ namespace yli::render
                 this->background_alpha);
     }
 
-    void RenderMaster::adjust_opengl_viewport(const float window_width, const float window_height) const
+    void RenderSystem::adjust_opengl_viewport(const float window_width, const float window_height) const
     {
         if (window_width >= 0 && window_width <= std::numeric_limits<GLsizei>::max() &&
                 window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max())
@@ -190,7 +190,7 @@ namespace yli::render
         }
     }
 
-    void RenderMaster::render(const yli::render::RenderStruct& render_struct) const
+    void RenderSystem::render(const yli::render::RenderStruct& render_struct) const
     {
         if (render_struct.scene != nullptr)
         {
@@ -216,7 +216,7 @@ namespace yli::render
         SDL_GL_SwapWindow(render_struct.window);
     }
 
-    void RenderMaster::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
+    void RenderSystem::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
     {
         for (auto it = parent.child_pointer_vector.begin(); it != parent.child_pointer_vector.end(); ++it)
         {
@@ -229,7 +229,7 @@ namespace yli::render
         }
     }
 
-    void RenderMaster::render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
+    void RenderSystem::render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
     {
         yli::render::render_children_of_given_scene_or_of_all_scenes<
             yli::ontology::ParentOfShadersModule&,
@@ -239,88 +239,88 @@ namespace yli::render
                 scene);
     }
 
-    void RenderMaster::render_shaders(yli::ontology::ParentOfShadersModule& parent) const
+    void RenderSystem::render_shaders(yli::ontology::ParentOfShadersModule& parent) const
     {
         yli::render::render_children<yli::ontology::ParentOfShadersModule&, yli::ontology::Entity*, yli::ontology::Shader*>(parent);
     }
 
-    void RenderMaster::render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentice_pointer_vector) const
+    void RenderSystem::render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentice_pointer_vector) const
     {
         yli::render::render_apprentices<yli::ontology::Material*>(material_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const
+    void RenderSystem::render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const
     {
         yli::render::render_apprentices<yli::ontology::Species*>(species_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_symbioses(std::vector<yli::ontology::ApprenticeModule*>& symbiosis_apprentice_pointer_vector) const
+    void RenderSystem::render_symbioses(std::vector<yli::ontology::ApprenticeModule*>& symbiosis_apprentice_pointer_vector) const
     {
         yli::render::render_apprentices<yli::ontology::Symbiosis*>(symbiosis_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const
+    void RenderSystem::render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const
     {
         yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(symbiont_species->mesh, *(symbiont_species->get_renderables_container()));
     }
 
-    void RenderMaster::render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const
+    void RenderSystem::render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::SymbiontSpecies*>(symbiont_species_pointer_vector);
     }
 
-    void RenderMaster::render_holobionts(std::vector<yli::ontology::Entity*>& holobiont_pointer_vector) const
+    void RenderSystem::render_holobionts(std::vector<yli::ontology::Entity*>& holobiont_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Holobiont*>(holobiont_pointer_vector);
     }
 
-    void RenderMaster::render_bionts(std::vector<yli::ontology::Entity*>& biont_pointer_vector) const
+    void RenderSystem::render_bionts(std::vector<yli::ontology::Entity*>& biont_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Biont*>(biont_pointer_vector);
     }
 
-    void RenderMaster::render_shapeshifter_sequences(std::vector<yli::ontology::Entity*>& shapeshifter_sequence_pointer_vector) const
+    void RenderSystem::render_shapeshifter_sequences(std::vector<yli::ontology::Entity*>& shapeshifter_sequence_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::ShapeshifterSequence*>(shapeshifter_sequence_pointer_vector);
     }
 
-    void RenderMaster::render_chunk_masters(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_chunk_masters(yli::ontology::GenericParentModule& parent) const
     {
         yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::ChunkMaster*>(parent);
     }
 
-    void RenderMaster::render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const
+    void RenderSystem::render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Chunk*>(chunk_pointer_vector);
         glDisable(GL_BLEND);
     }
 
-    void RenderMaster::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
+    void RenderSystem::render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Text2D*>(text_2d_pointer_vector);
     }
 
-    void RenderMaster::render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const
+    void RenderSystem::render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const
     {
         yli::render::render_apprentices<yli::ontology::Console*>(console_apprentice_pointer_vector);
     }
 
-    void RenderMaster::render_vector_fonts(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_vector_fonts(yli::ontology::GenericParentModule& parent) const
     {
         yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::VectorFont*>(parent);
     }
 
-    void RenderMaster::render_glyph(yli::ontology::Glyph* const glyph) const
+    void RenderSystem::render_glyph(yli::ontology::Glyph* const glyph) const
     {
         yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(glyph->mesh, *(glyph->get_renderables_container()));
     }
 
-    void RenderMaster::render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const
+    void RenderSystem::render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const
     {
         yli::render::render_children<std::vector<yli::ontology::Entity*>, yli::ontology::Entity*, yli::ontology::Glyph*>(glyph_pointer_vector);
     }
 
-    void RenderMaster::render_compute_tasks(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_compute_tasks(yli::ontology::GenericParentModule& parent) const
     {
         yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Entity*, yli::ontology::ComputeTask*>(parent);
     }

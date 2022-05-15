@@ -28,7 +28,7 @@
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include <ofbx.h>
 
@@ -115,15 +115,15 @@ namespace yli::ontology
     {
         if (this->should_be_rendered)
         {
-            yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+            yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-            if (render_master == nullptr)
+            if (render_system == nullptr)
             {
-                std::cerr << "ERROR: `Symbiosis::render`: `render_master` is `nullptr`!\n";
+                std::cerr << "ERROR: `Symbiosis::render`: `render_system` is `nullptr`!\n";
                 return;
             }
 
-            render_master->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
+            render_system->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
         }
     }
 

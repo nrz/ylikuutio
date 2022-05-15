@@ -26,7 +26,7 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
@@ -141,11 +141,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Material::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `Material::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
@@ -156,9 +156,9 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        render_master->render_species(this->master_of_species.get_apprentice_module_pointer_vector_reference());
-        render_master->render_vector_fonts(this->parent_of_vector_fonts);
-        render_master->render_chunk_masters(this->parent_of_chunk_masters);
+        render_system->render_species(this->master_of_species.get_apprentice_module_pointer_vector_reference());
+        render_system->render_vector_fonts(this->parent_of_vector_fonts);
+        render_system->render_chunk_masters(this->parent_of_chunk_masters);
     }
 
     yli::ontology::Entity* Material::get_parent() const

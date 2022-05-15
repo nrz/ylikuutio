@@ -37,7 +37,7 @@
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -175,11 +175,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Scene::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `Scene::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
@@ -198,8 +198,8 @@ namespace yli::ontology
             std::cerr << "ERROR: `Scene::render`: Vulkan is not supported yet!\n";
         }
 
-        render_master->render_shaders_of_ecosystems(this->universe.get_ecosystem_shaders(), this);
-        render_master->render_shaders(this->parent_of_shaders);
+        render_system->render_shaders_of_ecosystems(this->universe.get_ecosystem_shaders(), this);
+        render_system->render_shaders(this->parent_of_shaders);
     }
 
     yli::ontology::Camera* Scene::get_default_camera() const

@@ -190,7 +190,7 @@ namespace yli::input
 
 namespace yli::render
 {
-    class RenderMaster;
+    class RenderSystem;
     struct RenderStruct;
 }
 
@@ -261,7 +261,7 @@ namespace yli::ontology
 
             std::string eval_string(const std::string& my_string) const;
 
-            yli::render::RenderMaster* get_render_master() const;
+            yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioMaster* get_audio_master() const;
             yli::input::InputMaster* get_input_master() const;
 
@@ -473,7 +473,7 @@ namespace yli::ontology
             yli::ontology::Scene* active_scene     { nullptr };
             yli::ontology::Console* active_console { nullptr };
 
-            std::unique_ptr<yli::render::RenderMaster> render_master { nullptr }; // pointer to `RenderMaster`.
+            std::unique_ptr<yli::render::RenderSystem> render_system { nullptr }; // pointer to `RenderSystem`.
             std::unique_ptr<yli::audio::AudioMaster> audio_master    { nullptr }; // pointer to `AudioMaster`.
             std::unique_ptr<yli::input::InputMaster> input_master    { nullptr }; // pointer to `InputMaster`.
 

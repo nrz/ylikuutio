@@ -58,8 +58,8 @@
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
-#include "code/ylikuutio/render/render_master_struct.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
+#include "code/ylikuutio/render/render_system_struct.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/render/render_struct.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -202,8 +202,8 @@ namespace yli::ontology
         }
         else
         {
-            yli::render::RenderMasterStruct render_master_struct;
-            this->render_master = std::make_unique<yli::render::RenderMaster>(this, render_master_struct);
+            yli::render::RenderSystemStruct render_system_struct;
+            this->render_system = std::make_unique<yli::render::RenderSystem>(this, render_system_struct);
             this->input_master = std::make_unique<yli::input::InputMaster>(this);
         }
 
@@ -685,13 +685,13 @@ namespace yli::ontology
 
     void Universe::render(const yli::render::RenderStruct& render_struct)
     {
-        // Used `RenderMaster` rendering implementation depends of the graphics API.
+        // Used `RenderSystem` rendering implementation depends of the graphics API.
         // Software rendering renders to a CPU memory region or to file.
         // TODO: implement Vulkan rendering!
         // TODO: implement software rendering!
         if (this->should_be_rendered &&
                 this->get_active_camera() != nullptr &&
-                this->render_master != nullptr)
+                this->render_system != nullptr)
         {
             if (this->get_is_opengl_in_use())
             {
@@ -707,7 +707,7 @@ namespace yli::ontology
                 std::cerr << "ERROR: `Universe::render`: Vulkan is not supported yet!\n";
             }
 
-            this->render_master->render(render_struct);
+            this->render_system->render(render_struct);
         }
 
         yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
@@ -904,7 +904,7 @@ namespace yli::ontology
         // Setup graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
-            if (!this->render_master->setup_context(this->window))
+            if (!this->render_system->setup_context(this->window))
             {
                 // Setting up context failed.
                 return false;
@@ -1109,14 +1109,14 @@ namespace yli::ontology
         return "TODO: eval";
     }
 
-    yli::render::RenderMaster* Universe::get_render_master() const
+    yli::render::RenderSystem* Universe::get_render_system() const
     {
-        if (this->render_master == nullptr)
+        if (this->render_system == nullptr)
         {
             return nullptr;
         }
 
-        return this->render_master.get();
+        return this->render_system.get();
     }
 
     yli::audio::AudioMaster* Universe::get_audio_master() const

@@ -191,9 +191,9 @@ namespace yli::ontology
 
     void Object::render_this_object(yli::ontology::Shader* const shader)
     {
-        if (this->universe.get_render_master() == nullptr)
+        if (this->universe.get_render_system() == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `this->universe.get_render_master()` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!\n";
             return;
         }
 

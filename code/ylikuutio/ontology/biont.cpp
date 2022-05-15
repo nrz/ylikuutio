@@ -116,9 +116,9 @@ namespace yli::ontology
 
         yli::ontology::Universe& universe = this->universe;
 
-        if (universe.get_render_master() == nullptr)
+        if (universe.get_render_system() == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `universe.get_render_master()` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `universe.get_render_system()` is `nullptr`!\n";
             return;
         }
 

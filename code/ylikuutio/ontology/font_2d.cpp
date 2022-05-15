@@ -23,7 +23,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
@@ -141,17 +141,17 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Font2D::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `Font2D::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
         this->prepare_to_print();
-        render_master->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
-        render_master->render_consoles(this->master_of_consoles.get_apprentice_module_pointer_vector_reference());
+        render_system->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
+        render_system->render_consoles(this->master_of_consoles.get_apprentice_module_pointer_vector_reference());
         glDisable(GL_BLEND);
     }
 

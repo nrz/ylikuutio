@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_RENDER_RENDER_MASTER_HPP_INCLUDED
-#define __YLIKUUTIO_RENDER_RENDER_MASTER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_RENDER_RENDER_SYSTEM_HPP_INCLUDED
+#define __YLIKUUTIO_RENDER_RENDER_SYSTEM_HPP_INCLUDED
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
@@ -41,20 +41,20 @@ namespace yli::ontology
 
 namespace yli::render
 {
-    struct RenderMasterStruct;
+    struct RenderSystemStruct;
     struct RenderStruct;
 
-    class RenderMaster
+    class RenderSystem
     {
         public:
             // constructor.
-            RenderMaster(yli::ontology::Universe* const universe, const yli::render::RenderMasterStruct& render_master_struct);
+            RenderSystem(yli::ontology::Universe* const universe, const yli::render::RenderSystemStruct& render_system_struct);
 
-            RenderMaster(const RenderMaster&) = delete;            // Delete copy constructor.
-            RenderMaster& operator=(const RenderMaster&) = delete; // Delete copy assignment.
+            RenderSystem(const RenderSystem&) = delete;            // Delete copy constructor.
+            RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~RenderMaster();
+            ~RenderSystem();
 
             void create_context_and_make_it_current();
             [[nodiscard]] bool setup_context(SDL_Window* window);

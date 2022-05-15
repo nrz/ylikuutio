@@ -17,7 +17,7 @@
 
 #include "symbiont_species.hpp"
 #include "universe.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -48,15 +48,15 @@ namespace yli::ontology
 
     void SymbiontSpecies::render()
     {
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `SymbiontSpecies::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `SymbiontSpecies::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
-        render_master->render_symbiont_species(this);
+        render_system->render_symbiont_species(this);
     }
 
     yli::ontology::GenericMasterModule* SymbiontSpecies::get_renderables_container() const

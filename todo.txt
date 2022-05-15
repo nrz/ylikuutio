@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.
 [ ] Rename `AudioMaster` to `AudioSystem`.
 [ ] Rename `InputMaster` to `InputSystem`.
 [ ] When running in fullscreen mode, restore original screen resolution upon program termination.
@@ -309,3 +308,4 @@ Ready:
 [x] Do not bind to any master that belongs to a different `Scene`.
 [x] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
 [x] Fix compiling on MacOS.
+[x] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.

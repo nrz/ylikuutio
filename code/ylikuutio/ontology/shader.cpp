@@ -24,7 +24,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
@@ -162,20 +162,20 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Shader::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `Shader::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
         // [Re]bind `program_id` shader.
         glUseProgram(this->program_id);
 
-        render_master->render_compute_tasks(this->parent_of_compute_tasks);
-        render_master->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
-        render_master->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
+        render_system->render_compute_tasks(this->parent_of_compute_tasks);
+        render_system->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
+        render_system->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
     }
 
     yli::ontology::Scene* Shader::get_scene() const

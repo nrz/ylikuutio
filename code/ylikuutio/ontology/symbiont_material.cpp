@@ -24,7 +24,7 @@
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
@@ -79,11 +79,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `SymbiontMaterial::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `SymbiontMaterial::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
@@ -96,7 +96,7 @@ namespace yli::ontology
             yli::opengl::uniform_1i(this->opengl_texture_id, 0);
         }
 
-        render_master->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
+        render_system->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const

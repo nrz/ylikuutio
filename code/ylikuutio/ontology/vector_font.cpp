@@ -24,7 +24,7 @@
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
@@ -128,15 +128,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `VectorFont::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
-        render_master->render_glyphs(this->parent_of_glyphs.child_pointer_vector);
+        render_system->render_glyphs(this->parent_of_glyphs.child_pointer_vector);
     }
 
     yli::ontology::Entity* VectorFont::get_parent() const

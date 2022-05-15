@@ -25,7 +25,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
@@ -67,15 +67,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Holobiont::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `Holobiont::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
-        render_master->render_bionts(this->parent_of_bionts.child_pointer_vector);
+        render_system->render_bionts(this->parent_of_bionts.child_pointer_vector);
     }
 
     void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)

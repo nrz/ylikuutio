@@ -22,7 +22,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/render/render_master.hpp"
+#include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
@@ -84,15 +84,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderMaster* const render_master = this->universe.get_render_master();
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_master == nullptr)
+        if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::render`: `render_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `ShapeshifterTransformation::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
-        render_master->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences.child_pointer_vector);
+        render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences.child_pointer_vector);
     }
 
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const
