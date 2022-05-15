@@ -51,7 +51,7 @@
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/input/input_master.hpp"
+#include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -100,7 +100,7 @@
 
 namespace yli::input
 {
-    class InputMaster;
+    class InputSystem;
 }
 
 namespace yli::ontology
@@ -204,7 +204,7 @@ namespace yli::ontology
         {
             yli::render::RenderSystemStruct render_system_struct;
             this->render_system = std::make_unique<yli::render::RenderSystem>(this, render_system_struct);
-            this->input_master = std::make_unique<yli::input::InputMaster>(this);
+            this->input_system = std::make_unique<yli::input::InputSystem>(this);
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -358,7 +358,7 @@ namespace yli::ontology
         // This method contains the main simulation loop.
         bool has_mouse_focus = true;
 
-        while (!this->is_exit_requested && this->input_master != nullptr)
+        while (!this->is_exit_requested && this->input_system != nullptr)
         {
             const float current_time_in_main_loop = yli::time::get_time();
 
@@ -404,7 +404,7 @@ namespace yli::ontology
                 this->mouse_x = this->window_width / 2;
                 this->mouse_y = this->window_height / 2;
 
-                const yli::input::InputMode* const input_mode = input_master->get_active_input_mode();
+                const yli::input::InputMode* const input_mode = input_system->get_active_input_mode();
 
                 if (input_mode == nullptr)
                 {
@@ -779,12 +779,12 @@ namespace yli::ontology
 
     yli::input::InputMethod Universe::get_input_method() const
     {
-        if (this->input_master == nullptr)
+        if (this->input_system == nullptr)
         {
             return yli::input::InputMethod::KEYBOARD;
         }
 
-        return this->input_master->get_input_method();
+        return this->input_system->get_input_method();
     }
 
     yli::render::GraphicsApiBackend Universe::get_graphics_api_backend() const
@@ -1129,14 +1129,14 @@ namespace yli::ontology
         return this->audio_system.get();
     }
 
-    yli::input::InputMaster* Universe::get_input_master() const
+    yli::input::InputSystem* Universe::get_input_system() const
     {
-        if (this->input_master == nullptr)
+        if (this->input_system == nullptr)
         {
             return nullptr;
         }
 
-        return this->input_master.get();
+        return this->input_system.get();
     }
 
     btDefaultCollisionConfiguration* Universe::get_collision_configuration() const

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_INPUT_INPUT_MASTER_HPP_INCLUDED
-#define __YLIKUUTIO_INPUT_INPUT_MASTER_HPP_INCLUDED
+#ifndef __YLIKUUTIO_INPUT_INPUT_SYSTEM_HPP_INCLUDED
+#define __YLIKUUTIO_INPUT_INPUT_SYSTEM_HPP_INCLUDED
 
 #include "input.hpp"
 
@@ -35,19 +35,19 @@ namespace yli::input
 {
     class InputMode;
 
-    class InputMaster
+    class InputSystem
     {
         public:
             void bind_input_mode(yli::input::InputMode* const input_mode);
 
             // constructor.
-            explicit InputMaster(yli::ontology::Universe* const universe);
+            explicit InputSystem(yli::ontology::Universe* const universe);
 
-            InputMaster(const InputMaster&) = delete;            // Delete copy constructor.
-            InputMaster& operator=(const InputMaster&) = delete; // Delete copy assignment.
+            InputSystem(const InputSystem&) = delete;            // Delete copy constructor.
+            InputSystem& operator=(const InputSystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~InputMaster();
+            ~InputSystem();
 
             yli::input::InputMode* create_input_mode();
 

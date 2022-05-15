@@ -43,7 +43,7 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
-#include "code/ylikuutio/input/input_master.hpp"
+#include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
@@ -254,7 +254,7 @@ namespace ajokki
 
                 yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 
-                yli::input::InputMaster* const input_master = my_universe->get_input_master();
+                yli::input::InputSystem* const input_system = my_universe->get_input_system();
 
                 if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
                 {
@@ -841,7 +841,7 @@ namespace ajokki
 
                 // Keyrelease callbacks for action mode.
                 // Key releases are checked in the order of this struct.
-                yli::input::InputMode* const action_mode_input_mode = input_master->create_input_mode();
+                yli::input::InputMode* const action_mode_input_mode = input_system->create_input_mode();
                 action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, &release_first_turbo_callback_engine);
                 action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, &release_second_turbo_callback_engine);
                 action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_I, &enable_toggle_invert_mouse_callback_engine);
@@ -876,7 +876,7 @@ namespace ajokki
 
                 // Keyrelease callbacks for `my_console`.
                 // Key releases are checked in the order of this struct.
-                yli::input::InputMode* const my_console_mode_input_mode = input_master->create_input_mode();
+                yli::input::InputMode* const my_console_mode_input_mode = input_system->create_input_mode();
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, &my_release_left_control_in_console_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, &my_release_right_control_in_console_callback_engine);
                 my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LALT, &my_release_left_alt_in_console_callback_engine);
@@ -919,7 +919,7 @@ namespace ajokki
 
                 // Keyrelease callbacks for `mini_console`.
                 // Key releases are checked in the order of this struct.
-                yli::input::InputMode* const mini_console_mode_input_mode = input_master->create_input_mode();
+                yli::input::InputMode* const mini_console_mode_input_mode = input_system->create_input_mode();
                 mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, &mini_release_left_control_in_console_callback_engine);
                 mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, &mini_release_right_control_in_console_callback_engine);
                 mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LALT, &mini_release_left_alt_in_console_callback_engine);

@@ -184,7 +184,7 @@ namespace yli::data
 
 namespace yli::input
 {
-    class InputMaster;
+    class InputSystem;
     enum class InputMethod;
 }
 
@@ -263,7 +263,7 @@ namespace yli::ontology
 
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
-            yli::input::InputMaster* get_input_master() const;
+            yli::input::InputSystem* get_input_system() const;
 
             btDefaultCollisionConfiguration* get_collision_configuration() const;
             btCollisionDispatcher* get_dispatcher() const;
@@ -475,7 +475,7 @@ namespace yli::ontology
 
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr }; // pointer to `RenderSystem`.
             std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr }; // pointer to `AudioSystem`.
-            std::unique_ptr<yli::input::InputMaster> input_master    { nullptr }; // pointer to `InputMaster`.
+            std::unique_ptr<yli::input::InputSystem> input_system    { nullptr }; // pointer to `InputSystem`.
 
             // Bullet variables.
             std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration { std::make_unique<btDefaultCollisionConfiguration>() };

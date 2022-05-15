@@ -34,7 +34,7 @@ namespace yli::callback
 
 namespace yli::input
 {
-    class InputMaster;
+    class InputSystem;
 
     class InputMode
     {
@@ -56,7 +56,7 @@ namespace yli::input
             const std::vector<yli::callback::CallbackEngine*>* get_keyrelease_callback_engines() const;
             const std::vector<yli::callback::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
-            friend class yli::input::InputMaster;
+            friend class yli::input::InputSystem;
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
@@ -64,12 +64,12 @@ namespace yli::input
             void bind_to_parent();
 
             // constructor.
-            explicit InputMode(yli::input::InputMaster* const input_master);
+            explicit InputMode(yli::input::InputSystem* const input_system);
 
             InputMode(const InputMode&) = delete;            // Delete copy constructor.
             yli::input::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
-            yli::input::InputMaster* parent { nullptr };
+            yli::input::InputSystem* parent { nullptr };
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             std::vector<yli::callback::CallbackEngine*> keypress_callback_engines;

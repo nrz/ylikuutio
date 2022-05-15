@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "input_mode.hpp"
-#include "input_master.hpp"
+#include "input_system.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -34,24 +34,24 @@ namespace yli::input
     {
         // requirements:
         // `this->parent` must not be `nullptr`.
-        yli::input::InputMaster* const input_master = this->parent;
+        yli::input::InputSystem* const input_system = this->parent;
 
-        if (input_master == nullptr)
+        if (input_system == nullptr)
         {
-            std::cerr << "ERROR: `InputMode::bind_to_parent`: `input_master` is `nullptr`!\n";
+            std::cerr << "ERROR: `InputMode::bind_to_parent`: `input_system` is `nullptr`!\n";
             return;
         }
 
-        // get `childID` from the `InputMaster` and set pointer to this `InputMode`.
-        input_master->bind_input_mode(this);
+        // get `childID` from the `InputSystem` and set pointer to this `InputMode`.
+        input_system->bind_input_mode(this);
     }
 
-    InputMode::InputMode(yli::input::InputMaster* const input_master)
+    InputMode::InputMode(yli::input::InputSystem* const input_system)
     {
         // constructor.
-        this->parent = input_master;
+        this->parent = input_system;
 
-        // get `childID` from `InputMaster` and set pointer to this `InputMode`.
+        // get `childID` from `InputSystem` and set pointer to this `InputMode`.
         this->bind_to_parent();
     }
 

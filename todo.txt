@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Rename `InputMaster` to `InputSystem`.
 [ ] When running in fullscreen mode, restore original screen resolution upon program termination.
 [ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
@@ -309,3 +308,4 @@ Ready:
 [x] Fix compiling on MacOS.
 [x] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.
 [x] Rename `AudioMaster` to `AudioSystem`.
+[x] Rename `InputMaster` to `InputSystem`.

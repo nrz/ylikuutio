@@ -15,15 +15,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "input_master.hpp"
+#include "input_system.hpp"
 #include "input_mode.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 namespace yli::input
 {
-    void InputMaster::bind_input_mode(yli::input::InputMode* const input_mode)
+    void InputSystem::bind_input_mode(yli::input::InputMode* const input_mode)
     {
-        // get `childID` from `InputMaster` and set pointer to `input_mode`.
+        // get `childID` from `InputSystem` and set pointer to `input_mode`.
         yli::hierarchy::bind_child_to_parent<yli::input::InputMode*>(
                 input_mode,
                 this->input_mode_pointer_vector,
@@ -31,7 +31,7 @@ namespace yli::input
                 this->number_of_input_modes);
     }
 
-    InputMaster::InputMaster(yli::ontology::Universe* const universe)
+    InputSystem::InputSystem(yli::ontology::Universe* const universe)
         : universe { universe }
     {
         // constructor.
@@ -39,20 +39,20 @@ namespace yli::input
         this->input_method = yli::input::InputMethod::KEYBOARD;
     }
 
-    InputMaster::~InputMaster()
+    InputSystem::~InputSystem()
     {
         // destructor.
 
-        // destroy all `InputMode`s of this `InputMaster`.
+        // destroy all `InputMode`s of this `InputSystem`.
         yli::hierarchy::delete_children<yli::input::InputMode*>(this->input_mode_pointer_vector, this->number_of_input_modes);
     }
 
-    yli::input::InputMode* InputMaster::create_input_mode()
+    yli::input::InputMode* InputSystem::create_input_mode()
     {
         return new yli::input::InputMode(this);
     }
 
-    void InputMaster::set_active_input_mode(yli::input::InputMode* const input_mode)
+    void InputSystem::set_active_input_mode(yli::input::InputMode* const input_mode)
     {
         if (this->active_input_mode != nullptr)
         {
@@ -62,12 +62,12 @@ namespace yli::input
         this->active_input_mode = input_mode;
     }
 
-    yli::input::InputMode* InputMaster::get_active_input_mode() const
+    yli::input::InputMode* InputSystem::get_active_input_mode() const
     {
         return this->active_input_mode;
     }
 
-    void InputMaster::pop_input_mode()
+    void InputSystem::pop_input_mode()
     {
         if (!this->input_mode_stack.empty())
         {
@@ -76,7 +76,7 @@ namespace yli::input
         }
     }
 
-    yli::input::InputMethod InputMaster::get_input_method() const
+    yli::input::InputMethod InputSystem::get_input_method() const
     {
         return this->input_method;
     }
