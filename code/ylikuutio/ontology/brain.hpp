@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
-#include "brain_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -58,6 +57,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class GenericParentModule;
+    struct BrainStruct;
 
     class Brain: public yli::ontology::Entity
     {
@@ -65,18 +65,7 @@ namespace yli::ontology
             Brain(
                     yli::ontology::Universe& universe,
                     const yli::ontology::BrainStruct& brain_struct,
-                    yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, brain_struct),
-                child_of_scene(parent_module, this),
-                master_of_movables(this, &this->registry, "movables")
-            {
-                // constructor.
-                this->callback_engine    = brain_struct.callback_engine;
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Brain*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericParentModule* const parent_module);
 
             // destructor.
             ~Brain();

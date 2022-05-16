@@ -19,6 +19,7 @@
 #include "generic_master_module.hpp"
 #include "scene.hpp"
 #include "movable.hpp"
+#include "brain_struct.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -29,7 +30,25 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
+    class Universe;
+
+    Brain::Brain(
+            yli::ontology::Universe& universe,
+            const yli::ontology::BrainStruct& brain_struct,
+            yli::ontology::GenericParentModule* const parent_module)
+        : Entity(universe, brain_struct),
+        child_of_scene(parent_module, this),
+        master_of_movables(this, &this->registry, "movables")
+    {
+        // constructor.
+        this->callback_engine    = brain_struct.callback_engine;
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Brain*";
+        this->can_be_erased = true;
+    }
 
     Brain::~Brain()
     {
