@@ -22,10 +22,8 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "rigid_body_module.hpp"
-#include "universe.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -79,41 +77,7 @@ namespace yli::ontology
 
             Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
-                    yli::ontology::GenericMasterModule* const brain_master)
-                : Entity(universe, movable_struct),
-                apprentice_of_brain(brain_master, this),
-                rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
-                initial_rotate_vectors { movable_struct.initial_rotate_vectors },
-                initial_rotate_angles { movable_struct.initial_rotate_angles },
-                original_scale_vector { movable_struct.original_scale_vector },
-                cartesian_coordinates { movable_struct.cartesian_coordinates },
-                spherical_coordinates { movable_struct.spherical_coordinates },
-                roll { movable_struct.roll },
-                yaw { movable_struct.yaw },
-                pitch { movable_struct.pitch },
-                input_method { movable_struct.input_method }
-            {
-                // constructor.
-
-                if (this->universe.get_is_opengl_in_use())
-                {
-                    // Uniform block for data related to this `Movable`.
-
-                    glGenBuffers(1, &this->movable_uniform_block);
-                    glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-                    glBufferData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
-                    glBindBuffer(GL_UNIFORM_BUFFER, 0);
-                }
-
-                // Initialize speed, angular speed and maximum speed variables.
-                // These are to be used from the `Brain` callbacks.
-
-                this->create_coordinate_and_angle_variables();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Movable*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericMasterModule* const brain_master);
 
             Movable(const Movable&) = delete;            // Delete copy constructor.
             Movable& operator=(const Movable&) = delete; // Delete copy assignment.
