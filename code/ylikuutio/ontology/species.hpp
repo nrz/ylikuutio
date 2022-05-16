@@ -23,7 +23,6 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "mesh_module.hpp"
-#include "model_struct.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
@@ -42,6 +41,7 @@ namespace yli::ontology
     class Scene;
     class Shader;
     class Material;
+    struct ModelStruct;
 
     class Species: public yli::ontology::Entity
     {
@@ -58,19 +58,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const material_master)
-                : Entity(universe, model_struct),
-                child_of_scene(scene_parent_module, this),
-                master_of_objects(this, &this->registry, "objects"),
-                apprentice_of_material(material_master, this),
-                mesh(universe, model_struct)
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Species*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericMasterModule* const material_master);
 
             Species(const Species&) = delete;            // Delete copy constructor.
             Species& operator=(const Species&) = delete; // Delete copy assignment.

@@ -33,7 +33,11 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
+    class Universe;
     class Shader;
+    struct ModelStruct;
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent)
     {
@@ -85,6 +89,24 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    Species::Species(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const scene_parent_module,
+            yli::ontology::GenericMasterModule* const material_master)
+        : Entity(universe, model_struct),
+        child_of_scene(scene_parent_module, this),
+        master_of_objects(this, &this->registry, "objects"),
+        apprentice_of_material(material_master, this),
+        mesh(universe, model_struct)
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Species*";
+        this->can_be_erased = true;
     }
 
     Species::~Species()
