@@ -17,7 +17,6 @@
 
 #include "variable.hpp"
 #include "entity.hpp"
-#include "universe.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -30,6 +29,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Universe;
     class Scene;
 
     void Variable::bind_to_parent()
