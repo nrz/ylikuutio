@@ -155,6 +155,40 @@ namespace yli::ontology
         return std::nullopt;
     }
 
+    Object::Object(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ObjectStruct& object_struct,
+            yli::ontology::GenericParentModule* const scene_parent_module,
+            yli::ontology::GenericMasterModule* const mesh_master,
+            yli::ontology::GenericMasterModule* const brain_master)
+        : Movable(
+                universe,
+                object_struct,
+                brain_master),
+        child_of_scene(scene_parent_module, this),
+        apprentice_of_mesh(mesh_master, this)
+    {
+        // constructor.
+
+        if (std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master))
+        {
+            this->object_type = yli::ontology::ObjectType::REGULAR;
+        }
+        else if (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master))
+        {
+            this->object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+        }
+        else if (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master))
+        {
+            this->object_type = yli::ontology::ObjectType::CHARACTER;
+            this->glyph = object_struct.glyph;
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Object*";
+        this->can_be_erased = true;
+    }
+
     Object::~Object()
     {
         // destructor.
