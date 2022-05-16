@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
-#include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -50,26 +49,15 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Console;
+    struct VariableStruct;
 
     class Variable: public yli::ontology::Entity 
     {
         public:
-            Variable(yli::ontology::Universe& universe, const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
-                : Entity(universe, variable_struct),
-                parent            { variable_struct.parent },
-                variable_value    { any_value },
-                activate_callback { variable_struct.activate_callback },
-                read_callback     { variable_struct.read_callback }
-            {
-                // constructor (to be called from `Entity::create_variable`).
-
-                // Get `childID` from `Entity` and set pointer to this `Variable`.
-                this->bind_to_parent();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Variable*";
-                this->can_be_erased = true;
-            }
+            Variable(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::VariableStruct& variable_struct,
+                    const yli::data::AnyValue& any_value);
 
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
