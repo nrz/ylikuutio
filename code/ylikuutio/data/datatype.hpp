@@ -54,9 +54,6 @@ namespace yli::data
         // `yli::ontology` datatypes, 'variable' path.
         VARIABLE_POINTER,
         CONST_VARIABLE_POINTER,
-        // `yli::ontology` datatypes, 'anystructentity' path.
-        ANY_STRUCT_ENTITY_POINTER,
-        CONST_ANY_STRUCT_ENTITY_POINTER,
         // `yli::ontology` datatypes, 'window' path.
         WINDOW_POINTER,
         CONST_WINDOW_POINTER,
