@@ -22,6 +22,7 @@
 #include "object.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
