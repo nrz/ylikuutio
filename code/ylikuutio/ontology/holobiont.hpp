@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <optional> // std::optional
 #include <string>   // std::string
 #include <vector>   // std::vector
 
