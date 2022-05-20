@@ -55,6 +55,7 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class GenericMasterModule;
     class Universe;
     class Scene;
     class Shader;
