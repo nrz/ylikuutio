@@ -28,7 +28,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::data
