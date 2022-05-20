@@ -22,6 +22,7 @@
 #include "biont.hpp"
 #include "entity_factory.hpp"
 #include "holobiont_struct.hpp"
+#include "biont_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
