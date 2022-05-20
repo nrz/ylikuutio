@@ -22,7 +22,6 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
-#include "model_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -47,6 +46,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Shader;
+    struct ModelStruct;
 
     class SymbiontSpecies: public yli::ontology::Entity
     {
@@ -54,17 +54,7 @@ namespace yli::ontology
             SymbiontSpecies(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const symbiont_material_parent_module)
-                : Entity(universe, model_struct),
-                child_of_symbiont_material(symbiont_material_parent_module, this),
-                master_of_bionts(this, &this->registry, "bionts"),
-                mesh(universe, model_struct)
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::SymbiontSpecies*";
-            }
+                    yli::ontology::GenericParentModule* const symbiont_material_parent_module);
 
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.

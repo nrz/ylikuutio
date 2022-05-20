@@ -17,6 +17,7 @@
 
 #include "symbiont_species.hpp"
 #include "universe.hpp"
+#include "model_struct.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 
 // Include standard headers
@@ -27,7 +28,23 @@
 namespace yli::ontology
 {
     class Entity;
+    class Universe;
     class Scene;
+
+    SymbiontSpecies::SymbiontSpecies(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const symbiont_material_parent_module)
+        : Entity(universe, model_struct),
+        child_of_symbiont_material(symbiont_material_parent_module, this),
+        master_of_bionts(this, &this->registry, "bionts"),
+        mesh(universe, model_struct)
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::SymbiontSpecies*";
+    }
 
     SymbiontSpecies::~SymbiontSpecies()
     {
