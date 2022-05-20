@@ -27,7 +27,6 @@
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
-#include "model_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
 
@@ -61,6 +60,7 @@ namespace yli::ontology
     class Shader;
     class SymbiontMaterial;
     class SymbiontSpecies;
+    struct ModelStruct;
 
     class Symbiosis: public yli::ontology::Entity
     {
@@ -77,24 +77,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const shader_master)
-                : Entity(universe, model_struct),
-                child_of_scene(scene_parent_module, this),
-                parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
-                parent_of_holobionts(this, &this->registry, "holobionts"),
-                apprentice_of_shader(shader_master, this),
-                model_filename     { model_struct.model_filename },
-                model_file_format  { model_struct.model_file_format },
-                triangulation_type { model_struct.triangulation_type }
-            {
-                // constructor.
-
-                this->create_symbionts();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Symbiosis*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericMasterModule* const shader_master);
 
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.

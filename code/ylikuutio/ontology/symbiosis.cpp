@@ -105,6 +105,29 @@ namespace yli::ontology
         return std::nullopt;
     }
 
+    Symbiosis::Symbiosis(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const scene_parent_module,
+            yli::ontology::GenericMasterModule* const shader_master)
+        : Entity(universe, model_struct),
+        child_of_scene(scene_parent_module, this),
+        parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
+        parent_of_holobionts(this, &this->registry, "holobionts"),
+        apprentice_of_shader(shader_master, this),
+        model_filename     { model_struct.model_filename },
+        model_file_format  { model_struct.model_file_format },
+        triangulation_type { model_struct.triangulation_type }
+    {
+        // constructor.
+
+        this->create_symbionts();
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Symbiosis*";
+        this->can_be_erased = true;
+    }
+
     Symbiosis::~Symbiosis()
     {
         // destructor.
