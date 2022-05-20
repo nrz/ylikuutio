@@ -23,23 +23,18 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "texture_module.hpp"
-#include "universe.hpp"
-#include "font_struct.hpp"
-#include "code/ylikuutio/load/image_loader_struct.hpp"
-#include "code/ylikuutio/load/shader_loader.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <iostream>  // std::cout, std::cin, std::cerr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
-#include <utility>   // std::pair
 
 namespace yli::ontology
 {
+    class Universe;
     class Scene;
+    struct FontStruct;
     struct TextStruct;
 
     class Font2D: public yli::ontology::Entity
@@ -48,65 +43,7 @@ namespace yli::ontology
             Font2D(
                     yli::ontology::Universe& universe,
                     const yli::ontology::FontStruct& font_struct,
-                    yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, font_struct),
-                child_of_universe(parent_module, this),
-                parent_of_text_2ds(this, &this->registry, "text_2ds"),
-                master_of_consoles(this, &this->registry, "consoles"),
-                texture(
-                        universe,
-                        &this->registry,
-                        font_struct.texture_filename,
-                        font_struct.font_texture_file_format,
-                        yli::load::ImageLoaderStruct({ std::pair(yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
-                        "texture"),
-                screen_width  { font_struct.screen_width },
-                screen_height { font_struct.screen_height },
-                text_size     { font_struct.text_size },
-                font_size     { font_struct.font_size }
-        {
-                // constructor.
-
-                if (this->texture.get_is_texture_loaded())
-                {
-                    if (this->universe.get_is_opengl_in_use())
-                    {
-                        // Initialize VAO.
-                        glGenVertexArrays(1, &this->vao);
-                        glBindVertexArray(this->vao);
-
-                        // Initialize VBO.
-                        glGenBuffers(1, &this->vertexbuffer);
-                        glGenBuffers(1, &this->uvbuffer);
-
-                        // Initialize `Shader`.
-                        this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
-                        glUseProgram(this->program_id);
-
-                        // Get a handle for our buffers.
-                        this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
-                        this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertexUV");
-
-                        // Initialize uniforms' IDs.
-                        this->text_2d_uniform_id = glGetUniformLocation(this->program_id, "texture_sampler");
-
-                        // Initialize uniform window width.
-                        this->screen_width_uniform_id = glGetUniformLocation(this->program_id, "screen_width");
-                        yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
-
-                        // Initialize uniform window height.
-                        this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
-                        yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
-                    }
-                    else if (this->universe.get_is_vulkan_in_use())
-                    {
-                        std::cerr << "ERROR: `Font2D::Font2D`: Vulkan is not supported yet!\n";
-                    }
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Font2D*";
-            }
+                    yli::ontology::GenericParentModule* const parent_module);
 
             Font2D(const Font2D&) = delete;            // Delete copy constructor.
             Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
