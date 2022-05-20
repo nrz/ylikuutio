@@ -20,7 +20,6 @@
 
 #include "entity.hpp"
 #include "chunk_struct.hpp"
-#include "chunk_master.hpp"
 #include "material.hpp"
 
 // Include standard headers
@@ -43,6 +42,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class ChunkMaster;
 
     class Chunk: public yli::ontology::Entity
     {
