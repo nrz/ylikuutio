@@ -24,6 +24,7 @@
 #include "texture_module.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
