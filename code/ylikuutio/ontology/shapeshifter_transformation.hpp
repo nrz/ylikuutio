@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "model_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -42,6 +41,7 @@ namespace yli::ontology
     class Scene;
     class Shader;
     class Material;
+    struct ModelStruct;
 
     class ShapeshifterTransformation: public yli::ontology::Entity
     {
@@ -53,18 +53,7 @@ namespace yli::ontology
             ShapeshifterTransformation(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const material_parent_module)
-                : Entity(universe, model_struct),
-                child_of_material(material_parent_module, this),
-                parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
-                parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ShapeshifterTransformation*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericParentModule* const material_parent_module);
 
             // destructor.
             virtual ~ShapeshifterTransformation();

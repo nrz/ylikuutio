@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "material.hpp"
 #include "shapeshifter_sequence.hpp"
+#include "model_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -32,6 +33,7 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Scene;
     class Shader;
@@ -57,6 +59,22 @@ namespace yli::ontology
 
         shapeshifter_transformation.child_of_material.unbind_and_bind_to_new_parent(&new_parent.parent_of_shapeshifter_transformations);
         return std::nullopt;
+    }
+
+    ShapeshifterTransformation::ShapeshifterTransformation(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const material_parent_module)
+        : Entity(universe, model_struct),
+        child_of_material(material_parent_module, this),
+        parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
+        parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::ShapeshifterTransformation*";
+        this->can_be_erased = true;
     }
 
     ShapeshifterTransformation::~ShapeshifterTransformation()
