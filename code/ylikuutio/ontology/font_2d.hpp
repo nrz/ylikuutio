@@ -25,7 +25,6 @@
 #include "texture_module.hpp"
 #include "universe.hpp"
 #include "font_struct.hpp"
-#include "text_struct.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
@@ -43,6 +42,7 @@
 namespace yli::ontology
 {
     class Scene;
+    struct TextStruct;
 
     class Font2D: public yli::ontology::Entity
     {
