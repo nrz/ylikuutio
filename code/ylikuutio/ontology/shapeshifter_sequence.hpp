@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
-#include "shapeshifter_sequence_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -38,6 +37,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Shader;
+    class ShapeshifterSequenceStruct;
 
     class ShapeshifterSequence: public yli::ontology::Entity
     {
@@ -45,23 +45,7 @@ namespace yli::ontology
             ShapeshifterSequence(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
-                    yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
-                : Entity(universe, shapeshifter_sequence_struct),
-                child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
-                master_of_objects(this, &this->registry, "objects")
-            {
-                // constructor.
-
-                this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
-                this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
-                this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;
-                this->bounce_from_start           = shapeshifter_sequence_struct.bounce_from_start;
-                this->bounce_from_end             = shapeshifter_sequence_struct.bounce_from_end;
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ShapeshifterSequence*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);
 
             // destructor.
             virtual ~ShapeshifterSequence();
