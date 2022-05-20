@@ -51,6 +51,7 @@
 #include "text_3d_struct.hpp"
 #include "console_struct.hpp"
 #include "font_struct.hpp"
+#include "text_struct.hpp"
 #include "lisp_function_struct.hpp"
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"

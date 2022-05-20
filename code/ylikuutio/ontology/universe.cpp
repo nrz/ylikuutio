@@ -45,6 +45,7 @@
 #include "entity_variable_read.hpp"
 #include "universe_struct.hpp"
 #include "variable_struct.hpp"
+#include "text_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
