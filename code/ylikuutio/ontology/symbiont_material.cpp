@@ -17,10 +17,13 @@
 
 #include "symbiont_material.hpp"
 #include "universe.hpp"
+#include "shader.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
+#include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -34,8 +37,39 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Scene;
+
+    SymbiontMaterial::SymbiontMaterial(
+            yli::ontology::Universe& universe,
+            const yli::ontology::MaterialStruct& material_struct,
+            yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
+        : Entity(universe, material_struct),
+        child_of_symbiosis(symbiosis_parent_module, this),
+        parent_of_symbiont_species(this, &this->registry, "symbiont_species"),
+        texture(
+                universe,
+                &this->registry,
+                material_struct.ofbx_texture,
+                yli::load::ImageLoaderStruct(),
+                "texture")
+    {
+        // constructor.
+
+        if (this->texture.get_is_texture_loaded())
+        {
+            yli::ontology::Shader* const shader = this->get_shader();
+
+            if (shader != nullptr)
+            {
+                this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+            }
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::SymbiontMaterial*";
+    }
 
     SymbiontMaterial::~SymbiontMaterial()
     {

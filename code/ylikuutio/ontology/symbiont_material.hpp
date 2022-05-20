@@ -22,9 +22,6 @@
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "texture_module.hpp"
-#include "shader.hpp"
-#include "material_struct.hpp"
-#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -34,6 +31,8 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
+    class Shader;
+    struct MaterialStruct;
 
     class SymbiontMaterial: public yli::ontology::Entity
     {
@@ -41,32 +40,7 @@ namespace yli::ontology
             SymbiontMaterial(
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
-                : Entity(universe, material_struct),
-                child_of_symbiosis(symbiosis_parent_module, this),
-                parent_of_symbiont_species(this, &this->registry, "symbiont_species"),
-                texture(
-                        universe,
-                        &this->registry,
-                        material_struct.ofbx_texture,
-                        yli::load::ImageLoaderStruct(),
-                        "texture")
-            {
-                // constructor.
-
-                if (this->texture.get_is_texture_loaded())
-                {
-                    yli::ontology::Shader* const shader = this->get_shader();
-
-                    if (shader != nullptr)
-                    {
-                        this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
-                    }
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::SymbiontMaterial*";
-            }
+                    yli::ontology::GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
 
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
             SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
