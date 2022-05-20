@@ -19,7 +19,6 @@
 #define __YLIKUUTIO_ONTOLOGY_CHUNK_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "chunk_struct.hpp"
 #include "material.hpp"
 
 // Include standard headers
@@ -43,26 +42,14 @@ namespace yli::ontology
 {
     class Universe;
     class ChunkMaster;
+    struct ChunkStruct;
 
     class Chunk: public yli::ontology::Entity
     {
         public:
             Chunk(
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ChunkStruct& chunk_struct)
-                : Entity(universe, chunk_struct)
-            {
-                // constructor.
-                this->is_original = true;
-
-                this->parent      = chunk_struct.parent;
-
-                // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
-                this->bind_to_parent();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "ontology::Chunk*";
-            }
+                    const yli::ontology::ChunkStruct& chunk_struct);
 
             Chunk(const Chunk&) = delete;            // Delete copy constructor.
             Chunk& operator=(const Chunk&) = delete; // Delete copy assignment.

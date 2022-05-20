@@ -17,6 +17,7 @@
 
 #include "chunk.hpp"
 #include "chunk_master.hpp"
+#include "chunk_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -24,6 +25,8 @@
 
 namespace yli::ontology
 {
+    class Universe;
+
     void Chunk::bind_to_parent()
     {
         // requirements:
@@ -38,6 +41,23 @@ namespace yli::ontology
 
         // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
         chunk_master->parent_of_chunks.bind_child(this);
+    }
+
+    Chunk::Chunk(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ChunkStruct& chunk_struct)
+        : Entity(universe, chunk_struct)
+    {
+        // constructor.
+        this->is_original = true;
+
+        this->parent      = chunk_struct.parent;
+
+        // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
+        this->bind_to_parent();
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "ontology::Chunk*";
     }
 
     Chunk::~Chunk()
