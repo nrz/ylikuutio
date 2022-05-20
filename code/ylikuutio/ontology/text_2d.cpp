@@ -16,7 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_2d.hpp"
+#include "universe.hpp"
 #include "font_2d.hpp"
+#include "text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -60,6 +62,62 @@ namespace yli::ontology
 
         text_2d.child_of_font_2d.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_2ds);
         return std::nullopt;
+    }
+
+    Text2D::Text2D(
+            yli::ontology::Universe& universe,
+            const yli::ontology::TextStruct& text_struct,
+            yli::ontology::GenericParentModule* const parent_module)
+        : Entity(universe, text_struct),
+        child_of_font_2d(parent_module, this)
+    {
+        // constructor.
+
+        this->text = text_struct.text;
+        this->horizontal_alignment = text_struct.horizontal_alignment;
+        this->vertical_alignment = text_struct.vertical_alignment;
+        this->screen_height = text_struct.screen_height;
+        this->screen_width = text_struct.screen_width;
+        this->x = text_struct.x;
+        this->y = text_struct.y;
+        this->text_size = text_struct.text_size;
+        this->font_size = text_struct.font_size;
+
+        // Initialize class members with some dummy values.
+        this->vao                               = 0;
+        this->vertexbuffer                      = 0;
+        this->uvbuffer                          = 0;
+        this->vertex_position_in_screenspace_id = 0;
+        this->vertex_uv_id                      = 0;
+
+        // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
+        // but they can still be loaded into CPU memory to be used by the software rendering.
+        const bool should_load_vertices_and_uvs =
+            this->universe.get_is_opengl_in_use() ||
+            this->universe.get_is_vulkan_in_use() ||
+            this->universe.get_is_software_rendering_in_use();
+
+        if (should_load_vertices_and_uvs)
+        {
+            // Initialize VAO.
+            glGenVertexArrays(1, &this->vao);
+
+            // Initialize VBO.
+            glGenBuffers(1, &this->vertexbuffer);
+            glGenBuffers(1, &this->uvbuffer);
+
+            // Get a handle for our buffers.
+            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
+
+            if (font_2d != nullptr)
+            {
+                this->vertex_position_in_screenspace_id = glGetAttribLocation(font_2d->get_program_id(), "vertex_position_screenspace");
+                this->vertex_uv_id = glGetAttribLocation(font_2d->get_program_id(), "vertexUV");
+            }
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Text2D*";
     }
 
     Text2D::~Text2D()
