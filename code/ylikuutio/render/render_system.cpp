@@ -34,6 +34,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
+#include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/ontology/chunk.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
