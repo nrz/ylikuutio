@@ -41,6 +41,7 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
+#include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
