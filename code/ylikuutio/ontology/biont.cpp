@@ -57,9 +57,32 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Universe;
     class Scene;
+
+    Biont::Biont(
+            yli::ontology::Universe& universe,
+            yli::ontology::BiontStruct& biont_struct,
+            yli::ontology::GenericParentModule* const holobiont_parent_module,
+            yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
+        : Movable(
+                universe,
+                biont_struct,
+                nullptr),
+        child_of_holobiont(holobiont_parent_module, this),
+        apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
+    {
+        // constructor.
+
+        this->biontID       = biont_struct.biontID;
+        this->should_render = biont_struct.should_render;
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Biont*";
+    }
 
     Biont::~Biont()
     {

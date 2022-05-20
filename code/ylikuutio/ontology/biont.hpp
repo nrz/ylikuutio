@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
-#include "biont_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -36,6 +35,7 @@ namespace yli::ontology
     class Shader;
     class GenericParentModule;
     class GenericMasterModule;
+    struct BiontStruct;
 
     class Biont: public yli::ontology::Movable
     {
@@ -44,22 +44,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     yli::ontology::BiontStruct& biont_struct,
                     yli::ontology::GenericParentModule* const holobiont_parent_module,
-                    yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
-                : Movable(
-                        universe,
-                        biont_struct,
-                        nullptr),
-                child_of_holobiont(holobiont_parent_module, this),
-                apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
-            {
-                // constructor.
-
-                this->biontID       = biont_struct.biontID;
-                this->should_render = biont_struct.should_render;
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Biont*";
-            }
+                    yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module);
 
             Biont(const Biont&) = delete;            // Delete copy constructor.
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
