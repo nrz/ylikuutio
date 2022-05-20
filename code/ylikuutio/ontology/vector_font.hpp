@@ -20,13 +20,6 @@
 
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
-#include "glyph.hpp"
-#include "material.hpp"
-#include "model_struct.hpp"
-#include "vector_font_struct.hpp"
-#include "family_templates.hpp"
-#include "code/ylikuutio/load/font_loader.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -36,8 +29,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream>      // std::cout, std::cin, std::cerr
 #include <optional>      // std::optional
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
@@ -55,6 +46,8 @@ namespace yli::ontology
     class Scene;
     class Shader;
     class Material;
+    class Glyph;
+    struct VectorFontStruct;
 
     class VectorFont: public yli::ontology::Entity
     {
@@ -63,107 +56,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_material_parent(yli::ontology::VectorFont& vector_font, yli::ontology::Material& new_parent);
 
-            VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct)
-                : Entity(universe, vector_font_struct),
-                parent_of_glyphs(this, &this->registry, "glyphs"),
-                parent_of_text_3ds(this, &this->registry, "text_3ds"),
-                font_file_format      { vector_font_struct.font_file_format },
-                font_filename         { vector_font_struct.font_filename },
-                vertex_scaling_factor { vector_font_struct.vertex_scaling_factor },
-                parent                { vector_font_struct.parent }
-            {
-                // constructor.
-
-                // Get `childID` from the `Material` and set pointer to this `VectorFont`.
-                this->bind_to_parent();
-
-                this->can_be_erased         = true;
-                bool font_loading_result    = false;
-
-                if (this->font_file_format == "svg" || this->font_file_format == "SVG")
-                {
-                    const bool is_debug_mode = true;
-
-                    font_loading_result = yli::load::load_svg_font(
-                            this->font_filename,
-                            this->glyph_vertex_data,
-                            this->glyph_names,
-                            this->unicode_strings,
-                            is_debug_mode);
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::VectorFont*";
-                this->can_be_erased = true;
-
-                // Requirements for further actions:
-                // `this->parent` must not be `nullptr`.
-
-                yli::ontology::Material* const material = this->parent;
-
-                if (material == nullptr)
-                {
-                    std::cerr << "ERROR: `VectorFont::VectorFont`: `material` is `nullptr`!\n";
-                    return;
-                }
-
-                yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
-
-                if (shader == nullptr)
-                {
-                    std::cerr << "ERROR: `VectorFont::VectorFont`: `shader` is `nullptr`!\n";
-                    return;
-                }
-
-                yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
-
-                if (scene == nullptr)
-                {
-                    std::cerr << "ERROR: `VectorFont::VectorFont`: `scene` is `nullptr`!\n";
-                    return;
-                }
-
-                if (font_loading_result)
-                {
-                    // OK, `VectorFont` loading was successful.
-                    // Create each `Glyph` and bind them to `VectorFont`.
-
-                    std::cout << "Number of glyphs to be created: " << this->glyph_vertex_data.size() << "\n";
-
-                    for (std::size_t glyph_i = 0; glyph_i < this->glyph_vertex_data.size(); glyph_i++)
-                    {
-                        const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
-                        const char* temp_unicode_char_pointer = unicode_char_pointer;
-
-                        int32_t unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
-                        if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
-                        {
-                            // Invalid Unicode, skip to next `Glyph`.
-                            std::cerr << std::dec << "Error: invalid Unicode: " << unicode_value << "\n";
-                            continue;
-                        }
-
-                        yli::ontology::ModelStruct model_struct;
-                        model_struct.scene = scene;
-                        model_struct.shader = shader;
-                        model_struct.material = material;
-                        model_struct.vector_font = this;
-                        model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
-                        model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
-                        model_struct.unicode_char_pointer = unicode_char_pointer;
-
-                        std::string glyph_name_string = model_struct.glyph_name_pointer;
-                        std::string unicode_string = model_struct.unicode_char_pointer;
-                        std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                        yli::ontology::Glyph* glyph = new yli::ontology::Glyph(this->universe, model_struct, &this->parent_of_glyphs);
-
-                        // So that each `Glyph` can be referred to,
-                        // we need a hash map that points from Unicode string to `Glyph`.
-                        this->unicode_glyph_map[unicode_value] = glyph;
-                    }
-                }
-
-            }
+            VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct);
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
