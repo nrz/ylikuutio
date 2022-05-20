@@ -46,8 +46,31 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Scene;
+
+    Holobiont::Holobiont(
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& holobiont_struct,
+            yli::ontology::GenericParentModule* const symbiosis_parent_module,
+            yli::ontology::GenericMasterModule* const brain_master)
+        : Movable(
+                universe,
+                holobiont_struct,
+                brain_master),
+        child_of_symbiosis(symbiosis_parent_module, this),
+        parent_of_bionts(this, &this->registry, "bionts")
+    {
+        // constructor.
+
+        this->create_bionts(holobiont_struct.scene, holobiont_struct.should_render_bionts_vector);
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Holobiont*";
+        this->can_be_erased = true;
+    }
 
     Holobiont::~Holobiont()
     {
