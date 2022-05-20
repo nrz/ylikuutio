@@ -17,14 +17,30 @@
 
 #include "shapeshifter_form.hpp"
 #include "shapeshifter_transformation.hpp"
+#include "model_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Scene;
+
+    ShapeshifterForm::ShapeshifterForm(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
+        : Entity(universe, model_struct),
+        child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
+        mesh(universe, model_struct)
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::ShapeshifterForm*";
+    }
 
     ShapeshifterForm::~ShapeshifterForm()
     {
