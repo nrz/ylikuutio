@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
 #include "material.hpp"
-#include "entity_struct.hpp"
 #include "get_content_callback.hpp"
 
 // Include standard headers
@@ -39,20 +38,7 @@ namespace yli::ontology
     class ChunkMaster: public yli::ontology::Entity
     {
         public:
-            ChunkMaster(yli::ontology::Universe& universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
-                : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
-                parent_of_chunks(this, &this->registry, "chunks")
-            {
-                // constructor.
-                this->get_content_callback = get_content_callback;
-                this->parent               = parent;
-
-                // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-                this->bind_to_parent();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "ontology::ChunkMaster*";
-            }
+            ChunkMaster(yli::ontology::Universe& universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback);
 
             ChunkMaster(const ChunkMaster&) = delete;            // Delete copy constructor.
             ChunkMaster& operator=(const ChunkMaster&) = delete; // Delete copy assignment.

@@ -20,6 +20,7 @@
 #include "material.hpp"
 #include "chunk.hpp"
 #include "material.hpp"
+#include "entity_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -43,6 +44,21 @@ namespace yli::ontology
 
         // get `childID` from `Material` and set pointer to this `ChunkMaster`.
         material->parent_of_chunk_masters.bind_child(this);
+    }
+
+    ChunkMaster::ChunkMaster(yli::ontology::Universe& universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
+        : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
+        parent_of_chunks(this, &this->registry, "chunks")
+    {
+        // constructor.
+        this->get_content_callback = get_content_callback;
+        this->parent               = parent;
+
+        // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+        this->bind_to_parent();
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "ontology::ChunkMaster*";
     }
 
     ChunkMaster::~ChunkMaster()
