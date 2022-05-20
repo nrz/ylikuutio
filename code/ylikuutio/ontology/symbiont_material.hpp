@@ -21,8 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "apprentice_module.hpp"
-#include "master_module.hpp"
 #include "texture_module.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
