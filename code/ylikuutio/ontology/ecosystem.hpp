@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "parent_of_shaders_module.hpp"
-#include "ecosystem_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -35,6 +34,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class Scene;
+    struct EcosystemStruct;
 
     class Ecosystem: public yli::ontology::Entity
     {
@@ -42,17 +42,7 @@ namespace yli::ontology
             Ecosystem(
                     yli::ontology::Universe& universe,
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
-                    yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, ecosystem_struct),
-                child_of_universe(parent_module, this),
-                parent_of_shaders(this, &this->registry, "shaders")
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Ecosystem*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericParentModule* const parent_module);
 
             Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
             Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.

@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ecosystem.hpp"
+#include "ecosystem_struct.hpp"
 #include "family_templates.hpp"
 
 // Include standard headers
@@ -24,8 +25,23 @@
 
 namespace yli::ontology
 {
-    class Entity;
+    class Universe;
     class Scene;
+
+    Ecosystem::Ecosystem(
+            yli::ontology::Universe& universe,
+            const yli::ontology::EcosystemStruct& ecosystem_struct,
+            yli::ontology::GenericParentModule* const parent_module)
+        : Entity(universe, ecosystem_struct),
+        child_of_universe(parent_module, this),
+        parent_of_shaders(this, &this->registry, "shaders")
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Ecosystem*";
+        this->can_be_erased = true;
+    }
 
     Ecosystem::~Ecosystem()
     {
