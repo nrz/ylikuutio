@@ -19,25 +19,11 @@
 #define __YLIKUUTIO_ONTOLOGY_COMPUTE_TASK_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "universe.hpp"
-#include "shader.hpp"
-#include "compute_task_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/load/common_texture_loader.hpp"
-#include "code/ylikuutio/load/csv_texture_loader.hpp"
-#include "code/ylikuutio/load/image_loader_struct.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -71,184 +57,15 @@ namespace yli::callback
 
 namespace yli::ontology
 {
+    class Universe;
     class Scene;
     class Shader;
+    struct ComputeTaskStruct;
 
     class ComputeTask: public yli::ontology::Entity
     {
         public:
-            ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
-                : Entity(universe, compute_task_struct)
-            {
-                // constructor.
-                this->texture_file_format = compute_task_struct.texture_file_format;
-                this->texture_filename = compute_task_struct.texture_filename;
-                this->output_filename = compute_task_struct.output_filename;
-                this->parent = compute_task_struct.parent;
-                this->left_filler_vector_any_value = compute_task_struct.left_filler_vector_any_value;
-                this->right_filler_vector_any_value = compute_task_struct.right_filler_vector_any_value;
-                this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
-
-                this->n_max_iterations = compute_task_struct.n_max_iterations;
-                this->compute_taskID = compute_task_struct.compute_taskID;
-                this->texture_width = compute_task_struct.texture_width;
-                this->texture_height = compute_task_struct.texture_height;
-                this->texture_size = 0; // dummy value.
-                this->n_index_characters = compute_task_struct.n_index_characters;
-
-                this->vertices_size                 = 0;
-                this->uvs_size                      = 0;
-
-                // variables related to the framebuffer.
-                this->framebuffer                   = 0; // some dummy value.
-                this->source_texture                = 0; // some dummy value.
-                this->target_texture                = 0; // some dummy value.
-                this->opengl_texture_id             = 0; // some dummy value.
-
-                this->vertex_position_modelspace_id = 0; // some dummy value.
-                this->vertex_uv_id                  = 0; // some dummy value.
-                this->screen_width_uniform_id       = 0; // some dummy value.
-                this->screen_height_uniform_id      = 0; // some dummy value.
-                this->iteration_i_uniform_id        = 0; // some dummy value.
-                this->vertexbuffer                  = 0; // some dummy value.
-                this->uvbuffer                      = 0; // some dummy value.
-                this->elementbuffer                 = 0; // some dummy value.
-
-                this->format                                     = compute_task_struct.format;
-                this->internal_format                            = compute_task_struct.internal_format;
-                this->output_format                              = compute_task_struct.output_format;
-                this->type                                       = compute_task_struct.type;
-                this->should_save_intermediate_results = compute_task_struct.should_save_intermediate_results;
-                this->should_flip_texture              = compute_task_struct.should_flip_texture;
-
-                // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-                this->bind_to_parent();
-
-                // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
-                // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
-                // then `ComputeTask` could and should support software rendering as well.
-                const bool should_load_texture =
-                    this->universe.get_is_opengl_in_use() ||
-                    this->universe.get_is_vulkan_in_use();
-
-                if (should_load_texture && this->universe.get_is_opengl_in_use())
-                {
-                    // Get a handle for our buffers.
-                    this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
-                    this->vertex_uv_id = glGetAttribLocation(this->parent->get_program_id(), "vertexUV");
-
-                    glUseProgram(this->parent->get_program_id());
-                }
-
-                // Load the source texture, just like in `yli::ontology::Material` constructor.
-                if (should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
-                {
-                    uint32_t n_color_channels = 0;
-
-                    if (!yli::load::load_common_texture(
-                                this->texture_filename,
-                                yli::load::ImageLoaderStruct(),
-                                this->texture_width,
-                                this->texture_height,
-                                this->texture_size,
-                                n_color_channels,
-                                this->source_texture,
-                                this->universe.get_graphics_api_backend()))
-                    {
-                        std::cerr << "ERROR: loading PNG texture failed!\n";
-                    }
-                    else
-                    {
-                        this->is_texture_loaded = true;
-                    }
-                }
-                else if (should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
-                {
-                    if (!yli::load::load_csv_texture(
-                                this->texture_filename,
-                                this->format,
-                                this->internal_format,
-                                this->type,
-                                this->left_filler_vector_any_value,
-                                this->right_filler_vector_any_value,
-                                this->texture_width,
-                                this->texture_height,
-                                this->texture_size,
-                                this->source_texture))
-                    {
-                        std::cerr << "ERROR: loading CSV texture failed!\n";
-                    }
-                    else
-                    {
-                        this->is_texture_loaded = true;
-                    }
-                }
-                else
-                {
-                    std::cerr << "no texture was loaded!\n";
-                    std::cerr << "texture file format: " << this->texture_file_format << "\n";
-                }
-
-                if (this->is_texture_loaded && this->universe.get_is_opengl_in_use())
-                {
-                    // Get a handle for our "texture_sampler" uniform.
-                    this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
-
-                    // Initialize uniform window width.
-                    // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-                    this->screen_width_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_width");
-                    yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
-
-                    // Initialize uniform window height.
-                    // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-                    this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_height");
-                    yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
-
-                    // Initialize uniform iteration index.
-                    this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "iteration_i");
-                    yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
-
-                    // Create model (a square which consists of 2 triangles).
-                    // *---*
-                    // |  /|
-                    // | / |
-                    // |/  |
-                    // *---*
-                    const std::vector<glm::vec2> vertices
-                    { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f } };
-                    this->vertices_size = vertices.size();
-
-                    const std::vector<glm::vec2> uvs
-                    { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f } };
-                    this->uvs_size = uvs.size();
-
-                    const std::vector<GLuint> indices { 0, 1 };
-
-                    // Load model.
-
-                    // VAO.
-                    glGenVertexArrays(1, &this->vao);
-
-                    // Vertices.
-                    glGenBuffers(1, &this->vertexbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-
-                    // UVs.
-                    glGenBuffers(1, &this->uvbuffer);
-                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-                    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-
-                    // Index buffer.
-                    glGenBuffers(1, &this->elementbuffer);
-                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
-                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2, &indices[0], GL_STATIC_DRAW);
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::ComputeTask*";
-                this->can_be_erased = true;
-            }
+            ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct);
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
