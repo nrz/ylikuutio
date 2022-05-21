@@ -174,6 +174,7 @@ namespace yli::ontology
         glUseProgram(this->program_id);
 
         render_system->render_compute_tasks(this->parent_of_compute_tasks);
+        render_system->render_materials_of_ecosystems(this->universe.get_parent_of_ecosystems(), this->get_scene());
         render_system->render_materials(this->master_of_materials.get_apprentice_module_pointer_vector_reference());
         render_system->render_symbioses(this->master_of_symbioses.get_apprentice_module_pointer_vector_reference());
     }

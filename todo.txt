@@ -9,7 +9,6 @@ Fixes needed:
 
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] When running in fullscreen mode, restore original screen resolution upon program termination.
-[ ] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
@@ -309,3 +308,4 @@ Ready:
 [x] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.
 [x] Rename `AudioMaster` to `AudioSystem`.
 [x] Rename `InputMaster` to `InputSystem`.
+[x] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.

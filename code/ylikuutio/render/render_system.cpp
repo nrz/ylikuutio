@@ -245,6 +245,29 @@ namespace yli::render
         yli::render::render_children<yli::ontology::ParentOfShadersModule&, yli::ontology::Entity*, yli::ontology::Shader*>(parent);
     }
 
+    void RenderSystem::render_materials_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
+    {
+        for (auto it = parent.begin(); it != parent.end(); ++it)
+        {
+            yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
+
+            if (ecosystem != nullptr && ecosystem->should_be_rendered)
+            {
+                this->render_materials_of_an_ecosystem(ecosystem->parent_of_materials, scene);
+            }
+        }
+    }
+
+    void RenderSystem::render_materials_of_an_ecosystem(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
+    {
+        yli::render::render_children_of_given_scene_or_of_all_scenes<
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Entity*,
+            yli::ontology::Material*>(
+                parent,
+                scene);
+    }
+
     void RenderSystem::render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentice_pointer_vector) const
     {
         yli::render::render_apprentices<yli::ontology::Material*>(material_apprentice_pointer_vector);

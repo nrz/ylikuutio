@@ -17,6 +17,7 @@
 
 #include "material.hpp"
 #include "universe.hpp"
+#include "ecosystem.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
@@ -40,6 +41,37 @@
 namespace yli::ontology
 {
     class Entity;
+
+    std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(yli::ontology::Material& material, yli::ontology::Ecosystem& new_parent)
+    {
+        // Set pointer to `Material` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+
+        yli::ontology::Entity* const old_parent = material.get_parent();
+
+        if (old_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
+            return std::nullopt;
+        }
+
+        if (&new_parent == old_parent)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return std::nullopt;
+        }
+
+        if (new_parent.has_child(material.local_name))
+        {
+            std::cerr << "ERROR: `Material::bind_to_new_ecosystem_parent`: local name is already in use!\n";
+            return std::nullopt;
+        }
+
+        // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
+        // so binding to an `Ecosystem` does not unbind any apprentices.
+        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
+        return std::nullopt;
+    }
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(yli::ontology::Material& material, yli::ontology::Scene& new_parent)
     {
@@ -68,7 +100,7 @@ namespace yli::ontology
 
         material.master_of_species.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         material.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
-        material.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
+        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
         return std::nullopt;
     }
 
@@ -96,10 +128,10 @@ namespace yli::ontology
     Material::Material(
             yli::ontology::Universe& universe,
             const yli::ontology::MaterialStruct& material_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
+            yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
             yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
         : Entity(universe, material_struct),
-        child_of_scene(scene_parent_module, this),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
         parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
         parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
@@ -163,7 +195,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Material::get_parent() const
     {
-        return this->child_of_scene.get_parent();
+        return this->child_of_scene_or_ecosystem.get_parent();
     }
 
     yli::ontology::Shader* Material::get_shader() const
@@ -173,7 +205,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Material::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->get_parent());
+        return this->child_of_scene_or_ecosystem.get_scene();
     }
 
     std::size_t Material::get_number_of_children() const

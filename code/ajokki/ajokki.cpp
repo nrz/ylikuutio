@@ -1002,6 +1002,7 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_scene_parent));
 
                 // `Entity` binding callbacks, `Material`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_ecosystem_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_scene_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_shader));
 

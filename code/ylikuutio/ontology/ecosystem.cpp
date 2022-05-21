@@ -34,7 +34,8 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(universe, ecosystem_struct),
         child_of_universe(parent_module, this),
-        parent_of_shaders(this, &this->registry, "shaders")
+        parent_of_shaders(this, &this->registry, "shaders"),
+        parent_of_materials(this, &this->registry, "materials")
     {
         // constructor.
 
@@ -62,11 +63,13 @@ namespace yli::ontology
 
     std::size_t Ecosystem::get_number_of_children() const
     {
-        return this->parent_of_shaders.get_number_of_children();
+        return this->parent_of_shaders.get_number_of_children() +
+            this->parent_of_materials.get_number_of_children();
     }
 
     std::size_t Ecosystem::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector);
     }
 }

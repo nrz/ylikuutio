@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "generic_parent_module.hpp"
 #include "parent_of_shaders_module.hpp"
 
 // Include standard headers
@@ -54,6 +55,7 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentOfShadersModule parent_of_shaders;
+            yli::ontology::GenericParentModule parent_of_materials;
 
             yli::ontology::Scene* get_scene() const override;
 

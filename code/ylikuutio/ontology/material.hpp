@@ -44,6 +44,7 @@ namespace yli::data
 namespace yli::ontology
 {
     class Universe;
+    class Ecosystem;
     class Scene;
     class Shader;
     struct MaterialStruct;
@@ -51,6 +52,9 @@ namespace yli::ontology
     class Material: public yli::ontology::Entity
     {
         public:
+            // Set pointer to `material` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Material& material, yli::ontology::Ecosystem& new_parent);
             // Set pointer to `material` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Material& material, yli::ontology::Scene& new_parent);
@@ -62,7 +66,7 @@ namespace yli::ontology
             Material(
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module, // Parent is a `Scene`.
+                    yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
                     yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module);
 
             Material(const Material&) = delete;            // Delete copy constructor.
@@ -88,7 +92,7 @@ namespace yli::ontology
             template<typename T1>
                 friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
-            yli::ontology::ChildModule child_of_scene;
+            yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
             yli::ontology::GenericParentModule parent_of_vector_fonts;
             yli::ontology::GenericParentModule parent_of_chunk_masters;
@@ -106,6 +110,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        public:
             // This method renders all `Species` using this `Material`.
             void render();
     };

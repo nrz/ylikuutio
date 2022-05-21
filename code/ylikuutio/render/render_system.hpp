@@ -70,7 +70,12 @@ namespace yli::render
             void render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
             void render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const;
             void render_shaders(yli::ontology::ParentOfShadersModule& parent) const;
+
+            void render_materials_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
+            void render_materials_of_an_ecosystem(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
+
             void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
+
             void render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const;
             void render_symbioses(std::vector<yli::ontology::ApprenticeModule*>& symbiosis_apprentice_pointer_vector) const;
             void render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const;
