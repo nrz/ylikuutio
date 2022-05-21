@@ -35,12 +35,12 @@ namespace yli::data
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Universe;
     class Scene;
     class Shader;
     class Object;
-    class GenericParentModule;
     class VectorFont;
     struct Text3DStruct;
 
