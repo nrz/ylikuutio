@@ -23,7 +23,6 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
-#include "console_struct.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -88,6 +87,7 @@ namespace yli::ontology
     class Scene;
     class Font2D;
     class Registry;
+    struct ConsoleStruct;
 
     class Console: public yli::ontology::Entity
     {
@@ -99,21 +99,7 @@ namespace yli::ontology
             Console(yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::GenericParentModule* const parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
-                : Entity(universe, console_struct),
-                child_of_universe(parent_module, this),
-                parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
-                apprentice_of_font_2d(generic_master_module, this)
-            {
-                // constructor.
-
-                this->adjust_n_columns();
-                this->adjust_n_rows();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Console*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericMasterModule* const generic_master_module);
 
             Console(const Console&) = delete;            // Delete copy constructor.
             Console& operator=(const Console&) = delete; // Delete copy assignment.

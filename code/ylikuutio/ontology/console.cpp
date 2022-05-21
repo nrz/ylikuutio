@@ -20,6 +20,7 @@
 #include "universe.hpp"
 #include "font_2d.hpp"
 #include "registry.hpp"
+#include "console_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
@@ -40,6 +41,8 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Scene;
 
@@ -62,6 +65,25 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    Console::Console(yli::ontology::Universe& universe,
+            const yli::ontology::ConsoleStruct& console_struct,
+            yli::ontology::GenericParentModule* const parent_module,
+            yli::ontology::GenericMasterModule* const generic_master_module)
+        : Entity(universe, console_struct),
+        child_of_universe(parent_module, this),
+        parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
+        apprentice_of_font_2d(generic_master_module, this)
+    {
+        // constructor.
+
+        this->adjust_n_columns();
+        this->adjust_n_rows();
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Console*";
+        this->can_be_erased = true;
     }
 
     Console::~Console()
