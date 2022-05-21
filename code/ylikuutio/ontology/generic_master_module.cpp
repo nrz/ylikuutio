@@ -48,14 +48,6 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_all_apprentice_modules()
-    {
-        for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
-        {
-            this->unbind_apprentice_module(apprenticeID);
-        }
-    }
-
     void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(yli::ontology::Scene* const scene)
     {
         for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
