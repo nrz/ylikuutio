@@ -56,7 +56,7 @@ namespace yli::ontology
     class Shader: public yli::ontology::Entity
     {
         public:
-            // Set pointer to `Shader` to `nullptr`, set parent according to the input,
+            // Set pointer to `shader` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent);
 
