@@ -8,8 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] When running in windowed mode, by default open window in the main display and make its size match the display resolution.
-[ ] When running in fullscreen mode, restore original screen resolution upon program termination.
 [ ] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
@@ -310,3 +308,4 @@ Ready:
 [x] Rename `AudioMaster` to `AudioSystem`.
 [x] Rename `InputMaster` to `InputSystem`.
 [x] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
+[x] When running in windowed mode, by default open window in the main display and make its size match the display resolution.

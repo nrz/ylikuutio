@@ -54,6 +54,7 @@ namespace yli::ontology
         bool is_silent          { false };
         bool is_physical        { true };    // Physics simulation in use.
         bool is_fullscreen      { false };   // Windowed mode in use.
+        bool is_desktop_fullscreen { false }; // Windowed mode in use.
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
         yli::ontology::FramebufferModuleStruct framebuffer_module_struct;
     };

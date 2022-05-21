@@ -152,6 +152,7 @@ namespace yli::ontology
         is_silent            { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
         is_physical          { universe_struct.is_physical },
         is_fullscreen        { universe_struct.is_fullscreen },
+        is_desktop_fullscreen { universe_struct.is_desktop_fullscreen },
         window_width         { universe_struct.window_width },
         window_height        { universe_struct.window_height },
         window_title         { universe_struct.window_title },
@@ -880,12 +881,40 @@ namespace yli::ontology
         // Create the window only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
         {
-            // Create a window.
-            this->window = yli::sdl::create_window(
-                    static_cast<int>(this->window_width),
-                    static_cast<int>(this->window_height),
-                    this->window_title.c_str(),
-                    this->is_fullscreen);
+            Uint32 flags = 0;
+
+            if (this->is_fullscreen)
+            {
+                flags |= SDL_WINDOW_FULLSCREEN;
+            }
+
+            if (this->is_desktop_fullscreen)
+            {
+                flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+            }
+
+            if (this->get_is_opengl_in_use())
+            {
+                // Create a window.
+                this->window = yli::sdl::create_window(
+                        0,
+                        0,
+                        static_cast<int>(this->window_width),
+                        static_cast<int>(this->window_height),
+                        this->window_title.c_str(),
+                        flags | SDL_WINDOW_OPENGL);
+            }
+            else if (this->get_is_vulkan_in_use())
+            {
+                // Create a window.
+                this->window = yli::sdl::create_window(
+                        0,
+                        0,
+                        static_cast<int>(this->window_width),
+                        static_cast<int>(this->window_height),
+                        this->window_title.c_str(),
+                        flags | SDL_WINDOW_VULKAN);
+            }
 
             if (this->window != nullptr)
             {

@@ -491,6 +491,7 @@ namespace yli::ontology
             const bool is_silent;
             const bool is_physical;
             bool is_fullscreen;
+            bool is_desktop_fullscreen;
 
             // variables related to the window.
             SDL_Window* window { nullptr };

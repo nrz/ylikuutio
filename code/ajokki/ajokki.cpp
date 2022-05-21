@@ -137,6 +137,7 @@ namespace ajokki
                         "version",
                         "silent",
                         "fullscreen",
+                        "desktop_fullscreen",
                         "headless",
                         "window_width",
                         "window_height",
@@ -165,6 +166,11 @@ namespace ajokki
                 if (this->command_line_master.is_key("fullscreen"))
                 {
                     universe_struct.is_fullscreen = true;
+                }
+
+                if (this->command_line_master.is_key("desktop_fullscreen"))
+                {
+                    universe_struct.is_desktop_fullscreen = true;
                 }
 
                 if (this->command_line_master.is_key("headless"))

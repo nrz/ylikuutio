@@ -78,15 +78,58 @@ namespace yli::sdl
         return display_modes;
     }
 
-    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
+    [[nodiscard]] SDL_Window* create_window(
+            const int x,
+            const int y,
+            const int window_width,
+            const int window_height,
+            const char* const title,
+            const Uint32 flags)
     {
-        SDL_Window* const window = SDL_CreateWindow(
-                title,
-                SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED,
-                window_width,
-                window_height,
-                flags);
+        const int display_i = 0; // Primary display.
+        SDL_Rect bounds;
+        SDL_Window* window = nullptr;
+
+        if (flags & SDL_WINDOW_FULLSCREEN)
+        {
+            // Fullscreen.
+            int success = SDL_GetDisplayBounds(display_i, &bounds);
+
+            if (success != 0)
+            {
+                std::cerr << "ERROR: `yli::sdl::create_window`: getting usable display bounds failed!\n";
+                print_sdl_error();
+                return nullptr;
+            }
+
+            window = SDL_CreateWindow(
+                    title,
+                    0,
+                    0,
+                    bounds.w,
+                    bounds.h,
+                    flags);
+        }
+        else
+        {
+            // Windowed.
+            int success = SDL_GetDisplayUsableBounds(display_i, &bounds);
+
+            if (success != 0)
+            {
+                std::cerr << "ERROR: `yli::sdl::create_window`: getting display bounds failed!\n";
+                print_sdl_error();
+                return nullptr;
+            }
+
+            window = SDL_CreateWindow(
+                    title,
+                    0,
+                    0,
+                    (window_width < bounds.w ? window_width : bounds.w),
+                    (window_height < bounds.h ? window_height : bounds.h),
+                    flags);
+        }
 
         if (window != nullptr)
         {
@@ -97,6 +140,11 @@ namespace yli::sdl
         std::cerr << "ERROR: `yli::sdl::create_window`: creating window failed!\n";
         print_sdl_error();
         return window;
+    }
+
+    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
+    {
+        return create_window(0, 0, window_width, window_height, title, flags);
     }
 
     [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
@@ -120,7 +168,7 @@ namespace yli::sdl
             flags |= SDL_WINDOW_FULLSCREEN;
         }
 
-        return create_window(window_width, window_height, title, flags);
+        return create_window(0, 0, window_width, window_height, title, flags);
     }
 
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
