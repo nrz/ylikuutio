@@ -42,7 +42,6 @@ namespace yli::ontology
     class Shader;
     class Object;
     class GenericParentModule;
-    class GenericMasterModule;
     class VectorFont;
 
     class Text3D: public yli::ontology::Movable
