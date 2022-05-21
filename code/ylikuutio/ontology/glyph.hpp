@@ -40,10 +40,10 @@
 
 namespace yli::ontology
 {
-    class Scene;
-    class VectorFont;
-    class Object;
     class GenericParentModule;
+    class Scene;
+    class Object;
+    class VectorFont;
 
     class Glyph: public yli::ontology::Entity
     {
