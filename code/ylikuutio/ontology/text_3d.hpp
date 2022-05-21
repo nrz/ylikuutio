@@ -22,7 +22,6 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "glyph_object_creation.hpp"
-#include "text_3d_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -43,6 +42,7 @@ namespace yli::ontology
     class Object;
     class GenericParentModule;
     class VectorFont;
+    struct Text3DStruct;
 
     class Text3D: public yli::ontology::Movable
     {
@@ -59,30 +59,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::Text3DStruct& text_3d_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
-                : Movable(
-                        universe,
-                        text_3d_struct,
-                        generic_master_module),
-                child_of_vector_font(vector_font_parent_module, this),
-                master_of_objects(this, &this->registry, "objects")
-            {
-                // constructor.
-
-                // TODO: `Text3D` constructor also creates each `Object`,
-                // and binds each to its corresponding `Glyph` for rendering hierarchy,
-                // and also binds each to this `Text3D` for ontological hierarchy.
-
-                this->text_string = text_3d_struct.text_string;
-
-                // Let's create each glyph `Object` in a loop.
-
-                yli::ontology::create_glyph_objects(this->text_string, this);
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Text3D*";
-                this->can_be_erased = true;
-            }
+                    yli::ontology::GenericMasterModule* const generic_master_module);
 
             Text3D(const Text3D&) = delete;            // Delete copy constructor.
             Text3D& operator=(const Text3D&) = delete; // Delete copy assignment.

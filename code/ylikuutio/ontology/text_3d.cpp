@@ -17,6 +17,7 @@
 
 #include "text_3d.hpp"
 #include "vector_font.hpp"
+#include "text_3d_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -56,6 +57,35 @@ namespace yli::ontology
 
         text_3d.child_of_vector_font.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_3ds);
         return std::nullopt;
+    }
+
+    Text3D::Text3D(
+            yli::ontology::Universe& universe,
+            const yli::ontology::Text3DStruct& text_3d_struct,
+            yli::ontology::GenericParentModule* const vector_font_parent_module,
+            yli::ontology::GenericMasterModule* const generic_master_module)
+        : Movable(
+                universe,
+                text_3d_struct,
+                generic_master_module),
+        child_of_vector_font(vector_font_parent_module, this),
+        master_of_objects(this, &this->registry, "objects")
+    {
+        // constructor.
+
+        // TODO: `Text3D` constructor also creates each `Object`,
+        // and binds each to its corresponding `Glyph` for rendering hierarchy,
+        // and also binds each to this `Text3D` for ontological hierarchy.
+
+        this->text_string = text_3d_struct.text_string;
+
+        // Let's create each glyph `Object` in a loop.
+
+        yli::ontology::create_glyph_objects(this->text_string, this);
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Text3D*";
+        this->can_be_erased = true;
     }
 
     Text3D::~Text3D()
