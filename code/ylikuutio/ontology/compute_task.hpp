@@ -110,32 +110,32 @@ namespace yli::ontology
 
             uint32_t texture_width;
             uint32_t texture_height;
-            uint32_t texture_size;
+            uint32_t texture_size { 0 }; // Some dummy value.
 
             uint32_t n_index_characters; // For intermediate results' filenames.
 
-            uint32_t vertices_size;
-            uint32_t uvs_size;
+            uint32_t vertices_size { 0 };
+            uint32_t uvs_size      { 0 };
 
             // variables related to the framebuffer.
-            GLuint framebuffer;
-            GLuint source_texture;
-            GLuint target_texture;
-            GLint opengl_texture_id;         // Texture ID, returned by `glGetUniformLocation(this->parent->get_program_id(), "texture_sampler")`.
+            GLuint framebuffer              { 0 }; // Some dummy value.
+            GLuint source_texture           { 0 }; // Some dummy value.
+            GLuint target_texture           { 0 }; // Some dummy value.
+            GLint opengl_texture_id         { 0 }; // Some dummy value.
             bool is_texture_loaded          { false };
             bool is_framebuffer_initialized { false };
             bool is_ready                   { false };
 
-            GLint vertex_position_modelspace_id;
-            GLint vertex_uv_id;
-            GLint screen_width_uniform_id;       // Location of the program's window width uniform.
-            GLint screen_height_uniform_id;      // Location of the program's window height uniform.
-            GLint iteration_i_uniform_id;        // Location of the program's iteration index uniform.
+            GLint vertex_position_modelspace_id { 0 }; // Some dummy value.
+            GLint vertex_uv_id                  { 0 }; // Some dummy value.
+            GLint screen_width_uniform_id       { 0 }; // Some dummy value. Location of the program's window width uniform.
+            GLint screen_height_uniform_id      { 0 }; // Some dummy value. Location of the program's window height uniform.
+            GLint iteration_i_uniform_id        { 0 }; // Some dummy value. Location of the program's iteration index uniform.
 
-            GLuint vao;
-            GLuint vertexbuffer;
-            GLuint uvbuffer;
-            GLuint elementbuffer;
+            GLuint vao           { 0 }; // Some dummy value.
+            GLuint vertexbuffer  { 0 }; // Some dummy value.
+            GLuint uvbuffer      { 0 }; // Some dummy value.
+            GLuint elementbuffer { 0 }; // Some dummy value.
 
             GLenum format;
             GLenum internal_format;

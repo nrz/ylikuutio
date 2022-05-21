@@ -68,48 +68,27 @@ namespace yli::ontology
     }
 
     ComputeTask::ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
-        : Entity(universe, compute_task_struct)
+        : Entity(universe, compute_task_struct),
+        texture_file_format              { compute_task_struct.texture_file_format },
+        texture_filename                 { compute_task_struct.texture_filename },
+        output_filename                  { compute_task_struct.output_filename },
+        parent                           { compute_task_struct.parent },
+        left_filler_vector_any_value     { compute_task_struct.left_filler_vector_any_value },
+        right_filler_vector_any_value    { compute_task_struct.right_filler_vector_any_value },
+        end_condition_callback_engine    { compute_task_struct.end_condition_callback_engine },
+        n_max_iterations                 { compute_task_struct.n_max_iterations },
+        compute_taskID                   { compute_task_struct.compute_taskID },
+        texture_width                    { compute_task_struct.texture_width },
+        texture_height                   { compute_task_struct.texture_height },
+        n_index_characters               { compute_task_struct.n_index_characters },
+        format                           { compute_task_struct.format },
+        internal_format                  { compute_task_struct.internal_format },
+        output_format                    { compute_task_struct.output_format },
+        type                             { compute_task_struct.type },
+        should_save_intermediate_results { compute_task_struct.should_save_intermediate_results },
+        should_flip_texture              { compute_task_struct.should_flip_texture }
     {
         // constructor.
-        this->texture_file_format = compute_task_struct.texture_file_format;
-        this->texture_filename = compute_task_struct.texture_filename;
-        this->output_filename = compute_task_struct.output_filename;
-        this->parent = compute_task_struct.parent;
-        this->left_filler_vector_any_value = compute_task_struct.left_filler_vector_any_value;
-        this->right_filler_vector_any_value = compute_task_struct.right_filler_vector_any_value;
-        this->end_condition_callback_engine = compute_task_struct.end_condition_callback_engine;
-
-        this->n_max_iterations = compute_task_struct.n_max_iterations;
-        this->compute_taskID = compute_task_struct.compute_taskID;
-        this->texture_width = compute_task_struct.texture_width;
-        this->texture_height = compute_task_struct.texture_height;
-        this->texture_size = 0; // dummy value.
-        this->n_index_characters = compute_task_struct.n_index_characters;
-
-        this->vertices_size                 = 0;
-        this->uvs_size                      = 0;
-
-        // variables related to the framebuffer.
-        this->framebuffer                   = 0; // some dummy value.
-        this->source_texture                = 0; // some dummy value.
-        this->target_texture                = 0; // some dummy value.
-        this->opengl_texture_id             = 0; // some dummy value.
-
-        this->vertex_position_modelspace_id = 0; // some dummy value.
-        this->vertex_uv_id                  = 0; // some dummy value.
-        this->screen_width_uniform_id       = 0; // some dummy value.
-        this->screen_height_uniform_id      = 0; // some dummy value.
-        this->iteration_i_uniform_id        = 0; // some dummy value.
-        this->vertexbuffer                  = 0; // some dummy value.
-        this->uvbuffer                      = 0; // some dummy value.
-        this->elementbuffer                 = 0; // some dummy value.
-
-        this->format                           = compute_task_struct.format;
-        this->internal_format                  = compute_task_struct.internal_format;
-        this->output_format                    = compute_task_struct.output_format;
-        this->type                             = compute_task_struct.type;
-        this->should_save_intermediate_results = compute_task_struct.should_save_intermediate_results;
-        this->should_flip_texture              = compute_task_struct.should_flip_texture;
 
         // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
         this->bind_to_parent();
