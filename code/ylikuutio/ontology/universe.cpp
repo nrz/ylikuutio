@@ -844,7 +844,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::GenericParentModule& Universe::get_ecosystem_shaders()
+    yli::ontology::GenericParentModule& Universe::get_parent_of_ecosystems()
     {
         return this->parent_of_ecosystems;
     }

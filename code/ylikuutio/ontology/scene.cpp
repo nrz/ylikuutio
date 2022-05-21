@@ -198,7 +198,7 @@ namespace yli::ontology
             std::cerr << "ERROR: `Scene::render`: Vulkan is not supported yet!\n";
         }
 
-        render_system->render_shaders_of_ecosystems(this->universe.get_ecosystem_shaders(), this);
+        render_system->render_shaders_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
         render_system->render_shaders(this->parent_of_shaders);
     }
 
