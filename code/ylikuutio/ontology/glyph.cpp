@@ -17,12 +17,9 @@
 
 #include "glyph.hpp"
 #include "universe.hpp"
-#include "object.hpp"
 #include "model_struct.hpp"
 #include "gl_attrib_locations.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
-#include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
