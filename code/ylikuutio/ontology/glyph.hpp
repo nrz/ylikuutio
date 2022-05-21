@@ -44,7 +44,6 @@ namespace yli::ontology
     class VectorFont;
     class Object;
     class GenericParentModule;
-    class GenericMasterModule;
 
     class Glyph: public yli::ontology::Entity
     {
