@@ -22,9 +22,6 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
-#include "universe.hpp"
-#include "model_struct.hpp"
-#include "gl_attrib_locations.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -34,16 +31,16 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Universe;
     class Scene;
     class Object;
     class VectorFont;
+    struct ModelStruct;
 
     class Glyph: public yli::ontology::Entity
     {
@@ -62,33 +59,7 @@ namespace yli::ontology
             Glyph(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const vector_font_parent_module)
-                : Entity(universe, model_struct),
-                child_of_vector_font(vector_font_parent_module, this),
-                master_of_objects(this, &this->registry, "objects"),
-                mesh(universe, model_struct),
-                glyph_vertex_data    { model_struct.glyph_vertex_data },
-                glyph_name_pointer   { model_struct.glyph_name_pointer },
-                unicode_char_pointer { model_struct.unicode_char_pointer }
-            {
-                // constructor.
-
-                // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
-                // but they can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_texture =
-                    this->universe.get_is_opengl_in_use() ||
-                    this->universe.get_is_vulkan_in_use() ||
-                    this->universe.get_is_software_rendering_in_use();
-
-                if (should_load_texture && model_struct.shader != nullptr)
-                {
-                    // Get a handle for our buffers.
-                    yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->mesh);
-                }
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Glyph*";
-            }
+                    yli::ontology::GenericParentModule* const vector_font_parent_module);
 
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.

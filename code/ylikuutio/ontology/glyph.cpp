@@ -18,6 +18,8 @@
 #include "glyph.hpp"
 #include "universe.hpp"
 #include "object.hpp"
+#include "model_struct.hpp"
+#include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_model.hpp"
@@ -33,6 +35,37 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Scene;
+
+    Glyph::Glyph(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ModelStruct& model_struct,
+            yli::ontology::GenericParentModule* const vector_font_parent_module)
+        : Entity(universe, model_struct),
+        child_of_vector_font(vector_font_parent_module, this),
+        master_of_objects(this, &this->registry, "objects"),
+        mesh(universe, model_struct),
+        glyph_vertex_data    { model_struct.glyph_vertex_data },
+        glyph_name_pointer   { model_struct.glyph_name_pointer },
+        unicode_char_pointer { model_struct.unicode_char_pointer }
+    {
+        // constructor.
+
+        // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
+        // but they can still be loaded into CPU memory to be used by the software rendering.
+        const bool should_load_texture =
+            this->universe.get_is_opengl_in_use() ||
+            this->universe.get_is_vulkan_in_use() ||
+            this->universe.get_is_software_rendering_in_use();
+
+        if (should_load_texture && model_struct.shader != nullptr)
+        {
+            // Get a handle for our buffers.
+            yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->mesh);
+        }
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::Glyph*";
+    }
 
     Glyph::~Glyph()
     {
