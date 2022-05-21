@@ -17,9 +17,7 @@
 
 #include "text_3d.hpp"
 #include "vector_font.hpp"
-#include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
