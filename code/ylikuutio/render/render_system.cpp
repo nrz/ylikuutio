@@ -219,7 +219,7 @@ namespace yli::render
 
     void RenderSystem::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
     {
-        for (auto it = parent.child_pointer_vector.begin(); it != parent.child_pointer_vector.end(); ++it)
+        for (auto it = parent.begin(); it != parent.end(); ++it)
         {
             yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
 
