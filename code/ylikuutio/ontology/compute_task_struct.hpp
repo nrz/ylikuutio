@@ -26,6 +26,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::callback
@@ -48,9 +49,9 @@ namespace yli::ontology
         std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
-        std::size_t texture_width      { 0 };
-        std::size_t texture_height     { 0 };
-        std::size_t n_index_characters { 4 }; // For intermediate results' filenames.
+        uint32_t texture_width         { 0 };
+        uint32_t texture_height        { 0 };
+        uint32_t n_index_characters    { 4 }; // For intermediate results' filenames.
         GLenum format                  { GL_RGB };
         GLenum internal_format         { GL_INVALID_ENUM };
         GLenum output_format           { GL_INVALID_ENUM };
