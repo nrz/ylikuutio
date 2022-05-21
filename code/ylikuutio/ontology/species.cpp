@@ -64,7 +64,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        species.master_of_objects.unbind_all_apprentice_modules();
+        species.master_of_objects.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         species.apprentice_of_material.unbind_from_any_master_belonging_to_other_scene(new_parent);
         species.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_species);
         return std::nullopt;
