@@ -25,7 +25,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
 // `SymbiontSpecies` is not the ontological parent of `Biont`,
