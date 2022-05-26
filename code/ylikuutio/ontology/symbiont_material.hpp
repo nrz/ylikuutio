@@ -64,9 +64,6 @@ namespace yli::ontology
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
-
-            // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
-            void render();
     };
 }
 

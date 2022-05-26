@@ -19,16 +19,12 @@
 #include "universe.hpp"
 #include "shader.hpp"
 #include "symbiosis.hpp"
-#include "symbiont_species.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
-#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_system.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -104,33 +100,6 @@ namespace yli::ontology
         }
 
         return nullptr;
-    }
-
-    void SymbiontMaterial::render()
-    {
-        if (!this->should_be_rendered)
-        {
-            return;
-        }
-
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr)
-        {
-            std::cerr << "ERROR: `SymbiontMaterial::render`: `render_system` is `nullptr`!\n";
-            return;
-        }
-
-        if (this->universe.get_is_opengl_in_use())
-        {
-            // Bind our texture in Texture Unit 0.
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
-            // Set our "texture_sampler" sampler to user Texture Unit 0.
-            yli::opengl::uniform_1i(this->opengl_texture_id, 0);
-        }
-
-        render_system->render_symbiont_species(this->parent_of_symbiont_species.child_pointer_vector);
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const
