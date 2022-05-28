@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
-#include "universe.hpp"
 #include "model_struct.hpp"
 
 // Include standard headers
