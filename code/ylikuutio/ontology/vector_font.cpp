@@ -242,7 +242,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_glyphs(this->parent_of_glyphs.child_pointer_vector);
+        render_system->render_glyphs(this->parent_of_glyphs);
     }
 
     yli::ontology::Entity* VectorFont::get_parent() const

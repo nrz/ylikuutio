@@ -35,7 +35,7 @@ namespace yli::render
     template<typename T>
         using SomeIterator = typename std::decay<T>::type::iterator;
 
-    template<typename ContainerType, typename StoredType, typename CastType>
+    template<typename ContainerType, typename CastType>
         void render_children(ContainerType& child_container)
         {
             for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
@@ -49,7 +49,7 @@ namespace yli::render
             }
         }
 
-    template<typename ContainerType, typename StoredType, typename CastType>
+    template<typename ContainerType, typename CastType>
         void render_children_of_given_scene_or_of_all_scenes(
                 ContainerType& child_container,
                 const yli::ontology::Scene* const scene)
@@ -70,16 +70,14 @@ namespace yli::render
             }
         }
 
-    template<typename T1>
-        void render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector)
+    template<typename ContainerType, typename CastType>
+        void render_apprentices(ContainerType& apprentice_container)
         {
-            for (std::size_t apprentice_i = 0; apprentice_i < apprentice_pointer_vector.size(); apprentice_i++)
+            for (SomeIterator<ContainerType&> it = apprentice_container.begin(); it != apprentice_container.end(); ++it)
             {
-                yli::ontology::ApprenticeModule* const apprentice_module = apprentice_pointer_vector[apprentice_i];
-
-                if (apprentice_module != nullptr)
+                if (*it != nullptr)
                 {
-                    T1 apprentice_pointer = static_cast<T1>(apprentice_module->get_apprentice());
+                    CastType apprentice_pointer = static_cast<CastType>(*it);
 
                     if (apprentice_pointer != nullptr && apprentice_pointer->should_be_rendered)
                     {

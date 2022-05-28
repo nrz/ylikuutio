@@ -217,8 +217,8 @@ namespace yli::ontology
         }
 
         this->prepare_to_print();
-        render_system->render_text_2ds(this->parent_of_text_2ds.child_pointer_vector);
-        render_system->render_consoles(this->master_of_consoles.get_apprentice_module_pointer_vector_reference());
+        render_system->render_text_2ds(this->parent_of_text_2ds);
+        render_system->render_consoles(this->master_of_consoles);
         glDisable(GL_BLEND);
     }
 

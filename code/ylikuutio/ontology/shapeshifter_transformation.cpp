@@ -110,7 +110,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences.child_pointer_vector);
+        render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences);
     }
 
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const

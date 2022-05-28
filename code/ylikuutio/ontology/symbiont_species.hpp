@@ -69,9 +69,6 @@ namespace yli::ontology
             void bind_to_parent();
 
         public:
-            // this method renders all `Object`s of this `SymbiontSpecies`.
-            void render();
-
             yli::ontology::GenericMasterModule* get_renderables_container() const;
 
         private:

@@ -188,7 +188,7 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        render_system->render_species(this->master_of_species.get_apprentice_module_pointer_vector_reference());
+        render_system->render_species(this->master_of_species);
         render_system->render_vector_fonts(this->parent_of_vector_fonts);
         render_system->render_chunk_masters(this->parent_of_chunk_masters);
     }

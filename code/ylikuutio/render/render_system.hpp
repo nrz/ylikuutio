@@ -21,7 +21,6 @@
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 struct SDL_Window;
 
@@ -36,6 +35,7 @@ namespace yli::ontology
     class Glyph;
     class GenericParentModule;
     class ParentOfShadersModule;
+    class GenericMasterModule;
     class ApprenticeModule;
 }
 
@@ -74,22 +74,20 @@ namespace yli::render
             void render_materials_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
             void render_materials_of_an_ecosystem(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
 
-            void render_materials(std::vector<yli::ontology::ApprenticeModule*>& material_apprentices_pointer_vector) const;
+            void render_materials(yli::ontology::GenericMasterModule& master) const;
 
-            void render_species(std::vector<yli::ontology::ApprenticeModule*>& species_apprentice_pointer_vector) const;
-            void render_symbioses(std::vector<yli::ontology::ApprenticeModule*>& symbiosis_apprentice_pointer_vector) const;
-            void render_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species) const;
-            void render_symbiont_species(std::vector<yli::ontology::Entity*>& symbiont_species_pointer_vector) const;
-            void render_holobionts(std::vector<yli::ontology::Entity*>& holobiont_pointer_vector) const;
-            void render_bionts(std::vector<yli::ontology::Entity*>& biont_pointer_vector) const;
-            void render_shapeshifter_sequences(std::vector<yli::ontology::Entity*>& shapeshifter_sequence_pointer_vector) const;
+            void render_species(yli::ontology::GenericMasterModule& master) const;
+            void render_symbioses(yli::ontology::GenericMasterModule& master) const;
+            void render_holobionts(yli::ontology::GenericParentModule& parent) const;
+            void render_bionts(yli::ontology::GenericParentModule& parent) const;
+            void render_shapeshifter_sequences(yli::ontology::GenericParentModule& parent) const;
             void render_chunk_masters(yli::ontology::GenericParentModule& parent) const;
-            void render_chunks(std::vector<yli::ontology::Entity*>& chunk_pointer_vector) const;
-            void render_text_2ds(std::vector<yli::ontology::Entity*>& text_2d_pointer_vector) const;
-            void render_consoles(std::vector<yli::ontology::ApprenticeModule*>& console_apprentice_pointer_vector) const;
+            void render_chunks(yli::ontology::GenericParentModule& parent) const;
+            void render_text_2ds(yli::ontology::GenericParentModule& parent) const;
+            void render_consoles(yli::ontology::GenericMasterModule& master) const;
             void render_vector_fonts(yli::ontology::GenericParentModule& parent) const;
             void render_glyph(yli::ontology::Glyph* const glyph) const;
-            void render_glyphs(std::vector<yli::ontology::Entity*>& glyph_pointer_vector) const;
+            void render_glyphs(yli::ontology::GenericParentModule& parent) const;
             void render_compute_tasks(yli::ontology::GenericParentModule& parent) const;
 
         private:

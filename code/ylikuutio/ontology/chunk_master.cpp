@@ -94,6 +94,6 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_chunks(this->parent_of_chunks.child_pointer_vector);
+        render_system->render_chunks(this->parent_of_chunks);
     }
 }

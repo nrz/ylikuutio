@@ -99,7 +99,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_bionts(this->parent_of_bionts.child_pointer_vector);
+        render_system->render_bionts(this->parent_of_bionts);
     }
 
     void Holobiont::create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector)

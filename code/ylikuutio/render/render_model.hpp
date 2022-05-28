@@ -24,8 +24,8 @@
 
 namespace yli::render
 {
-    // ContainerType = container type, T1 = stored type, CastType = type in which to cast the stored type into.
-    template<typename ContainerType, typename StoredType, typename CastType>
+    // ContainerType = container type, CastType = type in which to cast the stored type into.
+    template<typename ContainerType, typename CastType>
         void render_model(const yli::ontology::MeshModule& mesh, ContainerType& renderables_container)
         {
             // 1st attribute buffer: vertices.
@@ -38,7 +38,7 @@ namespace yli::render
             yli::opengl::enable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
 
             // Render this `Species` or `Glyph` by calling `render()` function of each `Object`.
-            yli::render::render_children<ContainerType&, StoredType, CastType>(renderables_container);
+            yli::render::render_children<ContainerType&, CastType>(renderables_container);
 
             yli::opengl::disable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
             yli::opengl::disable_vertex_attrib_array(mesh.vertex_uv_id);

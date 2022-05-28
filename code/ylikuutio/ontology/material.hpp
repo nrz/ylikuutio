@@ -27,7 +27,6 @@
 #include "texture_module.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -89,9 +88,6 @@ namespace yli::ontology
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;
             uint32_t get_image_size() const;
-
-            template<typename T1>
-                friend void yli::render::render_apprentices(const std::vector<yli::ontology::ApprenticeModule*>& apprentice_pointer_vector);
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;

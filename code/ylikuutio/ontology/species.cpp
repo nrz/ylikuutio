@@ -133,7 +133,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Entity*, yli::ontology::Object*>(
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Object*>(
                 this->mesh, this->master_of_objects);
     }
 

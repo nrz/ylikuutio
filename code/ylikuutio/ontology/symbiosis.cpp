@@ -146,7 +146,7 @@ namespace yli::ontology
                 return;
             }
 
-            render_system->render_holobionts(this->parent_of_holobionts.child_pointer_vector);
+            render_system->render_holobionts(this->parent_of_holobionts);
         }
     }
 

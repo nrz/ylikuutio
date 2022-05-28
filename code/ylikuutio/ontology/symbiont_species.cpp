@@ -18,7 +18,6 @@
 #include "symbiont_species.hpp"
 #include "universe.hpp"
 #include "model_struct.hpp"
-#include "code/ylikuutio/render/render_system.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -61,19 +60,6 @@ namespace yli::ontology
     std::size_t SymbiontSpecies::get_number_of_apprentices() const
     {
         return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
-    }
-
-    void SymbiontSpecies::render()
-    {
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr)
-        {
-            std::cerr << "ERROR: `SymbiontSpecies::render`: `render_system` is `nullptr`!\n";
-            return;
-        }
-
-        render_system->render_symbiont_species(this);
     }
 
     yli::ontology::GenericMasterModule* SymbiontSpecies::get_renderables_container() const
