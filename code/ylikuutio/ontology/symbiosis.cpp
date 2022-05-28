@@ -53,7 +53,6 @@
 namespace yli::ontology
 {
     class Entity;
-    class Scene;
 
     std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent)
     {
