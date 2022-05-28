@@ -17,6 +17,7 @@
 
 #include "symbiosis.hpp"
 #include "universe.hpp"
+#include "scene.hpp"
 #include "shader.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"

@@ -20,6 +20,7 @@
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "shader.hpp"
+#include "scene.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
