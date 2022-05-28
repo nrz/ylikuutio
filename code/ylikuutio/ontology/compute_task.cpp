@@ -248,7 +248,7 @@ namespace yli::ontology
         this->parent->parent_of_compute_tasks.unbind_child(this->childID);
     }
 
-    void ComputeTask::render()
+    void ComputeTask::render(const yli::ontology::Scene* const)
     {
         if (!this->is_texture_loaded)
         {

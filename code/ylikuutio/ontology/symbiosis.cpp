@@ -134,20 +134,32 @@ namespace yli::ontology
         std::cout << "`Symbiosis` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
-    void Symbiosis::render()
+    void Symbiosis::render(const yli::ontology::Scene* const target_scene)
     {
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered)
         {
-            yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-            if (render_system == nullptr)
-            {
-                std::cerr << "ERROR: `Symbiosis::render`: `render_system` is `nullptr`!\n";
-                return;
-            }
-
-            render_system->render_holobionts(this->parent_of_holobionts);
+            return;
         }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
+
+        if (render_system == nullptr)
+        {
+            std::cerr << "ERROR: `Symbiosis::render`: `render_system` is `nullptr`!\n";
+            return;
+        }
+
+        render_system->render_holobionts(this->parent_of_holobionts, new_target_scene);
     }
 
     std::size_t Symbiosis::get_number_of_symbiont_materials() const

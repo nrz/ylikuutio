@@ -166,12 +166,22 @@ namespace yli::ontology
         std::cout << "`Material` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
-    void Material::render()
+    void Material::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->texture.get_is_texture_loaded() || !this->should_be_rendered)
         {
             return;
         }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -188,9 +198,9 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        render_system->render_species(this->master_of_species);
-        render_system->render_vector_fonts(this->parent_of_vector_fonts);
-        render_system->render_chunk_masters(this->parent_of_chunk_masters);
+        render_system->render_species(this->master_of_species, new_target_scene);
+        render_system->render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
+        render_system->render_chunk_masters(this->parent_of_chunk_masters, new_target_scene);
     }
 
     yli::ontology::Entity* Material::get_parent() const

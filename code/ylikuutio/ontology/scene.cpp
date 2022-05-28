@@ -199,7 +199,7 @@ namespace yli::ontology
         }
 
         render_system->render_shaders_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
-        render_system->render_shaders(this->parent_of_shaders);
+        render_system->render_shaders(this->parent_of_shaders, this);
     }
 
     yli::ontology::Camera* Scene::get_default_camera() const

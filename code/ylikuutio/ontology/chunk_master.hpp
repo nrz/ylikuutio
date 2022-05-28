@@ -34,6 +34,7 @@
 namespace yli::ontology
 {
     class Universe;
+    class Scene;
 
     class ChunkMaster: public yli::ontology::Entity
     {
@@ -53,7 +54,7 @@ namespace yli::ontology
 
         public:
             // this method renders all `Chunk`s bound to this `ChunkMaster`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             // Callback used to get the content based on x, y, z.

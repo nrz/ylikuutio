@@ -38,6 +38,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
+    class Ecosystem;
     class Scene;
     class Shader;
     class Material;
@@ -46,6 +47,10 @@ namespace yli::ontology
     class Species: public yli::ontology::Entity
     {
         public:
+            // Set pointer to `species` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Species& species, yli::ontology::Ecosystem& new_parent);
+
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent);
@@ -77,8 +82,7 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            // this method renders all `Object`s of this `Species`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
             yli::ontology::Scene* get_scene() const override;
 
@@ -88,7 +92,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::ChildModule child_of_scene;
+            yli::ontology::ChildModule child_of_scene_or_ecosystem;
 
         public:
             yli::ontology::GenericMasterModule master_of_objects;

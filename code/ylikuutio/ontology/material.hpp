@@ -25,7 +25,6 @@
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "texture_module.hpp"
-#include "family_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -33,7 +32,6 @@
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::data
 {
@@ -108,8 +106,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         public:
-            // This method renders all `Species` using this `Material`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
     };
 }
 

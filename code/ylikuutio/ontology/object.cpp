@@ -205,21 +205,31 @@ namespace yli::ontology
         return this->glyph;
     }
 
-    void Object::render()
+    void Object::render(const yli::ontology::Scene* const target_scene)
     {
         // render this `Object`.
 
-        if (this->should_be_rendered)
+        if (!this->should_be_rendered)
         {
-            if (this->object_type == yli::ontology::ObjectType::REGULAR ||
-                    this->object_type == yli::ontology::ObjectType::CHARACTER)
-            {
-                this->render_this_object(this->get_shader());
-            }
-            else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-            {
-                // TODO.
-            }
+            return;
+        }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        if (this->object_type == yli::ontology::ObjectType::REGULAR ||
+                this->object_type == yli::ontology::ObjectType::CHARACTER)
+        {
+            this->render_this_object(this->get_shader());
+        }
+        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        {
+            // TODO.
         }
     }
 

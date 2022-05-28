@@ -239,51 +239,41 @@ namespace yli::render
                 scene);
     }
 
-    void RenderSystem::render_shaders(yli::ontology::ParentOfShadersModule& parent) const
+    void RenderSystem::render_shaders(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::ParentOfShadersModule&, yli::ontology::Shader*>(parent);
-    }
-
-    void RenderSystem::render_materials_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
-    {
-        for (auto it = parent.begin(); it != parent.end(); ++it)
-        {
-            yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
-
-            if (ecosystem != nullptr && ecosystem->should_be_rendered)
-            {
-                this->render_materials_of_an_ecosystem(ecosystem->parent_of_materials, scene);
-            }
-        }
-    }
-
-    void RenderSystem::render_materials_of_an_ecosystem(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
-    {
-        yli::render::render_children_of_given_scene_or_of_all_scenes<
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Material*>(
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::ParentOfShadersModule&, yli::ontology::Shader*>(
                 parent,
                 scene);
     }
 
-    void RenderSystem::render_materials(yli::ontology::GenericMasterModule& master) const
+    void RenderSystem::render_materials(
+            yli::ontology::GenericMasterModule& master,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Material*>(master);
+        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Material*>(master, scene);
     }
 
-    void RenderSystem::render_species(yli::ontology::GenericMasterModule& master) const
+    void RenderSystem::render_species(
+            yli::ontology::GenericMasterModule& master,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Species*>(master);
+        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Species*>(master, scene);
     }
 
-    void RenderSystem::render_symbioses(yli::ontology::GenericMasterModule& master) const
+    void RenderSystem::render_symbioses(
+            yli::ontology::GenericMasterModule& master,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Symbiosis*>(master);
+        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Symbiosis*>(master, scene);
     }
 
-    void RenderSystem::render_holobionts(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_holobionts(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Holobiont*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::Holobiont*>(
+                parent,
+                scene);
     }
 
     void RenderSystem::render_bionts(yli::ontology::GenericParentModule& parent) const
@@ -291,14 +281,22 @@ namespace yli::render
         yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Biont*>(parent);
     }
 
-    void RenderSystem::render_shapeshifter_sequences(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_shapeshifter_sequences(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::ShapeshifterSequence*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::ShapeshifterSequence*>(
+                parent,
+                scene);
     }
 
-    void RenderSystem::render_chunk_masters(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_chunk_masters(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::ChunkMaster*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::ChunkMaster*>(
+                parent,
+                scene);
     }
 
     void RenderSystem::render_chunks(yli::ontology::GenericParentModule& parent) const
@@ -313,26 +311,45 @@ namespace yli::render
 
     void RenderSystem::render_consoles(yli::ontology::GenericMasterModule& master) const
     {
-        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Console*>(master);
+        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Console*>(
+                master,
+                nullptr); // `Console`s are rendered in all `Scene`s.
     }
 
-    void RenderSystem::render_vector_fonts(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_vector_fonts(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::VectorFont*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::VectorFont*>(
+                parent,
+                scene);
     }
 
-    void RenderSystem::render_glyph(yli::ontology::Glyph* const glyph) const
+    void RenderSystem::render_glyph(
+            yli::ontology::Glyph* const glyph,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Object*>(glyph->mesh, *(glyph->get_renderables_container()));
+        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Object*>(
+                glyph->mesh,
+                *(glyph->get_renderables_container()),
+                scene);
     }
 
-    void RenderSystem::render_glyphs(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_glyphs(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Glyph*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::Glyph*>(
+                parent,
+                scene);
     }
 
-    void RenderSystem::render_compute_tasks(yli::ontology::GenericParentModule& parent) const
+    void RenderSystem::render_compute_tasks(
+            yli::ontology::GenericParentModule& parent,
+            const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::ComputeTask*>(parent);
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::ComputeTask*>(
+                parent,
+                scene);
     }
 }

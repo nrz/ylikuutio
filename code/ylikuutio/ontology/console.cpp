@@ -221,7 +221,7 @@ namespace yli::ontology
         this->enter_console();
     }
 
-    void Console::render() const
+    void Console::render(const yli::ontology::Scene* const) const
     {
         if (!this->in_console ||
                 !this->should_be_rendered ||

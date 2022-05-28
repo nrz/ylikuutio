@@ -84,10 +84,18 @@ namespace yli::ontology
         return this->child_of_symbiosis.get_parent();
     }
 
-    void Holobiont::render()
+    void Holobiont::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
         {
+            return;
+        }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
             return;
         }
 
@@ -99,6 +107,7 @@ namespace yli::ontology
             return;
         }
 
+        // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
         render_system->render_bionts(this->parent_of_bionts);
     }
 

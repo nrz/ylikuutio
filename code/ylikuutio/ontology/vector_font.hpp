@@ -91,7 +91,7 @@ namespace yli::ontology
 
         public:
             // This method renders all `Glyph`s of this `VectorFont`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             std::string font_file_format; // Type of the model file, eg. `"png"`.

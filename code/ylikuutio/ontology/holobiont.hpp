@@ -104,7 +104,7 @@ namespace yli::ontology
 
         public:
             // this method renders this `Holobiont`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             void create_bionts(yli::ontology::Scene* const scene, const std::vector<bool>& should_render_bionts_vector);

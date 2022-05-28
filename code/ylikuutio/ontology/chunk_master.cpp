@@ -30,6 +30,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+
     void ChunkMaster::bind_to_parent()
     {
         // requirements:
@@ -79,10 +81,18 @@ namespace yli::ontology
         material->parent_of_chunk_masters.unbind_child(this->childID);
     }
 
-    void ChunkMaster::render()
+    void ChunkMaster::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
         {
+            return;
+        }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
             return;
         }
 

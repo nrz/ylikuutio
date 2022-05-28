@@ -119,7 +119,7 @@ namespace yli::ontology
             void set_console_right_x(const uint32_t console_right_x);
             void print_text(const std::string& text);
             void print_help();
-            void render() const;
+            void render(const yli::ontology::Scene* const) const;
 
             bool enter_console();
             bool exit_console();
@@ -369,7 +369,10 @@ namespace yli::ontology
         private:
             yli::ontology::Entity* get_parent() const override;
 
+        public:
             yli::ontology::Scene* get_scene() const override;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

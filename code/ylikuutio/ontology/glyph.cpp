@@ -99,12 +99,22 @@ namespace yli::ontology
         return 0; // `Glyph` has no children.
     }
 
-    void Glyph::render()
+    void Glyph::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered || this->universe.get_is_headless())
         {
             return;
         }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -114,7 +124,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_glyph(this);
+        render_system->render_glyph(this, new_target_scene);
     }
 
     yli::ontology::GenericMasterModule* Glyph::get_renderables_container()

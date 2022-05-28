@@ -102,7 +102,7 @@ namespace yli::ontology
 
         public:
             // This method renders all materials using this `Shader`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             GLuint program_id     { 0 };          // This `Shader`'s `program_id`, returned by `load_shaders`. Dummy value.

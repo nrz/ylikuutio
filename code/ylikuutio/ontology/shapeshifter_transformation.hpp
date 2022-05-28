@@ -76,7 +76,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
     };
 }
 

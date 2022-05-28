@@ -95,12 +95,22 @@ namespace yli::ontology
         material->parent_of_shapeshifter_transformations.unbind_child(this->childID);
     }
 
-    void ShapeshifterTransformation::render()
+    void ShapeshifterTransformation::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
         {
             return;
         }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -110,7 +120,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences);
+        render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences, new_target_scene);
     }
 
     yli::ontology::Entity* ShapeshifterTransformation::get_parent() const

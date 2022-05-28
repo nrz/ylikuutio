@@ -128,7 +128,7 @@ namespace yli::ontology
 
         public:
             // this method renders this `Object`.
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             void render_this_object(yli::ontology::Shader* const shader);

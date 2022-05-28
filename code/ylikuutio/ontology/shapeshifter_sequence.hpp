@@ -71,7 +71,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render();
+            void render(const yli::ontology::Scene* const target_scene);
 
         private:
             float transformation_speed;                        // Negative speed means inverse initial transition direction.

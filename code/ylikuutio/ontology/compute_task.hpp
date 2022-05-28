@@ -78,13 +78,16 @@ namespace yli::ontology
         private:
             void bind_to_parent();
 
+        public:
             yli::ontology::Scene* get_scene() const override;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
         public:
             // This method renders this `ComputeTask`, that is, computes this task.
-            void render();
+            void render(const yli::ontology::Scene* const);
 
         private:
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.

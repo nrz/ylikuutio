@@ -155,12 +155,22 @@ namespace yli::ontology
         }
     }
 
-    void Shader::render()
+    void Shader::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
         {
             return;
         }
+
+        yli::ontology::Scene* const scene = this->get_scene();
+
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        {
+            // Different `Scene`s, do not render.
+            return;
+        }
+
+        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -173,10 +183,9 @@ namespace yli::ontology
         // [Re]bind `program_id` shader.
         glUseProgram(this->program_id);
 
-        render_system->render_compute_tasks(this->parent_of_compute_tasks);
-        render_system->render_materials_of_ecosystems(this->universe.get_parent_of_ecosystems(), this->get_scene());
-        render_system->render_materials(this->master_of_materials);
-        render_system->render_symbioses(this->master_of_symbioses);
+        render_system->render_compute_tasks(this->parent_of_compute_tasks, new_target_scene);
+        render_system->render_materials(this->master_of_materials, new_target_scene);
+        render_system->render_symbioses(this->master_of_symbioses, new_target_scene);
     }
 
     yli::ontology::Scene* Shader::get_scene() const
