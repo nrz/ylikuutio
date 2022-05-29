@@ -1019,6 +1019,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
+        code/ylikuutio/tests/googletest/test_universe.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
         code/ylikuutio/tests/googletest/test_universe_struct.cpp
         code/ylikuutio/tests/googletest/test_variable_struct.cpp

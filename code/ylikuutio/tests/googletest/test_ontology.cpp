@@ -49,36 +49,6 @@
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
-TEST(universe_must_be_initialized_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    // `Universe` member variables.
-    ASSERT_FALSE(universe->is_invert_mouse_in_use);
-    ASSERT_FALSE(universe->is_first_turbo_pressed);
-    ASSERT_FALSE(universe->is_second_turbo_pressed);
-    ASSERT_TRUE(universe->is_exit_requested);
-    ASSERT_FALSE(universe->in_console);
-    ASSERT_TRUE(universe->in_help_mode);
-    ASSERT_TRUE(universe->can_display_help_screen);
-
-    // `Universe` member functions.
-    ASSERT_TRUE(universe->get_is_headless());
-    ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
-    ASSERT_EQ(universe->get_number_of_scenes(), 0);
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
-
-    // `Entity` member functions.
-    ASSERT_EQ(universe->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(universe->get_type(), "yli::ontology::Universe*");
-    ASSERT_FALSE(universe->get_can_be_erased());
-    ASSERT_EQ(&(universe->get_universe()), universe);
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_parent(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 0);
-}
-
 TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
@@ -2467,43 +2437,6 @@ TEST(symbiosis_must_bind_to_shader_appropriately, master_and_apprentice)
 
     ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader1);
     ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
-}
-
-TEST(universe_must_be_given_a_global_name_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_global_name("foo");
-    ASSERT_EQ(universe->get_global_name(), "foo");
-    ASSERT_EQ(universe->get_local_name(), "");
-}
-
-TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_local_name("foo");
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-}
-
-TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_global_name("foo");
-    universe->set_local_name("bar");
-    ASSERT_EQ(universe->get_global_name(), "foo");
-    ASSERT_EQ(universe->get_local_name(), "");
 }
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
