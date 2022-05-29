@@ -1011,6 +1011,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_model_struct.cpp
         code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
+        code/ylikuutio/tests/googletest/test_object.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_ontology.cpp
         code/ylikuutio/tests/googletest/test_png_heightmap_loader.cpp
