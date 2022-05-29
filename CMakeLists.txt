@@ -1001,6 +1001,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_graph.cpp
+        code/ylikuutio/tests/googletest/test_holobiont.cpp
         code/ylikuutio/tests/googletest/test_indexing.cpp
         code/ylikuutio/tests/googletest/test_line_2d.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
