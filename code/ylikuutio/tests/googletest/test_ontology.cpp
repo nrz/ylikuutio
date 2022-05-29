@@ -49,45 +49,6 @@
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
-TEST(brain_must_be_initialized_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-
-    yli::ontology::BrainStruct brain_struct;
-    brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = new yli::ontology::Brain(
-            *universe,
-            brain_struct,
-            &scene->parent_of_brains);
-
-    // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
-
-    // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);
-
-    // `Brain` member functions.
-    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
-
-    // `Entity` member functions.
-    ASSERT_EQ(brain->get_childID(), 0);
-    ASSERT_EQ(brain->get_type(), "yli::ontology::Brain*");
-    ASSERT_TRUE(brain->get_can_be_erased());
-    ASSERT_EQ(&(brain->get_universe()), universe);
-    ASSERT_EQ(brain->get_scene(), scene);
-    ASSERT_EQ(brain->get_parent(), scene);
-    ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
-}
-
 TEST(font_2d_must_be_initialized_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);

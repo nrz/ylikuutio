@@ -985,6 +985,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation.cpp
+        code/ylikuutio/tests/googletest/test_brain.cpp
         code/ylikuutio/tests/googletest/test_brain_struct.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
