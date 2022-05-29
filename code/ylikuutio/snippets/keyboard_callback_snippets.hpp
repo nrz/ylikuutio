@@ -18,6 +18,8 @@
 #ifndef __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
 #define __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
 #include <vector> // std::vector
@@ -27,11 +29,6 @@ namespace yli::callback
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
-}
-
-namespace yli::data
-{
-    class AnyValue;
 }
 
 namespace yli::ontology

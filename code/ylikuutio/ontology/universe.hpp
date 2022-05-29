@@ -22,6 +22,7 @@
 #include "generic_parent_module.hpp"
 #include "framebuffer_module.hpp"
 #include "entity_factory.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -50,11 +51,6 @@
 namespace yli::audio
 {
     class AudioSystem;
-}
-
-namespace yli::data
-{
-    class AnyValue;
 }
 
 namespace yli::input

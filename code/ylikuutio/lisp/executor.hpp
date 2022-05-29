@@ -18,15 +18,12 @@
 #ifndef __YLIKUUTIO_LISP_EXECUTOR_HPP_INCLUDED
 #define __YLIKUUTIO_LISP_EXECUTOR_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
 #include <string> // std::string, std::getline
 #include <vector> // std::vector
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

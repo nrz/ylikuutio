@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -34,11 +35,6 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

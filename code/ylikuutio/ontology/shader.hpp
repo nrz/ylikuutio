@@ -27,6 +27,7 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -39,11 +40,6 @@
 #include <queue>    // std::queue
 #include <string>   // std::string
 #include <vector>   // std::vector
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

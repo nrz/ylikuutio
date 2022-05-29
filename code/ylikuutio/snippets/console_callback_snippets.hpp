@@ -18,13 +18,10 @@
 #ifndef __YLIKUUTIO_SNIPPETS_CONSOLE_CALLBACK_SNIPPETS_HPP_INCLUDED
 #define __YLIKUUTIO_SNIPPETS_CONSOLE_CALLBACK_SNIPPETS_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

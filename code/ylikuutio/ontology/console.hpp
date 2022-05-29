@@ -24,6 +24,7 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
@@ -63,11 +64,6 @@ namespace yli::callback
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
-}
-
-namespace yli::data
-{
-    class AnyValue;
 }
 
 namespace yli::input

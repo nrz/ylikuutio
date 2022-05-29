@@ -23,6 +23,7 @@
 #include "apprentice_module.hpp"
 #include "rigid_body_module.hpp"
 #include "movable_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -49,11 +50,6 @@
 // `Camera`    - non-material `Movable`, child of `Scene`.
 //
 // `Text3D`, child of `VectorFont`, is not implemented yet.
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::input
 {

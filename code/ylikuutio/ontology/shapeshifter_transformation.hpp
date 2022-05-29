@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -29,11 +30,6 @@
 // `ShapeshifterTransformation` is a series of `ShapeshifterForm`s that
 // make up the transition that may be e.g. a walk cycle or
 // a metamorphosis of some kind.
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

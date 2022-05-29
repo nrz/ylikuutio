@@ -20,17 +20,13 @@
 
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
 #include <string>        // std::string
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

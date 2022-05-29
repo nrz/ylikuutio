@@ -20,17 +20,13 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

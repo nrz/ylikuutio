@@ -22,16 +22,12 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "glyph_object_creation.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

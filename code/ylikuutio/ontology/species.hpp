@@ -23,16 +23,12 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "mesh_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

@@ -18,13 +18,10 @@
 #ifndef __AJOKKI_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
 #define __AJOKKI_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

@@ -23,6 +23,7 @@
 #include "apprentice_module.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -30,11 +31,6 @@
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

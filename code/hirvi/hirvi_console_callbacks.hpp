@@ -18,13 +18,10 @@
 #ifndef __HIRVI_HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
 #define __HIRVI_HIRVI_CONSOLE_CALLBACKS_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

@@ -20,6 +20,7 @@
 
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
@@ -29,11 +30,6 @@ namespace yli::callback
 {
     class CallbackEngine;
     class CallbackParameter;
-}
-
-namespace yli::data
-{
-    class AnyValue;
 }
 
 namespace yli::console

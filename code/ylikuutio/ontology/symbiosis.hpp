@@ -27,6 +27,7 @@
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
 
@@ -46,11 +47,6 @@ typedef unsigned char u8;
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

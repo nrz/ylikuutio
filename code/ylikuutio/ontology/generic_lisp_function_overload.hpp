@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "entity_struct.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
@@ -28,11 +29,6 @@
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <vector>     // std::vector
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

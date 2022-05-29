@@ -18,13 +18,10 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_MOVABLE_VARIABLE_READ_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_MOVABLE_VARIABLE_READ_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
-
-namespace yli::data
-{
-    class AnyValue;
-}
 
 namespace yli::ontology
 {

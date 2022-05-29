@@ -18,6 +18,8 @@
 #ifndef __YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 #define __YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
+#include "code/ylikuutio/data/any_value.hpp"
+
 // Include standard headers
 #include <optional> // std::optional
 #include <vector> // std::vector
@@ -27,11 +29,6 @@ namespace yli::callback
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
-}
-
-namespace yli::data
-{
-    class AnyValue;
 }
 
 namespace yli::ontology
