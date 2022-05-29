@@ -49,36 +49,6 @@
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
-TEST(scene_must_be_initialized_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-
-    // `Universe` member functions.
-    ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
-    ASSERT_EQ(universe->get_number_of_scenes(), 1);
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
-
-    // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
-
-    // `Entity` member functions.
-    ASSERT_EQ(scene->get_childID(), 0);
-    ASSERT_EQ(scene->get_type(), "yli::ontology::Scene*");
-    ASSERT_TRUE(scene->get_can_be_erased());
-    ASSERT_EQ(&(scene->get_universe()), universe);
-    ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_parent(), universe);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1);
-}
-
 TEST(shader_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
@@ -1294,22 +1264,6 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
     ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 0);
 }
 
-TEST(scene_must_be_activated_appropriately, scene)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
-    universe->set_active_scene(scene);
-    ASSERT_EQ(universe->get_active_scene(), scene);
-}
-
 TEST(input_system_must_be_set_to_nullptr_in_headless_mode, universe)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
@@ -2145,144 +2099,6 @@ TEST(symbiosis_must_bind_to_shader_appropriately, master_and_apprentice)
 
     ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader1);
     ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
-}
-
-TEST(scene_must_be_given_a_global_name_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_global_name("foo");
-    ASSERT_EQ(scene->get_global_name(), "foo");
-    ASSERT_EQ(scene->get_local_name(), "foo");
-    ASSERT_TRUE(universe->has_child("foo"));
-    ASSERT_EQ(universe->get_entity("foo"), scene);
-}
-
-TEST(scene_must_be_given_a_local_name_appropriately, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_local_name("foo");
-    ASSERT_EQ(scene->get_global_name(), "foo");
-    ASSERT_EQ(scene->get_local_name(), "foo");
-    ASSERT_TRUE(universe->has_child("foo"));
-    ASSERT_EQ(universe->get_entity("foo"), scene);
-}
-
-TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_global_name("foo");
-    scene->set_global_name("bar");
-    ASSERT_EQ(scene->get_global_name(), "bar");
-    ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_FALSE(universe->has_child("foo"));
-    ASSERT_TRUE(universe->has_child("bar"));
-    ASSERT_EQ(universe->get_entity("foo"), nullptr);
-    ASSERT_EQ(universe->get_entity("bar"), scene);
-}
-
-TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_local_name("foo");
-    scene->set_local_name("bar");
-    ASSERT_EQ(scene->get_global_name(), "bar");
-    ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_FALSE(universe->has_child("foo"));
-    ASSERT_TRUE(universe->has_child("bar"));
-    ASSERT_EQ(universe->get_entity("foo"), nullptr);
-    ASSERT_EQ(universe->get_entity("bar"), scene);
-}
-
-TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_local_name("foo");
-    scene->set_global_name("bar");
-    ASSERT_EQ(scene->get_global_name(), "bar");
-    ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_FALSE(universe->has_child("foo"));
-    ASSERT_TRUE(universe->has_child("bar"));
-    ASSERT_EQ(universe->get_entity("foo"), nullptr);
-    ASSERT_EQ(universe->get_entity("bar"), scene);
-}
-
-TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
-{
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    ASSERT_EQ(scene->get_global_name(), "");
-    ASSERT_EQ(scene->get_local_name(), "");
-
-    // `Scene`s are children of the `Universe` and thus global name is local name, and vice versa.
-    scene->set_global_name("foo");
-    scene->set_local_name("bar");
-    ASSERT_EQ(scene->get_global_name(), "bar");
-    ASSERT_EQ(scene->get_local_name(), "bar");
-    ASSERT_FALSE(universe->has_child("foo"));
-    ASSERT_TRUE(universe->has_child("bar"));
-    ASSERT_EQ(universe->get_entity("foo"), nullptr);
-    ASSERT_EQ(universe->get_entity("bar"), scene);
 }
 
 TEST(shader_must_be_given_a_global_name_appropriately, headless)
