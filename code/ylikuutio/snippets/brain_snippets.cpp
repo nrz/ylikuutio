@@ -36,11 +36,6 @@ namespace yli::callback
     class CallbackParameter;
 }
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::ontology
 {
     class Universe;

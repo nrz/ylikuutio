@@ -26,11 +26,6 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::opengl
 {
     // Load texture from memory.

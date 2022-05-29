@@ -26,11 +26,6 @@
 #include <optional> // std::optional
 #include <string> // std::string
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 namespace yli::ontology
 {
     class Console;
