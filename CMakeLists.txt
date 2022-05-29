@@ -1020,6 +1020,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_scene.cpp
         code/ylikuutio/tests/googletest/test_shader.cpp
+        code/ylikuutio/tests/googletest/test_species.cpp
         code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
