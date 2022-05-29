@@ -992,6 +992,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_compute_struct.cpp
         code/ylikuutio/tests/googletest/test_console.cpp
         code/ylikuutio/tests/googletest/test_csv_loader.cpp
+        code/ylikuutio/tests/googletest/test_ecosystem.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
