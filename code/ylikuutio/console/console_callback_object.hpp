@@ -18,9 +18,9 @@
 #ifndef __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 #define __YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/console.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
