@@ -32,6 +32,7 @@ Enter game view.
 * Tulevaisuus - sending commands/computing AI/other waiting: [https://freesound.org/people/Greek555/sounds/401797/](https://freesound.org/people/Greek555/sounds/401797/)
 * Tulevaisuus - sending commands/computing AI/other waiting: [https://freesound.org/people/Greek555/sounds/402677/](https://freesound.org/people/Greek555/sounds/402677/)
 * Tulevaisuus - sending commands/computing AI/other waiting: [https://freesound.org/people/levelclearer/sounds/367561/](https://freesound.org/people/levelclearer/sounds/367561/)
+* Tulevaisuus - sending commands/computing AI/other waiting: [https://freesound.org/people/oymaldonado/sounds/583088/](https://freesound.org/people/oymaldonado/sounds/583088/)
 * Tulevaisuus - spaceship docking into a space station: [https://freesound.org/people/Greek555/sounds/410456/](https://freesound.org/people/Greek555/sounds/410456/)
 * Tulevaisuus - end scene: AI spaceship escaping out of Solar System: [https://freesound.org/people/Greek555/sounds/398753/](https://freesound.org/people/Greek555/sounds/398753/)
 
