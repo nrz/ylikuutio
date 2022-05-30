@@ -57,15 +57,25 @@ Planned languages on launch:
 * Hirvi - in-game music: [https://freesound.org/people/Greek555/sounds/321898/](https://freesound.org/people/Greek555/sounds/321898/)
 * Hirvi - in-game music: [https://freesound.org/people/Greek555/sounds/416316/](https://freesound.org/people/Greek555/sounds/416316/)
 * Hirvi - in-game music: [https://freesound.org/people/Greek555/sounds/324250/](https://freesound.org/people/Greek555/sounds/324250/)
+* Hirvi - in-game music: [https://freesound.org/people/frankum/sounds/585571/](https://freesound.org/people/frankum/sounds/585571/)
+* Hirvi - in-game music: [https://freesound.org/people/frankum/sounds/377541/](https://freesound.org/people/frankum/sounds/377541/)
+* Hirvi - in-game music: [https://freesound.org/people/Doctor_Dreamchip/sounds/460357/](https://freesound.org/people/Doctor_Dreamchip/sounds/460357/)
+* Hirvi - in-game music: [https://freesound.org/people/Doctor_Dreamchip/sounds/511278/](https://freesound.org/people/Doctor_Dreamchip/sounds/511278/)
 * Hirvi - in-game music: Super-Hirvi mode?: [https://freesound.org/people/Greek555/sounds/330957/](https://freesound.org/people/Greek555/sounds/330957/)
 * Hirvi - in-game music: Super-Hirvi mode?: [https://freesound.org/people/Greek555/sounds/410536/](https://freesound.org/people/Greek555/sounds/410536/)
 * Hirvi - in-game music: underground tunnels: [https://freesound.org/people/Greek555/sounds/415968/](https://freesound.org/people/Greek555/sounds/415968/)
 * Hirvi - in-game music: inside PD: [https://freesound.org/people/Greek555/sounds/416400/](https://freesound.org/people/Greek555/sounds/416400/)
 * Hirvi - in-game music: alarm in PD: [https://freesound.org/people/Greek555/sounds/414130/](https://freesound.org/people/Greek555/sounds/414130/)
 * Hirvi - in-game music: no cops around: [https://freesound.org/people/Greek555/sounds/410606/](https://freesound.org/people/Greek555/sounds/410606/)
+* Hirvi - in-game music: discotheque: [https://freesound.org/people/DoctorToast/sounds/385034/](https://freesound.org/people/DoctorToast/sounds/385034/)
+* Hirvi - in-game music: remembering Hirvinen: [https://freesound.org/people/frankum/sounds/411038/](https://freesound.org/people/frankum/sounds/411038/)
 * Hirvi - mission successful: [https://freesound.org/people/Greek555/sounds/413269/](https://freesound.org/people/Greek555/sounds/413269/)
 * Hirvi - slow dancing music: [https://freesound.org/people/Greek555/sounds/404352/](https://freesound.org/people/Greek555/sounds/404352/)
 * Hirvi - end scene: moose are partying: [https://freesound.org/people/MahanMahan/sounds/447197/](https://freesound.org/people/MahanMahan/sounds/447197/)
+
+Hirvi can go to a discotheque to dance to collect more energy.
+Hirvi voi mennä diskoteekkiin tanssimaan kerätäkseen lisää energiaa.
+Hirvi puede ir a una discoteca para bailar y recoger más energía así.
 
 ## Potential 3D models
 
@@ -296,6 +306,39 @@ Planned languages on launch:
 ### Tehtävä #1, #2, ...
 * Onnistumisehdot tehtävän mukaan.
 
+### Välianimaatio: Hirvi menettää tajuntansa ja luulee jo kuolleensa
+* Tietyssä skriptatussa tilanteessa kesken tehtävän Hirveä ammutaan tms., Hirvi menettää tajuntansa,
+  ja välianimaatio alkaa.
+
+### Tehtävä #1, #2, ...
+* Onnistumisehdot tehtävän mukaan.
+
+### Välianimaatio: mission debriefing #1, #2, ...
+* Tehtävän debriefing.
+* Kunkin tehtävän jälkeen seuraavan tehtävän käskynjako, paitsi viimeisen tehtävän jälkeen.
+
+### Välianimaatio: Hirvi menettää tajuntansa ja luulee jo kuolleensa
+* Tietyssä skriptatussa tilanteessa kesken tehtävän Hirveä ammutaan tms., Hirvi menettää tajuntansa,
+  ja välianimaatio alkaa.
+* Hirvi näkee menneen elämänsä pikakelauksella ja valkoinen tunneli tulee näkyviin, ja ennen
+  tunnelin suun saavuttamista Hirvi yllättäen herää.
+
+### Välianimaatio: Hirvinen onkin pelastettu, ja Hirvisestä on tullut Kyber-Hirvinen!
+* Hirvi herää ja huomaa muuttuneensa Kyber-Hirveksi!
+* Paikalle saapuu Kyber-Hirvinen, joka Kyber-Hirven yllätykseksi onkin pelastettu
+  (Hirvi luuli Hirvisen olleen kuollut) ja kuten Hirven tapauksessa, myös Hirvisen tapauksessa
+  ainoa keino pelastaa Hirvinen oli muuttaa Hirvinen Kyber-Hirviseksi.
+* Selviää myös, että Kyber-Hirvinen on edennyt Nisäkkäiden vapautusrintaman huippusalaisen
+  kyberhirviosaston johtajaksi!
+* Kyber-Hirvinen valmentaa Kyber-Hirveksi muuttunutta Hirveä kyberkykyjensä käytössä.
+* Yhtenä kyberominaisuutena saattaa olla kyky olla vaihtaa pelimusiikkia!
+
+### Välianimaatio: tehtävän käskynjako #1, #2, ...
+* Hirvet keskustelevat tehtävästä.
+
+### Tehtävä #1, #2, ...
+* Onnistumisehdot tehtävän mukaan.
+
 ### Välianimaatio: mission debriefing #1, #2, ...
 * Tehtävän debriefing.
 * Kunkin tehtävän jälkeen seuraavan tehtävän käskynjako, paitsi viimeisen tehtävän jälkeen.
@@ -308,6 +351,8 @@ Planned languages on launch:
   mm. eduskuntatalon tuntumassa.
 * Lopuksi kamera nousee hirvien tasolta taivaaseen kuvakulma kohti tanssivia hirviä ja ilta vaihtuu yöksi.
 * Tähdet syttyvät taivaalle, sitten näkyviin tulee revontulia. Revontulet morffautuvat lopputeksteiksi.
+* Lopuksi kamera etääntyy yhä kauemmaksi Maasta. Maa, Aurinkokunta, ja Aurinko katoavat näkyvistä, ja kamera etenee
+  ikuisuuksiin avaruuden äärettömyyksiin.
 
 ## Story
 
@@ -353,6 +398,27 @@ Planned languages on launch:
 ### Mission #1, #2, ...
 * Success criteria according to the mission.
 
+### Cut-scene: Hirvi loses consciousness and believes to have died
+* In a certain scripted situation in the mission Hirvi gets shot (or something), Hirvi loses consciousness,
+  and the the cut-scene begins.
+* Hirvi sees the past life with fast forward and a white tunnel appears on the view, but before reaching
+  the end of tunnel Hirvi suddenly wakes up.
+
+### Cut-scene: Hirvinen has been saved, and Hirvinen has became Kyber-Hirvinen!
+* Hirvi wakes up and notices to have been transformed into Kyber-Hirvi!
+* Kyber-Hirvinen arrives (as a surprise to Hirvi who thought Hirvinen was dead), and like
+  in Hirvi's case, also in Hirvinen's case the only way to save Hirvinen was to transform
+  them into Kyber-Hirvinen.
+* Hirvi learns that Kyber-Hirvinen has risen to became the leader of the top secret
+  kyberhirvi squad of the Mammal Liberation Front!
+* Kyber-Hirvinen teaches Kyber-Hirvi in using their kyber skills.
+
+### Cut-scene: mission briefing #1, #2, ...
+* Elks/moose discussion the mission.
+
+### Mission #1, #2, ...
+* Success criteria according to the mission.
+
 ### Cut-scene: mission debriefing #1, #2, ...
 * Mission debriefing.
 * After each mission debriefing, there will be next mission's briefing, except after last mission.
@@ -365,6 +431,8 @@ Planned languages on launch:
   including next to the parlament.
 * Finally camera rises from elk/moose-level up to the sky while looking at dancing elks/moose, then evening light turns to night.
 * Stars light up in the sky, then northern lights appear. Northers lights morph into closing credits.
+* In the end the camera moves ever farther from the Earth. The Earth, The Solar System, and The Sun disappear from the view,
+  and the camera continues forever into the eternity of the space.
 
 ## La historía
 
