@@ -16,38 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/ecosystem.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
-#include "code/ylikuutio/ontology/species.hpp"
-#include "code/ylikuutio/ontology/object.hpp"
-#include "code/ylikuutio/ontology/symbiosis.hpp"
-#include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_form.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
-#include "code/ylikuutio/ontology/font_2d.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/ecosystem_struct.hpp"
-#include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
-#include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
-#include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/holobiont_struct.hpp"
-#include "code/ylikuutio/ontology/font_struct.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
-
-// Include standard headers
-#include <cstddef> // std::size_t
-#include <limits>  // std::numeric_limits
 
 TEST(input_system_must_be_set_to_nullptr_in_headless_mode, universe)
 {
