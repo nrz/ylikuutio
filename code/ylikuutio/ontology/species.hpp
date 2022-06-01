@@ -58,7 +58,7 @@ namespace yli::ontology
             Species(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
+                    yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
                     yli::ontology::GenericMasterModule* const material_master);
 
             Species(const Species&) = delete;            // Delete copy constructor.
