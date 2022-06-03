@@ -118,7 +118,7 @@ namespace ajokki
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
         yli::ontology::ModelStruct joensuu_center_west_terrain_model_struct;
-        joensuu_center_west_terrain_model_struct.scene = joensuu_center_west_scene;
+        joensuu_center_west_terrain_model_struct.parent = joensuu_center_west_scene;
         joensuu_center_west_terrain_model_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_terrain_model_struct.material = joensuu_center_west_grass_material;
         joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
@@ -165,7 +165,7 @@ namespace ajokki
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
         yli::ontology::ModelStruct horse_model_struct;
-        horse_model_struct.scene = joensuu_center_west_scene;
+        horse_model_struct.parent = joensuu_center_west_scene;
         horse_model_struct.shader = joensuu_center_west_shader;
         horse_model_struct.material = orange_fur_material_joensuu;
         horse_model_struct.model_file_format = "fbx";

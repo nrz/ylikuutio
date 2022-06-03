@@ -57,6 +57,7 @@ namespace yli::ontology
             yli::ontology::ParentOfShadersModule parent_of_shaders;
             yli::ontology::GenericParentModule parent_of_materials;
             yli::ontology::GenericParentModule parent_of_species;
+            yli::ontology::GenericParentModule parent_of_symbioses;
 
             yli::ontology::Scene* get_scene() const override;
 

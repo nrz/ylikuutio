@@ -47,7 +47,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.vertices, std::vector<glm::vec3> { });
     ASSERT_EQ(test_model_struct.uvs, std::vector<glm::vec2> { });
     ASSERT_EQ(test_model_struct.normals, std::vector<glm::vec3> { });
-    ASSERT_EQ(test_model_struct.scene, nullptr);
     ASSERT_EQ(test_model_struct.shader, nullptr);
     ASSERT_EQ(test_model_struct.material, nullptr);
     ASSERT_EQ(test_model_struct.symbiont_material, nullptr);

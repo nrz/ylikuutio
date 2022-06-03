@@ -56,7 +56,7 @@ TEST(object_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
@@ -188,7 +188,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
@@ -238,7 +238,7 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     model_struct.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(

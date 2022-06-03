@@ -17,6 +17,7 @@
 
 #include "symbiosis.hpp"
 #include "universe.hpp"
+#include "ecosystem.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "symbiont_material.hpp"
@@ -54,6 +55,37 @@ namespace yli::ontology
 {
     class Entity;
 
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent)
+    {
+        // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+
+        yli::ontology::Entity* const old_parent = symbiosis.get_parent();
+
+        if (old_parent == nullptr)
+        {
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
+            return std::nullopt;
+        }
+
+        if (&new_parent == old_parent)
+        {
+            // Setting current parent as the new parent. Nothing to do.
+            return std::nullopt;
+        }
+
+        if (new_parent.has_child(symbiosis.local_name))
+        {
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: local name is already in use!\n";
+            return std::nullopt;
+        }
+
+        // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
+        // so binding to an `Ecosystem` does not unbind any apprentices.
+        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
+        return std::nullopt;
+    }
+
     std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent)
     {
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
@@ -80,7 +112,7 @@ namespace yli::ontology
         }
 
         symbiosis.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
-        symbiosis.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
+        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
         return std::nullopt;
     }
 
@@ -111,7 +143,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const shader_master)
         : Entity(universe, model_struct),
-        child_of_scene(scene_parent_module, this),
+        child_of_scene_or_ecosystem(scene_parent_module, this),
         parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
         apprentice_of_shader(shader_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
@@ -181,7 +213,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Symbiosis::get_parent() const
     {
-        return this->child_of_scene.get_parent();
+        return this->child_of_scene_or_ecosystem.get_parent();
     }
 
     yli::ontology::Shader* Symbiosis::get_shader() const
@@ -191,7 +223,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Symbiosis::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+        return this->child_of_scene_or_ecosystem.get_scene();
     }
 
     std::size_t Symbiosis::get_number_of_children() const
@@ -283,7 +315,6 @@ namespace yli::ontology
                     yli::ontology::ModelStruct model_struct;
                     model_struct.model_filename = this->model_filename;
                     model_struct.model_file_format = this->model_file_format;
-                    model_struct.scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
                     model_struct.shader = shader;
                     model_struct.symbiont_material = symbiont_material;
                     model_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;

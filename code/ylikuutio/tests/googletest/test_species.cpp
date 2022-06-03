@@ -185,7 +185,7 @@ TEST(species_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
@@ -279,7 +279,7 @@ TEST(species_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials)
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,
@@ -325,7 +325,7 @@ TEST(species_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosys
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,
@@ -420,7 +420,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,
@@ -459,7 +459,7 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,
@@ -503,7 +503,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct1;
-    model_struct1.scene = scene1;
+    model_struct1.parent = scene1;
     yli::ontology::Species* const species1 = new yli::ontology::Species(
             *universe,
             model_struct1,
@@ -511,7 +511,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
             nullptr);
 
     yli::ontology::ModelStruct model_struct2;
-    model_struct2.scene = scene2;
+    model_struct2.parent = scene2;
     yli::ontology::Species* const species2 = new yli::ontology::Species(
             *universe,
             model_struct2,
@@ -545,7 +545,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct1;
-    model_struct1.scene = scene1;
+    model_struct1.parent = scene1;
     yli::ontology::Species* const species1 = new yli::ontology::Species(
             *universe,
             model_struct1,
@@ -553,7 +553,7 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
             nullptr);
 
     yli::ontology::ModelStruct model_struct2;
-    model_struct2.scene = scene2;
+    model_struct2.parent = scene2;
     yli::ontology::Species* const species2 = new yli::ontology::Species(
             *universe,
             model_struct2,
@@ -589,7 +589,7 @@ TEST(species_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_c
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,
@@ -622,7 +622,7 @@ TEST(species_must_unbind_all_its_apprentice_modules_when_binding_to_a_different_
             &universe->parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
             model_struct,

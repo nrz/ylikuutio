@@ -53,6 +53,7 @@ namespace yli::ontology
 {
     class GenericMasterModule;
     class Universe;
+    class Ecosystem;
     class Scene;
     class Shader;
     class SymbiontMaterial;
@@ -62,6 +63,10 @@ namespace yli::ontology
     class Symbiosis: public yli::ontology::Entity
     {
         public:
+            // Set pointer to `species` to `nullptr`, set parent according to the input,
+            // and request a new childID from `new_parent`.
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent);
+
             // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent);
@@ -112,7 +117,7 @@ namespace yli::ontology
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
-            yli::ontology::ChildModule child_of_scene;
+            yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
             yli::ontology::ApprenticeModule apprentice_of_shader;
             yli::ontology::GenericMasterModule master_of_holobionts;

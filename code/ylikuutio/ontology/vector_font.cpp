@@ -184,7 +184,7 @@ namespace yli::ontology
                 }
 
                 yli::ontology::ModelStruct model_struct;
-                model_struct.scene = scene;
+                model_struct.parent = scene;
                 model_struct.shader = shader;
                 model_struct.material = material;
                 model_struct.vector_font = this;

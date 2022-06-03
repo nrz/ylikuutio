@@ -44,7 +44,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
@@ -102,7 +102,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";

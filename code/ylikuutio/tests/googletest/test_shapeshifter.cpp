@@ -57,7 +57,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
@@ -118,7 +118,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
@@ -190,7 +190,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
@@ -259,7 +259,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
@@ -344,7 +344,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
             &scene->parent_of_materials, &shader->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.scene = scene;
+    shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.shader = shader;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(

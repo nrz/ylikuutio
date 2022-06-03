@@ -36,7 +36,8 @@ namespace yli::ontology
         child_of_universe(parent_module, this),
         parent_of_shaders(this, &this->registry, "shaders"),
         parent_of_materials(this, &this->registry, "materials"),
-        parent_of_species(this, &this->registry, "species")
+        parent_of_species(this, &this->registry, "species"),
+        parent_of_symbioses(this, &this->registry, "species")
     {
         // constructor.
 
@@ -66,13 +67,15 @@ namespace yli::ontology
     {
         return this->parent_of_shaders.get_number_of_children() +
             this->parent_of_materials.get_number_of_children() +
-            this->parent_of_species.get_number_of_children();
+            this->parent_of_species.get_number_of_children() +
+            this->parent_of_symbioses.get_number_of_children();
     }
 
     std::size_t Ecosystem::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 }

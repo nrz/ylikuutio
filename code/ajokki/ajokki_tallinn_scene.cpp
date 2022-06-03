@@ -113,7 +113,7 @@ namespace ajokki
 
         // Create the species, store it in `terrain_species`.
         yli::ontology::ModelStruct tallinn_terrain_model_struct;
-        tallinn_terrain_model_struct.scene = tallinn_scene;
+        tallinn_terrain_model_struct.parent = tallinn_scene;
         tallinn_terrain_model_struct.shader = tallinn_shader;
         tallinn_terrain_model_struct.material = tallinn_grass_material;
         tallinn_terrain_model_struct.model_file_format = "SRTM";

@@ -780,6 +780,8 @@ add_executable(ajokki
     code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
+    code/ajokki/ajokki_earth_ecosystem.cpp
+    code/ajokki/ajokki_earth_ecosystem.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp

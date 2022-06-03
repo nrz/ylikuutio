@@ -36,10 +36,13 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
+#include <variant>  // std::holds_alternative, std::monostate, std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
+    class Ecosystem;
+
     class MeshModule
     {
         public:
@@ -69,7 +72,6 @@ namespace yli::ontology
 
                 if (should_load_vertices_uvs_and_normals &&
                         universe.get_is_opengl_in_use() &&
-                        model_struct.scene != nullptr &&
                         model_struct.shader != nullptr)
                 {
                     // VAO.
@@ -92,7 +94,7 @@ namespace yli::ontology
                     model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
                     model_loader_struct.model_struct.x_step                       = this->x_step;
                     model_loader_struct.model_struct.z_step                       = this->z_step;
-                    model_loader_struct.model_struct.scene                        = model_struct.scene;
+                    model_loader_struct.model_struct.parent                       = model_struct.parent;
                     model_loader_struct.model_struct.shader                       = model_struct.shader;
                     model_loader_struct.model_struct.material                     = model_struct.material;
                     model_loader_struct.model_struct.symbiont_material            = model_struct.symbiont_material;
@@ -123,9 +125,15 @@ namespace yli::ontology
                 }
                 else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
                 {
-                    if (model_struct.scene == nullptr)
+                    if (std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) &&
+                            std::get<yli::ontology::Ecosystem*>(model_struct.parent) == nullptr)
                     {
-                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->scene` is `nullptr`!\n";
+                        std::cerr << "ERROR: `MeshModule::MeshModule`: `Ecosystem` parent is `nullptr`!\n";
+                    }
+                    else if (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) &&
+                            std::get<yli::ontology::Scene*>(model_struct.parent) == nullptr)
+                    {
+                        std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
                     }
 
                     if (model_struct.shader == nullptr)

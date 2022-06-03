@@ -29,6 +29,7 @@
 #endif
 
 #include "ajokki_console_callbacks.hpp"
+#include "ajokki_earth_ecosystem.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
@@ -68,6 +69,7 @@
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
@@ -308,18 +310,7 @@ namespace ajokki
 
                 // Create an Earth `Ecosystem`.
 
-                std::cout << "Creating yli::ontology::Entity* earth_ecosystem and its contents ...\n";
-                yli::ontology::EcosystemStruct earth_ecosystem_struct;
-                earth_ecosystem_struct.global_name = "earth_ecosystem";
-                yli::ontology::Entity* const earth_ecosystem_entity = entity_factory->create_ecosystem(earth_ecosystem_struct);
-
-                std::cout << "Creating yli::ontology::Ecosystem* earth_ecosystem ...\n";
-                yli::ontology::Ecosystem* const earth_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(earth_ecosystem_entity);
-
-                if (earth_ecosystem == nullptr)
-                {
-                    return false;
-                }
+                yli::ontology::Ecosystem* const earth_ecosystem = ajokki::create_earth_ecosystem(entity_factory);
 
                 // Create a Mars `Ecosystem`.
 
@@ -1024,6 +1015,7 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_text_3d_master));
 
                 // `Entity` binding callbacks, `Symbiosis`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_ecosystem_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_scene_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_shader));
 

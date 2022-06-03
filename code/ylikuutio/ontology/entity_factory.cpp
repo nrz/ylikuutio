@@ -218,7 +218,9 @@ namespace yli::ontology
         yli::ontology::Entity* species_entity = new yli::ontology::Species(
                 this->universe,
                 model_struct,
-                (model_struct.scene == nullptr ? nullptr : &model_struct.scene->parent_of_species),
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
+                 (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
+                 nullptr),
                 (model_struct.material == nullptr ? nullptr : &model_struct.material->master_of_species));
 
         species_entity->set_global_name(model_struct.global_name);
@@ -254,7 +256,9 @@ namespace yli::ontology
         yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(
                 this->universe,
                 model_struct,
-                (model_struct.scene == nullptr ? nullptr : &model_struct.scene->parent_of_symbioses),
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
+                 (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
+                 nullptr),
                 (model_struct.shader == nullptr ? nullptr : &model_struct.shader->master_of_symbioses));
 
         symbiosis_entity->set_global_name(model_struct.global_name);

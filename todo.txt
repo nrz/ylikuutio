@@ -12,7 +12,6 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Write unit tests for keyboard callback snippets.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
 [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
-[ ] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
 [ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
 [ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
@@ -320,3 +319,4 @@ Ready:
 [x] Fix `yli::snippets::delete_entity`.
 [x] Fix `yli::snippets::transform_into_new_species`.
 [x] Fix compiling on MacOS.
+[x] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.

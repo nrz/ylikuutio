@@ -646,7 +646,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_eco
     yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
@@ -712,7 +712,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_cu
     yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
@@ -751,7 +751,7 @@ TEST(shader_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_cu
             &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene;
+    model_struct.parent = scene;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
@@ -816,7 +816,7 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
     yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene1->parent_of_shaders);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
@@ -860,7 +860,7 @@ TEST(shader_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differen
             &shader->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.scene = scene1;
+    model_struct.parent = scene1;
     model_struct.shader = shader;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,

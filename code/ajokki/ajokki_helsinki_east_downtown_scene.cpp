@@ -490,7 +490,7 @@ namespace ajokki
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
         yli::ontology::ModelStruct helsinki_east_downtown_terrain_model_struct;
-        helsinki_east_downtown_terrain_model_struct.scene = helsinki_east_downtown_scene;
+        helsinki_east_downtown_terrain_model_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_terrain_model_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_terrain_model_struct.material = helsinki_east_downtown_grass_material;
         helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
@@ -517,7 +517,7 @@ namespace ajokki
         entity_factory->create_object(helsinki_east_downtown_struct);
 
         yli::ontology::ModelStruct suzanne_model_struct;
-        suzanne_model_struct.scene = helsinki_east_downtown_scene;
+        suzanne_model_struct.parent = helsinki_east_downtown_scene;
         suzanne_model_struct.shader = helsinki_east_downtown_shader;
         suzanne_model_struct.material = orange_fur_material;
         suzanne_model_struct.model_file_format = "obj";
@@ -621,7 +621,7 @@ namespace ajokki
         suzanne5->set_global_name("suzanne5");
 
         yli::ontology::ModelStruct cat_model_struct;
-        cat_model_struct.scene = helsinki_east_downtown_scene;
+        cat_model_struct.parent = helsinki_east_downtown_scene;
         cat_model_struct.global_name = "cat_species";
         cat_model_struct.local_name = "cat";
         cat_model_struct.shader = helsinki_east_downtown_shader;
@@ -679,7 +679,7 @@ namespace ajokki
         }
 
         yli::ontology::ModelStruct freight_train_model_struct;
-        freight_train_model_struct.scene = helsinki_east_downtown_scene;
+        freight_train_model_struct.parent = helsinki_east_downtown_scene;
         freight_train_model_struct.shader = helsinki_east_downtown_shader;
         freight_train_model_struct.model_file_format = "fbx";
         freight_train_model_struct.model_filename = "freight_train.fbx";
@@ -720,73 +720,60 @@ namespace ajokki
 
         freight_train1->set_global_name("freight_train1");
 
-        yli::ontology::ModelStruct turbo_polizei_png_model_struct;
-        turbo_polizei_png_model_struct.scene = helsinki_east_downtown_scene;
-        turbo_polizei_png_model_struct.shader = helsinki_east_downtown_shader;
-        turbo_polizei_png_model_struct.model_file_format = "fbx";
-        turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = universe.get_entity("turbo_polizei_png_symbiosis");
 
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_png_symbiosis_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = entity_factory->create_symbiosis(turbo_polizei_png_model_struct);
-
-        std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
         yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_png_symbiosis_entity);
 
-        if (turbo_polizei_png_symbiosis == nullptr)
+        if (turbo_polizei_png_symbiosis != nullptr)
         {
-            std::cerr << "Failed to create turbo_polizei_png Symbiosis.\n";
-            return nullptr;
+            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
+            turbo_polizei_png_holobiont_struct1.brain = rest_brain;
+            turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+            turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
+            turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+            turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
+
+            std::cout << "Creating yli::ontology::Entity* turbo_polizei_png1_entity ...\n";
+
+            yli::ontology::Entity* const turbo_polizei_png1_entity = entity_factory->create_holobiont(turbo_polizei_png_holobiont_struct1);
+
+            std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png1 ...\n";
+
+            yli::ontology::Holobiont* const turbo_polizei_png1 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png1_entity);
+
+            if (turbo_polizei_png1 == nullptr)
+            {
+                std::cerr << "Failed to create turbo_polizei_png1 Object.\n";
+                return nullptr;
+            }
+
+            turbo_polizei_png1->set_global_name("turbo_polizei_png1");
+            turbo_polizei_png1->set_local_name("sinivuokko1");
+
+            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
+            turbo_polizei_png_holobiont_struct2.brain = rest_brain;
+            turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+            turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { PI };
+            turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+            turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
+
+            std::cout << "Creating yli::ontology::Entity* turbo_polizei_png2_entity ...\n";
+
+            yli::ontology::Entity* const turbo_polizei_png2_entity = entity_factory->create_holobiont(turbo_polizei_png_holobiont_struct2);
+
+            std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png2 ...\n";
+
+            yli::ontology::Holobiont* const turbo_polizei_png2 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png2_entity);
+
+            if (turbo_polizei_png2 == nullptr)
+            {
+                std::cerr << "Failed to create turbo_polizei_png2 Object.\n";
+                return nullptr;
+            }
+
+            turbo_polizei_png2->set_global_name("turbo_polizei_png2");
+            turbo_polizei_png2->set_local_name("sinivuokko2");
         }
-
-        turbo_polizei_png_symbiosis->set_global_name("turbo_polizei_png_symbiosis");
-
-        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-        turbo_polizei_png_holobiont_struct1.brain = rest_brain;
-        turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-        turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
-        turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
-
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_png1_entity ...\n";
-
-        yli::ontology::Entity* const turbo_polizei_png1_entity = entity_factory->create_holobiont(turbo_polizei_png_holobiont_struct1);
-
-        std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png1 ...\n";
-
-        yli::ontology::Holobiont* const turbo_polizei_png1 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png1_entity);
-
-        if (turbo_polizei_png1 == nullptr)
-        {
-            std::cerr << "Failed to create turbo_polizei_png1 Object.\n";
-            return nullptr;
-        }
-
-        turbo_polizei_png1->set_global_name("turbo_polizei_png1");
-        turbo_polizei_png1->set_local_name("sinivuokko1");
-
-        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-        turbo_polizei_png_holobiont_struct2.brain = rest_brain;
-        turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-        turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { PI };
-        turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
-
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_png2_entity ...\n";
-
-        yli::ontology::Entity* const turbo_polizei_png2_entity = entity_factory->create_holobiont(turbo_polizei_png_holobiont_struct2);
-
-        std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png2 ...\n";
-
-        yli::ontology::Holobiont* const turbo_polizei_png2 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png2_entity);
-
-        if (turbo_polizei_png2 == nullptr)
-        {
-            std::cerr << "Failed to create turbo_polizei_png2 Object.\n";
-            return nullptr;
-        }
-
-        turbo_polizei_png2->set_global_name("turbo_polizei_png2");
-        turbo_polizei_png2->set_local_name("sinivuokko2");
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
