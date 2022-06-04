@@ -27,6 +27,7 @@
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
+#include "generic_master_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
@@ -113,8 +114,8 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
-            yli::ontology::GenericParentModule parent_of_holobionts;
             yli::ontology::ApprenticeModule apprentice_of_shader;
+            yli::ontology::GenericMasterModule master_of_holobionts;
 
             yli::ontology::Scene* get_scene() const override;
 

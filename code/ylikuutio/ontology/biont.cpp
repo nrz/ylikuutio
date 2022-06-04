@@ -115,7 +115,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+        const yli::ontology::Symbiosis* const symbiosis = holobiont->get_symbiosis();
 
         if (symbiosis == nullptr)
         {
@@ -159,7 +159,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+        yli::ontology::Symbiosis* const symbiosis = holobiont->get_symbiosis();
 
         if (symbiosis == nullptr)
         {

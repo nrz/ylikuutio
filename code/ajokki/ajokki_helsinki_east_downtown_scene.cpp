@@ -698,9 +698,7 @@ namespace ajokki
 
         freight_train_symbiosis->set_global_name("freight_train_symbiosis");
 
-        yli::ontology::HolobiontStruct freight_train_holobiont_struct1;
-        freight_train_holobiont_struct1.scene = helsinki_east_downtown_scene;
-        freight_train_holobiont_struct1.parent = freight_train_symbiosis;
+        yli::ontology::HolobiontStruct freight_train_holobiont_struct1(*helsinki_east_downtown_scene, *freight_train_symbiosis);
         freight_train_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         freight_train_holobiont_struct1.initial_rotate_angles = { PI };
         freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -742,9 +740,7 @@ namespace ajokki
 
         turbo_polizei_png_symbiosis->set_global_name("turbo_polizei_png_symbiosis");
 
-        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1;
-        turbo_polizei_png_holobiont_struct1.scene = helsinki_east_downtown_scene;
-        turbo_polizei_png_holobiont_struct1.parent = turbo_polizei_png_symbiosis;
+        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
         turbo_polizei_png_holobiont_struct1.brain = rest_brain;
         turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
@@ -768,9 +764,7 @@ namespace ajokki
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
         turbo_polizei_png1->set_local_name("sinivuokko1");
 
-        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2;
-        turbo_polizei_png_holobiont_struct2.scene = helsinki_east_downtown_scene;
-        turbo_polizei_png_holobiont_struct2.parent = turbo_polizei_png_symbiosis;
+        yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
         turbo_polizei_png_holobiont_struct2.brain = rest_brain;
         turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { PI };

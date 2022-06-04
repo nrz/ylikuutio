@@ -78,6 +78,7 @@ namespace yli::ontology
         parent_of_species(this, &this->registry, "species"),
         parent_of_objects(this, &this->registry, "objects"),
         parent_of_symbioses(this, &this->registry, "symbioses"),
+        parent_of_holobionts(this, &this->registry, "holobionts"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },
         water_level           { scene_struct.water_level },
@@ -279,7 +280,8 @@ namespace yli::ontology
             this->parent_of_materials.get_number_of_children() +
             this->parent_of_species.get_number_of_children() +
             this->parent_of_objects.get_number_of_children() +
-            this->parent_of_symbioses.get_number_of_children();
+            this->parent_of_symbioses.get_number_of_children() +
+            this->parent_of_holobionts.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
@@ -291,7 +293,8 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const

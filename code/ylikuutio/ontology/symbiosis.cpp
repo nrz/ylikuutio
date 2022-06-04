@@ -113,8 +113,8 @@ namespace yli::ontology
         : Entity(universe, model_struct),
         child_of_scene(scene_parent_module, this),
         parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
-        parent_of_holobionts(this, &this->registry, "holobionts"),
         apprentice_of_shader(shader_master, this),
+        master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },
         model_file_format  { model_struct.model_file_format },
         triangulation_type { model_struct.triangulation_type }
@@ -159,7 +159,7 @@ namespace yli::ontology
             return;
         }
 
-        render_system->render_holobionts(this->parent_of_holobionts, new_target_scene);
+        render_system->render_holobionts(this->master_of_holobionts, new_target_scene);
     }
 
     std::size_t Symbiosis::get_number_of_symbiont_materials() const
@@ -196,14 +196,12 @@ namespace yli::ontology
 
     std::size_t Symbiosis::get_number_of_children() const
     {
-        return this->parent_of_symbiont_materials.get_number_of_children() +
-            this->parent_of_holobionts.get_number_of_children();
+        return this->parent_of_symbiont_materials.get_number_of_children();
     }
 
     std::size_t Symbiosis::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector);
     }
 
     const std::string& Symbiosis::get_model_file_format() const

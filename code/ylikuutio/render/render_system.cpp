@@ -268,11 +268,11 @@ namespace yli::render
     }
 
     void RenderSystem::render_holobionts(
-            yli::ontology::GenericParentModule& parent,
+            yli::ontology::GenericMasterModule& master,
             const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::Holobiont*>(
-                parent,
+        yli::render::render_apprentices<yli::ontology::GenericMasterModule&, yli::ontology::Holobiont*>(
+                master,
                 scene);
     }
 

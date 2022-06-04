@@ -25,11 +25,22 @@
 
 namespace yli::ontology
 {
+    class Scene;
     class Symbiosis;
 
     struct HolobiontStruct: public yli::ontology::MovableStruct
     {
-        yli::ontology::Symbiosis* parent { nullptr }; // pointer to the `Symbiosis`.
+        HolobiontStruct(
+                yli::ontology::Scene& parent,
+                yli::ontology::Symbiosis& symbiosis)
+            : parent  { &parent },
+            symbiosis { &symbiosis }
+        {
+            // constructor.
+        }
+
+        yli::ontology::Scene* parent        { nullptr }; // pointer to the `Scene`.
+        yli::ontology::Symbiosis* symbiosis { nullptr }; // pointer to the `Symbiosis`.
 
         std::vector<bool> should_render_bionts_vector;
     };

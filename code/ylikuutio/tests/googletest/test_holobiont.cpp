@@ -52,13 +52,13 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
             &scene->parent_of_symbioses,
             &shader->master_of_symbioses);
 
-    yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.scene = scene;
-    holobiont_struct.parent = symbiosis;
+    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
             *universe,
             holobiont_struct,
-            &symbiosis->parent_of_holobionts, nullptr);
+            &scene->parent_of_holobionts,
+            &symbiosis->master_of_holobionts,
+            nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -66,7 +66,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `symbiosis`, `holobiont`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
@@ -74,7 +74,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -82,7 +82,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(holobiont->get_can_be_erased());
     ASSERT_EQ(&(holobiont->get_universe()), universe);
     ASSERT_EQ(holobiont->get_scene(), scene);
-    ASSERT_EQ(holobiont->get_parent(), symbiosis);
+    ASSERT_EQ(holobiont->get_parent(), scene);
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 0);
 }
 
@@ -112,13 +112,13 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
             &scene->parent_of_symbioses,
             &shader->master_of_symbioses);
 
-    yli::ontology::HolobiontStruct holobiont_struct;
-    holobiont_struct.scene = scene;
-    holobiont_struct.parent = symbiosis;
+    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
             *universe,
             holobiont_struct,
-            &symbiosis->parent_of_holobionts, nullptr);
+            &scene->parent_of_holobionts,
+            &symbiosis->master_of_holobionts,
+            nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -126,7 +126,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `symbiosis`, `holobiont`.
 
     // `Entity` member functions of `Shader`.
     ASSERT_EQ(shader->get_scene(), scene);
@@ -134,7 +134,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 3);     // 2 `SymbiontMaterial`s and 1 `Holobiont`.
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);     // 2 `SymbiontMaterial`s.
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -142,6 +142,6 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_TRUE(holobiont->get_can_be_erased());
     ASSERT_EQ(&(holobiont->get_universe()), universe);
     ASSERT_EQ(holobiont->get_scene(), scene);
-    ASSERT_EQ(holobiont->get_parent(), symbiosis);
+    ASSERT_EQ(holobiont->get_parent(), scene);
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 5);     // 5 `Biont`s.
 }

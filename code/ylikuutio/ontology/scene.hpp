@@ -131,6 +131,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_species;
             yli::ontology::GenericParentModule parent_of_objects;
             yli::ontology::GenericParentModule parent_of_symbioses;
+            yli::ontology::GenericParentModule parent_of_holobionts;
 
             yli::ontology::Scene* get_scene() const override;
 
