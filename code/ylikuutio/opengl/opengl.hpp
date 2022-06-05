@@ -50,7 +50,7 @@ namespace yli::opengl
     std::size_t get_size_of_component(const GLenum type);
 
     template<typename T1>
-        std::shared_ptr<std::vector<T1>> copy_data_from_gpu_texture_to_cpu_array(
+        std::vector<T1> copy_data_from_gpu_texture_to_cpu_array(
                 const GLenum format,
                 const GLenum type,
                 const std::size_t texture_width,
@@ -72,7 +72,7 @@ namespace yli::opengl
                 yli::memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
             }
 
-            std::shared_ptr<std::vector<T1>> result_vector = std::make_shared<std::vector<T1>>(result_array, result_array + size_of_texture);
+            std::vector<T1> result_vector(result_array, result_array + size_of_texture);
 
             delete[] result_array;
 
