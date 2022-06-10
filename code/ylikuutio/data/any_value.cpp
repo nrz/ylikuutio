@@ -106,30 +106,6 @@ namespace yli::data
         {
             return "uint32_t";
         }
-        else if (std::holds_alternative<bool*>(this->data))
-        {
-            return "bool*";
-        }
-        else if (std::holds_alternative<char*>(this->data))
-        {
-            return "char*";
-        }
-        else if (std::holds_alternative<float*>(this->data))
-        {
-            return "float*";
-        }
-        else if (std::holds_alternative<double*>(this->data))
-        {
-            return "double*";
-        }
-        else if (std::holds_alternative<int32_t*>(this->data))
-        {
-            return "int32_t*";
-        }
-        else if (std::holds_alternative<uint32_t*>(this->data))
-        {
-            return "uint32_t*";
-        }
         else if (std::holds_alternative<yli::ontology::Entity*>(this->data))
         {
             return "yli::ontology::Entity*";
@@ -314,30 +290,6 @@ namespace yli::data
             // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
             // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
             any_value_stringstream << std::get<uint32_t>(this->data);
-        }
-        else if (std::holds_alternative<bool*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<bool*>(this->data) << std::dec;
-        }
-        else if (std::holds_alternative<char*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<char*>(this->data) << std::dec;
-        }
-        else if (std::holds_alternative<float*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<float*>(this->data) << std::dec;
-        }
-        else if (std::holds_alternative<double*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<double*>(this->data) << std::dec;
-        }
-        else if (std::holds_alternative<int32_t*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<int32_t*>(this->data) << std::dec;
-        }
-        else if (std::holds_alternative<uint32_t*>(this->data))
-        {
-            any_value_stringstream << std::hex << (uint64_t) std::get<uint32_t*>(this->data) << std::dec;
         }
         else if (std::holds_alternative<yli::ontology::Entity*>(this->data))
         {
@@ -784,78 +736,6 @@ namespace yli::data
             this->data = uint32_t_value;
             return true;
         }
-        else if (std::holds_alternative<bool*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<bool*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<char*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<char*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<float*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<float*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<double*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<double*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<int32_t*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<int32_t*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<uint32_t*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<uint32_t*>(void_pointer);
-            return true;
-        }
         else if (std::holds_alternative<yli::ontology::Entity*>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
@@ -1239,12 +1119,6 @@ namespace yli::data
                 double,
                 int32_t,
                 uint32_t,
-                bool*,
-                char*,
-                float*,
-                double*,
-                int32_t*,
-                uint32_t*,
                 yli::ontology::Entity*,
                 yli::ontology::Movable*,
                 const yli::ontology::Movable*,
@@ -1318,42 +1192,6 @@ namespace yli::data
 
     AnyValue::AnyValue(const uint32_t uint32_t_value)
         : data(uint32_t_value)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(bool* const bool_pointer)
-        : data(bool_pointer)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(char* const char_pointer)
-        : data(char_pointer)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(float* const float_pointer)
-        : data(float_pointer)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(double* const double_pointer)
-        : data(double_pointer)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(int32_t* const int32_t_pointer)
-        : data(int32_t_pointer)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(uint32_t* const uint32_t_pointer)
-        : data(uint32_t_pointer)
     {
         // constructor.
     }

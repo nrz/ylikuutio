@@ -89,12 +89,6 @@ namespace yli::data
             explicit AnyValue(const double double_value);
             explicit AnyValue(const int32_t int32_t_value);
             explicit AnyValue(const uint32_t uint32_t_value);
-            explicit AnyValue(bool* const bool_pointer);
-            explicit AnyValue(char* const char_pointer);
-            explicit AnyValue(float* const float_pointer);
-            explicit AnyValue(double* const double_pointer);
-            explicit AnyValue(int32_t* const int32_t_pointer);
-            explicit AnyValue(uint32_t* const uint32_t_pointer);
             explicit AnyValue(yli::ontology::Entity* const entity_pointer);
             explicit AnyValue(yli::ontology::Movable* const movable_pointer);
             explicit AnyValue(const yli::ontology::Movable* const const_movable_pointer);
@@ -141,12 +135,6 @@ namespace yli::data
                 double,
                 int32_t,
                 uint32_t,
-                bool*,
-                char*,
-                float*,
-                double*,
-                int32_t*,
-                uint32_t*,
                 yli::ontology::Entity*,
                 yli::ontology::Movable*,
                 const yli::ontology::Movable*,

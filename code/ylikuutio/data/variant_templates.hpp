@@ -129,66 +129,6 @@ namespace yli::data
                     my_variant = uint32_t_value;
                 }
             }
-            else if (type == "bool*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<bool*>(void_pointer);
-                }
-            }
-            else if (type == "char*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<char*>(void_pointer);
-                }
-            }
-            else if (type == "float*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<float*>(void_pointer);
-                }
-            }
-            else if (type == "double*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<double*>(void_pointer);
-                }
-            }
-            else if (type == "int32_t*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<int32_t*>(void_pointer);
-                }
-            }
-            else if (type == "uint32_t*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<uint32_t*>(void_pointer);
-                }
-            }
             else if (type == "yli::ontology::Entity*")
             {
                 if (yli::string::check_if_unsigned_integer_string(value_string))
