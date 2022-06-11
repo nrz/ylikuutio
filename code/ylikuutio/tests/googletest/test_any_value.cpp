@@ -48,6 +48,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <functional> // std::reference_wrapper
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
@@ -692,27 +693,21 @@ TEST(any_value_must_be_initialized_appropriately, spherical_coordinates_struct)
 TEST(any_value_must_be_initialized_appropriately, std_string)
 {
     std::string foo_string = "foo";
-    std::string* const foo_string_pointer = &foo_string;
-    yli::data::AnyValue std_string_pointer_any_value = yli::data::AnyValue(foo_string_pointer);
-    ASSERT_TRUE(std::holds_alternative<std::string*>(std_string_pointer_any_value.data));
-    ASSERT_EQ(std::get<std::string*>(std_string_pointer_any_value.data), foo_string_pointer);
-    ASSERT_EQ(std::char_traits<char>::length(std_string_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::string*"));
-    ASSERT_EQ(std::strcmp(std_string_pointer_any_value.get_datatype().c_str(), "std::string*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(std_string_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("foo"));
-    ASSERT_EQ(std::strcmp(std_string_pointer_any_value.get_string().c_str(), "foo"), 0);
+    yli::data::AnyValue std_string_ref_any_value = yli::data::AnyValue(foo_string);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::string>>(std_string_ref_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::string>>(std_string_ref_any_value.data).get(), foo_string);
+    ASSERT_EQ(std::strcmp(std_string_ref_any_value.get_datatype().c_str(), "std::string&"), 0);
+    ASSERT_EQ(std::strcmp(std_string_ref_any_value.get_string().c_str(), "foo"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, const_std_string)
 {
     const std::string foo_string = "foo";
-    const std::string* const foo_string_pointer = &foo_string;
-    yli::data::AnyValue const_std_string_pointer_any_value = yli::data::AnyValue(foo_string_pointer);
-    ASSERT_TRUE(std::holds_alternative<const std::string*>(const_std_string_pointer_any_value.data));
-    ASSERT_EQ(std::get<const std::string*>(const_std_string_pointer_any_value.data), foo_string_pointer);
-    ASSERT_EQ(std::char_traits<char>::length(const_std_string_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("const std::string*"));
-    ASSERT_EQ(std::strcmp(const_std_string_pointer_any_value.get_datatype().c_str(), "const std::string*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(const_std_string_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("foo"));
-    ASSERT_EQ(std::strcmp(const_std_string_pointer_any_value.get_string().c_str(), "foo"), 0);
+    yli::data::AnyValue const_std_string_ref_any_value = yli::data::AnyValue(foo_string);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const std::string>>(const_std_string_ref_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const std::string>>(const_std_string_ref_any_value.data).get(), foo_string);
+    ASSERT_EQ(std::strcmp(const_std_string_ref_any_value.get_datatype().c_str(), "const std::string&"), 0);
+    ASSERT_EQ(std::strcmp(const_std_string_ref_any_value.get_string().c_str(), "foo"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t_shared_ptr)

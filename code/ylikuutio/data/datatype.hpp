@@ -136,9 +136,9 @@ namespace yli::data
         // Structs.
         SPHERICAL_COORDINATES_STRUCT_POINTER,
         CONST_SPHERICAL_COORDINATES_STRUCT_POINTER,
-        // Raw pointers to standard library datatypes.
-        STD_STRING_POINTER,
-        CONST_STD_STRING_POINTER,
+        // References to standard library datatypes.
+        STD_STRING_REF,
+        CONST_STD_STRING_REF,
         // Shared pointers to standard library datatypes.
         STD_VECTOR_INT8_T_SHARED_PTR,
         STD_VECTOR_UINT8_T_SHARED_PTR,

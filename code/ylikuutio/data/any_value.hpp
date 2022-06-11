@@ -25,6 +25,7 @@
 #endif
 
 // Include standard headers
+#include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
@@ -114,8 +115,8 @@ namespace yli::data
             explicit AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr);
             explicit AnyValue(std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr);
             explicit AnyValue(yli::data::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
-            explicit AnyValue(std::string* const std_string_pointer);
-            explicit AnyValue(const std::string* const const_std_string_pointer);
+            explicit AnyValue(std::string& std_string_ref);
+            explicit AnyValue(const std::string& const_std_string_ref);
             explicit AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
             explicit AnyValue(std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr);
             explicit AnyValue(std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr);
@@ -170,8 +171,8 @@ namespace yli::data
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
                 yli::data::SphericalCoordinatesStruct*,
-                std::string*,
-                const std::string*
+                std::reference_wrapper<std::string>,
+                std::reference_wrapper<const std::string>
                     > data;
     };
 }

@@ -34,6 +34,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <functional> // std::reference_wrapper
 #include <ios>      // std::boolalpha, std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
@@ -72,7 +73,185 @@ namespace yli::data
 {
     bool AnyValue::operator==(const yli::data::AnyValue& rhs) const
     {
-        return this->data == rhs.data;
+        if (this->get_datatype() != rhs.get_datatype())
+        {
+            return false;
+        }
+
+        if (std::holds_alternative<bool>(this->data) && std::holds_alternative<bool>(rhs.data))
+        {
+            return std::get<bool>(this->data) == std::get<bool>(rhs.data);
+        }
+        else if (std::holds_alternative<char>(this->data) && std::holds_alternative<char>(rhs.data))
+        {
+            return std::get<char>(this->data) == std::get<char>(rhs.data);
+        }
+        else if (std::holds_alternative<float>(this->data) && std::holds_alternative<float>(rhs.data))
+        {
+            return std::get<float>(this->data) == std::get<float>(rhs.data);
+        }
+        else if (std::holds_alternative<double>(this->data) && std::holds_alternative<double>(rhs.data))
+        {
+            return std::get<double>(this->data) == std::get<double>(rhs.data);
+        }
+        else if (std::holds_alternative<int32_t>(this->data) && std::holds_alternative<int32_t>(rhs.data))
+        {
+            return std::get<int32_t>(this->data) == std::get<int32_t>(rhs.data);
+        }
+        else if (std::holds_alternative<uint32_t>(this->data) && std::holds_alternative<uint32_t>(rhs.data))
+        {
+            return std::get<uint32_t>(this->data) == std::get<uint32_t>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Entity*>(this->data) && std::holds_alternative<yli::ontology::Entity*>(rhs.data))
+        {
+            return std::get<yli::ontology::Entity*>(this->data) == std::get<yli::ontology::Entity*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Movable*>(this->data) && std::holds_alternative<yli::ontology::Movable*>(rhs.data))
+        {
+            return std::get<yli::ontology::Movable*>(this->data) == std::get<yli::ontology::Movable*>(rhs.data);
+        }
+        else if (std::holds_alternative<const yli::ontology::Movable*>(this->data) && std::holds_alternative<const yli::ontology::Movable*>(rhs.data))
+        {
+            return std::get<const yli::ontology::Movable*>(this->data) == std::get<const yli::ontology::Movable*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Universe*>(this->data) && std::holds_alternative<yli::ontology::Universe*>(rhs.data))
+        {
+            return std::get<yli::ontology::Universe*>(this->data) == std::get<yli::ontology::Universe*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Ecosystem*>(this->data) && std::holds_alternative<yli::ontology::Ecosystem*>(rhs.data))
+        {
+            return std::get<yli::ontology::Ecosystem*>(this->data) == std::get<yli::ontology::Ecosystem*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Scene*>(this->data) && std::holds_alternative<yli::ontology::Scene*>(rhs.data))
+        {
+            return std::get<yli::ontology::Scene*>(this->data) == std::get<yli::ontology::Scene*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Shader*>(this->data) && std::holds_alternative<yli::ontology::Shader*>(rhs.data))
+        {
+            return std::get<yli::ontology::Shader*>(this->data) == std::get<yli::ontology::Shader*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Material*>(this->data) && std::holds_alternative<yli::ontology::Material*>(rhs.data))
+        {
+            return std::get<yli::ontology::Material*>(this->data) == std::get<yli::ontology::Material*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Species*>(this->data) && std::holds_alternative<yli::ontology::Species*>(rhs.data))
+        {
+            return std::get<yli::ontology::Species*>(this->data) == std::get<yli::ontology::Species*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Object*>(this->data) && std::holds_alternative<yli::ontology::Object*>(rhs.data))
+        {
+            return std::get<yli::ontology::Object*>(this->data) == std::get<yli::ontology::Object*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Symbiosis*>(this->data) && std::holds_alternative<yli::ontology::Symbiosis*>(rhs.data))
+        {
+            return std::get<yli::ontology::Symbiosis*>(this->data) == std::get<yli::ontology::Symbiosis*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::SymbiontMaterial*>(this->data) && std::holds_alternative<yli::ontology::SymbiontMaterial*>(rhs.data))
+        {
+            return std::get<yli::ontology::SymbiontMaterial*>(this->data) == std::get<yli::ontology::SymbiontMaterial*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::SymbiontSpecies*>(this->data) && std::holds_alternative<yli::ontology::SymbiontSpecies*>(rhs.data))
+        {
+            return std::get<yli::ontology::SymbiontSpecies*>(this->data) == std::get<yli::ontology::SymbiontSpecies*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Holobiont*>(this->data) && std::holds_alternative<yli::ontology::Holobiont*>(rhs.data))
+        {
+            return std::get<yli::ontology::Holobiont*>(this->data) == std::get<yli::ontology::Holobiont*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Biont*>(this->data) && std::holds_alternative<yli::ontology::Biont*>(rhs.data))
+        {
+            return std::get<yli::ontology::Biont*>(this->data) == std::get<yli::ontology::Biont*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Font2D*>(this->data) && std::holds_alternative<yli::ontology::Font2D*>(rhs.data))
+        {
+            return std::get<yli::ontology::Font2D*>(this->data) == std::get<yli::ontology::Font2D*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Text2D*>(this->data) && std::holds_alternative<yli::ontology::Text2D*>(rhs.data))
+        {
+            return std::get<yli::ontology::Text2D*>(this->data) == std::get<yli::ontology::Text2D*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::VectorFont*>(this->data) && std::holds_alternative<yli::ontology::VectorFont*>(rhs.data))
+        {
+            return std::get<yli::ontology::VectorFont*>(this->data) == std::get<yli::ontology::VectorFont*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Glyph*>(this->data) && std::holds_alternative<yli::ontology::Glyph*>(rhs.data))
+        {
+            return std::get<yli::ontology::Glyph*>(this->data) == std::get<yli::ontology::Glyph*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Text3D*>(this->data) && std::holds_alternative<yli::ontology::Text3D*>(rhs.data))
+        {
+            return std::get<yli::ontology::Text3D*>(this->data) == std::get<yli::ontology::Text3D*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::Console*>(this->data) && std::holds_alternative<yli::ontology::Console*>(rhs.data))
+        {
+            return std::get<yli::ontology::Console*>(this->data) == std::get<yli::ontology::Console*>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::ontology::ComputeTask*>(this->data) && std::holds_alternative<yli::ontology::ComputeTask*>(rhs.data))
+        {
+            return std::get<yli::ontology::ComputeTask*>(this->data) == std::get<yli::ontology::ComputeTask*>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(this->data) && std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<yli::data::AnyValue>>(this->data) == std::get<std::shared_ptr<yli::data::AnyValue>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(this->data) && std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data) == std::get<std::shared_ptr<yli::data::AnyStruct>>(rhs.data);
+        }
+        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data) && std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(rhs.data))
+        {
+            return std::get<yli::data::SphericalCoordinatesStruct*>(this->data) == std::get<yli::data::SphericalCoordinatesStruct*>(rhs.data);
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data) && std::holds_alternative<std::reference_wrapper<std::string>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<std::string>>(this->data).get() == std::get<std::reference_wrapper<std::string>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const std::string>>(this->data) && std::holds_alternative<std::reference_wrapper<const std::string>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<const std::string>>(this->data).get() == std::get<std::reference_wrapper<const std::string>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<int8_t>>>(this->data) == std::get<std::shared_ptr<std::vector<int8_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<uint8_t>>>(this->data) == std::get<std::shared_ptr<std::vector<uint8_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<int16_t>>>(this->data) == std::get<std::shared_ptr<std::vector<int16_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<uint16_t>>>(this->data) == std::get<std::shared_ptr<std::vector<uint16_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<int32_t>>>(this->data) == std::get<std::shared_ptr<std::vector<int32_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<uint32_t>>>(this->data) == std::get<std::shared_ptr<std::vector<uint32_t>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::vector<float>>>(this->data) && std::holds_alternative<std::shared_ptr<std::vector<float>>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::vector<float>>>(this->data) == std::get<std::shared_ptr<std::vector<float>>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<std::string>>(this->data) && std::holds_alternative<std::shared_ptr<std::string>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<std::string>>(this->data) == std::get<std::shared_ptr<std::string>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data) && std::holds_alternative<std::shared_ptr<glm::vec3>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<glm::vec3>>(this->data) == std::get<std::shared_ptr<glm::vec3>>(rhs.data);
+        }
+        else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data) && std::holds_alternative<std::shared_ptr<glm::vec4>>(rhs.data))
+        {
+            return std::get<std::shared_ptr<glm::vec4>>(this->data) == std::get<std::shared_ptr<glm::vec4>>(rhs.data);
+        }
+
+        return false;
     }
 
     bool AnyValue::operator!=(const yli::data::AnyValue& rhs) const
@@ -206,13 +385,13 @@ namespace yli::data
         {
             return "yli::data::SphericalCoordinatesStruct*";
         }
-        else if (std::holds_alternative<std::string*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
-            return "std::string*";
+            return "std::string&";
         }
-        else if (std::holds_alternative<const std::string*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const std::string>>(this->data))
         {
-            return "const std::string*";
+            return "const std::string&";
         }
         else if (std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(this->data))
         {
@@ -415,27 +594,13 @@ namespace yli::data
                     << " }";
             }
         }
-        else if (std::holds_alternative<std::string*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
-            if (std::get<std::string*>(this->data) == nullptr)
-            {
-                any_value_stringstream << "nullptr";
-            }
-            else
-            {
-                any_value_stringstream << *(std::get<std::string*>(this->data));
-            }
+            any_value_stringstream << std::get<std::reference_wrapper<std::string>>(this->data).get();
         }
-        else if (std::holds_alternative<const std::string*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const std::string>>(this->data))
         {
-            if (std::get<const std::string*>(this->data) == nullptr)
-            {
-                any_value_stringstream << "nullptr";
-            }
-            else
-            {
-                any_value_stringstream << *(std::get<const std::string*>(this->data));
-            }
+            any_value_stringstream << std::get<std::reference_wrapper<const std::string>>(this->data).get();
         }
         else if (std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(this->data))
         {
@@ -1037,30 +1202,6 @@ namespace yli::data
             this->data = static_cast<yli::data::SphericalCoordinatesStruct*>(void_pointer);
             return true;
         }
-        else if (std::holds_alternative<std::string*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<std::string*>(void_pointer);
-            return true;
-        }
-        else if (std::holds_alternative<const std::string*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<const std::string*>(void_pointer);
-            return true;
-        }
         else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
@@ -1154,8 +1295,8 @@ namespace yli::data
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
                 yli::data::SphericalCoordinatesStruct*,
-                std::string*,
-                const std::string*>(type, value_string))
+                std::reference_wrapper<std::string>,
+                std::reference_wrapper<const std::string>>(type, value_string))
     {
         // constructor.
     }
@@ -1346,14 +1487,14 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(std::string* const std_string_pointer)
-        : data(std_string_pointer)
+    AnyValue::AnyValue(std::string& std_string_ref)
+        : data(std::reference_wrapper<std::string>(std_string_ref))
     {
         // constructor.
     }
 
-    AnyValue::AnyValue(const std::string* const const_std_string_pointer)
-        : data(const_std_string_pointer)
+    AnyValue::AnyValue(const std::string& const_std_string_ref)
+        : data(std::reference_wrapper<const std::string>(const_std_string_ref))
     {
         // constructor.
     }

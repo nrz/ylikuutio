@@ -35,6 +35,7 @@
 #endif
 
 // Include standard headers
+#include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
@@ -335,27 +336,20 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
-            std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
+            std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
-             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
+        const std::string& entity_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
 
-        if (entity_string_pointer == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const std::string entity_string = *entity_string_pointer;
-
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
 
         if (entity == nullptr)
         {
@@ -382,27 +376,20 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
-            std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
+            std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
-             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
+        const std::string& entity_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
 
-        if (entity_string_pointer == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const std::string entity_string = *entity_string_pointer;
-
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
 
         if (entity == nullptr)
         {
@@ -433,27 +420,20 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>(any_value_material_string->data) &&
-                !std::holds_alternative<const std::string*>(any_value_material_string->data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
-            std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
+            std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string* const new_material_string_pointer =
-            (std::holds_alternative<std::string*>(any_value_material_string->data) ?
-             std::get<std::string*>(any_value_material_string->data) :
-             std::get<const std::string*>(any_value_material_string->data));
+        const std::string& new_material_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
 
-        if (new_material_string_pointer == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const std::string new_material_string = *new_material_string_pointer;
-
-        yli::ontology::Entity* const new_material_entity = universe.get_entity(new_material_string);
+        yli::ontology::Entity* const new_material_entity = universe.get_entity(new_material_string_ref);
 
         if (new_material_entity == nullptr)
         {
@@ -491,27 +471,20 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<const std::string*>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
-            std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
+            std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string* const entity_string_pointer =
-            (std::holds_alternative<std::string*>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::string*>((*entity_name_string_pointer_any_value).data) :
-             std::get<const std::string*>((*entity_name_string_pointer_any_value).data));
+        const std::string& entity_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
 
-        if (entity_string_pointer == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const std::string entity_string = *entity_string_pointer;
-
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
 
         if (entity == nullptr)
         {
@@ -542,27 +515,20 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::string*>(any_value_species_string->data) &&
-                !std::holds_alternative<const std::string*>(any_value_species_string->data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
-            std::cerr << "Datatype should be either yli::data::Datatype::STD_STRING_POINTER or yli::data::Datatype::CONST_STD_STRING_POINTER\n";
+            std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string* const new_species_string_pointer =
-            (std::holds_alternative<std::string*>(any_value_species_string->data) ?
-             std::get<std::string*>(any_value_species_string->data) :
-             std::get<const std::string*>(any_value_species_string->data));
+        const std::string& new_species_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
 
-        if (new_species_string_pointer == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const std::string new_species_string = *new_species_string_pointer;
-
-        yli::ontology::Entity* const new_species_entity = universe.get_entity(new_species_string);
+        yli::ontology::Entity* const new_species_entity = universe.get_entity(new_species_string_ref);
 
         if (new_species_entity == nullptr)
         {
