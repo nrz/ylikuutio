@@ -70,8 +70,11 @@ namespace yli::ontology
 
     void ApprenticeModule::unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master)
     {
-        this->unbind_from_generic_master_module();
-        this->bind_to_new_generic_master_module(new_generic_master);
+        if (new_generic_master != this->generic_master_module)
+        {
+            this->unbind_from_generic_master_module();
+            this->bind_to_new_generic_master_module(new_generic_master);
+        }
     }
 
     ApprenticeModule::ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice)
