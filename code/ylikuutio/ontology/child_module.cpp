@@ -122,7 +122,10 @@ namespace yli::ontology
 
     void ChildModule::unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)
     {
-        this->unbind_child();
-        this->set_parent_module_and_bind_to_new_parent(new_parent_module);
+        if (new_parent_module != this->parent_module)
+        {
+            this->unbind_child();
+            this->set_parent_module_and_bind_to_new_parent(new_parent_module);
+        }
     }
 }
