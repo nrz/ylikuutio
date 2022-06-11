@@ -447,12 +447,6 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (old_material == new_material)
-        {
-            // New parent is the same as old parent, no changes needed.
-            return std::nullopt;
-        }
-
         return yli::ontology::Species::bind_to_new_material(*species, *new_material);
     }
 
@@ -539,12 +533,6 @@ namespace yli::snippets
 
         if (new_species == nullptr)
         {
-            return std::nullopt;
-        }
-
-        if (old_species == new_species)
-        {
-            // New parent is the same as old parent, no changes needed.
             return std::nullopt;
         }
 
