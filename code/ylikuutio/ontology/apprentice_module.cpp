@@ -45,7 +45,7 @@ namespace yli::ontology
         {
             const yli::ontology::Scene* const master_scene = master->get_scene();
 
-            if (master_scene != nullptr && &scene != nullptr && master_scene != &scene)
+            if (master_scene != nullptr && master_scene != &scene)
             {
                 // Master belongs to a different `Scene` compared to what apprentice plans to bind to.
                 // Therefore apprentice will unbind from master.
