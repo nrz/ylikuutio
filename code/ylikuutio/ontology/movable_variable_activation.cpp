@@ -33,6 +33,7 @@
 #endif
 
 // Include standard headers
+#include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>  // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
@@ -227,27 +228,37 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& spherical_coordinates_any_value = variable.variable_value;
+            const yli::data::AnyValue& any_value = variable.variable_value;
 
-            if (!std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data))
+            if (!std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) &&
+                    !std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
             {
+                // `AnyValue` does not hold spherical coordinates.
                 return std::nullopt;
             }
 
-            movable->spherical_coordinates = *(std::get<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data));
+            movable->spherical_coordinates =
+                (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) ?
+                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) :
+                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
             return std::nullopt;
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        const yli::data::AnyValue& spherical_coordinates_any_value = variable.variable_value;
+        const yli::data::AnyValue& any_value = variable.variable_value;
 
-        if (!std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data))
+        if (!std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) &&
+                !std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
         {
+            // `AnyValue` does not hold spherical coordinates.
             return std::nullopt;
         }
 
-        universe->current_camera_spherical_coordinates = *(std::get<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_any_value.data));
+        universe->current_camera_spherical_coordinates =
+            (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) ?
+             std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) :
+             std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
         return std::nullopt;
     }
 

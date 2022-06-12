@@ -36,6 +36,12 @@ namespace yli::data
         {
             // constructor.
         }
+
+        bool operator==(const yli::data::SphericalCoordinatesStruct& rhs) const
+        {
+            return this->rho == rhs.rho && this->theta == rhs.theta && this->phi == rhs.phi;
+        }
+
         float rho;
         float theta;
         float phi;

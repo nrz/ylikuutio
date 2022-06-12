@@ -681,13 +681,23 @@ TEST(any_value_must_be_initialized_appropriately, any_struct_shader_ptr)
 TEST(any_value_must_be_initialized_appropriately, spherical_coordinates_struct)
 {
     yli::data::SphericalCoordinatesStruct spherical_coordinates_struct = yli::data::SphericalCoordinatesStruct(1.0f, 2.0f, 3.0f);
-    yli::data::AnyValue spherical_coordinates_struct_pointer_any_value = yli::data::AnyValue(&spherical_coordinates_struct);
-    ASSERT_TRUE(std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_struct_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::data::SphericalCoordinatesStruct*>(spherical_coordinates_struct_pointer_any_value.data), &spherical_coordinates_struct);
-    ASSERT_EQ(std::char_traits<char>::length(spherical_coordinates_struct_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::data::SphericalCoordinatesStruct*"));
-    ASSERT_EQ(std::strcmp(spherical_coordinates_struct_pointer_any_value.get_datatype().c_str(), "yli::data::SphericalCoordinatesStruct*"), 0);
+    yli::data::AnyValue any_value(spherical_coordinates_struct);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
+    ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "yli::data::SphericalCoordinatesStruct&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
-    ASSERT_EQ(spherical_coordinates_struct_pointer_any_value.get_entity_pointer(), nullptr);
+    ASSERT_EQ(any_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, const_spherical_coordinates_struct)
+{
+    const yli::data::SphericalCoordinatesStruct spherical_coordinates_struct = yli::data::SphericalCoordinatesStruct(1.0f, 2.0f, 3.0f);
+    yli::data::AnyValue any_value(spherical_coordinates_struct);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
+    ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "const yli::data::SphericalCoordinatesStruct&"), 0);
+    // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
+    ASSERT_EQ(any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_string)

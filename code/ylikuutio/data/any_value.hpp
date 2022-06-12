@@ -114,7 +114,8 @@ namespace yli::data
             explicit AnyValue(yli::ontology::ComputeTask* const compute_task_pointer);
             explicit AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr);
             explicit AnyValue(std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr);
-            explicit AnyValue(yli::data::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+            explicit AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
+            explicit AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             explicit AnyValue(std::string& std_string_ref);
             explicit AnyValue(const std::string& const_std_string_ref);
             explicit AnyValue(std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr);
@@ -170,7 +171,8 @@ namespace yli::data
                 std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
-                yli::data::SphericalCoordinatesStruct*,
+                std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
+                std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>
                     > data;

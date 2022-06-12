@@ -367,16 +367,6 @@ namespace yli::data
                     my_variant = any_struct_shared_ptr;
                 }
             }
-            else if (type == "yli::data::SphericalCoordinatesStruct*")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    void* void_pointer = nullptr;
-                    value_stringstream << value_string;
-                    value_stringstream >> void_pointer;
-                    my_variant = static_cast<yli::data::SphericalCoordinatesStruct*>(void_pointer);
-                }
-            }
             else if (type == "std::shared_ptr<glm::vec3>")
             {
                 if (yli::string::check_if_unsigned_integer_string(value_string))

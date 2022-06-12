@@ -198,9 +198,13 @@ namespace yli::data
         {
             return std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data) == std::get<std::shared_ptr<yli::data::AnyStruct>>(rhs.data);
         }
-        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data) && std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) && std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data))
         {
-            return std::get<yli::data::SphericalCoordinatesStruct*>(this->data) == std::get<yli::data::SphericalCoordinatesStruct*>(rhs.data);
+            return std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data).get() == std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data) && std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data).get() == std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data) && std::holds_alternative<std::reference_wrapper<std::string>>(rhs.data))
         {
@@ -381,9 +385,13 @@ namespace yli::data
         {
             return "std::shared_ptr<yli::data::AnyStruct>";
         }
-        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data))
         {
-            return "yli::data::SphericalCoordinatesStruct*";
+            return "yli::data::SphericalCoordinatesStruct&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
+        {
+            return "const yli::data::SphericalCoordinatesStruct&";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
@@ -580,19 +588,18 @@ namespace yli::data
                 any_value_stringstream << std::hex << std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data).get() << std::dec;
             }
         }
-        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) ||
+                std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
         {
-            if (std::get<yli::data::SphericalCoordinatesStruct*>(this->data) == nullptr)
-            {
-                any_value_stringstream << "nullptr";
-            }
-            else
-            {
-                any_value_stringstream << std::fixed << "{ " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->rho
-                    << ", " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->theta
-                    << ", " << std::get<yli::data::SphericalCoordinatesStruct*>(this->data)->phi
-                    << " }";
-            }
+            const yli::data::SphericalCoordinatesStruct& spherical_coordinates =
+                (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) ?
+                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) :
+                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data));
+
+            any_value_stringstream << std::fixed << "{ " << spherical_coordinates.rho
+                << ", " << spherical_coordinates.theta
+                << ", " << spherical_coordinates.phi
+                << " }";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
@@ -1190,18 +1197,6 @@ namespace yli::data
             this->data = any_struct_shared_ptr;
             return true;
         }
-        else if (std::holds_alternative<yli::data::SphericalCoordinatesStruct*>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            value_stringstream << value_string;
-            value_stringstream >> void_pointer;
-            this->data = static_cast<yli::data::SphericalCoordinatesStruct*>(void_pointer);
-            return true;
-        }
         else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string(value_string))
@@ -1294,7 +1289,8 @@ namespace yli::data
                 std::shared_ptr<std::string>,
                 std::shared_ptr<glm::vec3>,
                 std::shared_ptr<glm::vec4>,
-                yli::data::SphericalCoordinatesStruct*,
+                std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
+                std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>>(type, value_string))
     {
@@ -1481,8 +1477,14 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
-        : data(spherical_coordinates_struct_pointer)
+    AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
+        : data(std::reference_wrapper<yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
+    {
+        // constructor.
+    }
+
+    AnyValue::AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
+        : data(std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
     {
         // constructor.
     }
