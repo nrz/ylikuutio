@@ -22,12 +22,6 @@
 #include "any_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
@@ -365,24 +359,6 @@ namespace yli::data
                     std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr =
                         std::make_shared<yli::data::AnyStruct>();
                     my_variant = any_struct_shared_ptr;
-                }
-            }
-            else if (type == "std::shared_ptr<glm::vec3>")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    std::shared_ptr<glm::vec3> glm_vec3_shared_ptr =
-                        std::make_shared<glm::vec3>();
-                    my_variant = glm_vec3_shared_ptr;
-                }
-            }
-            else if (type == "std::shared_ptr<glm::vec4>")
-            {
-                if (yli::string::check_if_unsigned_integer_string(value_string))
-                {
-                    std::shared_ptr<glm::vec4> glm_vec4_shared_ptr =
-                        std::make_shared<glm::vec4>();
-                    my_variant = glm_vec4_shared_ptr;
                 }
             }
 

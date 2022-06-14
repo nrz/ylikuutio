@@ -114,6 +114,10 @@ namespace yli::data
             explicit AnyValue(yli::ontology::ComputeTask* const compute_task_pointer);
             explicit AnyValue(std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr);
             explicit AnyValue(std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr);
+            explicit AnyValue(glm::vec3& glm_vec3_ref);
+            explicit AnyValue(const glm::vec3& const_glm_vec3_ref);
+            explicit AnyValue(glm::vec4& glm_vec4_ref);
+            explicit AnyValue(const glm::vec4& const_glm_vec4_ref);
             explicit AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             explicit AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             explicit AnyValue(std::string& std_string_ref);
@@ -126,8 +130,6 @@ namespace yli::data
             explicit AnyValue(std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr);
             explicit AnyValue(std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr);
             explicit AnyValue(std::shared_ptr<std::string> std_string_shared_ptr);
-            explicit AnyValue(std::shared_ptr<glm::vec3> const glm_vec3_shared_ptr);
-            explicit AnyValue(std::shared_ptr<glm::vec4> const glm_vec4_shared_ptr);
 
             std::variant<
                 std::monostate,
@@ -169,8 +171,10 @@ namespace yli::data
                 std::shared_ptr<std::vector<uint32_t>>,
                 std::shared_ptr<std::vector<float>>,
                 std::shared_ptr<std::string>,
-                std::shared_ptr<glm::vec3>,
-                std::shared_ptr<glm::vec4>,
+                std::reference_wrapper<glm::vec3>,
+                std::reference_wrapper<const glm::vec3>,
+                std::reference_wrapper<glm::vec4>,
+                std::reference_wrapper<const glm::vec4>,
                 std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<std::string>,

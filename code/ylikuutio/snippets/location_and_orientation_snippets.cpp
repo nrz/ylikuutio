@@ -32,7 +32,6 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <memory>        // std::make_shared, std::shared_ptr
 
 namespace yli::snippets
 {
@@ -87,7 +86,7 @@ namespace yli::snippets
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
         cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(cartesian_coordinates_variable_struct);` ...\n";
-        entity->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(x, y, z)));
+        entity->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(x, y, z)));
 
         yli::ontology::VariableStruct x_variable_struct;
         x_variable_struct.local_name = "x";
@@ -155,7 +154,7 @@ namespace yli::snippets
         right_variable_struct.read_callback = &yli::ontology::read_right;
         right_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(right_variable_struct);` ...\n";
-        entity->create_variable(right_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+        entity->create_variable(right_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
         // the value does not matter, `up` is read with a read callback.
         yli::ontology::VariableStruct up_variable_struct;
@@ -163,7 +162,7 @@ namespace yli::snippets
         up_variable_struct.read_callback = &yli::ontology::read_up;
         up_variable_struct.should_call_activate_callback_now = false;
         std::cout << "Executing `entity->create_variable(up_variable_struct);` ...\n";
-        entity->create_variable(up_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(NAN, NAN, NAN)));
+        entity->create_variable(up_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
         std::cout << "Setting up location and orientation ... ready.\n";
     }

@@ -198,6 +198,22 @@ namespace yli::data
         {
             return std::get<std::shared_ptr<yli::data::AnyStruct>>(this->data) == std::get<std::shared_ptr<yli::data::AnyStruct>>(rhs.data);
         }
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data) && std::holds_alternative<std::reference_wrapper<glm::vec3>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<glm::vec3>>(this->data).get() == std::get<std::reference_wrapper<glm::vec3>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data) && std::holds_alternative<std::reference_wrapper<const glm::vec3>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<const glm::vec3>>(this->data).get() == std::get<std::reference_wrapper<const glm::vec3>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data) && std::holds_alternative<std::reference_wrapper<glm::vec4>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<glm::vec4>>(this->data).get() == std::get<std::reference_wrapper<glm::vec4>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data) && std::holds_alternative<std::reference_wrapper<const glm::vec4>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<const glm::vec4>>(this->data).get() == std::get<std::reference_wrapper<const glm::vec4>>(rhs.data).get();
+        }
         else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) && std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data))
         {
             return std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data).get() == std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data).get();
@@ -245,14 +261,6 @@ namespace yli::data
         else if (std::holds_alternative<std::shared_ptr<std::string>>(this->data) && std::holds_alternative<std::shared_ptr<std::string>>(rhs.data))
         {
             return std::get<std::shared_ptr<std::string>>(this->data) == std::get<std::shared_ptr<std::string>>(rhs.data);
-        }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data) && std::holds_alternative<std::shared_ptr<glm::vec3>>(rhs.data))
-        {
-            return std::get<std::shared_ptr<glm::vec3>>(this->data) == std::get<std::shared_ptr<glm::vec3>>(rhs.data);
-        }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data) && std::holds_alternative<std::shared_ptr<glm::vec4>>(rhs.data))
-        {
-            return std::get<std::shared_ptr<glm::vec4>>(this->data) == std::get<std::shared_ptr<glm::vec4>>(rhs.data);
         }
 
         return false;
@@ -385,6 +393,22 @@ namespace yli::data
         {
             return "std::shared_ptr<yli::data::AnyStruct>";
         }
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data))
+        {
+            return "glm::vec3&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data))
+        {
+            return "const glm::vec3&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data))
+        {
+            return "glm::vec4&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data))
+        {
+            return "const glm::vec4&";
+        }
         else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data))
         {
             return "yli::data::SphericalCoordinatesStruct&";
@@ -432,14 +456,6 @@ namespace yli::data
         else if (std::holds_alternative<std::shared_ptr<std::string>>(this->data))
         {
             return "std::shared_ptr<std::string>";
-        }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
-        {
-            return "std::shared_ptr<glm::vec3>";
-        }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data))
-        {
-            return "std::shared_ptr<glm::vec4>";
         }
 
         return "ERROR: `AnyValue::get_datatype`: no datatype string defined for this datatype!";
@@ -697,34 +713,32 @@ namespace yli::data
                 any_value_stringstream << "std::shared_ptr<std::string>";
             }
         }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data) ||
+                std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data))
         {
-            if (std::get<std::shared_ptr<glm::vec3>>(this->data) == nullptr)
-            {
-                any_value_stringstream << "nullptr";
-            }
-            else
-            {
-                any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec3>>(this->data)->x
-                    << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->y
-                    << ", " << std::get<std::shared_ptr<glm::vec3>>(this->data)->z
-                    << " }";
-            }
+            const glm::vec3& cartesian_coordinates =
+                (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data) ?
+                 std::get<std::reference_wrapper<glm::vec3>>(this->data) :
+                 std::get<std::reference_wrapper<const glm::vec3>>(this->data));
+
+            any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
+                << ", " << cartesian_coordinates.y
+                << ", " << cartesian_coordinates.z
+                << " }";
         }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data) ||
+                std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data))
         {
-            if (std::get<std::shared_ptr<glm::vec4>>(this->data) == nullptr)
-            {
-                any_value_stringstream << "nullptr";
-            }
-            else
-            {
-                any_value_stringstream << std::fixed << "{ " << std::get<std::shared_ptr<glm::vec4>>(this->data)->x
-                    << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->y
-                    << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->z
-                    << ", " << std::get<std::shared_ptr<glm::vec4>>(this->data)->w
-                    << " }";
-            }
+            const glm::vec4& cartesian_coordinates =
+                (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data) ?
+                 std::get<std::reference_wrapper<glm::vec4>>(this->data) :
+                 std::get<std::reference_wrapper<const glm::vec4>>(this->data));
+
+            any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
+                << ", " << cartesian_coordinates.y
+                << ", " << cartesian_coordinates.z
+                << ", " << cartesian_coordinates.w
+                << " }";
         }
         else
         {
@@ -1197,30 +1211,6 @@ namespace yli::data
             this->data = any_struct_shared_ptr;
             return true;
         }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec3>>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            std::shared_ptr<glm::vec3> glm_vec3_shared_ptr =
-                std::make_shared<glm::vec3>();
-            this->data = glm_vec3_shared_ptr;
-            return true;
-        }
-        else if (std::holds_alternative<std::shared_ptr<glm::vec4>>(this->data))
-        {
-            if (!yli::string::check_if_unsigned_integer_string(value_string))
-            {
-                return false;
-            }
-
-            std::shared_ptr<glm::vec4> glm_vec4_shared_ptr =
-                std::make_shared<glm::vec4>();
-            this->data = glm_vec4_shared_ptr;
-            return true;
-        }
 
         return false;
     }
@@ -1287,8 +1277,10 @@ namespace yli::data
                 std::shared_ptr<std::vector<uint32_t>>,
                 std::shared_ptr<std::vector<float>>,
                 std::shared_ptr<std::string>,
-                std::shared_ptr<glm::vec3>,
-                std::shared_ptr<glm::vec4>,
+                std::reference_wrapper<glm::vec3>,
+                std::reference_wrapper<const glm::vec3>,
+                std::reference_wrapper<glm::vec4>,
+                std::reference_wrapper<const glm::vec4>,
                 std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<std::string>,
@@ -1477,6 +1469,30 @@ namespace yli::data
         // constructor.
     }
 
+    AnyValue::AnyValue(glm::vec3& glm_vec3_ref)
+        : data(std::reference_wrapper<glm::vec3>(glm_vec3_ref))
+    {
+        // constructor.
+    }
+
+    AnyValue::AnyValue(const glm::vec3& const_glm_vec3_ref)
+        : data(std::reference_wrapper<const glm::vec3>(const_glm_vec3_ref))
+    {
+        // constructor.
+    }
+
+    AnyValue::AnyValue(glm::vec4& glm_vec4_ref)
+        : data(std::reference_wrapper<glm::vec4>(glm_vec4_ref))
+    {
+        // constructor.
+    }
+
+    AnyValue::AnyValue(const glm::vec4& const_glm_vec4_ref)
+        : data(std::reference_wrapper<const glm::vec4>(const_glm_vec4_ref))
+    {
+        // constructor.
+    }
+
     AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
         : data(std::reference_wrapper<yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
     {
@@ -1545,18 +1561,6 @@ namespace yli::data
 
     AnyValue::AnyValue(std::shared_ptr<std::string> std_string_shared_ptr)
         : data(std_string_shared_ptr)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(std::shared_ptr<glm::vec3> glm_vec3_shared_ptr)
-        : data(glm_vec3_shared_ptr)
-    {
-        // constructor.
-    }
-
-    AnyValue::AnyValue(std::shared_ptr<glm::vec4> glm_vec4_shared_ptr)
-        : data(glm_vec4_shared_ptr)
     {
         // constructor.
     }

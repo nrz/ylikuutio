@@ -807,28 +807,48 @@ TEST(any_value_must_be_initialized_appropriately, std_string_shared_ptr)
     ASSERT_EQ(std::strcmp(std_string_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::string>"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, glm_vec3_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, glm_vec3)
 {
-    std::shared_ptr<glm::vec3> glm_vec3_shared_ptr = std::make_shared<glm::vec3>(1.0f, 2.0f, 3.0f);
-    yli::data::AnyValue glm_vec3_pointer_any_value = yli::data::AnyValue(glm_vec3_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec3>>(glm_vec3_pointer_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<glm::vec3>>(glm_vec3_pointer_any_value.data), glm_vec3_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(glm_vec3_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<glm::vec3>"));
-    ASSERT_EQ(std::strcmp(glm_vec3_pointer_any_value.get_datatype().c_str(), "std::shared_ptr<glm::vec3>"), 0);
+    glm::vec3 glm_vec3(1.0f, 2.0f, 3.0f);
+    yli::data::AnyValue glm_vec3_any_value = yli::data::AnyValue(glm_vec3);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec3>>(glm_vec3_any_value.data));
+    ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec3>>(glm_vec3_any_value.data).get(), &glm_vec3);
+    ASSERT_EQ(std::strcmp(glm_vec3_any_value.get_datatype().c_str(), "glm::vec3&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec3*`!
-    ASSERT_EQ(glm_vec3_pointer_any_value.get_entity_pointer(), nullptr);
+    ASSERT_EQ(glm_vec3_any_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, glm_vec4_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, const_glm_vec3)
 {
-    std::shared_ptr<glm::vec4> glm_vec4_shared_ptr = std::make_shared<glm::vec4>(1.0f, 2.0f, 3.0f, 4.0f);
-    yli::data::AnyValue glm_vec4_pointer_any_value = yli::data::AnyValue(glm_vec4_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<glm::vec4>>(glm_vec4_pointer_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<glm::vec4>>(glm_vec4_pointer_any_value.data), glm_vec4_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(glm_vec4_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<glm::vec4>"));
-    ASSERT_EQ(std::strcmp(glm_vec4_pointer_any_value.get_datatype().c_str(), "std::shared_ptr<glm::vec4>"), 0);
+    const glm::vec3 const_glm_vec3(1.0f, 2.0f, 3.0f);
+    yli::data::AnyValue const_glm_vec3_any_value = yli::data::AnyValue(const_glm_vec3);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec3>>(const_glm_vec3_any_value.data));
+    ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec3>>(const_glm_vec3_any_value.data).get(), &const_glm_vec3);
+    ASSERT_EQ(std::strcmp(const_glm_vec3_any_value.get_datatype().c_str(), "const glm::vec3&"), 0);
+    // TODO: add assertions for `AnyValue::get_string` for `glm::vec3*`!
+    ASSERT_EQ(const_glm_vec3_any_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, glm_vec4)
+{
+    glm::vec4 glm_vec4(1.0f, 2.0f, 3.0f, 4.0f);
+    yli::data::AnyValue glm_vec4_any_value = yli::data::AnyValue(glm_vec4);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec4>>(glm_vec4_any_value.data));
+    ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec4>>(glm_vec4_any_value.data).get(), &glm_vec4);
+    ASSERT_EQ(std::strcmp(glm_vec4_any_value.get_datatype().c_str(), "glm::vec4&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec4*`!
-    ASSERT_EQ(glm_vec4_pointer_any_value.get_entity_pointer(), nullptr);
+    ASSERT_EQ(glm_vec4_any_value.get_entity_pointer(), nullptr);
+}
+
+TEST(any_value_must_be_initialized_appropriately, const_glm_vec4)
+{
+    const glm::vec4 const_glm_vec4(1.0f, 2.0f, 3.0f, 4.0f);
+    yli::data::AnyValue const_glm_vec4_any_value = yli::data::AnyValue(const_glm_vec4);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec4>>(const_glm_vec4_any_value.data));
+    ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec4>>(const_glm_vec4_any_value.data).get(), &const_glm_vec4);
+    ASSERT_EQ(std::strcmp(const_glm_vec4_any_value.get_datatype().c_str(), "const glm::vec4&"), 0);
+    // TODO: add assertions for `AnyValue::get_string` for `glm::vec4*`!
+    ASSERT_EQ(const_glm_vec4_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_true)

@@ -31,7 +31,6 @@
 #endif
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
 
 namespace yli::ontology
@@ -44,14 +43,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->cartesian_coordinates));
+            return yli::data::AnyValue(movable->cartesian_coordinates);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(std::make_shared<glm::vec3>(universe->current_camera_cartesian_coordinates));
+            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates);
         }
 
         return std::nullopt;
@@ -177,14 +176,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->up));
+            return yli::data::AnyValue(movable->up);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(&universe->current_camera_up);
+            return yli::data::AnyValue(universe->current_camera_up);
         }
 
         return std::nullopt;
@@ -196,14 +195,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(std::make_shared<glm::vec3>(movable->right));
+            return yli::data::AnyValue(movable->right);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(&universe->current_camera_right);
+            return yli::data::AnyValue(universe->current_camera_right);
         }
 
         return std::nullopt;

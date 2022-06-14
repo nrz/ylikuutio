@@ -42,7 +42,6 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
 
 // `Movable` is a mixin class, not intended to be instantiated.
@@ -226,7 +225,7 @@ namespace yli::ontology
         cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
         cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(std::make_shared<glm::vec3>(float_x, float_y, float_z)));
+        this->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(float_x, float_y, float_z)));
 
         yli::ontology::VariableStruct x_variable_struct;
         x_variable_struct.local_name = "x";
