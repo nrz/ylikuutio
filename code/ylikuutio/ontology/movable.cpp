@@ -217,9 +217,9 @@ namespace yli::ontology
 
     void Movable::create_coordinate_and_angle_variables()
     {
-        float float_x = this->cartesian_coordinates.x;
-        float float_y = this->cartesian_coordinates.y;
-        float float_z = this->cartesian_coordinates.z;
+        float& float_x = this->cartesian_coordinates.x;
+        float& float_y = this->cartesian_coordinates.y;
+        float& float_z = this->cartesian_coordinates.z;
 
         yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
         cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
