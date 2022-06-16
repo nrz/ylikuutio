@@ -333,6 +333,15 @@ Hirvi puede ir a una discoteca para bailar y recoger más energía así.
 * Kyber-Hirvinen valmentaa Kyber-Hirveksi muuttunutta Hirveä kyberkykyjensä käytössä.
 * Yhtenä kyberominaisuutena saattaa olla kyky olla vaihtaa pelimusiikkia!
 
+### Tehtävänanto: Kyber-Hirven tulee liittyä ilmastomielenosoitukseen ja tulla pidätetyksi päästäkseen poliisivankilaan
+* "Olet KYBER-HIRVI.
+  Tehtäväsi - etsiä ja pelastaa ystäväsi Kosmoshirvi.
+  Meillä on syytä olettaa, että hän on Suomen poliisivoimien vankina Helsingin rajan tuolla puolen."
+
+### Välianimaatio: Poliisin mielenosoittajankantorobotti kantaa Kyber-Hirven pehmeästi poliisibussiin pidätettynä
+
+### Tehtävä: Kyber-Hirven tulee hakkeroida sellin oven lukko ja etsiä ja pelastaa pidätetty Kosmoshirvi
+
 ### Välianimaatio: tehtävän käskynjako #1, #2, ...
 * Hirvet keskustelevat tehtävästä.
 
@@ -412,6 +421,16 @@ Hirvi puede ir a una discoteca para bailar y recoger más energía así.
 * Hirvi learns that Kyber-Hirvinen has risen to became the leader of the top secret
   kyberhirvi squad of the Mammal Liberation Front!
 * Kyber-Hirvinen teaches Kyber-Hirvi in using their kyber skills.
+* As one kyber skill Kyber-Hirvi may be able to change the game music!
+
+### Mission: Kyber-Hirvi must join the climate demonstration and get arrested to get to the police jail
+* "You are KYBER-HIRVI.
+  Your Mission - to find and rescue your friend Kosmoshirvi.
+  We have reason to believe that they have been captured by Finnish polices forces beyond the Helsinki border."
+
+### Cut-scene: Police demonstrator-carrying-robot carries Kyber-Hirvi softly to the police bus to be arrested
+
+### Mission: Kyber-Hirvi must hack the cell door lock and search and save arrested Kosmoshirvi
 
 ### Cut-scene: mission briefing #1, #2, ...
 * Elks/moose discussion the mission.
