@@ -43,6 +43,8 @@ namespace yli::ontology
     std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
     std::optional<yli::data::AnyValue> activate_azimuth(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+
+    std::optional<yli::data::AnyValue> activate_scale(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 }
 
 #endif

@@ -41,7 +41,6 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 
 // `Movable` is a mixin class, not intended to be instantiated.
@@ -168,6 +167,16 @@ namespace yli::ontology
         this->yaw = 0.5f * PI - azimuth;
     }
 
+    float Movable::get_scale() const
+    {
+        return this->scale;
+    }
+
+    void Movable::set_scale(const float scale)
+    {
+        this->scale = scale;
+    }
+
     // Public callbacks (to be called from AI scripts written in YliLisp).
 
     void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
@@ -276,6 +285,13 @@ namespace yli::ontology
         azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
         azimuth_variable_struct.should_call_activate_callback_now = false;
         this->create_variable(azimuth_variable_struct, yli::data::AnyValue(azimuth));
+
+        const float scale = 1.0f;
+        yli::ontology::VariableStruct scale_variable_struct;
+        scale_variable_struct.local_name = "scale";
+        scale_variable_struct.activate_callback = &yli::ontology::activate_scale;
+        scale_variable_struct.should_call_activate_callback_now = true;
+        this->create_variable(scale_variable_struct, yli::data::AnyValue(scale));
 
         const float speed = 0.0f;
         yli::ontology::VariableStruct speed_variable_struct;

@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Add support for scaling `Movable`s in `Console`.
 [ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
 [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
@@ -314,3 +313,4 @@ Ready:
 [x] When running in windowed mode, by default open window in the main display and make its size match the display resolution.
 [x] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [x] Make `Holobiont`s children of the `Scene` and apprentices of the `Symbiosis`.
+[x] Add support for scaling `Movable`s in `Console`.

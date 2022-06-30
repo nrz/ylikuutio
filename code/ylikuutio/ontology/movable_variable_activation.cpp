@@ -515,4 +515,21 @@ namespace yli::ontology
         universe->current_camera_yaw = 0.5f * PI - std::get<float>(azimuth_any_value.data);
         return std::nullopt;
     }
+
+    std::optional<yli::data::AnyValue> activate_scale(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    {
+        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+
+        if (movable != nullptr)
+        {
+            const yli::data::AnyValue& scale_any_value = variable.variable_value;
+
+            if (std::holds_alternative<float>(scale_any_value.data))
+            {
+                movable->scale = std::get<float>(scale_any_value.data);
+            }
+        }
+
+        return std::nullopt;
+    }
 }

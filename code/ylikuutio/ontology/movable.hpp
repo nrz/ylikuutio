@@ -91,6 +91,8 @@ namespace yli::ontology
             void set_pitch(const float pitch);
             float get_azimuth() const;
             void set_azimuth(const float azimuth);
+            float get_scale() const;
+            void set_scale(const float scale);
 
             // Public callbacks (to be called from AI scripts written in YliLisp).
             // These are the functions that are available for AI scripts.
@@ -260,6 +262,7 @@ namespace yli::ontology
             float roll                    { 0.0f };
             float yaw                     { 0.0f };
             float pitch                   { 0.0f };
+            float scale                   { 1.0f };
             float speed                   { 0.0f };                // m/s
             float angular_speed           { 0.0f };                // 1/s
             float max_land_speed          { 0.0f };                // m/s
