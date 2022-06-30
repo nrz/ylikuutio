@@ -22,7 +22,7 @@
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <iterator> // std::istream_iterator
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -30,25 +30,24 @@
 
 namespace yli::file
 {
-    std::shared_ptr<std::string> slurp(const std::string& file_path)
+    std::optional<std::string> slurp(const std::string& file_path)
     {
-        // inspired by http://stackoverflow.com/questions/116038/what-is-the-best-way-to-slurp-a-file-into-a-stdstring-in-c/116220#116220
+        // Inspired by http://stackoverflow.com/questions/116038/what-is-the-best-way-to-slurp-a-file-into-a-stdstring-in-c/116220#116220
         std::cout << "Loading file " << file_path << " into memory.\n";
 
         std::ifstream file_stream(file_path.c_str());
 
         if (file_stream.fail())
         {
-            return nullptr;
+            return std::nullopt;
         }
 
         std::stringstream file_buffer;
         file_buffer << file_stream.rdbuf();
-        std::shared_ptr<std::string> file_contents = std::make_shared<std::string>(file_buffer.str());
-        return file_contents;
+        return file_buffer.str();
     }
 
-    std::shared_ptr<std::vector<uint8_t>> binary_slurp(const std::string& file_path)
+    std::optional<std::vector<uint8_t>> binary_slurp(const std::string& file_path)
     {
         std::cout << "Loading binary file " << file_path << " into memory.\n";
 
@@ -56,17 +55,17 @@ namespace yli::file
 
         if (file_stream.fail())
         {
-            return nullptr;
+            return std::nullopt;
         }
 
-        file_stream.unsetf(std::ios::skipws);           // do not skip whitespace.
+        file_stream.unsetf(std::ios::skipws);           // Do not skip whitespace.
         file_stream.seekg(0, std::ios::end);
         std::streampos file_size = file_stream.tellg();
         file_stream.seekg(0, std::ios::beg);
-        std::shared_ptr<std::vector<uint8_t>> data_vector = std::make_shared<std::vector<uint8_t>>();
-        data_vector->reserve(file_size);
-        data_vector->insert(
-                data_vector->begin(),
+        std::vector<uint8_t> data_vector;
+        data_vector.reserve(file_size);
+        data_vector.insert(
+                data_vector.begin(),
                 std::istream_iterator<uint8_t>(file_stream),
                 std::istream_iterator<uint8_t>());
         return data_vector;

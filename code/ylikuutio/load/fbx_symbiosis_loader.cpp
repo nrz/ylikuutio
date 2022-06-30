@@ -65,9 +65,9 @@ namespace yli::load
         // };
         //
         // IScene* load(const u8* data, int size)
-        const std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+        const std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
 
-        if (data_vector == nullptr || data_vector->empty())
+        if (!data_vector || data_vector->empty())
         {
             std::cerr << filename << " could not be opened, or the file is empty.\n";
             return false;

@@ -20,26 +20,27 @@
 #include "code/ylikuutio/memory/memory_templates.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 TEST(file_must_be_slurped_appropriately, this_file_does_not_exist_at_all)
 {
-    std::shared_ptr<std::string> file_content = yli::file::slurp("this_file_does_not_exist_at_all");
-    ASSERT_EQ(file_content, nullptr);
+    std::optional<std::string> file_content = yli::file::slurp("this_file_does_not_exist_at_all");
+    ASSERT_FALSE(file_content);
 }
 
 TEST(binary_file_must_be_slurped_appropriately, this_file_does_not_exist_at_all)
 {
-    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp("this_file_does_not_exist_at_all");
-    ASSERT_EQ(file_content, nullptr);
+    std::optional<std::vector<uint8_t>> file_content = yli::file::binary_slurp("this_file_does_not_exist_at_all");
+    ASSERT_FALSE(file_content);
 }
 
 TEST(file_must_be_slurped_appropriately, kongtext_svg)
 {
-    std::shared_ptr<std::string> file_content = yli::file::slurp("kongtext.svg");
+    std::optional<std::string> file_content = yli::file::slurp("kongtext.svg");
+    ASSERT_TRUE(file_content);
     const std::string first_line_of_kongtext_svg = "<?xml version=\"1.0\" standalone=\"no\"?>";
     const uint32_t length_of_first_line_of_kongtext_svg = first_line_of_kongtext_svg.size();
     ASSERT_EQ(file_content->compare(0, length_of_first_line_of_kongtext_svg, first_line_of_kongtext_svg), 0);
@@ -53,8 +54,8 @@ TEST(file_must_be_slurped_appropriately, kongtext_svg)
 TEST(file_must_be_slurped_appropriately, test3x3_png)
 {
     const std::string png_filename = "test3x3.png";
-    std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(png_filename);
-    ASSERT_NE(file_content, nullptr);
+    std::optional<std::vector<uint8_t>> file_content = yli::file::binary_slurp(png_filename);
+    ASSERT_TRUE(file_content);
     ASSERT_EQ(file_content->size(), 229);
     const uint16_t* file_content_uint16_t = (uint16_t*) file_content->data();
 

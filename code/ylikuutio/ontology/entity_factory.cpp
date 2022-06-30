@@ -57,7 +57,6 @@
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/any_struct.hpp"
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr

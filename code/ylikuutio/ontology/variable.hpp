@@ -38,7 +38,7 @@
 //
 // If `read_callback` is defined, then it is used to read the value
 // instead of reading it from `variable_value` member variable, that
-// stores the value as `std::shared_ptr<yli::data::AnyValue>`.
+// stores the value as `std::optional<yli::data::AnyValue>`.
 //
 // `read_callback` may, of course, compute the returned value
 // based on some other variables as well etc.

@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/any_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
@@ -27,17 +26,27 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
-#include "code/ylikuutio/ontology/symbiont_material.hpp"
-#include "code/ylikuutio/ontology/symbiont_species.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
-#include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/ecosystem_struct.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
+#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/material_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/holobiont_struct.hpp"
+#include "code/ylikuutio/ontology/font_struct.hpp"
+#include "code/ylikuutio/ontology/text_struct.hpp"
+#include "code/ylikuutio/ontology/vector_font_struct.hpp"
+#include "code/ylikuutio/ontology/text_3d_struct.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
+#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -72,7 +81,6 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_EQ(std::strcmp(true_value.get_datatype().c_str(), "bool"), 0);
     ASSERT_EQ(std::char_traits<char>::length(true_value.get_string().c_str()), std::char_traits<char>::length("true"));
     ASSERT_EQ(std::strcmp(true_value.get_string().c_str(), "true"), 0);
-    ASSERT_EQ(true_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, bool_false)
@@ -85,7 +93,6 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
     ASSERT_EQ(std::strcmp(false_value.get_datatype().c_str(), "bool"), 0);
     ASSERT_EQ(std::char_traits<char>::length(false_value.get_string().c_str()), std::char_traits<char>::length("false"));
     ASSERT_EQ(std::strcmp(false_value.get_string().c_str(), "false"), 0);
-    ASSERT_EQ(false_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, char_lowercase_a)
@@ -98,7 +105,6 @@ TEST(any_value_must_be_initialized_appropriately, char_lowercase_a)
     ASSERT_EQ(std::strcmp(lowercase_a_value.get_datatype().c_str(), "char"), 0);
     ASSERT_EQ(std::char_traits<char>::length(lowercase_a_value.get_string().c_str()), std::char_traits<char>::length("a"));
     ASSERT_EQ(std::strcmp(lowercase_a_value.get_string().c_str(), "a"), 0);
-    ASSERT_EQ(lowercase_a_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, char_lowercase_b)
@@ -111,7 +117,6 @@ TEST(any_value_must_be_initialized_appropriately, char_lowercase_b)
     ASSERT_EQ(std::strcmp(lowercase_b_value.get_datatype().c_str(), "char"), 0);
     ASSERT_EQ(std::char_traits<char>::length(lowercase_b_value.get_string().c_str()), std::char_traits<char>::length("b"));
     ASSERT_EQ(std::strcmp(lowercase_b_value.get_string().c_str(), "b"), 0);
-    ASSERT_EQ(lowercase_b_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, char_space)
@@ -124,7 +129,6 @@ TEST(any_value_must_be_initialized_appropriately, char_space)
     ASSERT_EQ(std::strcmp(space_value.get_datatype().c_str(), "char"), 0);
     ASSERT_EQ(std::char_traits<char>::length(space_value.get_string().c_str()), std::char_traits<char>::length(" "));
     ASSERT_EQ(std::strcmp(space_value.get_string().c_str(), " "), 0);
-    ASSERT_EQ(space_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, char_newline)
@@ -137,7 +141,6 @@ TEST(any_value_must_be_initialized_appropriately, char_newline)
     ASSERT_EQ(std::strcmp(newline_value.get_datatype().c_str(), "char"), 0);
     ASSERT_EQ(std::char_traits<char>::length(newline_value.get_string().c_str()), std::char_traits<char>::length("\n"));
     ASSERT_EQ(std::strcmp(newline_value.get_string().c_str(), "\n"), 0);
-    ASSERT_EQ(newline_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, float_0)
@@ -151,7 +154,6 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(std::char_traits<char>::length(float_zero_value.get_string().c_str()), std::char_traits<char>::length("0.000000"));
     ASSERT_EQ(std::char_traits<char>::length(float_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(float_zero_value.get_string().c_str(), "0.000000"), 0);
-    ASSERT_EQ(float_zero_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
@@ -164,7 +166,6 @@ TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
     ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_datatype().c_str(), "float"), 0);
     ASSERT_EQ(std::char_traits<char>::length(float_positive_infinity_value.get_string().c_str()), std::char_traits<char>::length("inf"));
     ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_string().c_str(), "inf"), 0);
-    ASSERT_EQ(float_positive_infinity_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
@@ -177,7 +178,6 @@ TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
     ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_datatype().c_str(), "float"), 0);
     ASSERT_EQ(std::char_traits<char>::length(float_negative_infinity_value.get_string().c_str()), std::char_traits<char>::length("-inf"));
     ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_string().c_str(), "-inf"), 0);
-    ASSERT_EQ(float_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, float_nan)
@@ -190,7 +190,6 @@ TEST(any_value_must_be_initialized_appropriately, float_nan)
     ASSERT_EQ(std::strcmp(float_nan_value.get_datatype().c_str(), "float"), 0);
     ASSERT_EQ(std::char_traits<char>::length(float_nan_value.get_string().c_str()), std::char_traits<char>::length("nan"));
     ASSERT_EQ(std::strcmp(float_nan_value.get_string().c_str(), "nan"), 0);
-    ASSERT_EQ(float_nan_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, double_0)
@@ -204,7 +203,6 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(std::char_traits<char>::length(double_zero_value.get_string().c_str()), std::char_traits<char>::length("0.000000"));
     ASSERT_EQ(std::char_traits<char>::length(double_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(double_zero_value.get_string().c_str(), "0.000000"), 0);
-    ASSERT_EQ(double_zero_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
@@ -217,7 +215,6 @@ TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
     ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_datatype().c_str(), "double"), 0);
     ASSERT_EQ(std::char_traits<char>::length(double_positive_infinity_value.get_string().c_str()), std::char_traits<char>::length("inf"));
     ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_string().c_str(), "inf"), 0);
-    ASSERT_EQ(double_positive_infinity_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
@@ -230,7 +227,6 @@ TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
     ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_datatype().c_str(), "double"), 0);
     ASSERT_EQ(std::char_traits<char>::length(double_negative_infinity_value.get_string().c_str()), std::char_traits<char>::length("-inf"));
     ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_string().c_str(), "-inf"), 0);
-    ASSERT_EQ(double_negative_infinity_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, double_nan)
@@ -243,7 +239,6 @@ TEST(any_value_must_be_initialized_appropriately, double_nan)
     ASSERT_EQ(std::strcmp(double_nan_value.get_datatype().c_str(), "double"), 0);
     ASSERT_EQ(std::char_traits<char>::length(double_nan_value.get_string().c_str()), std::char_traits<char>::length("nan"));
     ASSERT_EQ(std::strcmp(double_nan_value.get_string().c_str(), "nan"), 0);
-    ASSERT_EQ(double_nan_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
@@ -256,7 +251,6 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_EQ(std::strcmp(int32_t_zero_value.get_datatype().c_str(), "int32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_zero_value.get_string().c_str()), std::char_traits<char>::length("0"));
     ASSERT_EQ(std::strcmp(int32_t_zero_value.get_string().c_str(), "0"), 0);
-    ASSERT_EQ(int32_t_zero_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
@@ -269,7 +263,6 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_datatype().c_str(), "int32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_plus_1_value.get_string().c_str()), std::char_traits<char>::length("1"));
     ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_string().c_str(), "1"), 0);
-    ASSERT_EQ(int32_t_plus_1_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
@@ -282,7 +275,6 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_datatype().c_str(), "int32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_minus_1_value.get_string().c_str()), std::char_traits<char>::length("-1"));
     ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_string().c_str(), "-1"), 0);
-    ASSERT_EQ(int32_t_minus_1_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_max)
@@ -302,7 +294,6 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_max)
     ASSERT_EQ(std::strcmp(int32_t_max_value.get_datatype().c_str(), "int32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_max_value.get_string().c_str()), std::char_traits<char>::length("2147483647"));
     ASSERT_EQ(std::strcmp(int32_t_max_value.get_string().c_str(), "2147483647"), 0);
-    ASSERT_EQ(int32_t_max_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_min)
@@ -322,7 +313,6 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_min)
     ASSERT_EQ(std::strcmp(int32_t_min_value.get_datatype().c_str(), "int32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_min_value.get_string().c_str()), std::char_traits<char>::length("-2147483648"));
     ASSERT_EQ(std::strcmp(int32_t_min_value.get_string().c_str(), "-2147483648"), 0);
-    ASSERT_EQ(int32_t_min_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
@@ -335,7 +325,6 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_datatype().c_str(), "uint32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(uint32_t_zero_value.get_string().c_str()), std::char_traits<char>::length("0"));
     ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_string().c_str(), "0"), 0);
-    ASSERT_EQ(uint32_t_zero_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
@@ -348,7 +337,6 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_datatype().c_str(), "uint32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(uint32_t_plus_1_value.get_string().c_str()), std::char_traits<char>::length("1"));
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_string().c_str(), "1"), 0);
-    ASSERT_EQ(uint32_t_plus_1_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
@@ -367,315 +355,338 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_datatype().c_str(), "uint32_t"), 0);
     ASSERT_EQ(std::char_traits<char>::length(uint32_t_max_value.get_string().c_str()), std::char_traits<char>::length("4294967295"));
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_string().c_str(), "4294967295"), 0);
-    ASSERT_EQ(uint32_t_max_value.get_entity_pointer(), nullptr);
 }
 
-TEST(any_value_must_be_initialized_appropriately, entity)
+TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 {
-    yli::ontology::Entity* entity = static_cast<yli::ontology::Entity*>((void*) 0xdeadbeef);
-    yli::data::AnyValue entity_any_value = yli::data::AnyValue(entity);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(entity_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Entity*>(entity_any_value.data), entity);
-    ASSERT_EQ(std::char_traits<char>::length(entity_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Entity*"));
-    ASSERT_EQ(std::strcmp(entity_any_value.get_datatype().c_str(), "yli::ontology::Entity*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(entity_any_value.get_string().c_str()), std::char_traits<char>::length("deadbeef"));
-    ASSERT_EQ(std::strcmp(entity_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(entity_any_value.get_entity_pointer(), entity);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Entity* const universe_entity = new yli::ontology::Universe(universe_struct);
+    yli::data::AnyValue entity_any_value = yli::data::AnyValue(*universe_entity);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data).get(), *universe_entity);
+    ASSERT_EQ(std::strcmp(entity_any_value.get_datatype().c_str(), "yli::ontology::Entity&"), 0);
+    ASSERT_EQ(entity_any_value.get_entity_ref(), *universe_entity);
 }
 
-TEST(any_value_must_be_initialized_appropriately, movable)
+TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
-    yli::ontology::Movable* movable = static_cast<yli::ontology::Movable*>((void*) 0xdeadbeef);
-    yli::data::AnyValue movable_any_value = yli::data::AnyValue(movable);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Movable*>(movable_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Movable*>(movable_any_value.data), movable);
-    ASSERT_EQ(std::char_traits<char>::length(movable_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Movable*"));
-    ASSERT_EQ(std::strcmp(movable_any_value.get_datatype().c_str(), "yli::ontology::Movable*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(movable_any_value.get_string().c_str()), std::char_traits<char>::length("deadbeef"));
-    ASSERT_EQ(std::strcmp(movable_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(movable_any_value.get_entity_pointer(), (yli::ontology::Entity*) movable);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ObjectStruct object_struct(nullptr);
+    yli::ontology::Movable* const object_movable = new yli::ontology::Object(*universe, object_struct, nullptr, nullptr, nullptr);
+    yli::data::AnyValue movable_any_value = yli::data::AnyValue(*object_movable);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data).get(), *object_movable);
+    ASSERT_EQ(std::strcmp(movable_any_value.get_datatype().c_str(), "yli::ontology::Movable&"), 0);
+    ASSERT_EQ(movable_any_value.get_entity_ref(), *object_movable);
+    ASSERT_EQ(movable_any_value.get_const_entity_ref(), *object_movable);
 }
 
-TEST(any_value_must_be_initialized_appropriately, const_movable)
+TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
-    const yli::ontology::Movable* const_movable = static_cast<yli::ontology::Movable*>((void*) 0xdeadbeef);
-    yli::data::AnyValue const_movable_any_value = yli::data::AnyValue(const_movable);
-    ASSERT_TRUE(std::holds_alternative<const yli::ontology::Movable*>(const_movable_any_value.data));
-    ASSERT_EQ(std::get<const yli::ontology::Movable*>(const_movable_any_value.data), const_movable);
-    ASSERT_EQ(std::char_traits<char>::length(const_movable_any_value.get_datatype().c_str()), std::char_traits<char>::length("const yli::ontology::Movable*"));
-    ASSERT_EQ(std::strcmp(const_movable_any_value.get_datatype().c_str(), "const yli::ontology::Movable*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(const_movable_any_value.get_string().c_str()), std::char_traits<char>::length("deadbeef"));
-    ASSERT_EQ(std::strcmp(const_movable_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(const_movable_any_value.get_entity_pointer(), nullptr);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ObjectStruct object_struct(nullptr);
+    const yli::ontology::Movable* const const_object_movable = new yli::ontology::Object(*universe, object_struct, nullptr, nullptr, nullptr);
+    yli::data::AnyValue const_movable_any_value = yli::data::AnyValue(*const_object_movable);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data).get(), *const_object_movable);
+    ASSERT_EQ(std::strcmp(const_movable_any_value.get_datatype().c_str(), "const yli::ontology::Movable&"), 0);
+    ASSERT_EQ(const_movable_any_value.get_const_entity_ref(), *const_object_movable);
 }
 
 TEST(any_value_must_be_initialized_appropriately, universe)
 {
-    yli::ontology::Universe* universe = static_cast<yli::ontology::Universe*>((void*) 0xdeadbeef);
-    yli::data::AnyValue universe_any_value = yli::data::AnyValue(universe);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Universe*>(universe_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Universe*>(universe_any_value.data), universe);
-    ASSERT_EQ(std::char_traits<char>::length(universe_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Universe*"));
-    ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(universe_any_value.get_string().c_str()), std::char_traits<char>::length("deadbeef"));
-    ASSERT_EQ(std::strcmp(universe_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(universe_any_value.get_entity_pointer(), (yli::ontology::Entity*) universe);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::data::AnyValue universe_any_value = yli::data::AnyValue(*universe);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data).get(), *universe);
+    ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe&"), 0);
+    ASSERT_EQ(universe_any_value.get_entity_ref(), *universe);
+    ASSERT_EQ(universe_any_value.get_const_entity_ref(), *universe);
 }
 
 TEST(any_value_must_be_initialized_appropriately, ecosystem)
 {
-    yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>((void*) 0xdeadbeef);
-    yli::data::AnyValue ecosystem_any_value = yli::data::AnyValue(ecosystem);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(ecosystem_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Ecosystem*>(ecosystem_any_value.data), ecosystem);
-    ASSERT_EQ(std::char_traits<char>::length(ecosystem_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Ecosystem*"));
-    ASSERT_EQ(std::strcmp(ecosystem_any_value.get_datatype().c_str(), "yli::ontology::Ecosystem*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(ecosystem_any_value.get_string().c_str()), std::char_traits<char>::length("deadbeef"));
-    ASSERT_EQ(std::strcmp(ecosystem_any_value.get_string().c_str(), "deadbeef"), 0);
-    ASSERT_EQ(ecosystem_any_value.get_entity_pointer(), (yli::ontology::Entity*) ecosystem);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            *universe,
+            ecosystem_struct,
+            &universe->parent_of_ecosystems);
+
+    yli::data::AnyValue ecosystem_any_value = yli::data::AnyValue(*ecosystem);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(ecosystem_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(ecosystem_any_value.data).get(), *ecosystem);
+    ASSERT_EQ(std::strcmp(ecosystem_any_value.get_datatype().c_str(), "yli::ontology::Ecosystem&"), 0);
+    ASSERT_EQ(ecosystem_any_value.get_entity_ref(), *ecosystem);
+    ASSERT_EQ(ecosystem_any_value.get_const_entity_ref(), *ecosystem);
 }
 
 TEST(any_value_must_be_initialized_appropriately, scene)
 {
-    yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>((void*) 0xbad5ce6e);
-    yli::data::AnyValue scene_pointer_any_value = yli::data::AnyValue(scene);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(scene_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(scene_pointer_any_value.data), scene);
-    ASSERT_EQ(std::char_traits<char>::length(scene_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Scene*"));
-    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_datatype().c_str(), "yli::ontology::Scene*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(scene_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad5ce6e"));
-    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_string().c_str(), "bad5ce6e"), 0);
-    ASSERT_EQ(scene_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) scene);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::data::AnyValue scene_any_value = yli::data::AnyValue(*scene);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(scene_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Scene>>(scene_any_value.data).get(), *scene);
+    ASSERT_EQ(std::strcmp(scene_any_value.get_datatype().c_str(), "yli::ontology::Scene&"), 0);
+    ASSERT_EQ(scene_any_value.get_entity_ref(), *scene);
+    ASSERT_EQ(scene_any_value.get_const_entity_ref(), *scene);
 }
 
 TEST(any_value_must_be_initialized_appropriately, shader)
 {
-    yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>((void*) 0xbad5bade7);
-    yli::data::AnyValue shader_pointer_any_value = yli::data::AnyValue(shader);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Shader*>(shader_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Shader*>(shader_pointer_any_value.data), shader);
-    ASSERT_EQ(std::char_traits<char>::length(shader_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Shader*"));
-    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_datatype().c_str(), "yli::ontology::Shader*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(shader_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad5bade7"));
-    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_string().c_str(), "bad5bade7"), 0);
-    ASSERT_EQ(shader_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) shader);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ShaderStruct shader_struct;
+    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, nullptr);
+
+    yli::data::AnyValue shader_any_value = yli::data::AnyValue(*shader);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(shader_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Shader>>(shader_any_value.data).get(), *shader);
+    ASSERT_EQ(std::strcmp(shader_any_value.get_datatype().c_str(), "yli::ontology::Shader&"), 0);
+    ASSERT_EQ(shader_any_value.get_entity_ref(), *shader);
+    ASSERT_EQ(shader_any_value.get_const_entity_ref(), *shader);
 }
 
 TEST(any_value_must_be_initialized_appropriately, material)
 {
-    yli::ontology::Material* material = static_cast<yli::ontology::Material*>((void*) 0xbad6a7e71a1);
-    yli::data::AnyValue material_pointer_any_value = yli::data::AnyValue(material);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Material*>(material_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Material*>(material_pointer_any_value.data), material);
-    ASSERT_EQ(std::char_traits<char>::length(material_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Material*"));
-    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_datatype().c_str(), "yli::ontology::Material*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(material_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad6a7e71a1"));
-    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_string().c_str(), "bad6a7e71a1"), 0);
-    ASSERT_EQ(material_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) material);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::MaterialStruct material_struct;
+    yli::ontology::Material* const material = new yli::ontology::Material(
+            *universe,
+            material_struct,
+            nullptr, nullptr);
+
+    yli::data::AnyValue material_any_value = yli::data::AnyValue(*material);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(material_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Material>>(material_any_value.data).get(), *material);
+    ASSERT_EQ(std::strcmp(material_any_value.get_datatype().c_str(), "yli::ontology::Material&"), 0);
+    ASSERT_EQ(material_any_value.get_entity_ref(), *material);
+    ASSERT_EQ(material_any_value.get_const_entity_ref(), *material);
 }
 
 TEST(any_value_must_be_initialized_appropriately, species)
 {
-    yli::ontology::Species* species = static_cast<yli::ontology::Species*>((void*) 0xbad5bec1e5);
-    yli::data::AnyValue species_pointer_any_value = yli::data::AnyValue(species);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(species_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Species*>(species_pointer_any_value.data), species);
-    ASSERT_EQ(std::char_traits<char>::length(species_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Species*"));
-    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_datatype().c_str(), "yli::ontology::Species*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(species_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad5bec1e5"));
-    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_string().c_str(), "bad5bec1e5"), 0);
-    ASSERT_EQ(species_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) species);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ModelStruct model_struct;
+    yli::ontology::Species* const species = new yli::ontology::Species(
+            *universe,
+            model_struct,
+            nullptr,
+            nullptr);
+
+    yli::data::AnyValue species_any_value = yli::data::AnyValue(*species);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data).get(), *species);
+    ASSERT_EQ(std::strcmp(species_any_value.get_datatype().c_str(), "yli::ontology::Species&"), 0);
+    ASSERT_EQ(species_any_value.get_entity_ref(), *species);
+    ASSERT_EQ(species_any_value.get_const_entity_ref(), *species);
 }
 
 TEST(any_value_must_be_initialized_appropriately, object)
 {
-    yli::ontology::Object* object = static_cast<yli::ontology::Object*>((void*) 0xbad0b1ec7);
-    yli::data::AnyValue object_pointer_any_value = yli::data::AnyValue(object);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Object*>(object_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Object*>(object_pointer_any_value.data), object);
-    ASSERT_EQ(std::char_traits<char>::length(object_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Object*"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "yli::ontology::Object*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(object_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad0b1ec7"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "bad0b1ec7"), 0);
-    ASSERT_EQ(object_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) object);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ObjectStruct object_struct(nullptr);
+    yli::ontology::Object* const object = new yli::ontology::Object(
+            *universe,
+            object_struct,
+            nullptr,
+            nullptr,
+            nullptr);
+
+    yli::data::AnyValue object_any_value = yli::data::AnyValue(*object);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(object_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Object>>(object_any_value.data).get(), *object);
+    ASSERT_EQ(std::strcmp(object_any_value.get_datatype().c_str(), "yli::ontology::Object&"), 0);
+    ASSERT_EQ(object_any_value.get_entity_ref(), *object);
+    ASSERT_EQ(object_any_value.get_const_entity_ref(), *object);
 }
 
 TEST(any_value_must_be_initialized_appropriately, symbiosis)
 {
-    yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>((void*) 0xbad51b10515);
-    yli::data::AnyValue symbiosis_pointer_any_value = yli::data::AnyValue(symbiosis);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Symbiosis*>(symbiosis_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Symbiosis*>(symbiosis_pointer_any_value.data), symbiosis);
-    ASSERT_EQ(std::char_traits<char>::length(symbiosis_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Symbiosis*"));
-    ASSERT_EQ(std::strcmp(symbiosis_pointer_any_value.get_datatype().c_str(), "yli::ontology::Symbiosis*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(symbiosis_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad51b10515"));
-    ASSERT_EQ(std::strcmp(symbiosis_pointer_any_value.get_string().c_str(), "bad51b10515"), 0);
-    ASSERT_EQ(symbiosis_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) symbiosis);
-}
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-TEST(any_value_must_be_initialized_appropriately, symbiont_material)
-{
-    yli::ontology::SymbiontMaterial* symbiont_material = static_cast<yli::ontology::SymbiontMaterial*>((void*) 0xbad51b10ba7e71a1);
-    yli::data::AnyValue symbiont_material_pointer_any_value = yli::data::AnyValue(symbiont_material);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(symbiont_material_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::SymbiontMaterial*>(symbiont_material_pointer_any_value.data), symbiont_material);
-    ASSERT_EQ(std::char_traits<char>::length(symbiont_material_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::SymbiontMaterial*"));
-    ASSERT_EQ(std::strcmp(symbiont_material_pointer_any_value.get_datatype().c_str(), "yli::ontology::SymbiontMaterial*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(symbiont_material_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad51b10ba7e71a1"));
-    ASSERT_EQ(std::strcmp(symbiont_material_pointer_any_value.get_string().c_str(), "bad51b10ba7e71a1"), 0);
-    ASSERT_EQ(symbiont_material_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) symbiont_material);
-}
+    yli::ontology::ModelStruct model_struct;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            *universe,
+            model_struct,
+            nullptr,
+            nullptr);
 
-TEST(any_value_must_be_initialized_appropriately, symbiont_species)
-{
-    yli::ontology::SymbiontSpecies* symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>((void*) 0xbad51b105bec1e5);
-    yli::data::AnyValue symbiont_species_pointer_any_value = yli::data::AnyValue(symbiont_species);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::SymbiontSpecies*>(symbiont_species_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::SymbiontSpecies*>(symbiont_species_pointer_any_value.data), symbiont_species);
-    ASSERT_EQ(std::char_traits<char>::length(symbiont_species_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::SymbiontSpecies*"));
-    ASSERT_EQ(std::strcmp(symbiont_species_pointer_any_value.get_datatype().c_str(), "yli::ontology::SymbiontSpecies*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(symbiont_species_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad51b105bec1e5"));
-    ASSERT_EQ(std::strcmp(symbiont_species_pointer_any_value.get_string().c_str(), "bad51b105bec1e5"), 0);
-    ASSERT_EQ(symbiont_species_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) symbiont_species);
+    yli::data::AnyValue symbiosis_any_value = yli::data::AnyValue(*symbiosis);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(symbiosis_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(symbiosis_any_value.data).get(), *symbiosis);
+    ASSERT_EQ(std::strcmp(symbiosis_any_value.get_datatype().c_str(), "yli::ontology::Symbiosis&"), 0);
+    ASSERT_EQ(symbiosis_any_value.get_entity_ref(), *symbiosis);
+    ASSERT_EQ(symbiosis_any_value.get_const_entity_ref(), *symbiosis);
 }
 
 TEST(any_value_must_be_initialized_appropriately, holobiont)
 {
-    yli::ontology::Holobiont* holobiont = static_cast<yli::ontology::Holobiont*>((void*) 0xbad010b107);
-    yli::data::AnyValue holobiont_pointer_any_value = yli::data::AnyValue(holobiont);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Holobiont*>(holobiont_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Holobiont*>(holobiont_pointer_any_value.data), holobiont);
-    ASSERT_EQ(std::char_traits<char>::length(holobiont_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Holobiont*"));
-    ASSERT_EQ(std::strcmp(holobiont_pointer_any_value.get_datatype().c_str(), "yli::ontology::Holobiont*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(holobiont_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad010b107"));
-    ASSERT_EQ(std::strcmp(holobiont_pointer_any_value.get_string().c_str(), "bad010b107"), 0);
-    ASSERT_EQ(holobiont_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) holobiont);
-}
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-TEST(any_value_must_be_initialized_appropriately, biont)
-{
-    yli::ontology::Biont* biont = static_cast<yli::ontology::Biont*>((void*) 0xbadb107);
-    yli::data::AnyValue biont_pointer_any_value = yli::data::AnyValue(biont);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Biont*>(biont_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Biont*>(biont_pointer_any_value.data), biont);
-    ASSERT_EQ(std::char_traits<char>::length(biont_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Biont*"));
-    ASSERT_EQ(std::strcmp(biont_pointer_any_value.get_datatype().c_str(), "yli::ontology::Biont*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(biont_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("badb107"));
-    ASSERT_EQ(std::strcmp(biont_pointer_any_value.get_string().c_str(), "badb107"), 0);
-    ASSERT_EQ(biont_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) biont);
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            *universe,
+            scene_struct,
+            &universe->parent_of_scenes);
+
+    yli::ontology::ModelStruct model_struct;
+    model_struct.scene = scene;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            *universe,
+            model_struct,
+            &scene->parent_of_symbioses,
+            nullptr);
+
+    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
+    yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
+            *universe,
+            holobiont_struct,
+            &scene->parent_of_holobionts,
+            &symbiosis->master_of_holobionts,
+            nullptr);
+
+    yli::data::AnyValue holobiont_any_value = yli::data::AnyValue(*holobiont);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(holobiont_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Holobiont>>(holobiont_any_value.data).get(), *holobiont);
+    ASSERT_EQ(std::strcmp(holobiont_any_value.get_datatype().c_str(), "yli::ontology::Holobiont&"), 0);
+    ASSERT_EQ(holobiont_any_value.get_entity_ref(), *holobiont);
+    ASSERT_EQ(holobiont_any_value.get_const_entity_ref(), *holobiont);
 }
 
 TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
-    yli::ontology::Font2D* font_2d = static_cast<yli::ontology::Font2D*>((void*) 0xbadf072d);
-    yli::data::AnyValue font_2d_pointer_any_value = yli::data::AnyValue(font_2d);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Font2D*>(font_2d_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Font2D*>(font_2d_pointer_any_value.data), font_2d);
-    ASSERT_EQ(std::char_traits<char>::length(font_2d_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Font2D*"));
-    ASSERT_EQ(std::strcmp(font_2d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Font2D*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(font_2d_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("badf072d"));
-    ASSERT_EQ(std::strcmp(font_2d_pointer_any_value.get_string().c_str(), "badf072d"), 0);
-    ASSERT_EQ(font_2d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) font_2d);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::FontStruct font_struct;
+    yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            *universe,
+            font_struct,
+            &universe->parent_of_font_2ds);
+
+    yli::data::AnyValue font_2d_any_value = yli::data::AnyValue(*font_2d);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(font_2d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Font2D>>(font_2d_any_value.data).get(), *font_2d);
+    ASSERT_EQ(std::strcmp(font_2d_any_value.get_datatype().c_str(), "yli::ontology::Font2D&"), 0);
+    ASSERT_EQ(font_2d_any_value.get_entity_ref(), *font_2d);
+    ASSERT_EQ(font_2d_any_value.get_const_entity_ref(), *font_2d);
 }
 
 TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
-    yli::ontology::Text2D* text_2d = static_cast<yli::ontology::Text2D*>((void*) 0xbad7e72d);
-    yli::data::AnyValue text_2d_pointer_any_value = yli::data::AnyValue(text_2d);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text2D*>(text_2d_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Text2D*>(text_2d_pointer_any_value.data), text_2d);
-    ASSERT_EQ(std::char_traits<char>::length(text_2d_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Text2D*"));
-    ASSERT_EQ(std::strcmp(text_2d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text2D*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(text_2d_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad7e72d"));
-    ASSERT_EQ(std::strcmp(text_2d_pointer_any_value.get_string().c_str(), "bad7e72d"), 0);
-    ASSERT_EQ(text_2d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text_2d);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::TextStruct text_struct;
+    yli::ontology::Text2D* const text_2d = new yli::ontology::Text2D(
+            *universe,
+            text_struct,
+            nullptr);
+
+    yli::data::AnyValue text_2d_any_value = yli::data::AnyValue(*text_2d);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text2D>>(text_2d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text2D>>(text_2d_any_value.data).get(), *text_2d);
+    ASSERT_EQ(std::strcmp(text_2d_any_value.get_datatype().c_str(), "yli::ontology::Text2D&"), 0);
+    ASSERT_EQ(text_2d_any_value.get_entity_ref(), *text_2d);
+    ASSERT_EQ(text_2d_any_value.get_const_entity_ref(), *text_2d);
 }
 
 TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
-    yli::ontology::VectorFont* vector_font = static_cast<yli::ontology::VectorFont*>((void*) 0xbadec70f07);
-    yli::data::AnyValue vector_font_pointer_any_value = yli::data::AnyValue(vector_font);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::VectorFont*>(vector_font_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::VectorFont*>(vector_font_pointer_any_value.data), vector_font);
-    ASSERT_EQ(std::char_traits<char>::length(vector_font_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::VectorFont*"));
-    ASSERT_EQ(std::strcmp(vector_font_pointer_any_value.get_datatype().c_str(), "yli::ontology::VectorFont*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(vector_font_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("badec70f07"));
-    ASSERT_EQ(std::strcmp(vector_font_pointer_any_value.get_string().c_str(), "badec70f07"), 0);
-    ASSERT_EQ(vector_font_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) vector_font);
-}
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-TEST(any_value_must_be_initialized_appropriately, glyph)
-{
-    yli::ontology::Glyph* glyph = static_cast<yli::ontology::Glyph*>((void*) 0xbad11f);
-    yli::data::AnyValue glyph_pointer_any_value = yli::data::AnyValue(glyph);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Glyph*>(glyph_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Glyph*>(glyph_pointer_any_value.data), glyph);
-    ASSERT_EQ(std::char_traits<char>::length(glyph_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Glyph*"));
-    ASSERT_EQ(std::strcmp(glyph_pointer_any_value.get_datatype().c_str(), "yli::ontology::Glyph*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(glyph_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad11f"));
-    ASSERT_EQ(std::strcmp(glyph_pointer_any_value.get_string().c_str(), "bad11f"), 0);
-    ASSERT_EQ(glyph_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) glyph);
+    yli::ontology::VectorFontStruct vector_font_struct;
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(*universe, vector_font_struct);
+
+    yli::data::AnyValue vector_font_any_value = yli::data::AnyValue(*vector_font);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data).get(), *vector_font);
+    ASSERT_EQ(std::strcmp(vector_font_any_value.get_datatype().c_str(), "yli::ontology::VectorFont&"), 0);
+    ASSERT_EQ(vector_font_any_value.get_entity_ref(), *vector_font);
+    ASSERT_EQ(vector_font_any_value.get_const_entity_ref(), *vector_font);
 }
 
 TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
-    yli::ontology::Text3D* text_3d = static_cast<yli::ontology::Text3D*>((void*) 0xbad7e73d);
-    yli::data::AnyValue text_3d_pointer_any_value = yli::data::AnyValue(text_3d);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Text3D*>(text_3d_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Text3D*>(text_3d_pointer_any_value.data), text_3d);
-    ASSERT_EQ(std::char_traits<char>::length(text_3d_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Text3D*"));
-    ASSERT_EQ(std::strcmp(text_3d_pointer_any_value.get_datatype().c_str(), "yli::ontology::Text3D*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(text_3d_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad7e73d"));
-    ASSERT_EQ(std::strcmp(text_3d_pointer_any_value.get_string().c_str(), "bad7e73d"), 0);
-    ASSERT_EQ(text_3d_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) text_3d);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::Text3DStruct text_3d_struct;
+    yli::ontology::Text3D* const text_3d = new yli::ontology::Text3D(*universe, text_3d_struct, nullptr, nullptr);
+
+    yli::data::AnyValue text_3d_any_value = yli::data::AnyValue(*text_3d);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(text_3d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text3D>>(text_3d_any_value.data).get(), *text_3d);
+    ASSERT_EQ(std::strcmp(text_3d_any_value.get_datatype().c_str(), "yli::ontology::Text3D&"), 0);
+    ASSERT_EQ(text_3d_any_value.get_entity_ref(), *text_3d);
+    ASSERT_EQ(text_3d_any_value.get_const_entity_ref(), *text_3d);
 }
 
 TEST(any_value_must_be_initialized_appropriately, console)
 {
-    yli::ontology::Console* console = static_cast<yli::ontology::Console*>((void*) 0xbadc0501e);
-    yli::data::AnyValue console_pointer_any_value = yli::data::AnyValue(console);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Console*>(console_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::Console*>(console_pointer_any_value.data), console);
-    ASSERT_EQ(std::char_traits<char>::length(console_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::Console*"));
-    ASSERT_EQ(std::strcmp(console_pointer_any_value.get_datatype().c_str(), "yli::ontology::Console*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(console_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("badc0501e"));
-    ASSERT_EQ(std::strcmp(console_pointer_any_value.get_string().c_str(), "badc0501e"), 0);
-    ASSERT_EQ(console_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) console);
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+
+    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::Console* console = new yli::ontology::Console(
+            *universe,
+            console_struct,
+            &universe->parent_of_consoles,
+            nullptr);
+
+    yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data).get(), *console);
+    ASSERT_EQ(std::strcmp(console_any_value.get_datatype().c_str(), "yli::ontology::Console&"), 0);
+    ASSERT_EQ(console_any_value.get_entity_ref(), *console);
+    ASSERT_EQ(console_any_value.get_const_entity_ref(), *console);
 }
 
 TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
-    yli::ontology::ComputeTask* compute_task = static_cast<yli::ontology::ComputeTask*>((void*) 0xbad7a5c);
-    yli::data::AnyValue compute_task_pointer_any_value = yli::data::AnyValue(compute_task);
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::ComputeTask*>(compute_task_pointer_any_value.data));
-    ASSERT_EQ(std::get<yli::ontology::ComputeTask*>(compute_task_pointer_any_value.data), compute_task);
-    ASSERT_EQ(std::char_traits<char>::length(compute_task_pointer_any_value.get_datatype().c_str()), std::char_traits<char>::length("yli::ontology::ComputeTask*"));
-    ASSERT_EQ(std::strcmp(compute_task_pointer_any_value.get_datatype().c_str(), "yli::ontology::ComputeTask*"), 0);
-    ASSERT_EQ(std::char_traits<char>::length(compute_task_pointer_any_value.get_string().c_str()), std::char_traits<char>::length("bad7a5c"));
-    ASSERT_EQ(std::strcmp(compute_task_pointer_any_value.get_string().c_str(), "bad7a5c"), 0);
-    ASSERT_EQ(compute_task_pointer_any_value.get_entity_pointer(), (yli::ontology::Entity*) compute_task);
-}
+    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-TEST(any_value_must_be_initialized_appropriately, any_value_shader_ptr)
-{
-    std::shared_ptr<yli::data::AnyValue> any_value_shared_ptr =
-        std::make_shared<yli::data::AnyValue>();
-    yli::data::AnyValue any_value_shared_ptr_any_value = yli::data::AnyValue(any_value_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<yli::data::AnyValue>>(any_value_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<yli::data::AnyValue>>(any_value_shared_ptr_any_value.data), any_value_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(any_value_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<yli::data::AnyValue>"));
-    ASSERT_EQ(std::strcmp(any_value_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<yli::data::AnyValue>"), 0);
-}
+    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::Console* console = new yli::ontology::Console(
+            *universe,
+            console_struct,
+            &universe->parent_of_consoles,
+            nullptr);
 
-TEST(any_value_must_be_initialized_appropriately, any_struct_shader_ptr)
-{
-    std::shared_ptr<yli::data::AnyStruct> any_struct_shared_ptr =
-        std::make_shared<yli::data::AnyStruct>();
-    yli::data::AnyValue any_struct_shared_ptr_any_value = yli::data::AnyValue(any_struct_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<yli::data::AnyStruct>>(any_struct_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<yli::data::AnyStruct>>(any_struct_shared_ptr_any_value.data), any_struct_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(any_struct_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<yli::data::AnyStruct>"));
-    ASSERT_EQ(std::strcmp(any_struct_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<yli::data::AnyStruct>"), 0);
+    yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data).get(), *console);
+    ASSERT_EQ(std::strcmp(console_any_value.get_datatype().c_str(), "yli::ontology::Console&"), 0);
+    ASSERT_EQ(console_any_value.get_entity_ref(), *console);
+    ASSERT_EQ(console_any_value.get_const_entity_ref(), *console);
 }
 
 TEST(any_value_must_be_initialized_appropriately, spherical_coordinates_struct)
@@ -686,7 +697,6 @@ TEST(any_value_must_be_initialized_appropriately, spherical_coordinates_struct)
     ASSERT_EQ(std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
     ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "yli::data::SphericalCoordinatesStruct&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
-    ASSERT_EQ(any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, const_spherical_coordinates_struct)
@@ -697,7 +707,6 @@ TEST(any_value_must_be_initialized_appropriately, const_spherical_coordinates_st
     ASSERT_EQ(std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
     ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "const yli::data::SphericalCoordinatesStruct&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
-    ASSERT_EQ(any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_string)
@@ -720,91 +729,67 @@ TEST(any_value_must_be_initialized_appropriately, const_std_string)
     ASSERT_EQ(std::strcmp(const_std_string_ref_any_value.get_string().c_str(), "foo"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t)
 {
-    std::shared_ptr<std::vector<int8_t>> std_vector_int8_t_shared_ptr =
-        std::make_shared<std::vector<int8_t>>();
-    yli::data::AnyValue std_vector_int8_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_int8_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(std_vector_int8_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<int8_t>>>(std_vector_int8_t_shared_ptr_any_value.data), std_vector_int8_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_int8_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<int8_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_int8_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<int8_t>>"), 0);
+    std::vector<int8_t> std_vector_int8_t;
+    yli::data::AnyValue std_vector_int8_t_any_value = yli::data::AnyValue(std_vector_int8_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(std_vector_int8_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<int8_t>>>(std_vector_int8_t_any_value.data).get(), std_vector_int8_t);
+    ASSERT_EQ(std::strcmp(std_vector_int8_t_any_value.get_datatype().c_str(), "std::vector<int8_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_uint8_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_uint8_t)
 {
-    std::shared_ptr<std::vector<uint8_t>> std_vector_uint8_t_shared_ptr =
-        std::make_shared<std::vector<uint8_t>>();
-    yli::data::AnyValue std_vector_uint8_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_uint8_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(std_vector_uint8_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<uint8_t>>>(std_vector_uint8_t_shared_ptr_any_value.data), std_vector_uint8_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_uint8_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<uint8_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_uint8_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<uint8_t>>"), 0);
+    std::vector<uint8_t> std_vector_uint8_t;
+    yli::data::AnyValue std_vector_uint8_t_any_value = yli::data::AnyValue(std_vector_uint8_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(std_vector_uint8_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<uint8_t>>>(std_vector_uint8_t_any_value.data).get(), std_vector_uint8_t);
+    ASSERT_EQ(std::strcmp(std_vector_uint8_t_any_value.get_datatype().c_str(), "std::vector<uint8_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_int16_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_int16_t)
 {
-    std::shared_ptr<std::vector<int16_t>> std_vector_int16_t_shared_ptr =
-        std::make_shared<std::vector<int16_t>>();
-    yli::data::AnyValue std_vector_int16_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_int16_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(std_vector_int16_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<int16_t>>>(std_vector_int16_t_shared_ptr_any_value.data), std_vector_int16_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_int16_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<int16_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_int16_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<int16_t>>"), 0);
+    std::vector<int16_t> std_vector_int16_t;
+    yli::data::AnyValue std_vector_int16_t_any_value = yli::data::AnyValue(std_vector_int16_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(std_vector_int16_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<int16_t>>>(std_vector_int16_t_any_value.data).get(), std_vector_int16_t);
+    ASSERT_EQ(std::strcmp(std_vector_int16_t_any_value.get_datatype().c_str(), "std::vector<int16_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_uint16_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_uint16_t)
 {
-    std::shared_ptr<std::vector<uint16_t>> std_vector_uint16_t_shared_ptr =
-        std::make_shared<std::vector<uint16_t>>();
-    yli::data::AnyValue std_vector_uint16_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_uint16_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(std_vector_uint16_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<uint16_t>>>(std_vector_uint16_t_shared_ptr_any_value.data), std_vector_uint16_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_uint16_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<uint16_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_uint16_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<uint16_t>>"), 0);
+    std::vector<uint16_t> std_vector_uint16_t;
+    yli::data::AnyValue std_vector_uint16_t_any_value = yli::data::AnyValue(std_vector_uint16_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(std_vector_uint16_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<uint16_t>>>(std_vector_uint16_t_any_value.data).get(), std_vector_uint16_t);
+    ASSERT_EQ(std::strcmp(std_vector_uint16_t_any_value.get_datatype().c_str(), "std::vector<uint16_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_int32_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_int32_t)
 {
-    std::shared_ptr<std::vector<int32_t>> std_vector_int32_t_shared_ptr =
-        std::make_shared<std::vector<int32_t>>();
-    yli::data::AnyValue std_vector_int32_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_int32_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(std_vector_int32_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<int32_t>>>(std_vector_int32_t_shared_ptr_any_value.data), std_vector_int32_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_int32_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<int32_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_int32_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<int32_t>>"), 0);
+    std::vector<int32_t> std_vector_int32_t;
+    yli::data::AnyValue std_vector_int32_t_any_value = yli::data::AnyValue(std_vector_int32_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(std_vector_int32_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<int32_t>>>(std_vector_int32_t_any_value.data).get(), std_vector_int32_t);
+    ASSERT_EQ(std::strcmp(std_vector_int32_t_any_value.get_datatype().c_str(), "std::vector<int32_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_uint32_t_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_uint32_t)
 {
-    std::shared_ptr<std::vector<uint32_t>> std_vector_uint32_t_shared_ptr =
-        std::make_shared<std::vector<uint32_t>>();
-    yli::data::AnyValue std_vector_uint32_t_shared_ptr_any_value = yli::data::AnyValue(std_vector_uint32_t_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(std_vector_uint32_t_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<uint32_t>>>(std_vector_uint32_t_shared_ptr_any_value.data), std_vector_uint32_t_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_uint32_t_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<uint32_t>>"));
-    ASSERT_EQ(std::strcmp(std_vector_uint32_t_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<uint32_t>>"), 0);
+    std::vector<uint32_t> std_vector_uint32_t;
+    yli::data::AnyValue std_vector_uint32_t_any_value = yli::data::AnyValue(std_vector_uint32_t);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(std_vector_uint32_t_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<uint32_t>>>(std_vector_uint32_t_any_value.data).get(), std_vector_uint32_t);
+    ASSERT_EQ(std::strcmp(std_vector_uint32_t_any_value.get_datatype().c_str(), "std::vector<uint32_t>&"), 0);
 }
 
-TEST(any_value_must_be_initialized_appropriately, std_vector_float_shared_ptr)
+TEST(any_value_must_be_initialized_appropriately, std_vector_float)
 {
-    std::shared_ptr<std::vector<float>> std_vector_float_shared_ptr =
-        std::make_shared<std::vector<float>>();
-    yli::data::AnyValue std_vector_float_shared_ptr_any_value = yli::data::AnyValue(std_vector_float_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::vector<float>>>(std_vector_float_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::vector<float>>>(std_vector_float_shared_ptr_any_value.data), std_vector_float_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_vector_float_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::vector<float>>"));
-    ASSERT_EQ(std::strcmp(std_vector_float_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::vector<float>>"), 0);
-}
-
-TEST(any_value_must_be_initialized_appropriately, std_string_shared_ptr)
-{
-    std::shared_ptr<std::string> std_string_shared_ptr = std::make_shared<std::string>("foo");
-    yli::data::AnyValue std_string_shared_ptr_any_value = yli::data::AnyValue(std_string_shared_ptr);
-    ASSERT_TRUE(std::holds_alternative<std::shared_ptr<std::string>>(std_string_shared_ptr_any_value.data));
-    ASSERT_EQ(std::get<std::shared_ptr<std::string>>(std_string_shared_ptr_any_value.data), std_string_shared_ptr);
-    ASSERT_EQ(std::char_traits<char>::length(std_string_shared_ptr_any_value.get_datatype().c_str()), std::char_traits<char>::length("std::shared_ptr<std::string>"));
-    ASSERT_EQ(std::strcmp(std_string_shared_ptr_any_value.get_datatype().c_str(), "std::shared_ptr<std::string>"), 0);
+    std::vector<float> std_vector_float;
+    yli::data::AnyValue std_vector_float_any_value = yli::data::AnyValue(std_vector_float);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<float>>>(std_vector_float_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<std::vector<float>>>(std_vector_float_any_value.data).get(), std_vector_float);
+    ASSERT_EQ(std::strcmp(std_vector_float_any_value.get_datatype().c_str(), "std::vector<float>&"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, glm_vec3)
@@ -815,7 +800,6 @@ TEST(any_value_must_be_initialized_appropriately, glm_vec3)
     ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec3>>(glm_vec3_any_value.data).get(), &glm_vec3);
     ASSERT_EQ(std::strcmp(glm_vec3_any_value.get_datatype().c_str(), "glm::vec3&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec3*`!
-    ASSERT_EQ(glm_vec3_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, const_glm_vec3)
@@ -826,7 +810,6 @@ TEST(any_value_must_be_initialized_appropriately, const_glm_vec3)
     ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec3>>(const_glm_vec3_any_value.data).get(), &const_glm_vec3);
     ASSERT_EQ(std::strcmp(const_glm_vec3_any_value.get_datatype().c_str(), "const glm::vec3&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec3*`!
-    ASSERT_EQ(const_glm_vec3_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, glm_vec4)
@@ -837,7 +820,6 @@ TEST(any_value_must_be_initialized_appropriately, glm_vec4)
     ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec4>>(glm_vec4_any_value.data).get(), &glm_vec4);
     ASSERT_EQ(std::strcmp(glm_vec4_any_value.get_datatype().c_str(), "glm::vec4&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec4*`!
-    ASSERT_EQ(glm_vec4_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(any_value_must_be_initialized_appropriately, const_glm_vec4)
@@ -848,7 +830,6 @@ TEST(any_value_must_be_initialized_appropriately, const_glm_vec4)
     ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec4>>(const_glm_vec4_any_value.data).get(), &const_glm_vec4);
     ASSERT_EQ(std::strcmp(const_glm_vec4_any_value.get_datatype().c_str(), "const glm::vec4&"), 0);
     // TODO: add assertions for `AnyValue::get_string` for `glm::vec4*`!
-    ASSERT_EQ(const_glm_vec4_any_value.get_entity_pointer(), nullptr);
 }
 
 TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_true)

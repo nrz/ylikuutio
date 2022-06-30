@@ -44,8 +44,8 @@ namespace yli::ontology
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
         yli::ontology::Shader* parent { nullptr };   // Pointer to the `Shader`.
-        std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value            { nullptr };
-        std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value           { nullptr };
+        yli::data::AnyValue left_filler_vector_any_value;
+        yli::data::AnyValue right_filler_vector_any_value;
         std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };

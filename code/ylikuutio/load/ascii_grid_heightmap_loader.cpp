@@ -42,7 +42,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::stoi
 #include <vector>   // std::vector
@@ -91,9 +90,9 @@ namespace yli::load
         }
 
         // Open the file
-        const std::shared_ptr<std::string> file_content = yli::file::slurp(heightmap_loader_struct.filename);
+        const std::optional<std::string> file_content = yli::file::slurp(heightmap_loader_struct.filename);
 
-        if (file_content == nullptr || file_content->empty())
+        if (!file_content || file_content->empty())
         {
             std::cerr << "ERROR: " << heightmap_loader_struct.filename << " could not be opened, or the file is empty.\n";
             return false;

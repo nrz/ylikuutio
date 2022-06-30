@@ -21,7 +21,6 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -40,8 +39,8 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            const std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value,
-            const std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value,
+            const yli::data::AnyValue* const left_filler_vector_any_value,
+            const yli::data::AnyValue* const right_filler_vector_any_value,
             uint32_t& image_width,
             uint32_t& image_height,
             uint32_t& image_size,

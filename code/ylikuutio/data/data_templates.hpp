@@ -244,12 +244,6 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<yli::data::AnyStruct> data)
-        {
-            return "std::shared_ptr<yli::data::AnyStruct>";
-        }
-
-    template<>
         std::string get_type_string(yli::data::SphericalCoordinatesStruct* data)
         {
             return "yli::data::SphericalCoordinatesStruct*";

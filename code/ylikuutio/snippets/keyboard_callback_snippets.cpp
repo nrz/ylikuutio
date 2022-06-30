@@ -48,7 +48,7 @@
 // `std::vector<yli::callback::CallbackParameter*>& input parameters`.
 //
 // To access a name input variable:
-// `std::shared_ptr<yli::data::AnyValue> some_any_value = callback_object->get_any_value("foo");`
+// `std::optional<yli::data::AnyValue> some_any_value = callback_object->get_any_value("foo");`
 // where `"foo"` is the variable name.
 //
 // Using a numeric index is more efficient and should be used
@@ -56,7 +56,7 @@
 // However, the difference may be small.
 //
 // To access an input variable using a numeric index (this works for named input variables too):
-// `std::shared_ptr<yli::data::AnyValue> some_any_value = callback_object->get_arg(0);`
+// `std::optional<yli::data::AnyValue> some_any_value = callback_object->get_arg(0);`
 //
 // `get_arg` takes the zero-based index of the variable as function parameter.
 // First `CallbackParameter` of a `CallbackObject` gets index 0,

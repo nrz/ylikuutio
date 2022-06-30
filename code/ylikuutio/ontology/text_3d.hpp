@@ -71,10 +71,8 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_vector_font;
             yli::ontology::GenericMasterModule master_of_objects;
 
-        private:
             yli::ontology::Scene* get_scene() const override;
 
-        public:
             yli::ontology::Shader* get_shader() const;
 
         private:

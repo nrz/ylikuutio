@@ -32,7 +32,7 @@
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>   // std::cout, std::cin, std::cerr
-#include <memory>     // std::make_shared, std::shared_ptr
+#include <optional>   // std::optional
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string
 #include <vector>     // std::vector
@@ -454,7 +454,14 @@ namespace yli::load
             std::vector<std::string>& unicode_strings,
             const bool is_debug_mode)
     {
-        const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+        const std::optional<std::string> file_content = yli::file::slurp(filename);
+
+        if (!file_content)
+        {
+            std::cerr << "ERROR: `yli::load::load_svg_font`: SVG file " << filename << " not loaded successfully!\n";
+            return false;
+        }
+
         const std::size_t file_size = file_content->size();
 
         if (file_size == 0)
@@ -463,8 +470,8 @@ namespace yli::load
             return false;
         }
 
-        const char* const svg_base_pointer { &(*file_content)[0] };
-        const char* svg_data_pointer       { &(*file_content)[0] };
+        const char* const svg_base_pointer { file_content->data() };
+        const char* svg_data_pointer       { file_content->data() };
 
         // SVG files are XML files, so we just need to read until we find the data we need.
         const bool is_first_glyph_found { yli::load::find_first_glyph_in_svg(svg_base_pointer, svg_data_pointer, file_size) };

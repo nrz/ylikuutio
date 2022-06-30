@@ -21,10 +21,8 @@
 // `yli::data::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.
 //
-// Both raw pointers and `std::shared_ptr` pointers may be supported
-// to some datatypes in the future. However, only raw pointers are
-// supported for `yli::ontology` Entities, as the shared ownership is
-// not supported for any of the `yli::ontology` Entities.
+// Only references and raw pointers are supported for `yli::ontology` Entities,
+// as they don't support any kind of shared ownership.
 
 namespace yli::data
 {
@@ -46,6 +44,9 @@ namespace yli::data
         DOUBLE_POINTER,
         INT32_T_POINTER,
         UINT32_T_POINTER,
+        // Strings.
+        STD_STRING_REF,
+        CONST_STD_STRING_REF,
         // `yli::ontology` datatypes, 'entity' path.
         ENTITY_POINTER,
         // `yli::ontology` datatypes, 'universe' path.
@@ -130,27 +131,9 @@ namespace yli::data
         CONST_COMPUTETASK_POINTER,
         FRAMEBUFFER_MATERIAL_POINTER,
         CONST_FRAMEBUFFER_MATERIAL_POINTER,
-        // `std::shared_ptr` objects.
-        ANY_VALUE_SHARED_PTR,
-        ANY_STRUCT_SHARED_PTR,
         // Structs.
         SPHERICAL_COORDINATES_STRUCT_POINTER,
         CONST_SPHERICAL_COORDINATES_STRUCT_POINTER,
-        // References to standard library datatypes.
-        STD_STRING_REF,
-        CONST_STD_STRING_REF,
-        // Shared pointers to standard library datatypes.
-        STD_VECTOR_INT8_T_SHARED_PTR,
-        STD_VECTOR_UINT8_T_SHARED_PTR,
-        STD_VECTOR_INT16_T_SHARED_PTR,
-        STD_VECTOR_UINT16_T_SHARED_PTR,
-        STD_VECTOR_INT32_T_SHARED_PTR,
-        STD_VECTOR_UINT32_T_SHARED_PTR,
-        STD_VECTOR_FLOAT_SHARED_PTR,
-        STD_STRING_SHARED_PTR,
-        // Shared pointers to GLM datatypes.
-        GLM_VEC3_SHARED_PTR,
-        GLM_VEC4_SHARED_PTR
     };
 }
 

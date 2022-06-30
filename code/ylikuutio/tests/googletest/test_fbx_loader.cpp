@@ -34,7 +34,7 @@
 #endif
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -44,8 +44,8 @@ typedef unsigned char u8;
 TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 {
     const std::string filename = "cat.fbx";
-    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 1373356);                                // size of `cat.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
@@ -165,8 +165,8 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 TEST(openfbx_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei_png_textures.fbx";
-    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 365180);                              // size of `turbo_polizei_png_textures.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());
@@ -296,8 +296,8 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 TEST(openfbx_must_function_appropriately, freight_train)
 {
     const std::string filename = "freight_train.fbx";
-    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 426124);                                // size of `freight_train.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector->data());

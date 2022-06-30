@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr
-#include <memory>    // std::make_shared, std::shared_ptr
+#include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -33,15 +33,39 @@ namespace yli::load
 {
     GLuint load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename)
     {
+        // Read the vertex shader code from the file.
+        const std::optional<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
+
+        if (!vertex_shader_code)
+        {
+            std::cerr << "ERROR: `yli::load::load_shaders`: vertex shader file " << vertex_shader_filename << " not loaded successfully!\n";
+            return false;
+        }
+
+        if (vertex_shader_code->empty())
+        {
+            std::cerr << "ERROR: `yli::load::load_shaders`: vertex shader file " << vertex_shader_filename << " is empty!\n";
+            return false;
+        }
+
+        // Read the fragment shader code from the file.
+        const std::optional<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
+
+        if (!fragment_shader_code)
+        {
+            std::cerr << "ERROR: `yli::load::load_shaders`: fragment shader file " << fragment_shader_filename << " not loaded successfully!\n";
+            return false;
+        }
+
+        if (fragment_shader_code->empty())
+        {
+            std::cerr << "ERROR: `yli::load::load_shaders`: fragment shader file " << fragment_shader_filename << " is empty!\n";
+            return false;
+        }
+
         // Create the shaders.
         const uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
         const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
-
-        // Read the vertex shader code from the file.
-        const std::shared_ptr<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
-
-        // Read the fragment shader code from the file.
-        const std::shared_ptr<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
 
         GLint result = GL_FALSE;
         int info_log_length;

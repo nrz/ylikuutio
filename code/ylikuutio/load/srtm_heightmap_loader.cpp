@@ -42,7 +42,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -132,9 +132,9 @@ namespace yli::load
 
         std::cout << "Loading SRTM file " << abs_filename << " ...\n";
 
-        const std::shared_ptr<std::vector<uint8_t>> file_content = yli::file::binary_slurp(abs_filename);
+        const std::optional<std::vector<uint8_t>> file_content = yli::file::binary_slurp(abs_filename);
 
-        if (file_content == nullptr || file_content->empty())
+        if (!file_content || file_content->empty())
         {
             std::cerr << abs_filename << " could not be opened, or the file is empty.\n";
             return false;

@@ -41,6 +41,9 @@ namespace yli::ontology
     class Entity
     {
         public:
+            bool operator==(const yli::ontology::Entity& rhs) const;
+            bool operator!=(const yli::ontology::Entity& rhs) const;
+
             void bind_variable(yli::ontology::Variable* const variable);
 
             void unbind_variable(const std::size_t childID);
@@ -136,7 +139,6 @@ namespace yli::ontology
             // Named entities are stored here so that they can be recalled, if needed.
             yli::ontology::Registry registry;
             yli::ontology::GenericParentModule parent_of_variables;
-            yli::ontology::GenericParentModule parent_of_any_struct_entities;
 
         protected:
             yli::ontology::Universe& universe;

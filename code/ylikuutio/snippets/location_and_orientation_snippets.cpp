@@ -54,7 +54,7 @@ namespace yli::snippets
         spherical_coordinates_variable_struct.activate_callback = &yli::ontology::activate_spherical_coordinates;
         spherical_coordinates_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `entity->create_variable(spherical_coordinates_variable_struct);` ...\n";
-        entity->create_variable(spherical_coordinates_variable_struct, yli::data::AnyValue(&spherical_coordinates_struct));
+        entity->create_variable(spherical_coordinates_variable_struct, yli::data::AnyValue(spherical_coordinates_struct));
 
         yli::ontology::VariableStruct rho_variable_struct;
         rho_variable_struct.local_name = "rho";

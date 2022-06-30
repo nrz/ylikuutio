@@ -23,8 +23,9 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
+#include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
@@ -37,180 +38,173 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            const std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value,
-            const std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value,
+            const yli::data::AnyValue* const left_filler_vector_any_value,
+            const yli::data::AnyValue* const right_filler_vector_any_value,
             uint32_t& image_width,
             uint32_t& image_height,
             uint32_t& image_size,
             GLuint& textureID)
     {
-        GLvoid* image_data = nullptr;
+        GLvoid* image_data_ptr = nullptr;
 
-        // Shared pointers are created here so that they stay in scope
-        // until `glTexImage2D` call.
-        std::shared_ptr<std::vector<int8_t>> image_data_int8_t = nullptr;
-        std::shared_ptr<std::vector<uint8_t>> image_data_uint8_t = nullptr;
-        std::shared_ptr<std::vector<int16_t>> image_data_int16_t = nullptr;
-        std::shared_ptr<std::vector<uint16_t>> image_data_uint16_t = nullptr;
-        std::shared_ptr<std::vector<int32_t>> image_data_int32_t = nullptr;
-        std::shared_ptr<std::vector<uint32_t>> image_data_uint32_t = nullptr;
-        std::shared_ptr<std::vector<float>> image_data_float = nullptr;
+        std::variant<
+            std::vector<int8_t>,
+            std::vector<uint8_t>,
+            std::vector<int16_t>,
+            std::vector<uint16_t>,
+            std::vector<int32_t>,
+            std::vector<uint32_t>,
+            std::vector<float>> image_data;
 
         if (type == GL_BYTE)
         {
-            image_data_int8_t = load_csv_file<int8_t>(filename, image_width, image_height, image_size);
-            if (image_data_int8_t == nullptr)
+            std::optional<std::vector<int8_t>> csv_image_data = load_csv_file<int8_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int8_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_int8_t = yli::linear_algebra::insert_elements(
-                        *image_data_int8_t,
-                        *(std::get<std::shared_ptr<std::vector<int8_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<int8_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_int8_t != nullptr ? &(*image_data_int8_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<int8_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<int8_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<int8_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_int8_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<int8_t>>(image_data).data();
         }
         else if (type == GL_UNSIGNED_BYTE)
         {
-            image_data_uint8_t = load_csv_file<uint8_t>(filename, image_width, image_height, image_size);
-            if (image_data_uint8_t == nullptr)
+            std::optional<std::vector<uint8_t>> csv_image_data = load_csv_file<uint8_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint8_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_uint8_t = yli::linear_algebra::insert_elements(
-                        *image_data_uint8_t,
-                        *(std::get<std::shared_ptr<std::vector<uint8_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<uint8_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_uint8_t != nullptr ? &(*image_data_uint8_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<uint8_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<uint8_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<uint8_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_uint8_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<uint8_t>>(image_data).data();
         }
         else if (type == GL_SHORT)
         {
-            image_data_int16_t = load_csv_file<int16_t>(filename, image_width, image_height, image_size);
-            if (image_data_int16_t == nullptr)
+            std::optional<std::vector<int16_t>> csv_image_data = load_csv_file<int16_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int16_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_int16_t = yli::linear_algebra::insert_elements(
-                        *image_data_int16_t,
-                        *(std::get<std::shared_ptr<std::vector<int16_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<int16_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_int16_t != nullptr ? &(*image_data_int16_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<int16_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<int16_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<int16_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_int16_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<int16_t>>(image_data).data();
         }
         else if (type == GL_UNSIGNED_SHORT)
         {
-            image_data_uint16_t = load_csv_file<uint16_t>(filename, image_width, image_height, image_size);
-            if (image_data_uint16_t == nullptr)
+            std::optional<std::vector<uint16_t>> csv_image_data = load_csv_file<uint16_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint16_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_uint16_t = yli::linear_algebra::insert_elements(
-                        *image_data_uint16_t,
-                        *(std::get<std::shared_ptr<std::vector<uint16_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<uint16_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_uint16_t != nullptr ? &(*image_data_uint16_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<uint16_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<uint16_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<uint16_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_uint16_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<uint16_t>>(image_data).data();
         }
         else if (type == GL_INT)
         {
-            image_data_int32_t = load_csv_file<int32_t>(filename, image_width, image_height, image_size);
-            if (image_data_int32_t == nullptr)
+            std::optional<std::vector<int32_t>> csv_image_data = load_csv_file<int32_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_int32_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_int32_t = yli::linear_algebra::insert_elements(
-                        *image_data_int32_t,
-                        *(std::get<std::shared_ptr<std::vector<int32_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<int32_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_int32_t != nullptr ? &(*image_data_int32_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<int32_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<int32_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<int32_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_int32_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<int32_t>>(image_data).data();
         }
         else if (type == GL_UNSIGNED_INT)
         {
-            image_data_uint32_t = load_csv_file<uint32_t>(filename, image_width, image_height, image_size);
-            if (image_data_uint32_t == nullptr)
+            std::optional<std::vector<uint32_t>> csv_image_data = load_csv_file<uint32_t>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_uint32_t` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(right_filler_vector_any_value->data))
             {
-                image_data_uint32_t = yli::linear_algebra::insert_elements(
-                        *image_data_uint32_t,
-                        *(std::get<std::shared_ptr<std::vector<uint32_t>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<uint32_t>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_uint32_t != nullptr ? &(*image_data_uint32_t)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<uint32_t>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<uint32_t>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<uint32_t>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_uint32_t)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<uint32_t>>(image_data).data();
         }
         else if (type == GL_FIXED)
         {
@@ -222,29 +216,28 @@ namespace yli::load
         }
         else if (type == GL_FLOAT)
         {
-            image_data_float = load_csv_file<float>(filename, image_width, image_height, image_size);
-            if (image_data_float == nullptr)
+            std::optional<std::vector<float>> csv_image_data = load_csv_file<float>(filename, image_width, image_height, image_size);
+
+            if (!csv_image_data)
             {
-                std::cerr << "ERROR: `yli::load::load_csv_texture`: `image_data_float` is `nullptr`!\n";
+                std::cerr << "ERROR: `yli::load::load_csv_texture`: CSV file " << filename << " not loaded successfully!\n";
                 return false;
             }
+
+            image_data = *csv_image_data;
+
             if (left_filler_vector_any_value != nullptr &&
                     right_filler_vector_any_value != nullptr &&
-                    std::holds_alternative<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data) &&
-                    std::holds_alternative<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data) &&
-                    std::get<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data) != nullptr &&
-                    std::get<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data) != nullptr)
+                    std::holds_alternative<std::reference_wrapper<std::vector<float>>>(left_filler_vector_any_value->data) &&
+                    std::holds_alternative<std::reference_wrapper<std::vector<float>>>(right_filler_vector_any_value->data))
             {
-                image_data_float = yli::linear_algebra::insert_elements(
-                        *image_data_float,
-                        *(std::get<std::shared_ptr<std::vector<float>>>(left_filler_vector_any_value->data)),
-                        *(std::get<std::shared_ptr<std::vector<float>>>(right_filler_vector_any_value->data)));
-                image_data = image_data_float != nullptr ? &(*image_data_float)[0] : nullptr;
+                image_data = yli::linear_algebra::insert_elements<float>(
+                        *csv_image_data,
+                        std::get<std::reference_wrapper<std::vector<float>>>(left_filler_vector_any_value->data),
+                        std::get<std::reference_wrapper<std::vector<float>>>(right_filler_vector_any_value->data));
             }
-            else
-            {
-                image_data = &(*image_data_float)[0];
-            }
+
+            image_data_ptr = std::get<std::vector<float>>(image_data).data();
         }
         else if (type == GL_DOUBLE)
         {
@@ -256,7 +249,7 @@ namespace yli::load
             return false;
         }
 
-        if (image_data == nullptr)
+        if (image_data_ptr == nullptr)
         {
             std::cerr << "ERROR: `image_data` is `nullptr`!\n";
             return false;
@@ -272,12 +265,12 @@ namespace yli::load
         if (internal_format == GL_INVALID_ENUM)
         {
             // Internal format not defined, use format as internal format.
-            glTexImage2D(GL_TEXTURE_2D, 0, format, image_width, image_height, 0, format, type, image_data);
+            glTexImage2D(GL_TEXTURE_2D, 0, format, image_width, image_height, 0, format, type, image_data_ptr);
         }
         else
         {
             // Internal format is defined.
-            glTexImage2D(GL_TEXTURE_2D, 0, internal_format, image_width, image_height, 0, format, type, image_data);
+            glTexImage2D(GL_TEXTURE_2D, 0, internal_format, image_width, image_height, 0, format, type, image_data_ptr);
         }
 
         yli::opengl::set_nearest_filtering_parameters();

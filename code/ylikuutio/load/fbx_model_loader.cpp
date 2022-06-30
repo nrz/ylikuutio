@@ -32,6 +32,7 @@ typedef unsigned char u8;
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -58,9 +59,9 @@ namespace yli::load
         // };
         //
         // IScene* load(const u8* data, int size)
-        const std::shared_ptr<std::vector<unsigned char>> data_vector = yli::file::binary_slurp(filename);
+        const std::optional<std::vector<unsigned char>> data_vector = yli::file::binary_slurp(filename);
 
-        if (data_vector == nullptr || data_vector->empty())
+        if (!data_vector || data_vector->empty())
         {
             std::cerr << filename << " could not be opened, or the file is empty.\n";
             return false;

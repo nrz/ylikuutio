@@ -104,8 +104,7 @@ namespace yli::ontology
 
             if (movable != nullptr)
             {
-                // Do not waste time in calling the callback function for `nullptr` targets.
-                this->callback_engine->execute(yli::data::AnyValue(movable));
+                this->callback_engine->execute(yli::data::AnyValue(*movable));
             }
         }
     }

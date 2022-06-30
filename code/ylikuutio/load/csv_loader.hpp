@@ -24,7 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -32,24 +32,30 @@
 namespace yli::load
 {
     template<typename T1>
-        std::shared_ptr<std::vector<T1>> load_csv_file(
+        std::optional<std::vector<T1>> load_csv_file(
                 const std::string& filename,
                 uint32_t& data_width,
                 uint32_t& data_height,
                 uint32_t& data_size)
         {
             // Open the file
-            const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+            const std::optional<std::string> file_content = yli::file::slurp(filename);
 
-            if (file_content == nullptr || file_content->empty())
+            if (!file_content)
             {
-                std::cerr << filename << " could not be opened, or the file is empty.\n";
-                return nullptr;
+                std::cerr << "ERROR: `yli::load::load_csv_file`: CSV file " << filename << " not loaded successfully!\n";
+                return std::nullopt;
+            }
+
+            if (file_content->empty())
+            {
+                std::cerr << "ERROR: `yli::load::load_csv_file`: CSV file " << filename << " is empty!\n";
+                return std::nullopt;
             }
 
             // Assume that all lines have equal number of elements.
             // If any lines has number of elements different than the first line with elements,
-            // that is an error and `nullptr` will be returned and `data_width`, `data_height`,
+            // that is an error and `std::nullopt` will be returned and `data_width`, `data_height`,
             // and `data_size` are set to 0.
             // However, lines with 0 elements are allowed at any time.
 
@@ -64,7 +70,7 @@ namespace yli::load
             uint32_t n_elements_in_current_line = 0;
             const char* const char_end_string = ", \n";
 
-            std::shared_ptr<std::vector<T1>> data_vector = std::make_shared<std::vector<T1>>();
+            std::vector<T1> data_vector;
 
             while (file_content_i < file_content->size())
             {
@@ -73,7 +79,7 @@ namespace yli::load
 
                 while (yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
                 {
-                    if (file_content_i < file_content->size() && (*file_content)[file_content_i] == '\n')
+                    if (file_content_i < file_content->size() && file_content->at(file_content_i) == '\n')
                     {
                         // Newline was found.
                         if (n_elements_in_current_line > 0)
@@ -91,7 +97,7 @@ namespace yli::load
                                 // This line has a different number of elements than the first line.
                                 // All non-empty lines are expected to have the same number of elements,
                                 // so that the data can be entered in a matrix.
-                                return nullptr;
+                                return std::nullopt;
                             }
                         }
 
@@ -109,7 +115,7 @@ namespace yli::load
 
                 T1 value = 0;
                 yli::string::extract_value_from_string(*file_content, file_content_i, char_end_string, nullptr, value);
-                data_vector->emplace_back(value);
+                data_vector.emplace_back(value);
                 n_elements_in_current_line++;
 
                 while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
@@ -130,14 +136,14 @@ namespace yli::load
                     // so that the data can be entered in a matrix.
                     std::cout << "n_elements_in_current_line = " << n_elements_in_current_line << "\n";
                     std::cout << "n_elements_in_first_line = " << n_elements_in_first_line << "\n";
-                    return nullptr;
+                    return std::nullopt;
                 }
             }
 
             data_width = n_elements_in_first_line;
             data_height = n_lines;
             data_size = n_lines * n_elements_in_first_line;
-            data_size = data_vector->size();
+            data_size = data_vector.size();
             return data_vector;
         }
 }

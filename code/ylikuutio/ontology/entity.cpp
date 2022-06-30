@@ -35,6 +35,16 @@ namespace yli::ontology
 {
     class Scene;
 
+    bool Entity::operator==(const yli::ontology::Entity& rhs) const
+    {
+        return this == &rhs;
+    }
+
+    bool Entity::operator!=(const yli::ontology::Entity& rhs) const
+    {
+        return !this->operator==(rhs);
+    }
+
     void Entity::bind_variable(yli::ontology::Variable* const variable)
     {
         if (variable != nullptr)
@@ -60,7 +70,6 @@ namespace yli::ontology
     Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
         : registry(),
         parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.
-        parent_of_any_struct_entities(this, &this->registry, "any_struct_entities"),
         universe { universe },
         is_variable { entity_struct.is_variable }
     {
@@ -276,7 +285,6 @@ namespace yli::ontology
     std::size_t Entity::get_number_of_all_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_variables.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_any_struct_entities.child_pointer_vector) +
             this->get_number_of_descendants();
     }
 
@@ -287,8 +295,7 @@ namespace yli::ontology
 
     std::size_t Entity::get_number_of_non_variable_children() const
     {
-        return this->parent_of_any_struct_entities.get_number_of_children() +
-            this->get_number_of_children();
+        return this->get_number_of_children();
     }
 
     std::string Entity::get_local_name() const

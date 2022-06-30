@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <limits>  // std::numeric_limits
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -32,8 +32,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<float>> data_vector = yli::load::load_csv_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<float>> data_vector = yli::load::load_csv_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 17);
     ASSERT_EQ(data_height, 17);
@@ -80,8 +80,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float_
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<float>> data_vector = yli::load::load_csv_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<float>> data_vector = yli::load::load_csv_file<float>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 32);
     ASSERT_EQ(data_height, 32);
@@ -94,8 +94,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint8_
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::load::load_csv_file<uint8_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint8_t>> data_vector = yli::load::load_csv_file<uint8_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 5);
     ASSERT_EQ(data_height, 5);
@@ -118,8 +118,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint8_
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint8_t>> data_vector = yli::load::load_csv_file<uint8_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint8_t>> data_vector = yli::load::load_csv_file<uint8_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 8);
     ASSERT_EQ(data_height, 8);
@@ -145,8 +145,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int16_
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<int16_t>> data_vector = yli::load::load_csv_file<int16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<int16_t>> data_vector = yli::load::load_csv_file<int16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 17);
     ASSERT_EQ(data_height, 17);
@@ -181,8 +181,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint16
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 17);
     ASSERT_EQ(data_height, 17);
@@ -217,8 +217,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint16
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 32);
     ASSERT_EQ(data_height, 32);
@@ -231,8 +231,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_int32_
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<int32_t>> data_vector = yli::load::load_csv_file<int32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<int32_t>> data_vector = yli::load::load_csv_file<int32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 17);
     ASSERT_EQ(data_height, 17);
@@ -267,8 +267,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint32
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint32_t>> data_vector = yli::load::load_csv_file<uint32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint32_t>> data_vector = yli::load::load_csv_file<uint32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 17);
     ASSERT_EQ(data_height, 17);
@@ -303,8 +303,8 @@ TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_uint32
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint32_t>> data_vector = yli::load::load_csv_file<uint32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint32_t>> data_vector = yli::load::load_csv_file<uint32_t>(some_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 32);
     ASSERT_EQ(data_height, 32);
@@ -317,8 +317,8 @@ TEST(csv_file_must_be_loaded_appropriately, more_finnish_railway_stations_uint16
     uint32_t data_width;
     uint32_t data_height;
     uint32_t data_size;
-    std::shared_ptr<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(more_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
-    ASSERT_NE(data_vector, nullptr);
+    std::optional<std::vector<uint16_t>> data_vector = yli::load::load_csv_file<uint16_t>(more_finnish_railway_stations_csv_filename, data_width, data_height, data_size);
+    ASSERT_TRUE(data_vector);
 
     ASSERT_EQ(data_width, 32);
     ASSERT_EQ(data_height, 32);

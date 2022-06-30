@@ -30,8 +30,6 @@ TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct)
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");
     ASSERT_EQ(test_compute_task_struct.parent, nullptr);
-    ASSERT_EQ(test_compute_task_struct.left_filler_vector_any_value, nullptr);
-    ASSERT_EQ(test_compute_task_struct.right_filler_vector_any_value, nullptr);
     ASSERT_EQ(test_compute_task_struct.end_condition_callback_engine, nullptr);
     ASSERT_EQ(test_compute_task_struct.n_max_iterations, 1);
     ASSERT_EQ(test_compute_task_struct.compute_taskID, std::numeric_limits<std::size_t>::max());

@@ -96,8 +96,8 @@ namespace yli::ontology
 
             yli::ontology::Shader* parent;   // pointer to the `Shader`.
 
-            std::shared_ptr<yli::data::AnyValue> left_filler_vector_any_value;
-            std::shared_ptr<yli::data::AnyValue> right_filler_vector_any_value;
+            yli::data::AnyValue left_filler_vector_any_value;
+            yli::data::AnyValue right_filler_vector_any_value;
 
             // End iterating when `end_condition_callback_engine` returns `true`.
             std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;

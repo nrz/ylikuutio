@@ -29,7 +29,7 @@
 #include <algorithm> // std::replace
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cin, std::cerr
-#include <memory>    // std::make_shared, std::shared_ptr
+#include <optional>  // std::optional
 #include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -46,9 +46,9 @@ namespace yli::load
         std::cout << "Loading OBJ file " << filename << " ...\n";
 
         // Open the file
-        const std::shared_ptr<std::string> file_content = yli::file::slurp(filename);
+        const std::optional<std::string> file_content = yli::file::slurp(filename);
 
-        if (file_content->empty())
+        if (!file_content || file_content->empty())
         {
             std::cerr << filename << " could not be opened, or the file is empty.\n";
             return false;
