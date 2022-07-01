@@ -415,7 +415,6 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(object->get_can_be_erased());
     ASSERT_EQ(&(object->get_universe()), universe);
     ASSERT_EQ(object->get_scene(), scene);
-    ASSERT_EQ(object->get_glyph(), nullptr);
     ASSERT_EQ(object->get_parent(), scene);
     ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
 }

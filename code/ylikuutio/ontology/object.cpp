@@ -181,7 +181,6 @@ namespace yli::ontology
         else if (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master))
         {
             this->object_type = yli::ontology::ObjectType::CHARACTER;
-            this->glyph = object_struct.glyph;
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -198,11 +197,6 @@ namespace yli::ontology
     yli::ontology::Entity* Object::get_parent() const
     {
         return this->child_of_scene.get_parent();
-    }
-
-    yli::ontology::Glyph* Object::get_glyph() const
-    {
-        return this->glyph;
     }
 
     void Object::render(const yli::ontology::Scene* const target_scene)
@@ -318,7 +312,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            yli::ontology::Glyph* const master_glyph = this->glyph;
+            yli::ontology::Glyph* const master_glyph = static_cast<yli::ontology::Glyph*>(this->apprentice_of_mesh.get_master());
 
             if (master_glyph != nullptr)
             {

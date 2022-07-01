@@ -41,7 +41,6 @@ namespace yli::ontology
     class Species;
     class ShapeshifterSequence;
     class Text3D;
-    class Glyph;
     class GenericParentModule;
     class GenericMasterModule;
 
@@ -78,8 +77,6 @@ namespace yli::ontology
             virtual ~Object();
 
             yli::ontology::Entity* get_parent() const override;
-
-            yli::ontology::Glyph* get_glyph() const;
 
             // Public callbacks.
 
@@ -134,8 +131,6 @@ namespace yli::ontology
             yli::ontology::ApprenticeModule apprentice_of_mesh;
 
         private:
-            yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
-
             yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
     };
 }
