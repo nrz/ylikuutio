@@ -546,26 +546,37 @@ namespace yli::data
             any_value_stringstream << "std::vector<float>&";
         }
         // Fixed-size vectors.
-        else if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data) ||
-                std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data))
         {
-            const glm::vec3& cartesian_coordinates =
-                (std::holds_alternative<std::reference_wrapper<glm::vec3>>(this->data) ?
-                 std::get<std::reference_wrapper<glm::vec3>>(this->data) :
-                 std::get<std::reference_wrapper<const glm::vec3>>(this->data));
+            const glm::vec3& cartesian_coordinates = std::get<std::reference_wrapper<glm::vec3>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
                 << ", " << cartesian_coordinates.y
                 << ", " << cartesian_coordinates.z
                 << " }";
         }
-        else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data) ||
-                std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data))
         {
-            const glm::vec4& cartesian_coordinates =
-                (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data) ?
-                 std::get<std::reference_wrapper<glm::vec4>>(this->data) :
-                 std::get<std::reference_wrapper<const glm::vec4>>(this->data));
+            const glm::vec3& cartesian_coordinates = std::get<std::reference_wrapper<const glm::vec3>>(this->data);
+
+            any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
+                << ", " << cartesian_coordinates.y
+                << ", " << cartesian_coordinates.z
+                << " }";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data))
+        {
+            const glm::vec4& cartesian_coordinates = std::get<std::reference_wrapper<glm::vec4>>(this->data);
+
+            any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
+                << ", " << cartesian_coordinates.y
+                << ", " << cartesian_coordinates.z
+                << ", " << cartesian_coordinates.w
+                << " }";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data))
+        {
+            const glm::vec4& cartesian_coordinates = std::get<std::reference_wrapper<const glm::vec4>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
                 << ", " << cartesian_coordinates.y
@@ -574,13 +585,20 @@ namespace yli::data
                 << " }";
         }
         // Spherical coordinates.
-        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) ||
-                std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data))
         {
             const yli::data::SphericalCoordinatesStruct& spherical_coordinates =
-                (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) ?
-                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) :
-                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data));
+                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data);
+
+            any_value_stringstream << std::fixed << "{ " << spherical_coordinates.rho
+                << ", " << spherical_coordinates.theta
+                << ", " << spherical_coordinates.phi
+                << " }";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
+        {
+            const yli::data::SphericalCoordinatesStruct& spherical_coordinates =
+                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << spherical_coordinates.rho
                 << ", " << spherical_coordinates.theta
