@@ -113,8 +113,6 @@ namespace yli::map
     template <typename T1, typename T2>
         void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console& console)
         {
-            const yli::ontology::Universe& universe = console.get_universe();
-
             std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
 
             for (auto& [key, value] : keys_and_values)
