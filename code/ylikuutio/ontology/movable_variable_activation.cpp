@@ -50,18 +50,23 @@ namespace yli::ontology
         {
             const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
-            if (!std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) &&
-                    !std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
+            if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
+            {
+                const glm::vec3& cartesian_coordinates =
+                    std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data);
+                movable->cartesian_coordinates = cartesian_coordinates;
+            }
+            else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
+            {
+                const glm::vec3& cartesian_coordinates =
+                    std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data);
+                movable->cartesian_coordinates = cartesian_coordinates;
+            }
+            else
             {
                 std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
-                return std::nullopt;
             }
 
-            const glm::vec3& cartesian_coordinates =
-                (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) ?
-                 std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) :
-                 std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data));
-            movable->cartesian_coordinates = cartesian_coordinates;
             return std::nullopt;
         }
 
@@ -75,18 +80,23 @@ namespace yli::ontology
 
         const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
-        if (!std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) &&
-                !std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
+        if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
+        {
+            const glm::vec3& cartesian_coordinates =
+                std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data);
+            universe->current_camera_cartesian_coordinates = cartesian_coordinates;
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
+        {
+            const glm::vec3& cartesian_coordinates =
+                std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data);
+            universe->current_camera_cartesian_coordinates = cartesian_coordinates;
+        }
+        else
         {
             std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: data is of invalid type!\n";
-            return std::nullopt;
         }
 
-        const glm::vec3& cartesian_coordinates =
-            (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) ?
-             std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data) :
-             std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data));
-        universe->current_camera_cartesian_coordinates = cartesian_coordinates;
         return std::nullopt;
     }
 
