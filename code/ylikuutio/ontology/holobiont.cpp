@@ -63,8 +63,8 @@ namespace yli::ontology
                 holobiont_struct,
                 brain_master),
         child_of_scene(scene_parent, this),
-        apprentice_of_symbiosis(symbiosis_master, this),
-        parent_of_bionts(this, &this->registry, "bionts")
+        parent_of_bionts(this, &this->registry, "bionts"),
+        apprentice_of_symbiosis(symbiosis_master, this)
     {
         // constructor.
 
