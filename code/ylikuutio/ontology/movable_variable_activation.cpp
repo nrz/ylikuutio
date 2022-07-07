@@ -249,17 +249,22 @@ namespace yli::ontology
         {
             const yli::data::AnyValue& any_value = variable.variable_value;
 
-            if (!std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) &&
-                    !std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
+            if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data))
+            {
+                movable->spherical_coordinates =
+                    std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            }
+            else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
+            {
+                movable->spherical_coordinates =
+                    std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            }
+            else
             {
                 // `AnyValue` does not hold spherical coordinates.
-                return std::nullopt;
+                std::cerr << "ERROR: `yli::ontology::activate_spherical_coordinates`: data is of invalid type!\n";
             }
 
-            movable->spherical_coordinates =
-                (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) ?
-                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) :
-                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
             return std::nullopt;
         }
 
@@ -267,17 +272,22 @@ namespace yli::ontology
 
         const yli::data::AnyValue& any_value = variable.variable_value;
 
-        if (!std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) &&
-                !std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
+        if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data))
+        {
+            universe->current_camera_spherical_coordinates =
+                std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data);
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
+        {
+            universe->current_camera_spherical_coordinates =
+                std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data);
+        }
+        else
         {
             // `AnyValue` does not hold spherical coordinates.
-            return std::nullopt;
+            std::cerr << "ERROR: `yli::ontology::activate_spherical_coordinates`: data is of invalid type!\n";
         }
 
-        universe->current_camera_spherical_coordinates =
-            (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) ?
-             std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data) :
-             std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
         return std::nullopt;
     }
 
