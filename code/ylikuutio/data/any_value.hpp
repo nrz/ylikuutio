@@ -26,7 +26,6 @@
 
 // Include standard headers
 #include <functional> // std::reference_wrapper
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
