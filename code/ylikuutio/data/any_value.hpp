@@ -111,24 +111,24 @@ namespace yli::data
             explicit AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             explicit AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             // Ontology.
-            explicit AnyValue(yli::ontology::Entity& entity_pointer);
-            explicit AnyValue(yli::ontology::Movable& movable_pointer);
-            explicit AnyValue(const yli::ontology::Movable& const_movable_pointer);
-            explicit AnyValue(yli::ontology::Universe& universe_pointer);
-            explicit AnyValue(yli::ontology::Ecosystem& ecosystem_pointer);
-            explicit AnyValue(yli::ontology::Scene& scene_pointer);
-            explicit AnyValue(yli::ontology::Shader& shader_pointer);
-            explicit AnyValue(yli::ontology::Material& material_pointer);
-            explicit AnyValue(yli::ontology::Species& species_pointer);
-            explicit AnyValue(yli::ontology::Object& object_pointer);
-            explicit AnyValue(yli::ontology::Symbiosis& symbiosis_pointer);
-            explicit AnyValue(yli::ontology::Holobiont& holobiont_pointer);
-            explicit AnyValue(yli::ontology::Font2D& font_2d_pointer);
-            explicit AnyValue(yli::ontology::Text2D& text_2d_pointer);
-            explicit AnyValue(yli::ontology::VectorFont& vector_font_pointer);
-            explicit AnyValue(yli::ontology::Text3D& text_3d_pointer);
-            explicit AnyValue(yli::ontology::Console& console_pointer);
-            explicit AnyValue(yli::ontology::ComputeTask& compute_task_pointer);
+            explicit AnyValue(yli::ontology::Entity& entity_ref);
+            explicit AnyValue(yli::ontology::Movable& movable_ref);
+            explicit AnyValue(const yli::ontology::Movable& const_movable_ref);
+            explicit AnyValue(yli::ontology::Universe& universe_ref);
+            explicit AnyValue(yli::ontology::Ecosystem& ecosystem_ref);
+            explicit AnyValue(yli::ontology::Scene& scene_ref);
+            explicit AnyValue(yli::ontology::Shader& shader_ref);
+            explicit AnyValue(yli::ontology::Material& material_ref);
+            explicit AnyValue(yli::ontology::Species& species_ref);
+            explicit AnyValue(yli::ontology::Object& object_ref);
+            explicit AnyValue(yli::ontology::Symbiosis& symbiosis_ref);
+            explicit AnyValue(yli::ontology::Holobiont& holobiont_ref);
+            explicit AnyValue(yli::ontology::Font2D& font_2d_ref);
+            explicit AnyValue(yli::ontology::Text2D& text_2d_ref);
+            explicit AnyValue(yli::ontology::VectorFont& vector_font_ref);
+            explicit AnyValue(yli::ontology::Text3D& text_3d_ref);
+            explicit AnyValue(yli::ontology::Console& console_ref);
+            explicit AnyValue(yli::ontology::ComputeTask& compute_task_ref);
 
             std::variant<
                 // Uninitialized state.
