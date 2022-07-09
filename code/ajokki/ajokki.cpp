@@ -497,7 +497,7 @@ namespace ajokki
                 yli::callback::CallbackEngine delete_suzanne_species_callback_engine(*my_universe);
                 yli::callback::CallbackObject* const delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine.create_callback_object(
                         &yli::snippets::delete_entity);
-                delete_suzanne_species_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne_species_string), false);
+                delete_suzanne_species_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne_species_string), false);
 
                 // Callback code for G: switch to grass material.
                 const std::string grass_material_string = "helsinki_east_downtown_grass_material";
