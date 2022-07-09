@@ -492,15 +492,6 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        yli::ontology::Entity* const old_species_entity = object->get_parent();
-
-        const yli::ontology::Species* const old_species = dynamic_cast<yli::ontology::Species*>(old_species_entity);
-
-        if (old_species == nullptr)
-        {
-            return std::nullopt;
-        }
-
         std::optional<yli::data::AnyValue> any_value_species_string = callback_object->get_arg(1);
 
         if (!any_value_species_string)
@@ -509,8 +500,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_species_string).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*any_value_species_string).data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -518,9 +509,9 @@ namespace yli::snippets
         }
 
         const std::string& new_species_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_species_string).data) ?
+             std::get<std::reference_wrapper<std::string>>((*any_value_species_string).data) :
+             std::get<std::reference_wrapper<const std::string>>((*any_value_species_string).data));
 
         yli::ontology::Entity* const new_species_entity = universe.get_entity(new_species_string_ref);
 

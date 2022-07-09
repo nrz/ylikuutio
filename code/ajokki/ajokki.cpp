@@ -547,15 +547,15 @@ namespace ajokki
                 yli::callback::CallbackEngine transform_into_terrain_callback_engine(*my_universe);
                 yli::callback::CallbackObject* const transform_into_terrain_callback_object = transform_into_terrain_callback_engine.create_callback_object(
                         &yli::snippets::transform_into_new_species);
-                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne2_string), false);
-                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(&helsinki_species_string), false);
+                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne2_string), false);
+                transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(helsinki_species_string), false);
 
                 // Callback code for A: transform `suzanne2` back into monkey.
                 yli::callback::CallbackEngine transform_into_monkey_callback_engine(*my_universe);
                 yli::callback::CallbackObject* const transform_into_monkey_callback_object = transform_into_monkey_callback_engine.create_callback_object(
                         &yli::snippets::transform_into_new_species);
-                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne2_string), false);
-                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(&suzanne_species_string), false);
+                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne2_string), false);
+                transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne_species_string), false);
 
                 /*********************************************************************
                  *  Callback engines for console keyreleases begin here.             *
