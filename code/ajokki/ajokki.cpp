@@ -506,11 +506,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_grass_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&suzanne_species_string),
+                        yli::data::AnyValue(suzanne_species_string),
                         false);
                 switch_to_grass_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&grass_material_string),
+                        yli::data::AnyValue(grass_material_string),
                         false);
 
                 // Callback code for O: switch to orange fur material.
@@ -520,11 +520,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_orange_fur_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&suzanne_species_string),
+                        yli::data::AnyValue(suzanne_species_string),
                         false);
                 switch_to_orange_fur_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&orange_fur_material_string),
+                        yli::data::AnyValue(orange_fur_material_string),
                         false);
 
                 // Callback code for P: switch to pink_geometric_tiles_material.
@@ -534,11 +534,11 @@ namespace ajokki
                         &yli::snippets::switch_to_new_material);
                 switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&suzanne_species_string),
+                        yli::data::AnyValue(suzanne_species_string),
                         false);
                 switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                         "",
-                        yli::data::AnyValue(&pink_geometric_tiles_material_string),
+                        yli::data::AnyValue(pink_geometric_tiles_material_string),
                         false);
 
                 // Callback code for T: transform `suzanne2` into terrain.

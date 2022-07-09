@@ -420,8 +420,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_material_string).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*any_value_material_string).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -429,9 +429,9 @@ namespace yli::snippets
         }
 
         const std::string& new_material_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_material_string).data) ?
+             std::get<std::reference_wrapper<std::string>>((*any_value_material_string).data) :
+             std::get<std::reference_wrapper<const std::string>>((*any_value_material_string).data));
 
         yli::ontology::Entity* const new_material_entity = universe.get_entity(new_material_string_ref);
 

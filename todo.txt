@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix `yli::snippets::switch_to_new_material`.
 [ ] Fix `yli::snippets::delete_entity`.
 [ ] Fix `yli::snippets::transform_into_new_species`.
 [ ] Fix compiling on MacOS.
@@ -318,3 +317,4 @@ Ready:
 [x] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
 [x] Make `Holobiont`s children of the `Scene` and apprentices of the `Symbiosis`.
 [x] Add support for scaling `Movable`s in `Console`.
+[x] Fix `yli::snippets::switch_to_new_material`.
