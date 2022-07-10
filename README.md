@@ -334,7 +334,8 @@ A: In [Debian GNU/Linux](https://www.debian.org/)
    using [Vim](https://www.vim.org/). Other tools in use include
    [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
    [GDB](https://www.gnu.org/software/gdb/), [GitHub Actions](https://github.com/features/actions),
-   and [Coverity Scan](https://scan.coverity.com/).
+   [Codacy](https://www.codacy.com/), [CodeQL](https://codeql.github.com/), and
+   [Coverity Scan](https://scan.coverity.com/).
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
@@ -348,9 +349,9 @@ A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
    Higher detail level may be offered for high-end video cards.
 
 Q: What are the target platforms of Ylikuutio?
-A: Ylikuutio targets Linux, Windows and Android, in this order.
+A: Currently supported target platforms are Linux, MacOS, and Windows.
+   In the future Android and iOS will be supported as well.
    Cross-compiling from Linux to Windows works!
-   Cross-compiling from Linux to Android is not implemented yet.
    Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
