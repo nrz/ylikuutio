@@ -328,28 +328,28 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>&,
             const yli::data::AnyValue&)
     {
-        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> entity_name_string_any_value = callback_object->get_arg(0);
 
-        if (!entity_name_string_pointer_any_value)
+        if (!entity_name_string_any_value)
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: there is no argument 0.\n";
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string& entity_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
+        const std::string& entity_name_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_any_value).data));
 
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
+        yli::ontology::Entity* const entity = universe.get_entity(entity_name_string_ref);
 
         if (entity == nullptr)
         {
@@ -368,35 +368,35 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>&,
             const yli::data::AnyValue&)
     {
-        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> species_entity_name_string_any_value = callback_object->get_arg(0);
 
-        if (!entity_name_string_pointer_any_value)
+        if (!species_entity_name_string_any_value)
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: there is no argument 0.\n";
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*species_entity_name_string_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string& entity_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
+        const std::string& species_entity_name_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*species_entity_name_string_any_value).data));
 
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
+        yli::ontology::Entity* const species_entity = universe.get_entity(species_entity_name_string_ref);
 
-        if (entity == nullptr)
+        if (species_entity == nullptr)
         {
             return std::nullopt;
         }
 
-        yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(entity);
+        yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(species_entity);
 
         if (species == nullptr)
         {
@@ -412,16 +412,16 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        std::optional<yli::data::AnyValue> any_value_material_string = callback_object->get_arg(1);
+        std::optional<yli::data::AnyValue> material_name_string_any_value = callback_object->get_arg(1);
 
-        if (!any_value_material_string)
+        if (!material_name_string_any_value)
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: there is no argument 1.\n";
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_material_string).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*any_value_material_string).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*material_name_string_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*material_name_string_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -429,9 +429,9 @@ namespace yli::snippets
         }
 
         const std::string& new_material_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_material_string).data) ?
-             std::get<std::reference_wrapper<std::string>>((*any_value_material_string).data) :
-             std::get<std::reference_wrapper<const std::string>>((*any_value_material_string).data));
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*material_name_string_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*material_name_string_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*material_name_string_any_value).data));
 
         yli::ontology::Entity* const new_material_entity = universe.get_entity(new_material_string_ref);
 
@@ -457,61 +457,61 @@ namespace yli::snippets
             std::vector<yli::callback::CallbackParameter*>&,
             const yli::data::AnyValue&)
     {
-        std::optional<yli::data::AnyValue> entity_name_string_pointer_any_value = callback_object->get_arg(0);
+        std::optional<yli::data::AnyValue> object_entity_name_string_any_value = callback_object->get_arg(0);
 
-        if (!entity_name_string_pointer_any_value)
+        if (!object_entity_name_string_any_value)
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: there is no argument 0.\n";
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*object_entity_name_string_any_value).data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
-        const std::string& entity_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_pointer_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_pointer_any_value).data));
+        const std::string& object_entity_name_string_ref =
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*object_entity_name_string_any_value).data));
 
-        yli::ontology::Entity* const entity = universe.get_entity(entity_string_ref);
+        yli::ontology::Entity* const object_entity = universe.get_entity(object_entity_name_string_ref);
 
-        if (entity == nullptr)
+        if (object_entity == nullptr)
         {
             return std::nullopt;
         }
 
-        yli::ontology::Object* const object = dynamic_cast<yli::ontology::Object*>(entity);
+        yli::ontology::Object* const object = dynamic_cast<yli::ontology::Object*>(object_entity);
 
         if (object == nullptr)
         {
             return std::nullopt;
         }
 
-        std::optional<yli::data::AnyValue> any_value_species_string = callback_object->get_arg(1);
+        std::optional<yli::data::AnyValue> species_name_string_any_value = callback_object->get_arg(1);
 
-        if (!any_value_species_string)
+        if (!species_name_string_any_value)
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: there is no argument 1.\n";
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_species_string).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*any_value_species_string).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>((*species_name_string_any_value).data))
         {
-            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
+            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: arg 1 is of invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
             return std::nullopt;
         }
 
         const std::string& new_species_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*any_value_species_string).data) ?
-             std::get<std::reference_wrapper<std::string>>((*any_value_species_string).data) :
-             std::get<std::reference_wrapper<const std::string>>((*any_value_species_string).data));
+            (std::holds_alternative<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) ?
+             std::get<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) :
+             std::get<std::reference_wrapper<const std::string>>((*species_name_string_any_value).data));
 
         yli::ontology::Entity* const new_species_entity = universe.get_entity(new_species_string_ref);
 
