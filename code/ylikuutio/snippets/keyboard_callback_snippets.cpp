@@ -400,16 +400,6 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        yli::ontology::Entity* const old_material_entity = species->apprentice_of_material.get_master();
-
-        const yli::ontology::Material* const old_material = dynamic_cast<yli::ontology::Material*>(old_material_entity);
-
-        if (old_material == nullptr)
-        {
-            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Species` with name `" << species_entity_name_string_ref << "` (arg 0) has no `Material` master!\n";
-            return std::nullopt;
-        }
-
         std::optional<yli::data::AnyValue> material_name_string_any_value = callback_object->get_arg(1);
 
         if (!material_name_string_any_value)
