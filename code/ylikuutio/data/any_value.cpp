@@ -686,6 +686,20 @@ namespace yli::data
         return any_value_stringstream.str();
     }
 
+    const std::string& AnyValue::get_const_std_string_ref() const
+    {
+        if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
+        {
+            return std::get<std::reference_wrapper<std::string>>(this->data);
+        }
+        else if (std::holds_alternative<std::reference_wrapper<const std::string>>(this->data))
+        {
+            return std::get<std::reference_wrapper<const std::string>>(this->data);
+        }
+
+        throw std::runtime_error("Requested `const std::string&` for `AnyValue` that didn't hold `std::string` or `const std::string` reference!");
+    }
+
     yli::ontology::Entity& AnyValue::get_entity_ref() const
     {
         if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))

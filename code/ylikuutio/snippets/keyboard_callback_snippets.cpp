@@ -344,10 +344,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        const std::string& entity_name_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*entity_name_string_any_value).data));
+        const std::string& entity_name_string_ref = entity_name_string_any_value->get_const_std_string_ref();
 
         yli::ontology::Entity* const entity = universe.get_entity(entity_name_string_ref);
 
@@ -385,10 +382,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        const std::string& species_entity_name_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*species_entity_name_string_any_value).data));
+        const std::string& species_entity_name_string_ref = species_entity_name_string_any_value->get_const_std_string_ref();
 
         yli::ontology::Entity* const species_entity = universe.get_entity(species_entity_name_string_ref);
 
@@ -432,10 +426,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        const std::string& new_material_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*material_name_string_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*material_name_string_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*material_name_string_any_value).data));
+        const std::string& new_material_string_ref = material_name_string_any_value->get_const_std_string_ref();
 
         yli::ontology::Entity* const new_material_entity = universe.get_entity(new_material_string_ref);
 
@@ -479,10 +470,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        const std::string& object_entity_name_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*object_entity_name_string_any_value).data));
+        const std::string& object_entity_name_string_ref = object_entity_name_string_any_value->get_const_std_string_ref();
 
         yli::ontology::Entity* const object_entity = universe.get_entity(object_entity_name_string_ref);
 
@@ -516,10 +504,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        const std::string& new_species_string_ref =
-            (std::holds_alternative<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) ?
-             std::get<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) :
-             std::get<std::reference_wrapper<const std::string>>((*species_name_string_any_value).data));
+        const std::string& new_species_string_ref = species_name_string_any_value->get_const_std_string_ref();
 
         yli::ontology::Entity* const new_species_entity = universe.get_entity(new_species_string_ref);
 

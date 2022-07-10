@@ -65,6 +65,7 @@ namespace yli::data
             bool operator!=(const yli::data::AnyValue& rhs) const;
             std::string get_datatype() const;
             std::string get_string() const;
+            const std::string& get_const_std_string_ref() const;
             yli::ontology::Entity& get_entity_ref() const;
             const yli::ontology::Entity& get_const_entity_ref() const;
             bool has_movable_ref() const;
