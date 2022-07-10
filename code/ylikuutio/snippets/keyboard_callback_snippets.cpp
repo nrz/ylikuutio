@@ -18,7 +18,6 @@
 #include "keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
