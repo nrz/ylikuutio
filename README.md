@@ -334,8 +334,8 @@ A: In [Debian GNU/Linux](https://www.debian.org/)
    using [Vim](https://www.vim.org/). Other tools in use include
    [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
    [GDB](https://www.gnu.org/software/gdb/), [GitHub Actions](https://github.com/features/actions),
-   [Codacy](https://www.codacy.com/), [CodeQL](https://codeql.github.com/), and
-   [Coverity Scan](https://scan.coverity.com/).
+   [Codacy](https://www.codacy.com/), [CodeQL](https://codeql.github.com/),
+   [SonarCloud](https://sonarcloud.io/), and [Coverity Scan](https://scan.coverity.com/).
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
