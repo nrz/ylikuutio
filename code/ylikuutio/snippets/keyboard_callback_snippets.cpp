@@ -353,6 +353,7 @@ namespace yli::snippets
 
         if (entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::delete_entity`: `Entity` with name `" << entity_name_string_ref << "` does not exist!\n";
             return std::nullopt;
         }
 
@@ -393,6 +394,7 @@ namespace yli::snippets
 
         if (species_entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Entity` with name `" << species_entity_name_string_ref << "` (arg 0) does not exist!\n";
             return std::nullopt;
         }
 
@@ -400,6 +402,7 @@ namespace yli::snippets
 
         if (species == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Entity` with name `" << species_entity_name_string_ref << "` (arg 0) is not `Species`!\n";
             return std::nullopt;
         }
 
@@ -409,6 +412,7 @@ namespace yli::snippets
 
         if (old_material == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Species` with name `" << species_entity_name_string_ref << "` (arg 0) has no `Material` master!\n";
             return std::nullopt;
         }
 
@@ -437,6 +441,7 @@ namespace yli::snippets
 
         if (new_material_entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Entity` with name `" << new_material_string_ref << "` (arg 1) does not exist!\n";
             return std::nullopt;
         }
 
@@ -444,6 +449,7 @@ namespace yli::snippets
 
         if (new_material == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: `Entity` with name `" << new_material_string_ref << "` (arg 1) is not `Material`!\n";
             return std::nullopt;
         }
 
@@ -482,6 +488,7 @@ namespace yli::snippets
 
         if (object_entity == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `Entity` with name `" << object_entity_name_string_ref << "` (arg 0) does not exist!\n";
             return std::nullopt;
         }
 
@@ -489,6 +496,7 @@ namespace yli::snippets
 
         if (object == nullptr)
         {
+            std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: `Entity` with name `" << object_entity_name_string_ref << "` (arg 0) is not `Object`!\n";
             return std::nullopt;
         }
 
