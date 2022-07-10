@@ -16,9 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -61,6 +59,12 @@
 // `get_arg` takes the zero-based index of the variable as function parameter.
 // First `CallbackParameter` of a `CallbackObject` gets index 0,
 // second `CallbackParameter` gets index 1, etc.
+
+namespace yli::callback
+{
+    class CallbackEngine;
+    class CallbackParameter;
+}
 
 namespace yli::snippets
 {
