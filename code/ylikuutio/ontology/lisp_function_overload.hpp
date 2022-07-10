@@ -82,8 +82,6 @@ namespace yli::ontology
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {
-                yli::ontology::Universe& universe = this->get_universe();
-
                 yli::ontology::Entity* const lisp_function_entity = this->get_parent();
 
                 yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
