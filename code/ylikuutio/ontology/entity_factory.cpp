@@ -204,7 +204,10 @@ namespace yli::ontology
         yli::ontology::Entity* material_entity = new yli::ontology::Material(
                 this->universe,
                 material_struct,
-                ((std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
+                // `Ecosystem` or `Scene` parent.
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(material_struct.parent) && std::get<yli::ontology::Ecosystem*>(material_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Ecosystem*>(material_struct.parent)->parent_of_materials) :
+                 (std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Scene*>(material_struct.parent)->parent_of_materials) :
                  nullptr),
                 (material_struct.shader == nullptr ? nullptr : material_struct.shader->get_master_module()));
