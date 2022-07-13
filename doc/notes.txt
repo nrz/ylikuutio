@@ -144,3 +144,7 @@ https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 
 Intel graphics research samples library:
 https://www.intel.com/content/www/us/en/developer/topic-technology/graphics-research/samples.html
+
+HipremeEngine
+(Can be useful for OpenGL 3.3 -> DirectX 11 port)
+https://github.com/MrcSnm/HipremeEngine
