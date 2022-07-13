@@ -106,6 +106,7 @@ Tasks which are necessary for the third stage:
 [ ] Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
 
 Tasks which are necessary for Tulevaisuus:
+[ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
 [ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
 [ ] Make `yli_server` depend on `yli_core` and `yli_network`.
 [ ] Make `yli_client` depend on `yli_core` and `yli_network`.
