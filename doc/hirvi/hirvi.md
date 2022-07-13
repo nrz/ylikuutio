@@ -68,6 +68,7 @@ Planned languages on launch:
 * Hirvi - in-game music: alarm in PD: [https://freesound.org/people/Greek555/sounds/414130/](https://freesound.org/people/Greek555/sounds/414130/)
 * Hirvi - in-game music: no cops around: [https://freesound.org/people/Greek555/sounds/410606/](https://freesound.org/people/Greek555/sounds/410606/)
 * Hirvi - in-game music: discotheque: [https://freesound.org/people/DoctorToast/sounds/385034/](https://freesound.org/people/DoctorToast/sounds/385034/)
+* Hirvi - in-game music: discotheque: [https://freesound.org/people/DaveJf/sounds/611068/](https://freesound.org/people/DaveJf/sounds/611068/)
 * Hirvi - in-game music: remembering Hirvinen: [https://freesound.org/people/frankum/sounds/411038/](https://freesound.org/people/frankum/sounds/411038/)
 * Hirvi - mission successful: [https://freesound.org/people/Greek555/sounds/413269/](https://freesound.org/people/Greek555/sounds/413269/)
 * Hirvi - slow dancing music: [https://freesound.org/people/Greek555/sounds/404352/](https://freesound.org/people/Greek555/sounds/404352/)
