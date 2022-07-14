@@ -189,10 +189,10 @@ namespace yli::ontology
                 this->universe,
                 shader_struct,
                 // `Ecosystem` or `Scene` parent.
-                ((std::holds_alternative<yli::ontology::Scene*>(shader_struct.parent) && std::get<yli::ontology::Scene*>(shader_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::Scene*>(shader_struct.parent)->parent_of_shaders) :
-                 (std::holds_alternative<yli::ontology::Ecosystem*>(shader_struct.parent) && std::get<yli::ontology::Ecosystem*>(shader_struct.parent) != nullptr) ?
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(shader_struct.parent) && std::get<yli::ontology::Ecosystem*>(shader_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Ecosystem*>(shader_struct.parent)->parent_of_shaders) :
+                 (std::holds_alternative<yli::ontology::Scene*>(shader_struct.parent) && std::get<yli::ontology::Scene*>(shader_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Scene*>(shader_struct.parent)->parent_of_shaders) :
                  nullptr));
         shader_entity->set_global_name(shader_struct.global_name);
         shader_entity->set_local_name(shader_struct.local_name);
