@@ -113,11 +113,6 @@ namespace yli::render
         }
     }
 
-    RenderSystem::~RenderSystem()
-    {
-        // destructor.
-    }
-
     void RenderSystem::create_context_and_make_it_current()
     {
         std::cout << "Creating OpenGL context and making it current...\n";

@@ -25,11 +25,6 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    GenericLispFunctionOverload::~GenericLispFunctionOverload()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* GenericLispFunctionOverload::get_parent() const
     {
         return this->child_of_lisp_function.get_parent();

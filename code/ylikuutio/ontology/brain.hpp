@@ -68,7 +68,7 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const parent_module);
 
             // destructor.
-            ~Brain();
+            ~Brain() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

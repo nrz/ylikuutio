@@ -31,11 +31,6 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    LispFunction::~LispFunction()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* LispFunction::get_parent() const
     {
         return this->child_of_console.get_parent();

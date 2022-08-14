@@ -71,11 +71,6 @@ namespace yli::ontology
         // constructor.
     }
 
-    EntityFactory::~EntityFactory()
-    {
-        // destructor.
-    }
-
     yli::ontology::Universe& EntityFactory::get_universe() const
     {
         return this->universe;

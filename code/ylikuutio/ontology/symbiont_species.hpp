@@ -59,7 +59,7 @@ namespace yli::ontology
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~SymbiontSpecies();
+            virtual ~SymbiontSpecies() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

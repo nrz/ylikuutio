@@ -112,11 +112,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    Movable::~Movable()
-    {
-        // destructor.
-    }
-
     const glm::vec3& Movable::get_cartesian_coordinates() const
     {
         return this->cartesian_coordinates;

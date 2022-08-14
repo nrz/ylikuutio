@@ -51,11 +51,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    Camera::~Camera()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Camera::get_parent() const
     {
         return this->child_of_scene.get_parent();

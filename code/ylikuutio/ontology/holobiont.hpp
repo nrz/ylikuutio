@@ -52,7 +52,7 @@ namespace yli::ontology
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Holobiont();
+            virtual ~Holobiont() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

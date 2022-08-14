@@ -46,7 +46,7 @@ namespace yli::core
             yli::core::Application& operator=(const Application&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Application();
+            virtual ~Application() = default;
 
             virtual std::string get_name() const;    // Note: this is not the global name or the local name of the `Application`.
             virtual std::string get_version() const; // `Application` version.

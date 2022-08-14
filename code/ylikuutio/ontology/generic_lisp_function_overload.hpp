@@ -56,7 +56,7 @@ namespace yli::ontology
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~GenericLispFunctionOverload();
+            virtual ~GenericLispFunctionOverload() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

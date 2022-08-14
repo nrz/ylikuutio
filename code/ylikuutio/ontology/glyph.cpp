@@ -62,11 +62,6 @@ namespace yli::ontology
         this->type_string = "yli::ontology::Glyph*";
     }
 
-    Glyph::~Glyph()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Glyph::get_parent() const
     {
         return this->child_of_vector_font.get_parent();

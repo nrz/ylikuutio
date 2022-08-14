@@ -29,11 +29,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    RigidBodyModule::~RigidBodyModule()
-    {
-        // destructor.
-    }
-
     void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const
     {
         // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `Movable`

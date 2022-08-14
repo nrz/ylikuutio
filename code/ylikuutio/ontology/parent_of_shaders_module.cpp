@@ -57,9 +57,4 @@ namespace yli::ontology
     {
         // constructor.
     }
-
-    ParentOfShadersModule::~ParentOfShadersModule()
-    {
-        // destructor.
-    }
 }

@@ -25,12 +25,6 @@ namespace yli::ontology
 {
     class Scene;
 
-    // destructor.
-    CallbackEngineEntity::~CallbackEngineEntity()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* CallbackEngineEntity::get_parent() const
     {
         // Every `CallbackEngineEntity` is a child of the `Universe`.

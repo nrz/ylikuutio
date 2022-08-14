@@ -50,7 +50,7 @@ namespace yli::ontology
             VertexGraph& operator=(const VertexGraph&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~VertexGraph();
+            ~VertexGraph() = default;
     };
 }
 

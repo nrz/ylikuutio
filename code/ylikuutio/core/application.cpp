@@ -27,11 +27,6 @@ namespace yli::ontology
 
 namespace yli::core
 {
-    Application::~Application()
-    {
-        // destructor.
-    }
-
     std::string Application::get_name() const
     {
         return ""; // `override` this in the inherited class.

@@ -187,11 +187,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    Object::~Object()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Object::get_parent() const
     {
         return this->child_of_scene.get_parent();

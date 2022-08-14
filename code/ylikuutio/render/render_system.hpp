@@ -54,7 +54,7 @@ namespace yli::render
             RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~RenderSystem();
+            ~RenderSystem() = default;
 
             void create_context_and_make_it_current();
             [[nodiscard]] bool setup_context(SDL_Window* window);

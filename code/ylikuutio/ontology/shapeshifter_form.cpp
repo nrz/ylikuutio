@@ -42,11 +42,6 @@ namespace yli::ontology
         this->type_string = "yli::ontology::ShapeshifterForm*";
     }
 
-    ShapeshifterForm::~ShapeshifterForm()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* ShapeshifterForm::get_parent() const
     {
         return this->child_of_shapeshifter_transformation.get_parent();

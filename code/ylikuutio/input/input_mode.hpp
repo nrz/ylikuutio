@@ -40,7 +40,7 @@ namespace yli::input
     {
         public:
             // destructor.
-            ~InputMode();
+            ~InputMode() = default;
             void activate();
             void deactivate();
 

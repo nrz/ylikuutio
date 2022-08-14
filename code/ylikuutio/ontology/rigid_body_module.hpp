@@ -77,7 +77,7 @@ namespace yli::ontology
             RigidBodyModule &operator=(const RigidBodyModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~RigidBodyModule();
+            ~RigidBodyModule() = default;
 
             void add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const;
 

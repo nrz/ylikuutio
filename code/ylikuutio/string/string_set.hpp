@@ -33,7 +33,7 @@ namespace yli::string
             StringSet& operator=(const StringSet&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~StringSet();
+            ~StringSet() = default;
 
             void add_string(const std::string& string);
             void erase_string(const std::string& string);

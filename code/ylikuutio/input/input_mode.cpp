@@ -55,11 +55,6 @@ namespace yli::input
         this->bind_to_parent();
     }
 
-    InputMode::~InputMode()
-    {
-        // destructor.
-    }
-
     void InputMode::activate()
     {
         if (this->parent != nullptr)

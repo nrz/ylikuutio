@@ -43,7 +43,7 @@ namespace yli::ontology
             VertexNode& operator=(const VertexNode&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~VertexNode();
+            ~VertexNode() = default;
 
         private:
             glm::vec3 coordinate_vector;

@@ -87,11 +87,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    Text3D::~Text3D()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Text3D::get_parent() const
     {
         return this->child_of_vector_font.get_parent();

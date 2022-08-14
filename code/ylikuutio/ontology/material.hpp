@@ -67,7 +67,7 @@ namespace yli::ontology
             Material& operator=(const Material&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Material();
+            virtual ~Material() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

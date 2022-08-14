@@ -46,7 +46,7 @@ namespace yli::ontology
             SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~SymbiontMaterial();
+            virtual ~SymbiontMaterial() = default;
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;

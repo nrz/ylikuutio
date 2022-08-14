@@ -29,11 +29,6 @@ namespace yli::string
         // constructor.
     }
 
-    StringSet::~StringSet()
-    {
-        // destructor.
-    }
-
     void StringSet::add_string(const std::string& string)
     {
         if (this->is_string(string))

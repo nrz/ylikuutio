@@ -44,7 +44,7 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);
 
             // destructor.
-            virtual ~ShapeshifterForm();
+            virtual ~ShapeshifterForm() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

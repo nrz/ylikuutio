@@ -19,8 +19,4 @@
 
 namespace yli::ontology
 {
-    VertexGraph::~VertexGraph()
-    {
-        // destructor.
-    }
 }

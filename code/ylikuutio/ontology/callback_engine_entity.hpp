@@ -53,7 +53,7 @@ namespace yli::ontology
             CallbackEngineEntity& operator=(const CallbackEngineEntity&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~CallbackEngineEntity();
+            virtual ~CallbackEngineEntity() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

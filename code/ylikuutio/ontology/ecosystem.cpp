@@ -45,11 +45,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    Ecosystem::~Ecosystem()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Ecosystem::get_parent() const
     {
         return this->child_of_universe.get_parent();

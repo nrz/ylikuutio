@@ -42,11 +42,6 @@ namespace yli::ontology
         this->type_string = "yli::ontology::SymbiontSpecies*";
     }
 
-    SymbiontSpecies::~SymbiontSpecies()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* SymbiontSpecies::get_parent() const
     {
         return this->child_of_symbiont_material.get_parent();

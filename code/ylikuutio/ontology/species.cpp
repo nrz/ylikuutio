@@ -140,11 +140,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    Species::~Species()
-    {
-        // destructor.
-    }
-
     yli::ontology::Entity* Species::get_parent() const
     {
         return this->child_of_scene_or_ecosystem.get_parent();

@@ -59,7 +59,7 @@ namespace yli::ontology
             EntityFactory& operator=(const EntityFactory&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~EntityFactory();
+            ~EntityFactory() = default;
 
             yli::ontology::Universe& get_universe() const;
 

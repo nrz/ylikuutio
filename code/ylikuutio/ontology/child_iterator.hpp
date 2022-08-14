@@ -55,10 +55,7 @@ namespace yli::ontology
                 return *this;
             }
 
-            ~ChildIterator()
-            {
-                // destructor.
-            }
+            ~ChildIterator() = default;
 
             bool operator==(const ChildIterator& other_it)
             {

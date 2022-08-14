@@ -42,7 +42,7 @@ namespace yli::ontology
             Registry& operator=(const Registry&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~Registry();
+            ~Registry() = default;
 
             bool is_name(const std::string& name) const;
             bool is_indexable(const std::string& name) const;

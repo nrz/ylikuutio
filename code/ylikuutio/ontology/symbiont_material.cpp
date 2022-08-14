@@ -66,11 +66,6 @@ namespace yli::ontology
         this->type_string = "yli::ontology::SymbiontMaterial*";
     }
 
-    SymbiontMaterial::~SymbiontMaterial()
-    {
-        // destructor.
-    }
-
     yli::ontology::Scene* SymbiontMaterial::get_scene() const
     {
         yli::ontology::Entity* const symbiosis_parent = this->get_parent();

@@ -57,10 +57,7 @@ namespace yli::ontology
                 return *this;
             }
 
-            ~ApprenticeIterator()
-            {
-                // destructor.
-            }
+            ~ApprenticeIterator() = default;
 
             bool operator==(const ApprenticeIterator& other_it)
             {

@@ -43,7 +43,7 @@ namespace yli::ontology
             ParentOfShadersModule& operator=(const ParentOfShadersModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~ParentOfShadersModule();
+            virtual ~ParentOfShadersModule() = default;
 
         private:
             // `yli::ontology::ShaderPriorityQueue` is a priority queue for `Shader`s.
