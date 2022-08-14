@@ -210,7 +210,6 @@ namespace yli::ontology
         // destructor.
 
         // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-        std::cout << "`VectorFont` with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // Requirements for further actions:
         // `this->parent` must not be `nullptr`.

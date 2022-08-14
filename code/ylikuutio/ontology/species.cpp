@@ -26,7 +26,6 @@
 #include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
@@ -144,8 +143,6 @@ namespace yli::ontology
     Species::~Species()
     {
         // destructor.
-
-        std::cout << "`Species` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
     yli::ontology::Entity* Species::get_parent() const

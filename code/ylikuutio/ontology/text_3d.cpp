@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 
@@ -91,7 +90,6 @@ namespace yli::ontology
     Text3D::~Text3D()
     {
         // destructor.
-        std::cout << "This `Text3D` (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
     }
 
     yli::ontology::Entity* Text3D::get_parent() const

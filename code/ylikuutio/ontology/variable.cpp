@@ -73,7 +73,6 @@ namespace yli::ontology
     Variable::~Variable()
     {
         // destructor.
-        std::cout << "This `Variable` will be destroyed.\n";
 
         if (this->parent == nullptr)
         {

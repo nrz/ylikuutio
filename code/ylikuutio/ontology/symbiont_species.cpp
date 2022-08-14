@@ -20,8 +20,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
 {
@@ -47,8 +45,6 @@ namespace yli::ontology
     SymbiontSpecies::~SymbiontSpecies()
     {
         // destructor.
-
-        std::cout << "`SymbiontSpecies` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
     yli::ontology::Entity* SymbiontSpecies::get_parent() const

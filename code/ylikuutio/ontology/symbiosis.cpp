@@ -163,7 +163,6 @@ namespace yli::ontology
     Symbiosis::~Symbiosis()
     {
         // destructor.
-        std::cout << "`Symbiosis` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
     void Symbiosis::render(const yli::ontology::Scene* const target_scene)

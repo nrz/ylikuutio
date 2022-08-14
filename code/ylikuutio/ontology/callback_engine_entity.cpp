@@ -20,7 +20,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
 {
@@ -30,7 +29,6 @@ namespace yli::ontology
     CallbackEngineEntity::~CallbackEngineEntity()
     {
         // destructor.
-        std::cout << "This `CallbackEngineEntity` will be destroyed.\n";
     }
 
     yli::ontology::Entity* CallbackEngineEntity::get_parent() const

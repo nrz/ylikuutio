@@ -21,7 +21,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::ontology
 {
@@ -49,7 +48,6 @@ namespace yli::ontology
     Ecosystem::~Ecosystem()
     {
         // destructor.
-        std::cout << "This `Ecosystem` will be destroyed.\n";
     }
 
     yli::ontology::Entity* Ecosystem::get_parent() const

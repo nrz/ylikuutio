@@ -78,7 +78,6 @@ namespace yli::ontology
     Holobiont::~Holobiont()
     {
         // destructor.
-        std::cout << "`Holobiont` with childID " << std::dec << this->childID << " will be destroyed.\n";
     }
 
     yli::ontology::Entity* Holobiont::get_parent() const

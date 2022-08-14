@@ -23,9 +23,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
 
 namespace yli::ontology
 {
@@ -67,9 +65,6 @@ namespace yli::ontology
     Glyph::~Glyph()
     {
         // destructor.
-        std::string glyph_name_string = this->glyph_name_pointer;
-        std::string unicode_string = this->unicode_char_pointer;
-        std::cout << "This `Glyph` (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
     }
 
     yli::ontology::Entity* Glyph::get_parent() const

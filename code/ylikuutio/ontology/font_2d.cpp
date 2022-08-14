@@ -119,7 +119,6 @@ namespace yli::ontology
     Font2D::~Font2D()
     {
         // destructor.
-        std::cout << "This `Font2D` will be destroyed.\n";
 
         if (this->universe.get_is_opengl_in_use())
         {

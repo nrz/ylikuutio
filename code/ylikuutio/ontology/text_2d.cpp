@@ -123,7 +123,6 @@ namespace yli::ontology
     Text2D::~Text2D()
     {
         // destructor.
-        std::cout << "This `Text2D` will be destroyed.\n";
 
         // Delete buffers.
         glDeleteBuffers(1, &this->vertexbuffer);

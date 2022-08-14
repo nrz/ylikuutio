@@ -216,7 +216,7 @@ namespace yli::ontology
     Universe::~Universe()
     {
         // destructor.
-        std::cout << "This `Universe` will be destroyed.\n";
+
         SDL_Quit();
     }
 
