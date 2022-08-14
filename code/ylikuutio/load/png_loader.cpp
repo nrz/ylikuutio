@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <algorithm> // std::copy
+#include <array>     // std::array
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <limits>    // std::numeric_limits
@@ -79,9 +80,9 @@ namespace yli::load
 
         // Check for magic number of the PNG file.
 
-        const std::size_t header_size_in_bytes { 4 };
-        std::uint8_t header[header_size_in_bytes] { 0x49, 'P', 'N', 'G' };
-        if (fread(header, 1, header_size_in_bytes, fp) != header_size_in_bytes)
+        constexpr std::size_t header_size_in_bytes { 4 };
+        std::array<uint8_t, header_size_in_bytes> header  { 0x49, 'P', 'N', 'G' };
+        if (fread(header.data(), 1, header_size_in_bytes, fp) != header_size_in_bytes)
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
@@ -89,7 +90,7 @@ namespace yli::load
             return nullptr;
         }
 
-        if (png_sig_cmp(header, 0, header_size_in_bytes))
+        if (png_sig_cmp(header.data(), 0, header_size_in_bytes))
         {
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
