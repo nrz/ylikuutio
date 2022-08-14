@@ -133,7 +133,6 @@ namespace yli::ontology
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
         parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
-        parent_of_chunk_masters(this, &this->registry, "chunk_masters"),
         apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
         master_of_species(this, &this->registry, "species"),
         texture(
@@ -192,7 +191,6 @@ namespace yli::ontology
 
         render_system->render_species(this->master_of_species, new_target_scene);
         render_system->render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
-        render_system->render_chunk_masters(this->parent_of_chunk_masters, new_target_scene);
     }
 
     yli::ontology::Entity* Material::get_parent() const
@@ -213,15 +211,13 @@ namespace yli::ontology
     std::size_t Material::get_number_of_children() const
     {
         return this->parent_of_shapeshifter_transformations.get_number_of_children() +
-            this->parent_of_vector_fonts.get_number_of_children() +
-            this->parent_of_chunk_masters.get_number_of_children();
+            this->parent_of_vector_fonts.get_number_of_children();
     }
 
     std::size_t Material::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_chunk_masters.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector);
     }
 
     std::size_t Material::get_number_of_apprentices() const

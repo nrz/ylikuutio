@@ -93,11 +93,6 @@ namespace yli::render
                     yli::ontology::GenericParentModule& parent,
                     const yli::ontology::Scene* const scene) const;
 
-            void render_chunk_masters(
-                    yli::ontology::GenericParentModule& parent,
-                    const yli::ontology::Scene* const scene) const;
-
-            void render_chunks(yli::ontology::GenericParentModule& parent) const;
             void render_text_2ds(yli::ontology::GenericParentModule& parent) const;
             void render_consoles(yli::ontology::GenericMasterModule& master) const;
 

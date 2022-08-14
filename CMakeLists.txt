@@ -585,11 +585,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/child_iterator.hpp
     code/ylikuutio/ontology/child_module.cpp
     code/ylikuutio/ontology/child_module.hpp
-    code/ylikuutio/ontology/chunk.cpp
-    code/ylikuutio/ontology/chunk.hpp
-    code/ylikuutio/ontology/chunk_master.cpp
-    code/ylikuutio/ontology/chunk_master.hpp
-    code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/compute_task.cpp
     code/ylikuutio/ontology/compute_task.hpp
     code/ylikuutio/ontology/compute_task_struct.hpp

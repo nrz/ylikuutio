@@ -35,8 +35,6 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
-#include "code/ylikuutio/ontology/chunk_master.hpp"
-#include "code/ylikuutio/ontology/chunk.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
@@ -283,20 +281,6 @@ namespace yli::render
         yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::ShapeshifterSequence*>(
                 parent,
                 scene);
-    }
-
-    void RenderSystem::render_chunk_masters(
-            yli::ontology::GenericParentModule& parent,
-            const yli::ontology::Scene* const scene) const
-    {
-        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::GenericParentModule&, yli::ontology::ChunkMaster*>(
-                parent,
-                scene);
-    }
-
-    void RenderSystem::render_chunks(yli::ontology::GenericParentModule& parent) const
-    {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Chunk*>(parent);
     }
 
     void RenderSystem::render_text_2ds(yli::ontology::GenericParentModule& parent) const

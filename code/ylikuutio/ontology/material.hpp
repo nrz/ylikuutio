@@ -86,7 +86,6 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
             yli::ontology::GenericParentModule parent_of_vector_fonts;
-            yli::ontology::GenericParentModule parent_of_chunk_masters;
             yli::ontology::ApprenticeModule apprentice_of_shader;
             yli::ontology::GenericMasterModule master_of_species;
             yli::ontology::TextureModule texture;
