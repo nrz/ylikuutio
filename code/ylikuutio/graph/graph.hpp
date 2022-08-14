@@ -40,7 +40,7 @@ namespace yli::graph
             Graph& operator=(const Graph&) = delete; // Delete copy assignment.
 
             // destructor.
-            ~Graph();
+            virtual ~Graph();
 
             friend class yli::graph::Node;
 

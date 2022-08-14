@@ -37,7 +37,7 @@ namespace yli::graph
             explicit Node(const yli::graph::NodeStruct& node_struct);
 
             // destructor.
-            ~Node();
+            virtual ~Node();
 
             friend class yli::graph::Graph;
             template<typename T1>

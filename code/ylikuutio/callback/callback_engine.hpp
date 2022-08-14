@@ -69,7 +69,7 @@ namespace yli::callback
             explicit CallbackEngine(yli::ontology::Universe& universe);
 
             // destructor.
-            ~CallbackEngine();
+            virtual ~CallbackEngine();
 
             yli::callback::CallbackObject* create_callback_object();
             yli::callback::CallbackObject* create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
