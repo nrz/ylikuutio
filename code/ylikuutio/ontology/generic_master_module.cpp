@@ -48,15 +48,15 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(yli::ontology::Scene* const scene)
+    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene)
     {
         for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
         {
-            yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
+            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
 
             if (apprentice_module != nullptr)
             {
-                yli::ontology::Entity* const apprentice = apprentice_module->get_apprentice();
+                const yli::ontology::Entity* const apprentice = apprentice_module->get_apprentice();
 
                 if (apprentice->get_scene() != scene)
                 {
@@ -83,7 +83,7 @@ namespace yli::ontology
 
         for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
         {
-            yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector[apprentice_i];
+            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector[apprentice_i];
 
             if (apprentice_module != nullptr)
             {
@@ -117,7 +117,7 @@ namespace yli::ontology
     {
         if (index < this->apprentice_module_pointer_vector.size())
         {
-            yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(index);
+            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(index);
 
             if (apprentice_module != nullptr)
             {
