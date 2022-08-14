@@ -69,7 +69,7 @@ namespace yli::input
             std::queue<std::size_t> free_input_modeID_queue;
             std::size_t number_of_input_modes { 0 };
 
-            yli::input::InputMethod input_method;
+            yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
     };
 }
 

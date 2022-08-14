@@ -35,8 +35,6 @@ namespace yli::input
         : universe { universe }
     {
         // constructor.
-
-        this->input_method = yli::input::InputMethod::KEYBOARD;
     }
 
     InputSystem::~InputSystem()

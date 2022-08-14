@@ -50,11 +50,11 @@ namespace yli::ontology
 
     ChunkMaster::ChunkMaster(yli::ontology::Universe& universe, yli::ontology::Material* const parent, GetContentCallback get_content_callback)
         : yli::ontology::Entity(universe, yli::ontology::EntityStruct()),
-        parent_of_chunks(this, &this->registry, "chunks")
+        parent_of_chunks(this, &this->registry, "chunks"),
+        get_content_callback { get_content_callback },
+        parent               { parent }
     {
         // constructor.
-        this->get_content_callback = get_content_callback;
-        this->parent               = parent;
 
         // get `childID` from `Material` and set pointer to this `ChunkMaster`.
         this->bind_to_parent();

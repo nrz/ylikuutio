@@ -47,9 +47,9 @@ namespace yli::input
     }
 
     InputMode::InputMode(yli::input::InputSystem* const input_system)
+        : parent { input_system }
     {
         // constructor.
-        this->parent = input_system;
 
         // get `childID` from `InputSystem` and set pointer to this `InputMode`.
         this->bind_to_parent();
