@@ -60,7 +60,7 @@ namespace yli::ontology
         // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const old_parent = symbiosis.get_parent();
+        const yli::ontology::Entity* const old_parent = symbiosis.get_parent();
 
         if (old_parent == nullptr)
         {
@@ -91,7 +91,7 @@ namespace yli::ontology
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const scene = symbiosis.get_parent();
+        const yli::ontology::Entity* const scene = symbiosis.get_parent();
 
         if (scene == nullptr)
         {

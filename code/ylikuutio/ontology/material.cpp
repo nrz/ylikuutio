@@ -46,7 +46,7 @@ namespace yli::ontology
         // Set pointer to `Material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const old_parent = material.get_parent();
+        const yli::ontology::Entity* const old_parent = material.get_parent();
 
         if (old_parent == nullptr)
         {
@@ -77,7 +77,7 @@ namespace yli::ontology
         // Set pointer to `material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(material.get_parent());
+        const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(material.get_parent());
 
         if (scene == nullptr)
         {

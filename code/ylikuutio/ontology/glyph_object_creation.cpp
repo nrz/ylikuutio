@@ -41,7 +41,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text_3d->get_parent());
+        const yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text_3d->get_parent());
 
         if (vector_font == nullptr)
         {

@@ -40,7 +40,7 @@ namespace yli::ontology
         // TODO: implement creation and enabling the character `Object`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        yli::ontology::Entity* const vector_font = text_3d.get_parent();
+        const yli::ontology::Entity* const vector_font = text_3d.get_parent();
 
         if (vector_font == nullptr)
         {
@@ -94,7 +94,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Text3D::get_scene() const
     {
-        yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent != nullptr)
         {
@@ -106,7 +106,7 @@ namespace yli::ontology
 
     yli::ontology::Shader* Text3D::get_shader() const
     {
-        yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(this->get_parent());
+        const yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(this->get_parent());
 
         if (vector_font != nullptr)
         {

@@ -43,7 +43,7 @@ namespace yli::ontology
         // Set pointer to `Shader` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const old_parent = shader.get_parent();
+        const yli::ontology::Entity* const old_parent = shader.get_parent();
 
         if (old_parent == nullptr)
         {
@@ -74,7 +74,7 @@ namespace yli::ontology
         // Set pointer to `shader` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const old_parent = shader.get_parent();
+        const yli::ontology::Entity* const old_parent = shader.get_parent();
 
         if (old_parent == nullptr)
         {

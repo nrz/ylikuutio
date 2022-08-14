@@ -43,7 +43,7 @@ namespace yli::ontology
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const material = shapeshifter_transformation.get_parent();
+        const yli::ontology::Entity* const material = shapeshifter_transformation.get_parent();
 
         if (material == nullptr)
         {
@@ -142,7 +142,7 @@ namespace yli::ontology
 
     yli::ontology::Shader* ShapeshifterTransformation::get_shader() const
     {
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+        const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
 
         if (material != nullptr)
         {

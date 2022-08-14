@@ -46,7 +46,7 @@ namespace yli::ontology
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Entity* const font_2d = text_2d.get_parent();
+        const yli::ontology::Entity* const font_2d = text_2d.get_parent();
 
         if (font_2d == nullptr)
         {
@@ -107,7 +107,7 @@ namespace yli::ontology
             glGenBuffers(1, &this->uvbuffer);
 
             // Get a handle for our buffers.
-            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
             if (font_2d != nullptr)
             {
@@ -297,7 +297,7 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
             const std::string& font_texture_file_format = font_2d->get_font_texture_file_format();
 
@@ -361,7 +361,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Text2D::get_scene() const
     {
-        yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent != nullptr)
         {

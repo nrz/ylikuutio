@@ -80,7 +80,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* ShapeshifterSequence::get_scene() const
     {
-        yli::ontology::Entity* parent = this->get_parent();
+        const yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent != nullptr)
         {
@@ -92,7 +92,7 @@ namespace yli::ontology
 
     yli::ontology::Shader* ShapeshifterSequence::get_shader() const
     {
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
+        const yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
             static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
 
         if (shapeshifter_transformation != nullptr)

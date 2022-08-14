@@ -89,7 +89,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Variable::get_scene() const
     {
-        yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent != nullptr)
         {
