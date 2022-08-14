@@ -36,7 +36,7 @@ namespace yli::console
 {
     class ConsoleCallbackEngine;
 
-    class ConsoleCallbackObject : public yli::callback::CallbackObject
+    class ConsoleCallbackObject final : public yli::callback::CallbackObject
     {
         public:
             // destructor.

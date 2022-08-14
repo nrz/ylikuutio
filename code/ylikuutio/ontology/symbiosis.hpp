@@ -60,7 +60,7 @@ namespace yli::ontology
     class SymbiontSpecies;
     struct ModelStruct;
 
-    class Symbiosis: public yli::ontology::Entity
+    class Symbiosis final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,

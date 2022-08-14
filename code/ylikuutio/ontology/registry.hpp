@@ -32,7 +32,7 @@ namespace yli::ontology
     class Completable;
     class Entity;
 
-    class Registry
+    class Registry final
     {
         public:
             // constructor.

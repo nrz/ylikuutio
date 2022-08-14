@@ -29,7 +29,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    class ApprenticeIterator
+    class ApprenticeIterator final
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;

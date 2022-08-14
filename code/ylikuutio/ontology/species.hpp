@@ -40,7 +40,7 @@ namespace yli::ontology
     class Material;
     struct ModelStruct;
 
-    class Species: public yli::ontology::Entity
+    class Species final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,

@@ -37,7 +37,7 @@ namespace yli::ontology
     struct FontStruct;
     struct TextStruct;
 
-    class Font2D: public yli::ontology::Entity
+    class Font2D final : public yli::ontology::Entity
     {
         public:
             Font2D(

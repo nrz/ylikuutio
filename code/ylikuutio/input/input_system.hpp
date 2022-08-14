@@ -35,7 +35,7 @@ namespace yli::input
 {
     class InputMode;
 
-    class InputSystem
+    class InputSystem final
     {
         public:
             void bind_input_mode(yli::input::InputMode* const input_mode);

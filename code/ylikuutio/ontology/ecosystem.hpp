@@ -37,7 +37,7 @@ namespace yli::ontology
     class Scene;
     struct EcosystemStruct;
 
-    class Ecosystem: public yli::ontology::Entity
+    class Ecosystem final : public yli::ontology::Entity
     {
         public:
             Ecosystem(

@@ -45,7 +45,7 @@ namespace yli::ontology
     class Glyph;
     struct VectorFontStruct;
 
-    class VectorFont: public yli::ontology::Entity
+    class VectorFont final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `vector_font` to `nullptr`, set parent according to the input,

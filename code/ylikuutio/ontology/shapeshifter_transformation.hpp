@@ -39,7 +39,7 @@ namespace yli::ontology
     class Material;
     struct ModelStruct;
 
-    class ShapeshifterTransformation: public yli::ontology::Entity
+    class ShapeshifterTransformation final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,

@@ -30,7 +30,7 @@ namespace yli::console
 {
     class ConsoleCallbackObject;
 
-    class ConsoleCallbackEngine : public yli::callback::CallbackEngine
+    class ConsoleCallbackEngine final : public yli::callback::CallbackEngine
     {
         public:
             // constructor.

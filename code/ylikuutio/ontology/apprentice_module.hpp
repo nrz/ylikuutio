@@ -35,7 +35,7 @@ namespace yli::ontology
     template<typename M>
         class MasterModule;
 
-    class ApprenticeModule
+    class ApprenticeModule final
     {
         public:
             void bind_to_generic_master_module();

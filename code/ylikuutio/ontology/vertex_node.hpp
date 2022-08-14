@@ -29,7 +29,7 @@
 
 namespace yli::ontology
 {
-    class VertexNode: public yli::graph::Node
+    class VertexNode final : public yli::graph::Node
     {
         public:
             VertexNode(glm::vec3 coordinate_vector, const yli::graph::NodeStruct& node_struct)

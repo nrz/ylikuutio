@@ -36,7 +36,7 @@
 
 namespace yli::network
 {
-    class TcpServer
+    class TcpServer final
     {
         public:
             TcpServer(asio::io_context& io_context, int port)

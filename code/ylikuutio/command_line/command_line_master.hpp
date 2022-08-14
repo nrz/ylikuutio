@@ -25,7 +25,7 @@
 
 namespace yli::command_line
 {
-    class CommandLineMaster
+    class CommandLineMaster final
     {
         public:
             // constructor.

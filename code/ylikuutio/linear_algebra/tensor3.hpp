@@ -27,7 +27,7 @@
 
 namespace yli::linear_algebra
 {
-    class Tensor3
+    class Tensor3 final
     {
         // `class Tensor3` uses the coordinate order x, y, z:
         // x = 0 is the leftmost slice.

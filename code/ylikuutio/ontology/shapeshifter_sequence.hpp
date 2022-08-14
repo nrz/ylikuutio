@@ -39,7 +39,7 @@ namespace yli::ontology
     class Shader;
     struct ShapeshifterSequenceStruct;
 
-    class ShapeshifterSequence: public yli::ontology::Entity
+    class ShapeshifterSequence final : public yli::ontology::Entity
     {
         public:
             ShapeshifterSequence(

@@ -44,7 +44,7 @@ namespace yli::render
     struct RenderSystemStruct;
     struct RenderStruct;
 
-    class RenderSystem
+    class RenderSystem final
     {
         public:
             // constructor.

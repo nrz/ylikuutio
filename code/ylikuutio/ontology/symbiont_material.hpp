@@ -34,7 +34,7 @@ namespace yli::ontology
     class Shader;
     struct MaterialStruct;
 
-    class SymbiontMaterial: public yli::ontology::Entity
+    class SymbiontMaterial final : public yli::ontology::Entity
     {
         public:
             SymbiontMaterial(

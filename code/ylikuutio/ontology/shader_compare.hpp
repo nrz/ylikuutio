@@ -22,7 +22,7 @@ namespace yli::ontology
 {
     class Shader;
 
-    class ShaderCompare
+    class ShaderCompare final
     {
         public:
             bool operator() (yli::ontology::Shader* first, yli::ontology::Shader* second);

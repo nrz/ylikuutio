@@ -30,7 +30,7 @@ namespace yli::ontology
     class Registry;
     class Entity;
 
-    class ParentOfShadersModule: public yli::ontology::GenericParentModule
+    class ParentOfShadersModule final : public yli::ontology::GenericParentModule
     {
         public:
             bool bind_child(yli::ontology::Entity* const shader_child) override;

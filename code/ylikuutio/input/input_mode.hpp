@@ -36,7 +36,7 @@ namespace yli::input
 {
     class InputSystem;
 
-    class InputMode
+    class InputMode final
     {
         public:
             // destructor.

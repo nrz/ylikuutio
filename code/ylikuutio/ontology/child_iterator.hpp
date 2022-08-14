@@ -27,7 +27,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    class ChildIterator
+    class ChildIterator final
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;

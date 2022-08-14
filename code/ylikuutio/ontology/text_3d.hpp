@@ -40,7 +40,7 @@ namespace yli::ontology
     class VectorFont;
     struct Text3DStruct;
 
-    class Text3D: public yli::ontology::Movable
+    class Text3D final : public yli::ontology::Movable
     {
         public:
             // Disable all character `Object`s of `text_3d`,

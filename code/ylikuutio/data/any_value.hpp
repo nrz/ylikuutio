@@ -58,7 +58,7 @@ namespace yli::data
 {
     struct SphericalCoordinatesStruct;
 
-    class AnyValue
+    class AnyValue final
     {
         public:
             bool operator==(const yli::data::AnyValue& rhs) const;

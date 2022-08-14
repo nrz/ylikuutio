@@ -42,7 +42,7 @@ namespace yli::ontology
     class Shader;
     struct MaterialStruct;
 
-    class Material: public yli::ontology::Entity
+    class Material final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `material` to `nullptr`, set parent according to the input,

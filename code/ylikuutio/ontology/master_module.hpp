@@ -52,7 +52,7 @@ namespace yli::ontology
     class Entity;
 
     template<typename M>
-        class MasterModule: public yli::ontology::GenericMasterModule
+        class MasterModule final : public yli::ontology::GenericMasterModule
     {
         public:
             // constructor.

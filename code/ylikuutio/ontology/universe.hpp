@@ -73,7 +73,7 @@ namespace yli::ontology
 
     struct UniverseStruct;
 
-    class Universe: public yli::ontology::Entity
+    class Universe final : public yli::ontology::Entity
     {
         public:
             void bind_entity(yli::ontology::Entity* const entity);

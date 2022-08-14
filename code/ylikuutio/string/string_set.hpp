@@ -23,7 +23,7 @@
 
 namespace yli::string
 {
-    class StringSet
+    class StringSet final
     {
         public:
             // constructor.

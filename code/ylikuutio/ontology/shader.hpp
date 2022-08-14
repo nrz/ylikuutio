@@ -49,7 +49,7 @@ namespace yli::ontology
     class ShaderCompare;
     struct ShaderStruct;
 
-    class Shader: public yli::ontology::Entity
+    class Shader final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `shader` to `nullptr`, set parent according to the input,

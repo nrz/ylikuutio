@@ -33,7 +33,7 @@ namespace yli::ontology
 
 namespace yli::audio
 {
-    class AudioSystem
+    class AudioSystem final
     {
         public:
             // constructor.

@@ -47,7 +47,7 @@ namespace yli::ontology
     class Shader;
     struct ModelStruct;
 
-    class SymbiontSpecies: public yli::ontology::Entity
+    class SymbiontSpecies final : public yli::ontology::Entity
     {
         public:
             SymbiontSpecies(

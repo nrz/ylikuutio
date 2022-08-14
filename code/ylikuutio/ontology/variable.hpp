@@ -51,7 +51,7 @@ namespace yli::ontology
     class Console;
     struct VariableStruct;
 
-    class Variable: public yli::ontology::Entity 
+    class Variable final : public yli::ontology::Entity
     {
         public:
             Variable(

@@ -34,7 +34,7 @@ namespace yli::ontology
     // Insert:             O(log(n))
     // Delete:             O(log(n))
 
-    class ShaderPriorityQueue: public std::priority_queue<yli::ontology::Shader*, std::vector<yli::ontology::Shader*>>
+    class ShaderPriorityQueue final : public std::priority_queue<yli::ontology::Shader*, std::vector<yli::ontology::Shader*>>
     {
         public:
             bool remove(const std::size_t childID);

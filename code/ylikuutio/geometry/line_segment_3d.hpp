@@ -31,7 +31,7 @@
 
 namespace yli::geometry
 {
-    class LineSegment3D : public LineSegment
+    class LineSegment3D final : public LineSegment
     {
         public:
             // constructor.

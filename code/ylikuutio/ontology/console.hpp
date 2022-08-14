@@ -85,7 +85,7 @@ namespace yli::ontology
     class Registry;
     struct ConsoleStruct;
 
-    class Console: public yli::ontology::Entity
+    class Console final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `console` to `nullptr`, set font according to the input,

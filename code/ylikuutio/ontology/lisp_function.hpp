@@ -36,7 +36,7 @@ namespace yli::ontology
     class Scene;
     class Console;
 
-    class LispFunction: public yli::ontology::Entity
+    class LispFunction final : public yli::ontology::Entity
     {
         public:
             LispFunction(

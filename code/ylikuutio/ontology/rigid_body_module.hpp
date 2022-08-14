@@ -34,7 +34,7 @@ namespace yli::ontology
     class Movable;
     class Scene;
 
-    class RigidBodyModule
+    class RigidBodyModule final
     {
         public:
             RigidBodyModule(

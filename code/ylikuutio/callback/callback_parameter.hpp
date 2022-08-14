@@ -36,7 +36,7 @@ namespace yli::ontology
 
 namespace yli::callback
 {
-    class CallbackParameter
+    class CallbackParameter final
     {
         public:
             // destructor.

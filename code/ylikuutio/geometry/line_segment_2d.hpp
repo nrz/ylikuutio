@@ -32,7 +32,7 @@
 
 namespace yli::geometry
 {
-    class LineSegment2D : public Line2D
+    class LineSegment2D final : public Line2D
     {
         public:
             // constructor.

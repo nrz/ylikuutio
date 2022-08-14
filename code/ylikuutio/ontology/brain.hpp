@@ -59,7 +59,7 @@ namespace yli::ontology
     class GenericParentModule;
     struct BrainStruct;
 
-    class Brain: public yli::ontology::Entity
+    class Brain final : public yli::ontology::Entity
     {
         public:
             Brain(

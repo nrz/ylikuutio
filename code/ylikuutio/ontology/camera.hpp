@@ -76,7 +76,7 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
 
-    class Camera: public yli::ontology::Movable
+    class Camera final : public yli::ontology::Movable
     {
         public:
             Camera(

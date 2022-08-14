@@ -44,7 +44,7 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
 
-    class Object: public yli::ontology::Movable
+    class Object final : public yli::ontology::Movable
     {
         public:
             // Set pointer to `object` to `nullptr`, set parent according to the input,

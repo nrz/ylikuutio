@@ -62,7 +62,7 @@ namespace yli::ontology
     class Shader;
     struct ComputeTaskStruct;
 
-    class ComputeTask: public yli::ontology::Entity
+    class ComputeTask final : public yli::ontology::Entity
     {
         public:
             ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct);

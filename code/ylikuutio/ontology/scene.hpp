@@ -72,7 +72,7 @@ namespace yli::ontology
     class RigidBodyModule;
     struct SceneStruct;
 
-    class Scene: public yli::ontology::Entity
+    class Scene final : public yli::ontology::Entity
     {
         public:
             Scene(

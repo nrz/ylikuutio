@@ -36,7 +36,7 @@ namespace yli::ontology
     class Font2D;
     struct TextStruct;
 
-    class Text2D: public yli::ontology::Entity
+    class Text2D final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `text_2d` to `nullptr`, set parent according to the input,

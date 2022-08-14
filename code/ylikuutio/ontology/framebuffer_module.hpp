@@ -27,7 +27,7 @@ namespace yli::ontology
 {
     struct FramebufferModuleStruct;
 
-    class FramebufferModule
+    class FramebufferModule final
     {
         public:
             // constructor.

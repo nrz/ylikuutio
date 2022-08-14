@@ -27,7 +27,7 @@ namespace yli::linear_algebra
 {
     class Tensor3;
 
-    class Matrix
+    class Matrix final
     {
         public:
             // constructor.

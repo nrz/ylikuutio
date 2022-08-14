@@ -49,7 +49,7 @@ namespace yli::ontology
     struct ComputeTaskStruct;
     struct BrainStruct;
 
-    class EntityFactory
+    class EntityFactory final
     {
         public:
             // constructor.

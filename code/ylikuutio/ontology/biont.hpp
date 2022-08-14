@@ -37,7 +37,7 @@ namespace yli::ontology
     class GenericMasterModule;
     struct BiontStruct;
 
-    class Biont: public yli::ontology::Movable
+    class Biont final : public yli::ontology::Movable
     {
         public:
             Biont(

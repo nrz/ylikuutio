@@ -35,7 +35,7 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     struct ModelStruct;
 
-    class ShapeshifterForm: public yli::ontology::Entity
+    class ShapeshifterForm final : public yli::ontology::Entity
     {
         public:
             ShapeshifterForm(

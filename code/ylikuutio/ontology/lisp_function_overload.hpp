@@ -55,7 +55,7 @@ namespace yli::ontology
     class GenericParentModule;
 
     template<typename... Types>
-        class LispFunctionOverload: public yli::ontology::GenericLispFunctionOverload
+        class LispFunctionOverload final : public yli::ontology::GenericLispFunctionOverload
     {
         public:
             LispFunctionOverload(

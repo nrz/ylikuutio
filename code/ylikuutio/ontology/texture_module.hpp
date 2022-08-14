@@ -32,7 +32,7 @@
 
 namespace yli::ontology
 {
-    class TextureModule
+    class TextureModule final
     {
         public:
             TextureModule(

@@ -43,7 +43,7 @@ namespace yli::ontology
 {
     class Ecosystem;
 
-    class MeshModule
+    class MeshModule final
     {
         public:
             MeshModule(

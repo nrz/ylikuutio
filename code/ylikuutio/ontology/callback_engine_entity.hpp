@@ -32,7 +32,7 @@ namespace yli::ontology
     class Scene;
     class GenericParentModule;
 
-    class CallbackEngineEntity: public yli::callback::CallbackEngine, public yli::ontology::Entity
+    class CallbackEngineEntity final : public yli::callback::CallbackEngine, public yli::ontology::Entity
     {
         public:
             CallbackEngineEntity(

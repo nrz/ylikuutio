@@ -37,7 +37,7 @@
 namespace yli::network
 {
     // class TcpConnection: public std::shared_ptr<TcpConnection>
-    class TcpConnection
+    class TcpConnection final
     {
         public:
             explicit TcpConnection(asio::io_context& io_context)

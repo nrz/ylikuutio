@@ -33,7 +33,7 @@
 
 namespace yli::ontology
 {
-    class VertexGraph: public yli::graph::Graph
+    class VertexGraph final : public yli::graph::Graph
     {
         public:
             VertexGraph(std::vector<glm::vec3>& /* in_vertices */, uint32_t image_width, uint32_t image_height, const std::string& triangulation_type)

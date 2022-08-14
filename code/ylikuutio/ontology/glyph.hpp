@@ -42,7 +42,7 @@ namespace yli::ontology
     class VectorFont;
     struct ModelStruct;
 
-    class Glyph: public yli::ontology::Entity
+    class Glyph final : public yli::ontology::Entity
     {
         public:
             // destructor.
