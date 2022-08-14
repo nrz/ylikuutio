@@ -113,19 +113,19 @@ namespace yli::load
             return false;
         }
 
-        if (n_color_channels * image_size != image_data->size())
+        if (static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_size) != image_data->size())
         {
             std::cerr << "ERROR: `yli::load::load_png_terrain`: image data size does not match number of color channels and image size!\n";
             return false;
         }
 
         std::cout << n_color_channels << " color channel" << (n_color_channels > 1 ? "s" : "") << " in use.\n";
-        yli::memory::flip_vertically(&(*image_data)[0], n_color_channels * image_width, image_height);
+        yli::memory::flip_vertically(&(*image_data)[0], static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
 
         // Define terrain size.
-        const std::size_t terrain_size = image_width * image_height;
+        const std::size_t terrain_size = static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height);
 
-        const std::size_t line_size_in_bytes = n_color_channels * image_width;
+        const std::size_t line_size_in_bytes = static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width);
 
         std::vector<float> vertex_data;
         vertex_data.reserve(terrain_size);
