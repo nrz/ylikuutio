@@ -85,7 +85,7 @@ namespace yli::ontology
             Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Universe();
+            ~Universe();
 
             // This method contains the main loop.
             void start_simulation();

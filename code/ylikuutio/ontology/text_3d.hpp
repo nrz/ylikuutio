@@ -61,7 +61,7 @@ namespace yli::ontology
             Text3D& operator=(const Text3D&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Text3D() = default;
+            ~Text3D() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

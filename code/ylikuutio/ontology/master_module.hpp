@@ -71,7 +71,7 @@ namespace yli::ontology
             MasterModule& operator=(const MasterModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~MasterModule()
+            ~MasterModule()
             {
                 // destructor.
 

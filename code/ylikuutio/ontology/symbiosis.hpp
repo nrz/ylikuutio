@@ -85,7 +85,7 @@ namespace yli::ontology
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Symbiosis() = default;
+            ~Symbiosis() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

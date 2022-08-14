@@ -75,7 +75,7 @@ namespace yli::ontology
             LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~LispFunctionOverload() = default;
+            ~LispFunctionOverload() = default;
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {

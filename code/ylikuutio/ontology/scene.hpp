@@ -84,7 +84,7 @@ namespace yli::ontology
             Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Scene();
+            ~Scene();
 
             yli::ontology::Entity* get_parent() const override;
 

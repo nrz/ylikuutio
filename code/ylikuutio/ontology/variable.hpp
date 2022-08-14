@@ -63,7 +63,7 @@ namespace yli::ontology
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Variable();
+            ~Variable();
 
             yli::ontology::Entity* get_parent() const override;
 

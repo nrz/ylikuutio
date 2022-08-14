@@ -149,7 +149,7 @@ namespace yli::ontology
             MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~MeshModule();
+            ~MeshModule();
 
             std::size_t get_number_of_vertices() const;
             const std::vector<glm::vec3>& get_vertices() const;

@@ -116,7 +116,7 @@ namespace yli::ontology
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Camera() = default;
+            ~Camera() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

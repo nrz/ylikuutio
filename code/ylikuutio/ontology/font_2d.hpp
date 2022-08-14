@@ -49,7 +49,7 @@ namespace yli::ontology
             Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Font2D();
+            ~Font2D();
 
             yli::ontology::Entity* get_parent() const override;
 

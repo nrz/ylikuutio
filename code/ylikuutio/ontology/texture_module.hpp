@@ -120,7 +120,7 @@ namespace yli::ontology
             TextureModule &operator=(const TextureModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~TextureModule();
+            ~TextureModule();
 
             const std::string& get_texture_filename() const;
             const std::string& get_texture_file_format() const;

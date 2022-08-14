@@ -57,7 +57,7 @@ namespace yli::ontology
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~LispFunction() = default;
+            ~LispFunction() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

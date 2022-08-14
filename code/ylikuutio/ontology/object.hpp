@@ -74,7 +74,7 @@ namespace yli::ontology
             Object& operator=(const Object&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Object() = default;
+            ~Object() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

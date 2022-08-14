@@ -49,7 +49,7 @@ namespace yli::ontology
             Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Ecosystem() = default;
+            ~Ecosystem() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

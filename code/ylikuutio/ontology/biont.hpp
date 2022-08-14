@@ -50,7 +50,7 @@ namespace yli::ontology
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Biont();
+            ~Biont();
 
             yli::ontology::Entity* get_parent() const override;
 

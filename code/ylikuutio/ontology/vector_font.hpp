@@ -59,7 +59,7 @@ namespace yli::ontology
 
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-            virtual ~VectorFont();
+            ~VectorFont();
 
             yli::ontology::Entity* get_parent() const override;
 

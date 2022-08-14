@@ -47,7 +47,7 @@ namespace yli::ontology
         public:
             // destructor.
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
-            virtual ~Glyph() = default;
+            ~Glyph() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

@@ -69,7 +69,7 @@ namespace yli::ontology
             Shader& operator=(const Shader&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~Shader();
+            ~Shader();
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
