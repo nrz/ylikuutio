@@ -140,6 +140,8 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     ASSERT_EQ(vertices[11].x, 1.0f);
     ASSERT_EQ(vertices[11].z, 0.0f);
     ASSERT_EQ(vertices[11].y, southeast_height);
+
+    delete vertex_data;
 }
 
 TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
@@ -219,6 +221,8 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     ASSERT_EQ(vertices[5].x, 0.0f);
     ASSERT_EQ(vertices[5].z, 1.0f);
     ASSERT_EQ(vertices[5].y, northwest_height);
+
+    delete vertex_data;
 }
 
 TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges)
@@ -298,6 +302,8 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges
     ASSERT_EQ(vertices[5].x, 0.0f);
     ASSERT_EQ(vertices[5].z, 0.0f);
     ASSERT_EQ(vertices[5].y, southwest_height);
+
+    delete vertex_data;
 }
 
 TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
@@ -486,4 +492,6 @@ TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     ASSERT_EQ(vertices[23].x, 1.0f);
     ASSERT_EQ(vertices[23].z, 2.0f);
     ASSERT_EQ(vertices[23].y, x1_z2_height);
+
+    delete vertex_data;
 }
