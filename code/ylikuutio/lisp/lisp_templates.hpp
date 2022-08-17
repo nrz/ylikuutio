@@ -86,7 +86,6 @@ namespace yli::lisp
                 std::size_t&)                    // parameter_i.
         {
             static_assert(sizeof(T1) == -1, "You need to specialize this `yli::data::convert_string_to_value_and_advance_index` for the type!");
-            throw;
         }
 
     template<>
