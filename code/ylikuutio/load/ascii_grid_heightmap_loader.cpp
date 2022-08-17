@@ -185,7 +185,7 @@ namespace yli::load
         image_height = static_cast<uint32_t>(image_height_int32_t);
 
         std::vector<float> vertex_data;
-        vertex_data.reserve(image_width * image_height);
+        vertex_data.reserve(static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height));
 
         // start processing image_data.
         std::cout << "Processing image data.\n";
