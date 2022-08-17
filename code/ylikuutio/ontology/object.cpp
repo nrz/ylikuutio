@@ -317,7 +317,7 @@ namespace yli::ontology
             }
         }
 
-        if (this->universe.get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use() && master_model != nullptr)
         {
             GLuint vao                             = master_model->get_vao();
             GLuint vertexbuffer                    = master_model->get_vertexbuffer();
@@ -382,7 +382,7 @@ namespace yli::ontology
             yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
             yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
         }
-        else if (this->universe.get_is_vulkan_in_use())
+        else if (this->universe.get_is_vulkan_in_use() && master_model != nullptr)
         {
             std::cerr << "ERROR: `Object::render_this_object`: Vulkan is not supported yet!\n";
         }
