@@ -84,17 +84,17 @@ namespace yli::load
         std::array<uint8_t, header_size_in_bytes> header  { 0x49, 'P', 'N', 'G' };
         if (fread(header.data(), 1, header_size_in_bytes, fp) != header_size_in_bytes)
         {
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: reading header of " << filename << " failed!\n";
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_png_file`: reading header of " << filename << " failed!\n";
             return nullptr;
         }
 
         if (png_sig_cmp(header.data(), 0, header_size_in_bytes))
         {
+            std::cerr << filename << "ERROR: `yli::load::load_png_file`: file " << filename << " is not a PNG file!\n";
             png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
             fclose(fp);
-            std::cerr << filename << "ERROR: `yli::load::load_png_file`: file " << filename << " is not a PNG file!\n";
             return nullptr;
         }
 
