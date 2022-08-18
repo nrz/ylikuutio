@@ -39,7 +39,7 @@ namespace yli::ontology
     class Shader;
     struct ModelStruct;
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(yli::ontology::Species& species, yli::ontology::Ecosystem& new_parent)
+    std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(yli::ontology::Species& species, yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Species` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -70,7 +70,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent)
+    std::optional<yli::data::AnyValue> Species::bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `species` to `nullptr`, set parent according to the input,
         // and request a new childID from the new `new_parent`.
@@ -101,7 +101,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_material(yli::ontology::Species& species, yli::ontology::Material& new_material)
+    std::optional<yli::data::AnyValue> Species::bind_to_new_material(yli::ontology::Species& species, yli::ontology::Material& new_material) noexcept
     {
         // Set pointer to `species` to `nullptr`, set material according to the input,
         // and request a new apprenticeID from `new_material`.

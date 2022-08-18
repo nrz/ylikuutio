@@ -30,7 +30,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    bool GenericParentModule::bind_child(yli::ontology::Entity* const child)
+    bool GenericParentModule::bind_child(yli::ontology::Entity* const child) noexcept
     {
         if (this->entity == nullptr || child == nullptr)
         {
@@ -47,7 +47,7 @@ namespace yli::ontology
         return true; // Binding successful.
     }
 
-    bool GenericParentModule::unbind_child(std::size_t childID)
+    bool GenericParentModule::unbind_child(std::size_t childID) noexcept
     {
         if (this->entity == nullptr)
         {
@@ -82,7 +82,7 @@ namespace yli::ontology
         return true; // Unbinding successful.
     }
 
-    GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
+    GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
         : number_of_children { 0 },
         entity { entity }
     {
@@ -91,41 +91,41 @@ namespace yli::ontology
         registry->add_indexable(this, name);
     }
 
-    GenericParentModule::~GenericParentModule()
+    GenericParentModule::~GenericParentModule() noexcept
     {
         // destructor.
 
         yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
     }
 
-    yli::ontology::GenericParentModule* GenericParentModule::get() const
+    yli::ontology::GenericParentModule* GenericParentModule::get() const noexcept
     {
         // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
         yli::ontology::GenericParentModule* generic_parent_module = const_cast<yli::ontology::GenericParentModule*>(this);
         return generic_parent_module;
     }
 
-    yli::ontology::Entity* GenericParentModule::get_entity() const
+    yli::ontology::Entity* GenericParentModule::get_entity() const noexcept
     {
         return this->entity;
     }
 
-    std::size_t GenericParentModule::get_number_of_children() const
+    std::size_t GenericParentModule::get_number_of_children() const noexcept
     {
         return this->number_of_children;
     }
 
-    std::size_t GenericParentModule::get_number_of_descendants() const
+    std::size_t GenericParentModule::get_number_of_descendants() const noexcept
     {
         return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
     }
 
-    yli::ontology::Scene* GenericParentModule::get_scene() const
+    yli::ontology::Scene* GenericParentModule::get_scene() const noexcept
     {
         return this->entity->get_scene();
     }
 
-    yli::ontology::Entity* GenericParentModule::get(const std::size_t index) const
+    yli::ontology::Entity* GenericParentModule::get(const std::size_t index) const noexcept
     {
         if (index < this->child_pointer_vector.size())
         {

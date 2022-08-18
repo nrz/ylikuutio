@@ -38,7 +38,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Shader::bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent)
+    std::optional<yli::data::AnyValue> Shader::bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Shader` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -69,7 +69,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Shader::bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent)
+    std::optional<yli::data::AnyValue> Shader::bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `shader` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.

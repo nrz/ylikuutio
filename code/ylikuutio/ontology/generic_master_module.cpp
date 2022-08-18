@@ -30,7 +30,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
+    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module) noexcept
     {
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
                 apprentice_module,
@@ -39,7 +39,7 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID)
+    void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID) noexcept
     {
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
@@ -48,7 +48,7 @@ namespace yli::ontology
                 this->number_of_apprentices);
     }
 
-    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene)
+    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene) noexcept
     {
         for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
         {
@@ -68,7 +68,7 @@ namespace yli::ontology
         }
     }
 
-    GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name)
+    GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept
         : generic_master { generic_master },
         number_of_apprentices { 0 }
     {
@@ -77,7 +77,7 @@ namespace yli::ontology
         registry->add_indexable(this, name);
     }
 
-    GenericMasterModule::~GenericMasterModule()
+    GenericMasterModule::~GenericMasterModule() noexcept
     {
         // destructor.
 
@@ -93,27 +93,27 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* GenericMasterModule::get_generic_master() const
+    yli::ontology::Entity* GenericMasterModule::get_generic_master() const noexcept
     {
         return this->generic_master;
     }
 
-    std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference()
+    std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference() noexcept
     {
         return this->apprentice_module_pointer_vector;
     }
 
-    const std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const
+    const std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const noexcept
     {
         return this->apprentice_module_pointer_vector;
     }
 
-    std::size_t GenericMasterModule::get_number_of_apprentices() const
+    std::size_t GenericMasterModule::get_number_of_apprentices() const noexcept
     {
         return this->number_of_apprentices;
     }
 
-    yli::ontology::Entity* GenericMasterModule::get(const std::size_t index) const
+    yli::ontology::Entity* GenericMasterModule::get(const std::size_t index) const noexcept
     {
         if (index < this->apprentice_module_pointer_vector.size())
         {

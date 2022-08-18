@@ -33,7 +33,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    void Variable::bind_to_parent()
+    void Variable::bind_to_parent() noexcept
     {
         // Requirements:
         // `this->parent` must not be `nullptr`.

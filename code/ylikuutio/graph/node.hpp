@@ -41,7 +41,7 @@ namespace yli::graph
 
             friend class yli::graph::Graph;
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
         private:
             void bind_to_parent();

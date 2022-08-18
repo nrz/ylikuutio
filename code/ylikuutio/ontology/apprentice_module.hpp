@@ -38,25 +38,25 @@ namespace yli::ontology
     class ApprenticeModule final
     {
         public:
-            void bind_to_generic_master_module();
-            void unbind_from_generic_master_module();
+            void bind_to_generic_master_module() noexcept;
+            void unbind_from_generic_master_module() noexcept;
 
         private:
-            void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
+            void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
 
         public:
-            void unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene);
-            void unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master);
+            void unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene) noexcept;
+            void unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
 
             // constructor.
-            ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice);
+            ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice) noexcept;
 
             // destructor.
-            ~ApprenticeModule();
+            ~ApprenticeModule() noexcept;
 
-            yli::ontology::Entity* get_master() const;
-            yli::ontology::Entity* get_apprentice() const;
-            std::size_t get_apprenticeID() const;
+            yli::ontology::Entity* get_master() const noexcept;
+            yli::ontology::Entity* get_apprentice() const noexcept;
+            std::size_t get_apprenticeID() const noexcept;
 
             ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
             ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
@@ -72,18 +72,18 @@ namespace yli::ontology
                         const T1 child_pointer,
                         std::vector<T1>& child_pointer_vector,
                         std::queue<std::size_t>& free_childID_queue,
-                        std::size_t& number_of_children);
+                        std::size_t& number_of_children) noexcept;
 
 
             template<typename T1>
-                friend std::size_t yli::hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue);
+                friend std::size_t yli::hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept;
 
             template<typename T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(
                         const T1 apprentice_pointer,
                         std::vector<T1>& apprentice_pointer_vector,
                         std::queue<std::size_t>& free_apprenticeID_queue,
-                        std::size_t& number_of_apprentices);
+                        std::size_t& number_of_apprentices) noexcept;
 
         private:
             yli::ontology::GenericMasterModule* generic_master_module;

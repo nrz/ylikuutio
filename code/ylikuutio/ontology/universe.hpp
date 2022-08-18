@@ -76,8 +76,8 @@ namespace yli::ontology
     class Universe final : public yli::ontology::Entity
     {
         public:
-            void bind_entity(yli::ontology::Entity* const entity);
-            void unbind_entity(const std::size_t entityID);
+            void bind_entity(yli::ontology::Entity* const entity) noexcept;
+            void unbind_entity(const std::size_t entityID) noexcept;
 
             explicit Universe(const yli::ontology::UniverseStruct& universe_struct);
 

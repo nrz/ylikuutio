@@ -45,7 +45,7 @@ namespace yli::ontology
         return !this->operator==(rhs);
     }
 
-    void Entity::bind_variable(yli::ontology::Variable* const variable)
+    void Entity::bind_variable(yli::ontology::Variable* const variable) noexcept
     {
         if (variable != nullptr)
         {
@@ -56,12 +56,12 @@ namespace yli::ontology
         }
     }
 
-    void Entity::unbind_variable(const std::size_t childID)
+    void Entity::unbind_variable(const std::size_t childID) noexcept
     {
         this->parent_of_variables.unbind_child(childID);
     }
 
-    void Entity::bind_to_universe()
+    void Entity::bind_to_universe() noexcept
     {
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.
         universe.bind_entity(this);

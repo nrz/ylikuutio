@@ -28,7 +28,7 @@
 
 namespace yli::ontology
 {
-    bool ParentOfShadersModule::bind_child(yli::ontology::Entity* const shader_child)
+    bool ParentOfShadersModule::bind_child(yli::ontology::Entity* const shader_child) noexcept
     {
         if (this->GenericParentModule::bind_child(shader_child))
         {
@@ -40,7 +40,7 @@ namespace yli::ontology
         return false; // Binding failed.
     }
 
-    bool ParentOfShadersModule::unbind_child(std::size_t childID)
+    bool ParentOfShadersModule::unbind_child(std::size_t childID) noexcept
     {
         if (this->GenericParentModule::unbind_child(childID))
         {
@@ -52,7 +52,7 @@ namespace yli::ontology
         return false; // Unbinding failed.
     }
 
-    ParentOfShadersModule::ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name)
+    ParentOfShadersModule::ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
         : GenericParentModule(entity, registry, name)
     {
         // constructor.

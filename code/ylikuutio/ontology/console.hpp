@@ -90,7 +90,7 @@ namespace yli::ontology
         public:
             // Set pointer to `console` to `nullptr`, set font according to the input,
             // and request a new apprenticeID from `new_font_2d`.
-            static std::optional<yli::data::AnyValue> bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d);
+            static std::optional<yli::data::AnyValue> bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d) noexcept;
 
             Console(yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
@@ -360,7 +360,7 @@ namespace yli::ontology
             friend class yli::ontology::GenericMasterModule;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren);
+                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren) noexcept;
 
         private:
             yli::ontology::Entity* get_parent() const override;

@@ -55,7 +55,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent)
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -86,7 +86,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent)
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -116,7 +116,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader)
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader) noexcept
     {
         // Set pointer to `symbiosis` to `nullptr`, set shader according to the input,
         // and request a new apprenticeID from `new_shader`.

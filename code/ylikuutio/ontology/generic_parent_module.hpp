@@ -40,28 +40,28 @@ namespace yli::ontology
             typedef ChildIterator       iterator;
             typedef ChildIterator const_iterator;
 
-            virtual bool bind_child(yli::ontology::Entity* const child);
-            virtual bool unbind_child(std::size_t childID);
+            virtual bool bind_child(yli::ontology::Entity* const child) noexcept;
+            virtual bool unbind_child(std::size_t childID) noexcept;
 
             // constructor.
-            GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
+            GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept;
 
             GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
             GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
 
             // destructor.
-            virtual ~GenericParentModule();
+            virtual ~GenericParentModule() noexcept;
 
             // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
-            yli::ontology::GenericParentModule* get() const;
+            yli::ontology::GenericParentModule* get() const noexcept;
 
-            yli::ontology::Entity* get_entity() const;
-            std::size_t get_number_of_children() const;
-            std::size_t get_number_of_descendants() const;
+            yli::ontology::Entity* get_entity() const noexcept;
+            std::size_t get_number_of_children() const noexcept;
+            std::size_t get_number_of_descendants() const noexcept;
 
-            yli::ontology::Scene* get_scene() const;
+            yli::ontology::Scene* get_scene() const noexcept;
 
-            yli::ontology::Entity* get(const std::size_t index) const override;
+            yli::ontology::Entity* get(const std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()

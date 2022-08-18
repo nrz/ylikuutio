@@ -44,11 +44,11 @@ namespace yli::ontology
             bool operator==(const yli::ontology::Entity& rhs) const;
             bool operator!=(const yli::ontology::Entity& rhs) const;
 
-            void bind_variable(yli::ontology::Variable* const variable);
+            void bind_variable(yli::ontology::Variable* const variable) noexcept;
 
-            void unbind_variable(const std::size_t childID);
+            void unbind_variable(const std::size_t childID) noexcept;
 
-            void bind_to_universe();
+            void bind_to_universe() noexcept;
 
             // constructor.
             Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct);

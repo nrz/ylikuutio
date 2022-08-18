@@ -31,7 +31,7 @@ namespace yli::ontology
     class Scene;
     class Shader;
 
-    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent)
+    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent) noexcept
     {
         // Disable all character `Object`s of `text_3d`,
         // set `parent` according to the input, request a new childID

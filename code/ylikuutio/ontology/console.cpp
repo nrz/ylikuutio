@@ -46,7 +46,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d)
+    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d) noexcept
     {
         // Set pointer to `console` to `nullptr`, set font according to the input,
         // and request a new apprenticeID from `new_font_2d`.

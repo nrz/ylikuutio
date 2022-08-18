@@ -111,7 +111,7 @@ namespace yli::ontology
 
     const std::string Universe::version = "0.0.9";
 
-    void Universe::bind_entity(yli::ontology::Entity* const entity)
+    void Universe::bind_entity(yli::ontology::Entity* const entity) noexcept
     {
         // no-op when called during initialization of the `Entity` base class of `Universe` itself.
         if (entity == this)
@@ -127,7 +127,7 @@ namespace yli::ontology
         yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
     }
 
-    void Universe::unbind_entity(const std::size_t entityID)
+    void Universe::unbind_entity(const std::size_t entityID) noexcept
     {
         yli::hierarchy::unbind_child_from_parent(
                 entityID,

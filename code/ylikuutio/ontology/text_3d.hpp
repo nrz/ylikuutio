@@ -49,7 +49,7 @@ namespace yli::ontology
             // character `Object`s of `text_3d`.
             // TODO: implement creation and enabling the character `Object`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent);
+            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent) noexcept;
 
             Text3D(
                     yli::ontology::Universe& universe,

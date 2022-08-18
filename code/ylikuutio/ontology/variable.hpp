@@ -119,7 +119,7 @@ namespace yli::ontology
             // Public callbacks and here.
 
         private:
-            void bind_to_parent();
+            void bind_to_parent() noexcept;
 
             void activate() override;
 

@@ -50,7 +50,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void ComputeTask::bind_to_parent()
+    void ComputeTask::bind_to_parent() noexcept
     {
         // Requirements:
         // `this->parent` must not be `nullptr`.

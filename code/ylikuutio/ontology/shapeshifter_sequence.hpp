@@ -59,7 +59,7 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule master_of_objects;
 
         private:
-            void bind_to_parent();
+            void bind_to_parent() noexcept;
 
         public:
             yli::ontology::Scene* get_scene() const override;

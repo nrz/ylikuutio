@@ -29,7 +29,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    void ApprenticeModule::bind_to_generic_master_module()
+    void ApprenticeModule::bind_to_generic_master_module() noexcept
     {
         if (this->generic_master_module != nullptr)
         {
@@ -37,7 +37,7 @@ namespace yli::ontology
         }
     }
 
-    void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene)
+    void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene) noexcept
     {
         yli::ontology::Entity* const master = this->get_master();
 
@@ -54,7 +54,7 @@ namespace yli::ontology
         }
     }
 
-    void ApprenticeModule::unbind_from_generic_master_module()
+    void ApprenticeModule::unbind_from_generic_master_module() noexcept
     {
         if (this->generic_master_module != nullptr && this->apprenticeID != std::numeric_limits<std::size_t>::max())
         {
@@ -62,13 +62,13 @@ namespace yli::ontology
         }
     }
 
-    void ApprenticeModule::bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master)
+    void ApprenticeModule::bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept
     {
         this->generic_master_module = new_generic_master;
         this->bind_to_generic_master_module();
     }
 
-    void ApprenticeModule::unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master)
+    void ApprenticeModule::unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept
     {
         if (new_generic_master != this->generic_master_module)
         {
@@ -77,7 +77,7 @@ namespace yli::ontology
         }
     }
 
-    ApprenticeModule::ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice)
+    ApprenticeModule::ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice) noexcept
         : generic_master_module(generic_master_module),
         apprentice(apprentice)
     {
@@ -93,7 +93,7 @@ namespace yli::ontology
         this->unbind_from_generic_master_module();
     }
 
-    yli::ontology::Entity* ApprenticeModule::get_master() const
+    yli::ontology::Entity* ApprenticeModule::get_master() const noexcept
     {
         if (this->generic_master_module != nullptr)
         {
@@ -103,12 +103,12 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Entity* ApprenticeModule::get_apprentice() const
+    yli::ontology::Entity* ApprenticeModule::get_apprentice() const noexcept
     {
         return this->apprentice;
     }
 
-    std::size_t ApprenticeModule::get_apprenticeID() const
+    std::size_t ApprenticeModule::get_apprenticeID() const noexcept
     {
         return this->apprenticeID;
     }

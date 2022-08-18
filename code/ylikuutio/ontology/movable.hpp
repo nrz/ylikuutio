@@ -68,8 +68,8 @@ namespace yli::ontology
         public:
             // Set pointer to `movable` to `nullptr`, set brain according to the input,
             // and request a new apprenticeID from `new_brain`.
-            static std::optional<yli::data::AnyValue> bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain);
-            static std::optional<yli::data::AnyValue> unbind_from_brain(yli::ontology::Movable& movable);
+            static std::optional<yli::data::AnyValue> bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain) noexcept;
+            static std::optional<yli::data::AnyValue> unbind_from_brain(yli::ontology::Movable& movable) noexcept;
 
             Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,

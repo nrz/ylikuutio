@@ -40,7 +40,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                yli::ontology::Registry& registry)
+                yli::ontology::Registry& registry) noexcept
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -84,7 +84,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map)
+                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map) noexcept
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -129,7 +129,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                yli::ontology::Registry& registry)
+                yli::ontology::Registry& registry) noexcept
         {
             // requirements:
             // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -158,7 +158,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map)
+                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map) noexcept
         {
             // requirements:
             // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -181,7 +181,7 @@ namespace yli::ontology
         }
 
     template<typename T1>
-        std::size_t get_number_of_descendants(const std::vector<T1>& child_pointer_vector)
+        std::size_t get_number_of_descendants(const std::vector<T1>& child_pointer_vector) noexcept
         {
             std::size_t number_of_descendants = 0;
 

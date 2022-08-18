@@ -62,7 +62,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(yli::ontology::Object& object, yli::ontology::Scene& new_parent)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(yli::ontology::Object& object, yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `object` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -92,7 +92,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_species_master(yli::ontology::Object& object, yli::ontology::Species& new_species)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_species_master(yli::ontology::Object& object, yli::ontology::Species& new_species) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_species`.
@@ -120,7 +120,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_shapeshifter_sequence_master(yli::ontology::Object& object, yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_shapeshifter_sequence_master(yli::ontology::Object& object, yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_shapeshifter_sequence`.
@@ -137,7 +137,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_text_3d_master(yli::ontology::Object& object, yli::ontology::Text3D& new_text_3d)
+    std::optional<yli::data::AnyValue> Object::bind_to_new_text_3d_master(yli::ontology::Object& object, yli::ontology::Text3D& new_text_3d) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_text_3d`.

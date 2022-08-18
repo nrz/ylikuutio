@@ -44,7 +44,7 @@ namespace yli::ontology
         public:
             // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent);
+            static std::optional<yli::data::AnyValue> bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent) noexcept;
 
             ShapeshifterTransformation(
                     yli::ontology::Universe& universe,
@@ -61,7 +61,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_shapeshifter_sequences;
 
         private:
-            void bind_to_parent();
+            void bind_to_parent() noexcept;
 
         public:
             yli::ontology::Scene* get_scene() const override;

@@ -54,11 +54,11 @@ namespace yli::ontology
         public:
             // Set pointer to `shader` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent);
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent) noexcept;
 
             // Set pointer to `shader` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent);
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent) noexcept;
 
             Shader(
                     yli::ontology::Universe& universe,
@@ -85,7 +85,7 @@ namespace yli::ontology
 
             friend class yli::ontology::ShaderCompare;
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_compute_tasks;

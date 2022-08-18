@@ -76,7 +76,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
         private:
-            void bind_to_parent();
+            void bind_to_parent() noexcept;
 
         public:
             yli::ontology::Scene* get_scene() const override;

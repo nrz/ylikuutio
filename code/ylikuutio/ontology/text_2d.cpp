@@ -41,7 +41,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(yli::ontology::Text2D& text_2d, yli::ontology::Font2D& new_parent)
+    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(yli::ontology::Text2D& text_2d, yli::ontology::Font2D& new_parent) noexcept
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.

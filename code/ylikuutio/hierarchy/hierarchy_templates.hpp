@@ -32,7 +32,7 @@ namespace yli::hierarchy
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children)
+                std::size_t& number_of_children) noexcept
         {
             // requirements:
             // `childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -78,7 +78,7 @@ namespace yli::hierarchy
         }
 
     template<typename T1>
-        std::size_t request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue)
+        std::size_t request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept
         {
             // This function is called eg. from `bind_child_to_parent`,
             // so that child instance gets an appropriate `childID`.
@@ -119,7 +119,7 @@ namespace yli::hierarchy
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children)
+                std::size_t& number_of_children) noexcept
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -154,7 +154,7 @@ namespace yli::hierarchy
                 const T1 apprentice_pointer,
                 std::vector<T1>& apprentice_pointer_vector,
                 std::queue<std::size_t>& free_apprenticeID_queue,
-                std::size_t& number_of_apprentices)
+                std::size_t& number_of_apprentices) noexcept
         {
             // Note: this function must be used only for
             // master-apprentice relationships.
@@ -180,7 +180,7 @@ namespace yli::hierarchy
                 const std::size_t childID,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children)
+                std::size_t& number_of_children) noexcept
         {
             // requirements:
             // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -196,7 +196,7 @@ namespace yli::hierarchy
         }
 
     template<typename T1>
-        void delete_children(std::vector<T1>& child_pointer_vector, std::size_t& number_of_children)
+        void delete_children(std::vector<T1>& child_pointer_vector, std::size_t& number_of_children) noexcept
         {
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
@@ -207,7 +207,7 @@ namespace yli::hierarchy
         }
 
     template<typename T1>
-        T1 get_first_child(const std::vector<T1>& child_pointer_vector, const std::size_t number_of_children)
+        T1 get_first_child(const std::vector<T1>& child_pointer_vector, const std::size_t number_of_children) noexcept
         {
             if (number_of_children == 0)
             {

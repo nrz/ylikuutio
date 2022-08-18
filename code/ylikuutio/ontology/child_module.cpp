@@ -23,7 +23,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    void ChildModule::bind_to_parent_module()
+    void ChildModule::bind_to_parent_module() noexcept
     {
         // requirements:
         // `this->parent` must not be `nullptr`.
@@ -43,7 +43,7 @@ namespace yli::ontology
         this->parent_module->bind_child(this->entity);
     }
 
-    ChildModule::~ChildModule()
+    ChildModule::~ChildModule() noexcept
     {
         // destructor.
 
@@ -64,7 +64,7 @@ namespace yli::ontology
         this->parent_module->unbind_child(this->entity->childID);
     }
 
-    yli::ontology::Entity* ChildModule::get_parent() const
+    yli::ontology::Entity* ChildModule::get_parent() const noexcept
     {
         if (this->parent_module == nullptr)
         {
@@ -74,12 +74,12 @@ namespace yli::ontology
         return this->parent_module->get_entity();
     }
 
-    yli::ontology::Entity* ChildModule::get_child() const
+    yli::ontology::Entity* ChildModule::get_child() const noexcept
     {
         return this->entity;
     }
 
-    yli::ontology::Scene* ChildModule::get_scene() const
+    yli::ontology::Scene* ChildModule::get_scene() const noexcept
     {
         if (this->parent_module != nullptr)
         {
@@ -89,7 +89,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    void ChildModule::unbind_child() const
+    void ChildModule::unbind_child() const noexcept
     {
         if (this->parent_module == nullptr)
         {
@@ -104,7 +104,7 @@ namespace yli::ontology
         this->parent_module->unbind_child(this->entity->get_childID());
     }
 
-    void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)
+    void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module == nullptr)
         {
@@ -120,7 +120,7 @@ namespace yli::ontology
         this->parent_module->bind_child(this->entity);
     }
 
-    void ChildModule::unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module)
+    void ChildModule::unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module != this->parent_module)
         {

@@ -33,11 +33,11 @@ namespace yli::ontology
     class ParentOfShadersModule final : public yli::ontology::GenericParentModule
     {
         public:
-            bool bind_child(yli::ontology::Entity* const shader_child) override;
-            bool unbind_child(std::size_t childID) override;
+            bool bind_child(yli::ontology::Entity* const shader_child) noexcept override;
+            bool unbind_child(std::size_t childID) noexcept override;
 
             // constructor.
-            ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name);
+            ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept;
 
             ParentOfShadersModule(const ParentOfShadersModule&) = delete;            // Delete copy constructor.
             ParentOfShadersModule& operator=(const ParentOfShadersModule&) = delete; // Delete copy assignment.
