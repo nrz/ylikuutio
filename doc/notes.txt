@@ -148,3 +148,6 @@ https://www.intel.com/content/www/us/en/developer/topic-technology/graphics-rese
 HipremeEngine
 (Can be useful for OpenGL 3.3 -> DirectX 11 port)
 https://github.com/MrcSnm/HipremeEngine
+
+Erin Catto/Blizzard Entertainment: Understanding Constraints
+https://www.gdcvault.com/play/1020603/Physics-for-Game-Programmers-Understanding
