@@ -16,10 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <chrono>   // std::chrono
-#include <cstdlib>  // std::rand, std::srand
 #include <ctime>    // std::time
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <mutex>    // std::mutex, std::scoped_lock
+#include <random>   // std::generate_canonical, std::mt19937, std::random_device
 #include <stdint.h> // uint32_t etc.
 #include <thread>   // std::thread
 #include <vector>   // std::vector
@@ -33,20 +33,22 @@ class Messenger
 class Random
 {
     public:
-        Random()
+        Random(std::uniform_real_distribution<float>& distribution, std::mt19937& generator)
+            : distribution { distribution },
+            generator      { generator }
         {
-            // constructor.
-            std::srand(std::time(nullptr)); // Use current time as seed.
         }
 
         float get_random() const
         {
-            float dividend = static_cast<float>(std::rand() % 10000);
-            float divisor = static_cast<float>(std::rand() % 10000);
-            return dividend / divisor / 10000.0f;
+            return this->distribution(this->generator);
         }
 
-        std::mutex my_mutex;
+		std::mutex my_mutex;
+
+    private:
+        std::uniform_real_distribution<float>& distribution;
+        std::mt19937& generator;
 };
 
 class Fork
@@ -173,8 +175,11 @@ class Table
 
 int main()
 {
+    std::random_device random_device;
+    std::uniform_real_distribution<float> distribution(0.0f, 0.1f);
+    std::mt19937 generator(random_device());
     Messenger messenger;
-    Random random;
+    Random random(distribution, generator);
     Table table(5, messenger, random);
     table.dine();
     table.cleanup();
