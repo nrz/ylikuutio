@@ -10,7 +10,6 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
-[ ] Implement `OrientationModule`.
 [ ] Implement `WalkModule`.
 [ ] Implement `RunModule`.
 [ ] Implement `SwimModule`.
@@ -332,3 +331,4 @@ Ready:
 [x] Fix compiling on MacOS.
 [x] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [x] Implement `LocationModule`.
+[x] Implement `OrientationModule`.

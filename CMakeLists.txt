@@ -648,6 +648,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/object_type.hpp
+    code/ylikuutio/ontology/orientation_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp
     code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/parent_of_shaders_module.cpp

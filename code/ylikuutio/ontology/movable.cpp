@@ -85,9 +85,7 @@ namespace yli::ontology
         original_scale_vector { movable_struct.original_scale_vector },
         location(movable_struct.cartesian_coordinates),
         spherical_coordinates { movable_struct.spherical_coordinates },
-        roll { movable_struct.roll },
-        yaw { movable_struct.yaw },
-        pitch { movable_struct.pitch },
+        orientation(movable_struct.orientation.roll, movable_struct.orientation.yaw, movable_struct.orientation.pitch),
         input_method { movable_struct.input_method }
     {
         // constructor.
@@ -124,42 +122,42 @@ namespace yli::ontology
 
     float Movable::get_roll() const
     {
-        return this->roll;
+        return this->orientation.roll;
     }
 
     void Movable::set_roll(const float roll)
     {
-        this->roll = roll;
+        this->orientation.roll = roll;
     }
 
     float Movable::get_yaw() const
     {
-        return this->yaw;
+        return this->orientation.yaw;
     }
 
     void Movable::set_yaw(const float yaw)
     {
-        this->yaw = yaw;
+        this->orientation.yaw = yaw;
     }
 
     float Movable::get_pitch() const
     {
-        return this->pitch;
+        return this->orientation.pitch;
     }
 
     void Movable::set_pitch(const float pitch)
     {
-        this->pitch = pitch;
+        this->orientation.pitch = pitch;
     }
 
     float Movable::get_azimuth() const
     {
-        return 0.5f * PI - this->yaw;
+        return 0.5f * PI - this->orientation.yaw;
     }
 
     void Movable::set_azimuth(const float azimuth)
     {
-        this->yaw = 0.5f * PI - azimuth;
+        this->orientation.yaw = 0.5f * PI - azimuth;
     }
 
     float Movable::get_scale() const
@@ -257,21 +255,21 @@ namespace yli::ontology
         roll_variable_struct.activate_callback = &yli::ontology::activate_roll;
         roll_variable_struct.read_callback = &yli::ontology::read_roll;
         roll_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(roll_variable_struct, yli::data::AnyValue(this->roll));
+        this->create_variable(roll_variable_struct, yli::data::AnyValue(this->orientation.roll));
 
         yli::ontology::VariableStruct yaw_variable_struct;
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
         yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
         yaw_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(yaw_variable_struct, yli::data::AnyValue(this->yaw));
+        this->create_variable(yaw_variable_struct, yli::data::AnyValue(this->orientation.yaw));
 
         yli::ontology::VariableStruct pitch_variable_struct;
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
         pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
         pitch_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(pitch_variable_struct, yli::data::AnyValue(this->pitch));
+        this->create_variable(pitch_variable_struct, yli::data::AnyValue(this->orientation.pitch));
 
         const float azimuth = 0.0f;
         yli::ontology::VariableStruct azimuth_variable_struct;

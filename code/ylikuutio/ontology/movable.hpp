@@ -22,6 +22,7 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "location_module.hpp"
+#include "orientation_module.hpp"
 #include "rigid_body_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -260,9 +261,8 @@ namespace yli::ontology
             glm::vec3 right { glm::vec3(NAN, NAN, NAN) };          // note: can not be set directly using console.
             glm::vec3 up { glm::vec3(NAN, NAN, NAN) };             // note: can not be set directly using console.
 
-            float roll                    { 0.0f };
-            float yaw                     { 0.0f };
-            float pitch                   { 0.0f };
+            yli::ontology::OrientationModule orientation;
+
             float scale                   { 1.0f };
             float speed                   { 0.0f };                // m/s
             float angular_speed           { 0.0f };                // 1/s

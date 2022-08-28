@@ -17,6 +17,7 @@
 
 #include "object.hpp"
 #include "mesh_module.hpp"
+#include "orientation_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
 #include "shader.hpp"
@@ -263,7 +264,7 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->scale * this->original_scale_vector);
-        glm::vec3 euler_angles { this->roll, this->yaw, this->pitch };
+        glm::vec3 euler_angles { this->orientation.roll, this->orientation.yaw, this->orientation.pitch };
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
@@ -533,9 +534,7 @@ namespace yli::ontology
         yli::ontology::ObjectStruct object_struct(&parent);
         object_struct.mesh_master = &species;
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        object_struct.roll = float_roll;
-        object_struct.yaw = float_yaw;
-        object_struct.pitch = float_pitch;
+        object_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         object_struct.local_name = object_name;
         entity_factory->create_object(object_struct);
         return std::nullopt;

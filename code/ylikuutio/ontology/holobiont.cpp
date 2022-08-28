@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "holobiont.hpp"
+#include "orientation_module.hpp"
 #include "universe.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
@@ -338,9 +339,7 @@ namespace yli::ontology
 
         yli::ontology::HolobiontStruct holobiont_struct(parent, symbiosis);
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
-        holobiont_struct.roll = float_roll;
-        holobiont_struct.yaw = float_yaw;
-        holobiont_struct.pitch = float_pitch;
+        holobiont_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
         entity_factory->create_holobiont(holobiont_struct);
         return std::nullopt;

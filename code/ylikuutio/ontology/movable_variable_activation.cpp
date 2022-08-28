@@ -409,7 +409,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->roll = std::get<float>(roll_any_value.data);
+            movable->orientation.roll = std::get<float>(roll_any_value.data);
             return std::nullopt;
         }
 
@@ -444,7 +444,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->yaw = std::get<float>(yaw_any_value.data);
+            movable->orientation.yaw = std::get<float>(yaw_any_value.data);
             return std::nullopt;
         }
 
@@ -479,7 +479,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->pitch = std::get<float>(pitch_any_value.data);
+            movable->orientation.pitch = std::get<float>(pitch_any_value.data);
             return std::nullopt;
         }
 
@@ -514,7 +514,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->yaw = 0.5f * PI - std::get<float>(azimuth_any_value.data);
+            movable->orientation.yaw = 0.5f * PI - std::get<float>(azimuth_any_value.data);
             return std::nullopt;
         }
 

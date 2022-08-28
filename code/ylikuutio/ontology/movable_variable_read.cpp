@@ -214,7 +214,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->roll);
+            return yli::data::AnyValue(movable->orientation.roll);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
@@ -233,7 +233,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->yaw);
+            return yli::data::AnyValue(movable->orientation.yaw);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
@@ -252,7 +252,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->pitch);
+            return yli::data::AnyValue(movable->orientation.pitch);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
@@ -271,7 +271,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const float azimuth = 0.5f * PI - movable->yaw;
+            const float azimuth = 0.5f * PI - movable->orientation.yaw;
             return yli::data::AnyValue(azimuth);
         }
 

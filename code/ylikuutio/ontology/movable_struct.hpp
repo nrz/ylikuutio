@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/ontology/orientation_module.hpp"
 #include "code/ylikuutio/ontology/rigid_body_module_struct.hpp"
 
 // Include GLM
@@ -42,6 +43,7 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
+            : orientation(NAN, NAN, NAN)
         {
             // constructor.
         }
@@ -56,9 +58,7 @@ namespace yli::ontology
             : brain { brain },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
-            roll { roll },
-            yaw { yaw },
-            pitch { pitch }
+            orientation(roll, yaw, pitch)
         {
             // constructor.
         }
@@ -76,9 +76,7 @@ namespace yli::ontology
             brain { brain },
             cartesian_coordinates { cartesian_coordinates },
             spherical_coordinates { spherical_coordinates },
-            roll { roll },
-            yaw { yaw },
-            pitch { pitch }
+            orientation(roll, yaw, pitch)
         {
             // constructor.
         }
@@ -94,9 +92,7 @@ namespace yli::ontology
 
         glm::vec3 cartesian_coordinates { glm::vec3(NAN, NAN, NAN) };
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
-        float roll  { 0.0f };
-        float yaw   { 0.0f };
-        float pitch { 0.0f };
+        yli::ontology::OrientationModule orientation;
 
         yli::ontology::RigidBodyModuleStruct rigid_body_module_struct;
     };
