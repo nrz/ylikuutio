@@ -43,14 +43,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->cartesian_coordinates);
+            return yli::data::AnyValue(movable->location.cartesian_coordinates);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates);
+            return yli::data::AnyValue(universe->current_camera_location.cartesian_coordinates);
         }
 
         return std::nullopt;
@@ -62,14 +62,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->cartesian_coordinates.x);
+            return yli::data::AnyValue(movable->location.cartesian_coordinates.x);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.x);
+            return yli::data::AnyValue(universe->current_camera_location.cartesian_coordinates.x);
         }
 
         return std::nullopt;
@@ -81,14 +81,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->cartesian_coordinates.y);
+            return yli::data::AnyValue(movable->location.cartesian_coordinates.y);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.y);
+            return yli::data::AnyValue(universe->current_camera_location.cartesian_coordinates.y);
         }
 
         return std::nullopt;
@@ -100,14 +100,14 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->cartesian_coordinates.z);
+            return yli::data::AnyValue(movable->location.cartesian_coordinates.z);
         }
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_cartesian_coordinates.z);
+            return yli::data::AnyValue(universe->current_camera_location.cartesian_coordinates.z);
         }
 
         return std::nullopt;

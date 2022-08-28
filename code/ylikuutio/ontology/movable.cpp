@@ -83,7 +83,7 @@ namespace yli::ontology
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },
         initial_rotate_angles { movable_struct.initial_rotate_angles },
         original_scale_vector { movable_struct.original_scale_vector },
-        cartesian_coordinates { movable_struct.cartesian_coordinates },
+        location(movable_struct.cartesian_coordinates),
         spherical_coordinates { movable_struct.spherical_coordinates },
         roll { movable_struct.roll },
         yaw { movable_struct.yaw },
@@ -114,12 +114,12 @@ namespace yli::ontology
 
     const glm::vec3& Movable::get_cartesian_coordinates() const
     {
-        return this->cartesian_coordinates;
+        return this->location.cartesian_coordinates;
     }
 
     void Movable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
     {
-        this->cartesian_coordinates = cartesian_coordinates;
+        this->location.cartesian_coordinates = cartesian_coordinates;
     }
 
     float Movable::get_roll() const
@@ -177,25 +177,25 @@ namespace yli::ontology
     void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
     {
         // Set target towards which to move.
-        movable->cartesian_coordinates = glm::vec3(x, y, z);
+        movable->location.cartesian_coordinates = glm::vec3(x, y, z);
     }
 
     float Movable::get_x(const yli::ontology::Movable* const movable)
     {
         // Get x coordinate of `movable`.
-        return movable->cartesian_coordinates.x;
+        return movable->location.cartesian_coordinates.x;
     }
 
     float Movable::get_y(const yli::ontology::Movable* const movable)
     {
         // Get y coordinate of `movable`.
-        return movable->cartesian_coordinates.y;
+        return movable->location.cartesian_coordinates.y;
     }
 
     float Movable::get_z(const yli::ontology::Movable* const movable)
     {
         // Get z coordinate of `movable`.
-        return movable->cartesian_coordinates.z;
+        return movable->location.cartesian_coordinates.z;
     }
 
     float Movable::get_dest_x(const yli::ontology::Movable* const movable)
@@ -220,9 +220,9 @@ namespace yli::ontology
 
     void Movable::create_coordinate_and_angle_variables()
     {
-        float& float_x = this->cartesian_coordinates.x;
-        float& float_y = this->cartesian_coordinates.y;
-        float& float_z = this->cartesian_coordinates.z;
+        float& float_x = this->location.cartesian_coordinates.x;
+        float& float_y = this->location.cartesian_coordinates.y;
+        float& float_z = this->location.cartesian_coordinates.z;
 
         yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
         cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";

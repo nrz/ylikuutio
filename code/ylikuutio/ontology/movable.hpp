@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
+#include "location_module.hpp"
 #include "rigid_body_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -245,7 +246,7 @@ namespace yli::ontology
             glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 cartesian_coordinates;                       // cartesian coordinates.
+            yli::ontology::LocationModule location;
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.

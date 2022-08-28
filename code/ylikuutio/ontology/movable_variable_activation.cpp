@@ -54,13 +54,13 @@ namespace yli::ontology
             {
                 const glm::vec3& cartesian_coordinates =
                     std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data);
-                movable->cartesian_coordinates = cartesian_coordinates;
+                movable->location.cartesian_coordinates = cartesian_coordinates;
             }
             else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
             {
                 const glm::vec3& cartesian_coordinates =
                     std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data);
-                movable->cartesian_coordinates = cartesian_coordinates;
+                movable->location.cartesian_coordinates = cartesian_coordinates;
             }
             else
             {
@@ -84,13 +84,13 @@ namespace yli::ontology
         {
             const glm::vec3& cartesian_coordinates =
                 std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data);
-            universe->current_camera_cartesian_coordinates = cartesian_coordinates;
+            universe->current_camera_location.cartesian_coordinates = cartesian_coordinates;
         }
         else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
         {
             const glm::vec3& cartesian_coordinates =
                 std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data);
-            universe->current_camera_cartesian_coordinates = cartesian_coordinates;
+            universe->current_camera_location.cartesian_coordinates = cartesian_coordinates;
         }
         else
         {
@@ -114,7 +114,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->cartesian_coordinates.x = std::get<float>(x_any_value.data);
+            movable->location.cartesian_coordinates.x = std::get<float>(x_any_value.data);
             movable->model_matrix[3][0] = std::get<float>(x_any_value.data);
 
             yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
@@ -143,7 +143,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_cartesian_coordinates.x = std::get<float>(x_any_value.data);
+        universe->current_camera_location.cartesian_coordinates.x = std::get<float>(x_any_value.data);
         return std::nullopt;
     }
 
@@ -161,7 +161,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->cartesian_coordinates.y = std::get<float>(y_any_value.data);
+            movable->location.cartesian_coordinates.y = std::get<float>(y_any_value.data);
             movable->model_matrix[3][1] = std::get<float>(y_any_value.data);
 
             yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
@@ -190,7 +190,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_cartesian_coordinates.y = std::get<float>(y_any_value.data);
+        universe->current_camera_location.cartesian_coordinates.y = std::get<float>(y_any_value.data);
         return std::nullopt;
     }
 
@@ -208,7 +208,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->cartesian_coordinates.z = std::get<float>(z_any_value.data);
+            movable->location.cartesian_coordinates.z = std::get<float>(z_any_value.data);
             movable->model_matrix[3][2] = std::get<float>(z_any_value.data);
 
             yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
@@ -237,7 +237,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_cartesian_coordinates.z = std::get<float>(z_any_value.data);
+        universe->current_camera_location.cartesian_coordinates.z = std::get<float>(z_any_value.data);
         return std::nullopt;
     }
 

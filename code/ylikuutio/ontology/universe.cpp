@@ -138,6 +138,7 @@ namespace yli::ontology
 
     Universe::Universe(const yli::ontology::UniverseStruct& universe_struct)
         : Entity(*this, universe_struct), // `Universe` has no parent.
+        current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_ecosystems(this, &this->registry, "ecosystems"),
         parent_of_scenes(this, &this->registry, "scenes"),
         parent_of_font_2ds(this, &this->registry, "font_2ds"),
@@ -603,9 +604,9 @@ namespace yli::ontology
                         RADIANS_TO_DEGREES(this->current_camera_yaw) << "," <<
                         RADIANS_TO_DEGREES(this->current_camera_pitch) << " deg\n" <<
                         "(" <<
-                        this->current_camera_cartesian_coordinates.x << "," <<
-                        this->current_camera_cartesian_coordinates.y << "," <<
-                        this->current_camera_cartesian_coordinates.z << ")";
+                        this->current_camera_location.cartesian_coordinates.x << "," <<
+                        this->current_camera_location.cartesian_coordinates.y << "," <<
+                        this->current_camera_location.cartesian_coordinates.z << ")";
                     const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
                     angles_and_coordinates_text_2d->change_string(angles_and_coordinates_string);
                 }
@@ -1245,22 +1246,22 @@ namespace yli::ontology
         {
             // Compute spherical coordinates.
             this->current_camera_spherical_coordinates.rho = sqrt(
-                    (this->current_camera_cartesian_coordinates.x * this->current_camera_cartesian_coordinates.x) +
-                    (this->current_camera_cartesian_coordinates.y * this->current_camera_cartesian_coordinates.y) +
-                    (this->current_camera_cartesian_coordinates.z * this->current_camera_cartesian_coordinates.z));
+                    (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
+                    (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y) +
+                    (this->current_camera_location.cartesian_coordinates.z * this->current_camera_location.cartesian_coordinates.z));
             this->current_camera_spherical_coordinates.theta = RADIANS_TO_DEGREES(atan2(sqrt(
-                            (this->current_camera_cartesian_coordinates.x * this->current_camera_cartesian_coordinates.x) +
-                            (this->current_camera_cartesian_coordinates.y * this->current_camera_cartesian_coordinates.y)),
-                        this->current_camera_cartesian_coordinates.z));
+                            (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
+                            (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y)),
+                        this->current_camera_location.cartesian_coordinates.z));
             this->current_camera_spherical_coordinates.phi = RADIANS_TO_DEGREES(atan2(
-                        this->current_camera_cartesian_coordinates.y,
-                        this->current_camera_cartesian_coordinates.x));
+                        this->current_camera_location.cartesian_coordinates.y,
+                        this->current_camera_location.cartesian_coordinates.x));
         }
 
         glm::vec3 camera_cartesian_coordinates;
-        camera_cartesian_coordinates.x = this->current_camera_cartesian_coordinates.x;
-        camera_cartesian_coordinates.y = this->current_camera_cartesian_coordinates.y;
-        camera_cartesian_coordinates.z = this->current_camera_cartesian_coordinates.z;
+        camera_cartesian_coordinates.x = this->current_camera_location.cartesian_coordinates.x;
+        camera_cartesian_coordinates.y = this->current_camera_location.cartesian_coordinates.y;
+        camera_cartesian_coordinates.z = this->current_camera_location.cartesian_coordinates.z;
 
         // Compute the projection matrix.
         this->current_camera_projection_matrix = glm::perspective(

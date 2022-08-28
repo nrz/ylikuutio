@@ -267,9 +267,9 @@ namespace yli::ontology
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
-        this->model_matrix[3][0] = this->cartesian_coordinates.x;
-        this->model_matrix[3][1] = this->cartesian_coordinates.y;
-        this->model_matrix[3][2] = this->cartesian_coordinates.z;
+        this->model_matrix[3][0] = this->location.cartesian_coordinates.x;
+        this->model_matrix[3][1] = this->location.cartesian_coordinates.y;
+        this->model_matrix[3][2] = this->location.cartesian_coordinates.z;
 
         this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
