@@ -26,10 +26,8 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 
 // Include standard headers
-#include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
-#include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
 namespace yli::callback
