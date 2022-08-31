@@ -44,7 +44,7 @@ class Random
             return this->distribution(this->generator);
         }
 
-		std::mutex my_mutex;
+        std::mutex my_mutex;
 
     private:
         std::uniform_real_distribution<float>& distribution;
