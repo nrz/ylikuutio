@@ -1015,6 +1015,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
+        code/ylikuutio/tests/googletest/test_orientation_module.cpp
         code/ylikuutio/tests/googletest/test_png_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_png_loader.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
