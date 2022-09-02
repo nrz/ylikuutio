@@ -43,7 +43,7 @@ namespace yli::ontology
     struct MovableStruct: public yli::ontology::EntityStruct
     {
         MovableStruct()
-            : orientation(NAN, NAN, NAN)
+            : orientation(0.0f, 0.0f, 0.0f)
         {
             // constructor.
         }
