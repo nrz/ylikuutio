@@ -15,14 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "movable_variable_read.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -271,7 +268,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const float azimuth = 0.5f * PI - movable->orientation.yaw;
+            const float azimuth = 0.5f * pi - movable->orientation.yaw;
             return yli::data::AnyValue(azimuth);
         }
 
@@ -279,7 +276,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            const float azimuth = 0.5f * PI - universe->current_camera_yaw;
+            const float azimuth = 0.5f * pi - universe->current_camera_yaw;
             return yli::data::AnyValue(azimuth);
         }
 

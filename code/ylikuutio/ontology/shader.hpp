@@ -18,17 +18,12 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SHADER_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SHADER_HPP_INCLUDED
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"

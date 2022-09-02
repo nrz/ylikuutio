@@ -18,17 +18,11 @@
 #ifndef __YLIKUUTIO_TRIANGULATION_FACE_NORMALS_HPP_INCLUDED
 #define __YLIKUUTIO_TRIANGULATION_FACE_NORMALS_HPP_INCLUDED
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "triangulation_enums.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

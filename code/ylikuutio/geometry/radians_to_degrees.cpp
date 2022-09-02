@@ -15,9 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_DATA_PI_HPP_INCLUDED
-#define __YLIKUUTIO_DATA_PI_HPP_INCLUDED
+#include "radians_to_degrees.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
-constexpr float pi = 3.14159265359f;
-
-#endif
+namespace yli::geometry
+{
+    float radians_to_degrees(const float x)
+    {
+        return x * 180.0f / pi;
+    }
+}

@@ -15,19 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "transformation.hpp"
+#include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -49,8 +44,8 @@ namespace yli::geometry
     {
         yli::data::SphericalCoordinatesStruct spherical_vertex;
         spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
-        spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
-        spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
+        spherical_vertex.theta = yli::geometry::degrees_to_radians(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
+        spherical_vertex.phi = yli::geometry::degrees_to_radians(-planar_world_vertex.z);  // phi is latitude, the polar angle.
 
         glm::vec3 cartesian_vertex;
         cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);

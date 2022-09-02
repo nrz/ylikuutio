@@ -456,6 +456,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/file/file_writer.hpp
 
     # geometry, in alphabetical order.
+    code/ylikuutio/geometry/degrees_to_radians.cpp
+    code/ylikuutio/geometry/degrees_to_radians.hpp
     code/ylikuutio/geometry/line.cpp
     code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line_2d.cpp
@@ -472,6 +474,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/geometry/line_segment_3d.hpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+    code/ylikuutio/geometry/radians_to_degrees.cpp
+    code/ylikuutio/geometry/radians_to_degrees.hpp
     code/ylikuutio/geometry/spherical_terrain_struct.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp

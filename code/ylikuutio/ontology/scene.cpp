@@ -15,13 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "scene.hpp"
@@ -34,7 +29,6 @@
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"

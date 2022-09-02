@@ -15,17 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
-#ifndef RADIANS_TO_DEGREES
-#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
 #include "yli_edit_console_callbacks.hpp"
@@ -40,7 +31,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"

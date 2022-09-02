@@ -15,10 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "movable.hpp"
 #include "apprentice_module.hpp"
 #include "universe.hpp"
@@ -30,6 +26,7 @@
 #include "movable_struct.hpp"
 #include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -152,12 +149,12 @@ namespace yli::ontology
 
     float Movable::get_azimuth() const
     {
-        return 0.5f * PI - this->orientation.yaw;
+        return 0.5f * pi - this->orientation.yaw;
     }
 
     void Movable::set_azimuth(const float azimuth)
     {
-        this->orientation.yaw = 0.5f * PI - azimuth;
+        this->orientation.yaw = 0.5f * pi - azimuth;
     }
 
     float Movable::get_scale() const

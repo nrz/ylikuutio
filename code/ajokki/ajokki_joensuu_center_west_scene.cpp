@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "ajokki_joensuu_center_west_scene.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -188,7 +189,7 @@ namespace ajokki
         yli::ontology::ObjectStruct horse_object_struct1(joensuu_center_west_scene);
         horse_object_struct1.mesh_master = horse_species;
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
-        horse_object_struct1.initial_rotate_angles = { -0.5f * PI };
+        horse_object_struct1.initial_rotate_angles = { -0.5f * pi };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
         yli::ontology::Entity* const horse1_entity = entity_factory->create_object(horse_object_struct1);

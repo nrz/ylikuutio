@@ -15,16 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "movable_variable_activation.hpp"
 #include "variable.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "holobiont.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -514,7 +511,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->orientation.yaw = 0.5f * PI - std::get<float>(azimuth_any_value.data);
+            movable->orientation.yaw = 0.5f * pi - std::get<float>(azimuth_any_value.data);
             return std::nullopt;
         }
 
@@ -532,7 +529,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_yaw = 0.5f * PI - std::get<float>(azimuth_any_value.data);
+        universe->current_camera_yaw = 0.5f * pi - std::get<float>(azimuth_any_value.data);
         return std::nullopt;
     }
 

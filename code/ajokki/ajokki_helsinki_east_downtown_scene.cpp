@@ -15,14 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -647,7 +644,7 @@ namespace ajokki
         cat_object_struct1.local_name = "kissa1";
         cat_object_struct1.brain = rest_brain;
         cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat_object_struct1.initial_rotate_angles = { PI, -0.5f * PI };
+        cat_object_struct1.initial_rotate_angles = { pi, -0.5f * pi };
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
         yli::ontology::Entity* const cat1_entity = entity_factory->create_object(cat_object_struct1);
@@ -666,7 +663,7 @@ namespace ajokki
         cat_object_struct2.brain = rest_brain;
         cat_object_struct2.scene = helsinki_east_downtown_scene;
         cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat_object_struct2.initial_rotate_angles = { PI, -0.5f * PI };
+        cat_object_struct2.initial_rotate_angles = { pi, -0.5f * pi };
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
         yli::ontology::Entity* const cat2_entity = entity_factory->create_object(cat_object_struct2);
@@ -700,7 +697,7 @@ namespace ajokki
 
         yli::ontology::HolobiontStruct freight_train_holobiont_struct1(*helsinki_east_downtown_scene, *freight_train_symbiosis);
         freight_train_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-        freight_train_holobiont_struct1.initial_rotate_angles = { PI };
+        freight_train_holobiont_struct1.initial_rotate_angles = { pi };
         freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_holobiont_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
 
@@ -729,7 +726,7 @@ namespace ajokki
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
             turbo_polizei_png_holobiont_struct1.brain = rest_brain;
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-            turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { PI };
+            turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { pi };
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
 
@@ -753,7 +750,7 @@ namespace ajokki
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
             turbo_polizei_png_holobiont_struct2.brain = rest_brain;
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-            turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { PI };
+            turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { pi };
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
 

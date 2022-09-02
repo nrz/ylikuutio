@@ -15,12 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "brain_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
@@ -155,7 +152,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = PI;
+            movable.orientation.yaw = pi;
             return std::nullopt;
         }
 
@@ -173,7 +170,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = 0.5f * PI;
+            movable.orientation.yaw = 0.5f * pi;
             return std::nullopt;
         }
 
@@ -191,7 +188,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = -0.5f * PI;
+            movable.orientation.yaw = -0.5f * pi;
             return std::nullopt;
         }
 
@@ -281,7 +278,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw -= 0.1f * PI;
+            movable.orientation.yaw -= 0.1f * pi;
             return std::nullopt;
         }
 
@@ -299,7 +296,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw += 0.1f * PI;
+            movable.orientation.yaw += 0.1f * pi;
             return std::nullopt;
         }
 

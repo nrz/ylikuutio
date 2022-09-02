@@ -17,11 +17,6 @@
 
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
-#ifndef RADIANS_TO_DEGREES
-#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
 #include "camera.hpp"

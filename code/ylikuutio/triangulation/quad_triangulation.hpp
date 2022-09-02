@@ -18,13 +18,8 @@
 #ifndef __YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
 #define __YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "triangulate_quads_struct.hpp"
@@ -37,7 +32,6 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/geometry/transformation_struct.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

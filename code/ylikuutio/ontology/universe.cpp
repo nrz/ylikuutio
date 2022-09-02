@@ -15,10 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef __STDC_FORMAT_MACROS
 // For MinGW.
 #define __STDC_FORMAT_MACROS
@@ -26,11 +22,6 @@
 
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
-#ifndef RADIANS_TO_DEGREES
-#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
 #include "universe.hpp"
@@ -51,6 +42,9 @@
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/pi.hpp"
+#include "code/ylikuutio/geometry/degrees_to_radians.hpp"
+#include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
@@ -502,7 +496,7 @@ namespace yli::ontology
 
                         // Compute new orientation.
                         this->current_camera_yaw += this->mouse_speed * static_cast<float>(this->window_width / 2 - xpos);
-                        this->current_camera_yaw = remainder(this->current_camera_yaw, (2.0f * PI));
+                        this->current_camera_yaw = remainder(this->current_camera_yaw, (2.0f * pi));
 
                         if (this->is_invert_mouse_in_use)
                         {
@@ -515,15 +509,15 @@ namespace yli::ontology
                             this->current_camera_pitch += this->mouse_speed * static_cast<float>(this->window_height / 2 - ypos);
                         }
 
-                        this->current_camera_pitch = remainder(this->current_camera_pitch, (2.0f * PI));
+                        this->current_camera_pitch = remainder(this->current_camera_pitch, (2.0f * pi));
                     }
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
                 this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * PI),
+                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * pi),
                         sin(this->current_camera_pitch),
-                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * PI));
+                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * pi));
 
                 // Right vector.
                 this->current_camera_right = glm::vec3(
@@ -601,8 +595,8 @@ namespace yli::ontology
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
                         this->current_camera_yaw << "," <<
                         this->current_camera_pitch << " rad; " <<
-                        RADIANS_TO_DEGREES(this->current_camera_yaw) << "," <<
-                        RADIANS_TO_DEGREES(this->current_camera_pitch) << " deg\n" <<
+                        yli::geometry::radians_to_degrees(this->current_camera_yaw) << "," <<
+                        yli::geometry::radians_to_degrees(this->current_camera_pitch) << " deg\n" <<
                         "(" <<
                         this->current_camera_location.cartesian_coordinates.x << "," <<
                         this->current_camera_location.cartesian_coordinates.y << "," <<
@@ -1249,11 +1243,11 @@ namespace yli::ontology
                     (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
                     (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y) +
                     (this->current_camera_location.cartesian_coordinates.z * this->current_camera_location.cartesian_coordinates.z));
-            this->current_camera_spherical_coordinates.theta = RADIANS_TO_DEGREES(atan2(sqrt(
+            this->current_camera_spherical_coordinates.theta = yli::geometry::radians_to_degrees(atan2(sqrt(
                             (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
                             (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y)),
                         this->current_camera_location.cartesian_coordinates.z));
-            this->current_camera_spherical_coordinates.phi = RADIANS_TO_DEGREES(atan2(
+            this->current_camera_spherical_coordinates.phi = yli::geometry::radians_to_degrees(atan2(
                         this->current_camera_location.cartesian_coordinates.y,
                         this->current_camera_location.cartesian_coordinates.x));
         }
@@ -1265,7 +1259,7 @@ namespace yli::ontology
 
         // Compute the projection matrix.
         this->current_camera_projection_matrix = glm::perspective(
-                DEGREES_TO_RADIANS(this->initial_fov),
+                yli::geometry::degrees_to_radians(this->initial_fov),
                 this->aspect_ratio,
                 this->znear,
                 this->zfar);
