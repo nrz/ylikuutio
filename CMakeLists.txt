@@ -775,6 +775,32 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.hpp
     )
 
+add_library(snippets STATIC
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/background_color_snippets.cpp
+    code/ylikuutio/snippets/background_color_snippets.hpp
+    code/ylikuutio/snippets/brain_snippets.cpp
+    code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
+    code/ylikuutio/snippets/console_callback_snippets.cpp
+    code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/debug_snippets.cpp
+    code/ylikuutio/snippets/debug_snippets.hpp
+    code/ylikuutio/snippets/framebuffer_snippets.cpp
+    code/ylikuutio/snippets/framebuffer_snippets.hpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.cpp
+    code/ylikuutio/snippets/window_snippets.hpp
+    code/ylikuutio/snippets/movement_snippets.hpp
+    code/ylikuutio/snippets/wireframe_snippets.cpp
+    code/ylikuutio/snippets/wireframe_snippets.hpp
+    )
+
 # Ajokki
 add_executable(ajokki
     # ajokki, in alphabetical order
@@ -988,6 +1014,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation.cpp
         code/ylikuutio/tests/googletest/test_brain.cpp
+        code/ylikuutio/tests/googletest/test_brain_snippets.cpp
         code/ylikuutio/tests/googletest/test_brain_struct.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
@@ -1048,9 +1075,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(unit_tests_with_googletest gtest_main ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(unit_tests_with_googletest gtest_main snippets ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()
-        target_link_libraries(unit_tests_with_googletest gtest_main ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(unit_tests_with_googletest gtest_main snippets ylikuutio bullet SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
     endif()
 
     include(GoogleTest)
