@@ -15,30 +15,26 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_ORIENTATION_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_ORIENTATION_MODULE_HPP_INCLUDED
+#include "orientation_module.hpp"
 
 namespace yli::ontology
 {
-    class OrientationModule
+    bool OrientationModule::operator==(const yli::ontology::OrientationModule& rhs) const
     {
-        public:
-            bool operator==(const yli::ontology::OrientationModule& rhs) const;
-            bool operator!=(const yli::ontology::OrientationModule& rhs) const;
+        return this->roll == rhs.roll &&
+            this->yaw == rhs.yaw &&
+            this->pitch == rhs.pitch;
+    }
 
-            OrientationModule(const yli::ontology::OrientationModule& original);
+    bool OrientationModule::operator!=(const yli::ontology::OrientationModule& rhs) const
+    {
+        return !this->operator==(rhs);
+    }
 
-            OrientationModule(const float roll, const float yaw, const float pitch)
-                : roll { roll },
-                yaw    { yaw },
-                pitch  { pitch }
-            {
-            }
-
-            float roll  { 0.0f };
-            float yaw   { 0.0f };
-            float pitch { 0.0f };
-    };
+    OrientationModule::OrientationModule(const yli::ontology::OrientationModule& original)
+        : roll { original.roll },
+        yaw    { original.yaw },
+        pitch  { original.pitch }
+    {
+    }
 }
-
-#endif
