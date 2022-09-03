@@ -44,6 +44,7 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 
 Tasks which are necessary for the second stage:
+[ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 [ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 [ ] Use cgltf to add support for glTF. https://github.com/jkuhlmann/cgltf
 [ ] Add support for multiple displays.
