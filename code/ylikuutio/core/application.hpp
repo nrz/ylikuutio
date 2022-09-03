@@ -21,6 +21,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
 // Include standard headers
+#include <memory>  // std::unique_ptr
 #include <string>  // std::string
 #include <vector>  // std::vector
 
@@ -66,7 +67,7 @@ namespace yli::core
             yli::ontology::Universe* universe;
     };
 
-    yli::core::Application* create_application();
+    std::unique_ptr<yli::core::Application> create_application();
 }
 
 #endif

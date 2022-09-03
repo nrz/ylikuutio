@@ -46,6 +46,7 @@
 // Include standard headers
 #include <exception>     // try, catch, std::exception
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_unique, std::unique_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 
 namespace yli::ontology
@@ -143,8 +144,8 @@ namespace gpgpu_test
 
 namespace yli::core
 {
-    yli::core::Application* create_application(const int argc, const char* const argv[])
+    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
     {
-        return new gpgpu_test::GpgpuTestApplication(argc, argv);
+        return std::make_unique<gpgpu_test::GpgpuTestApplication>(argc, argv);
     }
 }

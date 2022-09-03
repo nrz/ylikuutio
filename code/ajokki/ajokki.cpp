@@ -1072,8 +1072,8 @@ namespace ajokki
 
 namespace yli::core
 {
-    yli::core::Application* create_application(const int argc, const char* const argv[])
+    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
     {
-        return new ajokki::AjokkiApplication(argc, argv);
+        return std::make_unique<ajokki::AjokkiApplication>(argc, argv);
     }
 }

@@ -32,7 +32,7 @@
 namespace yli::core
 {
     // `Application::create_application` is defined by the application!
-    extern yli::core::Application* create_application(const int argc, const char* const argv[]);
+    extern std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[]);
 }
 
 namespace yli::ontology
@@ -63,7 +63,7 @@ int main(const int argc, const char* const argv[]) try
     // 1. `yli::core::Application` is created, but it is not
     //    bound to `yli::ontology::Universe`.  `Application`
     //    is defined by the application that uses Ylikuutio.
-    yli::core::Application* const application = yli::core::create_application(argc, argv);
+    std::unique_ptr<yli::core::Application> application = yli::core::create_application(argc, argv);
 
     if (application == nullptr)
     {
@@ -76,8 +76,6 @@ int main(const int argc, const char* const argv[]) try
         // Some of the arguments do not comply with the Ylikuutio argument syntax.
         std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
         application->command_line_master.print_keys_and_values();
-
-        delete application;
         return EXIT_FAILURE;
     }
 
@@ -104,7 +102,6 @@ int main(const int argc, const char* const argv[]) try
             std::cout << "Ylikuutio " << yli::ontology::Universe::version << "\n";
         }
 
-        delete application;
         return EXIT_SUCCESS;
     }
 
@@ -125,7 +122,6 @@ int main(const int argc, const char* const argv[]) try
             std::cerr << "ERROR: Invalid command line parameter: " << *it << "\n";
         }
 
-        delete application;
         return EXIT_FAILURE;
     }
 

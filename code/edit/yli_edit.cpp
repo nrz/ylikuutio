@@ -666,8 +666,8 @@ namespace yli_edit
 
 namespace yli::core
 {
-    yli::core::Application* create_application(const int argc, const char* const argv[])
+    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
     {
-        return new yli_edit::YliEditApplication(argc, argv);
+        return std::make_unique<yli_edit::YliEditApplication>(argc, argv);
     }
 }
