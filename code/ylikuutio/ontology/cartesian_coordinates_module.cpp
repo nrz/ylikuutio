@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_LOCATION_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_LOCATION_MODULE_HPP_INCLUDED
+#include "cartesian_coordinates_module.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -24,23 +23,25 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include standard headers
-#include <utility> // std::move
-
 namespace yli::ontology
 {
-    class LocationModule
+    bool CartesianCoordinatesModule::operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const
     {
-        public:
-            bool operator==(const yli::ontology::LocationModule& rhs) const;
-            bool operator!=(const yli::ontology::LocationModule& rhs) const;
+        return this->cartesian_coordinates == rhs.cartesian_coordinates;
+    }
 
-            LocationModule(const yli::ontology::LocationModule& original);
+    bool CartesianCoordinatesModule::operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const
+    {
+        return !this->operator==(rhs);
+    }
 
-            LocationModule(const glm::vec3& cartesian_coordinates);
+    CartesianCoordinatesModule::CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original)
+        : cartesian_coordinates { original.cartesian_coordinates }
+    {
+    }
 
-            glm::vec3 cartesian_coordinates;
-    };
+    CartesianCoordinatesModule::CartesianCoordinatesModule(const glm::vec3& cartesian_coordinates)
+        : cartesian_coordinates { cartesian_coordinates }
+    {
+    }
 }
-
-#endif

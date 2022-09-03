@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
 #include "framebuffer_module.hpp"
-#include "location_module.hpp"
+#include "cartesian_coordinates_module.hpp"
 #include "entity_factory.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
@@ -278,7 +278,7 @@ namespace yli::ontology
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            LocationModule current_camera_location;
+            CartesianCoordinatesModule current_camera_location;
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct current_camera_spherical_coordinates;

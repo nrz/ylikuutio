@@ -64,7 +64,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
             nullptr,
             &rest_brain->master_of_movables);
 
-    yli::ontology::LocationModule original_location(object->location);
+    yli::ontology::CartesianCoordinatesModule original_location(object->location);
     yli::ontology::OrientationModule original_orientation(object->orientation);
 
     ASSERT_EQ(object->location, original_location);

@@ -633,8 +633,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp
     code/ylikuutio/ontology/lisp_function_struct.hpp
-    code/ylikuutio/ontology/location_module.cpp
-    code/ylikuutio/ontology/location_module.hpp
+    code/ylikuutio/ontology/cartesian_coordinates_module.cpp
+    code/ylikuutio/ontology/cartesian_coordinates_module.hpp
     code/ylikuutio/ontology/master_module.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
@@ -1017,6 +1017,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_brain_snippets.cpp
         code/ylikuutio/tests/googletest/test_brain_struct.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_cartesian_coordinates_module.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/googletest/test_command_line_master.cpp
         code/ylikuutio/tests/googletest/test_compute_struct.cpp
@@ -1040,7 +1041,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
-        code/ylikuutio/tests/googletest/test_location_module.cpp
         code/ylikuutio/tests/googletest/test_material.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
         code/ylikuutio/tests/googletest/test_model_struct.cpp

@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/location_module.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -24,17 +24,17 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-TEST(location_module_must_be_initialized_appropriately, location_0_0_0)
+TEST(cartesian_coordinates_module_must_be_initialized_appropriately, location_0_0_0)
 {
-    yli::ontology::LocationModule location(glm::vec3 { 0.0f, 0.0f, 0.0f });
+    yli::ontology::CartesianCoordinatesModule location(glm::vec3 { 0.0f, 0.0f, 0.0f });
     ASSERT_EQ(location.cartesian_coordinates.x, 0.0f);
     ASSERT_EQ(location.cartesian_coordinates.y, 0.0f);
     ASSERT_EQ(location.cartesian_coordinates.z, 0.0f);
 }
 
-TEST(location_module_must_be_initialized_appropriately, location_1_2_3)
+TEST(cartesian_coordinates_module_must_be_initialized_appropriately, location_1_2_3)
 {
-    yli::ontology::LocationModule location(glm::vec3 { 1.0f, 2.0f, 3.0f });
+    yli::ontology::CartesianCoordinatesModule location(glm::vec3 { 1.0f, 2.0f, 3.0f });
     ASSERT_EQ(location.cartesian_coordinates.x, 1.0f);
     ASSERT_EQ(location.cartesian_coordinates.y, 2.0f);
     ASSERT_EQ(location.cartesian_coordinates.z, 3.0f);
