@@ -27,7 +27,6 @@
 #include <exception> // try, catch, std::exception
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <memory>    // std::unique_ptr
-#include <utility>   // std::pair
 
 namespace yli::core
 {
