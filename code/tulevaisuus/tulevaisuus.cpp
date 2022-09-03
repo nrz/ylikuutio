@@ -102,10 +102,7 @@ namespace tulevaisuus
                 // constructor.
             }
 
-            ~TulevaisuusApplication()
-            {
-                // destructor.
-            }
+            ~TulevaisuusApplication() = default;
 
             std::string get_name() const override
             {

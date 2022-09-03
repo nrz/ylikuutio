@@ -64,10 +64,7 @@ namespace gpgpu_test
                 // constructor.
             }
 
-            ~GpgpuTestApplication()
-            {
-                // destructor.
-            }
+            ~GpgpuTestApplication() = default;
 
             std::string get_name() const override
             {

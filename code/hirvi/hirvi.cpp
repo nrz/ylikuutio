@@ -101,10 +101,7 @@ namespace hirvi
                 // constructor.
             }
 
-            ~HirviApplication()
-            {
-                // destructor.
-            }
+            ~HirviApplication() = default;
 
             std::string get_name() const override
             {

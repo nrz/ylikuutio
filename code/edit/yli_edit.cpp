@@ -98,10 +98,7 @@ namespace yli_edit
                 // constructor.
             }
 
-            ~YliEditApplication()
-            {
-                // destructor.
-            }
+            ~YliEditApplication() = default;
 
             std::string get_name() const override
             {

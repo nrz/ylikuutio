@@ -112,10 +112,7 @@ namespace ajokki
                 // constructor.
             }
 
-            ~AjokkiApplication()
-            {
-                // destructor.
-            }
+            ~AjokkiApplication() = default;
 
             std::string get_name() const override
             {
