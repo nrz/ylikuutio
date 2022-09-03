@@ -1067,7 +1067,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     float z = 3456.75f;
 
     yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
-    cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
+    cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
@@ -1118,8 +1118,8 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
-    ASSERT_NE(universe->get("cartesian_coordinates"), nullptr);
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
+    ASSERT_NE(universe->get("cartesian"), nullptr);
+    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
@@ -1158,7 +1158,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
     yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
-    cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
+    cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
@@ -1188,8 +1188,8 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
-    ASSERT_NE(universe->get("cartesian_coordinates"), nullptr);
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
+    ASSERT_NE(universe->get("cartesian"), nullptr);
+    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
@@ -1228,7 +1228,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
     yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
-    cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
+    cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
@@ -1237,7 +1237,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     yli::ontology::Variable* x_variable = universe->get("x");
     yli::ontology::Variable* y_variable = universe->get("y");
     yli::ontology::Variable* z_variable = universe->get("z");
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian_coordinates");
+    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
 
     x_variable->set("0.875");
     std::optional<yli::data::AnyValue> x_value = x_variable->get();

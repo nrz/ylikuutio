@@ -81,7 +81,7 @@ namespace yli::snippets
         entity->create_variable(phi_variable_struct, yli::data::AnyValue(phi));
 
         yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
-        cartesian_coordinates_variable_struct.local_name = "cartesian_coordinates";
+        cartesian_coordinates_variable_struct.local_name = "cartesian";
         cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
         cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
