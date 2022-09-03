@@ -26,7 +26,7 @@
 #include <cstdlib>   // EXIT_FAILURE, EXIT_SUCCESS
 #include <exception> // try, catch, std::exception
 #include <iostream>  // std::cout, std::cin, std::cerr
-#include <memory>    // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <memory>    // std::unique_ptr
 #include <utility>   // std::pair
 
 namespace yli::core
