@@ -32,14 +32,25 @@ namespace yli::ontology
     class CartesianCoordinatesModule
     {
         public:
-            bool operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const;
-            bool operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const;
+            bool operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept;
+            bool operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept;
 
-            CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original);
+            CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) noexcept;
 
-            CartesianCoordinatesModule(const glm::vec3& cartesian_coordinates);
+            CartesianCoordinatesModule(const glm::vec3& xyz) noexcept;
 
-            glm::vec3 cartesian_coordinates;
+            CartesianCoordinatesModule(const float x, const float y, const float z) noexcept;
+
+            void set_x(const float x) noexcept;
+            float get_x() const noexcept;
+
+            void set_y(const float y) noexcept;
+            float get_y() const noexcept;
+
+            void set_z(const float z) noexcept;
+            float get_z() const noexcept;
+
+            glm::vec3 xyz;
     };
 }
 

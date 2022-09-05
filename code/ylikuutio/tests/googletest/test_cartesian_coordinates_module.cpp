@@ -27,15 +27,15 @@
 TEST(cartesian_coordinates_module_must_be_initialized_appropriately, location_0_0_0)
 {
     yli::ontology::CartesianCoordinatesModule location(glm::vec3 { 0.0f, 0.0f, 0.0f });
-    ASSERT_EQ(location.cartesian_coordinates.x, 0.0f);
-    ASSERT_EQ(location.cartesian_coordinates.y, 0.0f);
-    ASSERT_EQ(location.cartesian_coordinates.z, 0.0f);
+    ASSERT_EQ(location.xyz.x, 0.0f);
+    ASSERT_EQ(location.xyz.y, 0.0f);
+    ASSERT_EQ(location.xyz.z, 0.0f);
 }
 
 TEST(cartesian_coordinates_module_must_be_initialized_appropriately, location_1_2_3)
 {
     yli::ontology::CartesianCoordinatesModule location(glm::vec3 { 1.0f, 2.0f, 3.0f });
-    ASSERT_EQ(location.cartesian_coordinates.x, 1.0f);
-    ASSERT_EQ(location.cartesian_coordinates.y, 2.0f);
-    ASSERT_EQ(location.cartesian_coordinates.z, 3.0f);
+    ASSERT_EQ(location.xyz.x, 1.0f);
+    ASSERT_EQ(location.xyz.y, 2.0f);
+    ASSERT_EQ(location.xyz.z, 3.0f);
 }

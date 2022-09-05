@@ -62,7 +62,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.cartesian_coordinates.x += movable.speed;
+            movable.location.xyz.x += movable.speed;
             return std::nullopt;
         }
 
@@ -80,7 +80,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.cartesian_coordinates.x -= movable.speed;
+            movable.location.xyz.x -= movable.speed;
             return std::nullopt;
         }
 
@@ -98,7 +98,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.cartesian_coordinates.z -= movable.speed;
+            movable.location.xyz.z -= movable.speed;
             return std::nullopt;
         }
 
@@ -116,7 +116,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.cartesian_coordinates.z += movable.speed;
+            movable.location.xyz.z += movable.speed;
             return std::nullopt;
         }
 

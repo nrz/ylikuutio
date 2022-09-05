@@ -109,12 +109,12 @@ namespace yli::ontology
 
     const glm::vec3& Movable::get_cartesian_coordinates() const
     {
-        return this->location.cartesian_coordinates;
+        return this->location.xyz;
     }
 
     void Movable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
     {
-        this->location.cartesian_coordinates = cartesian_coordinates;
+        this->location.xyz = cartesian_coordinates;
     }
 
     float Movable::get_roll() const
@@ -172,25 +172,25 @@ namespace yli::ontology
     void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
     {
         // Set target towards which to move.
-        movable->location.cartesian_coordinates = glm::vec3(x, y, z);
+        movable->location.xyz = glm::vec3(x, y, z);
     }
 
     float Movable::get_x(const yli::ontology::Movable* const movable)
     {
         // Get x coordinate of `movable`.
-        return movable->location.cartesian_coordinates.x;
+        return movable->location.get_x();
     }
 
     float Movable::get_y(const yli::ontology::Movable* const movable)
     {
         // Get y coordinate of `movable`.
-        return movable->location.cartesian_coordinates.y;
+        return movable->location.get_y();
     }
 
     float Movable::get_z(const yli::ontology::Movable* const movable)
     {
         // Get z coordinate of `movable`.
-        return movable->location.cartesian_coordinates.z;
+        return movable->location.get_z();
     }
 
     float Movable::get_dest_x(const yli::ontology::Movable* const movable)
@@ -215,9 +215,9 @@ namespace yli::ontology
 
     void Movable::create_coordinate_and_angle_variables()
     {
-        float& float_x = this->location.cartesian_coordinates.x;
-        float& float_y = this->location.cartesian_coordinates.y;
-        float& float_z = this->location.cartesian_coordinates.z;
+        float& float_x = this->location.xyz.x;
+        float& float_y = this->location.xyz.y;
+        float& float_z = this->location.xyz.z;
 
         yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
         cartesian_coordinates_variable_struct.local_name = "cartesian";

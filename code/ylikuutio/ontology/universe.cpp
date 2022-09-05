@@ -598,9 +598,9 @@ namespace yli::ontology
                         yli::geometry::radians_to_degrees(this->current_camera_yaw) << "," <<
                         yli::geometry::radians_to_degrees(this->current_camera_pitch) << " deg\n" <<
                         "(" <<
-                        this->current_camera_location.cartesian_coordinates.x << "," <<
-                        this->current_camera_location.cartesian_coordinates.y << "," <<
-                        this->current_camera_location.cartesian_coordinates.z << ")";
+                        this->current_camera_location.get_x() << "," <<
+                        this->current_camera_location.get_y() << "," <<
+                        this->current_camera_location.get_z() << ")";
                     const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
                     angles_and_coordinates_text_2d->change_string(angles_and_coordinates_string);
                 }
@@ -1240,22 +1240,22 @@ namespace yli::ontology
         {
             // Compute spherical coordinates.
             this->current_camera_spherical_coordinates.rho = sqrt(
-                    (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
-                    (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y) +
-                    (this->current_camera_location.cartesian_coordinates.z * this->current_camera_location.cartesian_coordinates.z));
+                    (this->current_camera_location.get_x() * this->current_camera_location.get_x()) +
+                    (this->current_camera_location.get_y() * this->current_camera_location.get_y()) +
+                    (this->current_camera_location.get_z() * this->current_camera_location.get_z()));
             this->current_camera_spherical_coordinates.theta = yli::geometry::radians_to_degrees(atan2(sqrt(
-                            (this->current_camera_location.cartesian_coordinates.x * this->current_camera_location.cartesian_coordinates.x) +
-                            (this->current_camera_location.cartesian_coordinates.y * this->current_camera_location.cartesian_coordinates.y)),
-                        this->current_camera_location.cartesian_coordinates.z));
+                            (this->current_camera_location.get_x() * this->current_camera_location.get_x()) +
+                            (this->current_camera_location.get_y() * this->current_camera_location.get_y())),
+                        this->current_camera_location.get_z()));
             this->current_camera_spherical_coordinates.phi = yli::geometry::radians_to_degrees(atan2(
-                        this->current_camera_location.cartesian_coordinates.y,
-                        this->current_camera_location.cartesian_coordinates.x));
+                        this->current_camera_location.get_y(),
+                        this->current_camera_location.get_x()));
         }
 
         glm::vec3 camera_cartesian_coordinates;
-        camera_cartesian_coordinates.x = this->current_camera_location.cartesian_coordinates.x;
-        camera_cartesian_coordinates.y = this->current_camera_location.cartesian_coordinates.y;
-        camera_cartesian_coordinates.z = this->current_camera_location.cartesian_coordinates.z;
+        camera_cartesian_coordinates.x = this->current_camera_location.get_x();
+        camera_cartesian_coordinates.y = this->current_camera_location.get_y();
+        camera_cartesian_coordinates.z = this->current_camera_location.get_z();
 
         // Compute the projection matrix.
         this->current_camera_projection_matrix = glm::perspective(

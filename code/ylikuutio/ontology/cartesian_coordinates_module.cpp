@@ -25,23 +25,58 @@
 
 namespace yli::ontology
 {
-    bool CartesianCoordinatesModule::operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const
+    bool CartesianCoordinatesModule::operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept
     {
-        return this->cartesian_coordinates == rhs.cartesian_coordinates;
+        return this->xyz == rhs.xyz;
     }
 
-    bool CartesianCoordinatesModule::operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const
+    bool CartesianCoordinatesModule::operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept
     {
         return !this->operator==(rhs);
     }
 
-    CartesianCoordinatesModule::CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original)
-        : cartesian_coordinates { original.cartesian_coordinates }
+    CartesianCoordinatesModule::CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) noexcept
+        : xyz { original.xyz }
     {
     }
 
-    CartesianCoordinatesModule::CartesianCoordinatesModule(const glm::vec3& cartesian_coordinates)
-        : cartesian_coordinates { cartesian_coordinates }
+    CartesianCoordinatesModule::CartesianCoordinatesModule(const glm::vec3& xyz) noexcept
+        : xyz { xyz }
     {
+    }
+
+    CartesianCoordinatesModule::CartesianCoordinatesModule(const float x, const float y, const float z) noexcept
+        : xyz { glm::vec3(x, y, z) }
+    {
+    }
+
+    void CartesianCoordinatesModule::set_x(const float x) noexcept
+    {
+        this->xyz.x = x;
+    }
+
+    float CartesianCoordinatesModule::get_x() const noexcept
+    {
+        return this->xyz.x;
+    }
+
+    void CartesianCoordinatesModule::set_y(const float y) noexcept
+    {
+        this->xyz.y = y;
+    }
+
+    float CartesianCoordinatesModule::get_y() const noexcept
+    {
+        return this->xyz.y;
+    }
+
+    void CartesianCoordinatesModule::set_z(const float z) noexcept
+    {
+        this->xyz.z = z;
+    }
+
+    float CartesianCoordinatesModule::get_z() const noexcept
+    {
+        return this->xyz.z;
     }
 }

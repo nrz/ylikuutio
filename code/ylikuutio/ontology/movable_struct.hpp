@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/orientation_module.hpp"
 #include "code/ylikuutio/ontology/rigid_body_module_struct.hpp"
 
@@ -90,7 +91,7 @@ namespace yli::ontology
 
         glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
-        glm::vec3 cartesian_coordinates { glm::vec3(NAN, NAN, NAN) };
+        yli::ontology::CartesianCoordinatesModule cartesian_coordinates { NAN, NAN, NAN };
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
         yli::ontology::OrientationModule orientation;
 

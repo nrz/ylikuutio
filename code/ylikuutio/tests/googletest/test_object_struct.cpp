@@ -45,7 +45,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct)
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3D*>(test_object_struct.mesh_master));
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.x));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.x));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.y));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.z));
 }

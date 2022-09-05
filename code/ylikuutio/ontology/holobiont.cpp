@@ -163,7 +163,7 @@ namespace yli::ontology
             biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector  = this->original_scale_vector;
-            biont_struct.cartesian_coordinates  = this->location.cartesian_coordinates;
+            biont_struct.cartesian_coordinates  = this->location;
             biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
@@ -174,7 +174,7 @@ namespace yli::ontology
 
     void Holobiont::update_x(const float x)
     {
-        this->location.cartesian_coordinates.x = x;
+        this->location.set_x(x);
         this->model_matrix[3][0] = x;
 
         for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
@@ -183,7 +183,7 @@ namespace yli::ontology
 
             if (biont != nullptr)
             {
-                biont->location.cartesian_coordinates.x = x;
+                biont->location.set_x(x);
                 biont->model_matrix[3][0] = x;
             }
         }
@@ -191,7 +191,7 @@ namespace yli::ontology
 
     void Holobiont::update_y(const float y)
     {
-        this->location.cartesian_coordinates.y = y;
+        this->location.set_y(y);
         this->model_matrix[3][1] = y;
 
         for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
@@ -200,7 +200,7 @@ namespace yli::ontology
 
             if (biont != nullptr)
             {
-                biont->location.cartesian_coordinates.y = y;
+                biont->location.set_y(y);
                 biont->model_matrix[3][1] = y;
             }
         }
@@ -208,7 +208,7 @@ namespace yli::ontology
 
     void Holobiont::update_z(const float z)
     {
-        this->location.cartesian_coordinates.z = z;
+        this->location.set_z(z);
         this->model_matrix[3][2] = z;
 
         for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
@@ -217,7 +217,7 @@ namespace yli::ontology
 
             if (biont != nullptr)
             {
-                biont->location.cartesian_coordinates.z = z;
+                biont->location.set_z(z);
                 biont->model_matrix[3][2] = z;
             }
         }
