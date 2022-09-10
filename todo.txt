@@ -10,22 +10,33 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
-[ ] Implement `WalkModule`.
-[ ] Implement `RunModule`.
-[ ] Implement `SwimModule`.
-[ ] Implement `DiveModule`.
-[ ] Implement `FlyModule`.
-[ ] Implement `RoadVehicleModule`.
-[ ] Implement `RailVehicleModule`.
-[ ] Implement `ShipModule`.
-[ ] Implement `AircraftModule`.
+[ ] Implement `GaitModule`, to be used for different bi- and quadrupedal gaits like walking, running, trot, canter, gallop, pace, tölt.
+[ ] Implement `SwimModule`, to be used for swimming.
+[ ] Implement `DiveModule`, to be used for diving.
+[ ] Implement `ClimbModule`, to be used for climbing on different surfaces.
+[ ] Implement `FlyModule`, to be used for flying animals.
+[ ] Implement `RoadVehicleModule`, to be used for road vehicles.
+[ ] Implement `RailVehicleModule`, to be used for rail vehicles.
+[ ] Implement `ShipModule`, to be used for ships.
+[ ] Implement `AircraftModule`, to be used for aircraft.
+[ ] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
+[ ] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
+[ ] Implement `Ship` class that inherits `Holobiont` and uses `ShipModule`.
+[ ] Implement `Aircraft` class that inherits `Holobiont` and uses `AircraftModule`.
+[ ] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` (walk, run) and `SwimModule`.
+[ ] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule` (walk, run), `SwimModule`, and `ClimbModule`.
+[ ] Hirvi: Implement `PoliceCar` class that inherits `Holobiont` and uses `RoadVehicleModule` and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceDog` class that inherits `Holobiont` and uses `GaitModule` (walk, run) and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceHorse` class that inherits `Holobiont` and uses `GaitModule` (walk, run) and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceShip` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
+[ ] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
 [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
-[ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) whose instances function as Bullet rigid bodies.
+[ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
 [ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
 [ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
-[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
-[ ] Implement object selection (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
@@ -168,7 +179,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
-[ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement scene loading which works in the background.
 [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement `ConsoleCommand` class.
