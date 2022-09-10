@@ -34,8 +34,6 @@ namespace yli::ontology
         CameraStruct default_camera_struct;      // Parameters of the default `Camera`.
 
         float gravity { 9.81f / 60.0f };         // Default gravity: Earth gravity, 9.81 m/s^2.
-                                                 // In Bullet, gravity is a feature of `btDiscreteDynamicsWorld` & `btSoftRigidDynamicsWorld`
-                                                 // (`btSoftRigidDynamicsWorld` inherits `btDiscreteDynamicsWorld`).
         glm::vec4 light_position { 0.0f, 0.0f, 0.0f, 1.0f }; // Default light position: origin.
         float water_level { 0.0f };              // Default water level: 0.0 meters.
         bool is_flight_mode_in_use { true };

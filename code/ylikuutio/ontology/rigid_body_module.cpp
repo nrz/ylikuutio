@@ -19,9 +19,6 @@
 #include "rigid_body_module.hpp"
 #include "scene.hpp"
 
-// Include Bullet
-#include <btBulletDynamicsCommon.h>
-
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
@@ -44,15 +41,5 @@ namespace yli::ontology
 
         // Add the rigid body to the dynamics world.
         scene->add_rigid_body_module(*this, scene);
-    }
-
-    btRigidBody* RigidBodyModule::get_bullet_rigid_body() const
-    {
-        if (this->bullet_rigid_body == nullptr)
-        {
-            return nullptr;
-        }
-
-        return this->bullet_rigid_body.get();
     }
 }

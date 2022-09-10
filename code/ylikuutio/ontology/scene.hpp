@@ -30,9 +30,6 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include Bullet
-#include <btBulletDynamicsCommon.h>
-
 // Include standard headers
 #include <cmath>   // NAN, std::isnan, std::pow
 #include <cstddef> // std::size_t
@@ -154,9 +151,6 @@ namespace yli::ontology
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             yli::data::SphericalCoordinatesStruct* spherical_coordinates { nullptr };
-
-            std::unique_ptr<btDiscreteDynamicsWorld> dynamics_world { nullptr };
-            btAlignedObjectArray<btCollisionShape*> collision_shapes;
 
             GLuint scene_uniform_block { 0 };
 

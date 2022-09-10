@@ -44,9 +44,6 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #endif
 
-// Include Bullet
-#include <btBulletDynamicsCommon.h>
-
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
@@ -99,23 +96,6 @@ namespace yli::ontology
         camera_struct.scene = this;
         new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
-        // Bullet variables.
-        if (this->universe.get_is_physical())
-        {
-            yli::ontology::Universe& universe = this->universe;
-
-            this->dynamics_world = std::make_unique<btDiscreteDynamicsWorld>(
-                    universe.get_dispatcher(),
-                    universe.get_overlapping_pair_cache(),
-                    universe.get_solver(),
-                    universe.get_collision_configuration());
-
-            // Gravity is stored as a non-negative value, make it negative for Bullet.
-            this->dynamics_world->setGravity(btVector3(0.0f, -this->gravity, 0.0f));
-
-            // Bullet is now initialized for this `Scene`.
-        }
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";
         this->can_be_erased = true;
@@ -134,7 +114,7 @@ namespace yli::ontology
 
     void Scene::do_physics()
     {
-        // TODO: implement physics using Bullet!
+        // TODO: implement physics!
     }
 
     void Scene::act()
@@ -345,22 +325,6 @@ namespace yli::ontology
             std::cerr << "ERROR: `Scene::add_rigid_body_module`: `scene` is `nullptr`!\n";
             return;
         }
-
-        if (this->dynamics_world == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `this->dynamics_world` is `nullptr`!\n";
-            return;
-        }
-
-        btRigidBody* const bullet_rigid_body = rigid_body_module.get_bullet_rigid_body();
-
-        if (bullet_rigid_body == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `bullet_rigid_body` is `nullptr`!\n";
-            return;
-        }
-
-        this->dynamics_world->addRigidBody(bullet_rigid_body);
     }
 
     const glm::vec4& Scene::get_light_position() const

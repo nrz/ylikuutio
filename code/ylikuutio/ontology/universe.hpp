@@ -35,9 +35,6 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include Bullet
-#include <btBulletDynamicsCommon.h>
-
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
@@ -136,11 +133,6 @@ namespace yli::ontology
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
             yli::input::InputSystem* get_input_system() const;
-
-            btDefaultCollisionConfiguration* get_collision_configuration() const;
-            btCollisionDispatcher* get_dispatcher() const;
-            btBroadphaseInterface* get_overlapping_pair_cache() const;
-            btSequentialImpulseConstraintSolver* get_solver() const;
 
             yli::ontology::GenericParentModule& get_parent_of_ecosystems();
             yli::ontology::Scene* get_scene() const override;
@@ -348,12 +340,6 @@ namespace yli::ontology
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr }; // pointer to `RenderSystem`.
             std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr }; // pointer to `AudioSystem`.
             std::unique_ptr<yli::input::InputSystem> input_system    { nullptr }; // pointer to `InputSystem`.
-
-            // Bullet variables.
-            std::unique_ptr<btDefaultCollisionConfiguration> collision_configuration { std::make_unique<btDefaultCollisionConfiguration>() };
-            std::unique_ptr<btCollisionDispatcher> dispatcher                        { std::make_unique<btCollisionDispatcher>(this->collision_configuration.get()) };
-            std::unique_ptr<btBroadphaseInterface> overlapping_pair_cache            { std::make_unique<btDbvtBroadphase>() };
-            std::unique_ptr<btSequentialImpulseConstraintSolver> solver              { std::make_unique<btSequentialImpulseConstraintSolver>() };
 
             const std::string application_name;
 

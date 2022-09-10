@@ -20,13 +20,7 @@
 
 #include "rigid_body_module_struct.hpp"
 
-// Include Bullet
-#include <btBulletDynamicsCommon.h>
-
-// Include standard headers
-#include <memory>  // std::make_unique, std::unique_ptr
-
-// `RigidBodyModule` class functions as a rigid body for Bullet physics.
+// `RigidBodyModule` class functions as a rigid body for physics.
 
 namespace yli::ontology
 {
@@ -46,30 +40,6 @@ namespace yli::ontology
             {
                 // constructor.
 
-                if (rigid_body_module_struct.type == "sphere")
-                {
-                    this->collision_shape = std::make_unique<btSphereShape>(rigid_body_module_struct.radius);
-                }
-                else if (rigid_body_module_struct.type == "box")
-                {
-                    // Use box as collision shape
-                    btVector3 box_half_extents(
-                            static_cast<btScalar>(rigid_body_module_struct.half_extents[0]),
-                            static_cast<btScalar>(rigid_body_module_struct.half_extents[1]),
-                            static_cast<btScalar>(rigid_body_module_struct.half_extents[2]));
-                    this->collision_shape = std::make_unique<btBoxShape>(box_half_extents);
-                }
-
-                btTransform transform;
-                transform.setIdentity();
-                transform.setOrigin(btVector3(0.0f, 0.0f, 0.0f));
-                this->motion_state = std::make_unique<btDefaultMotionState>(transform);
-
-                btVector3 local_inertia(0, 0, 0); // No local inertia.
-                btRigidBody::btRigidBodyConstructionInfo rigid_body_info(this->mass, this->motion_state.get(), this->collision_shape.get(), local_inertia);
-
-                this->bullet_rigid_body = std::make_unique<btRigidBody>(rigid_body_info);
-
                 this->add_rigid_body_module_to_scene(scene);
             }
 
@@ -81,14 +51,8 @@ namespace yli::ontology
 
             void add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const;
 
-            btRigidBody* get_bullet_rigid_body() const;
-
         private:
             yli::ontology::Movable* movable { nullptr };
-
-            std::unique_ptr<btCollisionShape> collision_shape  { nullptr };
-            std::unique_ptr<btDefaultMotionState> motion_state { nullptr };
-            std::unique_ptr<btRigidBody> bullet_rigid_body     { nullptr };
 
             float mass { 0.0f }; // An object is static if and only if its mass is 0.
     };
