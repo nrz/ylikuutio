@@ -583,6 +583,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp
     code/ylikuutio/ontology/lisp_function_struct.hpp
+    code/ylikuutio/ontology/locomotion_environment.hpp
+    code/ylikuutio/ontology/locomotion_module.cpp
+    code/ylikuutio/ontology/locomotion_module.hpp
+    code/ylikuutio/ontology/locomotion_module_struct.hpp
     code/ylikuutio/ontology/cartesian_coordinates_module.cpp
     code/ylikuutio/ontology/cartesian_coordinates_module.hpp
     code/ylikuutio/ontology/master_module.hpp
