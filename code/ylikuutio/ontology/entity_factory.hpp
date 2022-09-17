@@ -49,7 +49,7 @@ namespace yli::ontology
     struct ComputeTaskStruct;
     struct BrainStruct;
 
-    class EntityFactory final
+    class EntityFactory
     {
         public:
             // constructor.
@@ -83,7 +83,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
             yli::ontology::Entity* create_callback_engine_entity() const;
 
-        private:
+        protected:
             yli::ontology::Universe& universe;
     };
 }

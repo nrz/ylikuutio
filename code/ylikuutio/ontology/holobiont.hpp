@@ -38,7 +38,7 @@ namespace yli::ontology
     class Symbiosis;
     struct HolobiontStruct;
 
-    class Holobiont final : public yli::ontology::Movable
+    class Holobiont : public yli::ontology::Movable
     {
         public:
             Holobiont(
