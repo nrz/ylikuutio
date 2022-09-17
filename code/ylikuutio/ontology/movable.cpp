@@ -83,6 +83,7 @@ namespace yli::ontology
         location(movable_struct.cartesian_coordinates),
         spherical_coordinates { movable_struct.spherical_coordinates },
         orientation(movable_struct.orientation.roll, movable_struct.orientation.yaw, movable_struct.orientation.pitch),
+        scale        { movable_struct.scale },
         input_method { movable_struct.input_method }
     {
         // constructor.

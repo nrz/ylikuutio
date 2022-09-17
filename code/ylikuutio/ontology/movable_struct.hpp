@@ -95,6 +95,8 @@ namespace yli::ontology
         yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
         yli::ontology::OrientationModule orientation;
 
+        float scale { 1.0f };
+
         yli::ontology::RigidBodyModuleStruct rigid_body_module_struct;
     };
 }
