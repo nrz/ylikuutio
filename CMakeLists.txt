@@ -755,6 +755,24 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/movement_snippets.hpp
     code/ylikuutio/snippets/wireframe_snippets.cpp
     code/ylikuutio/snippets/wireframe_snippets.hpp
+
+    # locomotion snippets, in alphabetical order
+    code/ylikuutio/snippets/locomotion/climb_module.cpp
+    code/ylikuutio/snippets/locomotion/climb_module.hpp
+    code/ylikuutio/snippets/locomotion/dive_module.cpp
+    code/ylikuutio/snippets/locomotion/dive_module.hpp
+    code/ylikuutio/snippets/locomotion/fly_module.cpp
+    code/ylikuutio/snippets/locomotion/fly_module.hpp
+    code/ylikuutio/snippets/locomotion/gait_module.cpp
+    code/ylikuutio/snippets/locomotion/gait_module.hpp
+    code/ylikuutio/snippets/locomotion/rail_vehicle_module.cpp
+    code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp
+    code/ylikuutio/snippets/locomotion/road_vehicle_module.cpp
+    code/ylikuutio/snippets/locomotion/road_vehicle_module.hpp
+    code/ylikuutio/snippets/locomotion/ship_module.cpp
+    code/ylikuutio/snippets/locomotion/ship_module.hpp
+    code/ylikuutio/snippets/locomotion/swim_module.cpp
+    code/ylikuutio/snippets/locomotion/swim_module.hpp
     )
 
 # Ajokki

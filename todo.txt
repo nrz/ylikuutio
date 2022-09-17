@@ -10,19 +10,6 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
-[ ] Implement `GaitModule`, to be used for different bi- and quadrupedal gaits like walking, running, trot, canter, gallop, pace, tölt.
-[ ] Implement `SwimModule`, to be used for swimming.
-[ ] Implement `DiveModule`, to be used for diving.
-[ ] Implement `ClimbModule`, to be used for climbing on different surfaces.
-[ ] Implement `FlyModule`, to be used for flying animals.
-[ ] Implement `RoadVehicleModule`, to be used for road vehicles.
-[ ] Implement `RailVehicleModule`, to be used for rail vehicles.
-[ ] Implement `ShipModule`, to be used for ships.
-[ ] Implement `AircraftModule`, to be used for aircraft.
-[ ] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
-[ ] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
-[ ] Implement `Ship` class that inherits `Holobiont` and uses `ShipModule`.
-[ ] Implement `Aircraft` class that inherits `Holobiont` and uses `AircraftModule`.
 [ ] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` and `SwimModule`.
 [ ] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule`, `SwimModule`, and `ClimbModule`.
 [ ] Hirvi: Implement `PoliceModule` for sharing data such as knowledge about Hirvi's location, orientation, and speed between polices.
@@ -345,3 +332,13 @@ Ready:
 [x] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
 [x] Implement `LocationModule`.
 [x] Implement `OrientationModule`.
+[x] Implement `GaitModule`, to be used for different bi- and quadrupedal gaits like walking, running, trot, canter, gallop, pace, tölt.
+[x] Implement `SwimModule`, to be used for swimming.
+[x] Implement `DiveModule`, to be used for diving.
+[x] Implement `ClimbModule`, to be used for climbing on different surfaces.
+[x] Implement `FlyModule`, to be used for flying animals and aircraft.
+[x] Implement `RoadVehicleModule`, to be used for road vehicles.
+[x] Implement `RailVehicleModule`, to be used for rail vehicles.
+[x] Implement `ShipModule`, to be used for ships.
+[x] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
+[x] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
