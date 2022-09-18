@@ -21,8 +21,7 @@
 
 #include "hirvi_console_callbacks.hpp"
 #include "hirvi_earth_ecosystem.hpp"
-#include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
-#include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
+#include "hirvi_helsinki_east_downtown_scene.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
@@ -49,12 +48,12 @@
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/custom_entity_factory.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity_factory_templates.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -230,7 +229,7 @@ namespace hirvi
 
                 my_universe->set_global_name("universe");
 
-                yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
+                std::unique_ptr<yli::ontology::CustomEntityFactory> entity_factory = std::make_unique<yli::ontology::CustomEntityFactory>(*my_universe);
 
                 yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 
@@ -259,7 +258,7 @@ namespace hirvi
 
                 // Create an Earth `Ecosystem`.
 
-                yli::ontology::Ecosystem* const earth_ecosystem = hirvi::create_earth_ecosystem(entity_factory);
+                yli::ontology::Ecosystem* const earth_ecosystem = hirvi::create_earth_ecosystem(entity_factory.get());
 
                 std::cout << "Setting up console ...\n";
                 yli::snippets::set_console(my_universe, 15, 0, 0, 39);
@@ -271,7 +270,7 @@ namespace hirvi
                 // Helsinki `Scene` begins here.
 
                 std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
-                yli::ontology::Entity* const helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(*my_universe, entity_factory);
+                yli::ontology::Entity* const helsinki_east_downtown_scene_entity = hirvi::create_helsinki_east_downtown_scene(*my_universe, entity_factory.get());
 
                 if (helsinki_east_downtown_scene_entity == nullptr)
                 {

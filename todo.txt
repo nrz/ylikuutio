@@ -10,17 +10,6 @@ Fixes needed:
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
-[ ] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` and `SwimModule`.
-[ ] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule`, `SwimModule`, and `ClimbModule`.
-[ ] Hirvi: Implement `PoliceModule` for sharing data such as knowledge about Hirvi's location, orientation, and speed between polices.
-[ ] Hirvi: Implement `EmancipationModule` for emancipation-related behavior.
-[ ] Hirvi: Implement `PoliceCar` class that inherits `Holobiont` and uses `RoadVehicleModule` and `PoliceModule`.
-[ ] Hirvi: Implement `PoliceDog` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
-[ ] Hirvi: Implement `PoliceHorse` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
-[ ] Hirvi: Implement `PoliceShip` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
-[ ] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
-[ ] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
-[ ] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
 [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
 [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
@@ -342,3 +331,14 @@ Ready:
 [x] Implement `ShipModule`, to be used for ships.
 [x] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
 [x] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
+[x] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` and `SwimModule`.
+[x] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule`, `SwimModule`, and `ClimbModule`.
+[x] Hirvi: Implement `PoliceModule` for sharing data such as knowledge about Hirvi's location, orientation, and speed between polices.
+[x] Hirvi: Implement `EmancipationModule` for emancipation-related behavior.
+[x] Hirvi: Implement `PoliceCar` class that inherits `Holobiont` and uses `RoadVehicleModule` and `PoliceModule`.
+[x] Hirvi: Implement `PoliceDog` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
+[x] Hirvi: Implement `PoliceHorse` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
+[x] Hirvi: Implement `PoliceShip` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+[x] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+[x] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
+[x] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
