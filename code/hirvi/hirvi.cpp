@@ -20,6 +20,7 @@
 #endif
 
 #include "hirvi_console_callbacks.hpp"
+#include "hirvi_earth_ecosystem.hpp"
 #include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
@@ -41,6 +42,7 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
@@ -254,6 +256,10 @@ namespace hirvi
                 }
 
                 my_universe->set_active_console(my_console);
+
+                // Create an Earth `Ecosystem`.
+
+                yli::ontology::Ecosystem* const earth_ecosystem = hirvi::create_earth_ecosystem(entity_factory);
 
                 std::cout << "Setting up console ...\n";
                 yli::snippets::set_console(my_universe, 15, 0, 0, 39);

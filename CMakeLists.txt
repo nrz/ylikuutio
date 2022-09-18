@@ -812,6 +812,8 @@ add_executable(hirvi
     code/hirvi/hirvi.cpp
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
+    code/hirvi/hirvi_earth_ecosystem.cpp
+    code/hirvi/hirvi_earth_ecosystem.hpp
 
     # ajokki, in alphabetical order.
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
