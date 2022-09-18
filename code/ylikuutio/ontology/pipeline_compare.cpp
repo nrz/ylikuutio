@@ -15,18 +15,38 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_SHADER_COMPARE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_SHADER_COMPARE_HPP_INCLUDED
+#include "pipeline_compare.hpp"
+#include "pipeline.hpp"
 
 namespace yli::ontology
 {
-    class Shader;
-
-    class ShaderCompare final
+    bool PipelineCompare::operator() (yli::ontology::Pipeline* first, yli::ontology::Pipeline* second)
     {
-        public:
-            bool operator() (yli::ontology::Shader* first, yli::ontology::Shader* second);
-    };
-}
+        if (first->is_gpgpu_pipeline)
+        {
+            if (!second->is_gpgpu_pipeline)
+            {
+                return false;
+            }
 
-#endif
+            if (first->get_childID() < second->get_childID())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        if (second->is_gpgpu_pipeline)
+        {
+            return false;
+        }
+
+        if (first->get_childID() < second->get_childID())
+        {
+            return true;
+        }
+
+        return false;
+    }
+}

@@ -17,12 +17,12 @@
 
 #include "ajokki_tallinn_scene.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -74,27 +74,27 @@ namespace ajokki
         tallinn_scene->set_turbo_factor(5.0f);
         tallinn_scene->set_twin_turbo_factor(100.0f);
 
-        // Create the shader, store it in `tallinn_shader`.
-        yli::ontology::ShaderStruct tallinn_shader_struct;
-        tallinn_shader_struct.parent = tallinn_scene;
-        tallinn_shader_struct.vertex_shader = "standard_shading.vert";
-        tallinn_shader_struct.fragment_shader = "standard_shading.frag";
+        // Create the pipeline, store it in `tallinn_pipeline`.
+        yli::ontology::PipelineStruct tallinn_pipeline_struct;
+        tallinn_pipeline_struct.parent = tallinn_scene;
+        tallinn_pipeline_struct.vertex_shader = "standard_shading.vert";
+        tallinn_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* tallinn_shader_entity ...\n";
-        yli::ontology::Entity* const tallinn_shader_entity = entity_factory->create_shader(tallinn_shader_struct);
-        std::cout << "Creating yli::ontology::Shader* tallinn_shader ...\n";
-        yli::ontology::Shader* const tallinn_shader = dynamic_cast<yli::ontology::Shader*>(tallinn_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* tallinn_pipeline_entity ...\n";
+        yli::ontology::Entity* const tallinn_pipeline_entity = entity_factory->create_pipeline(tallinn_pipeline_struct);
+        std::cout << "Creating yli::ontology::Pipeline* tallinn_pipeline ...\n";
+        yli::ontology::Pipeline* const tallinn_pipeline = dynamic_cast<yli::ontology::Pipeline*>(tallinn_pipeline_entity);
 
-        if (tallinn_shader == nullptr)
+        if (tallinn_pipeline == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
         }
 
         // Create the material, store it in `tallinn_grass_material`.
         yli::ontology::MaterialStruct tallinn_grass_material_struct;
         tallinn_grass_material_struct.parent = tallinn_scene;
-        tallinn_grass_material_struct.shader = tallinn_shader;
+        tallinn_grass_material_struct.pipeline = tallinn_pipeline;
         tallinn_grass_material_struct.texture_file_format = "png";
         tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -114,7 +114,7 @@ namespace ajokki
         // Create the species, store it in `terrain_species`.
         yli::ontology::ModelStruct tallinn_terrain_model_struct;
         tallinn_terrain_model_struct.parent = tallinn_scene;
-        tallinn_terrain_model_struct.shader = tallinn_shader;
+        tallinn_terrain_model_struct.pipeline = tallinn_pipeline;
         tallinn_terrain_model_struct.material = tallinn_grass_material;
         tallinn_terrain_model_struct.model_file_format = "SRTM";
         tallinn_terrain_model_struct.latitude = 59.437222f;  // in degrees.

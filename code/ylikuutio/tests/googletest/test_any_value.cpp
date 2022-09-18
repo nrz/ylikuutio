@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -36,7 +36,7 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -448,20 +448,20 @@ TEST(any_value_must_be_initialized_appropriately, scene)
     ASSERT_EQ(scene_any_value.get_const_entity_ref(), *scene);
 }
 
-TEST(any_value_must_be_initialized_appropriately, shader)
+TEST(any_value_must_be_initialized_appropriately, pipeline)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
-    yli::ontology::ShaderStruct shader_struct;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, nullptr);
+    yli::ontology::PipelineStruct pipeline_struct;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, nullptr);
 
-    yli::data::AnyValue shader_any_value = yli::data::AnyValue(*shader);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(shader_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Shader>>(shader_any_value.data).get(), *shader);
-    ASSERT_EQ(std::strcmp(shader_any_value.get_datatype().c_str(), "yli::ontology::Shader&"), 0);
-    ASSERT_EQ(shader_any_value.get_entity_ref(), *shader);
-    ASSERT_EQ(shader_any_value.get_const_entity_ref(), *shader);
+    yli::data::AnyValue pipeline_any_value = yli::data::AnyValue(*pipeline);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(pipeline_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Pipeline>>(pipeline_any_value.data).get(), *pipeline);
+    ASSERT_EQ(std::strcmp(pipeline_any_value.get_datatype().c_str(), "yli::ontology::Pipeline&"), 0);
+    ASSERT_EQ(pipeline_any_value.get_entity_ref(), *pipeline);
+    ASSERT_EQ(pipeline_any_value.get_const_entity_ref(), *pipeline);
 }
 
 TEST(any_value_must_be_initialized_appropriately, material)

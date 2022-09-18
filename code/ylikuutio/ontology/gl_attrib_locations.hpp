@@ -20,10 +20,10 @@
 
 namespace yli::ontology
 {
-    class Shader;
+    class Pipeline;
     class MeshModule;
 
-    void set_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::MeshModule* const mesh_module);
+    void set_gl_attrib_locations(yli::ontology::Pipeline* const pipeline, yli::ontology::MeshModule* const mesh_module);
 }
 
 #endif

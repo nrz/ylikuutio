@@ -45,7 +45,7 @@
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -981,14 +981,14 @@ namespace ajokki
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Movable::bind_to_new_brain));
                 yli::ontology::create_lisp_function_overload("unbind-from-brain", my_console, std::function(&yli::ontology::Movable::unbind_from_brain));
 
-                // `Entity` binding callbacks, `Shader`.
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_ecosystem_parent));
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_scene_parent));
+                // `Entity` binding callbacks, `Pipeline`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Pipeline::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Pipeline::bind_to_new_scene_parent));
 
                 // `Entity` binding callbacks, `Material`.
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_ecosystem_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_scene_parent));
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_shader));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_pipeline));
 
                 // `Entity` binding callbacks, `Species`.
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_ecosystem_parent));
@@ -1004,7 +1004,7 @@ namespace ajokki
                 // `Entity` binding callbacks, `Symbiosis`.
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_ecosystem_parent));
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_scene_parent));
-                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_shader));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_pipeline));
 
                 // `Entity` binding callbacks, `ShapeshifterTransformation`.
                 yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::ShapeshifterTransformation::bind_to_new_material_parent));

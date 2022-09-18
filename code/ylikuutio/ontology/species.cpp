@@ -36,7 +36,7 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Universe;
-    class Shader;
+    class Pipeline;
     struct ModelStruct;
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(yli::ontology::Species& species, yli::ontology::Ecosystem& new_parent) noexcept
@@ -201,13 +201,13 @@ namespace yli::ontology
         return this->child_of_scene_or_ecosystem.get_scene();
     }
 
-    yli::ontology::Shader* Species::get_shader() const
+    yli::ontology::Pipeline* Species::get_pipeline() const
     {
         yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->apprentice_of_material.get_master());
 
         if (material != nullptr)
         {
-            return material->get_shader();
+            return material->get_pipeline();
         }
 
         return nullptr;

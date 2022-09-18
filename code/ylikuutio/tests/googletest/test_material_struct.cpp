@@ -21,7 +21,7 @@
 TEST(material_struct_must_be_initialized_appropriately, material_struct)
 {
     const yli::ontology::MaterialStruct test_material_struct;
-    ASSERT_EQ(test_material_struct.shader, nullptr);
+    ASSERT_EQ(test_material_struct.pipeline, nullptr);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }

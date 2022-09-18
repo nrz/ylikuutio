@@ -52,10 +52,10 @@ namespace yli::ontology
             this->universe.get_is_vulkan_in_use() ||
             this->universe.get_is_software_rendering_in_use();
 
-        if (should_load_texture && model_struct.shader != nullptr)
+        if (should_load_texture && model_struct.pipeline != nullptr)
         {
             // Get a handle for our buffers.
-            yli::ontology::set_gl_attrib_locations(model_struct.shader, &this->mesh);
+            yli::ontology::set_gl_attrib_locations(model_struct.pipeline, &this->mesh);
         }
 
         // `yli::ontology::Entity` member variables begin here.

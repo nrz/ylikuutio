@@ -19,16 +19,16 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
-TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, headless_shader_is_a_child_of_an_ecosystem)
+TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, headless_pipeline_is_a_child_of_an_ecosystem)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -39,25 +39,25 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, hea
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = ecosystem;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &ecosystem->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = ecosystem;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
-    compute_task_struct.parent = shader;
+    compute_task_struct.parent = pipeline;
     yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(*universe, compute_task_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
 
     // `Entity` member functions of `Ecosystem`.
-    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `shader`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `pipeline`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);    // `compute_task`.
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 1);  // `compute_task`.
 
-    // `Shader` member functions.
-    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 0);
 
     // `Entity` member functions of `ComputeTask`.
     ASSERT_EQ(compute_task->get_childID(), 0);
@@ -65,11 +65,11 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, hea
     ASSERT_TRUE(compute_task->get_can_be_erased());
     ASSERT_EQ(&(compute_task->get_universe()), universe);
     ASSERT_EQ(compute_task->get_scene(), nullptr);
-    ASSERT_EQ(compute_task->get_parent(), shader);
+    ASSERT_EQ(compute_task->get_parent(), pipeline);
     ASSERT_EQ(compute_task->get_number_of_non_variable_children(), 0);
 }
 
-TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, headless_shader_is_a_child_of_a_scene)
+TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, headless_pipeline_is_a_child_of_a_scene)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -80,25 +80,25 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, hea
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
-    compute_task_struct.parent = shader;
+    compute_task_struct.parent = pipeline;
     yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(*universe, compute_task_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1); // `ecosystem`.
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);    // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);    // Default `Camera`, `pipeline`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 1);   // `compute_task`.
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 1); // `compute_task`.
 
-    // `Shader` member functions.
-    ASSERT_EQ(shader->get_number_of_apprentices(), 0);
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 0);
 
     // `Entity` member functions of `ComputeTask`.
     ASSERT_EQ(compute_task->get_childID(), 0);
@@ -106,6 +106,6 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_shader_appropriately, hea
     ASSERT_TRUE(compute_task->get_can_be_erased());
     ASSERT_EQ(&(compute_task->get_universe()), universe);
     ASSERT_EQ(compute_task->get_scene(), scene);
-    ASSERT_EQ(compute_task->get_parent(), shader);
+    ASSERT_EQ(compute_task->get_parent(), pipeline);
     ASSERT_EQ(compute_task->get_number_of_non_variable_children(), 0);
 }

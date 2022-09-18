@@ -15,11 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
-#include "shader_struct.hpp"
+#include "pipeline_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -38,16 +38,16 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Shader::bind_to_new_ecosystem_parent(yli::ontology::Shader& shader, yli::ontology::Ecosystem& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Ecosystem& new_parent) noexcept
     {
-        // Set pointer to `Shader` to `nullptr`, set parent according to the input,
+        // Set pointer to `Pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_parent = shader.get_parent();
+        const yli::ontology::Entity* const old_parent = pipeline.get_parent();
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
             return std::nullopt;
         }
 
@@ -57,28 +57,28 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        if (new_parent.has_child(shader.local_name))
+        if (new_parent.has_child(pipeline.local_name))
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_ecosystem_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Pipeline::bind_to_new_ecosystem_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        shader.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_shaders);
+        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_pipelines);
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Shader::bind_to_new_scene_parent(yli::ontology::Shader& shader, yli::ontology::Scene& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_scene_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Scene& new_parent) noexcept
     {
-        // Set pointer to `shader` to `nullptr`, set parent according to the input,
+        // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_parent = shader.get_parent();
+        const yli::ontology::Entity* const old_parent = pipeline.get_parent();
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: `old_parent` is `nullptr`!\n";
+            std::cerr << "ERROR: `Pipeline::bind_to_new_scene_parent`: `old_parent` is `nullptr`!\n";
             return std::nullopt;
         }
 
@@ -88,23 +88,23 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        if (new_parent.has_child(shader.local_name))
+        if (new_parent.has_child(pipeline.local_name))
         {
-            std::cerr << "ERROR: `Shader::bind_to_new_scene_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Pipeline::bind_to_new_scene_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
-        shader.master_of_materials.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
-        shader.master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
-        shader.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_shaders);
+        pipeline.master_of_materials.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
+        pipeline.master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
+        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_pipelines);
         return std::nullopt;
     }
 
-    Shader::Shader(
+    Pipeline::Pipeline(
             yli::ontology::Universe& universe,
-            const yli::ontology::ShaderStruct& shader_struct,
+            const yli::ontology::PipelineStruct& pipeline_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
-        : Entity(universe, shader_struct),
+        : Entity(universe, pipeline_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_compute_tasks(this, &this->registry, "compute_tasks"),
         master_of_materials(this, &this->registry, "materials", nullptr),
@@ -112,17 +112,17 @@ namespace yli::ontology
     {
         // constructor.
 
-        this->vertex_shader        = shader_struct.vertex_shader;
-        this->fragment_shader      = shader_struct.fragment_shader;
+        this->vertex_shader        = pipeline_struct.vertex_shader;
+        this->fragment_shader      = pipeline_struct.fragment_shader;
 
         this->char_vertex_shader   = this->vertex_shader.c_str();
         this->char_fragment_shader = this->fragment_shader.c_str();
 
-        // Each GPGPU `Shader` owns 0 or more output `ComputeTask`s.
-        // Each `Material` rendered after a given GPGPU `Shader`
+        // Each GPGPU `Pipeline` owns 0 or more output `ComputeTask`s.
+        // Each `Material` rendered after a given GPGPU `Pipeline`
         // may also use the output `ComputeTask`s offered by
-        // a given GPGPU `Shader` as its texture.
-        this->is_gpgpu_shader      = shader_struct.is_gpgpu_shader;
+        // a given GPGPU `Pipeline` as its texture.
+        this->is_gpgpu_pipeline    = pipeline_struct.is_gpgpu_pipeline;
 
         if (this->universe.get_is_opengl_in_use())
         {
@@ -139,11 +139,11 @@ namespace yli::ontology
         }
 
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Shader*";
+        this->type_string = "yli::ontology::Pipeline*";
         this->can_be_erased = true;
     }
 
-    Shader::~Shader()
+    Pipeline::~Pipeline()
     {
         // destructor.
 
@@ -153,7 +153,7 @@ namespace yli::ontology
         }
     }
 
-    void Shader::render(const yli::ontology::Scene* const target_scene)
+    void Pipeline::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
         {
@@ -174,11 +174,11 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Shader::render`: `render_system` is `nullptr`!\n";
+            std::cerr << "ERROR: `Pipeline::render`: `render_system` is `nullptr`!\n";
             return;
         }
 
-        // [Re]bind `program_id` shader.
+        // [Re]bind `program_id` program.
         glUseProgram(this->program_id);
 
         render_system->render_compute_tasks(this->parent_of_compute_tasks, new_target_scene);
@@ -186,33 +186,33 @@ namespace yli::ontology
         render_system->render_symbioses(this->master_of_symbioses, new_target_scene);
     }
 
-    yli::ontology::Scene* Shader::get_scene() const
+    yli::ontology::Scene* Pipeline::get_scene() const
     {
         return this->child_of_scene_or_ecosystem.get_scene();
     }
 
-    yli::ontology::Entity* Shader::get_parent() const
+    yli::ontology::Entity* Pipeline::get_parent() const
     {
         return this->child_of_scene_or_ecosystem.get_parent();
     }
 
-    std::size_t Shader::get_number_of_children() const
+    std::size_t Pipeline::get_number_of_children() const
     {
         return this->parent_of_compute_tasks.get_number_of_children();
     }
 
-    std::size_t Shader::get_number_of_descendants() const
+    std::size_t Pipeline::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector);
     }
 
-    std::size_t Shader::get_number_of_apprentices() const
+    std::size_t Pipeline::get_number_of_apprentices() const
     {
         return this->master_of_materials.get_number_of_apprentices() +
             this->master_of_symbioses.get_number_of_apprentices();
     }
 
-    GLuint Shader::get_program_id() const
+    GLuint Pipeline::get_program_id() const
     {
         return this->program_id;
     }

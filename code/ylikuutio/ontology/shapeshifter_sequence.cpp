@@ -31,7 +31,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
-    class Shader;
+    class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
             yli::ontology::Universe& universe,
@@ -90,14 +90,14 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Shader* ShapeshifterSequence::get_shader() const
+    yli::ontology::Pipeline* ShapeshifterSequence::get_pipeline() const
     {
         const yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
             static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
 
         if (shapeshifter_transformation != nullptr)
         {
-            return shapeshifter_transformation->get_shader();
+            return shapeshifter_transformation->get_pipeline();
         }
 
         return nullptr;

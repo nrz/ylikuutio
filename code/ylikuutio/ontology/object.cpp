@@ -20,7 +20,7 @@
 #include "orientation_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "scene.hpp"
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
@@ -213,7 +213,7 @@ namespace yli::ontology
         if (this->object_type == yli::ontology::ObjectType::REGULAR ||
                 this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            this->render_this_object(this->get_shader());
+            this->render_this_object(this->get_pipeline());
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
@@ -221,7 +221,7 @@ namespace yli::ontology
         }
     }
 
-    void Object::render_this_object(yli::ontology::Shader* const shader)
+    void Object::render_this_object(yli::ontology::Pipeline* const pipeline)
     {
         if (this->universe.get_render_system() == nullptr)
         {
@@ -229,7 +229,7 @@ namespace yli::ontology
             return;
         }
 
-        if (shader == nullptr)
+        if (pipeline == nullptr)
         {
             return;
         }
@@ -394,7 +394,7 @@ namespace yli::ontology
         return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
     }
 
-    yli::ontology::Shader* Object::get_shader() const
+    yli::ontology::Pipeline* Object::get_pipeline() const
     {
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
@@ -402,7 +402,7 @@ namespace yli::ontology
 
             if (species != nullptr)
             {
-                return species->get_shader();
+                return species->get_pipeline();
             }
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
@@ -411,7 +411,7 @@ namespace yli::ontology
 
             if (shapeshifter_sequence != nullptr)
             {
-                return shapeshifter_sequence->get_shader();
+                return shapeshifter_sequence->get_pipeline();
             }
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
@@ -420,7 +420,7 @@ namespace yli::ontology
 
             if (text_3d != nullptr)
             {
-                return text_3d->get_shader();
+                return text_3d->get_pipeline();
             }
         }
 

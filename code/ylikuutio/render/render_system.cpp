@@ -22,11 +22,11 @@
 #include "render_struct.hpp"
 #include "code/ylikuutio/ontology/generic_master_module.hpp"
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
-#include "code/ylikuutio/ontology/parent_of_shaders_module.hpp"
+#include "code/ylikuutio/ontology/parent_of_pipelines_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -210,7 +210,7 @@ namespace yli::render
         SDL_GL_SwapWindow(render_struct.window);
     }
 
-    void RenderSystem::render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
+    void RenderSystem::render_pipelines_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const
     {
         for (auto it = parent.begin(); it != parent.end(); ++it)
         {
@@ -218,23 +218,23 @@ namespace yli::render
 
             if (ecosystem != nullptr && ecosystem->should_be_rendered)
             {
-                this->render_shaders_of_an_ecosystem(ecosystem->parent_of_shaders, scene);
+                this->render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
             }
         }
     }
 
-    void RenderSystem::render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
+    void RenderSystem::render_pipelines_of_an_ecosystem(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const
     {
         yli::render::render_children_of_given_scene_or_of_all_scenes<
-            yli::ontology::ParentOfShadersModule&,
-            yli::ontology::Shader*>(
+            yli::ontology::ParentOfPipelinesModule&,
+            yli::ontology::Pipeline*>(
                 parent,
                 scene);
     }
 
-    void RenderSystem::render_shaders(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const
+    void RenderSystem::render_pipelines(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const
     {
-        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::ParentOfShadersModule&, yli::ontology::Shader*>(
+        yli::render::render_children_of_given_scene_or_of_all_scenes<yli::ontology::ParentOfPipelinesModule&, yli::ontology::Pipeline*>(
                 parent,
                 scene);
     }

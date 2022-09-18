@@ -20,7 +20,7 @@
 
 #include "universe.hpp"
 #include "scene.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
@@ -72,15 +72,15 @@ namespace yli::ontology
 
                 if (should_load_vertices_uvs_and_normals &&
                         universe.get_is_opengl_in_use() &&
-                        model_struct.shader != nullptr)
+                        model_struct.pipeline != nullptr)
                 {
                     // VAO.
                     glGenVertexArrays(1, &this->vao);
 
                     // Get a handle for our buffers.
-                    this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_position_modelspace");
-                    this->vertex_uv_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertexUV");
-                    this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.shader->get_program_id(), "vertex_normal_modelspace");
+                    this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_position_modelspace");
+                    this->vertex_uv_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertexUV");
+                    this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
                     yli::load::ModelLoaderStruct model_loader_struct;
                     model_loader_struct.model_struct.model_filename               = this->model_filename;
@@ -95,7 +95,7 @@ namespace yli::ontology
                     model_loader_struct.model_struct.x_step                       = this->x_step;
                     model_loader_struct.model_struct.z_step                       = this->z_step;
                     model_loader_struct.model_struct.parent                       = model_struct.parent;
-                    model_loader_struct.model_struct.shader                       = model_struct.shader;
+                    model_loader_struct.model_struct.pipeline                     = model_struct.pipeline;
                     model_loader_struct.model_struct.material                     = model_struct.material;
                     model_loader_struct.model_struct.symbiont_material            = model_struct.symbiont_material;
                     model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
@@ -136,9 +136,9 @@ namespace yli::ontology
                         std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
                     }
 
-                    if (model_struct.shader == nullptr)
+                    if (model_struct.pipeline == nullptr)
                     {
-                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->shader` is `nullptr`!\n";
+                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->pipeline` is `nullptr`!\n";
                     }
 
                     // Do not load model.

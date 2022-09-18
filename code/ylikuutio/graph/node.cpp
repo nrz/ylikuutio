@@ -159,7 +159,7 @@ namespace yli::graph
     }
 
     // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:
-    // `Node`s have references (links) to other `Node`s, whereas `Shader`s, `Material`s, `Species`, `VectorFont`s, `Glyph`s, and `Object`s do not.
+    // `Node`s have references (links) to other `Node`s, whereas `Pipeline`s, `Material`s, `Species`, `VectorFont`s, `Glyph`s, and `Object`s do not.
     // The easiest way would be to request new `childID` for each new `Node`, and this will be probably be implemented first.
     // Another option would be to change only those `childID`'s for which there would be duplicate `childID`'s.
     // However, that may consume huge amounts of memory if a big object (eg. a terrain object) is split into several smaller objects.

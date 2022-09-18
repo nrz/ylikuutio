@@ -106,7 +106,7 @@ instead of `ParentModule`, `ChildModule`, or both.
 `childID` - an identifier that is unique within the children of a specific parent.
 
 In `ontology` namespace and directory there are also classes used for passing parameters to constructors of
-`ontology` classes. These classes include `UniverseStruct`, `SceneStruct`, `ShaderStruct`, `MaterialStruct`,
+`ontology` classes. These classes include `UniverseStruct`, `SceneStruct`, `PipelineStruct`, `MaterialStruct`,
 `SpeciesStruct`, `ObjectStruct`, `SymbiosisStruct`, `HolobiontStruct`, `BiontStruct`, `ComputeTaskStruct`,
 `ShapeshifterSequenceStruct`. The class name relates directly to the class where it is used. However, some
 of these classes used for passing parameters are used for more than 1 class. For example, `MaterialStruct` is
@@ -136,7 +136,7 @@ There are different hierarchical paths in ontology:
 `Universe` is the top-level class in `ontology` hierarchy. The instances of all other `ontology` classes are normally descendants of `Universe` instance.
 `World` is a class between `Universe` and 1 or more `Scene`s and can be used for sharing hierarchically lower-level classes between different `Scene`s.
 `Scene` is a location in the game or simulation world.
-`Shader` is a the owner of GLSL shaders (vertex shaders and fragment shaders).
+`Pipeline` is a the owner of GLSL shaders (vertex shaders and fragment shaders).
 `Material` is the owner a texture.
 `Species` is the owner of a mesh.
 `Object` is a single object instance in a `Scene`.
@@ -146,7 +146,7 @@ There are different hierarchical paths in ontology:
 `Universe` (see above).
 `World` (see above).
 `Scene` (see above).
-`Shader` (see above).
+`Pipeline` (see above).
 `Symbiosis` is a class that owns `SymbiontMaterial`s and `SymbiontSpecies`.
 `SymbiontMaterial` is a `Material` owned by a `Symbiosis`.
 `SymbiontSpecies` is a `Species` owned by a `Symbiosis`.
@@ -156,7 +156,7 @@ There are different hierarchical paths in ontology:
 `Universe` (see above).
 `World` (see above).
 `Scene` (see above).
-`Shader` (see above).
+`Pipeline` (see above).
 `Symbiosis` (see above).
 `Holobiont` is a single instance of a `Symbiosis`. Each `Holobiont` is a symbiotic organism and consists of 1 or more `Biont`s.
 `Biont` is a symbiont belonging to a specific `Holobiont`.
@@ -170,7 +170,7 @@ There are different hierarchical paths in ontology:
 `Universe` (see above).
 `World` (see above).
 `Scene` (see above).
-`Shader` (see above).
+`Pipeline` (see above).
 `Material` (see above).
 `VectorFont` is class that owns a the `Glyph`s of a single vector font, and also `Text3D` entities.
 `Glyph` is a single glyph belonging to the vector font.
@@ -184,8 +184,8 @@ There are different hierarchical paths in ontology:
 `Universe` (see above).
 `World` (see above).
 `Scene` (see above).
-`Shader` (see above).
-`ComputeTask` is a class that owns the data used for GPGPU computation using the GLSL vertex shader and GLSL fragment shader owned by the `Shader`.
+`Pipeline` (see above).
+`ComputeTask` is a class that owns the data used for GPGPU computation using the GLSL vertex shader and GLSL fragment shader owned by the `Pipeline`.
 
 Triangulation
 
@@ -202,8 +202,8 @@ Naturally, children must be bound to their parents somehow. There are different 
    Use this when possible. Constructor of `ChildModule` does the binding and destructor of `ChildModule` does the unbinding.
 3. Parent uses `yli::ontology::ParentModule` for 'parenting' and child uses custom code for 'childing'.
    Custom code does the binding and unbinding, using `ParentModule` interface, just like `ChildModule` does.
-4. Parent uses custom code for parenting and child uses custom code for 'childing'. see `Scene`-`Shader`-relationship for an example.
-   The reason to use custom binding code in `Scene`-`Shader`-relationship is to keep `Shader`s ordered in `ShaderPriorityQueue`.
+4. Parent uses custom code for parenting and child uses custom code for 'childing'. see `Scene`-`Pipeline`-relationship for an example.
+   The reason to use custom binding code in `Scene`-`Pipeline`-relationship is to keep `Pipeline`s ordered in `PipelinePriorityQueue`.
    In this case binding is completely custom for both 'parenting' and 'childing'. Use this only as a last resort.
 
 In `ontology` namespace and directory there is also class template `MasterModule` that provides the master functionality

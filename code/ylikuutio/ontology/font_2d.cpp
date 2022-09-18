@@ -87,7 +87,7 @@ namespace yli::ontology
                 glGenBuffers(1, &this->vertexbuffer);
                 glGenBuffers(1, &this->uvbuffer);
 
-                // Initialize `Shader`.
+                // Initialize `Pipeline`.
                 this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
                 glUseProgram(this->program_id);
 
@@ -179,7 +179,7 @@ namespace yli::ontology
     {
         if (this->should_be_rendered && this->universe.get_is_opengl_in_use())
         {
-            // Bind shader.
+            // Bind program.
             glUseProgram(this->program_id);
 
             // Bind texture.

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_SHADER_STRUCT_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_SHADER_STRUCT_HPP_INCLUDED
+#ifndef __YLIKUUTIO_ONTOLOGY_PIPELINE_STRUCT_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_PIPELINE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 
@@ -29,12 +29,12 @@ namespace yli::ontology
     class Ecosystem;
     class Scene;
 
-    struct ShaderStruct: public yli::ontology::EntityStruct
+    struct PipelineStruct: public yli::ontology::EntityStruct
     {
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
         std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent; // Pointer to `Ecosystem` or `Scene`.
-        bool is_gpgpu_shader         { false };   // TODO: GPGPU `Shader`s are not rendered on screen but their result textures can be used by `Material`s.
+        bool is_gpgpu_pipeline { false }; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }
 

@@ -16,10 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "code/ylikuutio/ontology/ecosystem.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
@@ -50,28 +50,28 @@ namespace ajokki
             return nullptr;
         }
 
-        // Create the shader, store it in `earth_shader`.
-        yli::ontology::ShaderStruct earth_shader_struct;
-        earth_shader_struct.parent = earth_ecosystem;
-        earth_shader_struct.global_name = "earth_shader";
-        earth_shader_struct.local_name = "helsinki_regular_shader";
-        earth_shader_struct.vertex_shader = "standard_shading.vert";
-        earth_shader_struct.fragment_shader = "standard_shading.frag";
+        // Create the pipeline, store it in `earth_pipeline`.
+        yli::ontology::PipelineStruct earth_pipeline_struct;
+        earth_pipeline_struct.parent = earth_ecosystem;
+        earth_pipeline_struct.global_name = "earth_pipeline";
+        earth_pipeline_struct.local_name = "helsinki_regular_pipeline";
+        earth_pipeline_struct.vertex_shader = "standard_shading.vert";
+        earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* earth_shader_entity ...\n";
-        yli::ontology::Entity* const earth_shader_entity = entity_factory->create_shader(earth_shader_struct);
-        std::cout << "Creating yli::ontology::Shader* earth_shader ...\n";
-        yli::ontology::Shader* const earth_shader = dynamic_cast<yli::ontology::Shader*>(earth_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* earth_pipeline_entity ...\n";
+        yli::ontology::Entity* const earth_pipeline_entity = entity_factory->create_pipeline(earth_pipeline_struct);
+        std::cout << "Creating yli::ontology::Pipeline* earth_pipeline ...\n";
+        yli::ontology::Pipeline* const earth_pipeline = dynamic_cast<yli::ontology::Pipeline*>(earth_pipeline_entity);
 
-        if (earth_shader == nullptr)
+        if (earth_pipeline == nullptr)
         {
-            std::cerr << "Failed to create `Shader`.\n";
+            std::cerr << "Failed to create `Pipeline`.\n";
             return nullptr;
         }
 
         yli::ontology::ModelStruct turbo_polizei_png_model_struct;
         turbo_polizei_png_model_struct.parent = earth_ecosystem;
-        turbo_polizei_png_model_struct.shader = earth_shader;
+        turbo_polizei_png_model_struct.pipeline = earth_pipeline;
         turbo_polizei_png_model_struct.model_file_format = "fbx";
         turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
 

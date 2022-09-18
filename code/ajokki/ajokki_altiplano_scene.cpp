@@ -17,12 +17,12 @@
 
 #include "ajokki_altiplano_scene.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -74,27 +74,27 @@ namespace ajokki
         altiplano_scene->set_turbo_factor(5.0f);
         altiplano_scene->set_twin_turbo_factor(100.0f);
 
-        // Create the shader, store it in `altiplano_shader`.
-        yli::ontology::ShaderStruct altiplano_shader_struct;
-        altiplano_shader_struct.parent = altiplano_scene;
-        altiplano_shader_struct.vertex_shader = "standard_shading.vert";
-        altiplano_shader_struct.fragment_shader = "standard_shading.frag";
+        // Create the pipeline, store it in `altiplano_pipeline`.
+        yli::ontology::PipelineStruct altiplano_pipeline_struct;
+        altiplano_pipeline_struct.parent = altiplano_scene;
+        altiplano_pipeline_struct.vertex_shader = "standard_shading.vert";
+        altiplano_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* altiplano_shader_entity ...\n";
-        yli::ontology::Entity* const altiplano_shader_entity = entity_factory->create_shader(altiplano_shader_struct);
-        std::cout << "Creating yli::ontology::Shader* altiplano_shader ...\n";
-        yli::ontology::Shader* const altiplano_shader = dynamic_cast<yli::ontology::Shader*>(altiplano_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* altiplano_pipeline_entity ...\n";
+        yli::ontology::Entity* const altiplano_pipeline_entity = entity_factory->create_pipeline(altiplano_pipeline_struct);
+        std::cout << "Creating yli::ontology::Pipeline* altiplano_pipeline ...\n";
+        yli::ontology::Pipeline* const altiplano_pipeline = dynamic_cast<yli::ontology::Pipeline*>(altiplano_pipeline_entity);
 
-        if (altiplano_shader == nullptr)
+        if (altiplano_pipeline == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
         }
 
         // Create the material, store it in `altiplano_grass_material`.
         yli::ontology::MaterialStruct altiplano_grass_material_struct;
         altiplano_grass_material_struct.parent = altiplano_scene;
-        altiplano_grass_material_struct.shader = altiplano_shader;
+        altiplano_grass_material_struct.pipeline = altiplano_pipeline;
         altiplano_grass_material_struct.texture_file_format = "png";
         altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -114,7 +114,7 @@ namespace ajokki
         // Create the species, store it in `terrain_species`.
         yli::ontology::ModelStruct altiplano_terrain_model_struct;
         altiplano_terrain_model_struct.parent = altiplano_scene;
-        altiplano_terrain_model_struct.shader = altiplano_shader;
+        altiplano_terrain_model_struct.pipeline = altiplano_pipeline;
         altiplano_terrain_model_struct.material = altiplano_grass_material;
         altiplano_terrain_model_struct.model_file_format = "SRTM";
         altiplano_terrain_model_struct.latitude = -16.50f;  // in degrees.

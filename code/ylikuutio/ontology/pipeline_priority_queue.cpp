@@ -15,36 +15,33 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "shader_compare.hpp"
-#include "shader.hpp"
+#include "pipeline_priority_queue.hpp"
+#include "pipeline.hpp"
+#include "pipeline_compare.hpp"
+
+// Include standard headers
+#include <algorithm> // std::make_heap etc.
+#include <cstddef>   // std::size_t
 
 namespace yli::ontology
 {
-    bool ShaderCompare::operator() (yli::ontology::Shader* first, yli::ontology::Shader* second)
-    {
-        if (first->is_gpgpu_shader)
-        {
-            if (!second->is_gpgpu_shader)
-            {
-                return false;
-            }
+    // Inspired by https://stackoverflow.com/questions/19467485/how-to-remove-element-not-at-top-from-priority-queue/36711682#36711682
+    //
+    // Heap-based priority queue.
+    // Random access read: O(1)
+    // Insert:             O(log(n))
+    // Delete:             O(log(n))
 
-            if (first->get_childID() < second->get_childID())
+    bool PipelinePriorityQueue::remove(const std::size_t childID)
+    {
+        for (auto it = this->c.begin(); it != this->c.end(); ++it)
+        {
+            if ((*it)->get_childID() == childID)
             {
+                this->c.erase(it);
+                std::make_heap(this->c.begin(), this->c.end(), yli::ontology::PipelineCompare());
                 return true;
             }
-
-            return false;
-        }
-
-        if (second->is_gpgpu_shader)
-        {
-            return false;
-        }
-
-        if (first->get_childID() < second->get_childID())
-        {
-            return true;
         }
 
         return false;

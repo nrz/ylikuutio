@@ -36,18 +36,18 @@ namespace yli::callback
 
 namespace yli::ontology
 {
-    class Shader;
+    class Pipeline;
 
     struct ComputeTaskStruct: public yli::ontology::EntityStruct
     {
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        yli::ontology::Shader* parent { nullptr };   // Pointer to the `Shader`.
+        yli::ontology::Pipeline* parent { nullptr }; // Pointer to the `Pipeline`.
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
         std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
-        std::size_t n_max_iterations   { 1 }; // By default execute GLSL shader exactly once (do not iterate further).
+        std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
         uint32_t texture_width         { 0 };
         uint32_t texture_height        { 0 };

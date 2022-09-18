@@ -17,9 +17,9 @@
 
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
-#include "parent_of_shaders_module.hpp"
+#include "parent_of_pipelines_module.hpp"
 #include "entity.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -28,31 +28,31 @@
 
 namespace yli::ontology
 {
-    bool ParentOfShadersModule::bind_child(yli::ontology::Entity* const shader_child) noexcept
+    bool ParentOfPipelinesModule::bind_child(yli::ontology::Entity* const pipeline_child) noexcept
     {
-        if (this->GenericParentModule::bind_child(shader_child))
+        if (this->GenericParentModule::bind_child(pipeline_child))
         {
-            // `shader` needs to be added to the priority queue as well.
-            this->shader_priority_queue.push(static_cast<yli::ontology::Shader*>(shader_child));
+            // `pipeline` needs to be added to the priority queue as well.
+            this->pipeline_priority_queue.push(static_cast<yli::ontology::Pipeline*>(pipeline_child));
             return true; // Binding successful.
         }
 
         return false; // Binding failed.
     }
 
-    bool ParentOfShadersModule::unbind_child(std::size_t childID) noexcept
+    bool ParentOfPipelinesModule::unbind_child(std::size_t childID) noexcept
     {
         if (this->GenericParentModule::unbind_child(childID))
         {
-            // `Shader` needs to be removed from the priority queue as well.
-            this->shader_priority_queue.remove(childID);
+            // `Pipeline` needs to be removed from the priority queue as well.
+            this->pipeline_priority_queue.remove(childID);
             return true; // Unbinding successful.
         }
 
         return false; // Unbinding failed.
     }
 
-    ParentOfShadersModule::ParentOfShadersModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
+    ParentOfPipelinesModule::ParentOfPipelinesModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
         : GenericParentModule(entity, registry, name)
     {
         // constructor.

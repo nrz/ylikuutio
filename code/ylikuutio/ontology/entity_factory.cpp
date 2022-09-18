@@ -22,7 +22,7 @@
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "material.hpp"
 #include "species.hpp"
 #include "object.hpp"
@@ -42,7 +42,7 @@
 #include "variable_struct.hpp"
 #include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
-#include "shader_struct.hpp"
+#include "pipeline_struct.hpp"
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "object_struct.hpp"
@@ -178,20 +178,20 @@ namespace yli::ontology
         return scene_entity;
     }
 
-    yli::ontology::Entity* EntityFactory::create_shader(const yli::ontology::ShaderStruct& shader_struct) const
+    yli::ontology::Entity* EntityFactory::create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const
     {
-        yli::ontology::Entity* shader_entity = new yli::ontology::Shader(
+        yli::ontology::Entity* pipeline_entity = new yli::ontology::Pipeline(
                 this->universe,
-                shader_struct,
+                pipeline_struct,
                 // `Ecosystem` or `Scene` parent.
-                ((std::holds_alternative<yli::ontology::Ecosystem*>(shader_struct.parent) && std::get<yli::ontology::Ecosystem*>(shader_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::Ecosystem*>(shader_struct.parent)->parent_of_shaders) :
-                 (std::holds_alternative<yli::ontology::Scene*>(shader_struct.parent) && std::get<yli::ontology::Scene*>(shader_struct.parent) != nullptr) ?
-                 &(std::get<yli::ontology::Scene*>(shader_struct.parent)->parent_of_shaders) :
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(pipeline_struct.parent) && std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent)->parent_of_pipelines) :
+                 (std::holds_alternative<yli::ontology::Scene*>(pipeline_struct.parent) && std::get<yli::ontology::Scene*>(pipeline_struct.parent) != nullptr) ?
+                 &(std::get<yli::ontology::Scene*>(pipeline_struct.parent)->parent_of_pipelines) :
                  nullptr));
-        shader_entity->set_global_name(shader_struct.global_name);
-        shader_entity->set_local_name(shader_struct.local_name);
-        return shader_entity;
+        pipeline_entity->set_global_name(pipeline_struct.global_name);
+        pipeline_entity->set_local_name(pipeline_struct.local_name);
+        return pipeline_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_material(const yli::ontology::MaterialStruct& material_struct) const
@@ -205,7 +205,7 @@ namespace yli::ontology
                  (std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
                  &(std::get<yli::ontology::Scene*>(material_struct.parent)->parent_of_materials) :
                  nullptr),
-                (material_struct.shader == nullptr ? nullptr : material_struct.shader->get_master_module()));
+                (material_struct.pipeline == nullptr ? nullptr : material_struct.pipeline->get_master_module()));
 
         material_entity->set_global_name(material_struct.global_name);
         material_entity->set_local_name(material_struct.local_name);
@@ -260,7 +260,7 @@ namespace yli::ontology
                 ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
                  (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
                  nullptr),
-                (model_struct.shader == nullptr ? nullptr : &model_struct.shader->master_of_symbioses));
+                (model_struct.pipeline == nullptr ? nullptr : &model_struct.pipeline->master_of_symbioses));
 
         symbiosis_entity->set_global_name(model_struct.global_name);
         symbiosis_entity->set_local_name(model_struct.local_name);

@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
@@ -26,7 +26,7 @@
 #include "code/ylikuutio/ontology/shapeshifter_form.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -44,21 +44,21 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             *universe,
@@ -71,11 +71,11 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
@@ -105,21 +105,21 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             *universe,
@@ -139,11 +139,11 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
@@ -177,21 +177,21 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             *universe,
@@ -211,11 +211,11 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
@@ -246,21 +246,21 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             *universe,
@@ -287,11 +287,11 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
@@ -331,21 +331,21 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.shader = shader;
+    shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
             *universe,
@@ -381,11 +381,11 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material`, `object`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `material`, `object`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);

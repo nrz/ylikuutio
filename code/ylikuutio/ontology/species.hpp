@@ -36,7 +36,7 @@ namespace yli::ontology
     class Universe;
     class Ecosystem;
     class Scene;
-    class Shader;
+    class Pipeline;
     class Material;
     struct ModelStruct;
 
@@ -82,7 +82,7 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
 
-            yli::ontology::Shader* get_shader() const;
+            yli::ontology::Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;

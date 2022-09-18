@@ -28,7 +28,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -224,11 +224,11 @@ namespace yli::data
             return std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data).get() ==
                 std::get<std::reference_wrapper<yli::ontology::Scene>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Shader>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Shader>>(rhs.data).get();
+            return std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data).get() ==
+                std::get<std::reference_wrapper<yli::ontology::Pipeline>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(rhs.data))
@@ -421,9 +421,9 @@ namespace yli::data
         {
             return "yli::ontology::Scene&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
         {
-            return "yli::ontology::Shader&";
+            return "yli::ontology::Pipeline&";
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
         {
@@ -630,9 +630,9 @@ namespace yli::data
         {
             any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Shader>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
         {
@@ -726,9 +726,9 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Shader>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Shader>>(this->data);
+            return std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data);
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
         {
@@ -988,7 +988,7 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Universe>,
                 std::reference_wrapper<yli::ontology::Ecosystem>,
                 std::reference_wrapper<yli::ontology::Scene>,
-                std::reference_wrapper<yli::ontology::Shader>,
+                std::reference_wrapper<yli::ontology::Pipeline>,
                 std::reference_wrapper<yli::ontology::Material>,
                 std::reference_wrapper<yli::ontology::Species>,
                 std::reference_wrapper<yli::ontology::Object>,
@@ -1178,8 +1178,8 @@ namespace yli::data
         // constructor.
     }
 
-    AnyValue::AnyValue(yli::ontology::Shader& shader_ref)
-        : data(std::reference_wrapper<yli::ontology::Shader>(shader_ref))
+    AnyValue::AnyValue(yli::ontology::Pipeline& pipeline_ref)
+        : data(std::reference_wrapper<yli::ontology::Pipeline>(pipeline_ref))
     {
         // constructor.
     }

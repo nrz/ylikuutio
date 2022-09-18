@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "parent_of_shaders_module.hpp"
+#include "parent_of_pipelines_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -54,7 +54,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentOfShadersModule parent_of_shaders;
+            yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
             yli::ontology::GenericParentModule parent_of_materials;
             yli::ontology::GenericParentModule parent_of_species;
             yli::ontology::GenericParentModule parent_of_symbioses;

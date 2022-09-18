@@ -34,7 +34,7 @@ namespace yli::ontology
     struct VariableStruct;
     struct EcosystemStruct;
     struct SceneStruct;
-    struct ShaderStruct;
+    struct PipelineStruct;
     struct MaterialStruct;
     struct ModelStruct;
     struct ObjectStruct;
@@ -66,7 +66,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
-            yli::ontology::Entity* create_shader(const yli::ontology::ShaderStruct& shader_struct) const;
+            yli::ontology::Entity* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const;
             yli::ontology::Entity* create_material(const yli::ontology::MaterialStruct& material_struct) const;
             yli::ontology::Entity* create_species(const yli::ontology::ModelStruct& model_struct) const;
             yli::ontology::Entity* create_object(const yli::ontology::ObjectStruct& object_struct) const;

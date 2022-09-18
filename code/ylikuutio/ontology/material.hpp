@@ -39,7 +39,7 @@ namespace yli::ontology
     class Universe;
     class Ecosystem;
     class Scene;
-    class Shader;
+    class Pipeline;
     struct MaterialStruct;
 
     class Material final : public yli::ontology::Entity
@@ -53,15 +53,15 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Material& material, yli::ontology::Scene& new_parent) noexcept;
 
-            // Set pointer to `material` to `nullptr`, set shader according to the input,
+            // Set pointer to `material` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_shader(yli::ontology::Material& material, yli::ontology::Shader& new_shader) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(yli::ontology::Material& material, yli::ontology::Pipeline& new_pipeline) noexcept;
 
             Material(
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
-                    yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module);
+                    yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module);
 
             Material(const Material&) = delete;            // Delete copy constructor.
             Material& operator=(const Material&) = delete; // Delete copy assignment.
@@ -75,7 +75,7 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            yli::ontology::Shader* get_shader() const;
+            yli::ontology::Pipeline* get_pipeline() const;
 
             const std::string& get_texture_file_format() const;
             const std::string& get_texture_filename() const;
@@ -86,7 +86,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
             yli::ontology::GenericParentModule parent_of_vector_fonts;
-            yli::ontology::ApprenticeModule apprentice_of_shader;
+            yli::ontology::ApprenticeModule apprentice_of_pipeline;
             yli::ontology::GenericMasterModule master_of_species;
             yli::ontology::TextureModule texture;
 

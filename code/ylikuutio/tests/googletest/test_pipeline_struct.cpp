@@ -16,15 +16,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 
 // Include standard headers
 #include <variant> // std::holds_alternative, std::monostate, std::variant
 
-TEST(shader_struct_must_be_initialized_appropriately, shader_struct)
+TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct)
 {
-    const yli::ontology::ShaderStruct test_shader_struct;
-    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_shader_struct.parent));
-    ASSERT_TRUE(test_shader_struct.vertex_shader.empty());
-    ASSERT_TRUE(test_shader_struct.fragment_shader.empty());
+    const yli::ontology::PipelineStruct test_pipeline_struct;
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
+    ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
+    ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }

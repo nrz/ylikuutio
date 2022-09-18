@@ -15,16 +15,18 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "shader_priority_queue.hpp"
-#include "shader.hpp"
-#include "shader_compare.hpp"
+#ifndef __YLIKUUTIO_ONTOLOGY_PIPELINE_PRIORITY_QUEUE_HPP_INCLUDED
+#define __YLIKUUTIO_ONTOLOGY_PIPELINE_PRIORITY_QUEUE_HPP_INCLUDED
 
 // Include standard headers
-#include <algorithm> // std::make_heap etc.
-#include <cstddef>   // std::size_t
+#include <cstddef> // std::size_t
+#include <queue>   // std::priority_queue, std::queue
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
+    class Pipeline;
+
     // Inspired by https://stackoverflow.com/questions/19467485/how-to-remove-element-not-at-top-from-priority-queue/36711682#36711682
     //
     // Heap-based priority queue.
@@ -32,18 +34,11 @@ namespace yli::ontology
     // Insert:             O(log(n))
     // Delete:             O(log(n))
 
-    bool ShaderPriorityQueue::remove(const std::size_t childID)
+    class PipelinePriorityQueue final : public std::priority_queue<yli::ontology::Pipeline*, std::vector<yli::ontology::Pipeline*>>
     {
-        for (auto it = this->c.begin(); it != this->c.end(); ++it)
-        {
-            if ((*it)->get_childID() == childID)
-            {
-                this->c.erase(it);
-                std::make_heap(this->c.begin(), this->c.end(), yli::ontology::ShaderCompare());
-                return true;
-            }
-        }
-
-        return false;
-    }
+        public:
+            bool remove(const std::size_t childID);
+    };
 }
+
+#endif

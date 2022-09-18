@@ -22,7 +22,7 @@
 #include "scene.hpp"
 #include "rigid_body_module.hpp"
 #include "universe.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
@@ -59,7 +59,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
     : Entity(universe, scene_struct),
         child_of_universe(parent_module, this),
-        parent_of_shaders(this, &this->registry, "shaders"),
+        parent_of_pipelines(this, &this->registry, "pipelines"),
         parent_of_default_camera(this, &this->registry, "default_camera"),
         parent_of_cameras(this, &this->registry, "cameras"),
         parent_of_brains(this, &this->registry, "brains"),
@@ -170,8 +170,8 @@ namespace yli::ontology
             std::cerr << "ERROR: `Scene::render`: Vulkan is not supported yet!\n";
         }
 
-        render_system->render_shaders_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
-        render_system->render_shaders(this->parent_of_shaders, this);
+        render_system->render_pipelines_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
+        render_system->render_pipelines(this->parent_of_pipelines, this);
     }
 
     yli::ontology::Camera* Scene::get_default_camera() const
@@ -244,7 +244,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_children() const
     {
-        return this->parent_of_shaders.get_number_of_children() +
+        return this->parent_of_pipelines.get_number_of_children() +
             this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
             this->parent_of_brains.get_number_of_children() +
@@ -257,7 +257,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_shaders.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +

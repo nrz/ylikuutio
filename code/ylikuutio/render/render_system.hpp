@@ -34,7 +34,7 @@ namespace yli::ontology
     class SymbiontSpecies;
     class Glyph;
     class GenericParentModule;
-    class ParentOfShadersModule;
+    class ParentOfPipelinesModule;
     class GenericMasterModule;
     class ApprenticeModule;
 }
@@ -67,9 +67,9 @@ namespace yli::render
             // This function renders everything.
             void render(const yli::render::RenderStruct& render_struct) const;
 
-            void render_shaders_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
-            void render_shaders_of_an_ecosystem(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const;
-            void render_shaders(yli::ontology::ParentOfShadersModule& parent, const yli::ontology::Scene* const scene) const;
+            void render_pipelines_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
+            void render_pipelines_of_an_ecosystem(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const;
+            void render_pipelines(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const;
 
             void render_materials(
                     yli::ontology::GenericMasterModule& master,

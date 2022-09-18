@@ -17,7 +17,7 @@
 
 #include "compute_task.hpp"
 #include "universe.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "compute_task_struct.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -55,16 +55,16 @@ namespace yli::ontology
         // Requirements:
         // `this->parent` must not be `nullptr`.
 
-        yli::ontology::Shader* const shader = this->parent;
+        yli::ontology::Pipeline* const pipeline = this->parent;
 
-        if (shader == nullptr)
+        if (pipeline == nullptr)
         {
-            std::cerr << "ERROR: `ComputeTask::bind_to_parent`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `ComputeTask::bind_to_parent`: `pipeline` is `nullptr`!\n";
             return;
         }
 
-        // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
-        shader->parent_of_compute_tasks.bind_child(this);
+        // Get `childID` from `Pipeline` and set pointer to this `ComputeTask`.
+        pipeline->parent_of_compute_tasks.bind_child(this);
     }
 
     ComputeTask::ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
@@ -90,7 +90,7 @@ namespace yli::ontology
     {
         // constructor.
 
-        // Get `childID` from `Shader` and set pointer to this `ComputeTask`.
+        // Get `childID` from `Pipeline` and set pointer to this `ComputeTask`.
         this->bind_to_parent();
 
         // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.

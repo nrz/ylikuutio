@@ -38,7 +38,7 @@ namespace yli::ontology
 {
     class Ecosystem;
     class Scene;
-    class Shader;
+    class Pipeline;
     class Material;
     class SymbiontMaterial;
     class ShapeshifterTransformation;
@@ -71,7 +71,7 @@ namespace yli::ontology
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
         std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*> parent  {};
-        yli::ontology::Shader* shader                                          { nullptr }; // Pointer to `Shader`.
+        yli::ontology::Pipeline* pipeline                                      { nullptr }; // Pointer to `Pipeline`.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial`.
         yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation`.

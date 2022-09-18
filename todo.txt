@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Rename `Shader` to `Pipeline`.
 [ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
@@ -327,3 +326,4 @@ Ready:
 [x] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
 [x] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
 [x] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
+[x] Rename `Shader` to `Pipeline`.

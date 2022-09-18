@@ -19,16 +19,16 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
-TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_shader_is_child_of_ecosystem)
+TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -39,17 +39,17 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = ecosystem;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &ecosystem->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = ecosystem;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &ecosystem->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -57,14 +57,14 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
 
     // `Entity` member functions of `Ecosystem`.
     ASSERT_EQ(ecosystem->get_scene(), nullptr);
-    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `shader`, `symbiosis`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `symbiosis`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), nullptr);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), nullptr);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -76,7 +76,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 }
 
-TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_shader_is_child_of_scene)
+TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_scene)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -93,17 +93,17 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &ecosystem->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -115,14 +115,14 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `pipeline`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -145,18 +145,18 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -164,14 +164,14 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -194,20 +194,20 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_scene(), nullptr);
@@ -215,14 +215,14 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(symbiosis->get_childID(), 0);
@@ -290,22 +290,22 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene1;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene1->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene1;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene1->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     ASSERT_EQ(symbiosis->get_scene(), scene1);
     ASSERT_EQ(symbiosis->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
             *universe,
@@ -318,14 +318,14 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
     yli::ontology::Symbiosis::bind_to_new_scene_parent(*symbiosis, *scene2);
     ASSERT_EQ(symbiosis->get_scene(), scene2);
     ASSERT_EQ(symbiosis->get_parent(), scene2);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `shader`.
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `pipeline`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 2); // Default `Camera`, `symbiosis`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 
     yli::ontology::Symbiosis::bind_to_new_scene_parent(*symbiosis, *scene1);
     ASSERT_EQ(symbiosis->get_scene(), scene1);
     ASSERT_EQ(symbiosis->get_parent(), scene1);
-    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `symbiosis`.
+    ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);
 }
@@ -415,7 +415,7 @@ TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scen
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
 }
 
-TEST(symbiosis_must_bind_to_shader_appropriately, master_and_apprentice)
+TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -426,34 +426,34 @@ TEST(symbiosis_must_bind_to_shader_appropriately, master_and_apprentice)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader1 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader1;
+    model_struct.pipeline = pipeline1;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
-            &shader1->master_of_symbioses);
-    ASSERT_EQ(symbiosis->get_shader(), shader1);
+            &pipeline1->master_of_symbioses);
+    ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
-    yli::ontology::Shader* const shader2 = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
-    ASSERT_EQ(symbiosis->get_shader(), shader1);
+    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
-    yli::ontology::Symbiosis::bind_to_new_shader(*symbiosis, *shader2);
-    ASSERT_EQ(symbiosis->get_shader(), shader2);
+    yli::ontology::Symbiosis::bind_to_new_pipeline(*symbiosis, *pipeline2);
+    ASSERT_EQ(symbiosis->get_pipeline(), pipeline2);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader2);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline2);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 
-    yli::ontology::Symbiosis::bind_to_new_shader(*symbiosis, *shader1);
-    ASSERT_EQ(symbiosis->get_shader(), shader1);
+    yli::ontology::Symbiosis::bind_to_new_pipeline(*symbiosis, *pipeline1);
+    ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_master(), shader1);
-    ASSERT_EQ(symbiosis->apprentice_of_shader.get_apprenticeID(), 0);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline1);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
 }

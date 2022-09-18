@@ -78,7 +78,7 @@ Multiverse       MULV
 Universe         UNIV
 World            WORL
 Scene            SCEN
-Shader           SHAD
+Pipeline         PIPL
 Material         MATE
 Species          SPEC
 Object           OBJE

@@ -17,7 +17,7 @@
 
 #include "symbiont_material.hpp"
 #include "universe.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
@@ -54,11 +54,11 @@ namespace yli::ontology
 
         if (this->texture.get_is_texture_loaded())
         {
-            yli::ontology::Shader* const shader = this->get_shader();
+            yli::ontology::Pipeline* const pipeline = this->get_pipeline();
 
-            if (shader != nullptr)
+            if (pipeline != nullptr)
             {
-                this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+                this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
             }
         }
 
@@ -83,13 +83,13 @@ namespace yli::ontology
         return this->child_of_symbiosis.get_parent();
     }
 
-    yli::ontology::Shader* SymbiontMaterial::get_shader() const
+    yli::ontology::Pipeline* SymbiontMaterial::get_pipeline() const
     {
         const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
 
         if (symbiosis != nullptr)
         {
-            return static_cast<yli::ontology::Shader*>(symbiosis->apprentice_of_shader.get_master());
+            return static_cast<yli::ontology::Pipeline*>(symbiosis->apprentice_of_pipeline.get_master());
         }
 
         return nullptr;

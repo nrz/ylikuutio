@@ -19,7 +19,7 @@
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
 #include "material_struct.hpp"
@@ -111,27 +111,27 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        symbiosis.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        symbiosis.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
         symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader) noexcept
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_pipeline(yli::ontology::Symbiosis& symbiosis, yli::ontology::Pipeline& new_pipeline) noexcept
     {
-        // Set pointer to `symbiosis` to `nullptr`, set shader according to the input,
-        // and request a new apprenticeID from `new_shader`.
+        // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
+        // and request a new apprenticeID from `new_pipeline`.
 
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
-        if (symbiosis.get_scene() == new_shader.get_scene() ||
+        if (symbiosis.get_scene() == new_pipeline.get_scene() ||
                 symbiosis.get_scene() == nullptr ||
-                new_shader.get_scene() == nullptr)
+                new_pipeline.get_scene() == nullptr)
         {
-            symbiosis.apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader.master_of_symbioses);
+            symbiosis.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(&new_pipeline.master_of_symbioses);
         }
         else
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_shader`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr << "ERROR: `Symbiosis::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
@@ -141,11 +141,11 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const shader_master)
+            yli::ontology::GenericMasterModule* const pipeline_master)
         : Entity(universe, model_struct),
         child_of_scene_or_ecosystem(scene_parent_module, this),
         parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
-        apprentice_of_shader(shader_master, this),
+        apprentice_of_pipeline(pipeline_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },
         model_file_format  { model_struct.model_file_format },
@@ -210,9 +210,9 @@ namespace yli::ontology
         return this->child_of_scene_or_ecosystem.get_parent();
     }
 
-    yli::ontology::Shader* Symbiosis::get_shader() const
+    yli::ontology::Pipeline* Symbiosis::get_pipeline() const
     {
-        return static_cast<yli::ontology::Shader*>(this->apprentice_of_shader.get_master());
+        return static_cast<yli::ontology::Pipeline*>(this->apprentice_of_pipeline.get_master());
     }
 
     yli::ontology::Scene* Symbiosis::get_scene() const
@@ -270,11 +270,11 @@ namespace yli::ontology
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
 
-            yli::ontology::Shader* const shader = this->get_shader();
+            yli::ontology::Pipeline* const pipeline = this->get_pipeline();
 
-            if (shader == nullptr)
+            if (pipeline == nullptr)
             {
-                std::cerr << "ERROR: `Symbiosis::create_symbionts`: `shader` is `nullptr`!\n";
+                std::cerr << "ERROR: `Symbiosis::create_symbionts`: `pipeline` is `nullptr`!\n";
                 return;
             }
 
@@ -292,7 +292,7 @@ namespace yli::ontology
 
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
                 yli::ontology::MaterialStruct material_struct;
-                material_struct.shader = shader;
+                material_struct.pipeline = pipeline;
                 material_struct.parent = this;
                 material_struct.ofbx_texture = ofbx_texture;
                 yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(
@@ -309,7 +309,7 @@ namespace yli::ontology
                     yli::ontology::ModelStruct model_struct;
                     model_struct.model_filename = this->model_filename;
                     model_struct.model_file_format = this->model_file_format;
-                    model_struct.shader = shader;
+                    model_struct.pipeline = pipeline;
                     model_struct.symbiont_material = symbiont_material;
                     model_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
                     model_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();

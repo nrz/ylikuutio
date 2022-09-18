@@ -32,9 +32,9 @@
 // `yli::ontology::ComputeTask` is a class which contains the data for a single
 // computing task. `ComputeTask` does not have the OpenGL shaders used to process
 // the data. Instead, the shaders are contained by the parent `Entity` which is
-// an `yli::ontology::Shader` instance.
+// an `yli::ontology::Pipeline` instance.
 //
-// For example, `yli::ontology::Shader` can have vertex and fragment shaders for
+// For example, `yli::ontology::Pipeline` can have vertex and fragment shaders for
 // computing the distances between nodes of a graph. Then, each `ComputeTask`
 // would contain the graph data, eg. as a distance matrix. Then, rendering a
 // `ComputeTask` means computing that task.
@@ -59,7 +59,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class Shader;
+    class Pipeline;
     struct ComputeTaskStruct;
 
     class ComputeTask final : public yli::ontology::Entity
@@ -94,7 +94,7 @@ namespace yli::ontology
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
 
-            yli::ontology::Shader* parent;   // pointer to the `Shader`.
+            yli::ontology::Pipeline* parent; // pointer to the `Pipeline`.
 
             yli::data::AnyValue left_filler_vector_any_value;
             yli::data::AnyValue right_filler_vector_any_value;

@@ -40,7 +40,7 @@ namespace yli::ontology
     class Universe;
     class Ecosystem;
     class Scene;
-    class Shader;
+    class Pipeline;
     class Material;
     class Species;
     class Object;
@@ -117,7 +117,7 @@ namespace yli::data
             explicit AnyValue(yli::ontology::Universe& universe_ref);
             explicit AnyValue(yli::ontology::Ecosystem& ecosystem_ref);
             explicit AnyValue(yli::ontology::Scene& scene_ref);
-            explicit AnyValue(yli::ontology::Shader& shader_ref);
+            explicit AnyValue(yli::ontology::Pipeline& pipeline_ref);
             explicit AnyValue(yli::ontology::Material& material_ref);
             explicit AnyValue(yli::ontology::Species& species_ref);
             explicit AnyValue(yli::ontology::Object& object_ref);
@@ -166,7 +166,7 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Universe>,
                 std::reference_wrapper<yli::ontology::Ecosystem>,
                 std::reference_wrapper<yli::ontology::Scene>,
-                std::reference_wrapper<yli::ontology::Shader>,
+                std::reference_wrapper<yli::ontology::Pipeline>,
                 std::reference_wrapper<yli::ontology::Material>,
                 std::reference_wrapper<yli::ontology::Species>,
                 std::reference_wrapper<yli::ontology::Object>,

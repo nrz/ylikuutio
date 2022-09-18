@@ -17,7 +17,7 @@
 
 #include "biont.hpp"
 #include "mesh_module.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
@@ -122,15 +122,15 @@ namespace yli::ontology
 
         if (this->should_render)
         {
-            this->render_this_biont(symbiosis->get_shader());
+            this->render_this_biont(symbiosis->get_pipeline());
         }
     }
 
-    void Biont::render_this_biont(const yli::ontology::Shader* const shader)
+    void Biont::render_this_biont(const yli::ontology::Pipeline* const pipeline)
     {
         // Requirements:
         // `this->universe` must not be `nullptr`.
-        // `shader` must not be `nullptr`.
+        // `pipeline` must not be `nullptr`.
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
@@ -142,9 +142,9 @@ namespace yli::ontology
             return;
         }
 
-        if (shader == nullptr)
+        if (pipeline == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `pipeline` is `nullptr`!\n";
             return;
         }
 

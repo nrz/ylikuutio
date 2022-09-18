@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "parent_of_shaders_module.hpp"
+#include "parent_of_pipelines_module.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -93,7 +93,7 @@ namespace yli::ontology
 
             void activate() override;
 
-            // this method renders all `Shader`s of this `Scene`.
+            // this method renders all `Pipeline`s of this `Scene`.
             void render();
 
             yli::ontology::Camera* get_default_camera() const;
@@ -120,7 +120,7 @@ namespace yli::ontology
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentOfShadersModule parent_of_shaders;
+            yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
             yli::ontology::GenericParentModule parent_of_default_camera;
             yli::ontology::GenericParentModule parent_of_cameras;
             yli::ontology::GenericParentModule parent_of_brains;

@@ -19,7 +19,7 @@
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
-#include "shader.hpp"
+#include "pipeline.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -98,27 +98,27 @@ namespace yli::ontology
         }
 
         material.master_of_species.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
-        material.apprentice_of_shader.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        material.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
         material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_shader(yli::ontology::Material& material, yli::ontology::Shader& new_shader) noexcept
+    std::optional<yli::data::AnyValue> Material::bind_to_new_pipeline(yli::ontology::Material& material, yli::ontology::Pipeline& new_pipeline) noexcept
     {
-        // Set pointer to `material` to `nullptr`, set shader according to the input,
+        // Set pointer to `material` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_parent`.
 
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
-        if (material.get_scene() == new_shader.get_scene() ||
+        if (material.get_scene() == new_pipeline.get_scene() ||
                 material.get_scene() == nullptr ||
-                new_shader.get_scene() == nullptr)
+                new_pipeline.get_scene() == nullptr)
         {
-            material.apprentice_of_shader.unbind_and_bind_to_new_generic_master_module(&new_shader.master_of_materials);
+            material.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(&new_pipeline.master_of_materials);
         }
         else
         {
-            std::cerr << "ERROR: `Material::bind_to_new_shader`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr << "ERROR: `Material::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
@@ -128,12 +128,12 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::MaterialStruct& material_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
-            yli::ontology::MasterModule<yli::ontology::Shader*>* shader_master_module)
+            yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module)
         : Entity(universe, material_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
         parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
-        apprentice_of_shader(static_cast<yli::ontology::GenericMasterModule*>(shader_master_module), this),
+        apprentice_of_pipeline(static_cast<yli::ontology::GenericMasterModule*>(pipeline_master_module), this),
         master_of_species(this, &this->registry, "species"),
         texture(
                 universe,
@@ -145,11 +145,11 @@ namespace yli::ontology
     {
         // constructor.
 
-        if (this->texture.get_is_texture_loaded() && this->get_shader() != nullptr)
+        if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
         {
             // Get a handle for our "texture_sampler" uniform.
-            yli::ontology::Shader* const shader = this->get_shader();
-            this->opengl_texture_id = glGetUniformLocation(shader->get_program_id(), "texture_sampler");
+            yli::ontology::Pipeline* const pipeline = this->get_pipeline();
+            this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -198,9 +198,9 @@ namespace yli::ontology
         return this->child_of_scene_or_ecosystem.get_parent();
     }
 
-    yli::ontology::Shader* Material::get_shader() const
+    yli::ontology::Pipeline* Material::get_pipeline() const
     {
-        return static_cast<yli::ontology::Shader*>(this->apprentice_of_shader.get_master());
+        return static_cast<yli::ontology::Pipeline*>(this->apprentice_of_pipeline.get_master());
     }
 
     yli::ontology::Scene* Material::get_scene() const

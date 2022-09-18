@@ -19,14 +19,14 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -43,21 +43,21 @@ TEST(object_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
@@ -79,11 +79,11 @@ TEST(object_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `shader`, `material`, `species`, `object`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `pipeline`, `material`, `species`, `object`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
@@ -111,7 +111,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
 }
 
-TEST(object_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials_no_species_no_shapeshifters_no_text_3ds)
+TEST(object_must_bind_to_scene_appropriately, scenes_no_pipelines_no_materials_no_species_no_shapeshifters_no_text_3ds)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -175,21 +175,21 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
             brain_struct,
             &scene->parent_of_brains);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
@@ -225,21 +225,21 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species1 = new yli::ontology::Species(
             *universe,

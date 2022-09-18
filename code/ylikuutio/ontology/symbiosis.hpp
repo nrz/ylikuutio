@@ -18,10 +18,10 @@
 #ifndef __YLIKUUTIO_ONTOLOGY_SYMBIOSIS_HPP_INCLUDED
 #define __YLIKUUTIO_ONTOLOGY_SYMBIOSIS_HPP_INCLUDED
 // `Symbiosis` consists usually of 2 or more different `SymbiontMaterial`s and 2 or more `SymbiontSpecies` bound to these `SymbiontMaterial`s.
-// All `SymbiontSpecies` of the same `Symbiosis` use the same `Shader`.
+// All `SymbiontSpecies` of the same `Symbiosis` use the same `Pipeline`.
 //
-// In the future, a new class `ShaderSymbiosis` may be created should need for such class arise.
-// `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
+// In the future, a new class `PipelineSymbiosis` may be created should need for such class arise.
+// `PipelineSymbiosis` is like `Symbiosis`, but it contains also `SymbiontPipeline`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -55,7 +55,7 @@ namespace yli::ontology
     class Universe;
     class Ecosystem;
     class Scene;
-    class Shader;
+    class Pipeline;
     class SymbiontMaterial;
     class SymbiontSpecies;
     struct ModelStruct;
@@ -71,15 +71,15 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent) noexcept;
 
-            // Set pointer to `symbiosis` to `nullptr`, set shader according to the input,
-            // and request a new apprenticeID from `new_shader`.
-            static std::optional<yli::data::AnyValue> bind_to_new_shader(yli::ontology::Symbiosis& symbiosis, yli::ontology::Shader& new_shader) noexcept;
+            // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
+            // and request a new apprenticeID from `new_pipeline`.
+            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(yli::ontology::Symbiosis& symbiosis, yli::ontology::Pipeline& new_pipeline) noexcept;
 
             Symbiosis(
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const shader_master);
+                    yli::ontology::GenericMasterModule* const pipeline_master);
 
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
@@ -89,7 +89,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-            yli::ontology::Shader* get_shader() const;
+            yli::ontology::Pipeline* get_pipeline() const;
 
             std::size_t get_number_of_symbiont_materials() const;
             std::size_t get_number_of_symbiont_species() const;
@@ -119,7 +119,7 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
-            yli::ontology::ApprenticeModule apprentice_of_shader;
+            yli::ontology::ApprenticeModule apprentice_of_pipeline;
             yli::ontology::GenericMasterModule master_of_holobionts;
 
             yli::ontology::Scene* get_scene() const override;

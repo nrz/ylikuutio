@@ -36,7 +36,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Entity;
     class Scene;
-    class Shader;
+    class Pipeline;
 
     std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent) noexcept
     {
@@ -140,13 +140,13 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Shader* ShapeshifterTransformation::get_shader() const
+    yli::ontology::Pipeline* ShapeshifterTransformation::get_pipeline() const
     {
         const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
 
         if (material != nullptr)
         {
-            return material->get_shader();
+            return material->get_pipeline();
         }
 
         return nullptr;

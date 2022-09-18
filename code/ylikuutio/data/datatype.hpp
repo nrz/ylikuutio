@@ -74,8 +74,8 @@ namespace yli::data
         // `yli::ontology` datatypes, 'simple' path.
         SCENE_POINTER,
         CONST_SCENE_POINTER,
-        SHADER_POINTER,
-        CONST_SHADER_POINTER,
+        PIPELINE_POINTER,
+        CONST_PIPELINE_POINTER,
         MATERIAL_POINTER,
         CONST_MATERIAL_POINTER,
         SPECIES_POINTER,

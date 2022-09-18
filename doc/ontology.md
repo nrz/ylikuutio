@@ -17,7 +17,7 @@ There is no support for multiple simultaneous [`Universe`](../code/ylikuutio/ont
 All Entities of the ontological hierarchy form a tree with [`Universe`](../code/ylikuutio/ontology/universe.hpp) as the top node. Therefore every [`Entity`](../code/ylikuutio/ontology/entity.hpp) must be given a parent upon creation.
 
 ## GenericParentModule and ChildModule
-Many parent-child-relationships are similar. Therefore some 'module' classes have been created to avoid writing the same binding and unbinding etc. code again and again. [`GenericParentModule`](../code/ylikuutio/ontology/generic_parent_module.hpp) provides 'parenting' functionality and [`ChildModule`](../code/ylikuutio/ontology/child_module.hpp) provides 'childing' functionality. `GenericParentModule` can be inherited to create some specialized module for some special 'parenting' needs, see [`ParentOfShadersModule`](../code/ylikuutio/ontology/parent_of_shaders_module.hpp) for an example.
+Many parent-child-relationships are similar. Therefore some 'module' classes have been created to avoid writing the same binding and unbinding etc. code again and again. [`GenericParentModule`](../code/ylikuutio/ontology/generic_parent_module.hpp) provides 'parenting' functionality and [`ChildModule`](../code/ylikuutio/ontology/child_module.hpp) provides 'childing' functionality. `GenericParentModule` can be inherited to create some specialized module for some special 'parenting' needs, see [`ParentOfPipelinesModule`](../code/ylikuutio/ontology/parent_of_pipelines_module.hpp) for an example.
 
 ## Ecosystem and Scene
 [`Universe`](../code/ylikuutio/ontology/universe.hpp) must be created as the first [`Entity`](../code/ylikuutio/ontology/entity.hpp). After creation of the `Universe`, 2 `Entity` classes of particular interest can be created, among others to be discussed later: [`Ecosystem`](../code/ylikuutio/ontology/ecosystem.hpp) and [`Scene`](../code/ylikuutio/ontology/scene.hpp). `Ecosystem` is basically an owner of collection of Entities, that's all it is. `Scene` is also a collection of Entities (just like an `Ecosystem`, but it is also a place that can be rendered with the [`Movable`](../code/ylikuutio/ontology/movable.hpp) Entities residing in it.
@@ -25,14 +25,14 @@ Many parent-child-relationships are similar. Therefore some 'module' classes hav
 ## Movable
 [`Movable`](../code/ylikuutio/ontology/movable.hpp) is an abstract class to be inherited by the classes that represent the actual types of different Movables. We'll get back to those a little bit later.
 
-## Shader
-To render anything else but 2D text we need a [`Shader`](../code/ylikuutio/ontology/shader.hpp). The information of vertex shader and fragment shader need to be passed to the `Shader` constructor, which then works in RAII-style and makes everything ready regards to using the GLSL shaders later in the render call. `Shader` can be bound either to an [`Ecosystem`](../code/ylikuutio/ontology/ecosystem.hpp) or [`Scene`](../code/ylikuutio/ontology/scene.hpp).
+## Pipeline
+To render anything else but 2D text we need a [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp). The information of vertex pipeline and fragment pipeline need to be passed to the `Pipeline` constructor, which then works in RAII-style and makes everything ready regards to using the GLSL shaders later in the render call. `Pipeline` can be bound either to an [`Ecosystem`](../code/ylikuutio/ontology/ecosystem.hpp) or [`Scene`](../code/ylikuutio/ontology/scene.hpp).
 
 ## Material
 The [`Movable`s](../code/ylikuutio/ontology/movable.hpp) often need a [`Material`](../code/ylikuutio/ontology/material.hpp). `Material` basically contains the texture but in the future it way have some shading features as well.
 
 ## Object and Species
-The simplest kind of visible [`Movable`s](../code/ylikuutio/ontology/movable.hpp) are [`Object`](../code/ylikuutio/ontology/movable.hpp) instances. In order to render `Object`, we need `Shader`, `Material`, and [`Species`](../code/ylikuutio/ontology/species.hpp). `Species` contains the information about the 3D mesh of the model.
+The simplest kind of visible [`Movable`s](../code/ylikuutio/ontology/movable.hpp) are [`Object`](../code/ylikuutio/ontology/movable.hpp) instances. In order to render `Object`, we need `Pipeline`, `Material`, and [`Species`](../code/ylikuutio/ontology/species.hpp). `Species` contains the information about the 3D mesh of the model.
 
 ## Relationships
 In our ontological hierarchy there are 2 kinds of relationships: parent-child relationships discussed already, and then there are master-apprentice relationships. In contrast to parent-child relationships, in master-apprentice relationships there is no ownership. An apprentice survives the deletion of its master and can continue its life although lacking the knowledge passed by the master.
@@ -55,15 +55,15 @@ Now that we know about master-apprentice relationships as well, let's get back t
 There are many more classes as well, but now we have enough to wonder how the classes mentioned so far interact with each other. The simplest case is as follows:
 1. We create the [`Universe`](../code/ylikuutio/ontology/universe.hpp)
 2. We create the [`Scene`](../code/ylikuutio/ontology/scene.hpp) and make it a child of the [`Object`](../code/ylikuutio/ontology/object.hpp).
-3. We create the [`Shader`](../code/ylikuutio/ontology/shader.hpp) and make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp).
-3. We create the [`Material`](../code/ylikuutio/ontology/material.hpp) make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp), and an apprentice of the [`Shader`](../code/ylikuutio/ontology/shader.hpp).
+3. We create the [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp) and make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp).
+3. We create the [`Material`](../code/ylikuutio/ontology/material.hpp) make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp), and an apprentice of the [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp).
 4. We create the [`Species`](../code/ylikuutio/ontology/species.hpp) and make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp), and an apprentice of the [`Material`](../code/ylikuutio/ontology/material.hpp).
 5. We create the [`Object`](../code/ylikuutio/ontology/object.hpp) and make it a child of the [`Scene`](../code/ylikuutio/ontology/scene.hpp), and an apprentice of the [`Species`](../code/ylikuutio/ontology/species.hpp).
 
 ## Rendering of Objects
 Then upon rendering we do the following:
-1. We render the currently active [`Scene`](../code/ylikuutio/ontology/scene.hpp), and render all its [`Shader`s](../code/ylikuutio/ontology/shader.hpp).
-2. Upon rendering any given [`Shader`](../code/ylikuutio/ontology/shader.hpp), we render all its [`Material`s](../code/ylikuutio/ontology/material.hpp).
+1. We render the currently active [`Scene`](../code/ylikuutio/ontology/scene.hpp), and render all its [`Pipeline`s](../code/ylikuutio/ontology/pipeline.hpp).
+2. Upon rendering any given [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp), we render all its [`Material`s](../code/ylikuutio/ontology/material.hpp).
 3. Upon rendering any given [`Material`](../code/ylikuutio/ontology/material.hpp), we render all its [`Species`](../code/ylikuutio/ontology/species.hpp).
 4. Upon rendering any given [`Species`](../code/ylikuutio/ontology/species.hpp), we render all its [`Object`s](../code/ylikuutio/ontology/object.hpp).
 
@@ -80,16 +80,16 @@ For more information about holobionts, check Wikipedia:
 Let's see how we create [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) and [`Holobiont`](../code/ylikuutio/ontology/holobiont.hpp) Entities:
 1. We create the [`Universe`](../code/ylikuutio/ontology/universe.hpp)
 2. We create the [`Scene`](../code/ylikuutio/ontology/scene.hpp) and make it a child of the `Universe`.
-3. We create the [`Shader`](../code/ylikuutio/ontology/shader.hpp) and make it a child of the `Scene`.
-4. We create the [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) make it a child of the `Scene`, and an apprentice of the `Shader`.
+3. We create the [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp) and make it a child of the `Scene`.
+4. We create the [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) make it a child of the `Scene`, and an apprentice of the `Pipeline`.
 5. We create the [`Holobiont`](../code/ylikuutio/ontology/holobiont.hpp) and make it a child of the `Scene`, and an apprentice of the `Symbiosis`.
 
 Regarding [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) Entities, [`SymbiontMaterial`](../code/ylikuutio/ontology/symbiont_material.hpp) and [`SymbiontSpecies`](../code/ylikuutio/ontology/symbiont_material.hpp) are usually implementation details that you don't need to worry about, but they are nontheless and and are counted as children of the `Symbiosis`. Same applies to [`Biont`s](../code/ylikuutio/ontology/biont.hpp) of any [`Holobiont`](../code/ylikuutio/ontology/holobiont.hpp), though in the future there will probably be support for manipulating individual `Biont`s. Manipulating individual `Biont`s is not implemented yet.
 
 ## Rendering of Holobionts
 The rendering of the [`Holobiont`s](../code/ylikuutio/ontology/holobiont.hpp) happens similarly to the [`Object`s](../code/ylikuutio/ontology/movable.hpp):
-1. We render the currently active [`Scene`](../code/ylikuutio/ontology/scene.hpp), and render all its [`Shader`s](../code/ylikuutio/ontology/shader.hpp).
-2. Upon rendering any given [`Shader`](../code/ylikuutio/ontology/shader.hpp), we render all its [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) Entities.
+1. We render the currently active [`Scene`](../code/ylikuutio/ontology/scene.hpp), and render all its [`Pipeline`s](../code/ylikuutio/ontology/pipeline.hpp).
+2. Upon rendering any given [`Pipeline`](../code/ylikuutio/ontology/pipeline.hpp), we render all its [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp) Entities.
 3. Upon rendering any given [`Symbiosis`](../code/ylikuutio/ontology/symbiosis.hpp), we render all its [`Holobiont`s](../code/ylikuutio/ontology/holobiont.hpp).
 4. Upon rendering any given [`Holobiont`](../code/ylikuutio/ontology/holobiont.hpp), we render all its `Biont`s.
 
@@ -98,5 +98,5 @@ The rendering of the [`Holobiont`s](../code/ylikuutio/ontology/holobiont.hpp) ha
 * Document `EntityFactory`!
 * Implement and document manipulating individual `Biont`s!
 * Implement and document `VectorFont` and Text3D` rendering!
-* Implement and document `ShaderSymbiosis` Entities!
+* Implement and document `PipelineSymbiosis` Entities!
 * Implement and document `ShapeshifterTransformation`, `ShapeshifterSequence`, `ShapeshifterForm`!

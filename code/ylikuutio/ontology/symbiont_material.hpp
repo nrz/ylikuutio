@@ -31,7 +31,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class Shader;
+    class Pipeline;
     struct MaterialStruct;
 
     class SymbiontMaterial final : public yli::ontology::Entity
@@ -50,7 +50,7 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Shader* get_shader() const;
+            yli::ontology::Pipeline* get_pipeline() const;
 
             GLint get_openGL_textureID() const;
 

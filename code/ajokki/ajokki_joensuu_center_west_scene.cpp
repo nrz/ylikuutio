@@ -18,13 +18,13 @@
 #include "ajokki_joensuu_center_west_scene.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -77,31 +77,31 @@ namespace ajokki
         joensuu_center_west_scene->set_turbo_factor(5.0f);
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
-        // Create the shader, store it in `joensuu_center_west_shader`.
-        yli::ontology::ShaderStruct joensuu_center_west_shader_struct;
-        joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_shader_struct.global_name = "joensuu_center_west_shader";
-        joensuu_center_west_shader_struct.local_name = "joensuu_regular_shader";
-        joensuu_center_west_shader_struct.vertex_shader = "standard_shading.vert";
-        joensuu_center_west_shader_struct.fragment_shader = "standard_shading.frag";
+        // Create the pipeline, store it in `joensuu_center_west_pipeline`.
+        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct;
+        joensuu_center_west_pipeline_struct.parent = joensuu_center_west_scene;
+        joensuu_center_west_pipeline_struct.global_name = "joensuu_center_west_pipeline";
+        joensuu_center_west_pipeline_struct.local_name = "joensuu_regular_pipeline";
+        joensuu_center_west_pipeline_struct.vertex_shader = "standard_shading.vert";
+        joensuu_center_west_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* joensuu_center_west_shader_entity ...\n";
-        yli::ontology::Entity* const joensuu_center_west_shader_entity = entity_factory->create_shader(joensuu_center_west_shader_struct);
-        std::cout << "Creating yli::ontology::Shader* joensuu_center_west_shader ...\n";
-        yli::ontology::Shader* const joensuu_center_west_shader = dynamic_cast<yli::ontology::Shader*>(joensuu_center_west_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* joensuu_center_west_pipeline_entity ...\n";
+        yli::ontology::Entity* const joensuu_center_west_pipeline_entity = entity_factory->create_pipeline(joensuu_center_west_pipeline_struct);
+        std::cout << "Creating yli::ontology::Pipeline* joensuu_center_west_pipeline ...\n";
+        yli::ontology::Pipeline* const joensuu_center_west_pipeline = dynamic_cast<yli::ontology::Pipeline*>(joensuu_center_west_pipeline_entity);
 
-        if (joensuu_center_west_shader == nullptr)
+        if (joensuu_center_west_pipeline == nullptr)
         {
-            std::cerr << "Failed to create Shader.\n";
+            std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
         }
 
-        joensuu_center_west_shader->set_global_name("joensuu_center_west_shader");
+        joensuu_center_west_pipeline->set_global_name("joensuu_center_west_pipeline");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
         yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
         joensuu_center_west_grass_material_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;
+        joensuu_center_west_grass_material_struct.pipeline = joensuu_center_west_pipeline;
         joensuu_center_west_grass_material_struct.texture_file_format = "png";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -120,7 +120,7 @@ namespace ajokki
 
         yli::ontology::ModelStruct joensuu_center_west_terrain_model_struct;
         joensuu_center_west_terrain_model_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_terrain_model_struct.shader = joensuu_center_west_shader;
+        joensuu_center_west_terrain_model_struct.pipeline = joensuu_center_west_pipeline;
         joensuu_center_west_terrain_model_struct.material = joensuu_center_west_grass_material;
         joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_model_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
@@ -148,7 +148,7 @@ namespace ajokki
         // Create the material, store it in `orange_fur_material_joensuu`.
         yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
         orange_fur_material_joensuu_struct.parent = joensuu_center_west_scene;
-        orange_fur_material_joensuu_struct.shader = joensuu_center_west_shader;
+        orange_fur_material_joensuu_struct.pipeline = joensuu_center_west_pipeline;
         orange_fur_material_joensuu_struct.texture_file_format = "png";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
@@ -167,7 +167,7 @@ namespace ajokki
 
         yli::ontology::ModelStruct horse_model_struct;
         horse_model_struct.parent = joensuu_center_west_scene;
-        horse_model_struct.shader = joensuu_center_west_shader;
+        horse_model_struct.pipeline = joensuu_center_west_pipeline;
         horse_model_struct.material = orange_fur_material_joensuu;
         horse_model_struct.model_file_format = "fbx";
         horse_model_struct.model_filename = "horse.fbx";

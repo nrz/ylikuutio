@@ -42,7 +42,7 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
-    class Shader;
+    class Pipeline;
     class Text3D;
     class Glyph;
 
@@ -147,15 +147,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(material->get_parent());
+        yli::ontology::Pipeline* const pipeline = static_cast<yli::ontology::Pipeline*>(material->get_parent());
 
-        if (shader == nullptr)
+        if (pipeline == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::VectorFont`: `shader` is `nullptr`!\n";
+            std::cerr << "ERROR: `VectorFont::VectorFont`: `pipeline` is `nullptr`!\n";
             return;
         }
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(shader->get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(pipeline->get_parent());
 
         if (scene == nullptr)
         {
@@ -185,7 +185,7 @@ namespace yli::ontology
 
                 yli::ontology::ModelStruct model_struct;
                 model_struct.parent = scene;
-                model_struct.shader = shader;
+                model_struct.pipeline = pipeline;
                 model_struct.material = material;
                 model_struct.vector_font = this;
                 model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
@@ -271,13 +271,13 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Shader* VectorFont::get_shader() const
+    yli::ontology::Pipeline* VectorFont::get_pipeline() const
     {
         const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
 
         if (material != nullptr)
         {
-            return material->get_shader();
+            return material->get_pipeline();
         }
 
         return nullptr;

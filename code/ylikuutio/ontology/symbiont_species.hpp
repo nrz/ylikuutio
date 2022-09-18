@@ -44,7 +44,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class Scene;
-    class Shader;
+    class Pipeline;
     struct ModelStruct;
 
     class SymbiontSpecies final : public yli::ontology::Entity
@@ -82,7 +82,7 @@ namespace yli::ontology
             yli::ontology::MeshModule mesh;
 
         private:
-            yli::ontology::Shader* shader; // Pointer to `Shader` (not a parent!).
+            yli::ontology::Pipeline* pipeline; // Pointer to `Pipeline` (not a parent!).
 
             std::string model_file_format; // Type of the model file, eg. `"png"`.
             std::string model_filename;    // Filename of the model file.

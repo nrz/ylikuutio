@@ -18,12 +18,12 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -39,18 +39,18 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
@@ -66,11 +66,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `symbiosis`, `holobiont`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `symbiosis`, `holobiont`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
@@ -97,20 +97,20 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
-            &shader->master_of_symbioses);
+            &pipeline->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
@@ -126,11 +126,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `symbiosis`, `holobiont`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `symbiosis`, `holobiont`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_scene(), scene);
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);

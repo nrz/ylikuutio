@@ -37,7 +37,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
-    class Shader;
+    class Pipeline;
     class Species;
     class ShapeshifterSequence;
     class Text3D;
@@ -113,7 +113,7 @@ namespace yli::ontology
 
             yli::ontology::Scene* get_scene() const override;
 
-            yli::ontology::Shader* get_shader() const;
+            yli::ontology::Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -124,7 +124,7 @@ namespace yli::ontology
             void render(const yli::ontology::Scene* const target_scene);
 
         private:
-            void render_this_object(yli::ontology::Shader* const shader);
+            void render_this_object(yli::ontology::Pipeline* const pipeline);
 
         public:
             yli::ontology::ChildModule child_of_scene;

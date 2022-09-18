@@ -19,20 +19,20 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
-TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_shader_and_material_are_children_of_an_ecosystem)
+TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -43,20 +43,20 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = ecosystem;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &ecosystem->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = ecosystem;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = ecosystem;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &ecosystem->parent_of_materials, &shader->master_of_materials);
+            &ecosystem->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
@@ -68,10 +68,10 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
 
     // `Entity` member functions of `Ecosystem`.
-    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 3); // `shader`, `material`, `species`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 3); // `pipeline`, `material`, `species`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
@@ -92,7 +92,7 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 }
 
-TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_shader_and_material_are_children_of_scene)
+TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_and_material_are_children_of_scene)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
@@ -103,9 +103,9 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
@@ -115,14 +115,14 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
@@ -137,10 +137,10 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `species`.
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `shader`, `material`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
@@ -172,21 +172,21 @@ TEST(species_must_be_initialized_appropriately, headless)
             scene_struct,
             &universe->parent_of_scenes);
 
-    yli::ontology::ShaderStruct shader_struct;
-    shader_struct.parent = scene;
-    yli::ontology::Shader* const shader = new yli::ontology::Shader(*universe, shader_struct, &scene->parent_of_shaders);
+    yli::ontology::PipelineStruct pipeline_struct;
+    pipeline_struct.parent = scene;
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
-    material_struct.shader = shader;
+    material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
             *universe,
             material_struct,
-            &scene->parent_of_materials, &shader->master_of_materials);
+            &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.shader = shader;
+    model_struct.pipeline = pipeline;
     model_struct.material = material;
     yli::ontology::Species* const species = new yli::ontology::Species(
             *universe,
@@ -198,10 +198,10 @@ TEST(species_must_be_initialized_appropriately, headless)
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions of `Scene`.
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `shader`, `material`, `species`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `material`, `species`.
 
-    // `Entity` member functions of `Shader`.
-    ASSERT_EQ(shader->get_number_of_non_variable_children(), 0);
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
@@ -267,7 +267,7 @@ TEST(species_must_bind_to_ecosystem_appropriately, ecosystem)
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
 }
 
-TEST(species_must_bind_to_scene_appropriately, scenes_no_shaders_no_materials)
+TEST(species_must_bind_to_scene_appropriately, scenes_no_pipelines_no_materials)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);

@@ -611,8 +611,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/orientation_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp
     code/ylikuutio/ontology/generic_parent_module.hpp
-    code/ylikuutio/ontology/parent_of_shaders_module.cpp
-    code/ylikuutio/ontology/parent_of_shaders_module.hpp
+    code/ylikuutio/ontology/parent_of_pipelines_module.cpp
+    code/ylikuutio/ontology/parent_of_pipelines_module.hpp
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp
@@ -628,13 +628,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/variable.hpp
     code/ylikuutio/ontology/variable_callbacks.cpp
     code/ylikuutio/ontology/variable_struct.hpp
-    code/ylikuutio/ontology/shader.cpp
-    code/ylikuutio/ontology/shader.hpp
-    code/ylikuutio/ontology/shader_compare.cpp
-    code/ylikuutio/ontology/shader_compare.hpp
-    code/ylikuutio/ontology/shader_priority_queue.cpp
-    code/ylikuutio/ontology/shader_priority_queue.hpp
-    code/ylikuutio/ontology/shader_struct.hpp
+    code/ylikuutio/ontology/pipeline.cpp
+    code/ylikuutio/ontology/pipeline.hpp
+    code/ylikuutio/ontology/pipeline_compare.cpp
+    code/ylikuutio/ontology/pipeline_compare.hpp
+    code/ylikuutio/ontology/pipeline_priority_queue.cpp
+    code/ylikuutio/ontology/pipeline_priority_queue.hpp
+    code/ylikuutio/ontology/pipeline_struct.hpp
     code/ylikuutio/ontology/shapeshifter_form.cpp
     code/ylikuutio/ontology/shapeshifter_form.hpp
     code/ylikuutio/ontology/shapeshifter_sequence.cpp
@@ -951,12 +951,12 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_scene.cpp
-        code/ylikuutio/tests/googletest/test_shader.cpp
+        code/ylikuutio/tests/googletest/test_pipeline.cpp
         code/ylikuutio/tests/googletest/test_shapeshifter.cpp
         code/ylikuutio/tests/googletest/test_species.cpp
         code/ylikuutio/tests/googletest/test_symbiosis.cpp
         code/ylikuutio/tests/googletest/test_variable.cpp
-        code/ylikuutio/tests/googletest/test_shader_struct.cpp
+        code/ylikuutio/tests/googletest/test_pipeline_struct.cpp
         code/ylikuutio/tests/googletest/test_text_2d.cpp
         code/ylikuutio/tests/googletest/test_text_3d.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp

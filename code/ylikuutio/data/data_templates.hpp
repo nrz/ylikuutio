@@ -142,9 +142,9 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Shader* data)
+        std::string get_type_string(yli::ontology::Pipeline* data)
         {
-            return "yli::ontology::Shader*";
+            return "yli::ontology::Pipeline*";
         }
 
     template<>
