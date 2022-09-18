@@ -661,6 +661,49 @@ namespace hirvi
                 yli::ontology::create_lisp_function_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
                 yli::ontology::create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
+
+                // `Entity` binding callbacks, `Movable`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Movable::bind_to_new_brain));
+                yli::ontology::create_lisp_function_overload("unbind-from-brain", my_console, std::function(&yli::ontology::Movable::unbind_from_brain));
+
+                // `Entity` binding callbacks, `Shader`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Shader::bind_to_new_scene_parent));
+
+                // `Entity` binding callbacks, `Material`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Material::bind_to_new_shader));
+
+                // `Entity` binding callbacks, `Species`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Species::bind_to_new_material));
+
+                // `Entity` binding callbacks, `Object`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_species_master));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_shapeshifter_sequence_master));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Object::bind_to_new_text_3d_master));
+
+                // `Entity` binding callbacks, `Symbiosis`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_ecosystem_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_scene_parent));
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Symbiosis::bind_to_new_shader));
+
+                // `Entity` binding callbacks, `ShapeshifterTransformation`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::ShapeshifterTransformation::bind_to_new_material_parent));
+
+                // `Entity` binding callbacks, `Text2D`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Text2D::bind_to_new_font_2d_parent));
+
+                // `Entity` binding callbacks, `Text3D`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Text3D::bind_to_new_vector_font_parent));
+
+                // `Entity` binding callbacks, `Console`.
+                yli::ontology::create_lisp_function_overload("bind", my_console, std::function(&yli::ontology::Console::bind_to_new_font_2d));
+
+                // `Entity` naming callbacks.
                 yli::ontology::create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
                 yli::ontology::create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
 
