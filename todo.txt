@@ -8,6 +8,8 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Rename `Shader` to `Pipeline`.
+[ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
@@ -44,16 +46,6 @@ Tasks which are necessary for the second stage:
 [ ] Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
 [ ] Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
 [ ] Evaluate Dear ImGUI: https://github.com/ocornut/imgui
-[ ] Implement `yli::ontology::WorldShader` to support sharing shaders between multiple `Scene`s.
-[ ] Implement `yli::ontology::WorldMaterial` to support sharing materials between multiple `Scene`s.
-[ ] Implement `yli::ontology::WorldSpecies` to support sharing species between multiple `Scene`s.
-[ ] Implement `yli::ontology::WorldSymbiosis` to support sharing symbioses between multiple `Scene`s.
-[ ] Implement `yli::ontology::WorldBrain` to support sharing brains between multiple `Scene`s.
-[ ] Implement `yli::ontology::WorldShader` constructor that receives `yli::ontology::Shader*` and converts it into a `yli::ontology::WorldShader*`.
-[ ] Implement `yli::ontology::WorldMaterial` constructor that receives `yli::ontology::Material*` and converts it into a `yli::ontology::WorldMaterial*`.
-[ ] Implement `yli::ontology::WorldSpecies` constructor that receives `yli::ontology::Species*` and converts it into a `yli::ontology::WorldSpecies*`.
-[ ] Implement `yli::ontology::WorldSymbiosis` constructor that receives `yli::ontology::Symbiosis*` and converts it into a `yli::ontology::WorldSymbiosis*`.
-[ ] Implement `yli::ontology::WorldBrain` constructor that receives `yli::ontology::Brain*` and converts it into a `yli::ontology::WorldBrain*`.
 [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
@@ -61,12 +53,6 @@ Tasks which are necessary for the second stage:
 [ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 [ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
 [ ] Implement closures for YliLisp.
-[ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
-[ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
-[ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
-[ ] Write test code using C++17 threads.
-[ ] Write test code using pthreads.
-[ ] Add support for multithreaded code.
 [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 [ ] Implement octree segmentation.
@@ -139,7 +125,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 [ ] Add `Scene` loading command `load` into console.
 [ ] Implement `LogMaster` class.
-[ ] Implement s7 support for programming of AI objects (robots).
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
