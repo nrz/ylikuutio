@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef __AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
+#define __AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
+
 namespace yli::ontology
 {
     class Ecosystem;
@@ -25,3 +28,5 @@ namespace ajokki
 {
     yli::ontology::Ecosystem* create_earth_ecosystem(yli::ontology::EntityFactory* const entity_factory);
 }
+
+#endif
