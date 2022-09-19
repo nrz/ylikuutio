@@ -8,7 +8,10 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
+[ ] Improve `create_yli_ontology_class.py` to create `default` destructors.
+[ ] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
+[ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
+[ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 [ ] Write unit tests for `Brain` snippets.
 [ ] Write unit tests for keyboard callback snippets.
 [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
@@ -66,7 +69,7 @@ Tasks which are necessary for the second stage:
 [ ] Add support for changing font size.
 [ ] Implement transparent rendering of 3D objects.
 [ ] Implement transparent rendering of 4D objects.
-[ ] Implement audio mixing using SDL_mixer.
+[ ] Replace SDL audio with OpenAL Soft.
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
@@ -175,6 +178,7 @@ Less urgent:
 [ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
 [ ] Implement simulation of contour detection processing in V2 (visual cortex area).
 [ ] Learn Vulkan.
+[ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
 [ ] Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.
 [ ] Add Vulkan support.
 
@@ -264,7 +268,7 @@ Ready:
 [x] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
 [x] Add support for `yli::ontology::Registry` in different modules (`ParentModule`, `MasterModule`).
 [x] Add support for Tab complete for global names in `Console`.
-[x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html) and libjpeg (http://ijg.org/).
+[x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html).
 [x] Fix compiling on MacOS.
 [x] Fix compiling in a Podman container on CentOS 8.
 [x] Fix segfault when running in headless mode (with `--headless`, bug entered in commit e9ea16157b51403685a3df2d0884cb87fbf500dc).
