@@ -79,6 +79,40 @@ https://semver.org/spec/v2.0.0.html
 * Remove shallow-copy functionality of `Variable`. It was buggy anyway.
 * Rename `World` -> `Ecosystem`.
 
+0.0.10 (release date 2022-09-19)
+* `CustomEntityFactory` enables creating customized derived classes.
+* `LocomotionModule` and `LocomotionEnvironment` for data-oriented locomotion.
+* Locomotion modules for different locomotion types.
+* Improve internal data structures and data management.
+* Improve `AnyValue` storage class.
+* `CartesianCoordinatesModule` class for storing cartesian coordinates.
+* Add support for setting the scale of a `Movable` in `Console`.
+* Rename `Shader` to `Pipeline`.
+* Unbind all apprentices when bind `Material`, `Pipeline`, or `Species`
+  to a different `Scene`.
+* Symbiosis`, `Pipeline`, `Material`, and `Species` instances can be shared
+  between `Scene`s by using `Ecosystem`s.
+* `Symbiosis` is a child of `Scene`.
+* `Holobiont` is a child of `Scene` and an apprentice of a `Symbiosis`.
+* Tab completion prints the possible completions.
+* Force the existence of the `Universe` by storing it as a reference.
+* YliLisp callbacks support `const` references.
+* Refactor and improve `Entity` binding code.
+* Refactor and improve graphics API selection code.
+* Improve window creation code.
+* `TextureModule` class provides OpenGL texture functionality.
+* Use vertex array object (VAO) in `Font2D`, `MeshModule`, `Object`, `Biont`.
+* Use OpenGL 3.3 core profile.
+* Use uniform buffer objets (UBOs).
+* Fix downloading Google Test during the build process.
+* Set up GitHub Actions Ubuntu and MacOS build workflows.
+* Set up SonarCloud GitHub Actions workflow.
+* Convert most dependencies into proper Git submodules.
+* Change to trunk-based development.
+* Rename `RenderMaster` to `RenderSystem`.
+* Rename `AudioMaster` to `AudioSystem`.
+* Rename `InputMaster` to `InputSystem`.
+
 Future versions:
 
 0.0.x

@@ -1,4 +1,4 @@
-Ylikuutio 0.0.9 / Hirvi 0.0.9 / Tulevaisuus 0.0.9 manual.
+Ylikuutio 0.0.10 / Hirvi 0.0.10 / Tulevaisuus 0.0.10 manual.
 
 Ylikuutio is a 3D game and simulation engine.
 It is designed with two different game types in mind:

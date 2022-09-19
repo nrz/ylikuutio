@@ -100,7 +100,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Font2D;
 
-    const std::string Universe::version = "0.0.9";
+    const std::string Universe::version = "0.0.10";
 
     void Universe::bind_entity(yli::ontology::Entity* const entity) noexcept
     {
