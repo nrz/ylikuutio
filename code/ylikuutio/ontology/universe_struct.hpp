@@ -39,22 +39,22 @@ namespace yli::ontology
 
         std::string application_name;
         std::string window_title;
-        uint32_t window_width   { 1600 };
-        uint32_t window_height  { 900 };
-        uint32_t text_size      { 40 };
-        uint32_t font_size      { 16 };
-        uint32_t max_fps        { 50000 };   // Default value max 50000 frames per second.
-        float speed             { 0.1f };    // Default value 0.1 units / second.
-        float turbo_factor      { 5.0f };    // Default value 5.0 x speed.
-        float twin_turbo_factor { 100.0f };  // Default value 100.0 x speed.
-        float mouse_speed       { 0.005f };
-        float znear             { 1.0f };    // Visibility: from 1 to 5000 units.
-        float zfar              { 5000.0f }; // Visibility: from 1 to 5000 units.
+        uint32_t window_width      { 1600 };
+        uint32_t window_height     { 900 };
+        uint32_t text_size         { 40 };
+        uint32_t font_size         { 16 };
+        uint32_t max_fps           { 50000 };   // Default value max 50000 frames per second.
+        float speed                { 0.1f };    // Default value 0.1 units / second.
+        float turbo_factor         { 5.0f };    // Default value 5.0 x speed.
+        float twin_turbo_factor    { 100.0f };  // Default value 100.0 x speed.
+        float mouse_speed          { 0.005f };
+        float znear                { 1.0f };    // Visibility: from 1 to 5000 units.
+        float zfar                 { 5000.0f }; // Visibility: from 1 to 5000 units.
         yli::render::GraphicsApiBackend graphics_api_backend;
-        bool is_silent          { false };
-        bool is_physical        { true };    // Physics simulation in use.
-        bool is_fullscreen      { false };   // Windowed mode in use.
-        bool is_desktop_fullscreen { false }; // Windowed mode in use.
+        bool is_silent             { false };
+        bool is_physical           { true };    // Physics simulation in use.
+        bool is_fullscreen         { false };   // Windowed mode in use.
+        bool is_desktop_fullscreen { false };   // Windowed mode in use.
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
         yli::ontology::FramebufferModuleStruct framebuffer_module_struct;
     };
