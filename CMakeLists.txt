@@ -837,6 +837,8 @@ add_executable(hirvi
     code/hirvi/police_train.hpp
     code/hirvi/police_tram.cpp
     code/hirvi/police_tram.hpp
+    code/hirvi/train.cpp
+    code/hirvi/train.hpp
     )
 target_link_libraries(hirvi snippets ylikuutio ${ALL_LIBS} pthread)
 
