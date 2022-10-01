@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
-#define __YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
+#ifndef YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
+#define YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 

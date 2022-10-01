@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
-#define __YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
+#ifndef YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
+#define YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef>       // std::size_t

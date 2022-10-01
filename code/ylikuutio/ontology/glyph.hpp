@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_GLYPH_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -24,8 +24,8 @@
 #include "mesh_module.hpp"
 
 // Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
+#ifndef GLM_GLM_HPP_INCLUDED
+#define GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
 

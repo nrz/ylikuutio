@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
-#define __AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
+#ifndef AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
+#define AJOKKI_AJOKKI_EARTH_ECOSYSTEM_HPP_INCLUDED
 
 namespace yli::ontology
 {

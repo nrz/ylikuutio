@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
-#define __YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
+#ifndef YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
+#define YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"

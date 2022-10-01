@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __HIRVI_POLICE_DOG_HPP_INCLUDED
-#define __HIRVI_POLICE_DOG_HPP_INCLUDED
+#ifndef HIRVI_POLICE_DOG_HPP_INCLUDED
+#define HIRVI_POLICE_DOG_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"

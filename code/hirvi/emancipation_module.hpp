@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __HIRVI_EMANCIPATION_MODULE_HPP_INCLUDED
-#define __HIRVI_EMANCIPATION_MODULE_HPP_INCLUDED
+#ifndef HIRVI_EMANCIPATION_MODULE_HPP_INCLUDED
+#define HIRVI_EMANCIPATION_MODULE_HPP_INCLUDED
 
 namespace hirvi
 {

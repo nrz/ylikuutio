@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
-#define __YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
+#ifndef YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
+#define YLIKUUTIO_SNIPPETS_KEYBOARD_CALLBACK_SNIPPETS_HPP_INCLUDED
 
 #include "code/ylikuutio/data/any_value.hpp"
 

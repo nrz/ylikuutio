@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_LINEAR_ALGEBRA_VECTOR_FUNCTIONS_HPP_INCLUDED
-#define __YLIKUUTIO_LINEAR_ALGEBRA_VECTOR_FUNCTIONS_HPP_INCLUDED
+#ifndef YLIKUUTIO_LINEAR_ALGEBRA_VECTOR_FUNCTIONS_HPP_INCLUDED
+#define YLIKUUTIO_LINEAR_ALGEBRA_VECTOR_FUNCTIONS_HPP_INCLUDED
 
 // Include standard headers
 #include <vector> // std::vector

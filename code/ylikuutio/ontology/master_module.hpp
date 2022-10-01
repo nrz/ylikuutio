@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_MASTER_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_MASTER_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_MASTER_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_MASTER_MODULE_HPP_INCLUDED
 
 // `yli::ontology::MasterModule` is a module that implements
 // the master part of a master-apprentice relationship.

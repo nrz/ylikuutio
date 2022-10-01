@@ -103,8 +103,8 @@ if inherited_class_name != "":
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-class_include_guard_macro_name = "__YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
-struct_include_guard_macro_name = "__YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
+class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
+struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
 class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name

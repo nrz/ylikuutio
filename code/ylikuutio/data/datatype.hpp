@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
-#define __YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
+#ifndef YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
+#define YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
 
 // `yli::data::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.

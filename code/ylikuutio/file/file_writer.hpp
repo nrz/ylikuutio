@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
-#define __YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
+#ifndef YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
+#define YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
 
 // Include standard headers
 #include <fstream>  // std::ifstream

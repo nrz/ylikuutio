@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_SNIPPETS_LOCOMOTION_SWIM_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_SNIPPETS_LOCOMOTION_SWIM_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_SNIPPETS_LOCOMOTION_SWIM_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_SNIPPETS_LOCOMOTION_SWIM_MODULE_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/locomotion_module.hpp"
 

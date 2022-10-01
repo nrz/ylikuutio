@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
-#define __YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
+#ifndef YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
+#define YLIKUUTIO_TRIANGULATION_QUAD_TRIANGULATION_HPP_INCLUDED
 
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
@@ -34,8 +34,8 @@
 #include "code/ylikuutio/geometry/transformation.hpp"
 
 // Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
+#ifndef GLM_GLM_HPP_INCLUDED
+#define GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
 

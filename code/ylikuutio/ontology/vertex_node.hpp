@@ -15,15 +15,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_VERTEX_NODE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_VERTEX_NODE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_VERTEX_NODE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_VERTEX_NODE_HPP_INCLUDED
 
 #include "code/ylikuutio/graph/node.hpp"
 #include "code/ylikuutio/graph/node_struct.hpp"
 
 // Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
+#ifndef GLM_GLM_HPP_INCLUDED
+#define GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
 

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_ONTOLOGY_PARENT_OF_PIPELINES_MODULE_HPP_INCLUDED
-#define __YLIKUUTIO_ONTOLOGY_PARENT_OF_PIPELINES_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_PARENT_OF_PIPELINES_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_PARENT_OF_PIPELINES_MODULE_HPP_INCLUDED
 
 #include "generic_parent_module.hpp"
 #include "pipeline_priority_queue.hpp"

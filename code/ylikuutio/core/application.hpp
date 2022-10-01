@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef __YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
-#define __YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
+#ifndef YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
+#define YLIKUUTIO_CORE_APPLICATION_HPP_INCLUDED
 
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
