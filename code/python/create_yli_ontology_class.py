@@ -229,7 +229,7 @@ delete_copy_assignment_line = \
 
 destructor_declaration_lines = \
 "            // destructor.\n"\
-"            virtual ~" + class_name + "();"
+"            virtual ~" + class_name + "() = default;"
 
 get_parent_const_override_line = \
 "            yli::ontology::Entity* get_parent() const override;"
@@ -244,12 +244,6 @@ child_module_lines = \
 "            " + namespace + "::ChildModule " + child_module_variable_name + "; // TODO: delete this line if `ChildModule` is not needed!"
 
 # Lines specific to the `.cpp` file.
-destructor_definition_lines = \
-"    " + class_name + "::~" + class_name + "()\n"\
-"    {\n"\
-"        // destructor.\n"\
-"    }"
-
 get_parent_function_lines = \
 "    yli::ontology::Entity* " + class_name + "::get_parent() const\n"\
 "    {\n"\
@@ -356,8 +350,6 @@ with open(class_filename_cpp, 'w') as f:
     if parent_class_name != "":
         print(entity_forward_declaration, file = f)
         print(file = f)
-    print(destructor_definition_lines, file = f)
-    print(file = f)
     if parent_class_name != "":
         print(get_parent_function_lines, file = f)
         print(file = f)
