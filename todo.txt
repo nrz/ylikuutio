@@ -8,7 +8,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
 [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 [ ] Write unit tests for `Brain` snippets.
@@ -331,3 +330,4 @@ Ready:
 [x] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
 [x] Rename `Shader` to `Pipeline`.
 [x] Improve `create_yli_ontology_class.py` to create `default` destructors.
+[x] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
