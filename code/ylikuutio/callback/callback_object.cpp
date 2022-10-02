@@ -26,7 +26,6 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 namespace yli::callback
 {

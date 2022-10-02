@@ -26,7 +26,6 @@
 #include <cstddef> // std::size_t
 #include <optional> // std::optional
 #include <queue>   // std::queue
-#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::ontology
