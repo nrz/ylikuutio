@@ -71,7 +71,8 @@ namespace yli::callback
             virtual ~CallbackEngine();
 
             yli::callback::CallbackObject* create_callback_object();
-            yli::callback::CallbackObject* create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+            yli::callback::CallbackObject* create_callback_object(
+                    const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);

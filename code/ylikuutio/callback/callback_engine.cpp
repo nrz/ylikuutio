@@ -50,7 +50,9 @@ namespace yli::callback
     CallbackEngine::~CallbackEngine()
     {
         // destroy all callback objects of this callback engine.
-        yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
+        yli::hierarchy::delete_children<yli::callback::CallbackObject*>(
+                this->callback_object_pointer_vector,
+                this->number_of_callback_objects);
     }
 
     yli::callback::CallbackObject* CallbackEngine::create_callback_object()
@@ -58,14 +60,20 @@ namespace yli::callback
         return new yli::callback::CallbackObject(this);
     }
 
-    yli::callback::CallbackObject* CallbackEngine::create_callback_object(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
+    yli::callback::CallbackObject* CallbackEngine::create_callback_object(
+            const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
         return new yli::callback::CallbackObject(callback, this);
     }
 
     void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
     {
-        yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
+        yli::hierarchy::set_child_pointer(
+                childID,
+                child_pointer,
+                this->callback_object_pointer_vector,
+                this->free_callback_objectID_queue,
+                this->number_of_callback_objects);
     }
 
     std::optional<yli::data::AnyValue> CallbackEngine::execute(const yli::data::AnyValue& any_value)
@@ -76,7 +84,8 @@ namespace yli::callback
         // execute all callbacks.
         for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
-            yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
+            yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(
+                    this->callback_object_pointer_vector[child_i]);
 
             if (callback_object_pointer != nullptr)
             {

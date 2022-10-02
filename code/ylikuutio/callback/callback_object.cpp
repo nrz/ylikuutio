@@ -128,7 +128,9 @@ namespace yli::callback
         this->bind_to_parent();
     }
 
-    CallbackObject::CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent)
+    CallbackObject::CallbackObject(
+            const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+            yli::callback::CallbackEngine* const parent)
         : callback { callback },
         parent     { parent }
     {
@@ -150,7 +152,9 @@ namespace yli::callback
         }
     }
 
-    void CallbackObject::set_callback_parameter_pointer(const std::size_t childID, yli::callback::CallbackParameter* const child_pointer)
+    void CallbackObject::set_callback_parameter_pointer(
+            const std::size_t childID,
+            yli::callback::CallbackParameter* const child_pointer)
     {
         this->callback_parameter_pointer_vector[childID] = child_pointer;
 

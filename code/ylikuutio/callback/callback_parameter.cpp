@@ -42,7 +42,11 @@ namespace yli::callback
         callback_object->bind_callback_parameter(this);
     }
 
-    CallbackParameter::CallbackParameter(const std::string& name, const yli::data::AnyValue& any_value, const bool is_reference, yli::callback::CallbackObject* const parent)
+    CallbackParameter::CallbackParameter(
+            const std::string& name,
+            const yli::data::AnyValue& any_value,
+            const bool is_reference,
+            yli::callback::CallbackObject* const parent)
         : parent     { parent },
         name         { name },
         any_value    { any_value },

@@ -47,13 +47,21 @@ namespace yli::callback
 
             friend class yli::callback::CallbackObject;
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+                friend void yli::hierarchy::bind_child_to_parent(
+                        T1 child_pointer,
+                        std::vector<T1>& child_pointer_vector,
+                        std::queue<std::size_t>& free_childID_queue,
+                        std::size_t& number_of_children) noexcept;
 
         private:
             void bind_to_parent();
 
             // constructor.
-            CallbackParameter(const std::string& name, const yli::data::AnyValue& any_value, const bool is_reference, yli::callback::CallbackObject* const parent);
+            CallbackParameter(
+                    const std::string& name,
+                    const yli::data::AnyValue& any_value,
+                    const bool is_reference,
+                    yli::callback::CallbackObject* const parent);
 
             yli::callback::CallbackObject* parent { nullptr }; // pointer to the callback object.
 

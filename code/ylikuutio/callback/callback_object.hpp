@@ -65,7 +65,11 @@ namespace yli::callback
             friend class yli::callback::CallbackEngine;
             friend class yli::callback::CallbackParameter;
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+                friend void yli::hierarchy::bind_child_to_parent(
+                        T1 child_pointer,
+                        std::vector<T1>& child_pointer_vector,
+                        std::queue<std::size_t>& free_childID_queue,
+                        std::size_t& number_of_children) noexcept;
 
         protected:
             yli::callback::CallbackEngine* parent { nullptr }; // pointer to the callback engine.
@@ -80,13 +84,17 @@ namespace yli::callback
             explicit CallbackObject(yli::callback::CallbackEngine* const parent);
 
             // constructor.
-            CallbackObject(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback, yli::callback::CallbackEngine* const parent);
+            CallbackObject(
+                    const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+                    yli::callback::CallbackEngine* const parent);
 
         private:
             void bind_to_parent();
 
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(const std::size_t childID, yli::callback::CallbackParameter* const child_pointer);
+            void set_callback_parameter_pointer(
+                    const std::size_t childID,
+                    yli::callback::CallbackParameter* const child_pointer);
 
             void bind_child_to_parent(yli::callback::CallbackParameter* child_pointer);
 
