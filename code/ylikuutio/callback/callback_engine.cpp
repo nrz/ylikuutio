@@ -23,7 +23,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 
 namespace yli::ontology
@@ -50,11 +49,7 @@ namespace yli::callback
 
     CallbackEngine::~CallbackEngine()
     {
-        // destructor.
-        std::cout << "This callback engine will be destroyed.\n";
-
         // destroy all callback objects of this callback engine.
-        std::cout << "All callback objects of this callback engine will be destroyed.\n";
         yli::hierarchy::delete_children<yli::callback::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
     }
 
