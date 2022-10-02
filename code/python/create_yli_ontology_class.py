@@ -21,7 +21,8 @@
 # the given command line parameters.
 #
 # usage:
-# create_yli_ontology_class.py <class name> [parent class name] [optional parameters]
+# create_yli_ontology_class.py <class name> [parent class name] [base class]
+# create_yli_ontology_class.py --no-inherit <class name> [parent class name]
 #
 # Class name and parent class name are assumed to be in `yli::ontology` namespace.
 # Class name and parent class name must be valid C++ class names.
@@ -32,7 +33,7 @@ n_command_line_args = len(sys.argv)
 
 usage = \
 "usage:\n"\
-"create_yli_ontology_class.py <class name> [parent class name] [inherited class]\n"\
+"create_yli_ontology_class.py <class name> [parent class name] [base class]\n"\
 "create_yli_ontology_class.py --no-inherit <class name> [parent class name]"
 
 # print usage if too little arguments are given.
