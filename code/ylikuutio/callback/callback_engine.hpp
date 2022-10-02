@@ -23,10 +23,10 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <queue>   // std::queue
-#include <vector>  // std::vector
+#include <queue>    // std::queue
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {
