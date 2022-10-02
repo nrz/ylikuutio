@@ -142,10 +142,7 @@ namespace yli::callback
 
     CallbackObject::~CallbackObject()
     {
-        std::cout << "Callback object with childID " << this->childID << " will be destroyed.\n";
-
         // destroy all callback parameters of this callback object.
-        std::cout << "All callback parameters of this callback object will be destroyed.\n";
         for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
         {
             delete this->callback_parameter_pointer_vector[child_i];
