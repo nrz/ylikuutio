@@ -26,7 +26,6 @@
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 TEST(line_2d_must_be_defined_as_expected, line_2d_std_vector_float_x1_0_y1_0_x2_1_y2_1)

@@ -59,7 +59,6 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <functional> // std::reference_wrapper
 #include <limits>   // std::numeric_limits
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::monostate, std::variant

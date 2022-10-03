@@ -22,7 +22,6 @@
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 
 // Include standard headers
-#include <optional> // std::optional
 #include <vector>   // std::vector
 
 TEST(matrices_must_function_as_expected, matrices)

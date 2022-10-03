@@ -39,10 +39,7 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::getline
-#include <variant>  // std::holds_alternative, std::variant
-#include <vector>   // std::vector
 
 // Tests for `yli::ontology::Universe` callbacks
 // that can be tested in headless mode.

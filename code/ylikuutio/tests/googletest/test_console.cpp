@@ -27,7 +27,6 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
-#include <list>    // std::list
 
 TEST(console_must_be_initialized_appropriately, no_font)
 {

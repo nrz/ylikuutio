@@ -21,7 +21,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
-#include <vector>   // std::vector
 
 TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_is_empty_string)
 {

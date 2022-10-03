@@ -18,8 +18,6 @@
 #ifndef YLIKUUTIO_ONTOLOGY_FRAMEBUFFER_MODULE_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_FRAMEBUFFER_MODULE_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 

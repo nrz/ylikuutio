@@ -27,7 +27,6 @@
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
