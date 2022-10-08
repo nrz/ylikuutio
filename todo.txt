@@ -8,6 +8,7 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Implement custom memory allocator.
 [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 [ ] Write unit tests for `Brain` snippets.
@@ -111,7 +112,6 @@ Tasks which are necessary for Tulevaisuus:
 [ ] In `yli_server`, implement sending result files for players over the network.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement custom memory allocator.
 [ ] Add support for hexadecimal input in `set` console command.
 [ ] Implement `yli::ontology::ShaderSymbiosis`.
 [ ] Implement a custom FBX loader.
