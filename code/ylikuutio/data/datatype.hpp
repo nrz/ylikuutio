@@ -30,110 +30,74 @@ namespace yli::data
     {
         // Unknown. This should be used as the default.
         UNKNOWN,
-        // Primitive datatypes:
+        // Fundamental types.
         BOOL,
         CHAR,
         FLOAT,
         DOUBLE,
         INT32_T,
         UINT32_T,
-        // Raw pointers to primitive datatypes:
-        BOOL_POINTER,
-        CHAR_POINTER,
-        FLOAT_POINTER,
-        DOUBLE_POINTER,
-        INT32_T_POINTER,
-        UINT32_T_POINTER,
         // Strings.
-        STD_STRING_REF,
-        CONST_STD_STRING_REF,
+        STD_STRING,
+        // Variable-size vectors.
+        STD_VECTOR_INT8_T,
+        STD_VECTOR_UINT8_T,
+        STD_VECTOR_INT16_T,
+        STD_VECTOR_UINT16_T,
+        STD_VECTOR_INT32_T,
+        STD_VECTOR_UINT32_T,
+        STD_VECTOR_FLOAT,
+        // Fixed-size vectors.
+        GLM_VEC3,
+        GLM_VEC4,
+        // Spherical coordinates.
+        SPHERICAL_COORDINATES_STRUCT,
         // `yli::ontology` datatypes, 'entity' path.
-        ENTITY_POINTER,
+        ENTITY,
+        MOVABLE,
         // `yli::ontology` datatypes, 'universe' path.
-        UNIVERSE_POINTER,
-        CONST_UNIVERSE_POINTER,
+        UNIVERSE,
         // `yli::ontology` datatypes, 'variable' path.
-        VARIABLE_POINTER,
-        CONST_VARIABLE_POINTER,
+        VARIABLE,
         // `yli::ontology` datatypes, 'window' path.
-        WINDOW_POINTER,
-        CONST_WINDOW_POINTER,
-        WIDGET_POINTER,
-        CONST_WIDGET_POINTER,
-        CAMERAWIDGET_POINTER,
-        CONST_CAMERAWIDGET_POINTER,
+        WINDOW,
+        WIDGET,
+        CAMERAWIDGET,
         // `yli::ontology` datatypes, 'brain' path.
-        BRAIN_POINTER,
-        CONST_BRAIN_POINTER,
-        // `yli::ontology` datatypes, 'movable' path.
-        MOVABLE_POINTER,
-        CONST_MOVABLE_POINTER,
+        BRAIN,
         // `yli::ontology` datatypes, 'ecosystem' path.
-        ECOSYSTEM_POINTER,
-        CONST_ECOSYSTEM_POINTER,
+        ECOSYSTEM,
         // `yli::ontology` datatypes, 'simple' path.
-        SCENE_POINTER,
-        CONST_SCENE_POINTER,
-        PIPELINE_POINTER,
-        CONST_PIPELINE_POINTER,
-        MATERIAL_POINTER,
-        CONST_MATERIAL_POINTER,
-        SPECIES_POINTER,
-        CONST_SPECIES_POINTER,
-        OBJECT_POINTER,
-        CONST_OBJECT_POINTER,
+        SCENE,
+        PIPELINE,
+        MATERIAL,
+        SPECIES,
+        OBJECT,
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP_POINTER,
-        CONST_HEIGHTMAP_POINTER,
-        HEIGHTMAP_SHEET_POINTER,
-        CONST_HEIGHTMAP_SHEET_POINTER,
+        HEIGHTMAP,
+        HEIGHTMAP_SHEET,
         // `yli::ontology` datatypes, 'symbiont' path.
-        SYMBIOSIS_POINTER,
-        CONST_SYMBIOSIS_POINTER,
-        SYMBIONTMATERIAL_POINTER,
-        CONST_SYMBIONTMATERIAL_POINTER,
-        SYMBIONTSPECIES_POINTER,
-        CONST_SYMBIONTSPECIES_POINTER,
+        SYMBIOSIS,
+        SYMBIONTMATERIAL,
+        SYMBIONTSPECIES,
         // `yli::ontology` datatypes, 'holobiont' path.
-        HOLOBIONT_POINTER,
-        CONST_HOLOBIONT_POINTER,
-        BIONT_POINTER,
-        CONST_BIONT_POINTER,
+        HOLOBIONT,
+        BIONT,
         // `yli::ontology` datatypes, 'shapeshifter' path.
-        SHAPESHIFTER_TRANSFORMATION_POINTER,
-        CONST_SHAPESHIFTER_TRANSFORMATION_POINTER,
-        SHAPESHIFTER_SEQUENCE_POINTER,
-        CONST_SHAPESHIFTER_SEQUENCE_POINTER,
-        SHAPESHIFTER_FORM_POINTER,
-        CONST_SHAPESHIFTER_FORM_POINTER,
-        // `yli::ontology` datatypes, 'voxel' path.
-        CHUNK_MASTER_POINTER,
-        CONST_CHUNK_MASTER_POINTER,
-        CHUNK_POINTER,
-        CONST_CHUNK_POINTER,
+        SHAPESHIFTER_TRANSFORMATION,
+        SHAPESHIFTER_SEQUENCE,
+        SHAPESHIFTER_FORM,
         // `yli::ontology` datatypes, 'text 2D' path.
-        FONT2D_POINTER,
-        CONST_FONT2D_POINTER,
-        TEXT2D_POINTER,
-        CONST_TEXT2D_POINTER,
+        FONT2D,
+        TEXT2D,
         // `yli::ontology` datatypes, 'text 3D' path.
-        VECTORFONT_POINTER,
-        CONST_VECTORFONT_POINTER,
-        GLYPH_POINTER,
-        CONST_GLYPH_POINTER,
-        TEXT3D_POINTER,
-        CONST_TEXT3D_POINTER,
+        VECTORFONT,
+        GLYPH,
+        TEXT3D,
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE_POINTER,
-        CONST_CONSOLE_POINTER,
+        CONSOLE,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK_POINTER,
-        CONST_COMPUTETASK_POINTER,
-        FRAMEBUFFER_MATERIAL_POINTER,
-        CONST_FRAMEBUFFER_MATERIAL_POINTER,
-        // Structs.
-        SPHERICAL_COORDINATES_STRUCT_POINTER,
-        CONST_SPHERICAL_COORDINATES_STRUCT_POINTER,
+        COMPUTETASK
     };
 }
 
