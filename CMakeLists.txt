@@ -376,11 +376,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.hpp
 
     # console, in alphabetical order.
-    code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/console_callback_engine.cpp
     code/ylikuutio/console/console_callback_engine.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
+    code/ylikuutio/console/console_command_callback.hpp
     code/ylikuutio/console/input_parameters_to_any_value_callback_with_console.hpp
 
     # core, in alphabetical order
@@ -391,8 +391,8 @@ add_library(ylikuutio STATIC
     # data, in alphabetical order
     code/ylikuutio/data/any_value.cpp
     code/ylikuutio/data/any_value.hpp
-    code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/data_templates.hpp
+    code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/pi.hpp
     code/ylikuutio/data/spherical_coordinates_struct.hpp
     code/ylikuutio/data/tuple_templates.hpp
@@ -535,6 +535,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
+    code/ylikuutio/ontology/cartesian_coordinates_module.cpp
+    code/ylikuutio/ontology/cartesian_coordinates_module.hpp
     code/ylikuutio/ontology/child_iterator.hpp
     code/ylikuutio/ontology/child_module.cpp
     code/ylikuutio/ontology/child_module.hpp
@@ -587,8 +589,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/locomotion_module.cpp
     code/ylikuutio/ontology/locomotion_module.hpp
     code/ylikuutio/ontology/locomotion_module_struct.hpp
-    code/ylikuutio/ontology/cartesian_coordinates_module.cpp
-    code/ylikuutio/ontology/cartesian_coordinates_module.hpp
     code/ylikuutio/ontology/master_module.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
@@ -740,10 +740,10 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/background_color_snippets.hpp
     code/ylikuutio/snippets/brain_snippets.cpp
     code/ylikuutio/snippets/brain_snippets.hpp
-    code/ylikuutio/snippets/console_snippets.cpp
-    code/ylikuutio/snippets/console_snippets.hpp
     code/ylikuutio/snippets/console_callback_snippets.cpp
     code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/console_snippets.cpp
+    code/ylikuutio/snippets/console_snippets.hpp
     code/ylikuutio/snippets/debug_snippets.cpp
     code/ylikuutio/snippets/debug_snippets.hpp
     code/ylikuutio/snippets/framebuffer_snippets.cpp
@@ -753,9 +753,9 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/location_and_orientation_snippets.cpp
     code/ylikuutio/snippets/location_and_orientation_snippets.hpp
     code/ylikuutio/snippets/movement_snippets.cpp
+    code/ylikuutio/snippets/movement_snippets.hpp
     code/ylikuutio/snippets/window_snippets.cpp
     code/ylikuutio/snippets/window_snippets.hpp
-    code/ylikuutio/snippets/movement_snippets.hpp
     code/ylikuutio/snippets/wireframe_snippets.cpp
     code/ylikuutio/snippets/wireframe_snippets.hpp
 
@@ -958,17 +958,17 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_scene.cpp
         code/ylikuutio/tests/googletest/test_pipeline.cpp
+        code/ylikuutio/tests/googletest/test_pipeline_struct.cpp
         code/ylikuutio/tests/googletest/test_shapeshifter.cpp
         code/ylikuutio/tests/googletest/test_species.cpp
         code/ylikuutio/tests/googletest/test_symbiosis.cpp
-        code/ylikuutio/tests/googletest/test_variable.cpp
-        code/ylikuutio/tests/googletest/test_pipeline_struct.cpp
         code/ylikuutio/tests/googletest/test_text_2d.cpp
         code/ylikuutio/tests/googletest/test_text_3d.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_universe.cpp
         code/ylikuutio/tests/googletest/test_universe_callbacks.cpp
         code/ylikuutio/tests/googletest/test_universe_struct.cpp
+        code/ylikuutio/tests/googletest/test_variable.cpp
         code/ylikuutio/tests/googletest/test_variable_struct.cpp
         code/ylikuutio/tests/googletest/test_vector_font.cpp
         code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
