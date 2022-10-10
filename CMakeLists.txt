@@ -815,6 +815,7 @@ add_executable(hirvi
     # hirvi, in alphabetical order
     code/hirvi/cat.cpp
     code/hirvi/cat.hpp
+    code/hirvi/datatype.hpp
     code/hirvi/elk.cpp
     code/hirvi/elk.hpp
     code/hirvi/emancipation_module.cpp
