@@ -691,7 +691,11 @@ namespace yli::ontology
             {
                 // Send our view matrix to the uniform buffer object (UBO).
                 glBindBuffer(GL_UNIFORM_BUFFER, this->get_active_camera()->get_camera_uniform_block());
-                glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::camera_ubo::CameraUboBlockOffsets::V, sizeof(glm::mat4), glm::value_ptr(this->current_camera_view_matrix)); // mat4
+                glBufferSubData(
+                        GL_UNIFORM_BUFFER,
+                        yli::opengl::camera_ubo::CameraUboBlockOffsets::V,
+                        sizeof(glm::mat4),
+                        glm::value_ptr(this->current_camera_view_matrix)); // mat4
                 glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
                 this->get_active_camera()->render();
