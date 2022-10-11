@@ -160,23 +160,37 @@ namespace yli::data
                 std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
                 std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 // Ontology.
+                // `yli::ontology` datatypes, 'entity' path.
                 std::reference_wrapper<yli::ontology::Entity>,
                 std::reference_wrapper<yli::ontology::Movable>,
                 std::reference_wrapper<const yli::ontology::Movable>,
+                // `yli::ontology` datatypes, 'universe' path.
                 std::reference_wrapper<yli::ontology::Universe>,
+                // `yli::ontology` datatypes, 'ecosystem' path.
                 std::reference_wrapper<yli::ontology::Ecosystem>,
+                // `yli::ontology` datatypes, 'simple' path.
                 std::reference_wrapper<yli::ontology::Scene>,
                 std::reference_wrapper<yli::ontology::Pipeline>,
                 std::reference_wrapper<yli::ontology::Material>,
                 std::reference_wrapper<yli::ontology::Species>,
                 std::reference_wrapper<yli::ontology::Object>,
+                // `yli::ontology` datatypes, 'heightmap' path.
+                // TODO
+                // `yli::ontology` datatypes, 'symbiont' path.
                 std::reference_wrapper<yli::ontology::Symbiosis>,
+                // `yli::ontology` datatypes, 'holobiont' path.
                 std::reference_wrapper<yli::ontology::Holobiont>,
+                // `yli::ontology` datatypes, 'shapeshifter' path.
+                // TODO
+                // `yli::ontology` datatypes, 'text 2D' path.
                 std::reference_wrapper<yli::ontology::Font2D>,
                 std::reference_wrapper<yli::ontology::Text2D>,
+                // `yli::ontology` datatypes, 'text 3D' path.
                 std::reference_wrapper<yli::ontology::VectorFont>,
                 std::reference_wrapper<yli::ontology::Text3D>,
+                // `yli::ontology` datatypes, 'console' path.
                 std::reference_wrapper<yli::ontology::Console>,
+                // `yli::ontology` datatypes, 'compute' path.
                 std::reference_wrapper<yli::ontology::ComputeTask>> data;
     };
 }
