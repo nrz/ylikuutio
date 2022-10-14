@@ -114,7 +114,7 @@ namespace yli::ontology
 
         private:
             std::queue<std::size_t> free_apprenticeID_queue;
-            std::size_t number_of_apprentices;
+            std::size_t number_of_apprentices { 0 };
     };
 }
 

@@ -83,8 +83,7 @@ namespace yli::ontology
     }
 
     GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
-        : number_of_children { 0 },
-        entity { entity }
+        : entity { entity }
     {
         // constructor.
 

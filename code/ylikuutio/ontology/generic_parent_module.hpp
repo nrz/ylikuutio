@@ -88,7 +88,7 @@ namespace yli::ontology
 
         protected:
             std::queue<std::size_t> free_childID_queue;
-            std::size_t number_of_children;
+            std::size_t number_of_children { 0 };
 
             yli::ontology::Entity* entity; // The `Entity` that owns this `GenericParentModule`.
     };

@@ -69,8 +69,7 @@ namespace yli::ontology
     }
 
     GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept
-        : generic_master { generic_master },
-        number_of_apprentices { 0 }
+        : generic_master { generic_master }
     {
         // constructor.
 
