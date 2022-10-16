@@ -81,7 +81,6 @@ namespace yli::ontology
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
-            yli::ontology::Entity* create_callback_engine_entity() const;
 
         protected:
             yli::ontology::Universe& universe;

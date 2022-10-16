@@ -531,8 +531,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/brain.cpp
     code/ylikuutio/ontology/brain.hpp
     code/ylikuutio/ontology/brain_struct.hpp
-    code/ylikuutio/ontology/callback_engine_entity.cpp
-    code/ylikuutio/ontology/callback_engine_entity.hpp
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
