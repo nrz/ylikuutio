@@ -337,9 +337,9 @@ namespace yli::ontology
             yli::ontology::Scene* active_scene     { nullptr };
             yli::ontology::Console* active_console { nullptr };
 
-            std::unique_ptr<yli::render::RenderSystem> render_system { nullptr }; // pointer to `RenderSystem`.
-            std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr }; // pointer to `AudioSystem`.
-            std::unique_ptr<yli::input::InputSystem> input_system    { nullptr }; // pointer to `InputSystem`.
+            std::unique_ptr<yli::render::RenderSystem> render_system { nullptr };
+            std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr };
+            std::unique_ptr<yli::input::InputSystem> input_system    { nullptr };
 
             const std::string application_name;
 
