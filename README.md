@@ -48,7 +48,7 @@ Skrolli 2019.2 can be freely downloaded as PDF.
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
-C++17 support is required.
+C++20 support is required.
 CMake 3.14 or newer is needed for the compiling process.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
