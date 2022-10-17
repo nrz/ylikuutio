@@ -5,7 +5,7 @@ cmake_policy(SET CMP0004 NEW)
 cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0072 NEW)
 set(CMAKE_CXX_STANDARD 20)
-project(ylikuutio VERSION 0.0.8)
+project(ylikuutio VERSION 0.0.10)
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
