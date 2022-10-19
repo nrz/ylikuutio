@@ -27,6 +27,13 @@ namespace yli::ontology
 
 namespace yli::core
 {
+    Application::Application(const int argc, const char* const argv[])
+        : command_line_master(argc, argv),
+        universe(nullptr)
+    {
+        // constructor.
+    }
+
     std::string Application::get_name() const
     {
         return ""; // `override` this in the inherited class.

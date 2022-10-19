@@ -36,12 +36,7 @@ namespace yli::core
     class Application
     {
         public:
-            Application(const int argc, const char* const argv[])
-                : command_line_master(argc, argv),
-                universe(nullptr)
-            {
-                // constructor.
-            }
+            Application(const int argc, const char* const argv[]);
 
             Application(const Application&) = delete;            // Delete copy constructor.
             yli::core::Application& operator=(const Application&) = delete; // Delete copy assignment.
