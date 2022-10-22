@@ -78,8 +78,8 @@ namespace yli::data
         HEIGHTMAP_SHEET,
         // `yli::ontology` datatypes, 'symbiont' path.
         SYMBIOSIS,
-        SYMBIONTMATERIAL,
-        SYMBIONTSPECIES,
+        SYMBIONT_MATERIAL,
+        SYMBIONT_SPECIES,
         // `yli::ontology` datatypes, 'holobiont' path.
         HOLOBIONT,
         BIONT,
