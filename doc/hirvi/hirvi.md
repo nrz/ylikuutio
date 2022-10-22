@@ -1,29 +1,7 @@
 # Hirvi
-Hirvi is a first person action-adventure of the adventures of
-a moose/elk called Hirvi. Cities are dangerous places for moose, and
-in particular an encounter with the police may prove deadly for Hirvi,
-even through moose are well-known pasifists.
-"hirvi" means a moose/elk in Finnish.
 
-Hirvi es una acción-aventura de la primera persona sobre
-las aventuras de unx alce que se llama Hirvi. Las ciudades son lugares
-peligrosos para lxs alces, y particularmente un encuentro con la policía
-se puede resultar mortal para Hirvi, a pesar de que lxs alces
-son pasifistas ilustres. "hirvi" significa unx alce en finés.
-
-In Hirvi there are missions in different cities of Finland,
-at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
-The scenes in which the missions take place are implemented
-using free 3D city models.
-
-En Hirvi hay misiones en diferentes ciudas de Finland,
-al menos en Helsinki, Espoo, Vantaa, Oulu, y Turku.
-Las escenas en las cuales las misiones se dan se las implementa
-usando modelos 3D libres.
-
-Hirvi targets 64-bit Linux, Windows, and MacOS environments.
-Hirvi will be implemented using Ylikuutio 3D engine.
-Hirvi is a work in progress.
+See ![hirvi_pitch.md](Hirvi pitch in different languages).
+See ![hirvi_description.md](Hirvi description in different languages).
 
 Planned languages on launch:
 * Deutsch
@@ -32,8 +10,6 @@ Planned languages on launch:
 * español
 * suomi
 * svenska
-
-3D models of Helsinki, Espoo, Vantaa, Oulu, and Turku will be used.
 
 ## Hirvi sex / el sexo de Hirvi / Hirven sukupuoli
 * Hirvi is ... ? female/male/something else
