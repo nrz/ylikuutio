@@ -1,4 +1,18 @@
 # Hirvi
+deu:
+Hirvi ist ein Action-Adventure über die Abenteuers dem Elch wer heisst Hirvi.
+Die Städte sind gefährliche Stelle für die Elche, und
+besonders ein Begegnung mit der Polizei kann fatal für Hirvi sein,
+obwohl die Elche wohlbekannte Pazifisten sind.
+
+In Hirvi gibt es Missionen in verschiedenen Finnische Städten,
+wenigstens Helsinki, Espoo, Vantaa, Oulu, und Turku.
+Die Szenen sind mit die freie 3D-Stadtmodellen implementiert (TODO).
+
+Hirvi will Linux, Windows, und MacOS, alle mit 64 bits unterstüzen.
+Hirvi wird mit die Ylikuutio Spiel-Engine implementiert.
+Hirvi ist in Arbeit.
+
 eng/elk:
 Hirvi is a first person action-adventure of the adventures of
 an elk called Hirvi. Cities are dangerous places for elks, and

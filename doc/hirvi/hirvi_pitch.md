@@ -1,6 +1,12 @@
 # Hirvi
 See also ![hirvi_description.md](longer Hirvi description in different languages).
 
+deu:
+Hirvi ist ein Action-Adventure über die Abenteuers dem Elch wer heisst Hirvi.
+Die Städte sind gefährliche Stelle für die Elche, und
+besonders ein Begegnung mit der Polizei kann fatal für Hirvi sein,
+obwohl die Elche wohlbekannte Pazifisten sind.
+
 eng/elk:
 Hirvi is a first person action-adventure of the adventures of
 an elk called Hirvi. Cities are dangerous places for elks, and
