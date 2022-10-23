@@ -781,6 +781,7 @@ add_library(snippets STATIC
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
+    code/ajokki/ajokki.hpp
     code/ajokki/ajokki_altiplano_scene.cpp
     code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_console_callbacks.cpp
@@ -800,6 +801,7 @@ target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} pthread)
 add_executable(gpgpu_test
     # ajokki, in alphabetical order
     code/gpgpu_test/gpgpu_test.cpp
+    code/gpgpu_test/gpgpu_test.hpp
     code/gpgpu_test/gpgpu_test_scene.cpp
     code/gpgpu_test/gpgpu_test_scene.hpp
 
@@ -820,6 +822,7 @@ add_executable(hirvi
     code/hirvi/emancipation_module.cpp
     code/hirvi/emancipation_module.hpp
     code/hirvi/hirvi.cpp
+    code/hirvi/hirvi.hpp
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
     code/hirvi/hirvi_earth_ecosystem.cpp
@@ -849,6 +852,7 @@ target_link_libraries(hirvi snippets ylikuutio ${ALL_LIBS} pthread)
 add_executable(tulevaisuus
     # tulevaisuus, in alphabetical order
     code/tulevaisuus/tulevaisuus.cpp
+    code/tulevaisuus/tulevaisuus.hpp
     code/tulevaisuus/tulevaisuus_console_callbacks.cpp
     code/tulevaisuus/tulevaisuus_console_callbacks.hpp
 
@@ -864,6 +868,7 @@ target_link_libraries(tulevaisuus snippets ylikuutio ${ALL_LIBS} pthread)
 add_executable(yli_edit
     # yli_edit, in alphabetical order
     code/edit/yli_edit.cpp
+    code/edit/yli_edit.hpp
     code/edit/yli_edit_console_callbacks.cpp
     code/edit/yli_edit_console_callbacks.hpp
     )

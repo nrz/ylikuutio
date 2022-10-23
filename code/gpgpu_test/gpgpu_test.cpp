@@ -28,6 +28,7 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "gpgpu_test.hpp"
 #include "gpgpu_test_scene.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -56,90 +57,84 @@ namespace yli::ontology
 
 namespace gpgpu_test
 {
-    class GpgpuTestApplication: public yli::core::Application
+    GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
+        : yli::core::Application(argc, argv)
     {
-        public:
-            GpgpuTestApplication(const int argc, const char* const argv[])
-                : yli::core::Application(argc, argv)
-            {
-                // constructor.
-            }
+        // constructor.
+    }
 
-            ~GpgpuTestApplication() = default;
+    std::string GpgpuTestApplication::get_name() const
+    {
+        return "GPGPU test";
+    }
 
-            std::string get_name() const override
-            {
-                return "GPGPU test";
-            }
+    std::vector<std::string> GpgpuTestApplication::get_valid_keys()
+    {
+        return { "help", "version" };
+    }
 
-            std::vector<std::string> get_valid_keys() override
-            {
-                return { "help", "version" };
-            }
+    yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct()
+    {
+        yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
+        std::stringstream window_title_stringstream;
+        window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
+        universe_struct.application_name = "GPGPU test";
+        universe_struct.window_title = window_title_stringstream.str();
+        universe_struct.window_width = 512;
+        universe_struct.window_height = 512;
 
-            yli::ontology::UniverseStruct get_universe_struct() override
-            {
-                yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
-                std::stringstream window_title_stringstream;
-                window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
-                universe_struct.application_name = "GPGPU test";
-                universe_struct.window_title = window_title_stringstream.str();
-                universe_struct.window_width = 512;
-                universe_struct.window_height = 512;
+        return universe_struct;
+    }
 
-                return universe_struct;
-            }
+    bool GpgpuTestApplication::create_simulation()
+    {
+        yli::ontology::Universe* const my_universe = this->get_universe();
 
-            bool create_simulation() override
-            {
-                yli::ontology::Universe* const my_universe = this->get_universe();
+        if (my_universe == nullptr)
+        {
+            return false;
+        }
 
-                if (my_universe == nullptr)
-                {
-                    return false;
-                }
+        my_universe->set_global_name("universe");
 
-                my_universe->set_global_name("universe");
+        yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
 
-                yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
+        if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
+        {
+            std::cerr << "Failed to open SDL window.\n";
+            return false;
+        }
 
-                if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
-                {
-                    std::cerr << "Failed to open SDL window.\n";
-                    return false;
-                }
+        // Create the `Scene`s.
 
-                // Create the `Scene`s.
+        // GPGPU test `Scene` begins here.
 
-                // GPGPU test `Scene` begins here.
+        std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
+        yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory);
 
-                std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-                yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory);
+        if (gpgpu_test_scene_entity == nullptr)
+        {
+            return false;
+        }
 
-                if (gpgpu_test_scene_entity == nullptr)
-                {
-                    return false;
-                }
+        std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
+        yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
 
-                std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
-                yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
+        if (gpgpu_test_scene == nullptr)
+        {
+            return false;
+        }
 
-                if (gpgpu_test_scene == nullptr)
-                {
-                    return false;
-                }
+        // Set `gpgpu_test_scene` to be the currently active `Scene`.
+        std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
+        my_universe->set_active_scene(gpgpu_test_scene);
 
-                // Set `gpgpu_test_scene` to be the currently active `Scene`.
-                std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
-                my_universe->set_active_scene(gpgpu_test_scene);
+        // GPGPU test `Scene` ends here.
 
-                // GPGPU test `Scene` ends here.
-
-                // Render the `Universe`.
-                my_universe->render();
-                return true;
-            }
-    };
+        // Render the `Universe`.
+        my_universe->render();
+        return true;
+    }
 }
 
 namespace yli::core
