@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef YLIKUUTIO_ONTOLOGY_CUSTOM_ENTITY_FACTORY_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CUSTOM_ENTITY_FACTORY_HPP_INCLUDED
+
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
@@ -85,3 +88,5 @@ namespace yli::ontology
                 }
     };
 }
+
+#endif
