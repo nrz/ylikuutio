@@ -49,10 +49,10 @@ namespace hirvi
         STD_VECTOR_UINT32_T,
         STD_VECTOR_FLOAT,
         // Fixed-size vectors.
-        GLM_VEC3
-        CONST_GLM_VEC3
-        GLM_VEC4
-        CONST_GLM_VEC4
+        GLM_VEC3,
+        CONST_GLM_VEC3,
+        GLM_VEC4,
+        CONST_GLM_VEC4,
         // Spherical coordinates.
         SPHERICAL_COORDINATES_STRUCT,
         CONST_SPHERICAL_COORDINATES_STRUCT,
