@@ -62,7 +62,9 @@ namespace yli::ontology
         material->parent_of_vector_fonts.bind_child(this);
     }
 
-    std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(yli::ontology::VectorFont& vector_font, yli::ontology::Material& new_parent) noexcept
+    std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(
+            yli::ontology::VectorFont& vector_font,
+            yli::ontology::Material& new_parent) noexcept
     {
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.

@@ -38,7 +38,9 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Ecosystem& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(
+            yli::ontology::Pipeline& pipeline,
+            yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -65,11 +67,15 @@ namespace yli::ontology
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_pipelines);
+        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_pipelines);
+
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_scene_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Scene& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_scene_parent(
+            yli::ontology::Pipeline& pipeline,
+            yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -96,7 +102,9 @@ namespace yli::ontology
 
         pipeline.master_of_materials.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         pipeline.master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
-        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_pipelines);
+        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_pipelines);
+
         return std::nullopt;
     }
 

@@ -46,7 +46,9 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(yli::ontology::Console& console, yli::ontology::Font2D& new_font_2d) noexcept
+    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(
+            yli::ontology::Console& console,
+            yli::ontology::Font2D& new_font_2d) noexcept
     {
         // Set pointer to `console` to `nullptr`, set font according to the input,
         // and request a new apprenticeID from `new_font_2d`.
@@ -57,7 +59,8 @@ namespace yli::ontology
                 console.get_scene() == nullptr ||
                 new_font_2d.get_scene() == nullptr)
         {
-            console.apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(&new_font_2d.master_of_consoles);
+            console.apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(
+                    &new_font_2d.master_of_consoles);
         }
         else
         {
@@ -230,7 +233,8 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->apprentice_of_font_2d.get_master());
+        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
+                this->apprentice_of_font_2d.get_master());
 
         if (font_2d == nullptr)
         {

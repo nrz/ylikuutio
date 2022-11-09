@@ -41,7 +41,9 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(yli::ontology::Material& material, yli::ontology::Ecosystem& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
+            yli::ontology::Material& material,
+            yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -68,11 +70,15 @@ namespace yli::ontology
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
+        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_materials);
+
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(yli::ontology::Material& material, yli::ontology::Scene& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(
+            yli::ontology::Material& material,
+            yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -99,11 +105,15 @@ namespace yli::ontology
 
         material.master_of_species.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         material.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
-        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_materials);
+        material.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_materials);
+
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_pipeline(yli::ontology::Material& material, yli::ontology::Pipeline& new_pipeline) noexcept
+    std::optional<yli::data::AnyValue> Material::bind_to_new_pipeline(
+            yli::ontology::Material& material,
+            yli::ontology::Pipeline& new_pipeline) noexcept
     {
         // Set pointer to `material` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_parent`.
@@ -114,7 +124,8 @@ namespace yli::ontology
                 material.get_scene() == nullptr ||
                 new_pipeline.get_scene() == nullptr)
         {
-            material.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(&new_pipeline.master_of_materials);
+            material.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(
+                    &new_pipeline.master_of_materials);
         }
         else
         {

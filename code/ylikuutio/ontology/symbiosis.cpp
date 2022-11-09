@@ -55,7 +55,9 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
+            yli::ontology::Symbiosis& symbiosis,
+            yli::ontology::Ecosystem& new_parent) noexcept
     {
         // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -82,11 +84,15 @@ namespace yli::ontology
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
+        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_symbioses);
+
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(
+            yli::ontology::Symbiosis& symbiosis,
+            yli::ontology::Scene& new_parent) noexcept
     {
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -112,11 +118,15 @@ namespace yli::ontology
         }
 
         symbiosis.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
-        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(&new_parent.parent_of_symbioses);
+        symbiosis.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_symbioses);
+
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_pipeline(yli::ontology::Symbiosis& symbiosis, yli::ontology::Pipeline& new_pipeline) noexcept
+    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_pipeline(
+            yli::ontology::Symbiosis& symbiosis,
+            yli::ontology::Pipeline& new_pipeline) noexcept
     {
         // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_pipeline`.
@@ -127,7 +137,8 @@ namespace yli::ontology
                 symbiosis.get_scene() == nullptr ||
                 new_pipeline.get_scene() == nullptr)
         {
-            symbiosis.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(&new_pipeline.master_of_symbioses);
+            symbiosis.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(
+                    &new_pipeline.master_of_symbioses);
         }
         else
         {
@@ -346,7 +357,8 @@ namespace yli::ontology
             return nullptr;
         }
 
-        return static_cast<yli::ontology::SymbiontMaterial*>(this->parent_of_symbiont_materials.child_pointer_vector[symbiont_material_i]);
+        return static_cast<yli::ontology::SymbiontMaterial*>(
+                this->parent_of_symbiont_materials.child_pointer_vector[symbiont_material_i]);
     }
 
     yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const

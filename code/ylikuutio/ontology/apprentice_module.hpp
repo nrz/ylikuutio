@@ -42,14 +42,20 @@ namespace yli::ontology
             void unbind_from_generic_master_module() noexcept;
 
         private:
-            void bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
+            void bind_to_new_generic_master_module(
+                    yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
 
         public:
-            void unbind_from_any_master_belonging_to_other_scene(const yli::ontology::Scene& scene) noexcept;
-            void unbind_and_bind_to_new_generic_master_module(yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
+            void unbind_from_any_master_belonging_to_other_scene(
+                    const yli::ontology::Scene& scene) noexcept;
+
+            void unbind_and_bind_to_new_generic_master_module(
+                    yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
 
             // constructor.
-            ApprenticeModule(yli::ontology::GenericMasterModule* const generic_master_module, yli::ontology::Entity* const apprentice) noexcept;
+            ApprenticeModule(
+                    yli::ontology::GenericMasterModule* const generic_master_module,
+                    yli::ontology::Entity* const apprentice) noexcept;
 
             // destructor.
             ~ApprenticeModule() noexcept;

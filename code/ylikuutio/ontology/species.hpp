@@ -45,15 +45,21 @@ namespace yli::ontology
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Species& species, yli::ontology::Ecosystem& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+                    yli::ontology::Species& species,
+                    yli::ontology::Ecosystem& new_parent) noexcept;
 
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Species& species, yli::ontology::Scene& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+                    yli::ontology::Species& species,
+                    yli::ontology::Scene& new_parent) noexcept;
 
             // Set pointer to `species` to `nullptr`, set material according to the input,
             // and request a new apprenticeID from `new_material`.
-            static std::optional<yli::data::AnyValue> bind_to_new_material(yli::ontology::Species& species, yli::ontology::Material& new_material) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_material(
+                    yli::ontology::Species& species,
+                    yli::ontology::Material& new_material) noexcept;
 
             Species(
                     yli::ontology::Universe& universe,

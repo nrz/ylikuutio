@@ -164,7 +164,8 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::SymbiontSpecies* const symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>(this->apprentice_of_symbiont_species.get_master());
+        const yli::ontology::SymbiontSpecies* const symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>(
+                this->apprentice_of_symbiont_species.get_master());
 
         if (symbiont_species == nullptr)
         {

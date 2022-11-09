@@ -44,7 +44,9 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain) noexcept
+    std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(
+            yli::ontology::Movable& movable,
+            yli::ontology::Brain& new_brain) noexcept
     {
         // Set pointer to `movable` to `nullptr`, set brain according to the input,
         // and request a new apprenticeID from `new_brain`.
@@ -55,7 +57,8 @@ namespace yli::ontology
                 movable.get_scene() == nullptr ||
                 new_brain.get_scene() == nullptr)
         {
-            movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(&new_brain.master_of_movables);
+            movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(
+                    &new_brain.master_of_movables);
         }
         else
         {

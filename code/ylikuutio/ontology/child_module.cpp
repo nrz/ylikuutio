@@ -104,7 +104,8 @@ namespace yli::ontology
         this->parent_module->unbind_child(this->entity->get_childID());
     }
 
-    void ChildModule::set_parent_module_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module) noexcept
+    void ChildModule::set_parent_module_and_bind_to_new_parent(
+            yli::ontology::GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module == nullptr)
         {
@@ -120,7 +121,8 @@ namespace yli::ontology
         this->parent_module->bind_child(this->entity);
     }
 
-    void ChildModule::unbind_and_bind_to_new_parent(yli::ontology::GenericParentModule* const new_parent_module) noexcept
+    void ChildModule::unbind_and_bind_to_new_parent(
+            yli::ontology::GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module != this->parent_module)
         {

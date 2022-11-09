@@ -65,15 +65,21 @@ namespace yli::ontology
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Ecosystem& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+                    yli::ontology::Symbiosis& symbiosis,
+                    yli::ontology::Ecosystem& new_parent) noexcept;
 
             // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Symbiosis& symbiosis, yli::ontology::Scene& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+                    yli::ontology::Symbiosis& symbiosis,
+                    yli::ontology::Scene& new_parent) noexcept;
 
             // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_pipeline`.
-            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(yli::ontology::Symbiosis& symbiosis, yli::ontology::Pipeline& new_pipeline) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(
+                    yli::ontology::Symbiosis& symbiosis,
+                    yli::ontology::Pipeline& new_pipeline) noexcept;
 
             Symbiosis(
                     yli::ontology::Universe& universe,

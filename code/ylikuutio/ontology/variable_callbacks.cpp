@@ -40,7 +40,9 @@ namespace yli::data
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Variable::activate_planet_radius(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_planet_radius(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(&entity);
 
@@ -61,7 +63,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_window_width(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_window_width(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         // window width.
         const yli::data::AnyValue& window_width_any_value = variable.variable_value;
@@ -93,7 +97,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_window_height(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_window_height(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         // window height.
         const yli::data::AnyValue& window_height_any_value = variable.variable_value;
@@ -125,7 +131,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_width(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_width(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         // framebuffer width.
         const yli::data::AnyValue& framebuffer_width_any_value = variable.variable_value;
@@ -149,7 +157,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_height(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_height(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         // framebuffer height.
         const yli::data::AnyValue& framebuffer_height_any_value = variable.variable_value;
@@ -173,7 +183,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_background_color(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_background_color(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         if (!entity.has_variable("red") ||
                 !entity.has_variable("green") ||
@@ -238,7 +250,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_wireframe(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_wireframe(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& wireframe_any_value = variable.variable_value;
 
@@ -250,7 +264,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_speed(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_speed(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
 
@@ -284,7 +300,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_turbo_factor(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_turbo_factor(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
@@ -303,7 +321,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_twin_turbo_factor(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_twin_turbo_factor(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
@@ -322,7 +342,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_mouse_speed(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_mouse_speed(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
@@ -341,7 +363,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_is_flight_mode_in_use(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_is_flight_mode_in_use(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(&entity);
 
@@ -360,7 +384,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_console_top_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_top_y(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& console_top_y_any_value = variable.variable_value;
 
@@ -386,7 +412,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_console_bottom_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_bottom_y(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& console_bottom_y_any_value = variable.variable_value;
 
@@ -412,7 +440,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_console_left_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_left_x(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& console_left_x_any_value = variable.variable_value;
 
@@ -438,7 +468,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_console_right_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> Variable::activate_console_right_x(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& console_right_x_any_value = variable.variable_value;
 

@@ -148,7 +148,12 @@ namespace yli::ontology
             }
 
             // Set pointer to this child to `nullptr` in the old parent.
-            yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
+            yli::hierarchy::set_child_pointer(
+                    childID,
+                    static_cast<T1>(nullptr),
+                    child_pointer_vector,
+                    free_childID_queue,
+                    number_of_children);
         }
 
     template <typename T1>

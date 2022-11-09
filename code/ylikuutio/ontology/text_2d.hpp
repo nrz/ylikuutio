@@ -41,7 +41,9 @@ namespace yli::ontology
         public:
             // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(yli::ontology::Text2D& text_2d, yli::ontology::Font2D& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
+                    yli::ontology::Text2D& text_2d,
+                    yli::ontology::Font2D& new_parent) noexcept;
 
             Text2D(
                     yli::ontology::Universe& universe,

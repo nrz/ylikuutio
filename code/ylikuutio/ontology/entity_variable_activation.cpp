@@ -26,7 +26,9 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> activate_should_be_rendered(yli::ontology::Entity& entity, yli::ontology::Variable& variable)
+    std::optional<yli::data::AnyValue> activate_should_be_rendered(
+            yli::ontology::Entity& entity,
+            yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& should_be_rendered_any_value = variable.variable_value;
 

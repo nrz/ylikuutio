@@ -38,7 +38,9 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(yli::ontology::ShapeshifterTransformation& shapeshifter_transformation, yli::ontology::Material& new_parent) noexcept
+    std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
+            yli::ontology::ShapeshifterTransformation& shapeshifter_transformation,
+            yli::ontology::Material& new_parent) noexcept
     {
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -57,7 +59,9 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        shapeshifter_transformation.child_of_material.unbind_and_bind_to_new_parent(&new_parent.parent_of_shapeshifter_transformations);
+        shapeshifter_transformation.child_of_material.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_shapeshifter_transformations);
+
         return std::nullopt;
     }
 

@@ -31,7 +31,9 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(yli::ontology::Text3D& text_3d, yli::ontology::VectorFont& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(
+            yli::ontology::Text3D& text_3d,
+            yli::ontology::VectorFont& new_parent) noexcept
     {
         // Disable all character `Object`s of `text_3d`,
         // set `parent` according to the input, request a new childID
@@ -54,7 +56,9 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        text_3d.child_of_vector_font.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_3ds);
+        text_3d.child_of_vector_font.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_text_3ds);
+
         return std::nullopt;
     }
 

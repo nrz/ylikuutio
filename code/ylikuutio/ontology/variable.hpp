@@ -93,28 +93,72 @@ namespace yli::ontology
                     const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
                     const yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_planet_radius(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+            static std::optional<yli::data::AnyValue> activate_planet_radius(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_window_width(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_window_height(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_framebuffer_width(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_framebuffer_height(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_background_color(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+            static std::optional<yli::data::AnyValue> activate_window_width(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_wireframe(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+            static std::optional<yli::data::AnyValue> activate_window_height(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_speed(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_turbo_factor(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_twin_turbo_factor(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_mouse_speed(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+            static std::optional<yli::data::AnyValue> activate_framebuffer_width(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_console_top_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_console_bottom_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_console_left_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-            static std::optional<yli::data::AnyValue> activate_console_right_x(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+            static std::optional<yli::data::AnyValue> activate_framebuffer_height(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(yli::ontology::Entity& entity);
+            static std::optional<yli::data::AnyValue> activate_background_color(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_wireframe(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_speed(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_turbo_factor(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_twin_turbo_factor(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_mouse_speed(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_is_flight_mode_in_use(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_console_top_y(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_console_bottom_y(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_console_left_x(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> activate_console_right_x(
+                    yli::ontology::Entity& entity,
+                    yli::ontology::Variable& variable);
+
+            static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(
+                    yli::ontology::Entity& entity);
 
             // Public callbacks and here.
 

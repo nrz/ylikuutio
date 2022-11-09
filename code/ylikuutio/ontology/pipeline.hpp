@@ -49,11 +49,15 @@ namespace yli::ontology
         public:
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Ecosystem& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+                    yli::ontology::Pipeline& pipeline,
+                    yli::ontology::Ecosystem& new_parent) noexcept;
 
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(yli::ontology::Pipeline& pipeline, yli::ontology::Scene& new_parent) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+                    yli::ontology::Pipeline& pipeline,
+                    yli::ontology::Scene& new_parent) noexcept;
 
             Pipeline(
                     yli::ontology::Universe& universe,

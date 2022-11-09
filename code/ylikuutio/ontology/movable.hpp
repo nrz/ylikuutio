@@ -70,8 +70,12 @@ namespace yli::ontology
         public:
             // Set pointer to `movable` to `nullptr`, set brain according to the input,
             // and request a new apprenticeID from `new_brain`.
-            static std::optional<yli::data::AnyValue> bind_to_new_brain(yli::ontology::Movable& movable, yli::ontology::Brain& new_brain) noexcept;
-            static std::optional<yli::data::AnyValue> unbind_from_brain(yli::ontology::Movable& movable) noexcept;
+            static std::optional<yli::data::AnyValue> bind_to_new_brain(
+                    yli::ontology::Movable& movable,
+                    yli::ontology::Brain& new_brain) noexcept;
+
+            static std::optional<yli::data::AnyValue> unbind_from_brain(
+                    yli::ontology::Movable& movable) noexcept;
 
             Movable(yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
@@ -176,50 +180,219 @@ namespace yli::ontology
             static bool may_have_ballistic_path(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
             // These functions return the coordinates of the farthest point.
-            static float get_closest_visible_ground_dest_x_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_closest_visible_ground_dest_y_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_closest_visible_ground_dest_z_towards(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_closest_visible_ground_dest_x_towards(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_closest_visible_ground_dest_y_towards(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_closest_visible_ground_dest_z_towards(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
 
             // This method returns `true` if complete path is visible, `false` otherwise.
-            static bool is_complete_ground_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static bool is_complete_rail_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static bool is_complete_air_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static bool is_complete_ballistic_path_visible(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static bool is_complete_ground_path_visible(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static bool is_complete_rail_path_visible(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static bool is_complete_air_path_visible(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static bool is_complete_ballistic_path_visible(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
 
             // These methods return the coordinates of the point closest to `movable` from which there is known ballistic path to (x, y, z).
-            static float get_nearest_known_ballistic_launch_site_x(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_nearest_known_ballistic_launch_site_y(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_nearest_known_ballistic_launch_site_z(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_known_ballistic_launch_site_x(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_nearest_known_ballistic_launch_site_y(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_nearest_known_ballistic_launch_site_z(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
 
             // These methods return the coordinates of the point closest to `movable` from which there may be a ballistic path to (x, y, z).
-            static float get_nearest_possible_ballistic_launch_site_x(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_nearest_possible_ballistic_launch_site_y(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
-            static float get_nearest_possible_ballistic_launch_site_z(const yli::ontology::Movable* const movable, const float x, const float y, const float z);
+            static float get_nearest_possible_ballistic_launch_site_x(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_nearest_possible_ballistic_launch_site_y(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
+
+            static float get_nearest_possible_ballistic_launch_site_z(
+                    const yli::ontology::Movable* const movable,
+                    const float x,
+                    const float y,
+                    const float z);
 
             // This method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
 
             // Coordinate-centric path and map information callbacks.
             // The conditions for returning `true` match the conditions of the corresponding allied-movable-centric callbacks.
 
-            static bool is_line_of_sight_between_from(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool may_have_line_of_sight_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool is_ground_path_known_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool is_rail_path_known_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool is_air_path_known_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool is_ballistic_path_known(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static bool may_have_ballistic_path_between(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
+            static bool is_line_of_sight_between_from(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
 
-            static float get_nearest_known_ballistic_launch_site_x(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_nearest_known_ballistic_launch_site_y(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_nearest_known_ballistic_launch_site_z(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
+            static bool may_have_line_of_sight_between(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
 
-            static float get_nearest_possible_ballistic_launch_site_x(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_nearest_possible_ballistic_launch_site_y(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_nearest_possible_ballistic_launch_site_z(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
+            static bool is_ground_path_known_between(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
 
-            static float get_closest_visible_dest_x_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_closest_visible_dest_y_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
-            static float get_closest_visible_dest_z_towards(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2);
+            static bool is_rail_path_known_between(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static bool is_air_path_known_between(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static bool is_ballistic_path_known(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static bool may_have_ballistic_path_between(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_known_ballistic_launch_site_x(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_known_ballistic_launch_site_y(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_known_ballistic_launch_site_z(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_possible_ballistic_launch_site_x(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_possible_ballistic_launch_site_y(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_nearest_possible_ballistic_launch_site_z(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_closest_visible_dest_x_towards(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_closest_visible_dest_y_towards(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
+
+            static float get_closest_visible_dest_z_towards(
+                    const float x1,
+                    const float y1,
+                    const float z1,
+                    const float x2,
+                    const float y2,
+                    const float z2);
 
             // Callbacks for looping through movables.
             static void* get_first_allied_movable(yli::ontology::Movable& movable);       // point `allied_iterator` to the first movable, `nullptr` if N/A.

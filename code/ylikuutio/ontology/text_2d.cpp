@@ -41,7 +41,9 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(yli::ontology::Text2D& text_2d, yli::ontology::Font2D& new_parent) noexcept
+    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(
+            yli::ontology::Text2D& text_2d,
+            yli::ontology::Font2D& new_parent) noexcept
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -60,7 +62,9 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        text_2d.child_of_font_2d.unbind_and_bind_to_new_parent(&new_parent.parent_of_text_2ds);
+        text_2d.child_of_font_2d.unbind_and_bind_to_new_parent(
+                &new_parent.parent_of_text_2ds);
+
         return std::nullopt;
     }
 
@@ -111,7 +115,9 @@ namespace yli::ontology
 
             if (font_2d != nullptr)
             {
-                this->vertex_position_in_screenspace_id = glGetAttribLocation(font_2d->get_program_id(), "vertex_position_screenspace");
+                this->vertex_position_in_screenspace_id = glGetAttribLocation(
+                        font_2d->get_program_id(),
+                        "vertex_position_screenspace");
                 this->vertex_uv_id = glGetAttribLocation(font_2d->get_program_id(), "vertexUV");
             }
         }
@@ -318,7 +324,9 @@ namespace yli::ontology
 
             if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), (uv_y + 1.0f / static_cast<float>(this->font_size)));
+                uv_down_right = glm::vec2(
+                        uv_x + (1.0f / static_cast<float>(this->font_size)),
+                        (uv_y + 1.0f / static_cast<float>(this->font_size)));
                 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(this->font_size)));
             }
 
