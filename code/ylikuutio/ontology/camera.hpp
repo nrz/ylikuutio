@@ -20,8 +20,6 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
-#include "universe.hpp"
-#include "camera_struct.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -75,6 +73,7 @@ namespace yli::ontology
     class Scene;
     class GenericParentModule;
     class GenericMasterModule;
+    struct CameraStruct;
 
     class Camera final : public yli::ontology::Movable
     {
@@ -83,34 +82,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::CameraStruct& camera_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module)
-                : Movable(
-                        universe,
-                        camera_struct,
-                        generic_master_module),
-                child_of_scene(scene_parent_module, this)
-            {
-                // constructor.
-
-                if (this->universe.get_is_opengl_in_use())
-                {
-                    // Uniform block for this `Camera`.
-                    glGenBuffers(1, &this->camera_uniform_block);
-                    glBindBuffer(GL_UNIFORM_BUFFER, this->camera_uniform_block);
-                    glBufferData(GL_UNIFORM_BUFFER, yli::opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
-                    glBindBuffer(GL_UNIFORM_BUFFER, 0);
-                }
-                else if (this->universe.get_is_vulkan_in_use())
-                {
-                    std::cerr << "ERROR: `Camera::Camera`: Vulkan is not supported yet!\n";
-                }
-
-                this->is_static_view = camera_struct.is_static_view;
-                this->activate();
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::Camera*";
-            }
+                    yli::ontology::GenericMasterModule* const generic_master_module);
 
             Camera(const Camera&) = delete;            // Delete copy constructor.
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
