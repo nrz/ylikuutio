@@ -20,7 +20,6 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -42,15 +41,7 @@ namespace yli::ontology
         public:
             GenericLispFunctionOverload(
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, yli::ontology::EntityStruct()),
-                child_of_lisp_function(parent_module, this)
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::GenericLispFunctionOverload*";
-            }
+                    yli::ontology::GenericParentModule* const parent_module);
 
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
