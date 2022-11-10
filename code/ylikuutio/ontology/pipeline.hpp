@@ -36,6 +36,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -60,15 +65,15 @@ namespace yli::ontology
                     yli::ontology::Scene& new_parent) noexcept;
 
             Pipeline(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::PipelineStruct& pipeline_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module);
 
+            ~Pipeline();
+
             Pipeline(const Pipeline&) = delete;            // Delete copy constructor.
             Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Pipeline();
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;

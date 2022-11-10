@@ -26,78 +26,83 @@
 
 namespace yli::data
 {
-    enum class Datatype
+    enum Datatype
     {
         // Unknown. This should be used as the default.
-        UNKNOWN,
+        UNKNOWN = 0,
         // Fundamental types.
-        BOOL,
-        CHAR,
-        FLOAT,
-        DOUBLE,
-        INT32_T,
-        UINT32_T,
+        BOOL = 1,
+        CHAR = 2,
+        FLOAT = 3,
+        DOUBLE = 4,
+        INT32_T = 5,
+        UINT32_T = 6,
         // Strings.
-        STD_STRING,
+        STD_STRING = 7,
         // Variable-size vectors.
-        STD_VECTOR_INT8_T,
-        STD_VECTOR_UINT8_T,
-        STD_VECTOR_INT16_T,
-        STD_VECTOR_UINT16_T,
-        STD_VECTOR_INT32_T,
-        STD_VECTOR_UINT32_T,
-        STD_VECTOR_FLOAT,
+        STD_VECTOR_INT8_T   = 8,
+        STD_VECTOR_UINT8_T  = 9,
+        STD_VECTOR_INT16_T  = 10,
+        STD_VECTOR_UINT16_T = 11,
+        STD_VECTOR_INT32_T  = 12,
+        STD_VECTOR_UINT32_T = 13,
+        STD_VECTOR_FLOAT    = 14,
         // Fixed-size vectors.
-        GLM_VEC3,
-        GLM_VEC4,
+        GLM_VEC3 = 15,
+        GLM_VEC4 = 16,
         // Spherical coordinates.
         SPHERICAL_COORDINATES_STRUCT,
         // `yli::ontology` datatypes, 'entity' path.
-        ENTITY,
-        MOVABLE,
+        ENTITY   = 17,
+        MOVABLE  = 18,
         // `yli::ontology` datatypes, 'universe' path.
-        UNIVERSE,
+        UNIVERSE = 19,
         // `yli::ontology` datatypes, 'variable' path.
-        VARIABLE,
+        VARIABLE = 20,
         // `yli::ontology` datatypes, 'window' path.
-        WINDOW,
-        WIDGET,
-        CAMERAWIDGET,
+        WINDOW       = 21,
+        WIDGET       = 22,
+        CAMERA       = 23,
+        CAMERAWIDGET = 24,
         // `yli::ontology` datatypes, 'brain' path.
-        BRAIN,
+        BRAIN        = 25,
         // `yli::ontology` datatypes, 'ecosystem' path.
-        ECOSYSTEM,
+        ECOSYSTEM    = 26,
         // `yli::ontology` datatypes, 'simple' path.
-        SCENE,
-        PIPELINE,
-        MATERIAL,
-        SPECIES,
-        OBJECT,
+        SCENE        = 27,
+        PIPELINE     = 28,
+        MATERIAL     = 29,
+        SPECIES      = 30,
+        OBJECT       = 31,
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP,
-        HEIGHTMAP_SHEET,
+        HEIGHTMAP       = 32,
+        HEIGHTMAP_SHEET = 33,
         // `yli::ontology` datatypes, 'symbiont' path.
-        SYMBIOSIS,
-        SYMBIONT_MATERIAL,
-        SYMBIONT_SPECIES,
+        SYMBIOSIS         = 34,
+        SYMBIONT_MATERIAL = 35,
+        SYMBIONT_SPECIES  = 36,
         // `yli::ontology` datatypes, 'holobiont' path.
-        HOLOBIONT,
-        BIONT,
+        HOLOBIONT         = 37,
+        BIONT             = 38,
         // `yli::ontology` datatypes, 'shapeshifter' path.
-        SHAPESHIFTER_TRANSFORMATION,
-        SHAPESHIFTER_SEQUENCE,
-        SHAPESHIFTER_FORM,
+        SHAPESHIFTER_TRANSFORMATION = 39,
+        SHAPESHIFTER_SEQUENCE       = 40,
+        SHAPESHIFTER_FORM           = 41,
         // `yli::ontology` datatypes, 'text 2D' path.
-        FONT2D,
-        TEXT2D,
+        FONT2D                      = 42,
+        TEXT2D                      = 43,
         // `yli::ontology` datatypes, 'text 3D' path.
-        VECTORFONT,
-        GLYPH,
-        TEXT3D,
+        VECTORFONT                  = 44,
+        GLYPH                       = 45,
+        TEXT3D                      = 46,
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE,
+        CONSOLE                     = 47,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK
+        COMPUTETASK                 = 48,
+        // `yli::ontology` datatypes, 'lisp' path.
+        LISP_FUNCTION                  = 49,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 50,
+        LISP_FUNCTION_OVERLOAD         = 51
     };
 }
 

@@ -19,6 +19,7 @@
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -28,16 +29,17 @@
 namespace yli::ontology
 {
     class GenericParentModule;
-    class Entity;
     class Universe;
+    class Entity;
     class Scene;
     class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(universe, shapeshifter_sequence_struct),
+        : Entity(application, universe, shapeshifter_sequence_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
         master_of_objects(this, &this->registry, "objects")
     {

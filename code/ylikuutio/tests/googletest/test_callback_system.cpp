@@ -16,14 +16,13 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -290,7 +289,8 @@ std::optional<yli::data::AnyValue> return_uint32_t_deadbeef(
 
 TEST(callback_engine_must_function_properly, nop)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&nop);
 
@@ -300,7 +300,8 @@ TEST(callback_engine_must_function_properly, nop)
 
 TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&return_uint32_t_deadbeef);
 
@@ -311,7 +312,8 @@ TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
 
 TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -328,7 +330,8 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 
 TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_one)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -345,7 +348,8 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 
 TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_two)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -362,7 +366,8 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 
 TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_one)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -379,7 +384,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 
 TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_two)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -396,7 +402,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 
 TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&square);
 
@@ -413,7 +420,8 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&square);
 
@@ -430,7 +438,8 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&expt);
 
@@ -452,7 +461,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with_named_inputs)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object = callback_engine.create_callback_object();
     callback_object->set_new_callback(&expt_with_named_inputs);
 
@@ -476,7 +486,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
 
 TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equals_282475249)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object_expt = callback_engine.create_callback_object();
     callback_object_expt->set_new_callback(&expt);
     yli::callback::CallbackObject* callback_object_square_last = callback_engine.create_callback_object();
@@ -500,7 +511,8 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 
 TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536)
 {
-    yli::callback::CallbackEngine callback_engine(*(new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS))));
+    mock::MockApplication application;
+    yli::callback::CallbackEngine callback_engine(application.get_universe());
     yli::callback::CallbackObject* callback_object_1st_square = callback_engine.create_callback_object();
     callback_object_1st_square->set_new_callback(&square);
 

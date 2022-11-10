@@ -19,12 +19,18 @@
 #include "generic_parent_module.hpp"
 #include "parent_of_pipelines_module.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "pipeline.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
+
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
 
 namespace yli::ontology
 {
@@ -52,8 +58,16 @@ namespace yli::ontology
         return false; // Unbinding failed.
     }
 
-    ParentOfPipelinesModule::ParentOfPipelinesModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
-        : GenericParentModule(entity, registry, name)
+    ParentOfPipelinesModule::ParentOfPipelinesModule(
+            yli::ontology::Entity* const entity,
+            yli::ontology::Registry* const registry,
+            yli::memory::GenericMemoryAllocator& memory_allocator,
+            const std::string& name) noexcept
+        : GenericParentModule(
+                entity,
+                registry,
+                memory_allocator,
+                name)
     {
         // constructor.
     }

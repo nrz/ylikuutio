@@ -17,21 +17,23 @@
 
 #include "terrain.hpp"
 #include "object.hpp"
+#include "code/ylikuutio/core/application.hpp"
 
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
 
     Terrain::Terrain(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& terrain_struct,
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const mesh_master,
             yli::ontology::GenericMasterModule* const /* brain_master */)
-        : yli::ontology::Object(universe, terrain_struct, scene_parent, mesh_master, nullptr)
+        : yli::ontology::Object(application, universe, terrain_struct, scene_parent, mesh_master, nullptr)
     {
         // constructor.
 

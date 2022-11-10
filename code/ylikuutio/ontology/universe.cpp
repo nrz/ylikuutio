@@ -31,7 +31,7 @@
 #include "text_2d.hpp"
 #include "camera.hpp"
 #include "console.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "universe_struct.hpp"
@@ -41,7 +41,9 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
@@ -49,6 +51,7 @@
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/memory/generic_memory_system.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -85,6 +88,7 @@
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept>     // std::runtime_error
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <variant>       // std::holds_alternative, std::variant
@@ -93,6 +97,11 @@
 namespace yli::input
 {
     class InputSystem;
+}
+
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
 }
 
 namespace yli::ontology
@@ -127,13 +136,31 @@ namespace yli::ontology
                 this->number_of_entities);
     }
 
-    Universe::Universe(const yli::ontology::UniverseStruct& universe_struct)
-        : Entity(*this, universe_struct), // `Universe` has no parent.
+    Universe::Universe(
+            yli::core::Application& application,
+            const yli::ontology::UniverseStruct& universe_struct)
+        : Entity(application, *this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
-        parent_of_ecosystems(this, &this->registry, "ecosystems"),
-        parent_of_scenes(this, &this->registry, "scenes"),
-        parent_of_font_2ds(this, &this->registry, "font_2ds"),
-        parent_of_consoles(this, &this->registry, "consoles"),
+        parent_of_ecosystems(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::ECOSYSTEM),
+                "ecosystems"),
+        parent_of_scenes(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SCENE),
+                "scenes"),
+        parent_of_font_2ds(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::FONT2D),
+                "font_2ds"),
+        parent_of_consoles(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CONSOLE),
+                "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },
         graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
@@ -235,10 +262,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->entity_factory == nullptr)
-        {
-            return;
-        }
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
                 yli::hierarchy::get_first_child(
@@ -262,7 +286,8 @@ namespace yli::ontology
         angles_and_coordinates_text_struct.font_texture_file_format = "png";
         angles_and_coordinates_text_struct.horizontal_alignment = "left";
         angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2D* angles_and_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(angles_and_coordinates_text_struct));
+        yli::ontology::Text2D* angles_and_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(
+                entity_factory.create_text2d(angles_and_coordinates_text_struct));
 
         if (angles_and_coordinates_text_2d == nullptr)
         {
@@ -280,7 +305,8 @@ namespace yli::ontology
         spherical_coordinates_text_struct.font_size = this->font_size;
         spherical_coordinates_text_struct.horizontal_alignment = "left";
         spherical_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2D* spherical_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(spherical_coordinates_text_struct));
+        yli::ontology::Text2D* spherical_coordinates_text_2d = dynamic_cast<yli::ontology::Text2D*>(
+                entity_factory.create_text2d(spherical_coordinates_text_struct));
 
         if (spherical_coordinates_text_2d == nullptr)
         {
@@ -299,7 +325,8 @@ namespace yli::ontology
         time_text_struct.font_texture_file_format = "png";
         time_text_struct.horizontal_alignment = "left";
         time_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* time_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(time_text_struct));
+        yli::ontology::Text2D* time_text_2d = dynamic_cast<yli::ontology::Text2D*>(
+                entity_factory.create_text2d(time_text_struct));
 
         if (time_text_2d == nullptr)
         {
@@ -318,7 +345,8 @@ namespace yli::ontology
         help_text_struct.font_texture_file_format = "png";
         help_text_struct.horizontal_alignment = "left";
         help_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* help_text_2d = dynamic_cast<yli::ontology::Text2D*>(this->entity_factory->create_text2d(help_text_struct));
+        yli::ontology::Text2D* help_text_2d = dynamic_cast<yli::ontology::Text2D*>(
+                entity_factory.create_text2d(help_text_struct));
 
         if (help_text_2d == nullptr)
         {
@@ -337,7 +365,8 @@ namespace yli::ontology
         frame_rate_text_struct.font_texture_file_format = "png";
         frame_rate_text_struct.horizontal_alignment = "right";
         frame_rate_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2D* frame_rate_text_2d = dynamic_cast<yli::ontology::Text2D*>(entity_factory->create_text2d(frame_rate_text_struct));
+        yli::ontology::Text2D* frame_rate_text_2d = dynamic_cast<yli::ontology::Text2D*>(
+                entity_factory.create_text2d(frame_rate_text_struct));
 
         if (frame_rate_text_2d == nullptr)
         {
@@ -1121,19 +1150,20 @@ namespace yli::ontology
         this->number_of_frames = 0;
     }
 
-    yli::ontology::EntityFactory* Universe::get_entity_factory() const
-    {
-        if (this->entity_factory == nullptr)
-        {
-            return nullptr;
-        }
-
-        return this->entity_factory.get();
-    }
-
     std::string Universe::eval_string(const std::string& my_string) const
     {
         return "TODO: eval";
+    }
+
+    yli::memory::GenericMemoryAllocator& Universe::get_memory_allocator(const int type) const
+    {
+        return this->application.get_memory_allocator(type);
+    }
+
+    bool Universe::delete_entity_with_storage_and_slotID(const int storage_and_slotID)
+    {
+        // TODO: implement!
+        return false;
     }
 
     yli::render::RenderSystem* Universe::get_render_system() const
@@ -1238,7 +1268,8 @@ namespace yli::ontology
     void Universe::create_should_be_rendered_variable()
     {
         // Create `Variable` `should_be_rendered` here because it can't be done in `Entity` constructor.
-        yli::ontology::VariableStruct should_be_rendered_variable_struct;
+        yli::ontology::VariableStruct should_be_rendered_variable_struct(*this);
+        should_be_rendered_variable_struct.is_variable_of_universe = true;
         should_be_rendered_variable_struct.local_name = "should_be_rendered";
         should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
         should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;

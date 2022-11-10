@@ -52,6 +52,11 @@ namespace yli::callback
     class CallbackEngine;
 }
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -63,11 +68,11 @@ namespace yli::ontology
     {
         public:
             Brain(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::BrainStruct& brain_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
-            // destructor.
             ~Brain() = default;
 
             yli::ontology::Entity* get_parent() const override;

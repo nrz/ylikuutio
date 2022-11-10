@@ -54,14 +54,16 @@ namespace yli::ontology
                     yli::ontology::VectorFont& vector_font,
                     yli::ontology::Material& new_parent) noexcept;
 
-            VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct);
+            VectorFont(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::VectorFontStruct& vector_font_struct);
+
+            // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
+            ~VectorFont();
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
-
-            // destructor.
-            // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-            ~VectorFont();
 
             yli::ontology::Entity* get_parent() const override;
 

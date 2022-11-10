@@ -22,11 +22,13 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -54,17 +56,23 @@ namespace yli::ontology
     class Entity;
 
     Holobiont::Holobiont(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& holobiont_struct,
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const brain_master)
         : Movable(
+                application,
                 universe,
                 holobiont_struct,
                 brain_master),
         child_of_scene(scene_parent, this),
-        parent_of_bionts(this, &this->registry, "bionts"),
+        parent_of_bionts(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::BIONT),
+                "bionts"),
         apprentice_of_symbiosis(symbiosis_master, this)
     {
         // constructor.
@@ -168,7 +176,8 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts, &symbiont_species->master_of_bionts);
+            yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+            entity_factory.create_biont(biont_struct);
         }
     }
 
@@ -280,12 +289,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return std::nullopt;
-        }
+        const yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);
@@ -341,7 +345,7 @@ namespace yli::ontology
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
-        entity_factory->create_holobiont(holobiont_struct);
+        entity_factory.create_holobiont(holobiont_struct);
         return std::nullopt;
     }
 

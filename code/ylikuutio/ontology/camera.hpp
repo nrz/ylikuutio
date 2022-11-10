@@ -66,6 +66,11 @@
 // When a `Scene` is deleted:
 // 1. Every child of `Scene` gets deleted as usual, including the `Camera`s.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -79,16 +84,16 @@ namespace yli::ontology
     {
         public:
             Camera(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::CameraStruct& camera_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module);
 
+            ~Camera() = default;
+
             Camera(const Camera&) = delete;            // Delete copy constructor.
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Camera() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

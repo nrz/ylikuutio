@@ -19,6 +19,7 @@
 #include "entity.hpp"
 #include "console.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -26,6 +27,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
+
+namespace yli::memory
+{
+    class GenericMemorySystem;
+}
 
 namespace yli::ontology
 {
@@ -51,10 +57,11 @@ namespace yli::ontology
     }
 
     Variable::Variable(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::VariableStruct& variable_struct,
             const yli::data::AnyValue& any_value)
-        : Entity(universe, variable_struct),
+        : Entity(application, universe, variable_struct),
         parent            { variable_struct.parent },
         variable_value    { any_value },
         activate_callback { variable_struct.activate_callback },

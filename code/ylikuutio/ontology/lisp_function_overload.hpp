@@ -47,6 +47,11 @@
 //
 // number-of-provided-parameters = number-of-function-arguments - number-of-Universe-arguments - number-of-Console-arguments
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -57,12 +62,14 @@ namespace yli::ontology
     template<typename... Types>
         class LispFunctionOverload final : public yli::ontology::GenericLispFunctionOverload
     {
+        // TODO: change to `private` and specialize `MemoryAllocator::build_in` for `LispFunctionOverload`!
         public:
             LispFunctionOverload(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module,
                     std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
-                : GenericLispFunctionOverload(universe, parent_module),
+                : GenericLispFunctionOverload(application, universe, parent_module),
                 callback(callback)
             {
                 // constructor.
@@ -71,11 +78,11 @@ namespace yli::ontology
                 this->type_string = "yli::ontology::LispFunctionOverload*";
             }
 
+            ~LispFunctionOverload() = default;
+
+        public:
             LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
             LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~LispFunctionOverload() = default;
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {

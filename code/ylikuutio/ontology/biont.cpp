@@ -55,19 +55,27 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
+    class Universe;
     class Scene;
 
     Biont::Biont(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
-            yli::ontology::BiontStruct& biont_struct,
+            const yli::ontology::BiontStruct& biont_struct,
             yli::ontology::GenericParentModule* const holobiont_parent_module,
             yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
         : Movable(
+                application,
                 universe,
                 biont_struct,
                 nullptr),
@@ -129,16 +137,13 @@ namespace yli::ontology
     void Biont::render_this_biont(const yli::ontology::Pipeline* const pipeline)
     {
         // Requirements:
-        // `this->universe` must not be `nullptr`.
         // `pipeline` must not be `nullptr`.
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
-        yli::ontology::Universe& universe = this->universe;
-
-        if (universe.get_render_system() == nullptr)
+        if (this->universe.get_render_system() == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `universe.get_render_system()` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!\n";
             return;
         }
 
@@ -194,7 +199,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont->location.get_y();
         this->model_matrix[3][2] = holobiont->location.get_z();
 
-        this->mvp_matrix = universe.get_projection_matrix() * universe.get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
         if (this->universe.get_is_opengl_in_use())
         {

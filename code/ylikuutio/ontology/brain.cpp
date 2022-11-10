@@ -28,6 +28,11 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -35,10 +40,11 @@ namespace yli::ontology
     class Universe;
 
     Brain::Brain(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::BrainStruct& brain_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, brain_struct),
+        : Entity(application, universe, brain_struct),
         child_of_scene(parent_module, this),
         master_of_movables(this, &this->registry, "movables")
     {

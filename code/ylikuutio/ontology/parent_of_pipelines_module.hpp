@@ -25,6 +25,11 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Registry;
@@ -37,7 +42,11 @@ namespace yli::ontology
             bool unbind_child(std::size_t childID) noexcept override;
 
             // constructor.
-            ParentOfPipelinesModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept;
+            ParentOfPipelinesModule(
+                    yli::ontology::Entity* const entity,
+                    yli::ontology::Registry* const registry,
+                    yli::memory::GenericMemoryAllocator& memory_allocator,
+                    const std::string& name) noexcept;
 
             ParentOfPipelinesModule(const ParentOfPipelinesModule&) = delete;            // Delete copy constructor.
             ParentOfPipelinesModule& operator=(const ParentOfPipelinesModule&) = delete; // Delete copy assignment.

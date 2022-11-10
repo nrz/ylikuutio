@@ -22,10 +22,13 @@
 #include "pipeline.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
+#include "generic_entity_factory.hpp"
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -149,13 +152,18 @@ namespace yli::ontology
     }
 
     Symbiosis::Symbiosis(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const pipeline_master)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_scene_or_ecosystem(scene_parent_module, this),
-        parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
+        parent_of_symbiont_materials(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
+                "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },
@@ -306,10 +314,10 @@ namespace yli::ontology
                 material_struct.pipeline = pipeline;
                 material_struct.parent = this;
                 material_struct.ofbx_texture = ofbx_texture;
-                yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(
-                        this->universe,
-                        material_struct,
-                        &this->parent_of_symbiont_materials);
+
+                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+                auto* const symbiont_material = static_cast<yli::ontology::SymbiontMaterial*>(
+                    entity_factory.create_symbiont_material(material_struct));
 
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 
@@ -330,10 +338,8 @@ namespace yli::ontology
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
-                    yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(
-                            this->universe,
-                            model_struct,
-                            &symbiont_material->parent_of_symbiont_species);
+                    auto* const symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>(
+                            entity_factory.create_symbiont_species(model_struct));
 
                     std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 

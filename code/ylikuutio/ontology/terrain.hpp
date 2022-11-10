@@ -20,27 +20,33 @@
 
 #include "code/ylikuutio/ontology/object.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct ObjectStruct;
 
     class Terrain final : public yli::ontology::Object
     {
         public:
             explicit Terrain(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& terrain_struct,
                     yli::ontology::GenericParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const mesh_master,
                     yli::ontology::GenericMasterModule* const /* brain_master */);
 
+            ~Terrain() = default;
+
             Terrain(const Terrain&) = delete;            // Delete copy constructor.
             Terrain &operator=(const Terrain&) = delete; // Delete copy assignment.
-
-            ~Terrain() = default;
     };
 }
 

@@ -357,7 +357,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        delete entity;
+        universe.delete_entity_with_storage_and_slotID(entity->get_storage_and_slotID());
 
         return std::nullopt;
     }

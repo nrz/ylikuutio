@@ -22,7 +22,6 @@
 #include "generic_parent_module.hpp"
 #include "framebuffer_module.hpp"
 #include "cartesian_coordinates_module.hpp"
-#include "entity_factory.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -51,10 +50,23 @@ namespace yli::audio
     class AudioSystem;
 }
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::input
 {
     class InputSystem;
     enum class InputMethod;
+}
+
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+
+    template<typename T1, uint32_t DataSize>
+        class MemoryStorage;
 }
 
 namespace yli::render
@@ -77,13 +89,16 @@ namespace yli::ontology
             void bind_entity(yli::ontology::Entity* const entity) noexcept;
             void unbind_entity(const std::size_t entityID) noexcept;
 
-            explicit Universe(const yli::ontology::UniverseStruct& universe_struct);
+        private:
+            Universe(
+                    yli::core::Application& application,
+                    const yli::ontology::UniverseStruct& universe_struct);
+
+        public:
+            ~Universe();
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
             Universe& operator=(const Universe&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Universe();
 
             // This method contains the main loop.
             void start_simulation();
@@ -129,6 +144,10 @@ namespace yli::ontology
             bool get_is_physical() const;
 
             std::string eval_string(const std::string& my_string) const;
+
+            yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const;
+
+            bool delete_entity_with_storage_and_slotID(const int storage_and_slotID);
 
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
@@ -193,8 +212,6 @@ namespace yli::ontology
             void update_last_time_for_display_sync();
             void increment_number_of_frames();
             void reset_number_of_frames();
-
-            yli::ontology::EntityFactory* get_entity_factory() const override;
 
             const glm::mat4& get_projection_matrix() const;
             void set_projection_matrix(const glm::mat4& projection_matrix);
@@ -264,6 +281,9 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
+            template<typename T1, uint32_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
             // Ylikuutio version.
             static const std::string version;
 
@@ -325,8 +345,6 @@ namespace yli::ontology
             void create_should_be_rendered_variable();
 
             bool compute_and_update_matrices_from_inputs();
-
-            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(*this) };
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;

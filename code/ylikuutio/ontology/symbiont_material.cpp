@@ -16,11 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_material.hpp"
-#include "universe.hpp"
 #include "pipeline.hpp"
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
@@ -34,17 +35,23 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
+    class Universe;
     class Scene;
 
     SymbiontMaterial::SymbiontMaterial(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MaterialStruct& material_struct,
             yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
-        : Entity(universe, material_struct),
+        : Entity(application, universe, material_struct),
         child_of_symbiosis(symbiosis_parent_module, this),
-        parent_of_symbiont_species(this, &this->registry, "symbiont_species"),
+        parent_of_symbiont_species(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
+                "symbiont_species"),
         texture(
-                universe,
+                this->universe,
                 &this->registry,
                 material_struct.ofbx_texture,
                 yli::load::ImageLoaderStruct(),

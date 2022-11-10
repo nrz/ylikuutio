@@ -23,8 +23,10 @@
 #include "console_struct.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -71,13 +73,19 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    Console::Console(yli::ontology::Universe& universe,
+    Console::Console(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
             const yli::ontology::ConsoleStruct& console_struct,
             yli::ontology::GenericParentModule* const parent_module,
             yli::ontology::GenericMasterModule* const generic_master_module)
-        : Entity(universe, console_struct),
+        : Entity(application, universe, console_struct),
         child_of_universe(parent_module, this),
-        parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
+        parent_of_lisp_functions(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
+                "lisp_functions"),
         apprentice_of_font_2d(generic_master_module, this)
     {
         // constructor.

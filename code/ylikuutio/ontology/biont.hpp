@@ -27,6 +27,11 @@
 #include <limits>   // std::numeric_limits
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -41,16 +46,16 @@ namespace yli::ontology
     {
         public:
             Biont(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::BiontStruct& biont_struct,
+                    const yli::ontology::BiontStruct& biont_struct,
                     yli::ontology::GenericParentModule* const holobiont_parent_module,
                     yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module);
 
+            ~Biont();
+
             Biont(const Biont&) = delete;            // Delete copy constructor.
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Biont();
 
             yli::ontology::Entity* get_parent() const override;
 

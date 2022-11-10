@@ -49,6 +49,11 @@ typedef unsigned char u8;
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -82,16 +87,16 @@ namespace yli::ontology
                     yli::ontology::Pipeline& new_pipeline) noexcept;
 
             Symbiosis(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const pipeline_master);
 
+            ~Symbiosis() = default;
+
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Symbiosis() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

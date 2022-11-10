@@ -18,6 +18,8 @@
 #include "ecosystem.hpp"
 #include "ecosystem_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -28,15 +30,32 @@ namespace yli::ontology
     class Scene;
 
     Ecosystem::Ecosystem(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::EcosystemStruct& ecosystem_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, ecosystem_struct),
+        : Entity(application, universe, ecosystem_struct),
         child_of_universe(parent_module, this),
-        parent_of_pipelines(this, &this->registry, "pipelines"),
-        parent_of_materials(this, &this->registry, "materials"),
-        parent_of_species(this, &this->registry, "species"),
-        parent_of_symbioses(this, &this->registry, "species")
+        parent_of_pipelines(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::PIPELINE),
+                "pipelines"),
+        parent_of_materials(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::MATERIAL),
+                "materials"),
+        parent_of_species(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SPECIES),
+                "species"),
+        parent_of_symbioses(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
+                "symbioses")
     {
         // constructor.
 

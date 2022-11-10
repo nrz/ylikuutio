@@ -29,6 +29,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -42,17 +47,17 @@ namespace yli::ontology
     {
         public:
             Holobiont(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
                     yli::ontology::GenericMasterModule* const symbiosis_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
+            ~Holobiont() = default;
+
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Holobiont() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

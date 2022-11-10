@@ -15,21 +15,25 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef AJOKKI_AJOKKI_ALTIPLANO_SCENE_HPP_INCLUDED
-#define AJOKKI_AJOKKI_ALTIPLANO_SCENE_HPP_INCLUDED
+#ifndef YLIKUUTIO_MEMORY_GENERIC_MEMORY_ALLOCATOR_HPP_INCLUDED
+#define YLIKUUTIO_MEMORY_GENERIC_MEMORY_ALLOCATOR_HPP_INCLUDED
 
-namespace yli
+// Include standard headers
+#include <stdint.h> // uint32_t
+
+namespace yli::memory
 {
-    namespace ontology
+    class GenericMemoryAllocator
     {
-        class Entity;
-        class EntityFactory;
-    }
-}
+        // `GenericMemoryAllocator` provides an interface
+        // for the `MemoryAllocator` class template instantiations.
 
-namespace ajokki
-{
-    yli::ontology::Entity* create_altiplano_scene(yli::ontology::EntityFactory* const entity_factory);
+        public:
+            virtual ~GenericMemoryAllocator() = default;
+
+            virtual uint32_t get_number_of_storages() const = 0;
+            virtual uint32_t get_number_of_instances() const = 0;
+    };
 }
 
 #endif

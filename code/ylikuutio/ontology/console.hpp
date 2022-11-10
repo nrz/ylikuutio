@@ -66,6 +66,11 @@ namespace yli::callback
     class CallbackParameter;
 }
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::input
 {
     class InputMode;
@@ -94,16 +99,17 @@ namespace yli::ontology
                     yli::ontology::Console& console,
                     yli::ontology::Font2D& new_font_2d) noexcept;
 
-            Console(yli::ontology::Universe& universe,
+            Console(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::GenericParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module);
 
+            ~Console();
+
             Console(const Console&) = delete;            // Delete copy constructor.
             Console& operator=(const Console&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Console();
 
             void activate() override;
 

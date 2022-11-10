@@ -22,11 +22,16 @@
 #include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
 #include "police_module.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
     struct LocomotionModuleStruct;
 }
@@ -37,6 +42,7 @@ namespace hirvi
     {
         public:
             explicit PoliceTrain(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& police_train_struct,
                     const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct,

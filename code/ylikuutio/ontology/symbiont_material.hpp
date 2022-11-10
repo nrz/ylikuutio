@@ -27,6 +27,11 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -38,15 +43,15 @@ namespace yli::ontology
     {
         public:
             SymbiontMaterial(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
 
+            ~SymbiontMaterial() = default;
+
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
             SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~SymbiontMaterial() = default;
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;

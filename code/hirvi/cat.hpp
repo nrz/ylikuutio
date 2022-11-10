@@ -22,11 +22,16 @@
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/climb_module.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct ObjectStruct;
     struct LocomotionModuleStruct;
 }
@@ -37,6 +42,7 @@ namespace hirvi
     {
         public:
             explicit Cat(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& cat_struct,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,

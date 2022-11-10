@@ -16,23 +16,20 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 TEST(input_system_must_be_set_to_nullptr_in_headless_mode, universe)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_EQ(universe->get_input_system(), nullptr);
-    ASSERT_EQ(universe->get_input_method(), yli::input::InputMethod::KEYBOARD);
+    mock::MockApplication application;
+    ASSERT_EQ(application.get_universe().get_input_system(), nullptr);
+    ASSERT_EQ(application.get_universe().get_input_method(), yli::input::InputMethod::KEYBOARD);
 }
 
 TEST(input_system_must_be_set_to_nullptr_when_using_software_rendering, universe)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::SOFTWARE);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-    ASSERT_EQ(universe->get_input_system(), nullptr);
-    ASSERT_EQ(universe->get_input_method(), yli::input::InputMethod::KEYBOARD);
+    mock::MockApplication application;
+    ASSERT_EQ(application.get_universe().get_input_system(), nullptr);
+    ASSERT_EQ(application.get_universe().get_input_method(), yli::input::InputMethod::KEYBOARD);
 }

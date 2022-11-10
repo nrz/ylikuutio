@@ -29,6 +29,11 @@
 #include <string>     // std::string
 #include <vector>     // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -40,15 +45,15 @@ namespace yli::ontology
     {
         public:
             LispFunction(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::LispFunctionStruct& lisp_function_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~LispFunction() = default;
+
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~LispFunction() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

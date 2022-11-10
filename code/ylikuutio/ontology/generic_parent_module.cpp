@@ -26,6 +26,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Scene;
@@ -82,8 +87,13 @@ namespace yli::ontology
         return true; // Unbinding successful.
     }
 
-    GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
-        : entity { entity }
+    GenericParentModule::GenericParentModule(
+            yli::ontology::Entity* const entity,
+            yli::ontology::Registry* const registry,
+            yli::memory::GenericMemoryAllocator& memory_allocator,
+            const std::string& name) noexcept
+        : entity { entity },
+        memory_allocator { memory_allocator }
     {
         // constructor.
 
@@ -94,7 +104,8 @@ namespace yli::ontology
     {
         // destructor.
 
-        yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
+        // TODO
+        // yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
     }
 
     yli::ontology::GenericParentModule* GenericParentModule::get() const noexcept

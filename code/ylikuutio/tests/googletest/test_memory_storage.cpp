@@ -15,18 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_HIRVI_EARTH_ECOSYSTEM_HPP_INCLUDED
-#define HIRVI_HIRVI_EARTH_ECOSYSTEM_HPP_INCLUDED
+#include "gtest/gtest.h"
+#include "code/ylikuutio/memory/memory_storage.hpp"
 
-namespace yli::ontology
+TEST(memory_storage_must_be_initialized_appropriately, default_memory_storage_storageID_0)
 {
-    class Ecosystem;
-    class EntityFactory;
+    yli::memory::MemoryStorage memory_storage(0);
+    ASSERT_EQ(memory_storage.get_number_of_instances(), 0);
+    ASSERT_EQ(memory_storage.get_storageID(), 0);
 }
-
-namespace hirvi
-{
-    yli::ontology::Ecosystem* create_earth_ecosystem(yli::ontology::EntityFactory* const entity_factory);
-}
-
-#endif

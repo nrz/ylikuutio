@@ -55,6 +55,11 @@ namespace yli::callback
     class CallbackEngine;
 }
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -65,13 +70,15 @@ namespace yli::ontology
     class ComputeTask final : public yli::ontology::Entity
     {
         public:
-            ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct);
+            ComputeTask(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::ComputeTaskStruct& compute_task_struct);
+
+            ~ComputeTask();
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~ComputeTask();
 
             yli::ontology::Entity* get_parent() const override;
 

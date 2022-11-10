@@ -39,6 +39,11 @@
 // 4. unbind `Biont` from its `SymbiontSpecies`.
 // 5. unbind `Biont` from its `Holobiont` parent.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -51,15 +56,15 @@ namespace yli::ontology
     {
         public:
             SymbiontSpecies(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const symbiont_material_parent_module);
 
+            ~SymbiontSpecies() = default;
+
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~SymbiontSpecies() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

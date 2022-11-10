@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "ajokki.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -33,14 +33,14 @@ namespace yli::ontology
 
 namespace ajokki
 {
-    yli::ontology::Ecosystem* create_earth_ecosystem(yli::ontology::EntityFactory* const entity_factory)
+    yli::ontology::Ecosystem* AjokkiApplication::create_earth_ecosystem()
     {
         // Earth `Ecosystem` begins here.
 
         std::cout << "Creating yli::ontology::Entity* earth_ecosystem and its contents ...\n";
         yli::ontology::EcosystemStruct earth_ecosystem_struct;
         earth_ecosystem_struct.global_name = "earth_ecosystem";
-        yli::ontology::Entity* const earth_ecosystem_entity = entity_factory->create_ecosystem(earth_ecosystem_struct);
+        yli::ontology::Entity* const earth_ecosystem_entity = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
 
         std::cout << "Creating yli::ontology::Ecosystem* earth_ecosystem ...\n";
         yli::ontology::Ecosystem* const earth_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(earth_ecosystem_entity);
@@ -59,7 +59,7 @@ namespace ajokki
         earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* earth_pipeline_entity ...\n";
-        yli::ontology::Entity* const earth_pipeline_entity = entity_factory->create_pipeline(earth_pipeline_struct);
+        yli::ontology::Entity* const earth_pipeline_entity = this->entity_factory.create_pipeline(earth_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* earth_pipeline ...\n";
         yli::ontology::Pipeline* const earth_pipeline = dynamic_cast<yli::ontology::Pipeline*>(earth_pipeline_entity);
 
@@ -76,7 +76,7 @@ namespace ajokki
         turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
         std::cout << "Creating yli::ontology::Entity* turbo_polizei_png_symbiosis_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = entity_factory->create_symbiosis(turbo_polizei_png_model_struct);
+        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = this->entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
 
         std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
         yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_png_symbiosis_entity);

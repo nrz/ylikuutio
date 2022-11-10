@@ -16,53 +16,57 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 TEST(holobiont_must_be_initialized_appropriately, headless)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
+            application,
+            application.get_universe(),
             scene_struct,
-            &universe->parent_of_scenes);
+            &application.get_universe().parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(
+            application,
+            application.get_universe(),
+            pipeline_struct,
+            &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
-            *universe,
+            application,
+            application.get_universe(),
             model_struct,
             &scene->parent_of_symbioses,
             &pipeline->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
-            *universe,
+            application,
+            application.get_universe(),
             holobiont_struct,
             &scene->parent_of_holobionts,
             &symbiosis->master_of_holobionts,
             nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
@@ -80,7 +84,6 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     ASSERT_EQ(holobiont->get_childID(), 0);
     ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
     ASSERT_TRUE(holobiont->get_can_be_erased());
-    ASSERT_EQ(&(holobiont->get_universe()), universe);
     ASSERT_EQ(holobiont->get_scene(), scene);
     ASSERT_EQ(holobiont->get_parent(), scene);
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 0);
@@ -88,18 +91,21 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 
 TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
+            application,
+            application.get_universe(),
             scene_struct,
-            &universe->parent_of_scenes);
+            &application.get_universe().parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(
+            application,
+            application.get_universe(),
+            pipeline_struct,
+            &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
@@ -107,22 +113,24 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
-            *universe,
+            application,
+            application.get_universe(),
             model_struct,
             &scene->parent_of_symbioses,
             &pipeline->master_of_symbioses);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
-            *universe,
+            application,
+            application.get_universe(),
             holobiont_struct,
             &scene->parent_of_holobionts,
             &symbiosis->master_of_holobionts,
             nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
@@ -140,7 +148,6 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_EQ(holobiont->get_childID(), 0);
     ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
     ASSERT_TRUE(holobiont->get_can_be_erased());
-    ASSERT_EQ(&(holobiont->get_universe()), universe);
     ASSERT_EQ(holobiont->get_scene(), scene);
     ASSERT_EQ(holobiont->get_parent(), scene);
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 5);     // 5 `Biont`s.

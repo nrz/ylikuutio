@@ -25,6 +25,11 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -32,13 +37,14 @@ namespace yli::ontology
     class Scene;
 
     Glyph::Glyph(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const vector_font_parent_module)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_vector_font(vector_font_parent_module, this),
         master_of_objects(this, &this->registry, "objects"),
-        mesh(universe, model_struct),
+        mesh(this->universe, model_struct),
         glyph_vertex_data    { model_struct.glyph_vertex_data },
         glyph_name_pointer   { model_struct.glyph_name_pointer },
         unicode_char_pointer { model_struct.unicode_char_pointer }

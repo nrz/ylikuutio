@@ -26,8 +26,9 @@
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "object_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -168,12 +169,14 @@ namespace yli::ontology
     }
 
     Object::Object(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& object_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const mesh_master,
             yli::ontology::GenericMasterModule* const brain_master)
         : Movable(
+                application,
                 universe,
                 object_struct,
                 brain_master),
@@ -487,12 +490,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return std::nullopt;
-        }
+        yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);
@@ -549,7 +547,7 @@ namespace yli::ontology
         object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         object_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         object_struct.local_name = object_name;
-        entity_factory->create_object(object_struct);
+        entity_factory.create_object(object_struct);
         return std::nullopt;
     }
 

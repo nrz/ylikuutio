@@ -16,20 +16,22 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "cat.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct ObjectStruct;
 }
 
 namespace hirvi
 {
     Cat::Cat(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& cat_struct,
             const yli::ontology::LocomotionModuleStruct& walk_struct,
@@ -40,7 +42,7 @@ namespace hirvi
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const mesh_master,
             yli::ontology::GenericMasterModule* const brain_master)
-        : yli::ontology::Object(universe, cat_struct, scene_parent, mesh_master, brain_master),
+        : yli::ontology::Object(application, universe, cat_struct, scene_parent, mesh_master, brain_master),
         walk(walk_struct),
         trot(trot_struct),
         canter(canter_struct),

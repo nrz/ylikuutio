@@ -16,11 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 
 TEST(variable_struct_must_be_initialized_appropriately, variable_struct_default_constructor)
 {
-    const yli::ontology::VariableStruct test_variable_struct;
+    mock::MockApplication application;
+
+    const yli::ontology::VariableStruct test_variable_struct(application.get_universe());
     ASSERT_EQ(test_variable_struct.parent, nullptr);
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
@@ -32,7 +35,9 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_default_
 
 TEST(variable_struct_must_be_initialized_appropriately, variable_struct_copy_constructor)
 {
-    yli::ontology::VariableStruct original_variable_struct;
+    mock::MockApplication application;
+
+    yli::ontology::VariableStruct original_variable_struct(application.get_universe());
     original_variable_struct.global_name = "foo";
     original_variable_struct.local_name = "bar";
     const yli::ontology::VariableStruct copy_variable_struct(original_variable_struct);

@@ -21,10 +21,13 @@
 #include "material.hpp"
 #include "glyph.hpp"
 #include "text_3d.hpp"
+#include "generic_entity_factory.hpp"
 #include "family_templates.hpp"
 #include "model_struct.hpp"
 #include "vector_font_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
@@ -105,10 +108,21 @@ namespace yli::ontology
         return nullptr;
     }
 
-    VectorFont::VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct)
-        : Entity(universe, vector_font_struct),
-        parent_of_glyphs(this, &this->registry, "glyphs"),
-        parent_of_text_3ds(this, &this->registry, "text_3ds"),
+    VectorFont::VectorFont(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::VectorFontStruct& vector_font_struct)
+        : Entity(application, universe, vector_font_struct),
+        parent_of_glyphs(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::GLYPH),
+                "glyphs"),
+        parent_of_text_3ds(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::TEXT3D),
+                "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },
         font_filename         { vector_font_struct.font_filename },
         vertex_scaling_factor { vector_font_struct.vertex_scaling_factor },
@@ -186,10 +200,9 @@ namespace yli::ontology
                 }
 
                 yli::ontology::ModelStruct model_struct;
-                model_struct.parent = scene;
+                model_struct.parent = this;
                 model_struct.pipeline = pipeline;
                 model_struct.material = material;
-                model_struct.vector_font = this;
                 model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 model_struct.unicode_char_pointer = unicode_char_pointer;
@@ -197,7 +210,9 @@ namespace yli::ontology
                 std::string glyph_name_string = model_struct.glyph_name_pointer;
                 std::string unicode_string = model_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                yli::ontology::Glyph* glyph = new yli::ontology::Glyph(this->universe, model_struct, &this->parent_of_glyphs);
+
+                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+                yli::ontology::Glyph* glyph = static_cast<yli::ontology::Glyph*>(entity_factory.create_glyph(model_struct));
 
                 // So that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.

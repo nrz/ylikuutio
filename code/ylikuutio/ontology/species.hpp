@@ -30,6 +30,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -62,16 +67,16 @@ namespace yli::ontology
                     yli::ontology::Material& new_material) noexcept;
 
             Species(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
                     yli::ontology::GenericMasterModule* const material_master);
 
+            ~Species() = default;
+
             Species(const Species&) = delete;            // Delete copy constructor.
             Species& operator=(const Species&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Species() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

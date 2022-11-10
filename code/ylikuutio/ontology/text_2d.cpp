@@ -36,6 +36,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -69,10 +74,11 @@ namespace yli::ontology
     }
 
     Text2D::Text2D(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::TextStruct& text_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, text_struct),
+        : Entity(application, universe, text_struct),
         child_of_font_2d(parent_module, this)
     {
         // constructor.

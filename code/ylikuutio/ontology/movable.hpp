@@ -53,6 +53,11 @@
 //
 // `Text3D`, child of `VectorFont`, is not implemented yet.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::input
 {
     enum class InputMethod;
@@ -77,15 +82,18 @@ namespace yli::ontology
             static std::optional<yli::data::AnyValue> unbind_from_brain(
                     yli::ontology::Movable& movable) noexcept;
 
-            Movable(yli::ontology::Universe& universe,
+        protected:
+            Movable(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::GenericMasterModule* const brain_master);
 
+            virtual ~Movable() = default;
+
+        public:
             Movable(const Movable&) = delete;            // Delete copy constructor.
             Movable& operator=(const Movable&) = delete; // Delete copy assignment.
-
-            // destructor.
-            virtual ~Movable() = default;
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);

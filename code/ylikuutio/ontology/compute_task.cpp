@@ -45,6 +45,11 @@
 #include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -67,8 +72,11 @@ namespace yli::ontology
         pipeline->parent_of_compute_tasks.bind_child(this);
     }
 
-    ComputeTask::ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
-        : Entity(universe, compute_task_struct),
+    ComputeTask::ComputeTask(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::ComputeTaskStruct& compute_task_struct)
+        : Entity(application, universe, compute_task_struct),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
         output_filename                  { compute_task_struct.output_filename },
@@ -96,6 +104,7 @@ namespace yli::ontology
         // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
         // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
         // then `ComputeTask` could and should support software rendering as well.
+
         const bool should_load_texture =
             this->universe.get_is_opengl_in_use() ||
             this->universe.get_is_vulkan_in_use();

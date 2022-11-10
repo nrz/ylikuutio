@@ -21,6 +21,11 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     struct LocomotionModuleStruct;
@@ -28,15 +33,16 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
 
     class Elk : public yli::ontology::Holobiont
     {
         public:
             explicit Elk(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& elk_struct,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,

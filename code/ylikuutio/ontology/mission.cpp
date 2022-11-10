@@ -16,16 +16,21 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mission.hpp"
-#include "universe.hpp"
 #include "mission_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
+    class Universe;
 
     yli::ontology::Entity* Mission::get_parent() const
     {
@@ -33,10 +38,11 @@ namespace yli::ontology
     }
 
     Mission::Mission(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MissionStruct& mission_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, mission_struct),
+        : Entity(application, universe, mission_struct),
         child_of_universe(parent_module, this),
         callback_engine(this->universe)
     {

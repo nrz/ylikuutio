@@ -26,7 +26,19 @@
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
+#include <stdint.h>      // uint32_t, uint64_t
 #include <string>        // std::string
+
+namespace yli::core
+{
+    class Application;
+}
+
+namespace yli::memory
+{
+    template<typename T1, uint32_t DataSize>
+        class MemoryStorage;
+}
 
 namespace yli::ontology
 {
@@ -34,7 +46,7 @@ namespace yli::ontology
     class Variable;
     class Scene;
     class Console;
-    class EntityFactory;
+    class GenericEntityFactory;
     struct EntityStruct;
     struct VariableStruct;
 
@@ -44,22 +56,29 @@ namespace yli::ontology
             bool operator==(const yli::ontology::Entity& rhs) const;
             bool operator!=(const yli::ontology::Entity& rhs) const;
 
+            yli::core::Application& get_application() const;
+
             void bind_variable(yli::ontology::Variable* const variable) noexcept;
 
             void unbind_variable(const std::size_t childID) noexcept;
 
             void bind_to_universe() noexcept;
 
-            // constructor.
-            Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct);
+        protected:
+            Entity(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::EntityStruct& entity_struct);
 
+            virtual ~Entity();
+
+        public:
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity& operator=(const Entity&) = delete; // Delete copy assignment.
 
-            // destructor.
-            virtual ~Entity();
-
             virtual void activate();
+
+            std::size_t get_storage_and_slotID() const;
 
             std::size_t get_childID() const;
             std::string get_type() const;
@@ -73,8 +92,6 @@ namespace yli::ontology
             // Note: not all classes have any relation to a specific `Scene`.
             // E.g. `Universe` may have many `Scene`s, but is descendant of none.
             virtual yli::ontology::Scene* get_scene() const = 0;
-
-            virtual yli::ontology::EntityFactory* get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;
@@ -134,6 +151,17 @@ namespace yli::ontology
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
 
+            template<typename T1, uint32_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
+        protected:
+            yli::core::Application& application;
+            yli::ontology::Universe& universe;
+
+        private:
+            uint64_t storage_and_slotID { std::numeric_limits<std::uint64_t>::max() };
+
+        public:
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             // Named entities are stored here so that they can be recalled, if needed.
@@ -141,7 +169,6 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_variables;
 
         protected:
-            yli::ontology::Universe& universe;
             std::size_t entityID { std::numeric_limits<std::size_t>::max() };
 
             std::string type_string;
@@ -155,7 +182,7 @@ namespace yli::ontology
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
 
-            bool is_variable;
+            const bool is_variable;
     };
 }
 

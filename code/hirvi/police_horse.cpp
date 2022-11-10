@@ -19,17 +19,23 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
 }
 
 namespace hirvi
 {
     PoliceHorse::PoliceHorse(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& police_horse_struct,
             const yli::ontology::LocomotionModuleStruct& walk_struct,
@@ -39,7 +45,7 @@ namespace hirvi
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const brain_master)
-        : yli::ontology::Holobiont(universe, police_horse_struct, scene_parent, symbiosis_master, brain_master),
+        : yli::ontology::Holobiont(application, universe, police_horse_struct, scene_parent, symbiosis_master, brain_master),
         walk(walk_struct),
         run(run_struct),
         canter(canter_struct),

@@ -41,15 +41,15 @@ namespace yli::ontology
     {
         public:
             Font2D(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::FontStruct& font_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~Font2D();
+
             Font2D(const Font2D&) = delete;            // Delete copy constructor.
             Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Font2D();
 
             yli::ontology::Entity* get_parent() const override;
 

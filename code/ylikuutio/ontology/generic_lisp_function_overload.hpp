@@ -29,6 +29,11 @@
 #include <string>     // std::string
 #include <vector>     // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -38,16 +43,17 @@ namespace yli::ontology
 
     class GenericLispFunctionOverload: public yli::ontology::Entity
     {
-        public:
+        protected:
             GenericLispFunctionOverload(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module);
 
+        public:
+            virtual ~GenericLispFunctionOverload() = default;
+
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
-
-            // destructor.
-            virtual ~GenericLispFunctionOverload() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

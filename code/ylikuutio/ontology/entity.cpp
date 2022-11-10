@@ -19,12 +19,15 @@
 #include "variable.hpp"
 #include "universe.hpp"
 #include "family_templates.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "entity_struct.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/generic_memory_system.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -43,6 +46,11 @@ namespace yli::ontology
     bool Entity::operator!=(const yli::ontology::Entity& rhs) const
     {
         return !this->operator==(rhs);
+    }
+
+    yli::core::Application& Entity::get_application() const
+    {
+        return this->application;
     }
 
     void Entity::bind_variable(yli::ontology::Variable* const variable) noexcept
@@ -64,13 +72,21 @@ namespace yli::ontology
     void Entity::bind_to_universe() noexcept
     {
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-        universe.bind_entity(this);
+        this->universe.bind_entity(this);
     }
 
-    Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
-        : registry(),
-        parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.
+    Entity::Entity(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::EntityStruct& entity_struct)
+        : application { application },
         universe { universe },
+        registry(),
+        parent_of_variables(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::VARIABLE),
+                ""), // Do not index `parent_of_variables`, index only the variables.
         is_variable { entity_struct.is_variable }
     {
         // constructor.
@@ -82,7 +98,7 @@ namespace yli::ontology
         {
             this->should_be_rendered = !this->universe.get_is_headless();
 
-            yli::ontology::VariableStruct should_be_rendered_variable_struct;
+            yli::ontology::VariableStruct should_be_rendered_variable_struct(this->universe);
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
@@ -116,6 +132,11 @@ namespace yli::ontology
     {
     }
 
+    std::size_t Entity::get_storage_and_slotID() const
+    {
+        return this->storage_and_slotID;
+    }
+
     std::size_t Entity::get_childID() const
     {
         return this->childID;
@@ -134,11 +155,6 @@ namespace yli::ontology
     yli::ontology::Universe& Entity::get_universe() const
     {
         return this->universe;
-    }
-
-    yli::ontology::EntityFactory* Entity::get_entity_factory() const
-    {
-        return this->universe.get_entity_factory();
     }
 
     bool Entity::has_child(const std::string& name) const
@@ -214,16 +230,11 @@ namespace yli::ontology
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
-        yli::ontology::EntityFactory* const entity_factory = this->universe.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return;
-        }
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::VariableStruct new_variable_struct(variable_struct);
         new_variable_struct.parent = this;
-        entity_factory->create_variable(new_variable_struct, any_value);
+        entity_factory.create_variable(new_variable_struct, any_value);
     }
 
     bool Entity::has_variable(const std::string& variable_name) const
@@ -306,7 +317,6 @@ namespace yli::ontology
     void Entity::set_global_name(const std::string& global_name)
     {
         // Requirements:
-        // `this->universe` must not be `nullptr`.
         // `global_name` must not be already in use.
 
         if (global_name.empty())

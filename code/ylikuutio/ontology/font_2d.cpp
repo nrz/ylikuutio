@@ -21,6 +21,8 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -54,15 +56,20 @@ namespace yli::ontology
     class Scene;
 
     Font2D::Font2D(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::FontStruct& font_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, font_struct),
+        : Entity(application, universe, font_struct),
         child_of_universe(parent_module, this),
-        parent_of_text_2ds(this, &this->registry, "text_2ds"),
+        parent_of_text_2ds(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::TEXT2D),
+                "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),
         texture(
-                universe,
+                this->universe,
                 &this->registry,
                 font_struct.texture_filename,
                 font_struct.font_texture_file_format,
@@ -77,7 +84,9 @@ namespace yli::ontology
 
         if (this->texture.get_is_texture_loaded())
         {
-            if (this->universe.get_is_opengl_in_use())
+            yli::ontology::Universe& universe = this->universe;
+
+            if (universe.get_is_opengl_in_use())
             {
                 // Initialize VAO.
                 glGenVertexArrays(1, &this->vao);
@@ -106,7 +115,7 @@ namespace yli::ontology
                 this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
                 yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
             }
-            else if (this->universe.get_is_vulkan_in_use())
+            else if (universe.get_is_vulkan_in_use())
             {
                 std::cerr << "ERROR: `Font2D::Font2D`: Vulkan is not supported yet!\n";
             }
@@ -202,12 +211,14 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (!this->should_be_rendered || !this->universe.get_is_opengl_in_use())
+        yli::ontology::Universe& universe = this->universe;
+
+        if (!this->should_be_rendered || !universe.get_is_opengl_in_use())
         {
             return;
         }
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
+        yli::render::RenderSystem* const render_system = universe.get_render_system();
 
         if (render_system == nullptr)
         {

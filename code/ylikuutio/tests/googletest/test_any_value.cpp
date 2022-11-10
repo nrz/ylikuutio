@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -33,7 +34,6 @@
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -46,7 +46,6 @@
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/text_3d_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -358,8 +357,8 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Entity* const universe_entity = new yli::ontology::Universe(universe_struct);
+    mock::MockApplication application;
+    yli::ontology::Entity* const universe_entity = &application.get_universe();
     yli::data::AnyValue entity_any_value = yli::data::AnyValue(*universe_entity);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data).get(), *universe_entity);
@@ -369,11 +368,16 @@ TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 
 TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
-    yli::ontology::Movable* const object_movable = new yli::ontology::Object(*universe, object_struct, nullptr, nullptr, nullptr);
+    yli::ontology::Movable* const object_movable = new yli::ontology::Object(
+            application,
+            application.get_universe(),
+            object_struct,
+            nullptr,
+            nullptr,
+            nullptr);
+
     yli::data::AnyValue movable_any_value = yli::data::AnyValue(*object_movable);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data).get(), *object_movable);
@@ -384,11 +388,16 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 
 TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
-    const yli::ontology::Movable* const const_object_movable = new yli::ontology::Object(*universe, object_struct, nullptr, nullptr, nullptr);
+    const yli::ontology::Movable* const const_object_movable = new yli::ontology::Object(
+            application,
+            application.get_universe(),
+            object_struct,
+            nullptr,
+            nullptr,
+            nullptr);
+
     yli::data::AnyValue const_movable_any_value = yli::data::AnyValue(*const_object_movable);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data).get(), *const_object_movable);
@@ -398,8 +407,8 @@ TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 
 TEST(any_value_must_be_initialized_appropriately, universe)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    mock::MockApplication application;
+    yli::ontology::Universe* const universe = &application.get_universe();
 
     yli::data::AnyValue universe_any_value = yli::data::AnyValue(*universe);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data));
@@ -411,14 +420,14 @@ TEST(any_value_must_be_initialized_appropriately, universe)
 
 TEST(any_value_must_be_initialized_appropriately, ecosystem)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    mock::MockApplication application;
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
-            *universe,
+            application,
+            application.get_universe(),
             ecosystem_struct,
-            &universe->parent_of_ecosystems);
+            &application.get_universe().parent_of_ecosystems);
 
     yli::data::AnyValue ecosystem_any_value = yli::data::AnyValue(*ecosystem);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(ecosystem_any_value.data));
@@ -430,14 +439,13 @@ TEST(any_value_must_be_initialized_appropriately, ecosystem)
 
 TEST(any_value_must_be_initialized_appropriately, scene)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
+            application,
+            application.get_universe(),
             scene_struct,
-            &universe->parent_of_scenes);
+            &application.get_universe().parent_of_scenes);
 
     yli::data::AnyValue scene_any_value = yli::data::AnyValue(*scene);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(scene_any_value.data));
@@ -449,11 +457,13 @@ TEST(any_value_must_be_initialized_appropriately, scene)
 
 TEST(any_value_must_be_initialized_appropriately, pipeline)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::PipelineStruct pipeline_struct;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, nullptr);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(
+            application,
+            application.get_universe(),
+            pipeline_struct,
+            nullptr);
 
     yli::data::AnyValue pipeline_any_value = yli::data::AnyValue(*pipeline);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(pipeline_any_value.data));
@@ -465,12 +475,11 @@ TEST(any_value_must_be_initialized_appropriately, pipeline)
 
 TEST(any_value_must_be_initialized_appropriately, material)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::MaterialStruct material_struct;
     yli::ontology::Material* const material = new yli::ontology::Material(
-            *universe,
+            application,
+            application.get_universe(),
             material_struct,
             nullptr, nullptr);
 
@@ -484,12 +493,11 @@ TEST(any_value_must_be_initialized_appropriately, material)
 
 TEST(any_value_must_be_initialized_appropriately, species)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ModelStruct model_struct;
     yli::ontology::Species* const species = new yli::ontology::Species(
-            *universe,
+            application,
+            application.get_universe(),
             model_struct,
             nullptr,
             nullptr);
@@ -504,12 +512,11 @@ TEST(any_value_must_be_initialized_appropriately, species)
 
 TEST(any_value_must_be_initialized_appropriately, object)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
     yli::ontology::Object* const object = new yli::ontology::Object(
-            *universe,
+            application,
+            application.get_universe(),
             object_struct,
             nullptr,
             nullptr,
@@ -525,12 +532,11 @@ TEST(any_value_must_be_initialized_appropriately, object)
 
 TEST(any_value_must_be_initialized_appropriately, symbiosis)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ModelStruct model_struct;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
-            *universe,
+            application,
+            application.get_universe(),
             model_struct,
             nullptr,
             nullptr);
@@ -545,26 +551,27 @@ TEST(any_value_must_be_initialized_appropriately, symbiosis)
 
 TEST(any_value_must_be_initialized_appropriately, holobiont)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            *universe,
+            application,
+            application.get_universe(),
             scene_struct,
-            &universe->parent_of_scenes);
+            &application.get_universe().parent_of_scenes);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
-            *universe,
+            application,
+            application.get_universe(),
             model_struct,
             &scene->parent_of_symbioses,
             nullptr);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = new yli::ontology::Holobiont(
-            *universe,
+            application,
+            application.get_universe(),
             holobiont_struct,
             &scene->parent_of_holobionts,
             &symbiosis->master_of_holobionts,
@@ -580,14 +587,13 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
 
 TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::FontStruct font_struct;
     yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
-            *universe,
+            application,
+            application.get_universe(),
             font_struct,
-            &universe->parent_of_font_2ds);
+            &application.get_universe().parent_of_font_2ds);
 
     yli::data::AnyValue font_2d_any_value = yli::data::AnyValue(*font_2d);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(font_2d_any_value.data));
@@ -599,12 +605,11 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 
 TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::TextStruct text_struct;
     yli::ontology::Text2D* const text_2d = new yli::ontology::Text2D(
-            *universe,
+            application,
+            application.get_universe(),
             text_struct,
             nullptr);
 
@@ -618,11 +623,12 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 
 TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::VectorFontStruct vector_font_struct;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(*universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(
+            application,
+            application.get_universe(),
+            vector_font_struct);
 
     yli::data::AnyValue vector_font_any_value = yli::data::AnyValue(*vector_font);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data));
@@ -634,11 +640,14 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
 
 TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::Text3DStruct text_3d_struct;
-    yli::ontology::Text3D* const text_3d = new yli::ontology::Text3D(*universe, text_3d_struct, nullptr, nullptr);
+    yli::ontology::Text3D* const text_3d = new yli::ontology::Text3D(
+            application,
+            application.get_universe(),
+            text_3d_struct,
+            nullptr,
+            nullptr);
 
     yli::data::AnyValue text_3d_any_value = yli::data::AnyValue(*text_3d);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(text_3d_any_value.data));
@@ -650,14 +659,13 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
 
 TEST(any_value_must_be_initialized_appropriately, console)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* console = new yli::ontology::Console(
-            *universe,
+            application,
+            application.get_universe(),
             console_struct,
-            &universe->parent_of_consoles,
+            &application.get_universe().parent_of_consoles,
             nullptr);
 
     yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);
@@ -670,14 +678,13 @@ TEST(any_value_must_be_initialized_appropriately, console)
 
 TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
-
+    mock::MockApplication application;
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* console = new yli::ontology::Console(
-            *universe,
+            application,
+            application.get_universe(),
             console_struct,
-            &universe->parent_of_consoles,
+            &application.get_universe().parent_of_consoles,
             nullptr);
 
     yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);

@@ -51,7 +51,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.material, nullptr);
     ASSERT_EQ(test_model_struct.symbiont_material, nullptr);
     ASSERT_EQ(test_model_struct.shapeshifter_transformation, nullptr);
-    ASSERT_EQ(test_model_struct.vector_font, nullptr);
     ASSERT_EQ(test_model_struct.glyph_vertex_data, nullptr);
     ASSERT_EQ(test_model_struct.glyph_name_pointer, nullptr);
     ASSERT_EQ(test_model_struct.unicode_char_pointer, nullptr);

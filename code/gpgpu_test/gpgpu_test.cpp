@@ -29,16 +29,39 @@
 #endif
 
 #include "gpgpu_test.hpp"
-#include "gpgpu_test_scene.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/memory_system.hpp"
+#include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
+#include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/movable.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
+#include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/text_2d.hpp"
+#include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/variable_struct.hpp"
+#include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/ecosystem_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
+#include "code/ylikuutio/ontology/font_struct.hpp"
+#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
@@ -49,18 +72,31 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept>     // std::runtime_error
+
+namespace yli::memory
+{
+    class GenericMemorySystem;
+    class GenericMemoryAllocator;
+}
 
 namespace yli::ontology
 {
     class Entity;
+    class GenericEntityFactory;
 }
 
 namespace gpgpu_test
 {
+    static constexpr yli::data::Datatype universe_enum_value = yli::data::Datatype::UNIVERSE;
+
     GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
-        : yli::core::Application(argc, argv)
+        : yli::core::Application(argc, argv),
+        memory_system(this, universe_enum_value),
+        entity_factory(*this, this->memory_system),
+        universe { *this->entity_factory.create_universe(this->get_universe_struct()) }
     {
-        // constructor.
+        std::cout << "GpgpuTestApplication initialized!\n";
     }
 
     std::string GpgpuTestApplication::get_name() const
@@ -68,12 +104,68 @@ namespace gpgpu_test
         return "GPGPU test";
     }
 
-    std::vector<std::string> GpgpuTestApplication::get_valid_keys()
+    std::vector<std::string> GpgpuTestApplication::get_valid_keys() const
     {
         return { "help", "version" };
     }
 
-    yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct()
+    yli::memory::GenericMemorySystem& GpgpuTestApplication::get_memory_system() const
+    {
+        return this->memory_system.get();
+    }
+
+    void GpgpuTestApplication::create_memory_allocators()
+    {
+        this->memory_system.create_allocator<UniverseMemoryAllocator>(yli::data::Datatype::UNIVERSE);
+        this->memory_system.create_allocator<VariableMemoryAllocator>(yli::data::Datatype::VARIABLE);
+        this->memory_system.create_allocator<CameraMemoryAllocator>(yli::data::Datatype::CAMERA);
+        this->memory_system.create_allocator<BrainMemoryAllocator>(yli::data::Datatype::BRAIN);
+        this->memory_system.create_allocator<EcosystemMemoryAllocator>(yli::data::Datatype::ECOSYSTEM);
+        this->memory_system.create_allocator<SceneMemoryAllocator>(yli::data::Datatype::SCENE);
+        this->memory_system.create_allocator<PipelineMemoryAllocator>(yli::data::Datatype::PIPELINE);
+        this->memory_system.create_allocator<MaterialMemoryAllocator>(yli::data::Datatype::MATERIAL);
+        this->memory_system.create_allocator<SpeciesMemoryAllocator>(yli::data::Datatype::SPECIES);
+        this->memory_system.create_allocator<ObjectMemoryAllocator>(yli::data::Datatype::OBJECT);
+        this->memory_system.create_allocator<SymbiosisMemoryAllocator>(yli::data::Datatype::SYMBIOSIS);
+        this->memory_system.create_allocator<SymbiontMaterialMemoryAllocator>(yli::data::Datatype::SYMBIONT_MATERIAL);
+        this->memory_system.create_allocator<SymbiontSpeciesMemoryAllocator>(yli::data::Datatype::SYMBIONT_SPECIES);
+        this->memory_system.create_allocator<HolobiontMemoryAllocator>(yli::data::Datatype::HOLOBIONT);
+        this->memory_system.create_allocator<BiontMemoryAllocator>(yli::data::Datatype::BIONT);
+        this->memory_system.create_allocator<ShapeshifterTransformationMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION);
+        this->memory_system.create_allocator<ShapeshifterSequenceMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE);
+        this->memory_system.create_allocator<ShapeshifterFormMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_FORM);
+        this->memory_system.create_allocator<Font2DMemoryAllocator>(yli::data::Datatype::FONT2D);
+        this->memory_system.create_allocator<Text2DMemoryAllocator>(yli::data::Datatype::TEXT2D);
+        this->memory_system.create_allocator<VectorFontMemoryAllocator>(yli::data::Datatype::VECTORFONT);
+        this->memory_system.create_allocator<GlyphMemoryAllocator>(yli::data::Datatype::GLYPH);
+        this->memory_system.create_allocator<Text3DMemoryAllocator>(yli::data::Datatype::TEXT3D);
+        this->memory_system.create_allocator<ConsoleMemoryAllocator>(yli::data::Datatype::CONSOLE);
+        this->memory_system.create_allocator<ComputeTaskMemoryAllocator>(yli::data::Datatype::COMPUTETASK);
+        this->memory_system.create_allocator<LispFunctionMemoryAllocator>(yli::data::Datatype::LISP_FUNCTION);
+        this->memory_system.create_allocator<GenericLispFunctionOverloadMemoryAllocator>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD);
+    }
+
+    yli::memory::GenericMemoryAllocator& GpgpuTestApplication::get_memory_allocator(const int type) const
+    {
+        return this->memory_system.get_allocator(type);
+    }
+
+    yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_entity_factory() const
+    {
+        return this->entity_factory.get();
+    }
+
+    bool GpgpuTestApplication::is_universe(yli::ontology::Entity* entity) const
+    {
+        return &this->universe == entity;
+    }
+
+    yli::ontology::Universe& GpgpuTestApplication::get_universe() const
+    {
+        return this->universe;
+    }
+
+    yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct() const
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         std::stringstream window_title_stringstream;
@@ -88,18 +180,9 @@ namespace gpgpu_test
 
     bool GpgpuTestApplication::create_simulation()
     {
-        yli::ontology::Universe* const my_universe = this->get_universe();
+        this->universe.set_global_name("universe");
 
-        if (my_universe == nullptr)
-        {
-            return false;
-        }
-
-        my_universe->set_global_name("universe");
-
-        yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
-
-        if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
+        if (!this->universe.get_is_headless() && this->universe.get_window() == nullptr)
         {
             std::cerr << "Failed to open SDL window.\n";
             return false;
@@ -110,7 +193,7 @@ namespace gpgpu_test
         // GPGPU test `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-        yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory);
+        yli::ontology::Entity* const gpgpu_test_scene_entity = this->create_gpgpu_test_scene();
 
         if (gpgpu_test_scene_entity == nullptr)
         {
@@ -127,13 +210,18 @@ namespace gpgpu_test
 
         // Set `gpgpu_test_scene` to be the currently active `Scene`.
         std::cout << "Setting gpgpu_test_scene as the active scene ...\n";
-        my_universe->set_active_scene(gpgpu_test_scene);
+        this->universe.set_active_scene(gpgpu_test_scene);
 
         // GPGPU test `Scene` ends here.
 
         // Render the `Universe`.
-        my_universe->render();
+        this->universe.render();
         return true;
+    }
+
+    void GpgpuTestApplication::destroy_memory_system()
+    {
+        delete &this->memory_system;
     }
 }
 

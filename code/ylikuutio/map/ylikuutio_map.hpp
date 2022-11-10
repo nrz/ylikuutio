@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 #define YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
@@ -74,7 +75,7 @@ namespace yli::map
                 return;
             }
 
-            const yli::ontology::Universe& universe = console->get_universe();
+            const yli::ontology::Universe& universe = console->get_application().get_universe();
 
             std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
 

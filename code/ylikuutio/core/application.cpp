@@ -28,8 +28,7 @@ namespace yli::ontology
 namespace yli::core
 {
     Application::Application(const int argc, const char* const argv[])
-        : command_line_master(argc, argv),
-        universe(nullptr)
+        : command_line_master(argc, argv)
     {
         // constructor.
     }
@@ -42,15 +41,5 @@ namespace yli::core
     std::string Application::get_version() const
     {
         return ""; // `override` this in the inherited class.
-    }
-
-    yli::ontology::Universe* Application::get_universe() const
-    {
-        return this->universe;
-    }
-
-    void Application::set_universe(yli::ontology::Universe* const universe)
-    {
-        this->universe = universe;
     }
 }

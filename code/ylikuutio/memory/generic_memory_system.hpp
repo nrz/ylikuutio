@@ -15,21 +15,31 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef AJOKKI_AJOKKI_TALLINN_SCENE_HPP_INCLUDED
-#define AJOKKI_AJOKKI_TALLINN_SCENE_HPP_INCLUDED
+#ifndef YLIKUUTIO_MEMORY_GENERIC_MEMORY_SYSTEM_HPP_INCLUDED
+#define YLIKUUTIO_MEMORY_GENERIC_MEMORY_SYSTEM_HPP_INCLUDED
 
-namespace yli
+// Include standard headers
+#include <stdint.h> // uint32_t
+
+namespace yli::memory
 {
-    namespace ontology
+    class GenericMemoryAllocator;
+
+    class GenericMemorySystem
     {
-        class Entity;
-        class EntityFactory;
-    }
-}
+        // `GenericMemorySystem` provides an interface
+        // for the `MemorySystem` class template instantiations.
 
-namespace ajokki
-{
-    yli::ontology::Entity* create_tallinn_scene(yli::ontology::EntityFactory* const entity_factory);
+        public:
+            virtual ~GenericMemorySystem() = default;
+
+            virtual uint32_t get_number_of_allocators() const = 0;
+
+            virtual bool has_allocator(const int type) const = 0;
+            virtual yli::memory::GenericMemoryAllocator& get_allocator(const int type) const = 0;
+
+            yli::memory::GenericMemorySystem& get();
+    };
 }
 
 #endif

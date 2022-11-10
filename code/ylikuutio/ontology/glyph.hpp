@@ -33,6 +33,11 @@
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -45,27 +50,25 @@ namespace yli::ontology
     class Glyph final : public yli::ontology::Entity
     {
         public:
-            // destructor.
-            // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
-            ~Glyph() = default;
-
             yli::ontology::Entity* get_parent() const override;
 
             const char* get_unicode_char_pointer() const;
 
-            friend class yli::ontology::VectorFont;
-
-        private:
             Glyph(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module);
 
+            // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
+            ~Glyph() = default;
+
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
-        public:
             yli::ontology::Scene* get_scene() const override;
+
+            friend class yli::ontology::VectorFont;
 
         private:
             std::size_t get_number_of_children() const override;

@@ -29,6 +29,8 @@
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
@@ -54,20 +56,57 @@ namespace yli::ontology
     class Entity;
 
     Scene::Scene(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::SceneStruct& scene_struct,
             yli::ontology::GenericParentModule* const parent_module)
-    : Entity(universe, scene_struct),
+    : Entity(application, universe, scene_struct),
         child_of_universe(parent_module, this),
-        parent_of_pipelines(this, &this->registry, "pipelines"),
-        parent_of_default_camera(this, &this->registry, "default_camera"),
-        parent_of_cameras(this, &this->registry, "cameras"),
-        parent_of_brains(this, &this->registry, "brains"),
-        parent_of_materials(this, &this->registry, "materials"),
-        parent_of_species(this, &this->registry, "species"),
-        parent_of_objects(this, &this->registry, "objects"),
-        parent_of_symbioses(this, &this->registry, "symbioses"),
-        parent_of_holobionts(this, &this->registry, "holobionts"),
+        parent_of_pipelines(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::PIPELINE),
+                "pipelines"),
+        parent_of_default_camera(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CAMERA),
+                "default_camera"),
+        parent_of_cameras(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CAMERA),
+                "cameras"),
+        parent_of_brains(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::BRAIN),
+                "brains"),
+        parent_of_materials(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::MATERIAL),
+                "materials"),
+        parent_of_species(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SPECIES),
+                "species"),
+        parent_of_objects(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::OBJECT),
+                "objects"),
+        parent_of_symbioses(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
+                "symbioses"),
+        parent_of_holobionts(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::HOLOBIONT),
+                "holobionts"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },
         water_level           { scene_struct.water_level },
@@ -90,11 +129,6 @@ namespace yli::ontology
         {
             std::cerr << "ERROR: `Scene::Scene`: Vulkan is not supported yet!\n";
         }
-
-        // create the default `Camera`.
-        yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
-        camera_struct.scene = this;
-        new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";
@@ -211,7 +245,6 @@ namespace yli::ontology
         this->active_camera = camera;
 
         // requirements for further actions:
-        // `this->universe` must not be `nullptr`.
         // `this->parent` must not be `nullptr`.
 
         yli::ontology::Scene* const active_scene = this->universe.get_active_scene();

@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "executor.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -37,7 +38,7 @@ namespace yli::lisp
         // `LispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
 
-        yli::ontology::Universe& universe = console.get_universe();
+        yli::ontology::Universe& universe = console.get_application().get_universe();
 
         yli::ontology::Entity* const lisp_function_entity = universe.get_entity(command);
 

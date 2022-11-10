@@ -26,6 +26,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <stdint.h> // uint32_t
 #include <string>   // std::string
 
 // `yli::ontology::Variable` provides variable-related functionality.
@@ -43,6 +44,16 @@
 // `read_callback` may, of course, compute the returned value
 // based on some other variables as well etc.
 
+namespace yli::core
+{
+    class Application;
+}
+
+namespace yli::memory
+{
+    class GenericMemorySystem;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -55,15 +66,15 @@ namespace yli::ontology
     {
         public:
             Variable(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VariableStruct& variable_struct,
                     const yli::data::AnyValue& any_value);
 
+            ~Variable();
+
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Variable();
 
             yli::ontology::Entity* get_parent() const override;
 

@@ -30,6 +30,11 @@
 // Compared to `Scene`s which are actual game/simulation locations,
 // `Ecosystem`s only function as owners of resources shared between `Scene`s.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -41,15 +46,15 @@ namespace yli::ontology
     {
         public:
             Ecosystem(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~Ecosystem() = default;
+
             Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
             Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Ecosystem() = default;
 
             yli::ontology::Entity* get_parent() const override;
 
