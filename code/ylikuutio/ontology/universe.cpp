@@ -135,7 +135,6 @@ namespace yli::ontology
         parent_of_font_2ds(this, &this->registry, "font_2ds"),
         parent_of_consoles(this, &this->registry, "consoles"),
         parent_of_any_value_entities(this, &this->registry, "any_value_entities"),
-        parent_of_callback_engine_entities(this, &this->registry, "callback_engine_entities"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },
         graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
@@ -864,8 +863,7 @@ namespace yli::ontology
             this->parent_of_scenes.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
-            this->parent_of_any_value_entities.get_number_of_children() +
-            this->parent_of_callback_engine_entities.get_number_of_children();
+            this->parent_of_any_value_entities.get_number_of_children();
     }
 
     std::size_t Universe::get_number_of_descendants() const
@@ -874,8 +872,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_callback_engine_entities.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_any_value_entities.child_pointer_vector);
     }
 
     [[nodiscard]] bool Universe::create_window()
