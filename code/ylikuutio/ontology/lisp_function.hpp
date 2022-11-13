@@ -21,7 +21,6 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "lisp_function_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -35,6 +34,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Console;
+    struct LispFunctionStruct;
 
     class LispFunction final : public yli::ontology::Entity
     {
@@ -42,16 +42,7 @@ namespace yli::ontology
             LispFunction(
                     yli::ontology::Universe& universe,
                     const yli::ontology::LispFunctionStruct& lisp_function_struct,
-                    yli::ontology::GenericParentModule* const parent_module)
-                : Entity(universe, lisp_function_struct),
-                child_of_console(parent_module, this),
-                parent_of_generic_lisp_function_overloads(this, &this->registry, "generic_lisp_functions")
-            {
-                // constructor.
-
-                // `yli::ontology::Entity` member variables begin here.
-                this->type_string = "yli::ontology::LispFunction*";
-            }
+                    yli::ontology::GenericParentModule* const parent_module);
 
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.

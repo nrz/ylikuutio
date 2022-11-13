@@ -16,7 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "lisp_function.hpp"
+#include "entity.hpp"
 #include "generic_lisp_function_overload.hpp"
+#include "lisp_function_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -28,8 +30,23 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Scene;
+
+    LispFunction::LispFunction(
+            yli::ontology::Universe& universe,
+            const yli::ontology::LispFunctionStruct& lisp_function_struct,
+            yli::ontology::GenericParentModule* const parent_module)
+        : Entity(universe, lisp_function_struct),
+        child_of_console(parent_module, this),
+        parent_of_generic_lisp_function_overloads(this, &this->registry, "generic_lisp_functions")
+    {
+        // constructor.
+
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::LispFunction*";
+    }
 
     yli::ontology::Entity* LispFunction::get_parent() const
     {
