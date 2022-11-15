@@ -16,14 +16,103 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "texture_module.hpp"
+#include "universe.hpp"
+#include "code/ylikuutio/load/common_texture_loader.hpp"
+#include "code/ylikuutio/load/fbx_texture_loader.hpp"
+#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include <ofbx.h>
 
 // Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
 {
+    class Registry;
+
+    TextureModule::TextureModule(
+            yli::ontology::Universe& universe,
+            yli::ontology::Registry* const registry,
+            const std::string& texture_filename,
+            const std::string& texture_file_format,
+            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const std::string& name)
+        : texture_filename { texture_filename },
+        texture_file_format { texture_file_format },
+        ofbx_texture { image_loader_struct.ofbx_texture }
+    {
+        // constructor.
+
+        // If software rendering is in use, the texture can not be loaded into GPU memory,
+        // but it can still be loaded into CPU memory to be used by the software rendering.
+        const bool should_load_texture =
+            universe.get_is_opengl_in_use() ||
+            universe.get_is_vulkan_in_use() ||
+            universe.get_is_software_rendering_in_use();
+
+        if (should_load_texture)
+        {
+            bool is_texture_loading_successful = false;
+
+            if (texture_file_format == "png" || texture_file_format == "PNG")
+            {
+                is_texture_loading_successful = yli::load::load_common_texture(
+                        this->texture_filename,
+                        image_loader_struct,
+                        this->image_width,
+                        this->image_height,
+                        this->image_size,
+                        n_color_channels,
+                        this->texture,
+                        universe.get_graphics_api_backend());
+            }
+            else
+            {
+                std::cerr << "ERROR: `TextureModule::TextureModule`: unsupported texture file format: " << texture_file_format << "\n";
+            }
+
+            if (!is_texture_loading_successful)
+            {
+                std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
+            }
+        }
+    }
+
+    TextureModule::TextureModule(
+            yli::ontology::Universe& universe,
+            yli::ontology::Registry* const registry,
+            const ofbx::Texture* ofbx_texture,
+            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const std::string& name)
+        : ofbx_texture { ofbx_texture }
+    {
+        // If software rendering is in use, the texture can not be loaded into GPU memory,
+        // but it can still be loaded into CPU memory to be used by the software rendering.
+        const bool should_load_texture =
+            universe.get_is_opengl_in_use() ||
+            universe.get_is_vulkan_in_use() ||
+            universe.get_is_software_rendering_in_use();
+
+        if (should_load_texture)
+        {
+            bool is_texture_loading_successful = yli::load::load_fbx_texture(
+                    this->ofbx_texture,
+                    this->image_width,
+                    this->image_height,
+                    this->image_size,
+                    n_color_channels,
+                    this->texture,
+                    universe.get_graphics_api_backend());
+
+            if (!is_texture_loading_successful)
+            {
+                std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
+            }
+        }
+    }
+
     TextureModule::~TextureModule()
     {
         // destructor.
