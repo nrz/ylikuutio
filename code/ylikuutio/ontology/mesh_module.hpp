@@ -18,12 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 
-#include "universe.hpp"
-#include "scene.hpp"
 #include "pipeline.hpp"
-#include "model_struct.hpp"
-#include "code/ylikuutio/load/model_loader.hpp"
-#include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -34,116 +29,21 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::holds_alternative, std::monostate, std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
+    class Universe;
     class Ecosystem;
+    struct ModelStruct;
 
     class MeshModule final
     {
         public:
             MeshModule(
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct)
-                : model_filename { model_struct.model_filename },
-                model_file_format { model_struct.model_file_format },
-                color_channel { model_struct.color_channel },
-                triangulation_type { model_struct.triangulation_type },
-                planet_radius { model_struct.planet_radius },
-                divisor { model_struct.divisor },
-                latitude { model_struct.latitude },
-                longitude { model_struct.longitude },
-                mesh_i { model_struct.mesh_i },
-                x_step { model_struct.x_step },
-                z_step { model_struct.z_step }
-            {
-                // constructor.
-
-                // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
-                // but they can still be loaded into CPU memory to be used by the software rendering.
-                const bool should_load_vertices_uvs_and_normals =
-                    universe.get_is_opengl_in_use() ||
-                    universe.get_is_vulkan_in_use() ||
-                    universe.get_is_software_rendering_in_use();
-
-                if (should_load_vertices_uvs_and_normals &&
-                        universe.get_is_opengl_in_use() &&
-                        model_struct.pipeline != nullptr)
-                {
-                    // VAO.
-                    glGenVertexArrays(1, &this->vao);
-
-                    // Get a handle for our buffers.
-                    this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_position_modelspace");
-                    this->vertex_uv_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertexUV");
-                    this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
-
-                    yli::load::ModelLoaderStruct model_loader_struct;
-                    model_loader_struct.model_struct.model_filename               = this->model_filename;
-                    model_loader_struct.model_struct.model_file_format            = this->model_file_format;
-                    model_loader_struct.model_struct.color_channel                = this->color_channel;
-                    model_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
-                    model_loader_struct.model_struct.planet_radius                = this->planet_radius;
-                    model_loader_struct.model_struct.divisor                      = this->divisor;
-                    model_loader_struct.model_struct.latitude                     = this->latitude;
-                    model_loader_struct.model_struct.longitude                    = this->longitude;
-                    model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
-                    model_loader_struct.model_struct.x_step                       = this->x_step;
-                    model_loader_struct.model_struct.z_step                       = this->z_step;
-                    model_loader_struct.model_struct.parent                       = model_struct.parent;
-                    model_loader_struct.model_struct.pipeline                     = model_struct.pipeline;
-                    model_loader_struct.model_struct.material                     = model_struct.material;
-                    model_loader_struct.model_struct.symbiont_material            = model_struct.symbiont_material;
-                    model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
-                    model_loader_struct.image_width_pointer                       = &this->image_width;
-                    model_loader_struct.image_height_pointer                      = &this->image_height;
-
-                    const bool is_debug_mode = true;
-
-                    yli::load::load_model(
-                            model_loader_struct,
-                            this->vertices,
-                            this->uvs,
-                            this->normals,
-                            this->indices,
-                            this->indexed_vertices,
-                            this->indexed_uvs,
-                            this->indexed_normals,
-                            this->vao,
-                            this->vertexbuffer,
-                            this->uvbuffer,
-                            this->normalbuffer,
-                            this->elementbuffer,
-                            universe.get_graphics_api_backend(),
-                            is_debug_mode);
-
-                    this->are_opengl_buffers_initialized = true;
-                }
-                else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
-                {
-                    if (std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) &&
-                            std::get<yli::ontology::Ecosystem*>(model_struct.parent) == nullptr)
-                    {
-                        std::cerr << "ERROR: `MeshModule::MeshModule`: `Ecosystem` parent is `nullptr`!\n";
-                    }
-                    else if (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) &&
-                            std::get<yli::ontology::Scene*>(model_struct.parent) == nullptr)
-                    {
-                        std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
-                    }
-
-                    if (model_struct.pipeline == nullptr)
-                    {
-                        std::cerr << "ERROR: `MeshModule::MeshModule`: `this->pipeline` is `nullptr`!\n";
-                    }
-
-                    // Do not load model.
-                }
-            }
+                    const yli::ontology::ModelStruct& model_struct);
 
             MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
             MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
