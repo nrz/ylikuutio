@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "object.hpp"
+#include "universe.hpp"
 #include "mesh_module.hpp"
 #include "orientation_module.hpp"
 #include "object_type.hpp"

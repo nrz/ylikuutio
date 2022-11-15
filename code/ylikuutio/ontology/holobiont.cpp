@@ -18,6 +18,7 @@
 #include "holobiont.hpp"
 #include "orientation_module.hpp"
 #include "universe.hpp"
+#include "scene.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"

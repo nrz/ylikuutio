@@ -17,6 +17,7 @@
 
 #include "biont.hpp"
 #include "mesh_module.hpp"
+#include "universe.hpp"
 #include "pipeline.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"

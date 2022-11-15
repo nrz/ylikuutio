@@ -23,6 +23,7 @@
 #include "code/ylikuutio/callback/callback_engine.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"

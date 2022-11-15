@@ -22,6 +22,7 @@
 #include "scene.hpp"
 #include "material.hpp"
 #include "object.hpp"
+#include "model_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_model.hpp"
 
