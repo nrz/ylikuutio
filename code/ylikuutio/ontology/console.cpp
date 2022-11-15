@@ -32,6 +32,7 @@
 // Include standard headers
 #include <algorithm>     // std::copy etc.
 #include <cstddef>       // std::size_t
+#include <iostream>      // std::cerr
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
 #include <optional>      // std::optional
