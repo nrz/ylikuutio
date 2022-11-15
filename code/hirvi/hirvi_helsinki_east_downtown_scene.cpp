@@ -58,7 +58,6 @@
 namespace yli::ontology
 {
     class Entity;
-    class Universe;
     class CustomEntityFactory;
 }
 

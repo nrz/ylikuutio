@@ -38,7 +38,6 @@ namespace yli::ontology
     class GenericMasterModule;
     class Universe;
     class Pipeline;
-    struct ModelStruct;
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(
             yli::ontology::Species& species,

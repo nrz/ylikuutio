@@ -52,7 +52,6 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
-    class Scene;
 
     Holobiont::Holobiont(
             yli::ontology::Universe& universe,

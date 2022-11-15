@@ -60,7 +60,6 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
-    class Universe;
     class Scene;
 
     Biont::Biont(

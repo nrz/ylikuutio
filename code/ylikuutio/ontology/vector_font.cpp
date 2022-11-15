@@ -42,7 +42,6 @@
 namespace yli::ontology
 {
     class Entity;
-    class Scene;
     class Pipeline;
     class Text3D;
     class Glyph;

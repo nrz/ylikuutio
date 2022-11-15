@@ -56,7 +56,6 @@ namespace yli
     namespace ontology
     {
         class Entity;
-        class Universe;
     }
 }
 
