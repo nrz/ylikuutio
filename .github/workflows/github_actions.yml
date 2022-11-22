@@ -2,7 +2,7 @@ name: build-and-test
 on: [push]
 jobs:
   build-and-test-on-ubuntu-gcc-native-compiler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -15,7 +15,7 @@ jobs:
       - run: cmake --build build_native_gcc
       - run: cd build_native_gcc && ./unit_tests_with_googletest
   build-and-test-on-ubuntu-clang-native-compiler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -28,7 +28,7 @@ jobs:
       - run: cmake --build build_native_clang
       - run: cd build_native_clang && ./unit_tests_with_googletest
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -40,7 +40,7 @@ jobs:
       - run: cmake -Bbuild_crosscompile_linux_to_windows_gcc -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=w64.cmake
       - run: cmake --build build_crosscompile_linux_to_windows_gcc
   build-and-test-on-macos:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
         with:
@@ -51,7 +51,7 @@ jobs:
       - run: CC=$(which clang) CXX=$(which clang++) cmake -Bbuild_native_clang
       - run: cmake --build build_native_clang
   run-sonar-cloud-on-ubuntu:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       SONAR_SCANNER_VERSION: 4.7.0.2747
       SONAR_SERVER_URL: "https://sonarcloud.io"
