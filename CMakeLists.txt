@@ -432,11 +432,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/geometry/transformation_struct.hpp
 
     # graph, in alphabetical order.
-    code/ylikuutio/graph/graph.cpp
-    code/ylikuutio/graph/graph.hpp
-    code/ylikuutio/graph/node.cpp
-    code/ylikuutio/graph/node.hpp
-    code/ylikuutio/graph/node_struct.hpp
     code/ylikuutio/graph/shortest_paths.cpp
     code/ylikuutio/graph/shortest_paths.hpp
 
@@ -669,10 +664,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
-    code/ylikuutio/ontology/vertex_graph.cpp
-    code/ylikuutio/ontology/vertex_graph.hpp
-    code/ylikuutio/ontology/vertex_node.cpp
-    code/ylikuutio/ontology/vertex_node.hpp
     code/ylikuutio/ontology/ecosystem.cpp
     code/ylikuutio/ontology/ecosystem.hpp
     code/ylikuutio/ontology/ecosystem_struct.hpp
@@ -950,7 +941,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_material.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
         code/ylikuutio/tests/googletest/test_model_struct.cpp
-        code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp
         code/ylikuutio/tests/googletest/test_object.cpp
         code/ylikuutio/tests/googletest/test_object_struct.cpp
