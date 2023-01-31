@@ -15,32 +15,27 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
-#define YLIKUUTIO_CALLBACK_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_INPUT_PARAMETERS_AND_ANY_VALUE_TO_ANY_VALUE_CALLBACK_WITH_UNIVERSE_HPP_INCLUDED
 
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
-#include <vector> // std::vector
-
-namespace yli::callback
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
+    class CallbackEngine;
+    class CallbackObject;
 }
 
 typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
         yli::ontology::Universe&,
-        yli::callback::CallbackEngine*,
-        yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>&,
+        yli::ontology::CallbackEngine*,
+        yli::ontology::CallbackObject*,
+        yli::ontology::GenericParentModule&,
         const yli::data::AnyValue&);
 
 #endif

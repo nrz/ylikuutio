@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CALLBACK_CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
-#define YLIKUUTIO_CALLBACK_CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
 
 #define ENTER_CONSOLE_MAGIC_NUMBER 0xc1e1ece  // "cielece" ~ "kieleke" in modern Finnish ortography, means "projecting part" in Finnish
 #define EXIT_CONSOLE_MAGIC_NUMBER 0xaa110cc0  // "aallocco" ~ "aallokko" in modern Finnish ortography, means "swell of the sea/lake" in Finnish

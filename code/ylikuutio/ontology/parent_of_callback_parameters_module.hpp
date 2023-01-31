@@ -15,31 +15,28 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_CONSOLE_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_CONSOLE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_PARENT_OF_CALLBACK_PARAMETERS_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_PARENT_OF_CALLBACK_PARAMETERS_MODULE_HPP_INCLUDED
 
-#include "code/ylikuutio/data/any_value.hpp"
-
-// Include standard headers
-#include <optional> // std::optional
-#include <vector>   // std::vector
-
-namespace yli::callback
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
+#include "generic_parent_module.hpp"
 
 namespace yli::ontology
 {
-    class Console;
-}
+    class Registry;
+    class Entity;
 
-typedef std::optional<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
-        yli::callback::CallbackEngine*,
-        yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>&,
-        yli::ontology::Console&);
+    class ParentOfCallbackParametersModule final : public yli::ontology::GenericParentModule
+    {
+        public:
+            ParentOfCallbackParametersModule(
+                    yli::ontology::Entity* const entity,
+                    yli::ontology::Registry* const registry,
+                    const std::string& name) noexcept;
+
+            bool bind_child(yli::ontology::Entity* const callback_parameter) noexcept override;
+
+            ~ParentOfCallbackParametersModule() = default;
+    };
+}
 
 #endif

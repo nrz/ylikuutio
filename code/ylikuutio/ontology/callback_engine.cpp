@@ -17,6 +17,8 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
+#include "entity_struct.hpp"
+#include "family_templates.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -27,53 +29,30 @@
 
 namespace yli::ontology
 {
+    class Entity;
+    class GenericParentModule;
     class Universe;
-}
+    class Scene;
 
-namespace yli::callback
-{
-    void CallbackEngine::bind_callback_object(yli::callback::CallbackObject* const callback_object)
+    CallbackEngine::CallbackEngine(yli::ontology::Universe& universe,
+            yli::ontology::GenericParentModule* const universe_parent)
+        : Entity(universe, yli::ontology::EntityStruct()),
+        child_of_universe(universe_parent, this),
+        parent_of_callback_objects(this, &this->registry, "callback_objects")
     {
-        yli::hierarchy::bind_child_to_parent<yli::callback::CallbackObject*>(
-                callback_object,
-                this->callback_object_pointer_vector,
-                this->free_callback_objectID_queue,
-                this->number_of_callback_objects);
     }
 
-    CallbackEngine::CallbackEngine(yli::ontology::Universe& universe)
-        : universe { universe }
+    yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
     {
-        // constructor.
+        return new yli::ontology::CallbackObject(this->universe, &this->parent_of_callback_objects);
     }
 
-    CallbackEngine::~CallbackEngine()
-    {
-        // destroy all callback objects of this callback engine.
-        yli::hierarchy::delete_children<yli::callback::CallbackObject*>(
-                this->callback_object_pointer_vector,
-                this->number_of_callback_objects);
-    }
-
-    yli::callback::CallbackObject* CallbackEngine::create_callback_object()
-    {
-        return new yli::callback::CallbackObject(this);
-    }
-
-    yli::callback::CallbackObject* CallbackEngine::create_callback_object(
+    yli::ontology::CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        return new yli::callback::CallbackObject(callback, this);
-    }
-
-    void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer)
-    {
-        yli::hierarchy::set_child_pointer(
-                childID,
-                child_pointer,
-                this->callback_object_pointer_vector,
-                this->free_callback_objectID_queue,
-                this->number_of_callback_objects);
+        auto callback_object = new yli::ontology::CallbackObject(this->universe, &this->parent_of_callback_objects);
+        callback_object->set_new_callback(callback);
+        return callback_object;
     }
 
     std::optional<yli::data::AnyValue> CallbackEngine::execute(const yli::data::AnyValue& any_value)
@@ -82,10 +61,10 @@ namespace yli::callback
         bool is_any_callback_object_executed { false };
 
         // execute all callbacks.
-        for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
+        for (std::size_t child_i = 0; child_i < this->parent_of_callback_objects.child_pointer_vector.size(); child_i++)
         {
-            yli::callback::CallbackObject* callback_object_pointer = static_cast<yli::callback::CallbackObject*>(
-                    this->callback_object_pointer_vector[child_i]);
+            yli::ontology::CallbackObject* callback_object_pointer = static_cast<yli::ontology::CallbackObject*>(
+                    this->parent_of_callback_objects.child_pointer_vector[child_i]);
 
             if (callback_object_pointer != nullptr)
             {
@@ -140,8 +119,23 @@ namespace yli::callback
         return this->return_values.back();
     }
 
-    yli::ontology::Universe& CallbackEngine::get_universe() const
+    yli::ontology::Entity* CallbackEngine::get_parent() const
     {
-        return this->universe;
+        return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::Scene* CallbackEngine::get_scene() const
+    {
+        return nullptr;
+    }
+
+    std::size_t CallbackEngine::get_number_of_children() const
+    {
+        return this->parent_of_callback_objects.get_number_of_children();
+    }
+
+    std::size_t CallbackEngine::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_callback_objects.child_pointer_vector);
     }
 }

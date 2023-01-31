@@ -15,59 +15,47 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CALLBACK_CALLBACK_PARAMETER_HPP_INCLUDED
-#define YLIKUUTIO_CALLBACK_CALLBACK_PARAMETER_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_PARAMETER_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CALLBACK_PARAMETER_HPP_INCLUDED
 
-#include "callback_object.hpp"
+#include "entity.hpp"
+#include "child_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <limits>  // std::numeric_limits
-#include <queue>   // std::queue
 #include <string>  // std::string
-#include <vector>  // std::vector
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
-}
+    class CallbackObject;
 
-namespace yli::callback
-{
-    class CallbackParameter final
+    class CallbackParameter final : public yli::ontology::Entity
     {
         public:
-            // destructor.
-            ~CallbackParameter();
-
-            // getter.
-            const yli::data::AnyValue& get_any_value() const;
-
-            friend class yli::callback::CallbackObject;
-            template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(
-                        T1 child_pointer,
-                        std::vector<T1>& child_pointer_vector,
-                        std::queue<std::size_t>& free_childID_queue,
-                        std::size_t& number_of_children) noexcept;
-
-        private:
-            void bind_to_parent();
-
-            // constructor.
             CallbackParameter(
+                    yli::ontology::Universe& universe,
                     const std::string& name,
                     const yli::data::AnyValue& any_value,
                     const bool is_reference,
-                    yli::callback::CallbackObject* const parent);
+                    yli::ontology::GenericParentModule* const callback_object_parent);
 
-            yli::callback::CallbackObject* parent { nullptr }; // pointer to the callback object.
+            ~CallbackParameter() = default;
 
-            std::size_t childID { std::numeric_limits<std::size_t>::max() };
+            const yli::data::AnyValue& get_any_value() const;
 
-            std::string name;
+            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+            yli::ontology::ChildModule child_of_callback_object;
+
+            friend class CallbackObject;
+
+        private:
             yli::data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };

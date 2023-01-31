@@ -47,14 +47,10 @@
 // makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
 // may have a `Brain` that defines how it processes its inputs and what kind of output it sends.
 
-namespace yli::callback
-{
-    class CallbackEngine;
-}
-
 namespace yli::ontology
 {
     class Universe;
+    class CallbackEngine;
     class Scene;
     class GenericParentModule;
     struct BrainStruct;
@@ -87,7 +83,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            std::shared_ptr<yli::callback::CallbackEngine> callback_engine;
+            yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
 }
 

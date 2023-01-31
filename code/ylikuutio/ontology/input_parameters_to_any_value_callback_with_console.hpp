@@ -15,26 +15,26 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "console_callback_engine.hpp"
-#include "console_callback_object.hpp"
-#include "input_parameters_to_any_value_callback_with_console.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
+#ifndef YLIKUUTIO_ONTOLOGY_INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_CONSOLE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_INPUT_PARAMETERS_TO_ANY_VALUE_CALLBACK_WITH_CONSOLE_HPP_INCLUDED
+
+#include "code/ylikuutio/data/any_value.hpp"
+
+// Include standard headers
+#include <optional> // std::optional
 
 namespace yli::ontology
 {
-    class Universe;
+    class GenericParentModule;
+    class CallbackEngine;
+    class CallbackObject;
+    class Console;
 }
 
-namespace yli::console
-{
-    ConsoleCallbackEngine::ConsoleCallbackEngine(yli::ontology::Universe& universe)
-        : yli::callback::CallbackEngine(universe)
-    {
-        // constructor.
-    }
+typedef std::optional<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+        yli::ontology::CallbackEngine*,
+        yli::ontology::CallbackObject*,
+        yli::ontology::GenericParentModule&,
+        yli::ontology::Console&);
 
-    yli::console::ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(const InputParametersToAnyValueCallbackWithConsole callback, yli::ontology::Console* console_pointer)
-    {
-        return new yli::console::ConsoleCallbackObject(callback, this, console_pointer);
-    }
-}
+#endif

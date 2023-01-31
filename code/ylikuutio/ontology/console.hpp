@@ -59,13 +59,6 @@
 // each with its own commands. It is possible to change between the
 // `Console`s by activating another `Console`.
 
-namespace yli::callback
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
-
 namespace yli::input
 {
     class InputMode;
@@ -80,6 +73,9 @@ namespace yli::map
 namespace yli::ontology
 {
     class Universe;
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
     class Scene;
     class Font2D;
     class Registry;
@@ -129,223 +125,223 @@ namespace yli::ontology
 
             static std::optional<yli::data::AnyValue> enter_console(
                     yli::ontology::Universe& universe,
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     const yli::data::AnyValue&);
 
             // Console mode keyrelease callbacks begin here.
 
             static std::optional<yli::data::AnyValue> release_left_control_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_right_control_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_left_alt_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_right_alt_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_left_shift_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_right_shift_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_move_to_previous_input(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_move_to_next_input(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_backspace(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_tab(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_enter_key(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_ctrl_c(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_ctrl_w(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_page_up(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_page_down(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_home(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enable_end(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             // Console mode keypress callbacks begin here.
 
             static std::optional<yli::data::AnyValue> exit_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_left_control_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_right_control_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_left_alt_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_right_alt_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_left_shift_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> press_right_shift_in_console(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> move_to_previous_input(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> move_to_next_input(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> backspace(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> tab(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> enter_key(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> ctrl_c(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> ctrl_w(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> page_up(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> page_down(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> home(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> end(
-                    yli::callback::CallbackEngine*,
-                    yli::callback::CallbackObject*,
-                    std::vector<yli::callback::CallbackParameter*>&,
+                    yli::ontology::CallbackEngine*,
+                    yli::ontology::CallbackObject*,
+                    yli::ontology::GenericParentModule&,
                     yli::ontology::Console& console);
 
             // Console command callbacks begin here.

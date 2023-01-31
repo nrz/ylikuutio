@@ -16,9 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/callback/callback_engine.hpp"
-#include "code/ylikuutio/callback/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
@@ -26,10 +25,8 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
-
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
 
 TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
 {
@@ -43,7 +40,9 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
             &universe->parent_of_scenes);
 
     InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
-    std::shared_ptr<yli::callback::CallbackEngine> rest_callback_engine = std::make_shared<yli::callback::CallbackEngine>(*universe);
+    yli::ontology::CallbackEngine* const rest_callback_engine = new yli::ontology::CallbackEngine(
+            *universe,
+            &universe->parent_of_callback_engines);
     rest_callback_engine->create_callback_object(callback);
 
     yli::ontology::BrainStruct rest_brain_struct;

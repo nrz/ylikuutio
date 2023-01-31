@@ -18,7 +18,7 @@
 #include "console.hpp"
 #include "universe.hpp"
 #include "lisp_function.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/lisp/parser.hpp"
 #include "code/ylikuutio/lisp/executor.hpp"
@@ -33,15 +33,12 @@
 #include <string>    // std::string, std::getline
 #include <vector>    // std::vector
 
-namespace yli::callback
+namespace yli::ontology
 {
+    class GenericParentModule;
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
-}
-
-namespace yli::ontology
-{
     class Console;
 
     // Public callbacks.
@@ -52,9 +49,9 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Console::enter_console(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::ontology::Console* const console = universe.get_active_console();
@@ -79,9 +76,9 @@ namespace yli::ontology
     // Console mode keyrelease callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::release_left_control_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -92,9 +89,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_control_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -105,9 +102,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_left_alt_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -118,9 +115,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_alt_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -131,9 +128,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_left_shift_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -144,9 +141,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_shift_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -157,9 +154,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_move_to_previous_input(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -170,9 +167,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_move_to_next_input(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -183,9 +180,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_backspace(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -196,9 +193,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_tab(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -209,9 +206,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_enter_key(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -222,9 +219,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_ctrl_c(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -235,9 +232,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_ctrl_w(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -248,9 +245,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_page_up(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -261,9 +258,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_page_down(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -274,9 +271,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_home(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -287,9 +284,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_end(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -302,9 +299,9 @@ namespace yli::ontology
     // Console mode keypress callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::exit_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.exit_console())
@@ -319,9 +316,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_control_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -332,9 +329,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_control_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -345,9 +342,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_alt_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -358,9 +355,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_alt_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -371,9 +368,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_shift_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -384,9 +381,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_shift_in_console(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console)
@@ -397,9 +394,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::move_to_previous_input(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_move_to_previous_input)
@@ -437,9 +434,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::move_to_next_input(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_move_to_next_input && !console.command_history.empty())
@@ -472,9 +469,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::backspace(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console &&
@@ -489,9 +486,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::tab(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         yli::ontology::Universe& universe = console.get_universe();
@@ -578,9 +575,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enter_key(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (!console.in_console || !console.can_enter_key)
@@ -645,9 +642,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::ctrl_c(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console &&
@@ -666,9 +663,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::ctrl_w(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console &&
@@ -711,9 +708,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::page_up(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_page_up)
@@ -740,9 +737,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::page_down(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_page_down)
@@ -763,9 +760,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::home(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_home)
@@ -787,9 +784,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::end(
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             yli::ontology::Console& console)
     {
         if (console.in_console && console.can_end)

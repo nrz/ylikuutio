@@ -29,13 +29,9 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace yli::callback
-{
-    class CallbackEngine;
-}
-
 namespace yli::ontology
 {
+    class CallbackEngine;
     class Pipeline;
 
     struct ComputeTaskStruct: public yli::ontology::EntityStruct
@@ -46,7 +42,7 @@ namespace yli::ontology
         yli::ontology::Pipeline* parent { nullptr }; // Pointer to the `Pipeline`.
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
-        std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine { nullptr };
+        std::shared_ptr<yli::ontology::CallbackEngine> end_condition_callback_engine { nullptr };
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
         uint32_t texture_width         { 0 };

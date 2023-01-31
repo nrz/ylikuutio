@@ -26,6 +26,7 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
+#include "callback_engine.hpp"
 #include "scene.hpp"
 #include "font_2d.hpp"
 #include "text_2d.hpp"
@@ -38,9 +39,8 @@
 #include "variable_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
+#include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
@@ -130,6 +130,7 @@ namespace yli::ontology
     Universe::Universe(const yli::ontology::UniverseStruct& universe_struct)
         : Entity(*this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
+        parent_of_callback_engines(this, &this->registry, "callback_engines"),
         parent_of_ecosystems(this, &this->registry, "ecosystems"),
         parent_of_scenes(this, &this->registry, "scenes"),
         parent_of_font_2ds(this, &this->registry, "font_2ds"),
@@ -415,7 +416,7 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::callback::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
+                        yli::ontology::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
 
                         if (callback_engine != nullptr)
                         {
@@ -440,7 +441,7 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::callback::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
+                        yli::ontology::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
 
                         if (callback_engine == nullptr)
                         {
@@ -532,7 +533,7 @@ namespace yli::ontology
                 if (!this->in_console)
                 {
                     const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
-                    const std::vector<yli::callback::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
+                    const std::vector<yli::ontology::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
                     if (continuous_keypress_callback_engines == nullptr)
                     {
                         continue;
@@ -565,7 +566,7 @@ namespace yli::ontology
 
                         if (is_pressed)
                         {
-                            yli::callback::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
+                            yli::ontology::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
 
                             if (callback_engine == nullptr)
                             {

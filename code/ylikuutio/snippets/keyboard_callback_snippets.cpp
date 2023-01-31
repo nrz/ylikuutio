@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/callback/callback_object.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/ontology/callback_object.hpp"
+#include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -38,11 +38,10 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::variant
-#include <vector>   // std::vector
 
 // Callbacks' input parameters can be accessed either through
-// `yli::callback::CallbackObject* callback_object`or
-// `std::vector<yli::callback::CallbackParameter*>& input parameters`.
+// `yli::ontology::CallbackObject* callback_object`or
+// `yli::ontology::GenericParentModule& input parameters`.
 //
 // To access a name input variable:
 // `std::optional<yli::data::AnyValue> some_any_value = callback_object->get_any_value("foo");`
@@ -59,10 +58,10 @@
 // First `CallbackParameter` of a `CallbackObject` gets index 0,
 // second `CallbackParameter` gets index 1, etc.
 
-namespace yli::callback
+namespace yli::ontology
 {
+    class GenericParentModule;
     class CallbackEngine;
-    class CallbackParameter;
 }
 
 namespace yli::snippets
@@ -71,7 +70,7 @@ namespace yli::snippets
      * Helper functions for callbacks begin here.                        *
     \*********************************************************************/
 
-    bool move_to_direction(yli::ontology::Universe& universe, const yli::callback::CallbackObject* const /* callback_object */, const glm::vec3& moving_direction)
+    bool move_to_direction(yli::ontology::Universe& universe, const yli::ontology::CallbackObject* const /* callback_object */, const glm::vec3& moving_direction)
     {
         // Movement changes location and orientation variables stored in `yli::ontology::Universe`.
         // This way there is no need to dereference pointer to the current `yli::ontology::Camera`.
@@ -116,9 +115,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> release_first_turbo(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.is_first_turbo_pressed = false;
@@ -127,9 +126,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> release_second_turbo(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.is_second_turbo_pressed = false;
@@ -138,9 +137,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> enable_toggle_invert_mouse(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.can_toggle_invert_mouse = true;
@@ -149,9 +148,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> enable_toggle_flight_mode(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.can_toggle_flight_mode = true;
@@ -160,9 +159,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> enable_toggle_help_mode(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.can_toggle_help_mode = true;
@@ -175,9 +174,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> exit_program(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
@@ -186,9 +185,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> first_turbo(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.is_first_turbo_pressed = true;
@@ -197,9 +196,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> second_turbo(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         universe.is_second_turbo_pressed = true;
@@ -208,9 +207,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> move_forward(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_direction);
@@ -219,9 +218,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> move_backward(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_direction);
@@ -230,9 +229,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> strafe_left(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_right);
@@ -241,9 +240,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> strafe_right(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_right);
@@ -252,9 +251,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> ascent(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_up);
@@ -263,9 +262,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> descent(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_up);
@@ -274,9 +273,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> toggle_invert_mouse(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         if (universe.can_toggle_invert_mouse)
@@ -289,9 +288,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> toggle_flight_mode(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         if (universe.can_toggle_flight_mode)
@@ -311,9 +310,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> toggle_help_mode(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* /* callback_object */,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* /* callback_object */,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         if (universe.can_toggle_help_mode)
@@ -326,9 +325,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> delete_entity(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         std::optional<yli::data::AnyValue> entity_name_string_any_value = callback_object->get_arg(0);
@@ -364,9 +363,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> switch_to_new_material(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         std::optional<yli::data::AnyValue> species_entity_name_string_any_value = callback_object->get_arg(0);
@@ -442,9 +441,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> transform_into_new_species(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
         std::optional<yli::data::AnyValue> object_entity_name_string_any_value = callback_object->get_arg(0);

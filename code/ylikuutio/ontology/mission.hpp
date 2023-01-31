@@ -20,7 +20,7 @@
 
 #include "child_module.hpp"
 #include "entity.hpp"
-#include "code/ylikuutio/callback/callback_engine.hpp"
+#include "callback_engine.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -50,7 +50,7 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
 
-            yli::callback::CallbackEngine callback_engine;
+            yli::ontology::CallbackEngine callback_engine;
     };
 }
 

@@ -15,33 +15,39 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "callback_parameter.hpp"
+#include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
-#include "code/ylikuutio/callback/callback_parameter.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 
-namespace yli::console
+namespace yli::ontology
 {
-    ConsoleCallbackObject::~ConsoleCallbackObject()
+    ConsoleCallbackObject::ConsoleCallbackObject(
+            yli::ontology::Universe& universe,
+            InputParametersToAnyValueCallbackWithConsole console_callback,
+            yli::ontology::GenericParentModule* const console_callback_engine_parent,
+            yli::ontology::Console* console_pointer)
+        : yli::ontology::CallbackObject(universe, console_callback_engine_parent),
+        console_callback { console_callback },
+        console_pointer { console_pointer }
     {
-        // destroy all callback parameters of this callback object.
-        std::cout << "All callback parameters of this console callback object will be destroyed.\n";
-        for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
-        {
-            delete this->callback_parameter_pointer_vector[child_i];
-        }
     }
 
     std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
     {
-        if (this->console_callback != nullptr && this->console_pointer != nullptr)
+        if (this->get_parent() != nullptr && this->console_callback != nullptr && this->console_pointer != nullptr)
         {
-            return yli::data::AnyValue(this->console_callback(this->parent, this, this->callback_parameter_pointer_vector, *this->console_pointer));
+            return yli::data::AnyValue(
+                    this->console_callback(
+                        static_cast<yli::ontology::ConsoleCallbackEngine*>(this->get_parent()),
+                        this,
+                        this->parent_of_callback_parameters,
+                        *this->console_pointer));
         }
+
         return std::nullopt;
     }
 }

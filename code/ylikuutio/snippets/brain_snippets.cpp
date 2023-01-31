@@ -25,27 +25,22 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
-#include <vector>   // std::vector
-
-namespace yli::callback
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
+    class CallbackEngine;
+    class CallbackObject;
 }
 
 namespace yli::snippets
 {
     std::optional<yli::data::AnyValue> rest(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& /* any_value */)
     {
         // Do nothing.
@@ -54,9 +49,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> go_east(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -72,9 +67,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> go_west(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -90,9 +85,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> go_north(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -108,9 +103,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> go_south(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -126,9 +121,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_to_east(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -144,9 +139,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_to_west(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -162,9 +157,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_to_north(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -180,9 +175,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_to_south(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -198,9 +193,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_and_go_east(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine* callback_engine,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>& callback_parameters,
+            yli::ontology::CallbackEngine* callback_engine,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule& callback_parameters,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -216,9 +211,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_and_go_west(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine* callback_engine,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>& callback_parameters,
+            yli::ontology::CallbackEngine* callback_engine,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule& callback_parameters,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -234,9 +229,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_and_go_north(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine* callback_engine,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>& callback_parameters,
+            yli::ontology::CallbackEngine* callback_engine,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule& callback_parameters,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -252,9 +247,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> orient_and_go_south(
             yli::ontology::Universe& universe,
-            yli::callback::CallbackEngine* callback_engine,
-            yli::callback::CallbackObject* callback_object,
-            std::vector<yli::callback::CallbackParameter*>& callback_parameters,
+            yli::ontology::CallbackEngine* callback_engine,
+            yli::ontology::CallbackObject* callback_object,
+            yli::ontology::GenericParentModule& callback_parameters,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -270,9 +265,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> rotate_clockwise(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
@@ -288,9 +283,9 @@ namespace yli::snippets
 
     std::optional<yli::data::AnyValue> rotate_counterclockwise(
             yli::ontology::Universe&,
-            yli::callback::CallbackEngine*,
-            yli::callback::CallbackObject*,
-            std::vector<yli::callback::CallbackParameter*>&,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
             const yli::data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())

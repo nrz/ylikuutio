@@ -17,7 +17,7 @@
 
 #include "console_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/callback/callback_magic_numbers.hpp"
+#include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers

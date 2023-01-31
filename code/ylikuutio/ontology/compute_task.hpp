@@ -50,14 +50,10 @@
 // `end_condition_callback_engine->execute(nullptr)` is still called and taken into account
 // in every iteration.
 
-namespace yli::callback
-{
-    class CallbackEngine;
-}
-
 namespace yli::ontology
 {
     class Universe;
+    class CallbackEngine;
     class Scene;
     class Pipeline;
     struct ComputeTaskStruct;
@@ -100,7 +96,7 @@ namespace yli::ontology
             yli::data::AnyValue right_filler_vector_any_value;
 
             // End iterating when `end_condition_callback_engine` returns `true`.
-            std::shared_ptr<yli::callback::CallbackEngine> end_condition_callback_engine;
+            std::shared_ptr<yli::ontology::CallbackEngine> end_condition_callback_engine;
 
             std::shared_ptr<std::vector<uint8_t>> result_vector { nullptr };
 

@@ -15,46 +15,38 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 
+#include "callback_object.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
-#include "code/ylikuutio/callback/callback_object.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
 
-namespace yli::callback
+namespace yli::ontology
 {
+    class GenericParentModule;
+    class Universe;
     class CallbackEngine;
     class CallbackParameter;
-}
-
-namespace yli::console
-{
     class ConsoleCallbackEngine;
+    class Console;
 
-    class ConsoleCallbackObject final : public yli::callback::CallbackObject
+    class ConsoleCallbackObject final : public yli::ontology::CallbackObject
     {
         public:
-            // destructor.
-            ~ConsoleCallbackObject();
+            ~ConsoleCallbackObject() = default;
 
-            friend class yli::console::ConsoleCallbackEngine;
+            friend class ConsoleCallbackEngine;
 
         private:
-            // constructor.
-            ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                    yli::callback::CallbackEngine* parent, yli::ontology::Console* console_pointer)
-                : yli::callback::CallbackObject(nullptr, parent)
-            {
-                // constructor.
-                this->callback = nullptr;
-                this->console_callback = console_callback;
-                this->console_pointer = console_pointer;
-            }
+            ConsoleCallbackObject(
+                    yli::ontology::Universe& universe,
+                    InputParametersToAnyValueCallbackWithConsole console_callback,
+                    yli::ontology::GenericParentModule* const console_callback_engine_parent,
+                    yli::ontology::Console* console_pointer);
 
             // execute this callback.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&) override;

@@ -15,9 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CALLBACK_CALLBACK_ENGINE_HPP_INCLUDED
-#define YLIKUUTIO_CALLBACK_CALLBACK_ENGINE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
 
+#include "entity.hpp"
+#include "child_module.hpp"
+#include "generic_parent_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -25,19 +28,15 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
     class Universe;
-}
-
-namespace yli::callback
-{
     class CallbackObject;
+    class Scene;
 
-    class CallbackEngine
+    class CallbackEngine : public yli::ontology::Entity
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
@@ -62,16 +61,14 @@ namespace yli::callback
         //    as input parameter for the `CallbackParameter` constructor.
 
         public:
-            void bind_callback_object(yli::callback::CallbackObject* const callback_object);
+            explicit CallbackEngine(
+                    yli::ontology::Universe& universe,
+                    yli::ontology::GenericParentModule* const universe_parent);
 
-            // constructor.
-            explicit CallbackEngine(yli::ontology::Universe& universe);
+            virtual ~CallbackEngine() = default;
 
-            // destructor.
-            virtual ~CallbackEngine();
-
-            yli::callback::CallbackObject* create_callback_object();
-            yli::callback::CallbackObject* create_callback_object(
+            yli::ontology::CallbackObject* create_callback_object();
+            yli::ontology::CallbackObject* create_callback_object(
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
@@ -81,21 +78,15 @@ namespace yli::callback
             std::optional<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
             std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
-            yli::ontology::Universe& get_universe() const;
+            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+            yli::ontology::ChildModule child_of_universe;
+            yli::ontology::GenericParentModule parent_of_callback_objects;
 
         private:
-            // `CallbackEngine` is not an `Entity`.
-            // Therefore they are not descendants of the `Universe`.
-            // `CallbackEngine`s just have a `Universe` reference.
-            yli::ontology::Universe& universe;
-
-            // this method sets a callback object pointer.
-            void set_callback_object_pointer(const std::size_t childID, yli::callback::CallbackObject* const child_pointer);
-
-            std::vector<yli::callback::CallbackObject*> callback_object_pointer_vector;
-            std::queue<std::size_t> free_callback_objectID_queue;
-            std::size_t number_of_callback_objects { 0 };
-
             std::vector<std::optional<yli::data::AnyValue>> return_values;
     };
 }

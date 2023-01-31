@@ -20,22 +20,15 @@
 
 #include "entity_struct.hpp"
 
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
-
-namespace yli::callback
-{
-    class CallbackEngine;
-}
-
 namespace yli::ontology
 {
+    class CallbackEngine;
     class Scene;
 
     struct BrainStruct: public yli::ontology::EntityStruct
     {
         yli::ontology::Scene* parent { nullptr };
-        std::shared_ptr<yli::callback::CallbackEngine> callback_engine { nullptr };
+        yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
 }
 

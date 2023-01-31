@@ -23,22 +23,22 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace yli::callback
+namespace yli::data
+{
+    class AnyValue;
+}
+
+namespace yli::ontology
 {
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
 }
 
-namespace yli::data
-{
-    class AnyValue;
-}
-
 typedef std::shared_ptr<yli::data::AnyValue> (*GetContentCallback) (
-        yli::callback::CallbackEngine*,
-        yli::callback::CallbackObject*,
-        std::vector<yli::callback::CallbackParameter*>&,
+        yli::ontology::CallbackEngine*,
+        yli::ontology::CallbackObject*,
+        std::vector<yli::ontology::CallbackParameter*>&,
         uint32_t x_start,
         uint32_t y_start,
         uint32_t z_start,
