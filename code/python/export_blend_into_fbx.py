@@ -2,7 +2,7 @@
 
 # Data preprocessing script for converting .blend into .fbx.
 #
-# Copyright (C) 2015-2022 Antti Nuortimo.
+# Copyright (C) 2015-2023 Antti Nuortimo.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
