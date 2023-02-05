@@ -74,7 +74,7 @@ namespace yli::ontology
             // E.g. `Universe` may have many `Scene`s, but is descendant of none.
             virtual yli::ontology::Scene* get_scene() const = 0;
 
-            virtual yli::ontology::EntityFactory* get_entity_factory() const;
+            virtual yli::ontology::EntityFactory& get_entity_factory() const;
 
             virtual yli::ontology::Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;

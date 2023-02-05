@@ -50,12 +50,7 @@ namespace yli::ontology
 
             yli::ontology::Universe& universe = console->get_universe();
 
-            yli::ontology::EntityFactory* const entity_factory = universe.get_entity_factory();
-
-            if (entity_factory == nullptr)
-            {
-                return nullptr;
-            }
+            yli::ontology::EntityFactory& entity_factory = universe.get_entity_factory();
 
             yli::ontology::Entity* const lisp_function_entity = universe.get_entity(name);
 
@@ -66,7 +61,7 @@ namespace yli::ontology
                 // There was not any `Entity` with that name.
                 yli::ontology::LispFunctionStruct lisp_function_struct;
                 lisp_function_struct.parent = console;
-                yli::ontology::Entity* const new_lisp_function_entity = entity_factory->create_lisp_function(lisp_function_struct);
+                yli::ontology::Entity* const new_lisp_function_entity = entity_factory.create_lisp_function(lisp_function_struct);
 
                 lisp_function = dynamic_cast<yli::ontology::LispFunction*>(new_lisp_function_entity);
 

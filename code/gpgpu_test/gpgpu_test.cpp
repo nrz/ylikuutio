@@ -97,7 +97,7 @@ namespace gpgpu_test
 
         my_universe->set_global_name("universe");
 
-        yli::ontology::EntityFactory* const entity_factory = my_universe->get_entity_factory();
+        yli::ontology::EntityFactory& entity_factory = my_universe->get_entity_factory();
 
         if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
         {
@@ -110,7 +110,7 @@ namespace gpgpu_test
         // GPGPU test `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-        yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(entity_factory);
+        yli::ontology::Entity* const gpgpu_test_scene_entity = gpgpu_test::create_gpgpu_test_scene(&entity_factory);
 
         if (gpgpu_test_scene_entity == nullptr)
         {

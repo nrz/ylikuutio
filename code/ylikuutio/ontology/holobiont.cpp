@@ -280,12 +280,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        const yli::ontology::EntityFactory* const entity_factory = parent.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return std::nullopt;
-        }
+        const yli::ontology::EntityFactory& entity_factory = parent.get_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);
@@ -341,7 +336,7 @@ namespace yli::ontology
         holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
         holobiont_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
-        entity_factory->create_holobiont(holobiont_struct);
+        entity_factory.create_holobiont(holobiont_struct);
         return std::nullopt;
     }
 

@@ -70,12 +70,8 @@ namespace yli::ontology
             object_struct.original_scale_vector = text_3d->original_scale_vector;
             object_struct.cartesian_coordinates = text_3d->location; // TODO: adjust this as needed.
 
-            yli::ontology::EntityFactory* const entity_factory = text_3d->get_entity_factory();
-
-            if (entity_factory != nullptr)
-            {
-                entity_factory->create_object(object_struct);
-            }
+            yli::ontology::EntityFactory& entity_factory = text_3d->get_entity_factory();
+            entity_factory.create_object(object_struct);
         }
 
         // TODO: Add support for Unicode strings.

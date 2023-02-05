@@ -85,6 +85,7 @@
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept>     // std::runtime_error
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <variant>       // std::holds_alternative, std::variant
@@ -1122,14 +1123,14 @@ namespace yli::ontology
         this->number_of_frames = 0;
     }
 
-    yli::ontology::EntityFactory* Universe::get_entity_factory() const
+    yli::ontology::EntityFactory& Universe::get_entity_factory() const
     {
         if (this->entity_factory == nullptr)
         {
-            return nullptr;
+            throw std::runtime_error("ERROR: `Universe::get_entity_factory`: `this->entity_factory` is `nullptr`!");
         }
 
-        return this->entity_factory.get();
+        return *this->entity_factory.get();
     }
 
     std::string Universe::eval_string(const std::string& my_string) const

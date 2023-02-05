@@ -136,7 +136,7 @@ namespace yli::ontology
         return this->universe;
     }
 
-    yli::ontology::EntityFactory* Entity::get_entity_factory() const
+    yli::ontology::EntityFactory& Entity::get_entity_factory() const
     {
         return this->universe.get_entity_factory();
     }
@@ -214,16 +214,11 @@ namespace yli::ontology
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
-        yli::ontology::EntityFactory* const entity_factory = this->universe.get_entity_factory();
-
-        if (entity_factory == nullptr)
-        {
-            return;
-        }
+        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
 
         yli::ontology::VariableStruct new_variable_struct(variable_struct);
         new_variable_struct.parent = this;
-        entity_factory->create_variable(new_variable_struct, any_value);
+        entity_factory.create_variable(new_variable_struct, any_value);
     }
 
     bool Entity::has_variable(const std::string& variable_name) const
