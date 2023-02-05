@@ -22,7 +22,10 @@
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/callback_engine_struct.hpp"
+#include "code/ylikuutio/ontology/callback_object_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
@@ -292,8 +295,13 @@ std::optional<yli::data::AnyValue> return_uint32_t_deadbeef(
 TEST(callback_engine_must_function_properly, nop)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
-    yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+
+    yli::ontology::CallbackObjectStruct callback_object_struct;
+    auto callback_object = static_cast<yli::ontology::CallbackObject*>(callback_engine->create_callback_object());
     callback_object->set_new_callback(&nop);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
@@ -303,7 +311,10 @@ TEST(callback_engine_must_function_properly, nop)
 TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&return_uint32_t_deadbeef);
 
@@ -315,14 +326,16 @@ TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
 TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
     const int32_t zero = 0;
-    const bool is_reference_0 = false;
     yli::data::AnyValue zero_value(zero);
-    callback_object->create_callback_parameter("", zero_value, is_reference_0);
+    callback_object->create_callback_parameter("", zero_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -333,14 +346,16 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_one)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
     const int32_t one = 1;
-    const bool is_reference_1 = false;
     yli::data::AnyValue one_value(one);
-    callback_object->create_callback_parameter("", one_value, is_reference_1);
+    callback_object->create_callback_parameter("", one_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -351,14 +366,16 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_two)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
     const int32_t two = 2;
-    const bool is_reference_2 = false;
     yli::data::AnyValue two_value(two);
-    callback_object->create_callback_parameter("", two_value, is_reference_2);
+    callback_object->create_callback_parameter("", two_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -369,14 +386,16 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_one)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
     const int32_t minus_one = -1;
-    const bool is_reference_minus_1 = false;
     yli::data::AnyValue minus_one_value(minus_one);
-    callback_object->create_callback_parameter("", minus_one_value, is_reference_minus_1);
+    callback_object->create_callback_parameter("", minus_one_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -387,14 +406,16 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_two)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
     const int32_t minus_two = -2;
-    const bool is_reference_minus_2 = false;
     yli::data::AnyValue minus_two_value(minus_two);
-    callback_object->create_callback_parameter("", minus_two_value, is_reference_minus_2);
+    callback_object->create_callback_parameter("", minus_two_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -405,14 +426,16 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&square);
 
     const int32_t three = 3;
-    const bool is_reference_3 = false;
     yli::data::AnyValue three_value(three);
-    callback_object->create_callback_parameter("foo", three_value, is_reference_3);
+    callback_object->create_callback_parameter("foo", three_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -423,14 +446,16 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&square);
 
     const uint32_t three = 3;
-    const bool is_reference_3 = false;
     yli::data::AnyValue three_value(three);
-    callback_object->create_callback_parameter("foo", three_value, is_reference_3);
+    callback_object->create_callback_parameter("foo", three_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -441,19 +466,46 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&expt);
 
     const uint32_t five = 5;
-    const bool is_reference_5 = false;
     yli::data::AnyValue five_value(five);
-    callback_object->create_callback_parameter("foo", five_value, is_reference_5);
+    callback_object->create_callback_parameter("foo", five_value);
 
     const uint32_t seven = 7;
-    const bool is_reference_7 = false;
     yli::data::AnyValue seven_value(seven);
-    callback_object->create_callback_parameter("foo", seven_value, is_reference_7);
+    callback_object->create_callback_parameter("foo", seven_value);
+
+    std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
+    ASSERT_TRUE(result);
+    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
+    ASSERT_EQ(std::get<uint32_t>((*result).data), 78125);
+}
+
+TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with_named_inputs)
+{
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
+    callback_object->set_new_callback(&expt_with_named_inputs);
+
+    const uint32_t five = 5;
+    yli::data::AnyValue five_value(five);
+    callback_object->create_callback_parameter("base", five_value);
+    std::optional<yli::data::AnyValue> anyvalue_base = callback_object->get_any_value("base");
+    ASSERT_TRUE(std::holds_alternative<uint32_t>((*anyvalue_base).data));
+
+    const uint32_t seven = 7;
+    yli::data::AnyValue seven_value(seven);
+    callback_object->create_callback_parameter("exponent", seven_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -464,21 +516,22 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equals_282475249)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object_expt = callback_engine->create_callback_object();
     callback_object_expt->set_new_callback(&expt);
     yli::ontology::CallbackObject* callback_object_square_last = callback_engine->create_callback_object();
     callback_object_square_last->set_new_callback(&square_last);
 
     const uint32_t seven = 7;
-    const bool is_reference_7 = false;
     yli::data::AnyValue seven_value(seven);
-    callback_object_expt->create_callback_parameter("", seven_value, is_reference_7);
+    callback_object_expt->create_callback_parameter("", seven_value);
 
     const uint32_t five = 5;
-    const bool is_reference_5 = false;
     yli::data::AnyValue five_value(five);
-    callback_object_expt->create_callback_parameter("", five_value, is_reference_5);
+    callback_object_expt->create_callback_parameter("", five_value);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
@@ -489,14 +542,16 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536)
 {
     yli::ontology::Universe* const universe = new yli::ontology::Universe(yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    auto callback_engine = new yli::ontology::CallbackEngine(*universe, &universe->parent_of_callback_engines);
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
     yli::ontology::CallbackObject* callback_object_1st_square = callback_engine->create_callback_object();
     callback_object_1st_square->set_new_callback(&square);
 
     const uint32_t two = 2;
-    const bool is_reference_2 = false;
     yli::data::AnyValue two_value(two);
-    callback_object_1st_square->create_callback_parameter("", two_value, is_reference_2);
+    callback_object_1st_square->create_callback_parameter("", two_value);
 
     yli::ontology::CallbackObject* callback_object_2nd_square = callback_engine->create_callback_object();
     callback_object_2nd_square->set_new_callback(&square_last);

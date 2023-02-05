@@ -35,6 +35,7 @@
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/custom_entity_factory.hpp"
+#include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -87,49 +88,64 @@ namespace hirvi
         helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
 
         // Create the `CallbackEngine`s for the `Brain`s.
-        auto rest_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
+        auto rest_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(rest_callback_engine_struct));
         rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-        auto go_east_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct go_east_callback_engine_struct;
+        auto go_east_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(go_east_callback_engine_struct));
         go_east_callback_engine->create_callback_object(&yli::snippets::go_east);
 
-        auto go_west_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct go_west_callback_engine_struct;
+        auto go_west_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(go_west_callback_engine_struct));
         go_west_callback_engine->create_callback_object(&yli::snippets::go_west);
 
-        auto go_north_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct go_north_callback_engine_struct;
+        auto go_north_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(go_north_callback_engine_struct));
         go_north_callback_engine->create_callback_object(&yli::snippets::go_north);
 
-        auto go_south_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
+        auto go_south_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(go_south_callback_engine_struct));
         go_south_callback_engine->create_callback_object(&yli::snippets::go_south);
 
-        auto orient_to_east_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_to_east_callback_engine_struct;
+        auto orient_to_east_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_to_east_callback_engine_struct));
         orient_to_east_callback_engine->create_callback_object(&yli::snippets::orient_to_east);
 
-        auto orient_to_west_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_to_west_callback_engine_struct;
+        auto orient_to_west_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_to_west_callback_engine_struct));
         orient_to_west_callback_engine->create_callback_object(&yli::snippets::orient_to_west);
 
-        auto orient_to_north_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_to_north_callback_engine_struct;
+        auto orient_to_north_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_to_north_callback_engine_struct));
         orient_to_north_callback_engine->create_callback_object(&yli::snippets::orient_to_north);
 
-        auto orient_to_south_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_to_south_callback_engine_struct;
+        auto orient_to_south_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_to_south_callback_engine_struct));
         orient_to_south_callback_engine->create_callback_object(&yli::snippets::orient_to_south);
 
-        auto orient_and_go_east_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
+        auto orient_and_go_east_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_and_go_east_callback_engine_struct));
         orient_and_go_east_callback_engine->create_callback_object(&yli::snippets::orient_and_go_east);
 
-        auto orient_and_go_west_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_and_go_west_callback_engine_struct;
+        auto orient_and_go_west_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_and_go_west_callback_engine_struct));
         orient_and_go_west_callback_engine->create_callback_object(&yli::snippets::orient_and_go_west);
 
-        auto orient_and_go_north_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_and_go_north_callback_engine_struct;
+        auto orient_and_go_north_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_and_go_north_callback_engine_struct));
         orient_and_go_north_callback_engine->create_callback_object(&yli::snippets::orient_and_go_north);
 
-        auto orient_and_go_south_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct orient_and_go_south_callback_engine_struct;
+        auto orient_and_go_south_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(orient_and_go_south_callback_engine_struct));
         orient_and_go_south_callback_engine->create_callback_object(&yli::snippets::orient_and_go_south);
 
-        auto rotate_clockwise_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct rotate_clockwise_callback_engine_struct;
+        auto rotate_clockwise_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(rotate_clockwise_callback_engine_struct));
         rotate_clockwise_callback_engine->create_callback_object(&yli::snippets::rotate_clockwise);
 
-        auto rotate_counterclockwise_callback_engine = new yli::ontology::CallbackEngine(universe, &universe.parent_of_callback_engines);
+        yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
+        auto rotate_counterclockwise_callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory->create_callback_engine(rotate_counterclockwise_callback_engine_struct));
         rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
         // Create the `Brain`s.

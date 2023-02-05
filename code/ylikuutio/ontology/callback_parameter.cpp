@@ -17,7 +17,7 @@
 
 #include "callback_parameter.hpp"
 #include "callback_object.hpp"
-#include "entity_struct.hpp"
+#include "callback_parameter_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -25,22 +25,26 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
+namespace yli::data
+{
+    class AnyValue;
+}
+
 namespace yli::ontology
 {
     class Entity;
     class Universe;
     class Scene;
+    struct EntityStruct;
 
     CallbackParameter::CallbackParameter(
             yli::ontology::Universe& universe,
-            const std::string& name,
+            const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
             const yli::data::AnyValue& any_value,
-            const bool is_reference,
             yli::ontology::GenericParentModule* const callback_object_parent)
-        : Entity(universe, yli::ontology::EntityStruct("", name)),
+        : Entity(universe, callback_parameter_struct),
         child_of_callback_object(callback_object_parent, this),
-        any_value    { any_value },
-        is_reference { is_reference }
+        any_value    { any_value }
     {
     }
 

@@ -31,15 +31,15 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class CallbackObject;
+    struct CallbackParameterStruct;
 
     class CallbackParameter final : public yli::ontology::Entity
     {
         public:
             CallbackParameter(
                     yli::ontology::Universe& universe,
-                    const std::string& name,
+                    const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
                     const yli::data::AnyValue& any_value,
-                    const bool is_reference,
                     yli::ontology::GenericParentModule* const callback_object_parent);
 
             ~CallbackParameter() = default;
@@ -57,7 +57,6 @@ namespace yli::ontology
 
         private:
             yli::data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
-            bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 }
 

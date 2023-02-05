@@ -9,7 +9,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.
 [ ] Convert `CallbackEngine` into `CallbackModule` that inherits `GenericParentModule`.
 [ ] Implement custom memory allocator.
 [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
@@ -334,3 +333,4 @@ Ready:
 [x] Rename `Shader` to `Pipeline`.
 [x] Improve `create_yli_ontology_class.py` to create `default` destructors.
 [x] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
+[x] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.

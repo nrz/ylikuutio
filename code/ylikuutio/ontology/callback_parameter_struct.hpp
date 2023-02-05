@@ -15,27 +15,18 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_PARENT_OF_CALLBACK_PARAMETERS_MODULE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_PARENT_OF_CALLBACK_PARAMETERS_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_PARAMETER_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CALLBACK_PARAMETER_STRUCT_HPP_INCLUDED
 
-#include "generic_parent_module.hpp"
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    class Registry;
-    class Entity;
+    class CallbackObject;
 
-    class ParentOfCallbackParametersModule final : public yli::ontology::GenericParentModule
+    struct CallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        public:
-            ParentOfCallbackParametersModule(
-                    yli::ontology::Entity* const entity,
-                    yli::ontology::Registry* const registry,
-                    const std::string& name) noexcept;
-
-            bool bind_child(yli::ontology::Entity* const callback_parameter) noexcept override;
-
-            ~ParentOfCallbackParametersModule() = default;
+        yli::ontology::CallbackObject* parent { nullptr };
     };
 }
 

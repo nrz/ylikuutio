@@ -16,15 +16,18 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_engine.hpp"
+#include "universe.hpp"
 #include "callback_object.hpp"
-#include "entity_struct.hpp"
+#include "callback_object_struct.hpp"
 #include "family_templates.hpp"
+#include "entity_factory.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cerr
 #include <optional> // std::optional
 
 namespace yli::ontology
@@ -44,13 +47,21 @@ namespace yli::ontology
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
     {
-        return new yli::ontology::CallbackObject(this->universe, &this->parent_of_callback_objects);
+        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+
+        yli::ontology::CallbackObjectStruct callback_object_struct;
+        callback_object_struct.parent = this;
+        return static_cast<yli::ontology::CallbackObject*>(entity_factory.create_callback_object(callback_object_struct));
     }
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        auto callback_object = new yli::ontology::CallbackObject(this->universe, &this->parent_of_callback_objects);
+        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+
+        yli::ontology::CallbackObjectStruct callback_object_struct;
+        callback_object_struct.parent = this;
+        auto callback_object = static_cast<yli::ontology::CallbackObject*>(entity_factory.create_callback_object(callback_object_struct));
         callback_object->set_new_callback(callback);
         return callback_object;
     }

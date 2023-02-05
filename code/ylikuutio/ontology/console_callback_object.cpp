@@ -18,6 +18,7 @@
 #include "callback_parameter.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
+#include "console_callback_object_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -27,12 +28,11 @@ namespace yli::ontology
 {
     ConsoleCallbackObject::ConsoleCallbackObject(
             yli::ontology::Universe& universe,
-            InputParametersToAnyValueCallbackWithConsole console_callback,
-            yli::ontology::GenericParentModule* const console_callback_engine_parent,
-            yli::ontology::Console* console_pointer)
-        : yli::ontology::CallbackObject(universe, console_callback_engine_parent),
-        console_callback { console_callback },
-        console_pointer { console_pointer }
+            const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
+            yli::ontology::GenericParentModule* const console_callback_engine_parent)
+        : yli::ontology::CallbackObject(universe, console_callback_object_struct, console_callback_engine_parent),
+        console_callback { console_callback_object_struct.console_callback },
+        console_pointer { console_callback_object_struct.console_pointer }
     {
     }
 

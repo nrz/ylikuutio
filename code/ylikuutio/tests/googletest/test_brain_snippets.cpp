@@ -21,7 +21,9 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
@@ -33,6 +35,8 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
 
+    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
+
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
             *universe,
@@ -40,9 +44,11 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
             &universe->parent_of_scenes);
 
     InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
-    yli::ontology::CallbackEngine* const rest_callback_engine = new yli::ontology::CallbackEngine(
-            *universe,
-            &universe->parent_of_callback_engines);
+
+    yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
+    yli::ontology::CallbackEngine* const rest_callback_engine = static_cast<yli::ontology::CallbackEngine*>(
+            entity_factory.create_callback_engine(rest_callback_engine_struct));
+
     rest_callback_engine->create_callback_object(callback);
 
     yli::ontology::BrainStruct rest_brain_struct;

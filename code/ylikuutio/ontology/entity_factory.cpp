@@ -20,6 +20,9 @@
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
+#include "callback_engine.hpp"
+#include "callback_object.hpp"
+#include "callback_parameter.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
 #include "pipeline.hpp"
@@ -33,12 +36,17 @@
 #include "text_3d.hpp"
 #include "font_2d.hpp"
 #include "console.hpp"
+#include "console_callback_engine.hpp"
+#include "console_callback_object.hpp"
 #include "lisp_function.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "brain.hpp"
 #include "variable_struct.hpp"
+#include "callback_engine_struct.hpp"
+#include "callback_object_struct.hpp"
+#include "callback_parameter_struct.hpp"
 #include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
 #include "pipeline_struct.hpp"
@@ -49,6 +57,8 @@
 #include "vector_font_struct.hpp"
 #include "text_3d_struct.hpp"
 #include "console_struct.hpp"
+#include "console_callback_engine_struct.hpp"
+#include "console_callback_object_struct.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "lisp_function_struct.hpp"
@@ -73,6 +83,63 @@ namespace yli::ontology
     yli::ontology::Universe& EntityFactory::get_universe() const
     {
         return this->universe;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_callback_engine(
+            const yli::ontology::CallbackEngineStruct& callback_engine_struct) const
+    {
+        yli::ontology::Entity* callback_engine_entity = new yli::ontology::CallbackEngine(
+                this->universe,
+                &this->universe.parent_of_callback_engines);
+
+        if (!callback_engine_struct.global_name.empty() && callback_engine_struct.local_name.empty())
+        {
+            // Only `global_name` given, OK.
+            callback_engine_entity->set_global_name(callback_engine_struct.global_name);
+        }
+        else if (callback_engine_struct.global_name.empty() && !callback_engine_struct.local_name.empty())
+        {
+            // Only `local_name` given, OK.
+            callback_engine_entity->set_local_name(callback_engine_struct.local_name);
+        }
+        else if (!callback_engine_struct.global_name.empty() && !callback_engine_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_callback_engine`: both global and local names given for a `CallbackEngine`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `CallbackEngine`!\n";
+        }
+
+        return callback_engine_entity;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_callback_object(const yli::ontology::CallbackObjectStruct& callback_object_struct) const
+    {
+        yli::ontology::Entity* callback_object_entity = new yli::ontology::CallbackObject(
+                this->universe,
+                callback_object_struct,
+                ((callback_object_struct.parent != nullptr) ?
+                 &callback_object_struct.parent->parent_of_callback_objects :
+                 nullptr));
+        callback_object_entity->set_global_name(callback_object_struct.global_name);
+        callback_object_entity->set_local_name(callback_object_struct.local_name);
+        return callback_object_entity;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_callback_parameter(
+            const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
+            const yli::data::AnyValue& any_value) const
+    {
+        yli::ontology::Entity* callback_parameter_entity = new yli::ontology::CallbackParameter(
+                this->universe,
+                callback_parameter_struct,
+                any_value,
+                ((callback_parameter_struct.parent != nullptr) ?
+                 &callback_parameter_struct.parent->parent_of_callback_parameters :
+                 nullptr));
+
+        callback_parameter_entity->set_global_name(callback_parameter_struct.global_name);
+        callback_parameter_entity->set_local_name(callback_parameter_struct.local_name);
+        return callback_parameter_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const
@@ -366,6 +433,48 @@ namespace yli::ontology
         }
 
         return console_entity;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_console_callback_engine(
+            const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const
+    {
+        yli::ontology::Entity* console_callback_engine_entity = new yli::ontology::ConsoleCallbackEngine(
+                this->universe,
+                &this->universe.parent_of_callback_engines);
+
+        if (!console_callback_engine_struct.global_name.empty() && console_callback_engine_struct.local_name.empty())
+        {
+            // Only `global_name` given, OK.
+            console_callback_engine_entity->set_global_name(console_callback_engine_struct.global_name);
+        }
+        else if (console_callback_engine_struct.global_name.empty() && !console_callback_engine_struct.local_name.empty())
+        {
+            // Only `local_name` given, OK.
+            console_callback_engine_entity->set_local_name(console_callback_engine_struct.local_name);
+        }
+        else if (!console_callback_engine_struct.global_name.empty() && !console_callback_engine_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_console_callback_engine`: both global and local names given for a `ConsoleCallbackEngine`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `ConsoleCallbackEngine`!\n";
+        }
+
+        return console_callback_engine_entity;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_console_callback_object(
+            const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const
+    {
+        yli::ontology::Entity* console_callback_object_entity = new yli::ontology::ConsoleCallbackObject(
+                this->universe,
+                console_callback_object_struct,
+                ((console_callback_object_struct.parent != nullptr) ?
+                 &console_callback_object_struct.parent->parent_of_callback_objects :
+                 nullptr));
+
+        console_callback_object_entity->set_global_name(console_callback_object_struct.global_name);
+        console_callback_object_entity->set_local_name(console_callback_object_struct.local_name);
+        return console_callback_object_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const

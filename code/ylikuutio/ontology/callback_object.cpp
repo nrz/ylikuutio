@@ -16,9 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_object.hpp"
+#include "universe.hpp"
 #include "callback_engine.hpp"
 #include "callback_parameter.hpp"
-#include "entity_struct.hpp"
+#include "entity_factory.hpp"
+#include "callback_object_struct.hpp"
+#include "callback_parameter_struct.hpp"
 #include "family_templates.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -36,8 +39,9 @@ namespace yli::ontology
 
     CallbackObject::CallbackObject(
             yli::ontology::Universe& universe,
+            const yli::ontology::CallbackObjectStruct& callback_object_struct,
             yli::ontology::GenericParentModule* const callback_engine_parent)
-        : Entity(universe, yli::ontology::EntityStruct()),
+        : Entity(universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
         parent_of_callback_parameters(this, &this->registry, "callback_parameters")
     {
@@ -45,9 +49,10 @@ namespace yli::ontology
 
     CallbackObject::CallbackObject(
             yli::ontology::Universe& universe,
+            const yli::ontology::CallbackObjectStruct& callback_object_struct,
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
             yli::ontology::GenericParentModule* const callback_engine_parent)
-        : Entity(universe, yli::ontology::EntityStruct()),
+        : Entity(universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
         parent_of_callback_parameters(this, &this->registry, "callback_parameters"),
         callback { callback }
@@ -56,21 +61,35 @@ namespace yli::ontology
 
     yli::ontology::CallbackParameter* CallbackObject::create_callback_parameter(
             const std::string& name,
-            const yli::data::AnyValue& any_value,
-            const bool is_reference)
+            const yli::data::AnyValue& any_value)
     {
-        return new yli::ontology::CallbackParameter(this->universe, name, any_value, is_reference, &this->parent_of_callback_parameters);
+        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+
+        yli::ontology::CallbackParameterStruct callback_parameter_struct;
+        callback_parameter_struct.parent = this;
+        callback_parameter_struct.local_name = name;
+        return static_cast<yli::ontology::CallbackParameter*>(
+                entity_factory.create_callback_parameter(callback_parameter_struct, any_value));
     }
 
     // getter function for callbacks and callback objects.
     std::optional<yli::data::AnyValue> CallbackObject::get_any_value(const std::string& name) const
     {
-        if (this->anyvalue_hashmap.count(name) != 1)
+        yli::ontology::Entity* const named_entity = this->registry.get_entity(name);
+
+        if (named_entity == nullptr)
         {
             return std::nullopt;
         }
 
-        return yli::data::AnyValue(this->anyvalue_hashmap.at(name));
+        yli::ontology::CallbackParameter* const callback_parameter = dynamic_cast<yli::ontology::CallbackParameter*>(named_entity);
+
+        if (callback_parameter == nullptr)
+        {
+            return std::nullopt;
+        }
+
+        return yli::data::AnyValue(callback_parameter->get_any_value());
     }
 
     std::optional<yli::data::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
@@ -91,12 +110,6 @@ namespace yli::ontology
         }
 
         return yli::data::AnyValue(callback_parameter->any_value);
-    }
-
-    // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(const std::string& name, const yli::data::AnyValue& any_value)
-    {
-        this->anyvalue_hashmap[name] = yli::data::AnyValue(any_value);
     }
 
     void CallbackObject::set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)

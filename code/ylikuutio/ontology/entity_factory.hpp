@@ -31,6 +31,9 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    struct CallbackEngineStruct;
+    struct CallbackObjectStruct;
+    struct CallbackParameterStruct;
     struct VariableStruct;
     struct EcosystemStruct;
     struct SceneStruct;
@@ -44,6 +47,8 @@ namespace yli::ontology
     struct TextStruct;
     struct Text3DStruct;
     struct ConsoleStruct;
+    struct ConsoleCallbackEngineStruct;
+    struct ConsoleCallbackObjectStruct;
     struct LispFunctionStruct;
     struct CameraStruct;
     struct ComputeTaskStruct;
@@ -63,6 +68,11 @@ namespace yli::ontology
 
             yli::ontology::Universe& get_universe() const;
 
+            yli::ontology::Entity* create_callback_engine(const yli::ontology::CallbackEngineStruct& callback_engine_struct) const;
+            yli::ontology::Entity* create_callback_object(const yli::ontology::CallbackObjectStruct& callback_object_struct) const;
+            yli::ontology::Entity* create_callback_parameter(
+                    const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
+                    const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const;
             yli::ontology::Entity* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const;
             yli::ontology::Entity* create_scene(const yli::ontology::SceneStruct& scene_struct) const;
@@ -77,6 +87,10 @@ namespace yli::ontology
             yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text_3d_struct) const;
             yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
             yli::ontology::Entity* create_console(const yli::ontology::ConsoleStruct& console_struct) const;
+            yli::ontology::Entity* create_console_callback_engine(
+                    const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const;
+            yli::ontology::Entity* create_console_callback_object(
+                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const;
             yli::ontology::Entity* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const;
             yli::ontology::Entity* create_camera(const yli::ontology::CameraStruct& camera_struct) const;
             yli::ontology::Entity* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const;

@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "parent_of_callback_parameters_module.hpp"
+#include "generic_parent_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -28,8 +28,6 @@
 #include <cstddef>       // std::size_t
 #include <optional>      // std::optional
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
-#include <vector>        // std::vector
 
 namespace yli::ontology
 {
@@ -38,6 +36,7 @@ namespace yli::ontology
     class CallbackEngine;
     class CallbackParameter;
     class Scene;
+    struct CallbackObjectStruct;
 
     class CallbackObject : public yli::ontology::Entity
     {
@@ -46,10 +45,12 @@ namespace yli::ontology
         public:
             CallbackObject(
                     yli::ontology::Universe& universe,
+                    const yli::ontology::CallbackObjectStruct& callback_object_struct,
                     yli::ontology::GenericParentModule* const callback_engine_parent);
 
             CallbackObject(
                     yli::ontology::Universe& universe,
+                    const yli::ontology::CallbackObjectStruct& callback_object_struct,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
                     yli::ontology::GenericParentModule* const callback_engine_parent);
 
@@ -57,8 +58,7 @@ namespace yli::ontology
 
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const std::string& name,
-                    const yli::data::AnyValue& any_value,
-                    const bool is_reference);
+                    const yli::data::AnyValue& any_value);
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
@@ -67,16 +67,13 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
             std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
-            // setter function for callbacks and callback objects.
-            void set_any_value(const std::string& name, const yli::data::AnyValue& any_value);
-
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             yli::ontology::ChildModule child_of_callback_engine;
-            yli::ontology::ParentOfCallbackParametersModule parent_of_callback_parameters;
+            yli::ontology::GenericParentModule parent_of_callback_parameters;
 
             friend class CallbackEngine;
 
@@ -86,9 +83,6 @@ namespace yli::ontology
         private:
             // execute this callback with a parameter.
             virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
-
-            // A hash map used to store variables.
-            std::unordered_map<std::string, yli::data::AnyValue> anyvalue_hashmap;
     };
 }
 

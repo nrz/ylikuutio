@@ -513,11 +513,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/brain_struct.hpp
     code/ylikuutio/ontology/callback_engine.cpp
     code/ylikuutio/ontology/callback_engine.hpp
+    code/ylikuutio/ontology/callback_engine_struct.hpp
     code/ylikuutio/ontology/callback_magic_numbers.hpp
     code/ylikuutio/ontology/callback_object.cpp
     code/ylikuutio/ontology/callback_object.hpp
+    code/ylikuutio/ontology/callback_object_struct.hpp
     code/ylikuutio/ontology/callback_parameter.cpp
     code/ylikuutio/ontology/callback_parameter.hpp
+    code/ylikuutio/ontology/callback_parameter_struct.hpp
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
@@ -533,8 +536,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console.hpp
     code/ylikuutio/ontology/console_callback_engine.cpp
     code/ylikuutio/ontology/console_callback_engine.hpp
+    code/ylikuutio/ontology/console_callback_engine_struct.hpp
     code/ylikuutio/ontology/console_callback_object.cpp
     code/ylikuutio/ontology/console_callback_object.hpp
+    code/ylikuutio/ontology/console_callback_object_struct.hpp
     code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/custom_entity_factory.hpp
@@ -604,8 +609,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object_type.hpp
     code/ylikuutio/ontology/orientation_module.cpp
     code/ylikuutio/ontology/orientation_module.hpp
-    code/ylikuutio/ontology/parent_of_callback_parameters_module.cpp
-    code/ylikuutio/ontology/parent_of_callback_parameters_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp
     code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/parent_of_pipelines_module.cpp
