@@ -26,78 +26,101 @@
 
 namespace yli::data
 {
-    enum class Datatype
+    enum Datatype
     {
         // Unknown. This should be used as the default.
-        UNKNOWN,
+        UNKNOWN    = 0,
         // Fundamental types.
-        BOOL,
-        CHAR,
-        FLOAT,
-        DOUBLE,
-        INT32_T,
-        UINT32_T,
+        BOOL       = 1,
+        CHAR       = 2,
+        FLOAT      = 3,
+        DOUBLE     = 4,
+        INT32_T    = 5,
+        UINT32_T   = 6,
         // Strings.
-        STD_STRING,
+        STD_STRING = 7,
         // Variable-size vectors.
-        STD_VECTOR_INT8_T,
-        STD_VECTOR_UINT8_T,
-        STD_VECTOR_INT16_T,
-        STD_VECTOR_UINT16_T,
-        STD_VECTOR_INT32_T,
-        STD_VECTOR_UINT32_T,
-        STD_VECTOR_FLOAT,
+        STD_VECTOR_INT8_T   = 8,
+        STD_VECTOR_UINT8_T  = 9,
+        STD_VECTOR_INT16_T  = 10,
+        STD_VECTOR_UINT16_T = 11,
+        STD_VECTOR_INT32_T  = 12,
+        STD_VECTOR_UINT32_T = 13,
+        STD_VECTOR_FLOAT    = 14,
         // Fixed-size vectors.
-        GLM_VEC3,
-        GLM_VEC4,
+        GLM_VEC3            = 15,
+        GLM_VEC4            = 16,
         // Spherical coordinates.
         SPHERICAL_COORDINATES_STRUCT,
+        // Systems.
+        AUDIO_SYSTEM        = 50,
+        INPUT_SYSTEM        = 50,
         // `yli::ontology` datatypes, 'entity' path.
-        ENTITY,
-        MOVABLE,
+        ENTITY              = 117,
+        MOVABLE             = 118,
         // `yli::ontology` datatypes, 'universe' path.
-        UNIVERSE,
+        UNIVERSE            = 119,
         // `yli::ontology` datatypes, 'variable' path.
-        VARIABLE,
+        VARIABLE            = 120,
+        // `yli::ontology` datatypes, 'callback' path.
+        CALLBACK_ENGINE     = 121,
+        CALLBACK_OBJECT     = 122,
+        CALLBACK_PARAMETER  = 123,
         // `yli::ontology` datatypes, 'window' path.
-        WINDOW,
-        WIDGET,
-        CAMERAWIDGET,
+        WINDOW              = 124,
+        WIDGET              = 125,
+        CAMERA              = 126,
+        CAMERAWIDGET        = 127,
         // `yli::ontology` datatypes, 'brain' path.
-        BRAIN,
+        BRAIN               = 128,
         // `yli::ontology` datatypes, 'ecosystem' path.
-        ECOSYSTEM,
+        ECOSYSTEM           = 129,
         // `yli::ontology` datatypes, 'simple' path.
-        SCENE,
-        PIPELINE,
-        MATERIAL,
-        SPECIES,
-        OBJECT,
+        SCENE               = 130,
+        PIPELINE            = 131,
+        MATERIAL            = 132,
+        SPECIES             = 133,
+        OBJECT              = 134,
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP,
-        HEIGHTMAP_SHEET,
+        HEIGHTMAP           = 135,
+        HEIGHTMAP_SHEET     = 136,
         // `yli::ontology` datatypes, 'symbiont' path.
-        SYMBIOSIS,
-        SYMBIONT_MATERIAL,
-        SYMBIONT_SPECIES,
+        SYMBIOSIS           = 137,
+        SYMBIONT_MATERIAL   = 138,
+        SYMBIONT_SPECIES    = 139,
         // `yli::ontology` datatypes, 'holobiont' path.
-        HOLOBIONT,
-        BIONT,
+        HOLOBIONT           = 140,
+        BIONT               = 141,
         // `yli::ontology` datatypes, 'shapeshifter' path.
-        SHAPESHIFTER_TRANSFORMATION,
-        SHAPESHIFTER_SEQUENCE,
-        SHAPESHIFTER_FORM,
+        SHAPESHIFTER_TRANSFORMATION = 142,
+        SHAPESHIFTER_SEQUENCE       = 143,
+        SHAPESHIFTER_FORM           = 144,
         // `yli::ontology` datatypes, 'text 2D' path.
-        FONT2D,
-        TEXT2D,
+        FONT_2D                     = 145,
+        TEXT_2D                     = 146,
         // `yli::ontology` datatypes, 'text 3D' path.
-        VECTORFONT,
-        GLYPH,
-        TEXT3D,
+        VECTOR_FONT                 = 147,
+        GLYPH                       = 148,
+        TEXT_3D                     = 149,
+        // `yli::ontology` datatypes, 'input' path.
+        INPUT_MODE                  = 150,
+        // `yli::ontology` datatypes, 'audio' path.
+        AUDIO_TRACK                 = 151,
+        // `yli::ontology` datatypes, 'track' path.
+        PLAYLIST                    = 152,
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE,
+        CONSOLE                     = 153,
+        CONSOLE_CALLBACK_ENGINE     = 154,
+        CONSOLE_CALLBACK_OBJECT     = 155,
+        // `yli::ontology` datatypes, 'graph' path.
+        GRAPH                       = 156,
+        NODE                        = 157,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK
+        COMPUTETASK                 = 158,
+        // `yli::ontology` datatypes, 'lisp' path.
+        LISP_FUNCTION                  = 159,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 160,
+        LISP_FUNCTION_OVERLOAD         = 161
     };
 }
 
