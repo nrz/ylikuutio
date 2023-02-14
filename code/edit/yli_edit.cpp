@@ -95,7 +95,7 @@ namespace yli_edit
     YliEditApplication::YliEditApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv)
     {
-        // constructor.
+        std::cout << "YliEditApplication initialized!\n";
     }
 
     std::string YliEditApplication::get_name() const

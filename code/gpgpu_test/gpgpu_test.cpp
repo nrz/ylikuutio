@@ -60,7 +60,7 @@ namespace gpgpu_test
     GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv)
     {
-        // constructor.
+        std::cout << "GpgpuTestApplication initialized!\n";
     }
 
     std::string GpgpuTestApplication::get_name() const

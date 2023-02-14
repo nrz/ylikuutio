@@ -109,7 +109,7 @@ namespace ajokki
     AjokkiApplication::AjokkiApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv)
     {
-        // constructor.
+        std::cout << "AjokkiApplication initialized!\n";
     }
 
     std::string AjokkiApplication::get_name() const

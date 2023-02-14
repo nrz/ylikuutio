@@ -99,7 +99,7 @@ namespace hirvi
     HirviApplication::HirviApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv)
     {
-        // constructor.
+        std::cout << "HirviApplication initialized!\n";
     }
 
     std::string HirviApplication::get_name() const

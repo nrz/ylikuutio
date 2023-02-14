@@ -99,7 +99,7 @@ namespace tulevaisuus
     TulevaisuusApplication::TulevaisuusApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv)
     {
-        // constructor.
+        std::cout << "TulevaisuusApplication initialized!\n";
     }
 
     std::string TulevaisuusApplication::get_name() const
