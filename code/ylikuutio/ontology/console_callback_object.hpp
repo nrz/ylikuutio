@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 
 #include "callback_object.hpp"
+#include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
