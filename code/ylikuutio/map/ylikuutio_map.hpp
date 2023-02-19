@@ -18,8 +18,8 @@
 #ifndef YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 #define YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/console_printing.hpp"
 
 // Include standard headers
 #include <algorithm>     // std::sort
@@ -29,6 +29,11 @@
 #include <unordered_map> // std::unordered_map
 #include <utility>       // std::pair
 #include <vector>        // std::vector
+
+namespace yli::ontology
+{
+    class Console;
+}
 
 namespace yli::map
 {
@@ -74,40 +79,8 @@ namespace yli::map
                 return;
             }
 
-            const yli::ontology::Universe& universe = console->get_universe();
-
             std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
-
-            std::size_t characters_for_line = universe.get_window_width() / universe.get_text_size();
-
-            std::string keys_text;
-
-            for (std::string key : key_vector)
-            {
-                if (keys_text.size() > 0 &&
-                        keys_text.size() + key.size() >= characters_for_line)
-                {
-                    // Not enough space for this key on this line.
-                    // Print this line.
-                    console->print_text(keys_text);
-                    keys_text = key;
-                }
-                else if (keys_text.size() > 0)
-                {
-                    // There is space, and this is not the first key on this line.
-                    keys_text += " " + key;
-                }
-                else
-                {
-                    // This is the first key on this line.
-                    keys_text += key;
-                }
-            }
-            if (keys_text.size() > 0)
-            {
-                // Print the last line.
-                console->print_text(keys_text);
-            }
+            yli::ontology::print_words_to_console(*console, key_vector);
         }
 
     template <typename T1, typename T2>
@@ -121,7 +94,7 @@ namespace yli::map
 
                 if (inherited_type != nullptr)
                 {
-                    console.print_text(key);
+                    yli::ontology::print_to_console(console, key);
                 }
             }
         }

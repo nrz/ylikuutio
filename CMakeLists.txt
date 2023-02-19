@@ -540,6 +540,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callback_object.cpp
     code/ylikuutio/ontology/console_callback_object.hpp
     code/ylikuutio/ontology/console_callback_object_struct.hpp
+    code/ylikuutio/ontology/console_printing.cpp
+    code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/custom_entity_factory.hpp
