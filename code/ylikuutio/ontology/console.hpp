@@ -67,7 +67,9 @@ namespace yli::input
 namespace yli::map
 {
     template <typename T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::ontology::Console& console);
+        void print_keys_to_console(
+                const std::unordered_map<std::string, T1>* const unordered_map_pointer,
+                yli::ontology::Console& console);
 }
 
 namespace yli::ontology
@@ -358,7 +360,11 @@ namespace yli::ontology
             friend class yli::ontology::GenericMasterModule;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(T1 apprentice_pointer, std::vector<T1>& apprentice_pointer_vector, std::queue<std::size_t>& free_apprenticeID_queue, std::size_t& number_of_apprenticeren) noexcept;
+                friend void yli::hierarchy::bind_apprentice_to_master(
+                        T1 apprentice_pointer,
+                        std::vector<T1>& apprentice_pointer_vector,
+                        std::queue<std::size_t>& free_apprenticeID_queue,
+                        std::size_t& number_of_apprenticeren) noexcept;
 
         private:
             yli::ontology::Entity* get_parent() const override;
