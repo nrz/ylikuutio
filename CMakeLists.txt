@@ -365,9 +365,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.cpp
     code/ylikuutio/command_line/command_line_master.hpp
 
-    # console, in alphabetical order.
-    code/ylikuutio/console/console_command_callback.hpp
-
     # core, in alphabetical order
     code/ylikuutio/core/application.cpp
     code/ylikuutio/core/application.hpp
