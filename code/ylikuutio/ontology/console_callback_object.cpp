@@ -26,6 +26,9 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class Universe;
+
     ConsoleCallbackObject::ConsoleCallbackObject(
             yli::ontology::Universe& universe,
             const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,

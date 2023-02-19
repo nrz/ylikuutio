@@ -23,7 +23,9 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
+    class Console;
     class ConsoleCallbackObject;
 
     class ConsoleCallbackEngine final : public yli::ontology::CallbackEngine
