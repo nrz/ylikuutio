@@ -47,7 +47,7 @@ namespace yli::ontology
             const yli::ontology::Entity& entity)
     {
         // OK, let's print the children of this `Entity`.
-        yli::map::print_keys_to_console(entity.registry.get_entity_map(), &console);
+        yli::map::print_keys_to_console(entity.registry.get_entity_map(), console);
 
         return std::nullopt;
     }

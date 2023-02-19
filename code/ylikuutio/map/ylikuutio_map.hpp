@@ -72,15 +72,10 @@ namespace yli::map
         }
 
     template <typename T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console* const console)
+        void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, yli::ontology::Console& console)
         {
-            if (console == nullptr)
-            {
-                return;
-            }
-
             std::vector<std::string> key_vector = yli::map::get_keys(unordered_map);
-            yli::ontology::print_words_to_console(*console, key_vector);
+            yli::ontology::print_words_to_console(console, key_vector);
         }
 
     template <typename T1, typename T2>

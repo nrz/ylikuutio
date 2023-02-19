@@ -127,7 +127,7 @@ namespace yli::ontology
             yli::ontology::Console& console)
     {
         // Print names of named entities.
-        yli::map::print_keys_to_console(universe.registry.get_entity_map(), &console);
+        yli::map::print_keys_to_console(universe.registry.get_entity_map(), console);
         return std::nullopt;
     }
 

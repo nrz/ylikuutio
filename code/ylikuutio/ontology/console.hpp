@@ -67,7 +67,7 @@ namespace yli::input
 namespace yli::map
 {
     template <typename T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::ontology::Console* const console);
+        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::ontology::Console& console);
 }
 
 namespace yli::ontology
