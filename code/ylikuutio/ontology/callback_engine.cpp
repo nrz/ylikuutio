@@ -43,6 +43,8 @@ namespace yli::ontology
         child_of_universe(universe_parent, this),
         parent_of_callback_objects(this, &this->registry, "callback_objects")
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::CallbackEngine*";
     }
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
