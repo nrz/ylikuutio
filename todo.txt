@@ -2,8 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix `Universe::get_number_of_children` to count `CallbackEngine`s as well.
-[ ] Fix `Universe::get_number_of_descendants` to count `CallbackEngine`s as well.
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix compiling on Visual Studio.
@@ -337,3 +335,5 @@ Ready:
 [x] Improve `create_yli_ontology_class.py` to create `default` destructors.
 [x] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
 [x] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.
+[x] Fix `Universe::get_number_of_children` to count `CallbackEngine`s as well.
+[x] Fix `Universe::get_number_of_descendants` to count `CallbackEngine`s as well.
