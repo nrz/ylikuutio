@@ -915,6 +915,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_brain.cpp
         code/ylikuutio/tests/googletest/test_brain_snippets.cpp
         code/ylikuutio/tests/googletest/test_brain_struct.cpp
+        code/ylikuutio/tests/googletest/test_callback_engine.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_cartesian_coordinates_module.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
