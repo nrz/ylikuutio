@@ -860,7 +860,8 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_children() const
     {
-        return this->parent_of_ecosystems.get_number_of_children() +
+        return this->parent_of_callback_engines.get_number_of_children() +
+            this->parent_of_ecosystems.get_number_of_children() +
             this->parent_of_scenes.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children();
