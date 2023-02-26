@@ -869,7 +869,8 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_callback_engines.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
