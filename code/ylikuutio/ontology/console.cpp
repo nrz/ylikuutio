@@ -24,7 +24,6 @@
 #include "text_struct.hpp"
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -77,7 +76,8 @@ namespace yli::ontology
         : Entity(universe, console_struct),
         child_of_universe(parent_module, this),
         parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
-        apprentice_of_font_2d(generic_master_module, this)
+        apprentice_of_font_2d(generic_master_module, this),
+        master_of_input_modes(this, &this->registry, "input_modes")
     {
         // constructor.
 
@@ -118,9 +118,9 @@ namespace yli::ontology
         }
     }
 
-    void Console::set_input_mode(yli::input::InputMode* const input_mode)
+    void Console::set_input_mode(yli::ontology::InputMode* const input_mode)
     {
-        this->input_mode = input_mode;
+        this->master_of_input_modes.set_current_input_mode(input_mode);
     }
 
     void Console::set_console_top_y(const uint32_t console_top_y)
@@ -348,6 +348,11 @@ namespace yli::ontology
         return nullptr;
     }
 
+    std::size_t Console::get_number_of_apprentices() const
+    {
+        return this->master_of_input_modes.get_number_of_apprentices();
+    }
+
     std::size_t Console::get_number_of_children() const
     {
         return 0; // `Console` has no children.
@@ -362,9 +367,9 @@ namespace yli::ontology
     {
         if (this->universe.get_active_console() == this &&
                 !this->in_console &&
-                this->input_mode != nullptr)
+                this->master_of_input_modes.has_current_input_mode())
         {
-            this->input_mode->activate();
+            this->master_of_input_modes.activate_current_input_mode();
 
             // Do not display help screen when in console.
             this->universe.can_display_help_screen = false;
@@ -385,9 +390,9 @@ namespace yli::ontology
         if (this->in_console)
         {
             // Restore previous input mode.
-            if (this->input_mode != nullptr)
+            if (this->master_of_input_modes.has_current_input_mode())
             {
-                this->input_mode->deactivate();
+                this->master_of_input_modes.deactivate_current_input_mode();
             }
 
             // Enable display help screen when not in console.
@@ -619,9 +624,9 @@ namespace yli::ontology
         return this->prompt;
     }
 
-    yli::input::InputMode* Console::get_input_mode() const
+    yli::ontology::InputMode* Console::get_input_mode() const
     {
-        return this->input_mode;
+        return this->master_of_input_modes.get_current_input_mode();
     }
 
     std::size_t Console::get_cursor_index() const

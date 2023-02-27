@@ -46,6 +46,7 @@ namespace yli::ontology
     struct FontStruct;
     struct TextStruct;
     struct Text3DStruct;
+    struct InputModeStruct;
     struct ConsoleStruct;
     struct ConsoleCallbackEngineStruct;
     struct ConsoleCallbackObjectStruct;
@@ -86,6 +87,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_text2d(const yli::ontology::TextStruct& text_struct) const;
             yli::ontology::Entity* create_text3d(const yli::ontology::Text3DStruct& text_3d_struct) const;
             yli::ontology::Entity* create_font2d(const yli::ontology::FontStruct& font_struct) const;
+            yli::ontology::Entity* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const;
             yli::ontology::Entity* create_console(const yli::ontology::ConsoleStruct& console_struct) const;
             yli::ontology::Entity* create_console_callback_engine(
                     const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const;

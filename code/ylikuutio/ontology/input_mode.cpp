@@ -16,63 +16,62 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "input_mode.hpp"
-#include "input_system.hpp"
+#include "parent_of_input_modes_module.hpp"
+#include "universe.hpp"
+#include "input_mode_struct.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
+    class MasterOfInputModesModule;
     class CallbackEngine;
-}
+    class Scene;
 
-namespace yli::input
-{
-    void InputMode::bind_to_parent()
+    InputMode::InputMode(
+            yli::ontology::Universe& universe,
+            const yli::ontology::InputModeStruct& input_mode_struct,
+            yli::ontology::ParentOfInputModesModule* const parent_module,
+            yli::ontology::MasterOfInputModesModule* const console_master_module)
+        : Entity(universe, input_mode_struct),
+        child_of_universe(parent_module, this),
+        apprentice_of_console(console_master_module, this)
     {
-        // requirements:
-        // `this->parent` must not be `nullptr`.
-        yli::input::InputSystem* const input_system = this->parent;
-
-        if (input_system == nullptr)
-        {
-            std::cerr << "ERROR: `InputMode::bind_to_parent`: `input_system` is `nullptr`!\n";
-            return;
-        }
-
-        // get `childID` from the `InputSystem` and set pointer to this `InputMode`.
-        input_system->bind_input_mode(this);
-    }
-
-    InputMode::InputMode(yli::input::InputSystem* const input_system)
-        : parent { input_system }
-    {
-        // constructor.
-
-        // get `childID` from `InputSystem` and set pointer to this `InputMode`.
-        this->bind_to_parent();
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::InputMode*";
     }
 
     void InputMode::activate()
     {
-        if (this->parent != nullptr)
+        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
+
+        [[unlikely]]
+        if (universe == nullptr)
         {
-            this->parent->set_active_input_mode(this);
+            throw std::runtime_error("ERROR: `InputMode::activate`: `universe` is `nullptr`!");
         }
+
+        universe->parent_of_input_modes.set_active_input_mode(this);
     }
 
     void InputMode::deactivate()
     {
-        if (this->parent != nullptr)
-        {
-            // Only the active input mode may deactivate itself.
+        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
 
-            if (this->parent->get_active_input_mode() == this)
-            {
-                this->parent->pop_input_mode();
-            }
+        if (universe == nullptr)
+        {
+            throw std::runtime_error("ERROR: `InputMode::deactivate`: `universe` is `nullptr`!");
+        }
+
+        // Only the active input mode may deactivate itself.
+
+        if (universe->parent_of_input_modes.get_active_input_mode() == this)
+        {
+            universe->parent_of_input_modes.pop_input_mode();
         }
     }
 
@@ -149,5 +148,25 @@ namespace yli::input
     const std::vector<yli::ontology::CallbackEngine*>* InputMode::get_continuous_keypress_callback_engines() const
     {
         return &this->continuous_keypress_callback_engines;
+    }
+
+    yli::ontology::Entity* InputMode::get_parent() const
+    {
+        return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::Scene* InputMode::get_scene() const
+    {
+        return nullptr;
+    }
+
+    std::size_t InputMode::get_number_of_children() const
+    {
+        return 0; // `InputMode` has no children.
+    }
+
+    std::size_t InputMode::get_number_of_descendants() const
+    {
+        return 0; // `InputMode` has no children.
     }
 }

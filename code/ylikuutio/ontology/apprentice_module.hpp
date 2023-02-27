@@ -35,7 +35,7 @@ namespace yli::ontology
     template<typename M>
         class MasterModule;
 
-    class ApprenticeModule final
+    class ApprenticeModule
     {
         public:
             void bind_to_generic_master_module() noexcept;
@@ -58,7 +58,7 @@ namespace yli::ontology
                     yli::ontology::Entity* const apprentice) noexcept;
 
             // destructor.
-            ~ApprenticeModule() noexcept;
+            virtual ~ApprenticeModule() noexcept;
 
             yli::ontology::Entity* get_master() const noexcept;
             yli::ontology::Entity* get_apprentice() const noexcept;

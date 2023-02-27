@@ -35,6 +35,7 @@
 #include "text_2d.hpp"
 #include "text_3d.hpp"
 #include "font_2d.hpp"
+#include "input_mode.hpp"
 #include "console.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
@@ -56,6 +57,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text_3d_struct.hpp"
+#include "input_mode_struct.hpp"
 #include "console_struct.hpp"
 #include "console_callback_engine_struct.hpp"
 #include "console_callback_object_struct.hpp"
@@ -405,6 +407,34 @@ namespace yli::ontology
         }
 
         return font2d_entity;
+    }
+
+    yli::ontology::Entity* EntityFactory::create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const
+    {
+        yli::ontology::Entity* const input_mode_entity = new yli::ontology::InputMode(
+                this->universe,
+                input_mode_struct,
+                &this->universe.parent_of_input_modes,
+                (input_mode_struct.console != nullptr ? &input_mode_struct.console->master_of_input_modes : nullptr));
+
+        if (!input_mode_struct.global_name.empty() && input_mode_struct.local_name.empty())
+        {
+            // Only `global_name` given, OK.
+            input_mode_entity->set_global_name(input_mode_struct.global_name);
+        }
+        else if (input_mode_struct.global_name.empty() && !input_mode_struct.local_name.empty())
+        {
+            // Only `local_name` given, OK.
+            input_mode_entity->set_local_name(input_mode_struct.local_name);
+        }
+        else if (!input_mode_struct.global_name.empty() && !input_mode_struct.local_name.empty())
+        {
+            std::cerr << "ERROR: `EntityFactory::create_input_mode`: both global and local names given for a `InputMode`\n";
+            std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+            std::cerr << "are the same and only 1 of them can be given. No name given to this `InputMode`!\n";
+        }
+
+        return input_mode_entity;
     }
 
     yli::ontology::Entity* EntityFactory::create_console(const yli::ontology::ConsoleStruct& console_struct) const

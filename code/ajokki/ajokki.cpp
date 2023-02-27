@@ -29,8 +29,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/input/input_system.hpp"
-#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
@@ -55,12 +53,14 @@
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
@@ -246,8 +246,6 @@ namespace ajokki
         yli::ontology::EntityFactory& entity_factory = my_universe->get_entity_factory();
 
         yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
-
-        yli::input::InputSystem* const input_system = my_universe->get_input_system();
 
         if (!my_universe->get_is_headless() && my_universe->get_window() == nullptr)
         {
@@ -909,7 +907,9 @@ namespace ajokki
 
         // Keyrelease callbacks for action mode.
         // Key releases are checked in the order of this struct.
-        yli::input::InputMode* const action_mode_input_mode = input_system->create_input_mode();
+        yli::ontology::InputModeStruct action_mode_input_mode_struct;
+        action_mode_input_mode_struct.global_name = "action_mode_input_mode";
+        yli::ontology::InputMode* const action_mode_input_mode = my_universe->create_input_mode(action_mode_input_mode_struct);
         action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, release_first_turbo_callback_engine);
         action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, release_second_turbo_callback_engine);
         action_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_I, enable_toggle_invert_mouse_callback_engine);
@@ -944,7 +944,10 @@ namespace ajokki
 
         // Keyrelease callbacks for `my_console`.
         // Key releases are checked in the order of this struct.
-        yli::input::InputMode* const my_console_mode_input_mode = input_system->create_input_mode();
+        yli::ontology::InputModeStruct my_console_mode_input_mode_struct;
+        my_console_mode_input_mode_struct.console = my_console;
+        my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
+        yli::ontology::InputMode* const my_console_mode_input_mode = my_universe->create_input_mode(my_console_mode_input_mode_struct);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, my_release_left_control_in_console_callback_engine);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, my_release_right_control_in_console_callback_engine);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LALT, my_release_left_alt_in_console_callback_engine);
@@ -983,11 +986,13 @@ namespace ajokki
         my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_PAGEDOWN, my_page_down_callback_engine);
         my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_HOME, my_home_callback_engine);
         my_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_END, my_end_callback_engine);
-        my_console->set_input_mode(my_console_mode_input_mode);
 
         // Keyrelease callbacks for `mini_console`.
         // Key releases are checked in the order of this struct.
-        yli::input::InputMode* const mini_console_mode_input_mode = input_system->create_input_mode();
+        yli::ontology::InputModeStruct mini_console_mode_input_mode_struct;
+        mini_console_mode_input_mode_struct.console = mini_console;
+        mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
+        yli::ontology::InputMode* const mini_console_mode_input_mode = my_universe->create_input_mode(mini_console_mode_input_mode_struct);
         mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, mini_release_left_control_in_console_callback_engine);
         mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, mini_release_right_control_in_console_callback_engine);
         mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LALT, mini_release_left_alt_in_console_callback_engine);
@@ -1024,7 +1029,6 @@ namespace ajokki
         mini_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_PAGEDOWN, mini_page_down_callback_engine);
         mini_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_HOME, mini_home_callback_engine);
         mini_console_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_END, mini_end_callback_engine);
-        mini_console->set_input_mode(mini_console_mode_input_mode);
 
         /*********************************************************************
          * Callback engines for console commands begin here.                 *

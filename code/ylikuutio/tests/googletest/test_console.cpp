@@ -16,11 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/input/input_system.hpp"
-#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
@@ -89,8 +89,9 @@ TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
             &universe->parent_of_consoles,
             nullptr);
 
-    yli::input::InputSystem* const input_system = new yli::input::InputSystem(universe);
-    yli::input::InputMode* const input_mode = input_system->create_input_mode();
+    yli::ontology::InputModeStruct console_mode_input_mode_struct;
+    console_mode_input_mode_struct.console = console;
+    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     ASSERT_EQ(console->get_input_mode(), input_mode);
 
@@ -200,8 +201,9 @@ TEST(enter_console_must_function_appropriately, no_font)
 
     universe->set_active_console(console);
 
-    yli::input::InputSystem* const input_system = new yli::input::InputSystem(universe);
-    yli::input::InputMode* const input_mode = input_system->create_input_mode();
+    yli::ontology::InputModeStruct console_mode_input_mode_struct;
+    console_mode_input_mode_struct.console = console;
+    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
     ASSERT_TRUE(console->get_in_console());
@@ -221,8 +223,9 @@ TEST(exit_console_must_function_appropriately, no_font)
 
     universe->set_active_console(console);
 
-    yli::input::InputSystem* const input_system = new yli::input::InputSystem(universe);
-    yli::input::InputMode* const input_mode = input_system->create_input_mode();
+    yli::ontology::InputModeStruct console_mode_input_mode_struct;
+    console_mode_input_mode_struct.console = console;
+    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
     console->exit_console();

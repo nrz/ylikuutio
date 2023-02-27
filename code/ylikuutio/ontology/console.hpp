@@ -21,8 +21,8 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
+#include "master_of_input_modes_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -58,11 +58,6 @@
 // each with its own commands. It is possible to change between the
 // `Console`s by activating another `Console`.
 
-namespace yli::input
-{
-    class InputMode;
-}
-
 namespace yli::map
 {
     template <typename T1>
@@ -73,6 +68,7 @@ namespace yli::map
 
 namespace yli::ontology
 {
+    class GenericMasterModule;
     class Universe;
     class CallbackEngine;
     class CallbackObject;
@@ -80,6 +76,7 @@ namespace yli::ontology
     class Scene;
     class Font2D;
     class Registry;
+    class InputMode;
     struct ConsoleStruct;
 
     class Console final : public yli::ontology::Entity
@@ -107,7 +104,7 @@ namespace yli::ontology
             void adjust_n_columns();
             void adjust_n_rows();
 
-            void set_input_mode(yli::input::InputMode* const input_mode);
+            void set_input_mode(yli::ontology::InputMode* const input_mode);
             void set_console_top_y(const uint32_t console_top_y);
             void set_console_bottom_y(const uint32_t console_bottom_y);
             void set_console_left_x(const uint32_t console_left_x);
@@ -355,6 +352,7 @@ namespace yli::ontology
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_lisp_functions;
             yli::ontology::ApprenticeModule apprentice_of_font_2d;
+            yli::ontology::MasterOfInputModesModule master_of_input_modes;
 
             friend class yli::ontology::GenericMasterModule;
 
@@ -370,6 +368,8 @@ namespace yli::ontology
 
         public:
             yli::ontology::Scene* get_scene() const override;
+
+            std::size_t get_number_of_apprentices() const;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -394,7 +394,7 @@ namespace yli::ontology
 
             const std::string& get_prompt() const;
 
-            yli::input::InputMode* get_input_mode() const;
+            yli::ontology::InputMode* get_input_mode() const;
             std::size_t get_cursor_index() const;
             std::size_t get_history_line_i() const;
             std::size_t get_historical_input_i() const;
@@ -437,8 +437,6 @@ namespace yli::ontology
             std::list<char>::iterator cursor_it { this->current_input.begin() };
 
             const std::string prompt            { "$ " };
-
-            yli::input::InputMode* input_mode   { nullptr };
 
             std::size_t cursor_index            { 0 }; // Name `cursor_index` is chosen to distinguish from `cursor_it`.
             std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.

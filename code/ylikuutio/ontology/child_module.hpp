@@ -24,7 +24,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Scene;
 
-    class ChildModule final
+    class ChildModule
     {
         public:
             ChildModule(yli::ontology::GenericParentModule* const parent_module, yli::ontology::Entity* const entity) noexcept

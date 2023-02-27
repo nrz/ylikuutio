@@ -9,8 +9,6 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Move `InputMode` into `yli::ontology` and make it a child of the `Universe`, and make `InputMode` inherit `yli::ontology::Entity`.
-[ ] Refactor `InputMaster` into `yli::ontology::ParentOfInputModesModule` and take it into use.
 [ ] Implement custom memory allocator.
 [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
@@ -337,3 +335,5 @@ Ready:
 [x] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.
 [x] Fix `Universe::get_number_of_children` to count `CallbackEngine`s as well.
 [x] Fix `Universe::get_number_of_descendants` to count `CallbackEngine`s as well.
+[x] Move `InputMode` into `yli::ontology` and make it a child of the `Universe`, and make `InputMode` inherit `yli::ontology::Entity`.
+[x] Refactor `InputMaster` into `yli::ontology::ParentOfInputModesModule` and take it into use.

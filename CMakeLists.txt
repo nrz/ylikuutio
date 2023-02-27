@@ -423,10 +423,6 @@ add_library(ylikuutio STATIC
     # input, in alphabetical order
     code/ylikuutio/input/input.cpp
     code/ylikuutio/input/input.hpp
-    code/ylikuutio/input/input_mode.cpp
-    code/ylikuutio/input/input_mode.hpp
-    code/ylikuutio/input/input_system.cpp
-    code/ylikuutio/input/input_system.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation.hpp
@@ -575,6 +571,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
     code/ylikuutio/ontology/indexable.hpp
+    code/ylikuutio/ontology/input_mode.cpp
+    code/ylikuutio/ontology/input_mode.hpp
+    code/ylikuutio/ontology/input_mode_apprentice_module.cpp
+    code/ylikuutio/ontology/input_mode_apprentice_module.hpp
+    code/ylikuutio/ontology/input_mode_child_module.cpp
+    code/ylikuutio/ontology/input_mode_child_module.hpp
+    code/ylikuutio/ontology/input_mode_struct.hpp
     code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp
     code/ylikuutio/ontology/input_parameters_to_any_value_callback_with_console.hpp
     code/ylikuutio/ontology/lisp_function.cpp
@@ -586,6 +589,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/locomotion_module.hpp
     code/ylikuutio/ontology/locomotion_module_struct.hpp
     code/ylikuutio/ontology/master_module.hpp
+    code/ylikuutio/ontology/master_of_input_modes_module.cpp
+    code/ylikuutio/ontology/master_of_input_modes_module.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
@@ -610,6 +615,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/orientation_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp
     code/ylikuutio/ontology/generic_parent_module.hpp
+    code/ylikuutio/ontology/parent_of_input_modes_module.cpp
+    code/ylikuutio/ontology/parent_of_input_modes_module.hpp
     code/ylikuutio/ontology/parent_of_pipelines_module.cpp
     code/ylikuutio/ontology/parent_of_pipelines_module.hpp
     code/ylikuutio/ontology/read_callback.hpp
@@ -936,7 +943,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_graph.cpp
         code/ylikuutio/tests/googletest/test_holobiont.cpp
         code/ylikuutio/tests/googletest/test_indexing.cpp
-        code/ylikuutio/tests/googletest/test_input_system.cpp
+        code/ylikuutio/tests/googletest/test_input_method.cpp
+        code/ylikuutio/tests/googletest/test_input_mode.cpp
         code/ylikuutio/tests/googletest/test_line_2d.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp

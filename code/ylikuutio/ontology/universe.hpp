@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "generic_parent_module.hpp"
+#include "parent_of_input_modes_module.hpp"
 #include "framebuffer_module.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "entity_factory.hpp"
@@ -53,7 +54,6 @@ namespace yli::audio
 
 namespace yli::input
 {
-    class InputSystem;
     enum class InputMethod;
 }
 
@@ -67,9 +67,11 @@ namespace yli::ontology
 {
     class Scene;
     class Camera;
+    class InputMode;
     class Console;
 
     struct UniverseStruct;
+    struct InputModeStruct;
 
     class Universe final : public yli::ontology::Entity
     {
@@ -132,7 +134,6 @@ namespace yli::ontology
 
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
-            yli::input::InputSystem* get_input_system() const;
 
             yli::ontology::GenericParentModule& get_parent_of_ecosystems();
             yli::ontology::Scene* get_scene() const override;
@@ -195,6 +196,8 @@ namespace yli::ontology
             void reset_number_of_frames();
 
             yli::ontology::EntityFactory& get_entity_factory() const override;
+
+            yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct);
 
             const glm::mat4& get_projection_matrix() const;
             void set_projection_matrix(const glm::mat4& projection_matrix);
@@ -315,6 +318,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_ecosystems;
             yli::ontology::GenericParentModule parent_of_scenes;
             yli::ontology::GenericParentModule parent_of_font_2ds;
+            yli::ontology::ParentOfInputModesModule parent_of_input_modes;
             yli::ontology::GenericParentModule parent_of_consoles;
 
             yli::ontology::FramebufferModule framebuffer_module;
@@ -338,7 +342,6 @@ namespace yli::ontology
 
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr };
             std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr };
-            std::unique_ptr<yli::input::InputSystem> input_system    { nullptr };
 
             const std::string application_name;
 

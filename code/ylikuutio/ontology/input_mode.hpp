@@ -18,7 +18,9 @@
 #ifndef YLIKUUTIO_INPUT_INPUT_MODE_HPP_INCLUDED
 #define YLIKUUTIO_INPUT_INPUT_MODE_HPP_INCLUDED
 
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "entity.hpp"
+#include "input_mode_child_module.hpp"
+#include "input_mode_apprentice_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -29,18 +31,23 @@
 
 namespace yli::ontology
 {
+    class ParentOfInputModesModule;
+    class MasterOfInputModesModule;
+    class Universe;
     class CallbackEngine;
-}
+    struct InputModeStruct;
 
-namespace yli::input
-{
-    class InputSystem;
-
-    class InputMode final
+    class InputMode final : public yli::ontology::Entity
     {
         public:
-            // destructor.
+            InputMode(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::InputModeStruct& input_mode_struct,
+                    yli::ontology::ParentOfInputModesModule* const parent_module,
+                    yli::ontology::MasterOfInputModesModule* const console_master_module);
+
             ~InputMode() = default;
+
             void activate();
             void deactivate();
 
@@ -56,21 +63,17 @@ namespace yli::input
             const std::vector<yli::ontology::CallbackEngine*>* get_keyrelease_callback_engines() const;
             const std::vector<yli::ontology::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
-            friend class yli::input::InputSystem;
-            template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
+            yli::ontology::InputModeChildModule child_of_universe;
+            yli::ontology::InputModeApprenticeModule apprentice_of_console;
 
         private:
-            void bind_to_parent();
-
-            // constructor.
-            explicit InputMode(yli::input::InputSystem* const input_system);
-
-            InputMode(const InputMode&) = delete;            // Delete copy constructor.
-            yli::input::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
-
-            yli::input::InputSystem* parent { nullptr };
-            std::size_t childID { std::numeric_limits<std::size_t>::max() };
+            InputMode(const InputMode&) = delete;                           // Delete copy constructor.
+            yli::ontology::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
             std::vector<yli::ontology::CallbackEngine*> keypress_callback_engines;
             std::vector<yli::ontology::CallbackEngine*> keyrelease_callback_engines;

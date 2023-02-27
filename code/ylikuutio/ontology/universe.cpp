@@ -31,6 +31,7 @@
 #include "font_2d.hpp"
 #include "text_2d.hpp"
 #include "camera.hpp"
+#include "input_mode.hpp"
 #include "console.hpp"
 #include "entity_factory.hpp"
 #include "entity_variable_activation.hpp"
@@ -46,8 +47,6 @@
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/input/input_system.hpp"
-#include "code/ylikuutio/input/input_mode.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
@@ -101,6 +100,8 @@ namespace yli::ontology
     class GenericParentModule;
     class Font2D;
 
+    struct InputModeStruct;
+
     const std::string Universe::version = "0.0.10";
 
     void Universe::bind_entity(yli::ontology::Entity* const entity) noexcept
@@ -135,6 +136,7 @@ namespace yli::ontology
         parent_of_ecosystems(this, &this->registry, "ecosystems"),
         parent_of_scenes(this, &this->registry, "scenes"),
         parent_of_font_2ds(this, &this->registry, "font_2ds"),
+        parent_of_input_modes(this, &this->registry, "input_modes"),
         parent_of_consoles(this, &this->registry, "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },
@@ -198,7 +200,6 @@ namespace yli::ontology
         {
             yli::render::RenderSystemStruct render_system_struct;
             this->render_system = std::make_unique<yli::render::RenderSystem>(this, render_system_struct);
-            this->input_system = std::make_unique<yli::input::InputSystem>(this);
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -352,7 +353,7 @@ namespace yli::ontology
         // This method contains the main simulation loop.
         bool has_mouse_focus = true;
 
-        while (!this->is_exit_requested && this->input_system != nullptr)
+        while (!this->is_exit_requested)
         {
             const float current_time_in_main_loop = yli::time::get_time();
 
@@ -398,7 +399,7 @@ namespace yli::ontology
                 this->mouse_x = this->window_width / 2;
                 this->mouse_y = this->window_height / 2;
 
-                const yli::input::InputMode* const input_mode = input_system->get_active_input_mode();
+                const yli::ontology::InputMode* const input_mode = this->parent_of_input_modes.get_active_input_mode();
 
                 if (input_mode == nullptr)
                 {
@@ -783,12 +784,7 @@ namespace yli::ontology
 
     yli::input::InputMethod Universe::get_input_method() const
     {
-        if (this->input_system == nullptr)
-        {
-            return yli::input::InputMethod::KEYBOARD;
-        }
-
-        return this->input_system->get_input_method();
+        return this->parent_of_input_modes.get_input_method();
     }
 
     yli::render::GraphicsApiBackend Universe::get_graphics_api_backend() const
@@ -864,6 +860,7 @@ namespace yli::ontology
             this->parent_of_ecosystems.get_number_of_children() +
             this->parent_of_scenes.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
+            this->parent_of_input_modes.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children();
     }
 
@@ -873,6 +870,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
     }
 
@@ -1135,6 +1133,11 @@ namespace yli::ontology
         return *this->entity_factory.get();
     }
 
+    yli::ontology::InputMode* Universe::create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct)
+    {
+        return static_cast<yli::ontology::InputMode*>(this->get_entity_factory().create_input_mode(input_mode_struct));
+    }
+
     std::string Universe::eval_string(const std::string& my_string) const
     {
         return "TODO: eval";
@@ -1158,16 +1161,6 @@ namespace yli::ontology
         }
 
         return this->audio_system.get();
-    }
-
-    yli::input::InputSystem* Universe::get_input_system() const
-    {
-        if (this->input_system == nullptr)
-        {
-            return nullptr;
-        }
-
-        return this->input_system.get();
     }
 
     const glm::mat4& Universe::get_projection_matrix() const
