@@ -9,6 +9,8 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
+[ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
 [ ] Implement custom memory allocator.
 [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
@@ -71,8 +73,6 @@ Tasks which are necessary for the second stage:
 [ ] Implement transparent rendering of 4D objects.
 [ ] Replace SDL audio with OpenAL Soft.
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
-[ ] Create `audio::Sound` class, whose parent is `Entity`.
-[ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Evaluate FreeType.
 [ ] Evaluate HarfBuzz.
 [ ] Implement better font support.
