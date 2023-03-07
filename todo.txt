@@ -9,6 +9,8 @@ Fixes needed:
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Add `yli::core::Application&` as the first parameter of `yli::ontology::Entity` and all its derivative classes.
+[ ] Create `MockApplication` class to be used in tests.
 [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 [ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
 [ ] Implement custom memory allocator.
