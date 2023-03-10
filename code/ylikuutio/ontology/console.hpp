@@ -361,7 +361,7 @@ namespace yli::ontology
                         T1 apprentice_pointer,
                         std::vector<T1>& apprentice_pointer_vector,
                         std::queue<std::size_t>& free_apprenticeID_queue,
-                        std::size_t& number_of_apprenticeren) noexcept;
+                        std::size_t& number_of_apprentices) noexcept;
 
         private:
             yli::ontology::Entity* get_parent() const override;
