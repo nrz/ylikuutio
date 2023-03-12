@@ -82,7 +82,10 @@ namespace yli::ontology
         return true; // Unbinding successful.
     }
 
-    GenericParentModule::GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
+    GenericParentModule::GenericParentModule(
+            yli::ontology::Entity* const entity,
+            yli::ontology::Registry* const registry,
+            const std::string& name) noexcept
         : entity { entity }
     {
         // constructor.

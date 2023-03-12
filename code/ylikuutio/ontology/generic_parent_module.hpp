@@ -44,7 +44,10 @@ namespace yli::ontology
             virtual bool unbind_child(std::size_t childID) noexcept;
 
             // constructor.
-            GenericParentModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept;
+            GenericParentModule(
+                    yli::ontology::Entity* const entity,
+                    yli::ontology::Registry* const registry,
+                    const std::string& name) noexcept;
 
             GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
             GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
