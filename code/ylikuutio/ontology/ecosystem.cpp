@@ -36,7 +36,7 @@ namespace yli::ontology
         parent_of_pipelines(this, &this->registry, "pipelines"),
         parent_of_materials(this, &this->registry, "materials"),
         parent_of_species(this, &this->registry, "species"),
-        parent_of_symbioses(this, &this->registry, "species")
+        parent_of_symbioses(this, &this->registry, "symbioses")
     {
         // constructor.
 
