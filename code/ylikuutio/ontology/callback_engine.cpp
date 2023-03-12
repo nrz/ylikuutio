@@ -27,7 +27,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cerr
 #include <optional> // std::optional
 
 namespace yli::ontology
