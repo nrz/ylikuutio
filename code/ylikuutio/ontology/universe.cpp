@@ -132,12 +132,30 @@ namespace yli::ontology
     Universe::Universe(const yli::ontology::UniverseStruct& universe_struct)
         : Entity(*this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
-        parent_of_callback_engines(this, &this->registry, "callback_engines"),
-        parent_of_ecosystems(this, &this->registry, "ecosystems"),
-        parent_of_scenes(this, &this->registry, "scenes"),
-        parent_of_font_2ds(this, &this->registry, "font_2ds"),
-        parent_of_input_modes(this, &this->registry, "input_modes"),
-        parent_of_consoles(this, &this->registry, "consoles"),
+        parent_of_callback_engines(
+                this,
+                &this->registry,
+                "callback_engines"),
+        parent_of_ecosystems(
+                this,
+                &this->registry,
+                "ecosystems"),
+        parent_of_scenes(
+                this,
+                &this->registry,
+                "scenes"),
+        parent_of_font_2ds(
+                this,
+                &this->registry,
+                "font_2ds"),
+        parent_of_input_modes(
+                this,
+                &this->registry,
+                "input_modes"),
+        parent_of_consoles(
+                this,
+                &this->registry,
+                "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },
         graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },

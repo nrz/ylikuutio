@@ -155,7 +155,10 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule* const pipeline_master)
         : Entity(universe, model_struct),
         child_of_scene_or_ecosystem(scene_parent_module, this),
-        parent_of_symbiont_materials(this, &this->registry, "symbiont_materials"),
+        parent_of_symbiont_materials(
+                this,
+                &this->registry,
+                "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },

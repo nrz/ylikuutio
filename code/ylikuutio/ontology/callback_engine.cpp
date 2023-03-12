@@ -40,7 +40,10 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const universe_parent)
         : Entity(universe, yli::ontology::EntityStruct()),
         child_of_universe(universe_parent, this),
-        parent_of_callback_objects(this, &this->registry, "callback_objects")
+        parent_of_callback_objects(
+                this,
+                &this->registry,
+                "callback_objects")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";

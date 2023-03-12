@@ -59,7 +59,10 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(universe, font_struct),
         child_of_universe(parent_module, this),
-        parent_of_text_2ds(this, &this->registry, "text_2ds"),
+        parent_of_text_2ds(
+                this,
+                &this->registry,
+                "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),
         texture(
                 universe,

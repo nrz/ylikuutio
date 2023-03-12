@@ -142,8 +142,14 @@ namespace yli::ontology
             yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module)
         : Entity(universe, material_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
-        parent_of_shapeshifter_transformations(this, &this->registry, "shapeshifter_transformations"),
-        parent_of_vector_fonts(this, &this->registry, "vector_fonts"),
+        parent_of_shapeshifter_transformations(
+                this,
+                &this->registry,
+                "shapeshifter_transformations"),
+        parent_of_vector_fonts(
+                this,
+                &this->registry,
+                "vector_fonts"),
         apprentice_of_pipeline(static_cast<yli::ontology::GenericMasterModule*>(pipeline_master_module), this),
         master_of_species(this, &this->registry, "species"),
         texture(

@@ -43,7 +43,10 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const callback_engine_parent)
         : Entity(universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
-        parent_of_callback_parameters(this, &this->registry, "callback_parameters")
+        parent_of_callback_parameters(
+                this,
+                &this->registry,
+                "callback_parameters")
     {
     }
 
@@ -54,7 +57,10 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const callback_engine_parent)
         : Entity(universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
-        parent_of_callback_parameters(this, &this->registry, "callback_parameters"),
+        parent_of_callback_parameters(
+                this,
+                &this->registry,
+                "callback_parameters"),
         callback { callback }
     {
     }

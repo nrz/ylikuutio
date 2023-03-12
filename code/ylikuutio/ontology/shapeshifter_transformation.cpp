@@ -71,8 +71,14 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const material_parent_module)
         : Entity(universe, model_struct),
         child_of_material(material_parent_module, this),
-        parent_of_shapeshifter_forms(this, &this->registry, "shapeshifter_forms"),
-        parent_of_shapeshifter_sequences(this, &this->registry, "shapeshifter_sequences")
+        parent_of_shapeshifter_forms(
+                this,
+                &this->registry,
+                "shapeshifter_forms"),
+        parent_of_shapeshifter_sequences(
+                this,
+                &this->registry,
+                "shapeshifter_sequences")
     {
         // constructor.
 

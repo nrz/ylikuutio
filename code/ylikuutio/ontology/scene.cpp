@@ -59,15 +59,42 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
     : Entity(universe, scene_struct),
         child_of_universe(parent_module, this),
-        parent_of_pipelines(this, &this->registry, "pipelines"),
-        parent_of_default_camera(this, &this->registry, "default_camera"),
-        parent_of_cameras(this, &this->registry, "cameras"),
-        parent_of_brains(this, &this->registry, "brains"),
-        parent_of_materials(this, &this->registry, "materials"),
-        parent_of_species(this, &this->registry, "species"),
-        parent_of_objects(this, &this->registry, "objects"),
-        parent_of_symbioses(this, &this->registry, "symbioses"),
-        parent_of_holobionts(this, &this->registry, "holobionts"),
+        parent_of_pipelines(
+                this,
+                &this->registry,
+                "pipelines"),
+        parent_of_default_camera(
+                this,
+                &this->registry,
+                "default_camera"),
+        parent_of_cameras(
+                this,
+                &this->registry,
+                "cameras"),
+        parent_of_brains(
+                this,
+                &this->registry,
+                "brains"),
+        parent_of_materials(
+                this,
+                &this->registry,
+                "materials"),
+        parent_of_species(
+                this,
+                &this->registry,
+                "species"),
+        parent_of_objects(
+                this,
+                &this->registry,
+                "objects"),
+        parent_of_symbioses(
+                this,
+                &this->registry,
+                "symbioses"),
+        parent_of_holobionts(
+                this,
+                &this->registry,
+                "holobionts"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },
         water_level           { scene_struct.water_level },

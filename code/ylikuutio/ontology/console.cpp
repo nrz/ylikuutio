@@ -75,7 +75,10 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule* const generic_master_module)
         : Entity(universe, console_struct),
         child_of_universe(parent_module, this),
-        parent_of_lisp_functions(this, &this->registry, "lisp_functions"),
+        parent_of_lisp_functions(
+                this,
+                &this->registry,
+                "lisp_functions"),
         apprentice_of_font_2d(generic_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")
     {

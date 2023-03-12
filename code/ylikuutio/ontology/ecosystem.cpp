@@ -33,10 +33,22 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(universe, ecosystem_struct),
         child_of_universe(parent_module, this),
-        parent_of_pipelines(this, &this->registry, "pipelines"),
-        parent_of_materials(this, &this->registry, "materials"),
-        parent_of_species(this, &this->registry, "species"),
-        parent_of_symbioses(this, &this->registry, "symbioses")
+        parent_of_pipelines(
+                this,
+                &this->registry,
+                "pipelines"),
+        parent_of_materials(
+                this,
+                &this->registry,
+                "materials"),
+        parent_of_species(
+                this,
+                &this->registry,
+                "species"),
+        parent_of_symbioses(
+                this,
+                &this->registry,
+                "symbioses")
     {
         // constructor.
 

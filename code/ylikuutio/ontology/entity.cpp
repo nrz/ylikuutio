@@ -69,7 +69,10 @@ namespace yli::ontology
 
     Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
         : registry(),
-        parent_of_variables(this, &this->registry, ""), // Do not index `parent_of_variables`, index only the variables.
+        parent_of_variables(
+                this,
+                &this->registry,
+                ""), // Do not index `parent_of_variables`, index only the variables.
         universe { universe },
         is_variable { entity_struct.is_variable }
     {
