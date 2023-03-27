@@ -75,7 +75,7 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
 
             std::size_t get_n_of_return_values() const;
-            std::optional<yli::data::AnyValue> get_nth_return_value(std::size_t n) const;
+            std::optional<yli::data::AnyValue> get_nth_return_value(const std::size_t n) const;
             std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
             yli::ontology::Entity* get_parent() const override;

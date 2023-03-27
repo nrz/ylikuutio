@@ -108,7 +108,7 @@ namespace yli::ontology
         return this->return_values.size();
     }
 
-    std::optional<yli::data::AnyValue> CallbackEngine::get_nth_return_value(std::size_t n) const
+    std::optional<yli::data::AnyValue> CallbackEngine::get_nth_return_value(const std::size_t n) const
     {
         // note: indexing of `n` begins from 0.
 
