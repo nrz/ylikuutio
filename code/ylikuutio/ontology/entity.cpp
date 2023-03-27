@@ -67,7 +67,9 @@ namespace yli::ontology
         universe.bind_entity(this);
     }
 
-    Entity::Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct)
+    Entity::Entity(
+            yli::ontology::Universe& universe,
+            const yli::ontology::EntityStruct& entity_struct)
         : registry(),
         parent_of_variables(
                 this,

@@ -51,7 +51,9 @@ namespace yli::ontology
             void bind_to_universe() noexcept;
 
             // constructor.
-            Entity(yli::ontology::Universe& universe, const yli::ontology::EntityStruct& entity_struct);
+            Entity(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::EntityStruct& entity_struct);
 
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity& operator=(const Entity&) = delete; // Delete copy assignment.
