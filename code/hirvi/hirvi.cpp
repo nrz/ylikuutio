@@ -126,7 +126,7 @@ namespace hirvi
         };
     }
 
-    yli::ontology::UniverseStruct HirviApplication::get_universe_struct()
+    yli::ontology::UniverseStruct HirviApplication::get_universe_struct() const
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         std::stringstream window_title_stringstream;

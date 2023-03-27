@@ -121,7 +121,7 @@ namespace yli_edit
         };
     }
 
-    yli::ontology::UniverseStruct YliEditApplication::get_universe_struct()
+    yli::ontology::UniverseStruct YliEditApplication::get_universe_struct() const
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         std::stringstream window_title_stringstream;

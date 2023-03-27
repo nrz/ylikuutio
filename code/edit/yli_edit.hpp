@@ -43,7 +43,7 @@ namespace yli_edit
 
             std::vector<std::string> get_valid_keys() const override;
 
-            yli::ontology::UniverseStruct get_universe_struct() override;
+            yli::ontology::UniverseStruct get_universe_struct() const override;
 
             bool create_simulation() override;
     };
