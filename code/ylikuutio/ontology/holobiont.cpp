@@ -171,7 +171,11 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            new yli::ontology::Biont(this->universe, biont_struct, &this->parent_of_bionts, &symbiont_species->master_of_bionts);
+            new yli::ontology::Biont(
+                    this->universe,
+                    biont_struct,
+                    &this->parent_of_bionts,
+                    &symbiont_species->master_of_bionts);
         }
     }
 
