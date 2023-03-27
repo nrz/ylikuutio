@@ -38,7 +38,9 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(universe, mission_struct),
         child_of_universe(parent_module, this),
-        callback_engine(this->universe, &this->universe.parent_of_callback_engines)
+        callback_engine(
+                this->universe,
+                &this->universe.parent_of_callback_engines)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";
