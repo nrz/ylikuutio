@@ -61,7 +61,9 @@ namespace yli::ontology
     class ComputeTask final : public yli::ontology::Entity
     {
         public:
-            ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct);
+            ComputeTask(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::ComputeTaskStruct& compute_task_struct);
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.

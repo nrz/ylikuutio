@@ -67,7 +67,9 @@ namespace yli::ontology
         pipeline->parent_of_compute_tasks.bind_child(this);
     }
 
-    ComputeTask::ComputeTask(yli::ontology::Universe& universe, const yli::ontology::ComputeTaskStruct& compute_task_struct)
+    ComputeTask::ComputeTask(
+            yli::ontology::Universe& universe,
+            const yli::ontology::ComputeTaskStruct& compute_task_struct)
         : Entity(universe, compute_task_struct),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
