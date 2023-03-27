@@ -117,7 +117,7 @@ namespace ajokki
         return "Ajokki";
     }
 
-    std::vector<std::string> AjokkiApplication::get_valid_keys()
+    std::vector<std::string> AjokkiApplication::get_valid_keys() const
     {
         return {
             "help",

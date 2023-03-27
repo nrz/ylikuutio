@@ -107,7 +107,7 @@ namespace hirvi
         return "Hirvi";
     }
 
-    std::vector<std::string> HirviApplication::get_valid_keys()
+    std::vector<std::string> HirviApplication::get_valid_keys() const
     {
         return {
             "help",

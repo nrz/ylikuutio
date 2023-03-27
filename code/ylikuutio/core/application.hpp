@@ -50,7 +50,7 @@ namespace yli::core
             yli::ontology::Universe* get_universe() const;
             void set_universe(yli::ontology::Universe* const universe);
 
-            virtual std::vector<std::string> get_valid_keys() = 0;
+            virtual std::vector<std::string> get_valid_keys() const = 0;
             virtual yli::ontology::UniverseStruct get_universe_struct() = 0;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.

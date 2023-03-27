@@ -68,7 +68,7 @@ namespace gpgpu_test
         return "GPGPU test";
     }
 
-    std::vector<std::string> GpgpuTestApplication::get_valid_keys()
+    std::vector<std::string> GpgpuTestApplication::get_valid_keys() const
     {
         return { "help", "version" };
     }

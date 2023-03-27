@@ -41,7 +41,7 @@ namespace yli_edit
 
             std::string get_name() const override;
 
-            std::vector<std::string> get_valid_keys() override;
+            std::vector<std::string> get_valid_keys() const override;
 
             yli::ontology::UniverseStruct get_universe_struct() override;
 

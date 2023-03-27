@@ -102,7 +102,7 @@ namespace yli_edit
         return "YliEdit";
     }
 
-    std::vector<std::string> YliEditApplication::get_valid_keys()
+    std::vector<std::string> YliEditApplication::get_valid_keys() const
     {
         return {
             "help",

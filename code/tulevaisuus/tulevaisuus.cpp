@@ -107,7 +107,7 @@ namespace tulevaisuus
         return "Tulevaisuus";
     }
 
-    std::vector<std::string> TulevaisuusApplication::get_valid_keys()
+    std::vector<std::string> TulevaisuusApplication::get_valid_keys() const
     {
         return {
             "help",
