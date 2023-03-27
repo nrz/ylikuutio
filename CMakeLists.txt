@@ -485,6 +485,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # memory, in alphabetical order
+    code/ylikuutio/memory/constructible_module.hpp
+    code/ylikuutio/memory/generic_memory_allocator.hpp
+    code/ylikuutio/memory/generic_memory_system.hpp
+    code/ylikuutio/memory/memory_allocator.hpp
+    code/ylikuutio/memory/memory_storage.hpp
+    code/ylikuutio/memory/memory_system.hpp
     code/ylikuutio/memory/memory_templates.hpp
 
     # network, in alphabetical order
