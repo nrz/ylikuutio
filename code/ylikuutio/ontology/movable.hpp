@@ -77,7 +77,8 @@ namespace yli::ontology
             static std::optional<yli::data::AnyValue> unbind_from_brain(
                     yli::ontology::Movable& movable) noexcept;
 
-            Movable(yli::ontology::Universe& universe,
+            Movable(
+                    yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::GenericMasterModule* const brain_master);
 

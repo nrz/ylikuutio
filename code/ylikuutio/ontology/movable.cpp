@@ -74,7 +74,8 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    Movable::Movable(yli::ontology::Universe& universe,
+    Movable::Movable(
+            yli::ontology::Universe& universe,
             const yli::ontology::MovableStruct& movable_struct,
             yli::ontology::GenericMasterModule* const brain_master)
         : Entity(universe, movable_struct),
