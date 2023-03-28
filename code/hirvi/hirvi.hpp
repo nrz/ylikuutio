@@ -18,9 +18,9 @@
 #ifndef TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
 #define TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
 
-#include "code/ylikuutio/core/application.hpp"
 #include "cat.hpp"
 #include "police_car.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
