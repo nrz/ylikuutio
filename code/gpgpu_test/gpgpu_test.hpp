@@ -88,7 +88,7 @@ namespace gpgpu_test
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
 
-    class GpgpuTestApplication : public yli::core::Application
+    class GpgpuTestApplication final : public yli::core::Application
     {
         public:
             GpgpuTestApplication(const int argc, const char* const argv[]);

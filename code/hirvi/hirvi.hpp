@@ -104,7 +104,7 @@ namespace hirvi
     using CatMemoryAllocator       = yli::memory::MemoryAllocator<hirvi::Cat, 256>;
     using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<hirvi::PoliceCar, 256>;
 
-    class HirviApplication : public yli::core::Application
+    class HirviApplication final : public yli::core::Application
     {
         public:
             HirviApplication(const int argc, const char* const argv[]);

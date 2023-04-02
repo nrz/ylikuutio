@@ -90,7 +90,7 @@ namespace ajokki
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
 
-    class AjokkiApplication : public yli::core::Application
+    class AjokkiApplication final : public yli::core::Application
     {
         public:
             AjokkiApplication(const int argc, const char* const argv[]);

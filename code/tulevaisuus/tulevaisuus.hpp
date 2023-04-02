@@ -90,7 +90,7 @@ namespace tulevaisuus
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
 
-    class TulevaisuusApplication : public yli::core::Application
+    class TulevaisuusApplication final : public yli::core::Application
     {
         public:
             TulevaisuusApplication(const int argc, const char* const argv[]);
