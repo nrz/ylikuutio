@@ -105,7 +105,9 @@ namespace yli::ontology
         return nullptr;
     }
 
-    VectorFont::VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct)
+    VectorFont::VectorFont(
+            yli::ontology::Universe& universe,
+            const yli::ontology::VectorFontStruct& vector_font_struct)
         : Entity(universe, vector_font_struct),
         parent_of_glyphs(
                 this,

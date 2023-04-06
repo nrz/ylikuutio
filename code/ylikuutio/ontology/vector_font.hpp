@@ -54,7 +54,9 @@ namespace yli::ontology
                     yli::ontology::VectorFont& vector_font,
                     yli::ontology::Material& new_parent) noexcept;
 
-            VectorFont(yli::ontology::Universe& universe, const yli::ontology::VectorFontStruct& vector_font_struct);
+            VectorFont(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::VectorFontStruct& vector_font_struct);
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
