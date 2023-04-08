@@ -64,7 +64,7 @@ namespace yli::ontology
 
     Biont::Biont(
             yli::ontology::Universe& universe,
-            yli::ontology::BiontStruct& biont_struct,
+            const yli::ontology::BiontStruct& biont_struct,
             yli::ontology::GenericParentModule* const holobiont_parent_module,
             yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
         : Movable(
