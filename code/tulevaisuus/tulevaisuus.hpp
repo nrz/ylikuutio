@@ -84,7 +84,7 @@ namespace tulevaisuus
     using VectorFontMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
     using Text3DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
-    using InputModeAllocator                         = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
+    using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
