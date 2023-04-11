@@ -39,6 +39,19 @@ namespace yli::ontology
             // constructor.
         }
 
+        ObjectStruct(
+                yli::ontology::Scene* const parent,
+                std::variant<
+                std::monostate,
+                yli::ontology::Species*,
+                yli::ontology::ShapeshifterSequence*,
+                yli::ontology::Text3D*>
+                mesh_master)
+            : parent { parent },
+            mesh_master { mesh_master }
+        {
+        }
+
         yli::ontology::Scene* parent { nullptr };
         std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> mesh_master {};
         yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
