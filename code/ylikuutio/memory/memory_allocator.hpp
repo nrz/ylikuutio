@@ -84,7 +84,7 @@ namespace yli::memory
                     return count;
                 }
 
-                void get_storage(const uint32_t storage_i) const
+                yli::memory::MemoryStorage<T1, DataSize>& get_storage(const uint32_t storage_i) const
                 {
                     if (storage_i >= this->get_number_of_storages())
                     {
@@ -93,10 +93,19 @@ namespace yli::memory
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
 
-                    return this->storages.at(storage_i);
+                    auto raw_storage_pointer = this->storages.at(storage_i).get();
+
+                    if (raw_storage_pointer == nullptr)
+                    {
+                        std::stringstream runtime_error_stringstream;
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for storage_i " << storage_i << " is `nullptr`!";
+                        throw std::runtime_error(runtime_error_stringstream.str());
+                    }
+
+                    return *raw_storage_pointer;
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& constructible_module) const override
+                void destroy(const yli::memory::ConstructibleModule& constructible_module) override
                 {
                     auto& storage = this->get_storage(constructible_module.storage_i);
                     storage.destroy(constructible_module.slot_i);
