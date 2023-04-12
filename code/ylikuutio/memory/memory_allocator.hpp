@@ -148,6 +148,11 @@ namespace yli::memory
                     return this->instances.size();
                 }
 
+                void destroy(const yli::memory::ConstructibleModule& constructible_module) override
+                {
+                    // TODO
+                }
+
             private:
                 std::vector<yli::ontology::GenericLispFunctionOverload*> instances;
         };
