@@ -19,14 +19,25 @@
 #define YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
 
 // Include standard headers
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t
 
 namespace yli::memory
 {
     struct ConstructibleModule
     {
-        uint32_t storage_i;
-        uint32_t slot_i;
+        ConstructibleModule()
+        {
+        }
+
+        ConstructibleModule(const uint32_t storage_i, const uint32_t slot_i)
+            : storage_i { storage_i },
+            slot_i { slot_i }
+        {
+        }
+
+        uint32_t storage_i { std::numeric_limits<uint32_t>::infinity() };
+        uint32_t slot_i    { std::numeric_limits<uint32_t>::infinity() };
     };
 }
 
