@@ -18,6 +18,8 @@
 #ifndef YLIKUUTIO_MEMORY_MEMORY_STORAGE_HPP_INCLUDED
 #define YLIKUUTIO_MEMORY_MEMORY_STORAGE_HPP_INCLUDED
 
+#include "constructible_module.hpp"
+
 // Include standard headers
 #include <algorithm> // std::sort
 #include <array>     // std::array
@@ -116,7 +118,7 @@ namespace yli::memory
 
                         T1* data = reinterpret_cast<T1*>(this->memory.data());
                         auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
-                        instance->constructible_module(this->storage_i, slot_i);
+                        instance->constructible_module = yli::memory::ConstructibleModule(this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
                     }
