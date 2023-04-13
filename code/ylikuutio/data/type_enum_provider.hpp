@@ -165,19 +165,19 @@ namespace yli::data
     template<>
         yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Font2D>()
         {
-            return yli::data::Datatype::FONT2D;
+            return yli::data::Datatype::FONT_2D;
         }
 
     template<>
         yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text2D>()
         {
-            return yli::data::Datatype::TEXT2D;
+            return yli::data::Datatype::TEXT_2D;
         }
 
     template<>
         yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::VectorFont>()
         {
-            return yli::data::Datatype::VECTORFONT;
+            return yli::data::Datatype::VECTOR_FONT;
         }
 
     template<>
@@ -189,7 +189,7 @@ namespace yli::data
     template<>
         yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text3D>()
         {
-            return yli::data::Datatype::TEXT3D;
+            return yli::data::Datatype::TEXT_3D;
         }
 
     template<>
