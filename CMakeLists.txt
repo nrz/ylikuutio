@@ -369,6 +369,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/core/application.cpp
     code/ylikuutio/core/application.hpp
     code/ylikuutio/core/entrypoint.hpp
+    code/ylikuutio/core/system_factory.hpp
 
     # data, in alphabetical order
     code/ylikuutio/data/any_value.cpp
