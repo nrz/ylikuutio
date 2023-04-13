@@ -38,7 +38,7 @@ namespace yli::memory
             virtual uint32_t get_number_of_storages() const = 0;
             virtual uint32_t get_number_of_instances() const = 0;
 
-            virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) const = 0;
+            virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) = 0;
     };
 }
 
