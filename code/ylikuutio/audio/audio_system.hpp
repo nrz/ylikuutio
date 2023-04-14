@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 
+#include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
@@ -25,6 +26,12 @@
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
+
+namespace yli::memory
+{
+    template<typename T1, uint32_t DataSize>
+        class MemoryStorage;
+}
 
 namespace yli::ontology
 {
@@ -58,9 +65,15 @@ namespace yli::audio
 
             int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
 
+            template<typename T1, uint32_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
         private:
             void play_audio(void* userdata, uint8_t* stream, int length);
             static void play_audio_callback(void* userdata, uint8_t* stream, int length);
+
+            yli::memory::ConstructibleModule constructible_module;
+
             static yli::audio::AudioSystem* audio_system;
 
             yli::ontology::Universe* const universe { nullptr };
