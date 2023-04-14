@@ -63,7 +63,6 @@ namespace yli::ontology
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-            // getter functions for callbacks and callback objects.
             std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
             std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
