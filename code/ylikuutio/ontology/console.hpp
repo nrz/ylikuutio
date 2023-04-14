@@ -94,11 +94,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module);
 
+            ~Console();
+
             Console(const Console&) = delete;            // Delete copy constructor.
             Console& operator=(const Console&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Console();
 
             void activate() override;
 
