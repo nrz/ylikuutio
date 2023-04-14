@@ -21,7 +21,6 @@
 #include "code/ylikuutio/ontology/console.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <vector>   // std::vector

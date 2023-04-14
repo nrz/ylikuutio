@@ -18,9 +18,6 @@
 #include "input_mode_child_module.hpp"
 #include "parent_of_input_modes_module.hpp"
 
-// Include standard headers
-#include <stdexcept> // std::runtime_error
-
 namespace yli::ontology
 {
     InputModeChildModule::InputModeChildModule(
