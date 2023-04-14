@@ -306,7 +306,6 @@ namespace yli::ontology
     void Entity::set_global_name(const std::string& global_name)
     {
         // Requirements:
-        // `this->universe` must not be `nullptr`.
         // `global_name` must not be already in use.
 
         if (global_name.empty())

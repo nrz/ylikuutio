@@ -238,7 +238,6 @@ namespace yli::ontology
         this->active_camera = camera;
 
         // requirements for further actions:
-        // `this->universe` must not be `nullptr`.
         // `this->parent` must not be `nullptr`.
 
         yli::ontology::Scene* const active_scene = this->universe.get_active_scene();

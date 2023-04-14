@@ -129,7 +129,6 @@ namespace yli::ontology
     void Biont::render_this_biont(const yli::ontology::Pipeline* const pipeline)
     {
         // Requirements:
-        // `this->universe` must not be `nullptr`.
         // `pipeline` must not be `nullptr`.
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
