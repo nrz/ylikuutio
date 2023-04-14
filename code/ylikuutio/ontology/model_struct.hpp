@@ -70,7 +70,7 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*> parent  {};
+        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*> parent {};
         yli::ontology::Pipeline* pipeline                                      { nullptr }; // Pointer to `Pipeline`.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial`.
