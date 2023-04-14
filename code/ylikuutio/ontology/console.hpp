@@ -75,8 +75,8 @@ namespace yli::ontology
     class CallbackParameter;
     class Scene;
     class Font2D;
-    class Registry;
     class InputMode;
+    class Registry;
     struct ConsoleStruct;
 
     class Console final : public yli::ontology::Entity
