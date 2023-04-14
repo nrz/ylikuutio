@@ -45,6 +45,11 @@ namespace yli::ontology
     class Glyph final : public yli::ontology::Entity
     {
         public:
+            Glyph(
+                    yli::ontology::Universe& universe,
+                    const yli::ontology::ModelStruct& model_struct,
+                    yli::ontology::GenericParentModule* const vector_font_parent_module);
+
             // destructor.
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph() = default;
@@ -56,11 +61,6 @@ namespace yli::ontology
             friend class yli::ontology::VectorFont;
 
         private:
-            Glyph(
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const vector_font_parent_module);
-
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
