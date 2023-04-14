@@ -61,7 +61,7 @@ namespace yli::ontology
         //    as input parameter for the `CallbackParameter` constructor.
 
         public:
-            explicit CallbackEngine(
+            CallbackEngine(
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const universe_parent);
 
