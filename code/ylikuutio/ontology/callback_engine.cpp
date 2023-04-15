@@ -36,7 +36,8 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    CallbackEngine::CallbackEngine(yli::ontology::Universe& universe,
+    CallbackEngine::CallbackEngine(
+            yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const universe_parent)
         : Entity(universe, yli::ontology::EntityStruct()),
         child_of_universe(universe_parent, this),
