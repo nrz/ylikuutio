@@ -27,6 +27,11 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -51,10 +56,11 @@ namespace yli::ontology
     }
 
     Variable::Variable(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::VariableStruct& variable_struct,
             const yli::data::AnyValue& any_value)
-        : Entity(universe, variable_struct),
+        : Entity(application, universe, variable_struct),
         parent            { variable_struct.parent },
         variable_value    { any_value },
         activate_callback { variable_struct.activate_callback },

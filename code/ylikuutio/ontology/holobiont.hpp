@@ -29,6 +29,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -42,6 +47,7 @@ namespace yli::ontology
     {
         public:
             Holobiont(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
                     yli::ontology::GenericParentModule* const scene_parent,

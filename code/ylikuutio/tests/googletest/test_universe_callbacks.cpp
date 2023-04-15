@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -56,15 +57,18 @@ namespace yli::ontology
 
 TEST(scene_must_be_deleted_appropriately, universe_callback)
 {
+    mock::MockApplication application;
+
     yli::ontology::Console* const console = nullptr;
 
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -80,15 +84,18 @@ TEST(scene_must_be_deleted_appropriately, universe_callback)
 
 TEST(scene_must_be_activated_appropriately, universe_callback)
 {
+    mock::MockApplication application;
+
     yli::ontology::Console* const console = nullptr;
 
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -102,13 +109,16 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
 
 TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = new yli::ontology::Console(
+            application,
             *universe,
             console_struct,
             &universe->parent_of_consoles, nullptr);
@@ -122,10 +132,13 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 
 TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::Font2D* font_2d = new yli::ontology::Font2D(
+            application,
             *universe,
             yli::ontology::FontStruct(),
             &universe->parent_of_font_2ds);
@@ -134,6 +147,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = new yli::ontology::Console(
+            application,
             *universe,
             console_struct,
             &universe->parent_of_consoles, nullptr);
@@ -147,15 +161,18 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 
 TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 {
+    mock::MockApplication application;
+
     yli::ontology::Console* const console = nullptr;
 
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -163,6 +180,7 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 
     const std::string camera_name = "bar";
     yli::ontology::Camera* const camera = new yli::ontology::Camera(
+            application,
             *universe,
             yli::ontology::CameraStruct(),
             &scene->parent_of_cameras, nullptr);

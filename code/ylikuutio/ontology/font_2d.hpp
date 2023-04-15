@@ -30,6 +30,11 @@
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -41,6 +46,7 @@ namespace yli::ontology
     {
         public:
             Font2D(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::FontStruct& font_struct,
                     yli::ontology::GenericParentModule* const parent_module);

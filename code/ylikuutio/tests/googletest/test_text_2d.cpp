@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
@@ -26,8 +27,10 @@
 
 TEST(text_2d_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::FontStruct font_struct;
     font_struct.screen_width = universe->get_window_width();
@@ -35,6 +38,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
     font_struct.text_size = universe->get_text_size();
     font_struct.font_size = universe->get_font_size();
     yli::ontology::Font2D* const font_2d = new yli::ontology::Font2D(
+            application,
             *universe,
             font_struct,
             &universe->parent_of_font_2ds);
@@ -42,6 +46,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
     yli::ontology::TextStruct text_struct;
     text_struct.parent = font_2d;
     yli::ontology::Text2D* const text_2d = new yli::ontology::Text2D(
+            application,
             *universe,
             text_struct,
             &font_2d->parent_of_text_2ds);

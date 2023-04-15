@@ -19,6 +19,11 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -30,6 +35,7 @@ namespace yli::ontology
 namespace hirvi
 {
     Elk::Elk(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& elk_struct,
             const yli::ontology::LocomotionModuleStruct& walk_struct,
@@ -39,7 +45,7 @@ namespace hirvi
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const brain_master)
-        : yli::ontology::Holobiont(universe, elk_struct, scene_parent, symbiosis_master, brain_master),
+        : yli::ontology::Holobiont(application, universe, elk_struct, scene_parent, symbiosis_master, brain_master),
         walk(walk_struct),
         trot(trot_struct),
         canter(canter_struct),

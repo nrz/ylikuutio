@@ -855,6 +855,14 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi snippets ylikuutio ${ALL_LIBS} pthread)
 
+# Mock
+add_executable(mock
+    # mock, in alphabetical order
+    code/mock/mock_application.cpp
+    code/mock/mock_application.hpp
+    )
+target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} pthread)
+
 # Tulevaisuus
 add_executable(tulevaisuus
     # tulevaisuus, in alphabetical order
@@ -922,6 +930,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
 
     set(UNIT_TESTS
+        code/mock/mock_application.cpp
+        code/mock/mock_application.hpp
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
@@ -988,6 +998,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
+    set_property(TARGET unit_tests_with_googletest PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
+
     if (DEFINED "PNG_LIBRARIES")
         target_link_libraries(unit_tests_with_googletest gtest_main snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()

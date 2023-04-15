@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -30,22 +31,26 @@
 
 TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &ecosystem->parent_of_symbioses,
@@ -78,28 +83,33 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
 
 TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_scene)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &ecosystem->parent_of_symbioses,
@@ -136,23 +146,27 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
 
 TEST(symbiosis_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -185,18 +199,21 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
 
 TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
@@ -204,6 +221,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -236,17 +254,21 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
 
 TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::ModelStruct model_struct;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &ecosystem1->parent_of_symbioses,
@@ -256,6 +278,7 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
 
     yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -281,23 +304,27 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
 
 TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene1->parent_of_symbioses,
@@ -308,6 +335,7 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -332,11 +360,14 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
 
 TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -344,6 +375,7 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecos
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -351,6 +383,7 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecos
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -375,17 +408,21 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecos
 
 TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::ModelStruct model_struct;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &ecosystem->parent_of_symbioses,
@@ -393,6 +430,7 @@ TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scen
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -417,18 +455,21 @@ TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scen
 
 TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
@@ -436,13 +477,14 @@ TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice)
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
             &pipeline1->master_of_symbioses);
     ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
-    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
     yli::ontology::Symbiosis::bind_to_new_pipeline(*symbiosis, *pipeline2);

@@ -227,7 +227,7 @@ namespace hirvi
 
         my_universe->set_global_name("universe");
 
-        std::unique_ptr<yli::ontology::CustomEntityFactory> entity_factory = std::make_unique<yli::ontology::CustomEntityFactory>(*my_universe);
+        std::unique_ptr<yli::ontology::CustomEntityFactory> entity_factory = std::make_unique<yli::ontology::CustomEntityFactory>(*this, *my_universe);
 
         yli::audio::AudioSystem* const audio_system = my_universe->get_audio_system();
 

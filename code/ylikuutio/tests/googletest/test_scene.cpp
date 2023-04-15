@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -24,11 +25,14 @@
 
 TEST(scene_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -54,11 +58,14 @@ TEST(scene_must_be_initialized_appropriately, headless)
 
 TEST(scene_must_be_activated_appropriately, scene)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -70,11 +77,14 @@ TEST(scene_must_be_activated_appropriately, scene)
 
 TEST(scene_must_be_given_a_global_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -91,11 +101,14 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
 
 TEST(scene_must_be_given_a_local_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -112,11 +125,14 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -136,11 +152,14 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -160,11 +179,14 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
 
 TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -184,11 +206,14 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
 
 TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);

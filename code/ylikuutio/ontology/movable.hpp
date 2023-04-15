@@ -53,6 +53,11 @@
 //
 // `Text3D`, child of `VectorFont`, is not implemented yet.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::input
 {
     enum class InputMethod;
@@ -78,6 +83,7 @@ namespace yli::ontology
                     yli::ontology::Movable& movable) noexcept;
 
             Movable(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
                     yli::ontology::GenericMasterModule* const brain_master);

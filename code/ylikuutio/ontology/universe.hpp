@@ -52,6 +52,11 @@ namespace yli::audio
     class AudioSystem;
 }
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::input
 {
     enum class InputMethod;
@@ -79,7 +84,8 @@ namespace yli::ontology
             void bind_entity(yli::ontology::Entity* const entity) noexcept;
             void unbind_entity(const std::size_t entityID) noexcept;
 
-            explicit Universe(
+            Universe(
+                    yli::core::Application& application,
                     const yli::ontology::UniverseStruct& universe_struct);
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
@@ -332,7 +338,7 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(*this) };
+            std::unique_ptr<yli::ontology::EntityFactory> entity_factory { std::make_unique<yli::ontology::EntityFactory>(this->application, *this) };
 
             std::vector<yli::ontology::Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;

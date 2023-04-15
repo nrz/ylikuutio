@@ -30,6 +30,11 @@
 #include <optional> // std::optional
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -62,6 +67,7 @@ namespace yli::ontology
 
         public:
             CallbackEngine(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const universe_parent);
 

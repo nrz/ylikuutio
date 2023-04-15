@@ -22,6 +22,7 @@
 #include "pipeline.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
@@ -136,11 +137,12 @@ namespace yli::ontology
     }
 
     Material::Material(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MaterialStruct& material_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
             yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module)
-        : Entity(universe, material_struct),
+        : Entity(application, universe, material_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_shapeshifter_transformations(
                 this,

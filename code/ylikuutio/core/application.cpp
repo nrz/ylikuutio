@@ -53,4 +53,9 @@ namespace yli::core
     {
         this->universe = universe;
     }
+
+    void Application::create_memory_allocators()
+    {
+        // TODO: remove this implementation and make this a pure virtual function.
+    }
 }

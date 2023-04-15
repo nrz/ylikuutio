@@ -21,6 +21,7 @@
 #include "scene.hpp"
 #include "pipeline_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -109,10 +110,11 @@ namespace yli::ontology
     }
 
     Pipeline::Pipeline(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::PipelineStruct& pipeline_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
-        : Entity(universe, pipeline_struct),
+        : Entity(application, universe, pipeline_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_compute_tasks(
                 this,

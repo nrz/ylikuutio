@@ -56,6 +56,11 @@
 // When a `Scene` is deleted:
 // 1. Every child of `Scene` gets deleted as usual, including the `Camera`s.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::data
 {
     struct SphericalCoordinatesStruct;
@@ -73,6 +78,7 @@ namespace yli::ontology
     {
         public:
             Scene(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::SceneStruct& scene_struct,
                     yli::ontology::GenericParentModule* const parent_module);

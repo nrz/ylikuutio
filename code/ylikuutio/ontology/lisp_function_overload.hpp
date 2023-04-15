@@ -47,6 +47,11 @@
 //
 // number-of-provided-parameters = number-of-function-arguments - number-of-Universe-arguments - number-of-Console-arguments
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -59,10 +64,11 @@ namespace yli::ontology
     {
         public:
             LispFunctionOverload(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module,
                     std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
-                : GenericLispFunctionOverload(universe, parent_module),
+                : GenericLispFunctionOverload(application, universe, parent_module),
                 callback(callback)
             {
                 // constructor.

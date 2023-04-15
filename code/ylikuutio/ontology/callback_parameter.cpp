@@ -25,6 +25,11 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::data
 {
     class AnyValue;
@@ -38,11 +43,12 @@ namespace yli::ontology
     struct EntityStruct;
 
     CallbackParameter::CallbackParameter(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
             const yli::data::AnyValue& any_value,
             yli::ontology::GenericParentModule* const callback_object_parent)
-        : Entity(universe, callback_parameter_struct),
+        : Entity(application, universe, callback_parameter_struct),
         child_of_callback_object(callback_object_parent, this),
         any_value    { any_value }
     {

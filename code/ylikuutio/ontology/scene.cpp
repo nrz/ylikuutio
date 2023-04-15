@@ -29,6 +29,7 @@
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
@@ -54,10 +55,11 @@ namespace yli::ontology
     class Entity;
 
     Scene::Scene(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::SceneStruct& scene_struct,
             yli::ontology::GenericParentModule* const parent_module)
-    : Entity(universe, scene_struct),
+    : Entity(application, universe, scene_struct),
         child_of_universe(parent_module, this),
         parent_of_pipelines(
                 this,
@@ -121,7 +123,7 @@ namespace yli::ontology
         // create the default `Camera`.
         yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = this;
-        new yli::ontology::Camera(this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
+        new yli::ontology::Camera(this->application, this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";

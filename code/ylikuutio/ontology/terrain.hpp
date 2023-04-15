@@ -20,6 +20,11 @@
 
 #include "code/ylikuutio/ontology/object.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -31,6 +36,7 @@ namespace yli::ontology
     {
         public:
             explicit Terrain(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& terrain_struct,
                     yli::ontology::GenericParentModule* const parent_module,

@@ -28,6 +28,11 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -46,6 +51,7 @@ namespace yli::ontology
                     yli::ontology::Font2D& new_parent) noexcept;
 
             Text2D(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::TextStruct& text_struct,
                     yli::ontology::GenericParentModule* const parent_module);

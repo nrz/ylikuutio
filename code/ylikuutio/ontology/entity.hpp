@@ -28,6 +28,11 @@
 #include <optional>      // std::optional
 #include <string>        // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -44,6 +49,8 @@ namespace yli::ontology
             bool operator==(const yli::ontology::Entity& rhs) const;
             bool operator!=(const yli::ontology::Entity& rhs) const;
 
+            yli::core::Application& get_application() const;
+
             void bind_variable(yli::ontology::Variable* const variable) noexcept;
 
             void unbind_variable(const std::size_t childID) noexcept;
@@ -52,6 +59,7 @@ namespace yli::ontology
 
             // constructor.
             Entity(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::EntityStruct& entity_struct);
 
@@ -136,6 +144,10 @@ namespace yli::ontology
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
 
+        protected:
+            yli::core::Application& application;
+
+        public:
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
             // Named entities are stored here so that they can be recalled, if needed.

@@ -47,6 +47,11 @@
 // makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
 // may have a `Brain` that defines how it processes its inputs and what kind of output it sends.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -59,6 +64,7 @@ namespace yli::ontology
     {
         public:
             Brain(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::BrainStruct& brain_struct,
                     yli::ontology::GenericParentModule* const parent_module);

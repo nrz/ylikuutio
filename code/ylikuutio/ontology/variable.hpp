@@ -43,6 +43,11 @@
 // `read_callback` may, of course, compute the returned value
 // based on some other variables as well etc.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -55,6 +60,7 @@ namespace yli::ontology
     {
         public:
             Variable(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VariableStruct& variable_struct,
                     const yli::data::AnyValue& any_value);

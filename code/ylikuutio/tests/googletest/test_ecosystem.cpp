@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -24,11 +25,14 @@
 
 TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
     yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct1,
             &universe->parent_of_ecosystems);
@@ -51,6 +55,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
     yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct2,
             &universe->parent_of_ecosystems);
@@ -73,6 +78,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct3,
             &universe->parent_of_ecosystems);
@@ -95,6 +101,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
     yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct4,
             &universe->parent_of_ecosystems);
@@ -118,11 +125,14 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 
 TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earlier_ecosystems, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
     yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct1,
             &universe->parent_of_ecosystems);
@@ -147,6 +157,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     delete ecosystem1;
     yli::ontology::EcosystemStruct ecosystem_struct2;
     yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct2,
             &universe->parent_of_ecosystems);
@@ -170,6 +181,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     delete ecosystem2;
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct3,
             &universe->parent_of_ecosystems);
@@ -194,6 +206,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     delete ecosystem3;
     yli::ontology::EcosystemStruct ecosystem_struct4;
     yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct4,
             &universe->parent_of_ecosystems);
@@ -217,11 +230,14 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
 TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earlier_ecosystems, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct1;
     yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct1,
             &universe->parent_of_ecosystems);
@@ -245,6 +261,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
     yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct2,
             &universe->parent_of_ecosystems);
@@ -269,6 +286,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     delete ecosystem1;
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct3,
             &universe->parent_of_ecosystems);
@@ -292,6 +310,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
     yli::ontology::Ecosystem* const ecosystem4 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct4,
             &universe->parent_of_ecosystems);
@@ -316,11 +335,14 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -337,11 +359,14 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -358,11 +383,14 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -382,11 +410,14 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -406,11 +437,14 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_na
 
 TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -430,11 +464,14 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_n
 
 TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);

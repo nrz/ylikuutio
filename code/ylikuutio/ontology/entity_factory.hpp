@@ -22,6 +22,11 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::data
 {
     class AnyValue;
@@ -59,7 +64,9 @@ namespace yli::ontology
     {
         public:
             // constructor.
-            explicit EntityFactory(yli::ontology::Universe& universe);
+            EntityFactory(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe);
 
             EntityFactory(const EntityFactory&) = delete;            // Delete copy constructor.
             EntityFactory& operator=(const EntityFactory&) = delete; // Delete copy assignment.
@@ -99,6 +106,7 @@ namespace yli::ontology
             yli::ontology::Entity* create_brain(const yli::ontology::BrainStruct& brain_struct) const;
 
         protected:
+            yli::core::Application& application;
             yli::ontology::Universe& universe;
     };
 }

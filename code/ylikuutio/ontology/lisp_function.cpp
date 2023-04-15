@@ -20,6 +20,7 @@
 #include "generic_lisp_function_overload.hpp"
 #include "lisp_function_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -35,10 +36,11 @@ namespace yli::ontology
     class Scene;
 
     LispFunction::LispFunction(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::LispFunctionStruct& lisp_function_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, lisp_function_struct),
+        : Entity(application, universe, lisp_function_struct),
         child_of_console(parent_module, this),
         parent_of_generic_lisp_function_overloads(
                 this,

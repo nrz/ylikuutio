@@ -42,6 +42,7 @@
 #include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
@@ -130,8 +131,9 @@ namespace yli::ontology
     }
 
     Universe::Universe(
+            yli::core::Application& application,
             const yli::ontology::UniverseStruct& universe_struct)
-        : Entity(*this, universe_struct), // `Universe` has no parent.
+        : Entity(application, *this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_callback_engines(
                 this,

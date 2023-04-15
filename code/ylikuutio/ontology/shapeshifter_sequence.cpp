@@ -25,6 +25,11 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -34,10 +39,11 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(universe, shapeshifter_sequence_struct),
+        : Entity(application, universe, shapeshifter_sequence_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
         master_of_objects(this, &this->registry, "objects")
     {

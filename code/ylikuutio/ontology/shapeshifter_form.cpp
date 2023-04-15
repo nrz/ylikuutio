@@ -22,6 +22,11 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -29,10 +34,11 @@ namespace yli::ontology
     class Scene;
 
     ShapeshifterForm::ShapeshifterForm(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
         mesh(universe, model_struct)
     {

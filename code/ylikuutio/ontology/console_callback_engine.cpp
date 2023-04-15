@@ -22,6 +22,7 @@
 #include "entity_factory.hpp"
 #include "console_callback_object_struct.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
+#include "code/ylikuutio/core/application.hpp"
 
 namespace yli::ontology
 {
@@ -29,9 +30,10 @@ namespace yli::ontology
     class Universe;
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const universe_parent)
-        : yli::ontology::CallbackEngine(universe, universe_parent)
+        : yli::ontology::CallbackEngine(application, universe, universe_parent)
     {
     }
 

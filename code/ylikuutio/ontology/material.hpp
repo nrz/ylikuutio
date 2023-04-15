@@ -34,6 +34,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -64,6 +69,7 @@ namespace yli::ontology
                     yli::ontology::Pipeline& new_pipeline) noexcept;
 
             Material(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,

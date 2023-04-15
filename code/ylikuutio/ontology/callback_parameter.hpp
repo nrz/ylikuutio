@@ -26,6 +26,11 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -37,6 +42,7 @@ namespace yli::ontology
     {
         public:
             CallbackParameter(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
                     const yli::data::AnyValue& any_value,

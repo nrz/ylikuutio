@@ -31,6 +31,11 @@
 // that make up the `ShapeshifterTransformation` are used in rendering
 // the `Object`s that are children of the `ShapeshifterSequence`.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -43,6 +48,7 @@ namespace yli::ontology
     {
         public:
             ShapeshifterSequence(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
                     yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);

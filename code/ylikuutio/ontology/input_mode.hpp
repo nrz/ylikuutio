@@ -29,6 +29,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class ParentOfInputModesModule;
@@ -41,6 +46,7 @@ namespace yli::ontology
     {
         public:
             InputMode(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::InputModeStruct& input_mode_struct,
                     yli::ontology::ParentOfInputModesModule* const parent_module,

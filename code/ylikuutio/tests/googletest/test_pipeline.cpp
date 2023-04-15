@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -32,18 +33,21 @@
 
 TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -67,18 +71,21 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
 
 TEST(pipeline_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
@@ -102,23 +109,27 @@ TEST(pipeline_must_be_initialized_appropriately, headless)
 
 TEST(pipeline_must_bind_to_ecosystem_appropriately, ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem1 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem1->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_scene(), nullptr);
     ASSERT_EQ(pipeline->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
 
     yli::ontology::Ecosystem* const ecosystem2 = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -144,23 +155,27 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately, ecosystem)
 
 TEST(pipeline_must_bind_to_scene_appropriately, scenes)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_scene(), scene1);
     ASSERT_EQ(pipeline->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -185,21 +200,25 @@ TEST(pipeline_must_bind_to_scene_appropriately, scenes)
 
 TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -224,21 +243,25 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosy
 
 TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -263,18 +286,21 @@ TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene
 
 TEST(pipeline_must_be_given_a_global_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -289,18 +315,21 @@ TEST(pipeline_must_be_given_a_global_name_appropriately, headless)
 
 TEST(pipeline_must_be_given_a_local_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -315,18 +344,21 @@ TEST(pipeline_must_be_given_a_local_name_appropriately, headless)
 
 TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -346,18 +378,21 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_n
 
 TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -377,18 +412,21 @@ TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_nam
 
 TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -408,18 +446,21 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_na
 
 TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
 
@@ -439,21 +480,25 @@ TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_global_na
 
 TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_pipeline_with_only_local_name)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct1,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct2,
             &universe->parent_of_scenes);
@@ -476,21 +521,25 @@ TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
 TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_pipeline_with_global_name_and_local_name)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct1,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct2,
             &universe->parent_of_scenes);
@@ -518,28 +567,32 @@ TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
 TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_pipelines_with_only_local_name)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct1,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct1;
     pipeline_struct1.parent = scene1;
-    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(*universe, pipeline_struct1, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(application, *universe, pipeline_struct1, &scene1->parent_of_pipelines);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct2,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct2;
     pipeline_struct2.parent = scene2;
-    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(*universe, pipeline_struct2, &scene2->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(application, *universe, pipeline_struct2, &scene2->parent_of_pipelines);
 
     pipeline1->set_local_name("foo");
     pipeline2->set_local_name("foo");
@@ -554,28 +607,32 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
 TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_pipelines_with_different_global_names_and_same_local_name)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct1;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct1,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct1;
     pipeline_struct1.parent = scene1;
-    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(*universe, pipeline_struct1, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline1 = new yli::ontology::Pipeline(application, *universe, pipeline_struct1, &scene1->parent_of_pipelines);
 
     yli::ontology::SceneStruct scene_struct2;
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct2,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct2;
     pipeline_struct2.parent = scene2;
-    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(*universe, pipeline_struct2, &scene2->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline2 = new yli::ontology::Pipeline(application, *universe, pipeline_struct2, &scene2->parent_of_pipelines);
 
     pipeline1->set_global_name("foo");
     pipeline2->set_global_name("bar");
@@ -596,23 +653,27 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
 TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_ecosystem, headless_universe_material_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials,
@@ -622,6 +683,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -632,23 +694,27 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 
 TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_ecosystem, headless_universe_symbiosis_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -658,6 +724,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
@@ -668,23 +735,27 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 
 TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_material_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials,
@@ -698,23 +769,27 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
 TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_symbiosis_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -728,23 +803,27 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
 TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_current_scene, headless_universe_material_and_symbiosis_apprentices)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials,
@@ -754,6 +833,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene->parent_of_symbioses,
@@ -767,23 +847,27 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
 TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_material_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene1->parent_of_materials,
@@ -792,6 +876,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -802,23 +887,27 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
 TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_symbiosis_apprentice)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene1->parent_of_symbioses,
@@ -827,6 +916,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -837,23 +927,27 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
 TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_different_scene, headless_universe_material_and_symbiosis_apprentices)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene1 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene1;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene1->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene1->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene1->parent_of_materials,
@@ -863,6 +957,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     model_struct.parent = scene1;
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(
+            application,
             *universe,
             model_struct,
             &scene1->parent_of_symbioses,
@@ -871,6 +966,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 2);
 
     yli::ontology::Scene* const scene2 = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);

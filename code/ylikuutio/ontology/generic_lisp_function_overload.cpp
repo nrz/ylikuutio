@@ -23,6 +23,11 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -31,9 +36,10 @@ namespace yli::ontology
     class Scene;
 
     GenericLispFunctionOverload::GenericLispFunctionOverload(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, yli::ontology::EntityStruct()),
+        : Entity(application, universe, yli::ontology::EntityStruct()),
         child_of_lisp_function(parent_module, this)
     {
         // `yli::ontology::Entity` member variables begin here.

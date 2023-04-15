@@ -22,6 +22,11 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -33,12 +38,14 @@ namespace yli::ontology
     }
 
     Mission::Mission(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MissionStruct& mission_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, mission_struct),
+        : Entity(application, universe, mission_struct),
         child_of_universe(parent_module, this),
         callback_engine(
+                application,
                 this->universe,
                 &this->universe.parent_of_callback_engines)
     {

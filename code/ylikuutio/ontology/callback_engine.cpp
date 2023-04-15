@@ -22,6 +22,7 @@
 #include "family_templates.hpp"
 #include "entity_factory.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -37,9 +38,10 @@ namespace yli::ontology
     class Scene;
 
     CallbackEngine::CallbackEngine(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const universe_parent)
-        : Entity(universe, yli::ontology::EntityStruct()),
+        : Entity(application, universe, EntityStruct()),
         child_of_universe(universe_parent, this),
         parent_of_callback_objects(
                 this,

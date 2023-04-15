@@ -36,6 +36,11 @@
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -55,6 +60,7 @@ namespace yli::ontology
                     yli::ontology::Material& new_parent) noexcept;
 
             VectorFont(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VectorFontStruct& vector_font_struct);
 

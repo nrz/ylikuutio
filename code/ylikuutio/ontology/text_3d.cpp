@@ -25,6 +25,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <optional> // std::optional
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -63,11 +68,13 @@ namespace yli::ontology
     }
 
     Text3D::Text3D(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::Text3DStruct& text_3d_struct,
             yli::ontology::GenericParentModule* const vector_font_parent_module,
             yli::ontology::GenericMasterModule* const generic_master_module)
         : Movable(
+                application,
                 universe,
                 text_3d_struct,
                 generic_master_module),

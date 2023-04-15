@@ -21,6 +21,11 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -28,10 +33,11 @@ namespace yli::ontology
     class Scene;
 
     SymbiontSpecies::SymbiontSpecies(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const symbiont_material_parent_module)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_symbiont_material(symbiont_material_parent_module, this),
         master_of_bionts(this, &this->registry, "bionts"),
         mesh(universe, model_struct)

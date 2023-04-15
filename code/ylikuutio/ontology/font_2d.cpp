@@ -21,6 +21,7 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -54,10 +55,11 @@ namespace yli::ontology
     class Scene;
 
     Font2D::Font2D(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::FontStruct& font_struct,
             yli::ontology::GenericParentModule* const parent_module)
-        : Entity(universe, font_struct),
+        : Entity(application, universe, font_struct),
         child_of_universe(parent_module, this),
         parent_of_text_2ds(
                 this,

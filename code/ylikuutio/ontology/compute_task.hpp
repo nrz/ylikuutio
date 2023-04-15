@@ -50,6 +50,11 @@
 // `end_condition_callback_engine->execute(nullptr)` is still called and taken into account
 // in every iteration.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -62,6 +67,7 @@ namespace yli::ontology
     {
         public:
             ComputeTask(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ComputeTaskStruct& compute_task_struct);
 

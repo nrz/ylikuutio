@@ -29,6 +29,11 @@
 #include <string>     // std::string
 #include <vector>     // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -40,6 +45,7 @@ namespace yli::ontology
     {
         public:
             GenericLispFunctionOverload(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module);
 

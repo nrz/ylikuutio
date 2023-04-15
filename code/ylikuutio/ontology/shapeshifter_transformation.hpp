@@ -31,6 +31,11 @@
 // make up the transition that may be e.g. a walk cycle or
 // a metamorphosis of some kind.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -49,6 +54,7 @@ namespace yli::ontology
                     yli::ontology::Material& new_parent) noexcept;
 
             ShapeshifterTransformation(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const material_parent_module);

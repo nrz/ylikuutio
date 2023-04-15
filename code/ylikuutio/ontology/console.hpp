@@ -58,6 +58,11 @@
 // each with its own commands. It is possible to change between the
 // `Console`s by activating another `Console`.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::map
 {
     template <typename T1>
@@ -89,6 +94,7 @@ namespace yli::ontology
                     yli::ontology::Font2D& new_font_2d) noexcept;
 
             Console(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::GenericParentModule* const parent_module,

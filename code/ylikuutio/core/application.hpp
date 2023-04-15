@@ -53,6 +53,8 @@ namespace yli::core
             virtual std::vector<std::string> get_valid_keys() const = 0;
             virtual yli::ontology::UniverseStruct get_universe_struct() const = 0;
 
+            virtual void create_memory_allocators();
+
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
             virtual bool create_simulation() = 0;
 

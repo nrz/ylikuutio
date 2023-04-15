@@ -32,6 +32,11 @@
 #include <variant>  // std::holds_alternative, std::variant
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -72,6 +77,7 @@ namespace yli::ontology
                     yli::ontology::Text3D& new_text_3d) noexcept;
 
             Object(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& object_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,

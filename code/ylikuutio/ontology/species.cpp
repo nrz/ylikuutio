@@ -32,6 +32,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -134,11 +139,12 @@ namespace yli::ontology
     }
 
     Species::Species(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
             yli::ontology::GenericMasterModule* const material_master)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         master_of_objects(this, &this->registry, "objects"),
         apprentice_of_material(material_master, this),

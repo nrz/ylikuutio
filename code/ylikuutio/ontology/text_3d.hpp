@@ -29,6 +29,11 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -54,6 +59,7 @@ namespace yli::ontology
                     yli::ontology::VectorFont& new_parent) noexcept;
 
             Text3D(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::Text3DStruct& text_3d_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module,

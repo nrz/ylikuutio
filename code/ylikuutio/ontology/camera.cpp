@@ -44,6 +44,11 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -51,11 +56,13 @@ namespace yli::ontology
     class Entity;
 
     Camera::Camera(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::CameraStruct& camera_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const generic_master_module)
         : Movable(
+                application,
                 universe,
                 camera_struct,
                 generic_master_module),

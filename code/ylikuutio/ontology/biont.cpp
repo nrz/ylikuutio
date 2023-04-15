@@ -55,6 +55,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -63,11 +68,13 @@ namespace yli::ontology
     class Scene;
 
     Biont::Biont(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::BiontStruct& biont_struct,
             yli::ontology::GenericParentModule* const holobiont_parent_module,
             yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
         : Movable(
+                application,
                 universe,
                 biont_struct,
                 nullptr),

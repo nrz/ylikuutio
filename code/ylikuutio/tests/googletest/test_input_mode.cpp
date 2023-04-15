@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
@@ -26,11 +27,14 @@
 
 TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_master)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::InputModeStruct input_mode_struct;
     yli::ontology::InputMode* const input_mode = new yli::ontology::InputMode(
+            application,
             *universe,
             input_mode_struct,
             &universe->parent_of_input_modes,
@@ -51,11 +55,14 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_
 
 TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console_master)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* console = new yli::ontology::Console(
+            application,
             *universe,
             console_struct,
             &universe->parent_of_consoles,
@@ -63,6 +70,7 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
 
     yli::ontology::InputModeStruct input_mode_struct;
     yli::ontology::InputMode* const input_mode = new yli::ontology::InputMode(
+            application,
             *universe,
             input_mode_struct,
             &universe->parent_of_input_modes,

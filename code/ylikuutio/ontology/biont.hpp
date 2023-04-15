@@ -27,6 +27,11 @@
 #include <limits>   // std::numeric_limits
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -41,6 +46,7 @@ namespace yli::ontology
     {
         public:
             Biont(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::BiontStruct& biont_struct,
                     yli::ontology::GenericParentModule* const holobiont_parent_module,

@@ -26,6 +26,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class MasterOfInputModesModule;
@@ -33,11 +38,12 @@ namespace yli::ontology
     class Scene;
 
     InputMode::InputMode(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::InputModeStruct& input_mode_struct,
             yli::ontology::ParentOfInputModesModule* const parent_module,
             yli::ontology::MasterOfInputModesModule* const console_master_module)
-        : Entity(universe, input_mode_struct),
+        : Entity(application, universe, input_mode_struct),
         child_of_universe(parent_module, this),
         apprentice_of_console(console_master_module, this)
     {

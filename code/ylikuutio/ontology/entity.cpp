@@ -24,6 +24,7 @@
 #include "entity_variable_read.hpp"
 #include "entity_struct.hpp"
 #include "variable_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -43,6 +44,11 @@ namespace yli::ontology
     bool Entity::operator!=(const yli::ontology::Entity& rhs) const
     {
         return !this->operator==(rhs);
+    }
+
+    yli::core::Application& Entity::get_application() const
+    {
+        return this->application;
     }
 
     void Entity::bind_variable(yli::ontology::Variable* const variable) noexcept
@@ -68,9 +74,11 @@ namespace yli::ontology
     }
 
     Entity::Entity(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::EntityStruct& entity_struct)
-        : registry(),
+        : application { application },
+        registry(),
         parent_of_variables(
                 this,
                 &this->registry,

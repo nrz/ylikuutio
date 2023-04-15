@@ -48,6 +48,8 @@ namespace yli::memory
                 MemorySystem(yli::core::Application* const application, TypeEnumType universe_datatype)
                     : universe_datatype { universe_datatype }
                 {
+                    std::cout << "Constructing `MemorySystem`...\n";
+
                     // `application` is given as a pointer to enable
                     // unit testing without a mock `Application` derivative.
                     if (application != nullptr) [[likely]]
@@ -55,6 +57,8 @@ namespace yli::memory
                         std::cout << "Creating memory allocators.\n";
                         application->create_memory_allocators();
                     }
+
+                    std::cout << "`MemorySystem` constructed.\n";
                 }
 
                 ~MemorySystem()

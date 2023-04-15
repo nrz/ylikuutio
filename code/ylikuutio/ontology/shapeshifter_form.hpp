@@ -27,6 +27,11 @@
 
 // `ShapeshifterForm` is a `Model` and a part of `ShapeshifterTransformation`.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -39,6 +44,7 @@ namespace yli::ontology
     {
         public:
             ShapeshifterForm(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);

@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -32,13 +33,16 @@
 
 TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
@@ -55,6 +59,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     rest_brain_struct.parent = scene;
     rest_brain_struct.callback_engine = rest_callback_engine;
     yli::ontology::Brain* const rest_brain = new yli::ontology::Brain(
+            application,
             *universe,
             rest_brain_struct,
             &scene->parent_of_brains);
@@ -63,6 +68,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = new yli::ontology::Object(
+            application,
             *universe,
             object_struct,
             &scene->parent_of_objects,

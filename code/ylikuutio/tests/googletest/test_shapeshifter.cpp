@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -35,23 +36,27 @@
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
@@ -61,6 +66,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            application,
             *universe,
             shapeshifter_transformation_struct,
             &material->parent_of_shapeshifter_transformations);
@@ -96,23 +102,27 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 
 TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
@@ -122,6 +132,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            application,
             *universe,
             shapeshifter_transformation_struct,
             &material->parent_of_shapeshifter_transformations);
@@ -129,6 +140,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            application,
             *universe,
             shapeshifter_form_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_forms);
@@ -168,23 +180,27 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 
 TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
@@ -194,6 +210,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            application,
             *universe,
             shapeshifter_transformation_struct,
             &material->parent_of_shapeshifter_transformations);
@@ -201,6 +218,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            application,
             *universe,
             shapeshifter_sequence_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_sequences);
@@ -237,23 +255,27 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
 
 TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
@@ -263,6 +285,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            application,
             *universe,
             shapeshifter_transformation_struct,
             &material->parent_of_shapeshifter_transformations);
@@ -270,6 +293,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            application,
             *universe,
             shapeshifter_form_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_forms);
@@ -277,6 +301,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            application,
             *universe,
             shapeshifter_sequence_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_sequences);
@@ -322,23 +347,27 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
 TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
@@ -348,6 +377,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = new yli::ontology::ShapeshifterTransformation(
+            application,
             *universe,
             shapeshifter_transformation_struct,
             &material->parent_of_shapeshifter_transformations);
@@ -355,6 +385,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::ModelStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = new yli::ontology::ShapeshifterForm(
+            application,
             *universe,
             shapeshifter_form_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_forms);
@@ -362,6 +393,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = new yli::ontology::ShapeshifterSequence(
+            application,
             *universe,
             shapeshifter_sequence_struct,
             &shapeshifter_transformation->parent_of_shapeshifter_sequences);
@@ -369,6 +401,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::ObjectStruct object_struct(scene);
     object_struct.mesh_master = shapeshifter_sequence;
     yli::ontology::Object* const object = new yli::ontology::Object(
+            application,
             *universe,
             object_struct,
             &scene->parent_of_objects,

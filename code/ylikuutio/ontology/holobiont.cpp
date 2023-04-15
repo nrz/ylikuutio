@@ -26,6 +26,7 @@
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
@@ -54,12 +55,14 @@ namespace yli::ontology
     class Entity;
 
     Holobiont::Holobiont(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& holobiont_struct,
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const brain_master)
         : Movable(
+                application,
                 universe,
                 holobiont_struct,
                 brain_master),
@@ -172,6 +175,7 @@ namespace yli::ontology
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
             new yli::ontology::Biont(
+                    this->application,
                     this->universe,
                     biont_struct,
                     &this->parent_of_bionts,

@@ -28,6 +28,7 @@
 #include "text_3d.hpp"
 #include "entity_factory.hpp"
 #include "object_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -168,12 +169,14 @@ namespace yli::ontology
     }
 
     Object::Object(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& object_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const mesh_master,
             yli::ontology::GenericMasterModule* const brain_master)
         : Movable(
+                application,
                 universe,
                 object_struct,
                 brain_master),

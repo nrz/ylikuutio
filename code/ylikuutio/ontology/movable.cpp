@@ -42,6 +42,11 @@
 
 // `Movable` is a mixin class, not intended to be instantiated.
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(
@@ -75,10 +80,11 @@ namespace yli::ontology
     }
 
     Movable::Movable(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MovableStruct& movable_struct,
             yli::ontology::GenericMasterModule* const brain_master)
-        : Entity(universe, movable_struct),
+        : Entity(application, universe, movable_struct),
         apprentice_of_brain(brain_master, this),
         rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },

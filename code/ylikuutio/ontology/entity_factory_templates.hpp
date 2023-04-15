@@ -32,6 +32,11 @@
 #include <optional>   // std::optional
 #include <string>     // std::string
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -49,6 +54,8 @@ namespace yli::ontology
             }
 
             yli::ontology::Universe& universe = console->get_universe();
+
+            yli::core::Application& application = universe.get_application();
 
             yli::ontology::EntityFactory& entity_factory = universe.get_entity_factory();
 
@@ -86,6 +93,7 @@ namespace yli::ontology
             }
 
             yli::ontology::GenericLispFunctionOverload* const generic_lisp_function_overload = new yli::ontology::LispFunctionOverload<Args...>(
+                    application,
                     universe,
                     &lisp_function->parent_of_generic_lisp_function_overloads,
                     callback);

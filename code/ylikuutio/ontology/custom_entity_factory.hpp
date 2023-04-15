@@ -37,8 +37,10 @@ namespace yli::ontology
     class CustomEntityFactory final : public yli::ontology::EntityFactory
     {
         public:
-            explicit CustomEntityFactory(yli::ontology::Universe& universe)
-                : yli::ontology::EntityFactory(universe)
+            explicit CustomEntityFactory(
+                    yli::core::Application& application,
+                    yli::ontology::Universe& universe)
+                : yli::ontology::EntityFactory(application, universe)
             {
             }
 
@@ -48,6 +50,7 @@ namespace yli::ontology
                         ModuleArgs... module_args)
                 {
                     yli::ontology::Entity* object_entity = new T(
+                            this->application,
                             this->universe,
                             object_struct,
                             module_args...,
@@ -75,6 +78,7 @@ namespace yli::ontology
                         ModuleArgs... module_args)
                 {
                     yli::ontology::Entity* holobiont_entity = new T(
+                            this->application,
                             this->universe,
                             holobiont_struct,
                             module_args...,

@@ -24,6 +24,7 @@
 #include "callback_parameter_struct.hpp"
 #include "family_templates.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -38,10 +39,11 @@ namespace yli::ontology
     class Universe;
 
     CallbackObject::CallbackObject(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::CallbackObjectStruct& callback_object_struct,
             yli::ontology::GenericParentModule* const callback_engine_parent)
-        : Entity(universe, callback_object_struct),
+        : Entity(application, universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
         parent_of_callback_parameters(
                 this,
@@ -51,11 +53,12 @@ namespace yli::ontology
     }
 
     CallbackObject::CallbackObject(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::CallbackObjectStruct& callback_object_struct,
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
             yli::ontology::GenericParentModule* const callback_engine_parent)
-        : Entity(universe, callback_object_struct),
+        : Entity(application, universe, callback_object_struct),
         child_of_callback_engine(callback_engine_parent, this),
         parent_of_callback_parameters(
                 this,

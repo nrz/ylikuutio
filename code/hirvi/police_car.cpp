@@ -19,6 +19,11 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -30,13 +35,14 @@ namespace yli::ontology
 namespace hirvi
 {
     PoliceCar::PoliceCar(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& police_car_struct,
             const yli::ontology::LocomotionModuleStruct& road_vehicle_struct,
             yli::ontology::GenericParentModule* const scene_parent,
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const brain_master)
-        : yli::ontology::Holobiont(universe, police_car_struct, scene_parent, symbiosis_master, brain_master),
+        : yli::ontology::Holobiont(application, universe, police_car_struct, scene_parent, symbiosis_master, brain_master),
         road_vehicle(road_vehicle_struct)
     {
         // constructor.

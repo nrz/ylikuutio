@@ -21,6 +21,7 @@
 #include "shapeshifter_sequence.hpp"
 #include "model_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
@@ -66,10 +67,11 @@ namespace yli::ontology
     }
 
     ShapeshifterTransformation::ShapeshifterTransformation(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const material_parent_module)
-        : Entity(universe, model_struct),
+        : Entity(application, universe, model_struct),
         child_of_material(material_parent_module, this),
         parent_of_shapeshifter_forms(
                 this,

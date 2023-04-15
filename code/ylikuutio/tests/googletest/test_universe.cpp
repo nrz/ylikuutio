@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -26,8 +27,10 @@
 
 TEST(universe_must_be_initialized_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     // `Universe` member variables.
     ASSERT_FALSE(universe->is_invert_mouse_in_use);
@@ -56,8 +59,10 @@ TEST(universe_must_be_initialized_appropriately, headless)
 
 TEST(universe_must_be_given_a_global_name_appropriately, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
 
@@ -68,8 +73,10 @@ TEST(universe_must_be_given_a_global_name_appropriately, headless)
 
 TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
 
@@ -80,8 +87,10 @@ TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headles
 
 TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
     ASSERT_EQ(universe->get_global_name(), "");
     ASSERT_EQ(universe->get_local_name(), "");
 

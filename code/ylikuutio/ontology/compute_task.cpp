@@ -45,6 +45,11 @@
 #include <variant>       // std::holds_alternative, std::variant
 #include <vector>        // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -68,9 +73,10 @@ namespace yli::ontology
     }
 
     ComputeTask::ComputeTask(
+            yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ComputeTaskStruct& compute_task_struct)
-        : Entity(universe, compute_task_struct),
+        : Entity(application, universe, compute_task_struct),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
         output_filename                  { compute_task_struct.output_filename },

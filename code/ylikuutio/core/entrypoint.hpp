@@ -131,7 +131,7 @@ int main(const int argc, const char* const argv[]) try
     const auto universe_struct = application->get_universe_struct();
 
     // 4. `Universe` is created. It receives `UniverseStruct` as an argument.
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(*application, universe_struct);
 
     if (!universe->create_window_and_setup_context())
     {

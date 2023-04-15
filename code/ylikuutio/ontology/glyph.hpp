@@ -33,6 +33,11 @@
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -46,6 +51,7 @@ namespace yli::ontology
     {
         public:
             Glyph(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module);

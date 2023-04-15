@@ -22,6 +22,11 @@
 #include "code/ylikuutio/snippets/locomotion/fly_module.hpp"
 #include "police_module.hpp"
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -37,6 +42,7 @@ namespace hirvi
     {
         public:
             explicit PoliceHelicopter(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& police_helicopter_struct,
                     const yli::ontology::LocomotionModuleStruct& fly_struct,

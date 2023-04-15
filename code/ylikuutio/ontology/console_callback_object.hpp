@@ -25,6 +25,11 @@
 // Include standard headers
 #include <optional> // std::optional
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -43,6 +48,7 @@ namespace yli::ontology
             friend class ConsoleCallbackEngine;
 
             ConsoleCallbackObject(
+                    yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
                     yli::ontology::GenericParentModule* const console_callback_engine_parent);

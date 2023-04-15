@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -32,30 +33,34 @@
 
 TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
+            application,
             *universe,
             ecosystem_struct,
             &universe->parent_of_ecosystems);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &ecosystem->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = ecosystem;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &ecosystem->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(*universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
@@ -87,30 +92,34 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
 
 TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_scene)
 {
+    mock::MockApplication application;
+
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(universe_struct);
+    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = new yli::ontology::Scene(
+            application,
             *universe,
             scene_struct,
             &universe->parent_of_scenes);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(*universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
     yli::ontology::Material* const material = new yli::ontology::Material(
+            application,
             *universe,
             material_struct,
             &scene->parent_of_materials, &pipeline->master_of_materials);
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(*universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1); // `scene`. 
