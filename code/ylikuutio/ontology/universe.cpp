@@ -129,7 +129,8 @@ namespace yli::ontology
                 this->number_of_entities);
     }
 
-    Universe::Universe(const yli::ontology::UniverseStruct& universe_struct)
+    Universe::Universe(
+            const yli::ontology::UniverseStruct& universe_struct)
         : Entity(*this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_callback_engines(

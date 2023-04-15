@@ -79,7 +79,8 @@ namespace yli::ontology
             void bind_entity(yli::ontology::Entity* const entity) noexcept;
             void unbind_entity(const std::size_t entityID) noexcept;
 
-            explicit Universe(const yli::ontology::UniverseStruct& universe_struct);
+            explicit Universe(
+                    const yli::ontology::UniverseStruct& universe_struct);
 
             Universe(const Universe&) = delete;            // Delete copy constructor.
             Universe& operator=(const Universe&) = delete; // Delete copy assignment.
