@@ -40,8 +40,8 @@ namespace yli::command_line
             void print_keys_and_values() const;
 
         private:
-            int argc;
-            bool are_arguments_valid;
+            int argc                 { 0 };     // By default there are 0 arguments.
+            bool are_arguments_valid { false }; // By default arguments are invalid.
             std::vector<std::string> arg_vector;
             std::unordered_map<std::string, std::string> arg_map;
     };

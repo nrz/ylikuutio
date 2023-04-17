@@ -32,6 +32,13 @@ namespace yli::command_line
     {
         // constructor.
 
+        if (argv == nullptr)
+        {
+            // Entrypoint code expects that arguments are valid.
+            this->are_arguments_valid = true;
+            return;
+        }
+
         this->argc = argc;
         this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
         this->are_arguments_valid = true;               // Arguments are valid if their syntax is valid.
