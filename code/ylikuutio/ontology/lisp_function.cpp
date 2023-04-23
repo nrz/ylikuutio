@@ -22,6 +22,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
@@ -45,6 +46,7 @@ namespace yli::ontology
         parent_of_generic_lisp_function_overloads(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD),
                 "generic_lisp_function_overloads")
     {
         // constructor.

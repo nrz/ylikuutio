@@ -16,6 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/registry.hpp"
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
 #include "code/ylikuutio/ontology/generic_master_module.hpp"
@@ -95,8 +97,10 @@ TEST(uninitialized_registry_must_return_an_empty_entity_map, registry)
 
 TEST(generic_parent_module_must_bind_to_registry_appropriately, generic_parent_module_foo)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericParentModule generic_parent_module(nullptr, &registry, "foo");
+    yli::ontology::GenericParentModule generic_parent_module(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "foo");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("bar"));
@@ -171,9 +175,11 @@ TEST(generic_master_module_must_bind_to_registry_appropriately, generic_master_m
 
 TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_foo1_foo2)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "foo1");
-    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "foo2");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "foo1");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "foo2");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_TRUE(registry.is_name("foo1"));
@@ -227,9 +233,11 @@ TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_par
 
 TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_foo_foo1)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "foo");
-    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "foo1");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "foo");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "foo1");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_TRUE(registry.is_name("foo1"));
@@ -281,9 +289,11 @@ TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_par
 
 TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_ab_ac)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "ab");
-    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "ac");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "ab");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "ac");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("a"));
@@ -332,9 +342,11 @@ TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_par
 
 TEST(two_generic_parent_modules_must_bind_to_registry_appropriately, generic_parent_modules_aba_aca)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, "aba");
-    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, "aca");
+    yli::ontology::GenericParentModule generic_parent_module_1(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "aba");
+    yli::ontology::GenericParentModule generic_parent_module_2(nullptr, &registry, application.get_memory_allocator(yli::data::Datatype::UNKNOWN), "aca");
 
     ASSERT_FALSE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("a"));

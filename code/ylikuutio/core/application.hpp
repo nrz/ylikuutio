@@ -25,6 +25,11 @@
 #include <string>  // std::string
 #include <vector>  // std::vector
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -54,6 +59,8 @@ namespace yli::core
             virtual yli::ontology::UniverseStruct get_universe_struct() const = 0;
 
             virtual void create_memory_allocators();
+
+            virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
             virtual bool create_simulation() = 0;

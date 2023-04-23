@@ -22,6 +22,7 @@
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
@@ -47,6 +48,7 @@ namespace yli::ontology
         parent_of_symbiont_species(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
                 "symbiont_species"),
         texture(
                 universe,

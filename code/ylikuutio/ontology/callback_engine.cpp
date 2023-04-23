@@ -24,6 +24,7 @@
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -46,6 +47,7 @@ namespace yli::ontology
         parent_of_callback_objects(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CALLBACK_OBJECT),
                 "callback_objects")
     {
         // `yli::ontology::Entity` member variables begin here.

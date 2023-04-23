@@ -23,6 +23,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -76,10 +77,12 @@ namespace yli::ontology
         parent_of_shapeshifter_forms(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_FORM),
                 "shapeshifter_forms"),
         parent_of_shapeshifter_sequences(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
                 "shapeshifter_sequences")
     {
         // constructor.

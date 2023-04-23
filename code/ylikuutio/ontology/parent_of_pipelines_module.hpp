@@ -25,6 +25,11 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Registry;
@@ -40,6 +45,7 @@ namespace yli::ontology
             ParentOfPipelinesModule(
                     yli::ontology::Entity* const entity,
                     yli::ontology::Registry* const registry,
+                    yli::memory::GenericMemoryAllocator& memory_allocator,
                     const std::string& name) noexcept;
 
             ParentOfPipelinesModule(const ParentOfPipelinesModule&) = delete;            // Delete copy constructor.

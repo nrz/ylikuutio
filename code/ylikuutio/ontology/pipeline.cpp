@@ -23,6 +23,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
@@ -119,6 +120,7 @@ namespace yli::ontology
         parent_of_compute_tasks(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::COMPUTETASK),
                 "compute_tasks"),
         master_of_materials(this, &this->registry, "materials", nullptr),
         master_of_symbioses(this, &this->registry, "symbioses")

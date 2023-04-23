@@ -26,6 +26,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     bool ParentOfPipelinesModule::bind_child(yli::ontology::Entity* const pipeline_child) noexcept
@@ -55,8 +60,9 @@ namespace yli::ontology
     ParentOfPipelinesModule::ParentOfPipelinesModule(
             yli::ontology::Entity* const entity,
             yli::ontology::Registry* const registry,
+            yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : GenericParentModule(entity, registry, name)
+        : GenericParentModule(entity, registry, memory_allocator, name)
     {
         // constructor.
     }

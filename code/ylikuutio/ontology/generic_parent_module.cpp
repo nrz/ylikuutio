@@ -26,6 +26,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Scene;
@@ -85,8 +90,10 @@ namespace yli::ontology
     GenericParentModule::GenericParentModule(
             yli::ontology::Entity* const entity,
             yli::ontology::Registry* const registry,
+            yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : entity { entity }
+        : entity { entity },
+        memory_allocator { memory_allocator }
     {
         // constructor.
 

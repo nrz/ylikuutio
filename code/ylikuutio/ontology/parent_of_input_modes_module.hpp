@@ -24,6 +24,11 @@
 // Include standard headers
 #include <stack> // std::stack
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -35,6 +40,7 @@ namespace yli::ontology
             ParentOfInputModesModule(
                     yli::ontology::Universe* universe,
                     yli::ontology::Registry* const registry,
+                    yli::memory::GenericMemoryAllocator& memory_allocator,
                     const std::string& name) noexcept;
 
             ParentOfInputModesModule(const ParentOfInputModesModule&) = delete;            // Delete copy constructor.

@@ -19,6 +19,7 @@
 #include "ecosystem_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -38,18 +39,22 @@ namespace yli::ontology
         parent_of_pipelines(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::PIPELINE),
                 "pipelines"),
         parent_of_materials(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::MATERIAL),
                 "materials"),
         parent_of_species(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SPECIES),
                 "species"),
         parent_of_symbioses(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
                 "symbioses")
     {
         // constructor.

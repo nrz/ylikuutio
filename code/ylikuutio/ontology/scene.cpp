@@ -30,6 +30,7 @@
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
@@ -64,38 +65,47 @@ namespace yli::ontology
         parent_of_pipelines(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::PIPELINE),
                 "pipelines"),
         parent_of_default_camera(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CAMERA),
                 "default_camera"),
         parent_of_cameras(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CAMERA),
                 "cameras"),
         parent_of_brains(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::BRAIN),
                 "brains"),
         parent_of_materials(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::MATERIAL),
                 "materials"),
         parent_of_species(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SPECIES),
                 "species"),
         parent_of_objects(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::OBJECT),
                 "objects"),
         parent_of_symbioses(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
                 "symbioses"),
         parent_of_holobionts(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::HOLOBIONT),
                 "holobionts"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },

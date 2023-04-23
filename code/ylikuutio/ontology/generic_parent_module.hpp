@@ -27,6 +27,11 @@
 #include <string>  // std::string
 #include <vector>  // std::vector
 
+namespace yli::memory
+{
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Registry;
@@ -47,6 +52,7 @@ namespace yli::ontology
             GenericParentModule(
                     yli::ontology::Entity* const entity,
                     yli::ontology::Registry* const registry,
+                    yli::memory::GenericMemoryAllocator& memory_allocator,
                     const std::string& name) noexcept;
 
             GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
@@ -94,6 +100,7 @@ namespace yli::ontology
             std::size_t number_of_children { 0 };
 
             yli::ontology::Entity* entity; // The `Entity` that owns this `GenericParentModule`.
+            yli::memory::GenericMemoryAllocator& memory_allocator;
     };
 }
 

@@ -22,6 +22,7 @@
 #include "text_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -64,6 +65,7 @@ namespace yli::ontology
         parent_of_text_2ds(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::TEXT_2D),
                 "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),
         texture(

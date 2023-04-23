@@ -27,6 +27,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -160,6 +161,7 @@ namespace yli::ontology
         parent_of_symbiont_materials(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
                 "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),

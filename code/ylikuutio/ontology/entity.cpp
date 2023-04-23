@@ -26,6 +26,7 @@
 #include "variable_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -82,6 +83,7 @@ namespace yli::ontology
         parent_of_variables(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::VARIABLE),
                 ""), // Do not index `parent_of_variables`, index only the variables.
         universe { universe },
         is_variable { entity_struct.is_variable }

@@ -44,6 +44,7 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
@@ -138,26 +139,32 @@ namespace yli::ontology
         parent_of_callback_engines(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
                 "callback_engines"),
         parent_of_ecosystems(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::ECOSYSTEM),
                 "ecosystems"),
         parent_of_scenes(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SCENE),
                 "scenes"),
         parent_of_font_2ds(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::FONT_2D),
                 "font_2ds"),
         parent_of_input_modes(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::INPUT_MODE),
                 "input_modes"),
         parent_of_consoles(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CONSOLE),
                 "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },

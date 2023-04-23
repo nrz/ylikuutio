@@ -25,6 +25,7 @@
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -81,6 +82,7 @@ namespace yli::ontology
         parent_of_lisp_functions(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
                 "lisp_functions"),
         apprentice_of_font_2d(generic_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")

@@ -24,6 +24,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -147,10 +148,12 @@ namespace yli::ontology
         parent_of_shapeshifter_transformations(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION),
                 "shapeshifter_transformations"),
         parent_of_vector_fonts(
                 this,
                 &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::VECTOR_FONT),
                 "vector_fonts"),
         apprentice_of_pipeline(static_cast<yli::ontology::GenericMasterModule*>(pipeline_master_module), this),
         master_of_species(this, &this->registry, "species"),
