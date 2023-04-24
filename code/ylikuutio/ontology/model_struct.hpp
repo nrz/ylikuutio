@@ -75,7 +75,6 @@ namespace yli::ontology
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial`.
         yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation`.
-        yli::ontology::VectorFont* vector_font                                 { nullptr }; // pointer to `VectorFont`.
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr }; // For `Glyph`s.
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
