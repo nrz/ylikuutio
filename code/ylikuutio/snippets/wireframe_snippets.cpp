@@ -25,7 +25,7 @@ namespace yli::snippets
 {
     void set_wireframe(yli::ontology::Universe* universe, const bool use_wireframe)
     {
-        yli::ontology::VariableStruct wireframe_variable_struct;
+        yli::ontology::VariableStruct wireframe_variable_struct(*universe, universe);
         wireframe_variable_struct.local_name = "wireframe";
         wireframe_variable_struct.activate_callback = &yli::ontology::Variable::activate_wireframe;
         wireframe_variable_struct.should_call_activate_callback_now = true;

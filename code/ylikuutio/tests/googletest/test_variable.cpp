@@ -65,7 +65,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -80,7 +80,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -105,7 +105,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -120,7 +120,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -145,7 +145,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -160,7 +160,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -185,7 +185,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -200,7 +200,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -225,7 +225,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -240,7 +240,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -265,7 +265,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -280,7 +280,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -305,7 +305,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -320,7 +320,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -345,7 +345,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_positive_infinity = std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_positive_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -370,7 +370,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_negative_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -395,7 +395,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_nan = NAN;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_nan));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -421,7 +421,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -436,7 +436,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -461,7 +461,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_positive_infinity = std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_positive_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -486,7 +486,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_negative_infinity = -1.0 * std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_negative_infinity));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -511,7 +511,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_nan = NAN;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_nan));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -537,7 +537,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -552,7 +552,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -577,7 +577,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -592,7 +592,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -617,7 +617,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -632,7 +632,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -657,7 +657,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -672,7 +672,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -697,7 +697,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -712,7 +712,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -737,7 +737,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -752,7 +752,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -777,7 +777,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -792,7 +792,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -817,7 +817,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_FALSE(universe->has_variable("foo"));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -832,7 +832,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_TRUE(universe->has_variable("foo"));
@@ -857,7 +857,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float x = 1234.25f;
-    yli::ontology::VariableStruct x_variable_struct;
+    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
@@ -883,7 +883,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float y = 1234.25f;
-    yli::ontology::VariableStruct y_variable_struct;
+    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
@@ -909,7 +909,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float z = 1234.25f;
-    yli::ontology::VariableStruct z_variable_struct;
+    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
@@ -935,7 +935,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float red = 0.0f;
-    yli::ontology::VariableStruct red_variable_struct;
+    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
@@ -961,7 +961,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float red = 1.0f;
-    yli::ontology::VariableStruct red_variable_struct;
+    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
@@ -987,7 +987,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float red = 0.875f;
-    yli::ontology::VariableStruct red_variable_struct;
+    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
@@ -1013,7 +1013,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float green = 0.0f;
-    yli::ontology::VariableStruct green_variable_struct;
+    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
@@ -1039,7 +1039,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float green = 1.0f;
-    yli::ontology::VariableStruct green_variable_struct;
+    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
@@ -1065,7 +1065,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float green = 0.875f;
-    yli::ontology::VariableStruct green_variable_struct;
+    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
@@ -1091,7 +1091,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float blue = 0.0f;
-    yli::ontology::VariableStruct blue_variable_struct;
+    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
@@ -1117,7 +1117,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float blue = 1.0f;
-    yli::ontology::VariableStruct blue_variable_struct;
+    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
@@ -1143,7 +1143,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float blue = 0.875f;
-    yli::ontology::VariableStruct blue_variable_struct;
+    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
@@ -1172,28 +1172,28 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
     universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
-    yli::ontology::VariableStruct x_variable_struct;
+    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct;
+    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct;
+    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
@@ -1244,28 +1244,28 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct;
+    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct;
+    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct;
+    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
@@ -1316,28 +1316,28 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct;
+    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct;
+    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct;
+    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
     universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct;
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
@@ -1379,7 +1379,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
@@ -1400,7 +1400,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
@@ -1421,7 +1421,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
@@ -1442,7 +1442,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
@@ -1463,7 +1463,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
@@ -1484,7 +1484,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
@@ -1505,7 +1505,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1526,7 +1526,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1547,7 +1547,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1568,7 +1568,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1589,7 +1589,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1610,7 +1610,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1631,7 +1631,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1652,7 +1652,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
@@ -1673,7 +1673,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1694,7 +1694,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1715,7 +1715,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1736,7 +1736,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1757,7 +1757,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1778,7 +1778,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1799,7 +1799,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
@@ -1820,7 +1820,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1841,7 +1841,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1862,7 +1862,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1883,7 +1883,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1904,7 +1904,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1925,7 +1925,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1946,7 +1946,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
@@ -1967,7 +1967,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -1988,7 +1988,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2009,7 +2009,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2030,7 +2030,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2051,7 +2051,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2072,7 +2072,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2093,7 +2093,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
@@ -2114,7 +2114,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2135,7 +2135,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2156,7 +2156,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2177,7 +2177,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2198,7 +2198,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2219,7 +2219,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2240,7 +2240,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
@@ -2261,7 +2261,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2282,7 +2282,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2303,7 +2303,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2324,7 +2324,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2345,7 +2345,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2366,7 +2366,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2387,7 +2387,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
@@ -2408,7 +2408,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2429,7 +2429,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2450,7 +2450,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2471,7 +2471,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2492,7 +2492,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2513,7 +2513,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
@@ -2534,7 +2534,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2555,7 +2555,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2576,7 +2576,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2597,7 +2597,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2618,7 +2618,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2639,7 +2639,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2660,7 +2660,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
@@ -2681,7 +2681,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2702,7 +2702,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2723,7 +2723,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2744,7 +2744,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2765,7 +2765,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2786,7 +2786,7 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
@@ -2807,7 +2807,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
@@ -2832,7 +2832,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
@@ -2857,7 +2857,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
@@ -2882,7 +2882,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.local_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
@@ -2907,7 +2907,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.global_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -2929,7 +2929,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.global_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -2951,7 +2951,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.global_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
     yli::ontology::Variable* const variable = universe->get("foo");
@@ -2973,7 +2973,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct;
+    yli::ontology::VariableStruct variable_struct(*universe, universe);
     variable_struct.global_name = "foo";
     universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
     yli::ontology::Variable* const variable = universe->get("foo");

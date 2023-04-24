@@ -25,10 +25,18 @@
 namespace yli::ontology
 {
     class Entity;
+    class Universe;
 
     struct VariableStruct final : public yli::ontology::EntityStruct
     {
-        VariableStruct()
+        // The `Universe&` needs to be stored into `VariableStruct`
+        // because `Universe` constructor creates its `Variable`
+        // instances using `EntityFactory` before `EntityFactory::create_universe`
+        // has initialized `universe` member variable of `EntityFactory`.
+
+        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity* parent)
+            : universe { universe },
+            parent { parent }
         {
             // constructor.
             this->is_variable = true;
@@ -36,6 +44,7 @@ namespace yli::ontology
 
         VariableStruct(const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
+            universe { variable_struct.universe },
             parent { variable_struct.parent },
             activate_callback { variable_struct.activate_callback },
             read_callback { variable_struct.read_callback },
@@ -47,9 +56,11 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
+        yli::ontology::Universe& universe;
         yli::ontology::Entity* parent                      { nullptr };
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
+        bool is_variable_of_universe                       { false };
         bool should_call_activate_callback_now             { true };
     };
 }

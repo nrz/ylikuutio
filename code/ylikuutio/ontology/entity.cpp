@@ -97,7 +97,7 @@ namespace yli::ontology
         {
             this->should_be_rendered = !this->universe.get_is_headless();
 
-            yli::ontology::VariableStruct should_be_rendered_variable_struct;
+            yli::ontology::VariableStruct should_be_rendered_variable_struct(this->universe, this);
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
