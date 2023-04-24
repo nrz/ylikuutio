@@ -52,7 +52,10 @@ namespace yli::ontology
         return false; // Unbinding failed.
     }
 
-    ParentOfPipelinesModule::ParentOfPipelinesModule(yli::ontology::Entity* const entity, yli::ontology::Registry* const registry, const std::string& name) noexcept
+    ParentOfPipelinesModule::ParentOfPipelinesModule(
+            yli::ontology::Entity* const entity,
+            yli::ontology::Registry* const registry,
+            const std::string& name) noexcept
         : GenericParentModule(entity, registry, name)
     {
         // constructor.
