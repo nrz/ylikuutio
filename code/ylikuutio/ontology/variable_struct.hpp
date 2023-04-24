@@ -26,7 +26,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    struct VariableStruct: public yli::ontology::EntityStruct
+    struct VariableStruct final : public yli::ontology::EntityStruct
     {
         VariableStruct()
         {
