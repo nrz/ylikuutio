@@ -45,7 +45,7 @@ namespace yli::ontology
         parent_of_generic_lisp_function_overloads(
                 this,
                 &this->registry,
-                "generic_lisp_functions")
+                "generic_lisp_function_overloads")
     {
         // constructor.
 
