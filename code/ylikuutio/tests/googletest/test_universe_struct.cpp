@@ -42,4 +42,3 @@ TEST(universe_struct_must_be_initialized_appropriately, universe_struct_headless
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     ASSERT_EQ(universe_struct.graphics_api_backend, yli::render::GraphicsApiBackend::HEADLESS);
 }
-

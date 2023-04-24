@@ -64,4 +64,3 @@ namespace yli::opengl
 }
 
 #endif
-

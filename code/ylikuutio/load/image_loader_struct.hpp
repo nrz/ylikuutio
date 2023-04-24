@@ -69,4 +69,3 @@ namespace yli::load
 }
 
 #endif
-

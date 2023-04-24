@@ -30,4 +30,3 @@ namespace yli::render
 }
 
 #endif
-
