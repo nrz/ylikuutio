@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
-#define TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
+#ifndef AJOKKI_AJOKKI_HPP_INCLUDED
+#define AJOKKI_AJOKKI_HPP_INCLUDED
 
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
