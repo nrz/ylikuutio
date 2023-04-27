@@ -21,6 +21,7 @@
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/memory/constructible_module.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -70,6 +71,8 @@ namespace yli::ontology
             virtual ~Entity();
 
             virtual void activate();
+
+            yli::memory::ConstructibleModule get_constructible_module() const;
 
             std::size_t get_childID() const;
             std::string get_type() const;
@@ -143,6 +146,8 @@ namespace yli::ontology
 
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
+
+            yli::memory::ConstructibleModule constructible_module;
 
         protected:
             yli::core::Application& application;

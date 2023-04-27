@@ -27,6 +27,7 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/constructible_module.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -129,6 +130,11 @@ namespace yli::ontology
 
     void Entity::activate()
     {
+    }
+
+    yli::memory::ConstructibleModule Entity::get_constructible_module() const
+    {
+        return this->constructible_module;
     }
 
     std::size_t Entity::get_childID() const
