@@ -52,11 +52,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const holobiont_parent_module,
                     yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module);
 
+            ~Biont();
+
             Biont(const Biont&) = delete;            // Delete copy constructor.
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Biont();
 
             yli::ontology::Entity* get_parent() const override;
 
