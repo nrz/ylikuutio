@@ -154,6 +154,9 @@ namespace yli::ontology
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
 
+            template<typename T1, uint32_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
             yli::memory::ConstructibleModule constructible_module;
 
         protected:
