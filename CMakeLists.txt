@@ -806,7 +806,7 @@ target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} pthread)
 
 # GPGPU test
 add_executable(gpgpu_test
-    # ajokki, in alphabetical order
+    # gpgpu_test, in alphabetical order
     code/gpgpu_test/gpgpu_test.cpp
     code/gpgpu_test/gpgpu_test.hpp
     code/gpgpu_test/gpgpu_test_scene.cpp
