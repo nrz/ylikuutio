@@ -870,12 +870,6 @@ add_executable(tulevaisuus
     code/tulevaisuus/tulevaisuus.hpp
     code/tulevaisuus/tulevaisuus_console_callbacks.cpp
     code/tulevaisuus/tulevaisuus_console_callbacks.hpp
-
-    # ajokki, in alphabetical order.
-    code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
-    code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
-    code/ajokki/ajokki_joensuu_center_west_scene.cpp
-    code/ajokki/ajokki_joensuu_center_west_scene.hpp
     )
 target_link_libraries(tulevaisuus snippets ylikuutio ${ALL_LIBS} pthread)
 

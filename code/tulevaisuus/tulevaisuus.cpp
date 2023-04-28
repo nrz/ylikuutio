@@ -21,8 +21,6 @@
 
 #include "tulevaisuus.hpp"
 #include "tulevaisuus_console_callbacks.hpp"
-#include "code/ajokki/ajokki_helsinki_east_downtown_scene.hpp"
-#include "code/ajokki/ajokki_joensuu_center_west_scene.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -261,25 +259,7 @@ namespace tulevaisuus
 
         // Helsinki `Scene` begins here.
 
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(*my_universe, &entity_factory);
-
-        if (helsinki_east_downtown_scene_entity == nullptr)
-        {
-            return false;
-        }
-
-        std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
-        yli::ontology::Scene* const helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
-
-        if (helsinki_east_downtown_scene == nullptr)
-        {
-            return false;
-        }
-
-        // Set `helsinki_east_downtown_scene` to be the currently active `Scene`.
-        std::cout << "Setting helsinki_east_downtown_scene as the active scene ...\n";
-        my_universe->set_active_scene(helsinki_east_downtown_scene);
+        // TODO: create Helsinki `Scene`.
 
         // Helsinki `Scene` ends here.
 
