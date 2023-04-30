@@ -60,6 +60,7 @@ namespace yli::core
                     this->universe = universe;
                 }
 
+            private:
                 yli::memory::MemorySystem<TypeEnumType>& memory_system;
                 yli::ontology::Universe* universe { nullptr };
         };
