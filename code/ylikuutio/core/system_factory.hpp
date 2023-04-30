@@ -55,6 +55,11 @@ namespace yli::core
                             this->universe);
                 }
 
+                void set_universe(yli::ontology::Universe* const universe)
+                {
+                    this->universe = universe;
+                }
+
                 yli::memory::MemorySystem<TypeEnumType>& memory_system;
                 yli::ontology::Universe* universe { nullptr };
         };
