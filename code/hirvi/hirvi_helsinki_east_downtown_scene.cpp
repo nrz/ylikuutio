@@ -508,7 +508,9 @@ namespace hirvi
         yli::ontology::ObjectStruct helsinki_east_downtown_struct(helsinki_east_downtown_scene);
         helsinki_east_downtown_struct.mesh_master = helsinki_east_downtown_terrain_species;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        entity_factory->create_object_derivative<yli::ontology::Terrain>(helsinki_east_downtown_struct);
+        entity_factory->create_object_derivative<
+            yli::ontology::Terrain>(
+                    helsinki_east_downtown_struct);
 
         yli::ontology::ModelStruct cat_model_struct;
         cat_model_struct.parent = helsinki_east_downtown_scene;
@@ -547,13 +549,14 @@ namespace hirvi
         yli::ontology::LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
         yli::ontology::LocomotionModuleStruct cat1_climb_struct;
 
-        yli::ontology::Entity* const cat1_entity = entity_factory->create_object_derivative<hirvi::Cat>(
-                cat1_object_struct,
-                cat1_walk_struct,
-                cat1_trot_struct,
-                cat1_canter_struct,
-                cat1_gallop_struct,
-                cat1_climb_struct);
+        yli::ontology::Entity* const cat1_entity = entity_factory->create_object_derivative<
+            hirvi::Cat>(
+                    cat1_object_struct,
+                    cat1_walk_struct,
+                    cat1_trot_struct,
+                    cat1_canter_struct,
+                    cat1_gallop_struct,
+                    cat1_climb_struct);
         hirvi::Cat* const cat1 = dynamic_cast<hirvi::Cat*>(cat1_entity);
 
         if (cat1 == nullptr)
@@ -579,13 +582,14 @@ namespace hirvi
         yli::ontology::LocomotionModuleStruct cat2_gallop_struct(12.5f); // 45 km/h.
         yli::ontology::LocomotionModuleStruct cat2_climb_struct;
 
-        yli::ontology::Entity* const cat2_entity = entity_factory->create_object_derivative<hirvi::Cat>(
-                cat2_object_struct,
-                cat2_walk_struct,
-                cat2_trot_struct,
-                cat2_canter_struct,
-                cat2_gallop_struct,
-                cat2_climb_struct);
+        yli::ontology::Entity* const cat2_entity = entity_factory->create_object_derivative<
+            hirvi::Cat>(
+                    cat2_object_struct,
+                    cat2_walk_struct,
+                    cat2_trot_struct,
+                    cat2_canter_struct,
+                    cat2_gallop_struct,
+                    cat2_climb_struct);
         hirvi::Cat* const cat2 = dynamic_cast<hirvi::Cat*>(cat2_entity);
 
         if (cat2 == nullptr)
