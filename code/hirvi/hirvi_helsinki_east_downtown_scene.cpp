@@ -619,7 +619,10 @@ namespace hirvi
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct1;
 
-        yli::ontology::Entity* const turbo_polizei_png1_entity = entity_factory->create_holobiont_derivative<hirvi::PoliceCar>(turbo_polizei_png_police_car_struct1, road_vehicle_struct1);
+        yli::ontology::Entity* const turbo_polizei_png1_entity = entity_factory->create_holobiont_derivative<
+            hirvi::PoliceCar>(
+                    turbo_polizei_png_police_car_struct1,
+                    road_vehicle_struct1);
 
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png1 ...\n";
 
@@ -645,7 +648,10 @@ namespace hirvi
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct2;
 
-        yli::ontology::Entity* const turbo_polizei_png2_entity = entity_factory->create_holobiont_derivative<hirvi::PoliceCar>(turbo_polizei_png_police_car_struct2, road_vehicle_struct2);
+        yli::ontology::Entity* const turbo_polizei_png2_entity = entity_factory->create_holobiont_derivative<
+            hirvi::PoliceCar>(
+                    turbo_polizei_png_police_car_struct2,
+                    road_vehicle_struct2);
 
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png2 ...\n";
 
