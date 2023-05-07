@@ -26,7 +26,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
-#include <unordered_map> // std::unordered_map
+#include <map>           // std::map
 #include <stdexcept>     // std::runtime_error
 #include <stdint.h>      // uint32_t
 #include <sstream>       // std::stringstream
@@ -182,7 +182,7 @@ namespace yli::memory
             private:
                 // Allocators need to be created elsewhere and only stored here.
                 // TODO: use `TypeEnumType` as the key type instead of `int`!
-                std::unordered_map<int, yli::memory::GenericMemoryAllocator*> memory_allocators;
+                std::map<int, yli::memory::GenericMemoryAllocator*> memory_allocators;
                 const TypeEnumType universe_datatype;
         };
 }
