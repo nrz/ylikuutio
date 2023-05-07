@@ -62,6 +62,9 @@ namespace gpgpu_test
 {
     using UniverseMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Universe, 1>;
     using VariableMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Variable, 4096>;
+    using CallbackEngineMemoryAllocator              = yli::memory::MemoryAllocator<yli::ontology::CallbackEngine, 256>;
+    using CallbackObjectMemoryAllocator              = yli::memory::MemoryAllocator<yli::ontology::CallbackObject, 256>;
+    using CallbackParameterMemoryAllocator           = yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
     using CameraMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
     using BrainMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
     using EcosystemMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
@@ -83,6 +86,7 @@ namespace gpgpu_test
     using VectorFontMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
     using Text3DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
+    using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
