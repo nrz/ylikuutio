@@ -30,9 +30,9 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
 }
 

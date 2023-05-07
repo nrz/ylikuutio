@@ -33,9 +33,9 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class Universe;
     class GenericParentModule;
     class GenericMasterModule;
+    class Universe;
     struct HolobiontStruct;
 
     class Elk : public yli::ontology::Holobiont
