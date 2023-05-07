@@ -563,6 +563,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/framebuffer_module.cpp
     code/ylikuutio/ontology/framebuffer_module.hpp
     code/ylikuutio/ontology/framebuffer_module_struct.hpp
+    code/ylikuutio/ontology/generic_entity_factory.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
     code/ylikuutio/ontology/generic_master_module.cpp
