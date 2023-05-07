@@ -54,7 +54,6 @@ namespace yli::data
         SPHERICAL_COORDINATES_STRUCT,
         // Systems.
         AUDIO_SYSTEM        = 50,
-        INPUT_SYSTEM        = 50,
         // `yli::ontology` datatypes, 'entity' path.
         ENTITY              = 117,
         MOVABLE             = 118,
