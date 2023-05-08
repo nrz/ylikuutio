@@ -23,7 +23,6 @@
 #include "memory_allocator.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <map>           // std::map
