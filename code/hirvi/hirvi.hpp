@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
-#define TULEVAISUUS_TULEVAISUUS_HPP_INCLUDED
+#ifndef HIRVI_HIRVI_HPP_INCLUDED
+#define HIRVI_HIRVI_HPP_INCLUDED
 
 #include "cat.hpp"
 #include "police_car.hpp"
