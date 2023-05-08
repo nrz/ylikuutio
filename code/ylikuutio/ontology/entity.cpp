@@ -86,15 +86,14 @@ namespace yli::ontology
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::VARIABLE),
                 ""), // Do not index `parent_of_variables`, index only the variables.
-        universe { universe },
-        is_variable { entity_struct.is_variable }
+        universe { universe }
     {
         // constructor.
 
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        if (!this->is_variable && &this->universe != this)
+        if (!entity_struct.is_universe && !entity_struct.is_variable)
         {
             this->should_be_rendered = !this->universe.get_is_headless();
 
