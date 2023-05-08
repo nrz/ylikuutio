@@ -193,9 +193,6 @@ namespace yli::ontology
     {
         // constructor.
 
-        // call `bind_entity` here since it couldn't be performed from `Entity` constructor.
-        this->bind_entity(this);
-
         // call `set_global_name` here because it can't be done in `Entity` constructor.
         this->set_global_name(universe_struct.global_name);
 
