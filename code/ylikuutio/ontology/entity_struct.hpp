@@ -33,6 +33,7 @@ namespace yli::ontology
         EntityStruct(const yli::ontology::EntityStruct& entity_struct)
             : global_name { entity_struct.global_name },
             local_name { entity_struct.local_name },
+            is_universe { entity_struct.is_universe },
             is_variable { entity_struct.is_variable }
         {
             // copy constructor.
@@ -47,6 +48,7 @@ namespace yli::ontology
 
         std::string global_name;
         std::string local_name;
+        bool is_universe    { false };
         bool is_variable    { false };
     };
 }

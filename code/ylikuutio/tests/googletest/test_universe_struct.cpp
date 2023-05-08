@@ -23,22 +23,26 @@ TEST(universe_struct_must_be_initialized_appropriately, universe_struct_opengl)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
     ASSERT_EQ(universe_struct.graphics_api_backend, yli::render::GraphicsApiBackend::OPENGL);
+    ASSERT_TRUE(universe_struct.is_universe);
 }
 
 TEST(universe_struct_must_be_initialized_appropriately, universe_struct_vulkan)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::VULKAN);
     ASSERT_EQ(universe_struct.graphics_api_backend, yli::render::GraphicsApiBackend::VULKAN);
+    ASSERT_TRUE(universe_struct.is_universe);
 }
 
 TEST(universe_struct_must_be_initialized_appropriately, universe_struct_software)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::SOFTWARE);
     ASSERT_EQ(universe_struct.graphics_api_backend, yli::render::GraphicsApiBackend::SOFTWARE);
+    ASSERT_TRUE(universe_struct.is_universe);
 }
 
 TEST(universe_struct_must_be_initialized_appropriately, universe_struct_headless)
 {
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
     ASSERT_EQ(universe_struct.graphics_api_backend, yli::render::GraphicsApiBackend::HEADLESS);
+    ASSERT_TRUE(universe_struct.is_universe);
 }

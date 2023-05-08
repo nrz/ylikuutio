@@ -35,6 +35,7 @@ namespace yli::ontology
             : graphics_api_backend { graphics_api_backend }
         {
             // constructor.
+            this->is_universe = true;
         }
 
         std::string application_name;
