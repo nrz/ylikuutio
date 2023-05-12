@@ -30,12 +30,14 @@ namespace yli::memory
         {
         }
 
-        ConstructibleModule(const uint32_t storage_i, const uint32_t slot_i)
-            : storage_i { storage_i },
+        ConstructibleModule(int datatype, const uint32_t storage_i, const uint32_t slot_i)
+            : datatype { datatype },
+            storage_i { storage_i },
             slot_i { slot_i }
         {
         }
 
+        int datatype       { 0 }; // Unknown type.
         uint32_t storage_i { std::numeric_limits<uint32_t>::infinity() };
         uint32_t slot_i    { std::numeric_limits<uint32_t>::infinity() };
     };
