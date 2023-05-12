@@ -109,11 +109,6 @@ namespace yli::memory
                     return this->memory_allocators.size();
                 }
 
-                // There is no allocator building function here because
-                // different allocators may need different `DataSize`
-                // template argument values. Construct the allocator elsewhere
-                // and acquire its ownership by passing it to `store_allocator`.
-
                 template<typename T1, typename... Args>
                     void create_allocator(int type, Args&&... args)
                     {
