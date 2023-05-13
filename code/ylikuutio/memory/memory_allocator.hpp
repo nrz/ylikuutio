@@ -48,11 +48,11 @@ namespace yli::memory
                 MemoryAllocator() = default;
 
                 template<typename... Args>
-                    T1* build_in(Args&&... args)
+                    T1* build_in(int datatype, Args&&... args)
                     {
                         for (auto& storage : this->storages)
                         {
-                            T1* instance = storage->build_in(std::forward<Args>(args)...);
+                            T1* instance = storage->build_in(datatype, std::forward<Args>(args)...);
 
                             if (instance != nullptr)
                             {
@@ -64,7 +64,7 @@ namespace yli::memory
                         // This assumes that storages can not be deleted (except in `MemoryAllocator`'s destructor).
                         auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(this->storages.size());
                         this->storages.emplace_back(std::move(storage));
-                        return this->storages.back()->build_in(std::forward<Args>(args)...);
+                        return this->storages.back()->build_in(datatype, std::forward<Args>(args)...);
                     }
 
                 uint32_t get_number_of_storages() const override
@@ -130,7 +130,7 @@ namespace yli::memory
                 }
 
                 template<typename... Args>
-                    yli::ontology::GenericLispFunctionOverload* build_in(Args&&... args)
+                    yli::ontology::GenericLispFunctionOverload* build_in(int datatype, Args&&... args)
                     {
                         yli::ontology::GenericLispFunctionOverload* function_overload =
                             new yli::ontology::LispFunctionOverload(std::forward<Args>(args)...);

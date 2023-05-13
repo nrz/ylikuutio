@@ -87,7 +87,7 @@ namespace yli::memory
                 }
 
                 template<typename... Args>
-                    T1* build_in(Args&&... args)
+                    T1* build_in(int datatype, Args&&... args)
                     {
                         if (this->number_of_instances >= DataSize) [[unlikely]]
                         {
@@ -118,7 +118,7 @@ namespace yli::memory
 
                         T1* data = reinterpret_cast<T1*>(this->memory.data());
                         auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
-                        instance->constructible_module = yli::memory::ConstructibleModule(this->storage_i, slot_i);
+                        instance->constructible_module = yli::memory::ConstructibleModule(datatype, this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
                     }
