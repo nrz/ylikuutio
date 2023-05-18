@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <cstddef>   // std::byte
+#include <memory>    // std::make_unique, std::unique_ptr
 #include <stdexcept> // std::runtime_error
 #include <sstream>   // std::stringstream
 #include <stdint.h>  // uint32_t
