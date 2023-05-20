@@ -56,11 +56,10 @@ namespace yli::ontology
                     const yli::ontology::TextStruct& text_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~Text2D();
+
             Text2D(const Text2D&) = delete;            // Delete copy constructor.
             Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Text2D();
 
             void render();
 

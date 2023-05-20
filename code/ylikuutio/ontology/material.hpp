@@ -75,11 +75,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
                     yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module);
 
+            ~Material() = default;
+
             Material(const Material&) = delete;            // Delete copy constructor.
             Material& operator=(const Material&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Material() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

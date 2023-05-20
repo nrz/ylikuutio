@@ -73,11 +73,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
                     yli::ontology::GenericMasterModule* const material_master);
 
+            ~Species() = default;
+
             Species(const Species&) = delete;            // Delete copy constructor.
             Species& operator=(const Species&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Species() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

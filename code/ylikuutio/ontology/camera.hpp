@@ -90,11 +90,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const generic_master_module);
 
+            ~Camera() = default;
+
             Camera(const Camera&) = delete;            // Delete copy constructor.
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Camera() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

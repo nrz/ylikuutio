@@ -43,10 +43,10 @@ namespace yli::ontology
                     yli::ontology::GenericMasterModule* const mesh_master,
                     yli::ontology::GenericMasterModule* const /* brain_master */);
 
+            ~Terrain() = default;
+
             Terrain(const Terrain&) = delete;            // Delete copy constructor.
             Terrain &operator=(const Terrain&) = delete; // Delete copy assignment.
-
-            ~Terrain() = default;
     };
 }
 

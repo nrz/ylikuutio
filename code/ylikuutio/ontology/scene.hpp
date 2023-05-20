@@ -83,11 +83,10 @@ namespace yli::ontology
                     const yli::ontology::SceneStruct& scene_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~Scene();
+
             Scene(const Scene&) = delete;            // Delete copy constructor.
             Scene& operator=(const Scene&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Scene();
 
             yli::ontology::Entity* get_parent() const override;
 

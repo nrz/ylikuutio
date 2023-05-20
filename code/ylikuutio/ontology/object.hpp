@@ -84,11 +84,10 @@ namespace yli::ontology
                     yli::ontology::GenericMasterModule* const mesh_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
+            ~Object() = default;
+
             Object(const Object&) = delete;            // Delete copy constructor.
             Object& operator=(const Object&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Object() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

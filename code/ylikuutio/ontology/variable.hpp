@@ -65,11 +65,10 @@ namespace yli::ontology
                     const yli::ontology::VariableStruct& variable_struct,
                     const yli::data::AnyValue& any_value);
 
+            ~Variable();
+
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Variable();
 
             yli::ontology::Entity* get_parent() const override;
 

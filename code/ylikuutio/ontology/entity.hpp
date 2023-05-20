@@ -71,11 +71,10 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::EntityStruct& entity_struct);
 
+            virtual ~Entity();
+
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity& operator=(const Entity&) = delete; // Delete copy assignment.
-
-            // destructor.
-            virtual ~Entity();
 
             virtual void activate();
 

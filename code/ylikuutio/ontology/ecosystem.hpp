@@ -51,11 +51,10 @@ namespace yli::ontology
                     const yli::ontology::EcosystemStruct& ecosystem_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            ~Ecosystem() = default;
+
             Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
             Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Ecosystem() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

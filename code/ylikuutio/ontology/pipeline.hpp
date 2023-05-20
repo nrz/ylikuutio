@@ -70,11 +70,10 @@ namespace yli::ontology
                     const yli::ontology::PipelineStruct& pipeline_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module);
 
+            ~Pipeline();
+
             Pipeline(const Pipeline&) = delete;            // Delete copy constructor.
             Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Pipeline();
 
             yli::ontology::Scene* get_scene() const override;
             yli::ontology::Entity* get_parent() const override;

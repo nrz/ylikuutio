@@ -45,10 +45,10 @@ namespace yli::ontology
                     const yli::ontology::MissionStruct& mission_struct,
                     yli::ontology::GenericParentModule* const parent_module);
 
+            virtual ~Mission() = default;
+
             Mission(const Mission&) = delete;            // Delete copy constructor.
             Mission &operator=(const Mission&) = delete; // Delete copy assignment.
-
-            virtual ~Mission() = default;
 
             yli::ontology::Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

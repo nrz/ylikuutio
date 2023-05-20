@@ -93,11 +93,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const pipeline_master);
 
+            ~Symbiosis() = default;
+
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Symbiosis() = default;
 
             yli::ontology::Entity* get_parent() const override;
 

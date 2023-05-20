@@ -88,11 +88,10 @@ namespace yli::ontology
                     yli::core::Application& application,
                     const yli::ontology::UniverseStruct& universe_struct);
 
+            ~Universe();
+
             Universe(const Universe&) = delete;            // Delete copy constructor.
             Universe& operator=(const Universe&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Universe();
 
             // This method contains the main loop.
             void start_simulation();

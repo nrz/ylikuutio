@@ -54,11 +54,10 @@ namespace yli::ontology
                     yli::ontology::GenericMasterModule* const symbiosis_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
+            ~Holobiont() = default;
+
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~Holobiont() = default;
 
             yli::ontology::Entity* get_parent() const override;
 
