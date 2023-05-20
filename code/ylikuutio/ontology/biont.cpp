@@ -140,9 +140,7 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
-        yli::ontology::Universe& universe = this->universe;
-
-        if (universe.get_render_system() == nullptr)
+        if (this->universe.get_render_system() == nullptr)
         {
             std::cerr << "ERROR: `Biont::render_this_biont`: `universe.get_render_system()` is `nullptr`!\n";
             return;
@@ -200,7 +198,7 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont->location.get_y();
         this->model_matrix[3][2] = holobiont->location.get_z();
 
-        this->mvp_matrix = universe.get_projection_matrix() * universe.get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
         if (this->universe.get_is_opengl_in_use())
         {
