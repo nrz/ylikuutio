@@ -65,12 +65,13 @@ namespace yli::ontology
 
             void bind_to_universe() noexcept;
 
-            // constructor.
+        protected:
             Entity(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::EntityStruct& entity_struct);
 
+        public:
             virtual ~Entity();
 
             Entity(const Entity&) = delete;            // Delete copy constructor.
