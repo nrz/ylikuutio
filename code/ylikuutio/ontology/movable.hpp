@@ -82,6 +82,7 @@ namespace yli::ontology
             static std::optional<yli::data::AnyValue> unbind_from_brain(
                     yli::ontology::Movable& movable) noexcept;
 
+        protected:
             Movable(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -90,6 +91,7 @@ namespace yli::ontology
 
             virtual ~Movable() = default;
 
+        public:
             Movable(const Movable&) = delete;            // Delete copy constructor.
             Movable& operator=(const Movable&) = delete; // Delete copy assignment.
 
