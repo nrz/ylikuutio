@@ -19,11 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_MOVABLE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "cartesian_coordinates_module.hpp"
+#include "orientation_module.hpp"
+#include "rigid_body_module_struct.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
-#include "code/ylikuutio/ontology/orientation_module.hpp"
-#include "code/ylikuutio/ontology/rigid_body_module_struct.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
