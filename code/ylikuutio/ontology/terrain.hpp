@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_TERRAIN_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_TERRAIN_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/object.hpp"
+#include "object.hpp"
 
 namespace yli::core
 {
