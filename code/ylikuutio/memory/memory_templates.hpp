@@ -19,7 +19,9 @@
 #define YLIKUUTIO_MEMORY_MEMORY_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
+#include <algorithm> // std::copy
 #include <cstddef>  // std::size_t
+#include <iterator> // std::back_inserter
 #include <stdint.h> // uint32_t etc.
 
 namespace yli::memory
@@ -49,6 +51,29 @@ namespace yli::memory
                     src_data[lower_index] = temp;
                 }
             }
+        }
+
+    template<typename T1, std::size_t DataSize>
+        std::vector<T1> copy_circular_buffer_into_vector(std::array<T1, DataSize> buffer, std::size_t start_i, std::size_t buffer_size)
+        {
+            if (buffer_size == 0)
+            {
+                return {};
+            }
+
+            std::vector<T1> dest;
+            dest.reserve(buffer_size);
+
+            std::size_t n_values_to_copy_first_part { buffer_size <= DataSize - start_i ? buffer_size : DataSize - start_i };
+            std::copy(&buffer.at(start_i), buffer.end(), std::back_inserter(dest));
+
+            if (n_values_to_copy_first_part < buffer_size)
+            {
+                // Copy the remaining values.
+                std::copy(buffer.begin(), &buffer.at(buffer_size - n_values_to_copy_first_part), std::back_inserter(dest));
+            }
+
+            return dest;
         }
 }
 
