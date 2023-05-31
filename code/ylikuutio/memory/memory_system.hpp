@@ -70,9 +70,9 @@ namespace yli::memory
                         if (it->first != this->universe_datatype)
                         {
                             std::cout << "Deleting memory allocator of type " << it->first << "\n";
-                            delete it->second;
                             auto old_it = it;
                             ++it;
+                            delete old_it->second;
                             this->memory_allocators.erase(old_it);
                         }
                         else
@@ -84,12 +84,19 @@ namespace yli::memory
                     std::cout << "Deleting the `Universe` allocator.\n";
 
                     // Delete `Universe` allocator.
-                    for (auto [type, allocator] : this->memory_allocators)
+                    for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end(); )
                     {
-                        if (type == this->universe_datatype)
+                        if (it->first == this->universe_datatype)
                         {
-                            delete allocator;
+                            auto old_it = it;
+                            ++it;
+                            delete old_it->second;
+                            this->memory_allocators.erase(old_it);
                             std::cout << "`Universe` allocator deleted.\n";
+                        }
+                        else
+                        {
+                            ++it;
                         }
                     }
                 }
