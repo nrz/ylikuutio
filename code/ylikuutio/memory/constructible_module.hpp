@@ -38,8 +38,8 @@ namespace yli::memory
         }
 
         int datatype       { 0 }; // Unknown type.
-        uint32_t storage_i { std::numeric_limits<uint32_t>::infinity() };
-        uint32_t slot_i    { std::numeric_limits<uint32_t>::infinity() };
+        uint32_t storage_i { std::numeric_limits<uint32_t>::max() };
+        uint32_t slot_i    { std::numeric_limits<uint32_t>::max() };
     };
 }
 
