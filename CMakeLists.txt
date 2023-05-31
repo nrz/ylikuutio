@@ -377,6 +377,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/data/data_templates.hpp
     code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/pi.hpp
+    code/ylikuutio/data/queue.hpp
     code/ylikuutio/data/spherical_coordinates_struct.hpp
     code/ylikuutio/data/tuple_templates.hpp
     code/ylikuutio/data/type_enum_provider.hpp
@@ -975,6 +976,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_png_loader.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_quad_triangulation.cpp
+        code/ylikuutio/tests/googletest/test_queue.cpp
         code/ylikuutio/tests/googletest/test_registry.cpp
         code/ylikuutio/tests/googletest/test_scene.cpp
         code/ylikuutio/tests/googletest/test_pipeline.cpp
