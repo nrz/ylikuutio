@@ -110,6 +110,7 @@ namespace yli::ontology
     {
         // destructor.
 
+        // FIXME `Entity` destructor must not access derived class `Universe`!
         this->universe.unbind_entity(this->entityID);
 
         if (!this->global_name.empty())
