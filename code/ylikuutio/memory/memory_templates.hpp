@@ -22,6 +22,7 @@
 #include <algorithm> // std::copy
 #include <cstddef>  // std::size_t
 #include <iterator> // std::back_inserter
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 
 namespace yli::memory
@@ -56,6 +57,11 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
         std::vector<T1> copy_circular_buffer_into_vector(std::array<T1, DataSize> buffer, std::size_t start_i, std::size_t buffer_size)
         {
+            if (buffer_size > buffer.size())
+            {
+                throw std::runtime_error("ERROR: `yli::memory::copy_circular_buffer_into_vector`: `buffer_size > buffer.size())`");
+            }
+
             if (buffer_size == 0)
             {
                 return {};
