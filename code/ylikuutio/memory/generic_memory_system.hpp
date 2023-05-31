@@ -42,8 +42,7 @@ namespace yli::memory
             // TODO: use `TypeEnumType` instead of `int`!
             virtual yli::memory::GenericMemoryAllocator& get_allocator(const int type) const = 0;
 
-            // TODO: use `TypeEnumType` instead of `int`!
-            virtual void destroy(const int type, const yli::memory::ConstructibleModule& constructible_module) = 0;
+            virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) = 0;
 
             yli::memory::GenericMemorySystem& get();
     };

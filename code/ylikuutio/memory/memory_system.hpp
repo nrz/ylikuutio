@@ -138,10 +138,9 @@ namespace yli::memory
                     throw std::runtime_error(runtime_error_stringstream.str());
                 }
 
-                // TODO: use `TypeEnumType` instead of `int`!
-                virtual void destroy(const int type, const yli::memory::ConstructibleModule& constructible_module) override
+                virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) override
                 {
-                    yli::memory::GenericMemoryAllocator& allocator = this->get_allocator(type);
+                    yli::memory::GenericMemoryAllocator& allocator = this->get_allocator(constructible_module.datatype);
                     allocator.destroy(constructible_module);
                 }
 
