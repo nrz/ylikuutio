@@ -63,7 +63,8 @@ namespace yli::memory
 
                         // Pass number of storages to `MemoryStorage` constructor as the `storage_i`.
                         // This assumes that storages can not be deleted (except in `MemoryAllocator`'s destructor).
-                        auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(this->storages.size());
+                        const uint32_t storage_i { static_cast<uint32_t>(this->storages.size()) };
+                        auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(storage_i);
                         this->storages.emplace_back(std::move(storage));
                         return this->storages.back()->build_in(datatype, std::forward<Args>(args)...);
                     }
