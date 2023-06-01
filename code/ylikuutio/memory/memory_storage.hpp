@@ -26,6 +26,7 @@
 #include <array>     // std::array
 #include <cstddef>   // std::byte
 #include <limits>    // std::numeric_limits
+#include <new>       // std::launder
 #include <stdint.h>  // uint32_t
 #include <utility>   // std::forward
 #include <vector>    // std::vector
@@ -81,8 +82,9 @@ namespace yli::memory
                             continue;
                         }
 
-                        T1& instance = reinterpret_cast<T1*>(this->memory.data())[slot_i];
-                        instance.~T1();
+                        T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
+                        T1* instance { &data[slot_i] };
+                        instance->~T1();
                         count++;
                     }
                 }
@@ -117,7 +119,7 @@ namespace yli::memory
                             this->size_of_free_slot_id_queue--;
                         }
 
-                        T1* data = reinterpret_cast<T1*>(this->memory.data());
+                        T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
                         auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
                         instance->constructible_module = yli::memory::ConstructibleModule(datatype, this->storage_i, slot_i);
                         this->number_of_instances++;
@@ -128,7 +130,8 @@ namespace yli::memory
                 {
                     // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
                     // The caller must make sure that `slot_i` points to an existing instance.
-                    T1* instance { &reinterpret_cast<T1*>(this->memory.data())[slot_i] };
+                    T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
+                    T1* instance { &data[slot_i] };
                     instance->~T1();
 
                     this->free_slot_id_queue.at((this->free_slot_id_queue_start_i + this->size_of_free_slot_id_queue) % DataSize) = slot_i;
