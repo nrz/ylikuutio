@@ -28,7 +28,7 @@
 namespace yli::memory
 {
     template<typename T1, typename T2>
-        T2 read_nonaligned_32_bit(T1* src_data, std::size_t offset)
+        T2 read_nonaligned_32_bit(T1* src_data, const std::size_t offset)
         {
             uint8_t* src_data_uint8_t = (uint8_t*) src_data;
             T2 value_32_bit = static_cast<T2>(src_data_uint8_t[offset + 3]);
@@ -39,7 +39,7 @@ namespace yli::memory
         }
 
     template<typename T1>
-        void flip_vertically(T1* src_data, std::size_t image_width, std::size_t image_height)
+        void flip_vertically(T1* src_data, const std::size_t image_width, const std::size_t image_height)
         {
             for (std::size_t y = 0; y < image_height / 2; y++)
             {
@@ -55,7 +55,7 @@ namespace yli::memory
         }
 
     template<typename T1, std::size_t DataSize>
-        std::vector<T1> copy_circular_buffer_into_vector(std::array<T1, DataSize> buffer, std::size_t start_i, std::size_t buffer_size)
+        std::vector<T1> copy_circular_buffer_into_vector(const std::array<T1, DataSize> buffer, const std::size_t start_i, const std::size_t buffer_size)
         {
             if (buffer_size > buffer.size())
             {
