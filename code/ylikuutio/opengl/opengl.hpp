@@ -24,7 +24,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 
