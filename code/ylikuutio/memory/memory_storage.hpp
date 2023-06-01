@@ -149,7 +149,7 @@ namespace yli::memory
                 }
 
             private:
-                std::array<std::byte, DataSize * sizeof(T1)> memory {};
+                alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
                 std::array<uint32_t, DataSize> free_slot_id_queue {};
                 const uint32_t storage_i;
                 uint32_t number_of_instances        { 0 };
