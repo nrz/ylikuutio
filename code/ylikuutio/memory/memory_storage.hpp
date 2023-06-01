@@ -134,7 +134,8 @@ namespace yli::memory
                     T1* instance { &data[slot_i] };
                     instance->~T1();
 
-                    this->free_slot_id_queue.at((this->free_slot_id_queue_start_i + this->size_of_free_slot_id_queue) % DataSize) = slot_i;
+                    const uint32_t end_of_queue_i { (this->free_slot_id_queue_start_i + this->size_of_free_slot_id_queue) % DataSize };
+                    this->free_slot_id_queue.at(end_of_queue_i) = slot_i;
                     this->size_of_free_slot_id_queue++;
                 }
 
