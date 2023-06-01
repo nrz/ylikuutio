@@ -24,6 +24,7 @@
 #include <algorithm> // std::sort
 #include <array>     // std::array
 #include <cstddef>   // std::byte
+#include <limits>    // std::numeric_limits
 #include <stdint.h>  // uint32_t
 #include <utility>   // std::forward
 #include <vector>    // std::vector
@@ -39,6 +40,10 @@ namespace yli::memory
                 explicit MemoryStorage(const uint32_t storage_i)
                     : storage_i { storage_i }
                 {
+                    if (storage_i == std::numeric_limits<uint32_t>::max())
+                    {
+                        throw std::runtime_error("ERROR: `MemoryStorage::MemoryStorage`: `storage_i` has invalid value!");
+                    }
                 }
 
                 ~MemoryStorage()
