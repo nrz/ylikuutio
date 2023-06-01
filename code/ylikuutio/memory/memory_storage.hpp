@@ -19,6 +19,7 @@
 #define YLIKUUTIO_MEMORY_MEMORY_STORAGE_HPP_INCLUDED
 
 #include "constructible_module.hpp"
+#include "memory_templates.hpp"
 
 // Include standard headers
 #include <algorithm> // std::sort
@@ -58,16 +59,11 @@ namespace yli::memory
                     // for finding out which slots are in use.
                     //
                     // First, copy the data so that the head of the queue is at index 0.
-                    std::vector<uint32_t> copy_of_free_slot_id_queue;
 
-                    for (
-                            uint32_t src_i = (this->free_slot_id_queue_start_i + this->size_of_free_slot_id_queue) % DataSize, count = 0;
-                            count < this->size_of_free_slot_id_queue;
-                            count++)
-                    {
-                        copy_of_free_slot_id_queue.emplace_back(this->free_slot_id_queue.at(src_i));
-                        src_i = (src_i + 1) % DataSize;
-                    }
+                    std::vector<uint32_t> copy_of_free_slot_id_queue = yli::memory::copy_circular_buffer_into_vector(
+                            this->free_slot_id_queue,
+                            this->free_slot_id_queue_start_i,
+                            this->size_of_free_slot_id_queue);
 
                     std::sort(copy_of_free_slot_id_queue.begin(), copy_of_free_slot_id_queue.end());
 
