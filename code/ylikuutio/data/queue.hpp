@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_MEMORY_QUEUE_HPP_INCLUDED
-#define YLIKUUTIO_MEMORY_QUEUE_HPP_INCLUDED
+#ifndef YLIKUUTIO_DATA_QUEUE_HPP_INCLUDED
+#define YLIKUUTIO_DATA_QUEUE_HPP_INCLUDED
 
 // Include standard headers
 #include <array>     // std::array
