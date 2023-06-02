@@ -20,10 +20,10 @@
 
 // Include standard headers
 #include <algorithm> // std::copy
-#include <cstddef>  // std::size_t
-#include <iterator> // std::back_inserter
+#include <cstddef>   // std::size_t
+#include <iterator>  // std::back_inserter
 #include <stdexcept> // std::runtime_error
-#include <stdint.h> // uint32_t etc.
+#include <stdint.h>  // uint32_t etc.
 
 namespace yli::memory
 {
