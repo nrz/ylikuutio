@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <cstddef>   // std::byte
+#include <limits>    // std::numeric_limits
 #include <memory>    // std::make_unique, std::unique_ptr
 #include <stdexcept> // std::runtime_error
 #include <sstream>   // std::stringstream
@@ -109,6 +110,16 @@ namespace yli::memory
 
                 void destroy(const yli::memory::ConstructibleModule& constructible_module) override
                 {
+                    if (constructible_module.storage_i == std::numeric_limits<uint32_t>::max())
+                    {
+                        throw std::runtime_error("ERROR: `MemoryAllocator::destroy`: `constructible_module.storage_i` has invalid value!");
+                    }
+
+                    if (constructible_module.slot_i == std::numeric_limits<uint32_t>::max())
+                    {
+                        throw std::runtime_error("ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!");
+                    }
+
                     auto& storage = this->get_storage(constructible_module.storage_i);
                     storage.destroy(constructible_module.slot_i);
                 }
