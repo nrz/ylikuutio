@@ -20,6 +20,7 @@
 
 #include "constructible_module.hpp"
 #include "memory_templates.hpp"
+#include "code/ylikuutio/data/queue.hpp"
 
 // Include standard headers
 #include <algorithm> // std::sort
@@ -62,9 +63,9 @@ namespace yli::memory
                     // First, copy the data so that the head of the queue is at index 0.
 
                     std::vector<uint32_t> copy_of_free_slot_id_queue = yli::memory::copy_circular_buffer_into_vector(
-                            this->free_slot_id_queue,
-                            this->free_slot_id_queue_start_i,
-                            this->size_of_free_slot_id_queue);
+                            this->free_slot_id_queue.data(),
+                            this->free_slot_id_queue.get_head(),
+                            this->free_slot_id_queue.size());
 
                     std::sort(copy_of_free_slot_id_queue.begin(), copy_of_free_slot_id_queue.end());
 
@@ -100,7 +101,7 @@ namespace yli::memory
 
                         uint32_t slot_i;
 
-                        if (this->size_of_free_slot_id_queue == 0) [[unlikely]]
+                        if (this->free_slot_id_queue.size() == 0) [[unlikely]]
                         {
                             // Queue is empty.
                             // Use the current number of instances as the index,
@@ -109,14 +110,8 @@ namespace yli::memory
                         else [[likely]]
                         {
                             // Queue is not empty.
-                            // Use the highest free index as the index.
-                            slot_i = this->free_slot_id_queue.at(this->free_slot_id_queue_start_i);
-
-                            // Advance to the next index in a barrel buffer.
-                            this->free_slot_id_queue_start_i = (this->free_slot_id_queue_start_i + 1) % DataSize;
-
-                            // The front element of the queue was used.
-                            this->size_of_free_slot_id_queue--;
+                            // Pop a free index from queue.
+                            slot_i = this->free_slot_id_queue.pop();
                         }
 
                         T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
@@ -134,9 +129,8 @@ namespace yli::memory
                     T1* instance { &data[slot_i] };
                     instance->~T1();
 
-                    const uint32_t end_of_queue_i { (this->free_slot_id_queue_start_i + this->size_of_free_slot_id_queue) % DataSize };
-                    this->free_slot_id_queue.at(end_of_queue_i) = slot_i;
-                    this->size_of_free_slot_id_queue++;
+                    // Push the freed index to the queue.
+                    this->free_slot_id_queue.push(slot_i);
                 }
 
                 uint32_t get_storage_id() const
@@ -151,11 +145,9 @@ namespace yli::memory
 
             private:
                 alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
-                std::array<uint32_t, DataSize> free_slot_id_queue {};
+                yli::data::Queue<DataSize> free_slot_id_queue;
                 const uint32_t storage_i;
                 uint32_t number_of_instances        { 0 };
-                uint32_t free_slot_id_queue_start_i { 0 };
-                uint32_t size_of_free_slot_id_queue { 0 };
         };
 }
 
