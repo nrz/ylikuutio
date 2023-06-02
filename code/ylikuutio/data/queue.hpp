@@ -83,6 +83,11 @@ namespace yli::data
                     return this->next_tail;
                 }
 
+                const std::array<uint32_t, QueueMaxSize>& data() const
+                {
+                    return this->queue;
+                }
+
             private:
                 std::array<uint32_t, QueueMaxSize> queue {};
                 uint32_t head       { 0 };

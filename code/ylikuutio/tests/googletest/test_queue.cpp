@@ -44,6 +44,7 @@ TEST(pushing_to_empty_queue_must_work_appropriately, queue_of_size_1)
     ASSERT_EQ(queue.max_size(), 1);
     ASSERT_EQ(queue.get_head(), 0);
     ASSERT_EQ(queue.get_next_tail(), 0); // Queue full.
+    ASSERT_EQ(queue.data().at(0), 0xdeadbeef);
 }
 
 TEST(pushing_to_empty_queue_must_work_appropriately, queue_of_size_2)
@@ -54,6 +55,7 @@ TEST(pushing_to_empty_queue_must_work_appropriately, queue_of_size_2)
     ASSERT_EQ(queue.max_size(), 2);
     ASSERT_EQ(queue.get_head(), 0);
     ASSERT_EQ(queue.get_next_tail(), 1);
+    ASSERT_EQ(queue.data().at(0), 0xdeadbeef);
 }
 
 TEST(pushing_to_empty_queue_must_work_appropriately, queue_of_size_3)
@@ -64,6 +66,33 @@ TEST(pushing_to_empty_queue_must_work_appropriately, queue_of_size_3)
     ASSERT_EQ(queue.max_size(), 3);
     ASSERT_EQ(queue.get_head(), 0);
     ASSERT_EQ(queue.get_next_tail(), 1);
+    ASSERT_EQ(queue.data().at(0), 0xdeadbeef);
+}
+
+TEST(pushing_twice_to_empty_queue_must_work_appropriately, queue_of_size_2)
+{
+    yli::data::Queue<2> queue;
+    queue.push(0xdeadbeef);
+    queue.push(0xbadf00d);
+    ASSERT_EQ(queue.size(), 2);
+    ASSERT_EQ(queue.max_size(), 2);
+    ASSERT_EQ(queue.get_head(), 0);
+    ASSERT_EQ(queue.get_next_tail(), 0); // Queue full.
+    ASSERT_EQ(queue.data().at(0), 0xdeadbeef);
+    ASSERT_EQ(queue.data().at(1), 0xbadf00d);
+}
+
+TEST(pushing_twice_to_empty_queue_must_work_appropriately, queue_of_size_3)
+{
+    yli::data::Queue<3> queue;
+    queue.push(0xdeadbeef);
+    queue.push(0xbadf00d);
+    ASSERT_EQ(queue.size(), 2);
+    ASSERT_EQ(queue.max_size(), 3);
+    ASSERT_EQ(queue.get_head(), 0);
+    ASSERT_EQ(queue.get_next_tail(), 2);
+    ASSERT_EQ(queue.data().at(0), 0xdeadbeef);
+    ASSERT_EQ(queue.data().at(1), 0xbadf00d);
 }
 
 TEST(popping_after_pushing_once_must_give_the_pushed_value, queue_of_size_1)
