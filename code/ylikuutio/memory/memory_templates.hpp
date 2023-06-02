@@ -24,6 +24,7 @@
 #include <iterator>  // std::back_inserter
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
+#include <vector>    // std::vector
 
 namespace yli::memory
 {
