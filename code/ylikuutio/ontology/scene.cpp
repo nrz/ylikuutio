@@ -163,7 +163,7 @@ namespace yli::ontology
         for (std::size_t brain_i = 0; brain_i < this->parent_of_brains.child_pointer_vector.size(); brain_i++)
         {
             yli::ontology::Brain* const brain = static_cast<yli::ontology::Brain*>(
-                    this->parent_of_brains.child_pointer_vector[brain_i]);
+                    this->parent_of_brains.child_pointer_vector.at(brain_i));
 
             if (brain != nullptr)
             {

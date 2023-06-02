@@ -84,7 +84,7 @@ namespace yli::ontology
         for (std::size_t child_i = 0; child_i < this->parent_of_callback_objects.child_pointer_vector.size(); child_i++)
         {
             yli::ontology::CallbackObject* callback_object_pointer = static_cast<yli::ontology::CallbackObject*>(
-                    this->parent_of_callback_objects.child_pointer_vector[child_i]);
+                    this->parent_of_callback_objects.child_pointer_vector.at(child_i));
 
             if (callback_object_pointer != nullptr)
             {

@@ -43,7 +43,7 @@ namespace yli::hierarchy
                 return;
             }
 
-            child_pointer_vector[childID] = child_pointer;
+            child_pointer_vector.at(childID) = child_pointer;
 
             if (child_pointer == nullptr)
             {
@@ -97,7 +97,7 @@ namespace yli::hierarchy
                     continue;
                 }
 
-                if (child_pointer_vector[childID] == nullptr)
+                if (child_pointer_vector.at(childID) == nullptr)
                 {
                     // OK, child index does not exceed current child pointer vector and the index is free.
                     return childID;
@@ -200,7 +200,7 @@ namespace yli::hierarchy
         {
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
-                delete child_pointer_vector[child_i];
+                delete child_pointer_vector.at(child_i);
             }
 
             number_of_children = 0; // no children any more.

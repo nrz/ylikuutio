@@ -172,7 +172,7 @@ namespace yli::ontology
             biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
             biont_struct.original_scale_vector  = this->original_scale_vector;
             biont_struct.cartesian_coordinates  = this->location;
-            biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector[biontID] : true);
+            biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector.at(biontID) : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 

@@ -547,7 +547,7 @@ namespace yli::ontology
 
                 for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
                 {
-                    std::copy(parameter_vector[i].begin(), parameter_vector[i].end(), std::back_inserter(console.current_input));
+                    std::copy(parameter_vector.at(i).begin(), parameter_vector.at(i).end(), std::back_inserter(console.current_input));
                     console.move_cursor_to_end_of_line();
                     console.current_input.emplace_back(' ');
                 }

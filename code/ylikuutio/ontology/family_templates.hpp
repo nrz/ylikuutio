@@ -192,7 +192,7 @@ namespace yli::ontology
 
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
-                T1 child_pointer = static_cast<T1>(child_pointer_vector[child_i]);
+                T1 child_pointer = static_cast<T1>(child_pointer_vector.at(child_i));
 
                 if (child_pointer != nullptr)
                 {

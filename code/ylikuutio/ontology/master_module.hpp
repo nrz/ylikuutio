@@ -77,7 +77,7 @@ namespace yli::ontology
 
                 for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
                 {
-                    yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector[apprentice_i];
+                    yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
 
                     if (apprentice_module != nullptr)
                     {

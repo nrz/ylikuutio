@@ -367,7 +367,7 @@ namespace yli::ontology
         }
 
         return static_cast<yli::ontology::SymbiontMaterial*>(
-                this->parent_of_symbiont_materials.child_pointer_vector[symbiont_material_i]);
+                this->parent_of_symbiont_materials.child_pointer_vector.at(symbiont_material_i));
     }
 
     yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
@@ -377,53 +377,53 @@ namespace yli::ontology
             return nullptr;
         }
 
-        return this->biontID_symbiont_species_vector[biontID];
+        return this->biontID_symbiont_species_vector.at(biontID);
     }
 
     GLint Symbiosis::get_vertex_position_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_vertex_position_modelspace_id();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_position_modelspace_id();
     }
 
     GLint Symbiosis::get_vertex_uv_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_vertex_uv_id();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_uv_id();
     }
 
     GLint Symbiosis::get_vertex_normal_modelspace_id(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_vertex_normal_modelspace_id();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_normal_modelspace_id();
     }
 
     uint32_t Symbiosis::get_vertexbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_vertexbuffer();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertexbuffer();
     }
 
     uint32_t Symbiosis::get_uvbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_uvbuffer();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_uvbuffer();
     }
 
     uint32_t Symbiosis::get_normalbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_normalbuffer();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_normalbuffer();
     }
 
     uint32_t Symbiosis::get_elementbuffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_elementbuffer();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_elementbuffer();
     }
 
     std::vector<uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_indices();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_indices();
         // return this->indices.at(biontID);
     }
 
     std::size_t Symbiosis::get_indices_size(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector[biontID]->mesh.get_indices_size();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_indices_size();
         // return this->indices.at(biontID).size();
     }
 
