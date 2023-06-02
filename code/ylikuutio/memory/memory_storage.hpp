@@ -131,6 +131,7 @@ namespace yli::memory
 
                     // Push the freed index to the queue.
                     this->free_slot_id_queue.push(slot_i);
+                    this->number_of_instances--;
                 }
 
                 uint32_t get_storage_id() const
