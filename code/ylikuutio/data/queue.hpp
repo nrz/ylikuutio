@@ -29,6 +29,22 @@ namespace yli::data
         class Queue
         {
             public:
+                void push(uint32_t value)
+                {
+                    if (this->queue_size >= QueueMaxSize)
+                    {
+                        throw std::runtime_error("ERROR: `yli::data::Queue::push`: queue is full, no space to push!");
+                    }
+
+                    this->queue.at(this->next_tail++) = value;
+                    this->queue_size++;
+
+                    if (this->next_tail == QueueMaxSize)
+                    {
+                        this->next_tail = 0;
+                    }
+                }
+
                 uint32_t pop()
                 {
                     if (this->size() == 0)
@@ -45,22 +61,6 @@ namespace yli::data
 
                     this->queue_size--;
                     return value;
-                }
-
-                void push(uint32_t value)
-                {
-                    if (this->queue_size >= QueueMaxSize)
-                    {
-                        throw std::runtime_error("ERROR: `yli::data::Queue::push`: queue is full, no space to push!");
-                    }
-
-                    this->queue.at(this->next_tail++) = value;
-                    this->queue_size++;
-
-                    if (this->next_tail == QueueMaxSize)
-                    {
-                        this->next_tail = 0;
-                    }
                 }
 
                 uint32_t size() const
