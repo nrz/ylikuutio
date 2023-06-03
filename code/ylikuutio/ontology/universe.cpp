@@ -236,6 +236,14 @@ namespace yli::ontology
         // destructor.
 
         SDL_Quit();
+
+        this->unbind_entity(this->entityID);
+
+        if (!this->global_name.empty())
+        {
+            // OK, this `Universe` had a global name, so it's global name shall be erased.
+            this->universe.erase_entity(this->global_name);
+        }
     }
 
     void Universe::do_physics()

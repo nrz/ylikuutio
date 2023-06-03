@@ -86,7 +86,8 @@ namespace yli::ontology
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::VARIABLE),
                 ""), // Do not index `parent_of_variables`, index only the variables.
-        universe { universe }
+        universe { universe },
+        is_universe { entity_struct.is_universe }
     {
         // constructor.
 
@@ -110,13 +111,15 @@ namespace yli::ontology
     {
         // destructor.
 
-        // FIXME `Entity` destructor must not access derived class `Universe`!
-        this->universe.unbind_entity(this->entityID);
-
-        if (!this->global_name.empty())
+        if (!this-is_universe)
         {
-            // OK, this `Entity` had a global name, so it's global name shall be erased.
-            this->universe.erase_entity(this->global_name);
+            this->universe.unbind_entity(this->entityID);
+
+            if (!this->global_name.empty())
+            {
+                // OK, this `Entity` had a global name, so it's global name shall be erased.
+                this->universe.erase_entity(this->global_name);
+            }
         }
 
         // Local names must be erased in the destructors

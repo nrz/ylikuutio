@@ -179,6 +179,7 @@ namespace yli::ontology
             std::string local_name;  // local name of this `Entity`.
 
             bool can_be_erased { false };
+            const bool is_universe;
 
         private:
             virtual std::size_t get_number_of_children() const = 0;
