@@ -94,7 +94,7 @@ namespace yli::ontology
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
-        if (!entity_struct.is_universe && !entity_struct.is_variable)
+        if (!this->is_universe && !entity_struct.is_variable)
         {
             this->should_be_rendered = !this->universe.get_is_headless();
 
