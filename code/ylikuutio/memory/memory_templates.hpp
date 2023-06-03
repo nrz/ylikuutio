@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <algorithm> // std::copy
+#include <array>     // std::array
 #include <cstddef>   // std::size_t
 #include <iterator>  // std::back_inserter
 #include <stdexcept> // std::runtime_error
