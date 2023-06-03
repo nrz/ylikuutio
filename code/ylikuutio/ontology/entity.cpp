@@ -53,22 +53,6 @@ namespace yli::ontology
         return this->application;
     }
 
-    void Entity::bind_variable(yli::ontology::Variable* const variable) noexcept
-    {
-        if (variable != nullptr)
-        {
-            this->parent_of_variables.bind_child(variable);
-
-            // `variable` with a local name needs to be added to `entity_map` as well.
-            this->add_entity(variable->get_local_name(), variable);
-        }
-    }
-
-    void Entity::unbind_variable(const std::size_t childID) noexcept
-    {
-        this->parent_of_variables.unbind_child(childID);
-    }
-
     void Entity::bind_to_universe() noexcept
     {
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.

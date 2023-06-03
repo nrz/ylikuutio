@@ -59,10 +59,6 @@ namespace yli::ontology
 
             yli::core::Application& get_application() const;
 
-            void bind_variable(yli::ontology::Variable* const variable) noexcept;
-
-            void unbind_variable(const std::size_t childID) noexcept;
-
             void bind_to_universe() noexcept;
 
         protected:

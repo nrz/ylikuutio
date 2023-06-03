@@ -38,29 +38,13 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    void Variable::bind_to_parent() noexcept
-    {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Entity* const entity = this->parent;
-
-        if (entity == nullptr)
-        {
-            std::cerr << "ERROR: `Variable::bind_to_parent`: `entity` is `nullptr`!\n";
-            return;
-        }
-
-        // Get `childID` from `Entity` and set pointer to this `Variable`.
-        entity->bind_variable(this);
-    }
-
     Variable::Variable(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::VariableStruct& variable_struct,
             const yli::data::AnyValue& any_value)
         : Entity(application, universe, variable_struct),
+        child_of_entity(variable_struct.parent != nullptr ? &variable_struct.parent->parent_of_variables : nullptr, this),
         parent            { variable_struct.parent },
         variable_value    { any_value },
         activate_callback { variable_struct.activate_callback },
@@ -68,29 +52,14 @@ namespace yli::ontology
     {
         // constructor (to be called from `Entity::create_variable`).
 
-        // Get `childID` from `Entity` and set pointer to this `Variable`.
-        this->bind_to_parent();
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Variable*";
         this->can_be_erased = true;
     }
 
-    Variable::~Variable()
-    {
-        // destructor.
-
-        if (this->parent == nullptr)
-        {
-            return;
-        }
-
-        this->parent->unbind_variable(this->childID);
-    }
-
     yli::ontology::Entity* Variable::get_parent() const
     {
-        return this->parent;
+        return this->child_of_entity.get_parent();
     }
 
     yli::ontology::Scene* Variable::get_scene() const

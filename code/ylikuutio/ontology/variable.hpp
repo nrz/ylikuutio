@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_VARIABLE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_VARIABLE_HPP_INCLUDED
 
+#include "child_module.hpp"
 #include "entity.hpp"
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
@@ -65,7 +66,7 @@ namespace yli::ontology
                     const yli::ontology::VariableStruct& variable_struct,
                     const yli::data::AnyValue& any_value);
 
-            ~Variable();
+            ~Variable() = default;
 
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
@@ -167,9 +168,9 @@ namespace yli::ontology
 
             // Public callbacks and here.
 
-        private:
-            void bind_to_parent() noexcept;
+            yli::ontology::ChildModule child_of_entity;
 
+        private:
             void activate() override;
 
             yli::ontology::Entity* parent;
