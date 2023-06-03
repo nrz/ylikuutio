@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Do not access derived class `Universe` instance in `Entity` destructor.
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix compiling on Visual Studio.
@@ -341,3 +340,4 @@ Ready:
 [x] Refactor `InputMaster` into `yli::ontology::ParentOfInputModesModule` and take it into use.
 [x] Add `yli::core::Application&` as the first parameter of `yli::ontology::Entity` and all its derivative classes.
 [x] Create `MockApplication` class to be used in tests.
+[x] Do not access derived class `Universe` instance in `Entity` destructor when destructing `Universe`.
