@@ -157,7 +157,11 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const
     {
-        yli::ontology::Entity* variable_entity = new yli::ontology::Variable(this->application, this->universe, variable_struct, any_value);
+        yli::ontology::Entity* variable_entity = new yli::ontology::Variable(
+                this->application,
+                this->universe,
+                variable_struct,
+                any_value);
 
         if (&this->universe == variable_struct.parent)
         {
@@ -254,7 +258,12 @@ namespace yli::ontology
         // Create the default `Camera`.
         yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = scene;
-        new yli::ontology::Camera(this->application, this->universe, camera_struct, &scene->parent_of_default_camera, nullptr); // Create the default `Camera`.
+        new yli::ontology::Camera(
+                this->application,
+                this->universe,
+                camera_struct,
+                &scene->parent_of_default_camera,
+                nullptr); // Create the default `Camera`.
 
         return scene_entity;
     }
@@ -370,7 +379,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const
     {
-        yli::ontology::Entity* vector_font_entity = new yli::ontology::VectorFont(this->application, this->universe, vector_font_struct);
+        yli::ontology::Entity* vector_font_entity = new yli::ontology::VectorFont(
+                this->application,
+                this->universe,
+                vector_font_struct);
         vector_font_entity->set_global_name(vector_font_struct.global_name);
         vector_font_entity->set_local_name(vector_font_struct.local_name);
         return vector_font_entity;
@@ -562,7 +574,10 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
     {
-        yli::ontology::Entity* compute_task_entity = new yli::ontology::ComputeTask(this->application, this->universe, compute_task_struct);
+        yli::ontology::Entity* compute_task_entity = new yli::ontology::ComputeTask(
+                this->application,
+                this->universe,
+                compute_task_struct);
         compute_task_entity->set_global_name(compute_task_struct.global_name);
         compute_task_entity->set_local_name(compute_task_struct.local_name);
         return compute_task_entity;
