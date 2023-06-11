@@ -33,7 +33,6 @@
 // Include standard headers
 #include <cmath>   // NAN, std::isnan, std::pow
 #include <cstddef> // std::size_t
-#include <memory>  // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
 #include <string>  // std::string
 
 // How `yli::ontology::Scene` class works:
@@ -107,7 +106,6 @@ namespace yli::ontology
             void set_active_camera(yli::ontology::Camera* camera);
 
             // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
-            std::shared_ptr<yli::data::AnyValue> get_variable(const std::string& key) const;
             float get_turbo_factor() const;
             void set_turbo_factor(const float turbo_factor);
             float get_twin_turbo_factor() const;
