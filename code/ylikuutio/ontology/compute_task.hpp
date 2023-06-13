@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "apprentice_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -59,8 +60,8 @@ namespace yli::core
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Universe;
-    class CallbackEngine;
     class Scene;
     struct ComputeTaskStruct;
 
@@ -71,7 +72,8 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ComputeTaskStruct& compute_task_struct,
-                    yli::ontology::GenericParentModule* const pipeline_parent_module);
+                    yli::ontology::GenericParentModule* const pipeline_parent_module,
+                    yli::ontology::GenericMasterModule* const end_condition_callback_engine_master);
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
@@ -94,6 +96,9 @@ namespace yli::ontology
             // This method renders this `ComputeTask`, that is, computes this task.
             void render(const yli::ontology::Scene* const);
 
+            // End iterating when end condition callback engine returns `true`.
+            yli::ontology::ApprenticeModule apprentice_of_end_condition_callback_engine;
+
         private:
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
@@ -101,9 +106,6 @@ namespace yli::ontology
 
             yli::data::AnyValue left_filler_vector_any_value;
             yli::data::AnyValue right_filler_vector_any_value;
-
-            // End iterating when `end_condition_callback_engine` returns `true`.
-            std::shared_ptr<yli::ontology::CallbackEngine> end_condition_callback_engine;
 
             std::shared_ptr<std::vector<uint8_t>> result_vector { nullptr };
 

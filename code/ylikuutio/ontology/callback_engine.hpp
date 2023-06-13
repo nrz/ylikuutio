@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -91,6 +92,7 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_callback_objects;
+            yli::ontology::GenericMasterModule master_of_compute_tasks;
 
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;

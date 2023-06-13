@@ -25,7 +25,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -40,9 +39,9 @@ namespace yli::ontology
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
         yli::ontology::Pipeline* parent { nullptr }; // Pointer to the `Pipeline`.
+        yli::ontology::CallbackEngine* end_condition_callback_engine { nullptr };
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
-        std::shared_ptr<yli::ontology::CallbackEngine> end_condition_callback_engine { nullptr };
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
         uint32_t texture_width         { 0 };

@@ -48,7 +48,8 @@ namespace yli::ontology
                 this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::CALLBACK_OBJECT),
-                "callback_objects")
+                "callback_objects"),
+        master_of_compute_tasks(this, &this->registry, "compute_tasks")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";
