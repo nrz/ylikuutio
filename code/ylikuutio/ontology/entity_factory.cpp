@@ -368,9 +368,9 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 holobiont_struct,
-                (holobiont_struct.parent == nullptr ? nullptr : &holobiont_struct.parent->parent_of_holobionts),
-                (holobiont_struct.symbiosis == nullptr ? nullptr : &holobiont_struct.symbiosis->master_of_holobionts),
-                (holobiont_struct.brain == nullptr ? nullptr : holobiont_struct.brain->get_generic_master_module()));
+                (holobiont_struct.parent != nullptr ? &holobiont_struct.parent->parent_of_holobionts : nullptr),
+                (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
+                (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
 
         holobiont_entity->set_global_name(holobiont_struct.global_name);
         holobiont_entity->set_local_name(holobiont_struct.local_name);
@@ -394,7 +394,7 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 text_struct,
-                (text_struct.parent == nullptr ? nullptr : &text_struct.parent->parent_of_text_2ds));
+                (text_struct.parent != nullptr ? &text_struct.parent->parent_of_text_2ds : nullptr));
 
         text2d_entity->set_global_name(text_struct.global_name);
         text2d_entity->set_local_name(text_struct.local_name);
@@ -407,8 +407,8 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 text_3d_struct,
-                (text_3d_struct.parent == nullptr ? nullptr : &text_3d_struct.parent->parent_of_text_3ds),
-                (text_3d_struct.brain == nullptr ? nullptr : text_3d_struct.brain->get_generic_master_module()));
+                (text_3d_struct.parent != nullptr ? &text_3d_struct.parent->parent_of_text_3ds : nullptr),
+                (text_3d_struct.brain != nullptr ? text_3d_struct.brain->get_generic_master_module() : nullptr));
 
         text3d_entity->set_global_name(text_3d_struct.global_name);
         text3d_entity->set_local_name(text_3d_struct.local_name);
@@ -479,7 +479,7 @@ namespace yli::ontology
                 this->universe,
                 console_struct,
                 &this->universe.parent_of_consoles,
-                (console_struct.font_2d == nullptr ? nullptr : &console_struct.font_2d->master_of_consoles));
+                (console_struct.font_2d != nullptr ? &console_struct.font_2d->master_of_consoles : nullptr));
 
         if (!console_struct.global_name.empty() && console_struct.local_name.empty())
         {
@@ -551,7 +551,7 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 lisp_function_struct,
-                (lisp_function_struct.parent == nullptr ? nullptr : &lisp_function_struct.parent->parent_of_lisp_functions));
+                (lisp_function_struct.parent != nullptr ? &lisp_function_struct.parent->parent_of_lisp_functions : nullptr));
 
         lisp_function_entity->set_global_name(lisp_function_struct.global_name);
         lisp_function_entity->set_local_name(lisp_function_struct.local_name);
@@ -564,8 +564,8 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 camera_struct,
-                (camera_struct.scene == nullptr ? nullptr : &camera_struct.scene->parent_of_cameras),
-                (camera_struct.brain == nullptr ? nullptr : camera_struct.brain->get_generic_master_module()));
+                (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_cameras : nullptr),
+                (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
 
         camera_entity->set_global_name(camera_struct.global_name);
         camera_entity->set_local_name(camera_struct.local_name);
@@ -589,7 +589,7 @@ namespace yli::ontology
                 this->application,
                 this->universe,
                 brain_struct,
-                (brain_struct.parent == nullptr ? nullptr : &brain_struct.parent->parent_of_brains));
+                (brain_struct.parent != nullptr ? &brain_struct.parent->parent_of_brains : nullptr));
 
         brain_entity->set_global_name(brain_struct.global_name);
         brain_entity->set_local_name(brain_struct.local_name);
