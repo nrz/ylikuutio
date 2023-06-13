@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_COMPUTE_TASK_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -57,10 +58,10 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
     class CallbackEngine;
     class Scene;
-    class Pipeline;
     struct ComputeTaskStruct;
 
     class ComputeTask final : public yli::ontology::Entity
@@ -69,7 +70,8 @@ namespace yli::ontology
             ComputeTask(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ComputeTaskStruct& compute_task_struct);
+                    const yli::ontology::ComputeTaskStruct& compute_task_struct,
+                    yli::ontology::GenericParentModule* const pipeline_parent_module);
 
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
@@ -79,8 +81,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
-        private:
-            void bind_to_parent() noexcept;
+            yli::ontology::ChildModule child_of_pipeline;
 
         public:
             yli::ontology::Scene* get_scene() const override;
@@ -97,8 +98,6 @@ namespace yli::ontology
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
-
-            yli::ontology::Pipeline* parent; // pointer to the `Pipeline`.
 
             yli::data::AnyValue left_filler_vector_any_value;
             yli::data::AnyValue right_filler_vector_any_value;

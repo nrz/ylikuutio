@@ -49,7 +49,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
     compute_task_struct.parent = pipeline;
-    yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(application, *universe, compute_task_struct);
+    yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(application, *universe, compute_task_struct, &pipeline->parent_of_compute_tasks);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
@@ -93,7 +93,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
     compute_task_struct.parent = pipeline;
-    yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(application, *universe, compute_task_struct);
+    yli::ontology::ComputeTask* const compute_task = new yli::ontology::ComputeTask(application, *universe, compute_task_struct, &pipeline->parent_of_compute_tasks);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1); // `ecosystem`.

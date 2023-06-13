@@ -52,35 +52,20 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Scene;
-
-    void ComputeTask::bind_to_parent() noexcept
-    {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Pipeline* const pipeline = this->parent;
-
-        if (pipeline == nullptr)
-        {
-            std::cerr << "ERROR: `ComputeTask::bind_to_parent`: `pipeline` is `nullptr`!\n";
-            return;
-        }
-
-        // Get `childID` from `Pipeline` and set pointer to this `ComputeTask`.
-        pipeline->parent_of_compute_tasks.bind_child(this);
-    }
 
     ComputeTask::ComputeTask(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::ComputeTaskStruct& compute_task_struct)
+            const yli::ontology::ComputeTaskStruct& compute_task_struct,
+            yli::ontology::GenericParentModule* const pipeline_parent_module)
         : Entity(application, universe, compute_task_struct),
+        child_of_pipeline(pipeline_parent_module, this),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
         output_filename                  { compute_task_struct.output_filename },
-        parent                           { compute_task_struct.parent },
         left_filler_vector_any_value     { compute_task_struct.left_filler_vector_any_value },
         right_filler_vector_any_value    { compute_task_struct.right_filler_vector_any_value },
         end_condition_callback_engine    { compute_task_struct.end_condition_callback_engine },
@@ -98,9 +83,6 @@ namespace yli::ontology
     {
         // constructor.
 
-        // Get `childID` from `Pipeline` and set pointer to this `ComputeTask`.
-        this->bind_to_parent();
-
         // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
         // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
         // then `ComputeTask` could and should support software rendering as well.
@@ -108,17 +90,19 @@ namespace yli::ontology
             this->universe.get_is_opengl_in_use() ||
             this->universe.get_is_vulkan_in_use();
 
-        if (should_load_texture && this->universe.get_is_opengl_in_use())
+        yli::ontology::Pipeline* const parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
+
+        if (parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
         {
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(this->parent->get_program_id(), "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(this->parent->get_program_id(), "vertexUV");
+            this->vertex_position_modelspace_id = glGetAttribLocation(parent->get_program_id(), "vertex_position_modelspace");
+            this->vertex_uv_id = glGetAttribLocation(parent->get_program_id(), "vertexUV");
 
-            glUseProgram(this->parent->get_program_id());
+            glUseProgram(parent->get_program_id());
         }
 
         // Load the source texture, just like in `yli::ontology::Material` constructor.
-        if (should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
+        if (parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
             uint32_t n_color_channels = 0;
 
@@ -139,7 +123,7 @@ namespace yli::ontology
                 this->is_texture_loaded = true;
             }
         }
-        else if (should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
+        else if (parent != nullptr && should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
         {
             if (!yli::load::load_csv_texture(
                         this->texture_filename,
@@ -166,23 +150,23 @@ namespace yli::ontology
             std::cerr << "texture file format: " << this->texture_file_format << "\n";
         }
 
-        if (this->is_texture_loaded && this->universe.get_is_opengl_in_use())
+        if (parent != nullptr && this->is_texture_loaded && this->universe.get_is_opengl_in_use())
         {
             // Get a handle for our "texture_sampler" uniform.
-            this->opengl_texture_id = glGetUniformLocation(this->parent->get_program_id(), "texture_sampler");
+            this->opengl_texture_id = glGetUniformLocation(parent->get_program_id(), "texture_sampler");
 
             // Initialize uniform window width.
             // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-            this->screen_width_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_width");
+            this->screen_width_uniform_id = glGetUniformLocation(parent->get_program_id(), "screen_width");
             yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
 
             // Initialize uniform window height.
             // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-            this->screen_height_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "screen_height");
+            this->screen_height_uniform_id = glGetUniformLocation(parent->get_program_id(), "screen_height");
             yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
             // Initialize uniform iteration index.
-            this->iteration_i_uniform_id = glGetUniformLocation(this->parent->get_program_id(), "iteration_i");
+            this->iteration_i_uniform_id = glGetUniformLocation(parent->get_program_id(), "iteration_i");
             yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
             // Create model (a square which consists of 2 triangles).
@@ -232,7 +216,7 @@ namespace yli::ontology
         // destructor.
         //
         // Requirements:
-        // `this->parent` must not be `nullptr`.
+        // `this->get_parent()` must not be `nullptr`.
 
         if (this->is_texture_loaded)
         {
@@ -248,12 +232,14 @@ namespace yli::ontology
             glDeleteFramebuffers(1, &this->framebuffer);
         }
 
-        if (this->parent == nullptr)
+        yli::ontology::Pipeline* const parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
+
+        if (parent == nullptr)
         {
             return;
         }
 
-        this->parent->parent_of_compute_tasks.unbind_child(this->childID);
+        parent->parent_of_compute_tasks.unbind_child(this->childID);
     }
 
     void ComputeTask::render(const yli::ontology::Scene* const)
@@ -465,7 +451,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* ComputeTask::get_parent() const
     {
-        return this->parent;
+        return this->child_of_pipeline.get_parent();
     }
 
     yli::ontology::Scene* ComputeTask::get_scene() const

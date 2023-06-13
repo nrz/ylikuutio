@@ -577,7 +577,8 @@ namespace yli::ontology
         yli::ontology::Entity* compute_task_entity = new yli::ontology::ComputeTask(
                 this->application,
                 this->universe,
-                compute_task_struct);
+                compute_task_struct,
+                compute_task_struct.parent != nullptr ? &compute_task_struct.parent->parent_of_compute_tasks : nullptr);
         compute_task_entity->set_global_name(compute_task_struct.global_name);
         compute_task_entity->set_local_name(compute_task_struct.local_name);
         return compute_task_entity;
