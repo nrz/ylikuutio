@@ -31,7 +31,6 @@ typedef unsigned char u8;
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
