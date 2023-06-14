@@ -43,26 +43,11 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Pipeline;
     class Text3D;
     class Glyph;
-
-    void VectorFont::bind_to_parent() noexcept
-    {
-        // Requirements:
-        // `this->parent` must not be `nullptr`.
-        yli::ontology::Material* const material = this->parent;
-
-        if (material == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::bind_to_parent`: `material` is `nullptr`!\n";
-            return;
-        }
-
-        // Get `childID` from the `Material` and set pointer to this `VectorFont`.
-        material->parent_of_vector_fonts.bind_child(this);
-    }
 
     std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(
             yli::ontology::VectorFont& vector_font,
@@ -71,7 +56,7 @@ namespace yli::ontology
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        yli::ontology::Material* const material = vector_font.parent;
+        const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(vector_font.get_parent());
 
         if (material == nullptr)
         {
@@ -85,12 +70,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        // Unbind from the old parent `Material`.
-        material->parent_of_vector_fonts.unbind_child(vector_font.childID);
-
-        // Get `childID` from `Material` and set pointer to this `VectorFont`.
-        vector_font.parent = &new_parent;
-        vector_font.parent->parent_of_vector_fonts.bind_child(&vector_font);
+        vector_font.child_of_material.unbind_and_bind_to_new_parent(&new_parent.parent_of_vector_fonts);
         return std::nullopt;
     }
 
@@ -110,8 +90,10 @@ namespace yli::ontology
     VectorFont::VectorFont(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::VectorFontStruct& vector_font_struct)
+            const yli::ontology::VectorFontStruct& vector_font_struct,
+            yli::ontology::GenericParentModule* const material_parent)
         : Entity(application, universe, vector_font_struct),
+        child_of_material(material_parent, this),
         parent_of_glyphs(
                 this,
                 &this->registry,
@@ -124,13 +106,9 @@ namespace yli::ontology
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },
         font_filename         { vector_font_struct.font_filename },
-        vertex_scaling_factor { vector_font_struct.vertex_scaling_factor },
-        parent                { vector_font_struct.parent }
+        vertex_scaling_factor { vector_font_struct.vertex_scaling_factor }
     {
         // constructor.
-
-        // Get `childID` from the `Material` and set pointer to this `VectorFont`.
-        this->bind_to_parent();
 
         this->can_be_erased         = true;
         bool font_loading_result    = false;
@@ -154,7 +132,7 @@ namespace yli::ontology
         // Requirements for further actions:
         // `this->parent` must not be `nullptr`.
 
-        yli::ontology::Material* const material = this->parent;
+        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
 
         if (material == nullptr)
         {
@@ -219,27 +197,6 @@ namespace yli::ontology
 
     }
 
-    VectorFont::~VectorFont()
-    {
-        // destructor.
-
-        // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-
-        // Requirements for further actions:
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Material* const material = this->parent;
-
-        if (material == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::~VectorFont`: `material` is `nullptr`!\n";
-            return;
-        }
-
-        // Set pointer to this `VectorFont` to `nullptr`.
-        material->parent_of_vector_fonts.unbind_child(this->childID);
-    }
-
     void VectorFont::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
@@ -270,12 +227,12 @@ namespace yli::ontology
 
     yli::ontology::Entity* VectorFont::get_parent() const
     {
-        return this->parent;
+        return this->child_of_material.get_parent();
     }
 
     yli::ontology::Scene* VectorFont::get_scene() const
     {
-        yli::ontology::Material* const parent = this->parent;
+        yli::ontology::Entity* const parent = this->get_parent();
 
         if (parent != nullptr)
         {

@@ -60,7 +60,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
@@ -119,7 +119,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(universe->get_number_of_non_variable_children(), 1); // `scene`. 

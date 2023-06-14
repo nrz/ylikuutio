@@ -664,7 +664,7 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
     yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     yli::ontology::VectorFontStruct vector_font_struct;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, nullptr);
 
     yli::data::AnyValue vector_font_any_value = yli::data::AnyValue(*vector_font);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data));

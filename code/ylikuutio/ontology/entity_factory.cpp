@@ -382,7 +382,8 @@ namespace yli::ontology
         yli::ontology::Entity* vector_font_entity = new yli::ontology::VectorFont(
                 this->application,
                 this->universe,
-                vector_font_struct);
+                vector_font_struct,
+                (vector_font_struct.parent != nullptr ? &vector_font_struct.parent->parent_of_vector_fonts : nullptr));
         vector_font_entity->set_global_name(vector_font_struct.global_name);
         vector_font_entity->set_local_name(vector_font_struct.local_name);
         return vector_font_entity;

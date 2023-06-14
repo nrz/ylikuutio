@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -62,10 +63,10 @@ namespace yli::ontology
             VectorFont(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::VectorFontStruct& vector_font_struct);
+                    const yli::ontology::VectorFontStruct& vector_font_struct,
+                    yli::ontology::GenericParentModule* const material_parent);
 
-            // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-            ~VectorFont();
+            ~VectorFont() = default;
 
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
@@ -78,13 +79,9 @@ namespace yli::ontology
 
             // The rest fields are created in the constructor.
 
-            yli::ontology::Material* parent; // Pointer to `Material`.
-
+            yli::ontology::ChildModule child_of_material;
             yli::ontology::GenericParentModule parent_of_glyphs;
             yli::ontology::GenericParentModule parent_of_text_3ds;
-
-        private:
-            void bind_to_parent() noexcept;
 
         public:
             yli::ontology::Scene* get_scene() const override;

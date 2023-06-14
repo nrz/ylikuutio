@@ -63,7 +63,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
 
     yli::ontology::Text3DStruct text_3d_struct;
     text_3d_struct.parent = vector_font;
@@ -128,7 +128,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct);
+    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
 
     yli::ontology::Text3DStruct text_3d_struct;
     text_3d_struct.parent = vector_font;
