@@ -25,7 +25,7 @@
 #include <iomanip>  // std::setfill, std::setprecision, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory>   // std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 

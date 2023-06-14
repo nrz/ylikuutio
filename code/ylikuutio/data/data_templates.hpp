@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory>   // std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 

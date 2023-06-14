@@ -19,7 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_GET_CONTENT_CALLBACK_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 

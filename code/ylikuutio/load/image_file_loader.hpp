@@ -21,7 +21,7 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 
 // Include standard headers
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector

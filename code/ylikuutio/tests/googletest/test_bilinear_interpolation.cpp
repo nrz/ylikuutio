@@ -20,7 +20,7 @@
 #include "code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp"
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <memory> // std::shared_ptr
 #include <vector> // std::vector
 
 TEST(a_1x1_terrain_must_be_interpolated_bilinearly_to_1x1_appropriately, no_change)

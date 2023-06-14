@@ -40,7 +40,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_shared, std::make_unique, std::shared_ptr, std::unique_ptr
+#include <memory>        // std::make_unique, std::unique_ptr
 #include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.

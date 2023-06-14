@@ -19,7 +19,7 @@
 #define YLIKUUTIO_GRAPH_SHORTEST_PATHS_HPP_INCLUDED
 
 // Include standard headers
-#include <memory>  // std::make_shared, std::shared_ptr
+#include <memory>  // std::shared_ptr
 
 namespace yli::linear_algebra
 {

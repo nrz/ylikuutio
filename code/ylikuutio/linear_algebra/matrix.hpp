@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
+#include <memory>   // std::shared_ptr
 #include <vector>   // std::vector
 
 namespace yli::linear_algebra
