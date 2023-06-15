@@ -114,6 +114,19 @@ namespace yli::ontology
         return nullptr;
     }
 
+    std::string Registry::get_entity_name(const yli::ontology::Entity* const entity) const
+    {
+        for (auto& key_and_value : this->entity_map)
+        {
+            if (key_and_value.second == entity)
+            {
+                return key_and_value.first;
+            }
+        }
+
+        return "";
+    }
+
     std::string Registry::get_entity_names() const
     {
         std::string entity_names = "";
