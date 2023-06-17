@@ -21,7 +21,7 @@
 #include "constructible_module.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t
+#include <cstddef> // std::size_t
 
 namespace yli::memory
 {
@@ -35,8 +35,8 @@ namespace yli::memory
         public:
             virtual ~GenericMemoryAllocator() = default;
 
-            virtual uint32_t get_number_of_storages() const = 0;
-            virtual uint32_t get_number_of_instances() const = 0;
+            virtual std::size_t get_number_of_storages() const = 0;
+            virtual std::size_t get_number_of_instances() const = 0;
 
             virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) = 0;
     };

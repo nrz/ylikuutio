@@ -19,8 +19,8 @@
 #define YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t
 
 namespace yli::memory
 {
@@ -30,7 +30,7 @@ namespace yli::memory
         {
         }
 
-        ConstructibleModule(int datatype, const uint32_t storage_i, const uint32_t slot_i)
+        ConstructibleModule(int datatype, const std::size_t storage_i, const std::size_t slot_i)
             : datatype { datatype },
             storage_i { storage_i },
             slot_i { slot_i }
@@ -38,8 +38,8 @@ namespace yli::memory
         }
 
         int datatype       { 0 }; // Unknown type.
-        uint32_t storage_i { std::numeric_limits<uint32_t>::max() };
-        uint32_t slot_i    { std::numeric_limits<uint32_t>::max() };
+        std::size_t storage_i { std::numeric_limits<std::size_t>::max() };
+        std::size_t slot_i    { std::numeric_limits<std::size_t>::max() };
     };
 }
 

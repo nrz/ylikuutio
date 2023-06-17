@@ -25,25 +25,24 @@
 // Include standard headers
 #include <algorithm> // std::sort
 #include <array>     // std::array
-#include <cstddef>   // std::byte
+#include <cstddef>   // std::byte, std::size_t
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
-#include <stdint.h>  // uint32_t
 #include <utility>   // std::forward
 #include <vector>    // std::vector
 
 namespace yli::memory
 {
-    template<typename T1 = std::byte, uint32_t DataSize = 1>
+    template<typename T1 = std::byte, std::size_t DataSize = 1>
         class MemoryStorage
         {
             // `MemoryStorage` instance takes care of single memory storage.
 
             public:
-                explicit MemoryStorage(const uint32_t storage_i)
+                explicit MemoryStorage(const std::size_t storage_i)
                     : storage_i { storage_i }
                 {
-                    if (storage_i == std::numeric_limits<uint32_t>::max())
+                    if (storage_i == std::numeric_limits<std::size_t>::max())
                     {
                         throw std::runtime_error("ERROR: `MemoryStorage::MemoryStorage`: `storage_i` has invalid value!");
                     }
@@ -62,7 +61,7 @@ namespace yli::memory
                     //
                     // First, copy the data so that the head of the queue is at index 0.
 
-                    std::vector<uint32_t> copy_of_free_slot_id_queue = yli::memory::copy_circular_buffer_into_vector(
+                    std::vector<std::size_t> copy_of_free_slot_id_queue = yli::memory::copy_circular_buffer_into_vector(
                             this->free_slot_id_queue.data(),
                             this->free_slot_id_queue.get_head(),
                             this->free_slot_id_queue.size());
@@ -70,7 +69,7 @@ namespace yli::memory
                     std::sort(copy_of_free_slot_id_queue.begin(), copy_of_free_slot_id_queue.end());
 
                     for (
-                            uint32_t slot_i = 0, queue_copy_i = 0, count = 0;
+                            std::size_t slot_i = 0, queue_copy_i = 0, count = 0;
                             count < this->number_of_instances;
                             slot_i++)
                     {
@@ -99,7 +98,7 @@ namespace yli::memory
                             return nullptr;
                         }
 
-                        uint32_t slot_i;
+                        std::size_t slot_i;
 
                         if (this->free_slot_id_queue.size() == 0) [[unlikely]]
                         {
@@ -121,7 +120,7 @@ namespace yli::memory
                         return instance;
                     }
 
-                void destroy(const uint32_t slot_i)
+                void destroy(const std::size_t slot_i)
                 {
                     // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
                     // The caller must make sure that `slot_i` points to an existing instance.
@@ -134,12 +133,12 @@ namespace yli::memory
                     this->number_of_instances--;
                 }
 
-                uint32_t get_storage_id() const
+                std::size_t get_storage_id() const
                 {
                     return this->storage_i;
                 }
 
-                std::uint32_t get_number_of_instances() const
+                std::size_t get_number_of_instances() const
                 {
                     return this->number_of_instances;
                 }
@@ -147,8 +146,8 @@ namespace yli::memory
             private:
                 alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
                 yli::data::Queue<DataSize> free_slot_id_queue;
-                const uint32_t storage_i;
-                uint32_t number_of_instances        { 0 };
+                const std::size_t storage_i;
+                std::size_t number_of_instances { 0 };
         };
 }
 

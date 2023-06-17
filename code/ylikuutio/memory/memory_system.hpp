@@ -25,9 +25,9 @@
 #include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <map>           // std::map
 #include <stdexcept>     // std::runtime_error
-#include <stdint.h>      // uint32_t
 #include <sstream>       // std::stringstream
 #include <utility>       // std::forward
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -111,7 +111,7 @@ namespace yli::memory
                     return const_cast<yli::memory::MemorySystem<TypeEnumType>&>(*this);
                 }
 
-                uint32_t get_number_of_allocators() const override
+                std::size_t get_number_of_allocators() const override
                 {
                     return this->memory_allocators.size();
                 }

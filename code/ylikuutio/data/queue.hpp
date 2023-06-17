@@ -20,16 +20,16 @@
 
 // Include standard headers
 #include <array>     // std::array
+#include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t
 
 namespace yli::data
 {
-    template<uint32_t QueueMaxSize = 1>
+    template<std::size_t QueueMaxSize = 1>
         class Queue
         {
             public:
-                void push(uint32_t value)
+                void push(std::size_t value)
                 {
                     if (this->queue_size >= QueueMaxSize)
                     {
@@ -45,14 +45,14 @@ namespace yli::data
                     }
                 }
 
-                uint32_t pop()
+                std::size_t pop()
                 {
                     if (this->size() == 0)
                     {
                         throw std::runtime_error("ERROR: `yli::data::Queue::pop`: queue is empty, nothing to pop!");
                     }
 
-                    uint32_t value = this->queue.at(this->head++);
+                    std::size_t value = this->queue.at(this->head++);
 
                     if (this->head >= QueueMaxSize)
                     {
@@ -63,36 +63,36 @@ namespace yli::data
                     return value;
                 }
 
-                uint32_t size() const
+                std::size_t size() const
                 {
                     return this->queue_size;
                 }
 
-                uint32_t max_size() const
+                std::size_t max_size() const
                 {
                     return QueueMaxSize;
                 }
 
-                uint32_t get_head() const
+                std::size_t get_head() const
                 {
                     return this->head;
                 }
 
-                uint32_t get_next_tail() const
+                std::size_t get_next_tail() const
                 {
                     return this->next_tail;
                 }
 
-                const std::array<uint32_t, QueueMaxSize>& data() const
+                const std::array<std::size_t, QueueMaxSize>& data() const
                 {
                     return this->queue;
                 }
 
             private:
-                std::array<uint32_t, QueueMaxSize> queue {};
-                uint32_t head       { 0 };
-                uint32_t next_tail  { 0 };
-                uint32_t queue_size { 0 };
+                std::array<std::size_t, QueueMaxSize> queue {};
+                std::size_t head       { 0 };
+                std::size_t next_tail  { 0 };
+                std::size_t queue_size { 0 };
         };
 }
 

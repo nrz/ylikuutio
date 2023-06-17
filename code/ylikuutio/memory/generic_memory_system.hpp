@@ -19,7 +19,7 @@
 #define YLIKUUTIO_MEMORY_GENERIC_MEMORY_SYSTEM_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t
+#include <cstddef> // std::size_t
 
 namespace yli::memory
 {
@@ -34,7 +34,7 @@ namespace yli::memory
         public:
             virtual ~GenericMemorySystem() = default;
 
-            virtual uint32_t get_number_of_allocators() const = 0;
+            virtual std::size_t get_number_of_allocators() const = 0;
 
             // TODO: use `TypeEnumType` instead of `int`!
             virtual bool has_allocator(const int type) const = 0;

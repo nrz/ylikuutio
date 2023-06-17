@@ -27,7 +27,6 @@
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
-#include <stdint.h>      // uint32_t
 #include <string>        // std::string
 
 namespace yli::core
@@ -37,7 +36,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    template<typename T1, uint32_t DataSize>
+    template<typename T1, std::size_t DataSize>
         class MemoryStorage;
 }
 
@@ -150,7 +149,7 @@ namespace yli::ontology
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;
 
-            template<typename T1, uint32_t DataSize>
+            template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
             yli::memory::ConstructibleModule constructible_module;

@@ -22,6 +22,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <list>          // std::list
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
@@ -29,7 +30,7 @@
 
 namespace yli::memory
 {
-    template<typename T1, uint32_t DataSize>
+    template<typename T1, std::size_t DataSize>
         class MemoryStorage;
 }
 
@@ -65,7 +66,7 @@ namespace yli::audio
 
             int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
 
-            template<typename T1, uint32_t DataSize>
+            template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         private:
