@@ -22,6 +22,7 @@
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
 #include <queue>         // std::queue
+#include <stdexcept>     // std::runtime_error
 #include <vector>        // std::vector
 
 namespace yli::hierarchy
@@ -40,7 +41,7 @@ namespace yli::hierarchy
 
             if (childID == std::numeric_limits<std::size_t>::max())
             {
-                return;
+                throw std::runtime_error("ERROR: `yli::hierarchy::set_child_pointer`: `childID` is uninitialized!");
             }
 
             child_pointer_vector.at(childID) = child_pointer;
