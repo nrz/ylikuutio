@@ -102,7 +102,7 @@ namespace yli::memory
                     if (storage_i >= this->get_number_of_storages())
                     {
                         std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for storage_i " << storage_i << " does not exist!";
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for `storage_i` " << storage_i << " does not exist!";
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
 
@@ -111,7 +111,7 @@ namespace yli::memory
                     if (raw_storage_pointer == nullptr)
                     {
                         std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for storage_i " << storage_i << " is `nullptr`!";
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for `storage_i` " << storage_i << " is `nullptr`!";
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
 
