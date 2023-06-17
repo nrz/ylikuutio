@@ -94,6 +94,11 @@ namespace yli::memory
 
                 yli::memory::MemoryStorage<T1, DataSize>& get_storage(const uint32_t storage_i) const
                 {
+                    if (storage_i == std::numeric_limits<uint32_t>::max())
+                    {
+                        throw std::runtime_error("ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!");
+                    }
+
                     if (storage_i >= this->get_number_of_storages())
                     {
                         std::stringstream runtime_error_stringstream;
