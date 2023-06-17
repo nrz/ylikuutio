@@ -95,7 +95,7 @@ namespace yli::ontology
     {
         // destructor.
 
-        if (!this-is_universe)
+        if (!this->is_universe)
         {
             this->universe.unbind_entity(this->entityID);
 
