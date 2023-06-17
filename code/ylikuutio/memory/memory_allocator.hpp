@@ -87,6 +87,11 @@ namespace yli::memory
                     return count;
                 }
 
+                uint32_t get_data_size() const
+                {
+                    return DataSize;
+                }
+
                 yli::memory::MemoryStorage<T1, DataSize>& get_storage(const uint32_t storage_i) const
                 {
                     if (storage_i >= this->get_number_of_storages())
