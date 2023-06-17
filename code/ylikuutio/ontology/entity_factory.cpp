@@ -352,8 +352,8 @@ namespace yli::ontology
                 this->universe,
                 model_struct,
                 // `Ecosystem` or `Scene` parent.
-                ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
-                 (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
+                ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_symbioses) :
+                 (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_symbioses) :
                  nullptr),
                 (model_struct.pipeline == nullptr ? nullptr : &model_struct.pipeline->master_of_symbioses));
 
