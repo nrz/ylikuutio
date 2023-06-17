@@ -90,6 +90,8 @@ namespace yli::ontology
             std::size_t y;
             std::size_t text_size;
             std::size_t font_size;
+
+            bool vertices_and_uvs_loaded { false };
     };
 }
 

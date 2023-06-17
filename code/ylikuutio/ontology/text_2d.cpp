@@ -107,7 +107,7 @@ namespace yli::ontology
             this->universe.get_is_vulkan_in_use() ||
             this->universe.get_is_software_rendering_in_use();
 
-        if (should_load_vertices_and_uvs)
+        if (this->get_parent() != nullptr && should_load_vertices_and_uvs)
         {
             // Initialize VAO.
             glGenVertexArrays(1, &this->vao);
@@ -126,6 +126,8 @@ namespace yli::ontology
                         "vertex_position_screenspace");
                 this->vertex_uv_id = glGetAttribLocation(font_2d->get_program_id(), "vertexUV");
             }
+
+            this->vertices_and_uvs_loaded = true;
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -134,11 +136,12 @@ namespace yli::ontology
 
     Text2D::~Text2D()
     {
-        // destructor.
-
-        // Delete buffers.
-        glDeleteBuffers(1, &this->vertexbuffer);
-        glDeleteBuffers(1, &this->uvbuffer);
+        if (this->vertices_and_uvs_loaded)
+        {
+            // Delete buffers.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
+        }
     }
 
     void Text2D::render()
