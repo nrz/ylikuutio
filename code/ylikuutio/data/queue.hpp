@@ -29,7 +29,7 @@ namespace yli::data
         class Queue
         {
             public:
-                void push(std::size_t value)
+                void push(const std::size_t value)
                 {
                     if (this->queue_size >= QueueMaxSize)
                     {
