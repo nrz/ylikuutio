@@ -120,11 +120,10 @@ namespace yli::ontology
         // Set pointer to `material` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_parent`.
 
-        // Master and apprentice must belong to the same `Scene`,
-        // if both belong to some `Scene`, and not `Ecosystem`.
+        // All apprentices of a master must belong to the same `Scene`
+        // as the master if the master belongs to some `Scene`.
         if (material.get_scene() == new_pipeline.get_scene() ||
-                material.get_scene() == nullptr ||
-                new_pipeline.get_scene() == nullptr)
+                (new_pipeline.get_scene() == nullptr))
         {
             material.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(
                     &new_pipeline.master_of_materials);
