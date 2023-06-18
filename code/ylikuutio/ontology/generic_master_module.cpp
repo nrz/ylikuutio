@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <stdexcept> // std::runtime_error
 #include <string>  // std::string
 #include <vector>  // std::vector
 
@@ -32,6 +33,11 @@ namespace yli::ontology
 
     void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module) noexcept
     {
+        if (apprentice_module == nullptr)
+        {
+            throw std::runtime_error("ERROR: `GenericMasterModule::bind_apprentice_module`: `apprentice_module` is `nullptr`!");
+        }
+
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
                 apprentice_module,
                 this->apprentice_module_pointer_vector,
