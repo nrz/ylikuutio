@@ -64,6 +64,8 @@ namespace yli::ontology
             yli::ontology::Entity* get_apprentice() const noexcept;
             std::size_t get_apprenticeID() const noexcept;
 
+            void release() noexcept;
+
             ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
             ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
 

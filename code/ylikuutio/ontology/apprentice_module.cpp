@@ -117,4 +117,9 @@ namespace yli::ontology
     {
         return this->apprenticeID;
     }
+
+    void ApprenticeModule::release() noexcept
+    {
+        this->apprenticeID = std::numeric_limits<std::size_t>::max();
+    }
 }

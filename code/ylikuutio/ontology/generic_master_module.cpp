@@ -55,11 +55,23 @@ namespace yli::ontology
             throw std::runtime_error(runtime_error_stringstream.str());
         }
 
+        // `ApprenticeModule*` must be read into a pointer before unbinding otherwise it will be out of bounds access.
+        yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
+
+        if (apprentice_module == nullptr)
+        {
+            std::stringstream runtime_error_stringstream;
+            runtime_error_stringstream << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprentice_module` with `apprenticeID` " << apprenticeID << " is `nullptr`!";
+            throw std::runtime_error(runtime_error_stringstream.str());
+        }
+
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
                 this->number_of_apprentices);
+
+        apprentice_module->release();
     }
 
     void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene) noexcept
