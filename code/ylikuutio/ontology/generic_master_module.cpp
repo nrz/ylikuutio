@@ -48,6 +48,12 @@ namespace yli::ontology
 
     void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID) noexcept
     {
+        if (apprenticeID == std::numeric_limits<std::size_t>::max())
+        {
+            // Apprentice is already unbound.
+            return;
+        }
+
         if (apprenticeID >= this->apprentice_module_pointer_vector.size())
         {
             std::stringstream runtime_error_stringstream;
