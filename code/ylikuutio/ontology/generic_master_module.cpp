@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -47,6 +48,13 @@ namespace yli::ontology
 
     void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID) noexcept
     {
+        if (apprenticeID >= this->apprentice_module_pointer_vector.size())
+        {
+            std::stringstream runtime_error_stringstream;
+            runtime_error_stringstream << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID << " is out of bounds, size is " << this->apprentice_module_pointer_vector.size();
+            throw std::runtime_error(runtime_error_stringstream.str());
+        }
+
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
                 apprenticeID,
                 this->apprentice_module_pointer_vector,
