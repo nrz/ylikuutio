@@ -98,7 +98,7 @@ namespace yli::ontology
     yli::ontology::Entity* EntityFactory::create_callback_engine(
             const yli::ontology::CallbackEngineStruct& callback_engine_struct) const
     {
-        yli::ontology::Entity* callback_engine_entity = new yli::ontology::CallbackEngine(
+        yli::ontology::Entity* const callback_engine_entity = new yli::ontology::CallbackEngine(
                 this->application,
                 this->universe,
                 &this->universe.parent_of_callback_engines);
@@ -125,7 +125,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_callback_object(const yli::ontology::CallbackObjectStruct& callback_object_struct) const
     {
-        yli::ontology::Entity* callback_object_entity = new yli::ontology::CallbackObject(
+        yli::ontology::Entity* const callback_object_entity = new yli::ontology::CallbackObject(
                 this->application,
                 this->universe,
                 callback_object_struct,
@@ -141,7 +141,7 @@ namespace yli::ontology
             const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
             const yli::data::AnyValue& any_value) const
     {
-        yli::ontology::Entity* callback_parameter_entity = new yli::ontology::CallbackParameter(
+        yli::ontology::Entity* const callback_parameter_entity = new yli::ontology::CallbackParameter(
                 this->application,
                 this->universe,
                 callback_parameter_struct,
@@ -157,7 +157,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value) const
     {
-        yli::ontology::Entity* variable_entity = new yli::ontology::Variable(
+        yli::ontology::Entity* const variable_entity = new yli::ontology::Variable(
                 this->application,
                 this->universe,
                 variable_struct,
@@ -202,7 +202,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const
     {
-        yli::ontology::Entity* ecosystem_entity = new yli::ontology::Ecosystem(
+        yli::ontology::Entity* const ecosystem_entity = new yli::ontology::Ecosystem(
                 this->application,
                 this->universe,
                 ecosystem_struct,
@@ -230,7 +230,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_scene(const yli::ontology::SceneStruct& scene_struct) const
     {
-        yli::ontology::Entity* scene_entity = new yli::ontology::Scene(
+        yli::ontology::Entity* const scene_entity = new yli::ontology::Scene(
                 this->application,
                 this->universe,
                 scene_struct,
@@ -270,7 +270,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const
     {
-        yli::ontology::Entity* pipeline_entity = new yli::ontology::Pipeline(
+        yli::ontology::Entity* const pipeline_entity = new yli::ontology::Pipeline(
                 this->application,
                 this->universe,
                 pipeline_struct,
@@ -287,7 +287,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_material(const yli::ontology::MaterialStruct& material_struct) const
     {
-        yli::ontology::Entity* material_entity = new yli::ontology::Material(
+        yli::ontology::Entity* const material_entity = new yli::ontology::Material(
                 this->application,
                 this->universe,
                 material_struct,
@@ -306,7 +306,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_species(const yli::ontology::ModelStruct& model_struct) const
     {
-        yli::ontology::Entity* species_entity = new yli::ontology::Species(
+        yli::ontology::Entity* const species_entity = new yli::ontology::Species(
                 this->application,
                 this->universe,
                 model_struct,
@@ -323,7 +323,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_object(const yli::ontology::ObjectStruct& object_struct) const
     {
-        yli::ontology::Entity* object_entity = new yli::ontology::Object(
+        yli::ontology::Entity* const object_entity = new yli::ontology::Object(
                 this->application,
                 this->universe,
                 object_struct,
@@ -347,7 +347,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_symbiosis(const yli::ontology::ModelStruct& model_struct) const
     {
-        yli::ontology::Entity* symbiosis_entity = new yli::ontology::Symbiosis(
+        yli::ontology::Entity* const symbiosis_entity = new yli::ontology::Symbiosis(
                 this->application,
                 this->universe,
                 model_struct,
@@ -364,7 +364,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const
     {
-        yli::ontology::Entity* holobiont_entity = new yli::ontology::Holobiont(
+        yli::ontology::Entity* const holobiont_entity = new yli::ontology::Holobiont(
                 this->application,
                 this->universe,
                 holobiont_struct,
@@ -379,7 +379,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const
     {
-        yli::ontology::Entity* vector_font_entity = new yli::ontology::VectorFont(
+        yli::ontology::Entity* const vector_font_entity = new yli::ontology::VectorFont(
                 this->application,
                 this->universe,
                 vector_font_struct,
@@ -391,7 +391,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_text2d(const yli::ontology::TextStruct& text_struct) const
     {
-        yli::ontology::Entity* text2d_entity = new yli::ontology::Text2D(
+        yli::ontology::Entity* const text2d_entity = new yli::ontology::Text2D(
                 this->application,
                 this->universe,
                 text_struct,
@@ -404,7 +404,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_text3d(const yli::ontology::Text3DStruct& text_3d_struct) const
     {
-        yli::ontology::Entity* text3d_entity = new yli::ontology::Text3D(
+        yli::ontology::Entity* const text3d_entity = new yli::ontology::Text3D(
                 this->application,
                 this->universe,
                 text_3d_struct,
@@ -418,7 +418,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_font2d(const yli::ontology::FontStruct& font_struct) const
     {
-        yli::ontology::Entity* font2d_entity = new yli::ontology::Font2D(
+        yli::ontology::Entity* const font2d_entity = new yli::ontology::Font2D(
                 this->application,
                 this->universe,
                 font_struct,
@@ -475,7 +475,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_console(const yli::ontology::ConsoleStruct& console_struct) const
     {
-        yli::ontology::Entity* console_entity = new yli::ontology::Console(
+        yli::ontology::Entity* const console_entity = new yli::ontology::Console(
                 this->application,
                 this->universe,
                 console_struct,
@@ -505,7 +505,7 @@ namespace yli::ontology
     yli::ontology::Entity* EntityFactory::create_console_callback_engine(
             const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const
     {
-        yli::ontology::Entity* console_callback_engine_entity = new yli::ontology::ConsoleCallbackEngine(
+        yli::ontology::Entity* const console_callback_engine_entity = new yli::ontology::ConsoleCallbackEngine(
                 this->application,
                 this->universe,
                 &this->universe.parent_of_callback_engines);
@@ -533,7 +533,7 @@ namespace yli::ontology
     yli::ontology::Entity* EntityFactory::create_console_callback_object(
             const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const
     {
-        yli::ontology::Entity* console_callback_object_entity = new yli::ontology::ConsoleCallbackObject(
+        yli::ontology::Entity* const console_callback_object_entity = new yli::ontology::ConsoleCallbackObject(
                 this->application,
                 this->universe,
                 console_callback_object_struct,
@@ -548,7 +548,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const
     {
-        yli::ontology::Entity* lisp_function_entity = new yli::ontology::LispFunction(
+        yli::ontology::Entity* const lisp_function_entity = new yli::ontology::LispFunction(
                 this->application,
                 this->universe,
                 lisp_function_struct,
@@ -561,7 +561,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_camera(const yli::ontology::CameraStruct& camera_struct) const
     {
-        yli::ontology::Entity* camera_entity = new yli::ontology::Camera(
+        yli::ontology::Entity* const camera_entity = new yli::ontology::Camera(
                 this->application,
                 this->universe,
                 camera_struct,
@@ -575,7 +575,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const
     {
-        yli::ontology::Entity* compute_task_entity = new yli::ontology::ComputeTask(
+        yli::ontology::Entity* const compute_task_entity = new yli::ontology::ComputeTask(
                 this->application,
                 this->universe,
                 compute_task_struct,
@@ -590,7 +590,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* EntityFactory::create_brain(const yli::ontology::BrainStruct& brain_struct) const
     {
-        yli::ontology::Entity* brain_entity = new yli::ontology::Brain(
+        yli::ontology::Entity* const brain_entity = new yli::ontology::Brain(
                 this->application,
                 this->universe,
                 brain_struct,
