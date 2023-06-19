@@ -23,6 +23,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
+#include "code/ylikuutio/ontology/callback_object.hpp"
+#include "code/ylikuutio/ontology/callback_parameter.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
@@ -46,6 +48,8 @@
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/console_callback_engine.hpp"
+#include "code/ylikuutio/ontology/console_callback_object.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 #include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
@@ -65,6 +69,8 @@ namespace mock
     using UniverseMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Universe, 1>;
     using VariableMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Variable, 4096>;
     using CallbackEngineMemoryAllocator              = yli::memory::MemoryAllocator<yli::ontology::CallbackEngine, 256>;
+    using CallbackObjectMemoryAllocator              = yli::memory::MemoryAllocator<yli::ontology::CallbackObject, 256>;
+    using CallbackParameterMemoryAllocator           = yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
     using CameraMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
     using BrainMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
     using EcosystemMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
@@ -88,6 +94,8 @@ namespace mock
     using Text3DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
     using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
+    using ConsoleCallbackEngineMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
+    using ConsoleCallbackObjectMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
