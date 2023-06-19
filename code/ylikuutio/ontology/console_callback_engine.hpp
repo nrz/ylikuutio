@@ -45,7 +45,7 @@ namespace yli::ontology
 
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
                     const InputParametersToAnyValueCallbackWithConsole callback,
-                    yli::ontology::Console* console_pointer);
+                    yli::ontology::Console* const console_pointer);
     };
 }
 
