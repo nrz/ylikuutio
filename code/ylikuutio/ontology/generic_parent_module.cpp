@@ -24,6 +24,8 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <sstream>  // std::stringstream
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 
 namespace yli::memory
@@ -105,6 +107,14 @@ namespace yli::ontology
         // destructor.
 
         yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
+
+        if (this->number_of_children != 0)
+        {
+            std::stringstream runtime_error_stringstream;
+            runtime_error_stringstream << "ERROR: `GenericParentModule::~GenericParentModule`: `number_of_children` is " <<
+                this->number_of_children << " even though it should be 0!\n";
+            throw std::runtime_error(runtime_error_stringstream.str());
+        }
     }
 
     yli::ontology::GenericParentModule* GenericParentModule::get() const noexcept
