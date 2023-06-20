@@ -28,6 +28,7 @@
 #include <cstddef>   // std::byte, std::size_t
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
+#include <sstream>   // std::stringstream
 #include <utility>   // std::forward
 #include <vector>    // std::vector
 
@@ -122,6 +123,19 @@ namespace yli::memory
 
                 void destroy(const std::size_t slot_i)
                 {
+                    if (slot_i == std::numeric_limits<std::size_t>::max())
+                    {
+                        throw std::runtime_error("ERROR: `MemoryStorage::destroy`: `slot_i` has invalid value!");
+                    }
+
+                    if (slot_i >= DataSize)
+                    {
+                        std::stringstream runtime_error_stringstream;
+                        runtime_error_stringstream << "ERROR: `MemoryStorage::destroy`: `slot_i` " << storage_i <<
+                            " is out of bounds, `DataSize` is " << DataSize;
+                        throw std::runtime_error(runtime_error_stringstream.str());
+                    }
+
                     // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
                     // The caller must make sure that `slot_i` points to an existing instance.
                     T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
