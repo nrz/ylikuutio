@@ -101,7 +101,7 @@ namespace yli::memory
                     if (storage_i >= this->get_number_of_storages())
                     {
                         std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for `storage_i` " << storage_i <<
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
                             " is out of bounds, size is " << this->get_number_of_storages();
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
@@ -111,7 +111,7 @@ namespace yli::memory
                     if (raw_storage_pointer == nullptr)
                     {
                         std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: storage for `storage_i` " << storage_i <<
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
                             " is `nullptr`!";
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
@@ -134,7 +134,7 @@ namespace yli::memory
                     if (constructible_module.storage_i >= this->get_number_of_storages())
                     {
                         std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::destroy`: storage for `storage_i` " <<
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::destroy`: `storage_i` " <<
                             constructible_module.storage_i << " is out of bounds, size is " << this->get_number_of_storages();
                         throw std::runtime_error(runtime_error_stringstream.str());
                     }
