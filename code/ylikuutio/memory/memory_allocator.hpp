@@ -131,6 +131,14 @@ namespace yli::memory
                         throw std::runtime_error("ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!");
                     }
 
+                    if (constructible_module.storage_i >= this->get_number_of_storages())
+                    {
+                        std::stringstream runtime_error_stringstream;
+                        runtime_error_stringstream << "ERROR: `MemoryAllocator::destroy`: storage for `storage_i` " <<
+                            constructible_module.storage_i << " is out of bounds, size is " << this->get_number_of_storages();
+                        throw std::runtime_error(runtime_error_stringstream.str());
+                    }
+
                     auto& storage = this->get_storage(constructible_module.storage_i);
                     storage.destroy(constructible_module.slot_i);
                 }
