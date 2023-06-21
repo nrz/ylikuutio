@@ -343,7 +343,7 @@ namespace yli::ontology
             GLuint normalbuffer                    = master_model->get_normalbuffer();
             uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
             GLuint elementbuffer                   = master_model->get_elementbuffer();
-            uint32_t indices_size                  = master_model->get_indices().size();
+            uint32_t indices_size                  = master_model->get_indices_size();
 
             glBindVertexArray(vao);
 
