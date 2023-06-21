@@ -18,6 +18,9 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CHILD_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CHILD_MODULE_HPP_INCLUDED
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli::ontology
 {
     class Entity;
@@ -46,6 +49,7 @@ namespace yli::ontology
             void release() noexcept;
 
             yli::ontology::Scene* get_scene() const noexcept;
+            std::size_t get_childID() const noexcept;
 
         private:
             void unbind_child() const noexcept;

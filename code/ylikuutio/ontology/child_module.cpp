@@ -19,6 +19,10 @@
 #include "generic_parent_module.hpp"
 #include "entity.hpp"
 
+// Include standard headers
+#include <cstddef> // std::size_t
+#include <limits>  // std::numeric_limits
+
 namespace yli::ontology
 {
     class Scene;
@@ -102,6 +106,16 @@ namespace yli::ontology
         return nullptr;
     }
 
+    std::size_t ChildModule::get_childID() const noexcept
+    {
+        if (this->entity != nullptr) [[likely]]
+        {
+            return this->entity->get_childID();
+        }
+
+        return std::numeric_limits<std::size_t>::max();
+    }
+
     void ChildModule::unbind_child() const noexcept
     {
         if (this->parent_module == nullptr)
@@ -114,7 +128,7 @@ namespace yli::ontology
             return;
         }
 
-        this->parent_module->unbind_child(this->entity->get_childID());
+        this->parent_module->unbind_child(this->get_childID());
     }
 
     void ChildModule::set_parent_module_and_bind_to_new_parent(
