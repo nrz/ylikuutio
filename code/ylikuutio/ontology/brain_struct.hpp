@@ -27,7 +27,7 @@ namespace yli::ontology
 
     struct BrainStruct: public yli::ontology::EntityStruct
     {
-        yli::ontology::Scene* parent { nullptr };
+        yli::ontology::Scene* parent                   { nullptr };
         yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
 }
