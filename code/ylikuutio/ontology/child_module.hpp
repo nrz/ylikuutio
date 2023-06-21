@@ -43,6 +43,8 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const noexcept;
             yli::ontology::Entity* get_child() const noexcept;
+            void release() noexcept;
+
             yli::ontology::Scene* get_scene() const noexcept;
 
         private:

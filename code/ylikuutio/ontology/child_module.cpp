@@ -52,6 +52,7 @@ namespace yli::ontology
 
         if (this->parent_module == nullptr)
         {
+            this->release();
             return;
         }
 
@@ -62,6 +63,8 @@ namespace yli::ontology
 
         // Set pointer to this `Entity` to `nullptr`.
         this->parent_module->unbind_child(this->entity->childID);
+
+        this->release();
     }
 
     yli::ontology::Entity* ChildModule::get_parent() const noexcept
@@ -77,6 +80,16 @@ namespace yli::ontology
     yli::ontology::Entity* ChildModule::get_child() const noexcept
     {
         return this->entity;
+    }
+
+    void ChildModule::release() noexcept
+    {
+        if (this->entity == nullptr) [[unlikely]]
+        {
+            return;
+        }
+
+        this->entity->childID = std::numeric_limits<std::size_t>::max();
     }
 
     yli::ontology::Scene* ChildModule::get_scene() const noexcept
@@ -127,6 +140,7 @@ namespace yli::ontology
         if (new_parent_module != this->parent_module)
         {
             this->unbind_child();
+            this->release();
             this->set_parent_module_and_bind_to_new_parent(new_parent_module);
         }
     }
