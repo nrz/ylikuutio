@@ -48,6 +48,8 @@
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/console_callback_engine.hpp"
+#include "code/ylikuutio/ontology/console_callback_object.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 #include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
@@ -92,6 +94,8 @@ namespace tulevaisuus
     using Text3DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
     using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
+    using ConsoleCallbackEngineMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
+    using ConsoleCallbackObjectMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
