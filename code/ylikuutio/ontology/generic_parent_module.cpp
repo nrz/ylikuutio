@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <limits>   // std::numeric_limits
 #include <sstream>  // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>   // std::string
@@ -59,6 +60,12 @@ namespace yli::ontology
         if (this->entity == nullptr)
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
+            return false; // Unbinding failed.
+        }
+
+        if (childID == std::numeric_limits<std::size_t>::max())
+        {
+            std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!\n";
             return false; // Unbinding failed.
         }
 
