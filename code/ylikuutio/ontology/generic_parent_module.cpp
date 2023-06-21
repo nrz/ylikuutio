@@ -93,6 +93,8 @@ namespace yli::ontology
                 this->number_of_children,
                 this->entity->registry);
 
+        child->childID = std::numeric_limits<std::size_t>::max();
+
         return true; // Unbinding successful.
     }
 
