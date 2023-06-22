@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
+#include "console_callback_engine.hpp"
 #include "console_callback_object_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
