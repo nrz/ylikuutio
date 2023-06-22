@@ -170,9 +170,9 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_entity;
 
-        private:
             void activate() override;
 
+        private:
             yli::ontology::Entity* parent;
 
         public:

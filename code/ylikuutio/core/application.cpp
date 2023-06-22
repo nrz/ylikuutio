@@ -16,15 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "application.hpp"
-#include "code/ylikuutio/memory/memory_allocator.hpp"
 
 // Include standard headers
 #include <string>   // std::string
-
-namespace yli::memory
-{
-    class GenericMemoryAllocator;
-}
 
 namespace yli::ontology
 {
@@ -34,8 +28,7 @@ namespace yli::ontology
 namespace yli::core
 {
     Application::Application(const int argc, const char* const argv[])
-        : command_line_master(argc, argv),
-        universe(nullptr)
+        : command_line_master(argc, argv)
     {
         // constructor.
     }
@@ -48,27 +41,5 @@ namespace yli::core
     std::string Application::get_version() const
     {
         return ""; // `override` this in the inherited class.
-    }
-
-    yli::ontology::Universe* Application::get_universe() const
-    {
-        return this->universe;
-    }
-
-    void Application::set_universe(yli::ontology::Universe* const universe)
-    {
-        this->universe = universe;
-    }
-
-    void Application::create_memory_allocators()
-    {
-        // TODO: remove this implementation and make this a pure virtual function.
-    }
-
-    yli::memory::GenericMemoryAllocator& Application::get_memory_allocator(const int type) const
-    {
-        // TODO: replace this dummy allocator with an actual implementation.
-        auto allocator = yli::memory::MemoryAllocator<>();
-        return allocator;
     }
 }

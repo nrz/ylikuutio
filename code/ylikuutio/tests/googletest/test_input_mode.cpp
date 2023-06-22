@@ -17,39 +17,27 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_master)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::InputModeStruct input_mode_struct;
-    yli::ontology::InputMode* const input_mode = new yli::ontology::InputMode(
-            application,
-            *universe,
-            input_mode_struct,
-            &universe->parent_of_input_modes,
-            nullptr);
+    yli::ontology::InputMode* const input_mode = application.get_entity_factory().create_input_mode(input_mode_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(input_mode->get_childID(), 0);
     ASSERT_EQ(input_mode->get_type(), "yli::ontology::InputMode*");
     ASSERT_FALSE(input_mode->get_can_be_erased());
-    ASSERT_EQ(&(input_mode->get_universe()), universe);
     ASSERT_EQ(input_mode->get_scene(), nullptr);
-    ASSERT_EQ(input_mode->get_parent(), universe);
+    ASSERT_EQ(input_mode->get_parent(), &application.get_universe());
     ASSERT_EQ(input_mode->get_number_of_non_variable_children(), 0);
 }
 
@@ -57,35 +45,22 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(console_struct);
 
     yli::ontology::InputModeStruct input_mode_struct;
-    yli::ontology::InputMode* const input_mode = new yli::ontology::InputMode(
-            application,
-            *universe,
-            input_mode_struct,
-            &universe->parent_of_input_modes,
-            &console->master_of_input_modes);
+    input_mode_struct.console = console;
+    yli::ontology::InputMode* const input_mode = application.get_entity_factory().create_input_mode(input_mode_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 2); // `Console`, `InputMode`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `Console`, `InputMode`.
 
     // `Entity` member functions.
     ASSERT_EQ(input_mode->get_childID(), 0);
     ASSERT_EQ(input_mode->get_type(), "yli::ontology::InputMode*");
     ASSERT_FALSE(input_mode->get_can_be_erased());
-    ASSERT_EQ(&(input_mode->get_universe()), universe);
     ASSERT_EQ(input_mode->get_scene(), nullptr);
-    ASSERT_EQ(input_mode->get_parent(), universe);
+    ASSERT_EQ(input_mode->get_parent(), &application.get_universe());
     ASSERT_EQ(input_mode->get_number_of_non_variable_children(), 0);
 
     // `Console` member functions.

@@ -19,8 +19,8 @@
 #define YLIKUUTIO_ONTOLOGY_MISSION_HPP_INCLUDED
 
 #include "child_module.hpp"
+#include "generic_parent_module.hpp"
 #include "entity.hpp"
-#include "callback_engine.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -38,7 +38,7 @@ namespace yli::ontology
 
     class Mission final : public yli::ontology::Entity
     {
-        public:
+        private:
             Mission(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -47,6 +47,7 @@ namespace yli::ontology
 
             virtual ~Mission() = default;
 
+        public:
             Mission(const Mission&) = delete;            // Delete copy constructor.
             Mission &operator=(const Mission&) = delete; // Delete copy assignment.
 
@@ -55,8 +56,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             yli::ontology::ChildModule child_of_universe;
-
-            yli::ontology::CallbackEngine callback_engine;
+            yli::ontology::GenericParentModule parent_of_callback_engines;
     };
 }
 

@@ -20,10 +20,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -32,17 +30,9 @@
 TEST(console_must_be_initialized_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
     ASSERT_TRUE(console->get_current_input().empty());
     ASSERT_TRUE(console->get_temp_input().empty());
     ASSERT_EQ(console->get_prompt(), "$ ");        // This may change in the future.
@@ -84,21 +74,13 @@ TEST(console_must_be_initialized_appropriately, no_font)
 TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
     console_mode_input_mode_struct.console = console;
-    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
+    yli::ontology::InputMode* const input_mode = application.get_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     ASSERT_EQ(console->get_input_mode(), input_mode);
 
@@ -109,17 +91,9 @@ TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
 TEST(setting_console_top_y_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
     console->set_console_top_y(3);
     ASSERT_EQ(console->get_console_top_y(), 3);
@@ -134,17 +108,9 @@ TEST(setting_console_top_y_must_function_appropriately, no_font)
 TEST(setting_console_bottom_y_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
     console->set_console_bottom_y(3);
     ASSERT_EQ(console->get_console_bottom_y(), 3);
@@ -159,17 +125,9 @@ TEST(setting_console_bottom_y_must_function_appropriately, no_font)
 TEST(setting_console_left_x_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
     console->set_console_left_x(3);
     ASSERT_EQ(console->get_console_left_x(), 3);
@@ -184,17 +142,9 @@ TEST(setting_console_left_x_must_function_appropriately, no_font)
 TEST(setting_console_right_x_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
     console->set_console_right_x(3);
     ASSERT_EQ(console->get_console_right_x(), 3);
@@ -209,23 +159,15 @@ TEST(setting_console_right_x_must_function_appropriately, no_font)
 TEST(enter_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
-    universe->set_active_console(console);
+    application.get_universe().set_active_console(console);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
     console_mode_input_mode_struct.console = console;
-    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
+    yli::ontology::InputMode* const input_mode = application.get_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
     ASSERT_TRUE(console->get_in_console());
@@ -234,23 +176,15 @@ TEST(enter_console_must_function_appropriately, no_font)
 TEST(exit_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles,
-            nullptr);
+    yli::ontology::Console* console = application.get_entity_factory().create_console(
+            console_struct);
 
-    universe->set_active_console(console);
+    application.get_universe().set_active_console(console);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
     console_mode_input_mode_struct.console = console;
-    yli::ontology::InputMode* const input_mode = universe->create_input_mode(console_mode_input_mode_struct);
+    yli::ontology::InputMode* const input_mode = application.get_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
     console->exit_console();

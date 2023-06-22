@@ -22,7 +22,7 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "family_templates.hpp"
@@ -176,12 +176,8 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            new yli::ontology::Biont(
-                    this->application,
-                    this->universe,
-                    biont_struct,
-                    &this->parent_of_bionts,
-                    &symbiont_species->master_of_bionts);
+            yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+            entity_factory.create_biont(biont_struct);
         }
     }
 
@@ -293,7 +289,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        const yli::ontology::EntityFactory& entity_factory = parent.get_entity_factory();
+        const yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);

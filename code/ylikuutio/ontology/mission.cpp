@@ -16,21 +16,18 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mission.hpp"
-#include "universe.hpp"
 #include "mission_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-
-namespace yli::core
-{
-    class Application;
-}
 
 namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
+    class Universe;
 
     yli::ontology::Entity* Mission::get_parent() const
     {
@@ -44,10 +41,11 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, mission_struct),
         child_of_universe(parent_module, this),
-        callback_engine(
-                application,
-                this->universe,
-                &this->universe.parent_of_callback_engines)
+        parent_of_callback_engines(
+                this,
+                &this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
+                "callback_engines")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";

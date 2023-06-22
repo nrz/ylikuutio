@@ -19,7 +19,7 @@
 #include "variable.hpp"
 #include "universe.hpp"
 #include "family_templates.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "entity_struct.hpp"
@@ -27,6 +27,7 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/generic_memory_system.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
 // Include standard headers
@@ -56,7 +57,7 @@ namespace yli::ontology
     void Entity::bind_to_universe() noexcept
     {
         // Get `entityID` from the `Universe` and set pointer to this `Entity`.
-        universe.bind_entity(this);
+        this->universe.bind_entity(this);
     }
 
     Entity::Entity(
@@ -144,11 +145,6 @@ namespace yli::ontology
         return this->universe;
     }
 
-    yli::ontology::EntityFactory& Entity::get_entity_factory() const
-    {
-        return this->universe.get_entity_factory();
-    }
-
     bool Entity::has_child(const std::string& name) const
     {
         return this->registry.is_entity(name);
@@ -222,7 +218,7 @@ namespace yli::ontology
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
-        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::VariableStruct new_variable_struct(variable_struct);
         new_variable_struct.parent = this;

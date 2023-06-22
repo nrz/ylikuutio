@@ -545,13 +545,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
     code/ylikuutio/ontology/console_callbacks.cpp
-    code/ylikuutio/ontology/custom_entity_factory.hpp
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_callbacks.cpp
-    code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
-    code/ylikuutio/ontology/entity_factory_templates.hpp
     code/ylikuutio/ontology/entity_variable_activation.cpp
     code/ylikuutio/ontology/entity_variable_activation.hpp
     code/ylikuutio/ontology/entity_variable_read.cpp
@@ -792,17 +789,12 @@ add_executable(ajokki
     code/ajokki/ajokki.cpp
     code/ajokki/ajokki.hpp
     code/ajokki/ajokki_altiplano_scene.cpp
-    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_earth_ecosystem.cpp
-    code/ajokki/ajokki_earth_ecosystem.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
-    code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
-    code/ajokki/ajokki_joensuu_center_west_scene.hpp
     code/ajokki/ajokki_tallinn_scene.cpp
-    code/ajokki/ajokki_tallinn_scene.hpp
     )
 target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} pthread)
 
@@ -812,7 +804,6 @@ add_executable(gpgpu_test
     code/gpgpu_test/gpgpu_test.cpp
     code/gpgpu_test/gpgpu_test.hpp
     code/gpgpu_test/gpgpu_test_scene.cpp
-    code/gpgpu_test/gpgpu_test_scene.hpp
 
     # snippets, in alphabetical order
     code/ylikuutio/snippets/keyboard_callback_snippets.cpp
@@ -835,9 +826,7 @@ add_executable(hirvi
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
     code/hirvi/hirvi_earth_ecosystem.cpp
-    code/hirvi/hirvi_earth_ecosystem.hpp
     code/hirvi/hirvi_helsinki_east_downtown_scene.cpp
-    code/hirvi/hirvi_helsinki_east_downtown_scene.hpp
     code/hirvi/police_car.cpp
     code/hirvi/police_car.hpp
     code/hirvi/police_dog.cpp
@@ -965,7 +954,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_material.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_memory_allocator.cpp
         code/ylikuutio/tests/googletest/test_memory_storage.cpp
+        code/ylikuutio/tests/googletest/test_memory_system.cpp
         code/ylikuutio/tests/googletest/test_memory_templates.cpp
         code/ylikuutio/tests/googletest/test_model_struct.cpp
         code/ylikuutio/tests/googletest/test_obj_loader.cpp

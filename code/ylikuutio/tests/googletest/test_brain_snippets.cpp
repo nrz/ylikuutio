@@ -22,9 +22,6 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
@@ -34,46 +31,29 @@
 TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            application,
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+            scene_struct);
 
     InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rest_callback_engine = static_cast<yli::ontology::CallbackEngine*>(
-            entity_factory.create_callback_engine(rest_callback_engine_struct));
+    yli::ontology::CallbackEngine* const rest_callback_engine = application.get_entity_factory().create_callback_engine(
+            rest_callback_engine_struct);
 
     rest_callback_engine->create_callback_object(callback);
 
     yli::ontology::BrainStruct rest_brain_struct;
     rest_brain_struct.parent = scene;
     rest_brain_struct.callback_engine = rest_callback_engine;
-    yli::ontology::Brain* const rest_brain = new yli::ontology::Brain(
-            application,
-            *universe,
-            rest_brain_struct,
-            &scene->parent_of_brains);
+    yli::ontology::Brain* const rest_brain = application.get_entity_factory().create_brain(
+            rest_brain_struct);
 
     yli::ontology::ObjectStruct object_struct(scene);
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = new yli::ontology::Object(
-            application,
-            *universe,
-            object_struct,
-            &scene->parent_of_objects,
-            nullptr,
-            &rest_brain->master_of_movables);
+    yli::ontology::Object* const object = application.get_entity_factory().create_object(
+            object_struct);
 
     yli::ontology::CartesianCoordinatesModule original_location(object->location);
     yli::ontology::OrientationModule original_orientation(object->orientation);

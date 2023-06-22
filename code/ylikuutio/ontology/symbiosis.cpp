@@ -22,6 +22,7 @@
 #include "pipeline.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
+#include "generic_entity_factory.hpp"
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "family_templates.hpp"
@@ -312,11 +313,9 @@ namespace yli::ontology
                 material_struct.pipeline = pipeline;
                 material_struct.parent = this;
                 material_struct.ofbx_texture = ofbx_texture;
-                yli::ontology::SymbiontMaterial* const symbiont_material = new yli::ontology::SymbiontMaterial(
-                        this->application,
-                        this->universe,
-                        material_struct,
-                        &this->parent_of_symbiont_materials);
+
+                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+                auto symbiont_material = entity_factory.create_symbiont_material(material_struct);
 
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 
@@ -337,11 +336,7 @@ namespace yli::ontology
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
-                    yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(
-                            this->application,
-                            this->universe,
-                            model_struct,
-                            &symbiont_material->parent_of_symbiont_species);
+                    auto symbiont_species = entity_factory.create_symbiont_species(model_struct);
 
                     std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 

@@ -18,15 +18,11 @@
 #include "generic_lisp_function_overload.hpp"
 #include "entity.hpp"
 #include "entity_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-
-namespace yli::core
-{
-    class Application;
-}
 
 namespace yli::ontology
 {

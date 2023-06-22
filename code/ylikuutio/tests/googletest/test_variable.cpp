@@ -23,8 +23,6 @@
 #include "code/ylikuutio/ontology/movable_variable_activation.hpp"
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -42,53 +40,42 @@
 TEST(is_variable_must_return_false_for_nonexisting_variables, headless_universe)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_FALSE(universe->has_variable("foo"));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
 }
 
 TEST(get_must_return_nullptr_for_nonexisting_variables, headless_universe)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_bool_true_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(variable, nullptr);
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_bool_true_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -101,34 +88,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_bool_false_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -141,34 +122,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_lowercase_a_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -181,34 +156,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_lowercase_b_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_b = 'b';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -221,34 +190,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_space));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_space_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_space = ' ';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_space));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_space));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -261,34 +224,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_newline));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_char_newline_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_newline = '\n';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_newline));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_newline));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -301,34 +258,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_float_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -341,19 +292,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_positive_infinity = std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_positive_infinity));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_positive_infinity));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -366,19 +314,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_negative_infinity));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_negative_infinity));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -391,19 +336,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_nan = NAN;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_nan));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_nan));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<float>(variable_value->data));
@@ -417,34 +359,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_double_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -457,19 +393,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_positive_infinity = std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_positive_infinity));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_positive_infinity));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -482,19 +415,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_negative_infinity = -1.0 * std::numeric_limits<double>::infinity();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_negative_infinity));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_negative_infinity));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -507,19 +437,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_nan = NAN;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_nan));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_nan));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<double>(variable_value->data));
@@ -533,34 +460,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -573,34 +494,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -613,34 +528,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_minus_1 = -1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -653,34 +562,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_max_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_max = std::numeric_limits<int32_t>::max();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -693,34 +596,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_int32_t_min_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_min = std::numeric_limits<int32_t>::min();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -733,34 +630,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -773,34 +664,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -813,34 +698,28 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
-    ASSERT_FALSE(universe->has_variable("foo"));
-    yli::ontology::Variable* const variable = universe->get("foo");
-    ASSERT_EQ(universe->get("foo"), nullptr);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
+    ASSERT_FALSE(application.get_universe().has_variable("foo"));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
+    ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_uint32_t_max_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
-    ASSERT_TRUE(universe->has_variable("foo"));
-    ASSERT_NE(universe->get("foo"), nullptr);
-    ASSERT_FALSE(universe->has_variable("bar"));
-    ASSERT_EQ(universe->get("bar"), nullptr);
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get("bar"), nullptr);
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -853,20 +732,17 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float x = 1234.25f;
-    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct x_variable_struct(application.get_universe(), &application.get_universe());
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("x"), nullptr);
-    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
+    ASSERT_EQ(application.get_universe().get("x"), nullptr);
+    application.get_universe().create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    ASSERT_NE(universe->get("x"), nullptr);
-    yli::ontology::Variable* x_variable = universe->get("x");
+    ASSERT_NE(application.get_universe().get("x"), nullptr);
+    yli::ontology::Variable* x_variable = application.get_universe().get("x");
     ASSERT_NE(x_variable, nullptr);
 
     std::optional<yli::data::AnyValue> x_value = x_variable->get();
@@ -879,20 +755,17 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float y = 1234.25f;
-    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct y_variable_struct(application.get_universe(), &application.get_universe());
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("y"), nullptr);
-    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
+    ASSERT_EQ(application.get_universe().get("y"), nullptr);
+    application.get_universe().create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    ASSERT_NE(universe->get("y"), nullptr);
-    yli::ontology::Variable* y_variable = universe->get("y");
+    ASSERT_NE(application.get_universe().get("y"), nullptr);
+    yli::ontology::Variable* y_variable = application.get_universe().get("y");
     ASSERT_NE(y_variable, nullptr);
 
     std::optional<yli::data::AnyValue> y_value = y_variable->get();
@@ -905,20 +778,17 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float z = 1234.25f;
-    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct z_variable_struct(application.get_universe(), &application.get_universe());
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("z"), nullptr);
-    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
+    ASSERT_EQ(application.get_universe().get("z"), nullptr);
+    application.get_universe().create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    ASSERT_NE(universe->get("z"), nullptr);
-    yli::ontology::Variable* z_variable = universe->get("z");
+    ASSERT_NE(application.get_universe().get("z"), nullptr);
+    yli::ontology::Variable* z_variable = application.get_universe().get("z");
     ASSERT_NE(z_variable, nullptr);
 
     std::optional<yli::data::AnyValue> z_value = z_variable->get();
@@ -931,19 +801,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float red = 0.0f;
-    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct red_variable_struct(application.get_universe(), &application.get_universe());
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
+    ASSERT_EQ(application.get_universe().get("red"), nullptr);
+    application.get_universe().create_variable(red_variable_struct, yli::data::AnyValue(red));
 
-    ASSERT_NE(universe->get("red"), nullptr);
-    yli::ontology::Variable* red_variable = universe->get("red");
+    ASSERT_NE(application.get_universe().get("red"), nullptr);
+    yli::ontology::Variable* red_variable = application.get_universe().get("red");
     ASSERT_NE(red_variable, nullptr);
 
     ASSERT_EQ(red_variable->variable_value, *red_variable->get());
@@ -957,19 +824,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float red = 1.0f;
-    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct red_variable_struct(application.get_universe(), &application.get_universe());
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
+    ASSERT_EQ(application.get_universe().get("red"), nullptr);
+    application.get_universe().create_variable(red_variable_struct, yli::data::AnyValue(red));
 
-    ASSERT_NE(universe->get("red"), nullptr);
-    yli::ontology::Variable* red_variable = universe->get("red");
+    ASSERT_NE(application.get_universe().get("red"), nullptr);
+    yli::ontology::Variable* red_variable = application.get_universe().get("red");
     ASSERT_NE(red_variable, nullptr);
 
     ASSERT_EQ(red_variable->variable_value, *red_variable->get());
@@ -983,19 +847,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float red = 0.875f;
-    yli::ontology::VariableStruct red_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct red_variable_struct(application.get_universe(), &application.get_universe());
     red_variable_struct.local_name = "red";
     red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     red_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("red"), nullptr);
-    universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
+    ASSERT_EQ(application.get_universe().get("red"), nullptr);
+    application.get_universe().create_variable(red_variable_struct, yli::data::AnyValue(red));
 
-    ASSERT_NE(universe->get("red"), nullptr);
-    yli::ontology::Variable* red_variable = universe->get("red");
+    ASSERT_NE(application.get_universe().get("red"), nullptr);
+    yli::ontology::Variable* red_variable = application.get_universe().get("red");
     ASSERT_NE(red_variable, nullptr);
 
     ASSERT_EQ(red_variable->variable_value, *red_variable->get());
@@ -1009,19 +870,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float green = 0.0f;
-    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct green_variable_struct(application.get_universe(), &application.get_universe());
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
+    ASSERT_EQ(application.get_universe().get("green"), nullptr);
+    application.get_universe().create_variable(green_variable_struct, yli::data::AnyValue(green));
 
-    ASSERT_NE(universe->get("green"), nullptr);
-    yli::ontology::Variable* green_variable = universe->get("green");
+    ASSERT_NE(application.get_universe().get("green"), nullptr);
+    yli::ontology::Variable* green_variable = application.get_universe().get("green");
     ASSERT_NE(green_variable, nullptr);
 
     ASSERT_EQ(green_variable->variable_value, *green_variable->get());
@@ -1035,19 +893,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float green = 1.0f;
-    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct green_variable_struct(application.get_universe(), &application.get_universe());
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
+    ASSERT_EQ(application.get_universe().get("green"), nullptr);
+    application.get_universe().create_variable(green_variable_struct, yli::data::AnyValue(green));
 
-    ASSERT_NE(universe->get("green"), nullptr);
-    yli::ontology::Variable* green_variable = universe->get("green");
+    ASSERT_NE(application.get_universe().get("green"), nullptr);
+    yli::ontology::Variable* green_variable = application.get_universe().get("green");
     ASSERT_NE(green_variable, nullptr);
 
     ASSERT_EQ(green_variable->variable_value, *green_variable->get());
@@ -1061,19 +916,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float green = 0.875f;
-    yli::ontology::VariableStruct green_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct green_variable_struct(application.get_universe(), &application.get_universe());
     green_variable_struct.local_name = "green";
     green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     green_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("green"), nullptr);
-    universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
+    ASSERT_EQ(application.get_universe().get("green"), nullptr);
+    application.get_universe().create_variable(green_variable_struct, yli::data::AnyValue(green));
 
-    ASSERT_NE(universe->get("green"), nullptr);
-    yli::ontology::Variable* green_variable = universe->get("green");
+    ASSERT_NE(application.get_universe().get("green"), nullptr);
+    yli::ontology::Variable* green_variable = application.get_universe().get("green");
     ASSERT_NE(green_variable, nullptr);
 
     ASSERT_EQ(green_variable->variable_value, *green_variable->get());
@@ -1087,19 +939,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float blue = 0.0f;
-    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct blue_variable_struct(application.get_universe(), &application.get_universe());
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
+    ASSERT_EQ(application.get_universe().get("blue"), nullptr);
+    application.get_universe().create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
-    ASSERT_NE(universe->get("blue"), nullptr);
-    yli::ontology::Variable* blue_variable = universe->get("blue");
+    ASSERT_NE(application.get_universe().get("blue"), nullptr);
+    yli::ontology::Variable* blue_variable = application.get_universe().get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
     ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
@@ -1113,19 +962,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float blue = 1.0f;
-    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct blue_variable_struct(application.get_universe(), &application.get_universe());
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
+    ASSERT_EQ(application.get_universe().get("blue"), nullptr);
+    application.get_universe().create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
-    ASSERT_NE(universe->get("blue"), nullptr);
-    yli::ontology::Variable* blue_variable = universe->get("blue");
+    ASSERT_NE(application.get_universe().get("blue"), nullptr);
+    yli::ontology::Variable* blue_variable = application.get_universe().get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
     ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
@@ -1139,19 +985,16 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float blue = 0.875f;
-    yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct blue_variable_struct(application.get_universe(), &application.get_universe());
     blue_variable_struct.local_name = "blue";
     blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
     blue_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe->get("blue"), nullptr);
-    universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
+    ASSERT_EQ(application.get_universe().get("blue"), nullptr);
+    application.get_universe().create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
-    ASSERT_NE(universe->get("blue"), nullptr);
-    yli::ontology::Variable* blue_variable = universe->get("blue");
+    ASSERT_NE(application.get_universe().get("blue"), nullptr);
+    yli::ontology::Variable* blue_variable = application.get_universe().get("blue");
     ASSERT_NE(blue_variable, nullptr);
 
     ASSERT_EQ(blue_variable->variable_value, *blue_variable->get());
@@ -1165,67 +1008,64 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float x = 1234.25f;
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(application.get_universe(), &application.get_universe());
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
+    application.get_universe().create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
-    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct x_variable_struct(application.get_universe(), &application.get_universe());
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
+    application.get_universe().create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct y_variable_struct(application.get_universe(), &application.get_universe());
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
+    application.get_universe().create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct z_variable_struct(application.get_universe(), &application.get_universe());
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
+    application.get_universe().create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    ASSERT_NE(universe->get("x"), nullptr);
-    yli::ontology::Variable* x_variable = universe->get("x");
+    ASSERT_NE(application.get_universe().get("x"), nullptr);
+    yli::ontology::Variable* x_variable = application.get_universe().get("x");
     ASSERT_NE(x_variable, nullptr);
     std::optional<yli::data::AnyValue> x_value = x_variable->get();
     ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 
-    ASSERT_NE(universe->get("y"), nullptr);
-    yli::ontology::Variable* y_variable = universe->get("y");
+    ASSERT_NE(application.get_universe().get("y"), nullptr);
+    yli::ontology::Variable* y_variable = application.get_universe().get("y");
     ASSERT_NE(y_variable, nullptr);
     std::optional<yli::data::AnyValue> y_value = y_variable->get();
     ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
 
-    ASSERT_NE(universe->get("z"), nullptr);
-    yli::ontology::Variable* z_variable = universe->get("z");
+    ASSERT_NE(application.get_universe().get("z"), nullptr);
+    yli::ontology::Variable* z_variable = application.get_universe().get("z");
     ASSERT_NE(z_variable, nullptr);
     std::optional<yli::data::AnyValue> z_value = z_variable->get();
     ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
-    ASSERT_NE(universe->get("cartesian"), nullptr);
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
+    ASSERT_NE(application.get_universe().get("cartesian"), nullptr);
+    yli::ontology::Variable* cartesian_coordinates_variable = application.get_universe().get("cartesian");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
@@ -1237,67 +1077,64 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float x = 1234.25f;
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct x_variable_struct(application.get_universe(), &application.get_universe());
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
+    application.get_universe().create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct y_variable_struct(application.get_universe(), &application.get_universe());
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
+    application.get_universe().create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct z_variable_struct(application.get_universe(), &application.get_universe());
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
+    application.get_universe().create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(application.get_universe(), &application.get_universe());
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
+    application.get_universe().create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
-    ASSERT_NE(universe->get("x"), nullptr);
-    yli::ontology::Variable* x_variable = universe->get("x");
+    ASSERT_NE(application.get_universe().get("x"), nullptr);
+    yli::ontology::Variable* x_variable = application.get_universe().get("x");
     ASSERT_NE(x_variable, nullptr);
     std::optional<yli::data::AnyValue> x_value = x_variable->get();
     ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 1234.25f);
 
-    ASSERT_NE(universe->get("y"), nullptr);
-    yli::ontology::Variable* y_variable = universe->get("y");
+    ASSERT_NE(application.get_universe().get("y"), nullptr);
+    yli::ontology::Variable* y_variable = application.get_universe().get("y");
     ASSERT_NE(y_variable, nullptr);
     std::optional<yli::data::AnyValue> y_value = y_variable->get();
     ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 2345.50f);
 
-    ASSERT_NE(universe->get("z"), nullptr);
-    yli::ontology::Variable* z_variable = universe->get("z");
+    ASSERT_NE(application.get_universe().get("z"), nullptr);
+    yli::ontology::Variable* z_variable = application.get_universe().get("z");
     ASSERT_NE(z_variable, nullptr);
     std::optional<yli::data::AnyValue> z_value = z_variable->get();
     ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 3456.75f);
 
-    ASSERT_NE(universe->get("cartesian"), nullptr);
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
+    ASSERT_NE(application.get_universe().get("cartesian"), nullptr);
+    yli::ontology::Variable* cartesian_coordinates_variable = application.get_universe().get("cartesian");
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
@@ -1309,45 +1146,42 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float x = 1234.25f;
     float y = 2345.50f;
     float z = 3456.75f;
 
-    yli::ontology::VariableStruct x_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct x_variable_struct(application.get_universe(), &application.get_universe());
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(x_variable_struct, yli::data::AnyValue(x));
+    application.get_universe().create_variable(x_variable_struct, yli::data::AnyValue(x));
 
-    yli::ontology::VariableStruct y_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct y_variable_struct(application.get_universe(), &application.get_universe());
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(y_variable_struct, yli::data::AnyValue(y));
+    application.get_universe().create_variable(y_variable_struct, yli::data::AnyValue(y));
 
-    yli::ontology::VariableStruct z_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct z_variable_struct(application.get_universe(), &application.get_universe());
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    universe->create_variable(z_variable_struct, yli::data::AnyValue(z));
+    application.get_universe().create_variable(z_variable_struct, yli::data::AnyValue(z));
 
-    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(*universe, universe);
+    yli::ontology::VariableStruct cartesian_coordinates_variable_struct(application.get_universe(), &application.get_universe());
     cartesian_coordinates_variable_struct.local_name = "cartesian";
     cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
     cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
     cartesian_coordinates_variable_struct.should_call_activate_callback_now = false;
-    universe->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
+    application.get_universe().create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(NAN, NAN, NAN)));
 
-    yli::ontology::Variable* x_variable = universe->get("x");
-    yli::ontology::Variable* y_variable = universe->get("y");
-    yli::ontology::Variable* z_variable = universe->get("z");
-    yli::ontology::Variable* cartesian_coordinates_variable = universe->get("cartesian");
+    yli::ontology::Variable* x_variable = application.get_universe().get("x");
+    yli::ontology::Variable* y_variable = application.get_universe().get("y");
+    yli::ontology::Variable* z_variable = application.get_universe().get("z");
+    yli::ontology::Variable* cartesian_coordinates_variable = application.get_universe().get("cartesian");
 
     x_variable->set("0.875");
     std::optional<yli::data::AnyValue> x_value = x_variable->get();
@@ -1375,15 +1209,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("true");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1396,15 +1227,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("false");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1417,15 +1245,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("true");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1438,15 +1263,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("false");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1459,15 +1281,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1480,15 +1299,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1501,15 +1317,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("a");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1522,15 +1335,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("b");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1543,15 +1353,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("A");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1564,15 +1371,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set(" ");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1585,15 +1389,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("\n");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1606,15 +1407,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("ba");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1627,15 +1425,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("bb");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1648,15 +1443,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     char char_lowercase_a = 'a';
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("bc");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1669,15 +1461,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1690,15 +1479,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1711,15 +1497,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1732,15 +1515,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1753,15 +1533,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1774,15 +1551,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1795,15 +1569,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_zero = 0.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1816,15 +1587,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1837,15 +1605,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1858,15 +1623,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1879,15 +1641,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1900,15 +1659,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1921,15 +1677,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1942,15 +1695,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     float float_plus_1 = 1.0f;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1963,15 +1713,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -1984,15 +1731,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2005,15 +1749,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2026,15 +1767,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2047,15 +1785,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2068,15 +1803,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2089,15 +1821,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_zero = 0.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2110,15 +1839,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2131,15 +1857,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2152,15 +1875,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2173,15 +1893,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2194,15 +1911,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2215,15 +1929,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2236,15 +1947,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     double double_plus_1 = 1.0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2257,15 +1965,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2278,15 +1983,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2299,15 +2001,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2320,15 +2019,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2341,15 +2037,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2362,15 +2055,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2383,15 +2073,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2404,15 +2091,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2425,15 +2109,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2446,15 +2127,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2467,15 +2145,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2488,15 +2163,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2509,15 +2181,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     int32_t int32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2530,15 +2199,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2551,15 +2217,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2572,15 +2235,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2593,15 +2253,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2614,15 +2271,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2635,15 +2289,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2656,15 +2307,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_zero = 0;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2677,15 +2325,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2698,15 +2343,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2719,15 +2361,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("-1");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2740,15 +2379,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("0.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2761,15 +2397,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("1.0");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2782,15 +2415,12 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     uint32_t uint32_t_plus_1 = 1;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     variable->set("foo");
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
@@ -2803,15 +2433,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     yli::data::AnyValue bool_true_any_value(true);
     variable->set(bool_true_any_value);
     ASSERT_NE(variable->get(), std::nullopt);
@@ -2828,15 +2455,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     yli::data::AnyValue bool_false_any_value(false);
     variable->set(bool_false_any_value);
     ASSERT_NE(variable->get(), std::nullopt);
@@ -2853,15 +2477,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     yli::data::AnyValue bool_true_any_value(true);
     variable->set(bool_true_any_value);
     ASSERT_NE(variable->get(), std::nullopt);
@@ -2878,15 +2499,12 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
 
-    yli::ontology::Variable* const variable = universe->get("foo");
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     yli::data::AnyValue bool_false_any_value(false);
     variable->set(bool_false_any_value);
     ASSERT_NE(variable->get(), std::nullopt);
@@ -2903,14 +2521,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
-    yli::ontology::Variable* const variable = universe->get("foo");
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
 
     yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
@@ -2925,14 +2540,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
-    yli::ontology::Variable* const variable = universe->get("foo");
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
 
     yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
@@ -2947,14 +2559,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_true = true;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_true));
-    yli::ontology::Variable* const variable = universe->get("foo");
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
 
     yli::ontology::Variable::set_variable_const_std_string(*variable, "true");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));
@@ -2969,14 +2578,11 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_w
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     bool bool_false = false;
-    yli::ontology::VariableStruct variable_struct(*universe, universe);
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.global_name = "foo";
-    universe->create_variable(variable_struct, yli::data::AnyValue(bool_false));
-    yli::ontology::Variable* const variable = universe->get("foo");
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
+    yli::ontology::Variable* const variable = application.get_universe().get("foo");
 
     yli::ontology::Variable::set_variable_const_std_string(*variable, "false");
     ASSERT_TRUE(std::holds_alternative<bool>(variable->variable_value.data));

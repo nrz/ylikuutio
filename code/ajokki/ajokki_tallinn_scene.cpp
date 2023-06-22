@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_tallinn_scene.hpp"
+#include "ajokki.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -26,7 +26,6 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -48,7 +47,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* create_tallinn_scene(yli::ontology::EntityFactory* const entity_factory)
+    yli::ontology::Entity* AjokkiApplication::create_tallinn_scene()
     {
         // Tallinn `Scene` begins here.
 
@@ -56,7 +55,7 @@ namespace ajokki
         yli::ontology::SceneStruct scene_struct;
         scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
-        yli::ontology::Entity* const tallinn_scene_entity = entity_factory->create_scene(scene_struct);
+        yli::ontology::Entity* const tallinn_scene_entity = this->entity_factory.create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* tallinn_scene ...\n";
         yli::ontology::Scene* const tallinn_scene = dynamic_cast<yli::ontology::Scene*>(tallinn_scene_entity);
 
@@ -81,7 +80,7 @@ namespace ajokki
         tallinn_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* tallinn_pipeline_entity ...\n";
-        yli::ontology::Entity* const tallinn_pipeline_entity = entity_factory->create_pipeline(tallinn_pipeline_struct);
+        yli::ontology::Entity* const tallinn_pipeline_entity = this->entity_factory.create_pipeline(tallinn_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* tallinn_pipeline ...\n";
         yli::ontology::Pipeline* const tallinn_pipeline = dynamic_cast<yli::ontology::Pipeline*>(tallinn_pipeline_entity);
 
@@ -99,7 +98,7 @@ namespace ajokki
         tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating yli::ontology::Entity* tallinn_grass_material_entity ...\n";
-        yli::ontology::Entity* const tallinn_grass_material_entity = entity_factory->create_material(tallinn_grass_material_struct);
+        yli::ontology::Entity* const tallinn_grass_material_entity = this->entity_factory.create_material(tallinn_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* tallinn_grass_material ...\n";
         yli::ontology::Material* const tallinn_grass_material = dynamic_cast<yli::ontology::Material*>(tallinn_grass_material_entity);
 
@@ -123,7 +122,7 @@ namespace ajokki
         tallinn_terrain_model_struct.z_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* tallinn_terrain_species_entity ...\n";
-        yli::ontology::Entity* const tallinn_terrain_species_entity = entity_factory->create_species(tallinn_terrain_model_struct);
+        yli::ontology::Entity* const tallinn_terrain_species_entity = this->entity_factory.create_species(tallinn_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* tallinn_terrain_species ...\n";
         yli::ontology::Species* const tallinn_terrain_species = dynamic_cast<yli::ontology::Species*>(tallinn_terrain_species_entity);
 
@@ -139,7 +138,7 @@ namespace ajokki
         yli::ontology::ObjectStruct tallinn_struct(tallinn_scene);
         tallinn_struct.mesh_master = tallinn_terrain_species;
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        entity_factory->create_object(tallinn_struct);
+        this->entity_factory.create_object(tallinn_struct);
 
         return tallinn_scene_entity;
         // Tallinn `Scene` ends here.

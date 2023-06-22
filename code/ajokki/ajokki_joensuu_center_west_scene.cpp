@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "ajokki_joensuu_center_west_scene.hpp"
+#include "ajokki.hpp"
 #include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -29,7 +29,6 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -51,7 +50,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* create_joensuu_center_west_scene(yli::ontology::EntityFactory* const entity_factory)
+    yli::ontology::Entity* AjokkiApplication::create_joensuu_center_west_scene()
     {
         // Joensuu `Scene` begins here.
 
@@ -59,7 +58,7 @@ namespace ajokki
         yli::ontology::SceneStruct scene_struct;
         scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 77.0f;
-        yli::ontology::Entity* const joensuu_center_west_scene_entity = entity_factory->create_scene(scene_struct);
+        yli::ontology::Entity* const joensuu_center_west_scene_entity = this->entity_factory.create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene ...\n";
         yli::ontology::Scene* const joensuu_center_west_scene = dynamic_cast<yli::ontology::Scene*>(joensuu_center_west_scene_entity);
 
@@ -86,7 +85,7 @@ namespace ajokki
         joensuu_center_west_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_pipeline_entity ...\n";
-        yli::ontology::Entity* const joensuu_center_west_pipeline_entity = entity_factory->create_pipeline(joensuu_center_west_pipeline_struct);
+        yli::ontology::Entity* const joensuu_center_west_pipeline_entity = this->entity_factory.create_pipeline(joensuu_center_west_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* joensuu_center_west_pipeline ...\n";
         yli::ontology::Pipeline* const joensuu_center_west_pipeline = dynamic_cast<yli::ontology::Pipeline*>(joensuu_center_west_pipeline_entity);
 
@@ -106,7 +105,7 @@ namespace ajokki
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_grass_material_entity ...\n";
-        yli::ontology::Entity* const joensuu_center_west_grass_material_entity = entity_factory->create_material(joensuu_center_west_grass_material_struct);
+        yli::ontology::Entity* const joensuu_center_west_grass_material_entity = this->entity_factory.create_material(joensuu_center_west_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* joensuu_center_west_grass_material ...\n";
         yli::ontology::Material* const joensuu_center_west_grass_material = dynamic_cast<yli::ontology::Material*>(joensuu_center_west_grass_material_entity);
 
@@ -127,7 +126,7 @@ namespace ajokki
         joensuu_center_west_terrain_model_struct.x_step = 4;
         joensuu_center_west_terrain_model_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";
-        yli::ontology::Entity* const joensuu_center_west_terrain_species_entity = entity_factory->create_species(joensuu_center_west_terrain_model_struct);
+        yli::ontology::Entity* const joensuu_center_west_terrain_species_entity = this->entity_factory.create_species(joensuu_center_west_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* joensuu_center_west_terrain_species ...\n";
         yli::ontology::Species* const joensuu_center_west_terrain_species = dynamic_cast<yli::ontology::Species*>(joensuu_center_west_terrain_species_entity);
 
@@ -143,7 +142,7 @@ namespace ajokki
         yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_scene);
         joensuu_center_west_struct.mesh_master = joensuu_center_west_terrain_species;
         joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        entity_factory->create_object(joensuu_center_west_struct);
+        this->entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
         yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
@@ -153,7 +152,7 @@ namespace ajokki
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating yli::ontology::Entity* orange_fur_material_joensuu_entity ...\n";
-        yli::ontology::Entity* const orange_fur_material_joensuu_entity = entity_factory->create_material(orange_fur_material_joensuu_struct);
+        yli::ontology::Entity* const orange_fur_material_joensuu_entity = this->entity_factory.create_material(orange_fur_material_joensuu_struct);
         std::cout << "Creating yli::ontology::Material* orange_fur_material_joensuu ...\n";
         yli::ontology::Material* const orange_fur_material_joensuu = dynamic_cast<yli::ontology::Material*>(orange_fur_material_joensuu_entity);
 
@@ -173,7 +172,7 @@ namespace ajokki
         horse_model_struct.model_filename = "horse.fbx";
 
         std::cout << "Creating yli::ontology::Entity* horse_species_entity ...\n";
-        yli::ontology::Entity* const horse_species_entity = entity_factory->create_species(horse_model_struct);
+        yli::ontology::Entity* const horse_species_entity = this->entity_factory.create_species(horse_model_struct);
 
         std::cout << "Creating yli::ontology::Species* horse_species ...\n";
         yli::ontology::Species* const horse_species = dynamic_cast<yli::ontology::Species*>(horse_species_entity);
@@ -192,7 +191,7 @@ namespace ajokki
         horse_object_struct1.initial_rotate_angles = { -0.5f * pi };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
-        yli::ontology::Entity* const horse1_entity = entity_factory->create_object(horse_object_struct1);
+        yli::ontology::Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);
         yli::ontology::Object* const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 
         if (horse1 == nullptr)
@@ -210,7 +209,7 @@ namespace ajokki
         horse_camera_struct.orientation.pitch = -0.18f;
 
         std::cout << "Creating yli::ontology::Entity* horse_camera_entity ...\n";
-        yli::ontology::Entity* const horse_camera_entity = entity_factory->create_camera(horse_camera_struct);
+        yli::ontology::Entity* const horse_camera_entity = this->entity_factory.create_camera(horse_camera_struct);
         std::cout << "Creating yli::ontology::Camera* horse_camera ...\n";
         yli::ontology::Camera* const horse_camera = dynamic_cast<yli::ontology::Camera*>(horse_camera_entity);
 

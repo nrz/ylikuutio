@@ -192,7 +192,7 @@ namespace yli::hierarchy
                 std::size_t& number_of_children) noexcept
         {
             // requirements:
-            // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
+            // `childID` must not be `std::numeric_limits<std::size_t>::max()`.
             //     (`std::numeric_limits<std::size_t>::max()` as `childID` value means that `childID` is uninitialized).
 
             if (childID == std::numeric_limits<std::size_t>::max())
@@ -202,17 +202,6 @@ namespace yli::hierarchy
 
             // Set pointer to this child to `nullptr` in the old parent.
             yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
-        }
-
-    template<typename T1>
-        void delete_children(std::vector<T1>& child_pointer_vector, std::size_t& number_of_children) noexcept
-        {
-            for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
-            {
-                delete child_pointer_vector.at(child_i);
-            }
-
-            number_of_children = 0; // no children any more.
         }
 
     template<typename T1>

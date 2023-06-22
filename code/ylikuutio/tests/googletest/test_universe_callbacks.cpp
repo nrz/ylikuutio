@@ -28,7 +28,6 @@
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -37,7 +36,6 @@
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <string>   // std::string, std::getline
@@ -51,150 +49,87 @@ namespace yli::ontology
     class Console;
 }
 
-// Public `Entity` create callbacks.
-
-// Public `Entity` delete callbacks.
-
-TEST(scene_must_be_deleted_appropriately, universe_callback)
-{
-    mock::MockApplication application;
-
-    yli::ontology::Console* const console = nullptr;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
-    const std::string scene_name = "foo";
-
-    yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            application,
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
-    scene->set_global_name(scene_name);
-
-    universe->activate_entity(*scene);
-
-    universe->delete_entity(*universe, *scene);
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
-}
-
 // Public `Entity` activate callbacks.
 
 TEST(scene_must_be_activated_appropriately, universe_callback)
 {
     mock::MockApplication application;
-
     yli::ontology::Console* const console = nullptr;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            application,
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+            scene_struct);
     scene->set_global_name(scene_name);
 
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
 
-    universe->activate_entity(*scene);
-    ASSERT_EQ(universe->get_active_scene(), scene);
+    application.get_universe().activate_entity(*scene);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
 }
 
 TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles, nullptr);
+    yli::ontology::Console* const console = application.get_entity_factory().create_console(
+            console_struct);
     console->set_global_name(console_name);
 
-    ASSERT_EQ(universe->get_active_console(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_console(), nullptr);
 
-    universe->activate_entity(*console);
-    ASSERT_EQ(universe->get_active_console(), console);
+    application.get_universe().activate_entity(*console);
+    ASSERT_EQ(application.get_universe().get_active_console(), console);
 }
 
 TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
-    yli::ontology::Font2D* font_2d = new yli::ontology::Font2D(
-            application,
-            *universe,
-            yli::ontology::FontStruct(),
-            &universe->parent_of_font_2ds);
+    yli::ontology::Font2D* font_2d = application.get_entity_factory().create_font_2d(
+            yli::ontology::FontStruct());
 
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = new yli::ontology::Console(
-            application,
-            *universe,
-            console_struct,
-            &universe->parent_of_consoles, nullptr);
+    yli::ontology::Console* const console = application.get_entity_factory().create_console(
+            console_struct);
     console->set_global_name(console_name);
 
-    ASSERT_EQ(universe->get_active_console(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_console(), nullptr);
 
-    universe->activate_entity(*console);
-    ASSERT_EQ(universe->get_active_console(), console);
+    application.get_universe().activate_entity(*console);
+    ASSERT_EQ(application.get_universe().get_active_console(), console);
 }
 
 TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 {
     mock::MockApplication application;
-
     yli::ontology::Console* const console = nullptr;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
 
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            application,
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+            scene_struct);
     scene->set_global_name(scene_name);
 
-    const std::string camera_name = "bar";
-    yli::ontology::Camera* const camera = new yli::ontology::Camera(
-            application,
-            *universe,
-            yli::ontology::CameraStruct(),
-            &scene->parent_of_cameras, nullptr);
-    camera->set_global_name(camera_name);
+    yli::ontology::CameraStruct camera_struct;
+    camera_struct.scene = scene;
+    camera_struct.global_name = "bar";
+    yli::ontology::Camera* const camera = application.get_entity_factory().create_camera(camera_struct);
 
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
     ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.
 
-    universe->activate_entity(*scene);
-    ASSERT_EQ(universe->get_active_scene(), scene);
+    application.get_universe().activate_entity(*scene);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
     ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.
 
-    universe->activate_entity(*camera);
-    ASSERT_EQ(universe->get_active_scene(), scene);
+    application.get_universe().activate_entity(*camera);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
     ASSERT_EQ(scene->get_active_camera(), camera);
 }
 

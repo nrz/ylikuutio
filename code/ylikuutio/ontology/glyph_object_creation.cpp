@@ -16,12 +16,13 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "glyph_object_creation.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "vector_font.hpp"
 #include "text_3d.hpp"
 #include "object.hpp"
 #include "object_type.hpp"
 #include "object_struct.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
@@ -70,7 +71,7 @@ namespace yli::ontology
             object_struct.original_scale_vector = text_3d->original_scale_vector;
             object_struct.cartesian_coordinates = text_3d->location; // TODO: adjust this as needed.
 
-            yli::ontology::EntityFactory& entity_factory = text_3d->get_entity_factory();
+            yli::ontology::GenericEntityFactory& entity_factory = text_3d->get_application().get_entity_factory();
             entity_factory.create_object(object_struct);
         }
 

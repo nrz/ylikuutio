@@ -19,15 +19,12 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
+#include "code/ylikuutio/ontology/generic_entity_factory.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/callback_object_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -297,14 +294,11 @@ TEST(callback_engine_must_function_properly, nop)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
 
     yli::ontology::CallbackObjectStruct callback_object_struct;
-    auto callback_object = static_cast<yli::ontology::CallbackObject*>(callback_engine->create_callback_object());
+    auto callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&nop);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
@@ -315,11 +309,8 @@ TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&return_uint32_t_deadbeef);
 
@@ -332,11 +323,8 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -354,11 +342,8 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -376,11 +361,8 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -398,11 +380,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -420,11 +399,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&neg);
 
@@ -442,11 +418,8 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&square);
 
@@ -464,11 +437,8 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&square);
 
@@ -486,11 +456,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&expt);
 
@@ -512,11 +479,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&expt_with_named_inputs);
 
@@ -540,11 +504,8 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object_expt = callback_engine->create_callback_object();
     callback_object_expt->set_new_callback(&expt);
     yli::ontology::CallbackObject* callback_object_square_last = callback_engine->create_callback_object();
@@ -568,11 +529,8 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
 {
     mock::MockApplication application;
 
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS));
-    yli::ontology::EntityFactory& entity_factory = universe->get_entity_factory();
-
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = static_cast<yli::ontology::CallbackEngine*>(entity_factory.create_callback_engine(callback_engine_struct));
+    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object_1st_square = callback_engine->create_callback_object();
     callback_object_1st_square->set_new_callback(&square);
 

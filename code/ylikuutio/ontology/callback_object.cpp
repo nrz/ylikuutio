@@ -16,10 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_object.hpp"
-#include "universe.hpp"
+#include "generic_parent_module.hpp"
 #include "callback_engine.hpp"
 #include "callback_parameter.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "callback_object_struct.hpp"
 #include "callback_parameter_struct.hpp"
 #include "family_templates.hpp"
@@ -75,7 +75,7 @@ namespace yli::ontology
             const std::string& name,
             const yli::data::AnyValue& any_value)
     {
-        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::CallbackParameterStruct callback_parameter_struct;
         callback_parameter_struct.parent = this;

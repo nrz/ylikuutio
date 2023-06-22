@@ -27,12 +27,15 @@
 
 namespace yli::memory
 {
+    class GenericMemorySystem;
     class GenericMemoryAllocator;
 }
 
 namespace yli::ontology
 {
+    class Entity;
     class Universe;
+    class GenericEntityFactory;
     struct UniverseStruct;
 }
 
@@ -52,23 +55,24 @@ namespace yli::core
             virtual std::string get_name() const;    // Note: this is not the global name or the local name of the `Application`.
             virtual std::string get_version() const; // `Application` version.
 
-            yli::ontology::Universe* get_universe() const;
-            void set_universe(yli::ontology::Universe* const universe);
-
             virtual std::vector<std::string> get_valid_keys() const = 0;
-            virtual yli::ontology::UniverseStruct get_universe_struct() const = 0;
 
-            virtual void create_memory_allocators();
+            virtual yli::memory::GenericMemorySystem& get_memory_system() const = 0;
 
-            virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const;
+            virtual void create_memory_allocators() = 0;
+
+            virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const = 0;
+
+            virtual yli::ontology::GenericEntityFactory& get_entity_factory() const = 0;
+
+            virtual bool is_universe(yli::ontology::Entity* entity) const = 0;
+
+            virtual yli::ontology::Universe& get_universe() const = 0;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
             virtual bool create_simulation() = 0;
 
             yli::command_line::CommandLineMaster command_line_master;
-
-        private:
-            yli::ontology::Universe* universe;
     };
 
     std::unique_ptr<yli::core::Application> create_application();

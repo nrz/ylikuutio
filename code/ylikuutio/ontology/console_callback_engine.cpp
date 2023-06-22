@@ -16,13 +16,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console_callback_engine.hpp"
-#include "universe.hpp"
 #include "callback_engine.hpp"
 #include "console_callback_object.hpp"
-#include "entity_factory.hpp"
 #include "console_callback_object_struct.hpp"
+#include "generic_entity_factory.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
+
+// Include standard headers
+#include <iostream>
 
 namespace yli::ontology
 {
@@ -41,14 +44,12 @@ namespace yli::ontology
             const InputParametersToAnyValueCallbackWithConsole callback,
             yli::ontology::Console* const console_pointer)
     {
-        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct;
         console_callback_object_struct.parent = this;
         console_callback_object_struct.console_callback = callback;
         console_callback_object_struct.console_pointer = console_pointer;
-
-        return static_cast<yli::ontology::ConsoleCallbackObject*>(entity_factory.create_console_callback_object(
-                    console_callback_object_struct));
+        return entity_factory.create_console_callback_object(console_callback_object_struct);
     }
 }

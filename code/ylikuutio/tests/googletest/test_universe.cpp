@@ -18,8 +18,6 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -28,74 +26,65 @@
 TEST(universe_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
+    yli::ontology::Universe& universe = application.get_universe();
 
     // `Universe` member variables.
-    ASSERT_FALSE(universe->is_invert_mouse_in_use);
-    ASSERT_FALSE(universe->is_first_turbo_pressed);
-    ASSERT_FALSE(universe->is_second_turbo_pressed);
-    ASSERT_TRUE(universe->is_exit_requested);
-    ASSERT_FALSE(universe->in_console);
-    ASSERT_TRUE(universe->in_help_mode);
-    ASSERT_TRUE(universe->can_display_help_screen);
+    ASSERT_FALSE(universe.is_invert_mouse_in_use);
+    ASSERT_FALSE(universe.is_first_turbo_pressed);
+    ASSERT_FALSE(universe.is_second_turbo_pressed);
+    ASSERT_TRUE(universe.is_exit_requested);
+    ASSERT_FALSE(universe.in_console);
+    ASSERT_TRUE(universe.in_help_mode);
+    ASSERT_TRUE(universe.can_display_help_screen);
 
     // `Universe` member functions.
-    ASSERT_TRUE(universe->get_is_headless());
-    ASSERT_EQ(universe->get_number_of_ecosystems(), 0);
-    ASSERT_EQ(universe->get_number_of_scenes(), 0);
-    ASSERT_EQ(universe->get_active_scene(), nullptr);
+    ASSERT_TRUE(universe.get_is_headless());
+    ASSERT_EQ(universe.get_number_of_ecosystems(), 0);
+    ASSERT_EQ(universe.get_number_of_scenes(), 0);
+    ASSERT_EQ(universe.get_active_scene(), nullptr);
 
     // `Entity` member functions.
-    ASSERT_EQ(universe->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(universe->get_type(), "yli::ontology::Universe*");
-    ASSERT_FALSE(universe->get_can_be_erased());
-    ASSERT_EQ(&(universe->get_universe()), universe);
-    ASSERT_EQ(universe->get_scene(), nullptr);
-    ASSERT_EQ(universe->get_parent(), nullptr);
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(universe.get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(universe.get_type(), "yli::ontology::Universe*");
+    ASSERT_FALSE(universe.get_can_be_erased());
+    ASSERT_EQ(universe.get_scene(), nullptr);
+    ASSERT_EQ(universe.get_parent(), nullptr);
+    ASSERT_EQ(universe.get_number_of_non_variable_children(), 0);
 }
 
 TEST(universe_must_be_given_a_global_name_appropriately, headless)
 {
     mock::MockApplication application;
+    yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(universe.get_global_name(), "");
+    ASSERT_EQ(universe.get_local_name(), "");
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_global_name("foo");
-    ASSERT_EQ(universe->get_global_name(), "foo");
-    ASSERT_EQ(universe->get_local_name(), "");
+    universe.set_global_name("foo");
+    ASSERT_EQ(universe.get_global_name(), "foo");
+    ASSERT_EQ(universe.get_local_name(), "");
 }
 
 TEST(universe_must_not_accept_a_local_name_before_setting_a_global_name, headless)
 {
     mock::MockApplication application;
+    yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(universe.get_global_name(), "");
+    ASSERT_EQ(universe.get_local_name(), "");
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_local_name("foo");
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
+    universe.set_local_name("foo");
+    ASSERT_EQ(universe.get_global_name(), "");
+    ASSERT_EQ(universe.get_local_name(), "");
 }
 
 TEST(universe_must_not_accept_a_local_name_after_setting_a_global_name, headless)
 {
     mock::MockApplication application;
+    yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(universe.get_global_name(), "");
+    ASSERT_EQ(universe.get_local_name(), "");
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get_global_name(), "");
-    ASSERT_EQ(universe->get_local_name(), "");
-
-    universe->set_global_name("foo");
-    universe->set_local_name("bar");
-    ASSERT_EQ(universe->get_global_name(), "foo");
-    ASSERT_EQ(universe->get_local_name(), "");
+    universe.set_global_name("foo");
+    universe.set_local_name("bar");
+    ASSERT_EQ(universe.get_global_name(), "foo");
+    ASSERT_EQ(universe.get_local_name(), "");
 }

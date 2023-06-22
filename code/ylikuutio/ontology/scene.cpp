@@ -26,6 +26,7 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "brain.hpp"
+#include "generic_entity_factory.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
@@ -133,7 +134,7 @@ namespace yli::ontology
         // create the default `Camera`.
         yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = this;
-        new yli::ontology::Camera(this->application, this->universe, camera_struct, &this->parent_of_default_camera, nullptr); // create the default camera.
+        this->application.get_entity_factory().create_default_camera(camera_struct);
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";

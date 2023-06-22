@@ -26,7 +26,7 @@
 #include "species.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
-#include "entity_factory.hpp"
+#include "generic_entity_factory.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -490,7 +490,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        yli::ontology::EntityFactory& entity_factory = parent.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);

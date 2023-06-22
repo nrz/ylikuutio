@@ -18,9 +18,12 @@
 #ifndef HIRVI_HIRVI_HPP_INCLUDED
 #define HIRVI_HIRVI_HPP_INCLUDED
 
+#include "datatype.hpp"
 #include "cat.hpp"
 #include "police_car.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/core/system_factory.hpp"
+#include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
@@ -48,7 +51,6 @@
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
-#include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
@@ -56,14 +58,30 @@
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 #include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
 #include "code/ylikuutio/ontology/terrain.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
 #include <memory> // std::unique_ptr
 #include <string> // std::string
 #include <vector> // std::vector
 
+namespace yli::audio
+{
+    class AudioSystem;
+}
+
+namespace yli::memory
+{
+    class GenericMemorySystem;
+    class GenericMemoryAllocator;
+}
+
 namespace yli::ontology
 {
+    class Entity;
+    class Universe;
+    class Ecosystem;
+    class GenericEntityFactory;
     struct UniverseStruct;
 }
 
@@ -119,9 +137,31 @@ namespace hirvi
 
             std::vector<std::string> get_valid_keys() const override;
 
-            yli::ontology::UniverseStruct get_universe_struct() const override;
+            yli::memory::GenericMemorySystem& get_memory_system() const override;
+
+            void create_memory_allocators() override;
+
+            yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const override;
+
+            yli::ontology::GenericEntityFactory& get_entity_factory() const override;
+
+            bool is_universe(yli::ontology::Entity* entity) const override;
+
+            yli::ontology::Universe& get_universe() const override;
+
+            yli::ontology::UniverseStruct get_universe_struct() const;
 
             bool create_simulation() override;
+
+        private:
+            yli::ontology::Ecosystem* create_earth_ecosystem();
+            yli::ontology::Entity* create_helsinki_east_downtown_scene();
+
+            yli::memory::MemorySystem<hirvi::Datatype> memory_system;
+            yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
+            yli::core::SystemFactory<hirvi::Datatype> system_factory;
+            yli::ontology::Universe* universe     { nullptr };
+            yli::audio::AudioSystem* audio_system { nullptr };
     };
 }
 

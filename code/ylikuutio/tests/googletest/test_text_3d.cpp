@@ -25,57 +25,43 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/text_3d_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = new yli::ontology::Ecosystem(
-            application,
-            *universe,
-            ecosystem_struct,
-            &universe->parent_of_ecosystems);
+    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+            ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &ecosystem->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+            pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = ecosystem;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = new yli::ontology::Material(
-            application,
-            *universe,
-            material_struct,
-            &ecosystem->parent_of_materials, &pipeline->master_of_materials);
+    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+            material_struct);
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
+    yli::ontology::VectorFont* const vector_font = application.get_entity_factory().create_vector_font(
+            vector_font_struct);
 
     yli::ontology::Text3DStruct text_3d_struct;
     text_3d_struct.parent = vector_font;
-    yli::ontology::Text3D* text_3d = new yli::ontology::Text3D(
-            application,
-            *universe,
-            text_3d_struct,
-            &vector_font->parent_of_text_3ds,
-            nullptr);
+    yli::ontology::Text3D* text_3d = application.get_entity_factory().create_text_3d(
+            text_3d_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);  // `ecosystem`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
 
     // `Entity` member functions of `Ecosystem`.
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `material`.
@@ -93,7 +79,6 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     ASSERT_EQ(text_3d->get_childID(), 0);
     ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3D*");
     ASSERT_TRUE(text_3d->get_can_be_erased());
-    ASSERT_EQ(&(text_3d->get_universe()), universe);
     ASSERT_EQ(text_3d->get_scene(), nullptr);
     ASSERT_EQ(text_3d->get_parent(), vector_font);
     ASSERT_EQ(text_3d->get_number_of_non_variable_children(), 0);
@@ -102,45 +87,33 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
 TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_a_scene)
 {
     mock::MockApplication application;
-
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = new yli::ontology::Scene(
-            application,
-            *universe,
-            scene_struct,
-            &universe->parent_of_scenes);
+    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+            scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = new yli::ontology::Pipeline(application, *universe, pipeline_struct, &scene->parent_of_pipelines);
+    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+            pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = new yli::ontology::Material(
-            application,
-            *universe,
-            material_struct,
-            &scene->parent_of_materials, &pipeline->master_of_materials);
+    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+            material_struct);
 
     yli::ontology::VectorFontStruct vector_font_struct;
     vector_font_struct.parent = material;
-    yli::ontology::VectorFont* const vector_font = new yli::ontology::VectorFont(application, *universe, vector_font_struct, &material->parent_of_vector_fonts);
+    yli::ontology::VectorFont* const vector_font = application.get_entity_factory().create_vector_font(
+            vector_font_struct);
 
     yli::ontology::Text3DStruct text_3d_struct;
     text_3d_struct.parent = vector_font;
-    yli::ontology::Text3D* text_3d = new yli::ontology::Text3D(
-            application,
-            *universe,
-            text_3d_struct,
-            &vector_font->parent_of_text_3ds,
-            nullptr);
+    yli::ontology::Text3D* text_3d = application.get_entity_factory().create_text_3d(
+            text_3d_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1); // `scene`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `scene`.
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
@@ -158,7 +131,6 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     ASSERT_EQ(text_3d->get_childID(), 0);
     ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3D*");
     ASSERT_TRUE(text_3d->get_can_be_erased());
-    ASSERT_EQ(&(text_3d->get_universe()), universe);
     ASSERT_EQ(text_3d->get_scene(), scene);
     ASSERT_EQ(text_3d->get_parent(), vector_font);
     ASSERT_EQ(text_3d->get_number_of_non_variable_children(), 0);

@@ -19,6 +19,8 @@
 #define MOCK_MOCK_APPLICATION_HPP_INCLUDED
 
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
@@ -53,14 +55,24 @@
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 #include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
 #include <memory> // std::unique_ptr
 #include <string> // std::string
+#include <utility> // std::forward
 #include <vector> // std::vector
+
+namespace yli::memory
+{
+    class GenericMemorySystem;
+    class GenericMemoryAllocator;
+}
 
 namespace yli::ontology
 {
+    class Entity;
+    class Universe;
     struct UniverseStruct;
 }
 
@@ -107,19 +119,37 @@ namespace mock
 
             ~MockApplication() = default;
 
-            std::string get_name() const override;
-
             std::vector<std::string> get_valid_keys() const override;
 
-            yli::ontology::UniverseStruct get_universe_struct() const override;
+            yli::memory::GenericMemorySystem& get_memory_system() const override;
+
+            void create_memory_allocators() override;
+
+            yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const override;
+
+            yli::ontology::GenericEntityFactory& get_entity_factory() const override;
+
+            bool is_universe(yli::ontology::Entity* entity) const override;
+
+            yli::ontology::Universe& get_universe() const override;
+
+            yli::ontology::UniverseStruct get_universe_struct() const;
 
             bool create_simulation() override;
-    };
-}
 
-namespace yli::core
-{
-    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[]);
+            template<typename Allocator, typename... Args>
+                yli::ontology::Entity* build(const yli::data::Datatype type, Args... args)
+                {
+                    auto& generic_memory_allocator = this->get_memory_allocator(type);
+                    Allocator& memory_allocator = static_cast<Allocator&>(generic_memory_allocator);
+                    return memory_allocator.template build_in(*this, std::forward<Args>(args)...);
+                }
+
+        private:
+            yli::memory::MemorySystem<yli::data::Datatype> memory_system;
+            yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
+            yli::ontology::Universe* universe { nullptr };
+    };
 }
 
 #endif

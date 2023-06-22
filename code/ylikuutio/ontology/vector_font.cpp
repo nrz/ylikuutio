@@ -20,8 +20,8 @@
 #include "scene.hpp"
 #include "pipeline.hpp"
 #include "material.hpp"
-#include "glyph.hpp"
 #include "text_3d.hpp"
+#include "generic_entity_factory.hpp"
 #include "family_templates.hpp"
 #include "model_struct.hpp"
 #include "vector_font_struct.hpp"
@@ -187,7 +187,9 @@ namespace yli::ontology
                 std::string glyph_name_string = model_struct.glyph_name_pointer;
                 std::string unicode_string = model_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                yli::ontology::Glyph* glyph = new yli::ontology::Glyph(this->application, this->universe, model_struct, &this->parent_of_glyphs);
+
+                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+                yli::ontology::Glyph* glyph = entity_factory.create_glyph(model_struct);
 
                 // So that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.

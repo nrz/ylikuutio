@@ -19,30 +19,24 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
+#include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 
 TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
 {
     mock::MockApplication application;
 
-    yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-
-    yli::ontology::CallbackEngine* const callback_engine = new yli::ontology::CallbackEngine(
-            application,
-            *universe,
-            &universe->parent_of_callback_engines);
+    yli::ontology::CallbackEngineStruct callback_engine_struct;
+    yli::ontology::CallbackEngine* const callback_engine = application.get_entity_factory().create_callback_engine(
+            callback_engine_struct);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(universe->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions.
     ASSERT_EQ(callback_engine->get_childID(), 0);
     ASSERT_EQ(callback_engine->get_type(), "yli::ontology::CallbackEngine*");
     ASSERT_FALSE(callback_engine->get_can_be_erased());
-    ASSERT_EQ(&(callback_engine->get_universe()), universe);
     ASSERT_EQ(callback_engine->get_scene(), nullptr);
-    ASSERT_EQ(callback_engine->get_parent(), universe);
+    ASSERT_EQ(callback_engine->get_parent(), &application.get_universe());
     ASSERT_EQ(callback_engine->get_number_of_non_variable_children(), 0);
 }

@@ -19,7 +19,7 @@
 #include "generic_parent_module.hpp"
 #include "entity.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/memory/generic_memory_allocator.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -113,9 +113,15 @@ namespace yli::ontology
 
     GenericParentModule::~GenericParentModule() noexcept
     {
-        // destructor.
-
-        yli::hierarchy::delete_children<yli::ontology::Entity*>(this->child_pointer_vector, this->number_of_children);
+        for (yli::ontology::Entity* const child : this->child_pointer_vector)
+        {
+            if (child != nullptr)
+            {
+                this->unbind_child(child->get_childID());
+                auto constructible_module = child->get_constructible_module();
+                this->memory_allocator.destroy(constructible_module);
+            }
+        }
 
         if (this->number_of_children != 0)
         {

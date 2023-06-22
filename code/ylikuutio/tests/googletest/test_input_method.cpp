@@ -27,8 +27,8 @@ TEST(input_method_must_be_set_to_keyboard_in_headless_mode, universe)
     mock::MockApplication application;
 
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::HEADLESS);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get_input_method(), yli::input::InputMethod::KEYBOARD);
+    yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(universe.get_input_method(), yli::input::InputMethod::KEYBOARD);
 }
 
 TEST(input_method_must_be_set_to_keyboard_when_using_software_rendering, universe)
@@ -36,6 +36,6 @@ TEST(input_method_must_be_set_to_keyboard_when_using_software_rendering, univers
     mock::MockApplication application;
 
     yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::SOFTWARE);
-    yli::ontology::Universe* const universe = new yli::ontology::Universe(application, universe_struct);
-    ASSERT_EQ(universe->get_input_method(), yli::input::InputMethod::KEYBOARD);
+    yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(universe.get_input_method(), yli::input::InputMethod::KEYBOARD);
 }

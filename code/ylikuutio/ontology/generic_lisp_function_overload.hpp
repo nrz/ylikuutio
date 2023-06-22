@@ -43,12 +43,13 @@ namespace yli::ontology
 
     class GenericLispFunctionOverload: public yli::ontology::Entity
     {
-        public:
+        protected:
             GenericLispFunctionOverload(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module);
 
+        public:
             virtual ~GenericLispFunctionOverload() = default;
 
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.

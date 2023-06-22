@@ -16,11 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "callback_engine.hpp"
-#include "universe.hpp"
 #include "callback_object.hpp"
+#include "generic_entity_factory.hpp"
+#include "entity_struct.hpp"
 #include "callback_object_struct.hpp"
 #include "family_templates.hpp"
-#include "entity_factory.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -33,10 +33,7 @@
 
 namespace yli::ontology
 {
-    class Entity;
-    class GenericParentModule;
     class Universe;
-    class Scene;
 
     CallbackEngine::CallbackEngine(
             yli::core::Application& application,
@@ -57,21 +54,21 @@ namespace yli::ontology
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
     {
-        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
         callback_object_struct.parent = this;
-        return static_cast<yli::ontology::CallbackObject*>(entity_factory.create_callback_object(callback_object_struct));
+        return entity_factory.create_callback_object(callback_object_struct);
     }
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        yli::ontology::EntityFactory& entity_factory = this->universe.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
         callback_object_struct.parent = this;
-        auto callback_object = static_cast<yli::ontology::CallbackObject*>(entity_factory.create_callback_object(callback_object_struct));
+        auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;
     }
