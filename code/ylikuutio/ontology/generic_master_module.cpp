@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <limits>    // std::numeric_limits
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>  // std::string
