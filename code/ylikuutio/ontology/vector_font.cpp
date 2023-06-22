@@ -46,7 +46,6 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
-    class Pipeline;
     class Text3D;
     class Glyph;
 
