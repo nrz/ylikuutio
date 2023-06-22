@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_material.hpp"
-#include "universe.hpp"
 #include "pipeline.hpp"
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
@@ -36,6 +35,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
+    class Universe;
     class Scene;
 
     SymbiontMaterial::SymbiontMaterial(
