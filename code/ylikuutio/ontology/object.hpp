@@ -37,6 +37,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -76,6 +82,7 @@ namespace yli::ontology
                     yli::ontology::Object& object,
                     yli::ontology::Text3D& new_text_3d) noexcept;
 
+        protected:
             Object(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -86,6 +93,7 @@ namespace yli::ontology
 
             virtual ~Object() = default;
 
+        public:
             Object(const Object&) = delete;            // Delete copy constructor.
             Object& operator=(const Object&) = delete; // Delete copy assignment.
 
@@ -138,6 +146,9 @@ namespace yli::ontology
 
         private:
             void render_this_object(yli::ontology::Pipeline* const pipeline);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
         public:
             yli::ontology::ChildModule child_of_scene;
