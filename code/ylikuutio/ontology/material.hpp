@@ -39,6 +39,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -68,6 +74,7 @@ namespace yli::ontology
                     yli::ontology::Material& material,
                     yli::ontology::Pipeline& new_pipeline) noexcept;
 
+        private:
             Material(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -77,6 +84,7 @@ namespace yli::ontology
 
             ~Material() = default;
 
+        public:
             Material(const Material&) = delete;            // Delete copy constructor.
             Material& operator=(const Material&) = delete; // Delete copy assignment.
 
@@ -93,6 +101,9 @@ namespace yli::ontology
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;
             uint32_t get_image_size() const;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
