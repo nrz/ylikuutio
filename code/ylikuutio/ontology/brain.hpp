@@ -51,6 +51,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -61,7 +67,7 @@ namespace yli::ontology
 
     class Brain final : public yli::ontology::Entity
     {
-        public:
+        private:
             Brain(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -71,6 +77,7 @@ namespace yli::ontology
             // destructor.
             ~Brain() = default;
 
+        public:
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::GenericMasterModule* get_generic_master_module() const;
@@ -78,6 +85,9 @@ namespace yli::ontology
             std::size_t get_number_of_apprentices() const;
 
             void act();
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericMasterModule master_of_movables;
