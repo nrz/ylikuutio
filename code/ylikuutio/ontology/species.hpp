@@ -26,6 +26,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -33,6 +34,12 @@
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -66,6 +73,7 @@ namespace yli::ontology
                     yli::ontology::Species& species,
                     yli::ontology::Material& new_material) noexcept;
 
+        private:
             Species(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -75,6 +83,7 @@ namespace yli::ontology
 
             ~Species() = default;
 
+        public:
             Species(const Species&) = delete;            // Delete copy constructor.
             Species& operator=(const Species&) = delete; // Delete copy assignment.
 
@@ -98,6 +107,9 @@ namespace yli::ontology
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
 
