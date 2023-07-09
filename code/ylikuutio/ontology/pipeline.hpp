@@ -41,6 +41,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -64,6 +70,7 @@ namespace yli::ontology
                     yli::ontology::Pipeline& pipeline,
                     yli::ontology::Scene& new_parent) noexcept;
 
+        private:
             Pipeline(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -72,6 +79,7 @@ namespace yli::ontology
 
             ~Pipeline();
 
+        public:
             Pipeline(const Pipeline&) = delete;            // Delete copy constructor.
             Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
 
@@ -88,6 +96,10 @@ namespace yli::ontology
             GLuint get_program_id() const;
 
             friend class yli::ontology::PipelineCompare;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
