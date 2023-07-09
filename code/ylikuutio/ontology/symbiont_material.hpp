@@ -32,6 +32,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -41,7 +47,7 @@ namespace yli::ontology
 
     class SymbiontMaterial final : public yli::ontology::Entity
     {
-        public:
+        private:
             SymbiontMaterial(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -50,6 +56,7 @@ namespace yli::ontology
 
             ~SymbiontMaterial() = default;
 
+        public:
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
             SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
@@ -58,6 +65,9 @@ namespace yli::ontology
             yli::ontology::Pipeline* get_pipeline() const;
 
             GLint get_openGL_textureID() const;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_symbiosis;
             yli::ontology::GenericParentModule parent_of_symbiont_species;
