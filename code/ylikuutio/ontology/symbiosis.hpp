@@ -54,6 +54,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -86,6 +92,7 @@ namespace yli::ontology
                     yli::ontology::Symbiosis& symbiosis,
                     yli::ontology::Pipeline& new_pipeline) noexcept;
 
+        private:
             Symbiosis(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -95,6 +102,7 @@ namespace yli::ontology
 
             ~Symbiosis() = default;
 
+        public:
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
 
@@ -127,6 +135,9 @@ namespace yli::ontology
             bool has_texture(const std::size_t biontID) const;
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_symbiont_materials;
