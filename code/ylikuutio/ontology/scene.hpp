@@ -65,6 +65,12 @@ namespace yli::data
     struct SphericalCoordinatesStruct;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -75,7 +81,7 @@ namespace yli::ontology
 
     class Scene final : public yli::ontology::Entity
     {
-        public:
+        private:
             Scene(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -84,6 +90,7 @@ namespace yli::ontology
 
             ~Scene();
 
+        public:
             Scene(const Scene&) = delete;            // Delete copy constructor.
             Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
@@ -121,6 +128,9 @@ namespace yli::ontology
 
             bool get_is_flight_mode_in_use() const;
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
