@@ -31,6 +31,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -43,7 +49,7 @@ namespace yli::ontology
 
     class Biont final : public yli::ontology::Movable
     {
-        public:
+        private:
             Biont(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -53,10 +59,14 @@ namespace yli::ontology
 
             ~Biont();
 
+        public:
             Biont(const Biont&) = delete;            // Delete copy constructor.
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
 
             yli::ontology::Entity* get_parent() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_holobiont;
             yli::ontology::ApprenticeModule apprentice_of_symbiont_species;
