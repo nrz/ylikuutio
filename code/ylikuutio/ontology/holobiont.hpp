@@ -34,6 +34,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -45,7 +51,7 @@ namespace yli::ontology
 
     class Holobiont : public yli::ontology::Movable
     {
-        public:
+        protected:
             Holobiont(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -56,6 +62,7 @@ namespace yli::ontology
 
             virtual ~Holobiont() = default;
 
+        public:
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
@@ -97,6 +104,9 @@ namespace yli::ontology
                     const std::string& pitch);
 
             // Public callbacks end here.
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene;
             yli::ontology::GenericParentModule parent_of_bionts;
