@@ -1068,7 +1068,6 @@ namespace yli::ontology
                         static_cast<GenericLispFunctionOverloadMemoryAllocator&>(generic_allocator);
 
                     yli::ontology::GenericLispFunctionOverload* const generic_lisp_function_overload = allocator.build_in(
-                            static_cast<int>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD),
                             this->application,
                             this->get_universe(),
                             &lisp_function->parent_of_generic_lisp_function_overloads,

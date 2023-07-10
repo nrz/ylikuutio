@@ -162,7 +162,7 @@ namespace yli::memory
                 }
 
                 template<typename... Args>
-                    yli::ontology::GenericLispFunctionOverload* build_in(int datatype, Args&&... args)
+                    yli::ontology::GenericLispFunctionOverload* build_in(Args&&... args)
                     {
                         yli::ontology::GenericLispFunctionOverload* function_overload =
                             new yli::ontology::LispFunctionOverload(std::forward<Args>(args)...);
