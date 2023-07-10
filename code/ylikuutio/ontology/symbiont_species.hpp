@@ -44,6 +44,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -53,7 +59,7 @@ namespace yli::ontology
 
     class SymbiontSpecies final : public yli::ontology::Entity
     {
-        public:
+        private:
             SymbiontSpecies(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -62,6 +68,7 @@ namespace yli::ontology
 
             ~SymbiontSpecies() = default;
 
+        public:
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
@@ -81,6 +88,9 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         public:
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
+
             yli::ontology::ChildModule child_of_symbiont_material;
             yli::ontology::GenericMasterModule master_of_bionts;
             yli::ontology::MeshModule mesh;
