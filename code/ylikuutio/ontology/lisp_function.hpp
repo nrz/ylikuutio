@@ -34,6 +34,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -43,7 +49,7 @@ namespace yli::ontology
 
     class LispFunction final : public yli::ontology::Entity
     {
-        public:
+        private:
             LispFunction(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -52,12 +58,16 @@ namespace yli::ontology
 
             ~LispFunction() = default;
 
+        public:
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
 
             yli::ontology::Entity* get_parent() const override;
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_console;
             yli::ontology::GenericParentModule parent_of_generic_lisp_function_overloads;
