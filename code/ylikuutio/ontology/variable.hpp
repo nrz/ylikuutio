@@ -49,6 +49,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -59,7 +65,7 @@ namespace yli::ontology
 
     class Variable final : public yli::ontology::Entity
     {
-        public:
+        private:
             Variable(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -68,6 +74,7 @@ namespace yli::ontology
 
             ~Variable() = default;
 
+        public:
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
@@ -167,6 +174,9 @@ namespace yli::ontology
                     yli::ontology::Entity& entity);
 
             // Public callbacks and here.
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_entity;
 
