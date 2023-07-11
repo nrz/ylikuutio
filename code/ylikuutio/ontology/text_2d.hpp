@@ -33,6 +33,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -50,6 +56,7 @@ namespace yli::ontology
                     yli::ontology::Text2D& text_2d,
                     yli::ontology::Font2D& new_parent) noexcept;
 
+        private:
             Text2D(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -58,6 +65,7 @@ namespace yli::ontology
 
             ~Text2D();
 
+        public:
             Text2D(const Text2D&) = delete;            // Delete copy constructor.
             Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
 
@@ -66,6 +74,9 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             void change_string(const std::string& text);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_font_2d;
 
