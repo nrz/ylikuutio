@@ -71,6 +71,12 @@ namespace yli::map
                 yli::ontology::Console& console);
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
@@ -93,6 +99,7 @@ namespace yli::ontology
                     yli::ontology::Console& console,
                     yli::ontology::Font2D& new_font_2d) noexcept;
 
+        private:
             Console(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -102,6 +109,7 @@ namespace yli::ontology
 
             ~Console();
 
+        public:
             Console(const Console&) = delete;            // Delete copy constructor.
             Console& operator=(const Console&) = delete; // Delete copy assignment.
 
@@ -354,6 +362,9 @@ namespace yli::ontology
                     yli::ontology::Console& console);
 
             // Public callbacks end here.
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_lisp_functions;
