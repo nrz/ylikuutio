@@ -36,6 +36,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -66,7 +72,7 @@ namespace yli::ontology
         //    `CallbackParameter` for each parameter, give `CallbackObject`
         //    as input parameter for the `CallbackParameter` constructor.
 
-        public:
+        protected:
             CallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -74,6 +80,7 @@ namespace yli::ontology
 
             virtual ~CallbackEngine() = default;
 
+        public:
             yli::ontology::CallbackObject* create_callback_object();
             yli::ontology::CallbackObject* create_callback_object(
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
@@ -89,6 +96,9 @@ namespace yli::ontology
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_callback_objects;
