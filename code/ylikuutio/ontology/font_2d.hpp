@@ -35,6 +35,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -44,7 +50,7 @@ namespace yli::ontology
 
     class Font2D final : public yli::ontology::Entity
     {
-        public:
+        private:
             Font2D(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -53,6 +59,7 @@ namespace yli::ontology
 
             ~Font2D();
 
+        public:
             Font2D(const Font2D&) = delete;            // Delete copy constructor.
             Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
 
@@ -86,6 +93,9 @@ namespace yli::ontology
                     const uint32_t font_size,
                     const std::string& text,
                     const std::string& font_texture_file_format) const;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_text_2ds;
