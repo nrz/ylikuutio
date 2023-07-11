@@ -42,6 +42,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -60,6 +66,7 @@ namespace yli::ontology
                     yli::ontology::VectorFont& vector_font,
                     yli::ontology::Material& new_parent) noexcept;
 
+        private:
             VectorFont(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -68,6 +75,7 @@ namespace yli::ontology
 
             ~VectorFont() = default;
 
+        public:
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
 
@@ -78,6 +86,9 @@ namespace yli::ontology
             yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
             // The rest fields are created in the constructor.
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_material;
             yli::ontology::GenericParentModule parent_of_glyphs;
