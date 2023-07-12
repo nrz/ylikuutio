@@ -75,11 +75,10 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const pipeline_parent_module,
                     yli::ontology::GenericMasterModule* const end_condition_callback_engine_master);
 
+            ~ComputeTask();
+
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
-
-            // destructor.
-            ~ComputeTask();
 
             yli::ontology::Entity* get_parent() const override;
 
