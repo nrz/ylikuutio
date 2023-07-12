@@ -36,6 +36,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -46,7 +52,7 @@ namespace yli::ontology
 
     class ShapeshifterSequence final : public yli::ontology::Entity
     {
-        public:
+        private:
             ShapeshifterSequence(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -56,7 +62,11 @@ namespace yli::ontology
             // destructor.
             ~ShapeshifterSequence();
 
+        public:
             yli::ontology::Entity* get_parent() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
         private:
             yli::ontology::ChildModule child_of_shapeshifter_transformation;
