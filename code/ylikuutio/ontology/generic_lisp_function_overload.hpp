@@ -34,6 +34,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -49,15 +55,18 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const parent_module);
 
-        public:
             virtual ~GenericLispFunctionOverload() = default;
 
+        public:
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
             yli::ontology::Entity* get_parent() const override;
 
             virtual std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) = 0;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryAllocator;
 
             yli::ontology::ChildModule child_of_lisp_function;
 
