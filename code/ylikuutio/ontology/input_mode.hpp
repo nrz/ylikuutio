@@ -34,6 +34,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class ParentOfInputModesModule;
@@ -44,7 +50,7 @@ namespace yli::ontology
 
     class InputMode final : public yli::ontology::Entity
     {
-        public:
+        private:
             InputMode(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -54,6 +60,7 @@ namespace yli::ontology
 
             ~InputMode() = default;
 
+        public:
             void activate();
             void deactivate();
 
@@ -73,6 +80,9 @@ namespace yli::ontology
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::InputModeChildModule child_of_universe;
             yli::ontology::InputModeApprenticeModule apprentice_of_console;
