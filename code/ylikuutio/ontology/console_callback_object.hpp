@@ -23,11 +23,18 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -42,7 +49,7 @@ namespace yli::ontology
 
     class ConsoleCallbackObject final : public yli::ontology::CallbackObject
     {
-        public:
+        private:
             ~ConsoleCallbackObject() = default;
 
             ConsoleCallbackObject(
@@ -51,11 +58,13 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
                     yli::ontology::GenericParentModule* const console_callback_engine_parent);
 
-        private:
             // execute this callback.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&) override;
 
             friend class ConsoleCallbackEngine;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             InputParametersToAnyValueCallbackWithConsole console_callback;
             yli::ontology::Console* console_pointer;
