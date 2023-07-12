@@ -31,6 +31,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -40,7 +46,7 @@ namespace yli::ontology
 
     class CallbackParameter final : public yli::ontology::Entity
     {
-        public:
+        private:
             CallbackParameter(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -50,12 +56,16 @@ namespace yli::ontology
 
             ~CallbackParameter() = default;
 
+        public:
             const yli::data::AnyValue& get_any_value() const;
 
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_callback_object;
 
