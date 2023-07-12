@@ -90,8 +90,8 @@ namespace yli::ontology
             void render(const yli::ontology::Scene* const target_scene);
 
         private:
-            float transformation_speed;                        // Negative speed means inverse initial transition direction.
-            std::size_t initial_offset;                        // Index of the `ShapeshifterForm` from which to begin the transition.
+            float transformation_speed; // Negative speed means inverse initial transition direction.
+            std::size_t initial_offset; // Index of the `ShapeshifterForm` from which to begin the transition.
 
             // Repeating transitions begin from the `initial_offset`
             // endlessly in the same initial transition direction,
