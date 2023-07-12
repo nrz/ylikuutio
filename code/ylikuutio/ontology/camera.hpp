@@ -71,6 +71,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -82,7 +88,7 @@ namespace yli::ontology
 
     class Camera final : public yli::ontology::Movable
     {
-        public:
+        private:
             Camera(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -92,6 +98,7 @@ namespace yli::ontology
 
             ~Camera() = default;
 
+        public:
             Camera(const Camera&) = delete;            // Delete copy constructor.
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
 
@@ -107,6 +114,9 @@ namespace yli::ontology
             bool get_is_static_view() const;
 
             friend class yli::ontology::Universe;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_scene;
 
