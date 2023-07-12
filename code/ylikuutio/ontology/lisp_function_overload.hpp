@@ -52,6 +52,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryAllocator;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -62,7 +68,7 @@ namespace yli::ontology
     template<typename... Types>
         class LispFunctionOverload final : public yli::ontology::GenericLispFunctionOverload
     {
-        public:
+        private:
             LispFunctionOverload(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -79,6 +85,7 @@ namespace yli::ontology
 
             ~LispFunctionOverload() = default;
 
+        public:
             LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
             LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
@@ -210,6 +217,9 @@ namespace yli::ontology
 
                 return std::nullopt;
             }
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryAllocator;
 
             // The callback may receive different kinds of arguments.
             const std::function<std::optional<yli::data::AnyValue>(Types...)> callback;
