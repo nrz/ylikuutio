@@ -36,6 +36,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -53,6 +59,7 @@ namespace yli::ontology
                     yli::ontology::ShapeshifterTransformation& shapeshifter_transformation,
                     yli::ontology::Material& new_parent) noexcept;
 
+        private:
             ShapeshifterTransformation(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -62,7 +69,11 @@ namespace yli::ontology
             // destructor.
             ~ShapeshifterTransformation();
 
+        public:
             yli::ontology::Entity* get_parent() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_material;
             yli::ontology::GenericParentModule parent_of_shapeshifter_forms;
