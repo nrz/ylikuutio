@@ -18,12 +18,21 @@
 #include "callback_engine.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -35,7 +44,7 @@ namespace yli::ontology
 
     class ConsoleCallbackEngine final : public yli::ontology::CallbackEngine
     {
-        public:
+        private:
             ConsoleCallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -43,9 +52,13 @@ namespace yli::ontology
 
             ~ConsoleCallbackEngine() = default;
 
+        public:
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
                     const InputParametersToAnyValueCallbackWithConsole callback,
                     yli::ontology::Console* const console_pointer);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
     };
 }
 
