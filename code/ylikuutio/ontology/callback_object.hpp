@@ -35,6 +35,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -48,7 +54,7 @@ namespace yli::ontology
     {
         // CallbackObject is an object that contains a single callback.
 
-        public:
+        protected:
             CallbackObject(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -64,6 +70,7 @@ namespace yli::ontology
 
             virtual ~CallbackObject() = default;
 
+        public:
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const std::string& name,
                     const yli::data::AnyValue& any_value);
@@ -78,6 +85,9 @@ namespace yli::ontology
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             yli::ontology::ChildModule child_of_callback_engine;
             yli::ontology::GenericParentModule parent_of_callback_parameters;
