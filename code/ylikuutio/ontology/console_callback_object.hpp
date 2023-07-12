@@ -45,8 +45,6 @@ namespace yli::ontology
         public:
             ~ConsoleCallbackObject() = default;
 
-            friend class ConsoleCallbackEngine;
-
             ConsoleCallbackObject(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -56,6 +54,8 @@ namespace yli::ontology
         private:
             // execute this callback.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&) override;
+
+            friend class ConsoleCallbackEngine;
 
             InputParametersToAnyValueCallbackWithConsole console_callback;
             yli::ontology::Console* console_pointer;
