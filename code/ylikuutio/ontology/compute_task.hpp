@@ -57,6 +57,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -67,7 +73,7 @@ namespace yli::ontology
 
     class ComputeTask final : public yli::ontology::Entity
     {
-        public:
+        private:
             ComputeTask(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
@@ -77,6 +83,7 @@ namespace yli::ontology
 
             ~ComputeTask();
 
+        public:
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
@@ -94,6 +101,9 @@ namespace yli::ontology
         public:
             // This method renders this `ComputeTask`, that is, computes this task.
             void render(const yli::ontology::Scene* const);
+
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
             // End iterating when end condition callback engine returns `true`.
             yli::ontology::ApprenticeModule apprentice_of_end_condition_callback_engine;
