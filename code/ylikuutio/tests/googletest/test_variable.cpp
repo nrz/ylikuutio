@@ -57,8 +57,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
-    ASSERT_EQ(variable, nullptr);
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -92,7 +90,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_false));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -126,7 +123,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_a));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -160,7 +156,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_lowercase_b));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -194,7 +189,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_space));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -228,7 +222,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(char_newline));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -262,7 +255,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(float_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -363,7 +355,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(double_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -464,7 +455,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -498,7 +488,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -532,7 +521,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -566,7 +554,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -600,7 +587,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -634,7 +620,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -668,7 +653,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
@@ -702,7 +686,6 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
-    yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_EQ(application.get_universe().get("foo"), nullptr);
 }
 
