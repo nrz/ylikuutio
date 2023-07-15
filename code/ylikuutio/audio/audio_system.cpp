@@ -248,7 +248,7 @@ namespace yli::audio
         return SDL_AtomicGet(&this->remaining_length);
     }
 
-    void AudioSystem::play_audio(void* userdata, uint8_t* stream, int length)
+    void AudioSystem::play_audio(void* /* userdata */, uint8_t* stream, int length)
     {
         if (this->universe != nullptr && !this->universe->get_is_silent())
         {
