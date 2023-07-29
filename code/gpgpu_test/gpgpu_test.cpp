@@ -67,7 +67,6 @@
 #define SDL_main main
 
 // Include standard headers
-#include <exception>     // try, catch, std::exception
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream

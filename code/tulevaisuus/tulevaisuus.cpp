@@ -80,7 +80,6 @@
 // Include standard headers
 #include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <exception>     // try, catch, std::exception
 #include <functional>    // std::function
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
