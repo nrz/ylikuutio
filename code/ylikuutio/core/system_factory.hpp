@@ -18,12 +18,8 @@
 #ifndef YLIKUUTIO_CORE_SYSTEM_FACTORY_HPP_INCLUDED
 #define YLIKUUTIO_CORE_SYSTEM_FACTORY_HPP_INCLUDED
 
+#include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
-
-namespace yli::audio
-{
-    class AudioSystem;
-}
 
 namespace yli::ontology
 {
