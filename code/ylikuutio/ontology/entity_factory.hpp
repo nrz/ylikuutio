@@ -78,7 +78,6 @@
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
-#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
@@ -90,6 +89,11 @@
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <variant>    // std::holds_alternative
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::memory
 {
