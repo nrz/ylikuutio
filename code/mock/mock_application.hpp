@@ -137,14 +137,6 @@ namespace mock
 
             bool create_simulation() override;
 
-            template<typename Allocator, typename... Args>
-                yli::ontology::Entity* build(const yli::data::Datatype type, Args... args)
-                {
-                    auto& generic_memory_allocator = this->get_memory_allocator(type);
-                    Allocator& memory_allocator = static_cast<Allocator&>(generic_memory_allocator);
-                    return memory_allocator.template build_in(*this, std::forward<Args>(args)...);
-                }
-
         private:
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
