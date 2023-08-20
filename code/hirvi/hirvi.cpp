@@ -326,7 +326,7 @@ namespace hirvi
 
         // Create an Earth `Ecosystem`.
 
-        yli::ontology::Ecosystem* const earth_ecosystem = this->create_earth_ecosystem();
+        this->create_earth_ecosystem();
 
         std::cout << "Setting up console ...\n";
         yli::snippets::set_console(&this->get_universe(), 15, 0, 0, 39);
