@@ -61,7 +61,7 @@ namespace yli::ontology
             ~InputMode() = default;
 
         public:
-            void activate();
+            void activate() override;
             void deactivate();
 
             yli::ontology::CallbackEngine* get_keypress_callback_engine(uint32_t keycode) const;
