@@ -913,7 +913,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
-                    const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const
+                    const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const override
             {
                 using ConsoleCallbackEngineMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
@@ -950,7 +950,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
-                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const
+                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const override
             {
                 using ConsoleCallbackObjectMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
