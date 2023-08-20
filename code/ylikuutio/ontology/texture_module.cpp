@@ -34,11 +34,11 @@ namespace yli::ontology
 
     TextureModule::TextureModule(
             yli::ontology::Universe& universe,
-            yli::ontology::Registry* const registry,
+            yli::ontology::Registry* const /* registry */,
             const std::string& texture_filename,
             const std::string& texture_file_format,
             const yli::load::ImageLoaderStruct& image_loader_struct,
-            const std::string& name)
+            const std::string& /* name */)
         : texture_filename { texture_filename },
         texture_file_format { texture_file_format },
         ofbx_texture { image_loader_struct.ofbx_texture }
@@ -82,10 +82,10 @@ namespace yli::ontology
 
     TextureModule::TextureModule(
             yli::ontology::Universe& universe,
-            yli::ontology::Registry* const registry,
+            yli::ontology::Registry* const /* registry */,
             const ofbx::Texture* ofbx_texture,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
-            const std::string& name)
+            const yli::load::ImageLoaderStruct& /* image_loader_struct */,
+            const std::string& /* name */)
         : ofbx_texture { ofbx_texture }
     {
         // If software rendering is in use, the texture can not be loaded into GPU memory,
