@@ -544,7 +544,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    application.get_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -572,7 +572,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    application.get_entity_factory().create_symbiosis(
             model_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -600,7 +600,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    application.get_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -624,7 +624,7 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    application.get_entity_factory().create_symbiosis(
             model_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -648,13 +648,13 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    application.get_entity_factory().create_material(
             material_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    application.get_entity_factory().create_symbiosis(
             model_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 2);
@@ -678,7 +678,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    application.get_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -705,7 +705,7 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    application.get_entity_factory().create_symbiosis(
             model_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -732,13 +732,13 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene1;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    application.get_entity_factory().create_material(
             material_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    application.get_entity_factory().create_symbiosis(
             model_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 2);

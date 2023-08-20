@@ -54,7 +54,6 @@ namespace yli::ontology
 TEST(scene_must_be_activated_appropriately, universe_callback)
 {
     mock::MockApplication application;
-    yli::ontology::Console* const console = nullptr;
 
     const std::string scene_name = "foo";
 
@@ -88,7 +87,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
     mock::MockApplication application;
-    yli::ontology::Font2D* font_2d = application.get_entity_factory().create_font_2d(
+    application.get_entity_factory().create_font_2d(
             yli::ontology::FontStruct());
 
     const std::string console_name = "foo";
@@ -107,7 +106,6 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
 {
     mock::MockApplication application;
-    yli::ontology::Console* const console = nullptr;
 
     const std::string scene_name = "foo";
 

@@ -486,7 +486,7 @@ TEST(species_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_c
             model_struct);
 
     yli::ontology::ObjectStruct object_struct(scene, species);
-    yli::ontology::Object* const object = application.get_entity_factory().create_object(
+    application.get_entity_factory().create_object(
             object_struct);
 
     ASSERT_EQ(species->get_number_of_apprentices(), 1);
@@ -508,7 +508,7 @@ TEST(species_must_unbind_all_its_apprentice_modules_when_binding_to_a_different_
             model_struct);
 
     yli::ontology::ObjectStruct object_struct(scene1, species);
-    yli::ontology::Object* const object = application.get_entity_factory().create_object(
+    application.get_entity_factory().create_object(
             object_struct);
 
     ASSERT_EQ(species->get_number_of_apprentices(), 1);

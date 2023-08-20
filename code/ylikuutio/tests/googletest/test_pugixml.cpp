@@ -30,8 +30,8 @@ TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
 {
     const char* const exactum_physicum_osm_char = "Exactum_Physicum_Helsinki_Finland.osm";
     pugi::xml_document doc;
-    const pugi::xml_parse_result result = doc.load_file(exactum_physicum_osm_char);
-    const pugi::xml_node osm = doc.child("osm");
+    doc.load_file(exactum_physicum_osm_char);
+    doc.child("osm");
 
     const pugi::xpath_node_set restaurants = doc.select_nodes("/osm/node/tag[@v='Unicafe']");
 
@@ -55,7 +55,7 @@ TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
 {
     const char* hofinkatu_and_isafjordinkatu_osm_char = "Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm";
     pugi::xml_document doc;
-    const pugi::xml_parse_result result = doc.load_file(hofinkatu_and_isafjordinkatu_osm_char);
+    doc.load_file(hofinkatu_and_isafjordinkatu_osm_char);
 
     const pugi::xpath_node_set buildings = doc.select_nodes("/osm/way/tag[@k='building']");
 
