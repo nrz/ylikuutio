@@ -364,7 +364,7 @@ namespace ajokki
 
         // Create an Earth `Ecosystem`.
 
-        yli::ontology::Ecosystem* const earth_ecosystem = this->create_earth_ecosystem();
+        this->create_earth_ecosystem();
 
         // Create a Mars `Ecosystem`.
 
