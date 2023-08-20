@@ -608,7 +608,7 @@ namespace yli::ontology
 
             const std::vector<std::string> completions = registry.get_completions(input);
 
-            for (const std::string completion :  completions)
+            for (const std::string& completion : completions)
             {
                 this->print_text(completion);
             }
