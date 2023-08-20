@@ -192,10 +192,10 @@ namespace yli::ontology
             uint32_t get_font_size() const;
 
             // This method computes the new delta time and returns it.
-            float compute_delta_time();
+            double compute_delta_time();
 
             // This method returns the last computed delta time.
-            float get_delta_time() const;
+            double get_delta_time() const;
 
             // This method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
@@ -400,9 +400,9 @@ namespace yli::ontology
 
             // variables related to timing of events.
             uint32_t max_fps;
-            float last_time_to_display_fps   { yli::time::get_time() };
-            float last_time_for_display_sync { yli::time::get_time() };
-            float delta_time                 { NAN };
+            double last_time_to_display_fps   { yli::time::get_time() };
+            double last_time_for_display_sync { yli::time::get_time() };
+            double delta_time                 { NAN };
             int32_t number_of_frames         { 0 };
 
             // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.

@@ -383,15 +383,15 @@ namespace yli::ontology
 
         while (!this->is_exit_requested)
         {
-            const float current_time_in_main_loop = yli::time::get_time();
+            const double current_time_in_main_loop = yli::time::get_time();
 
-            if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0f / this->max_fps))
+            if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0 / this->max_fps))
             {
                 this->update_last_time_for_display_sync();
 
                 this->increment_number_of_frames();
 
-                while (current_time_in_main_loop - this->last_time_to_display_fps >= 1.0f)
+                while (current_time_in_main_loop - this->last_time_to_display_fps >= 1.0)
                 {
                     // If last `std::stringstream` here was more than 1 sec ago,
                     // std::stringstream` and reset number of frames.
@@ -1093,7 +1093,7 @@ namespace yli::ontology
         return this->font_size;
     }
 
-    float Universe::compute_delta_time()
+    double Universe::compute_delta_time()
     {
         // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
         if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
@@ -1104,12 +1104,11 @@ namespace yli::ontology
 
         this->current_time_before_reading_keyboard = SDL_GetTicks();
 
-        this->delta_time = static_cast<float>(
-                current_time_before_reading_keyboard - last_time_before_reading_keyboard);
+        this->delta_time = current_time_before_reading_keyboard - last_time_before_reading_keyboard;
         return this->delta_time;
     }
 
-    float Universe::get_delta_time() const
+    double Universe::get_delta_time() const
     {
         return this->delta_time;
     }

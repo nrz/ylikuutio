@@ -20,7 +20,7 @@
 
 namespace yli::time
 {
-    float get_time();
+    double get_time();
 }
 
 #endif

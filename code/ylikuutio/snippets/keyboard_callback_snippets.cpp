@@ -104,7 +104,7 @@ namespace yli::snippets
         {
             temp_speed = universe.speed;
         }
-        universe.current_camera_location.xyz += temp_speed * universe.get_delta_time() * moving_direction;
+        universe.current_camera_location.xyz += temp_speed * static_cast<float>(universe.get_delta_time()) * moving_direction;
 
         return true;
     }
