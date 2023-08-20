@@ -330,7 +330,7 @@ A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-),
 
 Q: How is Ylikuutio software developed?
 A: In [Debian GNU/Linux](https://www.debian.org/)
-   ([Debian Bullseye](https://wiki.debian.org/DebianBullseye) at the moment),
+   ([Debian Bookworm](https://wiki.debian.org/DebianBookworm) at the moment),
    using [Vim](https://www.vim.org/). Other tools in use include
    [Valgrind](http://valgrind.org/), [KCachegrind](https://kcachegrind.github.io/html/Home.html),
    [GDB](https://www.gnu.org/software/gdb/), [GitHub Actions](https://github.com/features/actions),
