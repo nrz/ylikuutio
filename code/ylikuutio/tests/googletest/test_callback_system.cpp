@@ -273,7 +273,7 @@ std::optional<yli::data::AnyValue> nop(
         yli::ontology::Universe&,
         yli::ontology::CallbackEngine*,
         yli::ontology::CallbackObject*,
-        yli::ontology::GenericParentModule& input_parameters,
+        yli::ontology::GenericParentModule& /* input_parameters */,
         const yli::data::AnyValue&)
 {
     return std::nullopt;
@@ -283,7 +283,7 @@ std::optional<yli::data::AnyValue> return_uint32_t_deadbeef(
         yli::ontology::Universe&,
         yli::ontology::CallbackEngine*,
         yli::ontology::CallbackObject*,
-        yli::ontology::GenericParentModule& input_parameters,
+        yli::ontology::GenericParentModule& /* input_parameters */,
         const yli::data::AnyValue&)
 {
     uint32_t deadbeef { 0xdeadbeef };
