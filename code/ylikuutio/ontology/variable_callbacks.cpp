@@ -185,7 +185,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::activate_background_color(
             yli::ontology::Entity& entity,
-            yli::ontology::Variable& variable)
+            yli::ontology::Variable& /* variable */)
     {
         if (!entity.has_variable("red") ||
                 !entity.has_variable("green") ||
@@ -251,7 +251,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Variable::activate_wireframe(
-            yli::ontology::Entity& entity,
+            yli::ontology::Entity& /* entity */,
             yli::ontology::Variable& variable)
     {
         const yli::data::AnyValue& wireframe_any_value = variable.variable_value;

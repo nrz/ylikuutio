@@ -358,7 +358,7 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene* const scene)
+    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& /* rigid_body_module */, yli::ontology::Scene* const scene)
     {
         if (scene == nullptr)
         {
