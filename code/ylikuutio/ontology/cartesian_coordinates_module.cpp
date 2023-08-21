@@ -35,6 +35,17 @@ namespace yli::ontology
         return !this->operator==(rhs);
     }
 
+    yli::ontology::CartesianCoordinatesModule& CartesianCoordinatesModule::operator=(const yli::ontology::CartesianCoordinatesModule& other) noexcept
+    {
+        if (&other == this)
+        {
+            return *this;
+        }
+
+        this->xyz = other.xyz;
+        return *this;
+    }
+
     CartesianCoordinatesModule::CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) noexcept
         : xyz { original.xyz }
     {
