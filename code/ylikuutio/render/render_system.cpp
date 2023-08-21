@@ -148,7 +148,10 @@ namespace yli::render
 
     void RenderSystem::set_swap_interval(const int32_t interval)
     {
-        yli::sdl::set_swap_interval(static_cast<int>(interval));
+        if (!yli::sdl::set_swap_interval(static_cast<int>(interval)))
+        {
+            std::cerr << "ERROR: `RenderSystem::set_swap_interval`: setting swap interval failed!\n";
+        }
     }
 
     void RenderSystem::restore_onscreen_rendering(const float window_width, const float window_height) const

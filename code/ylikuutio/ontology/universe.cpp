@@ -1005,7 +1005,10 @@ namespace yli::ontology
 
     void Universe::set_swap_interval(const int32_t interval)
     {
-        yli::sdl::set_swap_interval(static_cast<int>(interval));
+        if (!yli::sdl::set_swap_interval(static_cast<int>(interval)))
+        {
+            std::cerr << "ERROR: `Universe::set_swap_interval`: setting swap interval failed!\n";
+        }
     }
 
     void Universe::restore_onscreen_rendering() const
