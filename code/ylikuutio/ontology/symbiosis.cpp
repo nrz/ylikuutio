@@ -321,7 +321,7 @@ namespace yli::ontology
 
                 // Create `SymbiontSpecies`s.
                 // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
-                for (const std::size_t& mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
+                for (const std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     yli::ontology::ModelStruct model_struct;
                     model_struct.model_filename = this->model_filename;
