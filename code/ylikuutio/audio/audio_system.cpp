@@ -232,12 +232,12 @@ namespace yli::audio
         // TODO: implement continue after pause!
     }
 
-    void AudioSystem::clear_playlist(const std::string& playlist)
+    void AudioSystem::clear_playlist(const std::string& /* playlist */)
     {
         // TODO: implement clear playlist!
     }
 
-    void AudioSystem::erase_playlist(const std::string& playlist)
+    void AudioSystem::erase_playlist(const std::string& /* playlist */)
     {
         // TODO: implement erase playlist!
     }
