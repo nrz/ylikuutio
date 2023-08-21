@@ -31,6 +31,19 @@ namespace yli::ontology
         return !this->operator==(rhs);
     }
 
+    yli::ontology::OrientationModule& OrientationModule::operator=(const yli::ontology::OrientationModule& other) noexcept
+    {
+        if (&other == this)
+        {
+            return *this;
+        }
+
+        this->roll  = other.roll;
+        this->yaw   = other.yaw;
+        this->pitch = other.pitch;
+        return *this;
+    }
+
     OrientationModule::OrientationModule(const yli::ontology::OrientationModule& original)
         : roll { original.roll },
         yaw    { original.yaw },

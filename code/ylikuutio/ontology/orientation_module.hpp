@@ -25,6 +25,7 @@ namespace yli::ontology
         public:
             bool operator==(const yli::ontology::OrientationModule& rhs) const;
             bool operator!=(const yli::ontology::OrientationModule& rhs) const;
+            yli::ontology::OrientationModule& operator=(const yli::ontology::OrientationModule& other) noexcept;
 
             OrientationModule(const yli::ontology::OrientationModule& original);
 
