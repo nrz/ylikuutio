@@ -30,7 +30,7 @@ namespace yli::ontology
             // constructor.
         }
 
-        EntityStruct(const yli::ontology::EntityStruct& entity_struct)
+        EntityStruct(const yli::ontology::EntityStruct& entity_struct) noexcept
             : global_name { entity_struct.global_name },
             local_name { entity_struct.local_name },
             is_universe { entity_struct.is_universe },
@@ -39,7 +39,7 @@ namespace yli::ontology
             // copy constructor.
         }
 
-        EntityStruct(const std::string& global_name, const std::string& local_name)
+        EntityStruct(const std::string& global_name, const std::string& local_name) noexcept
             : global_name { global_name },
             local_name { local_name }
         {
