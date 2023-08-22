@@ -30,7 +30,7 @@ namespace yli::ontology
         public:
             InputModeApprenticeModule(
                     yli::ontology::MasterOfInputModesModule* const master_of_input_modes_module,
-                    yli::ontology::Entity* const apprentice) noexcept;
+                    yli::ontology::Entity* const apprentice);
     };
 }
 

@@ -29,7 +29,7 @@ namespace yli::ontology
 
     InputModeApprenticeModule::InputModeApprenticeModule(
             yli::ontology::MasterOfInputModesModule* const master_of_input_modes_module,
-            yli::ontology::Entity* const apprentice) noexcept
+            yli::ontology::Entity* const apprentice)
         : ApprenticeModule(master_of_input_modes_module, apprentice)
     {
         if (master_of_input_modes_module != nullptr)
