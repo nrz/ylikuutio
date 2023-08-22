@@ -23,7 +23,6 @@
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
 #include <iterator>  // std::back_inserter
-#include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
 
@@ -61,7 +60,8 @@ namespace yli::memory
         {
             if (buffer_size > buffer.size())
             {
-                throw std::runtime_error("ERROR: `yli::memory::copy_circular_buffer_into_vector`: `buffer_size > buffer.size())`");
+                std::cerr << "ERROR: `yli::memory::copy_circular_buffer_into_vector`: `buffer_size > buffer.size()`\n";
+                return {};
             }
 
             if (buffer_size == 0)
