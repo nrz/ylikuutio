@@ -33,7 +33,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module) noexcept
+    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
     {
         if (apprentice_module == nullptr)
         {
