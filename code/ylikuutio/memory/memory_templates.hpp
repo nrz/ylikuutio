@@ -22,6 +22,7 @@
 #include <algorithm> // std::copy
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
+#include <iostream>  // std::cerr
 #include <iterator>  // std::back_inserter
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
