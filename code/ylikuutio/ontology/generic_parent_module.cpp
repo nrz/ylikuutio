@@ -25,8 +25,6 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
-#include <sstream>  // std::stringstream
-#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 
 namespace yli::memory
@@ -125,10 +123,7 @@ namespace yli::ontology
 
         if (this->number_of_children != 0)
         {
-            std::stringstream runtime_error_stringstream;
-            runtime_error_stringstream << "ERROR: `GenericParentModule::~GenericParentModule`: `number_of_children` is " <<
-                this->number_of_children << " even though it should be 0!\n";
-            throw std::runtime_error(runtime_error_stringstream.str());
+            std::cerr << "ERROR: `GenericParentModule::~GenericParentModule`: `number_of_children` is " << this->number_of_children << " even though it should be 0!\n";
         }
     }
 
