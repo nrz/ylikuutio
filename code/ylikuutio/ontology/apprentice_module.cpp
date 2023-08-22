@@ -91,7 +91,7 @@ namespace yli::ontology
         this->bind_to_generic_master_module();
     }
 
-    ApprenticeModule::~ApprenticeModule()
+    ApprenticeModule::~ApprenticeModule() noexcept
     {
         // destructor.
 
