@@ -19,7 +19,7 @@
 
 namespace yli::geometry
 {
-    bool Line3D::do_lines_3d_intersect(const yli::geometry::Line3D& line1, const yli::geometry::Line3D& line2) const
+    bool Line3D::do_lines_3d_intersect(const yli::geometry::Line3D& /* line1 */, const yli::geometry::Line3D& /* line2 */) const
     {
         // TODO: implement the function!
         return false;

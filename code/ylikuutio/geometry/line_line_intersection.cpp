@@ -65,7 +65,7 @@ namespace yli::geometry
         return glm::vec2(x, y);
     }
 
-    glm::vec3 get_intersection_point(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2)
+    glm::vec3 get_intersection_point(const yli::geometry::Line3D* const /* line1 */, const yli::geometry::Line3D* const /* line2 */)
     {
         // TODO: implement this function!
         glm::vec3 intersection_point { NAN, NAN, NAN };
