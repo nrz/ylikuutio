@@ -20,10 +20,9 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <iostream>      // std::cerr
 #include <limits>        // std::numeric_limits
 #include <queue>         // std::queue
-#include <sstream>       // std::stringstream
-#include <stdexcept>     // std::runtime_error
 #include <vector>        // std::vector
 
 namespace yli::hierarchy
@@ -42,14 +41,14 @@ namespace yli::hierarchy
 
             if (childID == std::numeric_limits<std::size_t>::max())
             {
-                throw std::runtime_error("ERROR: `yli::hierarchy::set_child_pointer`: `childID` is uninitialized!");
+                std::cerr << "ERROR: `yli::hierarchy::set_child_pointer`: `childID` is uninitialized!\n";
+                return;
             }
 
             if (childID >= child_pointer_vector.size())
             {
-                std::stringstream runtime_error_stringstream;
-                runtime_error_stringstream << "ERROR: `yli::hierarchy::set_child_pointer`: `childID` " << childID << " is out of bounds, size is " << child_pointer_vector.size();
-                throw std::runtime_error(runtime_error_stringstream.str());
+                std::cerr << "ERROR: `yli::hierarchy::set_child_pointer`: `childID` " << childID << " is out of bounds, size is " << child_pointer_vector.size() << "\n";
+                return;
             }
 
             child_pointer_vector.at(childID) = child_pointer;
