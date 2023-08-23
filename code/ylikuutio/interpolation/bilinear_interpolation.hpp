@@ -114,7 +114,6 @@ namespace yli::interpolation
             }
 
             const std::size_t n_output_vertices = output_image_width * output_image_height;
-            const std::ptrdiff_t n_output_vertices_ptrdiff_t = static_cast<std::ptrdiff_t>(n_output_vertices);
 
             std::shared_ptr<std::vector<float>> output_vector = std::make_shared<std::vector<float>>();
             output_vector->reserve(n_output_vertices);

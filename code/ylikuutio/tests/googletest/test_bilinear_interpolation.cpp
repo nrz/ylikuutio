@@ -33,7 +33,6 @@ TEST(a_1x1_terrain_must_be_interpolated_bilinearly_to_1x1_appropriately, no_chan
 
     float* input_vertex_data = new float[bilinear_interpolation_struct.input_image_width * bilinear_interpolation_struct.input_image_height];
     input_vertex_data[0] = 123.25f;
-    float* input_vertex_pointer = input_vertex_data;
 
     using OutputVector = std::shared_ptr<std::vector<float>>;
     OutputVector output_vector = yli::interpolation::interpolate_bilinearly(input_vertex_data, bilinear_interpolation_struct);
