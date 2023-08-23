@@ -28,6 +28,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Entity;
     class Universe;
+    class Scene;
 
     yli::ontology::Entity* Mission::get_parent() const
     {
@@ -50,6 +51,12 @@ namespace yli::ontology
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";
         // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!
+    }
+
+    yli::ontology::Scene* Mission::get_scene() const
+    {
+        // `Mission` is not specific to any `Scene`.
+        return nullptr;
     }
 
     std::size_t Mission::get_number_of_children() const

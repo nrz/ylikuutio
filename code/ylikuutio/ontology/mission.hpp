@@ -34,6 +34,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
+    class Scene;
     struct MissionStruct;
 
     class Mission final : public yli::ontology::Entity
@@ -46,6 +47,8 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const parent_module);
 
             virtual ~Mission() = default;
+
+            yli::ontology::Scene* get_scene() const override;
 
         public:
             Mission(const Mission&) = delete;            // Delete copy constructor.
