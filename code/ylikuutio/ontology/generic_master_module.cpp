@@ -24,7 +24,6 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <limits>    // std::numeric_limits
-#include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -57,9 +56,8 @@ namespace yli::ontology
 
         if (apprenticeID >= this->apprentice_module_pointer_vector.size())
         {
-            std::stringstream runtime_error_stringstream;
-            runtime_error_stringstream << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID << " is out of bounds, size is " << this->apprentice_module_pointer_vector.size();
-            throw std::runtime_error(runtime_error_stringstream.str());
+            std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID << " is out of bounds, size is " << this->apprentice_module_pointer_vector.size() << "\n";
+            return;
         }
 
         // `ApprenticeModule*` must be read into a pointer before unbinding otherwise it will be out of bounds access.
@@ -67,9 +65,8 @@ namespace yli::ontology
 
         if (apprentice_module == nullptr)
         {
-            std::stringstream runtime_error_stringstream;
-            runtime_error_stringstream << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprentice_module` with `apprenticeID` " << apprenticeID << " is `nullptr`!";
-            throw std::runtime_error(runtime_error_stringstream.str());
+            std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprentice_module` with `apprenticeID` " << apprenticeID << " is `nullptr`!\n";
+            return;
         }
 
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
