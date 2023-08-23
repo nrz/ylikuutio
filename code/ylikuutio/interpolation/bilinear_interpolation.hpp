@@ -34,7 +34,7 @@ namespace yli::interpolation
         float sample_2d(
                 const T1* source_image,
                 const float image_width,
-                const float image_height,
+                const float /* image_height */,
                 const float x,
                 const float z)
         {

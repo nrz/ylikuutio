@@ -79,8 +79,8 @@ namespace yli::sdl
     }
 
     [[nodiscard]] SDL_Window* create_window(
-            const int x,
-            const int y,
+            const int /* x */,
+            const int /* y */,
             const int window_width,
             const int window_height,
             const char* const title,
