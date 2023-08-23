@@ -63,6 +63,7 @@ namespace yli::data
         public:
             bool operator==(const yli::data::AnyValue& rhs) const;
             bool operator!=(const yli::data::AnyValue& rhs) const;
+            yli::data::AnyValue& operator=(const yli::data::AnyValue& other) noexcept;
             std::string get_datatype() const;
             std::string get_string() const;
             const std::string& get_const_std_string_ref() const;
