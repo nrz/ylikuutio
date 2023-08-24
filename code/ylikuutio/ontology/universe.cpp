@@ -1161,7 +1161,7 @@ namespace yli::ontology
         this->number_of_frames = 0;
     }
 
-    std::string Universe::eval_string(const std::string& my_string) const
+    std::string Universe::eval_string(const std::string& /* my_string */) const
     {
         return "TODO: eval";
     }

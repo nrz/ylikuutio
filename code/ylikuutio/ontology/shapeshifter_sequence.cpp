@@ -120,7 +120,7 @@ namespace yli::ontology
         return 0; // `ShapeshifterSequence` has no children.
     }
 
-    void ShapeshifterSequence::render(const yli::ontology::Scene* const target_scene)
+    void ShapeshifterSequence::render(const yli::ontology::Scene* const /* target_scene */)
     {
         // Render this `ShapeshifterSequence`.
 
