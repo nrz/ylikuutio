@@ -202,8 +202,8 @@ namespace yli::ontology
 
             // This method returns current `max_fps`.
             uint32_t get_max_fps() const;
-            float get_last_time_to_display_fps() const;
-            float get_last_time_for_display_sync() const;
+            double get_last_time_to_display_fps() const;
+            double get_last_time_for_display_sync() const;
             int32_t get_number_of_frames() const;
 
             void increment_last_time_to_display_fps();
