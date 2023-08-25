@@ -141,7 +141,7 @@ namespace yli::load
         }
 
         glm::vec2 current_vertex(NAN);
-        char char_path[1024];
+        char char_path[1024] = { 0 };
 
         // copy from opening double quote to the next `"/"`.
         yli::string::extract_string(svg_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
