@@ -84,24 +84,24 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
         const ofbx::Geometry* const geometry = mesh->getGeometry();
         ASSERT_NE(geometry, nullptr);
 
-        const ofbx::Vec3* const vertices = geometry->getVertices();
+        geometry->getVertices();
 
         const int vertex_count = geometry->getVertexCount();
         ASSERT_GE(vertex_count, 0);
 
-        const ofbx::Vec3* const normals = geometry->getNormals();
+        geometry->getNormals();
 
-        const ofbx::Vec2* const uvs = geometry->getUVs();
+        geometry->getUVs();
 
-        const ofbx::Vec4* const colors = geometry->getColors();
+        geometry->getColors();
 
-        const ofbx::Vec3* const tangents = geometry->getTangents();
+        geometry->getTangents();
 
-        const ofbx::Skin* const skin = geometry->getSkin();
+        geometry->getSkin();
 
-        const int* const materials = geometry->getMaterials();
+        geometry->getMaterials();
 
-        const ofbx::Matrix geometric_matrix = mesh->getGeometricMatrix();
+        mesh->getGeometricMatrix();
 
         const int material_count = mesh->getMaterialCount();
         ASSERT_GT(material_count, 0);
@@ -117,15 +117,15 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
             const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE);
             if (diffuse_texture != nullptr)
             {
-                const ofbx::DataView dataview_filename = diffuse_texture->getFileName();
-                const ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
+                diffuse_texture->getFileName();
+                diffuse_texture->getRelativeFileName();
             }
 
-            const ofbx::Texture* const normal_texture = material->getTexture(ofbx::Texture::NORMAL);
+            material->getTexture(ofbx::Texture::NORMAL);
 
-            const ofbx::Texture* const count_texture = material->getTexture(ofbx::Texture::COUNT);
+            material->getTexture(ofbx::Texture::COUNT);
 
-            const ofbx::Color color = material->getDiffuseColor();
+            material->getDiffuseColor();
 
             const ofbx::Object* const parent = material->getParent();
             ASSERT_NE(parent, nullptr);
@@ -217,16 +217,16 @@ TEST(openfbx_must_function_appropriately, turbo_polizei)
         const ofbx::Vec2* const uvs = geometry->getUVs();
         ASSERT_NE(uvs, nullptr);
 
-        const ofbx::Vec4* const colors = geometry->getColors();
+        geometry->getColors();
 
-        const ofbx::Vec3* const tangents = geometry->getTangents();
+        geometry->getTangents();
 
         const ofbx::Skin* const skin = geometry->getSkin();
         ASSERT_EQ(skin, nullptr);
 
-        const int* const materials = geometry->getMaterials();
+        geometry->getMaterials();
 
-        const ofbx::Matrix geometric_matrix = mesh->getGeometricMatrix();
+        mesh->getGeometricMatrix();
 
         const int material_count = mesh->getMaterialCount();
         ASSERT_GT(material_count, 0);
@@ -242,15 +242,15 @@ TEST(openfbx_must_function_appropriately, turbo_polizei)
             const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE);
             if (diffuse_texture != nullptr)
             {
-                const ofbx::DataView dataview_filename = diffuse_texture->getFileName();
-                const ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
+                diffuse_texture->getFileName();
+                diffuse_texture->getRelativeFileName();
             }
 
-            const ofbx::Texture* const normal_texture = material->getTexture(ofbx::Texture::NORMAL);
+            material->getTexture(ofbx::Texture::NORMAL);
 
-            const ofbx::Texture* const count_texture = material->getTexture(ofbx::Texture::COUNT);
+            material->getTexture(ofbx::Texture::COUNT);
 
-            const ofbx::Color color = material->getDiffuseColor();
+            material->getDiffuseColor();
 
             const ofbx::Object* const parent = material->getParent();
             ASSERT_NE(parent, nullptr);
@@ -345,18 +345,18 @@ TEST(openfbx_must_function_appropriately, freight_train)
         const ofbx::Vec3* const normals = geometry->getNormals();
         ASSERT_NE(normals, nullptr);
 
-        const ofbx::Vec2* const uvs = geometry->getUVs();
+        geometry->getUVs();
 
-        const ofbx::Vec4* const colors = geometry->getColors();
+        geometry->getColors();
 
-        const ofbx::Vec3* const tangents = geometry->getTangents();
+        geometry->getTangents();
 
         const ofbx::Skin* const skin = geometry->getSkin();
         ASSERT_EQ(skin, nullptr);
 
-        const int* const materials = geometry->getMaterials();
+        geometry->getMaterials();
 
-        const ofbx::Matrix geometric_matrix = mesh->getGeometricMatrix();
+        mesh->getGeometricMatrix();
 
         const int material_count = mesh->getMaterialCount();
         ASSERT_GT(material_count, 0);
@@ -372,15 +372,15 @@ TEST(openfbx_must_function_appropriately, freight_train)
             const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE);
             if (diffuse_texture != nullptr)
             {
-                const ofbx::DataView dataview_filename = diffuse_texture->getFileName();
-                const ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
+                diffuse_texture->getFileName();
+                diffuse_texture->getRelativeFileName();
             }
 
-            const ofbx::Texture* const normal_texture = material->getTexture(ofbx::Texture::NORMAL);
+            material->getTexture(ofbx::Texture::NORMAL);
 
-            const ofbx::Texture* const count_texture = material->getTexture(ofbx::Texture::COUNT);
+            material->getTexture(ofbx::Texture::COUNT);
 
-            const ofbx::Color color = material->getDiffuseColor();
+            material->getDiffuseColor();
 
             const ofbx::Object* const parent = material->getParent();
             ASSERT_NE(parent, nullptr);
