@@ -132,7 +132,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::info1(
-            const yli::ontology::Universe& universe,
+            const yli::ontology::Universe& /* universe */,
             yli::ontology::Console& console,
             const yli::ontology::Entity& entity)
     {
