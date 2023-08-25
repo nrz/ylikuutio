@@ -154,8 +154,8 @@ namespace ajokki
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
             yli::core::SystemFactory<yli::data::Datatype> system_factory;
-            yli::ontology::Universe* universe     { nullptr };
-            yli::audio::AudioSystem* audio_system { nullptr };
+            yli::ontology::Universe* const universe     { nullptr };
+            yli::audio::AudioSystem* const audio_system { nullptr };
     };
 }
 

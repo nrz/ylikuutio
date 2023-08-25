@@ -160,8 +160,8 @@ namespace hirvi
             yli::memory::MemorySystem<hirvi::Datatype> memory_system;
             yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
             yli::core::SystemFactory<hirvi::Datatype> system_factory;
-            yli::ontology::Universe* universe     { nullptr };
-            yli::audio::AudioSystem* audio_system { nullptr };
+            yli::ontology::Universe* const universe     { nullptr };
+            yli::audio::AudioSystem* const audio_system { nullptr };
     };
 }
 

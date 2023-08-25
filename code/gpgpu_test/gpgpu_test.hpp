@@ -140,7 +140,7 @@ namespace gpgpu_test
 
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
-            yli::ontology::Universe* universe { nullptr };
+            yli::ontology::Universe* const universe { nullptr };
     };
 }
 
