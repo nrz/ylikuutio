@@ -25,9 +25,9 @@ namespace yli::snippets::locomotion
     GaitModule::GaitModule(const yli::ontology::LocomotionModuleStruct& gait_module_struct)
         : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::LAND),
         max_speed         { gait_module_struct.max_speed },
-        max_angular_speed { gait_module_struct.max_angular_speed },
         acceleration      { gait_module_struct.acceleration },
-        deceleration      { gait_module_struct.deceleration }
+        deceleration      { gait_module_struct.deceleration },
+        max_angular_speed { gait_module_struct.max_angular_speed }
     {
     }
 }

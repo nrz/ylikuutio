@@ -25,9 +25,9 @@ namespace yli::snippets::locomotion
     DiveModule::DiveModule(const yli::ontology::LocomotionModuleStruct& dive_module_struct)
         : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::UNDERWATER),
         max_speed         { dive_module_struct.max_speed },
-        max_angular_speed { dive_module_struct.max_angular_speed },
         acceleration      { dive_module_struct.acceleration },
-        deceleration      { dive_module_struct.deceleration }
+        deceleration      { dive_module_struct.deceleration },
+        max_angular_speed { dive_module_struct.max_angular_speed }
     {
     }
 }

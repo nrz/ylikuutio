@@ -25,9 +25,9 @@ namespace yli::snippets::locomotion
     ClimbModule::ClimbModule(const yli::ontology::LocomotionModuleStruct& climb_module_struct)
         : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::CLIMB),
         max_speed         { climb_module_struct.max_speed },
-        max_angular_speed { climb_module_struct.max_angular_speed },
         acceleration      { climb_module_struct.acceleration },
-        deceleration      { climb_module_struct.deceleration }
+        deceleration      { climb_module_struct.deceleration },
+        max_angular_speed { climb_module_struct.max_angular_speed }
     {
     }
 }

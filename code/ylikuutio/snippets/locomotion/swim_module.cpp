@@ -25,9 +25,9 @@ namespace yli::snippets::locomotion
     SwimModule::SwimModule(const yli::ontology::LocomotionModuleStruct& swim_module_struct)
         : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::WATER),
         max_speed         { swim_module_struct.max_speed },
-        max_angular_speed { swim_module_struct.max_angular_speed },
         acceleration      { swim_module_struct.acceleration },
-        deceleration      { swim_module_struct.deceleration }
+        deceleration      { swim_module_struct.deceleration },
+        max_angular_speed { swim_module_struct.max_angular_speed }
     {
     }
 }
