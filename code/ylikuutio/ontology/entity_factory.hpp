@@ -109,8 +109,8 @@ namespace yli::ontology
             EntityFactory<TypeEnumType>(
                     yli::core::Application& application,
                     yli::memory::MemorySystem<TypeEnumType>& memory_system)
-                    : application { application },
-                    memory_system { memory_system }
+                : application { application },
+                memory_system { memory_system }
             {
             }
 
