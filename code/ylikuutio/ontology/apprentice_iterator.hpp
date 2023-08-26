@@ -64,10 +64,7 @@ namespace yli::ontology
                 return this->it == other_it.it;
             }
 
-            bool operator!=(const ApprenticeIterator& other_it)
-            {
-                return this->it != other_it.it;
-            }
+            bool operator!=(const ApprenticeIterator& other_it) const = default;
 
             ApprenticeIterator& operator++()
             {
