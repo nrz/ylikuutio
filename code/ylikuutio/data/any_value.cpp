@@ -300,11 +300,6 @@ namespace yli::data
         return false;
     }
 
-    bool AnyValue::operator!=(const yli::data::AnyValue& rhs) const
-    {
-        return !this->operator==(rhs);
-    }
-
     std::string AnyValue::get_datatype() const
     {
         // Fundamental types.
