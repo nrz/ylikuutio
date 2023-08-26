@@ -26,11 +26,6 @@ namespace yli::ontology
             this->pitch == rhs.pitch;
     }
 
-    bool OrientationModule::operator!=(const yli::ontology::OrientationModule& rhs) const
-    {
-        return !this->operator==(rhs);
-    }
-
     yli::ontology::OrientationModule& OrientationModule::operator=(const yli::ontology::OrientationModule& other) noexcept
     {
         if (&other == this)
