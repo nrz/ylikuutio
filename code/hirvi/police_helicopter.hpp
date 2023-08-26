@@ -55,7 +55,6 @@ namespace hirvi
 
             ~PoliceHelicopter() = default;
 
-        private:
             yli::snippets::locomotion::FlyModule fly;
             hirvi::PoliceModule police;
     };

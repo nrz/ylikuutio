@@ -58,7 +58,6 @@ namespace hirvi
 
             ~Elk() = default;
 
-        private:
             yli::snippets::locomotion::GaitModule walk;
             yli::snippets::locomotion::GaitModule trot;
             yli::snippets::locomotion::GaitModule canter;

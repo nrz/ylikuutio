@@ -54,7 +54,6 @@ namespace hirvi
 
             ~Train() = default;
 
-        private:
             yli::snippets::locomotion::RailVehicleModule rail_vehicle;
     };
 }

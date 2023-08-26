@@ -55,7 +55,6 @@ namespace hirvi
 
             ~PoliceCar() = default;
 
-        private:
             yli::snippets::locomotion::RoadVehicleModule road_vehicle;
             hirvi::PoliceModule police;
     };

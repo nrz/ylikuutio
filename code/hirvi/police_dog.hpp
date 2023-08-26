@@ -59,7 +59,6 @@ namespace hirvi
 
             ~PoliceDog() = default;
 
-        private:
             yli::snippets::locomotion::GaitModule walk;
             yli::snippets::locomotion::GaitModule run;
             yli::snippets::locomotion::GaitModule canter;
