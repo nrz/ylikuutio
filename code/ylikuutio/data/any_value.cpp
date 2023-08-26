@@ -300,7 +300,7 @@ namespace yli::data
         return false;
     }
 
-    std::string AnyValue::get_datatype() const
+    std::string AnyValue::get_datatype() const noexcept
     {
         // Fundamental types.
         if (std::holds_alternative<bool>(this->data))
