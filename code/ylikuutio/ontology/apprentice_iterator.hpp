@@ -59,7 +59,7 @@ namespace yli::ontology
 
             ~ApprenticeIterator() = default;
 
-            bool operator==(const ApprenticeIterator& other_it)
+            bool operator==(const ApprenticeIterator& other_it) const
             {
                 return this->it == other_it.it;
             }
