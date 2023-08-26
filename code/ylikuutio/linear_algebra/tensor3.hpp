@@ -89,7 +89,7 @@ namespace yli::linear_algebra
 
             void operator<<(const float rhs);
             void operator<<(const std::vector<float>& rhs);
-            bool operator==(const yli::linear_algebra::Tensor3& rhs) const;
+            bool operator==(const yli::linear_algebra::Tensor3& rhs) const noexcept;
             bool operator!=(const yli::linear_algebra::Tensor3& rhs) const = default;
             yli::linear_algebra::Tensor3& operator=(const yli::linear_algebra::Tensor3& rhs) = default;
             Proxy2D operator[](const std::size_t index)

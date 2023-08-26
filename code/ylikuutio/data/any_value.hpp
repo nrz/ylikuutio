@@ -61,7 +61,7 @@ namespace yli::data
     class AnyValue final
     {
         public:
-            bool operator==(const yli::data::AnyValue& rhs) const;
+            bool operator==(const yli::data::AnyValue& rhs) const noexcept;
             bool operator!=(const yli::data::AnyValue& rhs) const = default;
             yli::data::AnyValue& operator=(const yli::data::AnyValue& other) = default;
             std::string get_datatype() const noexcept;

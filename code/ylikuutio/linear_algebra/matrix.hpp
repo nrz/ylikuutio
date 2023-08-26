@@ -63,7 +63,7 @@ namespace yli::linear_algebra
 
             void operator<<(const float rhs);
             void operator<<(const std::vector<float>& rhs);
-            bool operator==(const yli::linear_algebra::Matrix& rhs) const;
+            bool operator==(const yli::linear_algebra::Matrix& rhs) const noexcept;
             bool operator!=(const yli::linear_algebra::Matrix& rhs) const = default;
             yli::linear_algebra::Matrix& operator=(const yli::linear_algebra::Matrix& rhs) = default;
             yli::linear_algebra::Matrix& operator++();

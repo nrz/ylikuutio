@@ -39,7 +39,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    bool Entity::operator==(const yli::ontology::Entity& rhs) const
+    bool Entity::operator==(const yli::ontology::Entity& rhs) const noexcept
     {
         return this == &rhs;
     }

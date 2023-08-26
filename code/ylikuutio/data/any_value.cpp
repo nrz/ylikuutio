@@ -61,7 +61,7 @@
 
 namespace yli::data
 {
-    bool AnyValue::operator==(const yli::data::AnyValue& rhs) const
+    bool AnyValue::operator==(const yli::data::AnyValue& rhs) const noexcept
     {
         if (this->get_datatype() != rhs.get_datatype())
         {

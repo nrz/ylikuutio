@@ -19,7 +19,7 @@
 
 namespace yli::ontology
 {
-    bool OrientationModule::operator==(const yli::ontology::OrientationModule& rhs) const
+    bool OrientationModule::operator==(const yli::ontology::OrientationModule& rhs) const noexcept
     {
         return this->roll == rhs.roll &&
             this->yaw == rhs.yaw &&

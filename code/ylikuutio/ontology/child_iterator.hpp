@@ -57,7 +57,7 @@ namespace yli::ontology
 
             ~ChildIterator() = default;
 
-            bool operator==(const ChildIterator& other_it) const
+            bool operator==(const ChildIterator& other_it) const noexcept
             {
                 return this->it == other_it.it;
             }

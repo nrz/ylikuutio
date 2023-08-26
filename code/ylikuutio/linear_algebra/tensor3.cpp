@@ -205,7 +205,7 @@ namespace yli::linear_algebra
         }
     }
 
-    bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs) const
+    bool Tensor3::operator==(const yli::linear_algebra::Tensor3& rhs) const noexcept
     {
         // compare if tensors are equal.
         if (this->width != rhs.width ||

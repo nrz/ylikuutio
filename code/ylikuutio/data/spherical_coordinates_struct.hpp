@@ -37,7 +37,7 @@ namespace yli::data
             // constructor.
         }
 
-        bool operator==(const yli::data::SphericalCoordinatesStruct& rhs) const
+        bool operator==(const yli::data::SphericalCoordinatesStruct& rhs) const noexcept
         {
             return this->rho == rhs.rho && this->theta == rhs.theta && this->phi == rhs.phi;
         }

@@ -210,7 +210,7 @@ namespace yli::linear_algebra
         }
     }
 
-    bool Matrix::operator==(const yli::linear_algebra::Matrix& rhs) const
+    bool Matrix::operator==(const yli::linear_algebra::Matrix& rhs) const noexcept
     {
         // compare if matrices are equal.
         if (this->width != rhs.width ||
