@@ -240,36 +240,6 @@ namespace yli::linear_algebra
         return true;
     }
 
-    bool Matrix::operator!=(const yli::linear_algebra::Matrix& rhs) const
-    {
-        // compare if matrices are equal.
-        if (this->width != rhs.width ||
-                this->height != rhs.height)
-        {
-            // Matrices are not equal, if they have different sizes.
-            return true;
-        }
-
-        for (std::size_t y = 0; y < this->height; y++)
-        {
-            // Get the slices of both arrays.
-            const std::vector<float>& my_array = this->array_of_arrays[y];
-            const std::vector<float>& other_array = rhs.array_of_arrays[y];
-
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                if (my_array[x] != other_array[x])
-                {
-                    // Arrays are not identical.
-                    return true;
-                }
-            }
-        }
-
-        // Everything matches. Arrays are identical.
-        return false;
-    }
-
     yli::linear_algebra::Matrix& Matrix::operator++()
     {
         for (std::size_t y = 0; y < this->height; y++)
