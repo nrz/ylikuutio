@@ -144,7 +144,7 @@ namespace yli::load
         char char_path[1024] = { 0 };
 
         // copy from opening double quote to the next `"/"`.
-        yli::string::extract_string(svg_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
+        yli::string::extract_string(svg_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), "/");
 
         if (is_debug_mode)
         {
@@ -311,7 +311,7 @@ namespace yli::load
                                 char_glyph_name,
                                 char_glyph_name,
                                 sizeof(char_glyph_name),
-                                (char*) "\"");
+                                "\"");
 
                         if (is_debug_mode)
                         {
@@ -376,7 +376,7 @@ namespace yli::load
                                 char_unicode,
                                 char_unicode,
                                 sizeof(char_unicode),
-                                (char*) "\"");
+                                "\"");
 
                         if (is_debug_mode)
                         {

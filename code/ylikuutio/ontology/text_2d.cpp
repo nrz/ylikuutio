@@ -181,7 +181,7 @@ namespace yli::ontology
                 break;
             }
 
-            if (character == (char) '\\')
+            if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
                 character = text[i++];
@@ -191,7 +191,7 @@ namespace yli::ontology
                     number_of_lines++;
                 }
             }
-            else if (character == (char) '\n')
+            else if (character == '\n')
             {
                 number_of_lines++;
             }
@@ -257,7 +257,7 @@ namespace yli::ontology
 
             char character = text[i++];
 
-            if (character == (char) '\\')
+            if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
                 character = text[i++];
@@ -279,7 +279,7 @@ namespace yli::ontology
                     continue;
                 }
             }
-            else if (character == (char) '\n')
+            else if (character == '\n')
             {
                 // jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.

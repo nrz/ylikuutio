@@ -270,7 +270,7 @@ namespace yli::ontology
                 break;
             }
 
-            if (character == (char) '\\')
+            if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
                 character = text[i++];
@@ -342,7 +342,7 @@ namespace yli::ontology
 
             char character = text[i++];
 
-            if (character == (char) '\\')
+            if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
                 character = text[i++];
