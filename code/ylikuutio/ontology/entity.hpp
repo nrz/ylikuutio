@@ -54,7 +54,7 @@ namespace yli::ontology
     {
         public:
             bool operator==(const yli::ontology::Entity& rhs) const;
-            bool operator!=(const yli::ontology::Entity& rhs) const;
+            bool operator!=(const yli::ontology::Entity& rhs) const = default;
 
             yli::core::Application& get_application() const;
 

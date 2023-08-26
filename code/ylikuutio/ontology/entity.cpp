@@ -44,11 +44,6 @@ namespace yli::ontology
         return this == &rhs;
     }
 
-    bool Entity::operator!=(const yli::ontology::Entity& rhs) const
-    {
-        return !this->operator==(rhs);
-    }
-
     yli::core::Application& Entity::get_application() const
     {
         return this->application;
