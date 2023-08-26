@@ -30,12 +30,14 @@ namespace yli::snippets::locomotion
 {
     class ShipModule final : public yli::ontology::LocomotionModule
     {
-        ShipModule(const yli::ontology::LocomotionModuleStruct& ship_module_struct);
+        public:
+            ShipModule(const yli::ontology::LocomotionModuleStruct& ship_module_struct);
 
-        float max_speed         { 0.0f }; // m/s.
-        float acceleration      { 0.0f }; // m/s^2
-        float deceleration      { 0.0f }; // m/s^2
-        float max_angular_speed { 0.0f }; // 1/s
+        private:
+            float max_speed         { 0.0f }; // m/s.
+            float acceleration      { 0.0f }; // m/s^2
+            float deceleration      { 0.0f }; // m/s^2
+            float max_angular_speed { 0.0f }; // 1/s
     };
 }
 
