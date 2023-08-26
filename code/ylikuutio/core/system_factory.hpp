@@ -32,7 +32,7 @@ namespace yli::core
         class SystemFactory
         {
             public:
-                SystemFactory(
+                explicit SystemFactory(
                         yli::memory::MemorySystem<TypeEnumType>& memory_system)
                     : memory_system { memory_system }
                 {
