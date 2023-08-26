@@ -32,7 +32,7 @@ namespace yli::ontology
 
     void print_words_to_console(
             yli::ontology::Console& console,
-            const std::vector<std::string> words);
+            const std::vector<std::string>& words);
 }
 
 #endif
