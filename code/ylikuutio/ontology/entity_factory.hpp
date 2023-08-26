@@ -106,7 +106,7 @@ namespace yli::ontology
         class EntityFactory : public yli::ontology::GenericEntityFactory
     {
         public:
-            EntityFactory<TypeEnumType>(
+            EntityFactory(
                     yli::core::Application& application,
                     yli::memory::MemorySystem<TypeEnumType>& memory_system)
                 : application { application },
