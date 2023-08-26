@@ -62,10 +62,7 @@ namespace yli::ontology
                 return this->it == other_it.it;
             }
 
-            bool operator!=(const ChildIterator& other_it)
-            {
-                return this->it != other_it.it;
-            }
+            bool operator!=(const ChildIterator& other_it) const = default;
 
             ChildIterator& operator++()
             {
