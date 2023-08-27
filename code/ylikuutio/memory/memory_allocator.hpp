@@ -120,7 +120,7 @@ namespace yli::memory
                     return *raw_storage_pointer;
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& constructible_module) override
+                void destroy(const yli::memory::ConstructibleModule& constructible_module) noexcept override
                 {
                     if (constructible_module.storage_i == std::numeric_limits<std::size_t>::max())
                     {
@@ -182,7 +182,7 @@ namespace yli::memory
                     return this->instances.size();
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& /* constructible_module */ ) override
+                void destroy(const yli::memory::ConstructibleModule& /* constructible_module */ ) noexcept override
                 {
                     // TODO
                 }
