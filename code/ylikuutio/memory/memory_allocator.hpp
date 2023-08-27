@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <cstddef>   // std::byte, std::size_t
+#include <iostream>  // std::cerr
 #include <limits>    // std::numeric_limits
 #include <memory>    // std::make_unique, std::unique_ptr
 #include <stdexcept> // std::runtime_error
@@ -123,20 +124,21 @@ namespace yli::memory
                 {
                     if (constructible_module.storage_i == std::numeric_limits<std::size_t>::max())
                     {
-                        throw std::runtime_error("ERROR: `MemoryAllocator::destroy`: `constructible_module.storage_i` has invalid value!");
+                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.storage_i` has invalid value!\n";
+                        return;
                     }
 
                     if (constructible_module.slot_i == std::numeric_limits<std::size_t>::max())
                     {
-                        throw std::runtime_error("ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!");
+                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!\n";
+                        return;
                     }
 
                     if (constructible_module.storage_i >= this->get_number_of_storages())
                     {
-                        std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::destroy`: `storage_i` " <<
-                            constructible_module.storage_i << " is out of bounds, size is " << this->get_number_of_storages();
-                        throw std::runtime_error(runtime_error_stringstream.str());
+                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `storage_i` " <<
+                            constructible_module.storage_i << " is out of bounds, size is " << this->get_number_of_storages() << "\n";
+                        return;
                     }
 
                     auto& storage = this->get_storage(constructible_module.storage_i);
