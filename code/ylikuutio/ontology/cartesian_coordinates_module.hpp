@@ -24,9 +24,6 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include standard headers
-#include <utility> // std::move
-
 namespace yli::ontology
 {
     class CartesianCoordinatesModule
