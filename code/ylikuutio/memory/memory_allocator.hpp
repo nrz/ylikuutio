@@ -25,11 +25,11 @@
 
 // Include standard headers
 #include <cstddef>   // std::byte, std::size_t
+#include <functional> // std::reference_wrapper
 #include <iostream>  // std::cerr
 #include <limits>    // std::numeric_limits
 #include <memory>    // std::make_unique, std::unique_ptr
-#include <stdexcept> // std::runtime_error
-#include <sstream>   // std::stringstream
+#include <optional>  // std::optional
 #include <utility>   // std::forward, std::move
 #include <vector>    // std::vector
 
@@ -92,29 +92,27 @@ namespace yli::memory
                     return DataSize;
                 }
 
-                yli::memory::MemoryStorage<T1, DataSize>& get_storage(const std::size_t storage_i) const
+                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<T1, DataSize>>> get_storage(const std::size_t storage_i) const noexcept
                 {
                     if (storage_i == std::numeric_limits<std::size_t>::max())
                     {
-                        throw std::runtime_error("ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!");
+                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!\n";
+                        return std::nullopt;
                     }
 
                     if (storage_i >= this->get_number_of_storages())
                     {
-                        std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
-                            " is out of bounds, size is " << this->get_number_of_storages();
-                        throw std::runtime_error(runtime_error_stringstream.str());
+                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
+                            " is out of bounds, size is " << this->get_number_of_storages() << "\n";
+                        return std::nullopt;
                     }
 
                     auto raw_storage_pointer = this->storages.at(storage_i).get();
 
                     if (raw_storage_pointer == nullptr)
                     {
-                        std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
-                            " is `nullptr`!";
-                        throw std::runtime_error(runtime_error_stringstream.str());
+                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i << " is `nullptr`!\n";
+                        return std::nullopt;
                     }
 
                     return *raw_storage_pointer;
@@ -141,8 +139,12 @@ namespace yli::memory
                         return;
                     }
 
-                    auto& storage = this->get_storage(constructible_module.storage_i);
-                    storage.destroy(constructible_module.slot_i);
+                    auto storage = this->get_storage(constructible_module.storage_i);
+
+                    if (storage)
+                    {
+                        (*storage).get().destroy(constructible_module.slot_i);
+                    }
                 }
 
             private:
