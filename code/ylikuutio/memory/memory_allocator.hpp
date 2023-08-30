@@ -24,14 +24,14 @@
 #include "code/ylikuutio/ontology/lisp_function_overload.hpp"
 
 // Include standard headers
-#include <cstddef>   // std::byte, std::size_t
+#include <cstddef>    // std::byte, std::size_t
 #include <functional> // std::reference_wrapper
-#include <iostream>  // std::cerr
-#include <limits>    // std::numeric_limits
-#include <memory>    // std::make_unique, std::unique_ptr
-#include <optional>  // std::optional
-#include <utility>   // std::forward, std::move
-#include <vector>    // std::vector
+#include <iostream>   // std::cerr
+#include <limits>     // std::numeric_limits
+#include <memory>     // std::make_unique, std::unique_ptr
+#include <optional>   // std::optional
+#include <utility>    // std::forward, std::move
+#include <vector>     // std::vector
 
 namespace yli::ontology
 {
