@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <optional> // std::optional
-#include <string> // std::string, std::getline
+#include <string> // std::string
 #include <vector> // std::vector
 
 namespace yli::lisp

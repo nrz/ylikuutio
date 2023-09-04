@@ -38,7 +38,7 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
-#include <string>   // std::string, std::getline
+#include <string>   // std::string
 
 // Tests for `yli::ontology::Universe` callbacks
 // that can be tested in headless mode.

@@ -30,7 +30,7 @@
 #include <list>      // std::list
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
-#include <string>    // std::string, std::getline
+#include <string>    // std::string
 #include <vector>    // std::vector
 
 namespace yli::ontology
