@@ -82,7 +82,6 @@ namespace yli::ontology
                         std::queue<std::size_t>& free_childID_queue,
                         std::size_t& number_of_children) noexcept;
 
-
             template<typename T1>
                 friend std::size_t yli::hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept;
 
