@@ -112,6 +112,9 @@ struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
 if parent_class_name != "":
     parent_class_include_line = "#include \"" + snake_case_parent_class_name + ".hpp\""
+else:
+    parent_class_include_line = ""
+
 if base_class_name != "":
     entity_struct_include_line = "#include \"" + snake_case_base_class_name + "_struct.hpp\""
 endif_line = "#endif"
