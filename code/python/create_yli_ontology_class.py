@@ -331,7 +331,7 @@ with open(class_filename_hpp, 'w') as f:
     if base_class_name != "" and base_class_name != "Entity":
         print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
-    if parent_class_name != "Universe":
+    if parent_class_name != "" and parent_class_name != "Universe":
         print(parent_class_forward_declaration, file = f)
     print(struct_forward_declaration, file = f)
     print(file = f)
