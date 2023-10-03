@@ -363,7 +363,8 @@ with open(class_filename_cpp, 'w') as f:
     print(copyright_notice, file = f)
     print(file = f)
     print(class_include_line, file = f)
-    print(parent_class_include_line, file = f)
+    if parent_class_include_line != "":
+        print(parent_class_include_line, file = f)
     print(struct_include_line, file = f)
     print(file = f)
     print(standard_headers_include_lines, file = f)
