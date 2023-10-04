@@ -103,23 +103,24 @@ namespace hirvi
         TEXT_3D                     = 149,
         // `yli::ontology` datatypes, 'input' path.
         INPUT_MODE                  = 150,
+        KEY_BINDING                 = 151,
         // `yli::ontology` datatypes, 'audio' path.
-        AUDIO_TRACK                 = 151,
+        AUDIO_TRACK                 = 152,
         // `yli::ontology` datatypes, 'track' path.
-        PLAYLIST                    = 152,
+        PLAYLIST                    = 153,
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE                     = 153,
-        CONSOLE_CALLBACK_ENGINE     = 154,
-        CONSOLE_CALLBACK_OBJECT     = 155,
+        CONSOLE                     = 154,
+        CONSOLE_CALLBACK_ENGINE     = 155,
+        CONSOLE_CALLBACK_OBJECT     = 156,
         // `yli::ontology` datatypes, 'graph' path.
-        GRAPH                       = 156,
-        NODE                        = 157,
+        GRAPH                       = 157,
+        NODE                        = 158,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK                 = 158,
+        COMPUTETASK                 = 159,
         // `yli::ontology` datatypes, 'lisp' path.
-        LISP_FUNCTION                  = 159,
-        GENERIC_LISP_FUNCTION_OVERLOAD = 160,
-        LISP_FUNCTION_OVERLOAD         = 161,
+        LISP_FUNCTION                  = 160,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 161,
+        LISP_FUNCTION_OVERLOAD         = 162,
         // Custom datatypes of Hirvi.
         CAT               = 201,
         ELK               = 202,
