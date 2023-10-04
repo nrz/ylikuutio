@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "parent_of_pipelines_module.hpp"
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
-#include "parent_of_pipelines_module.hpp"
 #include "entity.hpp"
 #include "pipeline.hpp"
 
