@@ -30,6 +30,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class InputMode;
+    class Registry;
 
     ParentOfInputModesModule::ParentOfInputModesModule(
             yli::ontology::Universe* universe,
