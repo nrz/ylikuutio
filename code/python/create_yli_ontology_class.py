@@ -173,6 +173,9 @@ entity_forward_declaration = \
 universe_forward_declaration = \
 "    class Universe;"
 
+scene_forward_declaration = \
+"    class Scene;"
+
 parent_module_forward_declaration = \
 "    class GenericParentModule;"
 
@@ -259,6 +262,9 @@ get_number_of_children_const_override_line = \
 get_number_of_descendants_const_override_line = \
 "            std::size_t get_number_of_descendants() const override;"
 
+get_scene_const_override_line = \
+"            yli::ontology::Scene* get_scene() const override;"
+
 child_module_lines = \
 "            " + namespace + "::ChildModule " + child_module_variable_name + ";"
 
@@ -285,6 +291,12 @@ get_number_of_descendants_lines = \
 "    std::size_t " + class_name + "::get_number_of_descendants() const\n"\
 "    {\n"\
 "        return 0; // TODO: modify this line if this class has children!\n"\
+"    }"
+
+get_scene_lines = \
+"    yli::ontology::Scene* " + class_name + "::get_scene() const\n"\
+"    {\n"\
+"        return this->" + child_module_variable_name + ".get_scene(); // TODO: modify this line if needed!\n"\
 "    }"
 
 # struct file specific lines.
@@ -331,6 +343,8 @@ with open(class_filename_hpp, 'w') as f:
     if base_class_name != "" and base_class_name != "Entity":
         print(entity_forward_declaration, file = f)
     print(universe_forward_declaration, file = f)
+    if parent_class_name != "Scene":
+        print(scene_forward_declaration, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(parent_class_forward_declaration, file = f)
     print(struct_forward_declaration, file = f)
@@ -351,6 +365,8 @@ with open(class_filename_hpp, 'w') as f:
         print(get_parent_const_override_line, file = f)
     print(get_number_of_children_const_override_line, file = f)
     print(get_number_of_descendants_const_override_line, file = f)
+    print(file = f)
+    print(get_scene_const_override_line, file = f)
     if parent_class_name != "":
         print(file = f)
         print(child_module_lines, file = f)
@@ -375,6 +391,8 @@ with open(class_filename_cpp, 'w') as f:
     print(entity_forward_declaration, file = f)
     if parent_class_name != "Universe":
         print(universe_forward_declaration, file = f)
+    if parent_class_name != "Scene":
+        print(scene_forward_declaration, file = f)
     print(file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(get_static_cast_parent_function_lines, file = f)
@@ -392,6 +410,8 @@ with open(class_filename_cpp, 'w') as f:
     print(get_number_of_children_lines, file = f)
     print(file = f)
     print(get_number_of_descendants_lines, file = f)
+    print(file = f)
+    print(get_scene_lines, file = f)
     print(end_namespace_lines, file = f)
 
 with open(struct_filename, 'w') as f:
