@@ -19,6 +19,9 @@
 #include "generic_parent_module.hpp"
 #include "universe.hpp"
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::memory
 {
     class GenericMemoryAllocator;
