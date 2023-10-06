@@ -154,6 +154,13 @@ standard_headers_include_lines = \
 
 parent_module_type_and_name = "yli::ontology::GenericParentModule* const parent_module"
 
+# forwacd declarations in core namespace
+core_namespace_forward_declarations = \
+"namespace yli::core\n"\
+"{\n"\
+"    class Application;\n"\
+"}"
+
 # namespace
 begin_namespace_lines = \
 "namespace yli::ontology\n"\
@@ -204,12 +211,14 @@ def get_class_constructor_signature(parent_class_name, n_leading_whitespace, is_
     if parent_class_name != "":
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
+                (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::ontology::Universe& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ",\n" + \
                 (' ' * (n_leading_whitespace + 8)) + parent_module_type_and_name + ")"
     else:
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
+                (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::ontology::Universe& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ")"
 
@@ -269,10 +278,10 @@ child_module_lines = \
 if base_class_name != "":
     if parent_class_name != "":
         class_constructor_base_initialization = \
-        "        : " + base_class_name + "(universe, " + struct_name + "),"
+        "        : " + base_class_name + "(application, universe, " + struct_name + "),"
     else:
         class_constructor_base_initialization = \
-        "        : " + base_class_name + "(universe, " + struct_name + ")"
+        "        : " + base_class_name + "(application, universe, " + struct_name + ")"
 
 get_parent_function_lines = \
 "    yli::ontology::Entity* " + class_name + "::get_parent() const\n"\
@@ -349,6 +358,8 @@ with open(class_filename_hpp, 'w') as f:
     print(file = f)
     print(standard_headers_include_lines, file = f)
     print(file = f)
+    print(core_namespace_forward_declarations, file = f)
+    print(file = f)
     print(begin_namespace_lines, file = f)
     if parent_class_name != "":
         print(parent_module_forward_declaration, file = f)
@@ -396,6 +407,8 @@ with open(class_filename_cpp, 'w') as f:
     print(struct_include_line, file = f)
     print(file = f)
     print(standard_headers_include_lines, file = f)
+    print(file = f)
+    print(core_namespace_forward_declarations, file = f)
     print(file = f)
     print(begin_namespace_lines, file = f)
     if parent_class_name != "":
