@@ -239,6 +239,8 @@ else:
     "    {\n"\
     "        // constructor.\n"\
     "    }"
+
+# Lines specific to the `.hpp` file.
 class_constructor_declaration = get_class_constructor_signature(parent_class_name, 12, is_for_header = True) + ";"
 
 delete_copy_constructor_line = \
