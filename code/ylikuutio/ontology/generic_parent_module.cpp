@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "registry.hpp"
 #include "generic_parent_module.hpp"
+#include "registry.hpp"
 #include "entity.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/memory/generic_memory_allocator.hpp"
