@@ -218,13 +218,6 @@ def get_class_constructor_signature(parent_class_name, n_leading_whitespace, is_
                 (' ' * (n_leading_whitespace + 8)) + "yli::ontology::Universe& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ")"
 
-if base_class_name != "":
-    if parent_class_name != "":
-        class_constructor_base_initialization = \
-        "        : " + base_class_name + "(universe, " + struct_name + "),"
-    else:
-        class_constructor_base_initialization = \
-        "        : " + base_class_name + "(universe, " + struct_name + ")"
 class_constructor_child_module_line = \
 "        " + child_module_variable_name + "(parent_module, this)"
 if base_class_name != "":
@@ -271,6 +264,14 @@ child_module_lines = \
 "            " + namespace + "::ChildModule " + child_module_variable_name + ";"
 
 # Lines specific to the `.cpp` file.
+if base_class_name != "":
+    if parent_class_name != "":
+        class_constructor_base_initialization = \
+        "        : " + base_class_name + "(universe, " + struct_name + "),"
+    else:
+        class_constructor_base_initialization = \
+        "        : " + base_class_name + "(universe, " + struct_name + ")"
+
 get_parent_function_lines = \
 "    yli::ontology::Entity* " + class_name + "::get_parent() const\n"\
 "    {\n"\
