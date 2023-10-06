@@ -104,12 +104,8 @@ if base_class_name != "":
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
-struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
-class_ifndef_line = "#ifndef " + class_include_guard_macro_name
-class_define_line = "#define " + class_include_guard_macro_name
-struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
-struct_define_line = "#define " + struct_include_guard_macro_name
+endif_line = "#endif"
+
 if parent_class_name != "":
     parent_class_include_line = "#include \"" + snake_case_parent_class_name + ".hpp\""
 else:
@@ -117,7 +113,6 @@ else:
 
 if base_class_name != "":
     entity_struct_include_line = "#include \"" + snake_case_base_class_name + "_struct.hpp\""
-endif_line = "#endif"
 
 # class filenames.
 class_filename_hpp = snake_case_class_name + ".hpp"
@@ -234,6 +229,13 @@ else:
     "    }"
 
 # Lines specific to the `.hpp` file.
+
+# include guard generation.
+# include guard macro names follow Ylikuutio coding guidelines.
+class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
+class_ifndef_line = "#ifndef " + class_include_guard_macro_name
+class_define_line = "#define " + class_include_guard_macro_name
+
 class_constructor_declaration = get_class_constructor_signature(parent_class_name, 12, is_for_header = True) + ";"
 
 delete_copy_constructor_line = \
@@ -303,6 +305,13 @@ get_scene_lines = \
 "    }"
 
 # struct file specific lines.
+
+# include guard generation.
+# include guard macro names follow Ylikuutio coding guidelines.
+struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
+struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
+struct_define_line = "#define " + struct_include_guard_macro_name
+
 if base_class_name != "":
     begin_struct_definition = \
     "    struct " + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + "\n"\
