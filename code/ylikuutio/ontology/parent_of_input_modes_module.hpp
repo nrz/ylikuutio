@@ -31,6 +31,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class Registry;
     class Universe;
     class InputMode;
 
