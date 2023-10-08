@@ -51,6 +51,7 @@
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
