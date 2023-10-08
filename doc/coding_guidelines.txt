@@ -94,10 +94,16 @@ Including files
   5. Standard libraries (in alphabetical order).
 * For `yli::ontology` files, the headers of same `namespace` shall be in
   the following order:
-  2.1. `child_module.hpp`
-  2.2. `parent_module.hpp`
-  2.3. `master_module.hpp`
-  2.4. The rest `yli::ontology` headers in the canonical order (`yli::data::Datatype`).
+  2.01. `registry.hpp`
+  2.02. `child_module.hpp`
+  2.03. specialized child modules in their classes' canonical order
+  2.04. `generic_parent_module.hpp`
+  2.05. specialized parent modules in their classes' canonical order
+  2.06. `apprentice_module.hpp`
+  2.07. specialized apprentice modules in their classes' canonical order
+  2.08. `generic_master_module.hpp`
+  2.09. specialized master modules in their classes' canonical order
+  2.10. The rest `yli::ontology` headers in the canonical order (`yli::data::Datatype`).
 
 Forward declarations
 * Always have a forward declaration for all classes and structs that are needed
