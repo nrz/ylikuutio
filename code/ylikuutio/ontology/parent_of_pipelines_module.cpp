@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "parent_of_pipelines_module.hpp"
-#include "registry.hpp"
 #include "generic_parent_module.hpp"
 #include "entity.hpp"
 #include "pipeline.hpp"
@@ -33,6 +32,8 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class Registry;
+
     bool ParentOfPipelinesModule::bind_child(yli::ontology::Entity* const pipeline_child) noexcept
     {
         if (this->GenericParentModule::bind_child(pipeline_child))
