@@ -32,8 +32,8 @@ namespace yli::load
 
 namespace yli::ontology
 {
-    class Universe;
     class Registry;
+    class Universe;
 
     class TextureModule final
     {

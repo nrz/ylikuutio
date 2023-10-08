@@ -79,6 +79,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class Registry;
     class GenericMasterModule;
     class Universe;
     class CallbackEngine;
@@ -87,7 +88,6 @@ namespace yli::ontology
     class Scene;
     class Font2D;
     class InputMode;
-    class Registry;
     struct ConsoleStruct;
 
     class Console final : public yli::ontology::Entity
