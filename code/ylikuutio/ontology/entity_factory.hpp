@@ -38,6 +38,7 @@
 #include "holobiont.hpp"
 #include "biont.hpp"
 #include "vector_font.hpp"
+#include "glyph.hpp"
 #include "text_2d.hpp"
 #include "text_3d.hpp"
 #include "font_2d.hpp"
