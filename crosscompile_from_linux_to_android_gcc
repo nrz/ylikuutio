@@ -1,3 +1,0 @@
-#!/bin/bash
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CC='/usr/bin/gcc' CXX='/usr/bin/g++' cmake -DCMAKE_TOOLCHAIN_FILE=${script_dir}/android.cmake ${script_dir} && nice -19 make -j $(($(nproc) - 1))
