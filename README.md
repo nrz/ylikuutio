@@ -25,8 +25,6 @@ following Blender's licensing.
 Ylikuutio is a 3D game engine designed for 3D games and simulations.
 Ylikuutio aims to run fast and support also older hardware.
 Currently Ylikuutio works on 64-bit GNU/Linux, MacOS, and Windows systems.
-Android support is a work in progress.
-iOS will be supported in the future.
 OpenGL 3.3 is required.
 
 ## Ylikuutio 0.0.8 screenshots
@@ -70,12 +68,6 @@ Eg. with apt:
 If you are doing a cross compile from Linux to Windows, you need also:
 
     $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
-
-If you are doing a cross compile from Linux to Android™, you need also:
-
-    $ sudo apt install android-sdk-platform-tools-common ant google-android-ndk-installer openjdk-8-jdk
-
-However, cross compiling from Linux to Android does not work yet!
 
 Ylikuutio uses Git submodules, so you need to update them:
 
@@ -159,16 +151,6 @@ compiling ends before you get `hirvi.exe`, `tulevaisuus.exe`,
 By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue:
 https://github.com/google/googletest/issues/606
-
-#### Cross compiling from Debian to Android
-To cross compile from Debian to Android (using Android NDK):
-
-    $ mkdir build_android
-    $ cd build_android
-    $ cmake -DCMAKE_TOOLCHAIN_FILE=../android.cmake ..
-    $ make
-
-However, cross compiling from Debian to Android does not work yet!
 
 ### Compiling in a Podman container
 You may build Ylikuutio also in a Podman container. See [instructions](https://github.com/nrz/ylikuutio/blob/master/container-build/README.md). Building tested in CentOS 8.
@@ -350,7 +332,6 @@ A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
 
 Q: What are the target platforms of Ylikuutio?
 A: Currently supported target platforms are Linux, MacOS, and Windows.
-   In the future Android and iOS will be supported as well.
    Cross-compiling from Linux to Windows works!
    Currently only 64-bit environments are supported.
 
@@ -481,7 +462,6 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * [Tecno pop base and guitar 2](https://freesound.org/people/frankum/sounds/395487/) is made by frankum and it is licensed under the [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). Original track by Frankum & Frankumjay. Converted into OGG from the original `395487__frankum__tecno-pop-base-and-guitar-2.mp3`.
 
 ## Trademarks
-* Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
 * Coverity® and Coverity Scan® are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
 * Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
 * Synopsys® is a registered trademark of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).

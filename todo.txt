@@ -136,8 +136,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
-[ ] Write a simple triangle drawing application (android-kolmio) for Android, using Android NDK and CMake.
-[ ] Add support for crosscompiling to Android.
 [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary GLTF files by loading the GLTF files created with it.
 [ ] Convert ASCII grid files into binary GLTF files.

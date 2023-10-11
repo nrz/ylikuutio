@@ -6,9 +6,8 @@ It is designed with two different game types in mind:
 2. turn-based tactical games.
 
 Other design goals include support also for slower video cards, and
-Linux, Windows, MacoOS, and Android as target operating systems
-(Android support is not implemented yet). Only 64-bit systems are
-supported. OpenGL 3.0 or newer is required.
+Linux, Windows, and MacoOS as target operating systems.
+Only 64-bit systems are supported. OpenGL 3.0 or newer is required.
 
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
