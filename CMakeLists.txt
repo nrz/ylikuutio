@@ -745,6 +745,8 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/background_color_snippets.hpp
     code/ylikuutio/snippets/brain_snippets.cpp
     code/ylikuutio/snippets/brain_snippets.hpp
+    code/ylikuutio/snippets/callback_snippets.cpp
+    code/ylikuutio/snippets/callback_snippets.hpp
     code/ylikuutio/snippets/console_callback_snippets.cpp
     code/ylikuutio/snippets/console_callback_snippets.hpp
     code/ylikuutio/snippets/console_snippets.cpp
