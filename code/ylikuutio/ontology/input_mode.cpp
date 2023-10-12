@@ -163,7 +163,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* InputMode::get_scene() const
     {
-        return nullptr;
+        return nullptr; // `InputMode` is not bound to any `Scene`.
     }
 
     std::size_t InputMode::get_number_of_children() const
