@@ -55,8 +55,7 @@ namespace yli::ontology
     {
         yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
 
-        [[unlikely]]
-        if (universe == nullptr)
+        if (universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `InputMode::activate`: `universe` is `nullptr`!");
         }

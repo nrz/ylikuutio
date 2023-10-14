@@ -39,8 +39,7 @@ namespace yli::ontology
             yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(
                     master_of_input_modes_module->get_generic_master());
 
-            [[unlikely]]
-            if (console == nullptr)
+            if (console == nullptr) [[unlikely]]
             {
                 throw std::runtime_error("ERROR: `InputModeApprenticeModule::InputModeApprenticeModule`: `console` is `nullptr`!");
             }
