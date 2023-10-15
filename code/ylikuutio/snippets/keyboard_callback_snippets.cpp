@@ -183,7 +183,7 @@ namespace yli::snippets
         return yli::data::AnyValue(exit_program_magic_number);
     }
 
-    std::optional<yli::data::AnyValue> first_turbo(
+    std::optional<yli::data::AnyValue> press_first_turbo(
             yli::ontology::Universe& universe,
             yli::ontology::CallbackEngine*,
             yli::ontology::CallbackObject* /* callback_object */,
