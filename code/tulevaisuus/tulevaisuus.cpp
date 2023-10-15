@@ -413,7 +413,7 @@ namespace tulevaisuus
         // Callback code for right Control: second turbo.
         yli::ontology::CallbackEngineStruct second_turbo_callback_engine_struct;
         auto second_turbo_callback_engine = this->entity_factory.create_callback_engine(second_turbo_callback_engine_struct);
-        second_turbo_callback_engine->create_callback_object(&yli::snippets::second_turbo);
+        second_turbo_callback_engine->create_callback_object(&yli::snippets::press_second_turbo);
 
         // Callback code for key up: move forward.
         yli::ontology::CallbackEngineStruct move_forward_callback_engine_struct;

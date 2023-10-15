@@ -90,7 +90,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> second_turbo(
+    std::optional<yli::data::AnyValue> press_second_turbo(
             yli::ontology::Universe& universe,
             yli::ontology::CallbackEngine*,
             yli::ontology::CallbackObject* callback_object,
