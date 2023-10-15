@@ -60,7 +60,7 @@ namespace yli::render
             [[nodiscard]] bool setup_context(SDL_Window* window);
             [[nodiscard]] bool setup_context();
             void set_swap_interval(const int32_t interval);
-            void restore_onscreen_rendering(const float window_width, const float window_height) const;
+            void restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const;
             void set_opengl_background_color() const;
             void adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const;
 

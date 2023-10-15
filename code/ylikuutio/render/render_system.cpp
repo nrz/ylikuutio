@@ -154,7 +154,7 @@ namespace yli::render
         }
     }
 
-    void RenderSystem::restore_onscreen_rendering(const float window_width, const float window_height) const
+    void RenderSystem::restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const
     {
         // Bind the default framebuffer for on-screen rendering.
         yli::opengl::bind_gl_framebuffer(0);
