@@ -62,7 +62,7 @@ namespace yli::render
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering(const float window_width, const float window_height) const;
             void set_opengl_background_color() const;
-            void adjust_opengl_viewport(const float window_width, const float window_height) const;
+            void adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const;
 
             // This function renders everything.
             void render(const yli::render::RenderStruct& render_struct) const;

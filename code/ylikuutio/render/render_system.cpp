@@ -178,7 +178,7 @@ namespace yli::render
                 this->background_alpha);
     }
 
-    void RenderSystem::adjust_opengl_viewport(const float window_width, const float window_height) const
+    void RenderSystem::adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const
     {
         if (window_width >= 0 && window_width <= std::numeric_limits<GLsizei>::max() &&
                 window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max())
