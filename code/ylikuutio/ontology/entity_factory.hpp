@@ -56,6 +56,8 @@
 #include "compute_task.hpp"
 #include "brain.hpp"
 #include "variable_struct.hpp"
+#include "callback_engine_struct.hpp"
+#include "callback_object_struct.hpp"
 #include "callback_parameter_struct.hpp"
 #include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
