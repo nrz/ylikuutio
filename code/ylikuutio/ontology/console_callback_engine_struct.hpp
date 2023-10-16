@@ -18,11 +18,11 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
 
-#include "callback_engine_struct.hpp"
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    struct ConsoleCallbackEngineStruct : public yli::ontology::CallbackEngineStruct
+    struct ConsoleCallbackEngineStruct : public yli::ontology::EntityStruct
     {
     };
 }
