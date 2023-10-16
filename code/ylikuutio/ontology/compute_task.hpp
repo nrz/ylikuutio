@@ -20,7 +20,6 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "apprentice_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -41,16 +40,8 @@
 // would contain the graph data, eg. as a distance matrix. Then, rendering a
 // `ComputeTask` means computing that task.
 //
-// Rendering a `ComputeTask` is done by iterating the task until either
-// `end_condition_callback_engine->execute(nullptr)` returns `true`, or until
-// `n_max_iterations` is reached. If `end_condition_callback_engine` is `nullptr`
-// or `end_condition_callback_engine->execute(nullptr)` does not not return an `AnyValue`
-// which contains `yli::data::BOOL`, then `end_condition_callback_engine` is ignored
-// and `n_max_iterations` is the exact number of iterations to be done. However,
-// even if `end_condition_callback_engine->execute(nullptr)` would return an invalid return
-// value, that is, not an `AnyValue` which contains `common::BOOL`,
-// `end_condition_callback_engine->execute(nullptr)` is still called and taken into account
-// in every iteration.
+// Rendering a `ComputeTask` is done by iterating the task until
+// `n_max_iterations` is reached.
 
 namespace yli::core
 {
@@ -78,8 +69,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ComputeTaskStruct& compute_task_struct,
-                    yli::ontology::GenericParentModule* const pipeline_parent_module,
-                    yli::ontology::GenericMasterModule* const end_condition_callback_engine_master);
+                    yli::ontology::GenericParentModule* const pipeline_parent_module);
 
             ~ComputeTask();
 
@@ -105,9 +95,6 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            // End iterating when end condition callback engine returns `true`.
-            yli::ontology::ApprenticeModule apprentice_of_end_condition_callback_engine;
-
         private:
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
@@ -119,8 +106,6 @@ namespace yli::ontology
             std::shared_ptr<std::vector<uint8_t>> result_vector { nullptr };
 
             // This is the maximum number of iterations.
-            // If `end_condition_callback_engine` is `nullptr`, then this is the number of iterations.
-            // If `end_condition_callback_engine` is not `nullptr`, then this is the maximum number of iterations.
             std::size_t n_max_iterations;
 
             std::size_t compute_taskID;

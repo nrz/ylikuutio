@@ -17,7 +17,6 @@
 
 #include "compute_task.hpp"
 #include "universe.hpp"
-#include "callback_engine.hpp"
 #include "pipeline.hpp"
 #include "compute_task_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -60,11 +59,9 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ComputeTaskStruct& compute_task_struct,
-            yli::ontology::GenericParentModule* const pipeline_parent_module,
-            yli::ontology::GenericMasterModule* const end_condition_callback_engine_master)
+            yli::ontology::GenericParentModule* const pipeline_parent_module)
         : Entity(application, universe, compute_task_struct),
         child_of_pipeline(pipeline_parent_module, this),
-        apprentice_of_end_condition_callback_engine(end_condition_callback_engine_master, this),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
         output_filename                  { compute_task_struct.output_filename },
@@ -321,19 +318,6 @@ namespace yli::ontology
 
         for (std::size_t iteration_i = 0; iteration_i < n_max_iterations; iteration_i++)
         {
-            auto end_condition_callback_engine = static_cast<yli::ontology::CallbackEngine*>(
-                    this->apprentice_of_end_condition_callback_engine.get_master());
-
-            if (end_condition_callback_engine != nullptr)
-            {
-                std::optional<yli::data::AnyValue> end_condition_any_value = end_condition_callback_engine->execute(yli::data::AnyValue());
-
-                if (end_condition_any_value && std::holds_alternative<bool>(end_condition_any_value->data) && std::get<bool>(end_condition_any_value->data))
-                {
-                    break; // End condition was satisfied. Therefore, no more iterations.
-                }
-            }
-
             // Update the value of `uniform` variable `iteration_i`.
             yli::opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
 
