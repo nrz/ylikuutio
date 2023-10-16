@@ -23,7 +23,6 @@
 #include "generic_parent_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

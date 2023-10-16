@@ -18,7 +18,6 @@
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "entity.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t

@@ -25,7 +25,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

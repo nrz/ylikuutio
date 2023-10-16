@@ -31,7 +31,6 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"

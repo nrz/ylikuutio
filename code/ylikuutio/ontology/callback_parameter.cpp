@@ -19,7 +19,6 @@
 #include "callback_object.hpp"
 #include "callback_parameter_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

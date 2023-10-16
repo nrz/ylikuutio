@@ -19,7 +19,6 @@
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
