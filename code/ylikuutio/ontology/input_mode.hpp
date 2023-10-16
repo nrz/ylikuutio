@@ -64,13 +64,13 @@ namespace yli::ontology
             void activate() override;
             void deactivate();
 
-            yli::ontology::CallbackEngine* get_keypress_callback_engine(uint32_t keycode) const;
-            yli::ontology::CallbackEngine* get_keyrelease_callback_engine(uint32_t keycode) const;
-            yli::ontology::CallbackEngine* get_continuous_keypress_callback_engine(uint32_t keycode) const;
+            yli::ontology::CallbackEngine* get_keypress_callback_engine(const uint32_t keycode) const;
+            yli::ontology::CallbackEngine* get_keyrelease_callback_engine(const uint32_t keycode) const;
+            yli::ontology::CallbackEngine* get_continuous_keypress_callback_engine(const uint32_t keycode) const;
 
-            void set_keypress_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine);
-            void set_keyrelease_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine);
-            void set_continuous_keypress_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine);
+            void set_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
+            void set_keyrelease_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
+            void set_continuous_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
 
             const std::vector<yli::ontology::CallbackEngine*>* get_keypress_callback_engines() const;
             const std::vector<yli::ontology::CallbackEngine*>* get_keyrelease_callback_engines() const;

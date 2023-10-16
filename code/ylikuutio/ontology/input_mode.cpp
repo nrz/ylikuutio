@@ -80,7 +80,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::CallbackEngine* InputMode::get_keypress_callback_engine(uint32_t keycode) const
+    yli::ontology::CallbackEngine* InputMode::get_keypress_callback_engine(const uint32_t keycode) const
     {
         if (keycode < this->keypress_callback_engines.size())
         {
@@ -90,7 +90,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::CallbackEngine* InputMode::get_keyrelease_callback_engine(uint32_t keycode) const
+    yli::ontology::CallbackEngine* InputMode::get_keyrelease_callback_engine(const uint32_t keycode) const
     {
         if (keycode < this->keyrelease_callback_engines.size())
         {
@@ -100,7 +100,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::CallbackEngine* InputMode::get_continuous_keypress_callback_engine(uint32_t keycode) const
+    yli::ontology::CallbackEngine* InputMode::get_continuous_keypress_callback_engine(const uint32_t keycode) const
     {
         if (keycode < this->continuous_keypress_callback_engines.size())
         {
@@ -110,7 +110,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    void InputMode::set_keypress_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine)
+    void InputMode::set_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine)
     {
         if (keycode >= this->keypress_callback_engines.size())
         {
@@ -120,7 +120,7 @@ namespace yli::ontology
         this->keypress_callback_engines[keycode] = callback_engine;
     }
 
-    void InputMode::set_keyrelease_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine)
+    void InputMode::set_keyrelease_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine)
     {
         if (keycode >= this->keyrelease_callback_engines.size())
         {
@@ -130,7 +130,7 @@ namespace yli::ontology
         this->keyrelease_callback_engines[keycode] = callback_engine;
     }
 
-    void InputMode::set_continuous_keypress_callback_engine(uint32_t keycode, yli::ontology::CallbackEngine* callback_engine)
+    void InputMode::set_continuous_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine)
     {
         if (keycode >= this->continuous_keypress_callback_engines.size())
         {
