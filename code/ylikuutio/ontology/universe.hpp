@@ -329,7 +329,6 @@ namespace yli::ontology
             float background_blue  { NAN };
             float background_alpha { NAN };
 
-            yli::ontology::GenericParentModule parent_of_callback_engines;
             yli::ontology::GenericParentModule parent_of_ecosystems;
             yli::ontology::GenericParentModule parent_of_scenes;
             yli::ontology::GenericParentModule parent_of_font_2ds;

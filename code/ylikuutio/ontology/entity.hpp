@@ -162,6 +162,7 @@ namespace yli::ontology
             // Named entities are stored here so that they can be recalled, if needed.
             yli::ontology::Registry registry;
             yli::ontology::GenericParentModule parent_of_variables;
+            yli::ontology::GenericParentModule parent_of_callback_engines;
 
         protected:
             yli::ontology::Universe& universe;

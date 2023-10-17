@@ -37,9 +37,9 @@ namespace yli::ontology
     CallbackEngine::CallbackEngine(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            yli::ontology::GenericParentModule* const universe_parent)
+            yli::ontology::GenericParentModule* const parent)
         : Entity(application, universe, EntityStruct()),
-        child_of_universe(universe_parent, this),
+        child_of_entity(parent, this),
         parent_of_callback_objects(
                 this,
                 &this->registry,
@@ -137,12 +137,12 @@ namespace yli::ontology
 
     yli::ontology::Entity* CallbackEngine::get_parent() const
     {
-        return this->child_of_universe.get_parent();
+        return this->child_of_entity.get_parent();
     }
 
     yli::ontology::Scene* CallbackEngine::get_scene() const
     {
-        return nullptr;
+        return this->child_of_entity.get_scene();
     }
 
     std::size_t CallbackEngine::get_number_of_children() const

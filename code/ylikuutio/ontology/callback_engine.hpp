@@ -74,7 +74,7 @@ namespace yli::ontology
             CallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const universe_parent);
+                    yli::ontology::GenericParentModule* const parent);
 
             virtual ~CallbackEngine() = default;
 
@@ -98,7 +98,7 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_universe;
+            yli::ontology::ChildModule child_of_entity;
             yli::ontology::GenericParentModule parent_of_callback_objects;
 
         private:

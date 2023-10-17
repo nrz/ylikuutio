@@ -137,11 +137,6 @@ namespace yli::ontology
             const yli::ontology::UniverseStruct& universe_struct)
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
-        parent_of_callback_engines(
-                this,
-                &this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
-                "callback_engines"),
         parent_of_ecosystems(
                 this,
                 &this->registry,

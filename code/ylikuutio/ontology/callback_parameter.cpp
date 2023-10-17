@@ -65,7 +65,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* CallbackParameter::get_scene() const
     {
-        return nullptr;
+        return this->child_of_callback_object.get_scene();
     }
 
     std::size_t CallbackParameter::get_number_of_children() const
