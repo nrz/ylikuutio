@@ -72,7 +72,6 @@ namespace yli::data
         CAMERAWIDGET        = 127,
         // `yli::ontology` datatypes, 'brain' path.
         BRAIN                 = 128,
-        BRAIN_CALLBACK_ENGINE = 129,
         // `yli::ontology` datatypes, 'ecosystem' path.
         ECOSYSTEM             = 130,
         // `yli::ontology` datatypes, 'simple' path.
@@ -105,7 +104,6 @@ namespace yli::data
         // `yli::ontology` datatypes, 'input' path.
         INPUT_MODE                  = 151,
         KEY_BINDING                 = 152,
-        KEYBOARD_CALLBACK_ENGINE    = 153,
         // `yli::ontology` datatypes, 'audio' path.
         AUDIO_TRACK                 = 154,
         // `yli::ontology` datatypes, 'track' path.
