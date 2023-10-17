@@ -2,9 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Implement `KeyboardCallbackEngine` that inherits `CallbackEngine`.
-[ ] Implement `BrainCallbackEngine` that inherits `CallbackEngine`.
-[ ] Make `CallbackEngine` only an interface and do not use it as is in `EntityFactory`.
 [ ] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
