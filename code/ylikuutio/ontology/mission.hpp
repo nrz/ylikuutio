@@ -19,7 +19,6 @@
 #define YLIKUUTIO_ONTOLOGY_MISSION_HPP_INCLUDED
 
 #include "child_module.hpp"
-#include "generic_parent_module.hpp"
 #include "entity.hpp"
 
 // Include standard headers
@@ -59,7 +58,6 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             yli::ontology::ChildModule child_of_universe;
-            yli::ontology::GenericParentModule parent_of_callback_engines;
     };
 }
 

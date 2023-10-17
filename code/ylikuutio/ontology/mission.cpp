@@ -17,11 +17,14 @@
 
 #include "mission.hpp"
 #include "mission_struct.hpp"
-#include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
@@ -41,12 +44,7 @@ namespace yli::ontology
             const yli::ontology::MissionStruct& mission_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, mission_struct),
-        child_of_universe(parent_module, this),
-        parent_of_callback_engines(
-                this,
-                &this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
-                "callback_engines")
+        child_of_universe(parent_module, this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";
