@@ -18,8 +18,10 @@
 #include "entity.hpp"
 #include "universe.hpp"
 #include "console.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
+#include "code/ylikuutio/memory/generic_memory_system.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -58,7 +60,9 @@ namespace yli::ontology
 
             // Erase the global name.
             universe.registry.erase_entity(entity.get_global_name());
-            delete &entity;
+
+            // Destroy the `Entity`.
+            universe.application.get_memory_system().destroy(entity.get_constructible_module());
         }
 
         return std::nullopt;
