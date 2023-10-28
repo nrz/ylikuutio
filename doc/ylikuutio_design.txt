@@ -21,7 +21,6 @@ Game Engine Architecture, 2nd Ed., page 876, written by
 Jason Gregory, with Unreal Engine mentioned as an example.
 
 code/ajokki/                    - Ajokki sandbox code.
-code/angelscript/               - AngelScript test code.
 code/bash/                      - scripts written in Bash.
 code/edit/                      - YliEdit editor code.
 code/gpgpu_test/                - GPGPU test code.
@@ -29,7 +28,6 @@ code/hirvi/                     - Hirvi game code.
 code/python/                    - scripts written in Python.
 code/tulevaisuus/               - Tulevaisuus game code.
 code/ylikuutio                  - Ylikuutio code.
-code/ylikuutio/angelscript/     - AngelScript related code. See below for more detailed description about AngelScript-related code.
 code/ylikuutio/audio/           - audio code. See below for more detailed description about audio.
 code/ylikuutio/callback_system/ - callback functionality.
 code/ylikuutio/command_line/    - command line argument processing.
@@ -56,10 +54,6 @@ code/ylikuutio/string/          - string processing code.
 code/ylikuutio/tests/           - unit tests.
 code/ylikuutio/time/            - time related code.
 code/ylikuutio/triangulation/   - triangulation related code. See below for more detailed description about triangulation.
-
-code/ylikuutio/angelscript/
-
-`AngelscriptMaster` is the master class of Ylikuutio AngelScript functionality.
 
 code/ylikuutio/audio/
 
