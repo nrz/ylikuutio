@@ -24,9 +24,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 
-// Include standard headers
-#include <iostream>
-
 namespace yli::ontology
 {
     class GenericParentModule;
