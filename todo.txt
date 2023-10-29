@@ -2,6 +2,7 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
+[ ] Fix bug "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!", in the deallocation of datatypes 121, 130, 131 (`CallbackEngine` etc.).
 [ ] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
