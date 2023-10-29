@@ -34,6 +34,13 @@ namespace yli::opengl
             const std::size_t image_height,
             GLuint& textureID)
     {
+        if (image_data.size() != 3 * image_width * image_height)
+        {
+            std::cerr << "ERROR: `image_data.size()` " << image_data.size() << " does not match `3 * image_width * image_height` (RGB)! " <<
+                " 3 * " << image_width << " * " << image_height << " = " << 3 * image_width * image_height << "!\n";
+            return false;
+        }
+
         // Create one OpenGL texture.
         glGenTextures(1, &textureID);
 
