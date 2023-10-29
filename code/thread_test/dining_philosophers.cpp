@@ -16,9 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <chrono>   // std::chrono
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout
 #include <mutex>    // std::mutex, std::scoped_lock
-#include <random>   // std::generate_canonical, std::mt19937, std::random_device
+#include <random>   // std::mt19937, std::random_device
 #include <stdint.h> // uint32_t etc.
 #include <thread>   // std::thread
 #include <vector>   // std::vector
