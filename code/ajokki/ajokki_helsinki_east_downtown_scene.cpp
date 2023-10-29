@@ -687,48 +687,6 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::ModelStruct freight_train_model_struct;
-        freight_train_model_struct.parent = helsinki_east_downtown_scene;
-        freight_train_model_struct.pipeline = helsinki_east_downtown_pipeline;
-        freight_train_model_struct.model_file_format = "fbx";
-        freight_train_model_struct.model_filename = "freight_train.fbx";
-
-        std::cout << "Creating yli::ontology::Entity* freight_train_symbiosis_entity ...\n";
-        yli::ontology::Entity* const freight_train_symbiosis_entity = this->entity_factory.create_symbiosis(freight_train_model_struct);
-
-        std::cout << "Creating yli::ontology::Symbiosis* freight_train_symbiosis ...\n";
-        yli::ontology::Symbiosis* const freight_train_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(freight_train_symbiosis_entity);
-
-        if (freight_train_symbiosis == nullptr)
-        {
-            std::cerr << "Failed to create freight_train Symbiosis.\n";
-            return nullptr;
-        }
-
-        freight_train_symbiosis->set_global_name("freight_train_symbiosis");
-
-        yli::ontology::HolobiontStruct freight_train_holobiont_struct1(*helsinki_east_downtown_scene, *freight_train_symbiosis);
-        freight_train_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-        freight_train_holobiont_struct1.initial_rotate_angles = { pi };
-        freight_train_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        freight_train_holobiont_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
-
-        std::cout << "Creating yli::ontology::Entity* freight_train1_entity ...\n";
-
-        yli::ontology::Entity* const freight_train1_entity = this->entity_factory.create_holobiont(freight_train_holobiont_struct1);
-
-        std::cout << "Creating yli::ontology::Holobiont* freight_train1 ...\n";
-
-        yli::ontology::Holobiont* const freight_train1 = dynamic_cast<yli::ontology::Holobiont*>(freight_train1_entity);
-
-        if (freight_train1 == nullptr)
-        {
-            std::cerr << "Failed to create freight_train1 Object.\n";
-            return nullptr;
-        }
-
-        freight_train1->set_global_name("freight_train1");
-
         yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity("turbo_polizei_png_symbiosis");
 
         yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_png_symbiosis_entity);
