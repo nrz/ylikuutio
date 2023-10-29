@@ -36,7 +36,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    bool GenericParentModule::bind_child(yli::ontology::Entity* const child) noexcept
+    [[nodiscard]] bool GenericParentModule::bind_child(yli::ontology::Entity* const child) noexcept
     {
         if (this->entity == nullptr || child == nullptr)
         {

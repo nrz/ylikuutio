@@ -45,7 +45,7 @@ namespace yli::ontology
             typedef ChildIterator       iterator;
             typedef ChildIterator const_iterator;
 
-            virtual bool bind_child(yli::ontology::Entity* const child) noexcept;
+            [[nodiscard]] virtual bool bind_child(yli::ontology::Entity* const child) noexcept;
             [[nodiscard]] virtual bool unbind_child(std::size_t childID) noexcept;
 
             // constructor.
