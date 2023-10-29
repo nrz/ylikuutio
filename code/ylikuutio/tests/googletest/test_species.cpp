@@ -35,25 +35,25 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = ecosystem;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = ecosystem;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem;
     model_struct.pipeline = pipeline;
     model_struct.material = material;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     // `Entity` member functions of `Universe`.
@@ -87,29 +87,29 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem;
     model_struct.pipeline = pipeline;
     model_struct.material = material;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     // `Entity` member functions of `Universe`.
@@ -146,25 +146,25 @@ TEST(species_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct;
     material_struct.parent = scene;
     material_struct.pipeline = pipeline;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
     model_struct.material = material;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     // `Entity` member functions of `Universe`.
@@ -198,18 +198,18 @@ TEST(species_must_bind_to_ecosystem_appropriately, ecosystem)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem1 = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem1;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
     ASSERT_EQ(species->get_scene(), nullptr);
     ASSERT_EQ(species->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1); // `species`.
 
-    yli::ontology::Ecosystem* const ecosystem2 = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     ASSERT_EQ(species->get_scene(), nullptr);
@@ -235,19 +235,19 @@ TEST(species_must_bind_to_scene_appropriately, scenes_no_pipelines_no_materials)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
     ASSERT_EQ(species->get_scene(), scene1);
     ASSERT_EQ(species->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(species->get_scene(), scene1);
     ASSERT_EQ(species->get_parent(), scene1);
@@ -272,19 +272,19 @@ TEST(species_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosys
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_parent(), scene);
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `species`.
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_parent(), scene);
@@ -309,19 +309,19 @@ TEST(species_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
     ASSERT_EQ(species->get_scene(), nullptr);
     ASSERT_EQ(species->get_parent(), ecosystem);
     ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `species`.
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(species->get_scene(), nullptr);
     ASSERT_EQ(species->get_parent(), ecosystem);
@@ -346,14 +346,14 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct);
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     species->set_local_name("foo");
@@ -376,14 +376,14 @@ TEST(species_must_maintain_the_local_name_after_binding_to_a_new_parent, headles
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct);
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     species->set_global_name("foo");
@@ -411,19 +411,19 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct);
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.parent = scene1;
-    yli::ontology::Species* const species1 = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             model_struct1);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.parent = scene2;
-    yli::ontology::Species* const species2 = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species2 = application.get_generic_entity_factory().create_species(
             model_struct2);
 
     species1->set_local_name("foo");
@@ -441,19 +441,19 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct);
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct1;
     model_struct1.parent = scene1;
-    yli::ontology::Species* const species1 = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             model_struct1);
 
     yli::ontology::ModelStruct model_struct2;
     model_struct2.parent = scene2;
-    yli::ontology::Species* const species2 = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species2 = application.get_generic_entity_factory().create_species(
             model_struct2);
 
     species1->set_global_name("foo");
@@ -477,16 +477,16 @@ TEST(species_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_c
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     yli::ontology::ObjectStruct object_struct(scene, species);
-    application.get_entity_factory().create_object(
+    application.get_generic_entity_factory().create_object(
             object_struct);
 
     ASSERT_EQ(species->get_number_of_apprentices(), 1);
@@ -499,21 +499,21 @@ TEST(species_must_unbind_all_its_apprentice_modules_when_binding_to_a_different_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     yli::ontology::ObjectStruct object_struct(scene1, species);
-    application.get_entity_factory().create_object(
+    application.get_generic_entity_factory().create_object(
             object_struct);
 
     ASSERT_EQ(species->get_number_of_apprentices(), 1);
 
-    yli::ontology::Scene* const scene2 = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::Species::bind_to_new_scene_parent(*species, *scene2);

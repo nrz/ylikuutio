@@ -217,7 +217,7 @@ namespace yli::ontology
 
     void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         yli::ontology::VariableStruct new_variable_struct(variable_struct);
         new_variable_struct.parent = this;

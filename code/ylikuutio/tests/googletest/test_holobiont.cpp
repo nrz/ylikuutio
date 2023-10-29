@@ -31,22 +31,22 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             model_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
-    yli::ontology::Holobiont* const holobiont = application.get_entity_factory().create_holobiont(
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
     // `Entity` member functions of `Universe`.
@@ -78,12 +78,12 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct;
     pipeline_struct.parent = scene;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ModelStruct model_struct;
@@ -91,11 +91,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     model_struct.pipeline = pipeline;
     model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     model_struct.model_file_format = "FBX";
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             model_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
-    yli::ontology::Holobiont* const holobiont = application.get_entity_factory().create_holobiont(
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
     // `Entity` member functions of `Universe`.

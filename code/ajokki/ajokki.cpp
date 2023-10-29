@@ -179,7 +179,7 @@ namespace ajokki
         return this->memory_system.get_allocator(type);
     }
 
-    yli::ontology::GenericEntityFactory& AjokkiApplication::get_entity_factory() const
+    yli::ontology::GenericEntityFactory& AjokkiApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
     }

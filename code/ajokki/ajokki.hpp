@@ -135,7 +135,7 @@ namespace ajokki
 
             yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const override;
 
-            yli::ontology::GenericEntityFactory& get_entity_factory() const override;
+            yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
 

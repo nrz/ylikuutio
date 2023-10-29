@@ -52,7 +52,7 @@ namespace yli::ontology
 
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
         callback_object_struct.parent = this;
@@ -62,7 +62,7 @@ namespace yli::ontology
     yli::ontology::CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
         callback_object_struct.parent = this;

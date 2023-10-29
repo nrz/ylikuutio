@@ -63,7 +63,7 @@ namespace yli::core
 
             virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const = 0;
 
-            virtual yli::ontology::GenericEntityFactory& get_entity_factory() const = 0;
+            virtual yli::ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
 
             virtual bool is_universe(yli::ontology::Entity* entity) const = 0;
 

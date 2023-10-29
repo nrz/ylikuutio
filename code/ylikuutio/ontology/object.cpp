@@ -490,7 +490,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);

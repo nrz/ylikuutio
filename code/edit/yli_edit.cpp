@@ -188,7 +188,7 @@ namespace yli_edit
         return this->memory_system.get_allocator(type);
     }
 
-    yli::ontology::GenericEntityFactory& YliEditApplication::get_entity_factory() const
+    yli::ontology::GenericEntityFactory& YliEditApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
     }

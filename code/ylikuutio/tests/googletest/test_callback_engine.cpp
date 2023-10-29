@@ -26,7 +26,7 @@ TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    yli::ontology::CallbackEngine* const callback_engine = application.get_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
 
     // `Entity` member functions of `Universe`.

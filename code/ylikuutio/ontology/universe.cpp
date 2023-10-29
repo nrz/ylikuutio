@@ -264,7 +264,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
                 yli::hierarchy::get_first_child(

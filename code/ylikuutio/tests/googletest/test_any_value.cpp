@@ -370,7 +370,7 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
     mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
-    yli::ontology::Movable* const object_movable = application.get_entity_factory().create_object(
+    yli::ontology::Movable* const object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
     yli::data::AnyValue movable_any_value = yli::data::AnyValue(*object_movable);
@@ -385,7 +385,7 @@ TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
     mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
-    const yli::ontology::Movable* const const_object_movable = application.get_entity_factory().create_object(
+    const yli::ontology::Movable* const const_object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
     yli::data::AnyValue const_movable_any_value = yli::data::AnyValue(*const_object_movable);
@@ -413,7 +413,7 @@ TEST(any_value_must_be_initialized_appropriately, ecosystem)
     mock::MockApplication application;
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::data::AnyValue ecosystem_any_value = yli::data::AnyValue(*ecosystem);
@@ -428,7 +428,7 @@ TEST(any_value_must_be_initialized_appropriately, scene)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::data::AnyValue scene_any_value = yli::data::AnyValue(*scene);
@@ -443,7 +443,7 @@ TEST(any_value_must_be_initialized_appropriately, pipeline)
 {
     mock::MockApplication application;
     yli::ontology::PipelineStruct pipeline_struct;
-    yli::ontology::Pipeline* const pipeline = application.get_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::data::AnyValue pipeline_any_value = yli::data::AnyValue(*pipeline);
@@ -458,7 +458,7 @@ TEST(any_value_must_be_initialized_appropriately, material)
 {
     mock::MockApplication application;
     yli::ontology::MaterialStruct material_struct;
-    yli::ontology::Material* const material = application.get_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
     yli::data::AnyValue material_any_value = yli::data::AnyValue(*material);
@@ -473,7 +473,7 @@ TEST(any_value_must_be_initialized_appropriately, species)
 {
     mock::MockApplication application;
     yli::ontology::ModelStruct model_struct;
-    yli::ontology::Species* const species = application.get_entity_factory().create_species(
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
     yli::data::AnyValue species_any_value = yli::data::AnyValue(*species);
@@ -488,7 +488,7 @@ TEST(any_value_must_be_initialized_appropriately, object)
 {
     mock::MockApplication application;
     yli::ontology::ObjectStruct object_struct(nullptr);
-    yli::ontology::Object* const object = application.get_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
 
     yli::data::AnyValue object_any_value = yli::data::AnyValue(*object);
@@ -503,7 +503,7 @@ TEST(any_value_must_be_initialized_appropriately, symbiosis)
 {
     mock::MockApplication application;
     yli::ontology::ModelStruct model_struct;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             model_struct);
 
     yli::data::AnyValue symbiosis_any_value = yli::data::AnyValue(*symbiosis);
@@ -518,16 +518,16 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    yli::ontology::Symbiosis* const symbiosis = application.get_entity_factory().create_symbiosis(
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             model_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
-    yli::ontology::Holobiont* const holobiont = application.get_entity_factory().create_holobiont(
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
     yli::data::AnyValue holobiont_any_value = yli::data::AnyValue(*holobiont);
@@ -542,7 +542,7 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
     mock::MockApplication application;
     yli::ontology::FontStruct font_struct;
-    yli::ontology::Font2D* const font_2d = application.get_entity_factory().create_font_2d(
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
     yli::data::AnyValue font_2d_any_value = yli::data::AnyValue(*font_2d);
@@ -557,7 +557,7 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
     mock::MockApplication application;
     yli::ontology::TextStruct text_struct;
-    yli::ontology::Text2D* const text_2d = application.get_entity_factory().create_text_2d(
+    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
 
     yli::data::AnyValue text_2d_any_value = yli::data::AnyValue(*text_2d);
@@ -572,7 +572,7 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
     mock::MockApplication application;
     yli::ontology::VectorFontStruct vector_font_struct;
-    yli::ontology::VectorFont* const vector_font = application.get_entity_factory().create_vector_font(
+    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
     yli::data::AnyValue vector_font_any_value = yli::data::AnyValue(*vector_font);
@@ -587,7 +587,7 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
     mock::MockApplication application;
     yli::ontology::Text3DStruct text_3d_struct;
-    yli::ontology::Text3D* const text_3d = application.get_entity_factory().create_text_3d(
+    yli::ontology::Text3D* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 
     yli::data::AnyValue text_3d_any_value = yli::data::AnyValue(*text_3d);
@@ -602,7 +602,7 @@ TEST(any_value_must_be_initialized_appropriately, console)
 {
     mock::MockApplication application;
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = application.get_entity_factory().create_console(
+    yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
 
     yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);
@@ -617,7 +617,7 @@ TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
     mock::MockApplication application;
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* console = application.get_entity_factory().create_console(
+    yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
 
     yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);

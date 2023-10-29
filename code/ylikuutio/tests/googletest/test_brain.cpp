@@ -27,12 +27,12 @@ TEST(brain_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::BrainStruct brain_struct;
     brain_struct.parent = scene;
-    yli::ontology::Brain* const brain = application.get_entity_factory().create_brain(
+    yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
     // `Entity` member functions of `Universe`.

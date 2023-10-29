@@ -45,7 +45,7 @@ TEST(callback_engine_must_function_properly, nop)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
 
     yli::ontology::CallbackObjectStruct callback_object_struct;
     auto callback_object = callback_engine->create_callback_object();
@@ -60,7 +60,7 @@ TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::return_uint32_t_deadbeef);
 
@@ -74,7 +74,7 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
@@ -93,7 +93,7 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
@@ -112,7 +112,7 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
@@ -131,7 +131,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
@@ -150,7 +150,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
@@ -169,7 +169,7 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::square);
 
@@ -188,7 +188,7 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::square);
 
@@ -207,7 +207,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::expt);
 
@@ -230,7 +230,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::expt_with_named_inputs);
 
@@ -255,7 +255,7 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object_expt = callback_engine->create_callback_object();
     callback_object_expt->set_new_callback(&yli::snippets::expt);
     yli::ontology::CallbackObject* callback_object_square_last = callback_engine->create_callback_object();
@@ -280,7 +280,7 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     mock::MockApplication application;
 
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    auto callback_engine = application.get_entity_factory().create_callback_engine(callback_engine_struct);
+    auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
     yli::ontology::CallbackObject* callback_object_1st_square = callback_engine->create_callback_object();
     callback_object_1st_square->set_new_callback(&yli::snippets::square);
 

@@ -187,7 +187,7 @@ namespace yli::ontology
                 std::string unicode_string = model_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
 
-                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
                 yli::ontology::Glyph* glyph = entity_factory.create_glyph(model_struct);
 
                 // So that each `Glyph` can be referred to,

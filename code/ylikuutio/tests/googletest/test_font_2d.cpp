@@ -29,7 +29,7 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
     font_struct.font_size = application.get_universe().get_font_size();
-    yli::ontology::Font2D* const font_2d = application.get_entity_factory().create_font_2d(
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
     // `Entity` member functions of `Universe`.
@@ -54,7 +54,7 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
     font_struct.font_size = application.get_universe().get_font_size();
-    yli::ontology::Font2D* const font_2d = application.get_entity_factory().create_font_2d(
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
     // `Entity` member functions of `Universe`.

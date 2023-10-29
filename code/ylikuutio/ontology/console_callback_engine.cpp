@@ -41,7 +41,7 @@ namespace yli::ontology
             const InputParametersToAnyValueCallbackWithConsole callback,
             yli::ontology::Console* const console_pointer)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct;
         console_callback_object_struct.parent = this;

@@ -58,7 +58,7 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
     scene->set_global_name(scene_name);
 
@@ -74,7 +74,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = application.get_entity_factory().create_console(
+    yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     console->set_global_name(console_name);
 
@@ -87,13 +87,13 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
 TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
     mock::MockApplication application;
-    application.get_entity_factory().create_font_2d(
+    application.get_generic_entity_factory().create_font_2d(
             yli::ontology::FontStruct());
 
     const std::string console_name = "foo";
 
     yli::ontology::ConsoleStruct console_struct;
-    yli::ontology::Console* const console = application.get_entity_factory().create_console(
+    yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     console->set_global_name(console_name);
 
@@ -110,14 +110,14 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     const std::string scene_name = "foo";
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
     scene->set_global_name(scene_name);
 
     yli::ontology::CameraStruct camera_struct;
     camera_struct.scene = scene;
     camera_struct.global_name = "bar";
-    yli::ontology::Camera* const camera = application.get_entity_factory().create_camera(camera_struct);
+    yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(camera_struct);
 
     ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
     ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.

@@ -152,7 +152,7 @@ namespace gpgpu_test
         return this->memory_system.get_allocator(type);
     }
 
-    yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_entity_factory() const
+    yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
     }
