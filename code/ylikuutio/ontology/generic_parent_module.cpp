@@ -53,7 +53,7 @@ namespace yli::ontology
         return true; // Binding successful.
     }
 
-    bool GenericParentModule::unbind_child(std::size_t childID) noexcept
+    [[nodiscard]] bool GenericParentModule::unbind_child(std::size_t childID) noexcept
     {
         if (this->entity == nullptr)
         {
