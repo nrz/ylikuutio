@@ -50,8 +50,6 @@ namespace yli::ontology
         activate_callback { variable_struct.activate_callback },
         read_callback     { variable_struct.read_callback }
     {
-        // constructor (to be called from `Entity::create_variable`).
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Variable*";
         this->can_be_erased = true;
