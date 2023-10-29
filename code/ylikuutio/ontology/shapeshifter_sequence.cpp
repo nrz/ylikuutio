@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli::core
 {
@@ -57,26 +56,6 @@ namespace yli::ontology
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterSequence*";
         this->can_be_erased = true;
-    }
-
-    ShapeshifterSequence::~ShapeshifterSequence()
-    {
-        // destructor.
-
-        // requirements for further actions:
-        // `this->child_of_shapeshifter_transformation.get_parent()` must not be `nullptr`.
-
-        yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
-            static_cast<yli::ontology::ShapeshifterTransformation*>(
-                    this->child_of_shapeshifter_transformation.get_parent());
-
-        if (shapeshifter_transformation == nullptr)
-        {
-            std::cerr << "ERROR: `ShapeshifterSequence::~ShapeshifterSequence`: `shapeshifter_transformation` is `nullptr`!\n";
-            return;
-        }
-
-        shapeshifter_transformation->parent_of_shapeshifter_sequences.unbind_child(this->childID);
     }
 
     yli::ontology::Entity* ShapeshifterSequence::get_parent() const
