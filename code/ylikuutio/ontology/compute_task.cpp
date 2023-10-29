@@ -229,15 +229,6 @@ namespace yli::ontology
             glDeleteTextures(1, &this->target_texture);
             glDeleteFramebuffers(1, &this->framebuffer);
         }
-
-        yli::ontology::Pipeline* const parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
-
-        if (parent == nullptr)
-        {
-            return;
-        }
-
-        parent->parent_of_compute_tasks.unbind_child(this->childID);
     }
 
     void ComputeTask::render(const yli::ontology::Scene* const)
