@@ -122,23 +122,22 @@ namespace yli::ontology
                 return const_cast<yli::ontology::EntityFactory<TypeEnumType>&>(*this);
             }
 
-            yli::ontology::Universe* create_universe(const yli::ontology::UniverseStruct& universe_struct)
-            {
-                using UniverseMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Universe, 1>;
+            template<typename UniverseMemoryAllocator>
+                yli::ontology::Universe* create_universe(const yli::ontology::UniverseStruct& universe_struct)
+                {
+                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                        this->memory_system.template get_or_create_allocator<UniverseMemoryAllocator>(
+                                static_cast<int>(yli::data::Datatype::UNIVERSE));
+                    UniverseMemoryAllocator& allocator = static_cast<UniverseMemoryAllocator&>(generic_allocator);
 
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<UniverseMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::UNIVERSE));
-                UniverseMemoryAllocator& allocator = static_cast<UniverseMemoryAllocator&>(generic_allocator);
+                    yli::ontology::Universe* const universe = allocator.build_in(
+                            static_cast<int>(yli::data::Datatype::UNIVERSE),
+                            this->application,
+                            universe_struct);
 
-                yli::ontology::Universe* const universe = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::UNIVERSE),
-                        this->application,
-                        universe_struct);
-
-                this->universe = universe;
-                return universe;
-            }
+                    this->universe = universe;
+                    return universe;
+                }
 
             yli::ontology::Universe& get_universe() const
             {

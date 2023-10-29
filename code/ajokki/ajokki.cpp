@@ -121,7 +121,7 @@ namespace ajokki
         memory_system(this, universe_enum_value),
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
-        universe { this->entity_factory.create_universe(this->get_universe_struct()) },
+        universe { this->entity_factory.create_universe<UniverseMemoryAllocator>(this->get_universe_struct()) },
         audio_system { this->system_factory.create_audio_system() }
     {
         std::cout << "AjokkiApplication initialized!\n";
