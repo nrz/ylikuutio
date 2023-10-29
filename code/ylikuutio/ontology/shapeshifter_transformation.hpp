@@ -66,8 +66,7 @@ namespace yli::ontology
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const material_parent_module);
 
-            // destructor.
-            ~ShapeshifterTransformation();
+            ~ShapeshifterTransformation() = default;
 
         public:
             yli::ontology::Entity* get_parent() const override;

@@ -91,24 +91,6 @@ namespace yli::ontology
         this->can_be_erased = true;
     }
 
-    ShapeshifterTransformation::~ShapeshifterTransformation()
-    {
-        // destructor.
-
-        // requirements for further actions:
-        // `this->parent` must not be `nullptr`.
-
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
-
-        if (material == nullptr)
-        {
-            std::cerr << "ERROR: `ShapeshifterTransformation::~ShapeshifterTransformation`: `material` is `nullptr`!\n";
-            return;
-        }
-
-        material->parent_of_shapeshifter_transformations.unbind_child(this->childID);
-    }
-
     void ShapeshifterTransformation::render(const yli::ontology::Scene* const target_scene)
     {
         if (!this->should_be_rendered)
