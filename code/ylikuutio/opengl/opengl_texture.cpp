@@ -22,7 +22,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -30,17 +29,11 @@ namespace yli::opengl
 {
     // Load texture from memory.
     bool prepare_opengl_texture(
-            const std::shared_ptr<std::vector<uint8_t>> image_data,
+            const std::vector<uint8_t>& image_data,
             const std::size_t image_width,
             const std::size_t image_height,
             GLuint& textureID)
     {
-        if (image_data == nullptr)
-        {
-            std::cerr << "ERROR: `image_data` is `nullptr`!\n";
-            return false;
-        }
-
         // Create one OpenGL texture.
         glGenTextures(1, &textureID);
 
@@ -48,7 +41,7 @@ namespace yli::opengl
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Give the image to OpenGL.
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, &(*image_data)[0]);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image_data.data());
 
         yli::opengl::set_filtering_parameters();
 

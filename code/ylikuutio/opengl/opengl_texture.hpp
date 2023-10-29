@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -30,7 +29,7 @@ namespace yli::opengl
 {
     // Load texture from memory.
     bool prepare_opengl_texture(
-            const std::shared_ptr<std::vector<uint8_t>> image_data,
+            const std::vector<uint8_t>& image_data,
             const std::size_t image_width,
             const std::size_t image_height,
             GLuint& textureID);

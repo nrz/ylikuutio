@@ -57,7 +57,7 @@ namespace yli::load
 
         if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
         {
-            return yli::opengl::prepare_opengl_texture(image_data, image_width, image_height, textureID);
+            return yli::opengl::prepare_opengl_texture(*image_data.get(), image_width, image_height, textureID);
         }
         else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
         {
