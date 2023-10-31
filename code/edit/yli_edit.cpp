@@ -55,7 +55,6 @@
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
-#include "code/ylikuutio/ontology/generic_entity_factory.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
@@ -144,43 +143,6 @@ namespace yli_edit
     yli::memory::GenericMemorySystem& YliEditApplication::get_memory_system() const
     {
         return this->memory_system.get();
-    }
-
-    void YliEditApplication::create_memory_allocators()
-    {
-        this->memory_system.create_allocator<UniverseMemoryAllocator>(yli::data::Datatype::UNIVERSE);
-        this->memory_system.create_allocator<VariableMemoryAllocator>(yli::data::Datatype::VARIABLE);
-        this->memory_system.create_allocator<CallbackEngineMemoryAllocator>(yli::data::Datatype::CALLBACK_ENGINE);
-        this->memory_system.create_allocator<CallbackObjectMemoryAllocator>(yli::data::Datatype::CALLBACK_OBJECT);
-        this->memory_system.create_allocator<CallbackParameterMemoryAllocator>(yli::data::Datatype::CALLBACK_PARAMETER);
-        this->memory_system.create_allocator<CameraMemoryAllocator>(yli::data::Datatype::CAMERA);
-        this->memory_system.create_allocator<BrainMemoryAllocator>(yli::data::Datatype::BRAIN);
-        this->memory_system.create_allocator<EcosystemMemoryAllocator>(yli::data::Datatype::ECOSYSTEM);
-        this->memory_system.create_allocator<SceneMemoryAllocator>(yli::data::Datatype::SCENE);
-        this->memory_system.create_allocator<PipelineMemoryAllocator>(yli::data::Datatype::PIPELINE);
-        this->memory_system.create_allocator<MaterialMemoryAllocator>(yli::data::Datatype::MATERIAL);
-        this->memory_system.create_allocator<SpeciesMemoryAllocator>(yli::data::Datatype::SPECIES);
-        this->memory_system.create_allocator<ObjectMemoryAllocator>(yli::data::Datatype::OBJECT);
-        this->memory_system.create_allocator<SymbiosisMemoryAllocator>(yli::data::Datatype::SYMBIOSIS);
-        this->memory_system.create_allocator<SymbiontMaterialMemoryAllocator>(yli::data::Datatype::SYMBIONT_MATERIAL);
-        this->memory_system.create_allocator<SymbiontSpeciesMemoryAllocator>(yli::data::Datatype::SYMBIONT_SPECIES);
-        this->memory_system.create_allocator<HolobiontMemoryAllocator>(yli::data::Datatype::HOLOBIONT);
-        this->memory_system.create_allocator<BiontMemoryAllocator>(yli::data::Datatype::BIONT);
-        this->memory_system.create_allocator<ShapeshifterTransformationMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION);
-        this->memory_system.create_allocator<ShapeshifterSequenceMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE);
-        this->memory_system.create_allocator<ShapeshifterFormMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_FORM);
-        this->memory_system.create_allocator<Font2DMemoryAllocator>(yli::data::Datatype::FONT_2D);
-        this->memory_system.create_allocator<Text2DMemoryAllocator>(yli::data::Datatype::TEXT_2D);
-        this->memory_system.create_allocator<VectorFontMemoryAllocator>(yli::data::Datatype::VECTOR_FONT);
-        this->memory_system.create_allocator<GlyphMemoryAllocator>(yli::data::Datatype::GLYPH);
-        this->memory_system.create_allocator<Text3DMemoryAllocator>(yli::data::Datatype::TEXT_3D);
-        this->memory_system.create_allocator<InputModeMemoryAllocator>(yli::data::Datatype::INPUT_MODE);
-        this->memory_system.create_allocator<ConsoleMemoryAllocator>(yli::data::Datatype::CONSOLE);
-        this->memory_system.create_allocator<ConsoleCallbackEngineMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE);
-        this->memory_system.create_allocator<ConsoleCallbackObjectMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT);
-        this->memory_system.create_allocator<ComputeTaskMemoryAllocator>(yli::data::Datatype::COMPUTETASK);
-        this->memory_system.create_allocator<LispFunctionMemoryAllocator>(yli::data::Datatype::LISP_FUNCTION);
-        this->memory_system.create_allocator<GenericLispFunctionOverloadMemoryAllocator>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD);
     }
 
     yli::memory::GenericMemoryAllocator& YliEditApplication::get_memory_allocator(const int type) const

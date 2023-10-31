@@ -39,37 +39,3 @@ TEST(memory_system_must_be_initialized_appropriately, default_memory_system_no_a
     ASSERT_EQ(memory_system.get_number_of_allocators(), 0);
     ASSERT_EQ(memory_system.get_universe_datatype(), yli::data::Datatype::UNIVERSE);
 }
-
-TEST(memory_system_must_store_allocator_for_universe, scene_default_memory_system_no_application)
-{
-    yli::memory::MemorySystem memory_system(nullptr, yli::data::Datatype::UNIVERSE);
-
-    memory_system.store_allocator(
-            yli::data::Datatype::UNIVERSE,
-            new yli::memory::MemoryAllocator<yli::ontology::Universe, 1>());
-    ASSERT_EQ(memory_system.get_number_of_allocators(), 1); // `Universe` allocator.
-
-    yli::memory::GenericMemoryAllocator& generic_universe_allocator = memory_system.get_allocator(yli::data::Datatype::UNIVERSE);
-
-    yli::memory::MemoryAllocator<yli::ontology::Universe, 1>& universe_allocator =
-        dynamic_cast<yli::memory::MemoryAllocator<yli::ontology::Universe, 1>&>(generic_universe_allocator);
-    ASSERT_EQ(universe_allocator.get_number_of_storages(), 0);
-    ASSERT_EQ(universe_allocator.get_number_of_instances(), 0);
-}
-
-TEST(memory_system_must_store_allocator_for_scene, scene_default_memory_system_no_application)
-{
-    yli::memory::MemorySystem memory_system(nullptr, yli::data::Datatype::UNIVERSE);
-
-    memory_system.store_allocator(
-            yli::data::Datatype::SCENE,
-            new yli::memory::MemoryAllocator<yli::ontology::Scene, 1>());
-    ASSERT_EQ(memory_system.get_number_of_allocators(), 1); // `Scene` allocator.
-
-    yli::memory::GenericMemoryAllocator& generic_scene_allocator = memory_system.get_allocator(yli::data::Datatype::SCENE);
-
-    yli::memory::MemoryAllocator<yli::ontology::Scene, 1>& scene_allocator =
-        dynamic_cast<yli::memory::MemoryAllocator<yli::ontology::Scene, 1>&>(generic_scene_allocator);
-    ASSERT_EQ(scene_allocator.get_number_of_storages(), 0);
-    ASSERT_EQ(scene_allocator.get_number_of_instances(), 0);
-}
