@@ -42,6 +42,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
