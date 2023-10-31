@@ -73,6 +73,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
+    class GenericEntityFactory;
     struct UniverseStruct;
 }
 
