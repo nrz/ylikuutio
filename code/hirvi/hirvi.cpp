@@ -112,6 +112,8 @@ namespace hirvi
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
         audio_system { this->system_factory.create_audio_system() }
     {
+        this->create_memory_allocators();
+
         std::cout << "HirviApplication initialized!\n";
     }
 
@@ -142,6 +144,13 @@ namespace hirvi
     yli::memory::GenericMemorySystem& HirviApplication::get_memory_system() const
     {
         return this->memory_system.get();
+    }
+
+    void HirviApplication::create_memory_allocators()
+    {
+        this->memory_system.create_allocator<TerrainMemoryAllocator>(hirvi::Datatype::TERRAIN);
+        this->memory_system.create_allocator<CatMemoryAllocator>(hirvi::Datatype::CAT);
+        this->memory_system.create_allocator<PoliceCarMemoryAllocator>(hirvi::Datatype::POLICE_CAR);
     }
 
     yli::memory::GenericMemoryAllocator& HirviApplication::get_memory_allocator(const int type) const
