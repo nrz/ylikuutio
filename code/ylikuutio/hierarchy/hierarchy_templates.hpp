@@ -124,7 +124,7 @@ namespace yli::hierarchy
 
     template<typename T1>
         void bind_child_to_parent(
-                const T1 child_pointer,
+                const T1& child,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children) noexcept
@@ -143,18 +143,10 @@ namespace yli::hierarchy
             // relationships. Other binding relationships, that is
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
-            //
-            // requirements:
-            // `child_pointer` must not be `nullptr` (use `this` as the first argument).
 
-            if (child_pointer == nullptr)
-            {
-                return;
-            }
-
-            child_pointer->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
+            child.childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
+            yli::hierarchy::set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
         }
 
     template<typename T1>

@@ -36,8 +36,8 @@ namespace yli::ontology
 
     template<typename T1>
         void bind_child_to_parent(
-                const T1 child,
-                std::vector<T1>& child_pointer_vector,
+                T1& child,
+                std::vector<T1*>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
                 yli::ontology::Registry& registry) noexcept
@@ -56,32 +56,23 @@ namespace yli::ontology
             // relationships. Other binding relationships, that is
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
-            //
-            // requirements:
-            // `child` must not be `nullptr` (use `this` as the first argument).
 
-            if (child == nullptr)
-            {
-                std::cerr << "ERROR: `yli::ontology::bind_child_to_parent`: `child` is `nullptr`!\n";
-                return;
-            }
-
-            child->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
+            child.childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child->childID, child, child_pointer_vector, free_childID_queue, number_of_children);
+            yli::hierarchy::set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
 
-            const std::string& name = child->get_local_name();
+            const std::string& name = child.get_local_name();
 
             if (!name.empty() && !registry.is_name(name))
             {
-                registry.add_entity(*child, name);
+                registry.add_entity(child, name);
             }
         }
 
     template<typename T1>
         void bind_child_to_parent(
-                const T1 child,
-                std::vector<T1>& child_pointer_vector,
+                const T1& child,
+                std::vector<T1*>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
                 std::unordered_map<std::string, yli::ontology::Entity*>& entity_map) noexcept
@@ -100,25 +91,16 @@ namespace yli::ontology
             // relationships. Other binding relationships, that is
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
-            //
-            // requirements:
-            // `child` must not be `nullptr` (use `this` as the first argument).
 
-            if (child == nullptr)
-            {
-                std::cerr << "ERROR: `yli::ontology::bind_child_to_parent`: `child` is `nullptr`!\n";
-                return;
-            }
-
-            child->childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
+            child.childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child->childID, child, child_pointer_vector, free_childID_queue, number_of_children);
+            yli::hierarchy::set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
 
             const std::string& name = child->get_local_name();
 
             if (!name.empty() && entity_map.count(name) == 0)
             {
-                entity_map[name] = child;
+                entity_map[name] = &child;
             }
         }
 

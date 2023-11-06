@@ -43,8 +43,8 @@ namespace yli::ontology
             return false; // Binding failed.
         }
 
-        yli::ontology::bind_child_to_parent<yli::ontology::Entity*>(
-                &child,
+        yli::ontology::bind_child_to_parent<yli::ontology::Entity>(
+                child,
                 this->child_pointer_vector,
                 this->free_childID_queue,
                 this->number_of_children,
