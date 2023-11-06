@@ -34,8 +34,8 @@ namespace yli::ontology
 
     void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule& apprentice_module)
     {
-        yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
-                &apprentice_module,
+        yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule>(
+                apprentice_module,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
                 this->number_of_apprentices);
