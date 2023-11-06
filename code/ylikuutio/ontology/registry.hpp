@@ -60,7 +60,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_indexed_entity(const std::string& indexable_name, std::size_t index) const;
             yli::ontology::Entity* get_entity(const std::string& name) const;
 
-            std::string get_entity_name(const yli::ontology::Entity* const entity) const;
+            std::string get_entity_name(const yli::ontology::Entity& entity) const;
             std::string get_entity_names() const;
 
             const std::unordered_map<std::string, yli::ontology::Indexable*>& get_indexable_map() const;
