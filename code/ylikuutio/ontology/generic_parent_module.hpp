@@ -99,7 +99,7 @@ namespace yli::ontology
             std::queue<std::size_t> free_childID_queue;
             std::size_t number_of_children { 0 };
 
-            yli::ontology::Entity* entity; // The `Entity` that owns this `GenericParentModule`.
+            yli::ontology::Entity& entity; // The `Entity` that owns this `GenericParentModule`.
             yli::memory::GenericMemoryAllocator& memory_allocator;
     };
 }

@@ -38,29 +38,18 @@ namespace yli::ontology
 
     [[nodiscard]] bool GenericParentModule::bind_child(yli::ontology::Entity& child) noexcept
     {
-        if (this->entity == nullptr)
-        {
-            return false; // Binding failed.
-        }
-
         yli::ontology::bind_child_to_parent<yli::ontology::Entity>(
                 child,
                 this->child_pointer_vector,
                 this->free_childID_queue,
                 this->number_of_children,
-                this->entity->registry);
+                this->entity.registry);
 
         return true; // Binding successful.
     }
 
     [[nodiscard]] bool GenericParentModule::unbind_child(std::size_t childID) noexcept
     {
-        if (this->entity == nullptr)
-        {
-            std::cerr << "ERROR: `GenericParentModule::unbind_child`: `this->entity` is `nullptr`!\n";
-            return false; // Unbinding failed.
-        }
-
         if (childID == std::numeric_limits<std::size_t>::max())
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!\n";
@@ -89,7 +78,7 @@ namespace yli::ontology
                 this->child_pointer_vector,
                 this->free_childID_queue,
                 this->number_of_children,
-                this->entity->registry);
+                this->entity.registry);
 
         child->childID = std::numeric_limits<std::size_t>::max();
 
@@ -101,7 +90,7 @@ namespace yli::ontology
             yli::ontology::Registry* const registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : entity { &entity },
+        : entity { entity },
         memory_allocator { memory_allocator }
     {
         // constructor.
@@ -136,7 +125,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* GenericParentModule::get_entity() const noexcept
     {
-        return this->entity;
+        return &this->entity;
     }
 
     std::size_t GenericParentModule::get_number_of_children() const noexcept
@@ -151,7 +140,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* GenericParentModule::get_scene() const noexcept
     {
-        return this->entity->get_scene();
+        return this->entity.get_scene();
     }
 
     yli::ontology::Entity* GenericParentModule::get(const std::size_t index) const noexcept
