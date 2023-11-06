@@ -48,7 +48,7 @@ namespace yli::ontology
             bool is_indexable(const std::string& name) const;
             bool is_entity(const std::string& name) const;
 
-            void add_indexable(yli::ontology::Indexable* const indexable, const std::string& name);
+            void add_indexable(yli::ontology::Indexable& indexable, const std::string& name);
             void add_entity(yli::ontology::Entity* const entity, const std::string& name);
 
             void erase_entity(const std::string& name);

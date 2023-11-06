@@ -106,7 +106,7 @@ namespace yli::ontology
     {
         // constructor.
 
-        registry->add_indexable(this, name);
+        registry->add_indexable(*this, name);
     }
 
     GenericParentModule::~GenericParentModule() noexcept

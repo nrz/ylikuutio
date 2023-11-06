@@ -47,11 +47,11 @@ namespace yli::ontology
         return this->entity_map.count(name) == 1;
     }
 
-    void Registry::add_indexable(yli::ontology::Indexable* const indexable, const std::string& name)
+    void Registry::add_indexable(yli::ontology::Indexable& indexable, const std::string& name)
     {
         if (!name.empty() && !this->is_name(name))
         {
-            this->indexable_map[name] = indexable;
+            this->indexable_map[name] = &indexable;
             this->completable_string_set.add_string(name);
         }
     }
