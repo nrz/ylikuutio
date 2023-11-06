@@ -74,7 +74,7 @@ namespace yli::ontology
 
             if (!name.empty() && !registry.is_name(name))
             {
-                registry.add_entity(child, name);
+                registry.add_entity(*child, name);
             }
         }
 

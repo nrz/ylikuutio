@@ -104,7 +104,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_entity(const std::string& name) const;
             std::string get_entity_names() const;
             std::string complete(const std::string& input) const;
-            void add_entity(const std::string& name, yli::ontology::Entity* const entity);
+            void add_entity(const std::string& name, yli::ontology::Entity& entity);
             void erase_entity(const std::string& name);
 
             void create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value);

@@ -56,11 +56,11 @@ namespace yli::ontology
         }
     }
 
-    void Registry::add_entity(yli::ontology::Entity* const entity, const std::string& name)
+    void Registry::add_entity(yli::ontology::Entity& entity, const std::string& name)
     {
         if (!name.empty() && !this->is_name(name))
         {
-            this->entity_map[name] = entity;
+            this->entity_map[name] = &entity;
             this->completable_string_set.add_string(name);
         }
     }
