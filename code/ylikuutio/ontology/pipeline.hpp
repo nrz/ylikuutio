@@ -101,7 +101,7 @@ namespace yli::ontology
                 friend class yli::memory::MemoryStorage;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+                friend void yli::hierarchy::bind_child_to_parent(const T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
             yli::ontology::ChildModule child_of_scene_or_ecosystem;
             yli::ontology::GenericParentModule parent_of_compute_tasks;
