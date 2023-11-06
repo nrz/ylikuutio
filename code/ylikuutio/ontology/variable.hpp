@@ -182,9 +182,6 @@ namespace yli::ontology
 
             void activate() override;
 
-        private:
-            yli::ontology::Entity* parent;
-
         public:
             // The variable value (may be a pointer a some datatype).
             yli::data::AnyValue variable_value;

@@ -45,7 +45,6 @@ namespace yli::ontology
             const yli::data::AnyValue& any_value)
         : Entity(application, universe, variable_struct),
         child_of_entity(&variable_struct.parent.parent_of_variables, this),
-        parent            { &variable_struct.parent },
         variable_value    { any_value },
         activate_callback { variable_struct.activate_callback },
         read_callback     { variable_struct.read_callback }
@@ -91,7 +90,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::get() const
     {
-        if (this->parent == nullptr)
+        if (this->get_parent() == nullptr)
         {
             std::cerr << "ERROR: `Variable::get`: the parent of a `Variable` must not be `nullptr`!";
             return std::nullopt;
@@ -102,12 +101,12 @@ namespace yli::ontology
             return this->variable_value;
         }
 
-        return this->read_callback(*this->parent);
+        return this->read_callback(*this->get_parent());
     }
 
     void Variable::set(const yli::data::AnyValue& new_value)
     {
-        if (this->parent == nullptr)
+        if (this->get_parent() == nullptr)
         {
             return;
         }
@@ -116,13 +115,13 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(*this->parent, *this);
+            this->activate_callback(*this->get_parent(), *this);
         }
     }
 
     void Variable::set(const std::string& new_value)
     {
-        if (this->parent == nullptr)
+        if (this->get_parent() == nullptr)
         {
             return;
         }
@@ -131,7 +130,7 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(*this->parent, *this);
+            this->activate_callback(*this->get_parent(), *this);
         }
     }
 
@@ -193,7 +192,7 @@ namespace yli::ontology
     {
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(*this->parent, *this);
+            this->activate_callback(*this->get_parent(), *this);
         }
     }
 }
