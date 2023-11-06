@@ -44,7 +44,7 @@ namespace yli::ontology
         }
 
         // get `childID` from the `ParentModule` and set pointer to this child.
-        this->parent_module->bind_child(this->entity);
+        this->parent_module->bind_child(*this->entity);
     }
 
     ChildModule::~ChildModule() noexcept
@@ -145,7 +145,7 @@ namespace yli::ontology
         }
 
         this->parent_module = new_parent_module;
-        this->parent_module->bind_child(this->entity);
+        this->parent_module->bind_child(*this->entity);
     }
 
     void ChildModule::unbind_and_bind_to_new_parent(

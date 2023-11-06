@@ -34,12 +34,12 @@ namespace yli::ontology
 {
     class Registry;
 
-    bool ParentOfPipelinesModule::bind_child(yli::ontology::Entity* const pipeline_child) noexcept
+    bool ParentOfPipelinesModule::bind_child(yli::ontology::Entity& pipeline_child) noexcept
     {
         if (this->GenericParentModule::bind_child(pipeline_child))
         {
             // `pipeline` needs to be added to the priority queue as well.
-            this->pipeline_priority_queue.push(static_cast<yli::ontology::Pipeline*>(pipeline_child));
+            this->pipeline_priority_queue.push(static_cast<yli::ontology::Pipeline*>(&pipeline_child));
             return true; // Binding successful.
         }
 
