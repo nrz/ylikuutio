@@ -375,7 +375,7 @@ namespace yli::ontology
 
             template<typename T1>
                 friend void yli::hierarchy::bind_apprentice_to_master(
-                        T1 apprentice_pointer,
+                        const T1 apprentice_pointer,
                         std::vector<T1>& apprentice_pointer_vector,
                         std::queue<std::size_t>& free_apprenticeID_queue,
                         std::size_t& number_of_apprentices) noexcept;
