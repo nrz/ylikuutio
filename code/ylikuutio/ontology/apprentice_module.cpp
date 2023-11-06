@@ -32,7 +32,7 @@ namespace yli::ontology
     {
         if (this->generic_master_module != nullptr)
         {
-            this->generic_master_module->bind_apprentice_module(this);
+            this->generic_master_module->bind_apprentice_module(*this);
         }
     }
 

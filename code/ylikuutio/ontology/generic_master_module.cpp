@@ -25,7 +25,6 @@
 #include <cstddef> // std::size_t
 #include <iostream>  // std::cerr
 #include <limits>    // std::numeric_limits
-#include <stdexcept> // std::runtime_error
 #include <string>  // std::string
 #include <vector>  // std::vector
 
@@ -33,15 +32,10 @@ namespace yli::ontology
 {
     class Scene;
 
-    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule* const apprentice_module)
+    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule& apprentice_module)
     {
-        if (apprentice_module == nullptr)
-        {
-            throw std::runtime_error("ERROR: `GenericMasterModule::bind_apprentice_module`: `apprentice_module` is `nullptr`!");
-        }
-
         yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule*>(
-                apprentice_module,
+                &apprentice_module,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
                 this->number_of_apprentices);
