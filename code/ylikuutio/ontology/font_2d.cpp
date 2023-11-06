@@ -62,7 +62,7 @@ namespace yli::ontology
         : Entity(application, universe, font_struct),
         child_of_universe(parent_module, this),
         parent_of_text_2ds(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::TEXT_2D),
                 "text_2ds"),

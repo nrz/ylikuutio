@@ -138,27 +138,27 @@ namespace yli::ontology
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_ecosystems(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::ECOSYSTEM),
                 "ecosystems"),
         parent_of_scenes(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SCENE),
                 "scenes"),
         parent_of_font_2ds(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::FONT_2D),
                 "font_2ds"),
         parent_of_input_modes(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::INPUT_MODE),
                 "input_modes"),
         parent_of_consoles(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::CONSOLE),
                 "consoles"),

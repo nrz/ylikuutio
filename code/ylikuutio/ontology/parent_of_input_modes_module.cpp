@@ -33,7 +33,7 @@ namespace yli::ontology
     class Registry;
 
     ParentOfInputModesModule::ParentOfInputModesModule(
-            yli::ontology::Universe* universe,
+            yli::ontology::Universe& universe,
             yli::ontology::Registry* const registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept

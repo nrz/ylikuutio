@@ -37,22 +37,22 @@ namespace yli::ontology
         : Entity(application, universe, ecosystem_struct),
         child_of_universe(parent_module, this),
         parent_of_pipelines(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::PIPELINE),
                 "pipelines"),
         parent_of_materials(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::MATERIAL),
                 "materials"),
         parent_of_species(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SPECIES),
                 "species"),
         parent_of_symbioses(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
                 "symbioses")

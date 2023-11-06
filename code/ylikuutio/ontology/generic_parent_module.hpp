@@ -50,7 +50,7 @@ namespace yli::ontology
 
             // constructor.
             GenericParentModule(
-                    yli::ontology::Entity* const entity,
+                    yli::ontology::Entity& entity,
                     yli::ontology::Registry* const registry,
                     yli::memory::GenericMemoryAllocator& memory_allocator,
                     const std::string& name) noexcept;

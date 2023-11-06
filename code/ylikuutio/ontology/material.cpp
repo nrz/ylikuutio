@@ -144,12 +144,12 @@ namespace yli::ontology
         : Entity(application, universe, material_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_shapeshifter_transformations(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION),
                 "shapeshifter_transformations"),
         parent_of_vector_fonts(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::VECTOR_FONT),
                 "vector_fonts"),

@@ -68,7 +68,7 @@ namespace yli::ontology
                 brain_master),
         child_of_scene(scene_parent, this),
         parent_of_bionts(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::BIONT),
                 "bionts"),

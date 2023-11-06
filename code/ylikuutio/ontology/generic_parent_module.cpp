@@ -97,11 +97,11 @@ namespace yli::ontology
     }
 
     GenericParentModule::GenericParentModule(
-            yli::ontology::Entity* const entity,
+            yli::ontology::Entity& entity,
             yli::ontology::Registry* const registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : entity { entity },
+        : entity { &entity },
         memory_allocator { memory_allocator }
     {
         // constructor.

@@ -74,12 +74,12 @@ namespace yli::ontology
         : Entity(application, universe, model_struct),
         child_of_material(material_parent_module, this),
         parent_of_shapeshifter_forms(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_FORM),
                 "shapeshifter_forms"),
         parent_of_shapeshifter_sequences(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
                 "shapeshifter_sequences")

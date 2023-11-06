@@ -117,7 +117,7 @@ namespace yli::ontology
         : Entity(application, universe, pipeline_struct),
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_compute_tasks(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::COMPUTETASK),
                 "compute_tasks"),

@@ -158,7 +158,7 @@ namespace yli::ontology
         : Entity(application, universe, model_struct),
         child_of_scene_or_ecosystem(scene_parent_module, this),
         parent_of_symbiont_materials(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
                 "symbiont_materials"),

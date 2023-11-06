@@ -94,12 +94,12 @@ namespace yli::ontology
         : Entity(application, universe, vector_font_struct),
         child_of_material(material_parent, this),
         parent_of_glyphs(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::GLYPH),
                 "glyphs"),
         parent_of_text_3ds(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::TEXT_3D),
                 "text_3ds"),

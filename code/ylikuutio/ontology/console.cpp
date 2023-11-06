@@ -80,7 +80,7 @@ namespace yli::ontology
         : Entity(application, universe, console_struct),
         child_of_universe(parent_module, this),
         parent_of_lisp_functions(
-                this,
+                *this,
                 &this->registry,
                 application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
                 "lisp_functions"),
