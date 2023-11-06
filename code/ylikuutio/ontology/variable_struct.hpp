@@ -34,7 +34,7 @@ namespace yli::ontology
         // instances using `EntityFactory` before `EntityFactory::create_universe`
         // has initialized `universe` member variable of `EntityFactory`.
 
-        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity* parent)
+        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity& parent)
             : universe { universe },
             parent { parent }
         {
@@ -56,8 +56,21 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
+        VariableStruct(yli::ontology::Entity& parent, const yli::ontology::VariableStruct& variable_struct)
+            : EntityStruct(variable_struct),
+            universe { variable_struct.universe },
+            parent { parent },
+            activate_callback { variable_struct.activate_callback },
+            read_callback { variable_struct.read_callback },
+            should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
+        {
+            this->global_name = variable_struct.global_name;
+            this->local_name = variable_struct.local_name;
+            this->is_variable = true;
+        }
+
         yli::ontology::Universe& universe;
-        yli::ontology::Entity* parent                      { nullptr };
+        yli::ontology::Entity& parent;
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
         bool is_variable_of_universe                       { false };

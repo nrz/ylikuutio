@@ -30,25 +30,25 @@ namespace yli::snippets
             return;
         }
 
-        yli::ontology::VariableStruct red_variable_struct(*universe, universe);
+        yli::ontology::VariableStruct red_variable_struct(*universe, *universe);
         red_variable_struct.local_name = "red";
         red_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         red_variable_struct.should_call_activate_callback_now = false;
         universe->create_variable(red_variable_struct, yli::data::AnyValue(red));
 
-        yli::ontology::VariableStruct green_variable_struct(*universe, universe);
+        yli::ontology::VariableStruct green_variable_struct(*universe, *universe);
         green_variable_struct.local_name = "green";
         green_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         green_variable_struct.should_call_activate_callback_now = false;
         universe->create_variable(green_variable_struct, yli::data::AnyValue(green));
 
-        yli::ontology::VariableStruct blue_variable_struct(*universe, universe);
+        yli::ontology::VariableStruct blue_variable_struct(*universe, *universe);
         blue_variable_struct.local_name = "blue";
         blue_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         blue_variable_struct.should_call_activate_callback_now = false;
         universe->create_variable(blue_variable_struct, yli::data::AnyValue(blue));
 
-        yli::ontology::VariableStruct alpha_variable_struct(*universe, universe);
+        yli::ontology::VariableStruct alpha_variable_struct(*universe, *universe);
         alpha_variable_struct.local_name = "alpha";
         alpha_variable_struct.activate_callback = &yli::ontology::Variable::activate_background_color;
         alpha_variable_struct.should_call_activate_callback_now = true;

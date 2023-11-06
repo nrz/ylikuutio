@@ -1261,7 +1261,7 @@ namespace yli::ontology
         this->should_be_rendered = !this->get_is_headless();
 
         // Create `Variable` `should_be_rendered` here because it can't be done in `Entity` constructor.
-        yli::ontology::VariableStruct should_be_rendered_variable_struct(*this, this);
+        yli::ontology::VariableStruct should_be_rendered_variable_struct(*this, *this);
         should_be_rendered_variable_struct.is_variable_of_universe = true;
         should_be_rendered_variable_struct.local_name = "should_be_rendered";
         should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;

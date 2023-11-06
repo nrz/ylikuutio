@@ -82,7 +82,7 @@ namespace yli::ontology
         {
             this->should_be_rendered = !this->universe.get_is_headless();
 
-            yli::ontology::VariableStruct should_be_rendered_variable_struct(this->universe, this);
+            yli::ontology::VariableStruct should_be_rendered_variable_struct(this->universe, *this);
             should_be_rendered_variable_struct.local_name = "should_be_rendered";
             should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
             should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
@@ -219,8 +219,7 @@ namespace yli::ontology
     {
         yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        yli::ontology::VariableStruct new_variable_struct(variable_struct);
-        new_variable_struct.parent = this;
+        yli::ontology::VariableStruct new_variable_struct(*this, variable_struct);
         entity_factory.create_variable(new_variable_struct, any_value);
     }
 
