@@ -48,26 +48,23 @@ namespace yli::ontology
         return true; // Binding successful.
     }
 
-    [[nodiscard]] bool GenericParentModule::unbind_child(const std::size_t childID) noexcept
+    void GenericParentModule::unbind_child(const std::size_t childID) noexcept
     {
         if (childID == std::numeric_limits<std::size_t>::max())
         {
-            std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!\n";
-            return false; // Unbinding failed.
+            return; // No changes happened.
         }
 
-        if (childID >= this->child_pointer_vector.size())
+        if (childID >= this->child_pointer_vector.size()) [[unlikely]]
         {
-            std::cerr << "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is too big!\n";
-            return false; // Unbinding failed.
+            return; // No changes happened.
         }
 
         yli::ontology::Entity* const child = this->child_pointer_vector.at(childID);
 
         if (child == nullptr)
         {
-            std::cerr << "ERROR: `GenericParentModule::unbind_child`: `child` is `nullptr`!\n";
-            return false; // Unbinding failed.
+            return; // No changes happened.
         }
 
         const std::string name = child->get_local_name();
@@ -80,9 +77,7 @@ namespace yli::ontology
                 this->number_of_children,
                 this->entity.registry);
 
-        child->childID = std::numeric_limits<std::size_t>::max();
-
-        return true; // Unbinding successful.
+        child->release();
     }
 
     GenericParentModule::GenericParentModule(

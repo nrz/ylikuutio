@@ -78,6 +78,7 @@ namespace yli::ontology
 
             void set_childID(const std::size_t childID);
             std::size_t get_childID() const;
+            void release();
             std::string get_type() const;
 
             bool get_can_be_erased() const;

@@ -47,18 +47,17 @@ namespace yli::ontology
         // requirements:
         // `this->parent_module` must not be `nullptr`.
 
-        if (this->parent_module == nullptr && this->get_childID() == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        if (this->get_childID() == std::numeric_limits<std::size_t>::max()) [[unlikely]]
         {
             // OK, this `ChildModule` has been released already.
+            this->parent_module = nullptr; // Clean up by setting parent to `nullptr`.
             return;
         }
-        else if (this->parent_module != nullptr && this->get_childID() == std::numeric_limits<std::size_t>::max()) [[unlikely]]
-        {
-            std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has parent but `childID` is invalid!\n";
-        }
-        else if (this->parent_module == nullptr && this->get_childID() != std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        else if (this->parent_module == nullptr) [[unlikely]]
         {
             std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has no parent but `childID` is not properly released!\n";
+            this->release();
+            return;
         }
         else [[likely]]
         {
@@ -87,6 +86,7 @@ namespace yli::ontology
 
     void ChildModule::release() noexcept
     {
+        this->parent_module = nullptr;
         this->entity.set_childID(std::numeric_limits<std::size_t>::max());
     }
 

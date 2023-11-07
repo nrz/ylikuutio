@@ -31,6 +31,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <limits>        // std::numeric_limits
 #include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
 
@@ -132,6 +133,11 @@ namespace yli::ontology
     std::size_t Entity::get_childID() const
     {
         return this->childID;
+    }
+
+    void Entity::release()
+    {
+        this->childID = std::numeric_limits<std::size_t>::max();
     }
 
     std::string Entity::get_type() const

@@ -39,7 +39,7 @@ namespace yli::ontology
     {
         public:
             bool bind_child(yli::ontology::Entity& pipeline_child) noexcept override;
-            bool unbind_child(const std::size_t childID) noexcept override;
+            void unbind_child(const std::size_t childID) noexcept override;
 
             // constructor.
             ParentOfPipelinesModule(

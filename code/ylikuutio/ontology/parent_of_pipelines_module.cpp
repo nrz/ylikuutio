@@ -46,16 +46,12 @@ namespace yli::ontology
         return false; // Binding failed.
     }
 
-    bool ParentOfPipelinesModule::unbind_child(const std::size_t childID) noexcept
+    void ParentOfPipelinesModule::unbind_child(const std::size_t childID) noexcept
     {
-        if (this->GenericParentModule::unbind_child(childID))
-        {
-            // `Pipeline` needs to be removed from the priority queue as well.
-            this->pipeline_priority_queue.remove(childID);
-            return true; // Unbinding successful.
-        }
+        this->GenericParentModule::unbind_child(childID);
 
-        return false; // Unbinding failed.
+        // `Pipeline` needs to be removed from the priority queue as well.
+        this->pipeline_priority_queue.remove(childID);
     }
 
     ParentOfPipelinesModule::ParentOfPipelinesModule(
