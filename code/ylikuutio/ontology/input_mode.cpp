@@ -58,18 +58,11 @@ namespace yli::ontology
 
     void InputMode::deactivate()
     {
-        yli::ontology::Universe* const universe = static_cast<yli::ontology::Universe*>(this->child_of_universe.get_parent());
-
-        if (universe == nullptr)
-        {
-            throw std::runtime_error("ERROR: `InputMode::deactivate`: `universe` is `nullptr`!");
-        }
-
         // Only the active input mode may deactivate itself.
 
-        if (universe->parent_of_input_modes.get_active_input_mode() == this)
+        if (this->universe.parent_of_input_modes.get_active_input_mode() == this)
         {
-            universe->parent_of_input_modes.pop_input_mode();
+            this->universe.parent_of_input_modes.pop_input_mode();
         }
     }
 
