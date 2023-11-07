@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <iostream> // std::cerr
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology
@@ -43,21 +44,30 @@ namespace yli::ontology
 
     ChildModule::~ChildModule() noexcept
     {
-        // destructor.
-
         // requirements:
-        // `this->parent` must not be `nullptr`.
+        // `this->parent_module` must not be `nullptr`.
 
-        if (this->parent_module == nullptr)
+        if (this->parent_module == nullptr && this->get_childID() == std::numeric_limits<std::size_t>::max()) [[unlikely]]
         {
-            this->release();
+            // OK, this `ChildModule` has been released already.
             return;
         }
+        else if (this->parent_module != nullptr && this->get_childID() == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        {
+            std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has parent but `childID` is invalid!\n";
+        }
+        else if (this->parent_module == nullptr && this->get_childID() != std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        {
+            std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has no parent but `childID` is not properly released!\n";
+        }
+        else [[likely]]
+        {
+            // OK, this `ChildModule` has not been released yet.
 
-        // Set pointer to this `Entity` to `nullptr`.
-        this->parent_module->unbind_child(this->entity.childID);
-
-        this->release();
+            // Set pointer to this `Entity` to `nullptr`.
+            this->parent_module->unbind_child(this->entity.childID);
+            this->release();
+        }
     }
 
     yli::ontology::Entity* ChildModule::get_parent() const noexcept
