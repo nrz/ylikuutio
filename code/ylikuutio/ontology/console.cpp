@@ -81,7 +81,7 @@ namespace yli::ontology
         child_of_universe(parent_module, this),
         parent_of_lisp_functions(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
                 "lisp_functions"),
         apprentice_of_font_2d(generic_master_module, this),

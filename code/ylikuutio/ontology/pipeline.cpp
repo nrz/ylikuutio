@@ -118,7 +118,7 @@ namespace yli::ontology
         child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
         parent_of_compute_tasks(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::COMPUTETASK),
                 "compute_tasks"),
         master_of_materials(this, &this->registry, "materials", nullptr),

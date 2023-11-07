@@ -139,27 +139,27 @@ namespace yli::ontology
         current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_ecosystems(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::ECOSYSTEM),
                 "ecosystems"),
         parent_of_scenes(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SCENE),
                 "scenes"),
         parent_of_font_2ds(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::FONT_2D),
                 "font_2ds"),
         parent_of_input_modes(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::INPUT_MODE),
                 "input_modes"),
         parent_of_consoles(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::CONSOLE),
                 "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),

@@ -38,22 +38,22 @@ namespace yli::ontology
         child_of_universe(parent_module, this),
         parent_of_pipelines(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::PIPELINE),
                 "pipelines"),
         parent_of_materials(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::MATERIAL),
                 "materials"),
         parent_of_species(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SPECIES),
                 "species"),
         parent_of_symbioses(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
                 "symbioses")
     {

@@ -62,12 +62,12 @@ namespace yli::ontology
         registry(),
         parent_of_variables(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::VARIABLE),
                 ""), // Do not index `parent_of_variables`, index only the variables.
         parent_of_callback_engines(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
                 "callback_engines"),
         universe { universe },

@@ -63,7 +63,7 @@ namespace yli::ontology
         child_of_universe(parent_module, this),
         parent_of_text_2ds(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::TEXT_2D),
                 "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),

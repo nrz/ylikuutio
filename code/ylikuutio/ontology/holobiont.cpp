@@ -69,7 +69,7 @@ namespace yli::ontology
         child_of_scene(scene_parent, this),
         parent_of_bionts(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::BIONT),
                 "bionts"),
         apprentice_of_symbiosis(symbiosis_master, this)

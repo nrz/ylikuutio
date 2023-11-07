@@ -95,12 +95,12 @@ namespace yli::ontology
         child_of_material(material_parent, this),
         parent_of_glyphs(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::GLYPH),
                 "glyphs"),
         parent_of_text_3ds(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::TEXT_3D),
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },

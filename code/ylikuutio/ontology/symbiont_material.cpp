@@ -46,7 +46,7 @@ namespace yli::ontology
         child_of_symbiosis(symbiosis_parent_module, this),
         parent_of_symbiont_species(
                 *this,
-                &this->registry,
+                this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
                 "symbiont_species"),
         texture(

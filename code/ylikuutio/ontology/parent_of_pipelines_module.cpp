@@ -60,7 +60,7 @@ namespace yli::ontology
 
     ParentOfPipelinesModule::ParentOfPipelinesModule(
             yli::ontology::Entity& entity,
-            yli::ontology::Registry* const registry,
+            yli::ontology::Registry& registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
         : GenericParentModule(entity, registry, memory_allocator, name)

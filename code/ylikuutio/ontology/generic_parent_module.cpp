@@ -87,7 +87,7 @@ namespace yli::ontology
 
     GenericParentModule::GenericParentModule(
             yli::ontology::Entity& entity,
-            yli::ontology::Registry* const registry,
+            yli::ontology::Registry& registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
         : entity { entity },
@@ -95,7 +95,7 @@ namespace yli::ontology
     {
         // constructor.
 
-        registry->add_indexable(*this, name);
+        registry.add_indexable(*this, name);
     }
 
     GenericParentModule::~GenericParentModule() noexcept
