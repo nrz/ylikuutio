@@ -76,6 +76,7 @@ namespace yli::ontology
 
             yli::memory::ConstructibleModule get_constructible_module() const;
 
+            void set_childID(const std::size_t childID);
             std::size_t get_childID() const;
             std::string get_type() const;
 
@@ -156,9 +157,10 @@ namespace yli::ontology
         protected:
             yli::core::Application& application;
 
-        public:
+        private:
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
+        public:
             // Named entities are stored here so that they can be recalled, if needed.
             yli::ontology::Registry registry;
             yli::ontology::GenericParentModule parent_of_variables;

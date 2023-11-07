@@ -65,7 +65,7 @@ namespace yli::ontology
             // OK, this `ChildModule` has not been released yet.
 
             // Set pointer to this `Entity` to `nullptr`.
-            this->parent_module->unbind_child(this->entity.childID);
+            this->parent_module->unbind_child(this->entity.get_childID());
             this->release();
         }
     }
@@ -87,7 +87,7 @@ namespace yli::ontology
 
     void ChildModule::release() noexcept
     {
-        this->entity.childID = std::numeric_limits<std::size_t>::max();
+        this->entity.set_childID(std::numeric_limits<std::size_t>::max());
     }
 
     yli::ontology::Scene* ChildModule::get_scene() const noexcept

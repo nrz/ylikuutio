@@ -124,6 +124,11 @@ namespace yli::ontology
         return this->constructible_module;
     }
 
+    void Entity::set_childID(const std::size_t childID)
+    {
+        this->childID = childID;
+    }
+
     std::size_t Entity::get_childID() const
     {
         return this->childID;
