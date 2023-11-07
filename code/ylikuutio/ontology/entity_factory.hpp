@@ -1088,7 +1088,7 @@ namespace yli::ontology
                 {
                     yli::memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<ObjectDerivativeMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::OBJECT));
+                                static_cast<int>(object_derivative_type));
 
                     ObjectDerivativeMemoryAllocator& allocator =
                         static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
