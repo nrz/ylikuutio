@@ -119,6 +119,7 @@ namespace yli::ontology
 
     void ApprenticeModule::release() noexcept
     {
+        this->generic_master_module = nullptr;
         this->apprenticeID = std::numeric_limits<std::size_t>::max();
     }
 }

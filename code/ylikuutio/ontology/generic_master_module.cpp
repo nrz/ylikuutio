@@ -23,7 +23,6 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <iostream>  // std::cerr
 #include <limits>    // std::numeric_limits
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -45,14 +44,12 @@ namespace yli::ontology
     {
         if (apprenticeID == std::numeric_limits<std::size_t>::max())
         {
-            // Apprentice is already unbound.
-            return;
+            return; // No changes happened.
         }
 
         if (apprenticeID >= this->apprentice_module_pointer_vector.size())
         {
-            std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID << " is out of bounds, size is " << this->apprentice_module_pointer_vector.size() << "\n";
-            return;
+            return; // No changes happened.
         }
 
         // `ApprenticeModule*` must be read into a pointer before unbinding otherwise it will be out of bounds access.
@@ -60,8 +57,7 @@ namespace yli::ontology
 
         if (apprentice_module == nullptr)
         {
-            std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprentice_module` with `apprenticeID` " << apprenticeID << " is `nullptr`!\n";
-            return;
+            return; // No changes happened.
         }
 
         yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
