@@ -42,7 +42,7 @@ namespace yli::ontology
             const yli::ontology::LispFunctionStruct& lisp_function_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, lisp_function_struct),
-        child_of_console(parent_module, this),
+        child_of_console(parent_module, *this),
         parent_of_generic_lisp_function_overloads(
                 *this,
                 this->registry,

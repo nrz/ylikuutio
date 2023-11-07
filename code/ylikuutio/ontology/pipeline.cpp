@@ -115,7 +115,7 @@ namespace yli::ontology
             const yli::ontology::PipelineStruct& pipeline_struct,
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module)
         : Entity(application, universe, pipeline_struct),
-        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, *this),
         parent_of_compute_tasks(
                 *this,
                 this->registry,

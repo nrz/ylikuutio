@@ -145,7 +145,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
             yli::ontology::GenericMasterModule* const material_master)
         : Entity(application, universe, model_struct),
-        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
         apprentice_of_material(material_master, this),
         mesh(universe, model_struct)

@@ -180,7 +180,7 @@ namespace yli::ontology
                 universe,
                 object_struct,
                 brain_master),
-        child_of_scene(scene_parent_module, this),
+        child_of_scene(scene_parent_module, *this),
         apprentice_of_mesh(mesh_master, this)
     {
         // constructor.

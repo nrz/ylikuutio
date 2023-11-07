@@ -44,7 +44,7 @@ namespace yli::ontology
             const yli::ontology::BrainStruct& brain_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, brain_struct),
-        child_of_scene(parent_module, this),
+        child_of_scene(parent_module, *this),
         master_of_movables(this, &this->registry, "movables")
     {
         // constructor.

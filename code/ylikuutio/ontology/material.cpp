@@ -142,7 +142,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
             yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module)
         : Entity(application, universe, material_struct),
-        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, this),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, *this),
         parent_of_shapeshifter_transformations(
                 *this,
                 this->registry,

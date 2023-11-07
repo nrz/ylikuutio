@@ -38,7 +38,7 @@ namespace yli::ontology
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const symbiont_material_parent_module)
         : Entity(application, universe, model_struct),
-        child_of_symbiont_material(symbiont_material_parent_module, this),
+        child_of_symbiont_material(symbiont_material_parent_module, *this),
         master_of_bionts(this, &this->registry, "bionts"),
         mesh(universe, model_struct)
     {

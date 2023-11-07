@@ -42,7 +42,7 @@ namespace yli::ontology
             const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(application, universe, shapeshifter_sequence_struct),
-        child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, this),
+        child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
         master_of_objects(this, &this->registry, "objects")
     {
         // constructor.

@@ -39,7 +39,7 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const parent)
         : Entity(application, universe, EntityStruct()),
-        child_of_entity(parent, this),
+        child_of_entity(parent, *this),
         parent_of_callback_objects(
                 *this,
                 this->registry,

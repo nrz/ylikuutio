@@ -43,7 +43,7 @@ namespace yli::ontology
             const yli::ontology::MaterialStruct& material_struct,
             yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
         : Entity(application, universe, material_struct),
-        child_of_symbiosis(symbiosis_parent_module, this),
+        child_of_symbiosis(symbiosis_parent_module, *this),
         parent_of_symbiont_species(
                 *this,
                 this->registry,

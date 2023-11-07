@@ -65,7 +65,7 @@ namespace yli::ontology
                 universe,
                 camera_struct,
                 generic_master_module),
-        child_of_scene(scene_parent_module, this)
+        child_of_scene(scene_parent_module, *this)
     {
         if (this->universe.get_is_opengl_in_use())
         {

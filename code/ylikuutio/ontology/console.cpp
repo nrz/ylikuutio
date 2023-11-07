@@ -78,7 +78,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const parent_module,
             yli::ontology::GenericMasterModule* const generic_master_module)
         : Entity(application, universe, console_struct),
-        child_of_universe(parent_module, this),
+        child_of_universe(parent_module, *this),
         parent_of_lisp_functions(
                 *this,
                 this->registry,

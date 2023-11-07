@@ -31,20 +31,14 @@ namespace yli::ontology
     {
         // requirements:
         // `this->parent` must not be `nullptr`.
-        // `this->entity` must not be `nullptr`.
 
         if (this->parent_module == nullptr)
         {
             return;
         }
 
-        if (this->entity == nullptr)
-        {
-            return;
-        }
-
         // get `childID` from the `ParentModule` and set pointer to this child.
-        this->parent_module->bind_child(*this->entity);
+        this->parent_module->bind_child(this->entity);
     }
 
     ChildModule::~ChildModule() noexcept
@@ -60,13 +54,8 @@ namespace yli::ontology
             return;
         }
 
-        if (this->entity == nullptr)
-        {
-            return;
-        }
-
         // Set pointer to this `Entity` to `nullptr`.
-        this->parent_module->unbind_child(this->entity->childID);
+        this->parent_module->unbind_child(this->entity.childID);
 
         this->release();
     }
@@ -83,17 +72,12 @@ namespace yli::ontology
 
     yli::ontology::Entity* ChildModule::get_child() const noexcept
     {
-        return this->entity;
+        return &this->entity;
     }
 
     void ChildModule::release() noexcept
     {
-        if (this->entity == nullptr) [[unlikely]]
-        {
-            return;
-        }
-
-        this->entity->childID = std::numeric_limits<std::size_t>::max();
+        this->entity.childID = std::numeric_limits<std::size_t>::max();
     }
 
     yli::ontology::Scene* ChildModule::get_scene() const noexcept
@@ -108,22 +92,12 @@ namespace yli::ontology
 
     std::size_t ChildModule::get_childID() const noexcept
     {
-        if (this->entity != nullptr) [[likely]]
-        {
-            return this->entity->get_childID();
-        }
-
-        return std::numeric_limits<std::size_t>::max();
+        return this->entity.get_childID();
     }
 
     void ChildModule::unbind_child() const noexcept
     {
         if (this->parent_module == nullptr)
-        {
-            return;
-        }
-
-        if (this->entity == nullptr)
         {
             return;
         }
@@ -139,13 +113,8 @@ namespace yli::ontology
             return;
         }
 
-        if (this->entity == nullptr)
-        {
-            return;
-        }
-
         this->parent_module = new_parent_module;
-        this->parent_module->bind_child(*this->entity);
+        this->parent_module->bind_child(this->entity);
     }
 
     void ChildModule::unbind_and_bind_to_new_parent(

@@ -44,7 +44,7 @@ namespace yli::ontology
             yli::ontology::ParentOfInputModesModule* const parent_module,
             yli::ontology::MasterOfInputModesModule* const console_master_module)
         : Entity(application, universe, input_mode_struct),
-        child_of_universe(parent_module, this),
+        child_of_universe(parent_module, *this),
         apprentice_of_console(console_master_module, this)
     {
         // `yli::ontology::Entity` member variables begin here.

@@ -35,7 +35,7 @@ namespace yli::ontology
             const yli::ontology::EcosystemStruct& ecosystem_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, ecosystem_struct),
-        child_of_universe(parent_module, this),
+        child_of_universe(parent_module, *this),
         parent_of_pipelines(
                 *this,
                 this->registry,

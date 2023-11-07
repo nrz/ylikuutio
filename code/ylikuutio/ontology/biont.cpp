@@ -77,7 +77,7 @@ namespace yli::ontology
                 universe,
                 biont_struct,
                 nullptr),
-        child_of_holobiont(holobiont_parent_module, this),
+        child_of_holobiont(holobiont_parent_module, *this),
         apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
     {
         // constructor.

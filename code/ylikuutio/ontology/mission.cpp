@@ -44,7 +44,7 @@ namespace yli::ontology
             const yli::ontology::MissionStruct& mission_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, mission_struct),
-        child_of_universe(parent_module, this)
+        child_of_universe(parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";

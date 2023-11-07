@@ -72,7 +72,7 @@ namespace yli::ontology
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const material_parent_module)
         : Entity(application, universe, model_struct),
-        child_of_material(material_parent_module, this),
+        child_of_material(material_parent_module, *this),
         parent_of_shapeshifter_forms(
                 *this,
                 this->registry,

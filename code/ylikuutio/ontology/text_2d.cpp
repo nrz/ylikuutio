@@ -79,7 +79,7 @@ namespace yli::ontology
             const yli::ontology::TextStruct& text_struct,
             yli::ontology::GenericParentModule* const parent_module)
         : Entity(application, universe, text_struct),
-        child_of_font_2d(parent_module, this)
+        child_of_font_2d(parent_module, *this)
     {
         // constructor.
 

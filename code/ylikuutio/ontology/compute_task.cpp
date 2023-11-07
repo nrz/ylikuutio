@@ -61,7 +61,7 @@ namespace yli::ontology
             const yli::ontology::ComputeTaskStruct& compute_task_struct,
             yli::ontology::GenericParentModule* const pipeline_parent_module)
         : Entity(application, universe, compute_task_struct),
-        child_of_pipeline(pipeline_parent_module, this),
+        child_of_pipeline(pipeline_parent_module, *this),
         texture_file_format              { compute_task_struct.texture_file_format },
         texture_filename                 { compute_task_struct.texture_filename },
         output_filename                  { compute_task_struct.output_filename },

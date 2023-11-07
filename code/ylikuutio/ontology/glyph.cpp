@@ -42,7 +42,7 @@ namespace yli::ontology
             const yli::ontology::ModelStruct& model_struct,
             yli::ontology::GenericParentModule* const vector_font_parent_module)
         : Entity(application, universe, model_struct),
-        child_of_vector_font(vector_font_parent_module, this),
+        child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
         mesh(universe, model_struct),
         glyph_vertex_data    { model_struct.glyph_vertex_data },

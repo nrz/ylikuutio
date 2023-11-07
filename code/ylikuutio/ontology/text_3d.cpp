@@ -78,7 +78,7 @@ namespace yli::ontology
                 universe,
                 text_3d_struct,
                 generic_master_module),
-        child_of_vector_font(vector_font_parent_module, this),
+        child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects")
     {
         // constructor.

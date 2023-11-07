@@ -156,7 +156,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const scene_parent_module,
             yli::ontology::GenericMasterModule* const pipeline_master)
         : Entity(application, universe, model_struct),
-        child_of_scene_or_ecosystem(scene_parent_module, this),
+        child_of_scene_or_ecosystem(scene_parent_module, *this),
         parent_of_symbiont_materials(
                 *this,
                 this->registry,

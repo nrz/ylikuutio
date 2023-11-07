@@ -92,7 +92,7 @@ namespace yli::ontology
             const yli::ontology::VectorFontStruct& vector_font_struct,
             yli::ontology::GenericParentModule* const material_parent)
         : Entity(application, universe, vector_font_struct),
-        child_of_material(material_parent, this),
+        child_of_material(material_parent, *this),
         parent_of_glyphs(
                 *this,
                 this->registry,

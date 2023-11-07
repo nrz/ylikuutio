@@ -30,7 +30,7 @@ namespace yli::ontology
     class ChildModule
     {
         public:
-            ChildModule(yli::ontology::GenericParentModule* const parent_module, yli::ontology::Entity* const entity) noexcept
+            ChildModule(yli::ontology::GenericParentModule* const parent_module, yli::ontology::Entity& entity) noexcept
                 : parent_module { parent_module },
                 entity { entity }
             {
@@ -64,7 +64,7 @@ namespace yli::ontology
             void bind_to_parent_module() noexcept;
 
             yli::ontology::GenericParentModule* parent_module;
-            yli::ontology::Entity* entity;
+            yli::ontology::Entity& entity;
     };
 }
 

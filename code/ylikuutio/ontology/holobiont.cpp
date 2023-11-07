@@ -66,7 +66,7 @@ namespace yli::ontology
                 universe,
                 holobiont_struct,
                 brain_master),
-        child_of_scene(scene_parent, this),
+        child_of_scene(scene_parent, *this),
         parent_of_bionts(
                 *this,
                 this->registry,
