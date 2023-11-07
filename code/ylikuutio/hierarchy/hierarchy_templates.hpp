@@ -174,12 +174,9 @@ namespace yli::hierarchy
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children) noexcept
         {
-            // requirements:
-            // `childID` must not be `std::numeric_limits<std::size_t>::max()`.
-            //     (`std::numeric_limits<std::size_t>::max()` as `childID` value means that `childID` is uninitialized).
-
             if (childID == std::numeric_limits<std::size_t>::max())
             {
+                // Nothing to do.
                 return;
             }
 
