@@ -46,7 +46,7 @@ namespace yli::ontology
         return false; // Binding failed.
     }
 
-    bool ParentOfPipelinesModule::unbind_child(std::size_t childID) noexcept
+    bool ParentOfPipelinesModule::unbind_child(const std::size_t childID) noexcept
     {
         if (this->GenericParentModule::unbind_child(childID))
         {

@@ -48,7 +48,7 @@ namespace yli::ontology
         return true; // Binding successful.
     }
 
-    [[nodiscard]] bool GenericParentModule::unbind_child(std::size_t childID) noexcept
+    [[nodiscard]] bool GenericParentModule::unbind_child(const std::size_t childID) noexcept
     {
         if (childID == std::numeric_limits<std::size_t>::max())
         {
