@@ -1125,7 +1125,7 @@ namespace yli::ontology
                 {
                     yli::memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<HolobiontDerivativeMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::HOLOBIONT));
+                                static_cast<int>(holobiont_derivative_type));
 
                     HolobiontDerivativeMemoryAllocator& allocator =
                         static_cast<HolobiontDerivativeMemoryAllocator&>(generic_allocator);
