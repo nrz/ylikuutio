@@ -35,8 +35,8 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <iomanip>       // std::setfill, std::setw
-#include <iostream>      // std::cout, std::cin, std::cerr
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <iostream>      // std::cerr
+#include <sstream>       // std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
 #include <vector>        // std::vector
