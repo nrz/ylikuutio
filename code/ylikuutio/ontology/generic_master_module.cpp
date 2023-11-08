@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <iostream> // std::cerr
 #include <limits>  // std::numeric_limits
 #include <string>  // std::string
 #include <vector>  // std::vector
@@ -49,6 +50,8 @@ namespace yli::ontology
 
         if (apprenticeID >= this->apprentice_module_pointer_vector.size())
         {
+            std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID <<
+                " is out of bounds, size is " << this->apprentice_module_pointer_vector.size() << "\n";
             return; // No changes happened.
         }
 
