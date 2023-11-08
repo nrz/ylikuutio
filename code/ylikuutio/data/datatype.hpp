@@ -62,66 +62,69 @@ namespace yli::data
         // `yli::ontology` datatypes, 'variable' path.
         VARIABLE            = 120,
         // `yli::ontology` datatypes, 'callback' path.
-        CALLBACK_ENGINE     = 121,
-        CALLBACK_OBJECT     = 122,
-        CALLBACK_PARAMETER  = 123,
+        GENERIC_CALLBACK_ENGINE    = 121,
+        GENERIC_CALLBACK_OBJECT    = 122,
+        GENERIC_CALLBACK_PARAMETER = 123,
+        CALLBACK_ENGINE     = 124,
+        CALLBACK_OBJECT     = 125,
+        CALLBACK_PARAMETER  = 126,
         // `yli::ontology` datatypes, 'window' path.
-        WINDOW              = 124,
-        WIDGET              = 125,
-        CAMERA              = 126,
-        CAMERAWIDGET        = 127,
+        WINDOW              = 130,
+        WIDGET              = 131,
+        CAMERA              = 132,
+        CAMERAWIDGET        = 133,
         // `yli::ontology` datatypes, 'brain' path.
-        BRAIN                 = 128,
+        BRAIN                 = 140,
         // `yli::ontology` datatypes, 'ecosystem' path.
-        ECOSYSTEM             = 130,
+        ECOSYSTEM             = 150,
         // `yli::ontology` datatypes, 'simple' path.
-        SCENE                 = 131,
-        PIPELINE              = 132,
-        MATERIAL              = 133,
-        SPECIES               = 134,
-        OBJECT                = 135,
+        SCENE                 = 160,
+        PIPELINE              = 161,
+        MATERIAL              = 162,
+        SPECIES               = 163,
+        OBJECT                = 164,
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP             = 136,
-        HEIGHTMAP_SHEET       = 137,
+        HEIGHTMAP             = 170,
+        HEIGHTMAP_SHEET       = 171,
         // `yli::ontology` datatypes, 'symbiont' path.
-        SYMBIOSIS             = 138,
-        SYMBIONT_MATERIAL     = 139,
-        SYMBIONT_SPECIES      = 140,
+        SYMBIOSIS             = 180,
+        SYMBIONT_MATERIAL     = 181,
+        SYMBIONT_SPECIES      = 182,
         // `yli::ontology` datatypes, 'holobiont' path.
-        HOLOBIONT             = 141,
-        BIONT                 = 142,
+        HOLOBIONT             = 190,
+        BIONT                 = 191,
         // `yli::ontology` datatypes, 'shapeshifter' path.
-        SHAPESHIFTER_TRANSFORMATION = 143,
-        SHAPESHIFTER_SEQUENCE       = 144,
-        SHAPESHIFTER_FORM           = 145,
+        SHAPESHIFTER_TRANSFORMATION = 200,
+        SHAPESHIFTER_SEQUENCE       = 201,
+        SHAPESHIFTER_FORM           = 202,
         // `yli::ontology` datatypes, 'text 2D' path.
-        FONT_2D                     = 146,
-        TEXT_2D                     = 147,
+        FONT_2D                     = 210,
+        TEXT_2D                     = 211,
         // `yli::ontology` datatypes, 'text 3D' path.
-        VECTOR_FONT                 = 148,
-        GLYPH                       = 149,
-        TEXT_3D                     = 150,
+        VECTOR_FONT                 = 220,
+        GLYPH                       = 221,
+        TEXT_3D                     = 222,
         // `yli::ontology` datatypes, 'input' path.
-        INPUT_MODE                  = 151,
-        KEY_BINDING                 = 152,
+        INPUT_MODE                  = 230,
+        KEY_BINDING                 = 231,
         // `yli::ontology` datatypes, 'audio' path.
-        AUDIO_TRACK                 = 154,
+        AUDIO_TRACK                 = 240,
         // `yli::ontology` datatypes, 'track' path.
-        PLAYLIST                    = 155,
+        PLAYLIST                    = 250,
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE                     = 156,
-        CONSOLE_CALLBACK_ENGINE     = 157,
-        CONSOLE_CALLBACK_OBJECT     = 158,
-        CONSOLE_CALLBACK_PARAMETER  = 159,
+        CONSOLE                     = 260,
+        CONSOLE_CALLBACK_ENGINE     = 261,
+        CONSOLE_CALLBACK_OBJECT     = 262,
+        CONSOLE_CALLBACK_PARAMETER  = 263,
         // `yli::ontology` datatypes, 'graph' path.
-        GRAPH                       = 160,
-        NODE                        = 161,
+        GRAPH                       = 270,
+        NODE                        = 271,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK                 = 162,
+        COMPUTETASK                 = 280,
         // `yli::ontology` datatypes, 'lisp' path.
-        LISP_FUNCTION                  = 163,
-        GENERIC_LISP_FUNCTION_OVERLOAD = 164,
-        LISP_FUNCTION_OVERLOAD         = 165
+        LISP_FUNCTION                  = 290,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 291,
+        LISP_FUNCTION_OVERLOAD         = 292
     };
 }
 
