@@ -57,6 +57,8 @@ namespace yli::ontology
 
         if (childID >= this->child_pointer_vector.size()) [[unlikely]]
         {
+            std::cerr << "ERROR: `GenericParentModule::unbind_child`: `childID` " << childID <<
+                " is out of bounds, size is " << this->child_pointer_vector.size() << "\n";
             return; // No changes happened.
         }
 
