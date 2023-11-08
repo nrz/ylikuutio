@@ -99,12 +99,12 @@ namespace yli::ontology
         if (!this->is_universe)
         {
             this->universe.unbind_entity(this->entityID);
+        }
 
-            if (!this->global_name.empty())
-            {
-                // OK, this `Entity` had a global name, so it's global name shall be erased.
-                this->universe.erase_entity(this->global_name);
-            }
+        if (!this->global_name.empty())
+        {
+            // OK, this `Entity` had a global name, so it's global name shall be erased.
+            this->universe.erase_entity(this->global_name);
         }
 
         // Local names must be erased in the destructors
