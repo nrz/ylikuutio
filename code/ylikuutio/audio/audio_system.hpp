@@ -53,6 +53,8 @@ namespace yli::audio
             // destructor.
             ~AudioSystem();
 
+            void terminate();
+
             bool load_and_play(const std::string& audio_file);
             void unload(const std::string& audio_file);
             void add_to_playlist(const std::string& playlist, const std::string& audio_file);

@@ -62,11 +62,17 @@ namespace yli::audio
     AudioSystem::~AudioSystem()
     {
         // destructor.
+        this->terminate();
 
         if (this->universe != nullptr && !this->universe->get_is_silent())
         {
             SDL_CloseAudioDevice(this->device);
         }
+    }
+
+    void AudioSystem::terminate()
+    {
+        this->constructible_module.alive = false;
     }
 
     bool AudioSystem::load_and_play(const std::string& audio_file)

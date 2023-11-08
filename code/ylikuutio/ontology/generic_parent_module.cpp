@@ -103,7 +103,11 @@ namespace yli::ontology
             {
                 this->unbind_child(child->get_childID());
                 auto constructible_module = child->get_constructible_module();
-                this->memory_allocator.destroy(constructible_module);
+
+                if (constructible_module.alive)
+                {
+                    this->memory_allocator.destroy(constructible_module);
+                }
             }
         }
 

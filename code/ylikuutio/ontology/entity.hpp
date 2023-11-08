@@ -74,6 +74,7 @@ namespace yli::ontology
 
             virtual void activate();
 
+            void terminate();
             yli::memory::ConstructibleModule get_constructible_module() const;
 
             void set_childID(const std::size_t childID);

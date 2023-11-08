@@ -95,6 +95,7 @@ namespace yli::ontology
     Entity::~Entity()
     {
         // destructor.
+        this->terminate(); // Mark this `Entity` as dead.
 
         if (!this->is_universe)
         {
@@ -118,6 +119,11 @@ namespace yli::ontology
 
     void Entity::activate()
     {
+    }
+
+    void Entity::terminate()
+    {
+        this->constructible_module.alive = false;
     }
 
     yli::memory::ConstructibleModule Entity::get_constructible_module() const

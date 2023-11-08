@@ -40,6 +40,7 @@ namespace yli::memory
         int datatype          { 0 }; // Unknown type.
         std::size_t storage_i { std::numeric_limits<std::size_t>::max() };
         std::size_t slot_i    { std::numeric_limits<std::size_t>::max() };
+        bool alive            { true };
     };
 }
 
