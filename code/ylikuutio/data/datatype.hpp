@@ -112,15 +112,16 @@ namespace yli::data
         CONSOLE                     = 156,
         CONSOLE_CALLBACK_ENGINE     = 157,
         CONSOLE_CALLBACK_OBJECT     = 158,
+        CONSOLE_CALLBACK_PARAMETER  = 159,
         // `yli::ontology` datatypes, 'graph' path.
-        GRAPH                       = 159,
-        NODE                        = 160,
+        GRAPH                       = 160,
+        NODE                        = 161,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK                 = 161,
+        COMPUTETASK                 = 162,
         // `yli::ontology` datatypes, 'lisp' path.
-        LISP_FUNCTION                  = 162,
-        GENERIC_LISP_FUNCTION_OVERLOAD = 163,
-        LISP_FUNCTION_OVERLOAD         = 164
+        LISP_FUNCTION                  = 163,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 164,
+        LISP_FUNCTION_OVERLOAD         = 165
     };
 }
 
