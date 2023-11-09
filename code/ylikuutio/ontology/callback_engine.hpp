@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "generic_callback_engine.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
@@ -46,7 +46,7 @@ namespace yli::ontology
     class CallbackObject;
     class Scene;
 
-    class CallbackEngine : public yli::ontology::Entity
+    class CallbackEngine : public yli::ontology::GenericCallbackEngine
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
@@ -84,7 +84,7 @@ namespace yli::ontology
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
+            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;
 
             std::size_t get_n_of_return_values() const;
             std::optional<yli::data::AnyValue> get_nth_return_value(const std::size_t n) const;

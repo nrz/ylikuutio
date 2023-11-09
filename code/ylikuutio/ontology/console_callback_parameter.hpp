@@ -15,19 +15,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_callback_engine.hpp"
+#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_PARAMETER_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_PARAMETER_HPP_INCLUDED
+
+#include "entity.hpp"
 #include "child_module.hpp"
-#include "generic_parent_module.hpp"
-#include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <optional> // std::optional
-#include <vector>   // std::vector
-
-#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
+#include <string>  // std::string
 
 namespace yli::core
 {
@@ -44,43 +41,38 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
-    class Scene;
-    class Console;
     class ConsoleCallbackObject;
+    struct ConsoleCallbackParameterStruct;
 
-    class ConsoleCallbackEngine final : public yli::ontology::GenericCallbackEngine
+    class ConsoleCallbackParameter final : public yli::ontology::Entity
     {
         private:
-            ConsoleCallbackEngine(
+            ConsoleCallbackParameter(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const universe_parent);
+                    const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+                    const yli::data::AnyValue& any_value,
+                    yli::ontology::GenericParentModule* const console_callback_object_parent);
 
-            ~ConsoleCallbackEngine() = default;
+            ~ConsoleCallbackParameter() = default;
 
-        private:
+        public:
+            const yli::data::AnyValue& get_any_value() const;
+
             yli::ontology::Entity* get_parent() const override;
-
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
-            yli::ontology::ChildModule child_of_universe;
-            yli::ontology::GenericParentModule parent_of_console_callback_objects;
-
-            yli::ontology::ConsoleCallbackObject* create_console_callback_object(
-                    const InputParametersToAnyValueCallbackWithConsole callback,
-                    yli::ontology::Console* const console_pointer);
-
-            // execute all callbacks with a parameter.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;
-
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
+            yli::ontology::ChildModule child_of_console_callback_object;
+
+            friend class ConsoleCallbackObject;
+
         private:
-            std::vector<std::optional<yli::data::AnyValue>> return_values;
+            yli::data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
     };
 }
 

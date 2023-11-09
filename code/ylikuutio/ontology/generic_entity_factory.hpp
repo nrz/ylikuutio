@@ -59,6 +59,7 @@ namespace yli::ontology
     class Console;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
+    class ConsoleCallbackParameter;
     class ComputeTask;
     class LispFunction;
     struct CallbackEngineStruct;
@@ -79,6 +80,7 @@ namespace yli::ontology
     struct ConsoleStruct;
     struct ConsoleCallbackEngineStruct;
     struct ConsoleCallbackObjectStruct;
+    struct ConsoleCallbackParameterStruct;
     struct FontStruct;
     struct TextStruct;
     struct LispFunctionStruct;
@@ -132,6 +134,9 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const = 0;
             virtual yli::ontology::ConsoleCallbackObject* create_console_callback_object(
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const = 0;
+            virtual yli::ontology::ConsoleCallbackParameter* create_console_callback_parameter(
+                    const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+                    const yli::data::AnyValue& any_value) const = 0;
             virtual yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const = 0;
             virtual yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
             virtual yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;

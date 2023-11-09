@@ -15,22 +15,18 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_PARAMETER_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_PARAMETER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
-#include "input_parameters_to_any_value_callback_with_console.hpp"
 
 namespace yli::ontology
 {
-    class Console;
-    class ConsoleCallbackEngine;
+    class ConsoleCallbackObject;
 
-    struct ConsoleCallbackObjectStruct final : public yli::ontology::EntityStruct
+    struct ConsoleCallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        InputParametersToAnyValueCallbackWithConsole console_callback { nullptr };
-        yli::ontology::ConsoleCallbackEngine* parent                  { nullptr };
-        yli::ontology::Console* console_pointer                       { nullptr };
+        yli::ontology::ConsoleCallbackObject* parent { nullptr };
     };
 }
 

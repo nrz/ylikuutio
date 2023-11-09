@@ -18,19 +18,19 @@
 #include "console_callback_object.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object_struct.hpp"
+#include "family_templates.hpp"
+#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
-
-namespace yli::core
-{
-    class Application;
-}
 
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Entity;
     class Universe;
 
     ConsoleCallbackObject::ConsoleCallbackObject(
@@ -38,10 +38,37 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
             yli::ontology::GenericParentModule* const console_callback_engine_parent)
-        : yli::ontology::CallbackObject(application, universe, console_callback_object_struct, console_callback_engine_parent),
+        : Entity(application, universe, console_callback_object_struct),
+        child_of_console_callback_engine(console_callback_engine_parent, *this),
+        parent_of_console_callback_parameters(
+                *this,
+                this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER),
+                "console_callback_parameters"),
         console_callback { console_callback_object_struct.console_callback },
         console_pointer { console_callback_object_struct.console_pointer }
     {
+    }
+
+    yli::ontology::Entity* ConsoleCallbackObject::get_parent() const
+    {
+        return this->child_of_console_callback_engine.get_parent();
+    }
+
+    yli::ontology::Scene* ConsoleCallbackObject::get_scene() const
+    {
+        // `ConsoleCallbackObject` does not belong in any `Scene`.
+        return nullptr;
+    }
+
+    std::size_t ConsoleCallbackObject::get_number_of_children() const
+    {
+        return this->parent_of_console_callback_parameters.get_number_of_children();
+    }
+
+    std::size_t ConsoleCallbackObject::get_number_of_descendants() const
+    {
+        return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_parameters.child_pointer_vector);
     }
 
     std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
@@ -52,7 +79,7 @@ namespace yli::ontology
                     this->console_callback(
                         static_cast<yli::ontology::ConsoleCallbackEngine*>(this->get_parent()),
                         this,
-                        this->parent_of_callback_parameters,
+                        this->parent_of_console_callback_parameters,
                         *this->console_pointer));
         }
 

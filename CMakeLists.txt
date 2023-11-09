@@ -541,6 +541,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callback_object.cpp
     code/ylikuutio/ontology/console_callback_object.hpp
     code/ylikuutio/ontology/console_callback_object_struct.hpp
+    code/ylikuutio/ontology/console_callback_parameter.cpp
+    code/ylikuutio/ontology/console_callback_parameter.hpp
+    code/ylikuutio/ontology/console_callback_parameter_struct.hpp
     code/ylikuutio/ontology/console_printing.cpp
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
@@ -561,6 +564,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/framebuffer_module.cpp
     code/ylikuutio/ontology/framebuffer_module.hpp
     code/ylikuutio/ontology/framebuffer_module_struct.hpp
+    code/ylikuutio/ontology/generic_callback_engine.cpp
+    code/ylikuutio/ontology/generic_callback_engine.hpp
+    code/ylikuutio/ontology/generic_callback_engine_struct.hpp
     code/ylikuutio/ontology/generic_entity_factory.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp

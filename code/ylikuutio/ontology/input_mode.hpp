@@ -45,7 +45,7 @@ namespace yli::ontology
     class ParentOfInputModesModule;
     class MasterOfInputModesModule;
     class Universe;
-    class CallbackEngine;
+    class GenericCallbackEngine;
     struct InputModeStruct;
 
     class InputMode final : public yli::ontology::Entity
@@ -64,17 +64,17 @@ namespace yli::ontology
             void activate() override;
             void deactivate();
 
-            yli::ontology::CallbackEngine* get_keypress_callback_engine(const uint32_t keycode) const;
-            yli::ontology::CallbackEngine* get_keyrelease_callback_engine(const uint32_t keycode) const;
-            yli::ontology::CallbackEngine* get_continuous_keypress_callback_engine(const uint32_t keycode) const;
+            yli::ontology::GenericCallbackEngine* get_keypress_callback_engine(const uint32_t keycode) const;
+            yli::ontology::GenericCallbackEngine* get_keyrelease_callback_engine(const uint32_t keycode) const;
+            yli::ontology::GenericCallbackEngine* get_continuous_keypress_callback_engine(const uint32_t keycode) const;
 
-            void set_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
-            void set_keyrelease_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
-            void set_continuous_keypress_callback_engine(const uint32_t keycode, yli::ontology::CallbackEngine* const callback_engine);
+            void set_keypress_callback_engine(const uint32_t keycode, yli::ontology::GenericCallbackEngine* const callback_engine);
+            void set_keyrelease_callback_engine(const uint32_t keycode, yli::ontology::GenericCallbackEngine* const callback_engine);
+            void set_continuous_keypress_callback_engine(const uint32_t keycode, yli::ontology::GenericCallbackEngine* const callback_engine);
 
-            const std::vector<yli::ontology::CallbackEngine*>* get_keypress_callback_engines() const;
-            const std::vector<yli::ontology::CallbackEngine*>* get_keyrelease_callback_engines() const;
-            const std::vector<yli::ontology::CallbackEngine*>* get_continuous_keypress_callback_engines() const;
+            const std::vector<yli::ontology::GenericCallbackEngine*>* get_keypress_callback_engines() const;
+            const std::vector<yli::ontology::GenericCallbackEngine*>* get_keyrelease_callback_engines() const;
+            const std::vector<yli::ontology::GenericCallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;
@@ -91,9 +91,9 @@ namespace yli::ontology
             InputMode(const InputMode&) = delete;                           // Delete copy constructor.
             yli::ontology::InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
-            std::vector<yli::ontology::CallbackEngine*> keypress_callback_engines;
-            std::vector<yli::ontology::CallbackEngine*> keyrelease_callback_engines;
-            std::vector<yli::ontology::CallbackEngine*> continuous_keypress_callback_engines;
+            std::vector<yli::ontology::GenericCallbackEngine*> keypress_callback_engines;
+            std::vector<yli::ontology::GenericCallbackEngine*> keyrelease_callback_engines;
+            std::vector<yli::ontology::GenericCallbackEngine*> continuous_keypress_callback_engines;
     };
 }
 

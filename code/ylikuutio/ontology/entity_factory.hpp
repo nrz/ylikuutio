@@ -46,6 +46,7 @@
 #include "console.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
+#include "console_callback_parameter.hpp"
 #include "lisp_function.hpp"
 #include "generic_lisp_function_overload.hpp"
 #include "lisp_function_overload.hpp"
@@ -74,6 +75,7 @@
 #include "console_struct.hpp"
 #include "console_callback_engine_struct.hpp"
 #include "console_callback_object_struct.hpp"
+#include "console_callback_parameter_struct.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "lisp_function_struct.hpp"
@@ -930,7 +932,7 @@ namespace yli::ontology
                         static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE),
                         this->application,
                         this->get_universe(),
-                        &this->get_universe().parent_of_callback_engines);
+                        &this->get_universe().parent_of_console_callback_engines);
 
                 if (!console_callback_engine_struct.global_name.empty() && console_callback_engine_struct.local_name.empty())
                 {
@@ -969,12 +971,39 @@ namespace yli::ontology
                         this->get_universe(),
                         console_callback_object_struct,
                         ((console_callback_object_struct.parent != nullptr) ?
-                         &console_callback_object_struct.parent->parent_of_callback_objects :
+                         &console_callback_object_struct.parent->parent_of_console_callback_objects :
                          nullptr));
 
                 console_callback_object->set_global_name(console_callback_object_struct.global_name);
                 console_callback_object->set_local_name(console_callback_object_struct.local_name);
                 return console_callback_object;
+            }
+
+            yli::ontology::ConsoleCallbackParameter* create_console_callback_parameter(
+                    const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+                    const yli::data::AnyValue& any_value) const override
+            {
+                using ConsoleCallbackParameterMemoryAllocator =
+                    yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackParameter, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<ConsoleCallbackParameterMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER));
+                ConsoleCallbackParameterMemoryAllocator& allocator = static_cast<ConsoleCallbackParameterMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::ConsoleCallbackParameter* const console_callback_parameter = allocator.build_in(
+                        static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER),
+                        this->application,
+                        this->get_universe(),
+                        console_callback_parameter_struct,
+                        any_value,
+                        ((console_callback_parameter_struct.parent != nullptr) ?
+                         &console_callback_parameter_struct.parent->parent_of_console_callback_parameters :
+                         nullptr));
+
+                console_callback_parameter->set_global_name(console_callback_parameter_struct.global_name);
+                console_callback_parameter->set_local_name(console_callback_parameter_struct.local_name);
+                return console_callback_parameter;
             }
 
             yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const override

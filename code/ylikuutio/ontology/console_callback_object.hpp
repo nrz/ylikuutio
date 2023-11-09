@@ -18,7 +18,9 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_OBJECT_HPP_INCLUDED
 
-#include "callback_object.hpp"
+#include "entity.hpp"
+#include "child_module.hpp"
+#include "generic_parent_module.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -41,15 +43,14 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
-    class CallbackEngine;
-    class CallbackParameter;
-    class ConsoleCallbackEngine;
+    class Scene;
     class Console;
+    class ConsoleCallbackEngine;
     struct ConsoleCallbackObjectStruct;
 
-    class ConsoleCallbackObject final : public yli::ontology::CallbackObject
+    class ConsoleCallbackObject final : public yli::ontology::Entity
     {
-        private:
+        public:
             ~ConsoleCallbackObject() = default;
 
             ConsoleCallbackObject(
@@ -58,14 +59,23 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
                     yli::ontology::GenericParentModule* const console_callback_engine_parent);
 
+            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Scene* get_scene() const override;
+            std::size_t get_number_of_children() const override;
+            std::size_t get_number_of_descendants() const override;
+
             // execute this callback.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&) override;
+            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&);
 
             friend class ConsoleCallbackEngine;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
+            yli::ontology::ChildModule child_of_console_callback_engine;
+            yli::ontology::GenericParentModule parent_of_console_callback_parameters;
+
+        private:
             InputParametersToAnyValueCallbackWithConsole console_callback;
             yli::ontology::Console* console_pointer;
     };

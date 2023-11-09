@@ -162,6 +162,11 @@ namespace yli::ontology
                 this->registry,
                 application.get_memory_allocator(yli::data::Datatype::CONSOLE),
                 "consoles"),
+        parent_of_console_callback_engines(
+                *this,
+                this->registry,
+                application.get_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE),
+                "console_callback_engines"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name     { universe_struct.application_name },
         graphics_api_backend { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
@@ -441,11 +446,11 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::ontology::CallbackEngine* const callback_engine = input_mode->get_keypress_callback_engine(scancode);
+                        yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode->get_keypress_callback_engine(scancode);
 
-                        if (callback_engine != nullptr)
+                        if (generic_callback_engine != nullptr)
                         {
-                            const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
+                            const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
@@ -466,14 +471,14 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::ontology::CallbackEngine* const callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
+                        yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
 
-                        if (callback_engine == nullptr)
+                        if (generic_callback_engine == nullptr)
                         {
                             continue;
                         }
 
-                        const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
+                        const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                         if (any_value &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
@@ -558,7 +563,7 @@ namespace yli::ontology
                 if (!this->in_console)
                 {
                     const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
-                    const std::vector<yli::ontology::CallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
+                    const std::vector<yli::ontology::GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
                     if (continuous_keypress_callback_engines == nullptr)
                     {
                         continue;
@@ -591,14 +596,14 @@ namespace yli::ontology
 
                         if (is_pressed)
                         {
-                            yli::ontology::CallbackEngine* const callback_engine = continuous_keypress_callback_engines->at(i);
+                            yli::ontology::GenericCallbackEngine* const generic_callback_engine = continuous_keypress_callback_engines->at(i);
 
-                            if (callback_engine == nullptr)
+                            if (generic_callback_engine == nullptr)
                             {
                                 continue;
                             }
 
-                            const std::optional<yli::data::AnyValue> any_value = callback_engine->execute(yli::data::AnyValue());
+                            const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
@@ -892,7 +897,8 @@ namespace yli::ontology
             this->parent_of_scenes.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_input_modes.get_number_of_children() +
-            this->parent_of_consoles.get_number_of_children();
+            this->parent_of_consoles.get_number_of_children() +
+            this->parent_of_console_callback_engines.get_number_of_children();
     }
 
     std::size_t Universe::get_number_of_descendants() const
@@ -902,7 +908,8 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector);
     }
 
     [[nodiscard]] bool Universe::create_window()

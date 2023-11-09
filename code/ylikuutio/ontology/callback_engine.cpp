@@ -18,7 +18,7 @@
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
 #include "generic_entity_factory.hpp"
-#include "entity_struct.hpp"
+#include "generic_callback_engine_struct.hpp"
 #include "callback_object_struct.hpp"
 #include "family_templates.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
@@ -38,7 +38,7 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             yli::ontology::GenericParentModule* const parent)
-        : Entity(application, universe, EntityStruct()),
+        : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
         child_of_entity(parent, *this),
         parent_of_callback_objects(
                 *this,

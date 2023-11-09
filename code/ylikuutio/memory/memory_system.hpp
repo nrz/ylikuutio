@@ -53,6 +53,7 @@
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
+#include "code/ylikuutio/ontology/console_callback_parameter.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/lisp_function.hpp"
 #include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
@@ -97,6 +98,7 @@ namespace yli::memory
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
     using ConsoleCallbackEngineMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
     using ConsoleCallbackObjectMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
+    using ConsoleCallbackParameterMemoryAllocator    = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackParameter, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
     using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
     using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
@@ -214,6 +216,7 @@ namespace yli::memory
                     this->create_allocator<ConsoleMemoryAllocator>(yli::data::Datatype::CONSOLE);
                     this->create_allocator<ConsoleCallbackEngineMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE);
                     this->create_allocator<ConsoleCallbackObjectMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT);
+                    this->create_allocator<ConsoleCallbackParameterMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER);
                     this->create_allocator<InputModeMemoryAllocator>(yli::data::Datatype::INPUT_MODE);
                     this->create_allocator<ComputeTaskMemoryAllocator>(yli::data::Datatype::COMPUTETASK);
                     this->create_allocator<LispFunctionMemoryAllocator>(yli::data::Datatype::LISP_FUNCTION);
