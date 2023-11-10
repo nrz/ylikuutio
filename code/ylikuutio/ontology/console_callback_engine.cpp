@@ -47,6 +47,8 @@ namespace yli::ontology
                 application.get_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT),
                 "console_callback_objects")
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::ConsoleCallbackEngine*";
     }
 
     yli::ontology::Scene* ConsoleCallbackEngine::get_scene() const
