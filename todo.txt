@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Fixes needed:
-[ ] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 [ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix compiling on Visual Studio.
@@ -340,3 +339,4 @@ Ready:
 [x] Fix compiling on g++ (Debian 12.2.0-14) 12.2.0 .
 [x] Fix segfault in GPGPU test in `yli::opengl::prepare_opengl_texture` (see commit cb041b92726df81afe3d349ac5a90d3bbbd14e91).
 [x] Fix bug "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!", in the deallocation of datatypes 121, 130, 131 (`CallbackEngine` etc.).
+[x] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
