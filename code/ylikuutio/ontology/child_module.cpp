@@ -64,7 +64,7 @@ namespace yli::ontology
             // OK, this `ChildModule` has not been released yet.
 
             // Set pointer to this `Entity` to `nullptr`.
-            this->parent_module->unbind_child(this->entity.get_childID());
+            this->parent_module->unbind_child(this->get_childID());
             this->release();
         }
     }
