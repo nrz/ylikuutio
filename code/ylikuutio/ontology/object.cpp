@@ -301,7 +301,7 @@ namespace yli::ontology
         }
         else if (this->universe.get_is_vulkan_in_use())
         {
-            std::cerr << "ERROR: `Object::render_this_object`: Vulkan is not supported yet!\n";
+            throw std::runtime_error("ERROR: `Object::render_this_object`: Vulkan is not supported yet!");
         }
 
         yli::ontology::MeshModule* master_model = nullptr;
@@ -318,6 +318,7 @@ namespace yli::ontology
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
             // TODO: set `master_model` so that it points to the correct `ShapeshifterForm` for the current frame!
+            throw std::runtime_error("ERROR: `Object::render_this_object`: shapeshifters are not implemented yet!");
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
@@ -400,7 +401,7 @@ namespace yli::ontology
         }
         else if (this->universe.get_is_vulkan_in_use() && master_model != nullptr)
         {
-            std::cerr << "ERROR: `Object::render_this_object`: Vulkan is not supported yet!\n";
+            throw std::runtime_error("ERROR: `Object::render_this_object`: Vulkan is not supported yet!");
         }
     }
 
