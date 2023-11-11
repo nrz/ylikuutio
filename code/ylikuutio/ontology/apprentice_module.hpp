@@ -93,7 +93,7 @@ namespace yli::ontology
                         std::size_t& number_of_apprentices) noexcept;
 
         private:
-            yli::ontology::GenericMasterModule* generic_master_module;
+            yli::ontology::GenericMasterModule* generic_master_module { nullptr };
 
             yli::ontology::Entity* const apprentice;
             std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
