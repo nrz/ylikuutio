@@ -21,6 +21,8 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <sstream>   // std::stringstream
+#include <stdexcept> // std::runtime_error
 
 namespace yli::sdl
 {
@@ -32,9 +34,8 @@ namespace yli::sdl
 
             if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
             {
-                std::cerr << "ERROR: `yli::sdl::init_sdl`: failed to initialize SDL.\n";
                 print_sdl_error();
-                return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
+                throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: failed to initialize SDL.");
             }
 
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -42,6 +43,10 @@ namespace yli::sdl
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
             return yli::render::GraphicsApiBackend::OPENGL; // Success.
+        }
+        else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
+        {
+            throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: Vulkan support not implemented yet!");
         }
 
         return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
@@ -61,8 +66,9 @@ namespace yli::sdl
 
         if (n_displays < 0)
         {
-            std::cerr << "ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " << n_displays << "\n";
-            return display_modes;
+            std::stringstream runtime_error_stringstream;
+            runtime_error_stringstream << "ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " << n_displays;
+            throw std::runtime_error(runtime_error_stringstream.str());
         }
 
         if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
@@ -97,9 +103,8 @@ namespace yli::sdl
 
             if (success != 0)
             {
-                std::cerr << "ERROR: `yli::sdl::create_window`: getting usable display bounds failed!\n";
                 print_sdl_error();
-                return nullptr;
+                throw std::runtime_error("ERROR: `yli::sdl::create_window`: getting usable display bounds failed!");
             }
 
             window = SDL_CreateWindow(
@@ -117,9 +122,8 @@ namespace yli::sdl
 
             if (success != 0)
             {
-                std::cerr << "ERROR: `yli::sdl::create_window`: getting display bounds failed!\n";
                 print_sdl_error();
-                return nullptr;
+                throw std::runtime_error("ERROR: `yli::sdl::create_window`: getting display bounds failed!");
             }
 
             window = SDL_CreateWindow(
@@ -137,9 +141,8 @@ namespace yli::sdl
             return window;
         }
 
-        std::cerr << "ERROR: `yli::sdl::create_window`: creating window failed!\n";
         print_sdl_error();
-        return window;
+        throw std::runtime_error("ERROR: `yli::sdl::create_window`: creating window failed!");
     }
 
     [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
@@ -181,9 +184,8 @@ namespace yli::sdl
             return context;
         }
 
-        std::cerr << "ERROR: `yli::sdl::create_context`: creating OpenGL context failed!\n";
         print_sdl_error();
-        return context;
+        throw std::runtime_error("ERROR: `yli::sdl::create_context`: creating OpenGL context failed!");
     }
 
     void set_window_size(SDL_Window* window, const int window_width, const int window_height)
@@ -201,9 +203,8 @@ namespace yli::sdl
             return true; // Success.
         }
 
-        std::cerr << "ERROR: `yli::sdl::set_window_windowed`: setting window to windowed failed!\n";
         print_sdl_error();
-        return false; // Fail.
+        throw std::runtime_error("ERROR: `yli::sdl::set_window_windowed`: setting window to windowed failed!");
     }
 
     [[nodiscard]] bool make_context_current(SDL_Window* window, SDL_GLContext context)
@@ -216,9 +217,8 @@ namespace yli::sdl
             return true; // Success.
         }
 
-        std::cerr << "ERROR: `yli::sdl::make_context_current`: making context current failed!\n";
         print_sdl_error();
-        return false;
+        throw std::runtime_error("ERROR: `yli::sdl::make_context_current`: making context current failed!");
     }
 
     [[nodiscard]] bool set_swap_interval(const int interval)
@@ -231,9 +231,8 @@ namespace yli::sdl
             return true; // Success.
         }
 
-        std::cerr << "ERROR: `yli::sdl::set_swap_interval`: setting swap interval failed!\n";
         print_sdl_error();
-        return false;
+        throw std::runtime_error("ERROR: `yli::sdl::set_swap_interval`: setting swap interval failed!");
     }
 
     void flush_sdl_event_queue()
