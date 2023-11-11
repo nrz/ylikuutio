@@ -148,7 +148,6 @@ namespace hirvi
 
     void HirviApplication::create_memory_allocators()
     {
-        this->memory_system.create_allocator<TerrainMemoryAllocator>(hirvi::Datatype::TERRAIN);
         this->memory_system.create_allocator<CatMemoryAllocator>(hirvi::Datatype::CAT);
         this->memory_system.create_allocator<PoliceCarMemoryAllocator>(hirvi::Datatype::POLICE_CAR);
     }

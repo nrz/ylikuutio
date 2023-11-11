@@ -32,7 +32,6 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
-#include "code/ylikuutio/ontology/terrain.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -504,11 +503,7 @@ namespace hirvi
         yli::ontology::ObjectStruct helsinki_east_downtown_struct(helsinki_east_downtown_scene);
         helsinki_east_downtown_struct.mesh_master = helsinki_east_downtown_terrain_species;
         helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-        this->entity_factory.create_object_derivative<
-            yli::ontology::Terrain,
-            TerrainMemoryAllocator>(
-                    hirvi::Datatype::TERRAIN,
-                    helsinki_east_downtown_struct);
+        this->entity_factory.create_object(helsinki_east_downtown_struct);
 
         yli::ontology::ModelStruct cat_model_struct;
         cat_model_struct.parent = helsinki_east_downtown_scene;

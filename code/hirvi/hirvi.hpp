@@ -25,7 +25,6 @@
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
-#include "code/ylikuutio/ontology/terrain.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
@@ -56,7 +55,6 @@ namespace yli::ontology
 namespace hirvi
 {
     // Allocators for custom types.
-    using TerrainMemoryAllocator   = yli::memory::MemoryAllocator<yli::ontology::Terrain, 256>;
     using CatMemoryAllocator       = yli::memory::MemoryAllocator<hirvi::Cat, 256>;
     using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<hirvi::PoliceCar, 256>;
 
