@@ -254,8 +254,11 @@ namespace yli::memory
 
                 virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) override
                 {
-                    yli::memory::GenericMemoryAllocator& allocator = this->get_allocator(constructible_module.datatype);
-                    allocator.destroy(constructible_module);
+                    if (constructible_module.alive)
+                    {
+                        yli::memory::GenericMemoryAllocator& allocator = this->get_allocator(constructible_module.datatype);
+                        allocator.destroy(constructible_module);
+                    }
                 }
 
                 template<typename T1, typename... Args>
