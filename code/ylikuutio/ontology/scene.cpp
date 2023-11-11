@@ -161,10 +161,9 @@ namespace yli::ontology
     {
         // Intentional actors (AIs and keyboard controlled ones).
 
-        for (std::size_t brain_i = 0; brain_i < this->parent_of_brains.child_pointer_vector.size(); brain_i++)
+        for (yli::ontology::Entity* const brain_entity : this->parent_of_brains.child_pointer_vector)
         {
-            yli::ontology::Brain* const brain = static_cast<yli::ontology::Brain*>(
-                    this->parent_of_brains.child_pointer_vector.at(brain_i));
+            yli::ontology::Brain* const brain = static_cast<yli::ontology::Brain*>(brain_entity);
 
             if (brain != nullptr)
             {
