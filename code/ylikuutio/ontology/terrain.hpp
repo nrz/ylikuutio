@@ -35,7 +35,7 @@ namespace yli::ontology
     class Terrain final : public yli::ontology::Object
     {
         public:
-            explicit Terrain(
+            Terrain(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& terrain_struct,
