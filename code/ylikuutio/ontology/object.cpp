@@ -413,34 +413,34 @@ namespace yli::ontology
     {
         if (this->object_type == yli::ontology::ObjectType::REGULAR)
         {
-            const yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
-
-            if (species != nullptr)
+            if (const auto* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master()); species != nullptr) [[likely]]
             {
                 return species->get_pipeline();
             }
+
+            throw std::runtime_error("ERROR: `Object::get_pipeline`: `species` is `nullptr`!");
         }
         else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
         {
-            const yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = static_cast<yli::ontology::ShapeshifterSequence*>(
-                    this->apprentice_of_mesh.get_master());
-
-            if (shapeshifter_sequence != nullptr)
+            if (const auto* const shapeshifter_sequence =
+                    static_cast<yli::ontology::ShapeshifterSequence*>(this->apprentice_of_mesh.get_master()); shapeshifter_sequence != nullptr) [[likely]]
             {
                 return shapeshifter_sequence->get_pipeline();
             }
+
+            throw std::runtime_error("ERROR: `Object::get_pipeline`: `shapeshifter_sequence` is `nullptr`!");
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            const yli::ontology::Text3D* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master());
-
-            if (text_3d != nullptr)
+            if (const auto* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
             {
                 return text_3d->get_pipeline();
             }
+
+            throw std::runtime_error("ERROR: `Object::get_pipeline`: `text_3d` is `nullptr`!");
         }
 
-        return nullptr;
+        throw std::runtime_error("ERROR: `Object::get_pipeline`: unknown object type!");
     }
 
     std::size_t Object::get_number_of_children() const
