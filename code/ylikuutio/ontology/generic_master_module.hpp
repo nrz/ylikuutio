@@ -104,8 +104,6 @@ namespace yli::ontology
                 return const_iterator(this->apprentice_module_pointer_vector.end());
             }
 
-            friend class yli::ontology::ApprenticeModule;
-
         private:
             yli::ontology::Entity* const generic_master; // The `Entity` that owns this `GenericMasterModule`.
 
