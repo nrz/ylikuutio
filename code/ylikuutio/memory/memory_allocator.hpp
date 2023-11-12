@@ -159,7 +159,7 @@ namespace yli::memory
 
                 ~MemoryAllocator()
                 {
-                    for (auto* instance : this->instances)
+                    for (auto* const instance : this->instances)
                     {
                         delete instance;
                     }
