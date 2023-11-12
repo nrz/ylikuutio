@@ -184,6 +184,13 @@ namespace yli::memory
                     return this->instances.size();
                 }
 
+                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<yli::ontology::GenericLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
+                {
+                    std::cerr << "ERROR: `MemoryAllocator<yli::ontology::GenericLispFunctionOverload, DataSize>::get_storage`: " <<
+                        "this function is not implemented for this specialization!\n";
+                    return std::nullopt;
+                }
+
                 void destroy(const yli::memory::ConstructibleModule& /* constructible_module */ ) noexcept override
                 {
                     // TODO
