@@ -40,7 +40,10 @@ namespace yli::ontology
             {
                 // constructor.
 
-                this->add_rigid_body_module_to_scene(scene);
+                if (scene != nullptr)
+                {
+                    this->add_rigid_body_module_to_scene(*scene);
+                }
             }
 
             RigidBodyModule(const RigidBodyModule&) = delete;            // Delete copy constructor.
@@ -49,7 +52,7 @@ namespace yli::ontology
             // destructor.
             ~RigidBodyModule() = default;
 
-            void add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const;
+            void add_rigid_body_module_to_scene(yli::ontology::Scene& scene) const;
 
         private:
             yli::ontology::Movable* movable { nullptr };

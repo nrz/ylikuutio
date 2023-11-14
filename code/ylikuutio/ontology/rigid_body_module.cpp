@@ -19,27 +19,18 @@
 #include "rigid_body_module.hpp"
 #include "scene.hpp"
 
-// Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-
 namespace yli::ontology
 {
     class Entity;
 
-    void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene* const scene) const
+    void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene& scene) const
     {
         // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `Movable`
         // is not initialized before initialization of `RigidBodyModule` composited in it.
         // Trying to do that would lead to calling pure virtual method and program termination.
         // Therefore `scene` needs to be passed to `Movable` constructor.
 
-        if (scene == nullptr)
-        {
-            std::cerr << "ERROR: `RigidBodyModule::add_rigid_body_module_to_scene`: `scene` is `nullptr`!\n";
-            return;
-        }
-
         // Add the rigid body to the dynamics world.
-        scene->add_rigid_body_module(*this, scene);
+        scene.add_rigid_body_module(*this, scene);
     }
 }

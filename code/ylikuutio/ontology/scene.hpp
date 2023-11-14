@@ -121,7 +121,7 @@ namespace yli::ontology
             float get_gravity() const;
             void set_gravity(const float gravity);
 
-            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene* const scene);
+            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene& scene);
 
             const glm::vec4& get_light_position() const;
             float get_water_level() const;

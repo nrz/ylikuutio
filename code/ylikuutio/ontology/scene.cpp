@@ -357,13 +357,8 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& /* rigid_body_module */, yli::ontology::Scene* const scene)
+    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& /* rigid_body_module */, yli::ontology::Scene& scene)
     {
-        if (scene == nullptr)
-        {
-            std::cerr << "ERROR: `Scene::add_rigid_body_module`: `scene` is `nullptr`!\n";
-            return;
-        }
     }
 
     const glm::vec4& Scene::get_light_position() const
