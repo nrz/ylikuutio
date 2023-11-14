@@ -650,41 +650,42 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::ObjectStruct cat_object_struct1(helsinki_east_downtown_scene);
-        cat_object_struct1.mesh_master = cat_species;
-        cat_object_struct1.global_name = "cat1";
-        cat_object_struct1.local_name = "kissa1";
-        cat_object_struct1.brain = rest_brain;
-        cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat_object_struct1.initial_rotate_angles = { pi, -0.5f * pi };
-        cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
-        yli::ontology::Entity* const cat1_entity = this->entity_factory.create_object(cat_object_struct1);
-        yli::ontology::Object* const cat1 = dynamic_cast<yli::ontology::Object*>(cat1_entity);
+        // Create some cats.
 
-        if (cat1 == nullptr)
+        for (std::size_t i = 0; i < 1000; i++)
         {
-            std::cerr << "Failed to create cat1 Object.\n";
-            return nullptr;
-        }
+            const std::string index_string = std::to_string(i);
 
-        yli::ontology::ObjectStruct cat_object_struct2(helsinki_east_downtown_scene);
-        cat_object_struct2.mesh_master = cat_species;
-        cat_object_struct2.global_name = "cat2";
-        cat_object_struct2.local_name = "kissa2";
-        cat_object_struct2.brain = rest_brain;
-        cat_object_struct2.scene = helsinki_east_downtown_scene;
-        cat_object_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat_object_struct2.initial_rotate_angles = { pi, -0.5f * pi };
-        cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
-        cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
-        yli::ontology::Entity* const cat2_entity = this->entity_factory.create_object(cat_object_struct2);
-        yli::ontology::Object* const cat2 = dynamic_cast<yli::ontology::Object*>(cat2_entity);
+            const float first_cat_x { 500.00f };
+            const float first_cat_y { 100.00f };
+            const float first_cat_z { 1000.00f };
 
-        if (cat2 == nullptr)
-        {
-            std::cerr << "Failed to create cat2 Object.\n";
-            return nullptr;
+            const float translation_x { 200.00f };
+            const float translation_y { 000.00f };
+            const float translation_z { 200.00f };
+
+            const float first_cat_scale { 10.0f };
+
+            yli::ontology::ObjectStruct cat_object_struct1(helsinki_east_downtown_scene);
+            cat_object_struct1.mesh_master = cat_species;
+            cat_object_struct1.global_name = "cat" + index_string;
+            cat_object_struct1.local_name = "kissa" + index_string;
+            cat_object_struct1.brain = rest_brain;
+            cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
+            cat_object_struct1.initial_rotate_angles = { pi, -0.5f * pi };
+            cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
+            cat_object_struct1.cartesian_coordinates = glm::vec3(
+                    first_cat_x + i * translation_x,
+                    first_cat_y + i * translation_y,
+                    first_cat_z + i * translation_z);
+            yli::ontology::Entity* const cat1_entity = this->entity_factory.create_object(cat_object_struct1);
+            yli::ontology::Object* const cat1 = dynamic_cast<yli::ontology::Object*>(cat1_entity);
+
+            if (cat1 == nullptr)
+            {
+                std::cerr << "Failed to create cat1 Object.\n";
+                return nullptr;
+            }
         }
 
         yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity("turbo_polizei_png_symbiosis");
