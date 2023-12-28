@@ -18,13 +18,9 @@ contains
         get_has_line_code = .false.
 
         do i = 1, sz
-            print *, "processing "
-            print *, i
             if (line(i) .eq. '#') then
-                print *, "found #"
                 exit
             else if (line(i) .ne. ' ' .and. line(i) .ne. '\t') then
-                print *, "found code"
                 get_has_line_code = .true.
                 exit
             end if
