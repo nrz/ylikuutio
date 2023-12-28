@@ -82,7 +82,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
 
     set(UNIT_TESTS
-        src/tests/test_string.cpp
+        src/tests/test_get_has_line_code.cpp
     )
     set(MAIN_FILE src/tests/googletest/main.cpp)
 
