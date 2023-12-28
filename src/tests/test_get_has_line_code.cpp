@@ -6,7 +6,6 @@ extern "C"
     int FortranCInterface_MODULE_(string_mod, get_has_line_code, string_mod, get_has_line_code)(const char* string, int sz);
 }
 
-#include <cstddef>  // std::size_t
 #include <string_view> // std::string_view
 
 TEST(get_has_line_code_must_work_properly, empty)
