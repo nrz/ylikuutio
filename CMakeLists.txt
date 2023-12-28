@@ -54,6 +54,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 endif()
 
+configure_file(run/input.dat input.dat COPYONLY)
+
 # Planetary simulation library
 add_library(planetary_simulation STATIC
     src/constants.f90
