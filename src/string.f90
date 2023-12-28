@@ -8,6 +8,7 @@ contains
 
     ! Return true if line has non-whitespace code before newline and before the # comment character.
     logical function get_has_line_code(line, sz)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int
 
         implicit none
