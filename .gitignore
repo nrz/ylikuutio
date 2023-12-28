@@ -1,0 +1,8 @@
+build/*
+*.pdf
+
+# Fortran modules
+*.mod
+
+# LaTeX temporary files
+*.aux

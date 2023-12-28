@@ -1,0 +1,54 @@
+# On any line, # is comment sign. The comment continues until the next newline.
+#
+# Global parameters section.
+#
+# Supported global parameters:
+# `number_of_objects`
+# `start_time`
+# `end_time`
+# `length_of_timestep`
+# `total_length_of_simulation`
+# `number_of_steps`.
+#
+# One must specify exactly 2 of the following 3 global parameters: `length_of_timestep`, `total_length_of_simulation`, `number_of_steps`.
+
+# Global parameter name    Effect of the parameter
+#     number_of_objects    Limits the number of objects. Set the value to Inf to read in all objects given in the input file. Default value: Inf.
+#     length_of_timestep
+#     total_length_of_simulation
+#     number_of_steps
+
+# <mass>, <x>, <y>, <z>, <vx>, <vy>, <vz>, [name], [apparent_size], [red], [green], [blue],
+#
+# Description:
+# mass          kg
+# x             km
+# y             km
+# z             km
+# vx            km/s
+# vy            km/s
+# vz            km/s
+# apparent_size for visualization
+# red           for visualization
+# green         for visualization
+# blue          for visualization
+
+begin global_parameters
+number_of_objects, length_of_timestep, total_length_of_simulation
+                2,              3600s,                       365d
+
+begin objects
+mass,    x,    y,    z, vx, vy, vz, name,         apparent_size, red, green, blue
+   0,    0,    0,    0,  0,  0,  0, "Sun"       ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Jupiter"   ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Mercury"   ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Venus"     ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Earth"     ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Mars"      ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Jupiter"   ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Neptune"   ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Uranus"    ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Saturn"    ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Luna"      ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Oumuamua"  ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "2I/Borisov",             1,   1,     1,    1
