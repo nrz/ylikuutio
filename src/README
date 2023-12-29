@@ -1,1 +1,8 @@
-TODO
+About mixing of Fortran and C++ in a CMake project
+https://enccs.github.io/cmake-workshop/cxx-fortran/
+
+About Fortran/C interface in CMake
+https://cmake.org/cmake/help/latest/module/FortranCInterface.html
+
+Mixing C/C++ and Fortran together
+http://www.yolinux.com/TUTORIALS/LinuxTutorialMixingFortranAndC.html
