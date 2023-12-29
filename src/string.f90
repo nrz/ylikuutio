@@ -71,8 +71,6 @@ contains
             end do
         end if
 
-        print *, token_sz
-
         ! Allocate memory according to the token length and the 0 needed for `c_str` (`char*`).
         allocate(temp_string(token_sz + 1))
 
