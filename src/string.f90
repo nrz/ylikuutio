@@ -29,6 +29,59 @@ contains
 
     end function get_has_line_code
 
+    ! Returns the first token of the line.
+    ! If newline is encountered before finding a token, an empty string is returned.
+    function get_first_token(line, sz)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+        use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
+
+        implicit none
+        character(kind = c_char), dimension(sz), intent(in) :: line
+        integer(kind = c_int), intent(in), value :: sz
+        type(c_ptr) :: get_first_token
+        character(kind = c_char), pointer, dimension(:), save :: temp_string
+        integer :: i, start_i, end_i, token_sz
+
+        start_i = -1
+        end_i = -1
+
+        ! Search the beginning of the token.
+        do i = 1, sz
+            if (line(i) .eq. '\n' .or. line(i) .eq. '#') then
+                exit
+            else if (line(i) .ne. ' ' .and. line(i) .ne. '\t') then
+                start_i = i
+                exit
+            end if
+        end do
+
+        if (start_i .ge. 1) then
+            ! The beginning of token was found. Search the end of the token.
+            do i = start_i + 1, sz
+                if (line(i) .eq. ' ' .or. line(i) .eq. '\t' .or. line(i) .eq. '\n' .or. line(i) .eq. '#') then
+                    end_i = i - 1
+                    exit
+                else if (i .eq. sz - 1) then
+                    end_i = i - 1
+                    exit
+                end if
+            end do
+        end if
+
+        token_sz = end_i - start_i + 1
+        print *, token_sz
+
+        ! Allocate memory according to the token length and the 0 needed for `c_str` (`char*`).
+        allocate(temp_string(token_sz + 1))
+
+        ! Copy token and null character to the allocated memory.
+        temp_string(1 : token_sz + 1) = line(start_i : end_i) // c_null_char
+
+        ! Get a C pointer (in this case `char*`) to the temporary string.
+        ! It is up to the caller to deallocate the memory allocated by this function.
+        get_first_token = c_loc(temp_string)
+    end function get_first_token
+
     ! Return true if first token of the string matches `token`.
     logical function get_is_first_token(line, token)
         implicit none

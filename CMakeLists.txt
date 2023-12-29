@@ -85,6 +85,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     set(UNIT_TESTS
         src/tests/test_get_has_line_code.cpp
+        src/tests/test_get_first_token.cpp
     )
     set(MAIN_FILE src/tests/googletest/main.cpp)
 
