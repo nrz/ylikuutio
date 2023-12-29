@@ -30,7 +30,7 @@ contains
     end function get_has_line_code
 
     ! Returns the first token of the line.
-    ! If newline is encountered before finding a token, an empty string is returned.
+    ! If newline or hash (beginning of a comment) is encountered before finding a token, an empty string is returned.
     function get_first_token(line, sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
