@@ -66,8 +66,8 @@ contains
                     token_sz = end_i - start_i + 1
                     exit
                 else if (i .eq. sz - 1) then
-                    ! The previous character was the last character of the token.
-                    end_i = i - 1
+                    ! The current character is the last character of the token.
+                    end_i = i
                     ! Update the size of the token.
                     token_sz = end_i - start_i + 1
                     exit
