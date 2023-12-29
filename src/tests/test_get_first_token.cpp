@@ -89,6 +89,15 @@ TEST(get_first_token_must_work_properly, a_hash)
     free(token);
 }
 
+TEST(get_first_token_must_work_properly, a_newline)
+{
+    std::string_view a_newline { "a\n" };
+    char* token = FortranCInterface_MODULE_(string_mod, get_first_token, string_mod, get_first_token)(a_newline.data(), a_newline.size());
+    std::string expected_token { "a" };
+    ASSERT_TRUE(expected_token.compare(token));
+    free(token);
+}
+
 TEST(get_first_token_must_work_properly, newline_a)
 {
     std::string_view newline_a { "\na" };
