@@ -44,6 +44,7 @@ contains
 
         start_i = -1
         end_i = -1
+        token_sz = 0
 
         ! Search the beginning of the token.
         do i = 1, sz
@@ -60,15 +61,16 @@ contains
             do i = start_i + 1, sz
                 if (line(i) .eq. ' ' .or. line(i) .eq. '\t' .or. line(i) .eq. '\n' .or. line(i) .eq. '#') then
                     end_i = i - 1
+                    token_sz = end_i - start_i + 1
                     exit
                 else if (i .eq. sz - 1) then
                     end_i = i - 1
+                    token_sz = end_i - start_i + 1
                     exit
                 end if
             end do
         end if
 
-        token_sz = end_i - start_i + 1
         print *, token_sz
 
         ! Allocate memory according to the token length and the 0 needed for `c_str` (`char*`).
