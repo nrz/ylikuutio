@@ -60,11 +60,15 @@ contains
             ! The beginning of token was found. Search the end of the token.
             do i = start_i + 1, sz
                 if (line(i) .eq. ' ' .or. line(i) .eq. '\t' .or. line(i) .eq. '\n' .or. line(i) .eq. '#') then
+                    ! The previous character was the last character of the token.
                     end_i = i - 1
+                    ! Update the size of the token.
                     token_sz = end_i - start_i + 1
                     exit
                 else if (i .eq. sz - 1) then
+                    ! The previous character was the last character of the token.
                     end_i = i - 1
+                    ! Update the size of the token.
                     token_sz = end_i - start_i + 1
                     exit
                 end if
