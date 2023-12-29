@@ -21,7 +21,7 @@ contains
         do i = 1, sz
             if (line(i) .eq. '#') then
                 exit
-            else if (line(i) .ne. ' ' .and. line(i) .ne. '\t') then
+            else if (line(i) .ne. ' ' .and. line(i) .ne. achar(9)) then
                 get_has_line_code = .true.
                 exit
             end if
@@ -31,55 +31,65 @@ contains
 
     ! Returns the first token of the line.
     ! If newline or hash (beginning of a comment) is encountered before finding a token, an empty string is returned.
-    function get_first_token(line, sz)
+    function get_first_token(line, sz, next_i)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
 
         implicit none
         character(kind = c_char), dimension(sz), intent(in) :: line
         integer(kind = c_int), intent(in), value :: sz
+        integer(kind = c_int), intent(out) :: next_i
         type(c_ptr) :: get_first_token
-        character(kind = c_char), pointer, dimension(:), save :: temp_string
-        integer :: i, start_i, end_i, token_sz
+        character(kind = c_char, len = :), pointer, save :: temp_string
+        integer :: src_i, dest_i, start_i, end_i, token_sz
 
+        next_i = -1
         start_i = -1
         end_i = -1
         token_sz = 0
 
         ! Search the beginning of the token.
-        do i = 1, sz
-            if (line(i) .eq. '\n' .or. line(i) .eq. '#') then
+        do src_i = 1, sz
+            if (line(src_i) .eq. achar(10) .or. line(src_i) .eq. '#') then
                 exit
-            else if (line(i) .ne. ' ' .and. line(i) .ne. '\t') then
-                start_i = i
+            else if (line(src_i) .ne. ' ' .and. line(src_i) .ne. achar(9)) then
+                start_i = src_i
                 exit
             end if
         end do
 
         if (start_i .ge. 1) then
             ! The beginning of token was found. Search the end of the token.
-            do i = start_i + 1, sz
-                if (line(i) .eq. ' ' .or. line(i) .eq. '\t' .or. line(i) .eq. '\n' .or. line(i) .eq. '#') then
-                    ! The previous character was the last character of the token.
-                    end_i = i - 1
-                    ! Update the size of the token.
-                    token_sz = end_i - start_i + 1
+            do src_i = start_i, sz
+                if (line(src_i) .eq. ' ' .or. line(src_i) .eq. achar(9) &
+                    .or. line(src_i) .eq. achar(10) .or. line(src_i) .eq. '#') then
+                    ! Nothing to update. Keep the data of the previous iteration.
                     exit
-                else if (i .eq. sz - 1) then
-                    ! The current character is the last character of the token.
-                    end_i = i
-                    ! Update the size of the token.
+                else
+                    ! Update the data.
+                    end_i = src_i
                     token_sz = end_i - start_i + 1
-                    exit
+                    next_i = src_i + 1
                 end if
             end do
         end if
 
         ! Allocate memory according to the token length and the 0 needed for `c_str` (`char*`).
-        allocate(temp_string(token_sz + 1))
+        allocate(character(token_sz + 1) :: temp_string)
 
-        ! Copy token and null character to the allocated memory.
-        temp_string(1 : token_sz + 1) = line(start_i : end_i) // c_null_char
+        if (token_sz .gt. 0) then
+            ! Copy token and null character to the allocated memory.
+
+            dest_i = 1
+
+            do src_i = start_i, end_i
+                temp_string(dest_i : dest_i) = line(src_i)
+                dest_i = dest_i + 1
+            end do
+            temp_string(token_sz + 1 : token_sz + 1) = c_null_char
+        else
+            temp_string = c_null_char
+        end if
 
         ! Get a C pointer (in this case `char*`) to the temporary string.
         ! It is up to the caller to deallocate the memory allocated by this function.
