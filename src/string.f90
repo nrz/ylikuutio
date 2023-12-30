@@ -8,6 +8,7 @@ contains
 
     ! Returns the line given as index.
     ! `line_sz` has the length of the line (including possible trailing newline) if line was found, otherwise -1 if was not found.
+    ! `line_sz` also makes it easier to process of lines (of type `c_ptr`) returned by `get_line` in Fortran.
     ! `string_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function get_line(string, string_sz, line_i, line_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
