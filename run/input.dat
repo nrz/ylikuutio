@@ -36,6 +36,7 @@
 begin global_parameters
 number_of_objects, length_of_timestep, total_length_of_simulation
                 2,              3600s,                       365d
+end global_parameters
 
 begin objects
 mass,    x,    y,    z, vx, vy, vz, name,         apparent_size, red, green, blue
@@ -52,3 +53,4 @@ mass,    x,    y,    z, vx, vy, vz, name,         apparent_size, red, green, blu
    0, 1000, 1000,    0,  0,  0,  0, "Luna"      ,             1,   1,     1,    1
    0, 1000, 1000,    0,  0,  0,  0, "Oumuamua"  ,             1,   1,     1,    1
    0, 1000, 1000,    0,  0,  0,  0, "2I/Borisov",             1,   1,     1,    1
+end objects
