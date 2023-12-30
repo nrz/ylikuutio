@@ -93,7 +93,6 @@ contains
         ! Get a C pointer (in this case `char*`) to the temporary string.
         ! It is up to the caller to deallocate the memory allocated by this function.
         get_line = c_loc(temp_string)
-
     end function get_line
 
     ! Return true if line has non-whitespace code before newline and before the # comment character.
