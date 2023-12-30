@@ -44,11 +44,8 @@ contains
         ! Loop through the string to find `line_i` - 1 newlines.
 
         do i = 1, string_sz
-            print *, "Searching for newlines!"
-            print *, i
             if (newlines_found .eq. line_i - 1) then
                 ! This is the beginning of the target line!
-                print *, "Enough newlines found!"
                 start_i = i
 
                 ! The line is definitely found.
@@ -66,8 +63,6 @@ contains
             ! Search for the end of line. Possible newline is included in the end of the line.
 
             do i = start_i, string_sz
-                print *, "Searching for end!"
-                print *, i
                 end_i = i
                 line_sz = end_i - start_i + 1
 
