@@ -16,7 +16,7 @@ program planetary_motion
     character(len = :), allocatable :: begin_string, end_string
     character(len = :), allocatable :: global_parameters_string, objects_string
     type(c_ptr) :: file_content
-    integer :: file_status
+    integer :: file_sz
 
     ! Objects are stored in the a vector of objects.
     type(planetary_system) :: my_planetary_system
@@ -26,18 +26,13 @@ program planetary_motion
     write(stdout, "(A28)") "Hello from planetary motion!"
 
     ! Read the simulation data from a file into a `planetary_system` record.
-    file_content = read_file(filename, len(filename), file_status)
+    file_content = read_file(filename, len(filename), file_sz)
 
-    if (file_status .eq. 1) then
+    if (file_sz .ge. 1) then
         write(stdout, "(A27)") "File was read successfully!"
-    else if (file_status .eq. 1) then
-        write(stdout, "(A27)") "ERROR: file reading failed!"
-    else
+    else if (file_sz .eq. 1) then
         write(stdout, "(A35)") "ERROR: Unknown file reading status!"
     end if
-
-    write(stdout, "(A17)", advance = "no") "File read status: "
-    write(stdout, "(g0)") file_status
 
     begin_string = "begin"
     end_string = "begin"

@@ -12,23 +12,23 @@ contains
 
     ! Read file and return its contents as a `char*`.
     ! `filename_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
-    function read_file(filename, filename_sz, file_status)
+    function read_file(filename, filename_sz, file_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
 
         implicit none
         character(kind = c_char), dimension(filename_sz), intent(in) :: filename
         integer(kind = c_int), intent(in), value :: filename_sz
-        integer(kind = c_int), intent(out) :: file_status
+        integer(kind = c_int), intent(out) :: file_sz
         type(c_ptr) :: read_file
         integer, parameter :: unit_number = 1
         character(kind = c_char, len = filename_sz) :: filename_scalar
         character(kind = c_char, len = :), pointer, save :: temp_string
-        integer :: ios, i, file_sz
+        integer :: ios, i
         logical :: are_inputs_valid
 
         are_inputs_valid = .true.
-        file_sz = 0
+        file_sz = -1
 
         if (len(filename) .eq. 0) then
             print *, "Filename must not be an empty string!"
@@ -48,9 +48,6 @@ contains
             ! Get a C pointer (in this case `char*`) to the temporary string.
             ! It is up to the caller to deallocate the memory allocated by this function.
             read_file = c_loc(temp_string)
-
-            ! Set file status output variable to -1 to signal an error.
-            file_status = -1
 
             return
         end if
@@ -82,9 +79,6 @@ contains
             ! It is up to the caller to deallocate the memory allocated by this function.
             read_file = c_loc(temp_string)
 
-            ! Set file status output variable to -1 to signal an error.
-            file_status = -1
-
             return
         else
             write(stdout, "(A19)", advance = "no") "Successfully opened"
@@ -95,8 +89,6 @@ contains
             write(stdout, "(A11)", advance = "no") "File size: "
             write(stdout, "(g0)", advance = "no") file_sz
             write(stdout, "(A6)") " bytes"
-
-            file_status = 1
         end if
 
         ! Allocate memory according to the file length and the 0 needed for `c_str` (`char*`).
@@ -120,8 +112,8 @@ contains
                 ! It is up to the caller to deallocate the memory allocated by this function.
                 read_file = c_loc(temp_string)
 
-                ! Set file status output variable to -1 to signal an error.
-                file_status = -1
+                ! Set file size output variable to -1 to signal an error.
+                file_sz = -1
 
                 return
             end if
