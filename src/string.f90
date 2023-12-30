@@ -113,7 +113,7 @@ contains
         do i = 1, len(line)
             if (line(i:i) .eq. '#') then
                 exit
-            else if (line(i:i) .ne. ' ' .and. line(i:i) .ne. '\t') then
+            else if (line(i:i) .ne. ' ' .and. line(i:i) .ne. achar(9)) then
                 maybe_token_and_whitespace(i:i) = line(i:i)
 
                 end_of_token_i = i + len(token) - 1
@@ -123,7 +123,7 @@ contains
                         get_is_first_token = .true.
                         exit
                     else if (maybe_token_and_whitespace(end_of_token_i:end_of_token_i) .eq. ' ' .or. &
-                        maybe_token_and_whitespace(end_of_token_i:end_of_token_i) .eq. '\t') then
+                        maybe_token_and_whitespace(end_of_token_i:end_of_token_i) .eq. achar(9)) then
                         get_is_first_token = .true.
                         exit
                     end if
