@@ -77,10 +77,10 @@ add_library(planetary_simulation STATIC
         planet
         planet)
 
-add_executable(simulate
+add_executable(planetary_motion
     src/planetary_motion.f90
 )
-target_link_libraries(simulate planetary_simulation)
+target_link_libraries(planetary_motion planetary_simulation)
 
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
