@@ -6,6 +6,101 @@ module string_mod
 
 contains
 
+    ! Returns the line given as index.
+    ! `line_status` is 1 if line was found, otherwise -1 if was not found.
+    ! `string_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
+    function get_line(string, string_sz, line_i, line_status)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+        use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
+
+        implicit none
+        character(kind = c_char), dimension(string_sz), intent(in) :: string
+        integer(kind = c_int), intent(in), value :: string_sz, line_i
+        integer(kind = c_int), intent(out) :: line_status
+        type(c_ptr) :: get_line
+        character(kind = c_char, len = :), pointer, save :: temp_string
+        integer :: i, newlines_found, src_i, dest_i, start_i, end_i, line_sz
+
+        line_status = -1   ! Line has not been found yet.
+        newlines_found = 0 ! No newlines found yet.
+        line_sz = 0
+        start_i = -1       ! Start of line not found yet.
+        end_i = -1         ! End of line not found yet.
+
+        if (line_i .le. 0) then
+            ! Allocate memory for the 0 needed for `c_str` (`char*`).
+            allocate(character(1) :: temp_string)
+
+            ! End the empty `c_str` with the necessary null character.
+            temp_string = c_null_char
+
+            ! Get a C pointer (in this case `char*`) to the temporary string.
+            ! It is up to the caller to deallocate the memory allocated by this function.
+            get_line = c_loc(temp_string)
+
+            return
+        end if
+
+        ! Loop through the string to find `line_i` - 1 newlines.
+
+        do i = 1, string_sz
+            print *, "Searching for newlines!"
+            print *, i
+            if (newlines_found .eq. line_i - 1) then
+                ! This is the beginning of the target line!
+                print *, "Enough newlines found!"
+                start_i = i
+
+                ! The line is definitely found.
+                line_status = 1
+                exit
+            end if
+
+            if (string(i) .eq. achar(10)) then
+                newlines_found = newlines_found + 1
+            end if
+        end do
+
+        if (start_i .ge. 1) then
+            ! Line was found.
+            ! Search for the end of line. Possible newline is included in the end of the line.
+
+            do i = start_i, string_sz
+                print *, "Searching for end!"
+                print *, i
+                end_i = i
+                line_sz = end_i - start_i + 1
+
+                if (string(i) .eq. achar(10)) then
+                    ! Newline found. This is the last character of the target line.
+                    exit
+                end if
+            end do
+        end if
+
+        ! Allocate memory according to the line length and the 0 needed for `c_str` (`char*`).
+        allocate(character(line_sz + 1) :: temp_string)
+
+        if (line_sz .gt. 0) then
+            ! Copy line and null character to the allocated memory.
+
+            dest_i = 1
+
+            do src_i = start_i, end_i
+                temp_string(dest_i : dest_i) = string(src_i)
+                dest_i = dest_i + 1
+            end do
+            temp_string(line_sz + 1 : line_sz + 1) = c_null_char
+        else
+            temp_string = c_null_char
+        end if
+
+        ! Get a C pointer (in this case `char*`) to the temporary string.
+        ! It is up to the caller to deallocate the memory allocated by this function.
+        get_line = c_loc(temp_string)
+
+    end function get_line
+
     ! Return true if line has non-whitespace code before newline and before the # comment character.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     logical function get_has_line_code(line, sz)
