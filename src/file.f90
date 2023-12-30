@@ -11,6 +11,7 @@ module file_mod
 contains
 
     ! Read file and return its contents as a `char*`.
+    ! `filename_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function read_file(filename, filename_sz, file_status)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
