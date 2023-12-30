@@ -7,9 +7,14 @@ program planetary_motion
     use planetary_system_mod
     use file_mod
 
+    ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+    use, intrinsic :: iso_c_binding, only: c_ptr
+
     implicit none
 
     character(len = :), allocatable :: filename
+    type(c_ptr) :: file_content
+    integer :: file_status
 
     ! Objects are stored in the a vector of objects.
     type(planetary_system) :: my_planetary_system
@@ -19,7 +24,18 @@ program planetary_motion
     print *, "Hello from planetary motion!"
 
     ! Read the simulation data from a file into a `planetary_system` record.
-    my_planetary_system = load_file(filename)
+    file_content = read_file(filename, len(filename), file_status)
+
+    if (file_status .eq. 1) then
+        write(stdout, "(A27)") "File was read successfully!"
+    else if (file_status .eq. 1) then
+        write(stdout, "(A27)") "ERROR: file reading failed!"
+    else
+        write(stdout, "(A35)") "ERROR: Unknown file reading status!"
+    end if
+
+    write(stdout, "(A17)", advance = "no") "File read status: "
+    write(stdout, "(g0)") file_status
 
     call simulate(my_planetary_system)
 
