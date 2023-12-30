@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
 #include "planetary_simulation.h"
 
+#include <string_view> // std::string_view
+
 extern "C"
 {
     char* FortranCInterface_MODULE_(string_mod, get_first_token, string_mod, get_first_token)(const char* string, int sz, int* next_i);
 }
-
-#include <string_view> // std::string_view
 
 TEST(get_first_token_must_work_properly, empty)
 {
