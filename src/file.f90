@@ -105,6 +105,26 @@ contains
             ! Read the entire file into the string.
             read(unit = unit_number, iostat = ios) temp_string
 
+            if (ios > 0) then
+                write(stdout, "(A18)", advance = "no") "Error reading file"
+                print *, filename
+
+                ! Allocate memory for the 0 needed for `c_str` (`char*`).
+                allocate(character(1) :: temp_string)
+
+                ! End the empty `c_str` with the necessary null character.
+                temp_string = c_null_char
+
+                ! Get a C pointer (in this case `char*`) to the temporary string.
+                ! It is up to the caller to deallocate the memory allocated by this function.
+                read_file = c_loc(temp_string)
+
+                ! Set file status output variable to -1 to signal an error.
+                file_status = -1
+
+                return
+            end if
+
             ! Copy file and null character to the allocated memory.
 
             temp_string(file_sz + 1 : file_sz + 1) = c_null_char
