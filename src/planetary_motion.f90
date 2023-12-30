@@ -35,7 +35,7 @@ program planetary_motion
     end if
 
     begin_string = "begin"
-    end_string = "begin"
+    end_string = "end"
 
     global_parameters_string = "global_parameters"
     objects_string = "objects"
