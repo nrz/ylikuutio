@@ -7,27 +7,26 @@ module string_mod
 contains
 
     ! Returns the line given as index.
-    ! `line_status` is 1 if line was found, otherwise -1 if was not found.
+    ! `line_sz` has the length of the line (including possible trailing newline) if line was found, otherwise -1 if was not found.
     ! `string_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
-    function get_line(string, string_sz, line_i, line_status)
+    function get_line(string, string_sz, line_i, line_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
 
         implicit none
         character(kind = c_char), dimension(string_sz), intent(in) :: string
         integer(kind = c_int), intent(in), value :: string_sz, line_i
-        integer(kind = c_int), intent(out) :: line_status
+        integer(kind = c_int), intent(out) :: line_sz
         type(c_ptr) :: get_line
         character(kind = c_char, len = :), pointer, save :: temp_string
-        integer :: i, newlines_found, src_i, dest_i, start_i, end_i, line_sz
+        integer :: i, newlines_found, src_i, dest_i, start_i, end_i
 
-        line_status = -1   ! Line has not been found yet.
+        line_sz = -1       ! Line has not been found yet.
         newlines_found = 0 ! No newlines found yet.
-        line_sz = 0
         start_i = -1       ! Start of line not found yet.
         end_i = -1         ! End of line not found yet.
 
-        if (line_i .le. 0) then
+        if (line_i .le. 0 .or. string_sz .lt. 1) then
             ! Allocate memory for the 0 needed for `c_str` (`char*`).
             allocate(character(1) :: temp_string)
 
@@ -49,7 +48,7 @@ contains
                 start_i = i
 
                 ! The line is definitely found.
-                line_status = 1
+                line_sz = 1
                 exit
             end if
 
