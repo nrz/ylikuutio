@@ -26,7 +26,6 @@ contains
                 exit
             end if
         end do
-
     end function get_has_line_code
 
     ! Returns the first token of the line.
