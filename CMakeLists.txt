@@ -91,6 +91,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         src/tests/test_get_line.cpp
         src/tests/test_get_has_line_code.cpp
         src/tests/test_get_first_token.cpp
+        src/tests/test_get_nth_token.cpp
     )
     set(MAIN_FILE src/tests/googletest/main.cpp)
 

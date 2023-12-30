@@ -187,4 +187,83 @@ contains
         get_first_token = c_loc(temp_string)
     end function get_first_token
 
+    ! Returns the nth token of the line (n given as `token_i`).
+    ! If newline or hash (beginning of a comment) is encountered before finding the nth token, an empty string is returned.
+    ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
+    function get_nth_token(line, sz, token_i, next_i)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+        use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
+
+        implicit none
+        character(kind = c_char), dimension(sz), intent(in) :: line
+        integer(kind = c_int), intent(in), value :: sz, token_i
+        integer(kind = c_int), intent(out) :: next_i
+        type(c_ptr) :: get_nth_token
+        type(c_ptr) :: temp_line
+        character(kind = c_char, len = :), pointer, save :: temp_string
+        integer :: i, tokens_found, token_sz
+
+        tokens_found = 0 ! No tokens found yet.
+        next_i = -1
+        token_sz = 0
+
+        if (token_i .le. 0 .or. sz .lt. 1) then
+            ! Allocate memory for the 0 needed for `c_str` (`char*`).
+            allocate(character(1) :: temp_string)
+
+            ! End the empty `c_str` with the necessary null character.
+            temp_string = c_null_char
+
+            ! Get a C pointer (in this case `char*`) to the temporary string.
+            ! It is up to the caller to deallocate the memory allocated by this function.
+            get_nth_token = c_loc(temp_string)
+
+            return
+        end if
+
+        i = 1
+
+        do
+            temp_line = get_first_token(line(i : sz), size(line(i : sz)), next_i)
+
+            if (next_i .eq. -1) then
+                ! Token not found.
+                get_nth_token = temp_line
+                return
+            else
+                ! `next_i` needs to be adjusted relative to the difference between
+                ! `i` and 1 (the offset of the beginning of the string)
+                ! because a partial line was passed to `get_first_token`.
+                next_i = next_i + (i - 1)
+                i = next_i
+                tokens_found = tokens_found + 1
+
+                if (tokens_found .eq. token_i) then
+                    ! This is the token with right index.
+                    exit
+                end if
+            end if
+        end do
+
+        if (tokens_found .lt. token_i) then
+            next_i = -1
+
+            ! Allocate memory for the 0 needed for `c_str` (`char*`).
+            allocate(character(1) :: temp_string)
+
+            ! End the empty `c_str` with the necessary null character.
+            temp_string = c_null_char
+
+            ! Get a C pointer (in this case `char*`) to the temporary string.
+            ! It is up to the caller to deallocate the memory allocated by this function.
+            get_nth_token = c_loc(temp_string)
+        else
+            ! The token was found!
+
+            ! Return a C pointer (in this case `char*`) to the temporary string.
+            ! It is up to the caller to deallocate the memory allocated by this function.
+            get_nth_token = temp_line
+        end if
+    end function get_nth_token
+
 end module string_mod
