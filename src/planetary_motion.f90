@@ -21,7 +21,7 @@ program planetary_motion
 
     filename = "input.dat"
 
-    print *, "Hello from planetary motion!"
+    write(stdout, "(A28)") "Hello from planetary motion!"
 
     ! Read the simulation data from a file into a `planetary_system` record.
     file_content = read_file(filename, len(filename), file_status)
@@ -47,7 +47,7 @@ contains
 
         type(planetary_system) :: my_planetary_system
 
-        print *, "Hello from simulate!"
+        write(stdout, "(A20)") "Hello from simulate!"
 
     end subroutine simulate
 
