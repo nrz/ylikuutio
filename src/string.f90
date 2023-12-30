@@ -121,17 +121,17 @@ contains
     ! Returns the first token of the line.
     ! If newline or hash (beginning of a comment) is encountered before finding a token, an empty string is returned.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
-    function get_first_token(line, sz, next_i)
+    function get_first_token(line, sz, next_i, token_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
 
         implicit none
         character(kind = c_char), dimension(sz), intent(in) :: line
         integer(kind = c_int), intent(in), value :: sz
-        integer(kind = c_int), intent(out) :: next_i
+        integer(kind = c_int), intent(out) :: next_i, token_sz
         type(c_ptr) :: get_first_token
         character(kind = c_char, len = :), pointer, save :: temp_string
-        integer :: src_i, dest_i, start_i, end_i, token_sz
+        integer :: src_i, dest_i, start_i, end_i
 
         next_i = -1
         start_i = -1
@@ -189,18 +189,18 @@ contains
     ! Returns the nth token of the line (n given as `token_i`).
     ! If newline or hash (beginning of a comment) is encountered before finding the nth token, an empty string is returned.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
-    function get_nth_token(line, sz, token_i, next_i)
+    function get_nth_token(line, sz, token_i, next_i, token_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_char, c_int, c_null_char, c_loc, c_ptr
 
         implicit none
         character(kind = c_char), dimension(sz), intent(in) :: line
         integer(kind = c_int), intent(in), value :: sz, token_i
-        integer(kind = c_int), intent(out) :: next_i
+        integer(kind = c_int), intent(out) :: next_i, token_sz
         type(c_ptr) :: get_nth_token
         type(c_ptr) :: temp_line
         character(kind = c_char, len = :), pointer, save :: temp_string
-        integer :: i, tokens_found, token_sz
+        integer :: i, tokens_found
 
         tokens_found = 0 ! No tokens found yet.
         next_i = -1
@@ -223,7 +223,7 @@ contains
         i = 1
 
         do
-            temp_line = get_first_token(line(i : sz), size(line(i : sz)), next_i)
+            temp_line = get_first_token(line(i : sz), size(line(i : sz)), next_i, token_sz)
 
             if (next_i .eq. -1) then
                 ! Token not found.
