@@ -13,6 +13,8 @@ program planetary_motion
     implicit none
 
     character(len = :), allocatable :: filename
+    character(len = :), allocatable :: begin_string, end_string
+    character(len = :), allocatable :: global_parameters_string, objects_string
     type(c_ptr) :: file_content
     integer :: file_status
 
@@ -36,6 +38,12 @@ program planetary_motion
 
     write(stdout, "(A17)", advance = "no") "File read status: "
     write(stdout, "(g0)") file_status
+
+    begin_string = "begin"
+    end_string = "begin"
+
+    global_parameters_string = "global_parameters"
+    objects_string = "objects"
 
     call simulate(my_planetary_system)
 
