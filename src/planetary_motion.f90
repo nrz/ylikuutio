@@ -65,7 +65,7 @@ program planetary_motion
         end_string, len(end_string), &
         global_parameters_string, len(global_parameters_string))
     if (end_global_parameters_line_i .ge. 1) then
-        write(stdout, "(A38)", advance = "no") "`end global_parameters` found on line "
+        write(stdout, "(A40)", advance = "no") "`end global_parameters` found on line   "
         write(stdout, "(g0)") end_global_parameters_line_i
     else
         write(stdout, "(A84)") &
@@ -77,7 +77,7 @@ program planetary_motion
         begin_string, len(begin_string), &
         objects_string, len(objects_string))
     if (begin_objects_line_i .ge. 1) then
-        write(stdout, "(A30)", advance = "no") "`begin objects` found on line "
+        write(stdout, "(A40)", advance = "no") "`begin objects` found on line           "
         write(stdout, "(g0)") begin_objects_line_i
     else
         write(stdout, "(A76)") &
@@ -89,7 +89,7 @@ program planetary_motion
         end_string, len(end_string), &
         objects_string, len(objects_string))
     if (end_objects_line_i .ge. 1) then
-        write(stdout, "(A28)", advance = "no") "`end objects` found on line "
+        write(stdout, "(A40)", advance = "no") "`end objects` found on line             "
         write(stdout, "(g0)") end_objects_line_i
     else
         write(stdout, "(A74)") &
