@@ -97,6 +97,18 @@ program planetary_motion
         return
     end if
 
+    ! Check that the statements of the input file are in correct order.
+
+    if (.not. (begin_global_parameters_line_i < end_global_parameters_line_i .and. &
+        end_global_parameters_line_i < begin_objects_line_i .and. &
+        begin_objects_line_i < end_objects_line_i)) then
+        write(stdout, "(A48)") "`begin` and `end` statements are in wrong order!"
+        write(stdout, "(A49)") "Please check provided `input.dat` for an example!"
+        return
+    end if
+
+    ! The data blocks of the input file are valid and in correct order.
+
     call simulate(my_planetary_system)
 
 contains
