@@ -50,6 +50,8 @@ program planetary_motion
         begin_string, len(begin_string), &
         global_parameters_string, len(global_parameters_string))
 
+    ! Check that all necessary statements of the input file are found.
+
     if (begin_global_parameters_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`begin global_parameters` found on line "
         write(stdout, "(g0)") begin_global_parameters_line_i
