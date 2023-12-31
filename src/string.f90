@@ -347,6 +347,13 @@ contains
                 cycle
             end if
 
+            temp_token = get_nth_token(fortran_line, line_sz, 3, next_i, temp_token_sz)
+
+            if (next_i .ne. -1 .or. temp_token_sz .ne. 0) then
+                line_i = line_i + 1
+                cycle
+            end if
+
             get_line_i_with_2_token_statement = line_i
             return
         end do
