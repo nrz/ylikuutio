@@ -327,7 +327,7 @@ contains
             call c_f_pointer(temp_token, fortran_temp_token, [ temp_token_sz ])
 
             if (next_i .eq. -1 .or. temp_token_sz .ne. token2_sz) then
-                ! Token 1 sizes do not match. There is no desired statement on this line.
+                ! Token 2 sizes do not match. There is no desired statement on this line.
                 ! Proceed to the next line.
                 line_i = line_i + 1
                 cycle
