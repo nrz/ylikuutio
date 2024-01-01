@@ -109,6 +109,12 @@ program planetary_motion
 
     ! The data blocks of the input file are valid and in correct order.
 
+    ! Process `global_parameters` block.
+    ! TODO
+
+    ! Process `objects` block.
+    ! TODO
+
     call simulate(my_planetary_system)
 
 contains

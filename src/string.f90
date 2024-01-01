@@ -122,6 +122,7 @@ contains
     ! Returns the first token of the line.
     ! It's up to caller to deallocate the returned token. A valid pointer (`c_ptr`) is returned always.
     ! If newline or hash (beginning of a comment) is encountered before finding a token, an empty string is returned.
+    ! If token is found, `next_i` points to the character right after the end of the token. Otherwise, `next_i` is -1.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function get_first_token(line, sz, next_i, token_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
