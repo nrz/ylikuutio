@@ -287,13 +287,17 @@ contains
         do
             line = get_line(string, string_sz, line_i, line_sz)
 
-            if (line_sz .eq. -1) then
-                ! Line was not found. There is no line with the given statement.
-                return
-            end if
-
             ! `line` is `c_ptr`. It needs to be converted into a Fortran pointer.
             call c_f_pointer(line, fortran_line)
+
+            if (line_sz .eq. -1) then
+                ! Line was not found. There is no line with the given statement.
+
+                ! Deallocate the line.
+                deallocate(fortran_line)
+
+                return
+            end if
 
             temp_token = get_nth_token(fortran_line, line_sz, 1, next_i, temp_token_sz)
 
@@ -304,6 +308,11 @@ contains
                 ! Token 1 sizes do not match. There is no desired statement on this line.
                 ! Proceed to the next line.
                 line_i = line_i + 1
+
+                ! Deallocate the line and the token.
+                deallocate(fortran_line)
+                deallocate(fortran_temp_token)
+
                 cycle
             end if
 
@@ -318,6 +327,11 @@ contains
 
             if (.not. do_tokens_match) then
                 line_i = line_i + 1
+
+                ! Deallocate the line and the token.
+                deallocate(fortran_line)
+                deallocate(fortran_temp_token)
+
                 cycle
             end if
 
@@ -330,6 +344,11 @@ contains
                 ! Token 2 sizes do not match. There is no desired statement on this line.
                 ! Proceed to the next line.
                 line_i = line_i + 1
+
+                ! Deallocate the line and the token.
+                deallocate(fortran_line)
+                deallocate(fortran_temp_token)
+
                 cycle
             end if
 
@@ -344,10 +363,22 @@ contains
 
             if (.not. do_tokens_match) then
                 line_i = line_i + 1
+
+                ! Deallocate the line and the token.
+                deallocate(fortran_line)
+                deallocate(fortran_temp_token)
+
                 cycle
             end if
 
             temp_token = get_nth_token(fortran_line, line_sz, 3, next_i, temp_token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ temp_token_sz ])
+
+            ! Deallocate the line and the token.
+            deallocate(fortran_line)
+            deallocate(fortran_temp_token)
 
             if (next_i .ne. -1 .or. temp_token_sz .ne. 0) then
                 ! The line has 2 matching tokens but also junk. Junk is not accepted.
