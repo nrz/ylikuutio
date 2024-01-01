@@ -36,6 +36,13 @@ TEST(get_has_line_code_must_work_properly, hash)
     ASSERT_FALSE(has_line_code);
 }
 
+TEST(get_has_line_code_must_work_properly, newline)
+{
+    std::string_view newline { "\n" };
+    int has_line_code = FortranCInterface_MODULE_(string_mod, get_has_line_code, string_mod, get_has_line_code)(newline.data(), newline.size());
+    ASSERT_FALSE(has_line_code);
+}
+
 TEST(get_has_line_code_must_work_properly, space_space)
 {
     std::string_view space_space { "  " };

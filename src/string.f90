@@ -110,7 +110,7 @@ contains
         get_has_line_code = .false.
 
         do i = 1, sz
-            if (line(i) .eq. '#') then
+            if (line(i) .eq. '#' .or. line(i) .eq. achar(10)) then
                 exit
             else if (line(i) .ne. ' ' .and. line(i) .ne. achar(9)) then
                 get_has_line_code = .true.
