@@ -17,17 +17,26 @@ program planetary_motion
     character(len = :), allocatable :: end_global_parameters_string
     character(len = :), allocatable :: begin_objects_string
     character(len = :), allocatable :: end_objects_string
-    type(c_ptr) :: file_content
-    integer :: file_sz
-    character(kind = c_char), pointer, dimension(:) :: fortran_file_content
+    character(len = :), allocatable :: global_parameters_header_string
+    character(len = :), allocatable :: objects_header_string
+    type(c_ptr) :: file_content, temp_line
+    integer :: file_sz, line_sz
+    character(kind = c_char), pointer, dimension(:) :: fortran_file_content, fortran_temp_line
     integer :: begin_global_parameters_line_i, end_global_parameters_line_i
     integer :: begin_objects_line_i, end_objects_line_i
+    integer :: global_parameters_header_line_i
+    integer :: objects_header_line_i
+    integer :: line_i
+    logical :: has_line_code
     type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
     begin_global_parameters_string = "begin global_parameters"
     end_global_parameters_string = "end global_parameters"
     begin_objects_string = "begin objects"
     end_objects_string = "end objects"
+
+    global_parameters_header_string = "number_of_objects, length_of_timestep, total_length_of_simulation"
+    objects_header_string = "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
 
     filename = "input.dat"
 
@@ -108,10 +117,97 @@ program planetary_motion
     ! The data blocks of the input file are valid and in correct order.
 
     ! Process `global_parameters` block.
-    ! TODO
+    global_parameters_header_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        global_parameters_header_string, len(global_parameters_header_string))
+
+    if (global_parameters_header_line_i .ge. 1) then
+        write(stdout, "(A40)", advance = "no") "Global parameters' header found on line "
+        write(stdout, "(g0)") global_parameters_header_line_i
+    else
+        write(stdout, "(A86)") &
+            "Global parameters' header not found! Please check provided `input.dat` for an example!"
+        return
+    end if
 
     ! Process `objects` block.
-    ! TODO
+
+    objects_header_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        objects_header_string, len(objects_header_string))
+
+    if (objects_header_line_i .ge. 1) then
+        write(stdout, "(A40)", advance = "no") "Objects' header found on line           "
+        write(stdout, "(g0)") objects_header_line_i
+    else
+        write(stdout, "(A76)") &
+            "Objects' header not found! Please check provided `input.dat` for an example!"
+        return
+    end if
+
+    ! Check that the header statement of global parameters is inside the block.
+    if (.not.(global_parameters_header_line_i .gt. begin_global_parameters_line_i .and. &
+        global_parameters_header_line_i .lt. end_global_parameters_line_i)) then
+        write(stdout, "(A63)") "Global parameters' header is outside `global_parameters` block!"
+        write(stdout, "(A49)") "Please check provided `input.dat` for an example!"
+        return
+    end if
+
+    ! Check that the header statement of global parameters is inside the block.
+    if (.not.(objects_header_line_i .gt. begin_objects_line_i .and. &
+        objects_header_line_i .lt. end_objects_line_i)) then
+        write(stdout, "(A43)") "Objects' header is outside `objects` block!"
+        write(stdout, "(A49)") "Please check provided `input.dat` for an example!"
+        return
+    end if
+
+    ! Check that there are no junk lines between `begin global_parameters` line and the header line.
+    do line_i = begin_global_parameters_line_i + 1, global_parameters_header_line_i - 1
+        temp_line = get_line(fortran_file_content, file_sz, line_i, line_sz)
+
+        if (line_sz .lt. 0) then
+            write(stdout, "(A97)") &
+                "Parse error in `begin global_parameters` block! This should never happen! The line was not found!"
+            return
+        end if
+
+        ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+        call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
+
+        has_line_code = get_has_line_code(fortran_temp_line, line_sz)
+
+        if (has_line_code) then
+            write(stdout, "(A78)", advance = "no") &
+                "Junk found between `begin global_parameters` line and the header line on line "
+            write(stdout, "(g0)") line_i
+            write(stdout, "(A49)") "Please check provided `input.dat` for an example!"
+            return
+        end if
+    end do
+
+    ! Check that there is no junk lines between `begin objects` line and the header line.
+
+    ! Check that there are no junk lines between `begin objects` line and the header line.
+    do line_i = begin_objects_line_i + 1, objects_header_line_i - 1
+        temp_line = get_line(fortran_file_content, file_sz, line_i, line_sz)
+
+        if (line_sz .lt. 0) then
+            write(stdout, "(A87)") &
+                "Parse error in `begin objects` block! This should never happen! The line was not found!"
+            return
+        end if
+
+        ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+        call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
+
+        has_line_code = get_has_line_code(fortran_temp_line, line_sz)
+
+        if (has_line_code) then
+            write(stdout, "(A68)", advance = "no") &
+                "Junk found between `begin objects` line and the header line on line "
+            write(stdout, "(g0)") line_i
+            write(stdout, "(A49)") "Please check provided `input.dat` for an example!"
+            return
+        end if
+    end do
 
     call simulate(my_planetary_system)
 
