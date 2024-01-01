@@ -173,6 +173,7 @@ program planetary_motion
         call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
 
         has_line_code = get_has_line_code(fortran_temp_line, line_sz)
+        deallocate(fortran_temp_line)
 
         if (has_line_code) then
             write(stdout, "(A78)", advance = "no") &
@@ -199,6 +200,7 @@ program planetary_motion
         call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
 
         has_line_code = get_has_line_code(fortran_temp_line, line_sz)
+        deallocate(fortran_temp_line)
 
         if (has_line_code) then
             write(stdout, "(A68)", advance = "no") &
