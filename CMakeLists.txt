@@ -89,7 +89,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(UNIT_TESTS
         src/tests/test_read_file.cpp
         src/tests/test_get_line.cpp
-        src/tests/test_get_line_i_with_2_token_statement.cpp
         src/tests/test_get_line_i_with_n_token_statement.cpp
         src/tests/test_get_has_line_code.cpp
         src/tests/test_get_first_token.cpp
