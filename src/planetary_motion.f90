@@ -17,8 +17,6 @@ program planetary_motion
     character(len = :), allocatable :: end_global_parameters_string
     character(len = :), allocatable :: begin_objects_string
     character(len = :), allocatable :: end_objects_string
-    character(len = :), allocatable :: begin_string, end_string
-    character(len = :), allocatable :: global_parameters_string, objects_string
     type(c_ptr) :: file_content
     integer :: file_sz
     character(kind = c_char), pointer, dimension(:) :: fortran_file_content
