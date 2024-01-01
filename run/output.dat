@@ -1,1 +1,16 @@
-TODO
+begin global_parameters
+number_of_objects, length_of_timestep, total_length_of_simulation
+                2,              3600s,                       365d
+end global_parameters
+
+begin objects
+mass,    x,    y,    z, vx, vy, vz, name,         apparent_size, red, green, blue
+   0,    0,    0,    0,  0,  0,  0, "Sun"       ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Jupiter"   ,             1,   1,     1,    1
+end objects
+
+begin objects
+mass,    x,    y,    z, vx, vy, vz, name,         apparent_size, red, green, blue
+   0,    0,    0,    0,  0,  0,  0, "Sun"       ,             1,   1,     1,    1
+   0, 1000, 1000,    0,  0,  0,  0, "Jupiter"   ,             1,   1,     1,    1
+end objects
