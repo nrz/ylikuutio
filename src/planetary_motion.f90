@@ -46,11 +46,11 @@ program planetary_motion
     ! `file_content` is `c_ptr`. It needs to be converted into a Fortran pointer.
     call c_f_pointer(file_content, fortran_file_content, [ file_sz ])
 
+    ! Check that all necessary statements of the input file are found.
+
     begin_global_parameters_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
         begin_string, len(begin_string), &
         global_parameters_string, len(global_parameters_string))
-
-    ! Check that all necessary statements of the input file are found.
 
     if (begin_global_parameters_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`begin global_parameters` found on line "
@@ -64,6 +64,7 @@ program planetary_motion
     end_global_parameters_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
         end_string, len(end_string), &
         global_parameters_string, len(global_parameters_string))
+
     if (end_global_parameters_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`end global_parameters` found on line   "
         write(stdout, "(g0)") end_global_parameters_line_i
@@ -76,6 +77,7 @@ program planetary_motion
     begin_objects_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
         begin_string, len(begin_string), &
         objects_string, len(objects_string))
+
     if (begin_objects_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`begin objects` found on line           "
         write(stdout, "(g0)") begin_objects_line_i
@@ -88,6 +90,7 @@ program planetary_motion
     end_objects_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
         end_string, len(end_string), &
         objects_string, len(objects_string))
+
     if (end_objects_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`end objects` found on line             "
         write(stdout, "(g0)") end_objects_line_i
