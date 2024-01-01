@@ -7,6 +7,7 @@ module string_mod
 contains
 
     ! Returns the line given as index.
+    ! It's up to caller to deallocate the returned line. A valid pointer (`c_ptr`) is returned always.
     ! `line_sz` has the length of the line (including possible trailing newline) if line was found, otherwise -1 if was not found.
     ! `line_sz` also makes it easier to process of lines (of type `c_ptr`) returned by `get_line` in Fortran.
     ! `string_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
@@ -119,6 +120,7 @@ contains
     end function get_has_line_code
 
     ! Returns the first token of the line.
+    ! It's up to caller to deallocate the returned token. A valid pointer (`c_ptr`) is returned always.
     ! If newline or hash (beginning of a comment) is encountered before finding a token, an empty string is returned.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function get_first_token(line, sz, next_i, token_sz)
@@ -187,6 +189,7 @@ contains
     end function get_first_token
 
     ! Returns the nth token of the line (n given as `token_i`).
+    ! It's up to caller to deallocate the returned token. A valid pointer (`c_ptr`) is returned always.
     ! If newline or hash (beginning of a comment) is encountered before finding the nth token, an empty string is returned.
     ! `sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function get_nth_token(line, sz, token_i, next_i, token_sz)
@@ -245,6 +248,7 @@ contains
         end do
 
         if (tokens_found .lt. token_i) then
+            ! This line does not have enough tokens!
             next_i = -1
 
             ! Allocate memory for the 0 needed for `c_str` (`char*`).

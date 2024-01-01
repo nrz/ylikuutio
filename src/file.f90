@@ -11,6 +11,7 @@ module file_mod
 contains
 
     ! Read file and return its contents as a `char*`.
+    ! It's up to caller to deallocate the returned file content. A valid pointer (`c_ptr`) is returned always.
     ! `filename_sz` is needed as input parameter due to ISO C binding used by unit tests written in C++.
     function read_file(filename, filename_sz, file_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
