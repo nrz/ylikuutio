@@ -396,4 +396,145 @@ contains
         end do
     end function get_line_i_with_2_token_statement
 
+    integer function get_line_i_with_n_token_statement(string, string_sz, tokens, tokens_sz)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+        use, intrinsic :: iso_c_binding, only: c_f_pointer, c_char, c_int, c_ptr
+
+        implicit none
+        character(kind = c_char), dimension(string_sz), intent(in) :: string
+        character(kind = c_char), dimension(tokens_sz), intent(in) :: tokens
+        integer(kind = c_int), intent(in), value :: string_sz, tokens_sz
+        character(kind = c_char, len = :), pointer :: fortran_line
+        character(kind = c_char), pointer, dimension(:) :: fortran_expected_token, fortran_received_token
+        type(c_ptr) :: line, expected_token, received_token
+        integer :: i, line_i, line_sz
+        integer :: expected_token_offset, expected_token_sz, next_expected_token_offset
+        integer :: received_token_offset, received_token_sz, next_received_token_offset
+        logical :: do_tokens_match
+
+        get_line_i_with_n_token_statement = -1
+
+        line_i = 1
+
+        do
+            line = get_line(string, string_sz, line_i, line_sz)
+
+            ! `line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(line, fortran_line)
+
+            if (line_sz .eq. -1) then
+                ! Line was not found. There is no line with the given statement.
+
+                ! Deallocate the line.
+                deallocate(fortran_line)
+
+                return
+            end if
+
+            ! A line was found.
+            expected_token_offset = 1 ! Start processing from the beginning of the expected tokens.
+            received_token_offset = 1 ! Start processing from the beginning of the received tokens.
+            next_expected_token_offset = -1 ! Some dummy value.
+            next_received_token_offset = -1 ! Some dummy value.
+
+            do
+                ! Check that the tokens of the line match the expected tokens.
+                expected_token = get_first_token(tokens(expected_token_offset : tokens_sz), &
+                    size(tokens(expected_token_offset : tokens_sz)), &
+                    next_expected_token_offset, expected_token_sz)
+                received_token = get_first_token(fortran_line(received_token_offset : line_sz), &
+                    len(fortran_line(received_token_offset : line_sz)), &
+                    next_received_token_offset, received_token_sz)
+
+                ! `expected_token` and received_token` are `c_ptr`. Thy need to be converted into Fortran pointers.
+                call c_f_pointer(expected_token, fortran_expected_token, [ expected_token_sz ])
+                call c_f_pointer(received_token, fortran_received_token, [ received_token_sz ])
+
+                if (expected_token_sz .lt. 1 .and. received_token_sz .lt. 1) then
+                    ! Line matches: No more tokens expected and no more tokens received.
+                    deallocate(fortran_line)
+                    deallocate(fortran_expected_token)
+                    deallocate(fortran_received_token)
+
+                    ! Return the current line number.
+                    get_line_i_with_n_token_statement = line_i
+                    return
+                end if
+
+                ! `next_expected_token_offset` and `next_received_token_offset`
+                ! need to be adjusted relative to the difference between
+                ! the corresponding start offset and 1
+                ! (the offset of the beginning of the string)
+                ! because a partial line was passed to `get_first_token`.
+                next_expected_token_offset = next_expected_token_offset + (expected_token_offset - 1)
+                next_received_token_offset = next_received_token_offset + (received_token_offset - 1)
+
+                if (expected_token_sz .ge. 1 .and. received_token_sz .lt. 1) then
+                    ! Expected token found but no token received!
+                    ! This line does not match.
+
+                    deallocate(fortran_line)
+                    deallocate(fortran_expected_token)
+                    deallocate(fortran_received_token)
+
+                    line_i = line_i + 1
+                    exit
+                else if (expected_token_sz .lt. 1 .and. received_token_sz .ge. 1) then
+                    ! Token received but no token expected!
+                    ! This line does not match.
+
+                    deallocate(fortran_line)
+                    deallocate(fortran_expected_token)
+                    deallocate(fortran_received_token)
+
+                    line_i = line_i + 1
+                    exit
+                else
+                    ! Token expected and token received.
+                    if (received_token_sz .ne. expected_token_sz) then
+                        ! Token sizes do not match!
+                        ! This line does not match.
+
+                        deallocate(fortran_line)
+                        deallocate(fortran_expected_token)
+                        deallocate(fortran_received_token)
+
+                        line_i = line_i + 1
+                        exit
+                    end if
+
+                    ! Token sizes match.
+                    ! Check that tokens are identical.
+
+                    do_tokens_match = .true.
+
+                    do i = 1, expected_token_sz
+                        if (fortran_received_token(i) .ne. fortran_expected_token(i)) then
+                            do_tokens_match = .false.
+                            exit
+                        end if
+                    end do
+
+                    if (.not. do_tokens_match) then
+                        ! This line does not match.
+
+                        deallocate(fortran_line)
+                        deallocate(fortran_expected_token)
+                        deallocate(fortran_received_token)
+
+                        line_i = line_i + 1
+                        exit
+                    end if
+
+                    ! Tokens match. Proceed to the next pair of tokens.
+                    deallocate(fortran_expected_token)
+                    deallocate(fortran_received_token)
+
+                    expected_token_offset = next_expected_token_offset
+                    received_token_offset = next_received_token_offset
+                end if
+            end do
+        end do
+    end function get_line_i_with_n_token_statement
+
 end module string_mod
