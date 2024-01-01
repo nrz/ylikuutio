@@ -13,6 +13,10 @@ program planetary_motion
     implicit none
 
     character(len = :), allocatable :: filename
+    character(len = :), allocatable :: begin_global_parameters_string
+    character(len = :), allocatable :: end_global_parameters_string
+    character(len = :), allocatable :: begin_objects_string
+    character(len = :), allocatable :: end_objects_string
     character(len = :), allocatable :: begin_string, end_string
     character(len = :), allocatable :: global_parameters_string, objects_string
     type(c_ptr) :: file_content
@@ -20,9 +24,12 @@ program planetary_motion
     character(kind = c_char), pointer, dimension(:) :: fortran_file_content
     integer :: begin_global_parameters_line_i, end_global_parameters_line_i
     integer :: begin_objects_line_i, end_objects_line_i
+    type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
-    ! Objects are stored in the a vector of objects.
-    type(planetary_system) :: my_planetary_system
+    begin_global_parameters_string = "begin global_parameters"
+    end_global_parameters_string = "end global_parameters"
+    begin_objects_string = "begin objects"
+    end_objects_string = "end objects"
 
     filename = "input.dat"
 
@@ -37,20 +44,13 @@ program planetary_motion
         write(stdout, "(A35)") "ERROR: Unknown file reading status!"
     end if
 
-    begin_string = "begin"
-    end_string = "end"
-
-    global_parameters_string = "global_parameters"
-    objects_string = "objects"
-
     ! `file_content` is `c_ptr`. It needs to be converted into a Fortran pointer.
     call c_f_pointer(file_content, fortran_file_content, [ file_sz ])
 
     ! Check that all necessary statements of the input file are found.
 
-    begin_global_parameters_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
-        begin_string, len(begin_string), &
-        global_parameters_string, len(global_parameters_string))
+    begin_global_parameters_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        begin_global_parameters_string, len(begin_global_parameters_string))
 
     if (begin_global_parameters_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`begin global_parameters` found on line "
@@ -61,9 +61,8 @@ program planetary_motion
         return
     end if
 
-    end_global_parameters_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
-        end_string, len(end_string), &
-        global_parameters_string, len(global_parameters_string))
+    end_global_parameters_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        end_global_parameters_string, len(end_global_parameters_string))
 
     if (end_global_parameters_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`end global_parameters` found on line   "
@@ -74,9 +73,8 @@ program planetary_motion
         return
     end if
 
-    begin_objects_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
-        begin_string, len(begin_string), &
-        objects_string, len(objects_string))
+    begin_objects_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        begin_objects_string, len(begin_objects_string))
 
     if (begin_objects_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`begin objects` found on line           "
@@ -87,9 +85,8 @@ program planetary_motion
         return
     end if
 
-    end_objects_line_i = get_line_i_with_2_token_statement(fortran_file_content, file_sz, &
-        end_string, len(end_string), &
-        objects_string, len(objects_string))
+    end_objects_line_i = get_line_i_with_n_token_statement(fortran_file_content, file_sz, &
+        end_objects_string, len(end_objects_string))
 
     if (end_objects_line_i .ge. 1) then
         write(stdout, "(A40)", advance = "no") "`end objects` found on line             "
