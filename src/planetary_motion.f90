@@ -144,6 +144,7 @@ program planetary_motion
     end if
 
     ! Check that the header statement of global parameters is inside the block.
+
     if (.not.(global_parameters_header_line_i .gt. begin_global_parameters_line_i .and. &
         global_parameters_header_line_i .lt. end_global_parameters_line_i)) then
         write(stdout, "(A63)") "Global parameters' header is outside `global_parameters` block!"
@@ -152,6 +153,7 @@ program planetary_motion
     end if
 
     ! Check that the header statement of global parameters is inside the block.
+
     if (.not.(objects_header_line_i .gt. begin_objects_line_i .and. &
         objects_header_line_i .lt. end_objects_line_i)) then
         write(stdout, "(A43)") "Objects' header is outside `objects` block!"
@@ -160,6 +162,7 @@ program planetary_motion
     end if
 
     ! Check that there are no junk lines between `begin global_parameters` line and the header line.
+
     do line_i = begin_global_parameters_line_i + 1, global_parameters_header_line_i - 1
         temp_line = get_line(fortran_file_content, file_sz, line_i, line_sz)
 
@@ -184,9 +187,8 @@ program planetary_motion
         end if
     end do
 
-    ! Check that there is no junk lines between `begin objects` line and the header line.
-
     ! Check that there are no junk lines between `begin objects` line and the header line.
+
     do line_i = begin_objects_line_i + 1, objects_header_line_i - 1
         temp_line = get_line(fortran_file_content, file_sz, line_i, line_sz)
 
