@@ -1,10 +1,6 @@
 module file_mod
 
-    use my_kind
     use constants
-    use string_mod
-    use object_mod
-    use planetary_system_mod
 
     implicit none
 
