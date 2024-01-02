@@ -4,6 +4,15 @@ module parser_mod
 
     implicit none
 
+    character(len = 23), parameter :: begin_global_parameters_string = "begin global_parameters"
+    character(len = 21), parameter :: end_global_parameters_string = "end global_parameters"
+    character(len = 14), parameter :: begin_objects_string = "begin objects"
+    character(len = 12), parameter :: end_objects_string = "end objects"
+    character(len = 65), parameter :: global_parameters_header_string = &
+        "number_of_objects, length_of_timestep, total_length_of_simulation"
+    character(len = 64), parameter :: objects_header_string = &
+        "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
+
 contains
 
     logical function parse(file_content, file_sz, &
@@ -24,23 +33,9 @@ contains
         integer(kind = c_int), intent(out) :: global_parameters_header_line_i
         integer(kind = c_int), intent(out) :: objects_header_line_i
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_line
-        character(len = :), allocatable :: begin_global_parameters_string
-        character(len = :), allocatable :: end_global_parameters_string
-        character(len = :), allocatable :: begin_objects_string
-        character(len = :), allocatable :: end_objects_string
-        character(len = :), allocatable :: global_parameters_header_string
-        character(len = :), allocatable :: objects_header_string
         type(c_ptr) :: temp_line
         integer :: line_i, line_sz
         logical :: has_line_code
-
-        begin_global_parameters_string = "begin global_parameters"
-        end_global_parameters_string = "end global_parameters"
-        begin_objects_string = "begin objects"
-        end_objects_string = "end objects"
-
-        global_parameters_header_string = "number_of_objects, length_of_timestep, total_length_of_simulation"
-        objects_header_string = "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
 
         ! Parse correctly by default, set to `.false.` on any parse error.
         parse = .true.
