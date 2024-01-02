@@ -5,13 +5,13 @@ module parser_mod
 
     implicit none
 
-    character(len = 23), parameter :: begin_global_parameters_string = "begin global_parameters"
-    character(len = 21), parameter :: end_global_parameters_string = "end global_parameters"
-    character(len = 13), parameter :: begin_objects_string = "begin objects"
-    character(len = 11), parameter :: end_objects_string = "end objects"
-    character(len = 81), parameter :: global_parameters_header_string = &
+    character(len = *), parameter :: begin_global_parameters_string = "begin global_parameters"
+    character(len = *), parameter :: end_global_parameters_string = "end global_parameters"
+    character(len = *), parameter :: begin_objects_string = "begin objects"
+    character(len = *), parameter :: end_objects_string = "end objects"
+    character(len = *), parameter :: global_parameters_header_string = &
         "number_of_objects, length_of_timestep, total_length_of_simulation, print_interval"
-    character(len = 64), parameter :: objects_header_string = &
+    character(len = *), parameter :: objects_header_string = &
         "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
 
 contains
