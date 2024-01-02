@@ -5,6 +5,7 @@ program planetary_motion
     use object_mod
     use planetary_system_mod
     use file_mod
+    use string_mod
     use parser_mod
 
     ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
