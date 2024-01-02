@@ -128,10 +128,11 @@ contains
         integer(kind = c_int), intent(out) :: print_interval
         character(kind = c_char), pointer, dimension(:) :: fortran_file_content
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_line
-        integer :: line_i, line_sz, value_line_i
+        character(kind = c_char), pointer, dimension(:) :: fortran_temp_token
+        integer(kind = c_int) :: line_i, line_sz, value_line_i, offset, next_offset, token_sz
         logical :: has_line_code
-        type(c_ptr) :: temp_line
-        integer :: n_of_global_parameters_code_lines
+        type(c_ptr) :: temp_line, temp_token
+        integer(kind = c_int) :: n_of_global_parameters_code_lines
 
         parse_global_parameters = .false.
         global_parameters_header_line_i = -1
@@ -211,7 +212,6 @@ contains
             end if
 
             has_line_code = get_has_line_code(fortran_temp_line, line_sz)
-            deallocate(fortran_temp_line)
 
             global_parameters_value_line_i = line_i
 
@@ -219,9 +219,33 @@ contains
                 write(stdout, "(A40)", advance = "no") "Global parameters' values found on line "
                 write(stdout, "(g0)") global_parameters_value_line_i
 
+                offset = 1       ! Start from the 1st byte.
+                next_offset = -1 ! The value will be overwritten by `get_nth_token`.
+
+                temp_token = get_nth_token(fortran_temp_line, line_sz, offset, next_offset, token_sz)
+
+                ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+                call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+                read(fortran_temp_token, *) n_objects
+                deallocate(fortran_temp_token)
+
+                offset = next_offset
+                temp_token = get_nth_token(fortran_temp_line, line_sz, offset, next_offset, token_sz)
+
+                ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+                call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+                ! TODO: read other global parameters!
+
+                deallocate(fortran_temp_token)
+
+                deallocate(fortran_temp_line)
                 parse_global_parameters = .true.
                 return
             end if
+
+            deallocate(fortran_temp_line)
         end do
     end function parse_global_parameters
 
