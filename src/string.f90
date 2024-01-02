@@ -1,6 +1,7 @@
 module string_mod
 
     use my_kind
+    use constants
 
     implicit none
 
@@ -410,5 +411,71 @@ contains
             end do
         end do
     end function get_line_i_with_n_token_statement
+
+    ! Returns the number of code lines between `begin_line_i` and `end_line_i` (both exclusive).
+    ! In case of an error -1 is returned.
+    function get_n_of_code_lines_between(string, string_sz, begin_line_i, end_line_i)
+        ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
+        use, intrinsic :: iso_c_binding, only: c_f_pointer, c_char, c_int, c_ptr
+
+        implicit none
+        character(kind = c_char), dimension(string_sz), intent(in) :: string
+        integer(kind = c_int), intent(in), value :: string_sz
+        integer(kind = c_int), intent(in), value :: begin_line_i, end_line_i
+        integer(kind = c_int) :: get_n_of_code_lines_between
+        type(c_ptr) :: temp_line
+        character(kind = c_char, len = :), pointer :: fortran_temp_line
+        integer(kind = c_int) :: temp_line_sz
+        integer :: line_i, n_code_lines
+        logical :: has_line_code
+
+        get_n_of_code_lines_between = -1
+        n_code_lines = 0
+
+        if (begin_line_i .lt. 1) then
+            ! Begin line must be greater or equal to 1.
+            write(stdout, "(A37)") "Error! Begin line must be at least 1!"
+            return
+        end if
+
+        if (begin_line_i .ge. end_line_i) then
+            ! End line must be after begin line.
+            write(stdout, "(A42)") "Error! Begin line must be before end line!"
+            return
+        end if
+
+        ! Check that `end_line_i` exists in the input string.
+        temp_line = get_line(string, string_sz, end_line_i, temp_line_sz)
+
+        if (temp_line_sz .lt. 0) then
+            write(stdout, "(A54)") "Error! End line number must exist in the input string!"
+            return
+        end if
+
+        do line_i = begin_line_i + 1, end_line_i - 1
+            temp_line = get_line(string, string_sz, line_i, temp_line_sz)
+
+            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_line, fortran_temp_line)
+
+            if (temp_line_sz .lt. 0) then
+                write(stdout, "(A12)", advance = "no") "Line number "
+                write(stdout, "(g0)", advance = "no") line_i
+                write(stdout, "(A15)") " was not found!"
+                deallocate(fortran_temp_line)
+                return
+            end if
+
+            has_line_code = get_has_line_code(fortran_temp_line, temp_line_sz)
+
+            if (has_line_code) then
+                n_code_lines = n_code_lines + 1
+            end if
+
+            deallocate(fortran_temp_line)
+        end do
+
+        get_n_of_code_lines_between = n_code_lines
+    end function get_n_of_code_lines_between
 
 end module string_mod

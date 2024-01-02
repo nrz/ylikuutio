@@ -93,6 +93,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         src/tests/test_get_line_i_with_n_token_statement.cpp
         src/tests/test_get_has_line_code.cpp
         src/tests/test_get_first_token.cpp
+        src/tests/test_get_n_of_code_lines_between.cpp
         src/tests/test_get_nth_token.cpp
         src/tests/test_parse.cpp
     )
