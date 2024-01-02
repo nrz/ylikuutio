@@ -99,6 +99,11 @@ contains
                 write(stdout, "(A18)", advance = "no") "Error reading file"
                 print *, filename
 
+                close(unit = unit_number, iostat = ios)
+                if (ios .ne. 0) then
+                    write(stdout, "(A18)", advance = "no") "Error closing file"
+                end if
+
                 ! Deallocate the previous allocation (needed for the next allocation).
                 deallocate(temp_string)
 
@@ -116,6 +121,13 @@ contains
                 file_sz = -1
 
                 return
+            end if
+
+            ! Close file. If file is not closed, opening and reading it again
+            ! e.g. in unit tests may fail in surprising ways. I have experience of this.
+            close(unit = unit_number, iostat = ios)
+            if (ios .ne. 0) then
+                write(stdout, "(A18)", advance = "no") "Error closing file"
             end if
 
             ! Copy file and null character to the allocated memory.

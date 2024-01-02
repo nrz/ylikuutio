@@ -122,3 +122,35 @@ TEST(file_parsing_must_work_properly, valid_data)
     ASSERT_EQ(objects_header_line_i, 44);
     free(content);
 }
+
+TEST(file_parsing_must_work_properly, valid_data_again)
+{
+    std::string_view file_name { "input.dat" };
+    int file_sz = 0;
+    char* content = FortranCInterface_MODULE_(file_mod, read_file, file_mod, read_file)(file_name.data(), file_name.size(), &file_sz);
+    ASSERT_EQ(file_sz, 2742); // File read successfully!
+
+    int begin_global_parameters_line_i;
+    int end_global_parameters_line_i;
+    int begin_objects_line_i;
+    int end_objects_line_i;
+    int global_parameters_header_line_i;
+    int objects_header_line_i;
+    int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
+            content,
+            file_sz,
+            &begin_global_parameters_line_i,
+            &end_global_parameters_line_i,
+            &begin_objects_line_i,
+            &end_objects_line_i,
+            &global_parameters_header_line_i,
+            &objects_header_line_i);
+    ASSERT_TRUE(success);
+    ASSERT_EQ(begin_global_parameters_line_i, 38);
+    ASSERT_EQ(end_global_parameters_line_i, 41);
+    ASSERT_EQ(begin_objects_line_i, 43);
+    ASSERT_EQ(end_objects_line_i, 58);
+    ASSERT_EQ(global_parameters_header_line_i, 39);
+    ASSERT_EQ(objects_header_line_i, 44);
+    free(content);
+}
