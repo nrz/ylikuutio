@@ -290,7 +290,7 @@ contains
 
         line_i = 1
 
-        do
+        line_loop: do
             line = get_line(string, string_sz, line_i, line_sz)
 
             ! `line` is `c_ptr`. It needs to be converted into a Fortran pointer.
@@ -311,7 +311,7 @@ contains
             next_expected_token_offset = -1 ! Some dummy value.
             next_received_token_offset = -1 ! Some dummy value.
 
-            do
+            token_loop: do
                 ! Check that the tokens of the line match the expected tokens.
                 expected_token = get_first_token(tokens(expected_token_offset : tokens_sz), &
                     size(tokens(expected_token_offset : tokens_sz)), &
@@ -407,8 +407,8 @@ contains
                     expected_token_offset = next_expected_token_offset
                     received_token_offset = next_received_token_offset
                 end if
-            end do
-        end do
+            end do token_loop
+        end do line_loop
     end function get_line_i_with_n_token_statement
 
     ! Returns the number of code lines between `begin_line_i` and `end_line_i` (both exclusive).
