@@ -1,6 +1,5 @@
 module string_mod
 
-    use my_kind
     use constants
 
     implicit none

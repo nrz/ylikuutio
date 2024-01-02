@@ -1,8 +1,6 @@
 program planetary_motion
 
-    use my_kind
     use constants
-    use object_mod
     use planetary_system_mod
     use file_mod
     use string_mod
