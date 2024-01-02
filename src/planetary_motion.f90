@@ -70,6 +70,11 @@ program planetary_motion
     write(stdout, "(A41)", advance = "no") "Number of objects' code lines:           "
     write(stdout, "(g0)") n_of_objects_code_lines
 
+    if (n_of_global_parameters_code_lines .ne. 1) then
+        write(stdout, "(A65)") "ERROR: Number of global parameters' code lines must be exactly 1!"
+        return
+    end if
+
     call simulate(my_planetary_system)
 
 contains
