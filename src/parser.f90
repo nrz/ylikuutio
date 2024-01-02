@@ -167,15 +167,16 @@ contains
         do line_i = begin_global_parameters_line_i + 1, global_parameters_header_line_i - 1
             temp_line = get_line(file_content, file_sz, line_i, line_sz)
 
+            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
+
             if (line_sz .lt. 0) then
                 write(stdout, "(A97)") &
                     "Parse error in `begin global_parameters` block! This should never happen! The line was not found!"
+                deallocate(fortran_temp_line)
                 parse = .false.
                 return
             end if
-
-            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
-            call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
 
             has_line_code = get_has_line_code(fortran_temp_line, line_sz)
             deallocate(fortran_temp_line)
@@ -195,15 +196,16 @@ contains
         do line_i = begin_objects_line_i + 1, objects_header_line_i - 1
             temp_line = get_line(file_content, file_sz, line_i, line_sz)
 
+            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
+
             if (line_sz .lt. 0) then
                 write(stdout, "(A87)") &
                     "Parse error in `begin objects` block! This should never happen! The line was not found!"
+                deallocate(fortran_temp_line)
                 parse = .false.
                 return
             end if
-
-            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
-            call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
 
             has_line_code = get_has_line_code(fortran_temp_line, line_sz)
             deallocate(fortran_temp_line)
