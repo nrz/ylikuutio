@@ -99,6 +99,9 @@ contains
                 write(stdout, "(A18)", advance = "no") "Error reading file"
                 print *, filename
 
+                ! Deallocate the previous allocation (needed for the next allocation).
+                deallocate(temp_string)
+
                 ! Allocate memory for the 0 needed for `c_str` (`char*`).
                 allocate(character(1) :: temp_string)
 
