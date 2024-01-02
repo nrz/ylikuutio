@@ -175,3 +175,15 @@ TEST(get_line_must_work_properly, newline_foo_space_bar_newline_bar_space_qux_ne
     ASSERT_EQ(line_sz, 8); // Line size is 8.
     free(line);
 }
+
+TEST(get_line_must_work_properly, newline_foo_space_bar_newline_bar_space_qux_new_linestring_line_i_4_must_not_be_found)
+{
+    std::string_view string { "\nfoo bar\nbaz qux\n" };
+    int line_i = 4;
+    int line_sz = 0;
+    char* line = FortranCInterface_MODULE_(string_mod, get_line, string_mod, get_line)(string.data(), string.size(), line_i, &line_sz);
+    std::string_view expected_line { "" };
+    ASSERT_EQ(expected_line.compare(line), 0);
+    ASSERT_EQ(line_sz, -1); // No line found!
+    free(line);
+}

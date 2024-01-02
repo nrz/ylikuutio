@@ -74,8 +74,13 @@ contains
             end do
         end if
 
-        ! Allocate memory according to the line length and the 0 needed for `c_str` (`char*`).
-        allocate(character(line_sz + 1) :: temp_string)
+        if (line_sz .eq. -1) then
+            ! Allocate memory for the 0 needed for `c_str` (`char*`).
+            allocate(character(1) :: temp_string)
+        else
+            ! Allocate memory according to the line length and the 0 needed for `c_str` (`char*`).
+            allocate(character(line_sz + 1) :: temp_string)
+        end if
 
         if (line_sz .gt. 0) then
             ! Copy line and null character to the allocated memory.
