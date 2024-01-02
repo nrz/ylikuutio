@@ -22,6 +22,8 @@ program planetary_motion
     integer :: end_objects_line_i
     integer :: global_parameters_header_line_i
     integer :: objects_header_line_i
+    integer :: n_of_global_parameters_code_lines
+    integer :: n_of_objects_code_lines
     logical :: parsing_success
     type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
@@ -55,6 +57,18 @@ program planetary_motion
         write(stdout, "(A15)") "Parsing failed!"
         return
     end if
+
+    n_of_global_parameters_code_lines = get_n_of_code_lines_between(fortran_file_content, file_sz, &
+        global_parameters_header_line_i, end_global_parameters_line_i)
+
+    n_of_objects_code_lines = get_n_of_code_lines_between(fortran_file_content, file_sz, &
+        objects_header_line_i, end_objects_line_i)
+
+    write(stdout, "(A41)", advance = "no") "Number of global parameters' code lines: "
+    write(stdout, "(g0)") n_of_global_parameters_code_lines
+
+    write(stdout, "(A41)", advance = "no") "Number of objects' code lines:           "
+    write(stdout, "(g0)") n_of_objects_code_lines
 
     call simulate(my_planetary_system)
 
