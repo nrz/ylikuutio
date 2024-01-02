@@ -8,8 +8,8 @@ module parser_mod
     character(len = 21), parameter :: end_global_parameters_string = "end global_parameters"
     character(len = 14), parameter :: begin_objects_string = "begin objects"
     character(len = 12), parameter :: end_objects_string = "end objects"
-    character(len = 65), parameter :: global_parameters_header_string = &
-        "number_of_objects, length_of_timestep, total_length_of_simulation"
+    character(len = 81), parameter :: global_parameters_header_string = &
+        "number_of_objects, length_of_timestep, total_length_of_simulation, print_interval"
     character(len = 64), parameter :: objects_header_string = &
         "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
 
