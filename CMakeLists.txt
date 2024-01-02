@@ -65,6 +65,7 @@ add_library(planetary_simulation STATIC
     src/file.f90
     src/my_kind.f90
     src/object.f90
+    src/parser.f90
     src/planetary_motion.f90
     src/planetary_system.f90
     src/string.f90
@@ -93,6 +94,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         src/tests/test_get_has_line_code.cpp
         src/tests/test_get_first_token.cpp
         src/tests/test_get_nth_token.cpp
+        src/tests/test_parse.cpp
     )
     set(MAIN_FILE src/tests/googletest/main.cpp)
 
