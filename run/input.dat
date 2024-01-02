@@ -10,13 +10,14 @@
 # `total_length_of_simulation`
 # `number_of_steps`.
 #
-# One must specify exactly 2 of the following 3 global parameters: `length_of_timestep`, `total_length_of_simulation`, `number_of_steps`.
+# One must specify the following global parameters: `length_of_timestep`, `total_length_of_simulation`.
 
-# Global parameter name    Effect of the parameter
-#     number_of_objects    Limits the number of objects. Set the value to Inf to read in all objects given in the input file. Default value: Inf.
-#     length_of_timestep
-#     total_length_of_simulation
-#     number_of_steps
+# Global parameter name           Effect of the parameter
+#     number_of_objects           Limits the number of objects. Set the value to Inf to read in all objects given in the input file.
+#     length_of_timestep          The length of each timestep.  Unit: hours.
+#     total_length_of_simulation  The length of the simulation: Unit: days.
+#
+# Note: number of timesteps is determined by the given total length of the simulation and the length of a timestep.
 
 # <mass>, <x>, <y>, <z>, <vx>, <vy>, <vz>, [name], [apparent_size], [red], [green], [blue],
 #
