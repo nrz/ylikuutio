@@ -96,6 +96,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         src/tests/test_get_n_of_code_lines_between.cpp
         src/tests/test_get_nth_token.cpp
         src/tests/test_parse.cpp
+        src/tests/test_parse_global_parameters.cpp
     )
     set(MAIN_FILE src/tests/googletest/main.cpp)
 

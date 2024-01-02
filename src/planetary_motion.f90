@@ -3,11 +3,10 @@ program planetary_motion
     use constants
     use planetary_system_mod
     use file_mod
-    use string_mod
     use parser_mod
 
     ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
-    use, intrinsic :: iso_c_binding, only: c_char, c_f_pointer, c_ptr
+    use, intrinsic :: iso_c_binding, only: c_char, c_double, c_f_pointer, c_ptr
 
     implicit none
 
@@ -20,10 +19,15 @@ program planetary_motion
     integer :: begin_objects_line_i
     integer :: end_objects_line_i
     integer :: global_parameters_header_line_i
+    integer :: global_parameters_value_line_i
     integer :: objects_header_line_i
-    integer :: n_of_global_parameters_code_lines
-    integer :: n_of_objects_code_lines
+    integer :: n_objects
+    real(kind = c_double) :: length_of_timestep
+    real(kind = c_double) :: total_length_of_simulation
+    integer :: print_interval
     logical :: parsing_success
+    logical :: global_parameters_parsing_success
+    logical :: objects_parsing_success
     type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
     filename = "input.dat"
@@ -46,9 +50,7 @@ program planetary_motion
 
     parsing_success = parse(fortran_file_content, file_sz, &
         begin_global_parameters_line_i, end_global_parameters_line_i, &
-        begin_objects_line_i, end_objects_line_i, &
-        global_parameters_header_line_i, &
-        objects_header_line_i)
+        begin_objects_line_i, end_objects_line_i)
 
     if (parsing_success) then
         write(stdout, "(A27)") "Initial parsing successful."
@@ -57,22 +59,33 @@ program planetary_motion
         return
     end if
 
-    n_of_global_parameters_code_lines = get_n_of_code_lines_between(fortran_file_content, file_sz, &
-        global_parameters_header_line_i, end_global_parameters_line_i)
+    global_parameters_parsing_success = parse_global_parameters(fortran_file_content, file_sz, &
+        begin_global_parameters_line_i, end_global_parameters_line_i, &
+        global_parameters_header_line_i, global_parameters_value_line_i, &
+        n_objects, length_of_timestep, total_length_of_simulation, print_interval)
 
-    n_of_objects_code_lines = get_n_of_code_lines_between(fortran_file_content, file_sz, &
-        objects_header_line_i, end_objects_line_i)
-
-    write(stdout, "(A41)", advance = "no") "Number of global parameters' code lines: "
-    write(stdout, "(g0)") n_of_global_parameters_code_lines
-
-    write(stdout, "(A41)", advance = "no") "Number of objects' code lines:           "
-    write(stdout, "(g0)") n_of_objects_code_lines
-
-    if (n_of_global_parameters_code_lines .ne. 1) then
-        write(stdout, "(A65)") "ERROR: Number of global parameters' code lines must be exactly 1!"
+    if (global_parameters_parsing_success) then
+        write(stdout, "(A43)") "Parsing global parameters block successful."
+    else
+        write(stdout, "(A39)") "Parsing global parameters block failed!"
         return
     end if
+
+    write(stdout, "(A12)", advance = "no") "n_objects = "
+    write(stdout, "(g0)") n_objects
+
+    write(stdout, "(A21)", advance = "no") "length_of_timestep = "
+    write(stdout, "(G0.10)") length_of_timestep
+
+    write(stdout, "(A29)", advance = "no") "total_length_of_simulation = "
+    write(stdout, "(G0.10)") length_of_timestep
+
+    write(stdout, "(A17)", advance = "no") "print_interval = "
+    write(stdout, "(g0)") print_interval
+
+    objects_parsing_success = parse_objects(fortran_file_content, file_sz, &
+        begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
+        my_planetary_system)
 
     call simulate(my_planetary_system)
 

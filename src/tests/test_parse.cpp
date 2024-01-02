@@ -8,9 +8,7 @@ extern "C"
     int FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             const char* content, int sz,
             int* begin_global_parameters_line_i, int* end_global_parameters_line_i,
-            int* begin_objects_line_i, int* end_objects_line_i,
-            int* global_parameters_header_line_i,
-            int* objects_header_line_i);
+            int* begin_objects_line_i, int* end_objects_line_i);
 }
 
 TEST(file_parsing_must_work_properly, empty_file)
@@ -24,17 +22,13 @@ TEST(file_parsing_must_work_properly, empty_file)
     int end_global_parameters_line_i;
     int begin_objects_line_i;
     int end_objects_line_i;
-    int global_parameters_header_line_i;
-    int objects_header_line_i;
     int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             content,
             file_sz,
             &begin_global_parameters_line_i,
             &end_global_parameters_line_i,
             &begin_objects_line_i,
-            &end_objects_line_i,
-            &global_parameters_header_line_i,
-            &objects_header_line_i);
+            &end_objects_line_i);
     ASSERT_FALSE(success);
     free(content);
 }
@@ -50,17 +44,13 @@ TEST(file_parsing_must_work_properly, invalid_file_one_line)
     int end_global_parameters_line_i;
     int begin_objects_line_i;
     int end_objects_line_i;
-    int global_parameters_header_line_i;
-    int objects_header_line_i;
     int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             content,
             file_sz,
             &begin_global_parameters_line_i,
             &end_global_parameters_line_i,
             &begin_objects_line_i,
-            &end_objects_line_i,
-            &global_parameters_header_line_i,
-            &objects_header_line_i);
+            &end_objects_line_i);
     ASSERT_FALSE(success);
     free(content);
 }
@@ -76,17 +66,13 @@ TEST(file_parsing_must_work_properly, invalid_file_multiple_lines)
     int end_global_parameters_line_i;
     int begin_objects_line_i;
     int end_objects_line_i;
-    int global_parameters_header_line_i;
-    int objects_header_line_i;
     int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             content,
             file_sz,
             &begin_global_parameters_line_i,
             &end_global_parameters_line_i,
             &begin_objects_line_i,
-            &end_objects_line_i,
-            &global_parameters_header_line_i,
-            &objects_header_line_i);
+            &end_objects_line_i);
     ASSERT_FALSE(success);
     free(content);
 }
@@ -102,24 +88,18 @@ TEST(file_parsing_must_work_properly, valid_data)
     int end_global_parameters_line_i;
     int begin_objects_line_i;
     int end_objects_line_i;
-    int global_parameters_header_line_i;
-    int objects_header_line_i;
     int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             content,
             file_sz,
             &begin_global_parameters_line_i,
             &end_global_parameters_line_i,
             &begin_objects_line_i,
-            &end_objects_line_i,
-            &global_parameters_header_line_i,
-            &objects_header_line_i);
+            &end_objects_line_i);
     ASSERT_TRUE(success);
     ASSERT_EQ(begin_global_parameters_line_i, 38);
     ASSERT_EQ(end_global_parameters_line_i, 41);
     ASSERT_EQ(begin_objects_line_i, 43);
     ASSERT_EQ(end_objects_line_i, 58);
-    ASSERT_EQ(global_parameters_header_line_i, 39);
-    ASSERT_EQ(objects_header_line_i, 44);
     free(content);
 }
 
@@ -134,23 +114,17 @@ TEST(file_parsing_must_work_properly, valid_data_again)
     int end_global_parameters_line_i;
     int begin_objects_line_i;
     int end_objects_line_i;
-    int global_parameters_header_line_i;
-    int objects_header_line_i;
     int success = FortranCInterface_MODULE_(parser_mod, parse, parser_mod, parse)(
             content,
             file_sz,
             &begin_global_parameters_line_i,
             &end_global_parameters_line_i,
             &begin_objects_line_i,
-            &end_objects_line_i,
-            &global_parameters_header_line_i,
-            &objects_header_line_i);
+            &end_objects_line_i);
     ASSERT_TRUE(success);
     ASSERT_EQ(begin_global_parameters_line_i, 38);
     ASSERT_EQ(end_global_parameters_line_i, 41);
     ASSERT_EQ(begin_objects_line_i, 43);
     ASSERT_EQ(end_objects_line_i, 58);
-    ASSERT_EQ(global_parameters_header_line_i, 39);
-    ASSERT_EQ(objects_header_line_i, 44);
     free(content);
 }
