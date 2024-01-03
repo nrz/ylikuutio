@@ -191,7 +191,9 @@ contains
             if (iteration_i .eq. 1 .or. &
                 iteration_i .eq. last_iteration_i .or. &
                 mod(iteration_i, my_global_parameters % print_interval) .eq. 0) then
-                write(stdout, "(A17)", advance = "no") "Iteration index: "
+                write(stdout, "(A20)", advance = "no") "Number of objects = "
+                write(stdout, "(g0)") my_planetary_system % n_objects
+                write(stdout, "(A20)", advance = "no") "Iteration index   = "
                 write(stdout, "(g0)") iteration_i
 
                 if (iteration_i .eq. 1) then
