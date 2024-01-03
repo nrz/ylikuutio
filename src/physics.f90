@@ -1,4 +1,4 @@
-module verlet_integration
+module physics_mod
 
     use object_mod
 
@@ -12,4 +12,4 @@ contains
 
     end subroutine timestep
 
-end module verlet_integration
+end module physics_mod

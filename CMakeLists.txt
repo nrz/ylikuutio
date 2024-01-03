@@ -66,11 +66,11 @@ add_library(planetary_simulation STATIC
     src/global_parameters.f90
     src/my_kind.f90
     src/object.f90
+    src/physics.f90
     src/parser.f90
     src/planetary_motion.f90
     src/planetary_system.f90
     src/string.f90
-    src/verlet_integration.f90
     )
     target_compile_features(planetary_simulation PUBLIC cxx_std_20)
     set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
