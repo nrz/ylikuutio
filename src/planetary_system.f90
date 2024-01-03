@@ -30,19 +30,19 @@ contains
 
             write(stdout, "(A7)", advance = "no") "name = "
             print *, object % name
-            write(stdout, "(A7)", advance = "no") "mass = "
+            write(stdout, "(G10.2)", advance = "no") "mass = "
             print *, object % mass
-            write(stdout, "(A7)", advance = "no") "x    = "
+            write(stdout, "(G10.2)", advance = "no") "x    = "
             print *, object % position(1)
-            write(stdout, "(A7)", advance = "no") "y    = "
+            write(stdout, "(G10.2)", advance = "no") "y    = "
             print *, object % position(2)
-            write(stdout, "(A7)", advance = "no") "z    = "
+            write(stdout, "(G10.2)", advance = "no") "z    = "
             print *, object % position(3)
-            write(stdout, "(A7)", advance = "no") "vx   = "
+            write(stdout, "(G10.2)", advance = "no") "vx   = "
             print *, object % velocity(1)
-            write(stdout, "(A7)", advance = "no") "vy   = "
+            write(stdout, "(G10.2)", advance = "no") "vy   = "
             print *, object % velocity(2)
-            write(stdout, "(A7)", advance = "no") "vz   = "
+            write(stdout, "(G10.2)", advance = "no") "vz   = "
             print *, object % velocity(3)
         end do object_loop
 

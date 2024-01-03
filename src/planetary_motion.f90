@@ -76,10 +76,10 @@ program planetary_motion
     write(stdout, "(i0)") n_objects
 
     write(stdout, "(A40)", advance = "no") "length_of_timestep                    = "
-    write(stdout, "(f10.2)") length_of_timestep
+    write(stdout, "(G10.2)") length_of_timestep
 
     write(stdout, "(A40)", advance = "no") "total_length_of_simulation            = "
-    write(stdout, "(f10.2)") total_length_of_simulation
+    write(stdout, "(G10.2)") total_length_of_simulation
 
     write(stdout, "(A40)", advance = "no") "print_interval                        = "
     write(stdout, "(i0)") print_interval
