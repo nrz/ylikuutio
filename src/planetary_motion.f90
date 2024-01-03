@@ -71,16 +71,16 @@ program planetary_motion
         return
     end if
 
-    write(stdout, "(A12)", advance = "no") "n_objects = "
+    write(stdout, "(A40)", advance = "no") "n_objects                             = "
     write(stdout, "(i0)") n_objects
 
-    write(stdout, "(A21)", advance = "no") "length_of_timestep = "
+    write(stdout, "(A40)", advance = "no") "length_of_timestep_objects            = "
     write(stdout, "(f10.2)") length_of_timestep
 
-    write(stdout, "(A29)", advance = "no") "total_length_of_simulation = "
+    write(stdout, "(A40)", advance = "no") "total_length_of_simulation            = "
     write(stdout, "(f10.2)") total_length_of_simulation
 
-    write(stdout, "(A17)", advance = "no") "print_interval = "
+    write(stdout, "(A40)", advance = "no") "print_interval                        = "
     write(stdout, "(i0)") print_interval
 
     objects_parsing_success = parse_objects(fortran_file_content, file_sz, &
