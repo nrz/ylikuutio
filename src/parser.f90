@@ -455,6 +455,7 @@ contains
             object % position     = [ 0.0, 0.0, 0.0 ]
             object % velocity     = [ 0.0, 0.0, 0.0 ]
             object % acceleration = [ 0.0, 0.0, 0.0 ]
+            object % new_acceleration = [ 0.0, 0.0, 0.0 ]
             object % apparent_size = 0
             object % red   = 0
             object % green = 0

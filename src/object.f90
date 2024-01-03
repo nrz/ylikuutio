@@ -7,7 +7,7 @@ module object_mod
     ! Object is a star, planet, moon, asteroid, comet, or any other celestial body.
     type :: object
         real(rk) :: mass
-        real(rk) :: position(3), velocity(3), acceleration(3)
+        real(rk) :: position(3), velocity(3), acceleration(3), new_acceleration(3)
 
         ! The rest of the object's variables are only for visualization purposes.
         character(len = :), allocatable :: name
