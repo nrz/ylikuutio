@@ -10,9 +10,9 @@ module parser_mod
     character(len = *), parameter :: begin_objects_string = "begin objects"
     character(len = *), parameter :: end_objects_string = "end objects"
     character(len = *), parameter :: global_parameters_header_string = &
-        "number_of_objects, length_of_timestep, total_length_of_simulation, print_interval"
+        "number_of_objects , length_of_timestep , total_length_of_simulation , print_interval"
     character(len = *), parameter :: objects_header_string = &
-        "mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue"
+        "mass , x , y , z , vx , vy , vz , name , apparent_size , red , green , blue"
 
 contains
 
@@ -229,8 +229,8 @@ contains
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                allocate(character(token_sz - 1) :: field)
-                do i = 1, token_sz - 1
+                allocate(character(token_sz) :: field)
+                do i = 1, token_sz
                     field(i:i) = fortran_temp_token(i)
                 end do
 
@@ -242,14 +242,14 @@ contains
                 end if
                 deallocate(fortran_temp_token)
 
-                column_i = column_i + 1
+                column_i = column_i + 2
                 temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
 
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                allocate(character(token_sz - 1) :: field)
-                do i = 1, token_sz - 1
+                allocate(character(token_sz) :: field)
+                do i = 1, token_sz
                     field(i:i) = fortran_temp_token(i)
                 end do
 
@@ -260,14 +260,14 @@ contains
                 end if
                 deallocate(fortran_temp_token)
 
-                column_i = column_i + 1
+                column_i = column_i + 2
                 temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
 
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                allocate(character(token_sz - 1) :: field)
-                do i = 1, token_sz - 1
+                allocate(character(token_sz) :: field)
+                do i = 1, token_sz
                     field(i:i) = fortran_temp_token(i)
                 end do
 
@@ -278,14 +278,13 @@ contains
                 end if
                 deallocate(fortran_temp_token)
 
-                column_i = column_i + 1
+                column_i = column_i + 2
                 temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
 
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
                 ! No comma after the last field!
-                ! Therefore do not subtract 1 from `token_sz` here!
                 allocate(character(token_sz) :: field)
                 do i = 1, token_sz
                     field(i:i) = fortran_temp_token(i)

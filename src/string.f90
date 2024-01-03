@@ -148,7 +148,14 @@ contains
 
         ! Search the beginning of the token.
         do src_i = 1, sz
-            if (line(src_i) .eq. achar(10) .or. line(src_i) .eq. '#') then
+            if (line(src_i) .eq. ',') then
+                ! Comma is a token always by itself (length of 1).
+                start_i = src_i
+                end_i = src_i
+                token_sz = end_i - start_i + 1
+                next_i = src_i + 1
+                exit
+            else if (line(src_i) .eq. achar(10) .or. line(src_i) .eq. '#') then
                 exit
             else if (line(src_i) .ne. ' ' .and. line(src_i) .ne. achar(9)) then
                 start_i = src_i
@@ -159,7 +166,7 @@ contains
         if (start_i .ge. 1) then
             ! The beginning of token was found. Search the end of the token.
             do src_i = start_i, sz
-                if (line(src_i) .eq. ' ' .or. line(src_i) .eq. achar(9) &
+                if (line(src_i) .eq. ',' .or. line(src_i) .eq. ' ' .or. line(src_i) .eq. achar(9) &
                     .or. line(src_i) .eq. achar(10) .or. line(src_i) .eq. '#') then
                     ! Nothing to update. Keep the data of the previous iteration.
                     exit
