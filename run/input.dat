@@ -37,7 +37,7 @@
 
 begin global_parameters
 number_of_objects, length_of_timestep, total_length_of_simulation, print_interval
-                2,                  1,                        365,             10
+                2,              24.00,                     365.00,             10
 end global_parameters
 
 begin objects
