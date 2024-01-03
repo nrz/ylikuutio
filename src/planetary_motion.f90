@@ -87,7 +87,7 @@ program planetary_motion
     write(stdout, "(A40)", advance = "no") "save_interval                         = "
     write(stdout, "(i0)") save_interval
 
-    objects_parsing_success = parse_objects(fortran_file_content, file_sz, &
+    objects_parsing_success = parse_objects(fortran_file_content, file_sz, n_objects, &
         begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
         my_planetary_system)
 

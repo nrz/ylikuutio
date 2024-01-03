@@ -326,7 +326,7 @@ contains
     end function parse_global_parameters
 
     ! Parse `objects` block.
-    logical function parse_objects(file_content, file_sz, &
+    logical function parse_objects(file_content, file_sz, n_objects, &
             begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
             my_planetary_system)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
@@ -335,6 +335,7 @@ contains
         implicit none
         character(kind = c_char), dimension(file_sz), intent(in) :: file_content
         integer(kind = c_int), intent(in), value :: file_sz
+        integer(kind = c_int), intent(in), value :: n_objects
         integer(kind = c_int), intent(in), value :: begin_objects_line_i
         integer(kind = c_int), intent(in), value :: end_objects_line_i
         integer(kind = c_int), intent(out) :: objects_header_line_i
