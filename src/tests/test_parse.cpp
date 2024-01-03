@@ -82,7 +82,7 @@ TEST(file_parsing_must_work_properly, valid_data)
     std::string_view file_name { "input.dat" };
     int file_sz = 0;
     char* content = FortranCInterface_MODULE_(file_mod, read_file, file_mod, read_file)(file_name.data(), file_name.size(), &file_sz);
-    ASSERT_EQ(file_sz, 2894); // File read successfully!
+    ASSERT_EQ(file_sz, 4705); // File read successfully!
 
     int begin_global_parameters_line_i;
     int end_global_parameters_line_i;
@@ -108,7 +108,7 @@ TEST(file_parsing_must_work_properly, valid_data_again)
     std::string_view file_name { "input.dat" };
     int file_sz = 0;
     char* content = FortranCInterface_MODULE_(file_mod, read_file, file_mod, read_file)(file_name.data(), file_name.size(), &file_sz);
-    ASSERT_EQ(file_sz, 2894); // File read successfully!
+    ASSERT_EQ(file_sz, 4705); // File read successfully!
 
     int begin_global_parameters_line_i;
     int end_global_parameters_line_i;
