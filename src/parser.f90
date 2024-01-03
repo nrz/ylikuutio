@@ -450,6 +450,16 @@ contains
                 cycle
             end if
 
+            ! Initialize the object. In particular, acceleration is not read from the file.
+            object % mass = 0
+            object % position     = [ 0.0, 0.0, 0.0 ]
+            object % velocity     = [ 0.0, 0.0, 0.0 ]
+            object % acceleration = [ 0.0, 0.0, 0.0 ]
+            object % apparent_size = 0
+            object % red   = 0
+            object % green = 0
+            object % blue  = 0
+
             ! Read an object.
 
             column_i = 1     ! Start from the 1st byte.
