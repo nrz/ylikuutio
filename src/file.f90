@@ -142,4 +142,39 @@ contains
         read_file = c_loc(temp_string)
     end function read_file
 
+    logical function open_file_for_writing(filename_scalar)
+        implicit none
+        character(len = *) :: filename_scalar
+        integer :: unit_number, ios
+
+        open_file_for_writing = .false.
+
+        open(unit = unit_number, file = filename_scalar, action = "write", &
+            form = "unformatted", access = "stream", iostat = ios)
+
+        if (ios < 0) then
+            write(stdout, "(A18)", advance = "no") "Error opening file"
+            print *, filename_scalar
+            return
+        end if
+
+        open_file_for_writing = .true.
+    end function open_file_for_writing
+
+    logical function close_file(unit_number)
+        implicit none
+        integer :: unit_number, ios
+
+        close_file = .false.
+
+        close(unit = unit_number, iostat = ios)
+        if (ios .ne. 0) then
+            write(stdout, "(A18)", advance = "no") "Error closing file"
+            return
+        end if
+
+        close_file = .true.
+
+    end function close_file
+
 end module file_mod
