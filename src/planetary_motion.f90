@@ -25,6 +25,7 @@ program planetary_motion
     real(kind = c_double) :: length_of_timestep
     real(kind = c_double) :: total_length_of_simulation
     integer :: print_interval
+    integer :: save_interval
     logical :: parsing_success
     logical :: global_parameters_parsing_success
     logical :: objects_parsing_success
@@ -62,7 +63,7 @@ program planetary_motion
     global_parameters_parsing_success = parse_global_parameters(fortran_file_content, file_sz, &
         begin_global_parameters_line_i, end_global_parameters_line_i, &
         global_parameters_header_line_i, global_parameters_value_line_i, &
-        n_objects, length_of_timestep, total_length_of_simulation, print_interval)
+        n_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval)
 
     if (global_parameters_parsing_success) then
         write(stdout, "(A43)") "Parsing global parameters block successful."
@@ -82,6 +83,9 @@ program planetary_motion
 
     write(stdout, "(A40)", advance = "no") "print_interval                        = "
     write(stdout, "(i0)") print_interval
+
+    write(stdout, "(A40)", advance = "no") "save_interval                         = "
+    write(stdout, "(i0)") save_interval
 
     objects_parsing_success = parse_objects(fortran_file_content, file_sz, &
         begin_objects_line_i, end_objects_line_i, objects_header_line_i, &

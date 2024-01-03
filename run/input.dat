@@ -3,24 +3,25 @@
 # Global parameters section.
 #
 # Supported global parameters:
-# `number_of_objects`
-# `start_time`
-# `end_time`
-# `length_of_timestep`
-# `total_length_of_simulation`
-# `number_of_steps`.
+# number_of_objects
+# length_of_timestep
+# total_length_of_simulation
+# print_interval
+# save_interval
 #
-# One must specify the following global parameters: `length_of_timestep`, `total_length_of_simulation`.
+# All these global parameters are required.
+# For now, they must be given in this exact order. See the format below for an example.
 
 # Global parameter name           Effect of the parameter
 #     number_of_objects           Limits the number of objects. Set the value to Inf to read in all objects given in the input file.
 #     length_of_timestep          The length of each timestep.  Unit: hours.
 #     total_length_of_simulation  The length of the simulation: Unit: days.
 #     print_interval              The interval (in iterations) between which output is printed during computation. Unit: iterations.
+#     save_interval               The interval (in iterations) between which output is saved into file during computation. Unit: iterations.
 #
 # Note: number of timesteps is determined by the given total length of the simulation and the length of a timestep.
 
-# <mass>, <x>, <y>, <z>, <vx>, <vy>, <vz>, [name], [apparent_size], [red], [green], [blue],
+# mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue
 #
 # Description:
 # mass          kg
@@ -36,8 +37,8 @@
 # blue          for visualization
 
 begin global_parameters
-number_of_objects, length_of_timestep, total_length_of_simulation, print_interval
-                2,              24.00,                     365.00,             10
+number_of_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval
+                2,              24.00,                     365.00,             10,             1
 end global_parameters
 
 begin objects

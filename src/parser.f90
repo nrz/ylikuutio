@@ -10,7 +10,7 @@ module parser_mod
     character(len = *), parameter :: begin_objects_string = "begin objects"
     character(len = *), parameter :: end_objects_string = "end objects"
     character(len = *), parameter :: global_parameters_header_string = &
-        "number_of_objects , length_of_timestep , total_length_of_simulation , print_interval"
+        "number_of_objects , length_of_timestep , total_length_of_simulation , print_interval , save_interval"
     character(len = *), parameter :: objects_header_string = &
         "mass , x , y , z , vx , vy , vz , name , apparent_size , red , green , blue"
 
@@ -111,7 +111,7 @@ contains
     logical function parse_global_parameters(file_content, file_sz, &
             begin_global_parameters_line_i, end_global_parameters_line_i, &
             global_parameters_header_line_i, global_parameters_value_line_i, &
-            n_objects, length_of_timestep, total_length_of_simulation, print_interval)
+            n_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_f_pointer, c_char, c_int, c_double, c_ptr
 
@@ -126,6 +126,7 @@ contains
         real(kind = c_double), intent(out) :: length_of_timestep
         real(kind = c_double), intent(out) :: total_length_of_simulation
         integer(kind = c_int), intent(out) :: print_interval
+        integer(kind = c_int), intent(out) :: save_interval
         character(kind = c_char), pointer, dimension(:) :: fortran_file_content
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_line
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_token
@@ -284,7 +285,6 @@ contains
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                ! No comma after the last field!
                 allocate(character(token_sz) :: field)
                 do i = 1, token_sz
                     field(i:i) = fortran_temp_token(i)
@@ -294,6 +294,25 @@ contains
                 deallocate(field)
                 if (ios < 0) then
                     write(stdout, "(A31)") "Error reading `print_interval`!"
+                end if
+                deallocate(fortran_temp_token)
+
+                column_i = column_i + 2
+                temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+                ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+                call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+                ! No comma after the last field!
+                allocate(character(token_sz) :: field)
+                do i = 1, token_sz
+                    field(i:i) = fortran_temp_token(i)
+                end do
+
+                read(field, *, iostat = ios) save_interval
+                deallocate(field)
+                if (ios < 0) then
+                    write(stdout, "(A30)") "Error reading `save_interval`!"
                 end if
                 deallocate(fortran_temp_token)
 

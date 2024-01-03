@@ -21,7 +21,8 @@ extern "C"
             int* n_objects,
             double* length_of_timestep,
             double* total_length_of_simulation,
-            int *print_interval);
+            int *print_interval,
+            int *save_interval);
 }
 
 TEST(global_parameters_parsing_must_work_properly, valid_data)
@@ -56,6 +57,7 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
     double length_of_timestep = 0.0;
     double total_length_of_simulation = 0.0;
     int print_interval = 0;
+    int save_interval = 0;
     int global_parameters_parse_success = FortranCInterface_MODULE_(parser_mod, parse_global_parameters, parser_mod, parse_global_parameters)(
             content, file_sz,
             begin_global_parameters_line_i,
@@ -65,10 +67,12 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
             &n_objects,
             &length_of_timestep,
             &total_length_of_simulation,
-            &print_interval);
+            &print_interval,
+            &save_interval);
 
     ASSERT_EQ(n_objects, 2);
     ASSERT_EQ(length_of_timestep, 24.00);
     ASSERT_EQ(total_length_of_simulation, 365.00);
     ASSERT_EQ(print_interval, 10);
+    ASSERT_EQ(save_interval, 1);
 }
