@@ -342,10 +342,15 @@ contains
         type(planetary_system), intent(out) :: my_planetary_system
         character(kind = c_char), pointer, dimension(:) :: fortran_file_content
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_line
+        character(kind = c_char), pointer, dimension(:) :: fortran_temp_token
+        integer(kind = c_int) :: i, object_i, column_i, next_offset, token_sz
         integer :: line_i, line_sz
         logical :: has_line_code
-        type(c_ptr) :: temp_line
-        integer :: n_of_objects_code_lines
+        type(c_ptr) :: temp_line, temp_token
+        integer :: n_of_objects_code_lines, n_objects_read
+        integer :: ios
+        character(len = :), allocatable :: field
+        type(object) :: object
 
         parse_objects = .false.
         objects_header_line_i = -1
@@ -403,6 +408,279 @@ contains
 
         write(stdout, "(A40)", advance = "no") "Number of objects' code lines:          "
         write(stdout, "(g0)") n_of_objects_code_lines
+
+        if (n_of_objects_code_lines .lt. n_objects) then
+            write(stdout, "(A40)") "Less objects' code lines than n_objects!"
+            my_planetary_system % n_objects = n_of_objects_code_lines
+        else
+            my_planetary_system % n_objects = n_objects
+        end if
+
+        allocate(my_planetary_system % objects(n_of_objects_code_lines))
+
+        ! The count of actual read objects so far.
+        n_objects_read = 0
+
+        object_i = 1
+
+        objects_loop: do line_i = objects_header_line_i + 1, end_objects_line_i
+            if (n_objects_read .ge. my_planetary_system % n_objects) then
+                ! Enough objects read!
+                exit
+            end if
+
+            ! Find the next line with code.
+            temp_line = get_line(file_content, file_sz, line_i, line_sz)
+
+            ! `temp_line` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
+
+            if (line_sz .lt. 0) then
+                write(stdout, "(A81)") &
+                    "Parse error in `objects` block! This should never happen! The line was not found!"
+                deallocate(fortran_temp_line)
+                return
+            end if
+
+            has_line_code = get_has_line_code(fortran_temp_line, line_sz)
+
+            if (.not.(has_line_code)) then
+                ! No code on this line, cycle to the next line.
+                deallocate(fortran_temp_line)
+                cycle
+            end if
+
+            ! Read an object.
+
+            column_i = 1     ! Start from the 1st byte.
+            next_offset = -1 ! The value will be overwritten by `get_nth_token`.
+
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % mass
+            deallocate(field)
+
+            if (ios < 0) then
+                write(stdout, "(A21)") "Error reading `mass`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % position(1)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A18)") "Error reading `x`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % position(2)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A18)") "Error reading `y`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % position(3)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A18)") "Error reading `z`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % velocity(1)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A19)") "Error reading `vx`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % velocity(2)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A19)") "Error reading `vy`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % velocity(3)
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A19)") "Error reading `vz`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            if (fortran_temp_token(1) .ne. '"' .or. fortran_temp_token(token_sz) .ne. '"') then
+                write(stdout, "(A45)") "Object's name must be given in double quotes!"
+                allocate(character(3) :: object % name)
+                object % name = "N/A"
+            else
+                allocate(character(token_sz) :: object % name)
+                do i = 1, token_sz
+                    object % name(i:i) = fortran_temp_token(i)
+                end do
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % apparent_size
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A30)") "Error reading `apparent_size`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % red
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A20)") "Error reading `red`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % green
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A22)") "Error reading `green`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            column_i = column_i + 2
+            temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+            ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+            call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+            allocate(character(token_sz) :: field)
+            do i = 1, token_sz
+                field(i:i) = fortran_temp_token(i)
+            end do
+
+            read(field, *, iostat = ios) object % blue
+            deallocate(field)
+            if (ios < 0) then
+                write(stdout, "(A21)") "Error reading `blue`!"
+            end if
+            deallocate(fortran_temp_token)
+
+            deallocate(fortran_temp_line)
+
+            ! Store the object.
+            my_planetary_system % objects(object_i) = object
+
+            deallocate(object % name)
+
+            object_i = object_i + 1
+            n_objects_read = n_objects_read + 1
+        end do objects_loop
 
     end function parse_objects
 

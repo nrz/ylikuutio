@@ -91,6 +91,8 @@ program planetary_motion
         begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
         my_planetary_system)
 
+    call print_objects(my_planetary_system)
+
     call simulate(my_planetary_system)
 
 contains
