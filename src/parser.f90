@@ -470,6 +470,9 @@ contains
 
             if (ios < 0) then
                 write(stdout, "(A21)") "Error reading `mass`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -488,6 +491,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A18)") "Error reading `x`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -506,6 +512,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A18)") "Error reading `y`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -524,6 +533,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A18)") "Error reading `z`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -542,6 +554,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A19)") "Error reading `vx`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -560,6 +575,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A19)") "Error reading `vy`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -578,6 +596,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A19)") "Error reading `vz`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -589,8 +610,9 @@ contains
 
             if (fortran_temp_token(1) .ne. '"' .or. fortran_temp_token(token_sz) .ne. '"') then
                 write(stdout, "(A45)") "Object's name must be given in double quotes!"
-                allocate(character(3) :: object % name)
-                object % name = "N/A"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             else
                 allocate(character(token_sz) :: object % name)
                 do i = 1, token_sz
@@ -614,6 +636,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A30)") "Error reading `apparent_size`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -632,6 +657,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A20)") "Error reading `red`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -650,6 +678,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A22)") "Error reading `green`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -668,6 +699,9 @@ contains
             deallocate(field)
             if (ios < 0) then
                 write(stdout, "(A21)") "Error reading `blue`!"
+                deallocate(fortran_temp_token)
+                deallocate(fortran_temp_line)
+                return
             end if
             deallocate(fortran_temp_token)
 
@@ -682,6 +716,7 @@ contains
             n_objects_read = n_objects_read + 1
         end do objects_loop
 
+        parse_objects = .true.
     end function parse_objects
 
 end module parser_mod

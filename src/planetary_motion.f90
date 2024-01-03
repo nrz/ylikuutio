@@ -80,6 +80,13 @@ program planetary_motion
         begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
         my_planetary_system)
 
+    if (objects_parsing_success) then
+        write(stdout, "(A33)") "Parsing objects block successful."
+    else
+        write(stdout, "(A29)") "Parsing objects block failed!"
+        return
+    end if
+
     call print_objects(my_planetary_system)
 
     call simulate(my_planetary_system)
