@@ -282,6 +282,8 @@ contains
         end if
     end function get_nth_token
 
+    ! Return the line number of the first line that matches the required tokens.
+    ! The tokens must be given in a `tokens` string, separated by spaces.
     integer function get_line_i_with_n_token_statement(string, string_sz, tokens, tokens_sz)
         ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
         use, intrinsic :: iso_c_binding, only: c_f_pointer, c_char, c_int, c_ptr
