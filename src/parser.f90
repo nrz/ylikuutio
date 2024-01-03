@@ -129,10 +129,12 @@ contains
         character(kind = c_char), pointer, dimension(:) :: fortran_file_content
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_line
         character(kind = c_char), pointer, dimension(:) :: fortran_temp_token
-        integer(kind = c_int) :: line_i, line_sz, value_line_i, offset, next_offset, token_sz
+        integer(kind = c_int) :: i, line_i, line_sz, value_line_i, column_i, next_offset, token_sz
         logical :: has_line_code
         type(c_ptr) :: temp_line, temp_token
         integer(kind = c_int) :: n_of_global_parameters_code_lines
+        integer :: ios
+        character(len = :), allocatable :: field
 
         parse_global_parameters = .false.
         global_parameters_header_line_i = -1
@@ -219,25 +221,81 @@ contains
                 write(stdout, "(A40)", advance = "no") "Global parameters' values found on line "
                 write(stdout, "(g0)") global_parameters_value_line_i
 
-                offset = 1       ! Start from the 1st byte.
+                column_i = 1     ! Start from the 1st byte.
                 next_offset = -1 ! The value will be overwritten by `get_nth_token`.
 
-                temp_token = get_nth_token(fortran_temp_line, line_sz, offset, next_offset, token_sz)
+                temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
 
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                read(fortran_temp_token, *) n_objects
+                allocate(character(token_sz - 1) :: field)
+                do i = 1, token_sz - 1
+                    field(i:i) = fortran_temp_token(i)
+                end do
+
+                read(field, *, iostat = ios) n_objects
+                deallocate(field)
+
+                if (ios < 0) then
+                    write(stdout, "(A26)") "Error reading `n_objects`!"
+                end if
                 deallocate(fortran_temp_token)
 
-                offset = next_offset
-                temp_token = get_nth_token(fortran_temp_line, line_sz, offset, next_offset, token_sz)
+                column_i = column_i + 1
+                temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
 
                 ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
                 call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
 
-                ! TODO: read other global parameters!
+                allocate(character(token_sz - 1) :: field)
+                do i = 1, token_sz - 1
+                    field(i:i) = fortran_temp_token(i)
+                end do
 
+                read(field, *, iostat = ios) length_of_timestep
+                deallocate(field)
+                if (ios < 0) then
+                    write(stdout, "(A35)") "Error reading `length_of_timestep`!"
+                end if
+                deallocate(fortran_temp_token)
+
+                column_i = column_i + 1
+                temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+                ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+                call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+                allocate(character(token_sz - 1) :: field)
+                do i = 1, token_sz - 1
+                    field(i:i) = fortran_temp_token(i)
+                end do
+
+                read(field, *, iostat = ios) total_length_of_simulation
+                deallocate(field)
+                if (ios < 0) then
+                    write(stdout, "(A43)") "Error reading `total_length_of_simulation`!"
+                end if
+                deallocate(fortran_temp_token)
+
+                column_i = column_i + 1
+                temp_token = get_nth_token(fortran_temp_line, line_sz, column_i, next_offset, token_sz)
+
+                ! `temp_token` is `c_ptr`. It needs to be converted into a Fortran pointer.
+                call c_f_pointer(temp_token, fortran_temp_token, [ token_sz ])
+
+                ! No comma after the last field!
+                ! Therefore do not subtract 1 from `token_sz` here!
+                allocate(character(token_sz) :: field)
+                do i = 1, token_sz
+                    field(i:i) = fortran_temp_token(i)
+                end do
+
+                read(field, *, iostat = ios) print_interval
+                deallocate(field)
+                if (ios < 0) then
+                    write(stdout, "(A31)") "Error reading `print_interval`!"
+                end if
                 deallocate(fortran_temp_token)
 
                 deallocate(fortran_temp_line)
