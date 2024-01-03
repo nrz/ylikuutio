@@ -5,6 +5,7 @@ module physics_mod
     use global_parameters_mod
     use planetary_system_mod
     use object_mod
+    use file_mod
 
     implicit none
 
@@ -118,13 +119,23 @@ contains
         end do object_loop
     end subroutine compute_velocities
 
-    subroutine write_to_file(my_planetary_system)
+    logical function write_to_file(unit_number, my_planetary_system)
         implicit none
         type(planetary_system), intent(in) :: my_planetary_system
+        type(object) :: my_object
+        integer :: unit_number, ios, i
 
-        ! TODO: write to file!
+        do i = 1, my_planetary_system % n_objects
+            my_object = my_planetary_system % objects(i)
 
-    end subroutine write_to_file
+            ! TODO: implement writing to file!
+
+            write(unit_number, *, iostat = ios) i
+            if (ios .ne. 0) then
+                write(stdout, "(A23)") "Writing to file failed!"
+            end if
+        end do
+    end function write_to_file
 
     subroutine update_accelerations(my_planetary_system)
         implicit none
@@ -142,8 +153,11 @@ contains
         implicit none
         type(global_parameters), intent(in) :: my_global_parameters
         type(planetary_system), intent(inout) :: my_planetary_system
+        character(len = :), allocatable :: filename
+        integer, parameter :: unit_number = 1
         integer :: iteration_i, last_iteration_i
         real(rk) :: total_length_of_simulation_in_h
+        logical :: file_open_success, file_write_success, file_close_success
 
         simulate = .false.
 
@@ -154,6 +168,16 @@ contains
 
         ! Length of timestep is provided in hours.
         last_iteration_i = total_length_of_simulation_in_h / my_global_parameters % length_of_timestep
+
+        filename = "output.dat"
+
+        file_open_success = open_file_for_writing(filename)
+
+        if (file_open_success) then
+            write(stdout, "(A41)") "File was opened successfully for writing."
+        else
+            write(stdout, "(A20)") "File opening failed!"
+        end if
 
         iteration_loop: do iteration_i = 1, last_iteration_i
             call compute_positions(my_global_parameters, my_planetary_system)
@@ -183,9 +207,17 @@ contains
             if (iteration_i .eq. 1 .or. &
                 iteration_i .eq. last_iteration_i .or. &
                 mod(iteration_i, my_global_parameters % save_interval) .eq. 0) then
-                call write_to_file(my_planetary_system)
+                file_write_success = write_to_file(unit_number, my_planetary_system)
             end if
         end do iteration_loop
+
+        file_close_success = close_file(unit_number)
+
+        if (file_close_success) then
+            write(stdout, "(A29)") "File was closed successfully."
+        else
+            write(stdout, "(A20)") "File closing failed!"
+        end if
 
         ! Simulation ended successfully.
         simulate = .true.
