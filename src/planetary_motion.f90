@@ -1,6 +1,7 @@
 program planetary_motion
 
     use constants
+    use global_parameters_mod
     use planetary_system_mod
     use file_mod
     use parser_mod
@@ -22,13 +23,10 @@ program planetary_motion
     integer :: global_parameters_value_line_i
     integer :: objects_header_line_i
     integer :: n_objects
-    real(kind = c_double) :: length_of_timestep
-    real(kind = c_double) :: total_length_of_simulation
-    integer :: print_interval
-    integer :: save_interval
     logical :: parsing_success
     logical :: global_parameters_parsing_success
     logical :: objects_parsing_success
+    type(global_parameters) :: my_global_parameters
     type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
     filename = "input.dat"
@@ -63,7 +61,11 @@ program planetary_motion
     global_parameters_parsing_success = parse_global_parameters(fortran_file_content, file_sz, &
         begin_global_parameters_line_i, end_global_parameters_line_i, &
         global_parameters_header_line_i, global_parameters_value_line_i, &
-        n_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval)
+        my_global_parameters % n_objects, &
+        my_global_parameters % length_of_timestep, &
+        my_global_parameters % total_length_of_simulation, &
+        my_global_parameters % print_interval, &
+        my_global_parameters % save_interval)
 
     if (global_parameters_parsing_success) then
         write(stdout, "(A43)") "Parsing global parameters block successful."
@@ -72,22 +74,9 @@ program planetary_motion
         return
     end if
 
-    write(stdout, "(A40)", advance = "no") "n_objects                             = "
-    write(stdout, "(i0)") n_objects
+    call print_global_parameters(my_global_parameters)
 
-    write(stdout, "(A40)", advance = "no") "length_of_timestep                    = "
-    write(stdout, "(G10.2)") length_of_timestep
-
-    write(stdout, "(A40)", advance = "no") "total_length_of_simulation            = "
-    write(stdout, "(G10.2)") total_length_of_simulation
-
-    write(stdout, "(A40)", advance = "no") "print_interval                        = "
-    write(stdout, "(i0)") print_interval
-
-    write(stdout, "(A40)", advance = "no") "save_interval                         = "
-    write(stdout, "(i0)") save_interval
-
-    objects_parsing_success = parse_objects(fortran_file_content, file_sz, n_objects, &
+    objects_parsing_success = parse_objects(fortran_file_content, file_sz, my_global_parameters % n_objects, &
         begin_objects_line_i, end_objects_line_i, objects_header_line_i, &
         my_planetary_system)
 

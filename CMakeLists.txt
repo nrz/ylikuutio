@@ -63,6 +63,7 @@ configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYO
 add_library(planetary_simulation STATIC
     src/constants.f90
     src/file.f90
+    src/global_parameters.f90
     src/my_kind.f90
     src/object.f90
     src/parser.f90
