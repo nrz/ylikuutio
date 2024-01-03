@@ -5,6 +5,7 @@ program planetary_motion
     use planetary_system_mod
     use file_mod
     use parser_mod
+    use physics_mod
 
     ! These are needed for C++/Fortran interface used by unit tests implemented in C++.
     use, intrinsic :: iso_c_binding, only: c_char, c_double, c_f_pointer, c_ptr
@@ -26,6 +27,7 @@ program planetary_motion
     logical :: parsing_success
     logical :: global_parameters_parsing_success
     logical :: objects_parsing_success
+    logical :: simulation_success
     type(global_parameters) :: my_global_parameters
     type(planetary_system) :: my_planetary_system ! Objects are stored in the a vector of objects.
 
@@ -89,18 +91,12 @@ program planetary_motion
 
     call print_objects(my_planetary_system)
 
-    call simulate(my_planetary_system)
+    simulation_success = simulate(my_global_parameters, my_planetary_system)
 
-contains
-
-    ! Simulate the planetary system according to the given input.
-    subroutine simulate(my_planetary_system)
-        implicit none
-
-        type(planetary_system) :: my_planetary_system
-
-        write(stdout, "(A20)") "Hello from simulate!"
-
-    end subroutine simulate
+    if (simulation_success) then
+        write(stdout, "(A39)") "Planetary motion simulation successful."
+    else
+        write(stdout, "(A35)") "Planetary motion simulation failed."
+    end if
 
 end program planetary_motion
