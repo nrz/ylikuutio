@@ -180,11 +180,13 @@ contains
         type(planetary_system), intent(inout) :: my_planetary_system
         character(len = :), allocatable :: filename
         integer, parameter :: unit_number = 1
-        integer :: iteration_i, last_iteration_i
+        integer :: iteration_i, last_iteration_i, file_write_count
         real(rk) :: total_length_of_simulation_in_h
         logical :: file_open_success, file_write_success, file_close_success
 
         simulate = .false.
+
+        file_write_count = 0
 
         write(stdout, "(A20)") "Hello from simulate!"
 
@@ -215,11 +217,20 @@ contains
 
             if (iteration_i .eq. 1 .or. &
                 iteration_i .eq. last_iteration_i .or. &
+                mod(iteration_i, my_global_parameters % save_interval) .eq. 0) then
+                file_write_success = write_to_file(unit_number, my_planetary_system, iteration_i)
+                file_write_count = file_write_count + 1
+            end if
+
+            if (iteration_i .eq. 1 .or. &
+                iteration_i .eq. last_iteration_i .or. &
                 mod(iteration_i, my_global_parameters % print_interval) .eq. 0) then
                 write(stdout, "(A20)", advance = "no") "Number of objects = "
                 write(stdout, "(g0)") my_planetary_system % n_objects
                 write(stdout, "(A20)", advance = "no") "Iteration index   = "
                 write(stdout, "(g0)") iteration_i
+                write(stdout, "(A20)", advance = "no") "File write count  = "
+                write(stdout, "(g0)") file_write_count
 
                 if (iteration_i .eq. 1) then
                     write(stdout, "(A35)") "This is end of the first iteration."
@@ -231,11 +242,6 @@ contains
                 call print_objects(my_planetary_system)
             end if
 
-            if (iteration_i .eq. 1 .or. &
-                iteration_i .eq. last_iteration_i .or. &
-                mod(iteration_i, my_global_parameters % save_interval) .eq. 0) then
-                file_write_success = write_to_file(unit_number, my_planetary_system, iteration_i)
-            end if
         end do iteration_loop
 
         file_close_success = close_file(unit_number)
