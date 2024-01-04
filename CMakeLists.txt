@@ -54,7 +54,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 endif()
 
-configure_file(run/input.dat input.dat COPYONLY)
+configure_file(run/input.dat                   input.dat COPYONLY)
 configure_file(run/empty_file_for_testing.dat  empty_file_for_testing.dat COPYONLY)
 configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY)
 configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
