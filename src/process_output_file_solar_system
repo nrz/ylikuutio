@@ -1,0 +1,10 @@
+#!/bin/bash
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print   $4 " "   $7 " "  $10 " "  $13 }' | awk 'NF' > sun_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $16 " "  $19 " "  $22 " "  $25 }' | awk 'NF' > jupiter_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $28 " "  $31 " "  $34 " "  $37 }' | awk 'NF' > mercury_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $40 " "  $43 " "  $46 " "  $49 }' | awk 'NF' > venus_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $52 " "  $55 " "  $58 " "  $61 }' | awk 'NF' > earth_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $64 " "  $67 " "  $70 " "  $73 }' | awk 'NF' > mars_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $76 " "  $79 " "  $82 " "  $85 }' | awk 'NF' > saturn_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print $100 " " $103 " " $106 " " $109 }' | awk 'NF' > uranus_processed_output.txt
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print  $88 " "  $91 " "  $94 " "  $97 }' | awk 'NF' > neptune_processed_output.txt
