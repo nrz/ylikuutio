@@ -38,7 +38,7 @@
 
 begin global_parameters
 number_of_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval
-                2,              24.00,                     365.00,             10,             1
+                2,              24.00,                     365.00,             10,             2
 end global_parameters
 
 begin objects # Note: objects' data based on ephemeres from https://ssd.jpl.nasa.gov/horizons/app.html#/ , situation 2017-01-01 00:00, origin is in Solar System Barycenter.
