@@ -171,7 +171,7 @@ contains
 
         filename = "output.dat"
 
-        file_open_success = open_file_for_writing(filename)
+        file_open_success = open_file_for_writing(filename, unit_number)
 
         if (file_open_success) then
             write(stdout, "(A41)") "File was opened successfully for writing."

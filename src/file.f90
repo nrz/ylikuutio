@@ -142,15 +142,15 @@ contains
         read_file = c_loc(temp_string)
     end function read_file
 
-    logical function open_file_for_writing(filename_scalar)
+    logical function open_file_for_writing(filename_scalar, unit_number)
         implicit none
         character(len = *) :: filename_scalar
-        integer :: unit_number, ios
+        integer, intent(in) :: unit_number
+        integer :: ios
 
         open_file_for_writing = .false.
 
-        open(unit = unit_number, file = filename_scalar, action = "write", &
-            form = "unformatted", access = "stream", iostat = ios)
+        open(unit = unit_number, file = filename_scalar, iostat = ios, status = "replace")
 
         if (ios < 0) then
             write(stdout, "(A18)", advance = "no") "Error opening file"
