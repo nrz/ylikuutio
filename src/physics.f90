@@ -72,6 +72,12 @@ contains
         real(rk) :: distance
         real(rk) :: unit_direction_from_2_to_1(3)
 
+        initialization_loop: do i = 1, my_planetary_system % n_objects
+            my_planetary_system % objects(i) % new_acceleration(1) = 0.0
+            my_planetary_system % objects(i) % new_acceleration(2) = 0.0
+            my_planetary_system % objects(i) % new_acceleration(3) = 0.0
+        end do initialization_loop
+
         outer_object_loop: do i = 1, my_planetary_system % n_objects
 
             inner_object_loop: do j = 1, my_planetary_system % n_objects
@@ -93,7 +99,8 @@ contains
                     my_planetary_system % objects(j) % position) / distance
 
                 ! Note: `new_acceleration` is acceleration in the a_(n+1) step!
-                my_planetary_system % objects(j) % new_acceleration = (gravity_scalar * unit_direction_from_2_to_1) / &
+                my_planetary_system % objects(j) % new_acceleration = my_planetary_system % objects(j) % new_acceleration + &
+                    (gravity_scalar * unit_direction_from_2_to_1) / &
                     my_planetary_system % objects(j) % mass
             end do inner_object_loop
         end do outer_object_loop
