@@ -27,10 +27,10 @@ contains
         write(stdout, "(i0)") my_global_parameters % n_objects
 
         write(stdout, "(A40)", advance = "no") "length_of_timestep                    = "
-        write(stdout, "(G10.2)") my_global_parameters % length_of_timestep
+        write(stdout, "(g0)") my_global_parameters % length_of_timestep
 
         write(stdout, "(A40)", advance = "no") "total_length_of_simulation            = "
-        write(stdout, "(G10.2)") my_global_parameters % total_length_of_simulation
+        write(stdout, "(g0)") my_global_parameters % total_length_of_simulation
 
         write(stdout, "(A40)", advance = "no") "print_interval                        = "
         write(stdout, "(i0)") my_global_parameters % print_interval
