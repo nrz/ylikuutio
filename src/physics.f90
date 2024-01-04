@@ -119,22 +119,47 @@ contains
         end do object_loop
     end subroutine compute_velocities
 
-    logical function write_to_file(unit_number, my_planetary_system)
+    logical function write_to_file(unit_number, my_planetary_system, iteration_i)
         implicit none
+        integer, intent(in) :: unit_number
         type(planetary_system), intent(in) :: my_planetary_system
+        integer, intent(in) :: iteration_i
         type(object) :: my_object
-        integer :: unit_number, ios, i
+        integer :: ios, i
+        character(len = 100) :: name_length_string
 
-        do i = 1, my_planetary_system % n_objects
+        write(unit_number, "(A20)", advance = "no") "Number of objects = "
+        write(unit_number, "(g0)") my_planetary_system % n_objects
+        write(unit_number, "(A20)", advance = "no") "Iteration index   = "
+        write(unit_number, "(g0)") iteration_i
+
+        object_loop: do i = 1, my_planetary_system % n_objects
             my_object = my_planetary_system % objects(i)
 
-            ! TODO: implement writing to file!
+            ! Write the length of the name into `name_length_string`.
+            write(name_length_string, "(g0)") len(my_object % name)
 
-            write(unit_number, *, iostat = ios) i
+            write(unit_number, "(A7)", advance = "no") "name = "
+
+            write(unit_number, "(A" // name_length_string // ")") my_object % name
+            write(unit_number, "(A7)", advance = "no") "mass = "
+            write(unit_number, "(g0)") my_object % mass
+            write(unit_number, "(A7)", advance = "no") "x    = "
+            write(unit_number, "(g0)") my_object % position(1)
+            write(unit_number, "(A7)", advance = "no") "y    = "
+            write(unit_number, "(g0)") my_object % position(2)
+            write(unit_number, "(A7)", advance = "no") "z    = "
+            write(unit_number, "(g0)") my_object % position(3)
+            write(unit_number, "(A7)", advance = "no") "vx   = "
+            write(unit_number, "(g0)") my_object % velocity(1)
+            write(unit_number, "(A7)", advance = "no") "vy   = "
+            write(unit_number, "(g0)") my_object % velocity(2)
+            write(unit_number, "(A7)", advance = "no") "vz   = "
+            write(unit_number, "(g0)") my_object % velocity(3)
             if (ios .ne. 0) then
                 write(stdout, "(A23)") "Writing to file failed!"
             end if
-        end do
+        end do object_loop
     end function write_to_file
 
     subroutine update_accelerations(my_planetary_system)
@@ -209,7 +234,7 @@ contains
             if (iteration_i .eq. 1 .or. &
                 iteration_i .eq. last_iteration_i .or. &
                 mod(iteration_i, my_global_parameters % save_interval) .eq. 0) then
-                file_write_success = write_to_file(unit_number, my_planetary_system)
+                file_write_success = write_to_file(unit_number, my_planetary_system, iteration_i)
             end if
         end do iteration_loop
 
