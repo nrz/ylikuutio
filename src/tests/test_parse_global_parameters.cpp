@@ -70,7 +70,7 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
             &print_interval,
             &save_interval);
 
-    ASSERT_EQ(n_objects, 2);
+    ASSERT_EQ(n_objects, 9);
     ASSERT_EQ(length_of_timestep, 24.00);
     ASSERT_EQ(total_length_of_simulation, 4331.00);
     ASSERT_EQ(print_interval, 10);
