@@ -19,8 +19,8 @@ trayectory2_z = np.loadtxt("processed_output.txt", usecols = (8))
 # Open figure
 fig = plt.figure(figsize=(20,15), constrained_layout = True)
 ax = fig.add_subplot(n_rows, projection = '3d')
-ax.scatter(trayectory1_x, trayectory1_y, trayectory1_z, color = 'red')
-ax.scatter(trayectory2_x, trayectory2_y, trayectory2_z, color = 'blue')
+ax.scatter(trayectory1_x, trayectory1_y, trayectory1_z, color = 'blue')
+ax.scatter(trayectory2_x, trayectory2_y, trayectory2_z, color = 'brown')
 
 plt.savefig('trayectories1.pdf', bbox_inches = 'tight', dpi = 300)
 plt.show()
