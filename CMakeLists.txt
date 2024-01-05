@@ -54,10 +54,17 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 endif()
 
+# Copy data files
 configure_file(run/input.dat                   input.dat COPYONLY)
 configure_file(run/empty_file_for_testing.dat  empty_file_for_testing.dat COPYONLY)
 configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY)
 configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
+
+# Copy scripts
+configure_file(src/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
+configure_file(src/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
+configure_file(src/visualize_2_objects               visualize_2_objects COPYONLY)
+configure_file(src/visualize_solar_system            visualize_solar_system COPYONLY)
 
 # Planetary simulation library
 add_library(planetary_simulation STATIC
