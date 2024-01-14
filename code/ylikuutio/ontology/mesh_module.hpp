@@ -96,7 +96,7 @@ namespace yli::ontology
 
         public:
             uint32_t x_step     { 1 };    // Step in x-dimension for input data (set to 1 to load all data points/measurements).
-            uint32_t z_step     { 1 };    // Step in z-dimension for input data (set to 1 to load all data points/measurements).
+            uint32_t y_step     { 1 };    // Step in z-dimension for input data (set to 1 to load all data points/measurements).
 
             uint32_t image_width  { 0 };
             uint32_t image_height { 0 };

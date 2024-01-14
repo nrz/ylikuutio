@@ -195,7 +195,7 @@ namespace yli::ontology
 
     uint32_t Species::get_z_step() const
     {
-        return this->mesh.z_step;
+        return this->mesh.y_step;
     }
 
     uint32_t Species::get_image_width() const
