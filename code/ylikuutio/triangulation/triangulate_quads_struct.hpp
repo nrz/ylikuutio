@@ -33,7 +33,7 @@ namespace yli::triangulation
             : image_width(0),
             image_height(0),
             x_step(1),
-            z_step(1),
+            y_step(1),
             use_real_texture_coordinates(true),
             sphere_radius(NAN),
             spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
@@ -43,7 +43,7 @@ namespace yli::triangulation
         std::size_t image_width;
         std::size_t image_height;
         std::size_t x_step;
-        std::size_t z_step;
+        std::size_t y_step;
         std::string triangulation_type;
         bool use_real_texture_coordinates;
         float sphere_radius;

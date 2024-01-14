@@ -59,7 +59,7 @@ namespace yli::triangulation
             const std::size_t image_width = triangulate_quads_struct.image_width;
             const std::size_t image_height = triangulate_quads_struct.image_height;
             const std::size_t x_step = triangulate_quads_struct.x_step;
-            const std::size_t z_step = triangulate_quads_struct.z_step;
+            const std::size_t z_step = triangulate_quads_struct.y_step;
 
             // Input vertices (`T1* input_vertex_pointer`)
             // can be `float`, `int32_t` or `uint32_t`.
