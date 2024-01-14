@@ -485,7 +485,7 @@ namespace hirvi
         helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_model_struct.x_step = 4;
-        helsinki_east_downtown_terrain_model_struct.z_step = 4;
+        helsinki_east_downtown_terrain_model_struct.y_step = 4;
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
         yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = this->entity_factory.create_species(helsinki_east_downtown_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";

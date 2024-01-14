@@ -52,7 +52,7 @@ namespace yli::ontology
         longitude { model_struct.longitude },
         mesh_i { model_struct.mesh_i },
         x_step { model_struct.x_step },
-        z_step { model_struct.z_step }
+        z_step { model_struct.y_step }
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -84,7 +84,7 @@ namespace yli::ontology
             model_loader_struct.model_struct.longitude                    = this->longitude;
             model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
             model_loader_struct.model_struct.x_step                       = this->x_step;
-            model_loader_struct.model_struct.z_step                       = this->z_step;
+            model_loader_struct.model_struct.y_step                       = this->z_step;
             model_loader_struct.model_struct.parent                       = model_struct.parent;
             model_loader_struct.model_struct.pipeline                     = model_struct.pipeline;
             model_loader_struct.model_struct.material                     = model_struct.material;

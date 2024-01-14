@@ -119,7 +119,7 @@ namespace ajokki
         altiplano_terrain_model_struct.latitude = -16.50f;  // in degrees.
         altiplano_terrain_model_struct.longitude = -68.15f; // in degrees.
         altiplano_terrain_model_struct.x_step = 1;
-        altiplano_terrain_model_struct.z_step = 1;
+        altiplano_terrain_model_struct.y_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
         yli::ontology::Entity* const altiplano_terrain_species_entity = this->entity_factory.create_species(altiplano_terrain_model_struct);

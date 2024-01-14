@@ -43,7 +43,7 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.longitude, 0.0f);
     ASSERT_EQ(test_model_struct.mesh_i, 0);
     ASSERT_EQ(test_model_struct.x_step, 1);
-    ASSERT_EQ(test_model_struct.z_step, 1);
+    ASSERT_EQ(test_model_struct.y_step, 1);
     ASSERT_EQ(test_model_struct.vertices, std::vector<glm::vec3> { });
     ASSERT_EQ(test_model_struct.uvs, std::vector<glm::vec2> { });
     ASSERT_EQ(test_model_struct.normals, std::vector<glm::vec3> { });

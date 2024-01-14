@@ -119,7 +119,7 @@ namespace ajokki
         tallinn_terrain_model_struct.latitude = 59.437222f;  // in degrees.
         tallinn_terrain_model_struct.longitude = 24.745278f; // in degrees.
         tallinn_terrain_model_struct.x_step = 1;
-        tallinn_terrain_model_struct.z_step = 1;
+        tallinn_terrain_model_struct.y_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* tallinn_terrain_species_entity ...\n";
         yli::ontology::Entity* const tallinn_terrain_species_entity = this->entity_factory.create_species(tallinn_terrain_model_struct);
