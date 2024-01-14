@@ -68,9 +68,9 @@ namespace yli::load
             return false;
         }
 
-        if (heightmap_loader_struct.z_step < 1)
+        if (heightmap_loader_struct.y_step < 1)
         {
-            std::cerr << "ERROR: `yli::load::load_srtm_terrain`: `heightmap_loader_struct.z_step` is less than 1.\n";
+            std::cerr << "ERROR: `yli::load::load_srtm_terrain`: `heightmap_loader_struct.y_step` is less than 1.\n";
             return false;
         }
 
@@ -179,7 +179,7 @@ namespace yli::load
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height;
         triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
-        triangulate_quads_struct.y_step = heightmap_loader_struct.z_step;
+        triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
         triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
         triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 

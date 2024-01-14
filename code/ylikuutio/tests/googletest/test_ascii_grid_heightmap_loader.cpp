@@ -29,12 +29,12 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
+TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_y_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
-    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.y_step = 1;
     heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
 
@@ -270,12 +270,12 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     ASSERT_EQ(UVs[47].y, 1.0f); // southeast vertex.
 }
 
-TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
+TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_y_step_1)
 {
     yli::load::HeightmapLoaderStruct heightmap_loader_struct;
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
-    heightmap_loader_struct.z_step = 1;
+    heightmap_loader_struct.y_step = 1;
     heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
     heightmap_loader_struct.triangulate = false;

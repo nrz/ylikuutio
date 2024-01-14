@@ -34,7 +34,7 @@ namespace yli::load
         float planet_radius { NAN };
         float divisor       { NAN };
         uint32_t x_step     { 1 };
-        uint32_t z_step     { 1 };
+        uint32_t y_step     { 1 };
         std::string triangulation_type;
         bool use_real_texture_coordinates { true };
         bool triangulate                  { true };
