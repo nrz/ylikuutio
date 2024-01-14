@@ -27,7 +27,7 @@
 #include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string

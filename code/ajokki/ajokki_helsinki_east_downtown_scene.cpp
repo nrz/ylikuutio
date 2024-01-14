@@ -47,7 +47,7 @@
 #endif
 
 // Include standard headers
-#include <iostream>   // std::cout, std::cin, std::cerr
+#include <iostream>   // std::cout, std::cerr
 #include <string>     // std::string
 
 namespace yli

@@ -38,7 +38,7 @@
 // Include standard headers
 #include <iomanip>    // std::setfill, std::setw
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream>   // std::cout, std::cin, std::cerr
+#include <iostream>   // std::cout, std::cerr
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string
 

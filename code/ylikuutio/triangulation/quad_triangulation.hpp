@@ -42,7 +42,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
 

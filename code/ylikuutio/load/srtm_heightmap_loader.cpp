@@ -35,7 +35,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iomanip>  // std::setfill, std::setw
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h> // uint32_t etc.

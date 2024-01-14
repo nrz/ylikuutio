@@ -31,7 +31,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
-#include <iostream>      // std::cout, std::cin, std::cerr
+#include <iostream>      // std::cout, std::cerr
 
 namespace yli::snippets
 {

@@ -20,7 +20,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <iostream>      // std::cout, std::cin, std::cerr
+#include <iostream>      // std::cout, std::cerr
 #include <list>          // std::list
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string

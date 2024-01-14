@@ -23,7 +23,7 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string

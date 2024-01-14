@@ -20,7 +20,7 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 

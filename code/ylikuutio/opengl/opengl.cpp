@@ -23,7 +23,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iomanip>  // std::setfill, std::setw
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <sstream>  // std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string

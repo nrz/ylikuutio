@@ -23,7 +23,7 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <iostream>  // std::cout, std::cin, std::cerr
+#include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string

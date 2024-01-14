@@ -36,7 +36,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string, std::stoi
 #include <vector>   // std::vector

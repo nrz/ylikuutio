@@ -64,7 +64,7 @@
 #include <stdexcept>     // std::runtime_error
 #include <sstream>       // std::stringstream
 #include <utility>       // std::forward
-#include <iostream>      // std::cout, std::cin, std::cerr
+#include <iostream>      // std::cout, std::cerr
 
 namespace yli::memory
 {

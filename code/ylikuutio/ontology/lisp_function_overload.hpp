@@ -30,7 +30,7 @@
 // Include standard headers
 #include <cstddef>    // std::size_t
 #include <functional> // std::function, std::invoke
-#include <iostream>   // std::cout, std::cin, std::cerr
+#include <iostream>   // std::cout, std::cerr
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat

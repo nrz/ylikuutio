@@ -24,7 +24,7 @@
 // Include standard headers
 #include <cstdlib>   // EXIT_FAILURE, EXIT_SUCCESS
 #include <exception> // try, catch, std::exception
-#include <iostream>  // std::cout, std::cin, std::cerr
+#include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::unique_ptr
 
 namespace yli::core

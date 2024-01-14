@@ -31,7 +31,7 @@
 #include <cstddef>    // std::size_t
 #include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream>   // std::cout, std::cin, std::cerr
+#include <iostream>   // std::cout, std::cerr
 #include <optional>   // std::optional
 #include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
 #include <string>     // std::string

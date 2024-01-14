@@ -23,7 +23,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::ceil, std::floor, std::isnan
 #include <cstddef>  // std::ptrdiff_t, std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 #include <limits>   // std::numeric_limits
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector

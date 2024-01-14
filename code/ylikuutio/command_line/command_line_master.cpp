@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cin, std::cerr
+#include <iostream>      // std::cout, std::cerr
 #include <limits>        // std::numeric_limits
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map

@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <iostream> // std::cout, std::cerr
 
 namespace yli::ontology
 {

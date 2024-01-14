@@ -28,7 +28,7 @@
 // Include standard headers
 #include <algorithm> // std::replace
 #include <cstddef>   // std::size_t
-#include <iostream>  // std::cout, std::cin, std::cerr
+#include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>  // uint32_t etc.

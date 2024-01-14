@@ -81,7 +81,7 @@
 #include <functional>    // std::function
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream>      // std::cout, std::cin, std::cerr
+#include <iostream>      // std::cout, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
