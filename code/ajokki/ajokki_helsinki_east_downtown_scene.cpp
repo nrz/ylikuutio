@@ -18,7 +18,6 @@
 #include "ajokki.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -48,6 +47,7 @@
 
 // Include standard headers
 #include <iostream>   // std::cout, std::cerr
+#include <numbers>    // std::numbers::pi
 #include <string>     // std::string
 
 namespace yli
@@ -677,7 +677,7 @@ namespace ajokki
                 cat_object_struct1.local_name = "kissa" + index_string;
                 cat_object_struct1.brain = rest_brain;
                 cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-                cat_object_struct1.initial_rotate_angles = { pi, -0.5f * pi };
+                cat_object_struct1.initial_rotate_angles = { std::numbers::pi, -0.5f * std::numbers::pi };
                 cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
                 cat_object_struct1.cartesian_coordinates = glm::vec3(
                         first_cat_x + i * translation_x,
@@ -705,7 +705,7 @@ namespace ajokki
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
             turbo_polizei_png_holobiont_struct1.brain = rest_brain;
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-            turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { pi };
+            turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { std::numbers::pi };
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
 
@@ -729,7 +729,7 @@ namespace ajokki
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
             turbo_polizei_png_holobiont_struct2.brain = rest_brain;
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-            turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { pi };
+            turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { std::numbers::pi };
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
 

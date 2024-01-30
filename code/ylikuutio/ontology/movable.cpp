@@ -26,7 +26,6 @@
 #include "movable_struct.hpp"
 #include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -38,6 +37,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 
 // `Movable` is a mixin class, not intended to be instantiated.
@@ -160,12 +160,12 @@ namespace yli::ontology
 
     float Movable::get_azimuth() const
     {
-        return 0.5f * pi - this->orientation.yaw;
+        return 0.5f * std::numbers::pi - this->orientation.yaw;
     }
 
     void Movable::set_azimuth(const float azimuth)
     {
-        this->orientation.yaw = 0.5f * pi - azimuth;
+        this->orientation.yaw = 0.5f * std::numbers::pi - azimuth;
     }
 
     float Movable::get_scale() const

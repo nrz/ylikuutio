@@ -17,13 +17,13 @@
 
 #include "brain_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cerr
+#include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 
 namespace yli::ontology
@@ -147,7 +147,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = pi;
+            movable.orientation.yaw = std::numbers::pi;
             return std::nullopt;
         }
 
@@ -165,7 +165,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = 0.5f * pi;
+            movable.orientation.yaw = 0.5f * std::numbers::pi;
             return std::nullopt;
         }
 
@@ -183,7 +183,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw = -0.5f * pi;
+            movable.orientation.yaw = -0.5f * std::numbers::pi;
             return std::nullopt;
         }
 
@@ -273,7 +273,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw -= 0.1f * pi;
+            movable.orientation.yaw -= 0.1f * std::numbers::pi;
             return std::nullopt;
         }
 
@@ -291,7 +291,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.orientation.yaw += 0.1f * pi;
+            movable.orientation.yaw += 0.1f * std::numbers::pi;
             return std::nullopt;
         }
 

@@ -19,7 +19,6 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -28,6 +27,7 @@
 #endif
 
 // Include standard headers
+#include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 
 namespace yli::ontology
@@ -268,7 +268,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const float azimuth = 0.5f * pi - movable->orientation.yaw;
+            const float azimuth = 0.5f * std::numbers::pi - movable->orientation.yaw;
             return yli::data::AnyValue(azimuth);
         }
 
@@ -276,7 +276,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            const float azimuth = 0.5f * pi - universe->current_camera_yaw;
+            const float azimuth = 0.5f * std::numbers::pi - universe->current_camera_yaw;
             return yli::data::AnyValue(azimuth);
         }
 

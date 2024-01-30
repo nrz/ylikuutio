@@ -16,12 +16,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "degrees_to_radians.hpp"
-#include "code/ylikuutio/data/pi.hpp"
+
+// Include standard headers
+#include <numbers> // std::numbers::pi
 
 namespace yli::geometry
 {
     float degrees_to_radians(const float x)
     {
-        return x * pi / 180.0f;
+        return x * std::numbers::pi / 180.0f;
     }
 }

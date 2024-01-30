@@ -376,7 +376,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/data/any_value.hpp
     code/ylikuutio/data/data_templates.hpp
     code/ylikuutio/data/datatype.hpp
-    code/ylikuutio/data/pi.hpp
     code/ylikuutio/data/queue.hpp
     code/ylikuutio/data/spherical_coordinates_struct.hpp
     code/ylikuutio/data/tuple_templates.hpp

@@ -45,7 +45,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -85,6 +84,7 @@
 #include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cerr
 #include <limits>        // std::numeric_limits
+#include <numbers>       // std::numbers::pi
 #include <optional>      // std::optional
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdexcept>     // std::runtime_error
@@ -525,7 +525,7 @@ namespace yli::ontology
                             this->mouse_speed * static_cast<float>(this->window_width / 2 - xpos);
 
                         this->current_camera_yaw =
-                            remainder(this->current_camera_yaw, (2.0f * pi));
+                            remainder(this->current_camera_yaw, (2.0f * std::numbers::pi));
 
                         if (this->is_invert_mouse_in_use)
                         {
@@ -541,15 +541,15 @@ namespace yli::ontology
                         }
 
                         this->current_camera_pitch =
-                            remainder(this->current_camera_pitch, (2.0f * pi));
+                            remainder(this->current_camera_pitch, (2.0f * std::numbers::pi));
                     }
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
                 this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * pi),
+                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * std::numbers::pi),
                         sin(this->current_camera_pitch),
-                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * pi));
+                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * std::numbers::pi));
 
                 // Right vector.
                 this->current_camera_right = glm::vec3(

@@ -21,7 +21,6 @@
 #include "universe.hpp"
 #include "holobiont.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -32,6 +31,7 @@
 // Include standard headers
 #include <functional> // std::reference_wrapper
 #include <iostream> // std::cout, std::cerr
+#include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 #include <variant> // std::holds_alternative, std::variant
 
@@ -535,7 +535,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->orientation.yaw = 0.5f * pi - std::get<float>(azimuth_any_value.data);
+            movable->orientation.yaw = 0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data);
             return std::nullopt;
         }
 
@@ -553,7 +553,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_yaw = 0.5f * pi - std::get<float>(azimuth_any_value.data);
+        universe->current_camera_yaw = 0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data);
         return std::nullopt;
     }
 
