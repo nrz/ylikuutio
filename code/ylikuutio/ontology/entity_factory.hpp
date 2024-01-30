@@ -623,7 +623,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         holobiont_struct,
-                        (holobiont_struct.parent != nullptr ? &holobiont_struct.parent->parent_of_holobionts : nullptr),
+                        (holobiont_struct.scene != nullptr ? &holobiont_struct.scene->parent_of_holobionts : nullptr),
                         (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                         (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
 
@@ -1165,7 +1165,7 @@ namespace yli::ontology
                             this->get_universe(),
                             holobiont_struct,
                             module_args...,
-                            (holobiont_struct.parent != nullptr ? &holobiont_struct.parent->parent_of_holobionts : nullptr),
+                            (holobiont_struct.scene != nullptr ? &holobiont_struct.scene->parent_of_holobionts : nullptr),
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                             (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
 

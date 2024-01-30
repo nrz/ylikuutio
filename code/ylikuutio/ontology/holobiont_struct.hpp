@@ -33,13 +33,12 @@ namespace yli::ontology
         HolobiontStruct(
                 yli::ontology::Scene& parent,
                 yli::ontology::Symbiosis& symbiosis)
-            : parent  { &parent },
-            symbiosis { &symbiosis }
+            : symbiosis { &symbiosis }
         {
             // constructor.
+            this->scene = &parent;
         }
 
-        yli::ontology::Scene* parent        { nullptr }; // pointer to the `Scene`.
         yli::ontology::Symbiosis* symbiosis { nullptr }; // pointer to the `Symbiosis`.
 
         std::vector<bool> should_render_bionts_vector;
