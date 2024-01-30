@@ -27,6 +27,8 @@ namespace yli::ontology
             bool operator!=(const yli::ontology::OrientationModule& rhs) const = default;
             yli::ontology::OrientationModule& operator=(const yli::ontology::OrientationModule& other) noexcept;
 
+            OrientationModule();
+
             OrientationModule(const yli::ontology::OrientationModule& original);
 
             OrientationModule(const float roll, const float yaw, const float pitch)
