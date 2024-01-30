@@ -49,4 +49,9 @@ namespace yli::ontology
         pitch  { original.pitch }
     {
     }
+
+    glm::vec3 OrientationModule::get() const
+    {
+        return glm::vec3 { this->roll, this->yaw, this->pitch };
+    }
 }

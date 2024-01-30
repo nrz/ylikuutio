@@ -18,6 +18,12 @@
 #ifndef YLIKUUTIO_ONTOLOGY_ORIENTATION_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_ORIENTATION_MODULE_HPP_INCLUDED
 
+// Include GLM
+#ifndef GLM_GLM_HPP_INCLUDED
+#define GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 namespace yli::ontology
 {
     class OrientationModule
@@ -37,6 +43,8 @@ namespace yli::ontology
                 pitch  { pitch }
             {
             }
+
+            glm::vec3 get() const;
 
             float roll  { 0.0f };
             float yaw   { 0.0f };
