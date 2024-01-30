@@ -4,10 +4,10 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 Fixes needed:
 [ ] Fix double free in Hirvi upon deallocation.
 [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
-[ ] Fix missing audio when running `wine ajokki.exe` in Debian and you get error message: "INFO: Float32 audio format was not available."
 [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 [ ] Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
+[ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
