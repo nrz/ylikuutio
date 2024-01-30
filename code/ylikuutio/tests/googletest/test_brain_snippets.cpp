@@ -54,6 +54,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
+    object->speed = 1.0f;
 
     yli::ontology::CartesianCoordinatesModule original_location(object->location);
     yli::ontology::OrientationModule original_orientation(object->orientation);
