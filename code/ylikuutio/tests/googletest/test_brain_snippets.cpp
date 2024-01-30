@@ -49,7 +49,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     yli::ontology::Brain* const rest_brain = application.get_generic_entity_factory().create_brain(
             rest_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(scene);
+    yli::ontology::ObjectStruct object_struct(rest_brain, scene);
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
