@@ -31,11 +31,11 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN, std::isnan
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::holds_alternative, std::variant
+#include <variant>  // std::holds_alternative
 
 TEST(is_variable_must_return_false_for_nonexisting_variables, headless_universe)
 {
