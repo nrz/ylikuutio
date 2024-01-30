@@ -199,3 +199,45 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
+
+TEST(go_south_brain_must_go_south, object_with_speed_1)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
+
+    yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
+    yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+            go_south_callback_engine_struct);
+
+    go_south_callback_engine->create_callback_object(callback);
+
+    yli::ontology::BrainStruct go_south_brain_struct;
+    go_south_brain_struct.parent = scene;
+    go_south_brain_struct.callback_engine = go_south_callback_engine;
+    yli::ontology::Brain* const go_south_brain = application.get_generic_entity_factory().create_brain(
+            go_south_brain_struct);
+
+    yli::ontology::ObjectStruct object_struct(go_south_brain, scene);
+    object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
+    object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    object->speed = 1.0f;
+
+    yli::ontology::CartesianCoordinatesModule original_location(object->location);
+    yli::ontology::OrientationModule original_orientation(object->orientation);
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation, original_orientation);
+
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 1.0f) };
+
+    go_south_brain->act();
+
+    ASSERT_EQ(object->location.xyz, expected_coordinates);
+    ASSERT_EQ(object->orientation, original_orientation);
+}
