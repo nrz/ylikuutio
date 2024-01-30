@@ -34,9 +34,9 @@ namespace yli::ontology
     struct ObjectStruct: public yli::ontology::MovableStruct
     {
         explicit ObjectStruct(yli::ontology::Scene* const parent)
-            : parent { parent }
         {
             // constructor.
+            this->scene = parent;
         }
 
         ObjectStruct(
@@ -47,12 +47,11 @@ namespace yli::ontology
                 yli::ontology::ShapeshifterSequence*,
                 yli::ontology::Text3D*>
                 mesh_master)
-            : parent { parent },
-            mesh_master { mesh_master }
+            : mesh_master { mesh_master }
         {
+            this->scene = parent;
         }
 
-        yli::ontology::Scene* parent { nullptr };
         std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> mesh_master {};
         yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
     };

@@ -37,7 +37,7 @@
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)
 {
     const yli::ontology::ObjectStruct test_object_struct(static_cast<yli::ontology::Scene*>(nullptr));
-    ASSERT_EQ(test_object_struct.parent, nullptr);
+    ASSERT_EQ(test_object_struct.scene, nullptr);
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
@@ -55,7 +55,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     const yli::ontology::ObjectStruct test_object_struct(
             static_cast<yli::ontology::Scene*>(nullptr),
             static_cast<yli::ontology::Species*>(nullptr));
-    ASSERT_EQ(test_object_struct.parent, nullptr);
+    ASSERT_EQ(test_object_struct.scene, nullptr);
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
@@ -73,7 +73,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     const yli::ontology::ObjectStruct test_object_struct(
             static_cast<yli::ontology::Scene*>(nullptr),
             static_cast<yli::ontology::ShapeshifterSequence*>(nullptr));
-    ASSERT_EQ(test_object_struct.parent, nullptr);
+    ASSERT_EQ(test_object_struct.scene, nullptr);
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
@@ -91,7 +91,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     const yli::ontology::ObjectStruct test_object_struct(
             static_cast<yli::ontology::Scene*>(nullptr),
             static_cast<yli::ontology::Text3D*>(nullptr));
-    ASSERT_EQ(test_object_struct.parent, nullptr);
+    ASSERT_EQ(test_object_struct.scene, nullptr);
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));

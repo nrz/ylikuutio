@@ -528,7 +528,7 @@ namespace yli::ontology
                         this->get_universe(),
                         object_struct,
                         // `Scene` parent.
-                        ((object_struct.parent != nullptr) ?  &object_struct.parent->parent_of_objects : nullptr),
+                        ((object_struct.scene != nullptr) ?  &object_struct.scene->parent_of_objects : nullptr),
                         // mesh master.
                         ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
                          &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -1129,7 +1129,7 @@ namespace yli::ontology
                             object_struct,
                             module_args...,
                             // `Scene` parent.
-                            ((object_struct.parent != nullptr) ?  &object_struct.parent->parent_of_objects : nullptr),
+                            ((object_struct.scene != nullptr) ?  &object_struct.scene->parent_of_objects : nullptr),
                             // mesh master.
                             ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
                              &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
