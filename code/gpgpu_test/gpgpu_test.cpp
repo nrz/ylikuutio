@@ -15,17 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
-#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
-#endif
-
-#ifndef RADIANS_TO_DEGREES
-#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
 #include "gpgpu_test.hpp"

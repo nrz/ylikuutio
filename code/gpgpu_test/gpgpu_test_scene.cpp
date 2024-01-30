@@ -15,10 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #include "gpgpu_test.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
