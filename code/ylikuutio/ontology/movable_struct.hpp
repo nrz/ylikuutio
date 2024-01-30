@@ -82,6 +82,14 @@ namespace yli::ontology
             // constructor.
         }
 
+        MovableStruct(
+                yli::ontology::Brain* const brain,
+                yli::ontology::Scene* const scene)
+            : brain { brain },
+            scene { scene }
+        {
+        }
+
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
         yli::ontology::Brain* brain { nullptr };
         yli::ontology::Scene* scene { nullptr };
