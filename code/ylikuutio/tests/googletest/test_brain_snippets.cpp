@@ -412,3 +412,46 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
+
+TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
+
+    yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
+    yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+            orient_and_go_east_callback_engine_struct);
+
+    orient_and_go_east_callback_engine->create_callback_object(callback);
+
+    yli::ontology::BrainStruct orient_and_go_east_brain_struct;
+    orient_and_go_east_brain_struct.parent = scene;
+    orient_and_go_east_brain_struct.callback_engine = orient_and_go_east_callback_engine;
+    yli::ontology::Brain* const orient_and_go_east_brain = application.get_generic_entity_factory().create_brain(
+            orient_and_go_east_brain_struct);
+
+    yli::ontology::ObjectStruct object_struct(orient_and_go_east_brain, scene);
+    object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
+    object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    object->speed = 1.0f;
+
+    yli::ontology::CartesianCoordinatesModule original_location(object->location);
+    yli::ontology::OrientationModule original_orientation(object->orientation);
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation, original_orientation);
+
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(1.0f, 0.0f, 0.0f) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.0f, object_struct.orientation.pitch) };
+
+    orient_and_go_east_brain->act();
+
+    ASSERT_EQ(object->location.xyz, expected_coordinates);
+    ASSERT_EQ(object->orientation.get(), expected_orientation);
+}
