@@ -1224,3 +1224,95 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
+
+TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_speed_1)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
+
+    yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
+    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+            rotate_counterclockwise_callback_engine_struct);
+
+    rotate_counterclockwise_callback_engine->create_callback_object(callback);
+
+    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
+    rotate_counterclockwise_brain_struct.parent = scene;
+    rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
+    yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
+            rotate_counterclockwise_brain_struct);
+
+    yli::ontology::ObjectStruct object_struct(rotate_counterclockwise_brain, scene);
+    object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
+    object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    object->speed = 1.0f;
+
+    yli::ontology::CartesianCoordinatesModule original_location(object->location);
+    yli::ontology::OrientationModule original_orientation(object->orientation);
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation, original_orientation);
+
+    glm::vec3 expected_orientation {
+        glm::vec3(
+                object_struct.orientation.roll,
+                object_struct.orientation.yaw + 0.1f * std::numbers::pi,
+                object_struct.orientation.pitch) };
+
+    rotate_counterclockwise_brain->act();
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation.get(), expected_orientation);
+}
+
+TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_speed_2)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
+
+    yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
+    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+            rotate_counterclockwise_callback_engine_struct);
+
+    rotate_counterclockwise_callback_engine->create_callback_object(callback);
+
+    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
+    rotate_counterclockwise_brain_struct.parent = scene;
+    rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
+    yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
+            rotate_counterclockwise_brain_struct);
+
+    yli::ontology::ObjectStruct object_struct(rotate_counterclockwise_brain, scene);
+    object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
+    object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    object->speed = 2.0f;
+
+    yli::ontology::CartesianCoordinatesModule original_location(object->location);
+    yli::ontology::OrientationModule original_orientation(object->orientation);
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation, original_orientation);
+
+    glm::vec3 expected_orientation {
+        glm::vec3(
+                object_struct.orientation.roll,
+                object_struct.orientation.yaw + 0.1f * std::numbers::pi,
+                object_struct.orientation.pitch) };
+
+    rotate_counterclockwise_brain->act();
+
+    ASSERT_EQ(object->location, original_location);
+    ASSERT_EQ(object->orientation.get(), expected_orientation);
+}
