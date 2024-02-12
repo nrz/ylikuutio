@@ -652,7 +652,7 @@ namespace ajokki
 
         // Create some cats.
 
-        const std::size_t cat_i_upper_bound { 100 };
+        const std::size_t cat_i_upper_bound { 2 };
         const std::size_t cat_j_upper_bound { 100 };
 
         for (std::size_t i = 0; i < cat_i_upper_bound; i++)
