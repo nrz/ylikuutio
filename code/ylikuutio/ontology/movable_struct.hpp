@@ -41,7 +41,7 @@ namespace yli::ontology
     class Brain;
     class Scene;
 
-    struct MovableStruct: public yli::ontology::EntityStruct
+    struct MovableStruct : public yli::ontology::EntityStruct
     {
         MovableStruct()
             : orientation(0.0f, 0.0f, 0.0f)

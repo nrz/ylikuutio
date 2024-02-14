@@ -31,7 +31,7 @@ namespace yli::ontology
     class Glyph;
     class Text3D;
 
-    struct ObjectStruct: public yli::ontology::MovableStruct
+    struct ObjectStruct : public yli::ontology::MovableStruct
     {
         explicit ObjectStruct(yli::ontology::Scene* const parent)
         {

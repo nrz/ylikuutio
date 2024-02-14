@@ -29,13 +29,13 @@
 
 namespace yli::ontology
 {
-    struct SceneStruct: public yli::ontology::EntityStruct
+    struct SceneStruct : public yli::ontology::EntityStruct
     {
         CameraStruct default_camera_struct;      // Parameters of the default `Camera`.
 
-        float gravity { 9.81f / 60.0f };         // Default gravity: Earth gravity, 9.81 m/s^2.
+        float gravity { 9.81f / 60.0f };                     // Default gravity: Earth gravity, 9.81 m/s^2.
         glm::vec4 light_position { 0.0f, 0.0f, 0.0f, 1.0f }; // Default light position: origin.
-        float water_level { 0.0f };              // Default water level: 0.0 meters.
+        float water_level { 0.0f };                          // Default water level: 0.0 meters.
         bool is_flight_mode_in_use { true };
     };
 }

@@ -25,7 +25,7 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
 
-    struct BrainStruct: public yli::ontology::EntityStruct
+    struct BrainStruct : public yli::ontology::EntityStruct
     {
         yli::ontology::Scene* parent                   { nullptr };
         yli::ontology::CallbackEngine* callback_engine { nullptr };

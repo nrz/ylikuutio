@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Font2D;
 
-    struct TextStruct: public yli::ontology::EntityStruct
+    struct TextStruct : public yli::ontology::EntityStruct
     {
         yli::ontology::Font2D* parent { nullptr };
         std::size_t screen_width  { 0 };

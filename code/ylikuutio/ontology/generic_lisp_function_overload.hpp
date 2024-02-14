@@ -47,7 +47,7 @@ namespace yli::ontology
     class Scene;
     class Console;
 
-    class GenericLispFunctionOverload: public yli::ontology::Entity
+    class GenericLispFunctionOverload : public yli::ontology::Entity
     {
         protected:
             GenericLispFunctionOverload(

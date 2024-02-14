@@ -29,7 +29,7 @@ namespace yli::ontology
     class Holobiont;
     class SymbiontSpecies;
 
-    struct BiontStruct: public yli::ontology::MovableStruct
+    struct BiontStruct : public yli::ontology::MovableStruct
     {
         yli::ontology::Holobiont* parent                 { nullptr };    // pointer to the `Holobiont`.
         yli::ontology::SymbiontSpecies* symbiont_species { nullptr };    // pointer to the `SymbiontSpecies` (not a parent!).

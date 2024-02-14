@@ -27,7 +27,7 @@ namespace yli::ontology
 {
     class VectorFont;
 
-    struct Text3DStruct: public yli::ontology::MovableStruct
+    struct Text3DStruct : public yli::ontology::MovableStruct
     {
         std::string text_string;
         yli::ontology::VectorFont* parent { nullptr }; // pointer to the `VectorFont` (parent).

@@ -33,7 +33,7 @@ namespace yli::ontology
     class CallbackEngine;
     class Pipeline;
 
-    struct ComputeTaskStruct: public yli::ontology::EntityStruct
+    struct ComputeTaskStruct : public yli::ontology::EntityStruct
     {
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.

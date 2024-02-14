@@ -54,7 +54,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    class GenericMasterModule: public yli::ontology::Indexable
+    class GenericMasterModule : public yli::ontology::Indexable
     {
         public:
             // Iterator typedefs.

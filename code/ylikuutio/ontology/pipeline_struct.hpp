@@ -29,7 +29,7 @@ namespace yli::ontology
     class Ecosystem;
     class Scene;
 
-    struct PipelineStruct: public yli::ontology::EntityStruct
+    struct PipelineStruct : public yli::ontology::EntityStruct
     {
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.

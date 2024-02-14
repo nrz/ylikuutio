@@ -28,7 +28,7 @@ namespace yli::ontology
     class Scene;
     class Symbiosis;
 
-    struct HolobiontStruct: public yli::ontology::MovableStruct
+    struct HolobiontStruct : public yli::ontology::MovableStruct
     {
         HolobiontStruct(
                 yli::ontology::Scene& parent,

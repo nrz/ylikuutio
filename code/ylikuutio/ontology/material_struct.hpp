@@ -37,7 +37,7 @@ namespace yli::ontology
     class Pipeline;
     class Symbiosis;
 
-    struct MaterialStruct: public yli::ontology::EntityStruct
+    struct MaterialStruct : public yli::ontology::EntityStruct
     {
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.

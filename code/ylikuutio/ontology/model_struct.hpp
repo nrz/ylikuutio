@@ -44,7 +44,7 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class VectorFont;
 
-    struct ModelStruct: public yli::ontology::EntityStruct
+    struct ModelStruct : public yli::ontology::EntityStruct
     {
         ModelStruct()
         {

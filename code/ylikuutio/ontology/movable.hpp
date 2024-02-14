@@ -70,7 +70,7 @@ namespace yli::ontology
     class Brain;
     class Waypoint;
 
-    class Movable: public yli::ontology::Entity
+    class Movable : public yli::ontology::Entity
     {
         public:
             // Set pointer to `movable` to `nullptr`, set brain according to the input,
