@@ -59,7 +59,7 @@ namespace yli::triangulation
             const std::size_t image_width = triangulate_quads_struct.image_width;
             const std::size_t image_height = triangulate_quads_struct.image_height;
             const std::size_t x_step = triangulate_quads_struct.x_step;
-            const std::size_t z_step = triangulate_quads_struct.y_step;
+            const std::size_t y_step = triangulate_quads_struct.y_step;
 
             // Input vertices (`T1* input_vertex_pointer`)
             // can be `float`, `int32_t` or `uint32_t`.
@@ -88,14 +88,14 @@ namespace yli::triangulation
                 return false;
             }
 
-            if (z_step < 1)
+            if (y_step < 1)
             {
-                std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: `z_step` is less than 1.\n";
+                std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: `y_step` is less than 1.\n";
                 return false;
             }
 
             const std::size_t actual_image_width = (image_width - 1) / x_step + 1;
-            const std::size_t actual_image_height = (image_height - 1) / z_step + 1;
+            const std::size_t actual_image_height = (image_height - 1) / y_step + 1;
 
             if (actual_image_width < 2)
             {
@@ -184,7 +184,7 @@ namespace yli::triangulation
                         image_width,
                         image_height,
                         x_step,
-                        z_step,
+                        y_step,
                         triangulate_quads_struct.use_real_texture_coordinates,
                         temp_vertices,
                         temp_uvs))
@@ -210,7 +210,7 @@ namespace yli::triangulation
                             image_width,
                             image_height,
                             x_step,
-                            z_step,
+                            y_step,
                             triangulate_quads_struct.use_real_texture_coordinates,
                             temp_vertices,
                             temp_uvs))
