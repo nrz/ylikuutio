@@ -92,7 +92,7 @@ namespace yli::ontology
             std::size_t get_number_of_apprentices() const;
 
             uint32_t get_x_step() const;
-            uint32_t get_z_step() const;
+            uint32_t get_y_step() const;
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;
 

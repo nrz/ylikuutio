@@ -193,7 +193,7 @@ namespace yli::ontology
         return this->mesh.x_step;
     }
 
-    uint32_t Species::get_z_step() const
+    uint32_t Species::get_y_step() const
     {
         return this->mesh.y_step;
     }
