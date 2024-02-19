@@ -47,32 +47,32 @@ namespace yli::triangulation
 
     // for bilinear interpolation.
     template<typename T1>
-        float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
+        float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - y_step, image_width));
         }
     template<typename T1>
-        float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t z_step)
+        float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t y_step)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - z_step, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - y_step, image_width));
         }
     template<typename T1>
-        float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* z_step */)
+        float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* y_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
     template<typename T1>
-        float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* z_step */)
+        float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* y_step */)
         {
             return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
         }
     template<typename T1>
-        float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
+        float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
         {
-            return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
-                    southeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
-                    northwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
-                    northeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step)) / 4.0f;
+            return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
+                    southeast_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
+                    northwest_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
+                    northeast_y(x, z, input_vertex_pointer, image_width, x_step, y_step)) / 4.0f;
         }
 
     template<typename T1>
@@ -81,12 +81,12 @@ namespace yli::triangulation
                 const std::size_t image_width,
                 const std::size_t image_height,
                 const std::size_t x_step,
-                const std::size_t z_step,
+                const std::size_t y_step,
                 float& min_y_value,
                 float& max_y_value,
                 float& divisor)
         {
-            for (std::size_t z = 0; z < image_height; z += z_step)
+            for (std::size_t z = 0; z < image_height; z += y_step)
             {
                 for (std::size_t x = 0; x < image_width; x += x_step)
                 {
@@ -127,7 +127,7 @@ namespace yli::triangulation
                 const std::size_t image_width,
                 const std::size_t image_height,
                 const std::size_t x_step,
-                const std::size_t z_step,
+                const std::size_t y_step,
                 const bool use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_uvs)
@@ -138,9 +138,9 @@ namespace yli::triangulation
                 return false;
             }
 
-            if (x_step == 0 || z_step == 0)
+            if (x_step == 0 || y_step == 0)
             {
-                // Can not define vertices if x_step == 0 or z_step == 0.
+                // Can not define vertices if x_step == 0 or y_step == 0.
                 return false;
             }
 
@@ -157,7 +157,7 @@ namespace yli::triangulation
                         image_width,
                         image_height,
                         x_step,
-                        z_step,
+                        y_step,
                         min_y_value,
                         max_y_value,
                         divisor);
@@ -169,7 +169,7 @@ namespace yli::triangulation
             }
 
             const std::size_t actual_image_width = image_width / x_step;
-            const std::size_t actual_image_height = image_height / z_step;
+            const std::size_t actual_image_height = image_height / y_step;
             std::size_t number_of_vertices = actual_image_width * actual_image_height;
             temp_vertices.reserve(number_of_vertices);
             temp_uvs.reserve(number_of_vertices);
@@ -177,7 +177,7 @@ namespace yli::triangulation
             // Define the temporary vertices in a double loop.
             std::size_t texture_y = 0;
 
-            for (std::size_t z = 0; z < image_height; z += z_step)
+            for (std::size_t z = 0; z < image_height; z += y_step)
             {
                 std::size_t texture_x = 0;
 
@@ -228,7 +228,7 @@ namespace yli::triangulation
                 const std::size_t image_width,
                 const std::size_t image_height,
                 const std::size_t x_step,
-                const std::size_t z_step,
+                const std::size_t y_step,
                 const bool use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_uvs)
@@ -241,9 +241,9 @@ namespace yli::triangulation
                 return false;
             }
 
-            if (x_step == 0 || z_step == 0)
+            if (x_step == 0 || y_step == 0)
             {
-                // Can not interpolate center vertices if x_step == 0 or z_step == 0.
+                // Can not interpolate center vertices if x_step == 0 or y_step == 0.
                 return false;
             }
 
@@ -260,7 +260,7 @@ namespace yli::triangulation
                         image_width,
                         image_height,
                         x_step,
-                        z_step,
+                        y_step,
                         min_y_value,
                         max_y_value,
                         divisor);
@@ -272,8 +272,8 @@ namespace yli::triangulation
             }
 
             // Then, define the faces in a double loop.
-            // Begin from index `z_step`.
-            for (std::size_t z = z_step; z < image_height; z += z_step)
+            // Begin from index `y_step`.
+            for (std::size_t z = y_step; z < image_height; z += y_step)
             {
                 // Begin from index `x_step`.
                 for (std::size_t x = x_step; x < image_width; x += x_step)
@@ -281,14 +281,14 @@ namespace yli::triangulation
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
 
                     // Interpolate y coordinate (altitude).
-                    const float y = center_y(x, z, input_vertex_pointer, image_width, x_step, z_step);
+                    const float y = center_y(x, z, input_vertex_pointer, image_width, x_step, y_step);
 
                     // Create a new vertex using bilinear interpolation.
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<float>(x) - 0.5f * x_step;
                     vertex.y = static_cast<float>(y);
-                    vertex.z = static_cast<float>(z) - 0.5f * z_step;
+                    vertex.z = static_cast<float>(z) - 0.5f * y_step;
                     temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
