@@ -48,7 +48,7 @@ namespace yli::triangulation
     // for bilinear interpolation.
     constexpr std::size_t get_face_normal_i(
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const yli::triangulation::BilinearDirections compass_point_code,
             const std::size_t actual_image_width)
     {
@@ -83,21 +83,21 @@ namespace yli::triangulation
         switch (compass_point_code)
         {
             case yli::triangulation::BilinearDirections::SSW:
-                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 1;
+                return 4 * (y - 1) * (actual_image_width - 1) + (4 * x) - 1;
             case yli::triangulation::BilinearDirections::WSW:
-                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 2;
+                return 4 * (y - 1) * (actual_image_width - 1) + (4 * x) - 2;
             case yli::triangulation::BilinearDirections::WNW:
-                return 4 * z * (actual_image_width - 1) + (4 * x) - 4;
+                return 4 * y * (actual_image_width - 1) + (4 * x) - 4;
             case yli::triangulation::BilinearDirections::NNW:
-                return 4 * z * (actual_image_width - 1) + (4 * x) - 1;
+                return 4 * y * (actual_image_width - 1) + (4 * x) - 1;
             case yli::triangulation::BilinearDirections::NNE:
-                return 4 * z * (actual_image_width - 1) + (4 * x) + 1;
+                return 4 * y * (actual_image_width - 1) + (4 * x) + 1;
             case yli::triangulation::BilinearDirections::ENE:
-                return 4 * z * (actual_image_width - 1) + (4 * x);
+                return 4 * y * (actual_image_width - 1) + (4 * x);
             case yli::triangulation::BilinearDirections::ESE:
-                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 2;
+                return 4 * (y - 1) * (actual_image_width - 1) + (4 * x) + 2;
             case yli::triangulation::BilinearDirections::SSE:
-                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
+                return 4 * (y - 1) * (actual_image_width - 1) + (4 * x) + 1;
             default:
                 return 0; // this line should never be reached.
         }
