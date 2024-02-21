@@ -36,43 +36,43 @@ namespace yli::triangulation
         T1 get_y(
                 const T1* const vertex_data,
                 const std::size_t x,
-                const std::size_t z,
+                const std::size_t y,
                 const std::size_t image_width)
         {
-            // This function returns the altitude value based on x & z coordinates.
+            // This function returns the altitude value based on x & y coordinates.
             // This works only for a raw heightmap data (for a 2D array of altitudes).
-            const T1* const vertex_pointer = vertex_data + z * image_width + x;
+            const T1* const vertex_pointer = vertex_data + y * image_width + x;
             return static_cast<T1>(*vertex_pointer);
         }
 
     // for bilinear interpolation.
     template<typename T1>
-        float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
+        float southwest_y(const std::size_t x, const std::size_t y, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z - y_step, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, y - y_step, image_width));
         }
     template<typename T1>
-        float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t y_step)
+        float southeast_y(const std::size_t x, const std::size_t y, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t y_step)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z - y_step, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, y - y_step, image_width));
         }
     template<typename T1>
-        float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* y_step */)
+        float northwest_y(const std::size_t x, const std::size_t y, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t /* y_step */)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, z, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x - x_step, y, image_width));
         }
     template<typename T1>
-        float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* y_step */)
+        float northeast_y(const std::size_t x, const std::size_t y, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t /* x_step */, const std::size_t /* y_step */)
         {
-            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
+            return static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, y, image_width));
         }
     template<typename T1>
-        float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
+        float center_y(const std::size_t x, const std::size_t y, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t y_step)
         {
-            return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
-                    southeast_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
-                    northwest_y(x, z, input_vertex_pointer, image_width, x_step, y_step) +
-                    northeast_y(x, z, input_vertex_pointer, image_width, x_step, y_step)) / 4.0f;
+            return static_cast<float>(southwest_y(x, y, input_vertex_pointer, image_width, x_step, y_step) +
+                    southeast_y(x, y, input_vertex_pointer, image_width, x_step, y_step) +
+                    northwest_y(x, y, input_vertex_pointer, image_width, x_step, y_step) +
+                    northeast_y(x, y, input_vertex_pointer, image_width, x_step, y_step)) / 4.0f;
         }
 
     template<typename T1>
@@ -86,11 +86,11 @@ namespace yli::triangulation
                 float& max_y_value,
                 float& divisor)
         {
-            for (std::size_t z = 0; z < image_height; z += y_step)
+            for (std::size_t y = 0; y < image_height; y += y_step)
             {
                 for (std::size_t x = 0; x < image_width; x += x_step)
                 {
-                    const T1& vertex_height = input_vertex_pointer[image_width * z + x];
+                    const T1& vertex_height = input_vertex_pointer[image_width * y + x];
 
                     if (std::isnan(min_y_value) || vertex_height < min_y_value)
                     {
@@ -177,20 +177,20 @@ namespace yli::triangulation
             // Define the temporary vertices in a double loop.
             std::size_t texture_y = 0;
 
-            for (std::size_t z = 0; z < image_height; z += y_step)
+            for (std::size_t y = 0; y < image_height; y += y_step)
             {
                 std::size_t texture_x = 0;
 
                 for (std::size_t x = 0; x < image_width; x += x_step)
                 {
-                    // current x,z coordinates).
-                    float y = static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, z, image_width));
+                    // current x,y coordinates).
+                    float z = static_cast<float>(yli::triangulation::get_y(input_vertex_pointer, x, y, image_width));
 
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<float>(x);
-                    vertex.y = static_cast<float>(y);
-                    vertex.z = static_cast<float>(z);
+                    vertex.y = static_cast<float>(z); // FIXME!
+                    vertex.z = static_cast<float>(y); // FIXME!
                     temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -273,22 +273,22 @@ namespace yli::triangulation
 
             // Then, define the faces in a double loop.
             // Begin from index `y_step`.
-            for (std::size_t z = y_step; z < image_height; z += y_step)
+            for (std::size_t y = y_step; y < image_height; y += y_step)
             {
                 // Begin from index `x_step`.
                 for (std::size_t x = x_step; x < image_width; x += x_step)
                 {
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
 
-                    // Interpolate y coordinate (altitude).
-                    const float y = center_y(x, z, input_vertex_pointer, image_width, x_step, y_step);
+                    // Interpolate z coordinate (altitude).
+                    const float z = center_y(x, y, input_vertex_pointer, image_width, x_step, y_step);
 
                     // Create a new vertex using bilinear interpolation.
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<float>(x) - 0.5f * x_step;
-                    vertex.y = static_cast<float>(y);
-                    vertex.z = static_cast<float>(z) - 0.5f * y_step;
+                    vertex.y = static_cast<float>(z);                 // FIXME!
+                    vertex.z = static_cast<float>(y) - 0.5f * y_step; // FIXME!
                     temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
