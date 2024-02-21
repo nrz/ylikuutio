@@ -53,10 +53,7 @@ namespace yli::triangulation
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
             const std::size_t actual_image_width,
-            const std::size_t actual_image_height,
-            const bool is_bilinear_interpolation_in_use,
-            const bool is_southwest_northeast_edges_in_use,
-            const bool is_southeast_northwest_edges_in_use);
+            const std::size_t actual_image_height);
 }
 
 #endif

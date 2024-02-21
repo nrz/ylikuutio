@@ -40,10 +40,7 @@ namespace yli::triangulation
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t actual_image_width,
-            const std::size_t actual_image_height,
-            const bool is_bilinear_interpolation_in_use,
-            const bool is_southwest_northeast_edges_in_use,
-            const bool is_southeast_northwest_edges_in_use);
+            const std::size_t actual_image_height);
 
     const glm::vec3& get_face_normal(
             const std::vector<glm::vec3>& face_normal_data,
@@ -74,22 +71,6 @@ namespace yli::triangulation
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
             const std::size_t z,
-            const std::size_t image_width);
-
-    // for southeast-northwest edges.
-    glm::vec3 get_face_normal_for_se_nw(
-            const std::vector<glm::vec3>& face_normal_data,
-            const std::size_t x,
-            const std::size_t z,
-            const SoutheastNorthwestEdgesDirections compass_point_code,
-            const std::size_t image_width);
-
-    // for southwest-northeast edges.
-    glm::vec3 get_face_normal_for_sw_ne(
-            const std::vector<glm::vec3>& face_normal_data,
-            const std::size_t x,
-            const std::size_t z,
-            const SouthwestNortheastEdgesDirections compass_point_code,
             const std::size_t image_width);
 }
 

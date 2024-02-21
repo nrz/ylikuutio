@@ -36,7 +36,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.model_filename, "");
     ASSERT_EQ(test_model_struct.model_file_format, "");
     ASSERT_EQ(test_model_struct.color_channel, "");
-    ASSERT_EQ(test_model_struct.triangulation_type, "bilinear_interpolation");
     ASSERT_TRUE(std::isnan(test_model_struct.planet_radius));
     ASSERT_EQ(test_model_struct.divisor, 1.0f);
     ASSERT_EQ(test_model_struct.latitude, 0.0f);

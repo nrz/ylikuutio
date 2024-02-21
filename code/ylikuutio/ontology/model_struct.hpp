@@ -59,7 +59,6 @@ namespace yli::ontology
                                                             // `"srtm"`/`"SRTM"` - SRTM heightmap.
                                                             // `"asc"`/`"ascii_grid"`/`"ASCII_grid"` - ASCII grid.
         std::string color_channel;                          // color channel to use for altitude data, for PNG model files.
-        std::string triangulation_type { "bilinear_interpolation" }; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
         float planet_radius { NAN };  // Radius of sea level in kilometers. Used only for terrains (planets and moons). `6371.0f` for Earth.
         float divisor       { 1.0f }; // Value by which SRTM values are divided to convert them to kilometers.
         float latitude      { 0.0f }; // In degrees, for SRTM model files.

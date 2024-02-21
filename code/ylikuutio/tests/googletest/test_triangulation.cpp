@@ -176,18 +176,12 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
     ASSERT_EQ(temp_uvs[12].y, 0.5f);
 
     std::vector<glm::vec3> face_normal_vector_vec3;
-    const bool is_bilinear_interpolation_in_use = true;
-    const bool is_southwest_northeast_edges_in_use = false;
-    const bool is_southeast_northwest_edges_in_use = false;
 
     ASSERT_TRUE(yli::triangulation::compute_face_normals(
                 temp_vertices,
                 face_normal_vector_vec3,
                 image_width,
-                image_height,
-                is_bilinear_interpolation_in_use,
-                is_southwest_northeast_edges_in_use,
-                is_southeast_northwest_edges_in_use));
+                image_height));
 
     // Predefined vertices.
     const glm::vec3 i0_x0_z0 = glm::vec3(0.0f, 0.0f, 0.0f);

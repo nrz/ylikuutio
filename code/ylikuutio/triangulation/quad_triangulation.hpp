@@ -109,50 +109,15 @@ namespace yli::triangulation
                 return false;
             }
 
-            const std::string& triangulation_type = triangulate_quads_struct.triangulation_type;
             const float& sphere_radius = triangulate_quads_struct.sphere_radius;
             const yli::geometry::SphericalTerrainStruct& spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
-            bool is_bilinear_interpolation_in_use = false;
-            bool is_southwest_northeast_edges_in_use = false;
-            bool is_southeast_northwest_edges_in_use = false;
-            std::size_t n_faces_for_each_vertex = 2; // split each quad into 2 triangles.
-
-            std::cout << "Triangulation type in use: " << triangulation_type << "\n";
-
-            if (triangulation_type == "bilinear_interpolation")
-            {
-                // *---*
-                // |\ /|
-                // | x |
-                // |/ \|
-                // *---*
-                is_bilinear_interpolation_in_use = true;
-                n_faces_for_each_vertex = 4;
-            }
-            else if (triangulation_type == "southwest_northeast_edges" || triangulation_type == "northeast_southwest_edges")
-            {
-                // *---*
-                // |  /|
-                // | / |
-                // |/  |
-                // *---*
-                is_southwest_northeast_edges_in_use = true;
-            }
-            else if (triangulation_type == "southeast_northwest_edges" || triangulation_type == "northwest_southeast_edges")
-            {
-                // *---*
-                // |\  |
-                // | \ |
-                // |  \|
-                // *---*
-                is_southeast_northwest_edges_in_use = true;
-            }
-            else
-            {
-                std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: invalid triangulation type: " << triangulation_type << "\n";
-                return false;
-            }
+            // *---*
+            // |\ /|
+            // | x |
+            // |/ \|
+            // *---*
+            const std::size_t n_faces_for_each_vertex = 4; // Split each quad into 4 triangles.
 
             std::vector<glm::vec3> temp_vertices;
             std::vector<glm::vec2> temp_uvs;
@@ -167,13 +132,12 @@ namespace yli::triangulation
             // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `emplace_back` to `temp_normals`.
             // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
             //
-            // stg. `"bilinear_interpolation"`                                      `"southwest_northeast_edges"`               `"southeast_northwest_edges"`
-            // 1.   `define_vertices`                                               `define_vertices`                           `define_vertices`
-            // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`  N/A                                         N/A
-            // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
-            // 4.   `compute_face_normals`                                          `compute_face_normals`                      `compute_face_normals`
-            // 5.   `compute_vertex_normals`                                        `compute_vertex_normals`                    `compute_vertex_normals`
-            // 6.   `define_vertices_uvs_and_normals`                               `define_vertices_uvs_and_normals`           `define_vertices_uvs_and_normals`
+            // 1.   `define_vertices`
+            // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`
+            // 3.   `transform_coordinates_to_curved_surface`
+            // 4.   `compute_face_normals`
+            // 5.   `compute_vertex_normals`
+            // 6.   `define_vertices_uvs_and_normals`
             //
             // stg. = stage
 
@@ -202,22 +166,19 @@ namespace yli::triangulation
 
             std::cout << "Number of faces: " << n_faces << ".\n";
 
-            if (is_bilinear_interpolation_in_use)
+            // 2. Interpolate the vertices between, using bilinear interpolation, `emplace_back` to `temp_vertices`.
+            if (!yli::triangulation::interpolate_and_define_vertices_using_bilinear_interpolation(
+                        input_vertex_pointer,
+                        image_width,
+                        image_height,
+                        x_step,
+                        y_step,
+                        triangulate_quads_struct.use_real_texture_coordinates,
+                        temp_vertices,
+                        temp_uvs))
             {
-                // 2. Interpolate the vertices between, using bilinear interpolation, `emplace_back` to `temp_vertices`.
-                if (!yli::triangulation::interpolate_and_define_vertices_using_bilinear_interpolation(
-                            input_vertex_pointer,
-                            image_width,
-                            image_height,
-                            x_step,
-                            y_step,
-                            triangulate_quads_struct.use_real_texture_coordinates,
-                            temp_vertices,
-                            temp_uvs))
-                {
-                    std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: interpolating and defining vertices using bilinear interpolation failed.\n";
-                    return false;
-                }
+                std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: interpolating and defining vertices using bilinear interpolation failed.\n";
+                return false;
             }
 
             if (!std::isnan(sphere_radius))
@@ -236,7 +197,6 @@ namespace yli::triangulation
                 transformation_struct.image_width = image_width;
                 transformation_struct.image_height = image_height;
                 transformation_struct.sphere_radius = sphere_radius;
-                transformation_struct.is_bilinear_interpolation_in_use = is_bilinear_interpolation_in_use;
                 transformation_struct.spherical_terrain_struct = spherical_terrain_struct;
                 yli::geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
             }
@@ -260,10 +220,7 @@ namespace yli::triangulation
                         temp_vertices,
                         face_normal_vector_vec3,
                         actual_image_width,
-                        actual_image_height,
-                        is_bilinear_interpolation_in_use,
-                        is_southwest_northeast_edges_in_use,
-                        is_southeast_northwest_edges_in_use))
+                        actual_image_height))
             {
                 std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: computing face normals failed.\n";
                 return false;
@@ -274,10 +231,7 @@ namespace yli::triangulation
                         temp_normals,
                         face_normal_vector_vec3,
                         actual_image_width,
-                        actual_image_height,
-                        is_bilinear_interpolation_in_use,
-                        is_southwest_northeast_edges_in_use,
-                        is_southeast_northwest_edges_in_use))
+                        actual_image_height))
             {
                 std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: computing vertex normals failed.\n";
                 return false;
@@ -294,10 +248,7 @@ namespace yli::triangulation
                         out_uvs,
                         out_normals,
                         actual_image_width,
-                        actual_image_height,
-                        is_bilinear_interpolation_in_use,
-                        is_southwest_northeast_edges_in_use,
-                        is_southeast_northwest_edges_in_use))
+                        actual_image_height))
             {
                 std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: defining vertices, UVs, and normals failed.\n";
                 return false;

@@ -36,7 +36,6 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_3x3_png_terrain)
     heightmap_loader_struct.filename = "test3x3.png";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.y_step = 1;
-    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> out_vertices;
@@ -372,7 +371,6 @@ TEST(a_png_terrain_must_be_loaded_appropriately, load_256x256_png_terrain)
     heightmap_loader_struct.filename = "noise256x256.png";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.y_step = 1;
-    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> out_vertices;

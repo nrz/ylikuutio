@@ -35,7 +35,6 @@ namespace yli::load
         float divisor       { NAN };
         uint32_t x_step     { 1 };
         uint32_t y_step     { 1 };
-        std::string triangulation_type;
         bool use_real_texture_coordinates { true };
         bool triangulate                  { true };
     };

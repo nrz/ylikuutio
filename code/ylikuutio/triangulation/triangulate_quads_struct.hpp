@@ -44,7 +44,6 @@ namespace yli::triangulation
         std::size_t image_height;
         std::size_t x_step;
         std::size_t y_step;
-        std::string triangulation_type;
         bool use_real_texture_coordinates;
         float sphere_radius;
         yli::geometry::SphericalTerrainStruct spherical_terrain_struct;

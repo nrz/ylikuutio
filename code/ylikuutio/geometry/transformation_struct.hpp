@@ -30,7 +30,6 @@ namespace yli::geometry
         std::size_t image_width;
         std::size_t image_height;
         float sphere_radius;
-        bool is_bilinear_interpolation_in_use;
         yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
     };
 }

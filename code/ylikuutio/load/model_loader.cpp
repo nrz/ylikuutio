@@ -110,7 +110,6 @@ namespace yli::load
             heightmap_loader_struct.divisor                      = model_loader_struct.model_struct.divisor;
             heightmap_loader_struct.x_step                       = model_loader_struct.model_struct.x_step;
             heightmap_loader_struct.y_step                       = model_loader_struct.model_struct.y_step;
-            heightmap_loader_struct.triangulation_type           = model_loader_struct.model_struct.triangulation_type;
             heightmap_loader_struct.use_real_texture_coordinates = model_loader_struct.model_struct.use_real_texture_coordinates;
 
             if (model_loader_struct.model_struct.model_file_format == "srtm" || model_loader_struct.model_struct.model_file_format == "SRTM")

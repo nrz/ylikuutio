@@ -165,8 +165,7 @@ namespace yli::ontology
         apprentice_of_pipeline(pipeline_master, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },
-        model_file_format  { model_struct.model_file_format },
-        triangulation_type { model_struct.triangulation_type }
+        model_file_format  { model_struct.model_file_format }
     {
         // constructor.
 
@@ -257,7 +256,6 @@ namespace yli::ontology
         yli::load::ModelLoaderStruct model_loader_struct;
         model_loader_struct.model_struct.model_filename = this->model_filename;
         model_loader_struct.model_struct.model_file_format = this->model_file_format;
-        model_loader_struct.model_struct.triangulation_type = this->triangulation_type;
 
         const bool is_debug_mode = true;
 

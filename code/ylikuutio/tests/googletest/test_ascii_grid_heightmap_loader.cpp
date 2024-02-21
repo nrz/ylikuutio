@@ -35,7 +35,6 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.y_step = 1;
-    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> vertices;         // vertices of the object.
@@ -276,7 +275,6 @@ TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_12
     heightmap_loader_struct.filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc";
     heightmap_loader_struct.x_step = 1;
     heightmap_loader_struct.y_step = 1;
-    heightmap_loader_struct.triangulation_type = "bilinear_interpolation";
     heightmap_loader_struct.use_real_texture_coordinates = true;
     heightmap_loader_struct.triangulate = false;
 

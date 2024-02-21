@@ -226,7 +226,6 @@ namespace yli::load
             triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
             triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
-            triangulate_quads_struct.triangulation_type = heightmap_loader_struct.triangulation_type;
             triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
             return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);

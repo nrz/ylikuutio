@@ -45,7 +45,6 @@ namespace yli::ontology
         : model_filename { model_struct.model_filename },
         model_file_format { model_struct.model_file_format },
         color_channel { model_struct.color_channel },
-        triangulation_type { model_struct.triangulation_type },
         planet_radius { model_struct.planet_radius },
         divisor { model_struct.divisor },
         latitude { model_struct.latitude },
@@ -77,7 +76,6 @@ namespace yli::ontology
             model_loader_struct.model_struct.model_filename               = this->model_filename;
             model_loader_struct.model_struct.model_file_format            = this->model_file_format;
             model_loader_struct.model_struct.color_channel                = this->color_channel;
-            model_loader_struct.model_struct.triangulation_type           = this->triangulation_type;
             model_loader_struct.model_struct.planet_radius                = this->planet_radius;
             model_loader_struct.model_struct.divisor                      = this->divisor;
             model_loader_struct.model_struct.latitude                     = this->latitude;

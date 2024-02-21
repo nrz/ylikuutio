@@ -83,7 +83,6 @@ namespace yli::ontology
 
         private:
             std::string color_channel;    // Color channel to use for altitude data, for PNG model files.
-            std::string triangulation_type { "bilinear_interpolation" }; // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
 
         public:
             float planet_radius { NAN };  // Radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
