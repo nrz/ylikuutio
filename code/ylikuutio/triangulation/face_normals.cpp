@@ -66,11 +66,11 @@ namespace yli::triangulation
         // 4 * (actual_image_width - 1) * (actual_image_height - 1)
         face_normal_vector_vec3.reserve(4 * (actual_image_width - 1) * (actual_image_height - 1));
 
-        for (std::size_t z = 1; z < actual_image_height; z++)
+        for (std::size_t y = 1; y < actual_image_height; y++)
         {
             for (std::size_t x = 1; x < actual_image_width; x++)
             {
-                std::size_t current_vertex_i = actual_image_width * z + x;
+                std::size_t current_vertex_i = actual_image_width * y + x;
 
                 const glm::vec3& southeast_edge = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
                 const glm::vec3& southwest_edge = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
@@ -99,11 +99,11 @@ namespace yli::triangulation
     const glm::vec3& get_face_normal(
             const std::vector<glm::vec3>& face_normal_data,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const yli::triangulation::BilinearDirections compass_point_code,
             const std::size_t actual_image_width)
     {
-        const std::size_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
+        const std::size_t face_normal_i = get_face_normal_i(x, y, compass_point_code, actual_image_width);
         return face_normal_data[face_normal_i];
     }
 
@@ -113,33 +113,33 @@ namespace yli::triangulation
     const glm::vec3& s_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width)
     {
-        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, yli::triangulation::BilinearDirections::ENE, image_width);
+        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, y - 1, yli::triangulation::BilinearDirections::ENE, image_width);
     }
     const glm::vec3& w_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width)
     {
-        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, yli::triangulation::BilinearDirections::NNE, image_width);
+        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x - 1, y - 1, yli::triangulation::BilinearDirections::NNE, image_width);
     }
     const glm::vec3& n_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width)
     {
-        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::WSW, image_width);
+        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, y, yli::triangulation::BilinearDirections::WSW, image_width);
     }
     const glm::vec3& e_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width)
     {
-        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, z, yli::triangulation::BilinearDirections::SSW, image_width);
+        return yli::triangulation::get_face_normal(face_normal_vector_vec3, x, y, yli::triangulation::BilinearDirections::SSW, image_width);
     }
 }

@@ -45,7 +45,7 @@ namespace yli::triangulation
     const glm::vec3& get_face_normal(
             const std::vector<glm::vec3>& face_normal_data,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const yli::triangulation::BilinearDirections compass_point_code,
             const std::size_t actual_image_width);
 
@@ -55,22 +55,22 @@ namespace yli::triangulation
     const glm::vec3& s_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width);
     const glm::vec3& w_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width);
     const glm::vec3& n_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width);
     const glm::vec3& e_face_normal(
             const std::vector<glm::vec3>& face_normal_vector_vec3,
             const std::size_t x,
-            const std::size_t z,
+            const std::size_t y,
             const std::size_t image_width);
 }
 
