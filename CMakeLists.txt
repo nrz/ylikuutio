@@ -958,6 +958,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line_2d.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        code/ylikuutio/tests/googletest/test_lisp_function_overload.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_material.cpp
         code/ylikuutio/tests/googletest/test_material_struct.cpp
