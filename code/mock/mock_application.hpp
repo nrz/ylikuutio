@@ -71,7 +71,11 @@ namespace mock
 
         private:
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
+
+        public:
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
+
+        private:
             yli::ontology::Universe* const universe { nullptr };
     };
 }
