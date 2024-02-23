@@ -688,46 +688,46 @@ namespace tulevaisuus
         std::cout << "Defining console command callback engines.\n";
 
         // Variable callbacks.
-        this->entity_factory.create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables0));
-        this->entity_factory.create_lisp_function_overload("variables", my_console, std::function(&yli::ontology::Entity::print_variables1));
-        this->entity_factory.create_lisp_function_overload("create-variable", my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
-        this->entity_factory.create_lisp_function_overload("set", my_console, std::function(&yli::ontology::Variable::set_variable_const_std_string));
-        this->entity_factory.create_lisp_function_overload("copy", my_console, std::function(&yli::ontology::Variable::set_variable_variable));
-        this->entity_factory.create_lisp_function_overload("print", my_console, std::function(&yli::ontology::Variable::print_value1));
+        this->entity_factory.create_lisp_function_overload("variables", *my_console, std::function(&yli::ontology::Entity::print_variables0));
+        this->entity_factory.create_lisp_function_overload("variables", *my_console, std::function(&yli::ontology::Entity::print_variables1));
+        this->entity_factory.create_lisp_function_overload("create-variable", *my_console, std::function(&yli::ontology::Entity::create_variable_with_parent_name_type_value));
+        this->entity_factory.create_lisp_function_overload("set", *my_console, std::function(&yli::ontology::Variable::set_variable_const_std_string));
+        this->entity_factory.create_lisp_function_overload("copy", *my_console, std::function(&yli::ontology::Variable::set_variable_variable));
+        this->entity_factory.create_lisp_function_overload("print", *my_console, std::function(&yli::ontology::Variable::print_value1));
 
         // Object callbacks.
-        this->entity_factory.create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z));
-        this->entity_factory.create_lisp_function_overload("create-object", my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch));
+        this->entity_factory.create_lisp_function_overload("create-object", *my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z));
+        this->entity_factory.create_lisp_function_overload("create-object", *my_console, std::function(&yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch));
 
         // Holobiont callbacks.
-        this->entity_factory.create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z));
-        this->entity_factory.create_lisp_function_overload("create-holobiont", my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch));
+        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z));
+        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, std::function(&yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch));
 
         // `Entity` handling callbacks.
-        this->entity_factory.create_lisp_function_overload("entities", my_console, std::function(&yli::ontology::Universe::print_entities));
-        this->entity_factory.create_lisp_function_overload("parent", my_console, std::function(&yli::ontology::Universe::print_parent));
-        this->entity_factory.create_lisp_function_overload("children", my_console, std::function(&yli::ontology::Entity::print_children));
-        this->entity_factory.create_lisp_function_overload("activate", my_console, std::function(&yli::ontology::Universe::activate_entity));
-        this->entity_factory.create_lisp_function_overload("delete", my_console, std::function(&yli::ontology::Universe::delete_entity));
-        this->entity_factory.create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info0));
-        this->entity_factory.create_lisp_function_overload("info", my_console, std::function(&yli::ontology::Universe::info1));
-        this->entity_factory.create_lisp_function_overload("set-global-name", my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
-        this->entity_factory.create_lisp_function_overload("set-local-name", my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
+        this->entity_factory.create_lisp_function_overload("entities", *my_console, std::function(&yli::ontology::Universe::print_entities));
+        this->entity_factory.create_lisp_function_overload("parent", *my_console, std::function(&yli::ontology::Universe::print_parent));
+        this->entity_factory.create_lisp_function_overload("children", *my_console, std::function(&yli::ontology::Entity::print_children));
+        this->entity_factory.create_lisp_function_overload("activate", *my_console, std::function(&yli::ontology::Universe::activate_entity));
+        this->entity_factory.create_lisp_function_overload("delete", *my_console, std::function(&yli::ontology::Universe::delete_entity));
+        this->entity_factory.create_lisp_function_overload("info", *my_console, std::function(&yli::ontology::Universe::info0));
+        this->entity_factory.create_lisp_function_overload("info", *my_console, std::function(&yli::ontology::Universe::info1));
+        this->entity_factory.create_lisp_function_overload("set-global-name", *my_console, std::function(&yli::ontology::Universe::set_global_name_for_entity));
+        this->entity_factory.create_lisp_function_overload("set-local-name", *my_console, std::function(&yli::ontology::Universe::set_local_name_for_entity));
 
         // Exit program callbacks.
-        this->entity_factory.create_lisp_function_overload("bye", my_console, std::function(&yli::snippets::quit));
-        this->entity_factory.create_lisp_function_overload("chau", my_console, std::function(&yli::snippets::quit));
-        this->entity_factory.create_lisp_function_overload("ciao", my_console, std::function(&yli::snippets::quit));
-        this->entity_factory.create_lisp_function_overload("heippa", my_console, std::function(&yli::snippets::quit));
-        this->entity_factory.create_lisp_function_overload("quit", my_console, std::function(&yli::snippets::quit));
-        this->entity_factory.create_lisp_function_overload("sayonara", my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("bye", *my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("chau", *my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("ciao", *my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("heippa", *my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("quit", *my_console, std::function(&yli::snippets::quit));
+        this->entity_factory.create_lisp_function_overload("sayonara", *my_console, std::function(&yli::snippets::quit));
 
         // Other callbacks.
         // my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
-        this->entity_factory.create_lisp_function_overload("help", my_console, std::function(&yli::snippets::help));
-        this->entity_factory.create_lisp_function_overload("version", my_console, std::function(&tulevaisuus::version));
-        this->entity_factory.create_lisp_function_overload("clear", my_console, std::function(&yli::ontology::Console::clear));
-        this->entity_factory.create_lisp_function_overload("screenshot", my_console, std::function(&yli::ontology::Universe::screenshot));
+        this->entity_factory.create_lisp_function_overload("help", *my_console, std::function(&yli::snippets::help));
+        this->entity_factory.create_lisp_function_overload("version", *my_console, std::function(&tulevaisuus::version));
+        this->entity_factory.create_lisp_function_overload("clear", *my_console, std::function(&yli::ontology::Console::clear));
+        this->entity_factory.create_lisp_function_overload("screenshot", *my_console, std::function(&yli::ontology::Universe::screenshot));
 
         if (this->audio_system != nullptr)
         {

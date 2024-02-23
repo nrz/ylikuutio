@@ -1051,14 +1051,9 @@ namespace yli::ontology
             template<typename... Args>
                 yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
                         const std::string& name,
-                        yli::ontology::Console* const console,
+                        yli::ontology::Console& console,
                         std::function<std::optional<yli::data::AnyValue>(Args...)> callback)
                 {
-                    if (console == nullptr)
-                    {
-                        return nullptr;
-                    }
-
                     yli::ontology::Entity* const lisp_function_entity = this->get_universe().get_entity(name);
 
                     yli::ontology::LispFunction* lisp_function = nullptr;
@@ -1067,7 +1062,7 @@ namespace yli::ontology
                     {
                         // There was not any `Entity` with that name.
                         yli::ontology::LispFunctionStruct lisp_function_struct;
-                        lisp_function_struct.parent = console;
+                        lisp_function_struct.parent = &console;
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)
