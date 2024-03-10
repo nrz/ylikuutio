@@ -25,6 +25,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 
 namespace yli::core
@@ -108,7 +109,7 @@ namespace yli::ontology
     {
         if (this->get_parent() == nullptr)
         {
-            return;
+            throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
         }
 
         this->variable_value = new_value;
@@ -123,7 +124,7 @@ namespace yli::ontology
     {
         if (this->get_parent() == nullptr)
         {
-            return;
+            throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
         }
 
         this->variable_value.set_new_value(new_value);
