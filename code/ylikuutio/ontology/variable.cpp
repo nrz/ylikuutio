@@ -93,8 +93,7 @@ namespace yli::ontology
     {
         if (this->get_parent() == nullptr)
         {
-            std::cerr << "ERROR: `Variable::get`: the parent of a `Variable` must not be `nullptr`!";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Variable::get`: `this->get_parent()` is `nullptr`!");
         }
 
         if (this->read_callback == nullptr)
