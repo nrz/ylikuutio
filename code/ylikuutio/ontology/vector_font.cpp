@@ -234,12 +234,12 @@ namespace yli::ontology
     {
         yli::ontology::Entity* const parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (parent == nullptr)
         {
-            return parent->get_scene();
+            throw std::runtime_error("ERROR: `VectorFont::get_scene`: `parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return parent->get_scene();
     }
 
     yli::ontology::Pipeline* VectorFont::get_pipeline() const
