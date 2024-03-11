@@ -246,12 +246,12 @@ namespace yli::ontology
     {
         const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
 
-        if (material != nullptr)
+        if (material == nullptr)
         {
-            return material->get_pipeline();
+            throw std::runtime_error("ERROR: `VectorFont::get_pipeline`: `material` is `nullptr`!");
         }
 
-        return nullptr;
+        return material->get_pipeline();
     }
 
     std::size_t VectorFont::get_number_of_children() const
