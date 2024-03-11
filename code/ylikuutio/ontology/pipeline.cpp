@@ -29,12 +29,12 @@
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
 
 namespace yli::ontology
 {
