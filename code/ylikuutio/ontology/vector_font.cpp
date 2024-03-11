@@ -40,6 +40,7 @@
 #include <optional>      // std::optional
 #include <stdexcept>     // std::runtime_error
 #include <stdint.h>      // uint32_t etc.
+#include <stdexcept>     // std::runtime_error
 #include <string>        // std::string
 
 namespace yli::ontology
@@ -51,7 +52,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(
             yli::ontology::VectorFont& vector_font,
-            yli::ontology::Material& new_parent) noexcept
+            yli::ontology::Material& new_parent)
     {
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -60,8 +61,7 @@ namespace yli::ontology
 
         if (material == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::bind_to_new_material_parent`: `material` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `VectorFont::bind_to_new_material_parent`: `material` is `nullptr`!");
         }
 
         if (new_parent.has_child(vector_font.local_name))

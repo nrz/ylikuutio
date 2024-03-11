@@ -64,7 +64,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_material_parent(
                     yli::ontology::VectorFont& vector_font,
-                    yli::ontology::Material& new_parent) noexcept;
+                    yli::ontology::Material& new_parent);
 
         private:
             VectorFont(
