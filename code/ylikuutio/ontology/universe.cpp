@@ -954,7 +954,7 @@ namespace yli::ontology
 
             if (this->window != nullptr)
             {
-                std::cerr << "SDL Window created successfully.\n";
+                std::cout << "SDL Window created successfully.\n";
                 return true;
             }
 
