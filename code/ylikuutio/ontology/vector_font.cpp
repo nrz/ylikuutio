@@ -219,8 +219,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `VectorFont::render`: `render_system` is `nullptr`!");
         }
 
         render_system->render_glyphs(this->parent_of_glyphs, new_target_scene);
