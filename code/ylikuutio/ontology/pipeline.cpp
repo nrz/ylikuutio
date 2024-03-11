@@ -32,6 +32,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -50,8 +51,7 @@ namespace yli::ontology
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_parent)
@@ -85,8 +85,7 @@ namespace yli::ontology
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Pipeline::bind_to_new_scene_parent`: `old_parent` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_scene_parent`: `old_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_parent)
