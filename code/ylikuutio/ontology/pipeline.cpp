@@ -187,8 +187,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Pipeline::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Pipeline::render`: `render_system` is `nullptr`!");
         }
 
         // [Re]bind `program_id` program.
