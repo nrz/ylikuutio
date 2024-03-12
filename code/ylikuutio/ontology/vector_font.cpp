@@ -131,15 +131,15 @@ namespace yli::ontology
         // Requirements for further actions:
         // `this->parent` must not be `nullptr`.
 
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+        yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
 
-        if (material == nullptr)
+        if (material_parent == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::VectorFont`: `material` is `nullptr`!\n";
+            std::cerr << "ERROR: `VectorFont::VectorFont`: `material_parent` is `nullptr`!\n";
             return;
         }
 
-        yli::ontology::Pipeline* const pipeline = static_cast<yli::ontology::Pipeline*>(material->get_parent());
+        yli::ontology::Pipeline* const pipeline = static_cast<yli::ontology::Pipeline*>(material_parent->get_parent());
 
         if (pipeline == nullptr)
         {
@@ -178,7 +178,7 @@ namespace yli::ontology
                 yli::ontology::ModelStruct model_struct;
                 model_struct.parent = this;
                 model_struct.pipeline = pipeline;
-                model_struct.material = material;
+                model_struct.material = material_parent;
                 model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 model_struct.unicode_char_pointer = unicode_char_pointer;
