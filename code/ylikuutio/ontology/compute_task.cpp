@@ -37,6 +37,7 @@
 #include <iomanip>       // std::setfill, std::setw
 #include <iostream>      // std::cerr
 #include <sstream>       // std::stringstream
+#include <stdexcept>     // std::runtime_error
 #include <stdint.h>      // uint32_t etc.
 #include <utility>       // std::swap etc.
 #include <vector>        // std::vector
@@ -432,14 +433,14 @@ namespace yli::ontology
 
     yli::ontology::Scene* ComputeTask::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Pipeline* const pipeline_parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
 
-        if (parent != nullptr)
+        if (pipeline_parent == nullptr)
         {
-            return parent->get_scene();
+            throw std::runtime_error("ERROR: `ComputeTask::get_scene`: `pipeline_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return pipeline_parent->get_scene();
     }
 
     std::size_t ComputeTask::get_number_of_children() const
