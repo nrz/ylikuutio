@@ -59,12 +59,12 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::CameraStruct& camera_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const generic_master_module)
+            yli::ontology::GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
                 camera_struct,
-                generic_master_module),
+                brain_master_module),
         child_of_scene(scene_parent_module, *this)
     {
         if (this->universe.get_is_opengl_in_use())
