@@ -56,9 +56,9 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    yli::ontology::GenericParentModule* const scene_parent_module,
+                    yli::ontology::GenericMasterModule* const symbiosis_master_module,
+                    yli::ontology::GenericMasterModule* const brain_master_module);
 
             virtual ~Holobiont() = default;
 

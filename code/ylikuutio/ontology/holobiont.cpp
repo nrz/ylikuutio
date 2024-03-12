@@ -58,21 +58,21 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& holobiont_struct,
-            yli::ontology::GenericParentModule* const scene_parent,
-            yli::ontology::GenericMasterModule* const symbiosis_master,
-            yli::ontology::GenericMasterModule* const brain_master)
+            yli::ontology::GenericParentModule* const scene_parent_module,
+            yli::ontology::GenericMasterModule* const symbiosis_master_module,
+            yli::ontology::GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
                 holobiont_struct,
-                brain_master),
-        child_of_scene(scene_parent, *this),
+                brain_master_module),
+        child_of_scene(scene_parent_module, *this),
         parent_of_bionts(
                 *this,
                 this->registry,
                 application.get_memory_allocator(yli::data::Datatype::BIONT),
                 "bionts"),
-        apprentice_of_symbiosis(symbiosis_master, this)
+        apprentice_of_symbiosis(symbiosis_master_module, this)
     {
         // constructor.
 
