@@ -52,14 +52,14 @@ namespace yli::ontology
         // Set pointer to `Species` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_parent = species.get_parent();
+        const yli::ontology::Entity* const old_scene_or_ecosystem_parent = species.get_parent();
 
-        if (old_parent == nullptr)
+        if (old_scene_or_ecosystem_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Species::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Species::bind_to_new_ecosystem_parent`: `old_scene_or_ecosystem_parent` is `nullptr`!");
         }
 
-        if (&new_parent == old_parent)
+        if (&new_parent == old_scene_or_ecosystem_parent)
         {
             // Setting current parent as the new parent. Nothing to do.
             return std::nullopt;
@@ -86,14 +86,14 @@ namespace yli::ontology
         // Set pointer to `species` to `nullptr`, set parent according to the input,
         // and request a new childID from the new `new_parent`.
 
-        const yli::ontology::Entity* const scene = species.get_parent();
+        const yli::ontology::Entity* const old_scene_or_ecosystem_parent = species.get_parent();
 
-        if (scene == nullptr)
+        if (old_scene_or_ecosystem_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Species::bind_to_new_scene_parent`: `scene` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Species::bind_to_new_scene_parent`: `old_scene_or_ecosystem_parent` is `nullptr`!");
         }
 
-        if (&new_parent == scene)
+        if (&new_parent == old_scene_or_ecosystem_parent)
         {
             // Setting current parent as the new parent. Nothing to do.
             return std::nullopt;
