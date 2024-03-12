@@ -31,6 +31,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
 {
@@ -50,8 +51,7 @@ namespace yli::ontology
 
         if (material_parent == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(shapeshifter_transformation.local_name))
