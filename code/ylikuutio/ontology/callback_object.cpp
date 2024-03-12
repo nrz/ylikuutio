@@ -42,9 +42,9 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::CallbackObjectStruct& callback_object_struct,
-            yli::ontology::GenericParentModule* const callback_engine_parent)
+            yli::ontology::GenericParentModule* const callback_engine_parent_module)
         : Entity(application, universe, callback_object_struct),
-        child_of_callback_engine(callback_engine_parent, *this),
+        child_of_callback_engine(callback_engine_parent_module, *this),
         parent_of_callback_parameters(
                 *this,
                 this->registry,
@@ -58,9 +58,9 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::CallbackObjectStruct& callback_object_struct,
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
-            yli::ontology::GenericParentModule* const callback_engine_parent)
+            yli::ontology::GenericParentModule* const callback_engine_parent_module)
         : Entity(application, universe, callback_object_struct),
-        child_of_callback_engine(callback_engine_parent, *this),
+        child_of_callback_engine(callback_engine_parent_module, *this),
         parent_of_callback_parameters(
                 *this,
                 this->registry,

@@ -59,14 +59,14 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::CallbackObjectStruct& callback_object_struct,
-                    yli::ontology::GenericParentModule* const callback_engine_parent);
+                    yli::ontology::GenericParentModule* const callback_engine_parent_module);
 
             CallbackObject(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::CallbackObjectStruct& callback_object_struct,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
-                    yli::ontology::GenericParentModule* const callback_engine_parent);
+                    yli::ontology::GenericParentModule* const callback_engine_parent_module);
 
             virtual ~CallbackObject() = default;
 
