@@ -83,9 +83,9 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::MovableStruct& movable_struct,
-            yli::ontology::GenericMasterModule* const brain_master)
+            yli::ontology::GenericMasterModule* const brain_master_module)
         : Entity(application, universe, movable_struct),
-        apprentice_of_brain(brain_master, this),
+        apprentice_of_brain(brain_master_module, this),
         rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },
         initial_rotate_angles { movable_struct.initial_rotate_angles },

@@ -87,7 +87,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::MovableStruct& movable_struct,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    yli::ontology::GenericMasterModule* const brain_master_module);
 
             virtual ~Movable() = default;
 
