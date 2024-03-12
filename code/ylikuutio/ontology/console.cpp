@@ -30,15 +30,15 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <algorithm>     // std::copy etc.
-#include <cstddef>       // std::size_t
-#include <iostream>      // std::cerr
-#include <iterator>      // std::back_inserter
-#include <list>          // std::list
-#include <optional>      // std::optional
-#include <stdint.h>      // uint32_t etc.
-#include <string>        // std::string
-#include <vector>        // std::vector
+#include <algorithm> // std::copy etc.
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cerr
+#include <iterator>  // std::back_inserter
+#include <list>      // std::list
+#include <optional>  // std::optional
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::ontology
 {
