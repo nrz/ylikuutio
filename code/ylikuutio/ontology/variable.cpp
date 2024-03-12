@@ -91,7 +91,9 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::get() const
     {
-        if (this->get_parent() == nullptr)
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent == nullptr)
         {
             throw std::runtime_error("ERROR: `Variable::get`: `this->get_parent()` is `nullptr`!");
         }
@@ -101,12 +103,14 @@ namespace yli::ontology
             return this->variable_value;
         }
 
-        return this->read_callback(*this->get_parent());
+        return this->read_callback(*parent);
     }
 
     void Variable::set(const yli::data::AnyValue& new_value)
     {
-        if (this->get_parent() == nullptr)
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent == nullptr)
         {
             throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
         }
@@ -115,13 +119,15 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(*this->get_parent(), *this);
+            this->activate_callback(*parent, *this);
         }
     }
 
     void Variable::set(const std::string& new_value)
     {
-        if (this->get_parent() == nullptr)
+        yli::ontology::Entity* const parent = this->get_parent();
+
+        if (parent == nullptr)
         {
             throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
         }
@@ -130,7 +136,7 @@ namespace yli::ontology
 
         if (this->activate_callback != nullptr)
         {
-            this->activate_callback(*this->get_parent(), *this);
+            this->activate_callback(*parent, *this);
         }
     }
 
