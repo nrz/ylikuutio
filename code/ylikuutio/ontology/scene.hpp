@@ -86,7 +86,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::SceneStruct& scene_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+                    yli::ontology::GenericParentModule* const universe_parent_module);
 
             ~Scene();
 
