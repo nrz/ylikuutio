@@ -53,7 +53,7 @@ namespace yli::ontology
             GenericLispFunctionOverload(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const parent_module);
+                    yli::ontology::GenericParentModule* const lisp_function_parent_module);
 
             virtual ~GenericLispFunctionOverload() = default;
 

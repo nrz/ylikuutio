@@ -34,9 +34,9 @@ namespace yli::ontology
     GenericLispFunctionOverload::GenericLispFunctionOverload(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            yli::ontology::GenericParentModule* const parent_module)
+            yli::ontology::GenericParentModule* const lisp_function_parent_module)
         : Entity(application, universe, yli::ontology::EntityStruct()),
-        child_of_lisp_function(parent_module, *this)
+        child_of_lisp_function(lisp_function_parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::GenericLispFunctionOverload*";

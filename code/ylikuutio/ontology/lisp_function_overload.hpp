@@ -72,9 +72,9 @@ namespace yli::ontology
             LispFunctionOverload(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const parent_module,
+                    yli::ontology::GenericParentModule* const lisp_function_parent_module,
                     std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
-                : GenericLispFunctionOverload(application, universe, parent_module),
+                : GenericLispFunctionOverload(application, universe, lisp_function_parent_module),
                 callback(callback)
             {
                 // constructor.
