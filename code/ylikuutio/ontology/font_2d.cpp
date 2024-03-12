@@ -58,9 +58,9 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::FontStruct& font_struct,
-            yli::ontology::GenericParentModule* const parent_module)
+            yli::ontology::GenericParentModule* const universe_parent_module)
         : Entity(application, universe, font_struct),
-        child_of_universe(parent_module, *this),
+        child_of_universe(universe_parent_module, *this),
         parent_of_text_2ds(
                 *this,
                 this->registry,
