@@ -61,7 +61,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::TextStruct& text_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+                    yli::ontology::GenericParentModule* const font_2d_parent_module);
 
             ~Text2D();
 
