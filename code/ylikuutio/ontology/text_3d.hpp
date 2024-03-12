@@ -63,7 +63,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::Text3DStruct& text_3d_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module);
+                    yli::ontology::GenericMasterModule* const brain_master_module);
 
             ~Text3D() = default;
 
