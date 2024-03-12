@@ -35,6 +35,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -44,7 +45,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
             yli::ontology::Material& material,
-            yli::ontology::Ecosystem& new_parent) noexcept
+            yli::ontology::Ecosystem& new_parent)
     {
         // Set pointer to `Material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -53,8 +54,7 @@ namespace yli::ontology
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Material::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_parent)
