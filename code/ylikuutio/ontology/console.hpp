@@ -107,7 +107,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleStruct& console_struct,
                     yli::ontology::GenericParentModule* const universe_parent_module,
-                    yli::ontology::GenericMasterModule* const generic_master_module);
+                    yli::ontology::GenericMasterModule* const font_2d_master_module);
 
             ~Console();
 

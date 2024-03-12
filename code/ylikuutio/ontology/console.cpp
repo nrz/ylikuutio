@@ -76,7 +76,7 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::ConsoleStruct& console_struct,
             yli::ontology::GenericParentModule* const universe_parent_module,
-            yli::ontology::GenericMasterModule* const generic_master_module)
+            yli::ontology::GenericMasterModule* const font_2d_master_module)
         : Entity(application, universe, console_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_lisp_functions(
@@ -84,7 +84,7 @@ namespace yli::ontology
                 this->registry,
                 application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
                 "lisp_functions"),
-        apprentice_of_font_2d(generic_master_module, this),
+        apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")
     {
         // constructor.
