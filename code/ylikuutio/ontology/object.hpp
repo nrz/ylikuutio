@@ -62,7 +62,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
                     yli::ontology::Object& object,
-                    yli::ontology::Scene& new_parent) noexcept;
+                    yli::ontology::Scene& new_parent);
 
             // Set pointer to `object` to `nullptr`, set mesh according to the input,
             // and request a new apprenticeID from `new_species`.
