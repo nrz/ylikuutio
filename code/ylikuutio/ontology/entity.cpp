@@ -370,6 +370,7 @@ namespace yli::ontology
 
         if (parent == nullptr)
         {
+            // `Universe` has no parent and can not be given a local name.
             return;
         }
 
