@@ -52,7 +52,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
                     const yli::data::AnyValue& any_value,
-                    yli::ontology::GenericParentModule* const console_callback_object_parent);
+                    yli::ontology::GenericParentModule* const console_callback_object_parent_module);
 
             ~ConsoleCallbackParameter() = default;
 
