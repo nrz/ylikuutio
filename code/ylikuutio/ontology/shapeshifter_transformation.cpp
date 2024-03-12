@@ -28,9 +28,9 @@
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
