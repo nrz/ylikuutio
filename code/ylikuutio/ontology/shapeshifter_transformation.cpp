@@ -46,11 +46,11 @@ namespace yli::ontology
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const material = shapeshifter_transformation.get_parent();
+        const yli::ontology::Entity* const material_parent = shapeshifter_transformation.get_parent();
 
-        if (material == nullptr)
+        if (material_parent == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material` is `nullptr`!\n";
+            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!\n";
             return std::nullopt;
         }
 
