@@ -97,8 +97,8 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const pipeline_master);
+                    yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
+                    yli::ontology::GenericMasterModule* const pipeline_master_module);
 
             ~Symbiosis() = default;
 

@@ -153,16 +153,16 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const pipeline_master)
+            yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
+            yli::ontology::GenericMasterModule* const pipeline_master_module)
         : Entity(application, universe, model_struct),
-        child_of_scene_or_ecosystem(scene_parent_module, *this),
+        child_of_scene_or_ecosystem(scene_or_ecosystem_parent_module, *this),
         parent_of_symbiont_materials(
                 *this,
                 this->registry,
                 application.get_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
                 "symbiont_materials"),
-        apprentice_of_pipeline(pipeline_master, this),
+        apprentice_of_pipeline(pipeline_master_module, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
         model_filename     { model_struct.model_filename },
         model_file_format  { model_struct.model_file_format }
