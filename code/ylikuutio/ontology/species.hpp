@@ -79,7 +79,7 @@ namespace yli::ontology
                     yli::ontology::Universe& universe,
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
-                    yli::ontology::GenericMasterModule* const material_master);
+                    yli::ontology::GenericMasterModule* const material_master_module);
 
             ~Species() = default;
 
