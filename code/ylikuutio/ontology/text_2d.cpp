@@ -54,11 +54,11 @@ namespace yli::ontology
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const font_2d = text_2d.get_parent();
+        const yli::ontology::Entity* const old_font_2d_parent = text_2d.get_parent();
 
-        if (font_2d == nullptr)
+        if (old_font_2d_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Text2D::bind_to_new_font_2d_parent`: `font_2d` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text2D::bind_to_new_font_2d_parent`: `old_font_2d_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_2d.local_name))
