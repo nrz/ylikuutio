@@ -57,7 +57,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
-                    yli::ontology::GenericParentModule* const console_callback_engine_parent);
+                    yli::ontology::GenericParentModule* const console_callback_engine_parent_module);
 
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;

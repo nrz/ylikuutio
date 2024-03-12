@@ -37,9 +37,9 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
-            yli::ontology::GenericParentModule* const console_callback_engine_parent)
+            yli::ontology::GenericParentModule* const console_callback_engine_parent_module)
         : Entity(application, universe, console_callback_object_struct),
-        child_of_console_callback_engine(console_callback_engine_parent, *this),
+        child_of_console_callback_engine(console_callback_engine_parent_module, *this),
         parent_of_console_callback_parameters(
                 *this,
                 this->registry,
