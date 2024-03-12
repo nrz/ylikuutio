@@ -71,7 +71,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VectorFontStruct& vector_font_struct,
-                    yli::ontology::GenericParentModule* const material_parent);
+                    yli::ontology::GenericParentModule* const material_parent_module);
 
             ~VectorFont() = default;
 
