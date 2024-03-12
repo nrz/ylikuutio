@@ -33,6 +33,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -48,7 +49,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(
             yli::ontology::Text2D& text_2d,
-            yli::ontology::Font2D& new_parent) noexcept
+            yli::ontology::Font2D& new_parent)
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -57,8 +58,7 @@ namespace yli::ontology
 
         if (font_2d == nullptr)
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: `font_2d` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Text2D::bind_to_new_font_2d_parent`: `font_2d` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_2d.local_name))

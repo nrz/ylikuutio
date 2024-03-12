@@ -54,7 +54,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
                     yli::ontology::Text2D& text_2d,
-                    yli::ontology::Font2D& new_parent) noexcept;
+                    yli::ontology::Font2D& new_parent);
 
         private:
             Text2D(
