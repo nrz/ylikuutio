@@ -42,7 +42,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
             yli::ontology::ShapeshifterTransformation& shapeshifter_transformation,
-            yli::ontology::Material& new_parent) noexcept
+            yli::ontology::Material& new_parent)
     {
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
