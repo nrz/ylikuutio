@@ -41,7 +41,7 @@ namespace yli::ontology
                     const yli::ontology::ObjectStruct& terrain_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module,
                     yli::ontology::GenericMasterModule* const mesh_master_module,
-                    yli::ontology::GenericMasterModule* const /* brain_master */);
+                    yli::ontology::GenericMasterModule* const /* brain_master_module */);
 
             ~Terrain() = default;
 
