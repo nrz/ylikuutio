@@ -49,7 +49,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const callback_object_parent_module)
         : Entity(application, universe, callback_parameter_struct),
         child_of_callback_object(callback_object_parent_module, *this),
-        any_value    { any_value }
+        any_value { any_value }
     {
     }
 
