@@ -34,10 +34,10 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& terrain_struct,
-            yli::ontology::GenericParentModule* const scene_parent,
-            yli::ontology::GenericMasterModule* const mesh_master,
+            yli::ontology::GenericParentModule* const scene_parent_module,
+            yli::ontology::GenericMasterModule* const mesh_master_module,
             yli::ontology::GenericMasterModule* const /* brain_master */)
-        : yli::ontology::Object(application, universe, terrain_struct, scene_parent, mesh_master, nullptr)
+        : yli::ontology::Object(application, universe, terrain_struct, scene_parent_module, mesh_master_module, nullptr)
     {
         // constructor.
 
