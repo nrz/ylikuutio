@@ -79,7 +79,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(
             yli::ontology::Material& material,
-            yli::ontology::Scene& new_parent) noexcept
+            yli::ontology::Scene& new_parent)
     {
         // Set pointer to `material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -88,8 +88,7 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Material::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Material::bind_to_new_scene_parent`: `scene` is `nullptr`!");
         }
 
         if (&new_parent == scene)

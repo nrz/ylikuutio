@@ -66,7 +66,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
                     yli::ontology::Material& material,
-                    yli::ontology::Scene& new_parent) noexcept;
+                    yli::ontology::Scene& new_parent);
 
             // Set pointer to `material` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_parent`.
