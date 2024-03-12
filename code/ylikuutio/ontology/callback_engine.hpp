@@ -74,7 +74,7 @@ namespace yli::ontology
             CallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const parent);
+                    yli::ontology::GenericParentModule* const entity_parent_module);
 
             virtual ~CallbackEngine() = default;
 

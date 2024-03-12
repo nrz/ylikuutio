@@ -37,9 +37,9 @@ namespace yli::ontology
     CallbackEngine::CallbackEngine(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            yli::ontology::GenericParentModule* const parent)
+            yli::ontology::GenericParentModule* const entity_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
-        child_of_entity(parent, *this),
+        child_of_entity(entity_parent_module, *this),
         parent_of_callback_objects(
                 *this,
                 this->registry,
