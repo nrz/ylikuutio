@@ -49,6 +49,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -59,7 +60,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
             yli::ontology::Symbiosis& symbiosis,
-            yli::ontology::Ecosystem& new_parent) noexcept
+            yli::ontology::Ecosystem& new_parent)
     {
         // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -68,8 +69,7 @@ namespace yli::ontology
 
         if (old_parent == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: `old_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_parent)
@@ -94,7 +94,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(
             yli::ontology::Symbiosis& symbiosis,
-            yli::ontology::Scene& new_parent) noexcept
+            yli::ontology::Scene& new_parent)
     {
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -103,8 +103,7 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Symbiosis::bind_to_new_scene_parent`: `scene` is `nullptr`!");
         }
 
         if (&new_parent == scene)
