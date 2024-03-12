@@ -30,12 +30,12 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::core
 {
