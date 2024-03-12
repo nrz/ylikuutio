@@ -54,7 +54,7 @@ namespace yli::ontology
             ConsoleCallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const universe_parent);
+                    yli::ontology::GenericParentModule* const universe_parent_module);
 
             ~ConsoleCallbackEngine() = default;
 
