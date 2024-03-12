@@ -71,14 +71,14 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::BiontStruct& biont_struct,
             yli::ontology::GenericParentModule* const holobiont_parent_module,
-            yli::ontology::GenericMasterModule* const symbiont_species_generic_master_module)
+            yli::ontology::GenericMasterModule* const symbiont_species_master_module)
         : Movable(
                 application,
                 universe,
                 biont_struct,
                 nullptr),
         child_of_holobiont(holobiont_parent_module, *this),
-        apprentice_of_symbiont_species(symbiont_species_generic_master_module, this)
+        apprentice_of_symbiont_species(symbiont_species_master_module, this)
     {
         // constructor.
 
