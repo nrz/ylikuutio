@@ -90,8 +90,7 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Species::bind_to_new_scene_parent`: `scene` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Species::bind_to_new_scene_parent`: `scene` is `nullptr`!");
         }
 
         if (&new_parent == scene)
