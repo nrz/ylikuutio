@@ -24,6 +24,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
+#include <stdexcept> // std::runtime_error
 
 namespace yli::core
 {
@@ -38,7 +39,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(
             yli::ontology::Text3D& text_3d,
-            yli::ontology::VectorFont& new_parent) noexcept
+            yli::ontology::VectorFont& new_parent)
     {
         // Disable all character `Object`s of `text_3d`,
         // set `parent` according to the input, request a new childID
@@ -51,8 +52,7 @@ namespace yli::ontology
 
         if (vector_font == nullptr)
         {
-            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_3d.local_name))

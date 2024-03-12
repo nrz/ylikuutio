@@ -56,7 +56,7 @@ namespace yli::ontology
             // Note: different fonts may provide glyphs for different Unicode code points!
             static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(
                     yli::ontology::Text3D& text_3d,
-                    yli::ontology::VectorFont& new_parent) noexcept;
+                    yli::ontology::VectorFont& new_parent);
 
             Text3D(
                     yli::core::Application& application,
