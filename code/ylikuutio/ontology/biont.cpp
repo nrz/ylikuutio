@@ -304,12 +304,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const holobiont_parent = this->get_parent();
 
-        if (holobiont_parent != nullptr)
+        if (holobiont_parent == nullptr)
         {
-            return holobiont_parent->get_scene();
+            throw std::runtime_error("ERROR: `Biont::get_scene`: `holobiont_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return holobiont_parent->get_scene();
     }
 
     std::size_t Biont::get_number_of_children() const
