@@ -65,11 +65,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* SymbiontSpecies::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const symbiont_material_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (symbiont_material_parent != nullptr)
         {
-            return parent->get_scene();
+            return symbiont_material_parent->get_scene();
         }
 
         return nullptr;
