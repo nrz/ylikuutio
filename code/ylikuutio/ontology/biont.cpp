@@ -122,8 +122,7 @@ namespace yli::ontology
 
         if (symbiosis_master_of_holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
         if (this->should_render)
