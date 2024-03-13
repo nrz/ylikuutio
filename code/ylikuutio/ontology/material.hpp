@@ -105,7 +105,7 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_scene_or_ecosystem;
+            yli::ontology::ChildModule child_of_ecosystem_or_scene;
             yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
             yli::ontology::GenericParentModule parent_of_vector_fonts;
             yli::ontology::ApprenticeModule apprentice_of_pipeline;

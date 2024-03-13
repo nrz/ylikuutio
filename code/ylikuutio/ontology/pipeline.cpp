@@ -68,7 +68,7 @@ namespace yli::ontology
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+        pipeline.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
                 &new_parent.parent_of_pipelines);
 
         return std::nullopt;
@@ -102,7 +102,7 @@ namespace yli::ontology
 
         pipeline.master_of_materials.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         pipeline.master_of_symbioses.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
-        pipeline.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+        pipeline.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
                 &new_parent.parent_of_pipelines);
 
         return std::nullopt;
@@ -114,7 +114,7 @@ namespace yli::ontology
             const yli::ontology::PipelineStruct& pipeline_struct,
             yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module)
         : Entity(application, universe, pipeline_struct),
-        child_of_scene_or_ecosystem(ecosystem_or_scene_parent_module, *this),
+        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         parent_of_compute_tasks(
                 *this,
                 this->registry,
@@ -200,12 +200,12 @@ namespace yli::ontology
 
     yli::ontology::Scene* Pipeline::get_scene() const
     {
-        return this->child_of_scene_or_ecosystem.get_scene();
+        return this->child_of_ecosystem_or_scene.get_scene();
     }
 
     yli::ontology::Entity* Pipeline::get_parent() const
     {
-        return this->child_of_scene_or_ecosystem.get_parent();
+        return this->child_of_ecosystem_or_scene.get_parent();
     }
 
     std::size_t Pipeline::get_number_of_children() const

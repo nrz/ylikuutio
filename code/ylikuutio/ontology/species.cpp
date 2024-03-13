@@ -73,7 +73,7 @@ namespace yli::ontology
 
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
-        species.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+        species.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
                 &new_parent.parent_of_species);
 
         return std::nullopt;
@@ -107,7 +107,7 @@ namespace yli::ontology
 
         species.master_of_objects.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         species.apprentice_of_material.unbind_from_any_master_belonging_to_other_scene(new_parent);
-        species.child_of_scene_or_ecosystem.unbind_and_bind_to_new_parent(
+        species.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
                 &new_parent.parent_of_species);
 
         return std::nullopt;
@@ -144,7 +144,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
             yli::ontology::GenericMasterModule* const material_master_module)
         : Entity(application, universe, model_struct),
-        child_of_scene_or_ecosystem(ecosystem_or_scene_parent_module, *this),
+        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
         apprentice_of_material(material_master_module, this),
         mesh(universe, model_struct)
@@ -158,7 +158,7 @@ namespace yli::ontology
 
     yli::ontology::Entity* Species::get_parent() const
     {
-        return this->child_of_scene_or_ecosystem.get_parent();
+        return this->child_of_ecosystem_or_scene.get_parent();
     }
 
     std::size_t Species::get_number_of_apprentices() const
@@ -214,7 +214,7 @@ namespace yli::ontology
 
     yli::ontology::Scene* Species::get_scene() const
     {
-        return this->child_of_scene_or_ecosystem.get_scene();
+        return this->child_of_ecosystem_or_scene.get_scene();
     }
 
     yli::ontology::Pipeline* Species::get_pipeline() const

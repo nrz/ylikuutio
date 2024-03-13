@@ -111,7 +111,7 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_scene_or_ecosystem;
+            yli::ontology::ChildModule child_of_ecosystem_or_scene;
 
         public:
             yli::ontology::GenericMasterModule master_of_objects;

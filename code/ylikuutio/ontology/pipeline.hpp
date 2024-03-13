@@ -103,7 +103,7 @@ namespace yli::ontology
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
-            yli::ontology::ChildModule child_of_scene_or_ecosystem;
+            yli::ontology::ChildModule child_of_ecosystem_or_scene;
             yli::ontology::GenericParentModule parent_of_compute_tasks;
             yli::ontology::MasterModule<yli::ontology::Pipeline*> master_of_materials;
             yli::ontology::GenericMasterModule master_of_symbioses;
