@@ -86,19 +86,19 @@ namespace yli::ontology
             this->universe.get_is_opengl_in_use() ||
             this->universe.get_is_vulkan_in_use();
 
-        yli::ontology::Pipeline* const parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
+        yli::ontology::Pipeline* const pipeline_parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
 
-        if (parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
+        if (pipeline_parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
         {
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(parent->get_program_id(), "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(parent->get_program_id(), "vertexUV");
+            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline_parent->get_program_id(), "vertex_position_modelspace");
+            this->vertex_uv_id = glGetAttribLocation(pipeline_parent->get_program_id(), "vertexUV");
 
-            glUseProgram(parent->get_program_id());
+            glUseProgram(pipeline_parent->get_program_id());
         }
 
         // Load the source texture, just like in `yli::ontology::Material` constructor.
-        if (parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
+        if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
             uint32_t n_color_channels = 0;
 
@@ -119,7 +119,7 @@ namespace yli::ontology
                 this->is_texture_loaded = true;
             }
         }
-        else if (parent != nullptr && should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
+        else if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
         {
             if (!yli::load::load_csv_texture(
                         this->texture_filename,
@@ -146,23 +146,23 @@ namespace yli::ontology
             std::cerr << "texture file format: " << this->texture_file_format << "\n";
         }
 
-        if (parent != nullptr && this->is_texture_loaded && this->universe.get_is_opengl_in_use())
+        if (pipeline_parent != nullptr && this->is_texture_loaded && this->universe.get_is_opengl_in_use())
         {
             // Get a handle for our "texture_sampler" uniform.
-            this->opengl_texture_id = glGetUniformLocation(parent->get_program_id(), "texture_sampler");
+            this->opengl_texture_id = glGetUniformLocation(pipeline_parent->get_program_id(), "texture_sampler");
 
             // Initialize uniform window width.
             // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
-            this->screen_width_uniform_id = glGetUniformLocation(parent->get_program_id(), "screen_width");
+            this->screen_width_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "screen_width");
             yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
 
             // Initialize uniform window height.
             // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
-            this->screen_height_uniform_id = glGetUniformLocation(parent->get_program_id(), "screen_height");
+            this->screen_height_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "screen_height");
             yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
             // Initialize uniform iteration index.
-            this->iteration_i_uniform_id = glGetUniformLocation(parent->get_program_id(), "iteration_i");
+            this->iteration_i_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "iteration_i");
             yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
             // Create model (a square which consists of 2 triangles).
