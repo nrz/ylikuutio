@@ -378,11 +378,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* Text2D::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const font_2d_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (font_2d_parent != nullptr)
         {
-            return parent->get_scene();
+            return font_2d_parent->get_scene();
         }
 
         return nullptr;
