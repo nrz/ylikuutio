@@ -28,6 +28,7 @@
 // Include standard headers
 #include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -41,7 +42,7 @@ namespace yli::ontology
 
         if (vector_font_parent_of_text_3d == nullptr)
         {
-            return;
+            throw std::runtime_error("ERROR: `create_glyph_objects`: `vector_font_parent_of_text_3d` is `nullptr`!");
         }
 
         const char* text_pointer = text_string.c_str();

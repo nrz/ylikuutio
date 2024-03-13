@@ -586,7 +586,12 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
 TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
     mock::MockApplication application;
+    yli::ontology::VectorFontStruct vector_font_struct;
+    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+            vector_font_struct);
+
     yli::ontology::Text3DStruct text_3d_struct;
+    text_3d_struct.parent = vector_font;
     yli::ontology::Text3D* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 
