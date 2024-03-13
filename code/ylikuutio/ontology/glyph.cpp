@@ -75,11 +75,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* Glyph::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (vector_font_parent != nullptr)
         {
-            return parent->get_scene();
+            return vector_font_parent->get_scene();
         }
 
         return nullptr;
