@@ -109,7 +109,24 @@ namespace yli::ontology
                 // OK, all preconditions for a successful argument binding are met.
                 // Now, process the arguments and call.
 
-                return this->process_args_and_call(parameter_vector);
+                std::size_t parameter_i = 0;                      // Start from the first parameter.
+                yli::ontology::Entity* context = &this->universe; // `Universe` is the default context.
+
+                std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
+                    std::size_t, Types...>(
+                            std::size_t {},
+                            this->universe,
+                            *console_parent_of_lisp_function,
+                            context,
+                            parameter_vector,
+                            parameter_i);
+
+                if (arg_tuple)
+                {
+                    return std::apply(this->callback, *arg_tuple);
+                }
+
+                return std::nullopt;
             }
 
         private:
@@ -168,44 +185,6 @@ namespace yli::ontology
                     // Binding failed.
                     return std::nullopt;
                 }
-
-            std::optional<yli::data::AnyValue> process_args_and_call(const std::vector<std::string>& parameter_vector)
-            {
-                // Start processing the arguments.
-
-                yli::ontology::LispFunction* const lisp_function = static_cast<yli::ontology::LispFunction*>(this->get_parent());
-
-                if (lisp_function == nullptr)
-                {
-                    return std::nullopt;
-                }
-
-                yli::ontology::Console* const console = static_cast<yli::ontology::Console*>(lisp_function->get_parent());
-
-                if (console == nullptr)
-                {
-                    return std::nullopt;
-                }
-
-                std::size_t parameter_i = 0;                     // Start from the first parameter.
-                yli::ontology::Entity* context = &this->universe; // `Universe` is the default context.
-
-                std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
-                    std::size_t, Types...>(
-                        std::size_t {},
-                        this->universe,
-                        *console,
-                        context,
-                        parameter_vector,
-                        parameter_i);
-
-                if (arg_tuple)
-                {
-                    return std::apply(this->callback, *arg_tuple);
-                }
-
-                return std::nullopt;
-            }
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryAllocator;
