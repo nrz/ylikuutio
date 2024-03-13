@@ -93,15 +93,15 @@ namespace yli::ontology
             {
                 yli::ontology::Entity* const lisp_function_entity = this->get_parent();
 
-                yli::ontology::LispFunction* const lisp_function = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
+                yli::ontology::LispFunction* const lisp_function_parent = dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
 
-                if (lisp_function == nullptr)
+                if (lisp_function_parent == nullptr)
                 {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function` is `nullptr`!\n";
+                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!\n";
                     return std::nullopt;
                 }
 
-                yli::ontology::Entity* const console_entity = lisp_function->get_parent();
+                yli::ontology::Entity* const console_entity = lisp_function_parent->get_parent();
 
                 if (console_entity == nullptr)
                 {
