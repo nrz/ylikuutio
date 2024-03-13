@@ -64,12 +64,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent != nullptr)
+        if (entity_parent == nullptr)
         {
-            return entity_parent->get_scene();
+            throw std::runtime_error("ERROR: `Variable::get_scene`: `entity_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return entity_parent->get_scene();
     }
 
     std::size_t Variable::get_number_of_children() const
