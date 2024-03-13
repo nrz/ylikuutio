@@ -380,12 +380,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const font_2d_parent = this->get_parent();
 
-        if (font_2d_parent != nullptr)
+        if (font_2d_parent == nullptr)
         {
-            return font_2d_parent->get_scene();
+            throw std::runtime_error("ERROR: `Text2D::get_scene`: `font_2d_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return font_2d_parent->get_scene();
     }
 
     std::size_t Text2D::get_number_of_children() const
