@@ -48,11 +48,11 @@ namespace yli::ontology
         // TODO: implement creation and enabling the character `Object`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        const yli::ontology::Entity* const vector_font = text_3d.get_parent();
+        const yli::ontology::Entity* const vector_font_parent = text_3d.get_parent();
 
-        if (vector_font == nullptr)
+        if (vector_font_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_3d.local_name))
