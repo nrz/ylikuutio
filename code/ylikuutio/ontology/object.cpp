@@ -73,7 +73,7 @@ namespace yli::ontology
         // Set pointer to `object` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Scene* const old_scene_parent = static_cast<yli::ontology::Scene*>(object.get_parent());
+        const yli::ontology::Scene* const old_scene_parent = object.get_scene();
 
         if (old_scene_parent == nullptr)
         {
