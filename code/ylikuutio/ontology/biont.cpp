@@ -152,15 +152,15 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->get_parent());
+        const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
-        if (holobiont == nullptr)
+        if (holobiont_parent == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `holobiont` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `holobiont_parent` is `nullptr`!\n";
             return;
         }
 
-        yli::ontology::Symbiosis* const symbiosis = holobiont->get_symbiosis();
+        yli::ontology::Symbiosis* const symbiosis = holobiont_parent->get_symbiosis();
 
         if (symbiosis == nullptr)
         {
@@ -189,14 +189,14 @@ namespace yli::ontology
             }
         }
 
-        this->model_matrix = glm::scale(this->model_matrix, holobiont->get_scale() * this->original_scale_vector);
-        glm::vec3 euler_angles { holobiont->orientation.roll, holobiont->orientation.yaw, holobiont->orientation.pitch };
+        this->model_matrix = glm::scale(this->model_matrix, holobiont_parent->get_scale() * this->original_scale_vector);
+        glm::vec3 euler_angles { holobiont_parent->orientation.roll, holobiont_parent->orientation.yaw, holobiont_parent->orientation.pitch };
         glm::quat my_quaternion = glm::quat(euler_angles);
         glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
-        this->model_matrix[3][0] = holobiont->location.get_x();
-        this->model_matrix[3][1] = holobiont->location.get_y();
-        this->model_matrix[3][2] = holobiont->location.get_z();
+        this->model_matrix[3][0] = holobiont_parent->location.get_x();
+        this->model_matrix[3][1] = holobiont_parent->location.get_y();
+        this->model_matrix[3][2] = holobiont_parent->location.get_z();
 
         this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
