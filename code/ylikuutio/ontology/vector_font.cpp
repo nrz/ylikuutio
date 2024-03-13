@@ -139,15 +139,15 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Pipeline* const pipeline = static_cast<yli::ontology::Pipeline*>(material_parent->get_parent());
+        yli::ontology::Pipeline* const pipeline_parent_of_material = static_cast<yli::ontology::Pipeline*>(material_parent->get_parent());
 
-        if (pipeline == nullptr)
+        if (pipeline_parent_of_material == nullptr)
         {
-            std::cerr << "ERROR: `VectorFont::VectorFont`: `pipeline` is `nullptr`!\n";
+            std::cerr << "ERROR: `VectorFont::VectorFont`: `pipeline_parent_of_material` is `nullptr`!\n";
             return;
         }
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(pipeline->get_parent());
+        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(pipeline_parent_of_material->get_parent());
 
         if (scene == nullptr)
         {
@@ -177,7 +177,7 @@ namespace yli::ontology
 
                 yli::ontology::ModelStruct model_struct;
                 model_struct.parent = this;
-                model_struct.pipeline = pipeline;
+                model_struct.pipeline = pipeline_parent_of_material;
                 model_struct.material = material_parent;
                 model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
