@@ -50,12 +50,12 @@ namespace yli::ontology
     {
         if (entity.get_can_be_erased())
         {
-            yli::ontology::Entity* const parent = entity.get_parent();
+            yli::ontology::Entity* const entity_parent_of_entity = entity.get_parent();
 
-            if (parent != nullptr)
+            if (entity_parent_of_entity != nullptr)
             {
                 // Erase the local name.
-                parent->registry.erase_entity(entity.get_local_name());
+                entity_parent_of_entity->registry.erase_entity(entity.get_local_name());
             }
 
             // Erase the global name.
