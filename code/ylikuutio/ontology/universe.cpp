@@ -794,7 +794,7 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            return; // `camera` has no parent.
+            throw std::runtime_error("ERROR: `Universe::set_active_camera`: `scene` is `nullptr`!");
         }
 
         scene->set_active_camera(camera);
