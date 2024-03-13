@@ -110,15 +110,15 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
-        const yli::ontology::Holobiont* const holobiont = static_cast<yli::ontology::Holobiont*>(this->get_parent());
+        const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
-        if (holobiont == nullptr)
+        if (holobiont_parent == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render`: `holobiont` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!\n";
             return;
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = holobiont->get_symbiosis();
+        const yli::ontology::Symbiosis* const symbiosis = holobiont_parent->get_symbiosis();
 
         if (symbiosis == nullptr)
         {
