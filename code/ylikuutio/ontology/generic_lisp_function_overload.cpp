@@ -51,12 +51,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const lisp_function_parent = this->get_parent();
 
-        if (lisp_function_parent != nullptr)
+        if (lisp_function_parent == nullptr)
         {
-            return lisp_function_parent->get_scene();
+            throw std::runtime_error("ERROR: `GenericLispFunctionOverload::get_scene`: `lisp_function_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return lisp_function_parent->get_scene();
     }
 
     std::size_t GenericLispFunctionOverload::get_number_of_children() const
