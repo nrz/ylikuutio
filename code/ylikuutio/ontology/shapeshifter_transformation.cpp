@@ -128,12 +128,12 @@ namespace yli::ontology
     {
         yli::ontology::Entity* material_parent = this->get_parent();
 
-        if (material_parent != nullptr)
+        if (material_parent == nullptr)
         {
-            return material_parent->get_scene();
+            throw std::runtime_error("ERROR: `ShapeshifterTransformation::get_scene`: `material_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return material_parent->get_scene();
     }
 
     yli::ontology::Pipeline* ShapeshifterTransformation::get_pipeline() const
