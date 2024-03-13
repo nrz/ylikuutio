@@ -138,11 +138,11 @@ namespace yli::ontology
 
     yli::ontology::Pipeline* ShapeshifterTransformation::get_pipeline() const
     {
-        const yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(this->get_parent());
+        const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
 
-        if (material != nullptr)
+        if (material_parent != nullptr)
         {
-            return material->get_pipeline();
+            return material_parent->get_pipeline();
         }
 
         return nullptr;
