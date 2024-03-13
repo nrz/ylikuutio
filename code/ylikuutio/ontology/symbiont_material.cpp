@@ -29,6 +29,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
 {
@@ -76,12 +77,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const symbiosis_parent = this->get_parent();
 
-        if (symbiosis_parent != nullptr)
+        if (symbiosis_parent == nullptr)
         {
-            return symbiosis_parent->get_scene();
+            throw std::runtime_error("ERROR: `SymbiontMaterial::get_scene`: `symbiosis_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return symbiosis_parent->get_scene();
     }
 
     yli::ontology::Entity* SymbiontMaterial::get_parent() const
