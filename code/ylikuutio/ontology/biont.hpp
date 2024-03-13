@@ -42,7 +42,6 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
-    class Pipeline;
     class GenericParentModule;
     class GenericMasterModule;
     struct BiontStruct;
@@ -75,7 +74,7 @@ namespace yli::ontology
             void render();
 
         protected:
-            void render_this_biont(const yli::ontology::Pipeline* const pipeline);
+            void render_this_biont();
 
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 

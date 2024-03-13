@@ -18,7 +18,6 @@
 #include "biont.hpp"
 #include "mesh_module.hpp"
 #include "universe.hpp"
-#include "pipeline.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
@@ -130,25 +129,18 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
-        this->render_this_biont(symbiosis_master_of_holobiont->get_pipeline());
+        this->render_this_biont();
     }
 
-    void Biont::render_this_biont(const yli::ontology::Pipeline* const pipeline)
+    void Biont::render_this_biont()
     {
         // Requirements:
-        // `pipeline` must not be `nullptr`.
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
         if (this->universe.get_render_system() == nullptr)
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!");
-        }
-
-        if (pipeline == nullptr)
-        {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `pipeline` is `nullptr`!\n";
-            return;
         }
 
         const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
