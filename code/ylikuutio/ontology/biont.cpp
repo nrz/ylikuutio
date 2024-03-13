@@ -111,6 +111,11 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->holobiont_parent->get_parent()` must not be `nullptr`.
 
+        if (!this->should_render)
+        {
+            return;
+        }
+
         const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
         if (holobiont_parent == nullptr)
@@ -125,10 +130,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
-        if (this->should_render)
-        {
-            this->render_this_biont(symbiosis_master_of_holobiont->get_pipeline());
-        }
+        this->render_this_biont(symbiosis_master_of_holobiont->get_pipeline());
     }
 
     void Biont::render_this_biont(const yli::ontology::Pipeline* const pipeline)
