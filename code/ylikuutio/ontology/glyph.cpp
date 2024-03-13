@@ -117,8 +117,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Glyph::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Glyph::render`: `render_system` is `nullptr`!");
         }
 
         render_system->render_glyph(this, new_target_scene);
