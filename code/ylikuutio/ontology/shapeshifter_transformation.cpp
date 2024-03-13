@@ -140,12 +140,12 @@ namespace yli::ontology
     {
         const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
 
-        if (material_parent != nullptr)
+        if (material_parent == nullptr)
         {
-            return material_parent->get_pipeline();
+            throw std::runtime_error("ERROR: `ShapeshifterTransformation::get_pipeline`: `material_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return material_parent->get_pipeline();
     }
 
     std::size_t ShapeshifterTransformation::get_number_of_children() const
