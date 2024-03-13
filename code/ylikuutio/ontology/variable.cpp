@@ -95,7 +95,7 @@ namespace yli::ontology
 
         if (entity_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Variable::get`: `this->get_parent()` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Variable::get`: `entity_parent` is `nullptr`!");
         }
 
         if (this->read_callback == nullptr)
