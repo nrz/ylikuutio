@@ -160,11 +160,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Symbiosis* const symbiosis = holobiont_parent->get_symbiosis();
+        yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
-        if (symbiosis == nullptr)
+        if (symbiosis_master_of_holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiosis` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!\n";
             return;
         }
 
@@ -179,7 +179,7 @@ namespace yli::ontology
 
         this->model_matrix = glm::mat4(1.0f);
 
-        const std::string model_file_format = symbiosis->get_model_file_format();
+        const std::string model_file_format = symbiosis_master_of_holobiont->get_model_file_format();
 
         if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
         {
@@ -206,9 +206,9 @@ namespace yli::ontology
 
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, symbiosis->get_texture(this->biontID));
+            glBindTexture(GL_TEXTURE_2D, symbiosis_master_of_holobiont->get_texture(this->biontID));
             // Set our "texture_sampler" sampler to user Texture Unit 0.
-            yli::opengl::uniform_1i(symbiosis->get_openGL_textureID(this->biontID), 0);
+            yli::opengl::uniform_1i(symbiosis_master_of_holobiont->get_openGL_textureID(this->biontID), 0);
 
             // '`Material`' part ends here.
 
