@@ -366,28 +366,28 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Entity* const parent = this->get_parent();
+        yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (parent == nullptr)
+        if (entity_parent == nullptr)
         {
             // `Universe` has no parent and can not be given a local name.
             return;
         }
 
-        if (parent->has_child(local_name))
+        if (entity_parent->has_child(local_name))
         {
             // The name is in use.
             return;
         }
 
         // Erase old local name.
-        parent->erase_entity(this->local_name);
+        entity_parent->erase_entity(this->local_name);
 
         // Set new local name.
-        parent->add_entity(local_name, *this);
+        entity_parent->add_entity(local_name, *this);
         this->local_name = local_name;
 
-        if (parent == &this->universe)
+        if (entity_parent == &this->universe)
         {
             // Special case: this `Entity` is a child of the `Universe`!
             // Therefore, the local name is also the global name,
