@@ -147,7 +147,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(pipeline_parent_of_material->get_parent());
+        yli::ontology::Scene* const scene = this->get_scene();
 
         if (scene == nullptr)
         {
