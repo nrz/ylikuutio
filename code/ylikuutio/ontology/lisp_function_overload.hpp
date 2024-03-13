@@ -32,6 +32,7 @@
 #include <functional> // std::function, std::invoke
 #include <iostream>   // std::cout, std::cerr
 #include <optional>   // std::optional
+#include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
 #include <vector>     // std::vector
@@ -97,8 +98,7 @@ namespace yli::ontology
 
                 if (lisp_function_parent == nullptr)
                 {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!\n";
-                    return std::nullopt;
+                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
                 }
 
                 yli::ontology::Entity* const console_entity = lisp_function_parent->get_parent();
