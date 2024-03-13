@@ -790,14 +790,14 @@ namespace yli::ontology
     {
         // Changing the active `Camera` does not change the active `Scene`!
 
-        yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(camera->get_parent());
+        yli::ontology::Scene* const scene_parent_of_camera = static_cast<yli::ontology::Scene*>(camera->get_parent());
 
-        if (scene == nullptr)
+        if (scene_parent_of_camera == nullptr)
         {
-            throw std::runtime_error("ERROR: `Universe::set_active_camera`: `scene` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Universe::set_active_camera`: `scene_parent_of_camera` is `nullptr`!");
         }
 
-        scene->set_active_camera(camera);
+        scene_parent_of_camera->set_active_camera(camera);
     }
 
     yli::ontology::Console* Universe::get_active_console() const
