@@ -118,17 +118,17 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = holobiont_parent->get_symbiosis();
+        const yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
-        if (symbiosis == nullptr)
+        if (symbiosis_master_of_holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render`: `symbiosis` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!\n";
             return;
         }
 
         if (this->should_render)
         {
-            this->render_this_biont(symbiosis->get_pipeline());
+            this->render_this_biont(symbiosis_master_of_holobiont->get_pipeline());
         }
     }
 
