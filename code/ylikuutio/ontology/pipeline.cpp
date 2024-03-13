@@ -47,14 +47,14 @@ namespace yli::ontology
         // Set pointer to `Pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_scene_or_ecosystem_parent = pipeline.get_parent();
+        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
 
-        if (old_scene_or_ecosystem_parent == nullptr)
+        if (old_ecosystem_or_scene_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_scene_or_ecosystem_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
-        if (&new_parent == old_scene_or_ecosystem_parent)
+        if (&new_parent == old_ecosystem_or_scene_parent)
         {
             // Setting current parent as the new parent. Nothing to do.
             return std::nullopt;
@@ -81,14 +81,14 @@ namespace yli::ontology
         // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_scene_or_ecosystem_parent = pipeline.get_parent();
+        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
 
-        if (old_scene_or_ecosystem_parent == nullptr)
+        if (old_ecosystem_or_scene_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_scene_parent`: `old_scene_or_ecosystem_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
-        if (&new_parent == old_scene_or_ecosystem_parent)
+        if (&new_parent == old_ecosystem_or_scene_parent)
         {
             // Setting current parent as the new parent. Nothing to do.
             return std::nullopt;
