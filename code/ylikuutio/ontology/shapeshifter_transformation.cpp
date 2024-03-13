@@ -126,11 +126,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* ShapeshifterTransformation::get_scene() const
     {
-        yli::ontology::Entity* parent = this->get_parent();
+        yli::ontology::Entity* material_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (material_parent != nullptr)
         {
-            return parent->get_scene();
+            return material_parent->get_scene();
         }
 
         return nullptr;
