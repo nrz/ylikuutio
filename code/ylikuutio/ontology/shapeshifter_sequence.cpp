@@ -77,12 +77,12 @@ namespace yli::ontology
 
     yli::ontology::Pipeline* ShapeshifterSequence::get_pipeline() const
     {
-        const yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation =
+        const yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation_parent =
             static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
 
-        if (shapeshifter_transformation != nullptr)
+        if (shapeshifter_transformation_parent != nullptr)
         {
-            return shapeshifter_transformation->get_pipeline();
+            return shapeshifter_transformation_parent->get_pipeline();
         }
 
         return nullptr;
