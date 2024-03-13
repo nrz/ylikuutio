@@ -142,8 +142,7 @@ namespace yli::ontology
 
         if (this->universe.get_render_system() == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!");
         }
 
         if (pipeline == nullptr)
