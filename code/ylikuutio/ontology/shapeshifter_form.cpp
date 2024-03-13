@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <stdexcept> // std::runtime_error
 
 namespace yli::core
 {
@@ -57,12 +58,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const shapeshifter_transformation_parent = this->get_parent();
 
-        if (shapeshifter_transformation_parent != nullptr)
+        if (shapeshifter_transformation_parent == nullptr)
         {
-            return shapeshifter_transformation_parent->get_scene();
+            throw std::runtime_error("ERROR: `ShapeshifterForm::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return shapeshifter_transformation_parent->get_scene();
     }
 
     std::size_t ShapeshifterForm::get_number_of_children() const
