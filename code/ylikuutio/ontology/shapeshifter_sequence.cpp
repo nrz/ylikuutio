@@ -65,11 +65,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* ShapeshifterSequence::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const shapeshifter_transformation_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (shapeshifter_transformation_parent != nullptr)
         {
-            return parent->get_scene();
+            return shapeshifter_transformation_parent->get_scene();
         }
 
         return nullptr;
