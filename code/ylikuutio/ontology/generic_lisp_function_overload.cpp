@@ -49,11 +49,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* GenericLispFunctionOverload::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const lisp_function_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (lisp_function_parent != nullptr)
         {
-            return parent->get_scene();
+            return lisp_function_parent->get_scene();
         }
 
         return nullptr;
