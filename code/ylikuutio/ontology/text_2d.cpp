@@ -312,9 +312,9 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            const yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2D* const font_2d_parent = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
-            const std::string& font_texture_file_format = font_2d->get_font_texture_file_format();
+            const std::string& font_texture_file_format = font_2d_parent->get_font_texture_file_format();
 
             if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
             {
