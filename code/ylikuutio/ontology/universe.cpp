@@ -78,20 +78,20 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, sqrt, std::isnan, std::pow
-#include <cstddef>       // std::size_t
-#include <iomanip>       // std::setfill, std::setprecision, std::setw
-#include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream>      // std::cout, std::cerr
-#include <limits>        // std::numeric_limits
-#include <numbers>       // std::numbers::pi
-#include <optional>      // std::optional
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
-#include <stdexcept>     // std::runtime_error
-#include <stdint.h>      // uint32_t etc.
-#include <string>        // std::string
-#include <variant>       // std::holds_alternative, std::variant
-#include <vector>        // std::vector
+#include <cmath>     // NAN, sqrt, std::isnan, std::pow
+#include <cstddef>   // std::size_t
+#include <iomanip>   // std::setfill, std::setprecision, std::setw
+#include <ios>       // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <iostream>  // std::cout, std::cerr
+#include <limits>    // std::numeric_limits
+#include <numbers>   // std::numbers::pi
+#include <optional>  // std::optional
+#include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept> // std::runtime_error
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
+#include <variant>   // std::holds_alternative, std::variant
+#include <vector>    // std::vector
 
 namespace yli::memory
 {

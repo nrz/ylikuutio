@@ -20,7 +20,7 @@
 #include "model_struct.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
+#include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 
 namespace yli::core
