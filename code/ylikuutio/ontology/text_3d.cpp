@@ -119,12 +119,12 @@ namespace yli::ontology
     {
         const yli::ontology::VectorFont* const vector_font_parent = static_cast<yli::ontology::VectorFont*>(this->get_parent());
 
-        if (vector_font_parent != nullptr)
+        if (vector_font_parent == nullptr)
         {
-            return vector_font_parent->get_pipeline();
+            throw std::runtime_error("ERROR: `Text3D::get_pipeline`: `vector_font_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return vector_font_parent->get_pipeline();
     }
 
     std::size_t Text3D::get_number_of_children() const
