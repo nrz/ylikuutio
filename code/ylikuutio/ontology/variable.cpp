@@ -112,7 +112,7 @@ namespace yli::ontology
 
         if (entity_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Variable::set`: `entity_parent` is `nullptr`!");
         }
 
         this->variable_value = new_value;
@@ -129,7 +129,7 @@ namespace yli::ontology
 
         if (entity_parent == nullptr)
         {
-            throw std::runtime_error("ERROR: `Variable::set`: `this->get_parent()` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Variable::set`: `entity_parent` is `nullptr`!");
         }
 
         this->variable_value.set_new_value(new_value);
