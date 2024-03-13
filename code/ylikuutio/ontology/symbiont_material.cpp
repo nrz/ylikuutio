@@ -94,12 +94,12 @@ namespace yli::ontology
     {
         const yli::ontology::Symbiosis* const symbiosis_parent = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
 
-        if (symbiosis_parent != nullptr)
+        if (symbiosis_parent == nullptr)
         {
-            return static_cast<yli::ontology::Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
+            throw std::runtime_error("ERROR: `SymbiontMaterial::get_pipeline`: `symbiosis_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return static_cast<yli::ontology::Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const
