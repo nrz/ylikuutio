@@ -51,6 +51,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -114,8 +115,7 @@ namespace yli::ontology
 
         if (holobiont_parent == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!");
         }
 
         const yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
