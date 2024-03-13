@@ -302,11 +302,11 @@ namespace yli::ontology
 
     yli::ontology::Scene* Biont::get_scene() const
     {
-        const yli::ontology::Entity* const parent = this->get_parent();
+        const yli::ontology::Entity* const holobiont_parent = this->get_parent();
 
-        if (parent != nullptr)
+        if (holobiont_parent != nullptr)
         {
-            return parent->get_scene();
+            return holobiont_parent->get_scene();
         }
 
         return nullptr;
