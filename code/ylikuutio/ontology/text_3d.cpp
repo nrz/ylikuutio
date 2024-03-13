@@ -117,11 +117,11 @@ namespace yli::ontology
 
     yli::ontology::Pipeline* Text3D::get_pipeline() const
     {
-        const yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(this->get_parent());
+        const yli::ontology::VectorFont* const vector_font_parent = static_cast<yli::ontology::VectorFont*>(this->get_parent());
 
-        if (vector_font != nullptr)
+        if (vector_font_parent != nullptr)
         {
-            return vector_font->get_pipeline();
+            return vector_font_parent->get_pipeline();
         }
 
         return nullptr;
