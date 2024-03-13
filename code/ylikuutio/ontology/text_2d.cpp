@@ -117,14 +117,14 @@ namespace yli::ontology
             glGenBuffers(1, &this->uvbuffer);
 
             // Get a handle for our buffers.
-            const yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2D* const font_2d_parent = static_cast<yli::ontology::Font2D*>(this->get_parent());
 
-            if (font_2d != nullptr)
+            if (font_2d_parent != nullptr)
             {
                 this->vertex_position_in_screenspace_id = glGetAttribLocation(
-                        font_2d->get_program_id(),
+                        font_2d_parent->get_program_id(),
                         "vertex_position_screenspace");
-                this->vertex_uv_id = glGetAttribLocation(font_2d->get_program_id(), "vertexUV");
+                this->vertex_uv_id = glGetAttribLocation(font_2d_parent->get_program_id(), "vertexUV");
             }
 
             this->vertices_and_uvs_loaded = true;
