@@ -107,12 +107,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
-        if (vector_font_parent != nullptr)
+        if (vector_font_parent == nullptr)
         {
-            return vector_font_parent->get_scene();
+            throw std::runtime_error("ERROR: `Text3D::get_scene`: `vector_font_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return vector_font_parent->get_scene();
     }
 
     yli::ontology::Pipeline* Text3D::get_pipeline() const
