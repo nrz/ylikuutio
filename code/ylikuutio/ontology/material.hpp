@@ -79,7 +79,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::GenericParentModule* const scene_or_ecosystem_parent_module,
+                    yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
                     yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module);
 
             ~Material() = default;
