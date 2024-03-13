@@ -67,12 +67,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const symbiont_material_parent = this->get_parent();
 
-        if (symbiont_material_parent != nullptr)
+        if (symbiont_material_parent == nullptr)
         {
-            return symbiont_material_parent->get_scene();
+            throw std::runtime_error("ERROR: `SymbiontSpecies::get_scene`: `symbiont_material_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return symbiont_material_parent->get_scene();
     }
 
     std::size_t SymbiontSpecies::get_number_of_children() const
