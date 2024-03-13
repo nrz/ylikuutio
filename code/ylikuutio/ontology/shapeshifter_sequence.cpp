@@ -81,12 +81,12 @@ namespace yli::ontology
         const yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation_parent =
             static_cast<yli::ontology::ShapeshifterTransformation*>(this->get_parent());
 
-        if (shapeshifter_transformation_parent != nullptr)
+        if (shapeshifter_transformation_parent == nullptr)
         {
-            return shapeshifter_transformation_parent->get_pipeline();
+            throw std::runtime_error("ERROR: `ShapeshifterSequence::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return shapeshifter_transformation_parent->get_pipeline();
     }
 
     std::size_t ShapeshifterSequence::get_number_of_children() const
