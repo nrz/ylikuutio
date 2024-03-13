@@ -22,8 +22,8 @@
 #include "code/ylikuutio/render/render_system.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
 
 namespace yli::core
