@@ -168,12 +168,12 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::SymbiontSpecies* const symbiont_species = static_cast<yli::ontology::SymbiontSpecies*>(
+        const yli::ontology::SymbiontSpecies* const symbiont_species_master = static_cast<yli::ontology::SymbiontSpecies*>(
                 this->apprentice_of_symbiont_species.get_master());
 
-        if (symbiont_species == nullptr)
+        if (symbiont_species_master == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiont_species` is `nullptr`!\n";
+            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiont_species_master` is `nullptr`!\n";
             return;
         }
 
@@ -214,7 +214,7 @@ namespace yli::ontology
 
             // '`Species`' part begins here.
 
-            const yli::ontology::MeshModule& mesh = symbiont_species->mesh;
+            const yli::ontology::MeshModule& mesh = symbiont_species_master->mesh;
 
             // 1st attribute buffer : vertices.
             yli::opengl::enable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
