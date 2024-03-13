@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 
 namespace yli::core
 {
@@ -77,12 +78,12 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
-        if (vector_font_parent != nullptr)
+        if (vector_font_parent == nullptr)
         {
-            return vector_font_parent->get_scene();
+            throw std::runtime_error("ERROR: `Glyph::get_scene`: `vector_font_parent` is `nullptr`!");
         }
 
-        return nullptr;
+        return vector_font_parent->get_scene();
     }
 
     std::size_t Glyph::get_number_of_children() const
