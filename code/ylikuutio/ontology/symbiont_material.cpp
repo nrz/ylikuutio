@@ -92,11 +92,11 @@ namespace yli::ontology
 
     yli::ontology::Pipeline* SymbiontMaterial::get_pipeline() const
     {
-        const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
+        const yli::ontology::Symbiosis* const symbiosis_parent = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
 
-        if (symbiosis != nullptr)
+        if (symbiosis_parent != nullptr)
         {
-            return static_cast<yli::ontology::Pipeline*>(symbiosis->apprentice_of_pipeline.get_master());
+            return static_cast<yli::ontology::Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
         }
 
         return nullptr;
