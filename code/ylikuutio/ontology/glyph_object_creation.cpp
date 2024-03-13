@@ -42,9 +42,9 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::VectorFont* const vector_font = static_cast<yli::ontology::VectorFont*>(text_3d->get_parent());
+        const yli::ontology::VectorFont* const vector_font_parent_of_text_3d = static_cast<yli::ontology::VectorFont*>(text_3d->get_parent());
 
-        if (vector_font == nullptr)
+        if (vector_font_parent_of_text_3d == nullptr)
         {
             return;
         }
@@ -54,7 +54,7 @@ namespace yli::ontology
         while (*text_pointer != '\0')
         {
             int32_t unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
-            yli::ontology::Glyph* glyph_pointer = vector_font->get_glyph_pointer(unicode_value);
+            yli::ontology::Glyph* glyph_pointer = vector_font_parent_of_text_3d->get_glyph_pointer(unicode_value);
 
             if (glyph_pointer == nullptr)
             {
