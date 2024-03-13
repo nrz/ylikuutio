@@ -103,8 +103,7 @@ namespace yli::ontology
 
                 if (console_parent_of_lisp_function == nullptr)
                 {
-                    std::cerr << "ERROR: `LispFunctionOverload::execute`: `console_parent_of_lisp_function` is `nullptr`!\n";
-                    return std::nullopt;
+                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `console_parent_of_lisp_function` is `nullptr`!");
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
