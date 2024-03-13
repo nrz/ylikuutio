@@ -91,7 +91,7 @@ namespace yli::ontology
 
         // Let's create each glyph `Object` in a loop.
 
-        yli::ontology::create_glyph_objects(this->text_string, this);
+        yli::ontology::create_glyph_objects(this->text_string, *this);
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Text3D*";

@@ -73,7 +73,7 @@ namespace yli::ontology
             yli::ontology::Entity* get_parent() const override;
 
             friend class yli::ontology::Object;
-            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text_3d);
+            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D& text_3d);
 
             yli::ontology::ChildModule child_of_vector_font;
             yli::ontology::GenericMasterModule master_of_objects;

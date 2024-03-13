@@ -25,7 +25,7 @@ namespace yli::ontology
 {
     class Text3D;
 
-    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* const text_3d);
+    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D& text_3d);
 }
 
 #endif
