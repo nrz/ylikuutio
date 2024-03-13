@@ -26,11 +26,11 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream> // std::cout, std::cerr
+#include <ios>       // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
 
 namespace yli::ontology
 {
