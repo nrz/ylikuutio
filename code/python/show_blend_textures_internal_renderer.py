@@ -3,7 +3,7 @@
 # Data preprocessing script for printing information about
 # the textures used by the Blender internal renderer.
 #
-# Copyright (C) 2015-2023 Antti Nuortimo.
+# Copyright (C) 2015-2024 Antti Nuortimo.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
