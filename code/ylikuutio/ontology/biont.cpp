@@ -162,8 +162,7 @@ namespace yli::ontology
 
         if (symbiont_species_master == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiont_species_master` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiont_species_master` is `nullptr`!");
         }
 
         this->model_matrix = glm::mat4(1.0f);
