@@ -293,7 +293,7 @@ namespace yli::ontology
         }
         else if (this->universe.get_is_vulkan_in_use())
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: Vulkan is not supported yet!\n";
+            throw std::runtime_error("ERROR: `Biont::render_this_biont`: Vulkan is not supported yet!");
         }
     }
 
