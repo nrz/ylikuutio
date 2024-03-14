@@ -45,6 +45,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -107,8 +108,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Holobiont::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Holobiont::render`: `render_system` is `nullptr`!");
         }
 
         // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
