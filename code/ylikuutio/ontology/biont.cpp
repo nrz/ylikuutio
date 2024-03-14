@@ -154,8 +154,7 @@ namespace yli::ontology
 
         if (symbiosis_master_of_holobiont == nullptr)
         {
-            std::cerr << "ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
         const yli::ontology::SymbiontSpecies* const symbiont_species_master = static_cast<yli::ontology::SymbiontSpecies*>(
