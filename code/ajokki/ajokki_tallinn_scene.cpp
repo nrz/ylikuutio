@@ -35,7 +35,6 @@
 
 // Include standard headers
 #include <iostream>   // std::cout, std::cerr
-#include <string>     // std::string
 
 namespace yli
 {
