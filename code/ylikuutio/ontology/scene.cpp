@@ -51,6 +51,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
 {
@@ -191,8 +192,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Scene::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Scene::render`: `render_system` is `nullptr`!");
         }
 
         if (this->universe.get_is_opengl_in_use())
