@@ -48,9 +48,9 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
+#include <cmath>     // NAN, std::isnan, std::pow
+#include <cstddef>   // std::size_t
+#include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
