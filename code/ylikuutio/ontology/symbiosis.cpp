@@ -287,8 +287,7 @@ namespace yli::ontology
 
             if (pipeline == nullptr)
             {
-                std::cerr << "ERROR: `Symbiosis::create_symbionts`: `pipeline` is `nullptr`!\n";
-                return;
+                throw std::runtime_error("ERROR: `Symbiosis::create_symbionts`: `pipeline` is `nullptr`!");
             }
 
             // Create `SymbiontMaterial`s.
