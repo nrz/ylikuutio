@@ -29,7 +29,6 @@
 #include <cstdint>  // std::uintptr_t
 #include <cstddef>  // std::size_t
 #include <ios>      // std::hex
-#include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <sstream>  // std::stringstream
 #include <string>   // std::string

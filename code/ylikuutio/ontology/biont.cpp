@@ -49,7 +49,6 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string

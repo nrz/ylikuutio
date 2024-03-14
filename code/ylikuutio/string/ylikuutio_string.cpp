@@ -26,7 +26,6 @@
 #include <ios>       // std::dec, std::hex
 #include <iostream>  // std::cout, std::cerr
 #include <limits>    // std::numeric_limits
-#include <list>      // std::list
 #include <sstream>   // std::stringstream
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string

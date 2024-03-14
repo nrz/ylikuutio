@@ -30,7 +30,6 @@
 // Include standard headers
 #include <cstddef>    // std::size_t
 #include <functional> // std::function, std::invoke
-#include <iostream>   // std::cout, std::cerr
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
