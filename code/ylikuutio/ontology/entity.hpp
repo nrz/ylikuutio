@@ -145,7 +145,7 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            bool should_be_rendered { false };
+            bool should_render { false };
 
             friend class yli::ontology::GenericParentModule;
             friend class yli::ontology::Universe;

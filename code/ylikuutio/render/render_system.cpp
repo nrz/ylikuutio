@@ -219,7 +219,7 @@ namespace yli::render
         {
             yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
 
-            if (ecosystem != nullptr && ecosystem->should_be_rendered)
+            if (ecosystem != nullptr && ecosystem->should_render)
             {
                 this->render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
             }

@@ -40,7 +40,7 @@ namespace yli::render
             {
                 CastType child_pointer = static_cast<CastType>(*it);
 
-                if (child_pointer != nullptr && child_pointer->should_be_rendered)
+                if (child_pointer != nullptr && child_pointer->should_render)
                 {
                     child_pointer->render();
                 }
@@ -56,7 +56,7 @@ namespace yli::render
             {
                 CastType child_pointer = static_cast<CastType>(*it);
 
-                if (child_pointer != nullptr && child_pointer->should_be_rendered)
+                if (child_pointer != nullptr && child_pointer->should_render)
                 {
                     yli::ontology::Scene* const scene_of_child = child_pointer->get_scene();
 
@@ -84,7 +84,7 @@ namespace yli::render
                 {
                     CastType apprentice_pointer = static_cast<CastType>(*it);
 
-                    if (apprentice_pointer != nullptr && apprentice_pointer->should_be_rendered)
+                    if (apprentice_pointer != nullptr && apprentice_pointer->should_render)
                     {
                         yli::ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
 

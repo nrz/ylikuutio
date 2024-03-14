@@ -208,7 +208,7 @@ namespace yli::ontology
             this->window_title = window_title_stringstream.str();
         }
 
-        this->create_should_be_rendered_variable();
+        this->create_should_render_variable();
 
         if (!this->is_silent)
         {
@@ -718,7 +718,7 @@ namespace yli::ontology
         // Software rendering renders to a CPU memory region or to file.
         // TODO: implement Vulkan rendering!
         // TODO: implement software rendering!
-        if (this->should_be_rendered &&
+        if (this->should_render &&
                 this->get_active_camera() != nullptr &&
                 this->render_system != nullptr)
         {
@@ -1262,19 +1262,19 @@ namespace yli::ontology
         return true;
     }
 
-    void Universe::create_should_be_rendered_variable()
+    void Universe::create_should_render_variable()
     {
-        // Set the value of `should_be_rendered` here because it can't be done in `Entity` constructor.
-        this->should_be_rendered = !this->get_is_headless();
+        // Set the value of `should_render` here because it can't be done in `Entity` constructor.
+        this->should_render = !this->get_is_headless();
 
-        // Create `Variable` `should_be_rendered` here because it can't be done in `Entity` constructor.
-        yli::ontology::VariableStruct should_be_rendered_variable_struct(*this, *this);
-        should_be_rendered_variable_struct.is_variable_of_universe = true;
-        should_be_rendered_variable_struct.local_name = "should_be_rendered";
-        should_be_rendered_variable_struct.activate_callback = &yli::ontology::activate_should_be_rendered;
-        should_be_rendered_variable_struct.read_callback = &yli::ontology::read_should_be_rendered;
-        should_be_rendered_variable_struct.should_call_activate_callback_now = true;
-        std::cout << "Executing `this->create_variable(should_be_rendered_variable_struct);` ...\n";
-        this->create_variable(should_be_rendered_variable_struct, yli::data::AnyValue(this->should_be_rendered));
+        // Create `Variable` `should_render` here because it can't be done in `Entity` constructor.
+        yli::ontology::VariableStruct should_render_variable_struct(*this, *this);
+        should_render_variable_struct.is_variable_of_universe = true;
+        should_render_variable_struct.local_name = "should_render";
+        should_render_variable_struct.activate_callback = &yli::ontology::activate_should_render;
+        should_render_variable_struct.read_callback = &yli::ontology::read_should_render;
+        should_render_variable_struct.should_call_activate_callback_now = true;
+        std::cout << "Executing `this->create_variable(should_render_variable_struct);` ...\n";
+        this->create_variable(should_render_variable_struct, yli::data::AnyValue(this->should_render));
     }
 }

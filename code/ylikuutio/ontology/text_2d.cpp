@@ -146,7 +146,7 @@ namespace yli::ontology
 
     void Text2D::render()
     {
-        if (!this->should_be_rendered || !this->universe.get_is_opengl_in_use())
+        if (!this->should_render || !this->universe.get_is_opengl_in_use())
         {
             return;
         }

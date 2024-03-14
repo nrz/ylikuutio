@@ -184,7 +184,7 @@ namespace yli::ontology
 
     void Font2D::prepare_to_print() const
     {
-        if (this->should_be_rendered && this->universe.get_is_opengl_in_use())
+        if (this->should_render && this->universe.get_is_opengl_in_use())
         {
             // Bind program.
             glUseProgram(this->program_id);
@@ -209,7 +209,7 @@ namespace yli::ontology
 
     void Font2D::render()
     {
-        if (!this->should_be_rendered || !this->universe.get_is_opengl_in_use())
+        if (!this->should_render || !this->universe.get_is_opengl_in_use())
         {
             return;
         }
@@ -237,7 +237,7 @@ namespace yli::ontology
             const std::string& horizontal_alignment,
             const std::string& vertical_alignment) const
     {
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }
@@ -444,7 +444,7 @@ namespace yli::ontology
 
     void Font2D::print_text_2d(const yli::ontology::TextStruct& text_struct) const
     {
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }
@@ -468,7 +468,7 @@ namespace yli::ontology
             const std::string& text,
             const std::string& font_texture_file_format) const
     {
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }

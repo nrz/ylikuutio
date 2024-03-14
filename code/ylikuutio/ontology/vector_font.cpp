@@ -200,7 +200,7 @@ namespace yli::ontology
 
     void VectorFont::render(const yli::ontology::Scene* const target_scene)
     {
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }

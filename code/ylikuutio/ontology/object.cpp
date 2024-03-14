@@ -212,7 +212,7 @@ namespace yli::ontology
     {
         // render this `Object`.
 
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }

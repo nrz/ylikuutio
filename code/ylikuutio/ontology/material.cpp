@@ -178,7 +178,7 @@ namespace yli::ontology
 
     void Material::render(const yli::ontology::Scene* const target_scene)
     {
-        if (!this->texture.get_is_texture_loaded() || !this->should_be_rendered)
+        if (!this->texture.get_is_texture_loaded() || !this->should_render)
         {
             return;
         }

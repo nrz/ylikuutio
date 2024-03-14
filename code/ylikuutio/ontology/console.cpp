@@ -235,7 +235,7 @@ namespace yli::ontology
     void Console::render(const yli::ontology::Scene* const) const
     {
         if (!this->in_console ||
-                !this->should_be_rendered ||
+                !this->should_render ||
                 this->universe.get_active_console() != this)
         {
             return;

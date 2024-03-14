@@ -183,7 +183,7 @@ namespace yli::ontology
 
     void Scene::render()
     {
-        if (!this->should_be_rendered)
+        if (!this->should_render)
         {
             return;
         }

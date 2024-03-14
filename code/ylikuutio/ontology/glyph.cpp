@@ -97,7 +97,7 @@ namespace yli::ontology
 
     void Glyph::render(const yli::ontology::Scene* const target_scene)
     {
-        if (!this->should_be_rendered || this->universe.get_is_headless())
+        if (!this->should_render || this->universe.get_is_headless())
         {
             return;
         }

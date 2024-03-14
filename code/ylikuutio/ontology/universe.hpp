@@ -342,7 +342,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void create_should_be_rendered_variable();
+            void create_should_render_variable();
 
             bool compute_and_update_matrices_from_inputs();
 
