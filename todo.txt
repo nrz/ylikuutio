@@ -10,6 +10,7 @@ Fixes needed:
 [ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
 [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 [ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
@@ -25,6 +26,7 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Add support for Tab complete for local names in `Console`.
 [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
+[ ] Add support for high DPI displays.
 [ ] Implement `yli::ontology::Window` class.
 [ ] Implement `yli::ontology::Widget` class.
 [ ] Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
@@ -41,7 +43,6 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 Tasks which are necessary for the second stage:
-[ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 [ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 [ ] Add support for multiple displays.
 [ ] Implement support for multiple light sources in each `Scene`.
