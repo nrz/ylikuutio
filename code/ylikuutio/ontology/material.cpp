@@ -197,8 +197,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Material::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Material::render`: `render_system` is `nullptr`!");
         }
 
         // Bind our texture in Texture Unit 0.
