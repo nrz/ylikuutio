@@ -216,7 +216,7 @@ namespace yli::ontology
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_system == nullptr)
+        if (render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Font2D::render`: `render_system` is `nullptr`!");
         }

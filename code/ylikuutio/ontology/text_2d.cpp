@@ -56,7 +56,7 @@ namespace yli::ontology
 
         const yli::ontology::Entity* const old_font_2d_parent = text_2d.get_parent();
 
-        if (old_font_2d_parent == nullptr)
+        if (old_font_2d_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text2D::bind_to_new_font_2d_parent`: `old_font_2d_parent` is `nullptr`!");
         }
@@ -380,7 +380,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const font_2d_parent = this->get_parent();
 
-        if (font_2d_parent == nullptr)
+        if (font_2d_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text2D::get_scene`: `font_2d_parent` is `nullptr`!");
         }

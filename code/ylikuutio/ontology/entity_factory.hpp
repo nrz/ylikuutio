@@ -144,7 +144,7 @@ namespace yli::ontology
 
             yli::ontology::Universe& get_universe() const
             {
-                if (this->universe == nullptr)
+                if (this->universe == nullptr) [[unlikely]]
                 {
                     throw std::runtime_error("ERROR: `EntityFactory::get_universe`: `this->universe` is `nullptr`!");
                 }

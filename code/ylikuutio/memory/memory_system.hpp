@@ -241,7 +241,7 @@ namespace yli::memory
                 // TODO: use `TypeEnumType` instead of `int`!
                 yli::memory::GenericMemoryAllocator& get_allocator(const int type) const override
                 {
-                    if (this->has_allocator(type))
+                    if (this->has_allocator(type)) [[likely]]
                     {
                         return *(this->memory_allocators.at(type));
                     }

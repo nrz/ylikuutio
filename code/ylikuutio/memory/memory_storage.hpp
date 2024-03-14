@@ -43,7 +43,7 @@ namespace yli::memory
                 explicit MemoryStorage(const std::size_t storage_i)
                     : storage_i { storage_i }
                 {
-                    if (storage_i == std::numeric_limits<std::size_t>::max())
+                    if (storage_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
                     {
                         throw std::runtime_error("ERROR: `MemoryStorage::MemoryStorage`: `storage_i` has invalid value!");
                     }
@@ -123,12 +123,12 @@ namespace yli::memory
 
                 void destroy(const std::size_t slot_i)
                 {
-                    if (slot_i == std::numeric_limits<std::size_t>::max())
+                    if (slot_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
                     {
                         throw std::runtime_error("ERROR: `MemoryStorage::destroy`: `slot_i` has invalid value!");
                     }
 
-                    if (slot_i >= DataSize)
+                    if (slot_i >= DataSize) [[unlikely]]
                     {
                         std::stringstream runtime_error_stringstream;
                         runtime_error_stringstream << "ERROR: `MemoryStorage::destroy`: `slot_i` " << storage_i <<

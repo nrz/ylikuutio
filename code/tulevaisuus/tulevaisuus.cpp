@@ -154,7 +154,7 @@ namespace tulevaisuus
 
     yli::ontology::Universe& TulevaisuusApplication::get_universe() const
     {
-        if (this->universe == nullptr)
+        if (this->universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `TulevaisuusApplication::get_universe`: `this->universe` is `nullptr`!");
         }

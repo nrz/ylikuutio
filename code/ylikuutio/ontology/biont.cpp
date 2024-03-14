@@ -116,14 +116,14 @@ namespace yli::ontology
 
         const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
-        if (holobiont_parent == nullptr)
+        if (holobiont_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!");
         }
 
         const yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
-        if (symbiosis_master_of_holobiont == nullptr)
+        if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
@@ -137,21 +137,21 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
-        if (this->universe.get_render_system() == nullptr)
+        if (this->universe.get_render_system() == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!");
         }
 
         const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
 
-        if (holobiont_parent == nullptr)
+        if (holobiont_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `holobiont_parent` is `nullptr`!");
         }
 
         yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
-        if (symbiosis_master_of_holobiont == nullptr)
+        if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
@@ -159,7 +159,7 @@ namespace yli::ontology
         const yli::ontology::SymbiontSpecies* const symbiont_species_master = static_cast<yli::ontology::SymbiontSpecies*>(
                 this->apprentice_of_symbiont_species.get_master());
 
-        if (symbiont_species_master == nullptr)
+        if (symbiont_species_master == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiont_species_master` is `nullptr`!");
         }
@@ -300,7 +300,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const holobiont_parent = this->get_parent();
 
-        if (holobiont_parent == nullptr)
+        if (holobiont_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::get_scene`: `holobiont_parent` is `nullptr`!");
         }

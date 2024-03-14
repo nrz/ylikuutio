@@ -93,14 +93,14 @@ namespace yli::ontology
             {
                 yli::ontology::LispFunction* const lisp_function_parent = static_cast<yli::ontology::LispFunction*>(this->get_parent());
 
-                if (lisp_function_parent == nullptr)
+                if (lisp_function_parent == nullptr) [[unlikely]]
                 {
                     throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
                 }
 
                 yli::ontology::Console* const console_parent_of_lisp_function = static_cast<yli::ontology::Console*>(lisp_function_parent->get_parent());
 
-                if (console_parent_of_lisp_function == nullptr)
+                if (console_parent_of_lisp_function == nullptr) [[unlikely]]
                 {
                     throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `console_parent_of_lisp_function` is `nullptr`!");
                 }

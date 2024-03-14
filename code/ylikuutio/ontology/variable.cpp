@@ -63,7 +63,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent == nullptr)
+        if (entity_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Variable::get_scene`: `entity_parent` is `nullptr`!");
         }
@@ -92,7 +92,7 @@ namespace yli::ontology
     {
         yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent == nullptr)
+        if (entity_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Variable::get`: `entity_parent` is `nullptr`!");
         }
@@ -109,7 +109,7 @@ namespace yli::ontology
     {
         yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent == nullptr)
+        if (entity_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Variable::set`: `entity_parent` is `nullptr`!");
         }
@@ -126,7 +126,7 @@ namespace yli::ontology
     {
         yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent == nullptr)
+        if (entity_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Variable::set`: `entity_parent` is `nullptr`!");
         }

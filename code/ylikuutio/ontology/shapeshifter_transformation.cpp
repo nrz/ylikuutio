@@ -49,7 +49,7 @@ namespace yli::ontology
 
         const yli::ontology::Entity* const material_parent = shapeshifter_transformation.get_parent();
 
-        if (material_parent == nullptr)
+        if (material_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
         }
@@ -110,7 +110,7 @@ namespace yli::ontology
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_system == nullptr)
+        if (render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ShapeshifterTransformation::render`: `render_system` is `nullptr`!");
         }
@@ -127,7 +127,7 @@ namespace yli::ontology
     {
         yli::ontology::Entity* material_parent = this->get_parent();
 
-        if (material_parent == nullptr)
+        if (material_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ShapeshifterTransformation::get_scene`: `material_parent` is `nullptr`!");
         }
@@ -139,7 +139,7 @@ namespace yli::ontology
     {
         const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
 
-        if (material_parent == nullptr)
+        if (material_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ShapeshifterTransformation::get_pipeline`: `material_parent` is `nullptr`!");
         }

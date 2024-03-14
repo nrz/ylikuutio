@@ -32,7 +32,7 @@ namespace yli::sdl
         {
             // Initialize SDL.
 
-            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
+            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) [[unlikely]]
             {
                 print_sdl_error();
                 throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: failed to initialize SDL.");

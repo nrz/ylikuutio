@@ -114,7 +114,7 @@ namespace gpgpu_test
 
     yli::ontology::Universe& GpgpuTestApplication::get_universe() const
     {
-        if (this->universe == nullptr)
+        if (this->universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `GpgpuTestApplication::get_universe`: `this->universe` is `nullptr`!");
         }

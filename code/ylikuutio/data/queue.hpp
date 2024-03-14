@@ -31,7 +31,7 @@ namespace yli::data
             public:
                 void push(const std::size_t value)
                 {
-                    if (this->queue_size >= QueueMaxSize)
+                    if (this->queue_size >= QueueMaxSize) [[unlikely]]
                     {
                         throw std::runtime_error("ERROR: `yli::data::Queue::push`: queue is full, no space to push!");
                     }
@@ -47,7 +47,7 @@ namespace yli::data
 
                 std::size_t pop()
                 {
-                    if (this->size() == 0)
+                    if (this->size() == 0) [[unlikely]]
                     {
                         throw std::runtime_error("ERROR: `yli::data::Queue::pop`: queue is empty, nothing to pop!");
                     }

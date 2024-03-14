@@ -50,7 +50,7 @@ namespace yli::ontology
 
         const yli::ontology::Entity* const vector_font_parent = text_3d.get_parent();
 
-        if (vector_font_parent == nullptr)
+        if (vector_font_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font_parent` is `nullptr`!");
         }
@@ -107,7 +107,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
-        if (vector_font_parent == nullptr)
+        if (vector_font_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text3D::get_scene`: `vector_font_parent` is `nullptr`!");
         }
@@ -119,7 +119,7 @@ namespace yli::ontology
     {
         const yli::ontology::VectorFont* const vector_font_parent = static_cast<yli::ontology::VectorFont*>(this->get_parent());
 
-        if (vector_font_parent == nullptr)
+        if (vector_font_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text3D::get_pipeline`: `vector_font_parent` is `nullptr`!");
         }

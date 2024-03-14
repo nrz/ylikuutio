@@ -72,7 +72,7 @@ namespace yli::ontology
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `yli::ontology::activate_cartesian_coordinates`: `universe` is `nullptr`!");
         }
@@ -130,7 +130,7 @@ namespace yli::ontology
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `yli::ontology::activate_x`: `universe` is `nullptr`!");
         }
@@ -178,7 +178,7 @@ namespace yli::ontology
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `yli::ontology::activate_y`: `universe` is `nullptr`!");
         }
@@ -226,7 +226,7 @@ namespace yli::ontology
 
         yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
 
-        if (universe == nullptr)
+        if (universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `yli::ontology::activate_z`: `universe` is `nullptr`!");
         }

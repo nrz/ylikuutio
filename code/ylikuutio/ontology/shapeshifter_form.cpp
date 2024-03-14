@@ -58,7 +58,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const shapeshifter_transformation_parent = this->get_parent();
 
-        if (shapeshifter_transformation_parent == nullptr)
+        if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ShapeshifterForm::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
         }

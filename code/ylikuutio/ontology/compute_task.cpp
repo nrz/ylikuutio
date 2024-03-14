@@ -435,7 +435,7 @@ namespace yli::ontology
     {
         const yli::ontology::Pipeline* const pipeline_parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
 
-        if (pipeline_parent == nullptr)
+        if (pipeline_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `ComputeTask::get_scene`: `pipeline_parent` is `nullptr`!");
         }

@@ -54,7 +54,7 @@ namespace yli::ontology
 
         const yli::ontology::Entity* const old_ecosystem_or_scene_parent = species.get_parent();
 
-        if (old_ecosystem_or_scene_parent == nullptr)
+        if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Species::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
@@ -88,7 +88,7 @@ namespace yli::ontology
 
         const yli::ontology::Entity* const old_ecosystem_or_scene_parent = species.get_parent();
 
-        if (old_ecosystem_or_scene_parent == nullptr)
+        if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Species::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }

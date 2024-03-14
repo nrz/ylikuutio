@@ -77,7 +77,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
-        if (vector_font_parent == nullptr)
+        if (vector_font_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Glyph::get_scene`: `vector_font_parent` is `nullptr`!");
         }
@@ -114,7 +114,7 @@ namespace yli::ontology
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_system == nullptr)
+        if (render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Glyph::render`: `render_system` is `nullptr`!");
         }

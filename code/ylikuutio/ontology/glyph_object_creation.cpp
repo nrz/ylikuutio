@@ -40,7 +40,7 @@ namespace yli::ontology
     {
         const yli::ontology::VectorFont* const vector_font_parent_of_text_3d = static_cast<yli::ontology::VectorFont*>(text_3d.get_parent());
 
-        if (vector_font_parent_of_text_3d == nullptr)
+        if (vector_font_parent_of_text_3d == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `create_glyph_objects`: `vector_font_parent_of_text_3d` is `nullptr`!");
         }

@@ -106,7 +106,7 @@ namespace yli::ontology
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
-        if (render_system == nullptr)
+        if (render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::render`: `render_system` is `nullptr`!");
         }
@@ -123,14 +123,14 @@ namespace yli::ontology
 
         yli::ontology::Scene* const scene = this->get_scene();
 
-        if (scene == nullptr)
+        if (scene == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!");
         }
 
         const yli::ontology::Symbiosis* const symbiosis = this->get_symbiosis();
 
-        if (symbiosis == nullptr)
+        if (symbiosis == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!");
         }

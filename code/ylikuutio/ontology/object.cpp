@@ -75,7 +75,7 @@ namespace yli::ontology
 
         const yli::ontology::Scene* const old_scene_parent = object.get_scene();
 
-        if (old_scene_parent == nullptr)
+        if (old_scene_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Object::bind_to_new_scene_parent`: `old_scene_parent` is `nullptr`!");
         }
@@ -238,7 +238,7 @@ namespace yli::ontology
 
     void Object::render_this_object(yli::ontology::Pipeline* const pipeline)
     {
-        if (this->universe.get_render_system() == nullptr)
+        if (this->universe.get_render_system() == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Object::render_this_object`: `this->universe.get_render_system()` is `nullptr`!");
         }

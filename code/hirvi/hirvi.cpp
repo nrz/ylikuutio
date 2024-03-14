@@ -164,7 +164,7 @@ namespace hirvi
 
     yli::ontology::Universe& HirviApplication::get_universe() const
     {
-        if (this->universe == nullptr)
+        if (this->universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `HirviApplication::get_universe`: `this->universe` is `nullptr`!");
         }

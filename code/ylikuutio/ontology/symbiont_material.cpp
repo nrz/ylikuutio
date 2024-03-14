@@ -76,7 +76,7 @@ namespace yli::ontology
     {
         const yli::ontology::Entity* const symbiosis_parent = this->get_parent();
 
-        if (symbiosis_parent == nullptr)
+        if (symbiosis_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `SymbiontMaterial::get_scene`: `symbiosis_parent` is `nullptr`!");
         }
@@ -93,7 +93,7 @@ namespace yli::ontology
     {
         const yli::ontology::Symbiosis* const symbiosis_parent = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
 
-        if (symbiosis_parent == nullptr)
+        if (symbiosis_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `SymbiontMaterial::get_pipeline`: `symbiosis_parent` is `nullptr`!");
         }

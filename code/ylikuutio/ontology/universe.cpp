@@ -792,7 +792,7 @@ namespace yli::ontology
 
         yli::ontology::Scene* const scene_parent_of_camera = static_cast<yli::ontology::Scene*>(camera->get_parent());
 
-        if (scene_parent_of_camera == nullptr)
+        if (scene_parent_of_camera == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Universe::set_active_camera`: `scene_parent_of_camera` is `nullptr`!");
         }
@@ -1175,7 +1175,7 @@ namespace yli::ontology
 
     yli::render::RenderSystem* Universe::get_render_system() const
     {
-        if (this->render_system == nullptr)
+        if (this->render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Universe::get_render_system`: `this->render_system` is `nullptr`!");
         }

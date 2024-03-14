@@ -87,7 +87,7 @@ namespace mock
 
     yli::ontology::Universe& MockApplication::get_universe() const
     {
-        if (this->universe == nullptr)
+        if (this->universe == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `MockApplication::get_universe`: `this->universe` is `nullptr`!");
         }
