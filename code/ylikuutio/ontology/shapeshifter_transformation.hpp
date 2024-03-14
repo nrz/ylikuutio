@@ -24,7 +24,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 
 // `ShapeshifterTransformation` is a series of `ShapeshifterForm`s that

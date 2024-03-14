@@ -33,14 +33,14 @@
 #endif
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <iomanip>       // std::setfill, std::setw
-#include <iostream>      // std::cerr
-#include <sstream>       // std::stringstream
-#include <stdexcept>     // std::runtime_error
-#include <stdint.h>      // uint32_t etc.
-#include <utility>       // std::swap etc.
-#include <vector>        // std::vector
+#include <cstddef>   // std::size_t
+#include <iomanip>   // std::setfill, std::setw
+#include <iostream>  // std::cerr
+#include <sstream>   // std::stringstream
+#include <stdexcept> // std::runtime_error
+#include <stdint.h>  // uint32_t etc.
+#include <utility>   // std::swap etc.
+#include <vector>    // std::vector
 
 namespace yli::core
 {

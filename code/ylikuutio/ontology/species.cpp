@@ -27,11 +27,11 @@
 #include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
+#include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
 
 namespace yli::core
 {
