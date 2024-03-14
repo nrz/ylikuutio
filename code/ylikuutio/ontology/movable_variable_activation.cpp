@@ -33,6 +33,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
+#include <stdexcept>  // std::runtime_error
 #include <variant> // std::holds_alternative, std::variant
 
 namespace yli::ontology
@@ -73,8 +74,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            std::cerr << "ERROR: `yli::ontology::activate_cartesian_coordinates`: `universe` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `yli::ontology::activate_cartesian_coordinates`: `universe` is `nullptr`!");
         }
 
         const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
@@ -132,8 +132,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            std::cerr << "ERROR: `yli::ontology::activate_x`: `universe` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `yli::ontology::activate_x`: `universe` is `nullptr`!");
         }
 
         const yli::data::AnyValue& x_any_value = variable.variable_value;
@@ -181,8 +180,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            std::cerr << "ERROR: `yli::ontology::activate_y`: `universe` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `yli::ontology::activate_y`: `universe` is `nullptr`!");
         }
 
         const yli::data::AnyValue& y_any_value = variable.variable_value;
@@ -230,8 +228,7 @@ namespace yli::ontology
 
         if (universe == nullptr)
         {
-            std::cerr << "ERROR: `yli::ontology::activate_z`: `universe` is `nullptr`!\n";
-            return std::nullopt;
+            throw std::runtime_error("ERROR: `yli::ontology::activate_z`: `universe` is `nullptr`!");
         }
 
         const yli::data::AnyValue& z_any_value = variable.variable_value;
