@@ -718,9 +718,18 @@ namespace yli::ontology
         // Software rendering renders to a CPU memory region or to file.
         // TODO: implement Vulkan rendering!
         // TODO: implement software rendering!
-        if (this->should_render &&
-                this->get_active_camera() != nullptr &&
-                this->render_system != nullptr)
+
+        if (!this->should_render)
+        {
+            return;
+        }
+
+        if (this->render_system == nullptr)
+        {
+            throw std::runtime_error("ERROR: `Universe::render`: `this->render_system` is `nullptr`!");
+        }
+
+        if (this->get_active_camera() != nullptr)
         {
             if (this->get_is_opengl_in_use())
             {
