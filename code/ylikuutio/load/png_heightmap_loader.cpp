@@ -35,7 +35,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <memory>   // std::shared_ptr

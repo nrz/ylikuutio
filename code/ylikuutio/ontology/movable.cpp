@@ -36,7 +36,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 

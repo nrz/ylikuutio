@@ -23,7 +23,6 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstddef>  // std::size_t
-#include <string>   // std::string
 
 namespace yli::triangulation
 {

@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <limits>   // std::numeric_limits
 
 namespace yli::interpolation
 {

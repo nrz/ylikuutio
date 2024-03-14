@@ -43,7 +43,6 @@
 #include <cmath>    // std::isnan
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::triangulation
