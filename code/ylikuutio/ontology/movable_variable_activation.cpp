@@ -30,11 +30,11 @@
 
 // Include standard headers
 #include <functional> // std::reference_wrapper
-#include <iostream> // std::cout, std::cerr
-#include <numbers>  // std::numbers::pi
-#include <optional> // std::optional
+#include <iostream>   // std::cout, std::cerr
+#include <numbers>    // std::numbers::pi
+#include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
-#include <variant> // std::holds_alternative, std::variant
+#include <variant>    // std::holds_alternative, std::variant
 
 namespace yli::ontology
 {
