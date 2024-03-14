@@ -25,9 +25,7 @@
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
-#include <memory> // std::unique_ptr
 #include <string> // std::string
-#include <utility> // std::forward
 #include <vector> // std::vector
 
 namespace yli::memory
