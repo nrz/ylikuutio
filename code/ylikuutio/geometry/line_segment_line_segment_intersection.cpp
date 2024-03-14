@@ -28,7 +28,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 
 namespace yli::geometry
 {

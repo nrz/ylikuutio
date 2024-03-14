@@ -19,7 +19,7 @@
 #define YLIKUUTIO_LOAD_HEIGHTMAP_LOADER_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 

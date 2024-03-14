@@ -27,11 +27,11 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::monostate, std::variant
+#include <variant>  // std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology

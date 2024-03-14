@@ -33,7 +33,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // std::isnan
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional

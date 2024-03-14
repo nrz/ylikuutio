@@ -26,7 +26,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // std::isnan
 
 TEST(line_2d_line_2d_intersection, parallel_lines)
 {

@@ -18,7 +18,7 @@
 #include "line.hpp"
 
 // Include standard headers
-#include <cmath>     // NAN, std::isnan, std::pow
+#include <cmath>     // NAN
 #include <string>    // std::string
 #include <vector>    // std::vector
 

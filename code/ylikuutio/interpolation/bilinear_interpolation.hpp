@@ -21,7 +21,7 @@
 #include "bilinear_interpolation_struct.hpp"
 
 // Include standard headers
-#include <cmath>    // NAN, std::ceil, std::floor, std::isnan
+#include <cmath>    // std::floor
 #include <cstddef>  // std::ptrdiff_t, std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <limits>   // std::numeric_limits

@@ -19,7 +19,7 @@
 #define YLIKUUTIO_DATA_SPHERICAL_COORDINATES_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 
 namespace yli::data
 {

@@ -36,7 +36,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 #include <optional> // std::optional
 #include <vector>   // std::vector
 

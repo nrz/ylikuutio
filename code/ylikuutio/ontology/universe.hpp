@@ -36,10 +36,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, std::isnan, std::pow
+#include <cmath>         // NAN
 #include <cstddef>       // std::size_t
 #include <limits>        // std::numeric_limits
-#include <memory>        // std::make_unique, std::unique_ptr
+#include <memory>        // std::unique_ptr
 #include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.

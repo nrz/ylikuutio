@@ -21,7 +21,7 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // NAN
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 

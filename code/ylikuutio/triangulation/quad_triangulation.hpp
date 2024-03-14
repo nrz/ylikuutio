@@ -40,7 +40,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
+#include <cmath>    // std::isnan
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <string>   // std::string

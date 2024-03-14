@@ -19,7 +19,7 @@
 #define YLIKUUTIO_GEOMETRY_SPHERICAL_TERRAIN_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
+#include <cmath> // NAN
 
 namespace yli::geometry
 {

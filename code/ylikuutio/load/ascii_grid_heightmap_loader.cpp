@@ -34,11 +34,11 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow, floor, ceil
+#include <cmath>    // floor
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string, std::stoi
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::load
