@@ -19,11 +19,11 @@
 
 // Include standard headers
 #include <fstream>  // std::ifstream
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <ios>      // std::ios
 #include <iostream> // std::cout, std::cerr
 #include <iterator> // std::istream_iterator
 #include <optional> // std::optional
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>  // std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector

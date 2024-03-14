@@ -35,7 +35,7 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <ios>       // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <ios>       // std::dec
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error

@@ -91,7 +91,7 @@
 #include <functional>    // std::function
 #include <iostream>      // std::cout, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>       // std::stringstream
 #include <stdexcept>     // std::runtime_error
 #include <string>        // std::string
 #include <vector>        // std::vector

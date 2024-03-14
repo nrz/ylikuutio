@@ -26,7 +26,7 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <ios>       // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <ios>       // std::dec, std::hex
 #include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.

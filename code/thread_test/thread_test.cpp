@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <functional> // std::ref
-#include <iostream>   // std::cout, std::cerr
+#include <iostream>   // std::cout
 #include <stdint.h>   // uint32_t etc.
 #include <thread>     // std::thread
 #include <vector>     // std::vector

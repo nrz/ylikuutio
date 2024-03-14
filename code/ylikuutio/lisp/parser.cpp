@@ -19,7 +19,7 @@
 
 // Include standard headers
 #include <string>  // std::string, std::getline
-#include <sstream> // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream> // std::istringstream
 #include <vector>  // std::vector
 
 namespace yli::lisp

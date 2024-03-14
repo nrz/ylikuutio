@@ -28,10 +28,10 @@
 // Include standard headers
 #include <cstdint>  // std::uintptr_t
 #include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <ios>      // std::hex
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>  // std::stringstream
 #include <string>   // std::string
 #include <utility>  // std::pair
 #include <vector>   // std::vector

@@ -43,7 +43,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>  // std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
 

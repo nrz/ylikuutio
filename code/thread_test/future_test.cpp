@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <future>   // std::async, std::launch, std::future
-#include <iostream> // std::cout, std::cerr
+#include <iostream> // std::cout
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 

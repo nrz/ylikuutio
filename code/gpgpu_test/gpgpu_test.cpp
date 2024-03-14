@@ -54,7 +54,7 @@
 // Include standard headers
 #include <iostream>      // std::cout, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
-#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>       // std::stringstream
 #include <stdexcept>     // std::runtime_error
 
 namespace yli::memory

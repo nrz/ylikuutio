@@ -26,14 +26,14 @@
 #endif
 
 // Include standard headers
-#include <cmath>      // NAN, std::isnan, std::pow
+#include <cmath>      // NAN
 #include <cstdint>    // std::uintptr_t
 #include <cstddef>    // std::size_t
-#include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <ios>        // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <cstring>    // std::strncmp
+#include <ios>        // std::hex
 #include <iostream>   // std::cout, std::cerr
 #include <optional>   // std::optional
-#include <sstream>    // std::istringstream, std::ostringstream, std::stringstream
+#include <sstream>    // std::stringstream
 #include <string>     // std::string
 #include <vector>     // std::vector
 
