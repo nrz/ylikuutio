@@ -92,6 +92,7 @@
 #include <functional> // std::function
 #include <iostream>   // std::cerr
 #include <optional>   // std::optional
+#include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
 #include <variant>    // std::holds_alternative
 
