@@ -23,7 +23,6 @@
 // Include standard headers
 #include <optional> // std::optional
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
-#include <vector>   // std::vector
 
 namespace hirvi
 {

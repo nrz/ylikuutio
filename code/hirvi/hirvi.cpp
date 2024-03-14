@@ -76,17 +76,12 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // abs, cos, NAN, remainder, sin, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <functional>    // std::function
-#include <iomanip>       // std::setfill, std::setprecision, std::setw
-#include <ios>           // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
 #include <iostream>      // std::cout, std::cerr
 #include <memory>        // std::make_unique, std::unique_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <utility>       // std::pair
 #include <vector>        // std::vector
 
 namespace yli::memory

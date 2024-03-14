@@ -51,7 +51,6 @@
 // Include standard headers
 #include <iostream>   // std::cout, std::cerr
 #include <numbers>    // std::numbers::pi
-#include <string>     // std::string
 
 namespace yli::ontology
 {
