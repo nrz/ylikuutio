@@ -207,7 +207,7 @@ namespace yli::ontology
         }
         else if (this->universe.get_is_vulkan_in_use())
         {
-            std::cerr << "ERROR: `Scene::render`: Vulkan is not supported yet!\n";
+            throw std::runtime_error("ERROR: `Scene::render`: Vulkan is not supported yet!");
         }
 
         render_system->render_pipelines_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
