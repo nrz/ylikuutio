@@ -44,6 +44,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <utility>  // std::pair
@@ -217,8 +218,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Font2D::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Font2D::render`: `render_system` is `nullptr`!");
         }
 
         this->prepare_to_print();
