@@ -39,15 +39,15 @@
 #endif
 
 // Include standard headers
-#include <cstdint>  // std::uintptr_t
-#include <cstddef>  // std::size_t
-#include <ios>      // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
-#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
+#include <cstdint>   // std::uintptr_t
+#include <cstddef>   // std::size_t
+#include <ios>       // std::defaultfloat, std::dec, std::fixed, std::hex, std::ios
+#include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
+#include <sstream>   // std::istringstream, std::ostringstream, std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::ontology
 {
