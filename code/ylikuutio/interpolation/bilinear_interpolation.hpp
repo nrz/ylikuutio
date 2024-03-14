@@ -23,7 +23,7 @@
 // Include standard headers
 #include <cmath>    // std::floor
 #include <cstddef>  // std::ptrdiff_t, std::size_t
-#include <iostream> // std::cout, std::cerr
+#include <iostream> // std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 

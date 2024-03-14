@@ -30,8 +30,8 @@
 #endif
 
 // Include standard headers
-#include <cmath>         // NAN, std::isnan, std::pow
-#include <iostream>      // std::cout, std::cerr
+#include <cmath>         // NAN
+#include <iostream>      // std::cout
 
 namespace yli::snippets
 {
