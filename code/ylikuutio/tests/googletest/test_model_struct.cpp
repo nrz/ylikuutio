@@ -25,10 +25,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>   // NAN, std::isnan, std::pow
-#include <limits>  // std::numeric_limits
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
-#include <vector>  // std::vector
+#include <vector>   // std::vector
 
 TEST(model_struct_must_be_initialized_appropriately, model_struct)
 {

@@ -26,11 +26,11 @@
 #endif
 
 // Include standard headers
-#include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 TEST(glyphs_must_be_found_appropriately, kongtext_svg)
 {

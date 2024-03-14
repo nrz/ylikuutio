@@ -20,11 +20,11 @@
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include standard headers
-#include <limits>  // std::numeric_limits
+#include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 TEST(csv_file_must_be_loaded_appropriately, some_finnish_railway_stations_float)
 {

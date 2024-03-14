@@ -54,14 +54,14 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cmath>      // NAN, std::isnan, std::pow
+#include <cstring>    // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <functional> // std::reference_wrapper
-#include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::monostate, std::variant
-#include <vector>   // std::vector
+#include <limits>     // std::numeric_limits
+#include <stdint.h>   // uint32_t etc.
+#include <string>     // std::string
+#include <variant>    // std::holds_alternative, std::monostate, std::variant
+#include <vector>     // std::vector
 
 TEST(any_value_must_be_initialized_appropriately, default_constructor)
 {

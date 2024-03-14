@@ -22,11 +22,11 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
-#include <limits>  // std::numeric_limits
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <limits>   // std::numeric_limits
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::ontology
 {

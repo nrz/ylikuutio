@@ -31,7 +31,7 @@
 #endif
 
 // Include standard headers
-#include <cmath> // NAN, std::isnan, std::pow
+#include <cmath>   // NAN, std::isnan, std::pow
 #include <variant> // std::holds_alternative, std::monostate, std::variant
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)

@@ -35,11 +35,11 @@
 
 // Include standard headers
 #include <functional> // std::reference_wrapper
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::variant
+#include <iostream>   // std::cout, std::cerr
+#include <optional>   // std::optional
+#include <stdint.h>   // uint32_t etc.
+#include <string>     // std::string
+#include <variant>    // std::holds_alternative, std::variant
 
 // Callbacks' input parameters can be accessed either through
 // `yli::ontology::CallbackObject* callback_object`or

@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <optional> // std::optional
-#include <string> // std::string
+#include <string>   // std::string
 
 namespace yli::ontology
 {
