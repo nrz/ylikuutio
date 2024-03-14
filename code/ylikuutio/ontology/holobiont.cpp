@@ -132,8 +132,7 @@ namespace yli::ontology
 
         if (symbiosis == nullptr)
         {
-            std::cerr << "ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!");
         }
 
         const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(this);
