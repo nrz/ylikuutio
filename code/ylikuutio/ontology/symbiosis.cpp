@@ -196,8 +196,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `Symbiosis::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Symbiosis::render`: `render_system` is `nullptr`!");
         }
 
         render_system->render_holobionts(this->master_of_holobionts, new_target_scene);
