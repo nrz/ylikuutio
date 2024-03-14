@@ -240,8 +240,7 @@ namespace yli::ontology
     {
         if (this->universe.get_render_system() == nullptr)
         {
-            std::cerr << "ERROR: `Object::render_this_object`: `this->universe.get_render_system()` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Object::render_this_object`: `this->universe.get_render_system()` is `nullptr`!");
         }
 
         if (pipeline == nullptr)
