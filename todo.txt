@@ -38,6 +38,7 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Implement support for multiple water levels within a `Scene`.
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
+[ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 Tasks which are necessary for the second stage:
 [ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
