@@ -125,8 +125,7 @@ namespace yli::ontology
 
         if (scene == nullptr)
         {
-            std::cerr << "ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!");
         }
 
         const yli::ontology::Symbiosis* const symbiosis = this->get_symbiosis();
