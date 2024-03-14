@@ -112,8 +112,7 @@ namespace yli::ontology
 
         if (render_system == nullptr)
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::render`: `render_system` is `nullptr`!\n";
-            return;
+            throw std::runtime_error("ERROR: `ShapeshifterTransformation::render`: `render_system` is `nullptr`!");
         }
 
         render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences, new_target_scene);
