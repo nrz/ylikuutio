@@ -21,7 +21,6 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Scene;
-    class Font2D;
 }
 
 namespace yli::render
