@@ -181,7 +181,7 @@ namespace yli::render
     void RenderSystem::adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const
     {
         if (window_width >= 0 && window_width <= std::numeric_limits<GLsizei>::max() &&
-                window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max())
+                window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
             glViewport(0, 0, window_width, window_height);
         }
@@ -189,22 +189,22 @@ namespace yli::render
 
     void RenderSystem::render(const yli::render::RenderStruct& render_struct) const
     {
-        if (render_struct.scene != nullptr)
+        if (render_struct.scene != nullptr) [[likely]]
         {
             render_struct.scene->render();
         }
 
-        if (render_struct.should_change_depth_test)
+        if (render_struct.should_change_depth_test) [[likely]]
         {
             yli::opengl::disable_depth_test();
         }
 
-        if (render_struct.parent_of_font_2ds != nullptr)
+        if (render_struct.parent_of_font_2ds != nullptr) [[likely]]
         {
             yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Font2D*>(*render_struct.parent_of_font_2ds);
         }
 
-        if (render_struct.should_change_depth_test)
+        if (render_struct.should_change_depth_test) [[likely]]
         {
             yli::opengl::enable_depth_test();
         }
@@ -219,7 +219,7 @@ namespace yli::render
         {
             yli::ontology::Ecosystem* ecosystem = static_cast<yli::ontology::Ecosystem*>(*it);
 
-            if (ecosystem != nullptr && ecosystem->should_render)
+            if (ecosystem != nullptr && ecosystem->should_render) [[likely]]
             {
                 this->render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
             }
