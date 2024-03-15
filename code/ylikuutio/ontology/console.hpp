@@ -35,7 +35,6 @@
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 // `Console` works through keypress callbacks and keyrelease callbacks.
@@ -61,14 +60,6 @@
 namespace yli::core
 {
     class Application;
-}
-
-namespace yli::map
-{
-    template <typename T1>
-        void print_keys_to_console(
-                const std::unordered_map<std::string, T1>* const unordered_map_pointer,
-                yli::ontology::Console& console);
 }
 
 namespace yli::memory
