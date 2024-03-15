@@ -68,7 +68,7 @@ namespace yli::load
         else if (graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
         {
             // TODO: implement.
-            return false;
+            throw std::runtime_error("ERROR: `yli::load::load_common_texture`: software rendering is not supported yet!");
         }
 
         // Headless.
