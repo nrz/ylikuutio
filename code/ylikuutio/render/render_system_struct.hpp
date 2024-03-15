@@ -27,8 +27,8 @@ namespace yli::render
     struct RenderSystemStruct
     {
         std::string hidden_window_title;
-        uint32_t hidden_window_width { 1600 };
-        uint32_t hidden_window_height { 900 };
+        uint32_t hidden_window_width     { 1600 };
+        uint32_t hidden_window_height    { 900 };
         bool is_hidden_window_fullscreen { false };
     };
 }
