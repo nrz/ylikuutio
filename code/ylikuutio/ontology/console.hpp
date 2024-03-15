@@ -28,14 +28,14 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <limits>        // std::numeric_limits
-#include <list>          // std::list
-#include <optional>      // std::optional
-#include <queue>         // std::queue
-#include <stdint.h>      // uint32_t etc.
-#include <string>        // std::string
-#include <vector>        // std::vector
+#include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
+#include <list>     // std::list
+#include <optional> // std::optional
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 // `Console` works through keypress callbacks and keyrelease callbacks.
 // If the action of a key should not happen many times in a very fast

@@ -23,12 +23,12 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
-#include <iostream> // std::cerr
-#include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
+#include <iostream>  // std::cerr
+#include <memory>    // std::shared_ptr
+#include <stdint.h>  // uint32_t etc.
 #include <stdexcept> // std::runtime_error
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::load
 {
