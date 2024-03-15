@@ -18,12 +18,16 @@
 #ifndef YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
 #define YLIKUUTIO_LOAD_COMMON_TEXTURE_LOADER_HPP_INCLUDED
 
-#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+
+namespace yli::load
+{
+    struct ImageLoaderStruct;
+}
 
 namespace yli::render
 {
