@@ -28,9 +28,9 @@ namespace yli::render
 {
     struct RenderStruct
     {
-        yli::ontology::Scene* scene                                 { nullptr };
-        yli::ontology::GenericParentModule* parent_of_font_2ds      { nullptr };
-        SDL_Window* window                                          { nullptr };
-        bool should_change_depth_test                               { true };
+        yli::ontology::Scene* scene                            { nullptr };
+        yli::ontology::GenericParentModule* parent_of_font_2ds { nullptr };
+        SDL_Window* window                                     { nullptr };
+        bool should_change_depth_test                          { true };
     };
 }
