@@ -26,6 +26,7 @@
 #include <iostream> // std::cerr
 #include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -62,7 +63,7 @@ namespace yli::load
         else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
         {
             // TODO: implement.
-            return false;
+            throw std::runtime_error("ERROR: `yli::load::load_common_texture`: Vulkan is not supported yet!");
         }
         else if (graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
         {
