@@ -205,6 +205,13 @@ namespace yli::ontology
             return;
         }
 
+        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
+
+        if (render_system == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `VectorFont::render`: `render_system` is `nullptr`!");
+        }
+
         yli::ontology::Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
@@ -214,13 +221,6 @@ namespace yli::ontology
         }
 
         const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
-
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `VectorFont::render`: `render_system` is `nullptr`!");
-        }
 
         render_system->render_glyphs(this->parent_of_glyphs, new_target_scene);
     }
