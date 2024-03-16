@@ -60,7 +60,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* AjokkiApplication::create_helsinki_east_downtown_scene()
+    yli::ontology::Scene* AjokkiApplication::create_helsinki_east_downtown_scene()
     {
         // Helsinki `Scene` begins here.
 
@@ -69,9 +69,8 @@ namespace ajokki
         scene_struct.global_name = "helsinki_east_downtown_scene";
         scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
-        yli::ontology::Entity* const helsinki_east_downtown_scene_entity = this->entity_factory.create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
-        yli::ontology::Scene* const helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
+        yli::ontology::Scene* const helsinki_east_downtown_scene = this->entity_factory.create_scene(scene_struct);
 
         if (helsinki_east_downtown_scene == nullptr)
         {
@@ -151,10 +150,8 @@ namespace ajokki
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         rest_brain_struct.callback_engine = rest_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* rest_brain_entity ...\n";
-        yli::ontology::Entity* const rest_brain_entity = this->entity_factory.create_brain(rest_brain_struct);
         std::cout << "Creating yli::ontology::Brain* rest_brain ...\n";
-        yli::ontology::Brain* const rest_brain = dynamic_cast<yli::ontology::Brain*>(rest_brain_entity);
+        yli::ontology::Brain* const rest_brain = this->entity_factory.create_brain(rest_brain_struct);
 
         if (rest_brain == nullptr)
         {
@@ -168,10 +165,8 @@ namespace ajokki
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         go_east_brain_struct.callback_engine = go_east_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* go_east_brain_entity ...\n";
-        yli::ontology::Entity* const go_east_brain_entity = this->entity_factory.create_brain(go_east_brain_struct);
         std::cout << "Creating yli::ontology::Brain* go_east_brain ...\n";
-        yli::ontology::Brain* const go_east_brain = dynamic_cast<yli::ontology::Brain*>(go_east_brain_entity);
+        yli::ontology::Brain* const go_east_brain = this->entity_factory.create_brain(go_east_brain_struct);
 
         if (go_east_brain == nullptr)
         {
@@ -185,10 +180,8 @@ namespace ajokki
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         go_west_brain_struct.callback_engine = go_west_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* go_west_brain_entity ...\n";
-        yli::ontology::Entity* const go_west_brain_entity = this->entity_factory.create_brain(go_west_brain_struct);
         std::cout << "Creating yli::ontology::Brain* go_west_brain ...\n";
-        yli::ontology::Brain* const go_west_brain = dynamic_cast<yli::ontology::Brain*>(go_west_brain_entity);
+        yli::ontology::Brain* const go_west_brain = this->entity_factory.create_brain(go_west_brain_struct);
 
         if (go_west_brain == nullptr)
         {
@@ -202,10 +195,8 @@ namespace ajokki
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         go_north_brain_struct.callback_engine = go_north_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* go_north_brain_entity ...\n";
-        yli::ontology::Entity* const go_north_brain_entity = this->entity_factory.create_brain(go_north_brain_struct);
         std::cout << "Creating yli::ontology::Brain* go_north_brain ...\n";
-        yli::ontology::Brain* const go_north_brain = dynamic_cast<yli::ontology::Brain*>(go_north_brain_entity);
+        yli::ontology::Brain* const go_north_brain = this->entity_factory.create_brain(go_north_brain_struct);
 
         if (go_north_brain == nullptr)
         {
@@ -219,10 +210,8 @@ namespace ajokki
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         go_south_brain_struct.callback_engine = go_south_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* go_south_brain_entity ...\n";
-        yli::ontology::Entity* const go_south_brain_entity = this->entity_factory.create_brain(go_south_brain_struct);
         std::cout << "Creating yli::ontology::Brain* go_south_brain ...\n";
-        yli::ontology::Brain* const go_south_brain = dynamic_cast<yli::ontology::Brain*>(go_south_brain_entity);
+        yli::ontology::Brain* const go_south_brain = this->entity_factory.create_brain(go_south_brain_struct);
 
         if (go_south_brain == nullptr)
         {
@@ -236,10 +225,8 @@ namespace ajokki
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         orient_to_east_brain_struct.callback_engine = orient_to_east_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_to_east_brain_entity ...\n";
-        yli::ontology::Entity* const orient_to_east_brain_entity = this->entity_factory.create_brain(orient_to_east_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_to_east_brain ...\n";
-        yli::ontology::Brain* const orient_to_east_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_east_brain_entity);
+        yli::ontology::Brain* const orient_to_east_brain = this->entity_factory.create_brain(orient_to_east_brain_struct);
 
         if (orient_to_east_brain == nullptr)
         {
@@ -253,10 +240,8 @@ namespace ajokki
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         orient_to_west_brain_struct.callback_engine = orient_to_west_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_to_west_brain_entity ...\n";
-        yli::ontology::Entity* const orient_to_west_brain_entity = this->entity_factory.create_brain(orient_to_west_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_to_west_brain ...\n";
-        yli::ontology::Brain* const orient_to_west_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_west_brain_entity);
+        yli::ontology::Brain* const orient_to_west_brain = this->entity_factory.create_brain(orient_to_west_brain_struct);
 
         if (orient_to_west_brain == nullptr)
         {
@@ -270,10 +255,8 @@ namespace ajokki
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         orient_to_north_brain_struct.callback_engine = orient_to_north_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_to_north_brain_entity ...\n";
-        yli::ontology::Entity* const orient_to_north_brain_entity = this->entity_factory.create_brain(orient_to_north_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_to_north_brain ...\n";
-        yli::ontology::Brain* const orient_to_north_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_north_brain_entity);
+        yli::ontology::Brain* const orient_to_north_brain = this->entity_factory.create_brain(orient_to_north_brain_struct);
 
         if (orient_to_north_brain == nullptr)
         {
@@ -287,10 +270,8 @@ namespace ajokki
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         orient_to_south_brain_struct.callback_engine = orient_to_south_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_to_south_brain_entity ...\n";
-        yli::ontology::Entity* const orient_to_south_brain_entity = this->entity_factory.create_brain(orient_to_south_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_to_south_brain ...\n";
-        yli::ontology::Brain* const orient_to_south_brain = dynamic_cast<yli::ontology::Brain*>(orient_to_south_brain_entity);
+        yli::ontology::Brain* const orient_to_south_brain = this->entity_factory.create_brain(orient_to_south_brain_struct);
 
         if (orient_to_south_brain == nullptr)
         {
@@ -304,10 +285,8 @@ namespace ajokki
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         rotate_clockwise_brain_struct.callback_engine = rotate_clockwise_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* rotate_clockwise_brain_entity ...\n";
-        yli::ontology::Entity* const rotate_clockwise_brain_entity = this->entity_factory.create_brain(rotate_clockwise_brain_struct);
         std::cout << "Creating yli::ontology::Brain* rotate_clockwise_brain ...\n";
-        yli::ontology::Brain* const rotate_clockwise_brain = dynamic_cast<yli::ontology::Brain*>(rotate_clockwise_brain_entity);
+        yli::ontology::Brain* const rotate_clockwise_brain = this->entity_factory.create_brain(rotate_clockwise_brain_struct);
 
         if (rotate_clockwise_brain == nullptr)
         {
@@ -321,10 +300,8 @@ namespace ajokki
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         orient_and_go_east_brain_struct.callback_engine = orient_and_go_east_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_and_go_east_brain_entity ...\n";
-        yli::ontology::Entity* const orient_and_go_east_brain_entity = this->entity_factory.create_brain(orient_and_go_east_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_and_go_east_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_east_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_east_brain_entity);
+        yli::ontology::Brain* const orient_and_go_east_brain = this->entity_factory.create_brain(orient_and_go_east_brain_struct);
 
         if (orient_and_go_east_brain == nullptr)
         {
@@ -338,10 +315,8 @@ namespace ajokki
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         orient_and_go_west_brain_struct.callback_engine = orient_and_go_west_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_and_go_west_brain_entity ...\n";
-        yli::ontology::Entity* const orient_and_go_west_brain_entity = this->entity_factory.create_brain(orient_and_go_west_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_and_go_west_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_west_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_west_brain_entity);
+        yli::ontology::Brain* const orient_and_go_west_brain = this->entity_factory.create_brain(orient_and_go_west_brain_struct);
 
         if (orient_and_go_west_brain == nullptr)
         {
@@ -355,10 +330,8 @@ namespace ajokki
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         orient_and_go_north_brain_struct.callback_engine = orient_and_go_north_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_and_go_north_brain_entity ...\n";
-        yli::ontology::Entity* const orient_and_go_north_brain_entity = this->entity_factory.create_brain(orient_and_go_north_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_and_go_north_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_north_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_north_brain_entity);
+        yli::ontology::Brain* const orient_and_go_north_brain = this->entity_factory.create_brain(orient_and_go_north_brain_struct);
 
         if (orient_and_go_north_brain == nullptr)
         {
@@ -372,10 +345,8 @@ namespace ajokki
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         orient_and_go_south_brain_struct.callback_engine = orient_and_go_south_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* orient_and_go_south_brain_entity ...\n";
-        yli::ontology::Entity* const orient_and_go_south_brain_entity = this->entity_factory.create_brain(orient_and_go_south_brain_struct);
         std::cout << "Creating yli::ontology::Brain* orient_and_go_south_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_south_brain = dynamic_cast<yli::ontology::Brain*>(orient_and_go_south_brain_entity);
+        yli::ontology::Brain* const orient_and_go_south_brain = this->entity_factory.create_brain(orient_and_go_south_brain_struct);
 
         if (orient_and_go_south_brain == nullptr)
         {
@@ -389,10 +360,8 @@ namespace ajokki
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
-        std::cout << "Creating yli::ontology::Entity* rotate_counterclockwise_brain_entity ...\n";
-        yli::ontology::Entity* const rotate_counterclockwise_brain_entity = this->entity_factory.create_brain(rotate_counterclockwise_brain_struct);
         std::cout << "Creating yli::ontology::Brain* rotate_counterclockwise_brain ...\n";
-        yli::ontology::Brain* const rotate_counterclockwise_brain = dynamic_cast<yli::ontology::Brain*>(rotate_counterclockwise_brain_entity);
+        yli::ontology::Brain* const rotate_counterclockwise_brain = this->entity_factory.create_brain(rotate_counterclockwise_brain_struct);
 
         if (rotate_counterclockwise_brain == nullptr)
         {
@@ -408,10 +377,8 @@ namespace ajokki
         helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_pipeline_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_pipeline_entity = this->entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* helsinki_east_downtown_pipeline ...\n";
-        yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = dynamic_cast<yli::ontology::Pipeline*>(helsinki_east_downtown_pipeline_entity);
+        yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = this->entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
         if (helsinki_east_downtown_pipeline == nullptr)
         {
@@ -427,10 +394,8 @@ namespace ajokki
         helsinki_east_downtown_grayscale_pipeline_struct.vertex_shader = "standard_shading.vert";
         helsinki_east_downtown_grayscale_pipeline_struct.fragment_shader = "grayscale_standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grayscale_pipeline_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_grayscale_pipeline_entity = this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* helsinki_east_downtown_grayscale_pipeline ...\n";
-        yli::ontology::Pipeline* const helsinki_east_downtown_grayscale_pipeline = dynamic_cast<yli::ontology::Pipeline*>(helsinki_east_downtown_grayscale_pipeline_entity);
+        yli::ontology::Pipeline* const helsinki_east_downtown_grayscale_pipeline = this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct);
 
         if (helsinki_east_downtown_grayscale_pipeline == nullptr)
         {
@@ -445,10 +410,8 @@ namespace ajokki
         helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grass_material_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_grass_material_entity = this->entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* helsinki_east_downtown_grass_material ...\n";
-        yli::ontology::Material* const helsinki_east_downtown_grass_material = dynamic_cast<yli::ontology::Material*>(helsinki_east_downtown_grass_material_entity);
+        yli::ontology::Material* const helsinki_east_downtown_grass_material = this->entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
 
         if (helsinki_east_downtown_grass_material == nullptr)
         {
@@ -465,10 +428,8 @@ namespace ajokki
         pink_geometric_tiles_material_struct.texture_file_format = "png";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
-        std::cout << "Creating yli::ontology::Entity* pink_geometric_tiles_material_entity ...\n";
-        yli::ontology::Entity* const pink_geometric_tiles_material_entity = this->entity_factory.create_material(pink_geometric_tiles_material_struct);
         std::cout << "Creating yli::ontology::Material* pink_geometric_tiles_material ...\n";
-        yli::ontology::Material* const pink_geometric_tiles_material = dynamic_cast<yli::ontology::Material*>(pink_geometric_tiles_material_entity);
+        yli::ontology::Material* const pink_geometric_tiles_material = this->entity_factory.create_material(pink_geometric_tiles_material_struct);
 
         if (pink_geometric_tiles_material == nullptr)
         {
@@ -485,10 +446,8 @@ namespace ajokki
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
-        std::cout << "Creating yli::ontology::Entity* orange_fur_material_entity ...\n";
-        yli::ontology::Entity* const orange_fur_material_entity = this->entity_factory.create_material(orange_fur_material_struct);
         std::cout << "Creating yli::ontology::Material* orange_fur_material ...\n";
-        yli::ontology::Material* const orange_fur_material = dynamic_cast<yli::ontology::Material*>(orange_fur_material_entity);
+        yli::ontology::Material* const orange_fur_material = this->entity_factory.create_material(orange_fur_material_struct);
 
         if (orange_fur_material == nullptr)
         {
@@ -506,10 +465,8 @@ namespace ajokki
         helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_model_struct.x_step = 4;
         helsinki_east_downtown_terrain_model_struct.y_step = 4;
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_terrain_species_entity = this->entity_factory.create_species(helsinki_east_downtown_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
-        yli::ontology::Species* const helsinki_east_downtown_terrain_species = dynamic_cast<yli::ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
+        yli::ontology::Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_model_struct);
 
         if (helsinki_east_downtown_terrain_species == nullptr)
         {
@@ -532,10 +489,8 @@ namespace ajokki
         suzanne_model_struct.model_file_format = "obj";
         suzanne_model_struct.model_filename = "suzanne.obj";
 
-        std::cout << "Creating yli::ontology::Entity* suzanne_species_entity ...\n";
-        yli::ontology::Entity* const suzanne_species_entity = this->entity_factory.create_species(suzanne_model_struct);
         std::cout << "Creating yli::ontology::Species* suzanne_species ...\n";
-        yli::ontology::Species* const suzanne_species = dynamic_cast<yli::ontology::Species*>(suzanne_species_entity);
+        yli::ontology::Species* const suzanne_species = this->entity_factory.create_species(suzanne_model_struct);
 
         if (suzanne_species == nullptr)
         {
@@ -549,10 +504,8 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct1(helsinki_east_downtown_scene);
         suzanne_object_struct1.mesh_master = suzanne_species;
         suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
-        std::cout << "Creating yli::ontology::Entity* suzanne1_entity ...\n";
-        yli::ontology::Entity* const suzanne1_entity = this->entity_factory.create_object(suzanne_object_struct1);
         std::cout << "Creating yli::ontology::Species* suzanne1 ...\n";
-        yli::ontology::Object* const suzanne1 = dynamic_cast<yli::ontology::Object*>(suzanne1_entity);
+        yli::ontology::Object* const suzanne1 = this->entity_factory.create_object(suzanne_object_struct1);
 
         if (suzanne1 == nullptr)
         {
@@ -567,10 +520,8 @@ namespace ajokki
         suzanne_object_struct2.mesh_master = suzanne_species;
         suzanne_object_struct2.scene = helsinki_east_downtown_scene;
         suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
-        std::cout << "Creating yli::ontology::Entity* suzanne2_entity ...\n";
-        yli::ontology::Entity* const suzanne2_entity = this->entity_factory.create_object(suzanne_object_struct2);
         std::cout << "Creating yli::ontology::Species* suzanne2 ...\n";
-        yli::ontology::Object* const suzanne2 = dynamic_cast<yli::ontology::Object*>(suzanne2_entity);
+        yli::ontology::Object* const suzanne2 = this->entity_factory.create_object(suzanne_object_struct2);
 
         if (suzanne2 == nullptr)
         {
@@ -583,10 +534,8 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct3(helsinki_east_downtown_scene);
         suzanne_object_struct3.mesh_master = suzanne_species;
         suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
-        std::cout << "Creating yli::ontology::Entity* suzanne3_entity ...\n";
-        yli::ontology::Entity* const suzanne3_entity = this->entity_factory.create_object(suzanne_object_struct3);
         std::cout << "Creating yli::ontology::Species* suzanne3 ...\n";
-        yli::ontology::Object* const suzanne3 = dynamic_cast<yli::ontology::Object*>(suzanne3_entity);
+        yli::ontology::Object* const suzanne3 = this->entity_factory.create_object(suzanne_object_struct3);
 
         if (suzanne3 == nullptr)
         {
@@ -599,10 +548,8 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct4(helsinki_east_downtown_scene);
         suzanne_object_struct4.mesh_master = suzanne_species;
         suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
-        std::cout << "Creating yli::ontology::Entity* suzanne4_entity ...\n";
-        yli::ontology::Entity* const suzanne4_entity = this->entity_factory.create_object(suzanne_object_struct4);
         std::cout << "Creating yli::ontology::Species* suzanne4 ...\n";
-        yli::ontology::Object* const suzanne4 = dynamic_cast<yli::ontology::Object*>(suzanne4_entity);
+        yli::ontology::Object* const suzanne4 = this->entity_factory.create_object(suzanne_object_struct4);
 
         if (suzanne4 == nullptr)
         {
@@ -616,10 +563,8 @@ namespace ajokki
         suzanne_object_struct5.mesh_master = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
-        std::cout << "Creating yli::ontology::Entity* suzanne5_entity ...\n";
-        yli::ontology::Entity* const suzanne5_entity = this->entity_factory.create_object(suzanne_object_struct5);
         std::cout << "Creating yli::ontology::Species* suzanne5 ...\n";
-        yli::ontology::Object* const suzanne5 = dynamic_cast<yli::ontology::Object*>(suzanne5_entity);
+        yli::ontology::Object* const suzanne5 = this->entity_factory.create_object(suzanne_object_struct5);
 
         if (suzanne5 == nullptr)
         {
@@ -638,11 +583,8 @@ namespace ajokki
         cat_model_struct.model_file_format = "fbx";
         cat_model_struct.model_filename = "cat.fbx";
 
-        std::cout << "Creating yli::ontology::Entity* cat_species_entity ...\n";
-        yli::ontology::Entity* const cat_species_entity = this->entity_factory.create_species(cat_model_struct);
-
         std::cout << "Creating yli::ontology::Species* cat_species ...\n";
-        yli::ontology::Species* const cat_species = dynamic_cast<yli::ontology::Species*>(cat_species_entity);
+        yli::ontology::Species* const cat_species = this->entity_factory.create_species(cat_model_struct);
 
         if (cat_species == nullptr)
         {
@@ -683,8 +625,7 @@ namespace ajokki
                         first_cat_x + i * translation_x,
                         first_cat_y + j * translation_y,
                         first_cat_z + j * translation_z);
-                yli::ontology::Entity* const cat1_entity = this->entity_factory.create_object(cat_object_struct1);
-                yli::ontology::Object* const cat1 = dynamic_cast<yli::ontology::Object*>(cat1_entity);
+                yli::ontology::Object* const cat1 = this->entity_factory.create_object(cat_object_struct1);
 
                 if (cat1 == nullptr)
                 {
@@ -709,13 +650,8 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
 
-            std::cout << "Creating yli::ontology::Entity* turbo_polizei_png1_entity ...\n";
-
-            yli::ontology::Entity* const turbo_polizei_png1_entity = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
-
             std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png1 ...\n";
-
-            yli::ontology::Holobiont* const turbo_polizei_png1 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png1_entity);
+            yli::ontology::Holobiont* const turbo_polizei_png1 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
 
             if (turbo_polizei_png1 == nullptr)
             {
@@ -733,13 +669,8 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
             turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
 
-            std::cout << "Creating yli::ontology::Entity* turbo_polizei_png2_entity ...\n";
-
-            yli::ontology::Entity* const turbo_polizei_png2_entity = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
-
             std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png2 ...\n";
-
-            yli::ontology::Holobiont* const turbo_polizei_png2 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei_png2_entity);
+            yli::ontology::Holobiont* const turbo_polizei_png2 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
 
             if (turbo_polizei_png2 == nullptr)
             {
@@ -757,10 +688,8 @@ namespace ajokki
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
 
-        std::cout << "Creating yli::ontology::Entity* cat_camera_entity ...\n";
-        yli::ontology::Entity* const cat_camera_entity = this->entity_factory.create_camera(cat_camera_struct);
         std::cout << "Creating yli::ontology::Camera* cat_camera ...\n";
-        yli::ontology::Camera* const cat_camera = dynamic_cast<yli::ontology::Camera*>(cat_camera_entity);
+        yli::ontology::Camera* const cat_camera = this->entity_factory.create_camera(cat_camera_struct);
 
         if (cat_camera == nullptr)
         {
@@ -776,10 +705,8 @@ namespace ajokki
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
 
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_camera_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_camera_entity = this->entity_factory.create_camera(turbo_polizei_camera_struct);
         std::cout << "Creating yli::ontology::Camera* turbo_polizei_camera ...\n";
-        yli::ontology::Camera* const turbo_polizei_camera = dynamic_cast<yli::ontology::Camera*>(turbo_polizei_camera_entity);
+        yli::ontology::Camera* const turbo_polizei_camera = this->entity_factory.create_camera(turbo_polizei_camera_struct);
 
         if (turbo_polizei_camera == nullptr)
         {
@@ -789,7 +716,7 @@ namespace ajokki
 
         turbo_polizei_camera->set_global_name("turbo_polizei_camera");
 
-        return helsinki_east_downtown_scene_entity;
+        return helsinki_east_downtown_scene;
         // Helsinki `Scene` ends here.
     }
 }

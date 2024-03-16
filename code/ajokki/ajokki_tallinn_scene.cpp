@@ -46,7 +46,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* AjokkiApplication::create_tallinn_scene()
+    yli::ontology::Scene* AjokkiApplication::create_tallinn_scene()
     {
         // Tallinn `Scene` begins here.
 
@@ -54,9 +54,8 @@ namespace ajokki
         yli::ontology::SceneStruct scene_struct;
         scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
-        yli::ontology::Entity* const tallinn_scene_entity = this->entity_factory.create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* tallinn_scene ...\n";
-        yli::ontology::Scene* const tallinn_scene = dynamic_cast<yli::ontology::Scene*>(tallinn_scene_entity);
+        yli::ontology::Scene* const tallinn_scene = this->entity_factory.create_scene(scene_struct);
 
         if (tallinn_scene == nullptr)
         {
@@ -78,10 +77,8 @@ namespace ajokki
         tallinn_pipeline_struct.vertex_shader = "standard_shading.vert";
         tallinn_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* tallinn_pipeline_entity ...\n";
-        yli::ontology::Entity* const tallinn_pipeline_entity = this->entity_factory.create_pipeline(tallinn_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* tallinn_pipeline ...\n";
-        yli::ontology::Pipeline* const tallinn_pipeline = dynamic_cast<yli::ontology::Pipeline*>(tallinn_pipeline_entity);
+        yli::ontology::Pipeline* const tallinn_pipeline = this->entity_factory.create_pipeline(tallinn_pipeline_struct);
 
         if (tallinn_pipeline == nullptr)
         {
@@ -96,10 +93,8 @@ namespace ajokki
         tallinn_grass_material_struct.texture_file_format = "png";
         tallinn_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
-        std::cout << "Creating yli::ontology::Entity* tallinn_grass_material_entity ...\n";
-        yli::ontology::Entity* const tallinn_grass_material_entity = this->entity_factory.create_material(tallinn_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* tallinn_grass_material ...\n";
-        yli::ontology::Material* const tallinn_grass_material = dynamic_cast<yli::ontology::Material*>(tallinn_grass_material_entity);
+        yli::ontology::Material* const tallinn_grass_material = this->entity_factory.create_material(tallinn_grass_material_struct);
 
         if (tallinn_grass_material == nullptr)
         {
@@ -120,10 +115,8 @@ namespace ajokki
         tallinn_terrain_model_struct.x_step = 1;
         tallinn_terrain_model_struct.y_step = 1;
 
-        std::cout << "Creating yli::ontology::Entity* tallinn_terrain_species_entity ...\n";
-        yli::ontology::Entity* const tallinn_terrain_species_entity = this->entity_factory.create_species(tallinn_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* tallinn_terrain_species ...\n";
-        yli::ontology::Species* const tallinn_terrain_species = dynamic_cast<yli::ontology::Species*>(tallinn_terrain_species_entity);
+        yli::ontology::Species* const tallinn_terrain_species = this->entity_factory.create_species(tallinn_terrain_model_struct);
 
         if (tallinn_terrain_species == nullptr)
         {
@@ -139,7 +132,7 @@ namespace ajokki
         tallinn_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(tallinn_struct);
 
-        return tallinn_scene_entity;
+        return tallinn_scene;
         // Tallinn `Scene` ends here.
     }
 }

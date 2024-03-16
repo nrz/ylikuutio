@@ -286,9 +286,8 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
         yli::ontology::ConsoleStruct my_console_struct;
         my_console_struct.global_name = "my_console";
-        yli::ontology::Entity* const my_console_entity = this->entity_factory.create_console(my_console_struct);
         std::cout << "Creating yli::ontology::Console* my_console ...\n";
-        yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
+        yli::ontology::Console* const my_console = this->entity_factory.create_console(my_console_struct);
 
         if (my_console == nullptr)
         {
@@ -304,9 +303,8 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* mini_console_entity ...\n";
         yli::ontology::ConsoleStruct mini_console_struct;
         mini_console_struct.global_name = "mini_console";
-        yli::ontology::Entity* const mini_console_entity = this->entity_factory.create_console(mini_console_struct);
         std::cout << "Creating yli::ontology::Console* mini_console ...\n";
-        yli::ontology::Console* const mini_console = dynamic_cast<yli::ontology::Console*>(mini_console_entity);
+        yli::ontology::Console* const mini_console = this->entity_factory.create_console(mini_console_struct);
 
         if (mini_console == nullptr)
         {
@@ -329,10 +327,8 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* mars_ecosystem and its contents ...\n";
         yli::ontology::EcosystemStruct mars_ecosystem_struct;
         mars_ecosystem_struct.global_name = "mars_ecosystem";
-        yli::ontology::Entity* const mars_ecosystem_entity = this->entity_factory.create_ecosystem(mars_ecosystem_struct);
-
         std::cout << "Creating yli::ontology::Ecosystem* mars_ecosystem ...\n";
-        yli::ontology::Ecosystem* const mars_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(mars_ecosystem_entity);
+        yli::ontology::Ecosystem* const mars_ecosystem = this->entity_factory.create_ecosystem(mars_ecosystem_struct);
 
         if (mars_ecosystem == nullptr)
         {
@@ -346,16 +342,8 @@ namespace ajokki
 
         // Helsinki `Scene` begins here.
 
-        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
-        yli::ontology::Entity* const helsinki_east_downtown_scene_entity = this->create_helsinki_east_downtown_scene();
-
-        if (helsinki_east_downtown_scene_entity == nullptr)
-        {
-            return false;
-        }
-
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
-        yli::ontology::Scene* const helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
+        yli::ontology::Scene* const helsinki_east_downtown_scene = this->create_helsinki_east_downtown_scene();
 
         if (helsinki_east_downtown_scene == nullptr)
         {
@@ -388,10 +376,8 @@ namespace ajokki
         font_struct.text_size = this->get_universe().get_text_size();
         font_struct.font_size = this->get_universe().get_font_size();
 
-        yli::ontology::Entity* const my_font_2d_entity = this->entity_factory.create_font_2d(font_struct);
-
         std::cout << "Creating yli::ontology::Font2D* my_font_2d ...\n";
-        yli::ontology::Font2D* const my_font_2d = dynamic_cast<yli::ontology::Font2D*>(my_font_2d_entity);
+        yli::ontology::Font2D* const my_font_2d = this->entity_factory.create_font_2d(font_struct);
 
         if (my_font_2d == nullptr)
         {

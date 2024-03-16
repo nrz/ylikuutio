@@ -46,7 +46,7 @@ namespace yli
 
 namespace ajokki
 {
-    yli::ontology::Entity* AjokkiApplication::create_altiplano_scene()
+    yli::ontology::Scene* AjokkiApplication::create_altiplano_scene()
     {
         // altiplano `Scene` begins here.
 
@@ -54,9 +54,8 @@ namespace ajokki
         yli::ontology::SceneStruct scene_struct;
         scene_struct.light_position = { 0.0f, 100000.0f, 0.0f, 1.0f };
         scene_struct.water_level = 3815.51f;
-        yli::ontology::Entity* const altiplano_scene_entity = this->entity_factory.create_scene(scene_struct);
         std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
-        yli::ontology::Scene* const altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
+        yli::ontology::Scene* const altiplano_scene = this->entity_factory.create_scene(scene_struct);
 
         if (altiplano_scene == nullptr)
         {
@@ -78,10 +77,8 @@ namespace ajokki
         altiplano_pipeline_struct.vertex_shader = "standard_shading.vert";
         altiplano_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* altiplano_pipeline_entity ...\n";
-        yli::ontology::Entity* const altiplano_pipeline_entity = this->entity_factory.create_pipeline(altiplano_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* altiplano_pipeline ...\n";
-        yli::ontology::Pipeline* const altiplano_pipeline = dynamic_cast<yli::ontology::Pipeline*>(altiplano_pipeline_entity);
+        yli::ontology::Pipeline* const altiplano_pipeline = this->entity_factory.create_pipeline(altiplano_pipeline_struct);
 
         if (altiplano_pipeline == nullptr)
         {
@@ -96,10 +93,8 @@ namespace ajokki
         altiplano_grass_material_struct.texture_file_format = "png";
         altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
-        std::cout << "Creating yli::ontology::Entity* altiplano_grass_material_entity ...\n";
-        yli::ontology::Entity* const altiplano_grass_material_entity = this->entity_factory.create_material(altiplano_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* altiplano_grass_material ...\n";
-        yli::ontology::Material* const altiplano_grass_material = dynamic_cast<yli::ontology::Material*>(altiplano_grass_material_entity);
+        yli::ontology::Material* const altiplano_grass_material = this->entity_factory.create_material(altiplano_grass_material_struct);
 
         if (altiplano_grass_material == nullptr)
         {
@@ -120,10 +115,8 @@ namespace ajokki
         altiplano_terrain_model_struct.x_step = 1;
         altiplano_terrain_model_struct.y_step = 1;
 
-        std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
-        yli::ontology::Entity* const altiplano_terrain_species_entity = this->entity_factory.create_species(altiplano_terrain_model_struct);
         std::cout << "Creating yli::ontology::Species* altiplano_terrain_species ...\n";
-        yli::ontology::Species* const altiplano_terrain_species = dynamic_cast<yli::ontology::Species*>(altiplano_terrain_species_entity);
+        yli::ontology::Species* const altiplano_terrain_species = this->entity_factory.create_species(altiplano_terrain_model_struct);
 
         if (altiplano_terrain_species == nullptr)
         {
@@ -139,7 +132,7 @@ namespace ajokki
         altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(altiplano_struct);
 
-        return altiplano_scene_entity;
+        return altiplano_scene;
         // altiplano `Scene` ends here.
     }
 }
