@@ -48,6 +48,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Ecosystem;
+    class Scene;
     class GenericEntityFactory;
     struct UniverseStruct;
 }
@@ -86,7 +87,7 @@ namespace hirvi
         private:
             void create_memory_allocators();
             yli::ontology::Ecosystem* create_earth_ecosystem();
-            yli::ontology::Entity* create_helsinki_east_downtown_scene();
+            yli::ontology::Scene* create_helsinki_east_downtown_scene();
 
             yli::memory::MemorySystem<hirvi::Datatype> memory_system;
             yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;

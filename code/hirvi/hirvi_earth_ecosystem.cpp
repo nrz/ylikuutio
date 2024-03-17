@@ -40,10 +40,8 @@ namespace hirvi
         std::cout << "Creating yli::ontology::Entity* earth_ecosystem and its contents ...\n";
         yli::ontology::EcosystemStruct earth_ecosystem_struct;
         earth_ecosystem_struct.global_name = "earth_ecosystem";
-        yli::ontology::Entity* const earth_ecosystem_entity = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
-
         std::cout << "Creating yli::ontology::Ecosystem* earth_ecosystem ...\n";
-        yli::ontology::Ecosystem* const earth_ecosystem = dynamic_cast<yli::ontology::Ecosystem*>(earth_ecosystem_entity);
+        yli::ontology::Ecosystem* const earth_ecosystem = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
 
         if (earth_ecosystem == nullptr)
         {
@@ -58,10 +56,8 @@ namespace hirvi
         earth_pipeline_struct.vertex_shader = "standard_shading.vert";
         earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Entity* earth_pipeline_entity ...\n";
-        yli::ontology::Entity* const earth_pipeline_entity = this->entity_factory.create_pipeline(earth_pipeline_struct);
         std::cout << "Creating yli::ontology::Pipeline* earth_pipeline ...\n";
-        yli::ontology::Pipeline* const earth_pipeline = dynamic_cast<yli::ontology::Pipeline*>(earth_pipeline_entity);
+        yli::ontology::Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
 
         if (earth_pipeline == nullptr)
         {
@@ -75,11 +71,8 @@ namespace hirvi
         turbo_polizei_png_model_struct.model_file_format = "fbx";
         turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
-        std::cout << "Creating yli::ontology::Entity* turbo_polizei_png_symbiosis_entity ...\n";
-        yli::ontology::Entity* const turbo_polizei_png_symbiosis_entity = this->entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
-
         std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_png_symbiosis_entity);
+        yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {
