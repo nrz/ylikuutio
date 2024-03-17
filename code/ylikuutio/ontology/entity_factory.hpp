@@ -1143,7 +1143,7 @@ namespace yli::ontology
                 }
 
             template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
-                yli::ontology::Holobiont* create_holobiont_derivative(
+                T* create_holobiont_derivative(
                         int holobiont_derivative_type,
                         const yli::ontology::HolobiontStruct& holobiont_struct,
                         ModuleArgs&&... module_args)
@@ -1155,7 +1155,7 @@ namespace yli::ontology
                     HolobiontDerivativeMemoryAllocator& allocator =
                         static_cast<HolobiontDerivativeMemoryAllocator&>(generic_allocator);
 
-                    yli::ontology::Holobiont* const holobiont = allocator.build_in(
+                    T* const holobiont = allocator.build_in(
                             holobiont_derivative_type,
                             this->application,
                             this->get_universe(),
