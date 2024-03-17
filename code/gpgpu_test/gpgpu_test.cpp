@@ -149,16 +149,8 @@ namespace gpgpu_test
 
         // GPGPU test `Scene` begins here.
 
-        std::cout << "Creating yli::ontology::Entity* gpgpu_test_scene_entity and its contents ...\n";
-        yli::ontology::Entity* const gpgpu_test_scene_entity = this->create_gpgpu_test_scene();
-
-        if (gpgpu_test_scene_entity == nullptr)
-        {
-            return false;
-        }
-
         std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
-        yli::ontology::Scene* const gpgpu_test_scene = dynamic_cast<yli::ontology::Scene*>(gpgpu_test_scene_entity);
+        yli::ontology::Scene* const gpgpu_test_scene = this->create_gpgpu_test_scene();
 
         if (gpgpu_test_scene == nullptr)
         {

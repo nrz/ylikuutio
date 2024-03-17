@@ -71,7 +71,7 @@ namespace gpgpu_test
             bool create_simulation() override;
 
         private:
-            yli::ontology::Entity* create_gpgpu_test_scene();
+            yli::ontology::Scene* create_gpgpu_test_scene();
 
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
