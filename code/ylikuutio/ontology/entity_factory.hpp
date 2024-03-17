@@ -1106,7 +1106,7 @@ namespace yli::ontology
                 }
 
             template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
-                yli::ontology::Object* create_object_derivative(
+                T* create_object_derivative(
                         int object_derivative_type,
                         const yli::ontology::ObjectStruct& object_struct,
                         ModuleArgs&&... module_args)
@@ -1118,7 +1118,7 @@ namespace yli::ontology
                     ObjectDerivativeMemoryAllocator& allocator =
                         static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
 
-                    yli::ontology::Object* const object = allocator.build_in(
+                    T* const object = allocator.build_in(
                             object_derivative_type,
                             this->application,
                             this->get_universe(),
