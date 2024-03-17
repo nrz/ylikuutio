@@ -48,6 +48,6 @@ namespace hirvi
         // constructor.
 
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::PoliceTram*";
+        this->type_string = "hirvi::PoliceTram*";
     }
 }
