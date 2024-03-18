@@ -53,18 +53,9 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 ### GLEW ###
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    set(GLEW_SOURCE
-        glew-2.0.0/src/glew.c
-        )
-
-    set(GLEW_HEADERS
-        )
-
-    add_library(GLEW_200 STATIC
-        ${GLEW_SOURCE}
-        ${GLEW_INCLUDE}
-        )
-
+    add_library(GLEW_200 STATIC)
+    target_sources(GLEW_200 PRIVATE
+        glew-2.0.0/src/glew.c)
     target_link_libraries(GLEW_200
         ${OPENGL_LIBRARY}
         ${EXTRA_LIBS}
