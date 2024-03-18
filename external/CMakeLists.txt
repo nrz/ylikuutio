@@ -1,7 +1,3 @@
-if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
-    add_definitions( "/MP" )
-endif()
-
 add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
