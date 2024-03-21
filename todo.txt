@@ -10,6 +10,7 @@ Fixes needed:
 [ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+[ ] Split Hirvi game code into `hirvi_lib` library and `hirvi` application that links against `hirvi_lib`.
 [ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
 [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
