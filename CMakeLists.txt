@@ -818,9 +818,8 @@ add_executable(gpgpu_test
     )
 target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
-# Hirvi
-add_executable(hirvi
-    # hirvi, in alphabetical order
+# Hirvi libraries
+add_library(hirvi_lib STATIC
     code/hirvi/cat.cpp
     code/hirvi/cat.hpp
     code/hirvi/datatype.hpp
@@ -828,8 +827,6 @@ add_executable(hirvi
     code/hirvi/elk.hpp
     code/hirvi/emancipation_module.cpp
     code/hirvi/emancipation_module.hpp
-    code/hirvi/hirvi.cpp
-    code/hirvi/hirvi.hpp
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
     code/hirvi/hirvi_earth_ecosystem.cpp
@@ -851,7 +848,15 @@ add_executable(hirvi
     code/hirvi/train.cpp
     code/hirvi/train.hpp
     )
-target_link_libraries(hirvi snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} pthread)
+
+# Hirvi game application
+add_executable(hirvi
+    # hirvi, in alphabetical order
+    code/hirvi/hirvi.cpp
+    code/hirvi/hirvi.hpp
+    )
+target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} pthread)
 
 # Mock
 add_executable(mock
