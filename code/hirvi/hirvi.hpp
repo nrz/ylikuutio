@@ -90,7 +90,11 @@ namespace hirvi
             yli::ontology::Scene* create_helsinki_east_downtown_scene();
 
             yli::memory::MemorySystem<hirvi::Datatype> memory_system;
+
+        public:
             yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
+
+        private:
             yli::core::SystemFactory<hirvi::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
             yli::audio::AudioSystem* const audio_system { nullptr };

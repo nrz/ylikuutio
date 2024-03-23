@@ -856,7 +856,7 @@ add_executable(hirvi
     code/hirvi/hirvi.cpp
     code/hirvi/hirvi.hpp
     )
-target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(hirvi hirvi_lib)
 
 # Mock
 add_executable(mock
@@ -926,7 +926,7 @@ target_link_libraries(dining_philosophers pthread)
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
 
-    set(UNIT_TESTS
+    set(YLIKUUTIO_UNIT_TESTS
         code/mock/mock_application.cpp
         code/mock/mock_application.hpp
         code/ylikuutio/tests/test_any_value.cpp
@@ -998,15 +998,27 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_vector_font.cpp
         code/ylikuutio/tests/test_vector_font_struct.cpp
         code/ylikuutio/tests/test_ylikuutio_map.cpp)
+
+    set(HIRVI_UNIT_TESTS
+        # Tests for Hirvi.
+        code/hirvi/hirvi.cpp
+        code/hirvi/hirvi.hpp
+        code/hirvi/tests/test_cat.cpp)
+
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
-    add_executable(test_ylikuutio code/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
+    add_executable(test_ylikuutio code/ylikuutio/tests/test_main.cpp ${YLIKUUTIO_UNIT_TESTS})
     set_property(TARGET test_ylikuutio PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
+
+    add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
+    set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
     if (DEFINED "PNG_LIBRARIES")
         target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()
         target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
     endif()
 
     include(GoogleTest)

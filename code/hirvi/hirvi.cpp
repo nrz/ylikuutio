@@ -25,7 +25,12 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
+
+#ifndef GOOGLE_TEST
+// Google Test provides its own `main` entrypoint.
 #include "code/ylikuutio/core/entrypoint.hpp"
+#endif
+
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
