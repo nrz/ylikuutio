@@ -47,15 +47,6 @@ https://blender.stackexchange.com/questions/30788/how-do-i-import-a-dxf
 OpenCTM file format:
 http://openctm.sourceforge.net/
 
-OpenGL instructions:
-http://www.opengl-tutorial.org/
-http://ogldev.atspace.co.uk/
-http://www.arcsynthesis.org/gltut/
-http://www.videotutorialsrock.com/index.php
-
-OpenGL / OpenGL ES Reference Compiler:
-https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/
-
 Blender instructions:
 https://www.youtube.com/playlist?list=PLda3VoSoc_TR7X7wfblBGiRz-bvhKpGkS
 

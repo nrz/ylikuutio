@@ -1,0 +1,8 @@
+OpenGL instructions:
+http://www.opengl-tutorial.org/
+http://ogldev.atspace.co.uk/
+http://www.arcsynthesis.org/gltut/
+http://www.videotutorialsrock.com/index.php
+
+OpenGL / OpenGL ES Reference Compiler:
+https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/
