@@ -1,0 +1,6 @@
+Vulkan
+
+Bindless:
+https://henriquegois.dev/posts/bindless-resources-in-vulkan/
+https://blog.traverseresearch.nl/bindless-rendering-setup-afeb678d77fc
+https://chunkstories.xyz/blog/a-note-on-descriptor-indexing/
