@@ -38,6 +38,8 @@ Tasks which are necessary for the first stage (Hirvi prototype):
 [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
 [ ] Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
 [ ] Implement support for multiple water levels within a `Scene`.
+[ ] Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
+[ ] Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
