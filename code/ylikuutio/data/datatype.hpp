@@ -124,7 +124,8 @@ namespace yli::data
         // `yli::ontology` datatypes, 'lisp' path.
         LISP_FUNCTION                  = 290,
         GENERIC_LISP_FUNCTION_OVERLOAD = 291,
-        LISP_FUNCTION_OVERLOAD         = 292
+        LISP_FUNCTION_OVERLOAD         = 292,
+        MAX_VALUE                      = LISP_FUNCTION_OVERLOAD + 1
     };
 }
 
