@@ -130,7 +130,8 @@ namespace hirvi
         POLICE_HORSE      = 206,
         POLICE_TRAIN      = 207,
         POLICE_TRAM       = 208,
-        TRAIN             = 209
+        TRAIN             = 209,
+        MAX_VALUE         = TRAIN + 1
     };
 }
 
