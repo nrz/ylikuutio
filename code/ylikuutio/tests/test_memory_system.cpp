@@ -24,9 +24,6 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 
-// Include standard headers
-#include <cstddef> // std::ptrdiff_t
-
 namespace yli::memory
 {
     class GenericMemoryAllocator;
