@@ -21,6 +21,6 @@
 TEST(memory_storage_must_be_initialized_appropriately, default_memory_storage_storage_i_0)
 {
     yli::memory::MemoryStorage memory_storage(0);
-    ASSERT_EQ(memory_storage.get_number_of_instances(), 0);
     ASSERT_EQ(memory_storage.get_storage_id(), 0);
+    ASSERT_EQ(memory_storage.get_number_of_instances(), 0);
 }
