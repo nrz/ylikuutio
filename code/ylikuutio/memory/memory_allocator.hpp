@@ -176,7 +176,7 @@ namespace yli::memory
 
                 std::size_t get_number_of_storages() const override
                 {
-                    return 1;
+                    return this->instances.size();
                 }
 
                 std::size_t get_number_of_instances() const override
