@@ -1003,7 +1003,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Tests for Hirvi.
         code/hirvi/hirvi.cpp
         code/hirvi/hirvi.hpp
-        code/hirvi/tests/test_cat.cpp)
+        code/hirvi/tests/test_cat.cpp
+        code/hirvi/tests/test_memory.cpp)
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
