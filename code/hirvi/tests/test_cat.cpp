@@ -51,6 +51,10 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     const int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
+    ASSERT_EQ(hirvi_application.get_memory_system().get_universe_datatype(), hirvi::Datatype::UNIVERSE);
+
+    yli::ontology::Universe& universe = hirvi_application.entity_factory.get_universe();
+    ASSERT_EQ(universe, hirvi_application.get_universe());
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_east_downtown_scene";

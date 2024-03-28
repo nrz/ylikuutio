@@ -146,6 +146,11 @@ namespace hirvi
         return this->memory_system.get();
     }
 
+    yli::memory::MemorySystem<hirvi::Datatype>& HirviApplication::get_memory_system() const
+    {
+        return this->memory_system.get();
+    }
+
     void HirviApplication::create_memory_allocators()
     {
         this->memory_system.create_allocator<CatMemoryAllocator>(hirvi::Datatype::CAT);

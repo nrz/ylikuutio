@@ -21,6 +21,7 @@
 #include "datatype.hpp"
 #include "cat.hpp"
 #include "police_car.hpp"
+#include "datatype.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
@@ -71,6 +72,8 @@ namespace hirvi
             std::vector<std::string> get_valid_keys() const override;
 
             yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
+
+            yli::memory::MemorySystem<hirvi::Datatype>& get_memory_system() const;
 
             yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const override;
 
