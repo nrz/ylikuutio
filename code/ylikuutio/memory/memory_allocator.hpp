@@ -47,7 +47,10 @@ namespace yli::memory
             // management for some given storable datatype.
 
             public:
-                MemoryAllocator() = default;
+                MemoryAllocator(const int datatype)
+                    : datatype { datatype }
+                {
+                }
 
                 template<typename... Args>
                     T1* build_in(int datatype, Args&&... args)
@@ -69,6 +72,11 @@ namespace yli::memory
                         this->storages.emplace_back(std::move(storage));
                         return this->storages.back()->build_in(datatype, std::forward<Args>(args)...);
                     }
+
+                std::size_t get_datatype() const override
+                {
+                    return this->datatype;
+                }
 
                 std::size_t get_number_of_storages() const override
                 {
@@ -148,6 +156,7 @@ namespace yli::memory
                 }
 
             private:
+                const int datatype;
                 std::vector<std::unique_ptr<yli::memory::MemoryStorage<T1, DataSize>>> storages;
         };
 
@@ -155,7 +164,10 @@ namespace yli::memory
         class MemoryAllocator<yli::ontology::GenericLispFunctionOverload, DataSize> : public yli::memory::GenericMemoryAllocator
         {
             public:
-                MemoryAllocator() = default;
+                MemoryAllocator(const int datatype)
+                    : datatype { datatype }
+                {
+                }
 
                 ~MemoryAllocator()
                 {
@@ -173,6 +185,11 @@ namespace yli::memory
                         this->instances.emplace_back(function_overload);
                         return function_overload;
                     }
+
+                std::size_t get_datatype() const override
+                {
+                    return this->datatype;
+                }
 
                 std::size_t get_number_of_storages() const override
                 {
@@ -197,6 +214,7 @@ namespace yli::memory
                 }
 
             private:
+                const int datatype;
                 std::vector<yli::ontology::GenericLispFunctionOverload*> instances;
         };
 }

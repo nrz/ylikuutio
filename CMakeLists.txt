@@ -967,6 +967,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_linear_algebra.cpp
         code/ylikuutio/tests/test_material.cpp
         code/ylikuutio/tests/test_material_struct.cpp
+        code/ylikuutio/tests/test_memory_allocator.cpp
         code/ylikuutio/tests/test_memory_storage.cpp
         code/ylikuutio/tests/test_memory_system.cpp
         code/ylikuutio/tests/test_memory_templates.cpp

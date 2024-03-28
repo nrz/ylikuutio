@@ -229,7 +229,7 @@ namespace yli::memory
                         // TODO: Return the return value of `try_emplace`.
                         // TODO: Throw an exception if creating an allocator fails.
                         std::cout << "Creating memory allocator of type " << type << "\n";
-                        this->memory_allocators.try_emplace(type, new T1(std::forward<Args>(args)...));
+                        this->memory_allocators.try_emplace(type, new T1(type, std::forward<Args>(args)...));
                     }
 
                 // TODO: use `TypeEnumType` instead of `int`!
