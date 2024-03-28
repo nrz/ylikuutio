@@ -141,7 +141,7 @@ namespace hirvi
         };
     }
 
-    yli::memory::GenericMemorySystem& HirviApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& HirviApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

@@ -131,7 +131,7 @@ namespace yli_edit
         };
     }
 
-    yli::memory::GenericMemorySystem& YliEditApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& YliEditApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

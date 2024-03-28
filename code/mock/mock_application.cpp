@@ -65,7 +65,7 @@ namespace mock
         return std::vector<std::string>();
     }
 
-    yli::memory::GenericMemorySystem& MockApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& MockApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

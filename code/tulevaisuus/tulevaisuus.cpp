@@ -132,7 +132,7 @@ namespace tulevaisuus
         };
     }
 
-    yli::memory::GenericMemorySystem& TulevaisuusApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& TulevaisuusApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

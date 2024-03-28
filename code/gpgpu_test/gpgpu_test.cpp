@@ -92,7 +92,7 @@ namespace gpgpu_test
         return { "help", "version" };
     }
 
-    yli::memory::GenericMemorySystem& GpgpuTestApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& GpgpuTestApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

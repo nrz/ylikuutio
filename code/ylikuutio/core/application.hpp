@@ -57,7 +57,7 @@ namespace yli::core
 
             virtual std::vector<std::string> get_valid_keys() const = 0;
 
-            virtual yli::memory::GenericMemorySystem& get_memory_system() const = 0;
+            virtual yli::memory::GenericMemorySystem& get_generic_memory_system() const = 0;
 
             virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const = 0;
 

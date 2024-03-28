@@ -64,7 +64,7 @@ namespace ajokki
 
             std::vector<std::string> get_valid_keys() const override;
 
-            yli::memory::GenericMemorySystem& get_memory_system() const override;
+            yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
 
             yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const override;
 

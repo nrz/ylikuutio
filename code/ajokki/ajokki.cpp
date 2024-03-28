@@ -127,7 +127,7 @@ namespace ajokki
         return "Ajokki";
     }
 
-    yli::memory::GenericMemorySystem& AjokkiApplication::get_memory_system() const
+    yli::memory::GenericMemorySystem& AjokkiApplication::get_generic_memory_system() const
     {
         return this->memory_system.get();
     }

@@ -30,7 +30,7 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    const auto& memory_system = static_cast<yli::memory::MemorySystem<hirvi::Datatype>&>(hirvi_application.get_memory_system());
+    const auto& memory_system = static_cast<yli::memory::MemorySystem<hirvi::Datatype>&>(hirvi_application.get_generic_memory_system());
     hirvi::Datatype universe_datatype = memory_system.get_universe_datatype();
     ASSERT_EQ(universe_datatype, hirvi::Datatype::UNIVERSE);
 

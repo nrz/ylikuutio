@@ -125,7 +125,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     ASSERT_EQ(ecosystem1->get_parent(), &application.get_universe());
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
-    application.get_memory_system().destroy(ecosystem1->get_constructible_module());
+    application.get_generic_memory_system().destroy(ecosystem1->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct2;
     yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct2);
@@ -145,7 +145,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     ASSERT_EQ(ecosystem2->get_parent(), &application.get_universe());
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    application.get_memory_system().destroy(ecosystem2->get_constructible_module());
+    application.get_generic_memory_system().destroy(ecosystem2->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct3);
@@ -166,7 +166,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
     ASSERT_EQ(ecosystem3->get_parent(), &application.get_universe());
     ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
-    application.get_memory_system().destroy(ecosystem3->get_constructible_module());
+    application.get_generic_memory_system().destroy(ecosystem3->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct4;
     yli::ontology::Ecosystem* const ecosystem4 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct4);
@@ -230,7 +230,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem2->get_parent(), &application.get_universe());
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
-    application.get_memory_system().destroy(ecosystem1->get_constructible_module());
+    application.get_generic_memory_system().destroy(ecosystem1->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct3);
