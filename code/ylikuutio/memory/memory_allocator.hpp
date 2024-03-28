@@ -182,7 +182,20 @@ namespace yli::memory
                     {
                         yli::ontology::GenericLispFunctionOverload* function_overload =
                             new yli::ontology::LispFunctionOverload(std::forward<Args>(args)...);
-                        this->instances.emplace_back(function_overload);
+
+                        if (this->free_storageID_queue.empty())
+                        {
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, this->free_storageID_queue.size(), 0);
+                            this->instances.emplace_back(function_overload);
+                        }
+                        else
+                        {
+                            const std::size_t storage_i = this->free_storageID_queue.front();
+                            this->free_storageID_queue.pop();
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, storage_i, 0);
+                            this->instances.at(storage_i) = function_overload;
+                        }
+
                         return function_overload;
                     }
 
@@ -216,6 +229,7 @@ namespace yli::memory
             private:
                 const int datatype;
                 std::vector<yli::ontology::GenericLispFunctionOverload*> instances;
+                std::queue<std::size_t> free_storageID_queue;
         };
 }
 
