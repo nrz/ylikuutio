@@ -109,6 +109,8 @@ Tasks which are necessary for Tulevaisuus:
 [ ] Implement turn file receiving over the network into `yli_server`.
 [ ] Implement processing of turn files in `yli_server`.
 [ ] Implement `yli::ontology::Multiverse` class.
+[ ] Evaluate OpenCV: https://opencv.org/ https://github.com/opencv/opencv
+[ ] Evaluate LLaVA: https://llava-vl.github.io/ https://github.com/haotian-liu/LLaVA
 [ ] In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..
 [ ] In `yli_server`, implement creation of apprentice `Universe`s, one for each player.
 [ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
