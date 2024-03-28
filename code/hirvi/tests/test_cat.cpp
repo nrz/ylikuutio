@@ -20,6 +20,7 @@
 #include "code/hirvi/cat.hpp"
 #include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -57,11 +58,21 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
     ASSERT_NE(helsinki_east_downtown_scene, nullptr);
+    yli::memory::ConstructibleModule scene_constructible_module = helsinki_east_downtown_scene->get_constructible_module();
+    ASSERT_EQ(scene_constructible_module.datatype, hirvi::Datatype::SCENE);
+    ASSERT_EQ(scene_constructible_module.storage_i, 0);
+    ASSERT_EQ(scene_constructible_module.slot_i, 0);
+    ASSERT_EQ(scene_constructible_module.alive, true);
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
     ASSERT_NE(rest_callback_engine, nullptr);
+    yli::memory::ConstructibleModule callback_engine_constructible_module = rest_callback_engine->get_constructible_module();
+    ASSERT_EQ(callback_engine_constructible_module.datatype, hirvi::Datatype::CALLBACK_ENGINE);
+    ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
+    ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);
+    ASSERT_EQ(callback_engine_constructible_module.alive, true);
 
     yli::ontology::BrainStruct rest_brain_struct;
     rest_brain_struct.parent = helsinki_east_downtown_scene;
@@ -70,6 +81,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     rest_brain_struct.callback_engine = rest_callback_engine;
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
     ASSERT_NE(rest_brain, nullptr);
+    yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
+    ASSERT_EQ(brain_constructible_module.datatype, hirvi::Datatype::BRAIN);
+    ASSERT_EQ(brain_constructible_module.storage_i, 0);
+    ASSERT_EQ(brain_constructible_module.slot_i, 0);
+    ASSERT_EQ(brain_constructible_module.alive, true);
 
     yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct;
     helsinki_east_downtown_pipeline_struct.parent = helsinki_east_downtown_scene;
@@ -79,6 +95,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
     ASSERT_NE(helsinki_east_downtown_pipeline, nullptr);
+    yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_east_downtown_pipeline->get_constructible_module();
+    ASSERT_EQ(pipeline_constructible_module.datatype, hirvi::Datatype::PIPELINE);
+    ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
+    ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
+    ASSERT_EQ(pipeline_constructible_module.alive, true);
 
     yli::ontology::MaterialStruct orange_fur_material_struct;
     orange_fur_material_struct.parent = helsinki_east_downtown_scene;
@@ -87,6 +108,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
+    yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
+    ASSERT_EQ(orange_fur_material_constructible_module.datatype, hirvi::Datatype::MATERIAL);
+    ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
+    ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
+    ASSERT_EQ(orange_fur_material_constructible_module.alive, true);
 
     yli::ontology::ModelStruct cat_model_struct;
     cat_model_struct.parent = helsinki_east_downtown_scene;
@@ -98,6 +124,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat_model_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);
     ASSERT_NE(cat_species, nullptr);
+    yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
+    ASSERT_EQ(cat_species_constructible_module.datatype, hirvi::Datatype::SPECIES);
+    ASSERT_EQ(cat_species_constructible_module.storage_i, 0);
+    ASSERT_EQ(cat_species_constructible_module.slot_i, 0);
+    ASSERT_EQ(cat_species_constructible_module.alive, true);
 
     yli::ontology::ObjectStruct cat1_object_struct(helsinki_east_downtown_scene);
     cat1_object_struct.mesh_master = cat_species;
@@ -126,4 +157,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
                 cat1_gallop_struct,
                 cat1_climb_struct);
     ASSERT_NE(cat1, nullptr);
+    yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
+    ASSERT_EQ(cat1_constructible_module.datatype, hirvi::Datatype::CAT);
+    ASSERT_EQ(cat1_constructible_module.storage_i, 0);
+    ASSERT_EQ(cat1_constructible_module.slot_i, 0);
+    ASSERT_EQ(cat1_constructible_module.alive, true);
 }
