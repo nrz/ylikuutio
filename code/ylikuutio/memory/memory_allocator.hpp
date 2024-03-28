@@ -221,9 +221,11 @@ namespace yli::memory
                     return std::nullopt;
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& /* constructible_module */ ) noexcept override
+                void destroy(const yli::memory::ConstructibleModule& constructible_module) noexcept override
                 {
-                    // TODO
+                    delete this->instances.at(constructible_module.storage_i);
+                    this->instances.at(constructible_module.storage_i) = nullptr;
+                    this->free_storageID_queue.push(constructible_module.storage_i);
                 }
 
             private:
