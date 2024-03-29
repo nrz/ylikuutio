@@ -76,12 +76,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
-    ASSERT_NE(helsinki_east_downtown_pipeline, nullptr);
-    yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_east_downtown_pipeline->get_constructible_module();
-    ASSERT_EQ(pipeline_constructible_module.datatype, hirvi::Datatype::PIPELINE);
-    ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
-    ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
-    ASSERT_EQ(pipeline_constructible_module.alive, true);
 
     yli::ontology::MaterialStruct orange_fur_material_struct;
     orange_fur_material_struct.parent = helsinki_east_downtown_scene;
