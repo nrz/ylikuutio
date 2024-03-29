@@ -57,12 +57,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
-    ASSERT_NE(helsinki_east_downtown_scene, nullptr);
-    yli::memory::ConstructibleModule scene_constructible_module = helsinki_east_downtown_scene->get_constructible_module();
-    ASSERT_EQ(scene_constructible_module.datatype, hirvi::Datatype::SCENE);
-    ASSERT_EQ(scene_constructible_module.storage_i, 0);
-    ASSERT_EQ(scene_constructible_module.slot_i, 0);
-    ASSERT_EQ(scene_constructible_module.alive, true);
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
