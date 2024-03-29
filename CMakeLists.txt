@@ -1011,7 +1011,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_pipeline.cpp
-        code/hirvi/tests/test_scene.cpp)
+        code/hirvi/tests/test_scene.cpp
+        code/hirvi/tests/test_species.cpp)
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
