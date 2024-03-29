@@ -1,350 +1,350 @@
-TODO list:
-Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
+# TODO list
+* Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
-Fixes needed:
-[ ] Fix double free in Hirvi upon deallocation.
-[ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
-[ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
-[ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
-[ ] Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
-[ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
+## Fixes needed
+- [ ] Fix double free in Hirvi upon deallocation.
+- [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
+- [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
+- [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
+- [ ] Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
+- [ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
-Tasks which are necessary for the first stage (Hirvi prototype):
-[ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
-[ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
-[ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
-[ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
-[ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
-[ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
-[ ] Write unit tests for `Brain` snippets.
-[ ] Write unit tests for keyboard callback snippets.
-[ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
-[ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
-[ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
-[ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
-[ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
-[ ] Add support for Tab complete for local names in `Console`.
-[ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
-[ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
-[ ] Add support for high DPI displays.
-[ ] Implement `yli::ontology::Window` class.
-[ ] Implement `yli::ontology::Widget` class.
-[ ] Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
-[ ] Add support for multiple windows.
-[ ] Add support for multiple widgets in each window.
-[ ] Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
-[ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
-[ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
-[ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
-[ ] Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
-[ ] Implement support for multiple water levels within a `Scene`.
-[ ] Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
-[ ] Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
-[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
-[ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
+## Tasks which are necessary for the first stage (Hirvi prototype)
+- [ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
+- [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
+- [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
+- [ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
+- [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
+- [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
+- [ ] Write unit tests for `Brain` snippets.
+- [ ] Write unit tests for keyboard callback snippets.
+- [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
+- [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
+- [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
+- [ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
+- [ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
+- [ ] Add support for Tab complete for local names in `Console`.
+- [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
+- [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
+- [ ] Add support for high DPI displays.
+- [ ] Implement `yli::ontology::Window` class.
+- [ ] Implement `yli::ontology::Widget` class.
+- [ ] Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+- [ ] Add support for multiple windows.
+- [ ] Add support for multiple widgets in each window.
+- [ ] Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
+- [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
+- [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
+- [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
+- [ ] Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
+- [ ] Implement support for multiple water levels within a `Scene`.
+- [ ] Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
+- [ ] Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
+- [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+- [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
+- [ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
-Tasks which are necessary for the second stage:
-[ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
-[ ] Add support for multiple displays.
-[ ] Implement support for multiple light sources in each `Scene`.
-[ ] Implement shadows.
-[ ] Implement HDR rendering.
-[ ] Add support for different keyboard layouts in `Console`.
-[ ] Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
-[ ] Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
-[ ] Evaluate Dear ImGUI: https://github.com/ocornut/imgui
-[ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
-[ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
-[ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
-[ ] Implement abstract syntax tree (AST) creation code for YliLisp.
-[ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
-[ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
-[ ] Implement closures for YliLisp.
-[ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
-[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
-[ ] Implement octree segmentation.
-[ ] Implement frustum culling using bounding spheres.
-[ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-[ ] Implement `yli::ontology::ShapeshifterForm`.
-[ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
-[ ] Implement skeletal animation.
-[ ] Implement creating new named `Variable`s using `Console`.
-[ ] Implement YliEdit editor.
-[ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
-[ ] Add support for changing font size.
-[ ] Implement transparent rendering of 3D objects.
-[ ] Implement transparent rendering of 4D objects.
-[ ] Replace SDL audio with OpenAL Soft.
-[ ] Implement dynamic not flowing water, using OpenGL shaders.
-[ ] Evaluate FreeType.
-[ ] Evaluate HarfBuzz.
-[ ] Implement better font support.
+## Tasks which are necessary for the second stage
+- [ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
+- [ ] Add support for multiple displays.
+- [ ] Implement support for multiple light sources in each `Scene`.
+- [ ] Implement shadows.
+- [ ] Implement HDR rendering.
+- [ ] Add support for different keyboard layouts in `Console`.
+- [ ] Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
+- [ ] Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
+- [ ] Evaluate Dear ImGUI: https://github.com/ocornut/imgui
+- [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
+- [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
+- [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
+- [ ] Implement abstract syntax tree (AST) creation code for YliLisp.
+- [ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
+- [ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
+- [ ] Implement closures for YliLisp.
+- [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
+- [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+- [ ] Implement octree segmentation.
+- [ ] Implement frustum culling using bounding spheres.
+- [ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+- [ ] Implement `yli::ontology::ShapeshifterForm`.
+- [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
+- [ ] Implement skeletal animation.
+- [ ] Implement creating new named `Variable`s using `Console`.
+- [ ] Implement YliEdit editor.
+- [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
+- [ ] Add support for changing font size.
+- [ ] Implement transparent rendering of 3D objects.
+- [ ] Implement transparent rendering of 4D objects.
+- [ ] Replace SDL audio with OpenAL Soft.
+- [ ] Implement dynamic not flowing water, using OpenGL shaders.
+- [ ] Evaluate FreeType.
+- [ ] Evaluate HarfBuzz.
+- [ ] Implement better font support.
 
-Tasks which are necessary for the third stage:
-[ ] Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
-[ ] Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
-[ ] Add support for vector fonts.
-[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
-[ ] Evaluate ZeroMQ: https://zeromq.org/
-[ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
-[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
-[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
-[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
-[ ] Implement chat server using the chosen network library.
-[ ] Implement chat client using the chosen network library.
-[ ] Implement software rendering.
-[ ] Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
+## Tasks which are necessary for the third stage
+- [ ] Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
+- [ ] Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
+- [ ] Add support for vector fonts.
+- [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+- [ ] Evaluate ZeroMQ: https://zeromq.org/
+- [ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
+- [ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+- [ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+- [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
+- [ ] Implement chat server using the chosen network library.
+- [ ] Implement chat client using the chosen network library.
+- [ ] Implement software rendering.
+- [ ] Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
 
-Tasks which are necessary for Tulevaisuus:
-[ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
-[ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
-[ ] Make `yli_server` depend on `yli_core` and `yli_network`.
-[ ] Make `yli_client` depend on `yli_core` and `yli_network`.
-[ ] Make `hirvi` to depend on `yli_core` and `yli_opengl`.
-[ ] Make `gpgpu_test` to depend on `yli_core` and `yli_opengl`.
-[ ] Make `tulevaisuus` to depend on `yli_core`, `yli_opengl`, and `yli_client`.
-[ ] Make `tulevaisuus_server` to depend on `yli_core`, `yli_opengl`, and `yli_server`.
-[ ] Implement turn file sending over the network into `yli_client`.
-[ ] Implement turn file receiving over the network into `yli_server`.
-[ ] Implement processing of turn files in `yli_server`.
-[ ] Implement `yli::ontology::Multiverse` class.
-[ ] Evaluate OpenCV: https://opencv.org/ https://github.com/opencv/opencv
-[ ] Evaluate LLaVA: https://llava-vl.github.io/ https://github.com/haotian-liu/LLaVA
-[ ] In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..
-[ ] In `yli_server`, implement creation of apprentice `Universe`s, one for each player.
-[ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
-[ ] In `yli_server`, implement master-apprentice relationship between the master `Universe` and apprentice `Universe`s.
-[ ] In `yli_server`, implement producing result files for players.
-[ ] In `yli_server`, implement sending result files for players over the network.
+## Tasks which are necessary for Tulevaisuus
+- [ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
+- [ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
+- [ ] Make `yli_server` depend on `yli_core` and `yli_network`.
+- [ ] Make `yli_client` depend on `yli_core` and `yli_network`.
+- [ ] Make `hirvi` to depend on `yli_core` and `yli_opengl`.
+- [ ] Make `gpgpu_test` to depend on `yli_core` and `yli_opengl`.
+- [ ] Make `tulevaisuus` to depend on `yli_core`, `yli_opengl`, and `yli_client`.
+- [ ] Make `tulevaisuus_server` to depend on `yli_core`, `yli_opengl`, and `yli_server`.
+- [ ] Implement turn file sending over the network into `yli_client`.
+- [ ] Implement turn file receiving over the network into `yli_server`.
+- [ ] Implement processing of turn files in `yli_server`.
+- [ ] Implement `yli::ontology::Multiverse` class.
+- [ ] Evaluate OpenCV: https://opencv.org/ https://github.com/opencv/opencv
+- [ ] Evaluate LLaVA: https://llava-vl.github.io/ https://github.com/haotian-liu/LLaVA
+- [ ] In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..
+- [ ] In `yli_server`, implement creation of apprentice `Universe`s, one for each player.
+- [ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
+- [ ] In `yli_server`, implement master-apprentice relationship between the master `Universe` and apprentice `Universe`s.
+- [ ] In `yli_server`, implement producing result files for players.
+- [ ] In `yli_server`, implement sending result files for players over the network.
 
-Tasks which are necessary for the development of Ylikuutio:
-[ ] Add support for hexadecimal input in `set` console command.
-[ ] Implement `yli::ontology::ShaderSymbiosis`.
-[ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
-[ ] Add support for .yli loading.
-[ ] Add support for exporting as .yli in `yli_convert`.
-[ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
-[ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).
-[ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
-[ ] Add `Scene` loading command `load` into console.
-[ ] Implement `LogMaster` class.
-[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
-[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
-[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
-[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
-[ ] Add support for automatic detection of optimal window size.
-[ ] Implement modifying of vertices.
-[ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
-[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
-[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
-[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
-[ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
-[ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
-[ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
-[ ] Test code used to convert ASCII grid files (height maps) to binary GLTF files by loading the GLTF files created with it.
-[ ] Convert ASCII grid files into binary GLTF files.
-[ ] Implement scene loading which works in the background.
-[ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
-[ ] Implement `ConsoleCommand` class.
-[ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
-[ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
-[ ] Add support for packed files.
-[ ] Add support for CityGML file format.
-[ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
-[ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
-[ ] Add support for Collada .dae file format.
-[ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
-[ ] Add support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
-[ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
-[ ] Add support for custom keyboard settings.
-[ ] Add variable `direction`.
-[ ] Implement A* for train routing.
-[ ] Use TinySpline.
-[ ] Add bicubic interpolation.
-[ ] Add spline interpolation.
-[ ] Add Lanczos interpolation.
-[ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
-[ ] Write integration tests for Ajokki.
-[ ] Learn how to write unit tests for multithreaded C++ code.
-[ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
+## Tasks which are necessary for the development of Ylikuutio
+- [ ] Add support for hexadecimal input in `set` console command.
+- [ ] Implement `yli::ontology::ShaderSymbiosis`.
+- [ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
+- [ ] Add support for .yli loading.
+- [ ] Add support for exporting as .yli in `yli_convert`.
+- [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
+- [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).
+- [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
+- [ ] Add `Scene` loading command `load` into console.
+- [ ] Implement `LogMaster` class.
+- [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
+- [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
+- [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
+- [ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
+- [ ] Add support for automatic detection of optimal window size.
+- [ ] Implement modifying of vertices.
+- [ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
+- [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
+- [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
+- [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
+- [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
+- [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
+- [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
+- [ ] Test code used to convert ASCII grid files (height maps) to binary GLTF files by loading the GLTF files created with it.
+- [ ] Convert ASCII grid files into binary GLTF files.
+- [ ] Implement scene loading which works in the background.
+- [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
+- [ ] Implement `ConsoleCommand` class.
+- [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
+- [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
+- [ ] Add support for packed files.
+- [ ] Add support for CityGML file format.
+- [ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+- [ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+- [ ] Add support for Collada .dae file format.
+- [ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+- [ ] Add support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
+- [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
+- [ ] Add support for custom keyboard settings.
+- [ ] Add variable `direction`.
+- [ ] Implement A* for train routing.
+- [ ] Use TinySpline.
+- [ ] Add bicubic interpolation.
+- [ ] Add spline interpolation.
+- [ ] Add Lanczos interpolation.
+- [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
+- [ ] Write integration tests for Ajokki.
+- [ ] Learn how to write unit tests for multithreaded C++ code.
+- [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 
-Less urgent:
-[ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
-[ ] Add support for 3D text.
-[ ] Add support for partially transparent text.
-[ ] Add support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
-[ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
-[ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
-[ ] Implement simulation of contour detection processing in V2 (visual cortex area).
-[ ] Learn Vulkan.
-[ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
-[ ] Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.
-[ ] Add Vulkan support.
+## Less urgent
+- [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
+- [ ] Add support for 3D text.
+- [ ] Add support for partially transparent text.
+- [ ] Add support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
+- [ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
+- [ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
+- [ ] Implement simulation of contour detection processing in V2 (visual cortex area).
+- [ ] Learn Vulkan.
+- [ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
+- [ ] Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.
+- [ ] Add Vulkan support.
 
-Ready:
-[x] Add test VBO, e.g. some kind of particle object.
-[x] Define an object class.
-[x] Add support for several vertex buffer objects (VBO).
-[x] `string.h` -> `cstring`.
-[x] `strcmp` -> `std::strcmp`.
-[x] `strlen` -> `std::strlen`.
-[x] Implement callbacks.
-[x] Test functioning of callbacks.
-[x] Add console (it opens with key `).
-[x] Enable naming of entities of any level in entity hierarchy.
-[x] Add scrolling into console when the 'window' gets full.
-[x] Add command `info` into console (tells about entities, e.g. number of vertices of an objects etc. information).
-[x] Add variable `horizontal_angle`.
-[x] Add variable `vertical_angle`.
-[x] Add variable `right`.
-[x] Add variable `up`.
-[x] Add variable `window_width`.
-[x] Add variable `window_height`.
-[x] Add `set wireframe true`, `set wireframe false`.
-[x] Add support for command line parameters in Ajokki.
-[x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
-[x] Add object listing command `info` into console.
-[x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
-[x] Add audio with SFML.
-[x] Add support for an initial rotation for `Object`s.
-[x] Implement `Symbiosis` entities.
-[x] Bind each `Biont` also to its corresponding `SymbiontSpecies` (and also unbind from its corresponding `SymbiontSpecies`).
-[x] Implement `Entity`-specific variables.
-[x] Fix Travis configuration file `.travis.yml`.
-[x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
-[x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
-[x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
-[x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
-[x] Write code to save screenshots into a raw data file which can be opened e.g. with GIMP.
-[x] Add variable `text_size` (affects size of console text and other texts printed on screen).
-[x] Implement `AnyStruct`.
-[x] Implement audio using SDL (SFML does not support Android and iOS yet).
-[x] Implement s7 support in console.
-[x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
-[x] Implement `Camera` entities.
-[x] Implement rendering into a texture (`ComputeTask`).
-[x] Implement `AnyValueEntity : public AnyValue, public Entity`.
-[x] Implement `AnyStructEntity : public AnyStruct, public Entity`.
-[x] Implement command line parameter `--window_width` to Hirvi and Ajokki (e.g. `--window_width 1600`).
-[x] Implement command line parameter `--window_height` to Hirvi and Ajokki (e.g. --window_height 900`).
-[x] Fix bug that only 2D text gets rendered when window width is less than window height.
-[x] Add support for changing window size.
-[x] Implement `yli::ontology::Brain` AI class.
-[x] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
-[x] Implement fullscreen mode.
-[x] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
-[x] Implement printing `Setting`s using `Console`.
-[x] Evaluate LuaJIT: https://luajit.org/
-[x] Write `yli::ontology` class generator in Python.
-[x] Implement printing parent of Entities using `Console`.
-[x] Implement creating new named AnyStructEntities using `Console`.
-[x] Implement `yli::ontology::EntityStruct` that all other `struct`s used for creating different kinds of Entities should inherit.
-[x] Inherit `yli::ontology::EntityStruct` in all `struct`s that are used for creating different kinds of Entities.
-[x] Restrict what characters are allowed in global names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
-[x] Restrict what characters are allowed in local names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
-[x] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
-[x] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
-[x] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
-[x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
-[x] Implement `set-global-name` console command so that setting a global name is done using `set-global-name foo bar`.
-[x] Implement `set-local-name` console command so that setting a local name is done using `set-local-name foo bar`.
-[x] Implement support for local variables in YliLisp function argument binding.
-[x] Implement support for local variables in all console commands.
-[x] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
-[x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
-[x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
-[x] Implement `yli::ontology::MasterModule`.
-[x] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
-[x] Implement creating new named `yli::ontology::Object`s using `Console` command `create-object`.
-[x] Implement creating new named `yli::ontology::Holobiont`s using `Console` command `create-holobiont`.
-[x] Implement printing children of Entities using `Console` command `children`.
-[x] Implement main game loop inside `yli::ontology::Universe` class.
-[x] Implement `int main(const int argc, const char* const argv[])` function with `try` & `catch` in new function file `code/ylikuutio/core/entrypoint.hpp`.
-[x] Implement `yli::ontology::Application` class that inherits `yli::ontology::Entity` and binds to the `yli::ontology::Universe`.
-[x] Implement processing command line arguments in the `yli::ontology::Application` class based on the data received from the application itself (as before).
-[x] Create initial design of custom `.yli` binary format.
-[x] Implement `Variable` `azimuth` (for geographical angles/azimuths), 0 pointing north, pi/2 pointing east, pi pointing south, -pi/2 pointing west.
-[x] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
-[x] Add support for `yli::ontology::Registry` in different modules (`ParentModule`, `MasterModule`).
-[x] Add support for Tab complete for global names in `Console`.
-[x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html).
-[x] Fix compiling on MacOS.
-[x] Fix compiling in a Podman container on CentOS 8.
-[x] Fix segfault when running in headless mode (with `--headless`, bug entered in commit e9ea16157b51403685a3df2d0884cb87fbf500dc).
-[x] Fix compiling on GCC on Travis CI Bionic Beaver environment.
-[x] Fix compiling on Clang.
-[x] Make `Material` a child of the `Scene`.
-[x] Modify `yli::ontology::SymbiontMaterial` so that it inherits `yli::ontology::Entity`, and does not inherit `yli::ontology::Material` any more.
-[x] Modify `yli::ontology::SymbiontSpecies` so that it inherits `yli::ontology::Model`, and does not inherit `yli::ontology::Species` any more.
-[x] Implement `yli::ontology::ModelModule` class (to be used with composition), that will replace `yli::ontology::Model` class.
-[x] Make `Species` a child of the `Scene`.
-[x] Add support for references in YliLisp.
-[x] Add roll rotation.
-[x] Make `Object` a child of the `Scene`.
-[x] Make `Symbiosis` a child of the `Scene`.
-[x] Implement `yli::ontology::Ecosystem` class for storing `Shader`s independently of `Scene`s so that they can be used in multiple `Scene`s.
-[x] Change OpenGL requirement to 3.3.
-[x] Print alternative completions in `Console`.
-[x] Use uniform buffer objects to enable sharing uniforms between shaders.
-[x] Fix compiling on Clang.
-[x] Fix downloading of Google Test in `CMakeLists.txt`.
-[x] Fix binding `Object` apprentice to `Species` master.
-[x] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
-[x] Do not bind to any master that belongs to a different `Scene`.
-[x] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
-[x] Fix compiling on MacOS.
-[x] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.
-[x] Rename `AudioMaster` to `AudioSystem`.
-[x] Rename `InputMaster` to `InputSystem`.
-[x] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
-[x] When running in windowed mode, by default open window in the main display and make its size match the display resolution.
-[x] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
-[x] Make `Holobiont`s children of the `Scene` and apprentices of the `Symbiosis`.
-[x] Add support for scaling `Movable`s in `Console`.
-[x] Fix `yli::snippets::switch_to_new_material`.
-[x] Fix `yli::snippets::delete_entity`.
-[x] Fix `yli::snippets::transform_into_new_species`.
-[x] Fix compiling on MacOS.
-[x] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
-[x] Implement `LocationModule`.
-[x] Implement `OrientationModule`.
-[x] Implement `GaitModule`, to be used for different bi- and quadrupedal gaits like walking, running, trot, canter, gallop, pace, tölt.
-[x] Implement `SwimModule`, to be used for swimming.
-[x] Implement `DiveModule`, to be used for diving.
-[x] Implement `ClimbModule`, to be used for climbing on different surfaces.
-[x] Implement `FlyModule`, to be used for flying animals and aircraft.
-[x] Implement `RoadVehicleModule`, to be used for road vehicles.
-[x] Implement `RailVehicleModule`, to be used for rail vehicles.
-[x] Implement `ShipModule`, to be used for ships.
-[x] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
-[x] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
-[x] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` and `SwimModule`.
-[x] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule`, `SwimModule`, and `ClimbModule`.
-[x] Hirvi: Implement `PoliceModule` for sharing data such as knowledge about Hirvi's location, orientation, and speed between polices.
-[x] Hirvi: Implement `EmancipationModule` for emancipation-related behavior.
-[x] Hirvi: Implement `PoliceCar` class that inherits `Holobiont` and uses `RoadVehicleModule` and `PoliceModule`.
-[x] Hirvi: Implement `PoliceDog` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
-[x] Hirvi: Implement `PoliceHorse` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
-[x] Hirvi: Implement `PoliceShip` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
-[x] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
-[x] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
-[x] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
-[x] Rename `Shader` to `Pipeline`.
-[x] Improve `create_yli_ontology_class.py` to create `default` destructors.
-[x] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
-[x] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.
-[x] Fix `Universe::get_number_of_children` to count `CallbackEngine`s as well.
-[x] Fix `Universe::get_number_of_descendants` to count `CallbackEngine`s as well.
-[x] Move `InputMode` into `yli::ontology` and make it a child of the `Universe`, and make `InputMode` inherit `yli::ontology::Entity`.
-[x] Refactor `InputMaster` into `yli::ontology::ParentOfInputModesModule` and take it into use.
-[x] Add `yli::core::Application&` as the first parameter of `yli::ontology::Entity` and all its derivative classes.
-[x] Create `MockApplication` class to be used in tests.
-[x] Do not access derived class `Universe` instance in `Entity` destructor when destructing `Universe`.
-[x] Implement custom memory allocation system.
-[x] Fix compiling on g++ (Debian 12.2.0-14) 12.2.0 .
-[x] Fix segfault in GPGPU test in `yli::opengl::prepare_opengl_texture` (see commit cb041b92726df81afe3d349ac5a90d3bbbd14e91).
-[x] Fix bug "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!", in the deallocation of datatypes 121, 130, 131 (`CallbackEngine` etc.).
-[x] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
-[x] Fix crash of Hirvi upon start.
-[x] Split Hirvi game code into `hirvi_lib` library and `hirvi` application that links against `hirvi_lib`.
+## Ready
+- [x] Add test VBO, e.g. some kind of particle object.
+- [x] Define an object class.
+- [x] Add support for several vertex buffer objects (VBO).
+- [x] `string.h` -> `cstring`.
+- [x] `strcmp` -> `std::strcmp`.
+- [x] `strlen` -> `std::strlen`.
+- [x] Implement callbacks.
+- [x] Test functioning of callbacks.
+- [x] Add console (it opens with key `).
+- [x] Enable naming of entities of any level in entity hierarchy.
+- [x] Add scrolling into console when the 'window' gets full.
+- [x] Add command `info` into console (tells about entities, e.g. number of vertices of an objects etc. information).
+- [x] Add variable `horizontal_angle`.
+- [x] Add variable `vertical_angle`.
+- [x] Add variable `right`.
+- [x] Add variable `up`.
+- [x] Add variable `window_width`.
+- [x] Add variable `window_height`.
+- [x] Add `set wireframe true`, `set wireframe false`.
+- [x] Add support for command line parameters in Ajokki.
+- [x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
+- [x] Add object listing command `info` into console.
+- [x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
+- [x] Add audio with SFML.
+- [x] Add support for an initial rotation for `Object`s.
+- [x] Implement `Symbiosis` entities.
+- [x] Bind each `Biont` also to its corresponding `SymbiontSpecies` (and also unbind from its corresponding `SymbiontSpecies`).
+- [x] Implement `Entity`-specific variables.
+- [x] Fix Travis configuration file `.travis.yml`.
+- [x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
+- [x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
+- [x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
+- [x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
+- [x] Write code to save screenshots into a raw data file which can be opened e.g. with GIMP.
+- [x] Add variable `text_size` (affects size of console text and other texts printed on screen).
+- [x] Implement `AnyStruct`.
+- [x] Implement audio using SDL (SFML does not support Android and iOS yet).
+- [x] Implement s7 support in console.
+- [x] Add support for GPGPU using OpenGL 3.0/GLSL 1.30.10 shaders.
+- [x] Implement `Camera` entities.
+- [x] Implement rendering into a texture (`ComputeTask`).
+- [x] Implement `AnyValueEntity : public AnyValue, public Entity`.
+- [x] Implement `AnyStructEntity : public AnyStruct, public Entity`.
+- [x] Implement command line parameter `--window_width` to Hirvi and Ajokki (e.g. `--window_width 1600`).
+- [x] Implement command line parameter `--window_height` to Hirvi and Ajokki (e.g. --window_height 900`).
+- [x] Fix bug that only 2D text gets rendered when window width is less than window height.
+- [x] Add support for changing window size.
+- [x] Implement `yli::ontology::Brain` AI class.
+- [x] Implement command line parameter `--headless` to Hirvi and Ajokki (do not open any windows, do not render anything).
+- [x] Implement fullscreen mode.
+- [x] Fix bug that some `Object`s (e.g. `cat.fbx`) do not appear on screen on some environments.
+- [x] Implement printing `Setting`s using `Console`.
+- [x] Evaluate LuaJIT: https://luajit.org/
+- [x] Write `yli::ontology` class generator in Python.
+- [x] Implement printing parent of Entities using `Console`.
+- [x] Implement creating new named AnyStructEntities using `Console`.
+- [x] Implement `yli::ontology::EntityStruct` that all other `struct`s used for creating different kinds of Entities should inherit.
+- [x] Inherit `yli::ontology::EntityStruct` in all `struct`s that are used for creating different kinds of Entities.
+- [x] Restrict what characters are allowed in global names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
+- [x] Restrict what characters are allowed in local names (regex: `[a-zA-Z][a-zA-Z0-9_-]*`).
+- [x] Implement setting the global name by defining the `global_name` member variable of `yli::ontology::EntityStruct`.
+- [x] Implement setting the local name by defining the `local_name` member variable of `yli::ontology::EntityStruct`.
+- [x] Implement setting global name in `yli::ontology::EntityFactory` factory functions by calling `set_global_name`.
+- [x] Implement setting local name in `yli::ontology::EntityFactory` factory functions by calling `set_local_name`.
+- [x] Implement `set-global-name` console command so that setting a global name is done using `set-global-name foo bar`.
+- [x] Implement `set-local-name` console command so that setting a local name is done using `set-local-name foo bar`.
+- [x] Implement support for local variables in YliLisp function argument binding.
+- [x] Implement support for local variables in all console commands.
+- [x] Convert `Setting` into a an `yli::ontology` class that inherits `yli::ontology::Entity`.
+- [x] Fix bug in `print` so that it accepts `print cat1.x` (instead of `print cat1 x`).
+- [x] Fix bug in `set` so that it accepts `set cat1.x 1234` (instead of `set cat1 x 1234`).
+- [x] Implement `yli::ontology::MasterModule`.
+- [x] Implement creating new named `yli::ontology::Variable`s of given type in Entities using `Console` command `create-variable`.
+- [x] Implement creating new named `yli::ontology::Object`s using `Console` command `create-object`.
+- [x] Implement creating new named `yli::ontology::Holobiont`s using `Console` command `create-holobiont`.
+- [x] Implement printing children of Entities using `Console` command `children`.
+- [x] Implement main game loop inside `yli::ontology::Universe` class.
+- [x] Implement `int main(const int argc, const char* const argv[])` function with `try` & `catch` in new function file `code/ylikuutio/core/entrypoint.hpp`.
+- [x] Implement `yli::ontology::Application` class that inherits `yli::ontology::Entity` and binds to the `yli::ontology::Universe`.
+- [x] Implement processing command line arguments in the `yli::ontology::Application` class based on the data received from the application itself (as before).
+- [x] Create initial design of custom `.yli` binary format.
+- [x] Implement `Variable` `azimuth` (for geographical angles/azimuths), 0 pointing north, pi/2 pointing east, pi pointing south, -pi/2 pointing west.
+- [x] Create `yli::ontology::Registry` class in which different modules (`ChildModule`, `ParentModule`, `MasterModule`, `ApprenticeModule` etc.) may bind with a name.
+- [x] Add support for `yli::ontology::Registry` in different modules (`ParentModule`, `MasterModule`).
+- [x] Add support for Tab complete for global names in `Console`.
+- [x] Replace stb with libpng (http://www.libpng.org/pub/png/libpng.html).
+- [x] Fix compiling on MacOS.
+- [x] Fix compiling in a Podman container on CentOS 8.
+- [x] Fix segfault when running in headless mode (with `--headless`, bug entered in commit e9ea16157b51403685a3df2d0884cb87fbf500dc).
+- [x] Fix compiling on GCC on Travis CI Bionic Beaver environment.
+- [x] Fix compiling on Clang.
+- [x] Make `Material` a child of the `Scene`.
+- [x] Modify `yli::ontology::SymbiontMaterial` so that it inherits `yli::ontology::Entity`, and does not inherit `yli::ontology::Material` any more.
+- [x] Modify `yli::ontology::SymbiontSpecies` so that it inherits `yli::ontology::Model`, and does not inherit `yli::ontology::Species` any more.
+- [x] Implement `yli::ontology::ModelModule` class (to be used with composition), that will replace `yli::ontology::Model` class.
+- [x] Make `Species` a child of the `Scene`.
+- [x] Add support for references in YliLisp.
+- [x] Add roll rotation.
+- [x] Make `Object` a child of the `Scene`.
+- [x] Make `Symbiosis` a child of the `Scene`.
+- [x] Implement `yli::ontology::Ecosystem` class for storing `Shader`s independently of `Scene`s so that they can be used in multiple `Scene`s.
+- [x] Change OpenGL requirement to 3.3.
+- [x] Print alternative completions in `Console`.
+- [x] Use uniform buffer objects to enable sharing uniforms between shaders.
+- [x] Fix compiling on Clang.
+- [x] Fix downloading of Google Test in `CMakeLists.txt`.
+- [x] Fix binding `Object` apprentice to `Species` master.
+- [x] When binding any `Entity` class instance to a different `Scene` parent, unbind from all masters except from ones that are children of an `Ecosystem`.
+- [x] Do not bind to any master that belongs to a different `Scene`.
+- [x] Replace obsolete Travis CI workflow with GitHub Actions CI workflow.
+- [x] Fix compiling on MacOS.
+- [x] Rename `RenderMaster` to `RenderSystem` and `RenderMasterStruct` to `RenderSystemStruct`.
+- [x] Rename `AudioMaster` to `AudioSystem`.
+- [x] Rename `InputMaster` to `InputSystem`.
+- [x] Add support for storing `yli::ontology::Material` Entities in `yli::ontology::Ecosystem` class.
+- [x] When running in windowed mode, by default open window in the main display and make its size match the display resolution.
+- [x] Add support for storing `yli::ontology::Species` Entities in `yli::ontology::Ecosystem` class.
+- [x] Make `Holobiont`s children of the `Scene` and apprentices of the `Symbiosis`.
+- [x] Add support for scaling `Movable`s in `Console`.
+- [x] Fix `yli::snippets::switch_to_new_material`.
+- [x] Fix `yli::snippets::delete_entity`.
+- [x] Fix `yli::snippets::transform_into_new_species`.
+- [x] Fix compiling on MacOS.
+- [x] Add support for storing `yli::ontology::Symbiosis` Entities in `yli::ontology::Ecosystem` class.
+- [x] Implement `LocationModule`.
+- [x] Implement `OrientationModule`.
+- [x] Implement `GaitModule`, to be used for different bi- and quadrupedal gaits like walking, running, trot, canter, gallop, pace, tölt.
+- [x] Implement `SwimModule`, to be used for swimming.
+- [x] Implement `DiveModule`, to be used for diving.
+- [x] Implement `ClimbModule`, to be used for climbing on different surfaces.
+- [x] Implement `FlyModule`, to be used for flying animals and aircraft.
+- [x] Implement `RoadVehicleModule`, to be used for road vehicles.
+- [x] Implement `RailVehicleModule`, to be used for rail vehicles.
+- [x] Implement `ShipModule`, to be used for ships.
+- [x] Implement `RoadVehicle` class that inherits `Holobiont` and uses `RoadVehicleModule`.
+- [x] Implement `RailVehicle` class that inherits `Holobiont` and uses `RailVehicleModule`.
+- [x] Hirvi: Implement `Elk` class that inherits `Holobiont` and uses `GaitModule` and `SwimModule`.
+- [x] Hirvi: Implement `Cat` class that inherits `Holobiont` and uses `GaitModule`, `SwimModule`, and `ClimbModule`.
+- [x] Hirvi: Implement `PoliceModule` for sharing data such as knowledge about Hirvi's location, orientation, and speed between polices.
+- [x] Hirvi: Implement `EmancipationModule` for emancipation-related behavior.
+- [x] Hirvi: Implement `PoliceCar` class that inherits `Holobiont` and uses `RoadVehicleModule` and `PoliceModule`.
+- [x] Hirvi: Implement `PoliceDog` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
+- [x] Hirvi: Implement `PoliceHorse` class that inherits `Holobiont` and uses `GaitModule`, `PoliceModule`, and `EmancipationModule`.
+- [x] Hirvi: Implement `PoliceShip` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+- [x] Hirvi: Implement `PoliceHelicopter` class that inherits `Holobiont` and uses `AircraftModule` and `PoliceModule`.
+- [x] Hirvi: Implement `PoliceTrain` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
+- [x] Hirvi: Implement `PoliceTram` class that inherits `Holobiont` and uses `RailVehicleModule` and `PoliceModule`.
+- [x] Rename `Shader` to `Pipeline`.
+- [x] Improve `create_yli_ontology_class.py` to create `default` destructors.
+- [x] Improve `create_yli_ontology_class.py` to create the constructor in the `.cpp` file, with the declaration in header.
+- [x] Refactor `CallbackEngine`, `CallbackObject`, and `CallbackParameter` into `yli::ontology` namespace and make them inherit `Entity`.
+- [x] Fix `Universe::get_number_of_children` to count `CallbackEngine`s as well.
+- [x] Fix `Universe::get_number_of_descendants` to count `CallbackEngine`s as well.
+- [x] Move `InputMode` into `yli::ontology` and make it a child of the `Universe`, and make `InputMode` inherit `yli::ontology::Entity`.
+- [x] Refactor `InputMaster` into `yli::ontology::ParentOfInputModesModule` and take it into use.
+- [x] Add `yli::core::Application&` as the first parameter of `yli::ontology::Entity` and all its derivative classes.
+- [x] Create `MockApplication` class to be used in tests.
+- [x] Do not access derived class `Universe` instance in `Entity` destructor when destructing `Universe`.
+- [x] Implement custom memory allocation system.
+- [x] Fix compiling on g++ (Debian 12.2.0-14) 12.2.0 .
+- [x] Fix segfault in GPGPU test in `yli::opengl::prepare_opengl_texture` (see commit cb041b92726df81afe3d349ac5a90d3bbbd14e91).
+- [x] Fix bug "ERROR: `GenericParentModule::unbind_child`: the value of `childID` is invalid!", in the deallocation of datatypes 121, 130, 131 (`CallbackEngine` etc.).
+- [x] Fix main loop to make it run on a reasonable speed on ThinkPad Z16 with AMD Ryzen 9 PRO 6950H and Radeon 680M (1 Hz is not reasonable).
+- [x] Fix crash of Hirvi upon start.
+- [x] Split Hirvi game code into `hirvi_lib` library and `hirvi` application that links against `hirvi_lib`.
