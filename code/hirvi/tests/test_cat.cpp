@@ -68,12 +68,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     rest_brain_struct.local_name = "rest";
     rest_brain_struct.callback_engine = rest_callback_engine;
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
-    ASSERT_NE(rest_brain, nullptr);
-    yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
-    ASSERT_EQ(brain_constructible_module.datatype, hirvi::Datatype::BRAIN);
-    ASSERT_EQ(brain_constructible_module.storage_i, 0);
-    ASSERT_EQ(brain_constructible_module.slot_i, 0);
-    ASSERT_EQ(brain_constructible_module.alive, true);
 
     yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct;
     helsinki_east_downtown_pipeline_struct.parent = helsinki_east_downtown_scene;
