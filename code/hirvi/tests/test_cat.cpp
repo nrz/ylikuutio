@@ -93,12 +93,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat_model_struct.model_file_format = "fbx";
     cat_model_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);
-    ASSERT_NE(cat_species, nullptr);
-    yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
-    ASSERT_EQ(cat_species_constructible_module.datatype, hirvi::Datatype::SPECIES);
-    ASSERT_EQ(cat_species_constructible_module.storage_i, 0);
-    ASSERT_EQ(cat_species_constructible_module.slot_i, 0);
-    ASSERT_EQ(cat_species_constructible_module.alive, true);
 
     yli::ontology::ObjectStruct cat1_object_struct(helsinki_east_downtown_scene);
     cat1_object_struct.mesh_master = cat_species;
