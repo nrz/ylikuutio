@@ -1004,6 +1004,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Tests for Hirvi.
         code/hirvi/hirvi.cpp
         code/hirvi/hirvi.hpp
+        code/hirvi/tests/test_hirvi_application.cpp
         code/hirvi/tests/test_cat.cpp
         code/hirvi/tests/test_memory.cpp)
 
