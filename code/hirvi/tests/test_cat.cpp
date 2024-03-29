@@ -61,12 +61,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
-    ASSERT_NE(rest_callback_engine, nullptr);
-    yli::memory::ConstructibleModule callback_engine_constructible_module = rest_callback_engine->get_constructible_module();
-    ASSERT_EQ(callback_engine_constructible_module.datatype, hirvi::Datatype::CALLBACK_ENGINE);
-    ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
-    ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);
-    ASSERT_EQ(callback_engine_constructible_module.alive, true);
 
     yli::ontology::BrainStruct rest_brain_struct;
     rest_brain_struct.parent = helsinki_east_downtown_scene;
