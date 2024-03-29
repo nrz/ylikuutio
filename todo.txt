@@ -10,6 +10,19 @@ Fixes needed:
 [ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 Tasks which are necessary for the first stage (Hirvi prototype):
+Hirvi prototype:
+* no wind.
+* no rain.
+* no snow.
+* no flowing water.
+* no vehicle physics (no skidding, no handbrake turns, no partial destruction).
+* Helsinki only.
+* no interplanetary travel.
+* no interstellar travel.
+* no black holes.
+* no wormholes.
+* no white holes.
+* no indoors.
 [ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
 [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
