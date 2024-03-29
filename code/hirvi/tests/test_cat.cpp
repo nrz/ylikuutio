@@ -22,7 +22,6 @@
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"

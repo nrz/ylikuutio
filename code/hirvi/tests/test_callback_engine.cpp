@@ -20,18 +20,7 @@
 #include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
-// Include standard headers
-#include <numbers> // std::numbers::pi
 
 TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
 {
