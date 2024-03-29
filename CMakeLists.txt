@@ -1009,6 +1009,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
         code/hirvi/tests/test_memory.cpp
+        code/hirvi/tests/test_pipeline.cpp
         code/hirvi/tests/test_scene.cpp)
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
