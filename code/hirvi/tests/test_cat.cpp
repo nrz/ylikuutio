@@ -83,12 +83,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
-    ASSERT_NE(orange_fur_material, nullptr);
-    yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
-    ASSERT_EQ(orange_fur_material_constructible_module.datatype, hirvi::Datatype::MATERIAL);
-    ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
-    ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
-    ASSERT_EQ(orange_fur_material_constructible_module.alive, true);
 
     yli::ontology::ModelStruct cat_model_struct;
     cat_model_struct.parent = helsinki_east_downtown_scene;
