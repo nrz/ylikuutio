@@ -1008,6 +1008,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_brain.cpp
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
+        code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_pipeline.cpp
         code/hirvi/tests/test_scene.cpp)
