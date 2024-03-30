@@ -19,10 +19,14 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
+
+namespace yli::ontology
+{
+    class Scene;
+}
 
 TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
 {

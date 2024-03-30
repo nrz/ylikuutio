@@ -23,11 +23,6 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
-#include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -44,6 +39,15 @@
 
 // Include standard headers
 #include <numbers> // std::numbers::pi
+
+namespace yli::ontology
+{
+    class Brain;
+    class Scene;
+    class Pipeline;
+    class Material;
+    class Species;
+}
 
 TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 {

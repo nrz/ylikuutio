@@ -19,14 +19,18 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
+
+namespace yli::ontology
+{
+    class Scene;
+    class Pipeline;
+    class Material;
+}
 
 TEST(species_must_be_initialized_appropriately, hirvi_species)
 {

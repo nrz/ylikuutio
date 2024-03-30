@@ -23,9 +23,13 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
+
+namespace yli::ontology
+{
+    class Scene;
+}
 
 TEST(brain_must_be_initialized_appropriately, hirvi_brain)
 {
