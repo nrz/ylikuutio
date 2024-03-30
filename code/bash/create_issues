@@ -1,0 +1,275 @@
+#!/bin/bash
+set -e
+gh issue create --assignee '@me' --title 'Double free in Hirvi' --label 'bug' --body 'Fix double free in Hirvi upon deallocation.'
+sleep 10
+gh issue create --assignee '@me' --title '`Camera` activation bug' --label 'bug' --body 'Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Console size bug' --label 'bug' --body 'Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)'
+sleep 10
+gh issue create --assignee '@me' --title 'Console logic bug' --label 'bug' --body 'Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)'
+sleep 10
+gh issue create --assignee '@me' --title 'Unit tests fail on debug build' --label 'bug' --body 'Fix unit tests on a debug build. `ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr'"'"' failed.`'
+sleep 10
+gh issue create --assignee '@me' --title 'Audio issue on Wine' --label 'bug' --body 'Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).'
+sleep 10
+gh issue create --assignee '@me' --title 'Z-up coordinate system' --label 'math' --body 'Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.'
+sleep 10
+gh issue create --assignee '@me' --title 'Replace OpenFBX with clgtf' --label 'libraries' --body 'Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf'
+sleep 10
+gh issue create --assignee '@me' --title '`AudioTrack` class' --label 'ontology,audio' --body 'Create `yli::ontology::AudioTrack` class that inherits `Entity`.'
+sleep 10
+gh issue create --assignee '@me' --title '`PlayList` class' --label 'ontology,audio' --body 'Create `yli::ontology::PlayList` class that inherits `Entity`.'
+sleep 10
+gh issue create --assignee '@me' --title '`Mission` class' --label 'ontology' --body 'Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.'
+sleep 10
+gh issue create --assignee '@me' --title 'libjpeg-turbo' --label 'libraries' --body 'Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo'
+sleep 10
+gh issue create --assignee '@me' --title 'Tests for `Brain`' --label 'ontology,tests' --body 'Write unit tests for `Brain` snippets.'
+sleep 10
+gh issue create --assignee '@me' --title 'Tests for keyboard callback snippets' --label 'ui,tests' --body 'Write unit tests for keyboard callback snippets.'
+sleep 10
+gh issue create --assignee '@me' --title '`RigidBodyModule` class' --label 'physics' --body 'Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check Jolt physics' --label 'libraries,physics,evaluate' --body 'Evaluate Jolt. https://github.com/jrouwe/JoltPhysics'
+sleep 10
+gh issue create --assignee '@me' --title 'Jolt physics' --label 'libraries,physics' --body 'Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics'
+sleep 10
+gh issue create --assignee '@me' --title 'Tab complete for local names' --label 'console,ui' --body 'Add support for Tab complete for local names in `Console`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Tab complete for children' --label 'console,ui' --body 'Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Child indexing in console' --label 'console,ui' --body 'Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.'
+sleep 10
+gh issue create --assignee '@me' --title 'High DPI displays' --label 'display,ui' --body 'Add support for high DPI displays.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_convert program' --label 'tools' --body 'Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.'
+sleep 10
+gh issue create --assignee '@me' --title '`HeightmapStruct` struct' --label 'ontology,data' --body 'Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.'
+sleep 10
+gh issue create --assignee '@me' --title '`Heightmap` class' --label 'ontology,data' --body 'Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.'
+sleep 10
+gh issue create --assignee '@me' --title '`HeightmapSheet` class' --label 'ontology,data' --body 'Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.'
+sleep 10
+gh issue create --assignee '@me' --title 'Load multiple sheets of elevation data at once' --label 'ontology,data' --body 'Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.'
+sleep 10
+gh issue create --assignee '@me' --title 'Multiple water levels' --label 'ontology,data' --body 'Implement support for multiple water levels within a `Scene`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check Far Cry 5 terrain rendering talk' --label 'ontology,data,evaluate' --body 'Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry'
+sleep 10
+gh issue create --assignee '@me' --title 'Data structures for 3D model' --label 'ontology,data' --body 'Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).'
+sleep 10
+gh issue create --assignee '@me' --title 'OpenStreetMap support' --label 'ontology,data' --body 'Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)'
+sleep 10
+gh issue create --assignee '@me' --title 'SoLoud audio' --label 'audio,evaluate' --body 'Evaluate SoLoud audio library: https://solhsa.com/soloud/'
+sleep 10
+gh issue create --assignee '@me' --title '`Window` class' --label 'ontology,gui' --body 'Implement `yli::ontology::Window` class.'
+sleep 10
+gh issue create --assignee '@me' --title '`Widget` class' --label 'ontology,gui' --body 'Implement `yli::ontology::Widget` class.'
+sleep 10
+gh issue create --assignee '@me' --title '`CameraWidget` class' --label 'ontology,camera,gui' --body 'Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Multiple windows' --label 'gui' --body 'Add support for multiple windows.'
+sleep 10
+gh issue create --assignee '@me' --title 'Multiple widgets in each window' --label 'gui' --body 'Add support for multiple widgets in each window.'
+sleep 10
+gh issue create --assignee '@me' --title '`scale_up_limit` variable' --label 'ontology' --body 'Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.'
+sleep 10
+gh issue create --assignee '@me' --title '`scale_down_limit` variable' --label 'ontology' --body 'Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.'
+sleep 10
+gh issue create --assignee '@me' --title 'Helsinki 3D model' --label 'ontology,data' --body 'Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli'
+sleep 10
+gh issue create --assignee '@me' --title '`Biont`-specific coordinate adjustments' --label 'ontology,math' --body 'Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Multiple displays' --label 'gui' --body 'Add support for multiple displays.'
+sleep 10
+gh issue create --assignee '@me' --title 'Multiple light sources in each `Scene`' --label 'math' --body 'Implement support for multiple light sources in each `Scene`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Shadows' --label 'math,rendering' --body 'Implement shadows.'
+sleep 10
+gh issue create --assignee '@me' --title 'HDR rendering' --label 'math,rendering' --body 'Implement HDR rendering.'
+sleep 10
+gh issue create --assignee '@me' --title 'Keyboard layouts' --label 'ui' --body 'Add support for different keyboard layouts in `Console`.'
+sleep 10
+gh issue create --assignee '@me' --title '`create_simulation` refactor' --label 'refactor' --body 'Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.'
+sleep 10
+gh issue create --assignee '@me' --title '`start_simulation` refactor' --label 'refactor' --body 'Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.'
+sleep 10
+gh issue create --assignee '@me' --title 'Dear ImGUI' --label 'libraries,gui,evaluate' --body 'Evaluate Dear ImGUI: https://github.com/ocornut/imgui'
+sleep 10
+gh issue create --assignee '@me' --title '`set` console command change for values' --label 'ylilisp' --body 'Modify `set` console command so that setting a value is done using `set '"'"'value foo bar` or `set '"'"'value foo bar baz` (`'"'"'value` must be used).'
+sleep 10
+gh issue create --assignee '@me' --title '`set` console command change for global names' --label 'ylilisp' --body 'Modify `set` console command so that setting a global name is done using `set '"'"'global-name foo bar`.'
+sleep 10
+gh issue create --assignee '@me' --title '`set` console command change for local names' --label 'ylilisp' --body 'Modify `set` console command so that setting a local name is done using `set '"'"'local-name foo bar`.'
+sleep 10
+gh issue create --assignee '@me' --title 'AST (Abstract syntax tree)' --label 'ylilisp' --body 'Implement abstract syntax tree (AST) creation code for YliLisp.'
+sleep 10
+gh issue create --assignee '@me' --title 'S-expression support' --label 'ylilisp,console' --body 'Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.'
+sleep 10
+gh issue create --assignee '@me' --title 'Continuations' --label 'ylilisp' --body 'Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.'
+sleep 10
+gh issue create --assignee '@me' --title 'Closures' --label 'ylilisp' --body 'Implement closures for YliLisp.'
+sleep 10
+gh issue create --assignee '@me' --title 'YliLisp interpreter' --label 'ylilisp' --body 'Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).'
+sleep 10
+gh issue create --assignee '@me' --title 'A* route finding' --label 'ai' --body 'Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm'
+sleep 10
+gh issue create --assignee '@me' --title 'Octree segmentation' --label 'optimize' --body 'Implement octree segmentation.'
+sleep 10
+gh issue create --assignee '@me' --title 'Frustum culling' --label 'optimize' --body 'Implement frustum culling using bounding spheres.'
+sleep 10
+gh issue create --assignee '@me' --title '`ShapeshifterTransformation` class' --label 'ontology,shapeshifters' --body 'Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.'
+sleep 10
+gh issue create --assignee '@me' --title '`ShapeshifterForm` class' --label 'ontology,shapeshifters' --body 'Implement `yli::ontology::ShapeshifterForm`.'
+sleep 10
+gh issue create --assignee '@me' --title '`ShapeshifterSequence` class' --label 'ontology,shapeshifters' --body 'Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.'
+sleep 10
+gh issue create --assignee '@me' --title 'Skeletal animation' --label 'animation' --body 'Implement skeletal animation.'
+sleep 10
+gh issue create --assignee '@me' --title 'Variable creation in console' --label 'console,ylilisp,ontology' --body 'Implement creating new named `Variable`s using `Console`.'
+sleep 10
+gh issue create --assignee '@me' --title 'YliEdit' --label 'tools' --body 'Implement YliEdit editor.'
+sleep 10
+gh issue create --assignee '@me' --title 'Voxel world' --label 'terrain,voxels' --body 'Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).'
+sleep 10
+gh issue create --assignee '@me' --title 'Changing of font size' --label 'text,ui' --body 'Add support for changing font size.'
+sleep 10
+gh issue create --assignee '@me' --title 'Transparent rendering of 3D objects' --label 'rendering' --body 'Implement transparent rendering of 3D objects.'
+sleep 10
+gh issue create --assignee '@me' --title 'Transparent rendering of 4D objects' --label 'rendering' --body 'Implement transparent rendering of 4D objects.'
+sleep 10
+gh issue create --assignee '@me' --title 'Dynamic not flowing water' --label 'water,rendering' --body 'Implement dynamic not flowing water, using OpenGL shaders.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check FreeType' --label 'text,libraries,evaluate' --body 'Evaluate FreeType.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check HarfBuzz' --label 'text,libraries,evaluate' --body 'Evaluate HarfBuzz.'
+sleep 10
+gh issue create --assignee '@me' --title 'Better font support' --label 'text,gui' --body 'Implement better font support.'
+sleep 10
+gh issue create --assignee '@me' --title 'CMake update' --label 'build' --body 'Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.'
+sleep 10
+gh issue create --assignee '@me' --title 'Precompiled headers' --label 'build' --body 'Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html'
+sleep 10
+gh issue create --assignee '@me' --title 'Vector fonts' --label 'text' --body 'Add support for vector fonts.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check network libraries' --label 'network' --body 'Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library'
+sleep 10
+gh issue create --assignee '@me' --title 'Check ZeroMQ' --label 'network,libraries,evaluate' --body 'Evaluate ZeroMQ: https://zeromq.org/'
+sleep 10
+gh issue create --assignee '@me' --title 'Check SDL_net' --label 'network,libraries,evaluate' --body 'Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/'
+sleep 10
+gh issue create --assignee '@me' --title 'Check Asio' --label 'network,libraries,evaluate' --body 'Evaluate Asio (nework and low-level I/O library): https://think-async.com/'
+sleep 10
+gh issue create --assignee '@me' --title 'Check cpp-netlib' --label 'network,libraries,evaluate' --body 'Evaluate cpp-netlib (network library): http://cpp-netlib.org/'
+sleep 10
+gh issue create --assignee '@me' --title 'Check kNet' --label 'network,libraries,evaluate' --body 'Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )'
+sleep 10
+gh issue create --assignee '@me' --title 'Chat server' --label 'network,libraries,evaluate' --body 'Implement chat server using the chosen network library.'
+sleep 10
+gh issue create --assignee '@me' --title 'Chat client' --label 'network,libraries,evaluate' --body 'Implement chat client using the chosen network library.'
+sleep 10
+gh issue create --assignee '@me' --title 'Software rendering' --label 'rendering' --body 'Implement software rendering.'
+sleep 10
+gh issue create --assignee '@me' --title '`Registry` refactor' --label 'refactor' --body 'Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Ylikuutio refactor' --body 'Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_client: turn file sending' --body 'Implement turn file sending over the network into `yli_client`.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: turn file receiving' --body 'Implement turn file receiving over the network into `yli_server`.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: turn file processing' --body 'Implement processing of turn files in `yli_server`.'
+sleep 10
+gh issue create --assignee '@me' --title '`Multiverse` class' --body 'Implement `yli::ontology::Multiverse` class.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check OpenCV' --body 'Evaluate OpenCV: https://opencv.org/ https://github.com/opencv/opencv'
+sleep 10
+gh issue create --assignee '@me' --title 'Check LLaVA' --body 'Evaluate LLaVA: https://llava-vl.github.io/ https://github.com/haotian-liu/LLaVA'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: master `Universe`' --body 'In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: apprentice `Universe`s' --body 'In `yli_server`, implement creation of apprentice `Universe`s, one for each player.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: compute turn outputs' --body 'In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: produce result files' --body 'In `yli_server`, implement producing result files for players.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_server: send result files' --body 'In `yli_server`, implement sending result files for players over the network.'
+sleep 10
+gh issue create --assignee '@me' --title 'Hexadecimal literals in YliLisp' --body 'Add support for hexadecimal input in `set` console command.'
+sleep 10
+gh issue create --assignee '@me' --title '`PipelineSymbiosis` class' --body 'Implement `yli::ontology::PipelineSymbiosis`.'
+sleep 10
+gh issue create --assignee '@me' --title '.yli loading' --body 'Add support for .yli loading.'
+sleep 10
+gh issue create --assignee '@me' --title 'yli_convert: export .yli' --body 'Add support for exporting as .yli in `yli_convert`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Save console commands in a file' --body 'Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.'
+sleep 10
+gh issue create --assignee '@me' --title 'Load console commands from a file' --body 'Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).'
+sleep 10
+gh issue create --assignee '@me' --title 'Debug logging' --body 'Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).'
+sleep 10
+gh issue create --assignee '@me' --title '`load` console command' --body 'Add `Scene` loading command `load` into console.'
+sleep 10
+gh issue create --assignee '@me' --title '`play` console command' --body 'Implement `play` console command for playing `Sound`s and `Playlist`s.'
+sleep 10
+gh issue create --assignee '@me' --title '`pause` console command' --body 'Implement `pause` console command for pausing `Sound`s and `Playlist`s.'
+sleep 10
+gh issue create --assignee '@me' --title '`next` console command' --body 'Implement `next` console command for changing to the next `Sound` in a `Playlist`.'
+sleep 10
+gh issue create --assignee '@me' --title '`prev` console command' --body 'Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Optimal window size detection' --body 'Add support for automatic detection of optimal window size.'
+sleep 10
+gh issue create --assignee '@me' --title 'Vertex modification' --body 'Implement modifying of vertices.'
+sleep 10
+gh issue create --assignee '@me' --title 'Terrain meshes generation with different LOD levels' --body 'Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).'
+sleep 10
+gh issue create --assignee '@me' --title 'Terrain LOD detection' --body 'Implement terrain mesh LOD selection based on the distance between the camera and the terrain.'
+sleep 10
+gh issue create --assignee '@me' --title 'Marching cubes' --body 'Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .'
+sleep 10
+gh issue create --assignee '@me' --title 'ASCII grid files into binary GLTF files' --body 'Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.'
+sleep 10
+gh issue create --assignee '@me' --title 'Scene loading in the background' --body 'Implement scene loading which works in the background.'
+sleep 10
+gh issue create --assignee '@me' --title 'Check AppVeyor' --body 'Evaluate AppVeyor: https://github.com/marketplace/appveyor'
+sleep 10
+gh issue create --assignee '@me' --title '`help` console command' --body 'Add support for `help` command in console (a container class with the command callback together with the `help` text for the command).'
+sleep 10
+gh issue create --assignee '@me' --title '`Symbiosis` optimization' --body 'Optimize `Symbiosis` entities'"'"' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.'
+sleep 10
+gh issue create --assignee '@me' --title 'Support for packed files' --body 'Add support for packed files.'
+sleep 10
+gh issue create --assignee '@me' --title 'Support for CityGML file format.' --body 'Add support for CityGML file format.'
+sleep 10
+gh issue create --assignee '@me' --title '3D model of Vantaa' --body 'Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset'
+sleep 10
+gh issue create --assignee '@me' --title '3D model of Oulu' --body 'Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx'
+sleep 10
+gh issue create --assignee '@me' --title '3D model of Turku' --body 'Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/'
+sleep 10
+gh issue create --assignee '@me' --title 'TinySpline for interpolation' --body 'Use TinySpline.'
+sleep 10
+gh issue create --assignee '@me' --title 'Bicubic interpolation' --body 'Add bicubic interpolation.'
+sleep 10
+gh issue create --assignee '@me' --title 'Spline interpolation' --body 'Add spline interpolation.'
+sleep 10
+gh issue create --assignee '@me' --title 'Lanczos interpolation' --body 'Add Lanczos interpolation.'
+sleep 10
+gh issue create --assignee '@me' --title 'Theta* route finding' --body 'Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/'
+sleep 10
+gh issue create --assignee '@me' --title 'Flowing water' --body 'Implement flowing water (computed on a server, based on players'"'"' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D'
+sleep 10
+gh issue create --assignee '@me' --title '3D text' --body 'Add support for 3D text.'
+sleep 10
+gh issue create --assignee '@me' --title 'Partially transparent text' --body 'Add support for partially transparent text.'
+sleep 10
+gh issue create --assignee '@me' --title 'Robot'"'"'s view available for YliLisp' --body 'Store each robot'"'"'s current view into an array from which the robot may access it programmatically using YliLisp.'
+sleep 10
+gh issue create --assignee '@me' --title '`OpenGLPipeline` class' --body 'Implement `OpenGLPipeline` class which inherits `Pipeline`.'
+sleep 10
+gh issue create --assignee '@me' --title 'Abstract rendering API to enable support for OpenGL and Vulkan' --body 'Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.'
+sleep 10
+gh issue create --assignee '@me' --title 'Vulkan' --body 'Add Vulkan support.'
