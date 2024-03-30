@@ -18,8 +18,6 @@
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 - [ ] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
 - [ ] UI/TESTS Write unit tests for keyboard callback snippets.
-- [ ] ONTOLOGY Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
-- [ ] ONTOLOGY Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
 - [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
 - [ ] LIBRARIES/PHYSICS/EVALUATE Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
 - [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
@@ -27,11 +25,6 @@
 - [ ] CONSOLE/UI Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 - [ ] CONSOLE/UI Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 - [ ] DISPLAY/UI Add support for high DPI displays.
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
-- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
-- [ ] GUI Add support for multiple windows.
-- [ ] GUI Add support for multiple widgets in each window.
 - [ ] TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
 - [ ] ONTOLOGY/DATA Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 - [ ] ONTOLOGY/DATA Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
@@ -40,10 +33,17 @@
 - [ ] ONTOLOGY/DATA Implement support for multiple water levels within a `Scene`.
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
-- [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/
+- [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
 - [ ] AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 ## Tasks which are necessary for the second stage
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
+- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+- [ ] GUI Add support for multiple windows.
+- [ ] GUI Add support for multiple widgets in each window.
+- [ ] ONTOLOGY Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
+- [ ] ONTOLOGY Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
 - [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 - [ ] ONTOLOGY/MATH Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 - [ ] GUI Add support for multiple displays.
@@ -75,7 +75,6 @@
 - [ ] TEXT/UI Add support for changing font size.
 - [ ] RENDERING Implement transparent rendering of 3D objects.
 - [ ] RENDERING Implement transparent rendering of 4D objects.
-- [ ] AUDIO/LIBRARIES Replace SDL audio with OpenAL Soft.
 - [ ] WATER/RENDERING Implement dynamic not flowing water, using OpenGL shaders.
 - [ ] TEXT/LIBRARIES/EVALUATE Evaluate FreeType.
 - [ ] TEXT/LIBRARIES/EVALUATE Evaluate HarfBuzz.
@@ -94,17 +93,10 @@
 - [ ] NETWORK/LIBRARIES/EVALUATE Implement chat server using the chosen network library.
 - [ ] NETWORK/LIBRARIES/EVALUATE Implement chat client using the chosen network library.
 - [ ] RENDERING Implement software rendering.
-- [ ] RENDERING Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
 
 ## Tasks which are necessary for Tulevaisuus
 - [ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
 - [ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
-- [ ] Make `yli_server` depend on `yli_core` and `yli_network`.
-- [ ] Make `yli_client` depend on `yli_core` and `yli_network`.
-- [ ] Make `hirvi` to depend on `yli_core` and `yli_opengl`.
-- [ ] Make `gpgpu_test` to depend on `yli_core` and `yli_opengl`.
-- [ ] Make `tulevaisuus` to depend on `yli_core`, `yli_opengl`, and `yli_client`.
-- [ ] Make `tulevaisuus_server` to depend on `yli_core`, `yli_opengl`, and `yli_server`.
 - [ ] Implement turn file sending over the network into `yli_client`.
 - [ ] Implement turn file receiving over the network into `yli_server`.
 - [ ] Implement processing of turn files in `yli_server`.
@@ -114,70 +106,48 @@
 - [ ] In `yli_server`, implement creation of the master `Universe`, that is a child of the `Multiverse` and knows everything..
 - [ ] In `yli_server`, implement creation of apprentice `Universe`s, one for each player.
 - [ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
-- [ ] In `yli_server`, implement master-apprentice relationship between the master `Universe` and apprentice `Universe`s.
 - [ ] In `yli_server`, implement producing result files for players.
 - [ ] In `yli_server`, implement sending result files for players over the network.
 
 ## Tasks which are necessary for the development of Ylikuutio
 - [ ] Add support for hexadecimal input in `set` console command.
-- [ ] Implement `yli::ontology::ShaderSymbiosis`.
-- [ ] Define a custom .yli binary 3D file format based on COLLADA .dae format.
+- [ ] Implement `yli::ontology::PipelineSymbiosis`.
 - [ ] Add support for .yli loading.
 - [ ] Add support for exporting as .yli in `yli_convert`.
 - [ ] Implement saving commands into a file that can later be loaded using command line parameter `--input-file` in Hirvi and Ajokki.
 - [ ] Implement command line parameter `--input-file` to Hirvi and Ajokki (load keypresses and keyreleases from a file, e.g. `--input-file foo` or `--input-file=foo`).
 - [ ] Implement command line parameter `--debug` to Hirvi and Ajokki (log all kinds of debug information).
 - [ ] Add `Scene` loading command `load` into console.
-- [ ] Implement `LogMaster` class.
 - [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
 - [ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
 - [ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
 - [ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
 - [ ] Add support for automatic detection of optimal window size.
 - [ ] Implement modifying of vertices.
-- [ ] Implement `ViewMaster` class and the functionality for splitting the window or fullscreen view into different `View`s (using horizontal or vertical split, or grid).
 - [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 - [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
-- [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
-- [ ] Find out how systemd-nspawn could be used for testing Ylikuutio.
 - [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 - [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
-- [ ] Test code used to convert ASCII grid files (height maps) to binary GLTF files by loading the GLTF files created with it.
-- [ ] Convert ASCII grid files into binary GLTF files.
 - [ ] Implement scene loading which works in the background.
 - [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
-- [ ] Implement `ConsoleCommand` class.
-- [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
+- [ ] Add support for `help` command in console (a container class with the command callback together with the `help` text for the command).
 - [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 - [ ] Add support for packed files.
 - [ ] Add support for CityGML file format.
 - [ ] Add support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
 - [ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
-- [ ] Add support for Collada .dae file format.
 - [ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
-- [ ] Add support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
-- [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
-- [ ] Add support for custom keyboard settings.
-- [ ] Add variable `direction`.
-- [ ] Implement A* for train routing.
 - [ ] Use TinySpline.
 - [ ] Add bicubic interpolation.
 - [ ] Add spline interpolation.
 - [ ] Add Lanczos interpolation.
-- [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
-- [ ] Write integration tests for Ajokki.
-- [ ] Learn how to write unit tests for multithreaded C++ code.
 - [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 
 ## Less urgent
 - [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
 - [ ] Add support for 3D text.
 - [ ] Add support for partially transparent text.
-- [ ] Add support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
-- [ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
-- [ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
-- [ ] Implement simulation of contour detection processing in V2 (visual cortex area).
-- [ ] Learn Vulkan.
+- [ ] Store each robot's current view into an array from which the robot may access it programmatically using YliLisp.
 - [ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
 - [ ] Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.
 - [ ] Add Vulkan support.
