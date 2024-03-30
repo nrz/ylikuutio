@@ -2,99 +2,99 @@
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 ## Fixes needed
-- [ ] Fix double free in Hirvi upon deallocation.
-- [ ] Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
-- [ ] Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
-- [ ] Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
-- [ ] Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
-- [ ] Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
+- [ ] BUG Fix double free in Hirvi upon deallocation.
+- [ ] BUG Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
+- [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
+- [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
+- [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
+- [ ] BUG Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
-- [ ] Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
-- [ ] Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
-- [ ] Create `yli::ontology::AudioTrack` class that inherits `Entity`.
-- [ ] Create `yli::ontology::PlayList` class that inherits `Entity`.
-- [ ] Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
-- [ ] Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
-- [ ] Write unit tests for `Brain` snippets.
-- [ ] Write unit tests for keyboard callback snippets.
-- [ ] Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
-- [ ] Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
-- [ ] Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
-- [ ] Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
-- [ ] Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
-- [ ] Add support for Tab complete for local names in `Console`.
-- [ ] Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
-- [ ] Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
-- [ ] Add support for high DPI displays.
-- [ ] Implement `yli::ontology::Window` class.
-- [ ] Implement `yli::ontology::Widget` class.
-- [ ] Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
-- [ ] Add support for multiple windows.
-- [ ] Add support for multiple widgets in each window.
-- [ ] Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
-- [ ] Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
-- [ ] Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
-- [ ] Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
-- [ ] Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
-- [ ] Implement support for multiple water levels within a `Scene`.
-- [ ] Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
-- [ ] Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
-- [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-- [ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
-- [ ] Evaluate SoLoud audio library: https://solhsa.com/soloud/
+- [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
+- [ ] LIBRARIES Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
+- [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
+- [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
+- [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
+- [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
+- [ ] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
+- [ ] UI/TESTS Write unit tests for keyboard callback snippets.
+- [ ] ONTOLOGY Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
+- [ ] ONTOLOGY Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
+- [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
+- [ ] LIBRARIES/PHYSICS/EVALUATE Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
+- [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
+- [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
+- [ ] CONSOLE/UI Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
+- [ ] CONSOLE/UI Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
+- [ ] DISPLAY/UI Add support for high DPI displays.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
+- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+- [ ] GUI Add support for multiple windows.
+- [ ] GUI Add support for multiple widgets in each window.
+- [ ] TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
+- [ ] ONTOLOGY/DATA Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
+- [ ] ONTOLOGY/DATA Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
+- [ ] ONTOLOGY/DATA Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
+- [ ] ONTOLOGY/DATA Implement support for loading multiple sheets of elevation model of National Land Survey of Finland at once.
+- [ ] ONTOLOGY/DATA Implement support for multiple water levels within a `Scene`.
+- [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
+- [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
+- [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/
+- [ ] AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 ## Tasks which are necessary for the second stage
-- [ ] Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
-- [ ] Add support for multiple displays.
-- [ ] Implement support for multiple light sources in each `Scene`.
-- [ ] Implement shadows.
-- [ ] Implement HDR rendering.
-- [ ] Add support for different keyboard layouts in `Console`.
-- [ ] Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
-- [ ] Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
-- [ ] Evaluate Dear ImGUI: https://github.com/ocornut/imgui
-- [ ] Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
-- [ ] Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
-- [ ] Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
-- [ ] Implement abstract syntax tree (AST) creation code for YliLisp.
-- [ ] Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
-- [ ] Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
-- [ ] Implement closures for YliLisp.
-- [ ] Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
-- [ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
-- [ ] Implement octree segmentation.
-- [ ] Implement frustum culling using bounding spheres.
-- [ ] Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-- [ ] Implement `yli::ontology::ShapeshifterForm`.
-- [ ] Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
-- [ ] Implement skeletal animation.
-- [ ] Implement creating new named `Variable`s using `Console`.
-- [ ] Implement YliEdit editor.
-- [ ] Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
-- [ ] Add support for changing font size.
-- [ ] Implement transparent rendering of 3D objects.
-- [ ] Implement transparent rendering of 4D objects.
-- [ ] Replace SDL audio with OpenAL Soft.
-- [ ] Implement dynamic not flowing water, using OpenGL shaders.
-- [ ] Evaluate FreeType.
-- [ ] Evaluate HarfBuzz.
-- [ ] Implement better font support.
+- [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+- [ ] ONTOLOGY/MATH Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
+- [ ] GUI Add support for multiple displays.
+- [ ] MATH Implement support for multiple light sources in each `Scene`.
+- [ ] MATH/RENDERING Implement shadows.
+- [ ] MATH/RENDERING Implement HDR rendering.
+- [ ] UI Add support for different keyboard layouts in `Console`.
+- [ ] REFACTOR Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
+- [ ] REFACTOR Call `Universe::start_simulation` from `main` instead of `Application::create_simulation` implementations.
+- [ ] LIBRARIES/GUI/EVALUATE Evaluate Dear ImGUI: https://github.com/ocornut/imgui
+- [ ] YLILISP Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
+- [ ] YLILISP Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
+- [ ] YLILISP Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
+- [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
+- [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
+- [ ] YLILISP Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
+- [ ] YLILISP Implement closures for YliLisp.
+- [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
+- [ ] AI Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+- [ ] OPTIMIZE Implement octree segmentation.
+- [ ] OPTIMIZE Implement frustum culling using bounding spheres.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
+- [ ] ANIMATION Implement skeletal animation.
+- [ ] CONSOLE/YLILISP/ONTOLOGY Implement creating new named `Variable`s using `Console`.
+- [ ] TOOLS Implement YliEdit editor.
+- [ ] TERRAIN/VOXELS Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
+- [ ] TEXT/UI Add support for changing font size.
+- [ ] RENDERING Implement transparent rendering of 3D objects.
+- [ ] RENDERING Implement transparent rendering of 4D objects.
+- [ ] AUDIO/LIBRARIES Replace SDL audio with OpenAL Soft.
+- [ ] WATER/RENDERING Implement dynamic not flowing water, using OpenGL shaders.
+- [ ] TEXT/LIBRARIES/EVALUATE Evaluate FreeType.
+- [ ] TEXT/LIBRARIES/EVALUATE Evaluate HarfBuzz.
+- [ ] TEXT/GUI Implement better font support.
 
 ## Tasks which are necessary for the third stage
-- [ ] Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
-- [ ] Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
-- [ ] Add support for vector fonts.
-- [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
-- [ ] Evaluate ZeroMQ: https://zeromq.org/
-- [ ] Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
-- [ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
-- [ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
-- [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
-- [ ] Implement chat server using the chosen network library.
-- [ ] Implement chat client using the chosen network library.
-- [ ] Implement software rendering.
-- [ ] Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
+- [ ] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
+- [ ] BUILD Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
+- [ ] TEXT Add support for vector fonts.
+- [ ] NETWORK Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+- [ ] NETWORK/LIBRARIES/EVALUATE Evaluate ZeroMQ: https://zeromq.org/
+- [ ] NETWORK/LIBRARIES/EVALUATE Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
+- [ ] NETWORK/LIBRARIES/EVALUATE Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+- [ ] NETWORK/LIBRARIES/EVALUATE Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+- [ ] NETWORK/LIBRARIES/EVALUATE Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
+- [ ] NETWORK/LIBRARIES/EVALUATE Implement chat server using the chosen network library.
+- [ ] NETWORK/LIBRARIES/EVALUATE Implement chat client using the chosen network library.
+- [ ] RENDERING Implement software rendering.
+- [ ] RENDERING Use dependency injection to select between OpenGL/software rendering (software rendering may render into a video file or a into a series of image files).
 
 ## Tasks which are necessary for Tulevaisuus
 - [ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
