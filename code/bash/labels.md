@@ -27,3 +27,4 @@ UI             ff5000
 VOXELS         00ff00
 WATER          0000ff
 YLILISP        ff00ff
+HIRVI          604000
