@@ -1011,6 +1011,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_pipeline.cpp
+        code/hirvi/tests/test_police_car.cpp
         code/hirvi/tests/test_scene.cpp
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
