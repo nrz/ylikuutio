@@ -30,7 +30,7 @@ namespace yli::ontology
     class Pipeline;
 }
 
-TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
+TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
 {
     const int argc { 0 };
     const char** const argv { nullptr };
