@@ -1,4 +1,5 @@
 Vulkan
+https://vkguide.dev/
 
 Bindless:
 https://henriquegois.dev/posts/bindless-resources-in-vulkan/
