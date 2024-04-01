@@ -153,7 +153,7 @@ namespace hirvi
 
     yli::memory::GenericMemoryAllocator& HirviApplication::get_generic_memory_allocator(const int type) const
     {
-        return this->memory_system.get_allocator(type);
+        return this->memory_system.get_generic_allocator(type);
     }
 
     yli::ontology::GenericEntityFactory& HirviApplication::get_generic_entity_factory() const

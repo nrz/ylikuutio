@@ -43,7 +43,7 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
         if (has_allocator)
         {
             n_allocators++;
-            const auto& memory_allocator = memory_system.get_allocator(datatype);
+            const auto& memory_allocator = memory_system.get_generic_allocator(datatype);
             ASSERT_EQ(memory_allocator.get_datatype(), datatype);
 
             if (datatype == hirvi::Datatype::UNIVERSE)

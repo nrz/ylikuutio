@@ -134,7 +134,7 @@ namespace ajokki
 
     yli::memory::GenericMemoryAllocator& AjokkiApplication::get_generic_memory_allocator(const int type) const
     {
-        return this->memory_system.get_allocator(type);
+        return this->memory_system.get_generic_allocator(type);
     }
 
     yli::ontology::GenericEntityFactory& AjokkiApplication::get_generic_entity_factory() const

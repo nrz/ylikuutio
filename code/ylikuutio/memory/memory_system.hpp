@@ -239,7 +239,7 @@ namespace yli::memory
                 }
 
                 // TODO: use `TypeEnumType` instead of `int`!
-                yli::memory::GenericMemoryAllocator& get_allocator(const int type) const override
+                yli::memory::GenericMemoryAllocator& get_generic_allocator(const int type) const override
                 {
                     if (this->has_allocator(type)) [[likely]]
                     {
@@ -248,7 +248,7 @@ namespace yli::memory
 
                     std::stringstream runtime_error_stringstream;
                     runtime_error_stringstream <<
-                        "ERROR: `MemorySystem::get_allocator`: allocator for type " << type << " does not exist!";
+                        "ERROR: `MemorySystem::get_generic_allocator`: allocator for type " << type << " does not exist!";
                     throw std::runtime_error(runtime_error_stringstream.str());
                 }
 
@@ -256,7 +256,7 @@ namespace yli::memory
                 {
                     if (constructible_module.alive)
                     {
-                        yli::memory::GenericMemoryAllocator& allocator = this->get_allocator(constructible_module.datatype);
+                        yli::memory::GenericMemoryAllocator& allocator = this->get_generic_allocator(constructible_module.datatype);
                         allocator.destroy(constructible_module);
                     }
                 }
@@ -267,11 +267,11 @@ namespace yli::memory
                     {
                         if (this->has_allocator(type))
                         {
-                            return this->get_allocator(type);
+                            return this->get_generic_allocator(type);
                         }
 
                         this->create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
-                        return this->get_allocator(type);
+                        return this->get_generic_allocator(type);
                     }
 
             private:
