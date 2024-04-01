@@ -64,7 +64,6 @@
 #include <stdexcept>     // std::runtime_error
 #include <sstream>       // std::stringstream
 #include <utility>       // std::forward
-#include <iostream>      // std::cout, std::cerr
 
 namespace yli::memory
 {
@@ -116,29 +115,22 @@ namespace yli::memory
                 MemorySystem(yli::core::Application* const application, TypeEnumType universe_datatype)
                     : universe_datatype { universe_datatype }
                 {
-                    std::cout << "Constructing `MemorySystem`...\n";
-
                     // `application` is given as a pointer to enable
                     // unit testing without a mock `Application` derivative.
                     if (application != nullptr) [[likely]]
                     {
-                        std::cout << "Creating memory allocators.\n";
                         this->create_allocators();
                     }
-
-                    std::cout << "`MemorySystem` constructed.\n";
                 }
 
                 ~MemorySystem()
                 {
                     // Delete other except `Universe` allocators.
-                    std::cout << "Deleting memory allocators except the `Universe` allocator.\n";
 
                     for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end(); )
                     {
                         if (it->first != this->universe_datatype)
                         {
-                            std::cout << "Deleting memory allocator of type " << it->first << "\n";
                             auto old_it = it;
                             ++it;
                             delete old_it->second;
@@ -150,8 +142,6 @@ namespace yli::memory
                         }
                     }
 
-                    std::cout << "Deleting the `Universe` allocator.\n";
-
                     // Delete `Universe` allocator.
                     for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end(); )
                     {
@@ -161,7 +151,6 @@ namespace yli::memory
                             ++it;
                             delete old_it->second;
                             this->memory_allocators.erase(old_it);
-                            std::cout << "`Universe` allocator deleted.\n";
                         }
                         else
                         {
@@ -228,7 +217,6 @@ namespace yli::memory
                     {
                         // TODO: Return the return value of `try_emplace`.
                         // TODO: Throw an exception if creating an allocator fails.
-                        std::cout << "Creating memory allocator of type " << type << "\n";
                         this->memory_allocators.try_emplace(type, new T1(type, std::forward<Args>(args)...));
                     }
 
