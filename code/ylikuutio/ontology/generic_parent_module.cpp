@@ -27,11 +27,6 @@
 #include <limits>   // std::numeric_limits
 #include <string>   // std::string
 
-namespace yli::memory
-{
-    class GenericMemoryAllocator;
-}
-
 namespace yli::ontology
 {
     class Scene;
@@ -85,7 +80,6 @@ namespace yli::ontology
     GenericParentModule::GenericParentModule(
             yli::ontology::Entity& entity,
             yli::ontology::Registry& registry,
-            yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
         : entity { entity }
     {

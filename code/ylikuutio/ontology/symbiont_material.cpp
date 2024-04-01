@@ -20,8 +20,6 @@
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -29,6 +27,11 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
@@ -47,7 +50,6 @@ namespace yli::ontology
         parent_of_symbiont_species(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
                 "symbiont_species"),
         texture(
                 universe,

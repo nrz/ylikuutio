@@ -27,7 +27,6 @@
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -96,12 +95,10 @@ namespace yli::ontology
         parent_of_glyphs(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::GLYPH),
                 "glyphs"),
         parent_of_text_3ds(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::TEXT_3D),
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },
         font_filename         { vector_font_struct.font_filename },

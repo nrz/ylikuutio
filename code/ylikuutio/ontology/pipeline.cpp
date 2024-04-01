@@ -21,9 +21,7 @@
 #include "scene.hpp"
 #include "pipeline_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -35,6 +33,11 @@
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
@@ -118,7 +121,6 @@ namespace yli::ontology
         parent_of_compute_tasks(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::COMPUTETASK),
                 "compute_tasks"),
         master_of_materials(this, &this->registry, "materials", nullptr),
         master_of_symbioses(this, &this->registry, "symbioses")

@@ -21,9 +21,7 @@
 #include "shapeshifter_sequence.hpp"
 #include "model_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -32,6 +30,11 @@
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
@@ -76,12 +79,10 @@ namespace yli::ontology
         parent_of_shapeshifter_forms(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::SHAPESHIFTER_FORM),
                 "shapeshifter_forms"),
         parent_of_shapeshifter_sequences(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
                 "shapeshifter_sequences")
     {
         // constructor.

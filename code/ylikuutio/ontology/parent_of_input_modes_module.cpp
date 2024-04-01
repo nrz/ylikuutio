@@ -22,11 +22,6 @@
 // Include standard headers
 #include <string> // std::string
 
-namespace yli::memory
-{
-    class GenericMemoryAllocator;
-}
-
 namespace yli::ontology
 {
     class InputMode;
@@ -35,9 +30,8 @@ namespace yli::ontology
     ParentOfInputModesModule::ParentOfInputModesModule(
             yli::ontology::Universe& universe,
             yli::ontology::Registry& registry,
-            yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : GenericParentModule(universe, registry, memory_allocator, name)
+        : GenericParentModule(universe, registry, name)
     {
     }
 

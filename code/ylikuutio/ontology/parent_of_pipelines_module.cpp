@@ -24,11 +24,6 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-namespace yli::memory
-{
-    class GenericMemoryAllocator;
-}
-
 namespace yli::ontology
 {
     class Registry;
@@ -56,9 +51,8 @@ namespace yli::ontology
     ParentOfPipelinesModule::ParentOfPipelinesModule(
             yli::ontology::Entity& entity,
             yli::ontology::Registry& registry,
-            yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : GenericParentModule(entity, registry, memory_allocator, name)
+        : GenericParentModule(entity, registry, name)
     {
         // constructor.
     }

@@ -21,8 +21,6 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -50,6 +48,11 @@
 #include <utility>   // std::pair
 #include <vector>    // std::vector
 
+namespace yli::core
+{
+    class Application;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -65,7 +68,6 @@ namespace yli::ontology
         parent_of_text_2ds(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::TEXT_2D),
                 "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),
         texture(

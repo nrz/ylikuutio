@@ -24,7 +24,6 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -44,7 +43,6 @@ namespace yli::ontology
         parent_of_console_callback_objects(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT),
                 "console_callback_objects")
     {
         // `yli::ontology::Entity` member variables begin here.

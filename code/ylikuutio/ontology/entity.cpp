@@ -26,7 +26,6 @@
 #include "variable_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
 // Include standard headers
@@ -64,12 +63,10 @@ namespace yli::ontology
         parent_of_variables(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::VARIABLE),
                 ""), // Do not index `parent_of_variables`, index only the variables.
         parent_of_callback_engines(
                 *this,
                 this->registry,
-                application.get_generic_memory_allocator(yli::data::Datatype::CALLBACK_ENGINE),
                 "callback_engines"),
         universe { universe },
         is_universe { entity_struct.is_universe }
