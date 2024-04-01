@@ -252,6 +252,21 @@ namespace yli::memory
                     throw std::runtime_error(runtime_error_stringstream.str());
                 }
 
+                template<typename T1, typename... Args>
+                    // TODO: use `TypeEnumType` instead of `int`!
+                    yli::memory::MemoryAllocator<T1>& get_allocator(const int type) const
+                    {
+                        if (this->has_allocator(type)) [[likely]]
+                        {
+                            return static_cast<yli::memory::MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
+                        }
+
+                        std::stringstream runtime_error_stringstream;
+                        runtime_error_stringstream <<
+                            "ERROR: `MemorySystem::get_allocator`: allocator for type " << type << " does not exist!";
+                        throw std::runtime_error(runtime_error_stringstream.str());
+                    }
+
                 virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) override
                 {
                     if (constructible_module.alive)

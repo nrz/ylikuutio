@@ -113,6 +113,15 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     yli::ontology::LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
     yli::ontology::LocomotionModuleStruct cat1_climb_struct;
 
+    yli::memory::MemoryAllocator<yli::ontology::Object*>& object_memory_allocator = hirvi_application.get_memory_allocator<yli::ontology::Object*>(hirvi::Datatype::OBJECT);
+    yli::memory::MemoryAllocator<hirvi::Cat*>& cat_memory_allocator = hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::Datatype::CAT);
+    // Ensure that `Object`'s memory allocation has no allocations before allocating this `Cat` instance.
+    ASSERT_EQ(object_memory_allocator.get_number_of_storages(), 0);
+    ASSERT_EQ(object_memory_allocator.get_number_of_instances(), 0);
+    // There should be no storages nor instances in `Cat`'s memory allocator before the upcoming allocation.
+    ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 0);
+    ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 0);
+
     hirvi::Cat* const cat1 = hirvi_application.entity_factory.create_object_derivative<
         hirvi::Cat,
         hirvi::CatMemoryAllocator>(
@@ -124,6 +133,13 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
                 cat1_gallop_struct,
                 cat1_climb_struct);
     ASSERT_NE(cat1, nullptr);
+
+    // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
+    ASSERT_EQ(object_memory_allocator.get_number_of_storages(), 0);
+    ASSERT_EQ(object_memory_allocator.get_number_of_instances(), 0);
+    ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
+    ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
+
     yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
     ASSERT_EQ(cat1_constructible_module.datatype, hirvi::Datatype::CAT);
     ASSERT_EQ(cat1_constructible_module.storage_i, 0);

@@ -77,6 +77,12 @@ namespace hirvi
 
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const override;
 
+            template<typename Type>
+                yli::memory::MemoryAllocator<Type>& get_memory_allocator(const int type) const
+            {
+                return this->memory_system.get_allocator<Type>(type);
+            }
+
             yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
