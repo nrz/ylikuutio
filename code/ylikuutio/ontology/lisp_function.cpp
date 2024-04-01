@@ -46,7 +46,7 @@ namespace yli::ontology
         parent_of_generic_lisp_function_overloads(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD),
+                application.get_generic_memory_allocator(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD),
                 "generic_lisp_function_overloads")
     {
         // constructor.

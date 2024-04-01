@@ -146,7 +146,7 @@ namespace yli::ontology
 
             std::string eval_string(const std::string& my_string) const;
 
-            yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const;
+            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const;
 
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;

@@ -96,12 +96,12 @@ namespace yli::ontology
         parent_of_glyphs(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::GLYPH),
+                application.get_generic_memory_allocator(yli::data::Datatype::GLYPH),
                 "glyphs"),
         parent_of_text_3ds(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::TEXT_3D),
+                application.get_generic_memory_allocator(yli::data::Datatype::TEXT_3D),
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },
         font_filename         { vector_font_struct.font_filename },

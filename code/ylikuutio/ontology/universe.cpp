@@ -140,32 +140,32 @@ namespace yli::ontology
         parent_of_ecosystems(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::ECOSYSTEM),
+                application.get_generic_memory_allocator(yli::data::Datatype::ECOSYSTEM),
                 "ecosystems"),
         parent_of_scenes(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SCENE),
+                application.get_generic_memory_allocator(yli::data::Datatype::SCENE),
                 "scenes"),
         parent_of_font_2ds(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::FONT_2D),
+                application.get_generic_memory_allocator(yli::data::Datatype::FONT_2D),
                 "font_2ds"),
         parent_of_input_modes(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::INPUT_MODE),
+                application.get_generic_memory_allocator(yli::data::Datatype::INPUT_MODE),
                 "input_modes"),
         parent_of_consoles(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CONSOLE),
+                application.get_generic_memory_allocator(yli::data::Datatype::CONSOLE),
                 "consoles"),
         parent_of_console_callback_engines(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE),
+                application.get_generic_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE),
                 "console_callback_engines"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name      { universe_struct.application_name },
@@ -1177,9 +1177,9 @@ namespace yli::ontology
         return "TODO: eval";
     }
 
-    yli::memory::GenericMemoryAllocator& Universe::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& Universe::get_generic_memory_allocator(const int type) const
     {
-        return this->application.get_memory_allocator(type);
+        return this->application.get_generic_memory_allocator(type);
     }
 
     yli::render::RenderSystem* Universe::get_render_system() const

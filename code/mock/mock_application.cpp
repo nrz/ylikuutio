@@ -70,7 +70,7 @@ namespace mock
         return this->memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& MockApplication::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& MockApplication::get_generic_memory_allocator(const int type) const
     {
         return this->memory_system.get_allocator(type);
     }

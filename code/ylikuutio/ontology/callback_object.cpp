@@ -48,7 +48,7 @@ namespace yli::ontology
         parent_of_callback_parameters(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CALLBACK_PARAMETER),
+                application.get_generic_memory_allocator(yli::data::Datatype::CALLBACK_PARAMETER),
                 "callback_parameters")
     {
     }
@@ -64,7 +64,7 @@ namespace yli::ontology
         parent_of_callback_parameters(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CALLBACK_PARAMETER),
+                application.get_generic_memory_allocator(yli::data::Datatype::CALLBACK_PARAMETER),
                 "callback_parameters"),
         callback { callback }
     {

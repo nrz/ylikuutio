@@ -65,7 +65,7 @@ namespace yli::ontology
         parent_of_text_2ds(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::TEXT_2D),
+                application.get_generic_memory_allocator(yli::data::Datatype::TEXT_2D),
                 "text_2ds"),
         master_of_consoles(this, &this->registry, "consoles"),
         texture(

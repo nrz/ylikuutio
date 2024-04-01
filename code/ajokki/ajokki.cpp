@@ -132,7 +132,7 @@ namespace ajokki
         return this->memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& AjokkiApplication::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& AjokkiApplication::get_generic_memory_allocator(const int type) const
     {
         return this->memory_system.get_allocator(type);
     }

@@ -118,7 +118,7 @@ namespace yli::ontology
         parent_of_compute_tasks(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::COMPUTETASK),
+                application.get_generic_memory_allocator(yli::data::Datatype::COMPUTETASK),
                 "compute_tasks"),
         master_of_materials(this, &this->registry, "materials", nullptr),
         master_of_symbioses(this, &this->registry, "symbioses")

@@ -47,7 +47,7 @@ namespace yli::ontology
         parent_of_symbiont_species(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
+                application.get_generic_memory_allocator(yli::data::Datatype::SYMBIONT_SPECIES),
                 "symbiont_species"),
         texture(
                 universe,

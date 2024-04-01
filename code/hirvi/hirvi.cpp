@@ -151,7 +151,7 @@ namespace hirvi
         this->memory_system.create_allocator<PoliceCarMemoryAllocator>(hirvi::Datatype::POLICE_CAR);
     }
 
-    yli::memory::GenericMemoryAllocator& HirviApplication::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& HirviApplication::get_generic_memory_allocator(const int type) const
     {
         return this->memory_system.get_allocator(type);
     }

@@ -159,7 +159,7 @@ namespace yli::ontology
         parent_of_symbiont_materials(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
+                application.get_generic_memory_allocator(yli::data::Datatype::SYMBIONT_MATERIAL),
                 "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master_module, this),
         master_of_holobionts(this, &this->registry, "holobionts"),

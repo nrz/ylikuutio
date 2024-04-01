@@ -76,12 +76,12 @@ namespace yli::ontology
         parent_of_shapeshifter_forms(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_FORM),
+                application.get_generic_memory_allocator(yli::data::Datatype::SHAPESHIFTER_FORM),
                 "shapeshifter_forms"),
         parent_of_shapeshifter_sequences(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
+                application.get_generic_memory_allocator(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
                 "shapeshifter_sequences")
     {
         // constructor.

@@ -39,22 +39,22 @@ namespace yli::ontology
         parent_of_pipelines(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::PIPELINE),
+                application.get_generic_memory_allocator(yli::data::Datatype::PIPELINE),
                 "pipelines"),
         parent_of_materials(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::MATERIAL),
+                application.get_generic_memory_allocator(yli::data::Datatype::MATERIAL),
                 "materials"),
         parent_of_species(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SPECIES),
+                application.get_generic_memory_allocator(yli::data::Datatype::SPECIES),
                 "species"),
         parent_of_symbioses(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::SYMBIOSIS),
+                application.get_generic_memory_allocator(yli::data::Datatype::SYMBIOSIS),
                 "symbioses")
     {
         // constructor.

@@ -71,7 +71,7 @@ namespace yli::ontology
         parent_of_bionts(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::BIONT),
+                application.get_generic_memory_allocator(yli::data::Datatype::BIONT),
                 "bionts"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {

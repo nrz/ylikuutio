@@ -82,7 +82,7 @@ namespace yli::ontology
         parent_of_lisp_functions(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
+                application.get_generic_memory_allocator(yli::data::Datatype::LISP_FUNCTION),
                 "lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")

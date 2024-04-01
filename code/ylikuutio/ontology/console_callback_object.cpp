@@ -43,7 +43,7 @@ namespace yli::ontology
         parent_of_console_callback_parameters(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER),
+                application.get_generic_memory_allocator(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER),
                 "console_callback_parameters"),
         console_callback { console_callback_object_struct.console_callback },
         console_pointer { console_callback_object_struct.console_pointer }

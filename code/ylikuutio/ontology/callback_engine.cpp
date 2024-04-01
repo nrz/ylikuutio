@@ -43,7 +43,7 @@ namespace yli::ontology
         parent_of_callback_objects(
                 *this,
                 this->registry,
-                application.get_memory_allocator(yli::data::Datatype::CALLBACK_OBJECT),
+                application.get_generic_memory_allocator(yli::data::Datatype::CALLBACK_OBJECT),
                 "callback_objects")
     {
         // `yli::ontology::Entity` member variables begin here.

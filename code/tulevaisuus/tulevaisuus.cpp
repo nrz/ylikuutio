@@ -137,7 +137,7 @@ namespace tulevaisuus
         return this->memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& TulevaisuusApplication::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& TulevaisuusApplication::get_generic_memory_allocator(const int type) const
     {
         return this->memory_system.get_allocator(type);
     }

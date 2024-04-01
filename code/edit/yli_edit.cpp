@@ -136,7 +136,7 @@ namespace yli_edit
         return this->memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& YliEditApplication::get_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& YliEditApplication::get_generic_memory_allocator(const int type) const
     {
         return this->memory_system.get_allocator(type);
     }

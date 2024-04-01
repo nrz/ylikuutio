@@ -59,7 +59,7 @@ namespace yli::core
 
             virtual yli::memory::GenericMemorySystem& get_generic_memory_system() const = 0;
 
-            virtual yli::memory::GenericMemoryAllocator& get_memory_allocator(const int type) const = 0;
+            virtual yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
 
             virtual yli::ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
 
