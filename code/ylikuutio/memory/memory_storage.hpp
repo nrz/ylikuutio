@@ -34,14 +34,17 @@
 
 namespace yli::memory
 {
+    class GenericMemoryAllocator;
+
     template<typename T1 = std::byte, std::size_t DataSize = 1>
         class MemoryStorage
         {
             // `MemoryStorage` instance takes care of single memory storage.
 
             public:
-                explicit MemoryStorage(const std::size_t storage_i)
-                    : storage_i { storage_i }
+                explicit MemoryStorage(yli::memory::GenericMemoryAllocator& allocator, const std::size_t storage_i)
+                    : allocator { allocator },
+                    storage_i { storage_i }
                 {
                     if (storage_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
                     {
@@ -116,7 +119,7 @@ namespace yli::memory
 
                         T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
                         auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
-                        instance->constructible_module = yli::memory::ConstructibleModule(datatype, this->storage_i, slot_i);
+                        instance->constructible_module = yli::memory::ConstructibleModule(datatype, this->allocator, this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
                     }
@@ -158,6 +161,7 @@ namespace yli::memory
                 }
 
             private:
+                yli::memory::GenericMemoryAllocator& allocator;
                 alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
                 yli::data::Queue<DataSize> free_slot_id_queue;
                 const std::size_t storage_i;

@@ -87,8 +87,7 @@ namespace yli::ontology
             yli::ontology::Registry& registry,
             yli::memory::GenericMemoryAllocator& memory_allocator,
             const std::string& name) noexcept
-        : entity { entity },
-        memory_allocator { memory_allocator }
+        : entity { entity }
     {
         // constructor.
 
@@ -104,9 +103,9 @@ namespace yli::ontology
                 this->unbind_child(child->get_childID());
                 auto constructible_module = child->get_constructible_module();
 
-                if (constructible_module.alive)
+                if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
                 {
-                    this->memory_allocator.destroy(constructible_module);
+                    constructible_module.generic_allocator->destroy(constructible_module);
                 }
             }
         }

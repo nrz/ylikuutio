@@ -16,18 +16,25 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/memory_storage.hpp"
+#include "code/ylikuutio/memory/constructible_module.hpp"
 
 TEST(memory_storage_must_be_initialized_appropriately, default_memory_storage_storage_i_0)
 {
-    yli::memory::MemoryStorage memory_storage(0);
+    yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
+
+    yli::memory::MemoryStorage memory_storage(memory_allocator, 0);
     ASSERT_EQ(memory_storage.get_storage_id(), 0);
     ASSERT_EQ(memory_storage.get_number_of_instances(), 0);
 }
 
 TEST(memory_storage_must_be_initialized_appropriately, default_memory_storage_storage_i_1)
 {
-    yli::memory::MemoryStorage memory_storage(1);
+    yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
+
+    yli::memory::MemoryStorage memory_storage(memory_allocator, 1);
     ASSERT_EQ(memory_storage.get_storage_id(), 1);
     ASSERT_EQ(memory_storage.get_number_of_instances(), 0);
 }

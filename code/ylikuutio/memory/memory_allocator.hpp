@@ -68,7 +68,7 @@ namespace yli::memory
                         // Pass number of storages to `MemoryStorage` constructor as the `storage_i`.
                         // This assumes that storages can not be deleted (except in `MemoryAllocator`'s destructor).
                         const std::size_t storage_i { this->storages.size() };
-                        auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(storage_i);
+                        auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(*this, storage_i);
                         this->storages.emplace_back(std::move(storage));
                         return this->storages.back()->build_in(datatype, std::forward<Args>(args)...);
                     }
@@ -185,14 +185,14 @@ namespace yli::memory
 
                         if (this->free_storageID_queue.empty())
                         {
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, this->free_storageID_queue.size(), 0);
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, *this, this->free_storageID_queue.size(), 0);
                             this->instances.emplace_back(function_overload);
                         }
                         else
                         {
                             const std::size_t storage_i = this->free_storageID_queue.front();
                             this->free_storageID_queue.pop();
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, storage_i, 0);
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, *this, storage_i, 0);
                             this->instances.at(storage_i) = function_overload;
                         }
 

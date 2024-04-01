@@ -16,16 +16,20 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
 TEST(constructible_module_must_be_initialized_appropriately, constructible_module)
 {
+    yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
+
     // Some arbitrary values.
     const int datatype = 1001;
     const uint32_t storage_i = 2002;
     const uint32_t slot_i = 3003;
 
-    yli::memory::ConstructibleModule constructible_module(datatype, storage_i, slot_i);
+    yli::memory::ConstructibleModule constructible_module(datatype, memory_allocator, storage_i, slot_i);
     ASSERT_EQ(constructible_module.datatype, datatype);
     ASSERT_EQ(constructible_module.storage_i, storage_i);
     ASSERT_EQ(constructible_module.slot_i, slot_i);

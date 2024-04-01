@@ -100,7 +100,6 @@ namespace yli::ontology
             std::size_t number_of_children { 0 };
 
             yli::ontology::Entity& entity; // The `Entity` that owns this `GenericParentModule`.
-            yli::memory::GenericMemoryAllocator& memory_allocator;
     };
 }
 
