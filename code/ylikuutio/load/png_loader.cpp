@@ -118,7 +118,7 @@ namespace yli::load
         image_width = png_get_image_width(png_ptr, info_ptr);
         std::cout << "Image width is " << image_width << " pixels.\n";
         image_height = png_get_image_height(png_ptr, info_ptr);
-        std::cout << "Image width is " << image_width << " pixels.\n";
+        std::cout << "Image height is " << image_height << " pixels.\n";
         image_size = image_width * image_height;
 
         const std::size_t line_width_in_bytes = png_get_rowbytes(png_ptr, info_ptr);
