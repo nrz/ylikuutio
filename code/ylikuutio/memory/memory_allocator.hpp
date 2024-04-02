@@ -185,14 +185,14 @@ namespace yli::memory
 
                         if (this->free_storageID_queue.empty())
                         {
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, *this, this->free_storageID_queue.size(), 0);
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(*this, this->free_storageID_queue.size(), 0);
                             this->instances.emplace_back(function_overload);
                         }
                         else
                         {
                             const std::size_t storage_i = this->free_storageID_queue.front();
                             this->free_storageID_queue.pop();
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(this->datatype, *this, storage_i, 0);
+                            function_overload->constructible_module = yli::memory::ConstructibleModule(*this, storage_i, 0);
                             this->instances.at(storage_i) = function_overload;
                         }
 

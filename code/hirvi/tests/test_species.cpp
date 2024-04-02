@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -70,7 +69,6 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);
     ASSERT_NE(cat_species, nullptr);
     yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
-    ASSERT_EQ(cat_species_constructible_module.datatype, hirvi::Datatype::SPECIES);
     ASSERT_EQ(cat_species_constructible_module.storage_i, 0);
     ASSERT_EQ(cat_species_constructible_module.slot_i, 0);
     ASSERT_EQ(cat_species_constructible_module.alive, true);

@@ -18,7 +18,6 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/cat.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -124,7 +123,6 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
     yli::memory::ConstructibleModule turbo_polizei1_constructible_module = turbo_polizei1->get_constructible_module();
-    ASSERT_EQ(turbo_polizei1_constructible_module.datatype, hirvi::Datatype::POLICE_CAR);
     ASSERT_EQ(turbo_polizei1_constructible_module.storage_i, 0);
     ASSERT_EQ(turbo_polizei1_constructible_module.slot_i, 0);
     ASSERT_EQ(turbo_polizei1_constructible_module.alive, true);

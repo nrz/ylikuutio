@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
@@ -32,7 +31,6 @@ TEST(ecosystem_must_be_initialized_appropriately, hirvi_ecosystem)
     yli::ontology::Ecosystem* const earth_ecosystem = hirvi_application.entity_factory.create_ecosystem(earth_ecosystem_struct);
     ASSERT_NE(earth_ecosystem, nullptr);
     yli::memory::ConstructibleModule ecosystem_constructible_module = earth_ecosystem->get_constructible_module();
-    ASSERT_EQ(ecosystem_constructible_module.datatype, hirvi::Datatype::ECOSYSTEM);
     ASSERT_EQ(ecosystem_constructible_module.storage_i, 0);
     ASSERT_EQ(ecosystem_constructible_module.slot_i, 0);
     ASSERT_EQ(ecosystem_constructible_module.alive, true);

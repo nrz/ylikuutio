@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -33,7 +32,6 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
     ASSERT_NE(rest_callback_engine, nullptr);
     yli::memory::ConstructibleModule callback_engine_constructible_module = rest_callback_engine->get_constructible_module();
-    ASSERT_EQ(callback_engine_constructible_module.datatype, hirvi::Datatype::CALLBACK_ENGINE);
     ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.alive, true);

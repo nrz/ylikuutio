@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -35,7 +34,6 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
     ASSERT_NE(helsinki_east_downtown_scene, nullptr);
     yli::memory::ConstructibleModule scene_constructible_module = helsinki_east_downtown_scene->get_constructible_module();
-    ASSERT_EQ(scene_constructible_module.datatype, hirvi::Datatype::SCENE);
     ASSERT_EQ(scene_constructible_module.storage_i, 0);
     ASSERT_EQ(scene_constructible_module.slot_i, 0);
     ASSERT_EQ(scene_constructible_module.alive, true);

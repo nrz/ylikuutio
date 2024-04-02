@@ -18,7 +18,6 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/cat.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
@@ -141,7 +140,6 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 
     yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
-    ASSERT_EQ(cat1_constructible_module.datatype, hirvi::Datatype::CAT);
     ASSERT_EQ(cat1_constructible_module.storage_i, 0);
     ASSERT_EQ(cat1_constructible_module.slot_i, 0);
     ASSERT_EQ(cat1_constructible_module.alive, true);

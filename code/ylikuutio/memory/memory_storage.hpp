@@ -119,7 +119,7 @@ namespace yli::memory
 
                         T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
                         auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
-                        instance->constructible_module = yli::memory::ConstructibleModule(datatype, this->allocator, this->storage_i, slot_i);
+                        instance->constructible_module = yli::memory::ConstructibleModule(this->allocator, this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
                     }

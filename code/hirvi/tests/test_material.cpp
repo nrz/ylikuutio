@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -58,7 +57,6 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
     yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
-    ASSERT_EQ(orange_fur_material_constructible_module.datatype, hirvi::Datatype::MATERIAL);
     ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.alive, true);

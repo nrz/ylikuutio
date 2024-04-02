@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -49,7 +48,6 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
     ASSERT_NE(helsinki_east_downtown_pipeline, nullptr);
     yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_east_downtown_pipeline->get_constructible_module();
-    ASSERT_EQ(pipeline_constructible_module.datatype, hirvi::Datatype::PIPELINE);
     ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
     ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
     ASSERT_EQ(pipeline_constructible_module.alive, true);

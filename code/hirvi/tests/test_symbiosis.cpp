@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -58,7 +57,6 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     yli::memory::ConstructibleModule symbiosis_constructible_module = turbo_polizei_png_symbiosis->get_constructible_module();
-    ASSERT_EQ(symbiosis_constructible_module.datatype, hirvi::Datatype::SYMBIOSIS);
     ASSERT_EQ(symbiosis_constructible_module.storage_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.slot_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.alive, true);

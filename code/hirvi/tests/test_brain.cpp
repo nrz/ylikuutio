@@ -18,7 +18,6 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/cat.hpp"
-#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -55,7 +54,6 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
     ASSERT_NE(rest_brain, nullptr);
     yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
-    ASSERT_EQ(brain_constructible_module.datatype, hirvi::Datatype::BRAIN);
     ASSERT_EQ(brain_constructible_module.storage_i, 0);
     ASSERT_EQ(brain_constructible_module.slot_i, 0);
     ASSERT_EQ(brain_constructible_module.alive, true);
