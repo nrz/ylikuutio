@@ -712,19 +712,19 @@ namespace yli::ontology
         // TODO: implement Vulkan rendering!
         // TODO: implement software rendering!
 
-        if (!this->should_render)
+        if (!this->should_render) [[unlikely]]
         {
             return;
         }
 
-        if (this->render_system == nullptr)
+        if (this->render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Universe::render`: `this->render_system` is `nullptr`!");
         }
 
-        if (this->get_active_camera() != nullptr)
+        if (this->get_active_camera() != nullptr) [[likely]]
         {
-            if (this->get_is_opengl_in_use())
+            if (this->get_is_opengl_in_use()) [[likely]]
             {
                 // Send our view matrix to the uniform buffer object (UBO).
                 glBindBuffer(GL_UNIFORM_BUFFER, this->get_active_camera()->get_camera_uniform_block());
@@ -780,7 +780,7 @@ namespace yli::ontology
 
     yli::ontology::Camera* Universe::get_active_camera() const
     {
-        if (this->active_scene != nullptr)
+        if (this->active_scene != nullptr) [[likely]]
         {
             return this->active_scene->get_active_camera();
         }
@@ -917,7 +917,7 @@ namespace yli::ontology
     [[nodiscard]] bool Universe::create_window()
     {
         // Create the window only when OpenGL or Vulkan is in use.
-        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
             Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI;
 
@@ -931,7 +931,7 @@ namespace yli::ontology
                 flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
             }
 
-            if (this->get_is_opengl_in_use())
+            if (this->get_is_opengl_in_use()) [[likely]]
             {
                 // Create a window.
                 this->window = yli::sdl::create_window(
@@ -954,7 +954,7 @@ namespace yli::ontology
                         flags | SDL_WINDOW_VULKAN);
             }
 
-            if (this->window != nullptr)
+            if (this->window != nullptr) [[likely]]
             {
                 std::cout << "SDL Window created successfully.\n";
                 return true;
@@ -970,9 +970,9 @@ namespace yli::ontology
     [[nodiscard]] bool Universe::setup_context()
     {
         // Setup graphics context only when OpenGL or Vulkan is in use.
-        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
-            if (!this->render_system->setup_context(this->window))
+            if (!this->render_system->setup_context(this->window)) [[unlikely]]
             {
                 // Setting up context failed.
                 return false;
@@ -988,14 +988,14 @@ namespace yli::ontology
     [[nodiscard]] bool Universe::create_window_and_setup_context()
     {
         // Create window and setup graphics context only when OpenGL or Vulkan is in use.
-        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use())
+        if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
-            if (!this->create_window())
+            if (!this->create_window()) [[unlikely]]
             {
                 return false;
             }
 
-            if (this->setup_context())
+            if (this->setup_context()) [[likely]]
             {
                 return true;
             }
@@ -1009,7 +1009,7 @@ namespace yli::ontology
 
     void Universe::set_swap_interval(const int32_t interval)
     {
-        if (!yli::sdl::set_swap_interval(static_cast<int>(interval)))
+        if (!yli::sdl::set_swap_interval(static_cast<int>(interval))) [[unlikely]]
         {
             std::cerr << "ERROR: `Universe::set_swap_interval`: setting swap interval failed!\n";
         }
@@ -1042,7 +1042,7 @@ namespace yli::ontology
     void Universe::adjust_opengl_viewport() const
     {
         if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
-                this->window_height <= std::numeric_limits<GLsizei>::max())
+                this->window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
             glViewport(0, 0, this->window_width, this->window_height);
         }
@@ -1068,7 +1068,7 @@ namespace yli::ontology
         this->window_width = window_width;
         this->adjust_opengl_viewport();
 
-        if (this->active_console != nullptr)
+        if (this->active_console != nullptr) [[likely]]
         {
             this->active_console->adjust_n_columns();
         }
@@ -1084,7 +1084,7 @@ namespace yli::ontology
         this->window_height = window_height;
         this->adjust_opengl_viewport();
 
-        if (this->active_console != nullptr)
+        if (this->active_console != nullptr) [[likely]]
         {
             this->active_console->adjust_n_rows();
         }
@@ -1103,7 +1103,7 @@ namespace yli::ontology
     double Universe::compute_delta_time()
     {
         // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-        if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
+        if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max()) [[unlikely]]
         {
             // `SDL_GetTicks()` is called here only once, the first time this function is called.
             this->last_time_before_reading_keyboard = SDL_GetTicks();
@@ -1187,7 +1187,7 @@ namespace yli::ontology
 
     yli::audio::AudioSystem* Universe::get_audio_system() const
     {
-        if (this->audio_system == nullptr)
+        if (this->audio_system == nullptr) [[unlikely]]
         {
             return nullptr;
         }
@@ -1227,7 +1227,7 @@ namespace yli::ontology
 
     bool Universe::compute_and_update_matrices_from_inputs()
     {
-        if (this->testing_spherical_terrain_in_use)
+        if (this->testing_spherical_terrain_in_use) [[unlikely]]
         {
             // Compute spherical coordinates.
             this->current_camera_spherical_coordinates.rho = sqrt(
