@@ -134,7 +134,6 @@ namespace yli::ontology
                 UniverseMemoryAllocator& allocator = static_cast<UniverseMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Universe* const universe = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::UNIVERSE),
                         this->application,
                         universe_struct);
 
@@ -168,7 +167,6 @@ namespace yli::ontology
                 // instances using `EntityFactory` before `EntityFactory::create_universe`
                 // has initialized `universe` member variable of `EntityFactory`.
                 yli::ontology::Variable* const variable = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::VARIABLE),
                         this->application,
                         variable_struct.universe,
                         variable_struct,
@@ -223,7 +221,6 @@ namespace yli::ontology
                 CallbackEngineMemoryAllocator& allocator = static_cast<CallbackEngineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackEngine* const callback_engine = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CALLBACK_ENGINE),
                         this->application,
                         this->get_universe(),
                         &this->get_universe().parent_of_callback_engines);
@@ -260,7 +257,6 @@ namespace yli::ontology
                 CallbackObjectMemoryAllocator& allocator = static_cast<CallbackObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackObject* const callback_object = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CALLBACK_OBJECT),
                         this->application,
                         this->get_universe(),
                         callback_object_struct,
@@ -285,7 +281,6 @@ namespace yli::ontology
                 CallbackParameterMemoryAllocator& allocator = static_cast<CallbackParameterMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackParameter* const callback_parameter = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CALLBACK_PARAMETER),
                         this->application,
                         this->get_universe(),
                         callback_parameter_struct,
@@ -309,7 +304,6 @@ namespace yli::ontology
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Camera* const camera = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CAMERA),
                         this->application,
                         this->get_universe(),
                         camera_struct,
@@ -331,7 +325,6 @@ namespace yli::ontology
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Camera* const camera = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CAMERA),
                         this->application,
                         this->get_universe(),
                         camera_struct,
@@ -353,7 +346,6 @@ namespace yli::ontology
                 BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Brain* const brain = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::BRAIN),
                         this->application,
                         this->get_universe(),
                         brain_struct,
@@ -374,7 +366,6 @@ namespace yli::ontology
                 EcosystemMemoryAllocator& allocator = static_cast<EcosystemMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Ecosystem* const ecosystem = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::ECOSYSTEM),
                         this->application,
                         this->get_universe(),
                         ecosystem_struct,
@@ -410,7 +401,6 @@ namespace yli::ontology
                 SceneMemoryAllocator& scene_allocator = static_cast<SceneMemoryAllocator&>(generic_scene_allocator);
 
                 yli::ontology::Scene* const scene = scene_allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SCENE),
                         this->application,
                         this->get_universe(),
                         scene_struct,
@@ -446,7 +436,6 @@ namespace yli::ontology
                 PipelineMemoryAllocator& allocator = static_cast<PipelineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Pipeline* const pipeline = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::PIPELINE),
                         this->application,
                         this->get_universe(),
                         pipeline_struct,
@@ -471,7 +460,6 @@ namespace yli::ontology
                 MaterialMemoryAllocator& allocator = static_cast<MaterialMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Material* const material = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::MATERIAL),
                         this->application,
                         this->get_universe(),
                         material_struct,
@@ -498,7 +486,6 @@ namespace yli::ontology
                 SpeciesMemoryAllocator& allocator = static_cast<SpeciesMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Species* const species = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SPECIES),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -523,7 +510,6 @@ namespace yli::ontology
                 ObjectMemoryAllocator& allocator = static_cast<ObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Object* const object = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::OBJECT),
                         this->application,
                         this->get_universe(),
                         object_struct,
@@ -555,7 +541,6 @@ namespace yli::ontology
                 SymbiosisMemoryAllocator& allocator = static_cast<SymbiosisMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Symbiosis* const symbiosis = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SYMBIOSIS),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -580,7 +565,6 @@ namespace yli::ontology
                 SymbiontMaterialMemoryAllocator& allocator = static_cast<SymbiontMaterialMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SYMBIONT_MATERIAL),
                         this->application,
                         this->get_universe(),
                         material_struct,
@@ -600,7 +584,6 @@ namespace yli::ontology
                 SymbiontSpeciesMemoryAllocator& allocator = static_cast<SymbiontSpeciesMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SYMBIONT_SPECIES),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -619,7 +602,6 @@ namespace yli::ontology
                 HolobiontMemoryAllocator& allocator = static_cast<HolobiontMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Holobiont* const holobiont = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::HOLOBIONT),
                         this->application,
                         this->get_universe(),
                         holobiont_struct,
@@ -642,7 +624,6 @@ namespace yli::ontology
                 BiontMemoryAllocator& allocator = static_cast<BiontMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::BIONT),
                         this->application,
                         this->get_universe(),
                         biont_struct,
@@ -662,7 +643,6 @@ namespace yli::ontology
                 ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -686,7 +666,6 @@ namespace yli::ontology
                 ShapeshifterSequenceMemoryAllocator& allocator = static_cast<ShapeshifterSequenceMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE),
                         this->application,
                         this->get_universe(),
                         shapeshifter_sequence_struct,
@@ -710,7 +689,6 @@ namespace yli::ontology
                 ShapeshifterFormMemoryAllocator& allocator = static_cast<ShapeshifterFormMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ShapeshifterForm* const shapeshifter_form = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::SHAPESHIFTER_FORM),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -732,7 +710,6 @@ namespace yli::ontology
                 Font2DMemoryAllocator& allocator = static_cast<Font2DMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Font2D* const font_2d = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::FONT_2D),
                         this->application,
                         this->get_universe(),
                         font_struct,
@@ -768,7 +745,6 @@ namespace yli::ontology
                 Text2DMemoryAllocator& allocator = static_cast<Text2DMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Text2D* const text_2d = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::TEXT_2D),
                         this->application,
                         this->get_universe(),
                         text_struct,
@@ -789,7 +765,6 @@ namespace yli::ontology
                 VectorFontMemoryAllocator& allocator = static_cast<VectorFontMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::VectorFont* const vector_font = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::VECTOR_FONT),
                         this->application,
                         this->get_universe(),
                         vector_font_struct,
@@ -810,7 +785,6 @@ namespace yli::ontology
                 GlyphMemoryAllocator& allocator = static_cast<GlyphMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Glyph* const glyph = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::GLYPH),
                         this->application,
                         this->get_universe(),
                         model_struct,
@@ -831,7 +805,6 @@ namespace yli::ontology
                 Text3DMemoryAllocator& allocator = static_cast<Text3DMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Text3D* const text_3d = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::TEXT_3D),
                         this->application,
                         this->get_universe(),
                         text_3d_struct,
@@ -853,7 +826,6 @@ namespace yli::ontology
                 InputModeMemoryAllocator& allocator = static_cast<InputModeMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::InputMode* const input_mode = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::INPUT_MODE),
                         this->application,
                         this->get_universe(),
                         input_mode_struct,
@@ -890,7 +862,6 @@ namespace yli::ontology
                 ConsoleMemoryAllocator& allocator = static_cast<ConsoleMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Console* const console = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CONSOLE),
                         this->application,
                         this->get_universe(),
                         console_struct,
@@ -929,7 +900,6 @@ namespace yli::ontology
                 ConsoleCallbackEngineMemoryAllocator& allocator = static_cast<ConsoleCallbackEngineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackEngine* const console_callback_engine = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE),
                         this->application,
                         this->get_universe(),
                         &this->get_universe().parent_of_console_callback_engines);
@@ -966,7 +936,6 @@ namespace yli::ontology
                 ConsoleCallbackObjectMemoryAllocator& allocator = static_cast<ConsoleCallbackObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackObject* const console_callback_object = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT),
                         this->application,
                         this->get_universe(),
                         console_callback_object_struct,
@@ -992,7 +961,6 @@ namespace yli::ontology
                 ConsoleCallbackParameterMemoryAllocator& allocator = static_cast<ConsoleCallbackParameterMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackParameter* const console_callback_parameter = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER),
                         this->application,
                         this->get_universe(),
                         console_callback_parameter_struct,
@@ -1016,7 +984,6 @@ namespace yli::ontology
                 ComputeTaskMemoryAllocator& allocator = static_cast<ComputeTaskMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ComputeTask* const compute_task = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::COMPUTETASK),
                         this->application,
                         this->get_universe(),
                         compute_task_struct,
@@ -1037,7 +1004,6 @@ namespace yli::ontology
                 LispFunctionMemoryAllocator& allocator = static_cast<LispFunctionMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::LispFunction* const lisp_function = allocator.build_in(
-                        static_cast<int>(yli::data::Datatype::LISP_FUNCTION),
                         this->application,
                         this->get_universe(),
                         lisp_function_struct,
@@ -1118,7 +1084,6 @@ namespace yli::ontology
                         static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
 
                     T* const object = allocator.build_in(
-                            object_derivative_type,
                             this->application,
                             this->get_universe(),
                             object_struct,
@@ -1155,7 +1120,6 @@ namespace yli::ontology
                         static_cast<HolobiontDerivativeMemoryAllocator&>(generic_allocator);
 
                     T* const holobiont = allocator.build_in(
-                            holobiont_derivative_type,
                             this->application,
                             this->get_universe(),
                             holobiont_struct,

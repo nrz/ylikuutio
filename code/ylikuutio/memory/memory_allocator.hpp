@@ -53,7 +53,7 @@ namespace yli::memory
                 }
 
                 template<typename... Args>
-                    T1* build_in(int datatype, Args&&... args)
+                    T1* build_in(Args&&... args)
                     {
                         for (auto& storage : this->storages)
                         {

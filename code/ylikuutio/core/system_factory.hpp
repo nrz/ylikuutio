@@ -48,7 +48,6 @@ namespace yli::core
                     AudioSystemMemoryAllocator& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
 
                     return allocator.build_in(
-                            static_cast<int>(yli::data::Datatype::AUDIO_SYSTEM),
                             this->universe);
                 }
 
