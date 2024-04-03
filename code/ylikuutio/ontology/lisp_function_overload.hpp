@@ -29,7 +29,6 @@
 
 // Include standard headers
 #include <cstddef>    // std::size_t
-#include <functional> // std::function, std::invoke
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
@@ -73,7 +72,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     yli::ontology::GenericParentModule* const lisp_function_parent_module,
-                    std::function<std::optional<yli::data::AnyValue>(Types...)> callback)
+                    std::optional<yli::data::AnyValue>(*callback)(Types...))
                 : GenericLispFunctionOverload(application, universe, lisp_function_parent_module),
                 callback(callback)
             {
@@ -189,7 +188,7 @@ namespace yli::ontology
                 friend class yli::memory::MemoryAllocator;
 
             // The callback may receive different kinds of arguments.
-            const std::function<std::optional<yli::data::AnyValue>(Types...)> callback;
+            std::optional<yli::data::AnyValue>(* const callback) (Types...);
     };
 }
 

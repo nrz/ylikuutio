@@ -22,7 +22,6 @@
 #include "code/ylikuutio/data/wrap.hpp"
 
 // Include standard headers
-#include <functional> // std::function
 #include <tuple>      // std::tuple
 
 namespace yli::lisp
@@ -31,7 +30,7 @@ namespace yli::lisp
         struct FunctionArgExtractor;
 
     template<typename R, typename... Args>
-        struct FunctionArgExtractor<std::function<R(Args...)>>
+        struct FunctionArgExtractor<R(Args...)>
         {
             using ArgTuple = std::tuple<typename yli::data::Wrap<Args>::type...>;
         };

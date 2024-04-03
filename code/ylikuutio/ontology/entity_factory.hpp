@@ -89,7 +89,6 @@
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 
 // Include standard headers
-#include <functional> // std::function
 #include <iostream>   // std::cerr
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
@@ -1053,7 +1052,7 @@ namespace yli::ontology
                 yli::ontology::GenericLispFunctionOverload* create_lisp_function_overload(
                         const std::string& name,
                         yli::ontology::Console& console,
-                        std::function<std::optional<yli::data::AnyValue>(Args...)> callback)
+                        std::optional<yli::data::AnyValue>(*callback)(Args...))
                 {
                     yli::ontology::Entity* const lisp_function_entity = this->get_universe().get_entity(name);
 

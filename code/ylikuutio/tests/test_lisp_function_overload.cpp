@@ -23,7 +23,6 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
-#include <functional> // std::function
 #include <string>     // std::string
 
 namespace yli::ontology
@@ -44,7 +43,7 @@ TEST(variables_lisp_function_overload_must_function_appropriately, variables)
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.entity_factory.create_lisp_function_overload(
             lisp_function_name,
             *my_console,
-            std::function(&yli::ontology::Entity::print_variables0));
+            &yli::ontology::Entity::print_variables0);
 
     ASSERT_NE(lisp_function_overload, nullptr);
 
@@ -66,7 +65,7 @@ TEST(set_lisp_function_overload_must_function_appropriately, set)
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.entity_factory.create_lisp_function_overload(
             lisp_function_name,
             *my_console,
-            std::function(&yli::ontology::Variable::set_variable_const_std_string));
+            &yli::ontology::Variable::set_variable_const_std_string);
 
     ASSERT_NE(lisp_function_overload, nullptr);
 
