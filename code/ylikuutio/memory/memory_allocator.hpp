@@ -57,7 +57,7 @@ namespace yli::memory
                     {
                         for (auto& storage : this->storages)
                         {
-                            T1* instance = storage->build_in(datatype, std::forward<Args>(args)...);
+                            T1* instance = storage->build_in(std::forward<Args>(args)...);
 
                             if (instance != nullptr)
                             {
@@ -70,7 +70,7 @@ namespace yli::memory
                         const std::size_t storage_i { this->storages.size() };
                         auto storage = std::make_unique<yli::memory::MemoryStorage<T1, DataSize>>(*this, storage_i);
                         this->storages.emplace_back(std::move(storage));
-                        return this->storages.back()->build_in(datatype, std::forward<Args>(args)...);
+                        return this->storages.back()->build_in(std::forward<Args>(args)...);
                     }
 
                 std::size_t get_datatype() const override
