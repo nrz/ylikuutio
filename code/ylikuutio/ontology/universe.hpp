@@ -131,6 +131,10 @@ namespace yli::ontology
             // Setting the active `Camera` does not change the active `Scene`!
             void set_active_camera(yli::ontology::Camera* const camera) const;
 
+            void set_active_camera_direction(glm::vec3&& direction);
+            void set_active_camera_right(glm::vec3&& right);
+            void set_active_camera_up(glm::vec3&& up);
+
             yli::ontology::Console* get_active_console() const;
             void set_active_console(yli::ontology::Console* const console);
 

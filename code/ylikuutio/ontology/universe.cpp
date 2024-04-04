@@ -89,6 +89,7 @@
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
+#include <utility>   // std::move
 #include <variant>   // std::holds_alternative
 #include <vector>    // std::vector
 
@@ -539,19 +540,19 @@ namespace yli::ontology
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
-                this->current_camera_direction = glm::vec3(
-                        cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * std::numbers::pi),
-                        sin(this->current_camera_pitch),
-                        cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * std::numbers::pi));
+                this->set_active_camera_direction(glm::vec3(
+                            cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * std::numbers::pi),
+                            sin(this->current_camera_pitch),
+                            cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * std::numbers::pi)));
 
                 // Right vector.
-                this->current_camera_right = glm::vec3(
-                        sin(this->current_camera_yaw),
-                        sin(this->current_camera_roll),
-                        cos(this->current_camera_yaw) * cos(this->current_camera_roll));
+                this->set_active_camera_right(glm::vec3(
+                            sin(this->current_camera_yaw),
+                            sin(this->current_camera_roll),
+                            cos(this->current_camera_yaw) * cos(this->current_camera_roll)));
 
                 // Up vector.
-                this->current_camera_up = glm::cross(this->current_camera_right, this->current_camera_direction);
+                this->set_active_camera_up(glm::cross(this->current_camera_right, this->current_camera_direction));
 
                 if (!this->in_console)
                 {
@@ -800,6 +801,21 @@ namespace yli::ontology
         }
 
         scene_parent_of_camera->set_active_camera(camera);
+    }
+
+    void Universe::set_active_camera_direction(glm::vec3&& direction)
+    {
+        this->current_camera_direction = std::move(direction);
+    }
+
+    void Universe::set_active_camera_right(glm::vec3&& right)
+    {
+        this->current_camera_right = std::move(right);
+    }
+
+    void Universe::set_active_camera_up(glm::vec3&& up)
+    {
+        this->current_camera_up = std::move(up);
     }
 
     yli::ontology::Console* Universe::get_active_console() const
