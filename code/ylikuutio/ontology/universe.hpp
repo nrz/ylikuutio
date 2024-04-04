@@ -135,6 +135,9 @@ namespace yli::ontology
             void set_active_camera_right(glm::vec3&& right);
             void set_active_camera_up(glm::vec3&& up);
 
+            void update_active_camera_yaw(const float x_position);
+            void update_active_camera_pitch(const float y_position);
+
             yli::ontology::Console* get_active_console() const;
             void set_active_console(yli::ontology::Console* const console);
 
