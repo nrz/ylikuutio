@@ -41,6 +41,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
+#include <utility>  // std::move
 
 namespace yli::core
 {
@@ -127,6 +128,11 @@ namespace yli::ontology
     const glm::mat4& Camera::get_projection_matrix() const
     {
         return this->projection_matrix;
+    }
+
+    void Camera::set_projection_matrix(glm::mat4&& projection_matrix)
+    {
+        this->projection_matrix = std::move(projection_matrix);
     }
 
     const glm::mat4& Camera::get_view_matrix() const
