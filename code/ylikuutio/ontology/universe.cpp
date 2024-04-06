@@ -1225,9 +1225,9 @@ namespace yli::ontology
         return this->current_camera_projection_matrix;
     }
 
-    void Universe::set_projection_matrix(const glm::mat4& projection_matrix)
+    void Universe::set_projection_matrix(glm::mat4&& projection_matrix)
     {
-        this->current_camera_projection_matrix = projection_matrix;
+        this->current_camera_projection_matrix = std::move(projection_matrix);
     }
 
     const glm::mat4& Universe::get_view_matrix() const
