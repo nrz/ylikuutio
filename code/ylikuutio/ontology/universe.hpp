@@ -222,7 +222,7 @@ namespace yli::ontology
             void set_projection_matrix(glm::mat4&& projection_matrix);
 
             const glm::mat4& get_view_matrix() const;
-            void set_view_matrix(const glm::mat4& view_matrix);
+            void set_view_matrix(glm::mat4&& view_matrix);
 
             float get_aspect_ratio() const;
             float get_initial_fov() const;
@@ -396,8 +396,6 @@ namespace yli::ontology
             float zfar;
 
             // variables related to `Camera` (projection).
-            glm::mat4 current_camera_projection_matrix { glm::mat4(1.0f) }; // Identity matrix (dummy value).
-            glm::mat4 current_camera_view_matrix       { glm::mat4(1.0f) }; // Identity matrix (dummy value).
             float aspect_ratio;          // At the moment all `Camera`s use the same aspect ratio.
             float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
 

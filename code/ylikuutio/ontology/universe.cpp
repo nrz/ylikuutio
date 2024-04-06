@@ -714,7 +714,7 @@ namespace yli::ontology
                         GL_UNIFORM_BUFFER,
                         yli::opengl::camera_ubo::CameraUboBlockOffsets::V,
                         sizeof(glm::mat4),
-                        glm::value_ptr(this->current_camera_view_matrix)); // mat4
+                        glm::value_ptr(this->get_view_matrix())); // mat4
                 glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
                 this->get_active_camera()->render();
@@ -1222,22 +1222,50 @@ namespace yli::ontology
 
     const glm::mat4& Universe::get_projection_matrix() const
     {
-        return this->current_camera_projection_matrix;
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_projection_matrix`: `camera` is `nullptr`!");
+        }
+
+        return camera->get_projection_matrix();
     }
 
     void Universe::set_projection_matrix(glm::mat4&& projection_matrix)
     {
-        this->current_camera_projection_matrix = std::move(projection_matrix);
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_projection_matrix`: `camera` is `nullptr`!");
+        }
+
+        camera->set_projection_matrix(std::move(projection_matrix));
     }
 
     const glm::mat4& Universe::get_view_matrix() const
     {
-        return this->current_camera_view_matrix;
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_view_matrix`: `camera` is `nullptr`!");
+        }
+
+        return camera->get_view_matrix();
     }
 
-    void Universe::set_view_matrix(const glm::mat4& view_matrix)
+    void Universe::set_view_matrix(glm::mat4&& view_matrix)
     {
-        this->current_camera_view_matrix = view_matrix;
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_view_matrix`: `camera` is `nullptr`!");
+        }
+
+        camera->set_view_matrix(std::move(view_matrix));
     }
 
     float Universe::get_aspect_ratio() const
@@ -1274,17 +1302,17 @@ namespace yli::ontology
         camera_cartesian_coordinates.z = this->current_camera_location.get_z();
 
         // Compute the projection matrix.
-        this->current_camera_projection_matrix = glm::perspective(
-                yli::geometry::degrees_to_radians(this->initial_fov),
-                this->aspect_ratio,
-                this->znear,
-                this->zfar);
+        this->set_projection_matrix(glm::perspective(
+                    yli::geometry::degrees_to_radians(this->initial_fov),
+                    this->aspect_ratio,
+                    this->znear,
+                    this->zfar));
 
         // Compute the view matrix.
-        this->current_camera_view_matrix = glm::lookAt(
-                camera_cartesian_coordinates,                                  // Camera coordinates.
-                camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
-                this->current_camera_up);                                      // Head is up (set to 0,-1,0 to look upside-down).
+        this->set_view_matrix(glm::lookAt(
+                    camera_cartesian_coordinates,                                  // Camera coordinates.
+                    camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
+                    this->current_camera_up));                                     // Head is up (set to 0,-1,0 to look upside-down).
 
         return true;
     }
