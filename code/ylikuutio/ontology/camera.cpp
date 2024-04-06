@@ -140,6 +140,11 @@ namespace yli::ontology
         return this->view_matrix;
     }
 
+    void Camera::set_view_matrix(glm::mat4&& view_matrix)
+    {
+        this->view_matrix = std::move(view_matrix);
+    }
+
     GLuint Camera::get_camera_uniform_block() const
     {
         return this->camera_uniform_block;

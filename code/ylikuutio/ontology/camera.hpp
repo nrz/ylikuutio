@@ -112,6 +112,8 @@ namespace yli::ontology
             void set_projection_matrix(glm::mat4&& projection_matrix);
 
             const glm::mat4& get_view_matrix() const;
+            void set_view_matrix(glm::mat4&& view_matrix);
+
             GLuint get_camera_uniform_block() const;
             bool get_is_static_view() const;
 
