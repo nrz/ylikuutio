@@ -2,7 +2,6 @@
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 ## Fixes needed
-- [ ] BUG Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 - [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
@@ -318,3 +317,4 @@
 - [x] Fix crash of Hirvi upon start.
 - [x] Split Hirvi game code into `hirvi_lib` library and `hirvi` application that links against `hirvi_lib`.
 - [x] BUG Fix double free in Hirvi upon deallocation.
+- [x] BUG Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
