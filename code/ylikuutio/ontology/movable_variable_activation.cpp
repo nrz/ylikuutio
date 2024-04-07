@@ -35,6 +35,7 @@
 #include <numbers>    // std::numbers::pi
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
+#include <utility>    // std::move
 #include <variant>    // std::holds_alternative, std::variant
 
 namespace yli::ontology
@@ -82,15 +83,15 @@ namespace yli::ontology
 
         if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
         {
-            const glm::vec3& cartesian_coordinates =
+            glm::vec3 cartesian_coordinates =
                 std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data);
-            universe->current_camera_location.xyz = cartesian_coordinates;
+            universe->set_xyz(std::move(cartesian_coordinates));
         }
         else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data))
         {
-            const glm::vec3& cartesian_coordinates =
+            glm::vec3 cartesian_coordinates =
                 std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_any_value.data);
-            universe->current_camera_location.xyz = cartesian_coordinates;
+            universe->set_xyz(std::move(cartesian_coordinates));
         }
         else
         {
@@ -144,7 +145,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_location.set_x(std::get<float>(x_any_value.data));
+        universe->set_x(std::get<float>(x_any_value.data));
         return std::nullopt;
     }
 
@@ -192,7 +193,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_location.set_y(std::get<float>(y_any_value.data));
+        universe->set_y(std::get<float>(y_any_value.data));
         return std::nullopt;
     }
 
@@ -240,7 +241,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_location.set_z(std::get<float>(z_any_value.data));
+        universe->set_z(std::get<float>(z_any_value.data));
         return std::nullopt;
     }
 
@@ -279,13 +280,13 @@ namespace yli::ontology
 
         if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data))
         {
-            universe->current_camera_spherical_coordinates =
-                std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            yli::data::SphericalCoordinatesStruct spherical_coordinates = std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            universe->set_spherical(std::move(spherical_coordinates));
         }
         else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data))
         {
-            universe->current_camera_spherical_coordinates =
-                std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            yli::data::SphericalCoordinatesStruct spherical_coordinates = std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data);
+            universe->set_spherical(std::move(spherical_coordinates));
         }
         else
         {
@@ -329,7 +330,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_spherical_coordinates.rho = std::get<float>(rho_any_value.data);
+        universe->set_rho(std::get<float>(rho_any_value.data));
         return std::nullopt;
     }
 
@@ -366,7 +367,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_spherical_coordinates.theta = std::get<float>(theta_any_value.data);
+        universe->set_theta(std::get<float>(theta_any_value.data));
         return std::nullopt;
     }
 
@@ -403,7 +404,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_spherical_coordinates.phi = std::get<float>(phi_any_value.data);
+        universe->set_phi(std::get<float>(phi_any_value.data));
         return std::nullopt;
     }
 
@@ -440,7 +441,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_roll = std::get<float>(roll_any_value.data);
+        universe->set_roll(std::get<float>(roll_any_value.data));
         return std::nullopt;
     }
 
@@ -477,7 +478,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_yaw = std::get<float>(yaw_any_value.data);
+        universe->set_yaw(std::get<float>(yaw_any_value.data));
         return std::nullopt;
     }
 
@@ -514,7 +515,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_pitch = std::get<float>(pitch_any_value.data);
+        universe->set_pitch(std::get<float>(pitch_any_value.data));
         return std::nullopt;
     }
 
@@ -551,7 +552,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->current_camera_yaw = 0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data);
+        universe->set_yaw(0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data));
         return std::nullopt;
     }
 

@@ -56,6 +56,11 @@ namespace yli::ontology
     {
     }
 
+    void CartesianCoordinatesModule::update_xyz(const glm::vec3& xyz)
+    {
+        this->xyz += xyz;
+    }
+
     void CartesianCoordinatesModule::set_x(const float x) noexcept
     {
         this->xyz.x = x;

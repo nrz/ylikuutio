@@ -20,9 +20,11 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/movable_variable_activation.hpp"
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -714,6 +716,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_x_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float x = 1234.25f;
     yli::ontology::VariableStruct x_variable_struct(application.get_universe(), application.get_universe());
@@ -737,6 +742,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_y_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float y = 1234.25f;
     yli::ontology::VariableStruct y_variable_struct(application.get_universe(), application.get_universe());
@@ -760,6 +768,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_z_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float z = 1234.25f;
     yli::ontology::VariableStruct z_variable_struct(application.get_universe(), application.get_universe());
@@ -990,6 +1001,9 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_cartesian_coordinates_x_y_z_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1052,13 +1066,16 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_value->data));
-    ASSERT_EQ(std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_value->data).get(), glm::vec3(1234.25f, 2345.50f, 3456.75f));
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_value->data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_value->data).get(), glm::vec3(1234.25f, 2345.50f, 3456.75f));
 }
 
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1121,13 +1138,16 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
     ASSERT_NE(cartesian_coordinates_variable, nullptr);
     std::optional<yli::data::AnyValue> cartesian_coordinates_value = cartesian_coordinates_variable->get();
     ASSERT_NE(cartesian_coordinates_value, std::nullopt);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_value->data));
-    ASSERT_EQ(std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_value->data).get(), glm::vec3(1234.25f, 2345.50f, 3456.75f));
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_value->data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_value->data).get(), glm::vec3(1234.25f, 2345.50f, 3456.75f));
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1171,21 +1191,21 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
     ASSERT_NE(x_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(x_value->data));
     ASSERT_EQ(std::get<float>(x_value->data), 0.875f);
-    ASSERT_EQ(std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 2345.50f, 3456.75f));
+    ASSERT_EQ(std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 2345.50f, 3456.75f));
 
     y_variable->set("0.9375");
     std::optional<yli::data::AnyValue> y_value = y_variable->get();
     ASSERT_NE(y_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(y_value->data));
     ASSERT_EQ(std::get<float>(y_value->data), 0.9375f);
-    ASSERT_EQ(std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 0.9375f, 3456.75f));
+    ASSERT_EQ(std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 0.9375f, 3456.75f));
 
     z_variable->set("0.96875");
     std::optional<yli::data::AnyValue> z_value = z_variable->get();
     ASSERT_NE(z_value, std::nullopt);
     ASSERT_TRUE(std::holds_alternative<float>(z_value->data));
     ASSERT_EQ(std::get<float>(z_value->data), 0.96875f);
-    ASSERT_EQ(std::get<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 0.9375f, 0.96875f));
+    ASSERT_EQ(std::get<std::reference_wrapper<const glm::vec3>>(cartesian_coordinates_variable->get()->data).get(), glm::vec3(0.875f, 0.9375f, 0.96875f));
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_new_value_true_no_activate_callback_no_read_callback)

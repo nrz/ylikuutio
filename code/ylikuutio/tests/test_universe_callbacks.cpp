@@ -62,8 +62,9 @@ TEST(scene_must_be_activated_appropriately, universe_callback)
             scene_struct);
     scene->set_global_name(scene_name);
 
-    ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
 
+    // TODO: deactivate before activating by creating another `Scene`!
     application.get_universe().activate_entity(*scene);
     ASSERT_EQ(application.get_universe().get_active_scene(), scene);
 }
@@ -119,7 +120,7 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
     camera_struct.global_name = "bar";
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(camera_struct);
 
-    ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
     ASSERT_NE(scene->get_active_camera(), nullptr); // Default `Camera` gets activated.
 
     application.get_universe().activate_entity(*scene);

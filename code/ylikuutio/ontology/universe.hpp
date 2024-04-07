@@ -22,7 +22,6 @@
 #include "generic_parent_module.hpp"
 #include "parent_of_input_modes_module.hpp"
 #include "framebuffer_module.hpp"
-#include "cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -131,12 +130,50 @@ namespace yli::ontology
             // Setting the active `Camera` does not change the active `Scene`!
             void set_active_camera(yli::ontology::Camera* const camera) const;
 
-            void set_active_camera_direction(glm::vec3&& direction);
-            void set_active_camera_right(glm::vec3&& right);
-            void set_active_camera_up(glm::vec3&& up);
+            const glm::vec3& get_xyz() const;
+            void set_xyz(glm::vec3&& xyz);
+            void update_xyz(const glm::vec3& xyz);
 
-            void update_active_camera_yaw(const float x_position);
-            void update_active_camera_pitch(const float y_position);
+            float get_x() const;
+            void set_x(const float x);
+
+            float get_y() const;
+            void set_y(const float y);
+
+            float get_z() const;
+            void set_z(const float z);
+
+            const yli::data::SphericalCoordinatesStruct& get_spherical() const;
+            void set_spherical(yli::data::SphericalCoordinatesStruct&& spherical_coordinates);
+
+            float get_rho() const;
+            void set_rho(const float rho);
+
+            float get_theta() const;
+            void set_theta(const float theta);
+
+            float get_phi() const;
+            void set_phi(const float phi);
+
+            const glm::vec3& get_direction() const;
+            void set_direction(glm::vec3&& direction);
+
+            const glm::vec3& get_right() const;
+            void set_right(glm::vec3&& right);
+
+            const glm::vec3& get_up() const;
+            void set_up(glm::vec3&& up);
+
+            float get_roll() const;
+            void set_roll(const float roll);
+
+            float get_yaw() const;
+            void set_yaw(const float yaw);
+            void update_yaw(const float x_position);
+
+            float get_pitch() const;
+            void set_pitch(const float pitch);
+            void update_pitch(const float y_position);
 
             yli::ontology::Console* get_active_console() const;
             void set_active_console(yli::ontology::Console* const console);
@@ -293,22 +330,6 @@ namespace yli::ontology
             static const std::string version;
 
             // Variables related to location and orientation.
-
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            CartesianCoordinatesModule current_camera_location;
-
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::data::SphericalCoordinatesStruct current_camera_spherical_coordinates;
-
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 current_camera_direction;
-
-            glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
-            glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
-
-            float current_camera_roll  { NAN };
-            float current_camera_yaw   { NAN };
-            float current_camera_pitch { NAN };
 
             // 'can toggle'-type of boolean keypress control variables
             // should all be stored in the `Universe` to avoid locking.

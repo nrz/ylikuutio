@@ -31,7 +31,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 0);
     ASSERT_EQ(application.get_universe().get_number_of_scenes(), 1);
-    ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene); // If there is no active `Scene`, newly created `Scene` becomes active.
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -53,6 +53,8 @@ TEST(scene_must_be_activated_appropriately, scene)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
+    ASSERT_EQ(application.get_universe().get_active_scene(), scene);
+    application.get_universe().set_active_scene(nullptr);
     ASSERT_EQ(application.get_universe().get_active_scene(), nullptr);
     application.get_universe().set_active_scene(scene);
     ASSERT_EQ(application.get_universe().get_active_scene(), scene);

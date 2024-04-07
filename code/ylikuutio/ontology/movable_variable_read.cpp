@@ -47,7 +47,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_location.xyz);
+            return yli::data::AnyValue(universe->get_xyz());
         }
 
         return std::nullopt;
@@ -66,7 +66,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_location.get_x());
+            return yli::data::AnyValue(universe->get_x());
         }
 
         return std::nullopt;
@@ -85,7 +85,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_location.get_y());
+            return yli::data::AnyValue(universe->get_y());
         }
 
         return std::nullopt;
@@ -104,7 +104,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_location.get_z());
+            return yli::data::AnyValue(universe->get_z());
         }
 
         return std::nullopt;
@@ -123,7 +123,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.rho);
+            return yli::data::AnyValue(universe->get_rho());
         }
 
         return std::nullopt;
@@ -142,7 +142,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.theta);
+            return yli::data::AnyValue(universe->get_theta());
         }
 
         return std::nullopt;
@@ -161,7 +161,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_spherical_coordinates.phi);
+            return yli::data::AnyValue(universe->get_phi());
         }
 
         return std::nullopt;
@@ -180,7 +180,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_up);
+            return yli::data::AnyValue(universe->get_up());
         }
 
         return std::nullopt;
@@ -199,7 +199,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_right);
+            return yli::data::AnyValue(universe->get_right());
         }
 
         return std::nullopt;
@@ -218,7 +218,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_roll);
+            return yli::data::AnyValue(universe->get_roll());
         }
 
         return std::nullopt;
@@ -237,7 +237,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_yaw);
+            return yli::data::AnyValue(universe->get_yaw());
         }
 
         return std::nullopt;
@@ -256,7 +256,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->current_camera_pitch);
+            return yli::data::AnyValue(universe->get_pitch());
         }
 
         return std::nullopt;
@@ -276,7 +276,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            const float azimuth = 0.5f * std::numbers::pi - universe->current_camera_yaw;
+            const float azimuth = 0.5f * std::numbers::pi - universe->get_yaw();
             return yli::data::AnyValue(azimuth);
         }
 

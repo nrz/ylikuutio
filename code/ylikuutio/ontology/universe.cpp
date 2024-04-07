@@ -77,7 +77,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>     // NAN, sqrt
+#include <cmath>     // sqrt
 #include <cstddef>   // std::size_t
 #include <iomanip>   // std::setprecision
 #include <ios>       // std::fixed
@@ -136,7 +136,6 @@ namespace yli::ontology
             yli::core::Application& application,
             const yli::ontology::UniverseStruct& universe_struct)
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
-        current_camera_location(glm::vec3(NAN, NAN, NAN)), // Dummy coordinates.
         parent_of_ecosystems(
                 *this,
                 this->registry,
@@ -190,10 +189,6 @@ namespace yli::ontology
 
         // call `set_global_name` here because it can't be done in `Entity` constructor.
         this->set_global_name(universe_struct.global_name);
-
-        this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
-        this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
-        this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
         if (this->window_title.empty())
         {
@@ -515,25 +510,25 @@ namespace yli::ontology
                         this->has_mouse_ever_moved = true;
 
                         // Compute new orientation.
-                        this->update_active_camera_yaw(xpos);
-                        this->update_active_camera_pitch(ypos);
+                        this->update_yaw(xpos);
+                        this->update_pitch(ypos);
                     }
                 }
 
                 // Direction: spherical coordinates to cartesian coordinates conversion.
-                this->set_active_camera_direction(glm::vec3(
-                            cos(this->current_camera_pitch) * sin(this->current_camera_yaw + 0.5f * std::numbers::pi),
-                            sin(this->current_camera_pitch),
-                            cos(this->current_camera_pitch) * cos(this->current_camera_yaw + 0.5f * std::numbers::pi)));
+                this->set_direction(glm::vec3(
+                            cos(this->get_pitch()) * sin(this->get_yaw() + 0.5f * std::numbers::pi),
+                            sin(this->get_pitch()),
+                            cos(this->get_pitch()) * cos(this->get_yaw() + 0.5f * std::numbers::pi)));
 
                 // Right vector.
-                this->set_active_camera_right(glm::vec3(
-                            sin(this->current_camera_yaw),
-                            sin(this->current_camera_roll),
-                            cos(this->current_camera_yaw) * cos(this->current_camera_roll)));
+                this->set_right(glm::vec3(
+                            sin(this->get_yaw()),
+                            sin(this->get_roll()),
+                            cos(this->get_yaw()) * cos(this->get_roll())));
 
                 // Up vector.
-                this->set_active_camera_up(glm::cross(this->current_camera_right, this->current_camera_direction));
+                this->set_up(glm::cross(this->get_right(), this->get_direction()));
 
                 if (!this->in_console)
                 {
@@ -600,14 +595,14 @@ namespace yli::ontology
                 {
                     std::stringstream angles_and_coordinates_stringstream;
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                        this->current_camera_yaw << "," <<
-                        this->current_camera_pitch << " rad; " <<
-                        yli::geometry::radians_to_degrees(this->current_camera_yaw) << "," <<
-                        yli::geometry::radians_to_degrees(this->current_camera_pitch) << " deg\n" <<
+                        this->get_yaw() << "," <<
+                        this->get_pitch() << " rad; " <<
+                        yli::geometry::radians_to_degrees(this->get_yaw()) << "," <<
+                        yli::geometry::radians_to_degrees(this->get_pitch()) << " deg\n" <<
                         "(" <<
-                        this->current_camera_location.get_x() << "," <<
-                        this->current_camera_location.get_y() << "," <<
-                        this->current_camera_location.get_z() << ")";
+                        this->get_x() << "," <<
+                        this->get_y() << "," <<
+                        this->get_z() << ")";
                     const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
                     angles_and_coordinates_text_2d->change_string(angles_and_coordinates_string);
                 }
@@ -662,9 +657,9 @@ namespace yli::ontology
                     {
                         std::stringstream spherical_coordinates_stringstream;
                         spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                            "rho:" << this->current_camera_spherical_coordinates.rho <<
-                            "theta:" << this->current_camera_spherical_coordinates.theta <<
-                            "phi:" << this->current_camera_spherical_coordinates.phi;
+                            "rho:" << this->get_rho() <<
+                            "theta:" << this->get_theta() <<
+                            "phi:" << this->get_phi();
                         std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
                         spherical_coordinates_text_2d->change_string(spherical_coordinates_string);
                     }
@@ -784,47 +779,367 @@ namespace yli::ontology
         scene_parent_of_camera->set_active_camera(camera);
     }
 
-    void Universe::set_active_camera_direction(glm::vec3&& direction)
+    const glm::vec3& Universe::get_xyz() const
     {
-        this->current_camera_direction = std::move(direction);
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_xyz`: `camera` is `nullptr`!");
+        }
+
+        return camera->location.xyz;
     }
 
-    void Universe::set_active_camera_right(glm::vec3&& right)
+    void Universe::set_xyz(glm::vec3&& xyz)
     {
-        this->current_camera_right = std::move(right);
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_xyz`: `camera` is `nullptr`!");
+        }
+
+        camera->location.xyz = std::move(xyz);
     }
 
-    void Universe::set_active_camera_up(glm::vec3&& up)
+    void Universe::update_xyz(const glm::vec3& xyz)
     {
-        this->current_camera_up = std::move(up);
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::update_xyz`: `camera` is `nullptr`!");
+        }
+
+        camera->location.update_xyz(xyz);
     }
 
-    void Universe::update_active_camera_yaw(const float x_position)
+    float Universe::get_x() const
     {
-		this->current_camera_yaw +=
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_x`: `camera` is `nullptr`!");
+        }
+
+        return camera->location.xyz.x;
+    }
+
+    void Universe::set_x(const float x)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_x`: `camera` is `nullptr`!");
+        }
+
+        camera->location.xyz.x = x;
+    }
+
+    float Universe::get_y() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_y`: `camera` is `nullptr`!");
+        }
+
+        return camera->location.xyz.y;
+    }
+
+    void Universe::set_y(const float y)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_y`: `camera` is `nullptr`!");
+        }
+
+        camera->location.xyz.y = y;
+    }
+
+    float Universe::get_z() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_z`: `camera` is `nullptr`!");
+        }
+
+        return camera->location.xyz.z;
+    }
+
+    void Universe::set_z(const float z)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_z`: `camera` is `nullptr`!");
+        }
+
+        camera->location.xyz.z = z;
+    }
+
+    const yli::data::SphericalCoordinatesStruct& Universe::get_spherical() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_spherical`: `camera` is `nullptr`!");
+        }
+
+        return camera->spherical_coordinates;
+    }
+
+    void Universe::set_spherical(yli::data::SphericalCoordinatesStruct&& spherical_coordinates)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_spherical`: `camera` is `nullptr`!");
+        }
+
+        camera->spherical_coordinates = std::move(spherical_coordinates);
+    }
+
+    float Universe::get_rho() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_rho`: `camera` is `nullptr`!");
+        }
+
+        return camera->spherical_coordinates.rho;
+    }
+
+    void Universe::set_rho(const float rho)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+        }
+
+        camera->spherical_coordinates.rho = rho;
+    }
+
+    float Universe::get_theta() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_theta`: `camera` is `nullptr`!");
+        }
+
+        return camera->spherical_coordinates.theta;
+    }
+
+    void Universe::set_theta(const float theta)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_theta`: `camera` is `nullptr`!");
+        }
+
+        camera->spherical_coordinates.theta = theta;
+    }
+
+    float Universe::get_phi() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_phi`: `camera` is `nullptr`!");
+        }
+
+        return camera->spherical_coordinates.phi;
+    }
+
+    void Universe::set_phi(const float phi)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_phi`: `camera` is `nullptr`!");
+        }
+
+        camera->spherical_coordinates.phi = phi;
+    }
+
+    const glm::vec3& Universe::get_direction() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_direction`: `camera` is `nullptr`!");
+        }
+
+        return camera->direction;
+    }
+
+    void Universe::set_direction(glm::vec3&& direction)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+        }
+
+        camera->direction = std::move(direction);
+    }
+
+    const glm::vec3& Universe::get_right() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_right`: `camera` is `nullptr`!");
+        }
+
+        return camera->right;
+    }
+
+    void Universe::set_right(glm::vec3&& right)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+        }
+
+        camera->right = std::move(right);
+    }
+
+    const glm::vec3& Universe::get_up() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_up`: `camera` is `nullptr`!");
+        }
+
+        return camera->up;
+    }
+
+    void Universe::set_up(glm::vec3&& up)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+        }
+
+        camera->up = std::move(up);
+    }
+
+    float Universe::get_roll() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_roll`: `camera` is `nullptr`!");
+        }
+
+        return camera->get_roll();
+    }
+
+    void Universe::set_roll(const float roll)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_roll`: `camera` is `nullptr`!");
+        }
+
+        camera->set_roll(roll);
+    }
+
+    float Universe::get_yaw() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_yaw`: `camera` is `nullptr`!");
+        }
+
+        return camera->get_yaw();
+    }
+
+    void Universe::set_yaw(const float yaw)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_yaw`: `camera` is `nullptr`!");
+        }
+
+        camera->set_yaw(yaw);
+    }
+
+    void Universe::update_yaw(const float x_position)
+    {
+        const float temp_yaw = this->get_yaw() +
 			this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
-
-		this->current_camera_yaw =
-			remainder(this->current_camera_yaw, (2.0f * std::numbers::pi));
+        this->set_yaw(remainder(temp_yaw, (2.0f * std::numbers::pi)));
     }
 
-    void Universe::update_active_camera_pitch(const float y_position)
+    float Universe::get_pitch() const
     {
-        if (this->is_invert_mouse_in_use)
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
         {
-            // Invert mouse.
-            this->current_camera_pitch -=
-                this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position);
-        }
-        else
-        {
-            // Don't invert mouse.
-            this->current_camera_pitch +=
-                this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position);
+            throw std::runtime_error("ERROR: `Universe::get_pitch`: `camera` is `nullptr`!");
         }
 
-        this->current_camera_pitch =
-            remainder(this->current_camera_pitch, (2.0f * std::numbers::pi));
+        return camera->get_pitch();
+    }
+
+    void Universe::set_pitch(const float pitch)
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::set_pitch`: `camera` is `nullptr`!");
+        }
+
+        camera->set_pitch(pitch);
+    }
+
+    void Universe::update_pitch(const float y_position)
+    {
+        const float temp_pitch = (this->is_invert_mouse_in_use) ?
+            (this->get_pitch() - this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position)) :
+            (this->get_pitch() + this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position));
+        this->set_pitch(remainder(temp_pitch, (2.0f * std::numbers::pi)));
     }
 
     yli::ontology::Console* Universe::get_active_console() const
@@ -1283,23 +1598,23 @@ namespace yli::ontology
         if (this->testing_spherical_terrain_in_use) [[unlikely]]
         {
             // Compute spherical coordinates.
-            this->current_camera_spherical_coordinates.rho = sqrt(
-                    (this->current_camera_location.get_x() * this->current_camera_location.get_x()) +
-                    (this->current_camera_location.get_y() * this->current_camera_location.get_y()) +
-                    (this->current_camera_location.get_z() * this->current_camera_location.get_z()));
-            this->current_camera_spherical_coordinates.theta = yli::geometry::radians_to_degrees(atan2(sqrt(
-                            (this->current_camera_location.get_x() * this->current_camera_location.get_x()) +
-                            (this->current_camera_location.get_y() * this->current_camera_location.get_y())),
-                        this->current_camera_location.get_z()));
-            this->current_camera_spherical_coordinates.phi = yli::geometry::radians_to_degrees(atan2(
-                        this->current_camera_location.get_y(),
-                        this->current_camera_location.get_x()));
+            this->set_rho(sqrt(
+                        (this->get_x() * this->get_x()) +
+                        (this->get_y() * this->get_y()) +
+                        (this->get_z() * this->get_z())));
+            this->set_theta(yli::geometry::radians_to_degrees(atan2(sqrt(
+                                (this->get_x() * this->get_x()) +
+                                (this->get_y() * this->get_y())),
+                            this->get_z())));
+            this->set_phi(yli::geometry::radians_to_degrees(atan2(
+                            this->get_y(),
+                            this->get_x())));
         }
 
         glm::vec3 camera_cartesian_coordinates;
-        camera_cartesian_coordinates.x = this->current_camera_location.get_x();
-        camera_cartesian_coordinates.y = this->current_camera_location.get_y();
-        camera_cartesian_coordinates.z = this->current_camera_location.get_z();
+        camera_cartesian_coordinates.x = this->get_x();
+        camera_cartesian_coordinates.y = this->get_y();
+        camera_cartesian_coordinates.z = this->get_z();
 
         // Compute the projection matrix.
         this->set_projection_matrix(glm::perspective(
@@ -1311,8 +1626,8 @@ namespace yli::ontology
         // Compute the view matrix.
         this->set_view_matrix(glm::lookAt(
                     camera_cartesian_coordinates,                                  // Camera coordinates.
-                    camera_cartesian_coordinates + this->current_camera_direction, // Camera looks here: at the same position, plus "current_camera_direction".
-                    this->current_camera_up));                                     // Head is up (set to 0,-1,0 to look upside-down).
+                    camera_cartesian_coordinates + this->get_direction(),          // Camera looks here: at the same position, plus "current_camera_direction".
+                    this->get_up()));                                              // Head is up (set to 0,-1,0 to look upside-down).
 
         return true;
     }

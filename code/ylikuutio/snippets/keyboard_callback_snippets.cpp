@@ -106,7 +106,7 @@ namespace yli::snippets
         {
             temp_speed = universe.speed;
         }
-        universe.current_camera_location.xyz += temp_speed * static_cast<float>(universe.get_delta_time()) * moving_direction;
+        universe.update_xyz(temp_speed * static_cast<float>(universe.get_delta_time()) * moving_direction);
 
         return true;
     }
@@ -214,7 +214,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_direction);
+        yli::snippets::move_to_direction(universe, callback_object, universe.get_direction());
         return std::nullopt;
     }
 
@@ -225,7 +225,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_direction);
+        yli::snippets::move_to_direction(universe, callback_object, -universe.get_direction());
         return std::nullopt;
     }
 
@@ -236,7 +236,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_right);
+        yli::snippets::move_to_direction(universe, callback_object, -universe.get_right());
         return std::nullopt;
     }
 
@@ -247,7 +247,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_right);
+        yli::snippets::move_to_direction(universe, callback_object, universe.get_right());
         return std::nullopt;
     }
 
@@ -258,7 +258,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, universe.current_camera_up);
+        yli::snippets::move_to_direction(universe, callback_object, universe.get_up());
         return std::nullopt;
     }
 
@@ -269,7 +269,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::snippets::move_to_direction(universe, callback_object, -universe.current_camera_up);
+        yli::snippets::move_to_direction(universe, callback_object, -universe.get_up());
         return std::nullopt;
     }
 

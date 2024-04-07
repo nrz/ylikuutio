@@ -122,6 +122,8 @@ namespace yli::ontology
             std::cerr << "ERROR: `Scene::Scene`: Vulkan is not supported yet!\n";
         }
 
+        this->activate();
+
         // create the default `Camera`.
         yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = this;
@@ -223,18 +225,6 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Camera* const old_active_camera = this->active_camera;
-
-        if (old_active_camera != nullptr)
-        {
-            // OK, there is an old active `Camera`.
-            // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
-            old_active_camera->set_cartesian_coordinates(this->universe.current_camera_location.xyz);
-            old_active_camera->set_roll(this->universe.current_camera_roll);
-            old_active_camera->set_yaw(this->universe.current_camera_yaw);
-            old_active_camera->set_pitch(this->universe.current_camera_pitch);
-        }
-
         // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
         this->active_camera = camera;
 
@@ -246,17 +236,6 @@ namespace yli::ontology
         if (active_scene == nullptr)
         {
             return;
-        }
-
-        if (active_scene == this && camera != nullptr)
-        {
-            // OK, the newly activated `Camera` is not `nullptr`,
-            // and this is the active `Scene` in the active `Universe`.
-            // Copy `Camera`'s coordinates and angles to the `Universe`.
-            this->universe.current_camera_location.xyz = camera->get_cartesian_coordinates();
-            this->universe.current_camera_roll = camera->get_roll();
-            this->universe.current_camera_yaw = camera->get_yaw();
-            this->universe.current_camera_pitch = camera->get_pitch();
         }
     }
 
