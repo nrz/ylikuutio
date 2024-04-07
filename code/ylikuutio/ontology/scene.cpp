@@ -225,10 +225,9 @@ namespace yli::ontology
 
         yli::ontology::Camera* const old_active_camera = this->active_camera;
 
-        if (old_active_camera != nullptr &&
-                !old_active_camera->get_is_static_view())
+        if (old_active_camera != nullptr)
         {
-            // OK, there is an old active `Camera`, and it is not a static view `Camera`.
+            // OK, there is an old active `Camera`.
             // Copy the coordinates and angles from the `Universe` to the old active `Camera`.
             old_active_camera->set_cartesian_coordinates(this->universe.current_camera_location.xyz);
             old_active_camera->set_roll(this->universe.current_camera_roll);

@@ -80,7 +80,6 @@ namespace yli::ontology
             std::cerr << "ERROR: `Camera::Camera`: Vulkan is not supported yet!\n";
         }
 
-        this->is_static_view = camera_struct.is_static_view;
         this->activate();
 
         // `yli::ontology::Entity` member variables begin here.
@@ -148,10 +147,5 @@ namespace yli::ontology
     GLuint Camera::get_camera_uniform_block() const
     {
         return this->camera_uniform_block;
-    }
-
-    bool Camera::get_is_static_view() const
-    {
-        return this->is_static_view;
     }
 }

@@ -115,7 +115,6 @@ namespace yli::ontology
             void set_view_matrix(glm::mat4&& view_matrix);
 
             GLuint get_camera_uniform_block() const;
-            bool get_is_static_view() const;
 
             friend class yli::ontology::Universe;
 
@@ -134,8 +133,6 @@ namespace yli::ontology
             glm::mat4 view_matrix { glm::mat4(1.0f) };       // identity matrix (dummy value).
 
             GLuint camera_uniform_block { 0 };
-
-            bool is_static_view;
     };
 }
 
