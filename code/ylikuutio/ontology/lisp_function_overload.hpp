@@ -22,7 +22,6 @@
 #include "console.hpp"
 #include "lisp_function.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/tuple_templates.hpp"
 #include "code/ylikuutio/data/wrap.hpp"
 #include "code/ylikuutio/lisp/function_arg_extractor.hpp"
 #include "code/ylikuutio/lisp/lisp_templates.hpp"
