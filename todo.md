@@ -32,7 +32,7 @@
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
 - [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
-- [ ] AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
+- [ ] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 ## Tasks which are necessary for the second stage
 - [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
