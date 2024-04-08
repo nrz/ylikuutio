@@ -715,6 +715,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_x_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
@@ -740,6 +742,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_y_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
@@ -765,6 +769,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_z_float_1234_dot_25_with_activate_callback_and_read_callback)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
@@ -997,6 +1003,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_cartesian_coordinates_x_y_z_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
@@ -1068,6 +1076,8 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 TEST(variables_must_be_initialized_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
@@ -1139,6 +1149,8 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_universe_x_y_z_cartesian_coordinates_activate_callbacks_and_read_callbacks)
 {
     mock::MockApplication application;
+
+    // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
     application.get_generic_entity_factory().create_scene(scene_struct);
 
