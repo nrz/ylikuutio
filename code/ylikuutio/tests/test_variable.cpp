@@ -20,7 +20,6 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/movable_variable_activation.hpp"
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
@@ -717,8 +716,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     yli::ontology::VariableStruct x_variable_struct(application.get_universe(), application.get_universe());
@@ -743,8 +741,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float y = 1234.25f;
     yli::ontology::VariableStruct y_variable_struct(application.get_universe(), application.get_universe());
@@ -769,8 +766,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float z = 1234.25f;
     yli::ontology::VariableStruct z_variable_struct(application.get_universe(), application.get_universe());
@@ -1002,8 +998,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1074,8 +1069,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1146,8 +1140,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
-            scene_struct);
+    application.get_generic_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
