@@ -386,7 +386,6 @@ namespace yli::ontology
             yli::ontology::Console* active_console { nullptr };
 
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr };
-            std::unique_ptr<yli::audio::AudioSystem> audio_system    { nullptr };
 
             const std::string application_name;
 

@@ -20,6 +20,11 @@
 // Include standard headers
 #include <string>   // std::string
 
+namespace yli::audio
+{
+    class AudioSystem;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -41,5 +46,10 @@ namespace yli::core
     std::string Application::get_version() const
     {
         return ""; // `override` this in the inherited class.
+    }
+
+    yli::audio::AudioSystem* Application::get_audio_system() const
+    {
+        return nullptr;
     }
 }

@@ -101,7 +101,7 @@ namespace yli_edit
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
-        audio_system { this->system_factory.create_audio_system() }
+        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "YliEditApplication initialized!\n";
     }
@@ -109,6 +109,11 @@ namespace yli_edit
     std::string YliEditApplication::get_name() const
     {
         return "YliEdit";
+    }
+
+    yli::audio::AudioSystem* YliEditApplication::get_audio_system() const
+    {
+        return this->audio_system;
     }
 
     std::vector<std::string> YliEditApplication::get_valid_keys() const

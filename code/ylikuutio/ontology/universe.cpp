@@ -199,11 +199,6 @@ namespace yli::ontology
 
         this->create_should_render_variable();
 
-        if (!this->is_silent)
-        {
-            this->audio_system = std::make_unique<yli::audio::AudioSystem>(this);
-        }
-
         if (this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS)
         {
             this->is_exit_requested = true;
@@ -399,7 +394,7 @@ namespace yli::ontology
                     this->increment_last_time_to_display_fps();
 
                     // Update audio also (in case the sound has reached the end).
-                    if (audio_system != nullptr)
+                    if (yli::audio::AudioSystem* const audio_system = this->get_audio_system(); audio_system != nullptr)
                     {
                         audio_system->update();
                     }
@@ -1527,12 +1522,12 @@ namespace yli::ontology
 
     yli::audio::AudioSystem* Universe::get_audio_system() const
     {
-        if (this->audio_system == nullptr) [[unlikely]]
+        if (yli::audio::AudioSystem* const audio_system = this->application.get_audio_system(); audio_system != nullptr) [[likely]]
         {
-            return nullptr;
+            return audio_system;
         }
 
-        return this->audio_system.get();
+        return nullptr;
     }
 
     const glm::mat4& Universe::get_projection_matrix() const

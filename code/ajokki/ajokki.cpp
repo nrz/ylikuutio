@@ -116,7 +116,7 @@ namespace ajokki
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
-        audio_system { this->system_factory.create_audio_system() }
+        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "AjokkiApplication initialized!\n";
     }
@@ -139,6 +139,11 @@ namespace ajokki
     yli::ontology::GenericEntityFactory& AjokkiApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
+    }
+
+    yli::audio::AudioSystem* AjokkiApplication::get_audio_system() const
+    {
+        return this->audio_system;
     }
 
     std::vector<std::string> AjokkiApplication::get_valid_keys() const

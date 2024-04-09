@@ -85,6 +85,8 @@ namespace hirvi
 
             yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
+            virtual yli::audio::AudioSystem* get_audio_system() const override;
+
             bool is_universe(yli::ontology::Entity* entity) const override;
 
             yli::ontology::Universe& get_universe() const override;

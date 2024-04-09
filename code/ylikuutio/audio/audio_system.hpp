@@ -45,7 +45,7 @@ namespace yli::audio
     {
         public:
             // constructor.
-            explicit AudioSystem(yli::ontology::Universe* const universe);
+            explicit AudioSystem(yli::ontology::Universe& universe);
 
             AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
             AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
@@ -79,7 +79,7 @@ namespace yli::audio
 
             static yli::audio::AudioSystem* audio_system;
 
-            yli::ontology::Universe* const universe { nullptr };
+            yli::ontology::Universe& universe;
 
             SDL_AudioSpec audio_spec;
             SDL_AudioDeviceID device;

@@ -25,6 +25,11 @@
 #include <string>  // std::string
 #include <vector>  // std::vector
 
+namespace yli::audio
+{
+    class AudioSystem;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
@@ -62,6 +67,8 @@ namespace yli::core
             virtual yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
 
             virtual yli::ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
+
+            virtual yli::audio::AudioSystem* get_audio_system() const;
 
             virtual bool is_universe(yli::ontology::Entity* entity) const = 0;
 

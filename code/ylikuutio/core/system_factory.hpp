@@ -38,7 +38,7 @@ namespace yli::core
                 {
                 }
 
-                yli::audio::AudioSystem* create_audio_system()
+                yli::audio::AudioSystem* create_audio_system(yli::ontology::Universe& universe)
                 {
                     using AudioSystemMemoryAllocator = yli::memory::MemoryAllocator<yli::audio::AudioSystem, 1>;
 
@@ -47,18 +47,11 @@ namespace yli::core
                                 static_cast<int>(yli::data::Datatype::AUDIO_SYSTEM));
                     AudioSystemMemoryAllocator& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
 
-                    return allocator.build_in(
-                            this->universe);
-                }
-
-                void set_universe(yli::ontology::Universe* const universe)
-                {
-                    this->universe = universe;
+                    return allocator.build_in(universe);
                 }
 
             private:
                 yli::memory::MemorySystem<TypeEnumType>& memory_system;
-                yli::ontology::Universe* universe { nullptr };
         };
 }
 

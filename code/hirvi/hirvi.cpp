@@ -103,7 +103,7 @@ namespace hirvi
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
-        audio_system { this->system_factory.create_audio_system() }
+        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         this->create_memory_allocators();
 
@@ -158,6 +158,11 @@ namespace hirvi
     yli::ontology::GenericEntityFactory& HirviApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
+    }
+
+    yli::audio::AudioSystem* HirviApplication::get_audio_system() const
+    {
+        return this->audio_system;
     }
 
     bool HirviApplication::is_universe(yli::ontology::Entity* entity) const
