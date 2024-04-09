@@ -23,7 +23,7 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
-#include <string>     // std::string
+#include <string> // std::string
 
 namespace yli::ontology
 {
