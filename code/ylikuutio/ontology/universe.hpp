@@ -23,7 +23,6 @@
 #include "parent_of_input_modes_module.hpp"
 #include "framebuffer_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/time/time.hpp"
@@ -53,6 +52,11 @@ namespace yli::audio
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::data
+{
+    struct SphericalCoordinatesStruct;
 }
 
 namespace yli::input
