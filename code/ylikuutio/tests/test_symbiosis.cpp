@@ -27,6 +27,9 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem)
 {
     mock::MockApplication application;
@@ -44,6 +47,8 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     model_struct.pipeline = pipeline;
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             model_struct);
+    ASSERT_NE(symbiosis, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

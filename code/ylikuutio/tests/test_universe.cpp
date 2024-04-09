@@ -27,6 +27,7 @@ TEST(universe_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(&universe) % alignof(yli::ontology::Universe), 0);
 
     // `Universe` member variables.
     ASSERT_FALSE(universe.is_invert_mouse_in_use);

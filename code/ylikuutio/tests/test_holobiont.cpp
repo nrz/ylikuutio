@@ -27,6 +27,9 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(holobiont_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -48,6 +51,8 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
+    ASSERT_NE(holobiont, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

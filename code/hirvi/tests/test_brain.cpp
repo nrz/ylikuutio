@@ -25,6 +25,9 @@
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 namespace yli::ontology
 {
     class Scene;
@@ -53,6 +56,7 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     rest_brain_struct.callback_engine = rest_callback_engine;
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
     ASSERT_NE(rest_brain, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_brain) % alignof(yli::ontology::Brain), 0);
     yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
     ASSERT_EQ(brain_constructible_module.storage_i, 0);
     ASSERT_EQ(brain_constructible_module.slot_i, 0);

@@ -23,6 +23,9 @@
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(brain_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -34,6 +37,8 @@ TEST(brain_must_be_initialized_appropriately, headless)
     brain_struct.parent = scene;
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
+    ASSERT_NE(brain, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(brain) % alignof(yli::ontology::Brain), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

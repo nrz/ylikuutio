@@ -21,6 +21,9 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
 {
     const int argc { 0 };
@@ -31,6 +34,7 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     yli::ontology::CallbackEngine* const rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
     ASSERT_NE(rest_callback_engine, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
     yli::memory::ConstructibleModule callback_engine_constructible_module = rest_callback_engine->get_constructible_module();
     ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);

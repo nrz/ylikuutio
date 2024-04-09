@@ -21,6 +21,9 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(scene_must_be_initialized_appropriately, hirvi_scene)
 {
     const int argc { 0 };
@@ -33,6 +36,7 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
     ASSERT_NE(helsinki_east_downtown_scene, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_east_downtown_scene) % alignof(yli::ontology::Scene), 0);
     yli::memory::ConstructibleModule scene_constructible_module = helsinki_east_downtown_scene->get_constructible_module();
     ASSERT_EQ(scene_constructible_module.storage_i, 0);
     ASSERT_EQ(scene_constructible_module.slot_i, 0);

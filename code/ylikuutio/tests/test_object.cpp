@@ -31,6 +31,9 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(object_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -59,6 +62,8 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::ObjectStruct object_struct(scene, species);
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
+    ASSERT_NE(object, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(object) % alignof(yli::ontology::Object), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

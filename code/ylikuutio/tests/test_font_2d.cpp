@@ -21,6 +21,9 @@
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(font_2d_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -31,6 +34,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
     font_struct.font_size = application.get_universe().get_font_size();
     yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
+    ASSERT_NE(font_2d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(font_2d) % alignof(yli::ontology::Font2D), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);

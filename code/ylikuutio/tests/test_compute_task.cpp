@@ -43,6 +43,8 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     compute_task_struct.parent = pipeline;
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
+    ASSERT_NE(compute_task, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(compute_task) % alignof(yli::ontology::ComputeTask), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.

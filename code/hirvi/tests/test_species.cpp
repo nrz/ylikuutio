@@ -24,6 +24,9 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 namespace yli::ontology
 {
     class Scene;
@@ -68,6 +71,7 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     cat_model_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);
     ASSERT_NE(cat_species, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(cat_species) % alignof(yli::ontology::Species), 0);
     yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
     ASSERT_EQ(cat_species_constructible_module.storage_i, 0);
     ASSERT_EQ(cat_species_constructible_module.slot_i, 0);

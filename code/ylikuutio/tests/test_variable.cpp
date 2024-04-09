@@ -33,6 +33,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan
+#include <cstddef>  // uintptr_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
@@ -76,6 +77,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 
     yli::ontology::Variable* const variable = application.get_universe().get("foo");
     ASSERT_NE(variable, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();

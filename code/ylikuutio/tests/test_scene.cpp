@@ -21,12 +21,17 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(scene_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
+    ASSERT_NE(scene, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 0);

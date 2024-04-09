@@ -32,6 +32,9 @@
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/text_3d_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     mock::MockApplication application;
@@ -59,6 +62,8 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     text_3d_struct.parent = vector_font;
     yli::ontology::Text3D* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
+    ASSERT_NE(text_3d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_3d) % alignof(yli::ontology::Text3D), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.

@@ -22,12 +22,17 @@
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct1;
     yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct1);
+    ASSERT_NE(ecosystem1, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem1) % alignof(yli::ontology::Ecosystem), 0);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 1);
@@ -47,6 +52,8 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     yli::ontology::EcosystemStruct ecosystem_struct2;
     yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct2);
+    ASSERT_NE(ecosystem2, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem2) % alignof(yli::ontology::Ecosystem), 0);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 2);
@@ -66,6 +73,8 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     yli::ontology::EcosystemStruct ecosystem_struct3;
     yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct3);
+    ASSERT_NE(ecosystem3, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem3) % alignof(yli::ontology::Ecosystem), 0);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 3);
@@ -85,6 +94,8 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     yli::ontology::EcosystemStruct ecosystem_struct4;
     yli::ontology::Ecosystem* const ecosystem4 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct4);
+    ASSERT_NE(ecosystem4, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem4) % alignof(yli::ontology::Ecosystem), 0);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 4);

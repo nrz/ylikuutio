@@ -29,6 +29,9 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     mock::MockApplication application;
@@ -51,6 +54,8 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     vector_font_struct.parent = material;
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
+    ASSERT_NE(vector_font, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.

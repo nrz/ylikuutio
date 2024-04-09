@@ -22,12 +22,17 @@
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_master)
 {
     mock::MockApplication application;
 
     yli::ontology::InputModeStruct input_mode_struct;
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(input_mode_struct);
+    ASSERT_NE(input_mode, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(input_mode) % alignof(yli::ontology::InputMode), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);

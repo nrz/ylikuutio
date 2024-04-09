@@ -21,6 +21,9 @@
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(hirvi_application_must_be_initialized_appropriately, hirvi_application)
 {
     const int argc { 0 };
@@ -30,4 +33,5 @@ TEST(hirvi_application_must_be_initialized_appropriately, hirvi_application)
 
     yli::ontology::Universe& universe = hirvi_application.entity_factory.get_universe();
     ASSERT_EQ(universe, hirvi_application.get_universe());
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(&universe) % alignof(yli::ontology::Universe), 0);
 }

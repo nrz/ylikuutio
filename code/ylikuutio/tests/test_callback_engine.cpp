@@ -21,6 +21,9 @@
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
 {
     mock::MockApplication application;
@@ -28,6 +31,8 @@ TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
     yli::ontology::CallbackEngineStruct callback_engine_struct;
     yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
+    ASSERT_NE(callback_engine, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);

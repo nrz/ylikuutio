@@ -42,6 +42,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef> // uintptr_t
 #include <numbers> // std::numbers::pi
 
 TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
@@ -110,6 +111,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
                 turbo_polizei_png_police_car_struct1,
                 road_vehicle_struct1);
     ASSERT_NE(turbo_polizei1, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::PoliceCar), 0);
 
     // Even though `PoliceCar` is derived from `Holobiont`. `PoliceCar` should be allocated using its own allocator.
     ASSERT_EQ(holobiont_memory_allocator.get_number_of_storages(), 0);

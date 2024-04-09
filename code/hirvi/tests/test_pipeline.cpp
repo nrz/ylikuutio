@@ -22,6 +22,9 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 namespace yli::ontology
 {
     class Scene;
@@ -47,6 +50,7 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
     ASSERT_NE(helsinki_east_downtown_pipeline, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_east_downtown_pipeline) % alignof(yli::ontology::Pipeline), 0);
     yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_east_downtown_pipeline->get_constructible_module();
     ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
     ASSERT_EQ(pipeline_constructible_module.slot_i, 0);

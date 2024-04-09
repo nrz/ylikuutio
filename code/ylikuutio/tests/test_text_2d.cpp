@@ -23,6 +23,9 @@
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(text_2d_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -38,6 +41,8 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
     text_struct.parent = font_2d;
     yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
+    ASSERT_NE(text_2d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

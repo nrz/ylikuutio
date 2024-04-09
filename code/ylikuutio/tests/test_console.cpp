@@ -33,6 +33,8 @@ TEST(console_must_be_initialized_appropriately, no_font)
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
+    ASSERT_NE(console, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(console) % alignof(yli::ontology::Console), 0);
     ASSERT_TRUE(console->get_current_input().empty());
     ASSERT_TRUE(console->get_temp_input().empty());
     ASSERT_EQ(console->get_prompt(), "$ ");        // This may change in the future.

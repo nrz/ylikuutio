@@ -23,6 +23,9 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 namespace yli::ontology
 {
     class Scene;
@@ -56,6 +59,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
     yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(yli::ontology::Symbiosis), 0);
     yli::memory::ConstructibleModule symbiosis_constructible_module = turbo_polizei_png_symbiosis->get_constructible_module();
     ASSERT_EQ(symbiosis_constructible_module.storage_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.slot_i, 0);

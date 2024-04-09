@@ -23,6 +23,9 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 namespace yli::ontology
 {
     class Scene;
@@ -56,6 +59,7 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(yli::ontology::Material), 0);
     yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
     ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);

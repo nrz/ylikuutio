@@ -28,12 +28,17 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
+    ASSERT_NE(scene, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
 
     yli::ontology::CameraStruct camera_struct;
     camera_struct.scene = scene;

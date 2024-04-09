@@ -37,6 +37,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef> // uintptr_t
 #include <numbers> // std::numbers::pi
 
 namespace yli::ontology
@@ -132,6 +133,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
                 cat1_gallop_struct,
                 cat1_climb_struct);
     ASSERT_NE(cat1, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::Cat), 0);
 
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
     ASSERT_EQ(object_memory_allocator.get_number_of_storages(), 0);

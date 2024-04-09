@@ -32,6 +32,9 @@
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -56,6 +59,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     shapeshifter_transformation_struct.material = material;
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
+    ASSERT_NE(shapeshifter_transformation, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(shapeshifter_transformation) % alignof(yli::ontology::ShapeshifterTransformation), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -114,6 +119,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
+    ASSERT_NE(shapeshifter_form, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(shapeshifter_form) % alignof(yli::ontology::ShapeshifterForm), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -176,6 +183,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     shapeshifter_sequence_struct.parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
+    ASSERT_NE(shapeshifter_sequence, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(shapeshifter_sequence) % alignof(yli::ontology::ShapeshifterSequence), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

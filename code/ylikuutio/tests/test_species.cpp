@@ -31,6 +31,9 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     mock::MockApplication application;
@@ -55,6 +58,8 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     model_struct.material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
+    ASSERT_NE(species, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(species) % alignof(yli::ontology::Species), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
