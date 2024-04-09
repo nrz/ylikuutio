@@ -800,11 +800,11 @@ namespace hirvi
         this->entity_factory.create_lisp_function_overload("clear", *my_console, &yli::ontology::Console::clear);
         this->entity_factory.create_lisp_function_overload("screenshot", *my_console, &yli::ontology::Universe::screenshot);
 
-        if (audio_system != nullptr)
+        if (this->audio_system != nullptr)
         {
-            audio_system->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
-            audio_system->add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
-            audio_system->play_playlist("Hirvi_playlist");
+            this->audio_system->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+            this->audio_system->add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
+            this->audio_system->play_playlist("Hirvi_playlist");
         }
 
         std::cout << "Setting up window size ...\n";
