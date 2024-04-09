@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
 
 TEST(console_must_be_initialized_appropriately, no_font)

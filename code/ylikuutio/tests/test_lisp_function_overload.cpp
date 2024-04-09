@@ -46,6 +46,7 @@ TEST(variables_lisp_function_overload_must_function_appropriately, variables)
             &yli::ontology::Entity::print_variables0);
 
     ASSERT_NE(lisp_function_overload, nullptr);
+    // `LispfunctionOverload` is allocated in using standard allocator so proper alignment should be guaranteed.
 
     // TODO: `variables` should return a list of variables and not print them in console!
     // Once that is done create a test that counts the number of variables first from the list, creates a new variable, and
