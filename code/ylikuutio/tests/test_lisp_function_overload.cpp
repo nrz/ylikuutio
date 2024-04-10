@@ -108,7 +108,7 @@ TEST(set_must_set_global_x, set_x)
     }
 
     {
-        lisp_function_overload->execute({ "x", "123"});
+        lisp_function_overload->execute({ "x", "123" });
         const float x = universe.get_x();
         ASSERT_EQ(x, 123.0f);
     }
@@ -147,7 +147,7 @@ TEST(set_must_set_global_y, set_y)
     }
 
     {
-        lisp_function_overload->execute({ "y", "123"});
+        lisp_function_overload->execute({ "y", "123" });
         const float y = universe.get_y();
         ASSERT_EQ(y, 123.0f);
     }
@@ -186,7 +186,7 @@ TEST(set_must_set_global_z, set_z)
     }
 
     {
-        lisp_function_overload->execute({ "z", "123"});
+        lisp_function_overload->execute({ "z", "123" });
         const float z = universe.get_z();
         ASSERT_EQ(z, 123.0f);
     }
@@ -224,7 +224,7 @@ TEST(set_must_set_global_roll, set_roll)
     }
 
     {
-        lisp_function_overload->execute({ "roll", "1.25"});
+        lisp_function_overload->execute({ "roll", "1.25" });
         const float roll = universe.get_roll();
         ASSERT_EQ(roll, 1.25f);
     }
@@ -262,7 +262,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     }
 
     {
-        lisp_function_overload->execute({ "yaw", "1.25"});
+        lisp_function_overload->execute({ "yaw", "1.25" });
         const float yaw = universe.get_yaw();
         ASSERT_EQ(yaw, 1.25f);
     }
@@ -300,7 +300,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     }
 
     {
-        lisp_function_overload->execute({ "pitch", "1.25"});
+        lisp_function_overload->execute({ "pitch", "1.25" });
         const float pitch = universe.get_pitch();
         ASSERT_EQ(pitch, 1.25f);
     }
@@ -333,12 +333,12 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     universe.create_variable(azimuth_variable_struct, yli::data::AnyValue(azimuth));
 
     {
-        lisp_function_overload->execute({ "azimuth", "0.00"});
+        lisp_function_overload->execute({ "azimuth", "0.00" });
         ASSERT_EQ(azimuth, 0.0f);
     }
 
     {
-        lisp_function_overload->execute({ "azimuth", "2.50"});
+        lisp_function_overload->execute({ "azimuth", "2.50" });
         const float azimuth = universe.get_azimuth();
         ASSERT_EQ(azimuth, 2.50f);
     }
