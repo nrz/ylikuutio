@@ -1137,6 +1137,18 @@ namespace yli::ontology
         this->set_pitch(remainder(temp_pitch, (2.0f * std::numbers::pi)));
     }
 
+    float Universe::get_azimuth() const
+    {
+        yli::ontology::Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::get_azimuth`: `camera` is `nullptr`!");
+        }
+
+        return camera->get_azimuth();
+    }
+
     yli::ontology::Console* Universe::get_active_console() const
     {
         for (yli::ontology::Entity* console : this->parent_of_consoles.child_pointer_vector)

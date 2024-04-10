@@ -179,6 +179,8 @@ namespace yli::ontology
             void set_pitch(const float pitch);
             void update_pitch(const float y_position);
 
+            float get_azimuth() const;
+
             yli::ontology::Console* get_active_console() const;
             void set_active_console(yli::ontology::Console* const console);
 
