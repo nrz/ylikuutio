@@ -35,8 +35,7 @@ TEST(variables_lisp_function_overload_must_function_appropriately, variables)
     mock::MockApplication application;
 
     yli::ontology::ConsoleStruct my_console_struct;
-    yli::ontology::Entity* const my_console_entity = application.get_generic_entity_factory().create_console(my_console_struct);
-    yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
+    yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
     const std::string lisp_function_name = "variables";
@@ -58,8 +57,7 @@ TEST(set_lisp_function_overload_must_function_appropriately, set)
     mock::MockApplication application;
 
     yli::ontology::ConsoleStruct my_console_struct;
-    yli::ontology::Entity* const my_console_entity = application.get_generic_entity_factory().create_console(my_console_struct);
-    yli::ontology::Console* const my_console = dynamic_cast<yli::ontology::Console*>(my_console_entity);
+    yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
     const std::string lisp_function_name = "set";
