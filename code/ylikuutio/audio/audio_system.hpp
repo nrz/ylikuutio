@@ -19,12 +19,13 @@
 #define YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 
 #include "code/ylikuutio/memory/constructible_module.hpp"
-#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
+
+#include "soloud.h"
+#include "soloud_wavstream.h"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <list>          // std::list
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
@@ -56,7 +57,6 @@ namespace yli::audio
             void terminate();
 
             bool load_and_play(const std::string& audio_file);
-            void unload(const std::string& audio_file);
             void add_to_playlist(const std::string& playlist, const std::string& audio_file);
             void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
             void play_playlist(const std::string& playlist);
@@ -66,28 +66,19 @@ namespace yli::audio
             void clear_playlist(const std::string& playlist);
             void erase_playlist(const std::string& playlist);
 
-            int get_remaining_length(); // This function is not `const` due to use of `SDL_AtomicGet`.
-
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         private:
-            void play_audio(void* userdata, uint8_t* stream, int length);
-            static void play_audio_callback(void* userdata, uint8_t* stream, int length);
-
             yli::memory::ConstructibleModule constructible_module;
-
-            static yli::audio::AudioSystem* audio_system;
 
             yli::ontology::Universe& universe;
 
-            SDL_AudioSpec audio_spec;
-            SDL_AudioDeviceID device;
+            SoLoud::Soloud soloud;        // SoLoud engine.
+            SoLoud::WavStream wav_stream; // Audio stream (from a file).
 
-            uint8_t* wav_pointer { nullptr };
-            SDL_atomic_t remaining_length { 0 };
+            int sound_handle { 0 };
 
-            std::unordered_map<std::string, uint8_t*> wav_buffer_pointer_map;     // filename is the key.
             std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
             std::string current_playlist;                                         // name of current playlist.
             std::list<std::string>::iterator current_playlist_sound_iterator;

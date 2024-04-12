@@ -18,6 +18,7 @@ include_directories(
     glm/
     OpenFBX/src/
     pugixml/src/
+    soloud/include/
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -85,3 +86,5 @@ set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")
 if(COMPILE_SDL_FROM_SOURCE)
     add_subdirectory(SDL)
 endif()
+
+add_subdirectory(soloud/contrib)

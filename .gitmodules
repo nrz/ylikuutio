@@ -19,3 +19,6 @@
 [submodule "external/zlib"]
 	path = external/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "external/soloud"]
+	path = external/soloud
+	url = https://github.com/jarikomppa/soloud

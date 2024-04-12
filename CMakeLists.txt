@@ -163,6 +163,7 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
+    external/soloud/include/
     .
     )
 
@@ -194,6 +195,7 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
+    soloud
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
@@ -1026,11 +1028,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
     else()
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
     endif()
 
     include(GoogleTest)
