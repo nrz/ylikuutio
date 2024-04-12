@@ -5,7 +5,6 @@
 - [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
-- [ ] BUG Fix audio issue of invalid sound output when running `wine ajokki.exe` in Debian 12.4 (bookworm).
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
 - [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
@@ -32,7 +31,6 @@
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
 - [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
-- [ ] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 
 ## Tasks which are necessary for the second stage
 - [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
@@ -320,3 +318,4 @@
 - [x] BUG Fix `Camera` activation, e.g. in Ajokki `activate cat_camera` makes all values `nan`.
 - [x] BUG Fix audio in Hirvi.
 - [x] BUG Fix audio in Ajokki.
+- [x] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
