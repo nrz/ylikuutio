@@ -5,3 +5,37 @@ Bindless:
 https://henriquegois.dev/posts/bindless-resources-in-vulkan/
 https://blog.traverseresearch.nl/bindless-rendering-setup-afeb678d77fc
 https://chunkstories.xyz/blog/a-note-on-descriptor-indexing/
+https://henriquegois.dev/posts/bindless-resources-in-vulkan/
+
+Vulkan Tutorial
+https://vulkan-tutorial.com/
+
+Yet another blog explaining Vulkan synchronization
+https://themaister.net/blog/2019/08/14/yet-another-blog-explaining-vulkan-synchronization/
+
+VK_KHR_DYNAMIC_RENDERING tutorial
+https://lesleylai.info/en/vk-khr-dynamic-rendering/
+
+Buffer device address
+https://docs.vulkan.org/samples/latest/samples/extensions/buffer_device_address/README.html
+
+Reducing Draw Time Hitching with the Vulkan Graphics Pipeline Extension
+https://www.youtube.com/watch?v=o1cdo3d2FQk
+
+You Can Use Vulkan Without Pipelines Today
+https://www.khronos.org/blog/you-can-use-vulkan-without-pipelines-today
+
+vk_memory_compression
+https://github.com/nvpro-samples/vk_memory_decompression
+
+VK_EXT_descriptor_buffer
+https://www.khronos.org/blog/vk-ext-descriptor-buffer
+
+Integrating Dear ImGui in a custom Vulkan renderer
+https://frguthmann.github.io/posts/vulkan_imgui/
+
+NVIDIA Vulkan Ray Tracing Tutorial
+https://nvpro-samples.github.io/vk_raytracing_tutorial_KHR/
+
+Vulkan Timeline Semaphores
+https://www.khronos.org/blog/vulkan-timeline-semaphores
