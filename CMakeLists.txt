@@ -25,9 +25,6 @@ set(COMPILE_LIBPNG_FROM_SOURCE false)
 # Modify the below line to control whether to compile zlib from source on Linux.
 set(COMPILE_ZLIB_FROM_SOURCE false)
 
-# uncomment the following line to disable updating of external projects.
-set(DISABLE_UPDATE_STEP true)
-
 #-------------------------------------------------------+
 # the options part intended to be modified ends here.   |
 #-------------------------------------------------------+
