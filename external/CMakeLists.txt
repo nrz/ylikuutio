@@ -224,6 +224,8 @@ if (COMPILE_SDL_FROM_SOURCE)
 	target_link_libraries(soloud SDL2-static)
 	set_property(TARGET soloud PROPERTY CMAKE_POSITION_INDEPENDENT_CODE ON)
 	set_property(TARGET soloud PROPERTY COMPILE_FLAGS "-DWITH_SDL2_STATIC")
+    set_target_properties(soloud PROPERTIES
+        C_STANDARD 99)
 else()
 	add_subdirectory(soloud/contrib)
 endif()
