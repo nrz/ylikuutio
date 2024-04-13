@@ -180,8 +180,8 @@ namespace yli::render
 
     void RenderSystem::adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const
     {
-        if (window_width >= 0 && window_width <= std::numeric_limits<GLsizei>::max() &&
-                window_height >= 0 && window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
+        if (window_width <= std::numeric_limits<GLsizei>::max() &&
+                window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
             glViewport(0, 0, window_width, window_height);
         }
