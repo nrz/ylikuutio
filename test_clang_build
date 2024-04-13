@@ -20,7 +20,8 @@ do
     echo "changing into ${build_dir}"
     cd ${build_dir}
     ${script_dir}/compile_linux_clang
-    ./unit_tests_with_googletest
+    ./test_ylikuutio
+    ./test_hirvi
     break
 done
 
