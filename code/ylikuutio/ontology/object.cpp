@@ -64,6 +64,8 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
 
     std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(
