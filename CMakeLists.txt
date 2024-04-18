@@ -543,19 +543,22 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callback_parameter.cpp
     code/ylikuutio/ontology/console_callback_parameter.hpp
     code/ylikuutio/ontology/console_callback_parameter_struct.hpp
+    code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/console_printing.cpp
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
-    code/ylikuutio/ontology/console_callbacks.cpp
+    code/ylikuutio/ontology/ecosystem.cpp
+    code/ylikuutio/ontology/ecosystem.hpp
+    code/ylikuutio/ontology/ecosystem_struct.hpp
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_callbacks.cpp
     code/ylikuutio/ontology/entity_factory.hpp
+    code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/entity_variable_activation.cpp
     code/ylikuutio/ontology/entity_variable_activation.hpp
     code/ylikuutio/ontology/entity_variable_read.cpp
     code/ylikuutio/ontology/entity_variable_read.hpp
-    code/ylikuutio/ontology/entity_struct.hpp
     code/ylikuutio/ontology/family_templates.hpp
     code/ylikuutio/ontology/font_2d.cpp
     code/ylikuutio/ontology/font_2d.hpp
@@ -571,6 +574,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
     code/ylikuutio/ontology/generic_master_module.cpp
     code/ylikuutio/ontology/generic_master_module.hpp
+    code/ylikuutio/ontology/generic_parent_module.cpp
+    code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
@@ -624,8 +629,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object_type.hpp
     code/ylikuutio/ontology/orientation_module.cpp
     code/ylikuutio/ontology/orientation_module.hpp
-    code/ylikuutio/ontology/generic_parent_module.cpp
-    code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/parent_of_input_modes_module.cpp
     code/ylikuutio/ontology/parent_of_input_modes_module.hpp
     code/ylikuutio/ontology/parent_of_pipelines_module.cpp
@@ -667,10 +670,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiont_species.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
-    code/ylikuutio/ontology/texture_module.cpp
-    code/ylikuutio/ontology/texture_module.hpp
     code/ylikuutio/ontology/terrain_generation_callbacks.cpp
     code/ylikuutio/ontology/terrain_generation_callbacks.hpp
+    code/ylikuutio/ontology/texture_module.cpp
+    code/ylikuutio/ontology/texture_module.hpp
     code/ylikuutio/ontology/text_2d.hpp
     code/ylikuutio/ontology/text_2d.cpp
     code/ylikuutio/ontology/text_3d.hpp
@@ -684,9 +687,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
-    code/ylikuutio/ontology/ecosystem.cpp
-    code/ylikuutio/ontology/ecosystem.hpp
-    code/ylikuutio/ontology/ecosystem_struct.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
