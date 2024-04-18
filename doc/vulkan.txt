@@ -43,3 +43,6 @@ https://www.khronos.org/blog/vulkan-timeline-semaphores
 NVIDIA Vulkan Ray Tracing Tutorial
 https://developer.nvidia.com/rtx/raytracing/vkray
 https://nvpro-samples.github.io/vk_raytracing_tutorial_KHR/
+
+Vulkan Hardware Database
+https://vulkan.gpuinfo.org/
