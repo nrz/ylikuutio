@@ -223,7 +223,7 @@ def get_class_constructor_signature(parent_class_name, n_leading_whitespace, is_
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ")"
 
 class_constructor_child_module_line = \
-"        " + child_module_variable_name + "(parent_module, this)"
+"        " + child_module_variable_name + "(parent_module, *this)"
 if base_class_name != "":
     class_constructor_definition = \
     "    {\n"\
