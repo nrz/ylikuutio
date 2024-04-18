@@ -75,6 +75,7 @@ namespace yli::data
         CAMERAWIDGET        = 133,
         // `yli::ontology` datatypes, 'brain' path.
         BRAIN                 = 140,
+        WAYPOINT              = 141,
         // `yli::ontology` datatypes, 'ecosystem' path.
         ECOSYSTEM             = 150,
         // `yli::ontology` datatypes, 'simple' path.
