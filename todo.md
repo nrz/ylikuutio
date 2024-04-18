@@ -7,13 +7,13 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
+- [ ] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
 - [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 - [ ] LIBRARIES Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
-- [ ] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
 - [ ] UI/TESTS Write unit tests for keyboard callback snippets.
 - [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
 - [ ] LIBRARIES/PHYSICS/EVALUATE Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
@@ -319,3 +319,4 @@
 - [x] BUG Fix audio in Hirvi.
 - [x] BUG Fix audio in Ajokki.
 - [x] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
+- [x] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
