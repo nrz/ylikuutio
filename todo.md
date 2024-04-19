@@ -7,7 +7,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
-- [ ] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
 - [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 - [ ] LIBRARIES Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
@@ -320,3 +319,4 @@
 - [x] BUG Fix audio in Ajokki.
 - [x] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 - [x] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
+- [x] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
