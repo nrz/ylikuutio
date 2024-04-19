@@ -18,6 +18,9 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/queue.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 TEST(queue_must_be_initialized_appropriately, queue_of_size_1)
 {
     yli::data::Queue<1> queue;
