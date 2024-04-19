@@ -21,10 +21,13 @@ jobs:
         with:
           submodules: recursive
       - run: sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
-      - run: clang -v && clang++ -v
+      - run: wget https://apt.llvm.org/llvm.sh
+      - run: chmod +x ./llvm.sh
+      - run: sudo ./llvm.sh 17
+      - run: clang-17 -v && clang++-17 -v
       - run: mkdir build_native_clang
       - run: echo "Running cmake for Clang native compiler"
-      - run: CC=$(which clang) CXX=$(which clang++) cmake -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: CC=$(which clang-17) CXX=$(which clang++-17) cmake -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: cmake --build build_native_clang
       - run: cd build_native_clang && ./test_ylikuutio
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
