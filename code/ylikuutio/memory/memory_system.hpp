@@ -30,6 +30,7 @@
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/waypoint.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -74,6 +75,7 @@ namespace yli::memory
     using CallbackParameterMemoryAllocator           = yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
     using CameraMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
     using BrainMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
+    using WaypointMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
     using EcosystemMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
     using SceneMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Scene, 256>;
     using PipelineMemoryAllocator                    = yli::memory::MemoryAllocator<yli::ontology::Pipeline, 256>;
@@ -183,6 +185,7 @@ namespace yli::memory
                     this->create_allocator<CallbackParameterMemoryAllocator>(yli::data::Datatype::CALLBACK_PARAMETER);
                     this->create_allocator<CameraMemoryAllocator>(yli::data::Datatype::CAMERA);
                     this->create_allocator<BrainMemoryAllocator>(yli::data::Datatype::BRAIN);
+                    this->create_allocator<WaypointMemoryAllocator>(yli::data::Datatype::WAYPOINT);
                     this->create_allocator<EcosystemMemoryAllocator>(yli::data::Datatype::ECOSYSTEM);
                     this->create_allocator<SceneMemoryAllocator>(yli::data::Datatype::SCENE);
                     this->create_allocator<PipelineMemoryAllocator>(yli::data::Datatype::PIPELINE);

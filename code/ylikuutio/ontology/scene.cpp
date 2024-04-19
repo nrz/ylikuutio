@@ -79,6 +79,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "brains"),
+        parent_of_waypoints(
+                *this,
+                this->registry,
+                "waypoints"),
         parent_of_materials(
                 *this,
                 this->registry,
@@ -255,6 +259,7 @@ namespace yli::ontology
             this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
             this->parent_of_brains.get_number_of_children() +
+            this->parent_of_waypoints.get_number_of_children() +
             this->parent_of_materials.get_number_of_children() +
             this->parent_of_species.get_number_of_children() +
             this->parent_of_objects.get_number_of_children() +
@@ -268,6 +273,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +

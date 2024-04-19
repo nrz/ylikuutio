@@ -136,6 +136,7 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_default_camera;
             yli::ontology::GenericParentModule parent_of_cameras;
             yli::ontology::GenericParentModule parent_of_brains;
+            yli::ontology::GenericParentModule parent_of_waypoints;
             yli::ontology::GenericParentModule parent_of_materials;
             yli::ontology::GenericParentModule parent_of_species;
             yli::ontology::GenericParentModule parent_of_objects;

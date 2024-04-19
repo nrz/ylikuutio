@@ -56,6 +56,7 @@
 #include "camera.hpp"
 #include "compute_task.hpp"
 #include "brain.hpp"
+#include "waypoint.hpp"
 #include "variable_struct.hpp"
 #include "callback_engine_struct.hpp"
 #include "callback_object_struct.hpp"
@@ -82,6 +83,7 @@
 #include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
 #include "brain_struct.hpp"
+#include "waypoint_struct.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -354,6 +356,28 @@ namespace yli::ontology
                 brain->set_global_name(brain_struct.global_name);
                 brain->set_local_name(brain_struct.local_name);
                 return brain;
+            }
+
+            yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const override
+            {
+                using WaypointMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<WaypointMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::WAYPOINT));
+                WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::Waypoint* const waypoint = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        waypoint_struct,
+                        (waypoint_struct.scene != nullptr ? &waypoint_struct.scene->parent_of_waypoints : nullptr),
+                        // `Brain` master.
+                        (waypoint_struct.brain != nullptr ? waypoint_struct.brain->get_generic_master_module() : nullptr));
+
+                waypoint->set_global_name(waypoint_struct.global_name);
+                waypoint->set_local_name(waypoint_struct.local_name);
+                return waypoint;
             }
 
             yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const override

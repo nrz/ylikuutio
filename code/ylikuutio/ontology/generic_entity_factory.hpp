@@ -36,6 +36,7 @@ namespace yli::ontology
     class CallbackParameter;
     class Camera;
     class Brain;
+    class Waypoint;
     class Ecosystem;
     class Scene;
     class Pipeline;
@@ -88,6 +89,7 @@ namespace yli::ontology
     struct CameraStruct;
     struct ComputeTaskStruct;
     struct BrainStruct;
+    struct WaypointStruct;
 
     class GenericEntityFactory
     {
@@ -142,6 +144,7 @@ namespace yli::ontology
             virtual yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
             virtual yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const = 0;
             virtual yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const = 0;
+            virtual yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const = 0;
     };
 }
 

@@ -687,6 +687,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
+    code/ylikuutio/ontology/waypoint.cpp
+    code/ylikuutio/ontology/waypoint.hpp
+    code/ylikuutio/ontology/waypoint_struct.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
@@ -999,6 +1002,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_variable_struct.cpp
         code/ylikuutio/tests/test_vector_font.cpp
         code/ylikuutio/tests/test_vector_font_struct.cpp
+        code/ylikuutio/tests/test_waypoint.cpp
         code/ylikuutio/tests/test_ylikuutio_map.cpp)
 
     set(HIRVI_UNIT_TESTS
