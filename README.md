@@ -352,7 +352,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
    (in alphabetical order) Asio, GLEW, GLM, libpng, OpenFBX, pugixml,
-   SDL, and zlib.
+   SDL, SoLoud, and zlib.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -370,7 +370,7 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * callbacks
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
-* audio with Simple DirectMedia Layer (SDL)
+* audio with SoLoud.
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 * GPGPU using `yli::ontology::ComputeTask` class (see also [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) for an article in Finnish).
 
@@ -424,6 +424,7 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
+* [SoLoud](https://solhsa.com/soloud/) is licensed under [the zlib license](https://solhsa.com/soloud/legal.html).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 * [zlib](https://zlib.net/) is licensed under [the zlib license](https://zlib.net/zlib_license.html).
 
