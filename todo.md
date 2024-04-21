@@ -8,7 +8,7 @@
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
 - [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
-- [ ] LIBRARIES Replace OpenFBX with cgltf. https://github.com/jkuhlmann/cgltf
+- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
@@ -32,6 +32,8 @@
 - [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
 
 ## Tasks which are necessary for the second stage
+- [ ] Add Vulkan support.
+- [ ] Remove OpenGL support.
 - [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
 - [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
 - [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
@@ -66,11 +68,12 @@
 - [ ] ANIMATION Implement skeletal animation.
 - [ ] CONSOLE/YLILISP/ONTOLOGY Implement creating new named `Variable`s using `Console`.
 - [ ] TOOLS Implement YliEdit editor.
+- [ ] MATH Plan coordinate systems and physics for interplanetary/interstellar/intergalactic travel.
 - [ ] TERRAIN/VOXELS Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 - [ ] TEXT/UI Add support for changing font size.
 - [ ] RENDERING Implement transparent rendering of 3D objects.
 - [ ] RENDERING Implement transparent rendering of 4D objects.
-- [ ] WATER/RENDERING Implement dynamic not flowing water, using OpenGL shaders.
+- [ ] WATER/RENDERING Implement dynamic not flowing water, using Vulkan shaders.
 - [ ] TEXT/LIBRARIES/EVALUATE Evaluate FreeType.
 - [ ] TEXT/LIBRARIES/EVALUATE Evaluate HarfBuzz.
 - [ ] TEXT/GUI Implement better font support.
@@ -91,7 +94,7 @@
 
 ## Tasks which are necessary for Tulevaisuus
 - [ ] Remove `dynamic_cast` of YliLisp function dispatch by storing in `Registry` instead of `yli::ontology::Entity*` a `std::variant`.
-- [ ] Split `ylikuutio` library into `yli_core`, `yli_opengl`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
+- [ ] Split `ylikuutio` library into `yli_core`, `yli_vulkan`, `yli_network`, `yli_server`, and `yli_client` libraries. All libraries depend on `yli_core`.
 - [ ] Implement turn file sending over the network into `yli_client`.
 - [ ] Implement turn file receiving over the network into `yli_server`.
 - [ ] Implement processing of turn files in `yli_server`.
@@ -103,6 +106,12 @@
 - [ ] In `yli_server`, implement computing turn outputs to each human and AI player, using software rendering for computing visual detection and rendering turn videos.
 - [ ] In `yli_server`, implement producing result files for players.
 - [ ] In `yli_server`, implement sending result files for players over the network.
+
+## Tasks which are needed for Avaruus
+- [ ] MATH Plan n-body star simulation of Milky Way stars.
+- [ ] MATH Plan the simulation of black holes.
+- [ ] MATH Plan the simulation of merging of 2 black holes.
+- [ ] MATH Implement simulation of the merging of supermassive black holes Sagittarius A* and the one in Andromeda.
 
 ## Tasks which are necessary for the development of Ylikuutio
 - [ ] Add support for hexadecimal input in `set` console command.
@@ -143,9 +152,6 @@
 - [ ] Add support for 3D text.
 - [ ] Add support for partially transparent text.
 - [ ] Store each robot's current view into an array from which the robot may access it programmatically using YliLisp.
-- [ ] Implement `OpenGLPipeline` class which inherits `Pipeline`.
-- [ ] Abstract Ylikuutio rendering API to enable support for both OpenGL and Vulkan.
-- [ ] Add Vulkan support.
 
 ## Ready
 - [x] Add test VBO, e.g. some kind of particle object.
