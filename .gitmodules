@@ -13,12 +13,12 @@
 [submodule "external/pugixml"]
 	path = external/pugixml
 	url = https://github.com/zeux/pugixml.git
-[submodule "external/SDL"]
-	path = external/SDL
-	url = https://github.com/libsdl-org/SDL.git
 [submodule "external/zlib"]
 	path = external/zlib
 	url = https://github.com/madler/zlib.git
 [submodule "external/soloud"]
 	path = external/soloud
 	url = https://github.com/jarikomppa/soloud
+[submodule "external/SDL"]
+	path = external/SDL
+	url = https://github.com/libsdl-org/SDL.git
