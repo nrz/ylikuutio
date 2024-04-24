@@ -369,8 +369,8 @@ namespace yli::ontology
         {
             // The main simulation loop works in the following way:
             // 1. Read and process inputs.
-            // 2. Process physics.
-            // 3. Process AI.
+            // 2. Process AI.
+            // 3. Process physics.
             // 4. Update information about current location and orientation (for rendering).
             // 5. Render.
             const double current_time_in_main_loop = yli::time::get_time();
@@ -587,13 +587,13 @@ namespace yli::ontology
                     }
                 }
 
-                // 2. Process physics.
-                // Gravity etc. physical phenomena.
-                this->do_physics();
-
-                // 3. Process AI.
+                // 2. Process AI.
                 // Intentional actors (AIs and keyboard controlled ones).
                 this->act();
+
+                // 3. Process physics.
+                // Gravity etc. physical phenomena.
+                this->do_physics();
 
                 // 4. Update information about current location and orientation (for rendering).
 
