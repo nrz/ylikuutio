@@ -1,14 +1,17 @@
 Vulkan
 https://vkguide.dev/
 
+Vulkan Tutorial
+https://vulkan-tutorial.com/
+
+Vulkan Documentation
+https://docs.vulkan.org/
+
 Bindless:
 https://henriquegois.dev/posts/bindless-resources-in-vulkan/
 https://blog.traverseresearch.nl/bindless-rendering-setup-afeb678d77fc
 https://chunkstories.xyz/blog/a-note-on-descriptor-indexing/
 https://henriquegois.dev/posts/bindless-resources-in-vulkan/
-
-Vulkan Tutorial
-https://vulkan-tutorial.com/
 
 Yet another blog explaining Vulkan synchronization
 https://themaister.net/blog/2019/08/14/yet-another-blog-explaining-vulkan-synchronization/
