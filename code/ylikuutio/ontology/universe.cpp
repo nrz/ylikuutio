@@ -367,6 +367,12 @@ namespace yli::ontology
 
         while (!this->is_exit_requested)
         {
+            // The main simulation loop works in the following way:
+            // 1. Read and process inputs.
+            // 2. Process physics.
+            // 3. Process AI.
+            // 4. Update information about current location and orientation (for rendering).
+            // 5. Render.
             const double current_time_in_main_loop = yli::time::get_time();
 
             if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0 / this->max_fps))
@@ -418,6 +424,7 @@ namespace yli::ontology
                     return;
                 }
 
+                // 1. Read and process inputs.
                 // Poll all SDL events.
                 while (SDL_PollEvent(&sdl_event))
                 {
@@ -580,11 +587,15 @@ namespace yli::ontology
                     }
                 }
 
+                // 2. Process physics.
                 // Gravity etc. physical phenomena.
                 this->do_physics();
 
+                // 3. Process AI.
                 // Intentional actors (AIs and keyboard controlled ones).
                 this->act();
+
+                // 4. Update information about current location and orientation (for rendering).
 
                 if (angles_and_coordinates_text_2d != nullptr)
                 {
@@ -664,6 +675,7 @@ namespace yli::ontology
                     }
                 }
 
+                // 5. Render.
                 // Render the `Universe`.
                 this->render();
 
