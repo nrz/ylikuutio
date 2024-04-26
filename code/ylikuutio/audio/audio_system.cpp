@@ -22,9 +22,9 @@
 #include "soloud_wavstream.h"
 
 // Include standard headers
-#include <iostream>      // std::cout, std::cerr
-#include <list>          // std::list
-#include <string>        // std::string
+#include <iostream> // std::cout, std::cerr
+#include <list>     // std::list
+#include <string>   // std::string
 
 namespace yli::audio
 {
