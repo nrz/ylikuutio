@@ -12,8 +12,8 @@
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
-- [ ] VULKAN Add Vulkan support.
-- [ ] OPENGL Remove OpenGL support.
+- [ ] VULKAN/RENDERING Add Vulkan support.
+- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
