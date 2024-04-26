@@ -59,12 +59,12 @@ namespace yli::ontology
 
     std::size_t Waypoint::get_number_of_children() const
     {
-        return 0; // TODO: modify this line if this class has children!
+        return 0; // `Waypoint` has no children.
     }
 
     std::size_t Waypoint::get_number_of_descendants() const
     {
-        return 0; // TODO: modify this line if this class has children!
+        return 0; // `Waypoint` has no children.
     }
 
     yli::ontology::Scene* Waypoint::get_scene() const
