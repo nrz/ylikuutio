@@ -22,7 +22,7 @@
 #include "soloud_wavstream.h"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cerr
+#include <iostream> // std::cerr
 #include <list>     // std::list
 #include <string>   // std::string
 
