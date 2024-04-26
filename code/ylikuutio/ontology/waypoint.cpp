@@ -54,7 +54,7 @@ namespace yli::ontology
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Waypoint*";
-        // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!
+        this->can_be_erased = true;
     }
 
     std::size_t Waypoint::get_number_of_children() const
