@@ -42,7 +42,7 @@ namespace yli::memory
             // `MemoryStorage` instance takes care of single memory storage.
 
             public:
-                explicit MemoryStorage(yli::memory::GenericMemoryAllocator& allocator, const std::size_t storage_i)
+                MemoryStorage(yli::memory::GenericMemoryAllocator& allocator, const std::size_t storage_i)
                     : allocator { allocator },
                     storage_i { storage_i }
                 {
