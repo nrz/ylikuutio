@@ -73,17 +73,18 @@ namespace yli::data
         WIDGET              = 131,
         CAMERA              = 132,
         CAMERAWIDGET        = 133,
-        // `yli::ontology` datatypes, 'brain' path.
-        BRAIN                 = 140,
-        WAYPOINT              = 141,
         // `yli::ontology` datatypes, 'ecosystem' path.
         ECOSYSTEM             = 150,
-        // `yli::ontology` datatypes, 'simple' path.
+        // `yli::ontology` datatypes, 'scene' path.
         SCENE                 = 160,
-        PIPELINE              = 161,
-        MATERIAL              = 162,
-        SPECIES               = 163,
-        OBJECT                = 164,
+        // `yli::ontology` datatypes, 'brain' path.
+        BRAIN                 = 161,
+        WAYPOINT              = 162,
+        // `yli::ontology` datatypes, 'simple' path.
+        PIPELINE              = 165,
+        MATERIAL              = 166,
+        SPECIES               = 167,
+        OBJECT                = 168,
         // `yli::ontology` datatypes, 'heightmap' path.
         HEIGHTMAP             = 170,
         HEIGHTMAP_SHEET       = 171,
