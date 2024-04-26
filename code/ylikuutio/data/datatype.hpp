@@ -108,10 +108,10 @@ namespace yli::data
         // `yli::ontology` datatypes, 'input' path.
         INPUT_MODE                  = 230,
         KEY_BINDING                 = 231,
-        // `yli::ontology` datatypes, 'audio' path.
-        AUDIO_TRACK                 = 240,
         // `yli::ontology` datatypes, 'track' path.
-        PLAYLIST                    = 250,
+        PLAYLIST                    = 240,
+        // `yli::ontology` datatypes, 'audio' path.
+        AUDIO_TRACK                 = 250,
         // `yli::ontology` datatypes, 'console' path.
         CONSOLE                     = 260,
         CONSOLE_CALLBACK_ENGINE     = 261,
