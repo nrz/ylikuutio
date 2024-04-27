@@ -72,7 +72,7 @@ namespace hirvi
         WINDOW              = 130,
         WIDGET              = 131,
         CAMERA              = 132,
-        CAMERAWIDGET        = 133,
+        CAMERA_WIDGET       = 133,
         // `yli::ontology` datatypes, 'ecosystem' path.
         ECOSYSTEM             = 150,
         // `yli::ontology` datatypes, 'scene' path.
