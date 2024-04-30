@@ -296,6 +296,10 @@ namespace yli::ontology
                 return callback_parameter;
             }
 
+            // TODO: implement `create_window` here!
+
+            // TODO: implement `create_widget` here!
+
             yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const override
             {
                 using EcosystemMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
@@ -450,6 +454,8 @@ namespace yli::ontology
                 return camera;
             }
 
+            // TODO: implement `create_camera_widget` here!
+
             yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const override
             {
                 using PipelineMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Pipeline, 256>;
@@ -554,6 +560,10 @@ namespace yli::ontology
                 object->set_local_name(object_struct.local_name);
                 return object;
             }
+
+            // TODO: implement `create_heightmap` here!
+
+            // TODO: implement `create_heightmap_sheet` here!
 
             yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::ModelStruct& model_struct) const override
             {
@@ -876,6 +886,12 @@ namespace yli::ontology
                 return input_mode;
             }
 
+            // TODO: implement `create_key_binding` here!
+
+            // TODO: implement `create_playlist` here!
+
+            // TODO: implement `create_audio_track` here!
+
             yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const override
             {
                 using ConsoleMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
@@ -997,6 +1013,10 @@ namespace yli::ontology
                 console_callback_parameter->set_local_name(console_callback_parameter_struct.local_name);
                 return console_callback_parameter;
             }
+
+            // TODO: implement `create_graph` here!
+
+            // TODO: implement `create_node` here!
 
             yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const override
             {
