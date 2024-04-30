@@ -26,6 +26,7 @@
 #include <exception> // try, catch, std::exception
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::unique_ptr
+#include <string>    // std::string
 
 namespace yli::core
 {
