@@ -28,6 +28,9 @@
 #include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
+#include "brain.hpp"
+#include "waypoint.hpp"
+#include "camera.hpp"
 #include "pipeline.hpp"
 #include "material.hpp"
 #include "species.hpp"
@@ -53,16 +56,16 @@
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "shapeshifter_form.hpp"
-#include "camera.hpp"
 #include "compute_task.hpp"
-#include "brain.hpp"
-#include "waypoint.hpp"
 #include "variable_struct.hpp"
 #include "callback_engine_struct.hpp"
 #include "callback_object_struct.hpp"
 #include "callback_parameter_struct.hpp"
 #include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
+#include "brain_struct.hpp"
+#include "waypoint_struct.hpp"
+#include "camera_struct.hpp"
 #include "pipeline_struct.hpp"
 #include "material_struct.hpp"
 #include "model_struct.hpp"
@@ -80,10 +83,7 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "lisp_function_struct.hpp"
-#include "camera_struct.hpp"
 #include "compute_task_struct.hpp"
-#include "brain_struct.hpp"
-#include "waypoint_struct.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -296,90 +296,6 @@ namespace yli::ontology
                 return callback_parameter;
             }
 
-            yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const override
-            {
-                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
-
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CAMERA));
-                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Camera* const camera = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        camera_struct,
-                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_cameras : nullptr),
-                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
-
-                camera->set_global_name(camera_struct.global_name);
-                camera->set_local_name(camera_struct.local_name);
-                return camera;
-            }
-
-            yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const override
-            {
-                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
-
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CAMERA));
-                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Camera* const camera = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        camera_struct,
-                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_default_camera : nullptr),
-                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
-
-                camera->set_global_name(camera_struct.global_name);
-                camera->set_local_name(camera_struct.local_name);
-                return camera;
-            }
-
-            yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const override
-            {
-                using BrainMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
-
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<BrainMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::BRAIN));
-                BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Brain* const brain = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        brain_struct,
-                        (brain_struct.parent != nullptr ? &brain_struct.parent->parent_of_brains : nullptr));
-
-                brain->set_global_name(brain_struct.global_name);
-                brain->set_local_name(brain_struct.local_name);
-                return brain;
-            }
-
-            yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const override
-            {
-                using WaypointMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
-
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<WaypointMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::WAYPOINT));
-                WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Waypoint* const waypoint = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        waypoint_struct,
-                        (waypoint_struct.scene != nullptr ? &waypoint_struct.scene->parent_of_waypoints : nullptr),
-                        // `Brain` master.
-                        (waypoint_struct.brain != nullptr ? waypoint_struct.brain->get_generic_master_module() : nullptr));
-
-                waypoint->set_global_name(waypoint_struct.global_name);
-                waypoint->set_local_name(waypoint_struct.local_name);
-                return waypoint;
-            }
-
             yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const override
             {
                 using EcosystemMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
@@ -448,6 +364,90 @@ namespace yli::ontology
                 }
 
                 return scene;
+            }
+
+            yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const override
+            {
+                using BrainMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<BrainMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::BRAIN));
+                BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::Brain* const brain = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        brain_struct,
+                        (brain_struct.parent != nullptr ? &brain_struct.parent->parent_of_brains : nullptr));
+
+                brain->set_global_name(brain_struct.global_name);
+                brain->set_local_name(brain_struct.local_name);
+                return brain;
+            }
+
+            yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const override
+            {
+                using WaypointMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<WaypointMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::WAYPOINT));
+                WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::Waypoint* const waypoint = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        waypoint_struct,
+                        (waypoint_struct.scene != nullptr ? &waypoint_struct.scene->parent_of_waypoints : nullptr),
+                        // `Brain` master.
+                        (waypoint_struct.brain != nullptr ? waypoint_struct.brain->get_generic_master_module() : nullptr));
+
+                waypoint->set_global_name(waypoint_struct.global_name);
+                waypoint->set_local_name(waypoint_struct.local_name);
+                return waypoint;
+            }
+
+            yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const override
+            {
+                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::CAMERA));
+                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::Camera* const camera = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        camera_struct,
+                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_cameras : nullptr),
+                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
+
+                camera->set_global_name(camera_struct.global_name);
+                camera->set_local_name(camera_struct.local_name);
+                return camera;
+            }
+
+            yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const override
+            {
+                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::CAMERA));
+                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::Camera* const camera = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        camera_struct,
+                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_default_camera : nullptr),
+                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
+
+                camera->set_global_name(camera_struct.global_name);
+                camera->set_local_name(camera_struct.local_name);
+                return camera;
             }
 
             yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const override

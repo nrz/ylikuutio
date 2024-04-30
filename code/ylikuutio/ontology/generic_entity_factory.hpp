@@ -34,11 +34,11 @@ namespace yli::ontology
     class CallbackEngine;
     class CallbackObject;
     class CallbackParameter;
-    class Camera;
-    class Brain;
-    class Waypoint;
     class Ecosystem;
     class Scene;
+    class Brain;
+    class Waypoint;
+    class Camera;
     class Pipeline;
     class Material;
     class Species;
@@ -68,6 +68,9 @@ namespace yli::ontology
     struct VariableStruct;
     struct EcosystemStruct;
     struct SceneStruct;
+    struct BrainStruct;
+    struct WaypointStruct;
+    struct CameraStruct;
     struct PipelineStruct;
     struct MaterialStruct;
     struct ModelStruct;
@@ -86,10 +89,7 @@ namespace yli::ontology
     struct TextStruct;
     struct LispFunctionStruct;
     struct CallbackParameterStruct;
-    struct CameraStruct;
     struct ComputeTaskStruct;
-    struct BrainStruct;
-    struct WaypointStruct;
 
     class GenericEntityFactory
     {
@@ -110,6 +110,10 @@ namespace yli::ontology
 
             virtual yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const = 0;
             virtual yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const = 0;
+            virtual yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const = 0;
+            virtual yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const = 0;
+            virtual yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
+            virtual yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
             virtual yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const = 0;
             virtual yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const = 0;
             virtual yli::ontology::Species* create_species(const yli::ontology::ModelStruct& model_struct) const = 0;
@@ -140,11 +144,7 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
                     const yli::data::AnyValue& any_value) const = 0;
             virtual yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const = 0;
-            virtual yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
-            virtual yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
             virtual yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const = 0;
-            virtual yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const = 0;
-            virtual yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const = 0;
     };
 }
 
