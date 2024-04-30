@@ -126,7 +126,21 @@ int main(const int argc, const char* const argv[]) try
         return EXIT_FAILURE;
     }
 
-    std::cout << "Application exited successfully!\n";
+    const std::string application_name = application->get_name();
+    const std::string application_version = application->get_version();
+
+    if (!application_name.empty() && !application_version.empty())
+    {
+        std::cout << application_name << " " << application_version << " exited successfully!\n";
+    }
+    else if (!application_name.empty())
+    {
+        std::cout << application_name << " exited successfully!\n";
+    }
+    else
+    {
+        std::cout << "Application exited successfully!\n";
+    }
     return EXIT_SUCCESS;
 }
 catch (const std::exception& exception)
