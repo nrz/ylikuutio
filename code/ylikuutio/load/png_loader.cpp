@@ -26,7 +26,6 @@
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
-#include <limits>    // std::numeric_limits
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
