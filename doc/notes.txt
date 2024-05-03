@@ -150,3 +150,6 @@ DNEG: Gravitational Lensing by Spinning Black Holes
 https://www.dneg.com/black-holes/
 https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001
 https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001/pdf
+
+Parallelizing the Naughty Dog engine using fibers
+https://www.youtube.com/watch?v=HIVBhKj7gQU
