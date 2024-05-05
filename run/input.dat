@@ -1,0 +1,58 @@
+# On any line, # is comment sign. The comment continues until the next newline.
+#
+# Global parameters section.
+#
+# Supported global parameters:
+# number_of_objects
+# length_of_timestep
+# total_length_of_simulation
+# print_interval
+# save_interval
+#
+# All these global parameters are required.
+# For now, they must be given in this exact order. See the format below for an example.
+
+# Global parameter name           Effect of the parameter
+#     number_of_objects           Limits the number of objects. Set the value to Inf to read in all objects given in the input file.
+#     length_of_timestep          The length of each timestep.  Unit: hours.
+#     total_length_of_simulation  The length of the simulation: Unit: days.
+#     print_interval              The interval (in iterations) between which output is printed during computation. Unit: iterations.
+#     save_interval               The interval (in iterations) between which output is saved into file during computation. Unit: iterations.
+#
+# Note: number of timesteps is determined by the given total length of the simulation and the length of a timestep.
+
+# mass, x, y, z, vx, vy, vz, name, apparent_size, red, green, blue
+#
+# Description:
+# mass          kg
+# x             km
+# y             km
+# z             km
+# vx            km/s
+# vy            km/s
+# vz            km/s
+# apparent_size for visualization
+# red           for visualization
+# green         for visualization
+# blue          for visualization
+
+begin global_parameters
+number_of_objects, length_of_timestep, total_length_of_simulation, print_interval, save_interval
+                9,              24.00,                    4331.00,             10,            10
+end global_parameters
+
+begin objects # Note: objects' data based on ephemeres from https://ssd.jpl.nasa.gov/horizons/app.html#/ , situation 2017-01-01 00:00, origin is in Solar System Barycenter.
+    mass,                       x,                      y,                      z,                     vx,                     vy,                    vz,         name, apparent_size, red, green, blue
+1.9885E30,  5.063634398940383E+05,  5.888659190689115E+05, -2.333966614386419E+04, -4.528767789366911E-03,  1.162145032708252E-02, 9.254269699040044E-05, "Sun"       ,           100,   1,     1,    0
+1.8982E27, -8.012983779832726E+08, -1.509045528216324E+08,  1.854710240352888E+07,  2.266627915224318E+00, -1.222160272281614E+01, 8.962974856530082E-05, "Jupiter"   ,            12,0.75,  0.75, 0.75
+ 3.302E23, -2.094177425545749E+07,  4.303118380857060E+07,  5.412404672631748E+06, -5.327883845842172E+01, -2.011402526385664E+01, 3.243060896891674E+00, "Mercury"   ,             1,   1,     1,    1
+48.685E23,  7.041709866480905E+07,  8.299083303086722E+07, -2.927733370557230E+06, -2.681660118625607E+01,  2.251800822163271E+01, 1.855924194494921E+00, "Venus"     ,             1,   1,     1,    1
+5.9729E24, -2.636345628507423E+07,  1.452193274572671E+08, -2.882793482947350E+04, -2.978625056306863E+01, -5.548408846120549E+00, 1.465196094178278E-03, "Earth"     ,             1,   1,     1,    1
+6.4171E23,  2.031670282513592E+08,  5.846452753792693E+07, -3.784244709588703E+06, -5.730507889221716E+00,  2.538300685702951E+01, 6.722936018298071E-01, "Mars"      ,             1,   1,     1,    1
+5.6834E26, -2.790166426636512E+08, -1.475897918785788E+09,  3.676629107874006E+07,  8.960458302518303E+00, -1.825209796942239E+00,-3.246327588806924E-01, "Saturn"    ,             1,   1,     1,    1
+86.813E24,  2.744017362062227E+09,  1.171374240006908E+09, -3.119892110196489E+07, -2.723695655070985E+00,  5.945761111724247E+00, 5.712406067514930E-02, "Uranus"    ,             1,   1,     1,    1
+102.41E24,  4.239524077360949E+09, -1.449526086245994E+09, -6.785383009135115E+07,  1.722550255012465E+00,  5.175306738593584E+00,-1.464576425701742E-01, "Neptune"   ,             1,   1,     1,    1
+        0,                      0,                      0,                      0,                      0,                      0,                     0, "Luna"      ,             1,   1,     1,    1
+        0,                      0,                      0,                      0,                      0,                      0,                     0, "Oumuamua"  ,             1,   1,     1,    1
+        0,                      0,                      0,                      0,                      0,                      0,                     0, "2I/Borisov",             1,   1,     1,    1
+end objects

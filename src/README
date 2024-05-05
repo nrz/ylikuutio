@@ -1,0 +1,13 @@
+The code should be self-explanatory. Here are some links which I found useful while doing this.
+
+About mixing of Fortran and C++ in a CMake project
+https://enccs.github.io/cmake-workshop/cxx-fortran/
+
+About Fortran/C interface in CMake
+https://cmake.org/cmake/help/latest/module/FortranCInterface.html
+
+Mixing C/C++ and Fortran together
+http://www.yolinux.com/TUTORIALS/LinuxTutorialMixingFortranAndC.html
+
+Return string from Fortran to C++
+https://stackoverflow.com/questions/44412718/return-string-from-fortran-to-c

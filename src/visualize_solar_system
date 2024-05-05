@@ -1,0 +1,90 @@
+#!/usr/bin/python3
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+print("Hello from Visualize planetary motion!")
+
+# Sun
+sun_trayectory_x = np.loadtxt("sun_processed_output.txt", usecols = (1))
+sun_trayectory_y = np.loadtxt("sun_processed_output.txt", usecols = (2))
+sun_trayectory_z = np.loadtxt("sun_processed_output.txt", usecols = (3))
+
+# Mercury
+mercury_trayectory_x = np.loadtxt("mercury_processed_output.txt", usecols = (1))
+mercury_trayectory_y = np.loadtxt("mercury_processed_output.txt", usecols = (2))
+mercury_trayectory_z = np.loadtxt("mercury_processed_output.txt", usecols = (3))
+
+# Venus
+venus_trayectory_x = np.loadtxt("venus_processed_output.txt", usecols = (1))
+venus_trayectory_y = np.loadtxt("venus_processed_output.txt", usecols = (2))
+venus_trayectory_z = np.loadtxt("venus_processed_output.txt", usecols = (3))
+
+# Earth
+earth_trayectory_x = np.loadtxt("earth_processed_output.txt", usecols = (1))
+earth_trayectory_y = np.loadtxt("earth_processed_output.txt", usecols = (2))
+earth_trayectory_z = np.loadtxt("earth_processed_output.txt", usecols = (3))
+
+# Mars
+mars_trayectory_x = np.loadtxt("mars_processed_output.txt", usecols = (1))
+mars_trayectory_y = np.loadtxt("mars_processed_output.txt", usecols = (2))
+mars_trayectory_z = np.loadtxt("mars_processed_output.txt", usecols = (3))
+
+# Jupiter
+jupiter_trayectory_x = np.loadtxt("jupiter_processed_output.txt", usecols = (1))
+jupiter_trayectory_y = np.loadtxt("jupiter_processed_output.txt", usecols = (2))
+jupiter_trayectory_z = np.loadtxt("jupiter_processed_output.txt", usecols = (3))
+
+# Saturn
+saturn_trayectory_x = np.loadtxt("saturn_processed_output.txt", usecols = (1))
+saturn_trayectory_y = np.loadtxt("saturn_processed_output.txt", usecols = (2))
+saturn_trayectory_z = np.loadtxt("saturn_processed_output.txt", usecols = (3))
+
+# Uranus
+uranus_trayectory_x = np.loadtxt("uranus_processed_output.txt", usecols = (1))
+uranus_trayectory_y = np.loadtxt("uranus_processed_output.txt", usecols = (2))
+uranus_trayectory_z = np.loadtxt("uranus_processed_output.txt", usecols = (3))
+
+# Neptune
+neptune_trayectory_x = np.loadtxt("neptune_processed_output.txt", usecols = (1))
+neptune_trayectory_y = np.loadtxt("neptune_processed_output.txt", usecols = (2))
+neptune_trayectory_z = np.loadtxt("neptune_processed_output.txt", usecols = (3))
+
+
+n_rows = len(sun_trayectory_x)
+print("Number of rows in data: " + str(n_rows))
+
+# Open figure
+fig = plt.figure(figsize=(20,15), constrained_layout = True)
+ax = fig.add_subplot(n_rows, projection = '3d')
+
+# Sun
+ax.scatter(sun_trayectory_x, sun_trayectory_y, sun_trayectory_z, color = 'yellow')
+
+# Mercury
+ax.scatter(mercury_trayectory_x, mercury_trayectory_y, mercury_trayectory_z, color = 'gray')
+
+# Venus
+ax.scatter(venus_trayectory_x, venus_trayectory_y, venus_trayectory_z, color = 'pink')
+
+# Earth
+ax.scatter(earth_trayectory_x, earth_trayectory_y, earth_trayectory_z, color = 'blue')
+
+# Mars
+ax.scatter(mars_trayectory_x, mars_trayectory_y, mars_trayectory_z, color = 'red')
+
+# Jupiter
+ax.scatter(jupiter_trayectory_x, jupiter_trayectory_y, jupiter_trayectory_z, color = 'brown')
+
+# Saturn
+ax.scatter(saturn_trayectory_x, saturn_trayectory_y, saturn_trayectory_z, color = 'yellow')
+
+# Uranus
+ax.scatter(uranus_trayectory_x, uranus_trayectory_y, uranus_trayectory_z, color = 'blue')
+
+# Neptune
+ax.scatter(neptune_trayectory_x, neptune_trayectory_y, neptune_trayectory_z, color = 'blue')
+
+plt.savefig('trayectories2.pdf', bbox_inches = 'tight', dpi = 300)
+plt.show()

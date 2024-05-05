@@ -1,0 +1,2 @@
+#!/bin/bash
+cat output.dat | grep -E '(^Iteration index)|(^name)|(^x)|(^y)|(^z)' | tr '\n' ' ' | sed 's@Iteration index *= *@\n@g' | awk '{ print $1 " " $4 " " $7 " " $10 " " $13 " " $16 " "$19 " " $22 " " $25}' | awk 'NF' >processed_output.txt

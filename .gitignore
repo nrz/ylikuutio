@@ -6,3 +6,12 @@
 
 # Vim swap files.
 .*.swp
+
+# Generated PDF files.
+*.pdf
+
+# Fortran modules
+*.mod
+
+# LaTeX temporary files
+*.aux

@@ -8,6 +8,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(ylikuutio VERSION 0.0.10)
+project(ylikuutio LANGUAGES C CXX Fortran)
+
+include(FortranCInterface)
+FortranCInterface_VERIFY(CXX)
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
@@ -355,6 +359,18 @@ configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 4195
 # Image files for tests.
 configure_file(res/height_maps/noise256x256.png noise256x256.png COPYONLY)
 configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
+
+# Copy data files for Avaruus.
+configure_file(run/input.dat                   input.dat COPYONLY)
+configure_file(run/empty_file_for_testing.dat  empty_file_for_testing.dat COPYONLY)
+configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY)
+configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
+
+# Copy scripts for Avaruus.
+configure_file(src/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
+configure_file(src/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
+configure_file(src/visualize_2_objects               visualize_2_objects COPYONLY)
+configure_file(src/visualize_solar_system            visualize_solar_system COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
@@ -925,6 +941,31 @@ add_executable(dining_philosophers
     )
 target_link_libraries(dining_philosophers pthread)
 
+# Planetary simulation library
+add_library(planetary_simulation STATIC
+    src/constants.f90
+    src/file.f90
+    src/global_parameters.f90
+    src/my_kind.f90
+    src/object.f90
+    src/physics.f90
+    src/parser.f90
+    src/planetary_motion.f90
+    src/planetary_system.f90
+    src/string.f90
+    )
+    target_compile_features(planetary_simulation PUBLIC cxx_std_20)
+    set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
+
+    FortranCInterface_HEADER(src/tests/planetary_simulation.h
+        planet
+        planet)
+
+add_executable(planetary_motion
+    src/planetary_motion.f90
+)
+target_link_libraries(planetary_motion planetary_simulation)
+
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
@@ -1022,6 +1063,19 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
 
+    set(AVARUUS_UNIT_TESTS
+        # Tests for Avaruus.
+        src/tests/test_read_file.cpp
+        src/tests/test_get_line.cpp
+        src/tests/test_get_line_i_with_n_token_statement.cpp
+        src/tests/test_get_has_line_code.cpp
+        src/tests/test_get_first_token.cpp
+        src/tests/test_get_n_of_code_lines_between.cpp
+        src/tests/test_get_nth_token.cpp
+        src/tests/test_parse.cpp
+        src/tests/test_parse_global_parameters.cpp
+    )
+
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
     add_executable(test_ylikuutio code/ylikuutio/tests/test_main.cpp ${YLIKUUTIO_UNIT_TESTS})
@@ -1029,6 +1083,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
+
+    add_executable(test_avaruus src/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
+    set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
+
+    target_compile_features(test_avaruus PUBLIC cxx_std_20)
+    set_target_properties(test_avaruus PROPERTIES CXX_EXTENSIONS OFF)
+    target_link_libraries(test_avaruus gtest_main planetary_simulation)
 
     if (DEFINED "PNG_LIBRARIES")
         target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
