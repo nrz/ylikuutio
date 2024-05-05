@@ -109,6 +109,7 @@
 - [ ] In `yli_server`, implement sending result files for players over the network.
 
 ## Tasks which are needed for Avaruus
+- [ ] AVARUUS/YLIAVARUUS Port N-body Newtonian star simulation into C++
 - [ ] MATH Plan n-body star simulation of Milky Way stars.
 - [ ] MATH Plan the simulation of black holes.
 - [ ] MATH Plan the simulation of merging of 2 black holes.
@@ -327,3 +328,4 @@
 - [x] LIBRARIES/AUDIO/EVALUATE Evaluate SoLoud audio library: https://solhsa.com/soloud/
 - [x] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
 - [x] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
+- [x] AVARUUS/MATH/PHYSICS Implement n-body Newtonian star simulation of Milky Way stars in Fortran.
