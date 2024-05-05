@@ -13,7 +13,7 @@ jobs:
       - run: echo "Running cmake for GCC native compiler"
       - run: CC=$(which gcc) CXX=$(which g++) cmake -Bbuild_native_gcc -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: cmake --build build_native_gcc
-      - run: cd build_native_gcc && ./test_ylikuutio
+      - run: cd build_native_gcc && ./test_ylikuutio && ./test_avaruus
   build-and-test-on-ubuntu-clang-native-compiler:
     runs-on: ubuntu-22.04
     steps:
@@ -29,7 +29,7 @@ jobs:
       - run: echo "Running cmake for Clang native compiler"
       - run: CC=$(which clang-17) CXX=$(which clang++-17) cmake -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: cmake --build build_native_clang
-      - run: cd build_native_clang && ./test_ylikuutio
+      - run: cd build_native_clang && ./test_ylikuutio && ./test_avaruus
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
     runs-on: ubuntu-22.04
     steps:
