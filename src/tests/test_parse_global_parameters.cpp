@@ -49,7 +49,6 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
     ASSERT_GT(end_global_parameters_line_i, begin_global_parameters_line_i);
     ASSERT_GT(begin_objects_line_i, end_global_parameters_line_i);
     ASSERT_GT(end_objects_line_i, begin_objects_line_i);
-    free(content);
 
     int global_parameters_header_line_i = 0;
     int global_parameters_value_line_i = 0;
@@ -69,6 +68,7 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
             &total_length_of_simulation,
             &print_interval,
             &save_interval);
+    free(content);
 
     ASSERT_EQ(n_objects, 9);
     ASSERT_EQ(length_of_timestep, 24.00);
