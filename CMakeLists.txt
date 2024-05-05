@@ -367,10 +367,10 @@ configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY
 configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
 
 # Copy scripts for Avaruus.
-configure_file(src/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
-configure_file(src/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
-configure_file(src/visualize_2_objects               visualize_2_objects COPYONLY)
-configure_file(src/visualize_solar_system            visualize_solar_system COPYONLY)
+configure_file(code/avaruus/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
+configure_file(code/avaruus/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
+configure_file(code/avaruus/visualize_2_objects               visualize_2_objects COPYONLY)
+configure_file(code/avaruus/visualize_solar_system            visualize_solar_system COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
@@ -943,26 +943,26 @@ target_link_libraries(dining_philosophers pthread)
 
 # Planetary simulation library
 add_library(planetary_simulation STATIC
-    src/constants.f90
-    src/file.f90
-    src/global_parameters.f90
-    src/my_kind.f90
-    src/object.f90
-    src/physics.f90
-    src/parser.f90
-    src/planetary_motion.f90
-    src/planetary_system.f90
-    src/string.f90
+    code/avaruus/constants.f90
+    code/avaruus/file.f90
+    code/avaruus/global_parameters.f90
+    code/avaruus/my_kind.f90
+    code/avaruus/object.f90
+    code/avaruus/physics.f90
+    code/avaruus/parser.f90
+    code/avaruus/planetary_motion.f90
+    code/avaruus/planetary_system.f90
+    code/avaruus/string.f90
     )
     target_compile_features(planetary_simulation PUBLIC cxx_std_20)
     set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
 
-    FortranCInterface_HEADER(src/tests/planetary_simulation.h
+    FortranCInterface_HEADER(code/avaruus/tests/planetary_simulation.h
         planet
         planet)
 
 add_executable(planetary_motion
-    src/planetary_motion.f90
+    code/avaruus/planetary_motion.f90
 )
 target_link_libraries(planetary_motion planetary_simulation)
 
@@ -1065,15 +1065,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     set(AVARUUS_UNIT_TESTS
         # Tests for Avaruus.
-        src/tests/test_read_file.cpp
-        src/tests/test_get_line.cpp
-        src/tests/test_get_line_i_with_n_token_statement.cpp
-        src/tests/test_get_has_line_code.cpp
-        src/tests/test_get_first_token.cpp
-        src/tests/test_get_n_of_code_lines_between.cpp
-        src/tests/test_get_nth_token.cpp
-        src/tests/test_parse.cpp
-        src/tests/test_parse_global_parameters.cpp
+        code/avaruus/tests/test_read_file.cpp
+        code/avaruus/tests/test_get_line.cpp
+        code/avaruus/tests/test_get_line_i_with_n_token_statement.cpp
+        code/avaruus/tests/test_get_has_line_code.cpp
+        code/avaruus/tests/test_get_first_token.cpp
+        code/avaruus/tests/test_get_n_of_code_lines_between.cpp
+        code/avaruus/tests/test_get_nth_token.cpp
+        code/avaruus/tests/test_parse.cpp
+        code/avaruus/tests/test_parse_global_parameters.cpp
     )
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
@@ -1084,7 +1084,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
-    add_executable(test_avaruus src/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
+    add_executable(test_avaruus code/avaruus/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
     set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
     target_compile_features(test_avaruus PUBLIC cxx_std_20)
