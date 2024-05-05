@@ -208,8 +208,8 @@ contains
             call c_f_pointer(temp_line, fortran_temp_line, [ line_sz ])
 
             if (line_sz .lt. 0) then
-                write(stdout, "(A81)") &
-                    "Parse error in `objects` block! This should never happen! The line was not found!"
+                write(stdout, "(A91)") &
+                    "Parse error in `global_parameters` block! This should never happen! The line was not found!"
                 deallocate(fortran_temp_line)
                 return
             end if
