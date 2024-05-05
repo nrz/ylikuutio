@@ -1084,7 +1084,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
-    add_executable(test_avaruus code/avaruus/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
+    add_executable(test_avaruus code/ylikuutio/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
     set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
     target_compile_features(test_avaruus PUBLIC cxx_std_20)
