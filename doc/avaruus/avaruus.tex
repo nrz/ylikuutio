@@ -1,0 +1,183 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% \usepackage[finnish]{babel}
+
+\usepackage{amsmath}
+
+\usepackage{tabularx}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}, exponent-product=\ensuremath{\cdot}}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language=Fortran}
+
+\usepackage{placeins} % FloatBarrier
+
+\begin{document}
+
+\begin{titlepage}
+    \vspace*{\fill}
+    \begin{center}
+        \large
+        Planetary motion simulator
+        \normalsize
+    \end{center}
+    \vfill
+\end{titlepage}
+\date{}
+
+\section*{Introduction}
+Planetary motion has been in the interest of the humankind for a very long time. Early scientists who were interested in the planetary motion include, among others, Tyko Brahe, Johannes Kepler, and Isaac Newton. Tyko Brahe made particularly precise observations of the planets, which enabled Johannes Kepler to find laws which describe planets' motion, but he was not able explain his findings. Isaac Newton created the foundation of physics and was able to create new laws which explain Kepler's findings. The present work attempts to simulate planetary motion using Newtonian mechanics.
+
+\section*{Methods}
+Velocity Verlet algorithm was used to numerically integrate celestial objects' trayectories using Newtonian mechanics.
+
+\section*{Implementation of the methods}
+The main effort of the development went in the implementation of the working and flexible input file format and a parser for it. As a result, a lot of unit tests were needed to ensure the correct behavior of the program.
+
+The example input file \textbf{input.dat} best illustrates the input file format and how to use it. Its format is quite flexible. Parser will print errors for almost any invalid input. All \textbf{global parameters} are required. Also for each celestial object all fields are required, even though not all yet in use due to schedule reasons. The file format has been designed to be easily extensible. \textbf{\#} means a comment until end of line. Values can be given using standard Fortran notation with or without decimals or by using base 10 notation.
+
+The example output file \textbf{output.dat} is the result of actual execution of the simulator, so it is exactly what you should get if you have the example input file \textbf{input.dat} as the input.
+
+Some things to note regarding the input file: \textbf{the header lines} inside both \textbf{global parameters} and \textbf{objects} blocks were meant to enable flexible ordering of fields as well as optional fields. However, as time did not permit me to implement such kind of flexibility, the header lines just need to be exactly like that, and all fields are mandatory. Another thing to note is that parser is still quite limited. Even though double quotes are required for the names of celestial objects, spaces are not permitted. Basically the parser considers any space as the end of the previous token, thus e.g. trying to use \hbox{``Sagittarius A*''} as object name will fail, as ``Sagittarius and A*'' will get parsed into different tokens, and A*'' won't correctly parse as \textbf{apparent\textunderscore{}size} (that was meant to be used in visualization together with \textbf{red}, \textbf{green} and \textbf{blue} fields. For the parser the only special characters are newlines (end of line), commas (each comma is its own token), spaces (separates tokens), and tabs (separates tokens).
+
+The chosen approach regarding input reading was to read the entire file into a string (the function \textbf{read\textunderscore{}file} in \textbf{file\textunderscore{}mod}. This had the advantage that possible changes to file during the processing would not affect the processing of the file content. Custom string handling functions (in module \textbf{string\textunderscore{}mod}) and a parser (in module \textbf{parser\textunderscore{}mod}) for the custom input file format were written, along with their corresponding unit tests. Google Test was used for unit testing with unit tests written in C++. This choice was informed by previous experience of using Google Test along with difficulties encountered when trying pFunit (\url{https://github.com/Goddard-Fortran-Ecosystem/pFUnit}) unit test framework for Fortran. All unit tests are written in C++20 and they can be found in \textbf{src/tests} directory.
+
+Unit tests use the following \textbf{*.dat} files for tests (these are copied by running CMake):
+\begin{itemize}
+    \item \textbf{run/empty\textunderscore{}file\textunderscore{}for\textunderscore{}testing.dat}
+    \item \textbf{run/one\textunderscore{}line\textunderscore{}for\textunderscore{}testing.dat}
+    \item \textbf{run/three\textunderscore{}lines\textunderscore{}for\textunderscore{}testing.dat}
+    \item \textbf{run/input.dat}.
+\end{itemize}
+Of these the last one, \textbf{input.dat} is a valid input file. \textbf{./planetary\textunderscore{}motion} requires the input file to be \textbf{input.dat}. Output file is \textbf{output.dat} of which there is an example of Sun-Jupiter simulation results.
+
+In Velocity Verlet implementation's accelaration computation step new acceleration values are first stored in each objects' \textbf{new\textunderscore{}acceleration} field to be used together with the current acceleration values (\textbf{acceleration}) in the computation of new velocity values (\textbf{velocity}). After computing the velocities, the new acceleration values are simply copied to current acceleration values in \textbf{update\textunderscore{}accelerations} function in \textbf{physics\textunderscore{}mod}. Computation is done using \textbf{km}, \textbf{kg}, and \textbf{s} as the base units. \textbf{print\textunderscore{}interval} is \textbf{m} parameter given in the task, and \textbf{save\textunderscore{}interval} is \textbf{k} parameter given in the task. Data are written to the file in the same format as to screen, the only difference is that some additional information that is printed on screen has been left out from the output file to make its further processing more straightforward.
+
+\subsection*{Data structures}
+File content is first read into string \textbf{file\textunderscore{}content} which is a C pointer to enuable unit testing with Google Test like described earlier. It is used in different parsing stages, first in the overall parsing of the file content, and after that also in the parsing of \textbf{global\textunderscore{}parameters} and \textbf{objects} blocks.
+
+After parsing global parameters are stored in an variable of derived type \textbf{global\textunderscore{}parameters} . The variable is called \textbf{my\textunderscore{}global\textunderscore{}parameters} to distinguish it from the corresponding type.
+
+Likewise after parsing objects are stored in an variable of derived type \textbf{planetary\textunderscore{}system} . The variable is called \textbf{my\textunderscore{}planetary\textunderscore{}system} to distinguish it from the corresponding type. Even though name \textbf{planetary\textunderscore{}system} refers to planets and planetary systems, there is no computation specific to planets (or to any other type of celestial objects, for that matter).
+
+\subsection*{Building}
+The recommended way to build is to use CMake. For convenience a \textbf{Makefile} is provided as well, though provided Makefile does not compile unit tests.
+
+Building with Make (these instructions assume that you are in the project's \textbf{run} directory):
+\begin{verbatim}
+make
+\end{verbatim}
+
+Building with CMake (these instructions assume that you are in the project's main directory):
+\begin{verbatim}
+mkdir build
+cd build
+cmake ..
+make
+\end{verbatim}
+
+\subsection*{Execution}
+Independently whether you built using only \textbf{Make} or by using \textbf{CMake} as well:
+\begin{verbatim}
+./planetary_motion
+\end{verbatim}
+
+From here it is expected that you have built using CMake as described above.
+
+In case you built using CMake, you can run unit tests as well. All 91 unit tests should pass at this moment. Note that \textbf{input.dat} and other example files are used by the unit tests so after modifying them some unit will probably fail. Anyway, passing all 91 tests here shows that the program should have compiled correctly.
+\begin{verbatim}
+./test_avaruus
+\end{verbatim}
+
+Then to run the Planetary motion simulator.
+\begin{verbatim}
+./planetary_motion
+\end{verbatim}
+
+A successful execution should end with these 2 lines and produce \textbf{output.dat}:
+
+\begin{verbatim}
+./planetary_motion | tail -n 2
+File was closed successfully.
+Planetary motion simulation successful.
+\end{verbatim}
+
+For visualization using the provided Python programs, the data needs to be converted into a suitable format. These Bash scripts create files for further processing and they should be self-explanatory.
+
+For Sun - Jupiter simulation (set \textbf{number\textunderscore{}of\textunderscore{}objects} to \textbf{2} (Sun and Jupiter are the 2 topmost objects in the \textbf{objects} block of the \textbf{input.dat} for convenience):
+\begin{verbatim}
+./process_output_file_2_objects
+\end{verbatim}
+
+This should produce the file \textbf{processed\textunderscore{}output.txt}.
+
+Then to visualize the data:
+\begin{verbatim}
+./visualize_2_objects
+\end{verbatim}
+
+This should create the file \textbf{trayectories1.pdf}
+
+For the Solar System simulation (set \textbf{number\textunderscore{}of\textunderscore{}objects} to \textbf{9} to do this):
+
+\begin{verbatim}
+./planetary_motion
+\end{verbatim}
+
+A successful execution should again end with these 2 lines and create a \textbf{output.dat}, possibly overwriting an existing one.
+\begin{verbatim}
+./planetary_motion | tail -n 2
+File was closed successfully.
+Planetary motion simulation successful.
+\end{verbatim}
+
+For visualization using the provided Python programs, the data needs again be converted into a suitable format.
+
+\begin{verbatim}
+./process_output_file_solar_system
+\end{verbatim}
+
+This creates the following files:
+\begin{itemize}
+    \item \textbf{sun\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{mercury\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{venus\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{earth\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{mars\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{jupiter\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{saturn\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{uranus\textunderscore{}processed\textunderscore{}output.txt}
+    \item \textbf{neptune\textunderscore{}processed\textunderscore{}output.txt}
+\end{itemize}
+
+Then to visualize the data:
+\begin{verbatim}
+./visualize_solar_system
+\end{verbatim}
+
+This creates file \textbf{trayectories2.pdf}
+
+\section*{Results}
+
+\begin{figure}
+    \includegraphics{trayectories1.pdf}
+    \caption{Sun and Jupiter. 4331 Earth days (1 Jupiter year, about 12 Earth years)}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{trayectories2.pdf}
+    \caption{Sun and all eight planets. 4331 Earth days (1 Jupiter year, about 12 Earth years)}
+\end{figure}
+
+Based on the visualizations, it seems that the simulator works as expected.
+
+\end{document}
