@@ -184,6 +184,8 @@ contains
                 write(stdout, "(A23)") "Writing to file failed!"
             end if
         end do object_loop
+
+        write_to_file = .true.
     end function write_to_file
 
     subroutine update_accelerations(my_planetary_system)
