@@ -8,7 +8,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(ylikuutio VERSION 0.0.10)
-project(ylikuutio LANGUAGES C CXX Fortran)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    project(ylikuutio LANGUAGES C CXX)
+else()
+    project(ylikuutio LANGUAGES C CXX Fortran)
+endif()
 
 include(FortranCInterface)
 FortranCInterface_VERIFY(CXX)
