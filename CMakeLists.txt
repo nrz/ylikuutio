@@ -13,10 +13,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     project(ylikuutio LANGUAGES C CXX)
 else()
     project(ylikuutio LANGUAGES C CXX Fortran)
+    include(FortranCInterface)
+    FortranCInterface_VERIFY(CXX)
 endif()
-
-include(FortranCInterface)
-FortranCInterface_VERIFY(CXX)
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
