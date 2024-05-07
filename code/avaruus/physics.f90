@@ -149,7 +149,7 @@ contains
         type(planetary_system), intent(in) :: my_planetary_system
         integer, intent(in) :: iteration_i
         type(object) :: my_object
-        integer :: ios, i
+        integer :: i
         character(len = 100) :: name_length_string
 
         write(unit_number, "(A20)", advance = "no") "Number of objects = "
@@ -180,9 +180,6 @@ contains
             write(unit_number, "(g0)") my_object % velocity(2)
             write(unit_number, "(A7)", advance = "no") "vz   = "
             write(unit_number, "(g0)") my_object % velocity(3)
-            if (ios .ne. 0) then
-                write(stdout, "(A23)") "Writing to file failed!"
-            end if
         end do object_loop
 
         write_to_file = .true.
