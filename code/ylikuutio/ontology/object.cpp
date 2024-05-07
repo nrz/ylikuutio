@@ -457,7 +457,7 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z(
+    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z(
             yli::ontology::Scene& parent,
             yli::ontology::Species& species,
             const std::string& object_name,
@@ -465,10 +465,10 @@ namespace yli::ontology
             const std::string& y,
             const std::string& z)
     {
-        return yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
+        return yli::ontology::Object::with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
     }
 
-    std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_yaw_pitch(
+    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_yaw_pitch(
             yli::ontology::Scene& parent,
             yli::ontology::Species& species,
             const std::string& object_name,
@@ -478,10 +478,10 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return yli::ontology::Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
+        return yli::ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
-    std::optional<yli::data::AnyValue> Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch(
+    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_roll_yaw_pitch(
             yli::ontology::Scene& parent,
             yli::ontology::Species& species,
             const std::string& object_name,
@@ -503,37 +503,37 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(roll_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_roll_pitch`: invalid value for `roll`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_roll_pitch`: invalid value for `roll`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
-            std::cerr << "ERROR: `Object::create_object_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
+            std::cerr << "ERROR: `Object::with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
             return std::nullopt;
         }
 

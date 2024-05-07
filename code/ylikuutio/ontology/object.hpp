@@ -101,7 +101,7 @@ namespace yli::ontology
 
             // Public callbacks.
 
-            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z(
+            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z(
                     yli::ontology::Scene& parent,
                     yli::ontology::Species& species,
                     const std::string& object_name,
@@ -109,7 +109,7 @@ namespace yli::ontology
                     const std::string& y,
                     const std::string& z);
 
-            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z_yaw_pitch(
+            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
                     yli::ontology::Scene& parent,
                     yli::ontology::Species& species,
                     const std::string& object_name,
@@ -119,7 +119,7 @@ namespace yli::ontology
                     const std::string& yaw,
                     const std::string& pitch);
 
-            static std::optional<yli::data::AnyValue> create_object_with_parent_name_x_y_z_roll_yaw_pitch(
+            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
                     yli::ontology::Scene& parent,
                     yli::ontology::Species& species,
                     const std::string& object_name,

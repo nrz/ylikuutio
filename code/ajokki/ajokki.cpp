@@ -1067,9 +1067,9 @@ namespace ajokki
         this->entity_factory.create_lisp_function_overload("print", *my_console, &yli::ontology::Variable::print_value1);
 
         // Object callbacks.
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::create_object_with_parent_name_x_y_z);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::create_object_with_parent_name_x_y_z_yaw_pitch);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::create_object_with_parent_name_x_y_z_roll_yaw_pitch);
+        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z);
+        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z_yaw_pitch);
+        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch);
 
         // Holobiont callbacks.
         this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z);
