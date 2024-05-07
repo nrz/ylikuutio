@@ -943,18 +943,19 @@ add_executable(dining_philosophers
     )
 target_link_libraries(dining_philosophers pthread)
 
-# Planetary simulation library
-add_library(planetary_simulation STATIC
-    code/avaruus/constants.f90
-    code/avaruus/file.f90
-    code/avaruus/global_parameters.f90
-    code/avaruus/my_kind.f90
-    code/avaruus/object.f90
-    code/avaruus/physics.f90
-    code/avaruus/parser.f90
-    code/avaruus/planetary_motion.f90
-    code/avaruus/planetary_system.f90
-    code/avaruus/string.f90
+if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
+    # Planetary simulation library
+    add_library(planetary_simulation STATIC
+        code/avaruus/constants.f90
+        code/avaruus/file.f90
+        code/avaruus/global_parameters.f90
+        code/avaruus/my_kind.f90
+        code/avaruus/object.f90
+        code/avaruus/physics.f90
+        code/avaruus/parser.f90
+        code/avaruus/planetary_motion.f90
+        code/avaruus/planetary_system.f90
+        code/avaruus/string.f90
     )
     target_compile_features(planetary_simulation PUBLIC cxx_std_20)
     set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
@@ -963,10 +964,11 @@ add_library(planetary_simulation STATIC
         planet
         planet)
 
-add_executable(planetary_motion
-    code/avaruus/planetary_motion.f90
-)
-target_link_libraries(planetary_motion planetary_simulation)
+    add_executable(planetary_motion
+        code/avaruus/planetary_motion.f90
+    )
+    target_link_libraries(planetary_motion planetary_simulation)
+endif()
 
 # Tests
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
@@ -1065,18 +1067,20 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
 
-    set(AVARUUS_UNIT_TESTS
-        # Tests for Avaruus.
-        code/avaruus/tests/test_read_file.cpp
-        code/avaruus/tests/test_get_line.cpp
-        code/avaruus/tests/test_get_line_i_with_n_token_statement.cpp
-        code/avaruus/tests/test_get_has_line_code.cpp
-        code/avaruus/tests/test_get_first_token.cpp
-        code/avaruus/tests/test_get_n_of_code_lines_between.cpp
-        code/avaruus/tests/test_get_nth_token.cpp
-        code/avaruus/tests/test_parse.cpp
-        code/avaruus/tests/test_parse_global_parameters.cpp
-    )
+    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
+        set(AVARUUS_UNIT_TESTS
+            # Tests for Avaruus.
+            code/avaruus/tests/test_read_file.cpp
+            code/avaruus/tests/test_get_line.cpp
+            code/avaruus/tests/test_get_line_i_with_n_token_statement.cpp
+            code/avaruus/tests/test_get_has_line_code.cpp
+            code/avaruus/tests/test_get_first_token.cpp
+            code/avaruus/tests/test_get_n_of_code_lines_between.cpp
+            code/avaruus/tests/test_get_nth_token.cpp
+            code/avaruus/tests/test_parse.cpp
+            code/avaruus/tests/test_parse_global_parameters.cpp
+        )
+    endif()
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
@@ -1086,12 +1090,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
-    add_executable(test_avaruus code/ylikuutio/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
-    set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
+    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
+        add_executable(test_avaruus code/ylikuutio/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
+        set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
-    target_compile_features(test_avaruus PUBLIC cxx_std_20)
-    set_target_properties(test_avaruus PROPERTIES CXX_EXTENSIONS OFF)
-    target_link_libraries(test_avaruus gtest_main planetary_simulation)
+        target_compile_features(test_avaruus PUBLIC cxx_std_20)
+        set_target_properties(test_avaruus PROPERTIES CXX_EXTENSIONS OFF)
+        target_link_libraries(test_avaruus gtest_main planetary_simulation)
+    endif()
 
     if (DEFINED "PNG_LIBRARIES")
         target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
