@@ -67,7 +67,7 @@ Eg. with apt:
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
+    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 gfortran-mingw-w64 binutils-mingw-w64 libz-mingw-w64-dev
 
 Ylikuutio uses Git submodules, so you need to update them:
 
