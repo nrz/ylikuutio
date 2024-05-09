@@ -373,10 +373,10 @@ configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY
 configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
 
 # Copy scripts for Avaruus.
-configure_file(code/avaruus/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
-configure_file(code/avaruus/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
-configure_file(code/avaruus/visualize_2_objects               visualize_2_objects COPYONLY)
-configure_file(code/avaruus/visualize_solar_system            visualize_solar_system COPYONLY)
+configure_file(code/avaruus/bash/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
+configure_file(code/avaruus/bash/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
+configure_file(code/avaruus/python/visualize_2_objects             visualize_2_objects COPYONLY)
+configure_file(code/avaruus/python/visualize_solar_system          visualize_solar_system COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
@@ -950,26 +950,26 @@ target_link_libraries(dining_philosophers pthread)
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
     # Planetary simulation library
     add_library(planetary_simulation STATIC
-        code/avaruus/constants.f90
-        code/avaruus/file.f90
-        code/avaruus/global_parameters.f90
-        code/avaruus/my_kind.f90
-        code/avaruus/object.f90
-        code/avaruus/physics.f90
-        code/avaruus/parser.f90
-        code/avaruus/planetary_motion.f90
-        code/avaruus/planetary_system.f90
-        code/avaruus/string.f90
+        code/avaruus/fortran/constants.f90
+        code/avaruus/fortran/file.f90
+        code/avaruus/fortran/global_parameters.f90
+        code/avaruus/fortran/my_kind.f90
+        code/avaruus/fortran/object.f90
+        code/avaruus/fortran/physics.f90
+        code/avaruus/fortran/parser.f90
+        code/avaruus/fortran/planetary_motion.f90
+        code/avaruus/fortran/planetary_system.f90
+        code/avaruus/fortran/string.f90
     )
     target_compile_features(planetary_simulation PUBLIC cxx_std_20)
     set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
 
-    FortranCInterface_HEADER(code/avaruus/tests/planetary_simulation.h
+    FortranCInterface_HEADER(code/avaruus/cpp/tests/planetary_simulation.h
         planet
         planet)
 
     add_executable(planetary_motion
-        code/avaruus/planetary_motion.f90
+        code/avaruus/fortran/planetary_motion.f90
     )
     target_link_libraries(planetary_motion planetary_simulation)
 endif()
@@ -1074,15 +1074,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
         set(AVARUUS_UNIT_TESTS
             # Tests for Avaruus.
-            code/avaruus/tests/test_read_file.cpp
-            code/avaruus/tests/test_get_line.cpp
-            code/avaruus/tests/test_get_line_i_with_n_token_statement.cpp
-            code/avaruus/tests/test_get_has_line_code.cpp
-            code/avaruus/tests/test_get_first_token.cpp
-            code/avaruus/tests/test_get_n_of_code_lines_between.cpp
-            code/avaruus/tests/test_get_nth_token.cpp
-            code/avaruus/tests/test_parse.cpp
-            code/avaruus/tests/test_parse_global_parameters.cpp
+            code/avaruus/cpp/tests/test_read_file.cpp
+            code/avaruus/cpp/tests/test_get_line.cpp
+            code/avaruus/cpp/tests/test_get_line_i_with_n_token_statement.cpp
+            code/avaruus/cpp/tests/test_get_has_line_code.cpp
+            code/avaruus/cpp/tests/test_get_first_token.cpp
+            code/avaruus/cpp/tests/test_get_n_of_code_lines_between.cpp
+            code/avaruus/cpp/tests/test_get_nth_token.cpp
+            code/avaruus/cpp/tests/test_parse.cpp
+            code/avaruus/cpp/tests/test_parse_global_parameters.cpp
         )
     endif()
 
