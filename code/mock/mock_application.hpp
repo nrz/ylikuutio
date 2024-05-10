@@ -25,6 +25,7 @@
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
+#include <memory> // std::unique_ptr
 #include <string> // std::string
 #include <vector> // std::vector
 
@@ -76,6 +77,11 @@ namespace mock
         private:
             yli::ontology::Universe* const universe { nullptr };
     };
+}
+
+namespace yli::core
+{
+    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[]);
 }
 
 #endif
