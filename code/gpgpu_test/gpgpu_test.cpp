@@ -52,10 +52,10 @@
 #define SDL_main main
 
 // Include standard headers
-#include <iostream>      // std::cout, std::cerr
-#include <memory>        // std::make_unique, std::unique_ptr
-#include <sstream>       // std::stringstream
-#include <stdexcept>     // std::runtime_error
+#include <iostream>  // std::cout, std::cerr
+#include <memory>    // std::make_unique, std::unique_ptr
+#include <sstream>   // std::stringstream
+#include <stdexcept> // std::runtime_error
 
 namespace yli::memory
 {

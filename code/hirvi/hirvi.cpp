@@ -75,12 +75,12 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cerr
-#include <memory>        // std::make_unique, std::unique_ptr
-#include <sstream>       // std::stringstream
-#include <string>        // std::string
-#include <vector>        // std::vector
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cerr
+#include <memory>   // std::make_unique, std::unique_ptr
+#include <sstream>  // std::stringstream
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli::memory
 {
