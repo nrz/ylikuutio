@@ -957,7 +957,7 @@ if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
         code/avaruus/fortran/object.f90
         code/avaruus/fortran/physics.f90
         code/avaruus/fortran/parser.f90
-        code/avaruus/fortran/planetary_motion.f90
+        code/avaruus/fortran/avaruus.f90
         code/avaruus/fortran/planetary_system.f90
         code/avaruus/fortran/string.f90
     )
@@ -969,7 +969,7 @@ if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin"))
         planet)
 
     add_executable(planetary_motion
-        code/avaruus/fortran/planetary_motion.f90
+        code/avaruus/fortran/avaruus.f90
     )
     target_link_libraries(planetary_motion planetary_simulation)
 endif()
