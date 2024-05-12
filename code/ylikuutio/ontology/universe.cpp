@@ -515,20 +515,26 @@ namespace yli::ontology
                     }
                 }
 
-                // Direction: spherical coordinates to cartesian coordinates conversion.
-                this->set_direction(glm::vec3(
-                            cos(this->get_pitch()) * sin(this->get_yaw() + 0.5f * std::numbers::pi),
-                            sin(this->get_pitch()),
-                            cos(this->get_pitch()) * cos(this->get_yaw() + 0.5f * std::numbers::pi)));
+                {
+                    const float roll = this->get_roll();
+                    const float yaw = this->get_yaw();
+                    const float pitch = this->get_pitch();
 
-                // Right vector.
-                this->set_right(glm::vec3(
-                            sin(this->get_yaw()),
-                            sin(this->get_roll()),
-                            cos(this->get_yaw()) * cos(this->get_roll())));
+                    // Direction: spherical coordinates to cartesian coordinates conversion.
+                    this->set_direction(glm::vec3(
+                                cos(pitch) * sin(yaw + 0.5f * std::numbers::pi),
+                                sin(pitch),
+                                cos(pitch) * cos(yaw + 0.5f * std::numbers::pi)));
 
-                // Up vector.
-                this->set_up(glm::cross(this->get_right(), this->get_direction()));
+                    // Right vector.
+                    this->set_right(glm::vec3(
+                                sin(yaw),
+                                sin(roll),
+                                cos(yaw) * cos(roll)));
+
+                    // Up vector.
+                    this->set_up(glm::cross(this->get_right(), this->get_direction()));
+                }
 
                 if (!this->in_console)
                 {
