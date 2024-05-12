@@ -76,7 +76,6 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_unique, std::unique_ptr
-#include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -169,10 +168,8 @@ namespace tulevaisuus
     yli::ontology::UniverseStruct TulevaisuusApplication::get_universe_struct() const
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
-        std::stringstream window_title_stringstream;
-        window_title_stringstream << "Tulevaisuus " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
         universe_struct.application_name = "Tulevaisuus";
-        universe_struct.window_title = window_title_stringstream.str();
+        universe_struct.window_title = "Tulevaisuus " + yli::ontology::Universe::version + ", powered by Ylikuutio " + yli::ontology::Universe::version;
 
         if (this->command_line_master.is_key("silent"))
         {
