@@ -626,18 +626,17 @@ namespace yli::ontology
                 {
                     if (this->in_help_mode && this->can_display_help_screen)
                     {
-                        std::stringstream help_text_stringstream;
                         yli::ontology::Scene* const scene = this->active_scene;
-                        help_text_stringstream <<
-                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) << " " << yli::ontology::Universe::version << "\n"
+                        const std::string help_text_string =
+                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + yli::ontology::Universe::version + "\n"
                             "\n"
                             "arrow keys\n"
                             "space jump\n"
                             "enter duck\n"
                             "F1 help mode\n"
                             "`  enter console\n"
-                            "I  invert mouse (" << (this->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
-                            "F  flight mode (" << (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) << ")\n"
+                            "I  invert mouse (" + (this->is_invert_mouse_in_use ? on_string : off_string) + ")\n"
+                            "F  flight mode (" + (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) + ")\n"
                             "Ctrl      turbo\n"
                             "Ctrl+Ctrl extra turbo\n"
                             "for debugging:\n"
@@ -646,7 +645,6 @@ namespace yli::ontology
                             "P  pink geometric tiles texture\n"
                             "T  terrain species\n"
                             "A  suzanne species\n";
-                        const std::string help_text_string = help_text_stringstream.str();
                         help_text_2d->change_string(help_text_string);
                     }
                     else
