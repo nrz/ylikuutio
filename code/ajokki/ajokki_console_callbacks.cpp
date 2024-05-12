@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <optional> // std::optional
-#include <sstream>  // std::stringstream
+#include <string>   // std::string
 
 namespace ajokki
 {
@@ -35,9 +35,7 @@ namespace ajokki
             return std::nullopt;
         }
 
-        std::stringstream version_stringstream;
-        version_stringstream << "Ajokki " << universe->version << " / Ylikuutio " << universe->version;
-        console->print_text(version_stringstream.str());
+        console->print_text("Ajokki " + universe->version + " / Ylikuutio " + universe->version);
         return std::nullopt;
     }
 }
