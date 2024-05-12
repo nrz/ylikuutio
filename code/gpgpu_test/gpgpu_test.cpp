@@ -54,7 +54,6 @@
 // Include standard headers
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_unique, std::unique_ptr
-#include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -127,10 +126,8 @@ namespace gpgpu_test
     yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct() const
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
-        std::stringstream window_title_stringstream;
-        window_title_stringstream << "GPGPU test " << yli::ontology::Universe::version << ", powered by Ylikuutio " << yli::ontology::Universe::version;
         universe_struct.application_name = "GPGPU test";
-        universe_struct.window_title = window_title_stringstream.str();
+        universe_struct.window_title = "GPGPU test " + yli::ontology::Universe::version + ", powered by Ylikuutio " + yli::ontology::Universe::version;
         universe_struct.window_width = 512;
         universe_struct.window_height = 512;
 
