@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cerr
-#include <sstream>   // std::stringstream
+#include <string>    // std::string
 #include <stdexcept> // std::runtime_error
 
 namespace yli::sdl
@@ -66,9 +66,7 @@ namespace yli::sdl
 
         if (n_displays < 0)
         {
-            std::stringstream runtime_error_stringstream;
-            runtime_error_stringstream << "ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " << n_displays;
-            throw std::runtime_error(runtime_error_stringstream.str());
+            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + n_displays);
         }
 
         if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
