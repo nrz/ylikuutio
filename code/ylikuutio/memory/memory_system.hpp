@@ -63,7 +63,7 @@
 #include <cstddef>       // std::size_t
 #include <map>           // std::map
 #include <stdexcept>     // std::runtime_error
-#include <sstream>       // std::stringstream
+#include <string>        // std::string
 #include <utility>       // std::forward
 
 namespace yli::memory
@@ -237,10 +237,7 @@ namespace yli::memory
                         return *(this->memory_allocators.at(type));
                     }
 
-                    std::stringstream runtime_error_stringstream;
-                    runtime_error_stringstream <<
-                        "ERROR: `MemorySystem::get_generic_allocator`: allocator for type " << type << " does not exist!";
-                    throw std::runtime_error(runtime_error_stringstream.str());
+                    throw std::runtime_error("ERROR: `MemorySystem::get_generic_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
                 }
 
                 template<typename T1, typename... Args>
@@ -252,10 +249,7 @@ namespace yli::memory
                             return static_cast<yli::memory::MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
                         }
 
-                        std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream <<
-                            "ERROR: `MemorySystem::get_allocator`: allocator for type " << type << " does not exist!";
-                        throw std::runtime_error(runtime_error_stringstream.str());
+                        throw std::runtime_error("ERROR: `MemorySystem::get_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
                     }
 
                 virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) override
