@@ -214,21 +214,21 @@ namespace yli::ontology
     {
         // render this `Object`.
 
-        if (!this->should_render)
+        if (!this->should_render) [[unlikely]]
         {
             return;
         }
 
         yli::ontology::Scene* const scene = this->get_scene();
 
-        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        if (target_scene != nullptr && scene != nullptr && scene != target_scene) [[unlikely]]
         {
             // Different `Scene`s, do not render.
             return;
         }
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR ||
-                this->object_type == yli::ontology::ObjectType::CHARACTER)
+                this->object_type == yli::ontology::ObjectType::CHARACTER) [[likely]]
         {
             this->render_this_object(this->get_pipeline());
         }
@@ -245,12 +245,12 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Object::render_this_object`: `this->universe.get_render_system()` is `nullptr`!");
         }
 
-        if (pipeline == nullptr)
+        if (pipeline == nullptr) [[unlikely]]
         {
             return;
         }
 
-        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER) [[unlikely]]
         {
             // TODO: implement rendering for `SHAPESHIFTER`!
             // Meanwhile this block just exists to exit this function.
@@ -259,18 +259,18 @@ namespace yli::ontology
 
         this->model_matrix = glm::mat4(1.0f);
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
         {
             yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
-            if (species == nullptr)
+            if (species == nullptr) [[unlikely]]
             {
                 return;
             }
 
             const std::string model_file_format = species->get_model_file_format();
 
-            if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
+            if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size()) [[likely]]
             {
                 for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
                 {
@@ -290,7 +290,7 @@ namespace yli::ontology
 
         this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
 
-        if (this->universe.get_is_opengl_in_use())
+        if (this->universe.get_is_opengl_in_use()) [[likely]]
         {
             // Send our transformation to the uniform buffer object (UBO).
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
@@ -307,7 +307,7 @@ namespace yli::ontology
 
         yli::ontology::MeshModule* master_model = nullptr;
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
         {
             yli::ontology::Species* const master_species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
 
@@ -335,7 +335,7 @@ namespace yli::ontology
             }
         }
 
-        if (this->universe.get_is_opengl_in_use() && master_model != nullptr)
+        if (this->universe.get_is_opengl_in_use() && master_model != nullptr) [[likely]]
         {
             GLuint vao                             = master_model->get_vao();
             GLuint vertexbuffer                    = master_model->get_vertexbuffer();
@@ -413,7 +413,7 @@ namespace yli::ontology
 
     yli::ontology::Pipeline* Object::get_pipeline() const
     {
-        if (this->object_type == yli::ontology::ObjectType::REGULAR)
+        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
         {
             if (const auto* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master()); species != nullptr) [[likely]]
             {
