@@ -521,19 +521,21 @@ namespace yli::ontology
                     const float pitch = this->get_pitch();
 
                     // Direction: spherical coordinates to cartesian coordinates conversion.
-                    this->set_direction(glm::vec3(
-                                cos(pitch) * sin(yaw + 0.5f * std::numbers::pi),
-                                sin(pitch),
-                                cos(pitch) * cos(yaw + 0.5f * std::numbers::pi)));
 
-                    // Right vector.
-                    this->set_right(glm::vec3(
-                                sin(yaw),
-                                sin(roll),
-                                cos(yaw) * cos(roll)));
+                    glm::vec3 direction = glm::vec3(
+                            cos(pitch) * sin(yaw + 0.5f * std::numbers::pi),
+                            sin(pitch),
+                            cos(pitch) * cos(yaw + 0.5f * std::numbers::pi));
+
+                    glm::vec3 right = glm::vec3(sin(yaw), sin(roll), cos(yaw) * cos(roll));
 
                     // Up vector.
-                    this->set_up(glm::cross(this->get_right(), this->get_direction()));
+                    this->set_up(glm::cross(right, direction));
+
+                    this->set_direction(std::move(direction));
+
+                    // Right vector.
+                    this->set_right(std::move(right));
                 }
 
                 if (!this->in_console)
