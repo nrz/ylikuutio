@@ -56,6 +56,8 @@
 #include <memory>    // std::make_unique, std::unique_ptr
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::memory
 {
