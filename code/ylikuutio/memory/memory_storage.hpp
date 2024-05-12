@@ -28,7 +28,7 @@
 #include <cstddef>   // std::byte, std::size_t
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
-#include <sstream>   // std::stringstream
+#include <string>    // std::string
 #include <utility>   // std::forward
 #include <vector>    // std::vector
 
@@ -133,10 +133,9 @@ namespace yli::memory
 
                     if (slot_i >= DataSize) [[unlikely]]
                     {
-                        std::stringstream runtime_error_stringstream;
-                        runtime_error_stringstream << "ERROR: `MemoryStorage::destroy`: `slot_i` " << storage_i <<
-                            " is out of bounds, `DataSize` is " << DataSize;
-                        throw std::runtime_error(runtime_error_stringstream.str());
+                        throw std::runtime_error(
+                                "ERROR: `MemoryStorage::destroy`: `slot_i` " + std::to_string(storage_i) +
+                                " is out of bounds, `DataSize` is " + std::to_string(DataSize));
                     }
 
                     // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
