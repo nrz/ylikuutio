@@ -389,7 +389,7 @@ namespace yli::ontology
                         ms_frame_text_stringstream << std::fixed << std::setprecision(2) <<
                             1000.0f / static_cast<float>(this->number_of_frames) << " ms/frame; " <<
                             this->number_of_frames << " Hz";
-                        std::string ms_frame_text = ms_frame_text_stringstream.str();
+                        const std::string ms_frame_text = ms_frame_text_stringstream.str();
                         frame_rate_text_2d->change_string(ms_frame_text);
                         this->reset_number_of_frames();
                     }
@@ -662,7 +662,7 @@ namespace yli::ontology
                             "rho:" << this->get_rho() <<
                             "theta:" << this->get_theta() <<
                             "phi:" << this->get_phi();
-                        std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
+                        const std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
                         spherical_coordinates_text_2d->change_string(spherical_coordinates_string);
                     }
                     else
