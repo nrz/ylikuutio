@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <optional> // std::optional
-#include <sstream>  // std::stringstream
+#include <string>   // std::string
 
 namespace yli_edit
 {
@@ -35,9 +35,7 @@ namespace yli_edit
             return std::nullopt;
         }
 
-        std::stringstream version_stringstream;
-        version_stringstream << "YliEdit " << universe->version << " / Ylikuutio " << universe->version;
-        console->print_text(version_stringstream.str());
+        console->print_text("YliEdit " + universe->version + " / Ylikuutio " + universe->version);
         return std::nullopt;
     }
 }
