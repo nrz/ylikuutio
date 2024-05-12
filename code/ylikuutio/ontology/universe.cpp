@@ -192,9 +192,7 @@ namespace yli::ontology
 
         if (this->window_title.empty())
         {
-            std::stringstream window_title_stringstream;
-            window_title_stringstream << "Ylikuutio " << yli::ontology::Universe::version;
-            this->window_title = window_title_stringstream.str();
+            this->window_title = "Ylikuutio " + yli::ontology::Universe::version;
         }
 
         this->create_should_render_variable();
