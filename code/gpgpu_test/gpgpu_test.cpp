@@ -128,8 +128,8 @@ namespace gpgpu_test
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         universe_struct.application_name = "GPGPU test";
         universe_struct.window_title = "GPGPU test " + yli::ontology::Universe::version + ", powered by Ylikuutio " + yli::ontology::Universe::version;
-        universe_struct.window_width = 512;
-        universe_struct.window_height = 512;
+        universe_struct.window_width = 2048;
+        universe_struct.window_height = 2048;
 
         return universe_struct;
     }
