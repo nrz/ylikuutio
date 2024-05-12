@@ -638,13 +638,13 @@ namespace yli::ontology
                             "`  enter console\n"
                             "I  invert mouse (" << (this->is_invert_mouse_in_use ? on_string : off_string) << ")\n"
                             "F  flight mode (" << (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) << ")\n"
-                            "Ctrl      turbo\n" <<
-                            "Ctrl+Ctrl extra turbo\n" <<
-                            "for debugging:\n" <<
-                            "G  grass texture\n" <<
-                            "O  orange fur texture\n" <<
-                            "P  pink geometric tiles texture\n" <<
-                            "T  terrain species\n" <<
+                            "Ctrl      turbo\n"
+                            "Ctrl+Ctrl extra turbo\n"
+                            "for debugging:\n"
+                            "G  grass texture\n"
+                            "O  orange fur texture\n"
+                            "P  pink geometric tiles texture\n"
+                            "T  terrain species\n"
                             "A  suzanne species\n";
                         const std::string help_text_string = help_text_stringstream.str();
                         help_text_2d->change_string(help_text_string);
