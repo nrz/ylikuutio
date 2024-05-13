@@ -337,15 +337,15 @@ namespace yli::ontology
 
         if (this->universe.get_is_opengl_in_use() && master_model != nullptr) [[likely]]
         {
-            GLuint vao                             = master_model->get_vao();
-            GLuint vertexbuffer                    = master_model->get_vertexbuffer();
-            uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
-            GLuint uvbuffer                        = master_model->get_uvbuffer();
-            uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
-            GLuint normalbuffer                    = master_model->get_normalbuffer();
-            uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
-            GLuint elementbuffer                   = master_model->get_elementbuffer();
-            uint32_t indices_size                  = master_model->get_indices_size();
+            const GLuint vao                             = master_model->get_vao();
+            const GLuint vertexbuffer                    = master_model->get_vertexbuffer();
+            const uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
+            const GLuint uvbuffer                        = master_model->get_uvbuffer();
+            const uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
+            const GLuint normalbuffer                    = master_model->get_normalbuffer();
+            const uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
+            const GLuint elementbuffer                   = master_model->get_elementbuffer();
+            const uint32_t indices_size                  = master_model->get_indices_size();
 
             glBindVertexArray(vao);
 
