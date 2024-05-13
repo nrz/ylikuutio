@@ -353,11 +353,11 @@ namespace yli::ontology
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glVertexAttribPointer(
                     vertex_position_modelspace_id, // The attribute we want to configure
-                    3,                           // size
-                    GL_FLOAT,                    // type
-                    GL_FALSE,                    // normalized?
-                    0,                           // stride
-                    (void*) 0                    // array buffer offset
+                    3,                             // size
+                    GL_FLOAT,                      // type
+                    GL_FALSE,                      // normalized?
+                    0,                             // stride
+                    (void*) 0                      // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
@@ -365,11 +365,11 @@ namespace yli::ontology
             glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glVertexAttribPointer(
                     vertex_uv_id, // The attribute we want to configure
-                    2,          // size : U+V => 2
-                    GL_FLOAT,   // type
-                    GL_FALSE,   // normalized?
-                    0,          // stride
-                    (void*) 0   // array buffer offset
+                    2,            // size : U+V => 2
+                    GL_FLOAT,     // type
+                    GL_FALSE,     // normalized?
+                    0,            // stride
+                    (void*) 0     // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
@@ -377,11 +377,11 @@ namespace yli::ontology
             glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
             glVertexAttribPointer(
                     vertex_normal_modelspace_id, // The attribute we want to configure
-                    3,                         // size
-                    GL_FLOAT,                  // type
-                    GL_FALSE,                  // normalized?
-                    0,                         // stride
-                    (void*) 0                  // array buffer offset
+                    3,                           // size
+                    GL_FLOAT,                    // type
+                    GL_FALSE,                    // normalized?
+                    0,                           // stride
+                    (void*) 0                    // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
