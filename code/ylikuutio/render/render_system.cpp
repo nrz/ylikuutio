@@ -163,7 +163,7 @@ namespace yli::render
         this->set_opengl_background_color();
 
         // Clear the default framebuffer.
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Adjust viewport for the default framebuffer.
         this->adjust_opengl_viewport(window_width, window_height);
