@@ -2,6 +2,15 @@ YliLisp is the scripting language of Ylikuutio.
 YliLisp is influenced by Scheme, Common Lisp, C++,
 AngelScript, and Rust.
 
+Use cases:
+* Defining physics simulations.
+* Defining game scenes.
+* In-simulation console.
+* In-game console.
+* NPC AI.
+* Scripted game events.
+* Game modding.
+
 General features:
 * Lexically scoped.
 * Variables and functions in the same namespace (Lisp-1).
