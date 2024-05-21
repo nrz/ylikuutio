@@ -33,7 +33,6 @@ namespace yli::interpolation
             output_image_width(0),
             output_image_height(0)
         {
-            // constructor.
         }
 
         std::size_t input_image_width;

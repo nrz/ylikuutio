@@ -108,8 +108,6 @@ namespace yli::ontology
         water_level           { scene_struct.water_level },
         is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
     {
-        // constructor.
-
         if (this->universe.get_is_opengl_in_use())
         {
             // Uniform block for data related to this `Scene`.
@@ -140,8 +138,6 @@ namespace yli::ontology
 
     Scene::~Scene()
     {
-        // destructor.
-
         if (this->universe.get_active_scene() == this)
         {
             // Set active `Scene` to `nullptr`.

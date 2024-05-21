@@ -45,8 +45,6 @@ namespace hirvi
         : yli::ontology::Holobiont(application, universe, police_helicopter_struct, scene_parent, symbiosis_master, brain_master),
         fly(fly_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::PoliceHelicopter*";
     }

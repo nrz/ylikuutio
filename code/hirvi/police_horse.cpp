@@ -51,8 +51,6 @@ namespace hirvi
         canter(canter_struct),
         gallop(gallop_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::PoliceHorse*";
     }

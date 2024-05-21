@@ -51,8 +51,6 @@ namespace yli::ontology
                 this->registry,
                 "generic_lisp_function_overloads")
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::LispFunction*";
     }

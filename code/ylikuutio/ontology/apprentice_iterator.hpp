@@ -41,7 +41,6 @@ namespace yli::ontology
             ApprenticeIterator(std::vector<yli::ontology::ApprenticeModule*>::iterator it)
                 : it { it }
             {
-                // constructor.
             }
 
             // copy constructor.

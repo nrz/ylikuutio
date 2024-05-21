@@ -74,7 +74,6 @@ namespace yli::ontology
                     const yli::ontology::BrainStruct& brain_struct,
                     yli::ontology::GenericParentModule* const scene_parent_module);
 
-            // destructor.
             ~Brain() = default;
 
         public:

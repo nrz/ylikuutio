@@ -71,8 +71,6 @@ namespace yli::ontology
         universe { universe },
         is_universe { entity_struct.is_universe }
     {
-        // constructor.
-
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
 
@@ -91,7 +89,6 @@ namespace yli::ontology
 
     Entity::~Entity()
     {
-        // destructor.
         this->terminate(); // Mark this `Entity` as dead.
 
         if (!this->is_universe)

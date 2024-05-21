@@ -81,8 +81,6 @@ namespace yli::ontology
         child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects")
     {
-        // constructor.
-
         // TODO: `Text3D` constructor also creates each `Object`,
         // and binds each to its corresponding `Glyph` for rendering hierarchy,
         // and also binds each to this `Text3D` for ontological hierarchy.

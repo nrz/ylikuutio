@@ -79,8 +79,6 @@ namespace yli::ontology
         child_of_holobiont(holobiont_parent_module, *this),
         apprentice_of_symbiont_species(symbiont_species_master_module, this)
     {
-        // constructor.
-
         this->biontID       = biont_struct.biontID;
         this->should_render = biont_struct.should_render;
 
@@ -90,8 +88,6 @@ namespace yli::ontology
 
     Biont::~Biont()
     {
-        // destructor.
-        //
         // Requirements:
         // `this->symbiont_species` must not be `nullptr`.
     }

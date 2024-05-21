@@ -24,7 +24,6 @@
 
 namespace yli::geometry
 {
-    // constructor.
     // can be used for creating n-dimensional lines.
     Line::Line(const std::vector<float>& point1, const std::vector<float>& point2)
     {
@@ -45,7 +44,6 @@ namespace yli::geometry
         }
     }
 
-    // constructor.
     // can be used for creating n-dimensional lines.
     Line::Line(const std::vector<float>& general_form_coefficients, const float general_form_constant)
     {

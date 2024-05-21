@@ -28,7 +28,6 @@ namespace yli::linear_algebra
 {
     Matrix::Matrix(std::size_t height, std::size_t width)
     {
-        // constructor.
         this->width = width;
         this->height = height;
         this->array_of_arrays.resize(this->height);

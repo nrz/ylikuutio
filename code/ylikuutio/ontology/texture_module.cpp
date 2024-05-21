@@ -43,8 +43,6 @@ namespace yli::ontology
         texture_file_format { texture_file_format },
         ofbx_texture { image_loader_struct.ofbx_texture }
     {
-        // constructor.
-
         // If software rendering is in use, the texture can not be loaded into GPU memory,
         // but it can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_texture =
@@ -115,8 +113,6 @@ namespace yli::ontology
 
     TextureModule::~TextureModule()
     {
-        // destructor.
-
         if (this->get_is_texture_loaded())
         {
             // Delete texture.

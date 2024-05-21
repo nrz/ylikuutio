@@ -48,7 +48,6 @@ namespace yli::ontology
     {
         ModelStruct()
         {
-            // constructor.
         }
 
         std::string model_filename;                         // Filename of the model file.

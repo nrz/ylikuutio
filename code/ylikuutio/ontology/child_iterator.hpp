@@ -39,7 +39,6 @@ namespace yli::ontology
             ChildIterator(std::vector<yli::ontology::Entity*>::iterator it)
                 : it { it }
             {
-                // constructor.
             }
 
             // copy constructor.

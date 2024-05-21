@@ -37,13 +37,10 @@ namespace yli::load
     {
         ImageLoaderStruct()
         {
-            // constructor.
         }
 
         ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
         {
-            // constructor.
-
             for (const auto& [enum_value, bool_value] : values)
             {
                 if (enum_value == yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB)

@@ -89,8 +89,6 @@ namespace yli::ontology
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")
     {
-        // constructor.
-
         this->adjust_n_columns();
         this->adjust_n_rows();
 
@@ -101,7 +99,6 @@ namespace yli::ontology
 
     Console::~Console()
     {
-        // destructor.
         this->exit_console();
 
         if (this->universe.get_active_console() == this)

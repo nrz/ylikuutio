@@ -39,8 +39,6 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule* const /* brain_master_module */)
         : yli::ontology::Object(application, universe, terrain_struct, scene_parent_module, mesh_master_module, nullptr)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Terrain*";
     }

@@ -30,7 +30,6 @@ namespace yli::linear_algebra
     class Matrix final
     {
         public:
-            // constructor.
             Matrix(std::size_t height, std::size_t width);
 
             // copy constructor.
@@ -39,7 +38,6 @@ namespace yli::linear_algebra
             explicit Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
                 : Matrix(*old_matrix)
             {
-                // constructor.
             }
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
@@ -49,7 +47,6 @@ namespace yli::linear_algebra
                     explicit Proxy(std::vector<float>& proxy_array)
                         : proxy_array(proxy_array)
                     {
-                        // constructor.
                     }
 
                     float& operator[](const std::size_t index)

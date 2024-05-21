@@ -164,8 +164,6 @@ namespace yli::ontology
         model_filename     { model_struct.model_filename },
         model_file_format  { model_struct.model_file_format }
     {
-        // constructor.
-
         this->create_symbionts();
 
         // `yli::ontology::Entity` member variables begin here.

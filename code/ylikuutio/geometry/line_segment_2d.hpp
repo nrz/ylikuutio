@@ -35,7 +35,6 @@ namespace yli::geometry
     class LineSegment2D final : public Line2D
     {
         public:
-            // constructor.
             LineSegment2D(const std::vector<float>& point1, const std::vector<float>& point2)
                 : Line2D(point1, point2)
             {

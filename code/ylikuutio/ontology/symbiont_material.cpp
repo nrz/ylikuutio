@@ -58,8 +58,6 @@ namespace yli::ontology
                 yli::load::ImageLoaderStruct(),
                 "texture")
     {
-        // constructor.
-
         if (this->texture.get_is_texture_loaded())
         {
             yli::ontology::Pipeline* const pipeline = this->get_pipeline();

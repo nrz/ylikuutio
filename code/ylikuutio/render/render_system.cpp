@@ -63,8 +63,6 @@ namespace yli::render
         hidden_window_height { render_system_struct.hidden_window_height },
         is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
     {
-        // constructor.
-
         // Open a window and create its OpenGL context.
         std::cout << "Opening a window and creating its OpenGL context...\n";
 

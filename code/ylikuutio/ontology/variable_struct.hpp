@@ -38,7 +38,6 @@ namespace yli::ontology
             : universe { universe },
             parent { parent }
         {
-            // constructor.
             this->is_variable = true;
         }
 

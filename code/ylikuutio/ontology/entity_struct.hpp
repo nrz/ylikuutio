@@ -27,7 +27,6 @@ namespace yli::ontology
     {
         EntityStruct()
         {
-            // constructor.
         }
 
         EntityStruct(const yli::ontology::EntityStruct& entity_struct) noexcept
@@ -43,7 +42,6 @@ namespace yli::ontology
             : global_name { global_name },
             local_name { local_name }
         {
-            // constructor.
         }
 
         std::string global_name;

@@ -55,7 +55,6 @@ class Fork
     public:
         Fork()
         {
-            // constructor.
         }
 
         std::mutex my_mutex;
@@ -71,7 +70,6 @@ class Philosopher
             right_fork { right_fork },
             id { id }
         {
-            // constructor.
             const std::lock_guard<std::mutex> messenger_lock(this->messenger.my_mutex);
             std::cout << "Philosopher " << this->id << " says hello!\n";
         }
@@ -131,8 +129,6 @@ class Table
             random { random },
             forks(n_philosophers)
         {
-            // constructor.
-
             this->philosophers.reserve(this->n_philosophers);
 
             if (this->n_philosophers > 0)

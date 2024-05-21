@@ -35,7 +35,6 @@ namespace yli::linear_algebra
         // z = 0 is the front slice.
 
         public:
-            // constructor.
             Tensor3(std::size_t width, std::size_t height, std::size_t depth);
 
             // copy constructor.
@@ -44,10 +43,8 @@ namespace yli::linear_algebra
             explicit Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
                 : Tensor3(*old_matrix)
             {
-                // constructor.
             }
 
-            // constructor.
             explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
@@ -57,7 +54,6 @@ namespace yli::linear_algebra
                     explicit Proxy2D(const std::vector<std::vector<float>>& array_of_arrays)
                         : array_of_arrays(array_of_arrays)
                     {
-                        // constructor.
                     }
 
                     class Proxy
@@ -66,7 +62,6 @@ namespace yli::linear_algebra
                             explicit Proxy(std::vector<float>& proxy_array)
                                 : proxy_array(proxy_array)
                             {
-                                // constructor.
                             }
 
                             float& operator[](const std::size_t index)

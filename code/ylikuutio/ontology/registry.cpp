@@ -29,7 +29,6 @@ namespace yli::ontology
 
     Registry::Registry()
     {
-        // constructor.
     }
 
     bool Registry::is_name(const std::string& name) const

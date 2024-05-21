@@ -28,7 +28,6 @@ namespace yli::command_line
     class CommandLineMaster final
     {
         public:
-            // constructor.
             CommandLineMaster(const int argc, const char* const argv[]);
 
             bool get_are_arguments_valid() const;

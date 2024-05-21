@@ -77,8 +77,6 @@ namespace yli::ontology
         should_save_intermediate_results { compute_task_struct.should_save_intermediate_results },
         should_flip_texture              { compute_task_struct.should_flip_texture }
     {
-        // constructor.
-
         // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
         // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
         // then `ComputeTask` could and should support software rendering as well.
@@ -209,8 +207,6 @@ namespace yli::ontology
 
     ComputeTask::~ComputeTask()
     {
-        // destructor.
-        //
         // Requirements:
         // `this->get_parent()` must not be `nullptr`.
 

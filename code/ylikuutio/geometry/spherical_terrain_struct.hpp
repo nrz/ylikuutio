@@ -33,7 +33,6 @@ namespace yli::geometry
             SRTM_latitude_step_in_degrees(1.0f/1200.0f),
             SRTM_longitude_step_in_degrees(1.0f/1200.0f)
         {
-            // constructor.
         }
         float southern_latitude;
         float northern_latitude;

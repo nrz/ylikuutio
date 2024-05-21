@@ -37,7 +37,6 @@ namespace yli::triangulation
             sphere_radius(NAN),
             spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
         {
-            // constructor.
         }
         std::size_t image_width;
         std::size_t image_height;

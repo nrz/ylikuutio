@@ -43,8 +43,6 @@ namespace yli::ontology
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
         mesh(universe, model_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterForm*";
     }

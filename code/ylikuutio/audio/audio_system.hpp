@@ -45,13 +45,11 @@ namespace yli::audio
     class AudioSystem final
     {
         public:
-            // constructor.
             explicit AudioSystem(yli::ontology::Universe& universe);
 
             AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
             AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~AudioSystem();
 
             void terminate();

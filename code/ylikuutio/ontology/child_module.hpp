@@ -34,14 +34,12 @@ namespace yli::ontology
                 : parent_module { parent_module },
                 entity { entity }
             {
-                // constructor.
                 this->bind_to_parent_module();
             }
 
             ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
             ChildModule& operator=(const ChildModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~ChildModule() noexcept;
 
             yli::ontology::Entity* get_parent() const noexcept;

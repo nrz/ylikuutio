@@ -73,8 +73,6 @@ namespace yli::ontology
                 "bionts"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {
-        // constructor.
-
         this->create_bionts(holobiont_struct.should_render_bionts_vector);
 
         // `yli::ontology::Entity` member variables begin here.

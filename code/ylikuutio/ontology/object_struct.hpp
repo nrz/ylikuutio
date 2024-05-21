@@ -36,7 +36,6 @@ namespace yli::ontology
     {
         explicit ObjectStruct(yli::ontology::Scene* const parent)
         {
-            // constructor.
             this->scene = parent;
         }
 

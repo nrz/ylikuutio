@@ -53,8 +53,6 @@ namespace hirvi
         gallop(gallop_struct),
         climb(climb_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::Cat*";
     }

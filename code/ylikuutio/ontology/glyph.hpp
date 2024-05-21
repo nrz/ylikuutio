@@ -62,7 +62,6 @@ namespace yli::ontology
                     const yli::ontology::ModelStruct& model_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module);
 
-            // destructor.
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph() = default;
 

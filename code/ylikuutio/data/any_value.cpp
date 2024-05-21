@@ -996,7 +996,6 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Console>,
                 std::reference_wrapper<yli::ontology::ComputeTask>>(type, value_string))
     {
-        // constructor.
     }
 
     // Fundamental types.
@@ -1004,37 +1003,31 @@ namespace yli::data
     AnyValue::AnyValue(const bool bool_value)
         : data(bool_value)
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const char char_value)
         : data(char_value)
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const float float_value)
         : data(float_value)
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const double double_value)
         : data(double_value)
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const int32_t int32_t_value)
         : data(int32_t_value)
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const uint32_t uint32_t_value)
         : data(uint32_t_value)
     {
-        // constructor.
     }
 
     // Strings.
@@ -1042,13 +1035,11 @@ namespace yli::data
     AnyValue::AnyValue(std::string& std_string_ref)
         : data(std::reference_wrapper<std::string>(std_string_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const std::string& const_std_string_ref)
         : data(std::reference_wrapper<const std::string>(const_std_string_ref))
     {
-        // constructor.
     }
 
     // Variable-size vectors.
@@ -1056,43 +1047,36 @@ namespace yli::data
     AnyValue::AnyValue(std::vector<int8_t>& std_vector_int8_t_ref)
         : data(std::reference_wrapper<std::vector<int8_t>>(std_vector_int8_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<uint8_t>& std_vector_uint8_t_ref)
         : data(std::reference_wrapper<std::vector<uint8_t>>(std_vector_uint8_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<int16_t>& std_vector_int16_t_ref)
         : data(std::reference_wrapper<std::vector<int16_t>>(std_vector_int16_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<uint16_t>& std_vector_uint16_t_ref)
         : data(std::reference_wrapper<std::vector<uint16_t>>(std_vector_uint16_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<int32_t>& std_vector_int32_t_ref)
         : data(std::reference_wrapper<std::vector<int32_t>>(std_vector_int32_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<uint32_t>& std_vector_uint32_t_ref)
         : data(std::reference_wrapper<std::vector<uint32_t>>(std_vector_uint32_t_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(std::vector<float>& std_vector_float_ref)
         : data(std::reference_wrapper<std::vector<float>>(std_vector_float_ref))
     {
-        // constructor.
     }
 
     // Fixed-size vectors.
@@ -1100,25 +1084,21 @@ namespace yli::data
     AnyValue::AnyValue(glm::vec3& glm_vec3_ref)
         : data(std::reference_wrapper<glm::vec3>(glm_vec3_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const glm::vec3& const_glm_vec3_ref)
         : data(std::reference_wrapper<const glm::vec3>(const_glm_vec3_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(glm::vec4& glm_vec4_ref)
         : data(std::reference_wrapper<glm::vec4>(glm_vec4_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const glm::vec4& const_glm_vec4_ref)
         : data(std::reference_wrapper<const glm::vec4>(const_glm_vec4_ref))
     {
-        // constructor.
     }
 
     // Spherical coordinates.
@@ -1126,13 +1106,11 @@ namespace yli::data
     AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
         : data(std::reference_wrapper<yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
         : data(std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
     {
-        // constructor.
     }
 
     // Ontology.
@@ -1140,108 +1118,90 @@ namespace yli::data
     AnyValue::AnyValue(yli::ontology::Entity& entity_ref)
         : data(std::reference_wrapper<yli::ontology::Entity>(entity_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Movable& movable_ref)
         : data(std::reference_wrapper<yli::ontology::Movable>(movable_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(const yli::ontology::Movable& const_movable_ref)
         : data(std::reference_wrapper<const yli::ontology::Movable>(const_movable_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Universe& universe_ref)
         : data(std::reference_wrapper<yli::ontology::Universe>(universe_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Ecosystem& ecosystem_ref)
         : data(std::reference_wrapper<yli::ontology::Ecosystem>(ecosystem_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Scene& scene_ref)
         : data(std::reference_wrapper<yli::ontology::Scene>(scene_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Pipeline& pipeline_ref)
         : data(std::reference_wrapper<yli::ontology::Pipeline>(pipeline_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Material& material_ref)
         : data(std::reference_wrapper<yli::ontology::Material>(material_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Species& species_ref)
         : data(std::reference_wrapper<yli::ontology::Species>(species_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Object& object_ref)
         : data(std::reference_wrapper<yli::ontology::Object>(object_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Symbiosis& symbiosis_ref)
         : data(std::reference_wrapper<yli::ontology::Symbiosis>(symbiosis_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Holobiont& holobiont_ref)
         : data(std::reference_wrapper<yli::ontology::Holobiont>(holobiont_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Font2D& font_2d_ref)
         : data(std::reference_wrapper<yli::ontology::Font2D>(font_2d_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Text2D& text_2d_ref)
         : data(std::reference_wrapper<yli::ontology::Text2D>(text_2d_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::VectorFont& vector_font_ref)
         : data(std::reference_wrapper<yli::ontology::VectorFont>(vector_font_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Text3D& text_3d_ref)
         : data(std::reference_wrapper<yli::ontology::Text3D>(text_3d_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::Console& console_ref)
         : data(std::reference_wrapper<yli::ontology::Console>(console_ref))
     {
-        // constructor.
     }
 
     AnyValue::AnyValue(yli::ontology::ComputeTask& compute_task_ref)
         : data(std::reference_wrapper<yli::ontology::ComputeTask>(compute_task_ref))
     {
-        // constructor.
     }
 }

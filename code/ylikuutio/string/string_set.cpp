@@ -26,7 +26,6 @@ namespace yli::string
 {
     StringSet::StringSet()
     {
-        // constructor.
     }
 
     void StringSet::add_string(const std::string& string)

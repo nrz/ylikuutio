@@ -54,6 +54,5 @@ namespace yli::ontology
             const std::string& name) noexcept
         : GenericParentModule(entity, registry, name)
     {
-        // constructor.
     }
 }

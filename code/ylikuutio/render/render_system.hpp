@@ -47,13 +47,11 @@ namespace yli::render
     class RenderSystem final
     {
         public:
-            // constructor.
             RenderSystem(yli::ontology::Universe* const universe, const yli::render::RenderSystemStruct& render_system_struct);
 
             RenderSystem(const RenderSystem&) = delete;            // Delete copy constructor.
             RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~RenderSystem() = default;
 
             void create_context_and_make_it_current();

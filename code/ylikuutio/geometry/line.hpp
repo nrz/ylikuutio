@@ -27,11 +27,9 @@ namespace yli::geometry
     class Line
     {
         public:
-            // constructor.
             // can be used for creating n-dimensional lines.
             Line(const std::vector<float>& point1, const std::vector<float>& point2);
 
-            // constructor.
             // can be used for creating n-dimensional lines.
             Line(const std::vector<float>& general_form_coefficients, const float general_form_constant);
 

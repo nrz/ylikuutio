@@ -36,7 +36,6 @@ namespace yli::ontology
             bool bind_child(yli::ontology::Entity& pipeline_child) noexcept override;
             void unbind_child(const std::size_t childID) noexcept override;
 
-            // constructor.
             ParentOfPipelinesModule(
                     yli::ontology::Entity& entity,
                     yli::ontology::Registry& registry,
@@ -45,7 +44,6 @@ namespace yli::ontology
             ParentOfPipelinesModule(const ParentOfPipelinesModule&) = delete;            // Delete copy constructor.
             ParentOfPipelinesModule& operator=(const ParentOfPipelinesModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~ParentOfPipelinesModule() = default;
 
         private:

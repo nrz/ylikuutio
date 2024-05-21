@@ -28,7 +28,6 @@ namespace yli::ontology
     class Indexable
     {
         public:
-            // constructor.
             Indexable()
             {
             }
@@ -36,7 +35,6 @@ namespace yli::ontology
             Indexable(const Indexable&) = delete;            // Delete copy constructor.
             Indexable& operator=(const Indexable&) = delete; // Delete copy assignment.
 
-            // destructor.
             virtual ~Indexable()
             {
             }

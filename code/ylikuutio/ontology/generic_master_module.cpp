@@ -95,15 +95,11 @@ namespace yli::ontology
     GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept
         : generic_master { generic_master }
     {
-        // constructor.
-
         registry->add_indexable(*this, name);
     }
 
     GenericMasterModule::~GenericMasterModule() noexcept
     {
-        // destructor.
-
         for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
         {
             const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);

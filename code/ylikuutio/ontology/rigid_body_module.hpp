@@ -38,8 +38,6 @@ namespace yli::ontology
                 : movable { movable },
                 mass { rigid_body_module_struct.mass }
             {
-                // constructor.
-
                 if (scene != nullptr)
                 {
                     this->add_rigid_body_module_to_scene(*scene);
@@ -49,7 +47,6 @@ namespace yli::ontology
             RigidBodyModule(const RigidBodyModule&) = delete;            // Delete copy constructor.
             RigidBodyModule &operator=(const RigidBodyModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~RigidBodyModule() = default;
 
             void add_rigid_body_module_to_scene(yli::ontology::Scene& scene) const;

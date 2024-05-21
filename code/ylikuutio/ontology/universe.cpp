@@ -185,8 +185,6 @@ namespace yli::ontology
         font_size             { universe_struct.font_size },
         max_fps               { universe_struct.max_fps }
     {
-        // constructor.
-
         // call `set_global_name` here because it can't be done in `Entity` constructor.
         this->set_global_name(universe_struct.global_name);
 
@@ -213,8 +211,6 @@ namespace yli::ontology
 
     Universe::~Universe()
     {
-        // destructor.
-
         SDL_Quit();
 
         this->unbind_entity(this->entityID);

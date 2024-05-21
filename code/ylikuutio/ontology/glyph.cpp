@@ -49,8 +49,6 @@ namespace yli::ontology
         glyph_name_pointer   { model_struct.glyph_name_pointer },
         unicode_char_pointer { model_struct.unicode_char_pointer }
     {
-        // constructor.
-
         // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_texture =

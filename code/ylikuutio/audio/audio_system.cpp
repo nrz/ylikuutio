@@ -39,7 +39,6 @@ namespace yli::audio
 
     AudioSystem::~AudioSystem()
     {
-        // destructor.
         this->terminate();
 
         if (!this->universe.get_is_silent())

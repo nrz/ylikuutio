@@ -35,7 +35,6 @@ namespace yli::core
     Application::Application(const int argc, const char* const argv[])
         : command_line_master(argc, argv)
     {
-        // constructor.
     }
 
     std::string Application::get_name() const

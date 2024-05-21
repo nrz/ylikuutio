@@ -85,15 +85,11 @@ namespace yli::ontology
         : generic_master_module(generic_master_module),
         apprentice(apprentice)
     {
-        // constructor.
-
         this->bind_to_generic_master_module();
     }
 
     ApprenticeModule::~ApprenticeModule() noexcept
     {
-        // destructor.
-
         this->unbind_from_generic_master_module();
     }
 

@@ -55,7 +55,6 @@ namespace yli::ontology
         class MasterModule final : public yli::ontology::GenericMasterModule
     {
         public:
-            // constructor.
             MasterModule(
                     M const master,
                     yli::ontology::Registry* const registry,
@@ -64,17 +63,13 @@ namespace yli::ontology
                 : GenericMasterModule(master, registry, name),
                 unbind_callback { unbind_callback }
             {
-                // constructor.
             }
 
             MasterModule(const MasterModule&) = delete;            // Delete copy constructor.
             MasterModule& operator=(const MasterModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~MasterModule()
             {
-                // destructor.
-
                 for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
                 {
                     yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);

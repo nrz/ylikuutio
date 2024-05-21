@@ -42,8 +42,6 @@ namespace yli::ontology
         master_of_bionts(this, &this->registry, "bionts"),
         mesh(universe, model_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontSpecies*";
     }

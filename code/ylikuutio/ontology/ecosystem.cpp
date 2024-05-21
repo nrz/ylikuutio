@@ -56,8 +56,6 @@ namespace yli::ontology
                 this->registry,
                 "symbioses")
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Ecosystem*";
         this->can_be_erased = true;

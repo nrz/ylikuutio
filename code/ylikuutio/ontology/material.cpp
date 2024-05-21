@@ -163,8 +163,6 @@ namespace yli::ontology
                 yli::load::ImageLoaderStruct(),
                 "texture")
     {
-        // constructor.
-
         if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
         {
             // Get a handle for our "texture_sampler" uniform.

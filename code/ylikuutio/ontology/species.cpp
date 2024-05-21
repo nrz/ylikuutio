@@ -149,8 +149,6 @@ namespace yli::ontology
         apprentice_of_material(material_master_module, this),
         mesh(universe, model_struct)
     {
-        // constructor.
-
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Species*";
         this->can_be_erased = true;

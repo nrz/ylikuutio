@@ -52,12 +52,10 @@ namespace yli::ontology
             void unbind_and_bind_to_new_generic_master_module(
                     yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
 
-            // constructor.
             ApprenticeModule(
                     yli::ontology::GenericMasterModule* const generic_master_module,
                     yli::ontology::Entity* const apprentice) noexcept;
 
-            // destructor.
             virtual ~ApprenticeModule() noexcept;
 
             yli::ontology::Entity* get_master() const noexcept;

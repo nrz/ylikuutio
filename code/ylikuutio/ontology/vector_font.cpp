@@ -104,8 +104,6 @@ namespace yli::ontology
         font_filename         { vector_font_struct.font_filename },
         vertex_scaling_factor { vector_font_struct.vertex_scaling_factor }
     {
-        // constructor.
-
         this->can_be_erased         = true;
         bool font_loading_result    = false;
 

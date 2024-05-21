@@ -46,8 +46,6 @@ namespace yli::ontology
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
         master_of_objects(this, &this->registry, "objects")
     {
-        // constructor.
-
         this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
         this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
         this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;

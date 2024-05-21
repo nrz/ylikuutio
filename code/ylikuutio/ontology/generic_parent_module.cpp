@@ -83,8 +83,6 @@ namespace yli::ontology
             const std::string& name) noexcept
         : entity { entity }
     {
-        // constructor.
-
         registry.add_indexable(*this, name);
     }
 

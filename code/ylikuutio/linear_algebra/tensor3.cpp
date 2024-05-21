@@ -32,7 +32,6 @@ namespace yli::linear_algebra
 
     Tensor3::Tensor3(std::size_t width, std::size_t height, std::size_t depth)
     {
-        // constructor.
         this->width = width;
         this->height = height;
         this->depth = depth;
@@ -119,8 +118,6 @@ namespace yli::linear_algebra
 
     Tensor3::Tensor3(const yli::linear_algebra::Matrix& old_matrix)
     {
-        // constructor.
-
         this->width = old_matrix.width;
         this->height = old_matrix.height;
         this->depth = 1;

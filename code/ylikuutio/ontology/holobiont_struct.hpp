@@ -35,7 +35,6 @@ namespace yli::ontology
                 yli::ontology::Symbiosis& symbiosis)
             : symbiosis { &symbiosis }
         {
-            // constructor.
             this->scene = &parent;
         }
 

@@ -30,8 +30,6 @@ namespace yli::command_line
 {
     CommandLineMaster::CommandLineMaster(const int argc, const char* const argv[])
     {
-        // constructor.
-
         if (argv == nullptr)
         {
             // Entrypoint code expects that arguments are valid.

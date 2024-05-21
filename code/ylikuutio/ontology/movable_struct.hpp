@@ -46,7 +46,6 @@ namespace yli::ontology
         MovableStruct()
             : orientation(0.0f, 0.0f, 0.0f)
         {
-            // constructor.
         }
 
         MovableStruct(
@@ -61,7 +60,6 @@ namespace yli::ontology
             spherical_coordinates { spherical_coordinates },
             orientation(roll, yaw, pitch)
         {
-            // constructor.
         }
 
         MovableStruct(
@@ -79,7 +77,6 @@ namespace yli::ontology
             spherical_coordinates { spherical_coordinates },
             orientation(roll, yaw, pitch)
         {
-            // constructor.
         }
 
         MovableStruct(

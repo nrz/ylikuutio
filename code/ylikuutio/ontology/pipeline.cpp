@@ -125,8 +125,6 @@ namespace yli::ontology
         master_of_materials(this, &this->registry, "materials", nullptr),
         master_of_symbioses(this, &this->registry, "symbioses")
     {
-        // constructor.
-
         this->vertex_shader        = pipeline_struct.vertex_shader;
         this->fragment_shader      = pipeline_struct.fragment_shader;
 
@@ -160,8 +158,6 @@ namespace yli::ontology
 
     Pipeline::~Pipeline()
     {
-        // destructor.
-
         if (this->universe.get_is_opengl_in_use())
         {
             glDeleteProgram(this->program_id);

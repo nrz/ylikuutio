@@ -34,13 +34,11 @@ namespace yli::geometry
     class Line3D : public Line
     {
         public:
-            // constructor.
             Line3D(const std::vector<float>& point1, const std::vector<float>& point2)
                 : Line(point1, point2)
             {
             }
 
-            // constructor.
             Line3D(const std::vector<float>& general_form_coefficients, const float general_form_constant)
                 : Line(general_form_coefficients, general_form_constant)
             {

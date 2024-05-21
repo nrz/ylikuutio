@@ -75,8 +75,6 @@ namespace yli::ontology
                 : GenericLispFunctionOverload(application, universe, lisp_function_parent_module),
                 callback(callback)
             {
-                // constructor.
-
                 // `yli::ontology::Entity` member variables begin here.
                 this->type_string = "yli::ontology::LispFunctionOverload*";
             }

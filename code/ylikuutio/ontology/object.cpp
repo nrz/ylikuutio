@@ -185,8 +185,6 @@ namespace yli::ontology
         child_of_scene(scene_parent_module, *this),
         apprentice_of_mesh(mesh_master_module, this)
     {
-        // constructor.
-
         if (std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master))
         {
             this->object_type = yli::ontology::ObjectType::REGULAR;

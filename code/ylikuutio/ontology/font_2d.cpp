@@ -82,8 +82,6 @@ namespace yli::ontology
         text_size     { font_struct.text_size },
         font_size     { font_struct.font_size }
     {
-        // constructor.
-
         if (this->texture.get_is_texture_loaded())
         {
             if (this->universe.get_is_opengl_in_use())
@@ -127,8 +125,6 @@ namespace yli::ontology
 
     Font2D::~Font2D()
     {
-        // destructor.
-
         if (this->universe.get_is_opengl_in_use())
         {
             // Delete buffers.

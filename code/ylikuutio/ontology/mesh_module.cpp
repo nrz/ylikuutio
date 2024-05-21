@@ -136,8 +136,6 @@ namespace yli::ontology
 
     MeshModule::~MeshModule()
     {
-        // destructor.
-
         if (this->are_opengl_buffers_initialized)
         {
             glDeleteBuffers(1, &this->vertexbuffer);

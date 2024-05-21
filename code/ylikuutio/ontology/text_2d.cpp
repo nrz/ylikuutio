@@ -81,8 +81,6 @@ namespace yli::ontology
         : Entity(application, universe, text_struct),
         child_of_font_2d(font_2d_parent_module, *this)
     {
-        // constructor.
-
         this->text = text_struct.text;
         this->horizontal_alignment = text_struct.horizontal_alignment;
         this->vertical_alignment = text_struct.vertical_alignment;

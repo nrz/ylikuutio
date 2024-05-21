@@ -31,13 +31,10 @@ namespace yli::ontology
         texture_height { framebuffer_module_struct.texture_height },
         in_use { framebuffer_module_struct.in_use }
     {
-        // constructor.
     }
 
     FramebufferModule::~FramebufferModule()
     {
-        // destructor.
-
         if (this->is_initialized)
         {
             glDeleteTextures(1, &this->texture);

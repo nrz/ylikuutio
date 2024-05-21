@@ -34,7 +34,6 @@ namespace yli::triangulation
         TriangulatePolygonsStruct()
             : input_vertices(nullptr), use_real_texture_coordinates(true)
         {
-            // constructor.
         }
         std::vector<std::vector<glm::vec2>>* input_vertices;
         bool use_real_texture_coordinates;

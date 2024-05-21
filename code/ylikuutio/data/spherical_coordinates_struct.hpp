@@ -28,13 +28,11 @@ namespace yli::data
         SphericalCoordinatesStruct()
             : rho(NAN), theta(NAN), phi(NAN)
         {
-            // constructor.
         }
 
         SphericalCoordinatesStruct(float rho, float theta, float phi)
             : rho(rho), theta(theta), phi(phi)
         {
-            // constructor.
         }
 
         bool operator==(const yli::data::SphericalCoordinatesStruct& rhs) const noexcept

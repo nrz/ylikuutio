@@ -35,13 +35,11 @@ namespace yli::ontology
     class Registry final
     {
         public:
-            // constructor.
             Registry();
 
             Registry(const Registry&) = delete;            // Delete copy constructor.
             Registry& operator=(const Registry&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~Registry() = default;
 
             bool is_name(const std::string& name) const;

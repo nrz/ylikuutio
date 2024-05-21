@@ -56,7 +56,6 @@ namespace yli::ontology
             TextureModule(const TextureModule&) = delete;            // Delete copy constructor.
             TextureModule &operator=(const TextureModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             ~TextureModule();
 
             const std::string& get_texture_filename() const;

@@ -65,13 +65,11 @@ namespace yli::ontology
             void unbind_apprentice_module(const std::size_t apprenticeID) noexcept;
             void unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene) noexcept;
 
-            // constructor.
             GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept;
 
             GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
             GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
 
-            // destructor.
             virtual ~GenericMasterModule() noexcept;
 
             yli::ontology::Entity* get_generic_master() const noexcept;

@@ -95,8 +95,6 @@ namespace yli::ontology
         scale        { movable_struct.scale },
         input_method { movable_struct.input_method }
     {
-        // constructor.
-
         if (this->universe.get_is_opengl_in_use())
         {
             // Uniform block for data related to this `Movable`.
