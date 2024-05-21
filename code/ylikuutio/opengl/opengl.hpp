@@ -29,7 +29,7 @@
 
 namespace yli::opengl
 {
-    bool init_glew();
+    void init_glew();
     void print_opengl_errors(const std::string& my_string);
     void enable_depth_test();
     void disable_depth_test();

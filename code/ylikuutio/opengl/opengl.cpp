@@ -32,14 +32,12 @@
 
 namespace yli::opengl
 {
-    bool init_glew()
+    void init_glew()
     {
         if (glewInit() != GLEW_OK)
         {
             throw std::runtime_error("ERROR: `yli::opengl::init_glew`: Failed to initialize GLEW.!");
         }
-
-        return true;
     }
 
     void print_opengl_errors(const std::string& my_string)

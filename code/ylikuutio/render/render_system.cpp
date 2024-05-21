@@ -85,25 +85,18 @@ namespace yli::render
             this->set_swap_interval(0);
 
             // Initialize GLEW.
-            if (yli::opengl::init_glew())
-            {
-                std::cout << "GLEW initialization successful.\n";
+            yli::opengl::init_glew();
 
-                yli::input::disable_cursor();
-                yli::input::enable_relative_mouse_mode();
+            yli::input::disable_cursor();
+            yli::input::enable_relative_mouse_mode();
 
-                // Enable depth test.
-                yli::opengl::enable_depth_test();
-                // Accept fragment if it is closer to the camera than the former one.
-                yli::opengl::set_depth_func_to_less();
+            // Enable depth test.
+            yli::opengl::enable_depth_test();
+            // Accept fragment if it is closer to the camera than the former one.
+            yli::opengl::set_depth_func_to_less();
 
-                // Cull triangles whose normal is not towards the camera.
-                yli::opengl::cull_triangles();
-            }
-            else
-            {
-                std::cerr << "GLEW initialization failed!\n";
-            }
+            // Cull triangles whose normal is not towards the camera.
+            yli::opengl::cull_triangles();
         }
         else
         {
