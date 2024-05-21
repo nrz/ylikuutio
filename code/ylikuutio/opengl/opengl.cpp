@@ -25,6 +25,7 @@
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cerr
 #include <sstream>  // std::stringstream
+#include <stdexcept> // std::runtime_error
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -35,9 +36,9 @@ namespace yli::opengl
     {
         if (glewInit() != GLEW_OK)
         {
-            std::cerr << "Failed to initialize GLEW.\n";
-            return false;
+            throw std::runtime_error("ERROR: `yli::opengl::init_glew`: Failed to initialize GLEW.!");
         }
+
         return true;
     }
 
