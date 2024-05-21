@@ -21,14 +21,14 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iomanip>  // std::setfill, std::setw
-#include <iostream> // std::cout, std::cerr
-#include <sstream>  // std::stringstream
+#include <cstddef>   // std::size_t
+#include <iomanip>   // std::setfill, std::setw
+#include <iostream>  // std::cout, std::cerr
+#include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <stdint.h>  // uint32_t etc.
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace yli::opengl
 {
