@@ -48,7 +48,6 @@ namespace yli::opengl
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Give the image to OpenGL.
-        // FIXME: the next line segfaults in GPGPU test!
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image_data.data());
 
         yli::opengl::set_filtering_parameters();
