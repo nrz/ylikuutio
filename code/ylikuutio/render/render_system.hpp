@@ -115,8 +115,8 @@ namespace yli::render
         private:
             yli::ontology::Universe* const universe { nullptr };
 
-            SDL_GLContext context { nullptr };
-            SDL_Window* hidden_sdl_window { nullptr };
+            SDL_GLContext context                   { nullptr };
+            SDL_Window* hidden_sdl_window           { nullptr };
             std::string hidden_window_title;
             uint32_t hidden_window_width     { 0 };
             uint32_t hidden_window_height    { 0 };
