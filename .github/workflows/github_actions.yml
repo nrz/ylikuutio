@@ -75,18 +75,6 @@ jobs:
           mkdir build
           CC=$(which gcc) CXX=$(which g++) cmake -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
-      - name: Run tests to generate coverage information
-        run: |
-          ./build/coverage_test1
-          mv default.profraw test1.profraw
-          ./build/coverage_test2
-          mv default.profraw test2.profraw
-      - name: Merge counters from different runs and convert the result into an llvm-cov-compatible form
-        run: |
-          llvm-profdata merge -o merged.profdata *.profraw
-      - name: Collect the coverage
-        run: |
-          llvm-cov show --show-branches=count --instr-profile merged.profdata build/coverage_test1 -object build/coverage_test2 > coverage.txt
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
