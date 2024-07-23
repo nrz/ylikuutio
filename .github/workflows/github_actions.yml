@@ -69,8 +69,10 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v2
       - name: Run build-wrapper
         run: |
+          sudo apt-get install -y cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
+          gcc -v && g++ -v
           mkdir build
-          cmake -S . -B build
+          CC=$(which gcc) CXX=$(which g++) cmake -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run tests to generate coverage information
         run: |
