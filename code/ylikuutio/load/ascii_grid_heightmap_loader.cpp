@@ -21,7 +21,6 @@
 
 #include "ascii_grid_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"

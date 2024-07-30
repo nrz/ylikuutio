@@ -22,7 +22,6 @@
 #include "png_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
 #include "image_file_loader.hpp"
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
