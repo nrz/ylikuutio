@@ -29,9 +29,6 @@
 #include "triangulation_enums.hpp"
 #include "triangulation_templates.hpp"
 #include "indexing.hpp"
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
-#include "code/ylikuutio/geometry/transformation_struct.hpp"
-#include "code/ylikuutio/geometry/transformation.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
@@ -108,9 +105,6 @@ namespace yli::triangulation
                 return false;
             }
 
-            const float& sphere_radius = triangulate_quads_struct.sphere_radius;
-            const yli::geometry::SphericalTerrainStruct& spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
-
             // *---*
             // |\ /|
             // | x |
@@ -125,7 +119,6 @@ namespace yli::triangulation
             // Processing stages:
             // 1. Define the (float) vertices for vertices loaded from file, `emplace_back` to `temp_vertices` and `temp_uvs`.
             // 2. Interpolate the (float) vertices between, using bilinear interpolation, `emplace_back` to `temp_vertices` and `temp_uvs`.
-            // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             // 4. Compute the face normals, `emplace_back` to `face_normals`.
             // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `emplace_back` to `temp_normals`.
@@ -133,7 +126,6 @@ namespace yli::triangulation
             //
             // 1.   `define_vertices`
             // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`
-            // 3.   `transform_coordinates_to_curved_surface`
             // 4.   `compute_face_normals`
             // 5.   `compute_vertex_normals`
             // 6.   `define_vertices_uvs_and_normals`
@@ -178,30 +170,6 @@ namespace yli::triangulation
             {
                 std::cerr << "ERROR: `yli::triangulation::triangulate_quads`: interpolating and defining vertices using bilinear interpolation failed.\n";
                 return false;
-            }
-
-            if (!std::isnan(sphere_radius))
-            {
-                // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
-                // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-                //
-                // Wikipedia:
-                // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
-                //
-                // x = rho * sin(theta) * cos(phi)
-                // y = rho * sin(theta) * sin(phi)
-                // z = rho * cos(theta)
-
-                yli::geometry::TransformationStruct transformation_struct;
-                transformation_struct.image_width = image_width;
-                transformation_struct.image_height = image_height;
-                transformation_struct.sphere_radius = sphere_radius;
-                transformation_struct.spherical_terrain_struct = spherical_terrain_struct;
-                yli::geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
-            }
-            else
-            {
-                std::cout << "No coordinate transformation is needed.\n";
             }
 
             // 4. Compute the face normals, `emplace_back` to `face_normals`.

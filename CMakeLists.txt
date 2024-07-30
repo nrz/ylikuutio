@@ -431,10 +431,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/radians_to_degrees.cpp
     code/ylikuutio/geometry/radians_to_degrees.hpp
-    code/ylikuutio/geometry/spherical_terrain_struct.hpp
-    code/ylikuutio/geometry/transformation.cpp
-    code/ylikuutio/geometry/transformation.hpp
-    code/ylikuutio/geometry/transformation_struct.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/shortest_paths.cpp

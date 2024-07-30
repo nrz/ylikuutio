@@ -18,10 +18,7 @@
 #ifndef YLIKUUTIO_TRIANGULATION_TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_TRIANGULATION_TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
-
 // Include standard headers
-#include <cmath>    // NAN
 #include <cstddef>  // std::size_t
 
 namespace yli::triangulation
@@ -33,9 +30,7 @@ namespace yli::triangulation
             image_height(0),
             x_step(1),
             y_step(1),
-            use_real_texture_coordinates(true),
-            sphere_radius(NAN),
-            spherical_terrain_struct(yli::geometry::SphericalTerrainStruct())
+            use_real_texture_coordinates(true)
         {
         }
         std::size_t image_width;
@@ -43,8 +38,6 @@ namespace yli::triangulation
         std::size_t x_step;
         std::size_t y_step;
         bool use_real_texture_coordinates;
-        float sphere_radius;
-        yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
     };
 }
 

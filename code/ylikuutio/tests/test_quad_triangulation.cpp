@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 
@@ -71,7 +70,6 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
-    triangulate_quads_struct.sphere_radius = NAN;
 
     const bool is_success = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
