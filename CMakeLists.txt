@@ -527,6 +527,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/apprentice_iterator.hpp
     code/ylikuutio/ontology/apprentice_module.cpp
     code/ylikuutio/ontology/apprentice_module.hpp
+    code/ylikuutio/ontology/audio_track.cpp
+    code/ylikuutio/ontology/audio_track.hpp
+    code/ylikuutio/ontology/audio_track_struct.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
@@ -984,6 +987,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_any_value.cpp
         code/ylikuutio/tests/test_ascii_grid_heightmap_loader.cpp
         # code/ylikuutio/tests/test_asio.cpp
+        code/ylikuutio/tests/test_audio_track.cpp
         code/ylikuutio/tests/test_bilinear_interpolation.cpp
         code/ylikuutio/tests/test_brain.cpp
         code/ylikuutio/tests/test_brain_snippets.cpp

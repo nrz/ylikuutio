@@ -46,6 +46,7 @@
 #include "text_3d.hpp"
 #include "font_2d.hpp"
 #include "input_mode.hpp"
+#include "audio_track.hpp"
 #include "console.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
@@ -76,6 +77,7 @@
 #include "vector_font_struct.hpp"
 #include "text_3d_struct.hpp"
 #include "input_mode_struct.hpp"
+#include "audio_track_struct.hpp"
 #include "console_struct.hpp"
 #include "console_callback_engine_struct.hpp"
 #include "console_callback_object_struct.hpp"
@@ -890,7 +892,40 @@ namespace yli::ontology
 
             // TODO: implement `create_playlist` here!
 
-            // TODO: implement `create_audio_track` here!
+            yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const override
+            {
+                using AudioTrackMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::AudioTrack, 256>;
+
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<AudioTrackMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::AUDIO_TRACK));
+                AudioTrackMemoryAllocator& allocator = static_cast<AudioTrackMemoryAllocator&>(generic_allocator);
+
+                yli::ontology::AudioTrack* const audio_track = allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        audio_track_struct,
+                        &this->get_universe().parent_of_audio_tracks);
+
+                if (!audio_track_struct.global_name.empty() && audio_track_struct.local_name.empty())
+                {
+                    // Only `global_name` given, OK.
+                    audio_track->set_global_name(audio_track_struct.global_name);
+                }
+                else if (audio_track_struct.global_name.empty() && !audio_track_struct.local_name.empty())
+                {
+                    // Only `local_name` given, OK.
+                    audio_track->set_local_name(audio_track_struct.local_name);
+                }
+                else if (!audio_track_struct.global_name.empty() && !audio_track_struct.local_name.empty())
+                {
+                    std::cerr << "ERROR: `EntityFactory::create_audio_track`: both global and local names given for a `AudioTrack`\n";
+                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                    std::cerr << "are the same and only 1 of them can be given. No name given to this `AudioTrack`!\n";
+                }
+
+                return audio_track;
+            }
 
             yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const override
             {

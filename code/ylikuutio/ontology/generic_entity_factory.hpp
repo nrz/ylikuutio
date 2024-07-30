@@ -57,6 +57,7 @@ namespace yli::ontology
     class Glyph;
     class Text3D;
     class InputMode;
+    class AudioTrack;
     class Console;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
@@ -81,6 +82,7 @@ namespace yli::ontology
     struct VectorFontStruct;
     struct Text3DStruct;
     struct InputModeStruct;
+    struct AudioTrackStruct;
     struct ConsoleStruct;
     struct ConsoleCallbackEngineStruct;
     struct ConsoleCallbackObjectStruct;
@@ -135,6 +137,7 @@ namespace yli::ontology
             virtual yli::ontology::Text3D* create_text_3d(const yli::ontology::Text3DStruct& text_3d_struct) const = 0;
             virtual yli::ontology::Font2D* create_font_2d(const yli::ontology::FontStruct& font_struct) const = 0;
             virtual yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const = 0;
+            virtual yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const = 0;
             virtual yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const = 0;
             virtual yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
                     const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const = 0;

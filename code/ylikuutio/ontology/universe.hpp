@@ -365,6 +365,7 @@ namespace yli::ontology
 
             yli::ontology::GenericParentModule parent_of_ecosystems;
             yli::ontology::GenericParentModule parent_of_scenes;
+            yli::ontology::GenericParentModule parent_of_audio_tracks;
             yli::ontology::GenericParentModule parent_of_font_2ds;
             yli::ontology::ParentOfInputModesModule parent_of_input_modes;
             yli::ontology::GenericParentModule parent_of_consoles;

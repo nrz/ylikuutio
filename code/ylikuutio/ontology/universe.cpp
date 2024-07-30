@@ -144,6 +144,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "scenes"),
+        parent_of_audio_tracks(
+                *this,
+                this->registry,
+                "audio_tracks"),
         parent_of_font_2ds(
                 *this,
                 this->registry,
@@ -1256,6 +1260,7 @@ namespace yli::ontology
         return this->parent_of_callback_engines.get_number_of_children() +
             this->parent_of_ecosystems.get_number_of_children() +
             this->parent_of_scenes.get_number_of_children() +
+            this->parent_of_audio_tracks.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_input_modes.get_number_of_children() +
             this->parent_of_consoles.get_number_of_children() +
@@ -1267,6 +1272,7 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_callback_engines.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
