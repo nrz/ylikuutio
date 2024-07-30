@@ -22,7 +22,6 @@
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 
@@ -76,12 +75,6 @@ namespace yli::load
 
         const int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
         const int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
-
-        const float southern_latitude = std::floor(heightmap_loader_struct.latitude);
-        const float western_longitude = std::floor(heightmap_loader_struct.longitude);
-
-        const float northern_latitude = southern_latitude + 1.0f;
-        const float eastern_longitude = western_longitude + 1.0f;
 
         std::string south_north_char;
         std::string west_east_char;
@@ -181,18 +174,6 @@ namespace yli::load
         triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
         triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
         triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
-
-        if (!std::isnan(heightmap_loader_struct.planet_radius))
-        {
-            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
-            spherical_terrain_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
-
-            triangulate_quads_struct.sphere_radius = heightmap_loader_struct.planet_radius;
-            triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
-        }
 
         return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
     }
