@@ -111,11 +111,11 @@ namespace yli::triangulation
 
         std::size_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
-        for (std::size_t z = 1; z < actual_image_height; z++)
+        for (std::size_t y = 1; y < actual_image_height; y++)
         {
             for (std::size_t x = 1; x < actual_image_width; x++)
             {
-                std::size_t current_vertex_i = actual_image_width * z + x;
+                std::size_t current_vertex_i = actual_image_width * y + x;
 
                 uint32_t vertex_index[3];
                 uint32_t uv_index[3];
