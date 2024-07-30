@@ -1136,7 +1136,6 @@ namespace ajokki
         this->entity_factory.create_lisp_function_overload("sayonara", *my_console, &yli::snippets::quit);
 
         // Other callbacks.
-        // my_console->add_command_callback("eval", &yli::ontology::Universe::eval);
         this->entity_factory.create_lisp_function_overload("help", *my_console, &yli::snippets::help);
         this->entity_factory.create_lisp_function_overload("version", *my_console, &ajokki::version);
         this->entity_factory.create_lisp_function_overload("clear", *my_console, &yli::ontology::Console::clear);
