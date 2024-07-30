@@ -18,8 +18,6 @@
 #ifndef YLIKUUTIO_INTERPOLATION_BILINEAR_INTERPOLATION_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_INTERPOLATION_BILINEAR_INTERPOLATION_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 
