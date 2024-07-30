@@ -527,7 +527,7 @@ namespace yli::ontology
                             sin(pitch),
                             cos(pitch) * cos(yaw + 0.5f * std::numbers::pi));
 
-                    glm::vec3 right = glm::vec3(sin(yaw), sin(roll), cos(yaw) * cos(roll));
+                    glm::vec3 right = glm::vec3(sin(yaw) * cos(roll), sin(roll), cos(yaw) * cos(roll));
 
                     // Up vector.
                     this->set_up(glm::cross(right, direction));
