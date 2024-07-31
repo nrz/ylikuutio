@@ -7,7 +7,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
-- [ ] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
@@ -329,3 +328,4 @@
 - [x] ONTOLOGY/TESTS Write unit tests for `Brain` snippets.
 - [x] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
 - [x] AVARUUS/MATH/PHYSICS Implement n-body Newtonian star simulation of Milky Way stars in Fortran.
+- [x] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
