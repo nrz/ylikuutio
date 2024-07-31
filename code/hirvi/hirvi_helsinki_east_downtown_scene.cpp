@@ -66,7 +66,7 @@ namespace hirvi
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
         scene_struct.global_name = "helsinki_east_downtown_scene";
-        scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
+        scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
         yli::ontology::Scene* const helsinki_east_downtown_scene = this->entity_factory.create_scene(scene_struct);
@@ -489,7 +489,7 @@ namespace hirvi
         cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat1_object_struct.initial_rotate_angles = { std::numbers::pi, -0.5f * std::numbers::pi };
         cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        cat1_object_struct.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
+        cat1_object_struct.cartesian_coordinates = glm::vec3(500.00f, -1000.00f, 100.00f);
 
         yli::ontology::LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
         yli::ontology::LocomotionModuleStruct cat1_trot_struct(5.0f);
@@ -523,7 +523,7 @@ namespace hirvi
         cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat2_object_struct.initial_rotate_angles = { std::numbers::pi, -0.5f * std::numbers::pi };
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
-        cat2_object_struct.cartesian_coordinates = glm::vec3(700.00f, 100.00f, 1200.00f);
+        cat2_object_struct.cartesian_coordinates = glm::vec3(700.00f, -1200.00f, 100.00f);
 
         yli::ontology::LocomotionModuleStruct cat2_walk_struct(1.0f); // 3.6 km/h.
         yli::ontology::LocomotionModuleStruct cat2_trot_struct(5.0f);
@@ -563,7 +563,7 @@ namespace hirvi
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { std::numbers::pi };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_police_car_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
+        turbo_polizei_png_police_car_struct1.cartesian_coordinates = glm::vec3(85.00f, -160.00f, 30.00f);
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct1;
 
@@ -589,7 +589,7 @@ namespace hirvi
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { std::numbers::pi };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_police_car_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
+        turbo_polizei_png_police_car_struct2.cartesian_coordinates = glm::vec3(85.00f, -175.00f, 30.00f);
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct2;
 
@@ -612,7 +612,7 @@ namespace hirvi
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
-        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
+        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, -950.00f, 400.00f);
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
 
@@ -629,7 +629,7 @@ namespace hirvi
 
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.scene = helsinki_east_downtown_scene;
-        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
+        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, -169.00f, 28.00f);
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
 

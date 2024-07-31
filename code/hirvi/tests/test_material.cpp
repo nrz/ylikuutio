@@ -40,7 +40,7 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
 
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_east_downtown_scene";
-    scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
+    scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 

@@ -67,7 +67,7 @@ namespace ajokki
         std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
         scene_struct.global_name = "helsinki_east_downtown_scene";
-        scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
+        scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
         yli::ontology::Scene* const helsinki_east_downtown_scene = this->entity_factory.create_scene(scene_struct);
@@ -503,7 +503,7 @@ namespace ajokki
         // Create suzanne1, store it in `suzanne1`.
         yli::ontology::ObjectStruct suzanne_object_struct1(helsinki_east_downtown_scene);
         suzanne_object_struct1.mesh_master = suzanne_species;
-        suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
+        suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, -95.50f, 119.00f);
         std::cout << "Creating yli::ontology::Species* suzanne1 ...\n";
         yli::ontology::Object* const suzanne1 = this->entity_factory.create_object(suzanne_object_struct1);
 
@@ -519,7 +519,7 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct2(helsinki_east_downtown_scene);
         suzanne_object_struct2.mesh_master = suzanne_species;
         suzanne_object_struct2.scene = helsinki_east_downtown_scene;
-        suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
+        suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, -75.50f, 113.90f);
         std::cout << "Creating yli::ontology::Species* suzanne2 ...\n";
         yli::ontology::Object* const suzanne2 = this->entity_factory.create_object(suzanne_object_struct2);
 
@@ -533,7 +533,7 @@ namespace ajokki
 
         yli::ontology::ObjectStruct suzanne_object_struct3(helsinki_east_downtown_scene);
         suzanne_object_struct3.mesh_master = suzanne_species;
-        suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
+        suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, -103.00f, 162.90f);
         std::cout << "Creating yli::ontology::Species* suzanne3 ...\n";
         yli::ontology::Object* const suzanne3 = this->entity_factory.create_object(suzanne_object_struct3);
 
@@ -547,7 +547,7 @@ namespace ajokki
 
         yli::ontology::ObjectStruct suzanne_object_struct4(helsinki_east_downtown_scene);
         suzanne_object_struct4.mesh_master = suzanne_species;
-        suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
+        suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, -109.00f, 130.00f);
         std::cout << "Creating yli::ontology::Species* suzanne4 ...\n";
         yli::ontology::Object* const suzanne4 = this->entity_factory.create_object(suzanne_object_struct4);
 
@@ -562,7 +562,7 @@ namespace ajokki
         yli::ontology::ObjectStruct suzanne_object_struct5(helsinki_east_downtown_scene);
         suzanne_object_struct5.mesh_master = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
+        suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, -109.00f, 140.00f);
         std::cout << "Creating yli::ontology::Species* suzanne5 ...\n";
         yli::ontology::Object* const suzanne5 = this->entity_factory.create_object(suzanne_object_struct5);
 
@@ -648,7 +648,7 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { std::numbers::pi };
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-            turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
+            turbo_polizei_png_holobiont_struct1.cartesian_coordinates = glm::vec3(85.00f, -160.00f, 30.00f);
 
             std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png1 ...\n";
             yli::ontology::Holobiont* const turbo_polizei_png1 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
@@ -667,7 +667,7 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { std::numbers::pi };
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-            turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
+            turbo_polizei_png_holobiont_struct2.cartesian_coordinates = glm::vec3(85.00f, -175.00f, 30.00f);
 
             std::cout << "Creating yli::ontology::Holobiont* turbo_polizei_png2 ...\n";
             yli::ontology::Holobiont* const turbo_polizei_png2 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
@@ -684,7 +684,7 @@ namespace ajokki
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
-        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, 400.00f, 950.00f);
+        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, -950.00f, 400.00f);
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
 
@@ -701,7 +701,7 @@ namespace ajokki
 
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.scene = helsinki_east_downtown_scene;
-        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, 28.00f, 169.00f);
+        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, -169.00f, 28.00f);
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
 

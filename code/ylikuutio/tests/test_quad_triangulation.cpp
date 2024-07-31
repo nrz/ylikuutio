@@ -52,7 +52,7 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     const std::size_t northwest_height = 4;
     const std::size_t northeast_height = 8;
     const float center_x = 0.5f;
-    const float center_z = 0.5f;
+    const float center_y = -0.5f;
 
     // 0, 0: 1.
     *vertex_pointer++ = southwest_height;
@@ -79,63 +79,63 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
 
     // 1st vertex is the center vertex of the 1st triangle.
     ASSERT_EQ(vertices[0].x, center_x);
-    ASSERT_EQ(vertices[0].z, center_z);
-    ASSERT_EQ(vertices[0].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[0].y, center_y);
+    ASSERT_EQ(vertices[0].z, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 2nd vertex is the southeast vertex of the 1st triangle.
     ASSERT_EQ(vertices[1].x, 1.0f);
-    ASSERT_EQ(vertices[1].z, 0.0f);
-    ASSERT_EQ(vertices[1].y, southeast_height);
+    ASSERT_EQ(vertices[1].y, 0.0f);
+    ASSERT_EQ(vertices[1].z, southeast_height);
 
     // 3rd vertex is the southwest vertex of the 1st triangle.
     ASSERT_EQ(vertices[2].x, 0.0f);
-    ASSERT_EQ(vertices[2].z, 0.0f);
-    ASSERT_EQ(vertices[2].y, southwest_height);
+    ASSERT_EQ(vertices[2].y, 0.0f);
+    ASSERT_EQ(vertices[2].z, southwest_height);
 
     // 4th vertex is the center vertex of the 2nd triangle.
     ASSERT_EQ(vertices[3].x, center_x);
-    ASSERT_EQ(vertices[3].z, center_z);
-    ASSERT_EQ(vertices[3].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[3].y, center_y);
+    ASSERT_EQ(vertices[3].z, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 5th vertex is the southwest vertex of the 2nd triangle.
     ASSERT_EQ(vertices[4].x, 0.0f);
-    ASSERT_EQ(vertices[4].z, 0.0f);
-    ASSERT_EQ(vertices[4].y, southwest_height);
+    ASSERT_EQ(vertices[4].y, 0.0f);
+    ASSERT_EQ(vertices[4].z, southwest_height);
 
     // 6th vertex is the northwest vertex of the 2nd triangle.
     ASSERT_EQ(vertices[5].x, 0.0f);
-    ASSERT_EQ(vertices[5].z, 1.0f);
-    ASSERT_EQ(vertices[5].y, northwest_height);
+    ASSERT_EQ(vertices[5].y, -1.0f);
+    ASSERT_EQ(vertices[5].z, northwest_height);
 
     // 7th vertex is the center vertex of the 3rd triangle.
     ASSERT_EQ(vertices[6].x, center_x);
-    ASSERT_EQ(vertices[6].z, center_z);
-    ASSERT_EQ(vertices[6].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[6].y, center_y);
+    ASSERT_EQ(vertices[6].z, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 8th vertex is the northwest vertex of the 3rd triangle.
     ASSERT_EQ(vertices[7].x, 0.0f);
-    ASSERT_EQ(vertices[7].z, 1.0f);
-    ASSERT_EQ(vertices[7].y, northwest_height);
+    ASSERT_EQ(vertices[7].y, -1.0f);
+    ASSERT_EQ(vertices[7].z, northwest_height);
 
     // 9th vertex is the northeast vertex of the 3rd triangle.
     ASSERT_EQ(vertices[8].x, 1.0f);
-    ASSERT_EQ(vertices[8].z, 1.0f);
-    ASSERT_EQ(vertices[8].y, northeast_height);
+    ASSERT_EQ(vertices[8].y, -1.0f);
+    ASSERT_EQ(vertices[8].z, northeast_height);
 
     // 10th vertex is the center vertex of the 4th triangle.
     ASSERT_EQ(vertices[9].x, center_x);
-    ASSERT_EQ(vertices[9].z, center_z);
-    ASSERT_EQ(vertices[9].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[9].y, center_y);
+    ASSERT_EQ(vertices[9].z, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4);
 
     // 11th vertex is the northeast vertex of the 4th triangle.
     ASSERT_EQ(vertices[10].x, 1.0f);
-    ASSERT_EQ(vertices[10].z, 1.0f);
-    ASSERT_EQ(vertices[10].y, northeast_height);
+    ASSERT_EQ(vertices[10].y, -1.0f);
+    ASSERT_EQ(vertices[10].z, northeast_height);
 
     // 12th vertex is the southeast vertex of the 4th triangle.
     ASSERT_EQ(vertices[11].x, 1.0f);
-    ASSERT_EQ(vertices[11].z, 0.0f);
-    ASSERT_EQ(vertices[11].y, southeast_height);
+    ASSERT_EQ(vertices[11].y, 0.0f);
+    ASSERT_EQ(vertices[11].z, southeast_height);
 
     delete[] vertex_data;
 }

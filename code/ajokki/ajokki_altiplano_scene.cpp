@@ -52,7 +52,7 @@ namespace ajokki
 
         std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
-        scene_struct.light_position = { 0.0f, 100000.0f, 0.0f, 1.0f };
+        scene_struct.light_position = { 0.0f, 0.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 3815.51f;
         std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
         yli::ontology::Scene* const altiplano_scene = this->entity_factory.create_scene(scene_struct);

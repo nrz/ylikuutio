@@ -25,7 +25,7 @@ void main()
     vec3 light_color = vec3(1, 1, 1);
     float light_power = 40000000000.0f;
 
-    if (position_worldspace.y < water_level)
+    if (position_worldspace.z < water_level)
     {
         light_color = vec3(0, 0, 1);
     }

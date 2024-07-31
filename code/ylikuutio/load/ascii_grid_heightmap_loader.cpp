@@ -235,9 +235,11 @@ namespace yli::load
 
         for (std::size_t i = 0, y = 0; i < vertex_data.size() && y < image_height; y++)
         {
+            const float scene_y = -1.0f * static_cast<float>(y);
+
             for (uint32_t x = 0; x < image_width; x++)
             {
-                glm::vec3 vertex { static_cast<float>(x), vertex_data[i++], static_cast<float>(y) };
+                glm::vec3 vertex { static_cast<float>(x), scene_y, vertex_data[i++] };
                 out_vertices.emplace_back(vertex);
             }
         }

@@ -179,6 +179,8 @@ namespace yli::triangulation
 
             for (std::size_t y = 0; y < image_height; y += y_step)
             {
+                const float scene_y = -1.0f * static_cast<float>(y);
+
                 std::size_t texture_x = 0;
 
                 for (std::size_t x = 0; x < image_width; x += x_step)
@@ -189,8 +191,8 @@ namespace yli::triangulation
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<float>(x);
-                    vertex.y = static_cast<float>(z); // FIXME!
-                    vertex.z = static_cast<float>(y); // FIXME!
+                    vertex.y = scene_y;
+                    vertex.z = static_cast<float>(z);
                     temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -275,6 +277,8 @@ namespace yli::triangulation
             // Begin from index `y_step`.
             for (std::size_t y = y_step; y < image_height; y += y_step)
             {
+                const float scene_y = -1.0f * static_cast<float>(y);
+
                 // Begin from index `x_step`.
                 for (std::size_t x = x_step; x < image_width; x += x_step)
                 {
@@ -287,8 +291,8 @@ namespace yli::triangulation
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<float>(x) - 0.5f * x_step;
-                    vertex.y = static_cast<float>(z);                 // FIXME!
-                    vertex.z = static_cast<float>(y) - 0.5f * y_step; // FIXME!
+                    vertex.y = scene_y + 0.5f * y_step;
+                    vertex.z = static_cast<float>(z);
                     temp_vertices.emplace_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.

@@ -55,7 +55,7 @@ namespace ajokki
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_scene_entity ...\n";
         yli::ontology::SceneStruct scene_struct;
-        scene_struct.light_position = { 0.0f, 100000.0f, 100000.0f, 1.0f };
+        scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 77.0f;
         std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene ...\n";
         yli::ontology::Scene* const joensuu_center_west_scene = this->entity_factory.create_scene(scene_struct);
@@ -177,7 +177,7 @@ namespace ajokki
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
         horse_object_struct1.initial_rotate_angles = { -0.5f * std::numbers::pi };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
-        horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
+        horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, -1990.00f, 200.00f);
         yli::ontology::Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);
         yli::ontology::Object* const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 
@@ -191,7 +191,7 @@ namespace ajokki
 
         yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.scene = joensuu_center_west_scene;
-        horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, 201.00f, 1822.00f);
+        horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, -1822.00f, 201.00f);
         horse_camera_struct.orientation.yaw = -0.97f;
         horse_camera_struct.orientation.pitch = -0.18f;
 
