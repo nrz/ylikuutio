@@ -520,8 +520,6 @@ namespace yli::ontology
                     const float yaw = this->get_yaw();
                     const float pitch = this->get_pitch();
 
-                    // Direction: spherical coordinates to cartesian coordinates conversion.
-
                     glm::vec3 direction = glm::vec3(
                             cos(pitch) * sin(yaw + 0.5f * std::numbers::pi),
                             sin(pitch),
