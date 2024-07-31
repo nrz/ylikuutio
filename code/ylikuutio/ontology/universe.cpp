@@ -503,9 +503,9 @@ namespace yli::ontology
                     const float pitch = this->get_pitch();
 
                     glm::vec3 direction = glm::vec3(
-                            cos(pitch) * sin(yaw + 0.5f * std::numbers::pi),
+                            cos(pitch) * cos(yaw),
                             sin(pitch),
-                            cos(pitch) * cos(yaw + 0.5f * std::numbers::pi));
+                            -1.0f * cos(pitch) * sin(yaw));
 
                     glm::vec3 right = glm::vec3(sin(yaw) * cos(roll), sin(roll), cos(yaw) * cos(roll));
 
