@@ -1012,7 +1012,7 @@ namespace yli::ontology
 
         if (camera == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Universe::set_direction`: `camera` is `nullptr`!");
         }
 
         camera->direction = std::move(direction);
@@ -1036,7 +1036,7 @@ namespace yli::ontology
 
         if (camera == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Universe::set_right`: `camera` is `nullptr`!");
         }
 
         camera->right = std::move(right);
@@ -1060,7 +1060,7 @@ namespace yli::ontology
 
         if (camera == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Universe::set_up`: `camera` is `nullptr`!");
         }
 
         camera->up = std::move(up);
