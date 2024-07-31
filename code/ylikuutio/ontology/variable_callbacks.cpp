@@ -33,11 +33,6 @@
 #include <limits>        // std::numeric_limits
 #include <variant>       // std::holds_alternative, std::variant
 
-namespace yli::data
-{
-    struct SphericalCoordinatesStruct;
-}
-
 namespace yli::ontology
 {
     std::optional<yli::data::AnyValue> Variable::activate_planet_radius(
