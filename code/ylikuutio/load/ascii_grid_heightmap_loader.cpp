@@ -65,7 +65,7 @@ namespace yli::load
         // ncols           number of columns
         // nrows           number of rows
         // xllcorner       the x-coordinate of bottom left corner
-        // yllcorner       the y-coordinate of bottom left corner (note: consider this as z-coordinate in Ylikuutio)
+        // yllcorner       the y-coordinate of bottom left corner (note: consider this as y-coordinate in Ylikuutio)
         // cellsize        grid resolution in meters
         // NODATA_value    the value used to indicate a missing value
 
@@ -187,10 +187,10 @@ namespace yli::load
         {
             int32_t last_percent = -1;
 
-            for (uint32_t z = 0; z < image_height; z++)
+            for (uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
+                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -233,11 +233,11 @@ namespace yli::load
         // No triangulation.
         // Just copy the vertices loaded from file to `out_vertices`.
 
-        for (std::size_t i = 0, z = 0; i < vertex_data.size() && z < image_height; z++)
+        for (std::size_t i = 0, y = 0; i < vertex_data.size() && y < image_height; y++)
         {
             for (uint32_t x = 0; x < image_width; x++)
             {
-                glm::vec3 vertex { static_cast<float>(x), vertex_data[i++], static_cast<float>(z) };
+                glm::vec3 vertex { static_cast<float>(x), vertex_data[i++], static_cast<float>(y) };
                 out_vertices.emplace_back(vertex);
             }
         }
