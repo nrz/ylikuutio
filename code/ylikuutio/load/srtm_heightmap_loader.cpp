@@ -144,10 +144,10 @@ namespace yli::load
         {
             int32_t last_percent = -1;
 
-            for (uint32_t z = 0; z < image_height; z++)
+            for (uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(z) / static_cast<float>(image_height - 1))));
+                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -157,10 +157,10 @@ namespace yli::load
 
                 for (uint32_t x = 0; x < image_width; x++)
                 {
-                    uint32_t y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
+                    uint32_t z = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                     image_pointer += sizeof(int16_t);
-                    vertex_data.emplace_back(static_cast<float>(y) / heightmap_loader_struct.divisor);
+                    vertex_data.emplace_back(static_cast<float>(z) / heightmap_loader_struct.divisor);
                 }
                 image_pointer += sizeof(int16_t) * (true_image_width - image_width);
             }
