@@ -54,11 +54,6 @@ namespace yli::core
     class Application;
 }
 
-namespace yli::data
-{
-    struct SphericalCoordinatesStruct;
-}
-
 namespace yli::input
 {
     enum class InputMethod;
@@ -146,18 +141,6 @@ namespace yli::ontology
 
             float get_z() const;
             void set_z(const float z);
-
-            const yli::data::SphericalCoordinatesStruct& get_spherical() const;
-            void set_spherical(yli::data::SphericalCoordinatesStruct&& spherical_coordinates);
-
-            float get_rho() const;
-            void set_rho(const float rho);
-
-            float get_theta() const;
-            void set_theta(const float theta);
-
-            float get_phi() const;
-            void set_phi(const float phi);
 
             const glm::vec3& get_direction() const;
             void set_direction(glm::vec3&& direction);
@@ -347,9 +330,6 @@ namespace yli::ontology
             bool is_first_turbo_pressed  { false };
             bool is_second_turbo_pressed { false };
             bool is_exit_requested       { false };
-
-            // Variables related to the current `Scene`.
-            bool testing_spherical_terrain_in_use { false };
 
             // Variables related to `Console`s.
             bool in_console { false };

@@ -110,63 +110,6 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_rho(yli::ontology::Entity& entity)
-    {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
-
-        if (movable != nullptr)
-        {
-            return yli::data::AnyValue(movable->spherical_coordinates.rho);
-        }
-
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
-
-        if (universe != nullptr)
-        {
-            return yli::data::AnyValue(universe->get_rho());
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> read_theta(yli::ontology::Entity& entity)
-    {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
-
-        if (movable != nullptr)
-        {
-            return yli::data::AnyValue(movable->spherical_coordinates.theta);
-        }
-
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
-
-        if (universe != nullptr)
-        {
-            return yli::data::AnyValue(universe->get_theta());
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> read_phi(yli::ontology::Entity& entity)
-    {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
-
-        if (movable != nullptr)
-        {
-            return yli::data::AnyValue(movable->spherical_coordinates.phi);
-        }
-
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
-
-        if (universe != nullptr)
-        {
-            return yli::data::AnyValue(universe->get_phi());
-        }
-
-        return std::nullopt;
-    }
-
     std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity)
     {
         yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);

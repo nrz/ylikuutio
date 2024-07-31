@@ -59,11 +59,6 @@ namespace yli::core
     class Application;
 }
 
-namespace yli::data
-{
-    struct SphericalCoordinatesStruct;
-}
-
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
@@ -161,9 +156,6 @@ namespace yli::ontology
 
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::data::SphericalCoordinatesStruct* spherical_coordinates { nullptr };
 
             GLuint scene_uniform_block { 0 };
 

@@ -26,7 +26,6 @@
 #include "rigid_body_module.hpp"
 #include "movable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -118,9 +117,6 @@ namespace yli::ontology
             // Set target towards which to move.
             static void set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
-            // Set target towards which to move.
-            static void set_spherical_dest(yli::ontology::Movable* const movable, const float rho, const float theta, const float phi);
-
             // Get x coordinate of `movable`.
             static float get_x(const yli::ontology::Movable* const movable);
 
@@ -130,15 +126,6 @@ namespace yli::ontology
             // Get z destination coordinate of `movable`.
             static float get_z(const yli::ontology::Movable* const movable);
 
-            // Get rho coordinate of `movable`.
-            static float get_rho(const yli::ontology::Movable* const movable);
-
-            // Get theta coordinate of `movable`.
-            static float get_theta(const yli::ontology::Movable* const movable);
-
-            // Get phi destination coordinate of `movable`.
-            static float get_phi(const yli::ontology::Movable* const movable);
-
             // Get x destination coordinate of `movable`.
             static float get_dest_x(const yli::ontology::Movable* const movable);
 
@@ -147,15 +134,6 @@ namespace yli::ontology
 
             // Get z coordinate of `movable`.
             static float get_dest_z(const yli::ontology::Movable* const movable);
-
-            // Get rho destination coordinate of `movable`.
-            static float get_dest_rho(const yli::ontology::Movable* const movable);
-
-            // Get theta destination coordinate of `movable`.
-            static float get_dest_theta(const yli::ontology::Movable* const movable);
-
-            // Get phi destination destination coordinate of `movable`.
-            static float get_dest_phi(const yli::ontology::Movable* const movable);
 
             // Allied-movable-centric path and map information callbacks.
 
@@ -427,11 +405,7 @@ namespace yli::ontology
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
             yli::ontology::CartesianCoordinatesModule location;
 
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            yli::data::SphericalCoordinatesStruct spherical_coordinates;      // spherical coordinates.
-
             glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
-            yli::data::SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction { glm::vec3(NAN, NAN, NAN) };

@@ -20,7 +20,6 @@
 #include "code/ylikuutio/ontology/movable_variable_activation.hpp"
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
@@ -37,48 +36,11 @@ namespace yli::snippets
 {
     void set_location_and_orientation(
             yli::ontology::Entity* const entity,
-            const float rho,
-            const float theta,
-            const float phi,
             const float x,
             const float y,
             const float z)
     {
         // Variables related to location and orientation.
-        yli::data::SphericalCoordinatesStruct spherical_coordinates_struct;
-        spherical_coordinates_struct.rho = rho;
-        spherical_coordinates_struct.theta = theta;
-        spherical_coordinates_struct.phi = phi;
-        yli::ontology::VariableStruct spherical_coordinates_variable_struct(entity->get_universe(), *entity);
-        spherical_coordinates_variable_struct.local_name = "spherical_coordinates";
-        spherical_coordinates_variable_struct.activate_callback = &yli::ontology::activate_spherical_coordinates;
-        spherical_coordinates_variable_struct.should_call_activate_callback_now = true;
-        std::cout << "Executing `entity->create_variable(spherical_coordinates_variable_struct);` ...\n";
-        entity->create_variable(spherical_coordinates_variable_struct, yli::data::AnyValue(spherical_coordinates_struct));
-
-        yli::ontology::VariableStruct rho_variable_struct(entity->get_universe(), *entity);
-        rho_variable_struct.local_name = "rho";
-        rho_variable_struct.activate_callback = &yli::ontology::activate_rho;
-        rho_variable_struct.read_callback = &yli::ontology::read_rho;
-        rho_variable_struct.should_call_activate_callback_now = true;
-        std::cout << "Executing `entity->create_variable(rho_variable_struct);` ...\n";
-        entity->create_variable(rho_variable_struct, yli::data::AnyValue(rho));
-
-        yli::ontology::VariableStruct theta_variable_struct(entity->get_universe(), *entity);
-        theta_variable_struct.local_name = "theta";
-        theta_variable_struct.activate_callback = &yli::ontology::activate_theta;
-        theta_variable_struct.read_callback = &yli::ontology::read_theta;
-        theta_variable_struct.should_call_activate_callback_now = true;
-        std::cout << "Executing `entity->create_variable(theta_variable_struct);` ...\n";
-        entity->create_variable(theta_variable_struct, yli::data::AnyValue(theta));
-
-        yli::ontology::VariableStruct phi_variable_struct(entity->get_universe(), *entity);
-        phi_variable_struct.local_name = "phi";
-        phi_variable_struct.activate_callback = &yli::ontology::activate_phi;
-        phi_variable_struct.read_callback = &yli::ontology::read_phi;
-        phi_variable_struct.should_call_activate_callback_now = true;
-        std::cout << "Executing `entity->create_variable(phi_variable_struct);` ...\n";
-        entity->create_variable(phi_variable_struct, yli::data::AnyValue(phi));
 
         yli::ontology::VariableStruct cartesian_coordinates_variable_struct(entity->get_universe(), *entity);
         cartesian_coordinates_variable_struct.local_name = "cartesian";

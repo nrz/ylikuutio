@@ -244,12 +244,6 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::data::SphericalCoordinatesStruct* data)
-        {
-            return "yli::data::SphericalCoordinatesStruct*";
-        }
-
-    template<>
         std::string get_type_string(std::string* data)
         {
             return "std::string*";

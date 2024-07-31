@@ -33,11 +33,6 @@ namespace yli::ontology
     std::optional<yli::data::AnyValue> activate_y(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_z(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_spherical_coordinates(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-    std::optional<yli::data::AnyValue> activate_rho(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-    std::optional<yli::data::AnyValue> activate_theta(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-    std::optional<yli::data::AnyValue> activate_phi(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
-
     std::optional<yli::data::AnyValue> activate_roll(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_yaw(yli::ontology::Entity& entity, yli::ontology::Variable& variable);
     std::optional<yli::data::AnyValue> activate_pitch(yli::ontology::Entity& entity, yli::ontology::Variable& variable);

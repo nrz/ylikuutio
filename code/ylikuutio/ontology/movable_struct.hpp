@@ -22,7 +22,6 @@
 #include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
 #include "rigid_body_module_struct.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
 // Include GLM
@@ -51,13 +50,11 @@ namespace yli::ontology
         MovableStruct(
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
-                yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const float roll,
                 const float yaw,
                 const float pitch)
             : brain { brain },
             cartesian_coordinates { cartesian_coordinates },
-            spherical_coordinates { spherical_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
@@ -65,7 +62,6 @@ namespace yli::ontology
         MovableStruct(
                 yli::ontology::Brain* const brain,
                 const glm::vec3& cartesian_coordinates,
-                yli::data::SphericalCoordinatesStruct spherical_coordinates,
                 const float roll,
                 const float yaw,
                 const float pitch,
@@ -74,7 +70,6 @@ namespace yli::ontology
             : EntityStruct(global_name, local_name),
             brain { brain },
             cartesian_coordinates { cartesian_coordinates },
-            spherical_coordinates { spherical_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
@@ -97,7 +92,6 @@ namespace yli::ontology
         glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
         yli::ontology::CartesianCoordinatesModule cartesian_coordinates { NAN, NAN, NAN };
-        yli::data::SphericalCoordinatesStruct spherical_coordinates { NAN, NAN, NAN };
         yli::ontology::OrientationModule orientation;
 
         float scale { 1.0f };

@@ -738,7 +738,7 @@ namespace tulevaisuus
         std::cout << "Setting up movement ...\n";
         yli::snippets::set_movement(&this->get_universe(), this->get_universe().speed, this->get_universe().turbo_factor, this->get_universe().twin_turbo_factor, this->get_universe().mouse_speed);
         std::cout << "Setting up location and orientation ...\n";
-        yli::snippets::set_location_and_orientation(&this->get_universe(), -5682.32f, -1641.20f, 2376.45f, 100.0f, 100.0f, 100.0f);
+        yli::snippets::set_location_and_orientation(&this->get_universe(), 100.0f, 100.0f, 100.0f);
         std::cout << "Setting up debug variables ...\n";
         yli::snippets::set_flight_mode(&this->get_universe(), true);
 

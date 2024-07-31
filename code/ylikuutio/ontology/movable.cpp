@@ -90,7 +90,6 @@ namespace yli::ontology
         initial_rotate_angles { movable_struct.initial_rotate_angles },
         original_scale_vector { movable_struct.original_scale_vector },
         location(movable_struct.cartesian_coordinates),
-        spherical_coordinates { movable_struct.spherical_coordinates },
         orientation(movable_struct.orientation.roll, movable_struct.orientation.yaw, movable_struct.orientation.pitch),
         scale        { movable_struct.scale },
         input_method { movable_struct.input_method }

@@ -55,8 +55,6 @@ namespace yli::ontology
 
 namespace yli::data
 {
-    struct SphericalCoordinatesStruct;
-
     class AnyValue final
     {
         public:
@@ -107,9 +105,6 @@ namespace yli::data
             explicit AnyValue(const glm::vec3& const_glm_vec3_ref);
             explicit AnyValue(glm::vec4& glm_vec4_ref);
             explicit AnyValue(const glm::vec4& const_glm_vec4_ref);
-            // Spherical coordinates.
-            explicit AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
-            explicit AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref);
             // Ontology.
             explicit AnyValue(yli::ontology::Entity& entity_ref);
             explicit AnyValue(yli::ontology::Movable& movable_ref);
@@ -156,9 +151,6 @@ namespace yli::data
                 std::reference_wrapper<const glm::vec3>,
                 std::reference_wrapper<glm::vec4>,
                 std::reference_wrapper<const glm::vec4>,
-                // Spherical coordinates.
-                std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
-                std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 // Ontology.
                 // `yli::ontology` datatypes, 'entity' path.
                 std::reference_wrapper<yli::ontology::Entity>,

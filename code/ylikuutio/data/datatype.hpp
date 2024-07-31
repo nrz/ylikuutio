@@ -50,8 +50,6 @@ namespace yli::data
         // Fixed-size vectors.
         GLM_VEC3            = 15,
         GLM_VEC4            = 16,
-        // Spherical coordinates.
-        SPHERICAL_COORDINATES_STRUCT,
         // Systems.
         AUDIO_SYSTEM        = 50,
         // `yli::ontology` datatypes, 'entity' path.

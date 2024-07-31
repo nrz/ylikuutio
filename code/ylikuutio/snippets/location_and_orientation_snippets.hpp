@@ -27,9 +27,6 @@ namespace yli::snippets
 {
     void set_location_and_orientation(
             yli::ontology::Entity* const entity,
-            const float rho,
-            const float theta,
-            const float phi,
             const float x,
             const float y,
             const float z);

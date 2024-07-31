@@ -32,11 +32,6 @@ namespace yli::ontology
     std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity& entity);
     std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity& entity);
 
-    std::optional<yli::data::AnyValue> read_spherical_coordinates(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_rho(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_theta(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_phi(yli::ontology::Entity& entity);
-
     std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity);
     std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity& entity);
 

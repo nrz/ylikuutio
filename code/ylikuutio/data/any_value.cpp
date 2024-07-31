@@ -22,7 +22,6 @@
 
 #include "any_value.hpp"
 #include "variant_templates.hpp"
-#include "spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -173,19 +172,6 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<const glm::vec4>>(this->data).get() ==
                 std::get<std::reference_wrapper<const glm::vec4>>(rhs.data).get();
-        }
-        // Spherical coordinates.
-        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data))
-        {
-            return std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(rhs.data).get();
-        }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(rhs.data))
-        {
-            return std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data).get() ==
-                std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(rhs.data).get();
         }
         // Ontology.
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data) &&
@@ -382,15 +368,6 @@ namespace yli::data
         {
             return "const glm::vec4&";
         }
-        // Spherical coordinates.
-        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data))
-        {
-            return "yli::data::SphericalCoordinatesStruct&";
-        }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
-        {
-            return "const yli::data::SphericalCoordinatesStruct&";
-        }
         // Ontology.
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))
         {
@@ -577,27 +554,6 @@ namespace yli::data
                 << ", " << cartesian_coordinates.y
                 << ", " << cartesian_coordinates.z
                 << ", " << cartesian_coordinates.w
-                << " }";
-        }
-        // Spherical coordinates.
-        else if (std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data))
-        {
-            const yli::data::SphericalCoordinatesStruct& spherical_coordinates =
-                 std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(this->data);
-
-            any_value_stringstream << std::fixed << "{ " << spherical_coordinates.rho
-                << ", " << spherical_coordinates.theta
-                << ", " << spherical_coordinates.phi
-                << " }";
-        }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data))
-        {
-            const yli::data::SphericalCoordinatesStruct& spherical_coordinates =
-                 std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(this->data);
-
-            any_value_stringstream << std::fixed << "{ " << spherical_coordinates.rho
-                << ", " << spherical_coordinates.theta
-                << ", " << spherical_coordinates.phi
                 << " }";
         }
         // Ontology.
@@ -973,9 +929,6 @@ namespace yli::data
                 std::reference_wrapper<const glm::vec3>,
                 std::reference_wrapper<glm::vec4>,
                 std::reference_wrapper<const glm::vec4>,
-                // Spherical coordinates.
-                std::reference_wrapper<yli::data::SphericalCoordinatesStruct>,
-                std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>,
                 // Ontology.
                 std::reference_wrapper<yli::ontology::Entity>,
                 std::reference_wrapper<yli::ontology::Movable>,
@@ -1098,18 +1051,6 @@ namespace yli::data
 
     AnyValue::AnyValue(const glm::vec4& const_glm_vec4_ref)
         : data(std::reference_wrapper<const glm::vec4>(const_glm_vec4_ref))
-    {
-    }
-
-    // Spherical coordinates.
-
-    AnyValue::AnyValue(yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
-        : data(std::reference_wrapper<yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
-    {
-    }
-
-    AnyValue::AnyValue(const yli::data::SphericalCoordinatesStruct& spherical_coordinates_struct_ref)
-        : data(std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>(spherical_coordinates_struct_ref))
     {
     }
 

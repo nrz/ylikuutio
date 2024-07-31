@@ -282,24 +282,6 @@ namespace yli::ontology
             return;
         }
 
-        // Create spherical coordinates text, on second line from the bottom left.
-        yli::ontology::TextStruct spherical_coordinates_text_struct;
-        spherical_coordinates_text_struct.parent = font_2d;
-        spherical_coordinates_text_struct.screen_width = this->window_width;
-        spherical_coordinates_text_struct.screen_height = this->window_height;
-        spherical_coordinates_text_struct.x = 0;
-        spherical_coordinates_text_struct.y = 2 * this->text_size;
-        spherical_coordinates_text_struct.text_size = this->text_size;
-        spherical_coordinates_text_struct.font_size = this->font_size;
-        spherical_coordinates_text_struct.horizontal_alignment = "left";
-        spherical_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2D* spherical_coordinates_text_2d = entity_factory.create_text_2d(spherical_coordinates_text_struct);
-
-        if (spherical_coordinates_text_2d == nullptr)
-        {
-            return;
-        }
-
         // Create time data text, on top left corner.
         yli::ontology::TextStruct time_text_struct;
         time_text_struct.parent = font_2d;
@@ -659,24 +641,6 @@ namespace yli::ontology
                     }
                 }
 
-                if (spherical_coordinates_text_2d != nullptr)
-                {
-                    if (this->testing_spherical_terrain_in_use)
-                    {
-                        std::stringstream spherical_coordinates_stringstream;
-                        spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                            "rho:" << this->get_rho() <<
-                            "theta:" << this->get_theta() <<
-                            "phi:" << this->get_phi();
-                        const std::string spherical_coordinates_string = spherical_coordinates_stringstream.str();
-                        spherical_coordinates_text_2d->change_string(spherical_coordinates_string);
-                    }
-                    else
-                    {
-                        spherical_coordinates_text_2d->change_string("");
-                    }
-                }
-
                 // 5. Render.
                 // Render the `Universe`.
                 this->render();
@@ -894,102 +858,6 @@ namespace yli::ontology
         }
 
         camera->location.xyz.z = z;
-    }
-
-    const yli::data::SphericalCoordinatesStruct& Universe::get_spherical() const
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::get_spherical`: `camera` is `nullptr`!");
-        }
-
-        return camera->spherical_coordinates;
-    }
-
-    void Universe::set_spherical(yli::data::SphericalCoordinatesStruct&& spherical_coordinates)
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::set_spherical`: `camera` is `nullptr`!");
-        }
-
-        camera->spherical_coordinates = std::move(spherical_coordinates);
-    }
-
-    float Universe::get_rho() const
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::get_rho`: `camera` is `nullptr`!");
-        }
-
-        return camera->spherical_coordinates.rho;
-    }
-
-    void Universe::set_rho(const float rho)
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::set_rho`: `camera` is `nullptr`!");
-        }
-
-        camera->spherical_coordinates.rho = rho;
-    }
-
-    float Universe::get_theta() const
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::get_theta`: `camera` is `nullptr`!");
-        }
-
-        return camera->spherical_coordinates.theta;
-    }
-
-    void Universe::set_theta(const float theta)
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::set_theta`: `camera` is `nullptr`!");
-        }
-
-        camera->spherical_coordinates.theta = theta;
-    }
-
-    float Universe::get_phi() const
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::get_phi`: `camera` is `nullptr`!");
-        }
-
-        return camera->spherical_coordinates.phi;
-    }
-
-    void Universe::set_phi(const float phi)
-    {
-        yli::ontology::Camera* const camera = this->get_active_camera();
-
-        if (camera == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Universe::set_phi`: `camera` is `nullptr`!");
-        }
-
-        camera->spherical_coordinates.phi = phi;
     }
 
     const glm::vec3& Universe::get_direction() const
@@ -1618,22 +1486,6 @@ namespace yli::ontology
 
     bool Universe::compute_and_update_matrices_from_inputs()
     {
-        if (this->testing_spherical_terrain_in_use) [[unlikely]]
-        {
-            // Compute spherical coordinates.
-            this->set_rho(sqrt(
-                        (this->get_x() * this->get_x()) +
-                        (this->get_y() * this->get_y()) +
-                        (this->get_z() * this->get_z())));
-            this->set_theta(yli::geometry::radians_to_degrees(atan2(sqrt(
-                                (this->get_x() * this->get_x()) +
-                                (this->get_y() * this->get_y())),
-                            this->get_z())));
-            this->set_phi(yli::geometry::radians_to_degrees(atan2(
-                            this->get_y(),
-                            this->get_x())));
-        }
-
         glm::vec3 camera_cartesian_coordinates;
         camera_cartesian_coordinates.x = this->get_x();
         camera_cartesian_coordinates.y = this->get_y();

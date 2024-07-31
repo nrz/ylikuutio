@@ -18,7 +18,6 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -631,26 +630,6 @@ TEST(any_value_must_be_initialized_appropriately, compute_task)
     ASSERT_EQ(std::strcmp(console_any_value.get_datatype().c_str(), "yli::ontology::Console&"), 0);
     ASSERT_EQ(console_any_value.get_entity_ref(), *console);
     ASSERT_EQ(console_any_value.get_const_entity_ref(), *console);
-}
-
-TEST(any_value_must_be_initialized_appropriately, spherical_coordinates_struct)
-{
-    yli::data::SphericalCoordinatesStruct spherical_coordinates_struct = yli::data::SphericalCoordinatesStruct(1.0f, 2.0f, 3.0f);
-    yli::data::AnyValue any_value(spherical_coordinates_struct);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
-    ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "yli::data::SphericalCoordinatesStruct&"), 0);
-    // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
-}
-
-TEST(any_value_must_be_initialized_appropriately, const_spherical_coordinates_struct)
-{
-    const yli::data::SphericalCoordinatesStruct spherical_coordinates_struct = yli::data::SphericalCoordinatesStruct(1.0f, 2.0f, 3.0f);
-    yli::data::AnyValue any_value(spherical_coordinates_struct);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<const yli::data::SphericalCoordinatesStruct>>(any_value.data).get(), spherical_coordinates_struct);
-    ASSERT_EQ(std::strcmp(any_value.get_datatype().c_str(), "const yli::data::SphericalCoordinatesStruct&"), 0);
-    // TODO: add assertions for `AnyValue::get_string` for `yli::data::SphericalCoordinatesStruct`!
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_string)
