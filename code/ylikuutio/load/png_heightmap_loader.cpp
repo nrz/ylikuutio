@@ -123,35 +123,35 @@ namespace yli::load
         vertex_data.reserve(terrain_size);
 
         // start processing image_data.
-        for (std::size_t z = 0; z < image_height; z++)
+        for (std::size_t y = 0; y < image_height; y++)
         {
-            const uint8_t* image_pointer = &(*image_data)[0] + z * line_size_in_bytes;
+            const uint8_t* image_pointer = &(*image_data)[0] + y * line_size_in_bytes;
 
             for (std::size_t x = 0; x < image_width; x++)
             {
-                std::size_t y;
+                std::size_t z;
 
                 if (color_channel == "red")
                 {
-                    y = static_cast<float>(*(image_pointer));     // y-coordinate is the red (R) value.
+                    z = static_cast<float>(*(image_pointer));     // z-coordinate is the red (R) value.
                 }
                 else if (color_channel == "green" && n_color_channels >= 2)
                 {
-                    y = static_cast<float>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
+                    z = static_cast<float>(*(image_pointer + 1)); // z-coordinate is the green (G) value.
                 }
                 else if (color_channel == "blue" && n_color_channels >= 3)
                 {
-                    y = static_cast<float>(*image_pointer + 2);   // y-coordinate is the blue (B) value.
+                    z = static_cast<float>(*image_pointer + 2);   // z-coordinate is the blue (B) value.
                 }
                 else if (color_channel == "mean" || color_channel == "all")
                 {
-                    float float_y { 0.0f };
+                    float float_z { 0.0f };
                     for (std::size_t color_channel_i = 0; color_channel_i < n_color_channels; color_channel_i++)
                     {
-                        float_y += static_cast<float>(*image_pointer + color_channel_i);
+                        float_z += static_cast<float>(*image_pointer + color_channel_i);
                     }
 
-                    y = float_y / static_cast<float>(n_color_channels);
+                    z = float_z / static_cast<float>(n_color_channels);
                 }
                 else
                 {
@@ -159,7 +159,7 @@ namespace yli::load
                     return false;
                 }
 
-                vertex_data.emplace_back(y);
+                vertex_data.emplace_back(z);
                 image_pointer += n_color_channels;
             }
         }
