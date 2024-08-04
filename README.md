@@ -432,6 +432,7 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * [Google logging module (glog)](https://github.com/google/glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
 * [FastNoiseSIMD](https://github.com/Auburns/FastNoiseSIMD) is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * [TinySpline](https://github.com/msteinbeck/tinyspline) is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
+* [fastgltf](https://github.com/spnda/fastgltf) is licensed under [the MIT license](https://github.com/spnda/fastgltf/blob/main/LICENSE.md).
 
 ### 3D models
 * [3D model of Helsinki.](https://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](https://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.fi).
