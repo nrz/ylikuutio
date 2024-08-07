@@ -128,7 +128,7 @@ namespace yli::load
         const char* opening_double_quote_pointer = strchr(svg_data_pointer, '"');
         if (opening_double_quote_pointer == nullptr)
         {
-            std::cerr << "error: no opening double quote found for d=!\n";
+            std::cerr << "ERROR: `yli::load::load_vertex_data`: no opening double quote found for d=!\n";
             return false;
         }
 
@@ -136,7 +136,7 @@ namespace yli::load
         const char* closing_double_quote_pointer = strchr(++opening_double_quote_pointer, '"');
         if (closing_double_quote_pointer == nullptr)
         {
-            std::cerr << "error: no closing double quote found for d=!\n";
+            std::cerr << "ERROR: `yli::load::load_vertex_data`: no closing double quote found for d=!\n";
             return false;
         }
 
