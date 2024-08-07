@@ -106,10 +106,6 @@ namespace yli::ontology
                     const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
                     const yli::ontology::Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_planet_radius(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
-
             static std::optional<yli::data::AnyValue> activate_window_width(
                     yli::ontology::Entity& entity,
                     yli::ontology::Variable& variable);

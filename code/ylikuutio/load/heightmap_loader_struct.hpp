@@ -31,7 +31,6 @@ namespace yli::load
         std::string file_format;
         float latitude      { NAN };
         float longitude     { NAN };
-        float planet_radius { NAN };
         float divisor       { NAN };
         uint32_t x_step     { 1 };
         uint32_t y_step     { 1 };

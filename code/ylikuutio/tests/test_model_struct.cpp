@@ -25,7 +25,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // std::isnan
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -36,7 +35,6 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.model_filename, "");
     ASSERT_EQ(test_model_struct.model_file_format, "");
     ASSERT_EQ(test_model_struct.color_channel, "");
-    ASSERT_TRUE(std::isnan(test_model_struct.planet_radius));
     ASSERT_EQ(test_model_struct.divisor, 1.0f);
     ASSERT_EQ(test_model_struct.latitude, 0.0f);
     ASSERT_EQ(test_model_struct.longitude, 0.0f);

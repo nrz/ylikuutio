@@ -28,7 +28,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
 #include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -84,10 +83,6 @@ namespace yli::ontology
         private:
             std::string color_channel;    // Color channel to use for altitude data, for PNG model files.
 
-        public:
-            float planet_radius { NAN };  // Radius of sea level in kilometers. used only for terrains (planets and moons). `6371.0f` for Earth.
-
-        private:
             float divisor       { 1.0f }; // Value by which SRTM values are divided to convert them to kilometers.
             float latitude      { 0.0f }; // In degrees, for SRTM model files.
             float longitude     { 0.0f }; // In degrees, for SRTM model files.

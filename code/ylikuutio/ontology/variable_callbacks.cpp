@@ -15,13 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "mesh_module.hpp"
 #include "entity.hpp"
 #include "variable.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
-#include "species.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -34,29 +32,6 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Variable::activate_planet_radius(
-            yli::ontology::Entity& entity,
-            yli::ontology::Variable& variable)
-    {
-        yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(&entity);
-
-        if (species == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        const yli::data::AnyValue& planet_radius_any_value = variable.variable_value;
-
-        if (!std::holds_alternative<float>(planet_radius_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        species->mesh.planet_radius = std::get<float>(planet_radius_any_value.data);
-
-        return std::nullopt;
-    }
-
     std::optional<yli::data::AnyValue> Variable::activate_window_width(
             yli::ontology::Entity& entity,
             yli::ontology::Variable& variable)
