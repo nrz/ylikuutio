@@ -22,7 +22,6 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "species.hpp"
-#include "holobiont.hpp"
 #include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
