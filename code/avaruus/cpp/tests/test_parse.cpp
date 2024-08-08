@@ -47,7 +47,6 @@ TEST(file_parsing_must_work_properly, empty_file)
             &begin_objects_line_i,
             &end_objects_line_i);
     ASSERT_FALSE(success);
-    free(content);
 }
 
 TEST(file_parsing_must_work_properly, invalid_file_one_line)
@@ -69,7 +68,6 @@ TEST(file_parsing_must_work_properly, invalid_file_one_line)
             &begin_objects_line_i,
             &end_objects_line_i);
     ASSERT_FALSE(success);
-    free(content);
 }
 
 TEST(file_parsing_must_work_properly, invalid_file_multiple_lines)
@@ -91,7 +89,6 @@ TEST(file_parsing_must_work_properly, invalid_file_multiple_lines)
             &begin_objects_line_i,
             &end_objects_line_i);
     ASSERT_FALSE(success);
-    free(content);
 }
 
 TEST(file_parsing_must_work_properly, valid_data)
@@ -117,7 +114,6 @@ TEST(file_parsing_must_work_properly, valid_data)
     ASSERT_EQ(end_global_parameters_line_i, 42);
     ASSERT_EQ(begin_objects_line_i, 44);
     ASSERT_EQ(end_objects_line_i, 58);
-    free(content);
 }
 
 TEST(file_parsing_must_work_properly, valid_data_again)
@@ -143,5 +139,4 @@ TEST(file_parsing_must_work_properly, valid_data_again)
     ASSERT_EQ(end_global_parameters_line_i, 42);
     ASSERT_EQ(begin_objects_line_i, 44);
     ASSERT_EQ(end_objects_line_i, 58);
-    free(content);
 }

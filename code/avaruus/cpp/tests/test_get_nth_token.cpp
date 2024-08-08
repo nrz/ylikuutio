@@ -36,7 +36,6 @@ TEST(get_nth_token_must_function_properly, empty_string_token_i_0_must_not_be_fo
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, empty_string_token_i_1_must_not_be_found)
@@ -50,7 +49,6 @@ TEST(get_nth_token_must_function_properly, empty_string_token_i_1_must_not_be_fo
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, a_string_token_i_1_must_be_found)
@@ -64,7 +62,6 @@ TEST(get_nth_token_must_function_properly, a_string_token_i_1_must_be_found)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, foo_string_token_i_1_must_be_found)
@@ -78,7 +75,6 @@ TEST(get_nth_token_must_function_properly, foo_string_token_i_1_must_be_found)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, foo_string_token_i_2_must_not_be_found)
@@ -92,7 +88,6 @@ TEST(get_nth_token_must_function_properly, foo_string_token_i_2_must_not_be_foun
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_1_must_be_found)
@@ -106,7 +101,6 @@ TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_1_must_be_foun
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_2_must_be_found)
@@ -120,7 +114,6 @@ TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_2_must_be_foun
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 8); // Searching for next token can begin from Fortran index 8.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_3_must_not_be_found)
@@ -134,7 +127,6 @@ TEST(get_nth_token_must_function_properly, foo_bar_string_token_i_3_must_not_be_
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, newline_string_token_i_0_must_not_be_found)
@@ -148,7 +140,6 @@ TEST(get_nth_token_must_function_properly, newline_string_token_i_0_must_not_be_
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, newline_string_token_i_1_must_not_be_found)
@@ -162,7 +153,6 @@ TEST(get_nth_token_must_function_properly, newline_string_token_i_1_must_not_be_
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, newline_a_string_token_i_0_must_not_be_found)
@@ -176,7 +166,6 @@ TEST(get_nth_token_must_function_properly, newline_a_string_token_i_0_must_not_b
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_nth_token_must_function_properly, newline_a_string_token_i_1_must_not_be_found)
@@ -190,5 +179,4 @@ TEST(get_nth_token_must_function_properly, newline_a_string_token_i_1_must_not_b
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }

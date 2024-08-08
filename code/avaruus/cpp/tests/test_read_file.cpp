@@ -33,7 +33,6 @@ TEST(read_file_must_work_properly, empty_filename_string)
     std::string_view expected_content { "" };
     ASSERT_EQ(expected_content.compare(content), 0);
     ASSERT_EQ(file_sz, -1); // File not found!
-    free(content);
 }
 
 TEST(read_file_must_work_properly, empty_file)
@@ -44,7 +43,6 @@ TEST(read_file_must_work_properly, empty_file)
     std::string_view expected_content { "" };
     ASSERT_EQ(expected_content.compare(content), 0);
     ASSERT_EQ(file_sz, 0); // File read successfully!
-    free(content);
 }
 
 TEST(read_file_must_work_properly, one_line)
@@ -55,7 +53,6 @@ TEST(read_file_must_work_properly, one_line)
     std::string_view expected_content { "# Hello! This file is used for unit tests!\n" };
     ASSERT_EQ(expected_content.compare(content), 0);
     ASSERT_EQ(file_sz, 43); // File read successfully!
-    free(content);
 }
 
 TEST(read_file_must_work_properly, multiple_lines)
@@ -66,5 +63,4 @@ TEST(read_file_must_work_properly, multiple_lines)
     std::string_view expected_content { "# Hello! This file is used for unit tests!\n# Second line!\n# Third line as well!\n" };
     ASSERT_EQ(expected_content.compare(content), 0);
     ASSERT_EQ(file_sz, 80); // File read successfully!
-    free(content);
 }

@@ -35,7 +35,6 @@ TEST(get_first_token_must_work_properly, empty)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, space)
@@ -48,7 +47,6 @@ TEST(get_first_token_must_work_properly, space)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a)
@@ -61,7 +59,6 @@ TEST(get_first_token_must_work_properly, a)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, hash)
@@ -74,7 +71,6 @@ TEST(get_first_token_must_work_properly, hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, newline)
@@ -87,7 +83,6 @@ TEST(get_first_token_must_work_properly, newline)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, space_a)
@@ -100,7 +95,6 @@ TEST(get_first_token_must_work_properly, space_a)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 3); // Searching for next token can begin from Fortran index 3.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, space_hash)
@@ -113,7 +107,6 @@ TEST(get_first_token_must_work_properly, space_hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a_space)
@@ -126,7 +119,6 @@ TEST(get_first_token_must_work_properly, a_space)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a_hash)
@@ -139,7 +131,6 @@ TEST(get_first_token_must_work_properly, a_hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a_newline)
@@ -152,7 +143,6 @@ TEST(get_first_token_must_work_properly, a_newline)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, newline_a)
@@ -165,7 +155,6 @@ TEST(get_first_token_must_work_properly, newline_a)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, -1); // No token found!
     ASSERT_EQ(token_sz, 0); // No token found!
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, space_a_space)
@@ -178,7 +167,6 @@ TEST(get_first_token_must_work_properly, space_a_space)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 3); // Searching for next token can begin from Fortran index 3.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, space_a_hash)
@@ -191,7 +179,6 @@ TEST(get_first_token_must_work_properly, space_a_hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 3); // Searching for next token can begin from Fortran index 3.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a_space_a)
@@ -204,7 +191,6 @@ TEST(get_first_token_must_work_properly, a_space_a)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, a_space_hash)
@@ -217,7 +203,6 @@ TEST(get_first_token_must_work_properly, a_space_hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 2); // Searching for next token can begin from Fortran index 2.
     ASSERT_EQ(token_sz, 1); // Token size is 1.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, abc)
@@ -230,7 +215,6 @@ TEST(get_first_token_must_work_properly, abc)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, abc_space)
@@ -243,7 +227,6 @@ TEST(get_first_token_must_work_properly, abc_space)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, abc_hash)
@@ -256,7 +239,6 @@ TEST(get_first_token_must_work_properly, abc_hash)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }
 
 TEST(get_first_token_must_work_properly, abc_newline)
@@ -269,5 +251,4 @@ TEST(get_first_token_must_work_properly, abc_newline)
     ASSERT_EQ(expected_token.compare(token), 0);
     ASSERT_EQ(next_i, 4); // Searching for next token can begin from Fortran index 4.
     ASSERT_EQ(token_sz, 3); // Token size is 3.
-    free(token);
 }

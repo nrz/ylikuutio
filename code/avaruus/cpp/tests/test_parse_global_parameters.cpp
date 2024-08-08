@@ -85,7 +85,6 @@ TEST(global_parameters_parsing_must_work_properly, valid_data)
             &total_length_of_simulation,
             &print_interval,
             &save_interval);
-    free(content);
 
     ASSERT_NE(global_parameters_parse_success, 0);
     ASSERT_EQ(n_objects, 9);
