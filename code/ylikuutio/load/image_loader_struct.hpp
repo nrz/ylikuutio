@@ -35,9 +35,7 @@ namespace yli::load
 
     struct ImageLoaderStruct
     {
-        ImageLoaderStruct()
-        {
-        }
+        ImageLoaderStruct() = default;
 
         ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
         {
