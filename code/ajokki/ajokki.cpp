@@ -329,9 +329,7 @@ namespace ajokki
         yli::ontology::EcosystemStruct mars_ecosystem_struct;
         mars_ecosystem_struct.global_name = "mars_ecosystem";
         std::cout << "Creating yli::ontology::Ecosystem* mars_ecosystem ...\n";
-        const yli::ontology::Ecosystem* const mars_ecosystem = this->entity_factory.create_ecosystem(mars_ecosystem_struct);
-
-        if (mars_ecosystem == nullptr)
+        if (this->entity_factory.create_ecosystem(mars_ecosystem_struct) == nullptr)
         {
             return false;
         }
