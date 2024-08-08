@@ -27,7 +27,6 @@
 namespace yli_edit
 {
     std::optional<yli::data::AnyValue> version(
-            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         console.print_text("YliEdit " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);

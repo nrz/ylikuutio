@@ -27,7 +27,6 @@
 namespace tulevaisuus
 {
     std::optional<yli::data::AnyValue> version(
-            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         console.print_text("Tulevaisuus " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);

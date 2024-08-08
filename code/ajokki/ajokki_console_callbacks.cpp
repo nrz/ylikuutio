@@ -27,7 +27,6 @@
 namespace ajokki
 {
     std::optional<yli::data::AnyValue> version(
-            const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
         console.print_text("Ajokki " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
