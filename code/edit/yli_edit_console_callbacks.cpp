@@ -27,15 +27,10 @@
 namespace yli_edit
 {
     std::optional<yli::data::AnyValue> version(
-            yli::ontology::Universe* const universe,
-            yli::ontology::Console* const console)
+            const yli::ontology::Universe& universe,
+            yli::ontology::Console& console)
     {
-        if (console == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        console->print_text("YliEdit " + universe->version + " / Ylikuutio " + universe->version);
+        console.print_text("YliEdit " + universe.version + " / Ylikuutio " + universe.version);
         return std::nullopt;
     }
 }
