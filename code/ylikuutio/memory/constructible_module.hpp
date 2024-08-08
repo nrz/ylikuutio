@@ -28,9 +28,7 @@ namespace yli::memory
 
     struct ConstructibleModule
     {
-        ConstructibleModule()
-        {
-        }
+        ConstructibleModule() = default;
 
         ConstructibleModule(yli::memory::GenericMemoryAllocator& generic_allocator, const std::size_t storage_i, const std::size_t slot_i)
             : generic_allocator { &generic_allocator },
