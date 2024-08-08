@@ -30,7 +30,7 @@ namespace hirvi
             const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
-        console.print_text("Hirvi " + universe.version + " / Ylikuutio " + universe.version);
+        console.print_text("Hirvi " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
         return std::nullopt;
     }
 }

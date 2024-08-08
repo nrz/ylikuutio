@@ -30,7 +30,7 @@ namespace yli_edit
             const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
-        console.print_text("YliEdit " + universe.version + " / Ylikuutio " + universe.version);
+        console.print_text("YliEdit " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
         return std::nullopt;
     }
 }

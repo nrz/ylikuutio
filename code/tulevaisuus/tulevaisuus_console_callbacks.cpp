@@ -30,7 +30,7 @@ namespace tulevaisuus
             const yli::ontology::Universe& universe,
             yli::ontology::Console& console)
     {
-        console.print_text("Tulevaisuus " + universe.version + " / Ylikuutio " + universe.version);
+        console.print_text("Tulevaisuus " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
         return std::nullopt;
     }
 }
