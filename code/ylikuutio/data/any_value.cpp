@@ -882,12 +882,6 @@ namespace yli::data
         return false;
     }
 
-    AnyValue::AnyValue(const yli::data::AnyValue& original)
-    {
-        // copy constructor.
-        this->data = original.data;
-    }
-
     AnyValue::AnyValue(const std::optional<yli::data::AnyValue> original)
     {
         // constructor for optional `AnyValue`.

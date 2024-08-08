@@ -73,7 +73,7 @@ namespace yli::data
             bool set_new_value(const std::string& value_string);
 
             // copy constructor.
-            AnyValue(const yli::data::AnyValue& original);
+            AnyValue(const yli::data::AnyValue& original) = default;
 
             // constructor for optional `AnyValue`.
             AnyValue(const std::optional<yli::data::AnyValue> original);
