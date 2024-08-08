@@ -324,13 +324,14 @@ struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(class_name_word
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
 
+four_spaces_struct_space = "    struct "
 if base_class_name != "":
     begin_struct_definition = \
-    "    struct " + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + newline + \
+    four_spaces_struct_space + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + newline + \
     "    {"
 else:
     begin_struct_definition = \
-    "    struct " + struct_variable_type + newline + \
+    four_spaces_struct_space + struct_variable_type + newline + \
     "    {"
 
 end_struct_definition = \
@@ -340,7 +341,7 @@ parent_class_forward_declaration = \
 four_spaces_class_space + parent_class_name + ";"
 
 struct_forward_declaration = \
-"    struct " + struct_variable_type + ";"
+four_spaces_struct_space + struct_variable_type + ";"
 
 struct_constructor_lines = \
 "        " + struct_variable_type + "()\n"\
