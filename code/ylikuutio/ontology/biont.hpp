@@ -56,7 +56,7 @@ namespace yli::ontology
                     yli::ontology::GenericParentModule* const holobiont_parent_module,
                     yli::ontology::GenericMasterModule* const symbiont_species_master_module);
 
-            ~Biont();
+            ~Biont() = default;
 
         public:
             Biont(const Biont&) = delete;            // Delete copy constructor.

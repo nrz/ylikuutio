@@ -86,12 +86,6 @@ namespace yli::ontology
         this->type_string = "yli::ontology::Biont*";
     }
 
-    Biont::~Biont()
-    {
-        // Requirements:
-        // `this->symbiont_species` must not be `nullptr`.
-    }
-
     yli::ontology::Entity* Biont::get_parent() const
     {
         return this->child_of_holobiont.get_parent();
