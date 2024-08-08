@@ -53,9 +53,7 @@ class Random
 class Fork
 {
     public:
-        Fork()
-        {
-        }
+        Fork() = default;
 
         std::mutex my_mutex;
 };
