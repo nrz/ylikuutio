@@ -183,13 +183,14 @@ parent_module_forward_declaration = \
 "    class GenericParentModule;"
 
 four_spaces_class_space = "    class "
+newline = "\n"
 if base_class_name != "":
     begin_class_definition = \
-    four_spaces_class_space + class_name + " final : public " + fully_qualified_base_class_name + "\n"\
+    four_spaces_class_space + class_name + " final : public " + fully_qualified_base_class_name + newline + \
     "    {"
 else:
     begin_class_definition = \
-    four_spaces_class_space + class_name + "\n"\
+    four_spaces_class_space + class_name + newline + \
     "    {"
 
 public_line = \
@@ -325,11 +326,11 @@ struct_define_line = "#define " + struct_include_guard_macro_name
 
 if base_class_name != "":
     begin_struct_definition = \
-    "    struct " + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + "\n"\
+    "    struct " + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + newline + \
     "    {"
 else:
     begin_struct_definition = \
-    "    struct " + struct_variable_type + "\n"\
+    "    struct " + struct_variable_type + newline + \
     "    {"
 
 end_struct_definition = \
