@@ -80,7 +80,7 @@ namespace yli::data
 
             // common constructors.
 
-            AnyValue(); // This constructor initializes `AnyValue` with default values.
+            AnyValue() = default;
             AnyValue(const std::string& type, const std::string& value_string); // This constructor takes also the value as a string.
             // Fundamental types.
             explicit AnyValue(const bool bool_value);
