@@ -182,13 +182,14 @@ scene_forward_declaration = \
 parent_module_forward_declaration = \
 "    class GenericParentModule;"
 
+four_spaces_class_space = "    class "
 if base_class_name != "":
     begin_class_definition = \
-    "    class " + class_name + " final : public " + fully_qualified_base_class_name + "\n"\
+    four_spaces_class_space + class_name + " final : public " + fully_qualified_base_class_name + "\n"\
     "    {"
 else:
     begin_class_definition = \
-    "    class " + class_name + "\n"\
+    four_spaces_class_space + class_name + "\n"\
     "    {"
 
 public_line = \
@@ -335,7 +336,7 @@ end_struct_definition = \
 "    };"
 
 parent_class_forward_declaration = \
-"    class " + parent_class_name + ";"
+four_spaces_class_space + parent_class_name + ";"
 
 struct_forward_declaration = \
 "    struct " + struct_variable_type + ";"
