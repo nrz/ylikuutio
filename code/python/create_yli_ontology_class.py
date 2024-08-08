@@ -96,11 +96,12 @@ if base_class_name != "":
     fully_qualified_base_class_name = namespace + "::" + base_class_name
 
 # snake_case lowercase names.
-snake_case_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).lower()
-snake_case_parent_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', parent_class_name).lower()
+class_name_word_boundaries = r'(?<!^)(?=[A-Z])'
+snake_case_class_name = re.sub(class_name_word_boundaries, '_', class_name).lower()
+snake_case_parent_class_name = re.sub(class_name_word_boundaries, '_', parent_class_name).lower()
 
 if base_class_name != "":
-    snake_case_base_class_name = re.sub(r'(?<!^)(?=[A-Z])', '_', base_class_name).lower()
+    snake_case_base_class_name = re.sub(class_name_word_boundaries, '_', base_class_name).lower()
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
@@ -241,7 +242,7 @@ else:
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_HPP_INCLUDED"
+class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(class_name_word_boundaries, '_', class_name).upper() + "_HPP_INCLUDED"
 class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 
@@ -317,7 +318,7 @@ get_scene_lines = \
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
+struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(class_name_word_boundaries, '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
 
