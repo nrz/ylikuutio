@@ -211,7 +211,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const float azimuth = 0.5f * std::numbers::pi - movable->orientation.yaw;
+            const float azimuth = 0.5f * static_cast<float>(std::numbers::pi) - movable->orientation.yaw;
             return yli::data::AnyValue(azimuth);
         }
 
@@ -219,7 +219,7 @@ namespace yli::ontology
 
         if (universe != nullptr)
         {
-            const float azimuth = 0.5f * std::numbers::pi - universe->get_yaw();
+            const float azimuth = 0.5f * static_cast<float>(std::numbers::pi) - universe->get_yaw();
             return yli::data::AnyValue(azimuth);
         }
 

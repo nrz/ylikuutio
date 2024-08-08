@@ -571,7 +571,7 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_west_brain->act();
 
@@ -613,7 +613,7 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_west_brain->act();
 
@@ -655,7 +655,7 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_north_brain->act();
 
@@ -697,7 +697,7 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_north_brain->act();
 
@@ -739,7 +739,7 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_south_brain->act();
 
@@ -781,7 +781,7 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_to_south_brain->act();
 
@@ -910,7 +910,7 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-1.0f, 0.0f, 0.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_west_brain->act();
 
@@ -953,7 +953,7 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-2.0f, 0.0f, 0.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_west_brain->act();
 
@@ -996,7 +996,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -1.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_north_brain->act();
 
@@ -1039,7 +1039,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -2.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_north_brain->act();
 
@@ -1082,7 +1082,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 1.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_south_brain->act();
 
@@ -1125,7 +1125,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
     ASSERT_EQ(object->orientation, original_orientation);
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 2.0f) };
-    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * std::numbers::pi, object_struct.orientation.pitch) };
+    glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_south_brain->act();
 
@@ -1170,7 +1170,7 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
     glm::vec3 expected_orientation {
         glm::vec3(
                 object_struct.orientation.roll,
-                object_struct.orientation.yaw - 0.1f * std::numbers::pi,
+                object_struct.orientation.yaw - 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
     rotate_clockwise_brain->act();
@@ -1216,7 +1216,7 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
     glm::vec3 expected_orientation {
         glm::vec3(
                 object_struct.orientation.roll,
-                object_struct.orientation.yaw - 0.1f * std::numbers::pi,
+                object_struct.orientation.yaw - 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
     rotate_clockwise_brain->act();
@@ -1262,7 +1262,7 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
     glm::vec3 expected_orientation {
         glm::vec3(
                 object_struct.orientation.roll,
-                object_struct.orientation.yaw + 0.1f * std::numbers::pi,
+                object_struct.orientation.yaw + 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
     rotate_counterclockwise_brain->act();
@@ -1308,7 +1308,7 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
     glm::vec3 expected_orientation {
         glm::vec3(
                 object_struct.orientation.roll,
-                object_struct.orientation.yaw + 0.1f * std::numbers::pi,
+                object_struct.orientation.yaw + 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
     rotate_counterclockwise_brain->act();

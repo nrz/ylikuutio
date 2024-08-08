@@ -156,12 +156,12 @@ namespace yli::ontology
 
     float Movable::get_azimuth() const
     {
-        return 0.5f * std::numbers::pi - this->orientation.yaw;
+        return 0.5f * static_cast<float>(std::numbers::pi) - this->orientation.yaw;
     }
 
     void Movable::set_azimuth(const float azimuth)
     {
-        this->orientation.yaw = 0.5f * std::numbers::pi - azimuth;
+        this->orientation.yaw = 0.5f * static_cast<float>(std::numbers::pi) - azimuth;
     }
 
     float Movable::get_scale() const

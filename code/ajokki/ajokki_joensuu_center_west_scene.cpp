@@ -175,7 +175,7 @@ namespace ajokki
         yli::ontology::ObjectStruct horse_object_struct1(joensuu_center_west_scene);
         horse_object_struct1.mesh_master = horse_species;
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
-        horse_object_struct1.initial_rotate_angles = { -0.5f * std::numbers::pi };
+        horse_object_struct1.initial_rotate_angles = { -0.5f * static_cast<float>(std::numbers::pi) };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, -1990.00f, 200.00f);
         yli::ontology::Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);

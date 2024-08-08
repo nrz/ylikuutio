@@ -984,7 +984,7 @@ namespace yli::ontology
     {
         const float temp_yaw = this->get_yaw() +
 			this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
-        this->set_yaw(remainder(temp_yaw, (2.0f * std::numbers::pi)));
+        this->set_yaw(remainder(temp_yaw, (2.0f * static_cast<float>(std::numbers::pi))));
     }
 
     float Universe::get_pitch() const
@@ -1016,7 +1016,7 @@ namespace yli::ontology
         const float temp_pitch = (this->is_invert_mouse_in_use) ?
             (this->get_pitch() - this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position)) :
             (this->get_pitch() + this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position));
-        this->set_pitch(remainder(temp_pitch, (2.0f * std::numbers::pi)));
+        this->set_pitch(remainder(temp_pitch, (2.0f * static_cast<float>(std::numbers::pi))));
     }
 
     float Universe::get_azimuth() const

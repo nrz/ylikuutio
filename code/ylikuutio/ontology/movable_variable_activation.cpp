@@ -370,7 +370,7 @@ namespace yli::ontology
                 return std::nullopt;
             }
 
-            movable->orientation.yaw = 0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data);
+            movable->orientation.yaw = 0.5f * static_cast<float>(std::numbers::pi) - std::get<float>(azimuth_any_value.data);
             return std::nullopt;
         }
 
@@ -388,7 +388,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        universe->set_yaw(0.5f * std::numbers::pi - std::get<float>(azimuth_any_value.data));
+        universe->set_yaw(0.5f * static_cast<float>(std::numbers::pi) - std::get<float>(azimuth_any_value.data));
         return std::nullopt;
     }
 

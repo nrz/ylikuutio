@@ -24,6 +24,6 @@ namespace yli::geometry
 {
     float radians_to_degrees(const float x)
     {
-        return x * 180.0f / std::numbers::pi;
+        return x * 180.0f / static_cast<float>(std::numbers::pi);
     }
 }
