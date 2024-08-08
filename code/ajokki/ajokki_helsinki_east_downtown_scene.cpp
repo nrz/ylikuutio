@@ -591,9 +591,9 @@ namespace ajokki
                 cat_object_struct1.initial_rotate_angles = { std::numbers::pi, -0.5f * std::numbers::pi };
                 cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
                 cat_object_struct1.cartesian_coordinates = glm::vec3(
-                        first_cat_x + i * translation_x,
-                        first_cat_y + j * translation_y,
-                        first_cat_z + j * translation_z);
+                        first_cat_x + static_cast<float>(i) * translation_x,
+                        first_cat_y + static_cast<float>(j) * translation_y,
+                        first_cat_z + static_cast<float>(j) * translation_z);
                 yli::ontology::Object* const cat1 = this->entity_factory.create_object(cat_object_struct1);
 
                 if (cat1 == nullptr)
