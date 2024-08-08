@@ -105,21 +105,22 @@ if base_class_name != "":
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
+include_space_double_quote = "#include \""
 endif_line = "#endif"
 
 if parent_class_name != "":
-    parent_class_include_line = "#include \"" + snake_case_parent_class_name + ".hpp\""
+    parent_class_include_line = include_space_double_quote + snake_case_parent_class_name + ".hpp\""
 else:
     parent_class_include_line = ""
 
 if base_class_name != "":
-    entity_struct_include_line = "#include \"" + snake_case_base_class_name + "_struct.hpp\""
+    entity_struct_include_line = include_space_double_quote + snake_case_base_class_name + "_struct.hpp\""
 
 # class filenames.
 class_filename_hpp = snake_case_class_name + ".hpp"
 class_filename_cpp = snake_case_class_name + ".cpp"
 
-class_include_line = "#include \"" + class_filename_hpp + "\""
+class_include_line = include_space_double_quote + class_filename_hpp + "\""
 
 # struct filename.
 struct_filename = snake_case_class_name + "_struct.hpp"
@@ -128,7 +129,7 @@ struct_filename = snake_case_class_name + "_struct.hpp"
 # base class needs to be #include'd always because it is inherited.
 if base_class_name != "":
     base_class_hpp = snake_case_base_class_name + ".hpp"
-    base_class_include_line = "#include \"" + base_class_hpp + "\""
+    base_class_include_line = include_space_double_quote + base_class_hpp + "\""
 
 # include line for `yli::ontology::ChildModule`.
 child_module_include_line = "#include \"child_module.hpp\""
@@ -142,7 +143,7 @@ const_struct_reference_variable_type = "const " + namespace + "::" + struct_vari
 struct_name = snake_case_class_name + "_struct"
 
 # include line for the corresponding struct file.
-struct_include_line = "#include \"" + struct_name + ".hpp\""
+struct_include_line = include_space_double_quote + struct_name + ".hpp\""
 
 # base class' variable type and name.
 if base_class_name != "":
