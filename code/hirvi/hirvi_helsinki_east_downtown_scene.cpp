@@ -165,9 +165,7 @@ namespace hirvi
         go_east_brain_struct.local_name = "go_east";
         go_east_brain_struct.callback_engine = go_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_east_brain ...\n";
-        yli::ontology::Brain* const go_east_brain = this->entity_factory.create_brain(go_east_brain_struct);
-
-        if (go_east_brain == nullptr)
+        if (this->entity_factory.create_brain(go_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -180,9 +178,7 @@ namespace hirvi
         go_west_brain_struct.local_name = "go_west";
         go_west_brain_struct.callback_engine = go_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_west_brain ...\n";
-        yli::ontology::Brain* const go_west_brain = this->entity_factory.create_brain(go_west_brain_struct);
-
-        if (go_west_brain == nullptr)
+        if (this->entity_factory.create_brain(go_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -195,9 +191,7 @@ namespace hirvi
         go_north_brain_struct.local_name = "go_north";
         go_north_brain_struct.callback_engine = go_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_north_brain ...\n";
-        yli::ontology::Brain* const go_north_brain = this->entity_factory.create_brain(go_north_brain_struct);
-
-        if (go_north_brain == nullptr)
+        if (this->entity_factory.create_brain(go_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -210,9 +204,7 @@ namespace hirvi
         go_south_brain_struct.local_name = "go_south";
         go_south_brain_struct.callback_engine = go_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_south_brain ...\n";
-        yli::ontology::Brain* const go_south_brain = this->entity_factory.create_brain(go_south_brain_struct);
-
-        if (go_south_brain == nullptr)
+        if (this->entity_factory.create_brain(go_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -225,9 +217,7 @@ namespace hirvi
         orient_to_east_brain_struct.local_name = "orient_to_east";
         orient_to_east_brain_struct.callback_engine = orient_to_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_east_brain ...\n";
-        yli::ontology::Brain* const orient_to_east_brain = this->entity_factory.create_brain(orient_to_east_brain_struct);
-
-        if (orient_to_east_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_to_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -240,9 +230,7 @@ namespace hirvi
         orient_to_west_brain_struct.local_name = "orient_to_west";
         orient_to_west_brain_struct.callback_engine = orient_to_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_west_brain ...\n";
-        yli::ontology::Brain* const orient_to_west_brain = this->entity_factory.create_brain(orient_to_west_brain_struct);
-
-        if (orient_to_west_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_to_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -255,9 +243,7 @@ namespace hirvi
         orient_to_north_brain_struct.local_name = "orient_to_north";
         orient_to_north_brain_struct.callback_engine = orient_to_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_north_brain ...\n";
-        yli::ontology::Brain* const orient_to_north_brain = this->entity_factory.create_brain(orient_to_north_brain_struct);
-
-        if (orient_to_north_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_to_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -270,9 +256,7 @@ namespace hirvi
         orient_to_south_brain_struct.local_name = "orient_to_south";
         orient_to_south_brain_struct.callback_engine = orient_to_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_south_brain ...\n";
-        yli::ontology::Brain* const orient_to_south_brain = this->entity_factory.create_brain(orient_to_south_brain_struct);
-
-        if (orient_to_south_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_to_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -285,9 +269,7 @@ namespace hirvi
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         rotate_clockwise_brain_struct.callback_engine = rotate_clockwise_callback_engine;
         std::cout << "Creating yli::ontology::Brain* rotate_clockwise_brain ...\n";
-        yli::ontology::Brain* const rotate_clockwise_brain = this->entity_factory.create_brain(rotate_clockwise_brain_struct);
-
-        if (rotate_clockwise_brain == nullptr)
+        if (this->entity_factory.create_brain(rotate_clockwise_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -300,9 +282,7 @@ namespace hirvi
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         orient_and_go_east_brain_struct.callback_engine = orient_and_go_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_east_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_east_brain = this->entity_factory.create_brain(orient_and_go_east_brain_struct);
-
-        if (orient_and_go_east_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_and_go_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -315,9 +295,7 @@ namespace hirvi
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         orient_and_go_west_brain_struct.callback_engine = orient_and_go_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_west_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_west_brain = this->entity_factory.create_brain(orient_and_go_west_brain_struct);
-
-        if (orient_and_go_west_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_and_go_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -330,9 +308,7 @@ namespace hirvi
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         orient_and_go_north_brain_struct.callback_engine = orient_and_go_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_north_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_north_brain = this->entity_factory.create_brain(orient_and_go_north_brain_struct);
-
-        if (orient_and_go_north_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_and_go_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -345,9 +321,7 @@ namespace hirvi
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         orient_and_go_south_brain_struct.callback_engine = orient_and_go_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_south_brain ...\n";
-        yli::ontology::Brain* const orient_and_go_south_brain = this->entity_factory.create_brain(orient_and_go_south_brain_struct);
-
-        if (orient_and_go_south_brain == nullptr)
+        if (this->entity_factory.create_brain(orient_and_go_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -360,9 +334,7 @@ namespace hirvi
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
         std::cout << "Creating yli::ontology::Brain* rotate_counterclockwise_brain ...\n";
-        yli::ontology::Brain* const rotate_counterclockwise_brain = this->entity_factory.create_brain(rotate_counterclockwise_brain_struct);
-
-        if (rotate_counterclockwise_brain == nullptr)
+        if (this->entity_factory.create_brain(rotate_counterclockwise_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
