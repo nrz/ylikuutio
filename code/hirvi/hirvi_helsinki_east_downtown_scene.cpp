@@ -469,18 +469,16 @@ namespace hirvi
         yli::ontology::LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
         yli::ontology::LocomotionModuleStruct cat1_climb_struct;
 
-        hirvi::Cat* const cat1 = this->entity_factory.create_object_derivative<
-            hirvi::Cat,
-            CatMemoryAllocator>(
+        if (this->entity_factory.create_object_derivative<
+                hirvi::Cat,
+                CatMemoryAllocator>(
                     hirvi::Datatype::CAT,
                     cat1_object_struct,
                     cat1_walk_struct,
                     cat1_trot_struct,
                     cat1_canter_struct,
                     cat1_gallop_struct,
-                    cat1_climb_struct);
-
-        if (cat1 == nullptr)
+                    cat1_climb_struct) == nullptr)
         {
             std::cerr << "Failed to create cat1.\n";
             return nullptr;
