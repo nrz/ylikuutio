@@ -50,12 +50,9 @@
 #include <numbers>    // std::numbers::pi
 #include <string>     // std::string
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-    }
+    class Entity;
 }
 
 namespace ajokki
