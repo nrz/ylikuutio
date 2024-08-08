@@ -364,9 +364,7 @@ namespace ajokki
         helsinki_east_downtown_grayscale_pipeline_struct.fragment_shader = "grayscale_standard_shading.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* helsinki_east_downtown_grayscale_pipeline ...\n";
-        yli::ontology::Pipeline* const helsinki_east_downtown_grayscale_pipeline = this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct);
-
-        if (helsinki_east_downtown_grayscale_pipeline == nullptr)
+        if (this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct) == nullptr)
         {
             std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
