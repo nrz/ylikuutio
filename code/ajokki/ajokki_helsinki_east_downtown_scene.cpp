@@ -594,9 +594,7 @@ namespace ajokki
                         first_cat_x + static_cast<float>(i) * translation_x,
                         first_cat_y + static_cast<float>(j) * translation_y,
                         first_cat_z + static_cast<float>(j) * translation_z);
-                yli::ontology::Object* const cat1 = this->entity_factory.create_object(cat_object_struct1);
-
-                if (cat1 == nullptr)
+                if (this->entity_factory.create_object(cat_object_struct1) == nullptr)
                 {
                     std::cerr << "Failed to create cat1 Object.\n";
                     return nullptr;
