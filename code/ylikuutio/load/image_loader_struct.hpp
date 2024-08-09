@@ -37,7 +37,7 @@ namespace yli::load
     {
         ImageLoaderStruct() = default;
 
-        ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
+        explicit ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
         {
             for (const auto& [enum_value, bool_value] : values)
             {
