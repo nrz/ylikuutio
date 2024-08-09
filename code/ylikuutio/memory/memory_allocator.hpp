@@ -52,6 +52,9 @@ namespace yli::memory
                 {
                 }
 
+                MemoryAllocator(const MemoryAllocator&) = delete;            // Delete copy constructor.
+                MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
+
                 template<typename... Args>
                     T1* build_in(Args&&... args)
                     {
@@ -176,6 +179,9 @@ namespace yli::memory
                         delete instance;
                     }
                 }
+
+                MemoryAllocator(const MemoryAllocator&) = delete;            // Delete copy constructor.
+                MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
 
                 template<typename... Args>
                     yli::ontology::GenericLispFunctionOverload* build_in(Args&&... args)
