@@ -45,10 +45,6 @@ namespace yli::ontology
 
     struct ModelStruct : public yli::ontology::EntityStruct
     {
-        ModelStruct()
-        {
-        }
-
         std::string model_filename;                         // Filename of the model file.
         std::string model_file_format;                      // Type of the model file. Supported file formats so far:
                                                             // `"png"`/`"PNG"` - PNG heightmap.
