@@ -355,7 +355,7 @@ namespace yli::ontology
                     GL_FLOAT,                      // type
                     GL_FALSE,                      // normalized?
                     0,                             // stride
-                    (void*) 0                      // array buffer offset
+                    nullptr                        // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
@@ -367,7 +367,7 @@ namespace yli::ontology
                     GL_FLOAT,     // type
                     GL_FALSE,     // normalized?
                     0,            // stride
-                    (void*) 0     // array buffer offset
+                    nullptr       // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
@@ -379,7 +379,7 @@ namespace yli::ontology
                     GL_FLOAT,                    // type
                     GL_FALSE,                    // normalized?
                     0,                           // stride
-                    (void*) 0                    // array buffer offset
+                    nullptr                      // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
@@ -391,7 +391,7 @@ namespace yli::ontology
                     GL_TRIANGLES,    // mode
                     indices_size,    // count
                     GL_UNSIGNED_INT, // type
-                    (void*) 0        // element array buffer offset
+                    nullptr          // element array buffer offset
                     );
 
             yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
