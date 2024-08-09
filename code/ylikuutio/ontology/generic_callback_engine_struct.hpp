@@ -24,9 +24,6 @@ namespace yli::ontology
 {
     struct GenericCallbackEngineStruct final : public yli::ontology::EntityStruct
     {
-        GenericCallbackEngineStruct()
-        {
-        }
     };
 }
 
