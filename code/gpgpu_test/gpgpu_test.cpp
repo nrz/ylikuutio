@@ -54,7 +54,7 @@
 // Include standard headers
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_unique, std::unique_ptr
-#include <stdexcept> // std::runtime_error
+#include <stdexcept> // std::logic_error
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -117,7 +117,7 @@ namespace gpgpu_test
     {
         if (this->universe == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `GpgpuTestApplication::get_universe`: `this->universe` is `nullptr`!");
+            throw std::logic_error("ERROR: `GpgpuTestApplication::get_universe`: `this->universe` is `nullptr`!");
         }
 
         return *this->universe;

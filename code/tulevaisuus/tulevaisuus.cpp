@@ -76,7 +76,7 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_unique, std::unique_ptr
-#include <stdexcept> // std::runtime_error
+#include <stdexcept> // std::logic_error
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -159,7 +159,7 @@ namespace tulevaisuus
     {
         if (this->universe == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `TulevaisuusApplication::get_universe`: `this->universe` is `nullptr`!");
+            throw std::logic_error("ERROR: `TulevaisuusApplication::get_universe`: `this->universe` is `nullptr`!");
         }
 
         return *this->universe;
