@@ -33,9 +33,7 @@ namespace yli::ontology
             Indexable(const Indexable&) = delete;            // Delete copy constructor.
             Indexable& operator=(const Indexable&) = delete; // Delete copy assignment.
 
-            virtual ~Indexable()
-            {
-            }
+            virtual ~Indexable() = default;
 
             virtual yli::ontology::Entity* get(const std::size_t index) const = 0;
     };
