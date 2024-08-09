@@ -39,10 +39,6 @@ namespace yli::ontology
         return *this;
     }
 
-    OrientationModule::OrientationModule()
-    {
-    }
-
     OrientationModule::OrientationModule(const yli::ontology::OrientationModule& original)
         : roll { original.roll },
         yaw    { original.yaw },
