@@ -331,7 +331,7 @@ namespace yli::ontology
                     GL_FLOAT,                           // type
                     GL_FALSE,                           // normalized?
                     0,                                  // stride
-                    (void*) 0                           // array buffer offset
+                    nullptr                             // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
@@ -343,7 +343,7 @@ namespace yli::ontology
                     GL_FLOAT,         // type
                     GL_FALSE,         // normalized?
                     0,                // stride
-                    (void*) 0         // array buffer offset
+                    nullptr           // array buffer offset
                     );
             yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
