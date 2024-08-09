@@ -28,9 +28,7 @@ namespace yli::ontology
     class Indexable
     {
         public:
-            Indexable()
-            {
-            }
+            Indexable() = default;
 
             Indexable(const Indexable&) = delete;            // Delete copy constructor.
             Indexable& operator=(const Indexable&) = delete; // Delete copy assignment.
