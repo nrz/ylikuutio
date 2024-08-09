@@ -47,7 +47,7 @@ namespace yli::memory
             // management for some given storable datatype.
 
             public:
-                MemoryAllocator(const int datatype)
+                explicit MemoryAllocator(const int datatype)
                     : datatype { datatype }
                 {
                 }
