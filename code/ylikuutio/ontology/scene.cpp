@@ -129,7 +129,7 @@ namespace yli::ontology
         // create the default `Camera`.
         yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = this;
-        this->application.get_generic_entity_factory().create_default_camera(camera_struct);
+        this->get_application().get_generic_entity_factory().create_default_camera(camera_struct);
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";

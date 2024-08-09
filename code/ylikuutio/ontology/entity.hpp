@@ -162,10 +162,8 @@ namespace yli::ontology
         private:
             yli::memory::ConstructibleModule constructible_module;
 
-        protected:
             yli::core::Application& application;
 
-        private:
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 
         public:

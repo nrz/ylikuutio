@@ -304,7 +304,7 @@ namespace yli::ontology
                 material_struct.parent = this;
                 material_struct.ofbx_texture = ofbx_texture;
 
-                yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+                yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
                 auto symbiont_material = entity_factory.create_symbiont_material(material_struct);
 
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";

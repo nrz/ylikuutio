@@ -169,7 +169,7 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            yli::ontology::GenericEntityFactory& entity_factory = holobiont.application.get_generic_entity_factory();
+            yli::ontology::GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
             entity_factory.create_biont(biont_struct);
         }
     }

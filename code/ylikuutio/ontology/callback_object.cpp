@@ -71,7 +71,7 @@ namespace yli::ontology
             const std::string& name,
             const yli::data::AnyValue& any_value)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         yli::ontology::CallbackParameterStruct callback_parameter_struct;
         callback_parameter_struct.parent = this;
