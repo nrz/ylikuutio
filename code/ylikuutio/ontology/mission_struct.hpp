@@ -24,9 +24,6 @@ namespace yli::ontology
 {
     struct MissionStruct final : public yli::ontology::EntityStruct
     {
-        MissionStruct()
-        {
-        }
     };
 }
 
