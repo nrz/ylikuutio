@@ -78,6 +78,7 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <memory>   // std::make_unique, std::unique_ptr
+#include <stdexcept> // std::runtime_error
 #include <string>   // std::string
 #include <vector>   // std::vector
 
