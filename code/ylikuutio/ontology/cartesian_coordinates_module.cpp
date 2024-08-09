@@ -41,11 +41,6 @@ namespace yli::ontology
         return *this;
     }
 
-    CartesianCoordinatesModule::CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) noexcept
-        : xyz { original.xyz }
-    {
-    }
-
     CartesianCoordinatesModule::CartesianCoordinatesModule(const glm::vec3& xyz) noexcept
         : xyz { xyz }
     {
