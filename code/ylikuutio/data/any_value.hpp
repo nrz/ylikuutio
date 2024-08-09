@@ -76,7 +76,7 @@ namespace yli::data
             AnyValue(const yli::data::AnyValue& original) = default;
 
             // constructor for optional `AnyValue`.
-            AnyValue(const std::optional<yli::data::AnyValue> original);
+            explicit AnyValue(const std::optional<yli::data::AnyValue> original);
 
             // common constructors.
 
