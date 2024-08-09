@@ -179,7 +179,7 @@ namespace ajokki
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, -1990.00f, 200.00f);
         yli::ontology::Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);
-        yli::ontology::Object* const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
+        auto const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 
         if (horse1 == nullptr)
         {
