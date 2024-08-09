@@ -73,7 +73,7 @@ namespace yli::ontology
                 "bionts"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {
-        this->create_bionts(holobiont_struct.should_render_bionts_vector);
+        Holobiont::create_bionts(*this, holobiont_struct.should_render_bionts_vector);
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Holobiont*";
@@ -111,27 +111,27 @@ namespace yli::ontology
         render_system->render_bionts(this->parent_of_bionts);
     }
 
-    void Holobiont::create_bionts(const std::vector<bool>& should_render_bionts_vector)
+    void Holobiont::create_bionts(yli::ontology::Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
         // `scene` must not be `nullptr`.
         // `this->symbiosis_parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        yli::ontology::Scene* const scene = holobiont.get_scene();
 
         if (scene == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!");
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = this->get_symbiosis();
+        const yli::ontology::Symbiosis* const symbiosis = holobiont.get_symbiosis();
 
         if (symbiosis == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!");
         }
 
-        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(this);
+        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(&holobiont);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
@@ -159,17 +159,17 @@ namespace yli::ontology
             yli::ontology::BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
             biont_struct.scene                  = scene;
-            biont_struct.parent                 = this;
+            biont_struct.parent                 = &holobiont;
             biont_struct.symbiont_species       = symbiont_species;
-            biont_struct.initial_rotate_vectors = this->initial_rotate_vectors;
-            biont_struct.initial_rotate_angles  = this->initial_rotate_angles;
-            biont_struct.original_scale_vector  = this->original_scale_vector;
-            biont_struct.cartesian_coordinates  = this->location;
+            biont_struct.initial_rotate_vectors = holobiont.initial_rotate_vectors;
+            biont_struct.initial_rotate_angles  = holobiont.initial_rotate_angles;
+            biont_struct.original_scale_vector  = holobiont.original_scale_vector;
+            biont_struct.cartesian_coordinates  = holobiont.location;
             biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector.at(biontID) : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+            yli::ontology::GenericEntityFactory& entity_factory = holobiont.application.get_generic_entity_factory();
             entity_factory.create_biont(biont_struct);
         }
     }

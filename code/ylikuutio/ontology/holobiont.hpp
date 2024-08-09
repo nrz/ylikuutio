@@ -125,7 +125,7 @@ namespace yli::ontology
             void render(const yli::ontology::Scene* const target_scene);
 
         private:
-            void create_bionts(const std::vector<bool>& should_render_bionts_vector);
+            static void create_bionts(yli::ontology::Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
     };
 }
 
