@@ -36,14 +36,6 @@
 // Include standard headers
 #include <iostream>   // std::cout, std::cerr
 
-namespace yli
-{
-    namespace ontology
-    {
-        class Entity;
-    }
-}
-
 namespace ajokki
 {
     yli::ontology::Scene* AjokkiApplication::create_tallinn_scene()
