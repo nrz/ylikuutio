@@ -27,10 +27,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    Registry::Registry()
-    {
-    }
-
     bool Registry::is_name(const std::string& name) const
     {
         return (this->is_indexable(name) || this->is_entity(name));
