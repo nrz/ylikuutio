@@ -118,33 +118,31 @@ namespace yli::audio
             // This function checks if a playlist is running.
             // if yes, then if the the previous sound has ended,
             // its memory gets freed and a new sound gets started.
-            if (this->current_playlist.size() > 0)
+            if (this->current_playlist.size() > 0 &&
+                    this->soloud.getVoiceCount() == 0)
             {
                 // OK, there is a sound which might be playing, so let's check its status.
-                if (this->soloud.getVoiceCount() == 0)
+                this->soloud.stop(this->sound_handle);
+
+                // play the next sound.
+
+                if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
                 {
-                    this->soloud.stop(this->sound_handle);
-
-                    // play the next sound.
-
-                    if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
+                    // Next sound.
+                    this->load_and_play(*this->current_playlist_sound_iterator);
+                }
+                else
+                {
+                    // The previous sound was the last sound.
+                    if (this->loop)
                     {
-                        // Next sound.
+                        // Start from the first.
+                        this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
                         this->load_and_play(*this->current_playlist_sound_iterator);
                     }
                     else
                     {
-                        // The previous sound was the last sound.
-                        if (this->loop)
-                        {
-                            // Start from the first.
-                            this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
-                            this->load_and_play(*this->current_playlist_sound_iterator);
-                        }
-                        else
-                        {
-                            this->current_playlist = ""; // no current playlist.
-                        }
+                        this->current_playlist = ""; // no current playlist.
                     }
                 }
             }
