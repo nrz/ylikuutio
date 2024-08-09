@@ -26,7 +26,7 @@ namespace yli::string
     class StringSet final
     {
         public:
-            StringSet();
+            StringSet() = default;
 
             StringSet(const StringSet&) = delete;            // Delete copy constructor.
             StringSet& operator=(const StringSet&) = delete; // Delete copy assignment.

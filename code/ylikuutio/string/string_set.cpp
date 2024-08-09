@@ -24,10 +24,6 @@
 
 namespace yli::string
 {
-    StringSet::StringSet()
-    {
-    }
-
     void StringSet::add_string(const std::string& string)
     {
         if (this->is_string(string))
