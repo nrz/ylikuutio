@@ -25,9 +25,7 @@ namespace yli::ontology
 {
     struct EntityStruct
     {
-        EntityStruct()
-        {
-        }
+        EntityStruct() = default;
 
         EntityStruct(const yli::ontology::EntityStruct& entity_struct) noexcept
             : global_name { entity_struct.global_name },
