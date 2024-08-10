@@ -20,7 +20,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::shared_ptr
 #include <vector>   // std::vector
 
 namespace yli::linear_algebra
@@ -36,11 +35,6 @@ namespace yli::linear_algebra
 
             // copy constructor.
             Matrix(const yli::linear_algebra::Matrix& old_matrix);
-
-            explicit Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
-                : Matrix(*old_matrix)
-            {
-            }
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy
@@ -85,14 +79,14 @@ namespace yli::linear_algebra
             std::size_t get_height() const;
             float get_value(const std::size_t y, const std::size_t x) const;
 
-            std::shared_ptr<yli::linear_algebra::Matrix> transpose();
+            yli::linear_algebra::Matrix transpose();
             float det();
 
             friend class yli::linear_algebra::Tensor3;
             friend yli::linear_algebra::Matrix operator+(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
             friend yli::linear_algebra::Matrix operator-(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
             friend yli::linear_algebra::Matrix operator*(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
-            friend std::shared_ptr<yli::linear_algebra::Matrix> cat(std::size_t dimension, yli::linear_algebra::Matrix& old_matrix1, yli::linear_algebra::Matrix& old_matrix2);
+            friend yli::linear_algebra::Matrix cat(std::size_t dimension, yli::linear_algebra::Matrix& old_matrix1, yli::linear_algebra::Matrix& old_matrix2);
 
             bool is_square;
             std::size_t width;

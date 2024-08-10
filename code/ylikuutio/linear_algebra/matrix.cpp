@@ -21,7 +21,6 @@
 #include <cmath>    // NAN
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
 namespace yli::linear_algebra
@@ -111,15 +110,15 @@ namespace yli::linear_algebra
         return this->array_of_arrays[y][x];
     }
 
-    std::shared_ptr<yli::linear_algebra::Matrix> Matrix::transpose()
+    yli::linear_algebra::Matrix Matrix::transpose()
     {
-        std::shared_ptr<yli::linear_algebra::Matrix> new_matrix = std::make_shared<yli::linear_algebra::Matrix>(this->width, this->height); // Flip width and height.
+        auto new_matrix = yli::linear_algebra::Matrix(this->width, this->height); // Flip width and height.
 
         for (std::size_t x = 0; x < this->width; x++)
         {
             for (std::size_t y = 0; y < this->height; y++)
             {
-                *new_matrix << this->operator[](y).operator[](x);
+                new_matrix << this->operator[](y).operator[](x);
             }
         }
 

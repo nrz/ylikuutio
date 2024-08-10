@@ -22,11 +22,10 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::shared_ptr
 
 namespace yli::linear_algebra
 {
-    std::shared_ptr<yli::linear_algebra::Matrix> cat(std::size_t dimension, yli::linear_algebra::Matrix& old_matrix1, yli::linear_algebra::Matrix& old_matrix2);
+    yli::linear_algebra::Matrix cat(std::size_t dimension, yli::linear_algebra::Matrix& old_matrix1, yli::linear_algebra::Matrix& old_matrix2);
 }
 
 #endif
