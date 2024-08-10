@@ -21,17 +21,12 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
 #include <iostream>   // std::cout, std::cerr
@@ -121,7 +116,7 @@ namespace ajokki
         // Create altiplano terrain.
         yli::ontology::ObjectStruct altiplano_struct(altiplano_scene);
         altiplano_struct.mesh_master = altiplano_terrain_species;
-        altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
+        altiplano_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(altiplano_struct);
 
         return altiplano_scene;

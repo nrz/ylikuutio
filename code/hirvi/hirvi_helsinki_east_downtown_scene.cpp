@@ -33,6 +33,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -430,7 +431,7 @@ namespace hirvi
         // Create Helsinki eastern downtown terrain.
         yli::ontology::ObjectStruct helsinki_east_downtown_struct(helsinki_east_downtown_scene);
         helsinki_east_downtown_struct.mesh_master = helsinki_east_downtown_terrain_species;
-        helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
+        helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);
 
         yli::ontology::ModelStruct cat_model_struct;
@@ -459,7 +460,7 @@ namespace hirvi
         cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
         cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        cat1_object_struct.cartesian_coordinates = glm::vec3(500.00f, -1000.00f, 100.00f);
+        cat1_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(500.00f, -1000.00f, 100.00f);
 
         yli::ontology::LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
         yli::ontology::LocomotionModuleStruct cat1_trot_struct(5.0f);
@@ -491,7 +492,7 @@ namespace hirvi
         cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
         cat2_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
-        cat2_object_struct.cartesian_coordinates = glm::vec3(700.00f, -1200.00f, 100.00f);
+        cat2_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(700.00f, -1200.00f, 100.00f);
 
         yli::ontology::LocomotionModuleStruct cat2_walk_struct(1.0f); // 3.6 km/h.
         yli::ontology::LocomotionModuleStruct cat2_trot_struct(5.0f);
@@ -531,7 +532,7 @@ namespace hirvi
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_police_car_struct1.cartesian_coordinates = glm::vec3(85.00f, -160.00f, 30.00f);
+        turbo_polizei_png_police_car_struct1.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(85.00f, -160.00f, 30.00f);
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct1;
 
@@ -557,7 +558,7 @@ namespace hirvi
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_png_police_car_struct2.cartesian_coordinates = glm::vec3(85.00f, -175.00f, 30.00f);
+        turbo_polizei_png_police_car_struct2.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(85.00f, -175.00f, 30.00f);
 
         yli::ontology::LocomotionModuleStruct road_vehicle_struct2;
 
@@ -580,7 +581,7 @@ namespace hirvi
 
         yli::ontology::CameraStruct cat_camera_struct;
         cat_camera_struct.scene = helsinki_east_downtown_scene;
-        cat_camera_struct.cartesian_coordinates = glm::vec3(800.00f, -950.00f, 400.00f);
+        cat_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(800.00f, -950.00f, 400.00f);
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
 
@@ -597,7 +598,7 @@ namespace hirvi
 
         yli::ontology::CameraStruct turbo_polizei_camera_struct;
         turbo_polizei_camera_struct.scene = helsinki_east_downtown_scene;
-        turbo_polizei_camera_struct.cartesian_coordinates = glm::vec3(87.00f, -169.00f, 28.00f);
+        turbo_polizei_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(87.00f, -169.00f, 28.00f);
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
 

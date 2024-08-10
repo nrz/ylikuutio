@@ -35,7 +35,7 @@ namespace yli::ontology
 
             CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) = default;
 
-            CartesianCoordinatesModule(const glm::vec3& xyz) noexcept;
+            explicit CartesianCoordinatesModule(const glm::vec3& xyz) noexcept;
 
             CartesianCoordinatesModule(const float x, const float y, const float z) noexcept;
 

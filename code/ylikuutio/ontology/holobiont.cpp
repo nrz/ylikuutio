@@ -22,6 +22,7 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"
+#include "cartesian_coordinates_module.hpp"
 #include "generic_entity_factory.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
@@ -30,12 +31,6 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
 #include <cstdint>   // std::uintptr_t
@@ -335,7 +330,7 @@ namespace yli::ontology
         const float float_pitch = std::get<float>(pitch_any_value.data);
 
         yli::ontology::HolobiontStruct holobiont_struct(parent, symbiosis);
-        holobiont_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
+        holobiont_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(float_x, float_y, float_z);
         holobiont_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
         entity_factory.create_holobiont(holobiont_struct);

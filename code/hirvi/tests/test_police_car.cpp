@@ -27,6 +27,7 @@
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -88,7 +89,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
     turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
     turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-    turbo_polizei_png_police_car_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 160.00f);
+    turbo_polizei_png_police_car_struct1.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(85.00f, 30.00f, 160.00f);
     yli::ontology::LocomotionModuleStruct road_vehicle_struct1;
 
     // Ensure that `Holobiont`'s memory allocation has no allocations before allocating this `PoliceCar` instance.

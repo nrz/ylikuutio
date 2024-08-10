@@ -20,6 +20,7 @@
 #include "code/hirvi/cat.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
@@ -105,7 +106,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
     cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
     cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-    cat1_object_struct.cartesian_coordinates = glm::vec3(500.00f, 100.00f, 1000.00f);
+    cat1_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(500.00f, 100.00f, 1000.00f);
 
     yli::ontology::LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
     yli::ontology::LocomotionModuleStruct cat1_trot_struct(5.0f);

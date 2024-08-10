@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
+#include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -133,7 +134,7 @@ namespace ajokki
         // Create Joensuu center west terrain.
         yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_scene);
         joensuu_center_west_struct.mesh_master = joensuu_center_west_terrain_species;
-        joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
+        joensuu_center_west_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
@@ -177,7 +178,7 @@ namespace ajokki
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(1.0f, 0.0f, 0.0f) };
         horse_object_struct1.initial_rotate_angles = { -0.5f * static_cast<float>(std::numbers::pi) };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
-        horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, -1990.00f, 200.00f);
+        horse_object_struct1.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(2150.00f, -1990.00f, 200.00f);
         yli::ontology::Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);
         auto const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 
@@ -191,7 +192,7 @@ namespace ajokki
 
         yli::ontology::CameraStruct horse_camera_struct;
         horse_camera_struct.scene = joensuu_center_west_scene;
-        horse_camera_struct.cartesian_coordinates = glm::vec3(2303.00f, -1822.00f, 201.00f);
+        horse_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(2303.00f, -1822.00f, 201.00f);
         horse_camera_struct.orientation.yaw = -0.97f;
         horse_camera_struct.orientation.pitch = -0.18f;
 

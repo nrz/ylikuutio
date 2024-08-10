@@ -18,6 +18,7 @@
 #include "object.hpp"
 #include "universe.hpp"
 #include "mesh_module.hpp"
+#include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
 #include "object_type.hpp"
 #include "glyph.hpp"
@@ -544,7 +545,7 @@ namespace yli::ontology
 
         yli::ontology::ObjectStruct object_struct(&parent);
         object_struct.mesh_master = &species;
-        object_struct.cartesian_coordinates = glm::vec3(float_x, float_y, float_z);
+        object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(float_x, float_y, float_z);
         object_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
         object_struct.local_name = object_name;
         entity_factory.create_object(object_struct);
