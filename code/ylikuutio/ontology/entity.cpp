@@ -113,6 +113,10 @@ namespace yli::ontology
 
     void Entity::activate()
     {
+        // There is no default activation behavior.
+        //
+        // Each derivative class may override `Entity::activate`
+        // to implement its own specific activation behavior.
     }
 
     void Entity::terminate()
