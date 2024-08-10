@@ -36,7 +36,7 @@ namespace yli::ontology
             using pointer           = yli::ontology::Entity**;
             using reference         = yli::ontology::Entity*&;
 
-            ChildIterator(std::vector<yli::ontology::Entity*>::iterator it)
+            explicit ChildIterator(std::vector<yli::ontology::Entity*>::iterator it)
                 : it { it }
             {
             }
