@@ -43,8 +43,6 @@ namespace yli::memory
             virtual yli::memory::GenericMemoryAllocator& get_generic_allocator(const int type) const = 0;
 
             virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) = 0;
-
-            yli::memory::GenericMemorySystem& get();
     };
 }
 
