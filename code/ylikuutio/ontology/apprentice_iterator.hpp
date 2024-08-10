@@ -38,7 +38,7 @@ namespace yli::ontology
             using pointer           = yli::ontology::Entity**;
             using reference         = yli::ontology::Entity*&;
 
-            ApprenticeIterator(std::vector<yli::ontology::ApprenticeModule*>::iterator it)
+            explicit ApprenticeIterator(std::vector<yli::ontology::ApprenticeModule*>::iterator it)
                 : it { it }
             {
             }
