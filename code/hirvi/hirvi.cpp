@@ -58,7 +58,6 @@
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
-#include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/snippets/window_snippets.hpp"
