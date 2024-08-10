@@ -84,7 +84,7 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            std::string help() const;
+            std::string help() const override;
 
             std::optional<yli::data::AnyValue> get() const;
             void set(const yli::data::AnyValue& new_value);
