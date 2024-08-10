@@ -24,7 +24,7 @@ namespace yli::ontology
     {
         LocomotionModuleStruct() = default;
 
-        LocomotionModuleStruct(const float max_speed)
+        explicit LocomotionModuleStruct(const float max_speed)
             : max_speed(max_speed)
         {
         }
