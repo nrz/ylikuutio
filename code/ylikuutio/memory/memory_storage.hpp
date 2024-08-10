@@ -94,6 +94,9 @@ namespace yli::memory
                     }
                 }
 
+                MemoryStorage(const MemoryStorage&) = delete;            // Delete copy constructor.
+                MemoryStorage& operator=(const MemoryStorage&) = delete; // Delete copy assignment.
+
                 template<typename... Args>
                     T1* build_in(Args&&... args)
                     {
