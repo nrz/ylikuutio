@@ -352,25 +352,25 @@ TEST(matrices_must_function_as_expected, matrices)
     // matrix concatenation.
 
     // use `Matrix(yli::linear_algebra::Matrix& old_matrix)`.
-    yli::linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below_without_shared_ptr(cat(1, magic3x3, magic3x3_transposed));
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[0][0], 8);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[1][0], 3);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[2][0], 4);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[3][0], 8);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[4][0], 1);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[5][0], 6);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[0][1], 1);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[1][1], 5);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[2][1], 9);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[3][1], 3);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[4][1], 5);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[5][1], 7);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[0][2], 6);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[1][2], 7);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[2][2], 2);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[3][2], 4);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[4][2], 9);
-    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[5][2], 2);
+    yli::linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below(cat(1, magic3x3, magic3x3_transposed));
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][0], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][0], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][0], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][0], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][1], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][1], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][1], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][1], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][2], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][2], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][2], 2);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][2], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][2], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][2], 2);
 
     ASSERT_EQ(magic3x3[0][0], 8);
     ASSERT_EQ(magic3x3[1][0], 3);
