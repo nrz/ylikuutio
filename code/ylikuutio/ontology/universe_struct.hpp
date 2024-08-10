@@ -31,7 +31,7 @@ namespace yli::ontology
 {
     struct UniverseStruct : public yli::ontology::EntityStruct
     {
-        UniverseStruct(const yli::render::GraphicsApiBackend graphics_api_backend) noexcept
+        explicit UniverseStruct(const yli::render::GraphicsApiBackend graphics_api_backend) noexcept
             : graphics_api_backend { graphics_api_backend }
         {
             this->is_universe = true;
