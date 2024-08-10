@@ -37,6 +37,8 @@ namespace yli::linear_algebra
         public:
             Tensor3(std::size_t width, std::size_t height, std::size_t depth);
 
+            ~Tensor3() = default;
+
             // copy constructor.
             Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
 
