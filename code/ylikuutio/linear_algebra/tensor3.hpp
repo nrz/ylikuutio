@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <memory>   // std::shared_ptr
 #include <vector>   // std::vector
 
 namespace yli::linear_algebra
@@ -41,11 +40,6 @@ namespace yli::linear_algebra
 
             // copy constructor.
             Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
-
-            explicit Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
-                : Tensor3(*old_matrix)
-            {
-            }
 
             explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
