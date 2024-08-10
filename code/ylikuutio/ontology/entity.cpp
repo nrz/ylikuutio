@@ -196,7 +196,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        yli::ontology::Entity* entity = this->registry.get_entity(first);
+        const yli::ontology::Entity* const entity = this->registry.get_entity(first);
 
         if (entity == nullptr)
         {
@@ -230,7 +230,7 @@ namespace yli::ontology
     {
         yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        yli::ontology::VariableStruct new_variable_struct(*this, variable_struct);
+        const yli::ontology::VariableStruct new_variable_struct(*this, variable_struct);
         entity_factory.create_variable(new_variable_struct, any_value);
     }
 
@@ -269,7 +269,7 @@ namespace yli::ontology
 
     std::string Entity::help(const std::string& variable_name) const
     {
-        yli::ontology::Variable* const variable = this->get(variable_name);
+        const yli::ontology::Variable* const variable = this->get(variable_name);
 
         if (variable == nullptr)
         {
