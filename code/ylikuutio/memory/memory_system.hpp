@@ -161,6 +161,9 @@ namespace yli::memory
                     }
                 }
 
+                MemorySystem(const MemorySystem&) = delete;            // Delete copy constructor.
+                MemorySystem& operator=(const MemorySystem&) = delete; // Delete copy assignment.
+
                 TypeEnumType get_universe_datatype() const
                 {
                     return this->universe_datatype;
