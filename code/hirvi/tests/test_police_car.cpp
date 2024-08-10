@@ -19,7 +19,6 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/cat.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
-#include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -34,6 +33,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
+#include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
