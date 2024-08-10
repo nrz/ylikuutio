@@ -32,6 +32,8 @@ namespace yli::linear_algebra
         public:
             Matrix(std::size_t height, std::size_t width);
 
+            ~Matrix() = default;
+
             // copy constructor.
             Matrix(const yli::linear_algebra::Matrix& old_matrix);
 
