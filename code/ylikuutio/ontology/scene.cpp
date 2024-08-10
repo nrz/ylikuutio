@@ -329,6 +329,7 @@ namespace yli::ontology
 
     void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& /* rigid_body_module */, yli::ontology::Scene& /* scene */ )
     {
+        // TODO: implement!
     }
 
     const glm::vec4& Scene::get_light_position() const
