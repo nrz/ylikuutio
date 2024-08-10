@@ -181,7 +181,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
+        const uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
         return yli::data::AnyValue(exit_program_magic_number);
     }
 

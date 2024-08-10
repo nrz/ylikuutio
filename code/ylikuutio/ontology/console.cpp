@@ -794,7 +794,7 @@ namespace yli::ontology
         console.console_history.clear();
         console.current_input.clear();
 
-        const uint32_t clear_console_magic_number = CLEAR_CONSOLE_MAGIC_NUMBER;
+        const uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
         return yli::data::AnyValue(clear_console_magic_number);
     }
 

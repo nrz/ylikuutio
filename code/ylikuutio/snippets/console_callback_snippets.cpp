@@ -33,7 +33,7 @@ namespace yli::snippets
 {
     std::optional<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
     {
-        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
+        uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
         return yli::data::AnyValue(exit_program_magic_number);
     }
 

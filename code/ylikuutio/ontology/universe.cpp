@@ -425,7 +425,7 @@ namespace yli::ontology
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                                    std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                             {
                                 this->request_exit();
                             }
@@ -453,7 +453,7 @@ namespace yli::ontology
 
                         if (any_value &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
-                                std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                                std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                         {
                             this->request_exit();
                         }
@@ -565,7 +565,7 @@ namespace yli::ontology
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == EXIT_PROGRAM_MAGIC_NUMBER)
+                                    std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                             {
                                 this->request_exit();
                             }

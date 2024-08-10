@@ -67,7 +67,7 @@ namespace yli::ontology
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
-            uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
+            uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
             return yli::data::AnyValue(enter_console_magic_number);
         }
 
@@ -309,7 +309,7 @@ namespace yli::ontology
         if (console.in_console && console.exit_console())
         {
             // Signal to caller that we have exited the console.
-            uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
+            uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
             return yli::data::AnyValue(exit_console_magic_number);
         }
 
