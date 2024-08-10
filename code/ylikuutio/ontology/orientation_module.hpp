@@ -35,6 +35,8 @@ namespace yli::ontology
 
             OrientationModule() = default;
 
+            ~OrientationModule() = default;
+
             OrientationModule(const yli::ontology::OrientationModule& original);
 
             OrientationModule(const float roll, const float yaw, const float pitch)
