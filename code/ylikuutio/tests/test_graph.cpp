@@ -29,8 +29,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-#define INF std::numeric_limits<float>::infinity()
-
 TEST(floyd_warshall_must_function_as_expected, finnish_railway_stations)
 {
     // Railway distances between some Finnish railway stations.
@@ -85,26 +83,28 @@ TEST(floyd_warshall_must_function_as_expected, finnish_railway_stations)
     // Distances from VR timetables for routes which do not begin or end in Helsinki are read from the first listed direction, that is:
     // Joensuu-Turku, Iisalmi-Ylivieska, Tampere-Haapamäki-Seinäjoki, Jyväskylä-Haapamäki-Seinäjoki.
 
+    const float inf { std::numeric_limits<float>::infinity() };
+
     yli::linear_algebra::Matrix railway_neighbors(17, 17);
     railway_neighbors << std::vector<float> {
 //      Hpk,    Ilm,    Jns,     Jy,     Ke,     Kv,     Lh,     Ov,     Ol,     Ri,    Psl,     Pm,     Sk,    Tpe,     Tl,    Tku,     Yv
-       0.0f,    INF,    INF,  78.0f,    INF,    INF,    INF,  72.0f,    INF,    INF,    INF,    INF, 118.0f,    INF,    INF,    INF,    INF,   // Hpk
-        INF,   0.0f,    INF,    INF,    INF,    INF,    INF,    INF, 275.0f,    INF,    INF, 174.0f,    INF,    INF,    INF,    INF, 154.0f,   // Ilm
-        INF,    INF,   0.0f,    INF,    INF, 316.0f,    INF,    INF,    INF,    INF,    INF, 183.0f,    INF,    INF,    INF,    INF,    INF,   // Jns
-      78.0f,    INF,    INF,   0.0f,    INF,    INF,    INF, 113.0f,    INF,    INF,    INF,  80.0f,    INF,    INF,    INF,    INF,    INF,   // Jy
-        INF,    INF,    INF,    INF,   0.0f,    INF,  75.0f,    INF,    INF,  42.0f,  26.0f,    INF,    INF,    INF,    INF,    INF,    INF,   // Ke
-        INF,    INF, 316.0f,    INF,    INF,   0.0f,  62.0f,    INF,    INF,    INF,    INF, 184.0f,    INF,    INF,    INF,    INF,    INF,   // Kv
-        INF,    INF,    INF,    INF,  75.0f,  62.0f,   0.0f,    INF,    INF,  59.0f,    INF,    INF,    INF,    INF,    INF,    INF,    INF,   // Lh
-      72.0f,    INF,    INF, 113.0f,    INF,    INF,    INF,   0.0f,    INF,    INF,    INF,    INF,    INF,  42.0f,    INF,    INF,    INF,   // Ov
-        INF, 275.0f,    INF,    INF,    INF,    INF,    INF,    INF,   0.0f,    INF,    INF,    INF,    INF,    INF,    INF,    INF, 122.0f,   // Ol
-        INF,    INF,    INF,    INF,  42.0f,    INF,  59.0f,    INF,    INF,   0.0f,    INF,    INF,    INF,    INF,  76.0f,    INF,    INF,   // Ri
-        INF,    INF,    INF,    INF,  26.0f,    INF,    INF,    INF,    INF,    INF,   0.0f,    INF,    INF,    INF,    INF, 191.0f,    INF,   // Psl
-        INF, 174.0f, 183.0f,  80.0f,    INF, 184.0f,    INF,    INF,    INF,    INF,    INF,   0.0f,    INF,    INF,    INF,    INF,    INF,   // Pm
-     118.0f,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,   0.0f, 160.0f,    INF,    INF, 211.0f,   // Sk
-        INF,    INF,    INF,    INF,    INF,    INF,    INF,  42.0f,    INF,    INF,    INF,    INF, 160.0f,   0.0f,  40.0f,    INF,    INF,   // Tpe
-        INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,  76.0f,    INF,    INF,    INF,  40.0f,   0.0f, 128.0f,    INF,   // Tl
-        INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF,    INF, 191.0f,    INF,    INF,    INF, 128.0f,   0.0f,    INF,   // Tku
-        INF, 154.0f,    INF,    INF,    INF,    INF,    INF,    INF, 122.0f,    INF,    INF,    INF, 211.0f,    INF,    INF,    INF,   0.0f }; // Yv
+       0.0f,    inf,    inf,  78.0f,    inf,    inf,    inf,  72.0f,    inf,    inf,    inf,    inf, 118.0f,    inf,    inf,    inf,    inf,   // Hpk
+        inf,   0.0f,    inf,    inf,    inf,    inf,    inf,    inf, 275.0f,    inf,    inf, 174.0f,    inf,    inf,    inf,    inf, 154.0f,   // Ilm
+        inf,    inf,   0.0f,    inf,    inf, 316.0f,    inf,    inf,    inf,    inf,    inf, 183.0f,    inf,    inf,    inf,    inf,    inf,   // Jns
+      78.0f,    inf,    inf,   0.0f,    inf,    inf,    inf, 113.0f,    inf,    inf,    inf,  80.0f,    inf,    inf,    inf,    inf,    inf,   // Jy
+        inf,    inf,    inf,    inf,   0.0f,    inf,  75.0f,    inf,    inf,  42.0f,  26.0f,    inf,    inf,    inf,    inf,    inf,    inf,   // Ke
+        inf,    inf, 316.0f,    inf,    inf,   0.0f,  62.0f,    inf,    inf,    inf,    inf, 184.0f,    inf,    inf,    inf,    inf,    inf,   // Kv
+        inf,    inf,    inf,    inf,  75.0f,  62.0f,   0.0f,    inf,    inf,  59.0f,    inf,    inf,    inf,    inf,    inf,    inf,    inf,   // Lh
+      72.0f,    inf,    inf, 113.0f,    inf,    inf,    inf,   0.0f,    inf,    inf,    inf,    inf,    inf,  42.0f,    inf,    inf,    inf,   // Ov
+        inf, 275.0f,    inf,    inf,    inf,    inf,    inf,    inf,   0.0f,    inf,    inf,    inf,    inf,    inf,    inf,    inf, 122.0f,   // Ol
+        inf,    inf,    inf,    inf,  42.0f,    inf,  59.0f,    inf,    inf,   0.0f,    inf,    inf,    inf,    inf,  76.0f,    inf,    inf,   // Ri
+        inf,    inf,    inf,    inf,  26.0f,    inf,    inf,    inf,    inf,    inf,   0.0f,    inf,    inf,    inf,    inf, 191.0f,    inf,   // Psl
+        inf, 174.0f, 183.0f,  80.0f,    inf, 184.0f,    inf,    inf,    inf,    inf,    inf,   0.0f,    inf,    inf,    inf,    inf,    inf,   // Pm
+     118.0f,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,   0.0f, 160.0f,    inf,    inf, 211.0f,   // Sk
+        inf,    inf,    inf,    inf,    inf,    inf,    inf,  42.0f,    inf,    inf,    inf,    inf, 160.0f,   0.0f,  40.0f,    inf,    inf,   // Tpe
+        inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,  76.0f,    inf,    inf,    inf,  40.0f,   0.0f, 128.0f,    inf,   // Tl
+        inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf,    inf, 191.0f,    inf,    inf,    inf, 128.0f,   0.0f,    inf,   // Tku
+        inf, 154.0f,    inf,    inf,    inf,    inf,    inf,    inf, 122.0f,    inf,    inf,    inf, 211.0f,    inf,    inf,    inf,   0.0f }; // Yv
 
     std::shared_ptr<yli::linear_algebra::Matrix> distance_matrix = yli::graph::floyd_warshall(railway_neighbors);
 
@@ -377,5 +377,3 @@ TEST(floyd_warshall_must_function_as_expected, finnish_railway_stations)
     // NOTE: Toijala-Joensuu via Riihmäki and Lahti is 76.0 km + 59.0 km + 378.0 km = 513.0 km.
     ASSERT_EQ((*distance_matrix)[RailwayStation::JNS][RailwayStation::TL], 458.0f);
 }
-
-#undef INF
