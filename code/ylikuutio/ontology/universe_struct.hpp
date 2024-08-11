@@ -37,6 +37,8 @@ namespace yli::ontology
             this->is_universe = true;
         }
 
+        UniverseStruct(const yli::ontology::UniverseStruct& universe_struct) = default;
+
         std::string application_name;
         std::string window_title;
         uint32_t window_width      { 1600 };
