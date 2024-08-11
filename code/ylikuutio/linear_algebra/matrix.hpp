@@ -34,7 +34,7 @@ namespace yli::linear_algebra
             ~Matrix() = default;
 
             // copy constructor.
-            Matrix(const yli::linear_algebra::Matrix& old_matrix);
+            Matrix(const yli::linear_algebra::Matrix& old_matrix) = default;
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy

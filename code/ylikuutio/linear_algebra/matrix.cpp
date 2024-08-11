@@ -50,46 +50,6 @@ namespace yli::linear_algebra
         }
     }
 
-    Matrix::Matrix(const yli::linear_algebra::Matrix& old_matrix)
-    {
-        // copy constructor.
-        this->width = old_matrix.width;
-        this->height = old_matrix.height;
-        this->array_of_arrays.resize(this->height);
-
-        for (std::size_t i = 0; i < this->height; i++)
-        {
-            this->array_of_arrays[i].resize(this->width);
-        }
-
-        this->next_x_to_populate = old_matrix.next_x_to_populate;
-        this->next_y_to_populate = old_matrix.next_y_to_populate;
-        this->is_fully_populated = old_matrix.is_fully_populated;
-
-        // Copy values from old matrix (deep copy).
-        // Don't care whether `old_matrix` is fully populated or not.
-        for (std::size_t y = 0; y < this->height; y++)
-        {
-            // Get the slices of both arrays.
-            std::vector<float>& my_array = this->array_of_arrays[y];
-            const std::vector<float>& other_array = old_matrix.array_of_arrays[y];
-
-            for (std::size_t x = 0; x < this->width; x++)
-            {
-                my_array[x] = other_array[x];
-            }
-        }
-
-        if (this->width == this->height)
-        {
-            this->is_square = true;
-        }
-        else
-        {
-            this->is_square = false;
-        }
-    }
-
     bool Matrix::get_is_square() const
     {
         return this->is_square;
