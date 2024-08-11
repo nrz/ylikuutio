@@ -19,7 +19,7 @@
 
 // Include standard headers
 #include <algorithm> // std::copy
-#include <cstddef>   // std::size_t
+#include <cstddef>   // std::byte, std::size_t
 #include <cstdlib>   // std::strtof, std::strtol, std::strtoul
 #include <cstring>   // std::strncmp
 #include <iomanip>   // std::setfill, std::setw
@@ -1132,15 +1132,14 @@ namespace yli::string
         return true;
     }
 
-    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end` is exclusive.
+    void print_hexdump(const std::byte* const start_address, const std::byte* const end_address) // `begin` is inclusive, `end` is exclusive.
     {
-        const void* void_start_address = const_cast<void*>(start_address);
         const std::size_t line_width_in_bytes = 16;
         std::size_t characters_on_this_line = 0;
         std::string current_line_ascii = "";
         std::string current_line_hex = "";
 
-        for (const uint8_t* data_pointer = static_cast<const uint8_t*>(void_start_address); data_pointer < end_address; data_pointer++)
+        for (const std::byte* data_pointer = start_address; data_pointer < end_address; data_pointer++)
         {
             const uint8_t data_byte = static_cast<uint8_t>(*data_pointer);
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');

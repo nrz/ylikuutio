@@ -19,7 +19,7 @@
 #define YLIKUUTIO_STRING_YLIKUUTIO_STRING_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>   // std::size_t
+#include <cstddef>   // std::byte, std::size_t
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -354,7 +354,7 @@ namespace yli::string
 
     bool check_if_unsigned_integer_string(const std::string& my_string);
 
-    void print_hexdump(const void* const start_address, const void* const end_address); // `begin` is inclusive, `end is exclusive.
+    void print_hexdump(const std::byte* const start_address, const std::byte* const end_address); // `begin` is inclusive, `end is exclusive.
     void print_hexdump(const std::string& my_string);
 }
 
