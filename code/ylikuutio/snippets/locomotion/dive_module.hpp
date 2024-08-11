@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class DiveModule final : public yli::ontology::LocomotionModule
     {
         public:
-            DiveModule(const yli::ontology::LocomotionModuleStruct& dive_module_struct);
+            explicit DiveModule(const yli::ontology::LocomotionModuleStruct& dive_module_struct);
 
         private:
             float max_speed            { 0.0f }; // m/s.

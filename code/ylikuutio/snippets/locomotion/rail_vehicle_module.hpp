@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class RailVehicleModule final : public yli::ontology::LocomotionModule
     {
         public:
-            RailVehicleModule(const yli::ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
+            explicit RailVehicleModule(const yli::ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
 
         private:
             float max_speed    { 0.0f }; // m/s.

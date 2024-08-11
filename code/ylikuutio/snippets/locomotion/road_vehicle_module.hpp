@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class RoadVehicleModule final : public yli::ontology::LocomotionModule
     {
         public:
-            RoadVehicleModule(const yli::ontology::LocomotionModuleStruct& road_vehicle_module_struct);
+            explicit RoadVehicleModule(const yli::ontology::LocomotionModuleStruct& road_vehicle_module_struct);
 
         private:
             float max_speed            { 0.0f }; // m/s.

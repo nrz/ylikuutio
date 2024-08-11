@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class GaitModule final : public yli::ontology::LocomotionModule
     {
         public:
-            GaitModule(const yli::ontology::LocomotionModuleStruct& gait_module_struct);
+            explicit GaitModule(const yli::ontology::LocomotionModuleStruct& gait_module_struct);
 
         public:
             float max_speed            { 0.0f }; // m/s.

@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class ClimbModule final : public yli::ontology::LocomotionModule
     {
         public:
-            ClimbModule(const yli::ontology::LocomotionModuleStruct& climb_module_struct);
+            explicit ClimbModule(const yli::ontology::LocomotionModuleStruct& climb_module_struct);
 
         private:
             float max_speed            { 0.0f }; // m/s.

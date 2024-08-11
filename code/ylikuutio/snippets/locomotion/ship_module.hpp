@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class ShipModule final : public yli::ontology::LocomotionModule
     {
         public:
-            ShipModule(const yli::ontology::LocomotionModuleStruct& ship_module_struct);
+            explicit ShipModule(const yli::ontology::LocomotionModuleStruct& ship_module_struct);
 
         private:
             float max_speed         { 0.0f }; // m/s.

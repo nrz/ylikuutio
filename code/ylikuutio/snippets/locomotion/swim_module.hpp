@@ -31,7 +31,7 @@ namespace yli::snippets::locomotion
     class SwimModule final : public yli::ontology::LocomotionModule
     {
         public:
-            SwimModule(const yli::ontology::LocomotionModuleStruct& swim_module_struct);
+            explicit SwimModule(const yli::ontology::LocomotionModuleStruct& swim_module_struct);
 
         private:
             float max_speed            { 0.0f }; // m/s.
