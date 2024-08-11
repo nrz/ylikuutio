@@ -27,14 +27,7 @@ namespace yli::ontology
     {
         EntityStruct() = default;
 
-        EntityStruct(const yli::ontology::EntityStruct& entity_struct) noexcept
-            : global_name { entity_struct.global_name },
-            local_name { entity_struct.local_name },
-            is_universe { entity_struct.is_universe },
-            is_variable { entity_struct.is_variable }
-        {
-            // copy constructor.
-        }
+        EntityStruct(const yli::ontology::EntityStruct& entity_struct) = default;
 
         EntityStruct(const std::string& global_name, const std::string& local_name) noexcept
             : global_name { global_name },
