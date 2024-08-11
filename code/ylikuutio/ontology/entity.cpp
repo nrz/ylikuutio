@@ -271,7 +271,7 @@ namespace yli::ontology
         return help_string;
     }
 
-    std::string Entity::help(const std::string& variable_name) const
+    std::string Entity::help_for_variable(const std::string& variable_name) const
     {
         const yli::ontology::Variable* const variable = this->get(variable_name);
 
