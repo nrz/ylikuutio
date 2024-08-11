@@ -38,6 +38,7 @@ namespace yli::ontology
         }
 
         UniverseStruct(const yli::ontology::UniverseStruct& universe_struct) = default;
+        yli::ontology::UniverseStruct& operator=(const yli::ontology::UniverseStruct& universe_struct) = default;
 
         std::string application_name;
         std::string window_title;
