@@ -41,19 +41,7 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
-        VariableStruct(const yli::ontology::VariableStruct& variable_struct)
-            : EntityStruct(variable_struct),
-            universe { variable_struct.universe },
-            parent { variable_struct.parent },
-            activate_callback { variable_struct.activate_callback },
-            read_callback { variable_struct.read_callback },
-            should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
-        {
-            // copy constructor.
-            this->global_name = variable_struct.global_name;
-            this->local_name = variable_struct.local_name;
-            this->is_variable = true;
-        }
+        VariableStruct(const yli::ontology::VariableStruct& variable_struct) = default;
 
         VariableStruct(yli::ontology::Entity& parent, const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
