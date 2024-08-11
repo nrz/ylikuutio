@@ -62,60 +62,6 @@ namespace yli::linear_algebra
         }
     }
 
-    Tensor3::Tensor3(const yli::linear_algebra::Tensor3& old_tensor3)
-    {
-        // copy constructor.
-        this->width = old_tensor3.width;
-        this->height = old_tensor3.height;
-        this->depth = old_tensor3.depth;
-        this->array_of_arrays_of_arrays.resize(this->width);
-
-        for (std::size_t x = 0; x < this->width; x++)
-        {
-            this->array_of_arrays_of_arrays[x].resize(this->height);
-
-            for (std::size_t y = 0; y < this->height; y++)
-            {
-                this->array_of_arrays_of_arrays[x][y].resize(this->depth);
-            }
-        }
-
-        this->next_x_to_populate = 0;
-        this->next_y_to_populate = 0;
-        this->next_z_to_populate = 0;
-        this->is_fully_populated = false;
-
-        // Copy values from old tensor (deep copy).
-        // Don't care whether `old_tensor3` is fully populated or not.
-        for (std::size_t x = 0; x < this->width; x++)
-        {
-            // Get the slices of both arrays.
-            std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[x];
-            const std::vector<std::vector<float>>& other_array_of_arrays = old_tensor3.array_of_arrays_of_arrays[x];
-
-            for (std::size_t y = 0; y < this->height; y++)
-            {
-                // Get the slices of both arrays.
-                std::vector<float>& my_array = my_array_of_arrays[y];
-                const std::vector<float>& other_array = other_array_of_arrays[y];
-
-                for (std::size_t z = 0; z < this->depth; z++)
-                {
-                    my_array[z] = other_array[z];
-                }
-            }
-        }
-
-        if (this->width == this->height && this->height == this->depth)
-        {
-            this->is_cube = true;
-        }
-        else
-        {
-            this->is_cube = false;
-        }
-    }
-
     Tensor3::Tensor3(const yli::linear_algebra::Matrix& old_matrix)
     {
         this->width = old_matrix.width;

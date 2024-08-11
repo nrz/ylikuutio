@@ -39,7 +39,7 @@ namespace yli::linear_algebra
             ~Tensor3() = default;
 
             // copy constructor.
-            Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
+            Tensor3(const yli::linear_algebra::Tensor3& old_tensor3) = default;
 
             explicit Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
