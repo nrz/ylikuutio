@@ -240,17 +240,17 @@ namespace yli::ontology
 
     bool Entity::has_variable(const std::string& variable_name) const
     {
-        return this->get(variable_name) != nullptr;
+        return this->get_variable(variable_name) != nullptr;
     }
 
-    yli::ontology::Variable* Entity::get(const std::string& variable_name) const
+    yli::ontology::Variable* Entity::get_variable(const std::string& variable_name) const
     {
         return dynamic_cast<yli::ontology::Variable*>(this->registry.get_entity(variable_name));
     }
 
     bool Entity::set(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value)
     {
-        yli::ontology::Variable* const variable = this->get(variable_name);
+        yli::ontology::Variable* const variable = this->get_variable(variable_name);
 
         if (variable == nullptr)
         {
@@ -273,7 +273,7 @@ namespace yli::ontology
 
     std::string Entity::help_for_variable(const std::string& variable_name) const
     {
-        const yli::ontology::Variable* const variable = this->get(variable_name);
+        const yli::ontology::Variable* const variable = this->get_variable(variable_name);
 
         if (variable == nullptr)
         {

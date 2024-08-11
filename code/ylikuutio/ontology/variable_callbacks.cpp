@@ -165,7 +165,7 @@ namespace yli::ontology
         }
 
         // red.
-        const yli::data::AnyValue& red_any_value = entity.get("red")->variable_value;
+        const yli::data::AnyValue& red_any_value = entity.get_variable("red")->variable_value;
 
         if (!std::holds_alternative<float>(red_any_value.data))
         {
@@ -175,7 +175,7 @@ namespace yli::ontology
         const float red = std::get<float>(red_any_value.data);
 
         // green.
-        const yli::data::AnyValue& green_any_value = entity.get("green")->variable_value;
+        const yli::data::AnyValue& green_any_value = entity.get_variable("green")->variable_value;
 
         if (!std::holds_alternative<float>(green_any_value.data))
         {
@@ -185,7 +185,7 @@ namespace yli::ontology
         const float green = std::get<float>(green_any_value.data);
 
         // blue.
-        const yli::data::AnyValue& blue_any_value = entity.get("blue")->variable_value;
+        const yli::data::AnyValue& blue_any_value = entity.get_variable("blue")->variable_value;
 
         if (!std::holds_alternative<float>(blue_any_value.data))
         {
@@ -195,7 +195,7 @@ namespace yli::ontology
         const float blue = std::get<float>(blue_any_value.data);
 
         // alpha.
-        const yli::data::AnyValue& alpha_any_value = entity.get("alpha")->variable_value;
+        const yli::data::AnyValue& alpha_any_value = entity.get_variable("alpha")->variable_value;
 
         if (!std::holds_alternative<float>(alpha_any_value.data))
         {

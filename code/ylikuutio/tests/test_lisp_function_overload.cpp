@@ -99,7 +99,7 @@ TEST(set_must_set_global_x, set_x)
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
     x_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe.get("x"), nullptr);
+    ASSERT_EQ(universe.get_variable("x"), nullptr);
     universe.create_variable(x_variable_struct, yli::data::AnyValue(x));
 
     {
@@ -138,7 +138,7 @@ TEST(set_must_set_global_y, set_y)
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
     y_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe.get("y"), nullptr);
+    ASSERT_EQ(universe.get_variable("y"), nullptr);
     universe.create_variable(y_variable_struct, yli::data::AnyValue(y));
 
     {
@@ -177,7 +177,7 @@ TEST(set_must_set_global_z, set_z)
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
     z_variable_struct.should_call_activate_callback_now = true;
-    ASSERT_EQ(universe.get("z"), nullptr);
+    ASSERT_EQ(universe.get_variable("z"), nullptr);
     universe.create_variable(z_variable_struct, yli::data::AnyValue(z));
 
     {
