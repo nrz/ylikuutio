@@ -68,6 +68,8 @@ namespace yli::ontology
             this->is_variable = true;
         }
 
+        ~VariableStruct() = default;
+
         yli::ontology::Universe& universe;
         yli::ontology::Entity& parent;
         ActivateCallback activate_callback                 { nullptr };
