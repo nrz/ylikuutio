@@ -26,19 +26,6 @@ namespace yli::ontology
             this->pitch == rhs.pitch;
     }
 
-    yli::ontology::OrientationModule& OrientationModule::operator=(const yli::ontology::OrientationModule& other) noexcept
-    {
-        if (&other == this)
-        {
-            return *this;
-        }
-
-        this->roll  = other.roll;
-        this->yaw   = other.yaw;
-        this->pitch = other.pitch;
-        return *this;
-    }
-
     glm::vec3 OrientationModule::get() const
     {
         return glm::vec3 { this->roll, this->yaw, this->pitch };
