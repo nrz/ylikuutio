@@ -169,7 +169,7 @@ namespace yli::memory
         class MemoryAllocator<yli::ontology::GenericLispFunctionOverload, DataSize> : public yli::memory::GenericMemoryAllocator
         {
             public:
-                MemoryAllocator(const int datatype)
+                explicit MemoryAllocator(const int datatype)
                     : datatype { datatype }
                 {
                 }
