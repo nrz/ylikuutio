@@ -42,6 +42,8 @@ namespace yli::ontology
         {
         }
 
+        ~EntityStruct() = default;
+
         std::string global_name;
         std::string local_name;
         bool is_universe    { false };
