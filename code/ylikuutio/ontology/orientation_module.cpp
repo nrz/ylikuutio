@@ -39,13 +39,6 @@ namespace yli::ontology
         return *this;
     }
 
-    OrientationModule::OrientationModule(const yli::ontology::OrientationModule& original)
-        : roll { original.roll },
-        yaw    { original.yaw },
-        pitch  { original.pitch }
-    {
-    }
-
     glm::vec3 OrientationModule::get() const
     {
         return glm::vec3 { this->roll, this->yaw, this->pitch };
