@@ -30,17 +30,6 @@ namespace yli::ontology
         return this->xyz == rhs.xyz;
     }
 
-    yli::ontology::CartesianCoordinatesModule& CartesianCoordinatesModule::operator=(const yli::ontology::CartesianCoordinatesModule& other) noexcept
-    {
-        if (&other == this)
-        {
-            return *this;
-        }
-
-        this->xyz = other.xyz;
-        return *this;
-    }
-
     CartesianCoordinatesModule::CartesianCoordinatesModule(const glm::vec3& xyz) noexcept
         : xyz { xyz }
     {

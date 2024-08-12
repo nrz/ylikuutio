@@ -31,7 +31,7 @@ namespace yli::ontology
         public:
             bool operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept;
             bool operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const = default;
-            yli::ontology::CartesianCoordinatesModule& operator=(const yli::ontology::CartesianCoordinatesModule& other) noexcept;
+            yli::ontology::CartesianCoordinatesModule& operator=(const yli::ontology::CartesianCoordinatesModule& other) = default;
 
             CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) = default;
 
