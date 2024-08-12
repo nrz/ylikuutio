@@ -15,11 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_POLICE_HELICOPTER_HPP_INCLUDED
-#define HIRVI_POLICE_HELICOPTER_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_POLICE_TRAM_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_POLICE_TRAM_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/snippets/locomotion/fly_module.hpp"
+#include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
 #include "police_module.hpp"
 
 namespace yli::core
@@ -38,24 +38,24 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class PoliceHelicopter : public yli::ontology::Holobiont
+    class PoliceTram : public yli::ontology::Holobiont
     {
         public:
-            explicit PoliceHelicopter(
+            explicit PoliceTram(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_helicopter_struct,
-                    const yli::ontology::LocomotionModuleStruct& fly_struct,
+                    const yli::ontology::HolobiontStruct& police_tram_struct,
+                    const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
                     yli::ontology::GenericMasterModule* const symbiosis_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
-            PoliceHelicopter(const PoliceHelicopter&) = delete;            // Delete copy constructor.
-            PoliceHelicopter &operator=(const PoliceHelicopter&) = delete; // Delete copy assignment.
+            PoliceTram(const PoliceTram&) = delete;            // Delete copy constructor.
+            PoliceTram &operator=(const PoliceTram&) = delete; // Delete copy assignment.
 
-            ~PoliceHelicopter() = default;
+            ~PoliceTram() = default;
 
-            yli::snippets::locomotion::FlyModule fly;
+            yli::snippets::locomotion::RailVehicleModule rail_vehicle;
             hirvi::PoliceModule police;
     };
 }

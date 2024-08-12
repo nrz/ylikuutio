@@ -15,12 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_POLICE_TRAIN_HPP_INCLUDED
-#define HIRVI_POLICE_TRAIN_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_TRAIN_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_TRAIN_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
-#include "police_module.hpp"
 
 namespace yli::core
 {
@@ -38,25 +37,24 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class PoliceTrain : public yli::ontology::Holobiont
+    class Train : public yli::ontology::Holobiont
     {
         public:
-            explicit PoliceTrain(
+            explicit Train(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_train_struct,
+                    const yli::ontology::HolobiontStruct& train_struct,
                     const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
                     yli::ontology::GenericMasterModule* const symbiosis_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
-            PoliceTrain(const PoliceTrain&) = delete;            // Delete copy constructor.
-            PoliceTrain &operator=(const PoliceTrain&) = delete; // Delete copy assignment.
+            Train(const Train&) = delete;            // Delete copy constructor.
+            Train &operator=(const Train&) = delete; // Delete copy assignment.
 
-            ~PoliceTrain() = default;
+            ~Train() = default;
 
             yli::snippets::locomotion::RailVehicleModule rail_vehicle;
-            hirvi::PoliceModule police;
     };
 }
 

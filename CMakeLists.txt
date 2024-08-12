@@ -843,33 +843,33 @@ target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 
 # Hirvi libraries
 add_library(hirvi_lib STATIC
-    code/hirvi/cat.cpp
-    code/hirvi/cat.hpp
+    code/hirvi/ontology/cat.cpp
+    code/hirvi/ontology/cat.hpp
     code/hirvi/datatype.hpp
-    code/hirvi/elk.cpp
-    code/hirvi/elk.hpp
-    code/hirvi/emancipation_module.cpp
-    code/hirvi/emancipation_module.hpp
+    code/hirvi/ontology/elk.cpp
+    code/hirvi/ontology/elk.hpp
+    code/hirvi/ontology/emancipation_module.cpp
+    code/hirvi/ontology/emancipation_module.hpp
     code/hirvi/hirvi_console_callbacks.cpp
     code/hirvi/hirvi_console_callbacks.hpp
     code/hirvi/hirvi_earth_ecosystem.cpp
     code/hirvi/hirvi_helsinki_east_downtown_scene.cpp
-    code/hirvi/police_car.cpp
-    code/hirvi/police_car.hpp
-    code/hirvi/police_dog.cpp
-    code/hirvi/police_dog.hpp
-    code/hirvi/police_helicopter.cpp
-    code/hirvi/police_helicopter.hpp
-    code/hirvi/police_horse.cpp
-    code/hirvi/police_horse.hpp
-    code/hirvi/police_module.cpp
-    code/hirvi/police_module.hpp
-    code/hirvi/police_train.cpp
-    code/hirvi/police_train.hpp
-    code/hirvi/police_tram.cpp
-    code/hirvi/police_tram.hpp
-    code/hirvi/train.cpp
-    code/hirvi/train.hpp
+    code/hirvi/ontology/police_car.cpp
+    code/hirvi/ontology/police_car.hpp
+    code/hirvi/ontology/police_dog.cpp
+    code/hirvi/ontology/police_dog.hpp
+    code/hirvi/ontology/police_helicopter.cpp
+    code/hirvi/ontology/police_helicopter.hpp
+    code/hirvi/ontology/police_horse.cpp
+    code/hirvi/ontology/police_horse.hpp
+    code/hirvi/ontology/police_module.cpp
+    code/hirvi/ontology/police_module.hpp
+    code/hirvi/ontology/police_train.cpp
+    code/hirvi/ontology/police_train.hpp
+    code/hirvi/ontology/police_tram.cpp
+    code/hirvi/ontology/police_tram.hpp
+    code/hirvi/ontology/train.cpp
+    code/hirvi/ontology/train.hpp
     )
 target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} pthread)
 

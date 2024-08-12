@@ -17,8 +17,8 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/cat.hpp"
-#include "code/hirvi/police_car.hpp"
+#include "code/hirvi/ontology/cat.hpp"
+#include "code/hirvi/ontology/police_car.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"

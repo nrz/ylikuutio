@@ -15,19 +15,23 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_POLICE_MODULE_HPP_INCLUDED
-#define HIRVI_POLICE_MODULE_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_EMANCIPATION_MODULE_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_EMANCIPATION_MODULE_HPP_INCLUDED
 
 namespace hirvi
 {
-    class PoliceModule
+    class EmancipationModule
     {
-        // `PoliceModule` provides access to the knowledge shared in the police network.
+        // `EmancipationModule` provides the functionality to become emancipated.
 
         public:
-            PoliceModule() = default;
+            EmancipationModule() = default;
 
-            // TODO: implement!
+            void emancipate();
+            bool get_is_emancipated() const;
+
+        private:
+            bool is_emancipated { false };
     };
 }
 

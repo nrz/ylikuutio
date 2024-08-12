@@ -15,11 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_TRAIN_HPP_INCLUDED
-#define HIRVI_TRAIN_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_POLICE_CAR_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_POLICE_CAR_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
+#include "code/ylikuutio/snippets/locomotion/road_vehicle_module.hpp"
+#include "police_module.hpp"
 
 namespace yli::core
 {
@@ -37,24 +38,25 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class Train : public yli::ontology::Holobiont
+    class PoliceCar : public yli::ontology::Holobiont
     {
         public:
-            explicit Train(
+            explicit PoliceCar(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& train_struct,
-                    const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct,
+                    const yli::ontology::HolobiontStruct& police_car_struct,
+                    const yli::ontology::LocomotionModuleStruct& road_vehicle_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
                     yli::ontology::GenericMasterModule* const symbiosis_master,
                     yli::ontology::GenericMasterModule* const brain_master);
 
-            Train(const Train&) = delete;            // Delete copy constructor.
-            Train &operator=(const Train&) = delete; // Delete copy assignment.
+            PoliceCar(const PoliceCar&) = delete;            // Delete copy constructor.
+            PoliceCar &operator=(const PoliceCar&) = delete; // Delete copy assignment.
 
-            ~Train() = default;
+            ~PoliceCar() = default;
 
-            yli::snippets::locomotion::RailVehicleModule rail_vehicle;
+            yli::snippets::locomotion::RoadVehicleModule road_vehicle;
+            hirvi::PoliceModule police;
     };
 }
 
