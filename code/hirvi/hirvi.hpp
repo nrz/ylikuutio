@@ -18,9 +18,9 @@
 #ifndef HIRVI_HIRVI_HPP_INCLUDED
 #define HIRVI_HIRVI_HPP_INCLUDED
 
-#include "code/hirvi/data/datatype.hpp"
-#include "code/hirvi/ontology/cat.hpp"
-#include "code/hirvi/ontology/police_car.hpp"
+#include "data/datatype.hpp"
+#include "ontology/cat.hpp"
+#include "ontology/police_car.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
