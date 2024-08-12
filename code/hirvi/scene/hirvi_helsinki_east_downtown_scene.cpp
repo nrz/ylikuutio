@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "hirvi.hpp"
+#include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
-#include "datatype.hpp"
+#include "code/hirvi/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
