@@ -20,7 +20,7 @@
 #endif
 
 #include "hirvi.hpp"
-#include "hirvi_console_callbacks.hpp"
+#include "lisp/hirvi_console_callbacks.hpp"
 #include "datatype.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"

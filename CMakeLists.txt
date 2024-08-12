@@ -850,8 +850,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp
     code/hirvi/ontology/emancipation_module.hpp
-    code/hirvi/hirvi_console_callbacks.cpp
-    code/hirvi/hirvi_console_callbacks.hpp
+    code/hirvi/lisp/hirvi_console_callbacks.cpp
+    code/hirvi/lisp/hirvi_console_callbacks.hpp
     code/hirvi/ecosystem/hirvi_earth_ecosystem.cpp
     code/hirvi/scene/hirvi_helsinki_east_downtown_scene.cpp
     code/hirvi/ontology/police_car.cpp
