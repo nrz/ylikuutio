@@ -845,7 +845,7 @@ target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
 add_library(hirvi_lib STATIC
     code/hirvi/ontology/cat.cpp
     code/hirvi/ontology/cat.hpp
-    code/hirvi/datatype.hpp
+    code/hirvi/data/datatype.hpp
     code/hirvi/ontology/elk.cpp
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp

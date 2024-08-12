@@ -18,7 +18,7 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
-#include "code/hirvi/datatype.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/brain_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"

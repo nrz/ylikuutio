@@ -21,7 +21,7 @@
 
 #include "hirvi.hpp"
 #include "lisp/hirvi_console_callbacks.hpp"
-#include "datatype.hpp"
+#include "data/datatype.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"

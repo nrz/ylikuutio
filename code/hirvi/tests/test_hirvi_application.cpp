@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/hirvi/datatype.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
