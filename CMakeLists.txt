@@ -820,7 +820,7 @@ add_executable(ajokki
     code/ajokki/ajokki.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
-    code/ajokki/ajokki_earth_ecosystem.cpp
+    code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
     code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
     )
