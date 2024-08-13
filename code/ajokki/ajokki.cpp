@@ -20,7 +20,7 @@
 #endif
 
 #include "ajokki.hpp"
-#include "ajokki_console_callbacks.hpp"
+#include "lisp/ajokki_console_callbacks.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"

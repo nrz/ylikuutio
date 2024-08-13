@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef AJOKKI_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
-#define AJOKKI_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#ifndef AJOKKI_LISP_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
+#define AJOKKI_LISP_AJOKKI_CONSOLE_CALLBACKS_HPP_INCLUDED
 
 #include "code/ylikuutio/data/any_value.hpp"
 
