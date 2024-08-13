@@ -84,8 +84,6 @@ namespace ajokki
             yli::ontology::Ecosystem* create_earth_ecosystem();
             yli::ontology::Scene* create_helsinki_east_downtown_scene();
             yli::ontology::Scene* create_joensuu_center_west_scene();
-            yli::ontology::Scene* create_tallinn_scene();
-            yli::ontology::Scene* create_altiplano_scene();
 
             yli::memory::MemorySystem<yli::data::Datatype> memory_system;
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
