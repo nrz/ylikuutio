@@ -572,12 +572,12 @@ namespace ajokki
                 const std::string index_string = std::to_string(i * cat_i_upper_bound + j);
 
                 const float first_cat_x {   0.00f };
-                const float first_cat_y { 100.00f };
-                const float first_cat_z {   0.00f };
+                const float first_cat_y {   0.00f };
+                const float first_cat_z { 100.00f };
 
                 const float translation_x { 100.00f };
-                const float translation_y {   0.00f };
-                const float translation_z {  50.00f };
+                const float translation_y { -50.00f };
+                const float translation_z {   0.00f };
 
                 const float first_cat_scale { 10.0f };
 
