@@ -498,16 +498,17 @@ namespace ajokki
         auto toggle_help_mode_callback_engine = this->entity_factory.create_callback_engine(toggle_help_mode_callback_engine_struct);
         toggle_help_mode_callback_engine->create_callback_object(&yli::snippets::toggle_help_mode);
 
-        // Callback code for D: delete Suzanne species.
-        const std::string suzanne_species_string = "suzanne_species";
-        yli::ontology::CallbackEngineStruct delete_suzanne_species_callback_engine_struct;
-        auto delete_suzanne_species_callback_engine = this->entity_factory.create_callback_engine(delete_suzanne_species_callback_engine_struct);
-        auto delete_suzanne_species_callback_object = delete_suzanne_species_callback_engine->create_callback_object(
+        // Callback code for D: delete cat species.
+        const std::string cat_species_string = "cat_species";
+        yli::ontology::CallbackEngineStruct delete_cat_species_callback_engine_struct;
+        auto delete_cat_species_callback_engine = this->entity_factory.create_callback_engine(delete_cat_species_callback_engine_struct);
+        auto delete_cat_species_callback_object = delete_cat_species_callback_engine->create_callback_object(
                 &yli::snippets::delete_entity);
-        delete_suzanne_species_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne_species_string));
+        delete_cat_species_callback_object->create_callback_parameter("", yli::data::AnyValue(cat_species_string));
 
         // Callback code for G: switch to grass material.
         const std::string grass_material_string = "helsinki_east_downtown_grass_material";
+        const std::string suzanne_species_string = "suzanne_species";
         yli::ontology::CallbackEngineStruct switch_to_grass_material_callback_engine_struct;
         auto switch_to_grass_material_callback_engine = this->entity_factory.create_callback_engine(switch_to_grass_material_callback_engine_struct);
         auto switch_to_grass_material_callback_object = switch_to_grass_material_callback_engine->create_callback_object(
@@ -939,7 +940,7 @@ namespace ajokki
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_I, toggle_invert_mouse_callback_engine);
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_F, toggle_flight_mode_callback_engine);
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_F1, toggle_help_mode_callback_engine);
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_D, delete_suzanne_species_callback_engine);
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_D, delete_cat_species_callback_engine);
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_G, switch_to_grass_material_callback_engine);
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine);
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine);
