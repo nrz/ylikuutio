@@ -5,6 +5,10 @@ http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli
 http://3d.hel.ninja/data/citygml/
 http://3d.hel.ninja/data/mesh/
 
+Reality mesh of Espoo / Espoon verkkomalli (CC-BY 4.0):
+file formats: .obj files, .dae files
+https://hri.fi/data/en_GB/dataset/espoon-verkkomalli
+
 3D model of Vantaa (CC-BY 4.0):
 file formats: .gml, .kml, .skp
 https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset
