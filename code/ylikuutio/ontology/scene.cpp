@@ -160,7 +160,7 @@ namespace yli::ontology
 
             if (brain != nullptr)
             {
-                brain->act();
+                brain->update();
             }
         }
     }

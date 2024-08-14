@@ -84,11 +84,11 @@ namespace yli::ontology
         return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `Brain` are its apprentices.
     }
 
-    void Brain::act()
+    void Brain::update()
     {
         if (this->callback_engine == nullptr)
         {
-            std::cerr << "ERROR: `Brain::act`: `this->callback_engine` is `nullptr`!\n";
+            std::cerr << "ERROR: `Brain::update`: `this->callback_engine` is `nullptr`!\n";
             return;
         }
 
