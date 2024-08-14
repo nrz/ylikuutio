@@ -508,14 +508,13 @@ namespace ajokki
 
         // Callback code for G: switch to grass material.
         const std::string grass_material_string = "helsinki_east_downtown_grass_material";
-        const std::string suzanne_species_string = "suzanne_species";
         yli::ontology::CallbackEngineStruct switch_to_grass_material_callback_engine_struct;
         auto switch_to_grass_material_callback_engine = this->entity_factory.create_callback_engine(switch_to_grass_material_callback_engine_struct);
         auto switch_to_grass_material_callback_object = switch_to_grass_material_callback_engine->create_callback_object(
                 &yli::snippets::switch_to_new_material);
         switch_to_grass_material_callback_object->create_callback_parameter(
                 "",
-                yli::data::AnyValue(suzanne_species_string));
+                yli::data::AnyValue(cat_species_string));
         switch_to_grass_material_callback_object->create_callback_parameter(
                 "",
                 yli::data::AnyValue(grass_material_string));
@@ -528,7 +527,7 @@ namespace ajokki
                 &yli::snippets::switch_to_new_material);
         switch_to_orange_fur_material_callback_object->create_callback_parameter(
                 "",
-                yli::data::AnyValue(suzanne_species_string));
+                yli::data::AnyValue(cat_species_string));
         switch_to_orange_fur_material_callback_object->create_callback_parameter(
                 "",
                 yli::data::AnyValue(orange_fur_material_string));
@@ -541,7 +540,7 @@ namespace ajokki
                 &yli::snippets::switch_to_new_material);
         switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                 "",
-                yli::data::AnyValue(suzanne_species_string));
+                yli::data::AnyValue(cat_species_string));
         switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
                 "",
                 yli::data::AnyValue(pink_geometric_tiles_material_string));
@@ -557,6 +556,7 @@ namespace ajokki
         transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(helsinki_species_string));
 
         // Callback code for A: transform `suzanne2` back into monkey.
+        const std::string suzanne_species_string = "suzanne_species";
         yli::ontology::CallbackEngineStruct transform_into_monkey_callback_engine_struct;
         auto transform_into_monkey_callback_engine = this->entity_factory.create_callback_engine(transform_into_monkey_callback_engine_struct);
         auto transform_into_monkey_callback_object = transform_into_monkey_callback_engine->create_callback_object(
