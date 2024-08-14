@@ -457,8 +457,8 @@ namespace hirvi
         cat1_object_struct.global_name = "cat1";
         cat1_object_struct.local_name = "kissa1";
         cat1_object_struct.brain = rest_brain;
-        cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
+        cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
+        cat1_object_struct.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat1_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(500.00f, -1000.00f, 100.00f);
 
@@ -489,8 +489,8 @@ namespace hirvi
         cat2_object_struct.local_name = "kissa2";
         cat2_object_struct.brain = rest_brain;
         cat2_object_struct.scene = helsinki_east_downtown_scene;
-        cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-        cat2_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
+        cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
+        cat2_object_struct.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat2_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(700.00f, -1200.00f, 100.00f);
 
@@ -529,7 +529,7 @@ namespace hirvi
 
         yli::ontology::HolobiontStruct turbo_polizei_png_police_car_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
         turbo_polizei_png_police_car_struct1.brain = rest_brain;
-        turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_police_car_struct1.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(85.00f, -160.00f, 30.00f);
@@ -555,7 +555,7 @@ namespace hirvi
 
         yli::ontology::HolobiontStruct turbo_polizei_png_police_car_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
         turbo_polizei_png_police_car_struct2.brain = rest_brain;
-        turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+        turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_police_car_struct2.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(85.00f, -175.00f, 30.00f);
