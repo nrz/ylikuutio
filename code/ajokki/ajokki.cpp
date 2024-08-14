@@ -545,24 +545,23 @@ namespace ajokki
                 "",
                 yli::data::AnyValue(pink_geometric_tiles_material_string));
 
-        // Callback code for T: transform `suzanne2` into terrain.
+        // Callback code for T: transform `cat1` into terrain.
         const std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
-        const std::string suzanne2_string = "suzanne2";
+        const std::string cat1_string = "cat1";
         yli::ontology::CallbackEngineStruct transform_into_terrain_callback_engine_struct;
         auto transform_into_terrain_callback_engine = this->entity_factory.create_callback_engine(transform_into_terrain_callback_engine_struct);
         auto transform_into_terrain_callback_object = transform_into_terrain_callback_engine->create_callback_object(
                 &yli::snippets::transform_into_new_species);
-        transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne2_string));
+        transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(cat1_string));
         transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(helsinki_species_string));
 
-        // Callback code for A: transform `suzanne2` back into monkey.
-        const std::string suzanne_species_string = "suzanne_species";
+        // Callback code for A: transform `cat1` back into monkey.
         yli::ontology::CallbackEngineStruct transform_into_monkey_callback_engine_struct;
         auto transform_into_monkey_callback_engine = this->entity_factory.create_callback_engine(transform_into_monkey_callback_engine_struct);
         auto transform_into_monkey_callback_object = transform_into_monkey_callback_engine->create_callback_object(
                 &yli::snippets::transform_into_new_species);
-        transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne2_string));
-        transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(suzanne_species_string));
+        transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(cat1_string));
+        transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(cat_species_string));
 
         /*********************************************************************
          *  Callback engines for console keyreleases begin here.             *
