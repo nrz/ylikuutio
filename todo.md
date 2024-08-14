@@ -7,6 +7,8 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
+- [ ] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
+- [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
