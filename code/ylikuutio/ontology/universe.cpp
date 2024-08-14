@@ -236,7 +236,7 @@ namespace yli::ontology
         this->compute_and_update_matrices_from_inputs();
     }
 
-    void Universe::act()
+    void Universe::update()
     {
         if (this->active_scene != nullptr)
         {
@@ -575,7 +575,7 @@ namespace yli::ontology
 
                 // 2. Process AI.
                 // Intentional actors (AIs and keyboard controlled ones).
-                this->act();
+                this->update();
 
                 // 3. Process physics.
                 // Gravity etc. physical phenomena.

@@ -109,7 +109,7 @@ namespace yli::ontology
             void do_physics();
 
             // Intentional actors (AIs and keyboard controlled ones).
-            void act();
+            void update();
 
             // This method renders according to the data given in `render_struct`.
             void render(const yli::render::RenderStruct& render_struct);
