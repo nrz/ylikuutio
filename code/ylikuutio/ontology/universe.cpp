@@ -240,7 +240,7 @@ namespace yli::ontology
     {
         if (this->active_scene != nullptr)
         {
-            this->active_scene->act();
+            this->active_scene->update();
         }
     }
 

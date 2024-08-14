@@ -150,7 +150,7 @@ namespace yli::ontology
         // TODO: implement physics!
     }
 
-    void Scene::act()
+    void Scene::update()
     {
         // Intentional actors (AIs and keyboard controlled ones).
 
