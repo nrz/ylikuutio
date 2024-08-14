@@ -494,8 +494,8 @@ namespace ajokki
                 cat_object_struct1.global_name = "cat" + index_string;
                 cat_object_struct1.local_name = "kissa" + index_string;
                 cat_object_struct1.brain = rest_brain;
-                cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-                cat_object_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
+                cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
+                cat_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
                 cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
                 cat_object_struct1.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(
                         first_cat_x + static_cast<float>(i) * translation_x,
