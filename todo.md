@@ -2,7 +2,6 @@
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 ## Fixes needed
-- [ ] BUG/MATH Fix Brain snippets.
 - [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
@@ -333,3 +332,4 @@
 - [x] AVARUUS/MATH/PHYSICS Implement n-body Newtonian star simulation of Milky Way stars in Fortran.
 - [x] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 - [x] MATH Add support for Tait-Bryan angles. https://en.wikipedia.org/wiki/Euler_angles#Tait%E2%80%93Bryan_angles
+- [x] BUG/MATH Fix Brain snippets.
