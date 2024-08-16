@@ -507,7 +507,8 @@ namespace yli::ontology
                             cos(pitch) * sin(yaw),
                             sin(pitch));
 
-                    glm::vec3 right = glm::vec3(sin(yaw) * cos(roll), -1.0f * cos(yaw) * cos(roll), sin(roll));
+                    const float neg_roll = -roll;
+                    glm::vec3 right = glm::vec3(sin(yaw) * cos(neg_roll), -1.0f * cos(yaw) * cos(neg_roll), sin(neg_roll));
 
                     // Up vector.
                     this->set_up(glm::cross(right, direction));
