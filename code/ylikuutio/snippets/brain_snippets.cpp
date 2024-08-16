@@ -93,7 +93,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.xyz.z -= movable.speed;
+            movable.location.xyz.y += movable.speed;
             return std::nullopt;
         }
 
@@ -111,7 +111,7 @@ namespace yli::snippets
         if (any_value.has_movable_ref())
         {
             yli::ontology::Movable& movable = any_value.get_movable_ref();
-            movable.location.xyz.z += movable.speed;
+            movable.location.xyz.y -= movable.speed;
             return std::nullopt;
         }
 
