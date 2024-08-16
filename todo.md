@@ -8,7 +8,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
-- [ ] MATH Add support for Tait-Bryan angles. https://en.wikipedia.org/wiki/Euler_angles#Tait%E2%80%93Bryan_angles
 - [ ] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
@@ -333,3 +332,4 @@
 - [x] ONTOLOGY/AI Add `yli::ontology::Waypoint` class to be used for `Brain` snippets.
 - [x] AVARUUS/MATH/PHYSICS Implement n-body Newtonian star simulation of Milky Way stars in Fortran.
 - [x] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
+- [x] MATH Add support for Tait-Bryan angles. https://en.wikipedia.org/wiki/Euler_angles#Tait%E2%80%93Bryan_angles
