@@ -319,7 +319,7 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -1.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 1.0f, 0.0f) };
 
     go_north_brain->update();
 
@@ -361,7 +361,7 @@ TEST(go_north_brain_must_go_north, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -2.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 2.0f, 0.0f) };
 
     go_north_brain->update();
 
@@ -403,7 +403,7 @@ TEST(go_south_brain_must_go_south, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 1.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -1.0f, 0.0f) };
 
     go_south_brain->update();
 
@@ -445,7 +445,7 @@ TEST(go_south_brain_must_go_south, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 2.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -2.0f, 0.0f) };
 
     go_south_brain->update();
 
@@ -995,7 +995,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -1.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 1.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_north_brain->update();
@@ -1038,7 +1038,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, -2.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 2.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_north_brain->update();
@@ -1081,7 +1081,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 1.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -1.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_south_brain->update();
@@ -1124,7 +1124,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 0.0f, 2.0f) };
+    glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -2.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
     orient_and_go_south_brain->update();
