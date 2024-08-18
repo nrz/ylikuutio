@@ -21,6 +21,6 @@
 TEST(brain_struct_must_be_initialized_appropriately, brain_struct)
 {
     const yli::ontology::BrainStruct test_brain_struct;
-    ASSERT_EQ(test_brain_struct.parent, nullptr);
+    ASSERT_FALSE(test_brain_struct.parent.valueless_by_exception());
     ASSERT_EQ(test_brain_struct.callback_engine, nullptr);
 }

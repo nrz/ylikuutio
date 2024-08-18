@@ -381,11 +381,21 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::BRAIN));
                 BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* parent { nullptr };
+                if (std::holds_alternative<std::string>(brain_struct.parent)) [[likely]]
+                {
+                    parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(brain_struct.parent)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(brain_struct.parent))
+                {
+                    parent = std::get<yli::ontology::Scene*>(brain_struct.parent);
+                }
+
                 yli::ontology::Brain* const brain = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         brain_struct,
-                        (brain_struct.parent != nullptr ? &brain_struct.parent->parent_of_brains : nullptr));
+                        (parent != nullptr ? &parent->parent_of_brains : nullptr));
 
                 brain->set_global_name(brain_struct.global_name);
                 brain->set_local_name(brain_struct.local_name);

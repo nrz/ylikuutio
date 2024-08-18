@@ -20,6 +20,9 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <variant> // std::monostate, std::variant
+
 namespace yli::ontology
 {
     class CallbackEngine;
@@ -27,7 +30,7 @@ namespace yli::ontology
 
     struct BrainStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::Scene* parent                   { nullptr };
+        std::variant<std::monostate, yli::ontology::Scene*, std::string> parent {};
         yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
 }

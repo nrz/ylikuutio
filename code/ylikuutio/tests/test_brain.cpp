@@ -24,9 +24,9 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
 
-TEST(brain_must_be_initialized_appropriately, headless)
+TEST(brain_must_be_initialized_appropriately, headless_valid_parent_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -57,5 +57,109 @@ TEST(brain_must_be_initialized_appropriately, headless)
     ASSERT_TRUE(brain->get_can_be_erased());
     ASSERT_EQ(brain->get_scene(), scene);
     ASSERT_EQ(brain->get_parent(), scene);
+    ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
+}
+
+TEST(brain_must_be_initialized_appropriately, headless_nullptr_parent_pointer)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::BrainStruct brain_struct;
+    brain_struct.parent = nullptr;
+    yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
+            brain_struct);
+    ASSERT_NE(brain, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(brain) % alignof(yli::ontology::Brain), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    // `Brain` member functions.
+    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(brain->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(brain->get_type(), "yli::ontology::Brain*");
+    ASSERT_TRUE(brain->get_can_be_erased());
+    ASSERT_EQ(brain->get_scene(), nullptr);
+    ASSERT_EQ(brain->get_parent(), nullptr);
+    ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
+}
+
+TEST(brain_must_be_initialized_appropriately, headless_parent_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::BrainStruct brain_struct;
+    brain_struct.parent = "foo";
+    yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
+            brain_struct);
+    ASSERT_NE(brain, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(brain) % alignof(yli::ontology::Brain), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);
+
+    // `Brain` member functions.
+    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(brain->get_childID(), 0);
+    ASSERT_EQ(brain->get_type(), "yli::ontology::Brain*");
+    ASSERT_TRUE(brain->get_can_be_erased());
+    ASSERT_EQ(brain->get_scene(), scene);
+    ASSERT_EQ(brain->get_parent(), scene);
+    ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
+}
+
+TEST(brain_must_be_initialized_appropriately, headless_parent_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::BrainStruct brain_struct;
+    brain_struct.parent = "bar";
+    yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
+            brain_struct);
+    ASSERT_NE(brain, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(brain) % alignof(yli::ontology::Brain), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    // `Brain` member functions.
+    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(brain->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(brain->get_type(), "yli::ontology::Brain*");
+    ASSERT_TRUE(brain->get_can_be_erased());
+    ASSERT_EQ(brain->get_scene(), nullptr);
+    ASSERT_EQ(brain->get_parent(), nullptr);
     ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
 }
