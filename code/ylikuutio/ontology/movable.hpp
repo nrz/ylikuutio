@@ -64,7 +64,6 @@ namespace yli::ontology
     class GenericMasterModule;
     class Universe;
     class Brain;
-    class Waypoint;
 
     class Movable : public yli::ontology::Entity
     {
@@ -417,8 +416,6 @@ namespace yli::ontology
 
             float scale { 1.0f };
             float speed { 1.0f };
-            std::vector<yli::ontology::Waypoint*> waypoints;       // Used for actual waypoints. `Brain` can use these freely.
-            std::vector<yli::ontology::Waypoint*> control_points;  // Used as B-spline/Bézier/etc. control points. `Brain` can use these freely.
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
