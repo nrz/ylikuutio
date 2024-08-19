@@ -26,7 +26,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t, uintptr_t
 
-TEST(brain_must_be_initialized_appropriately, headless_valid_parent_pointer)
+TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -60,7 +60,7 @@ TEST(brain_must_be_initialized_appropriately, headless_valid_parent_pointer)
     ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
 }
 
-TEST(brain_must_be_initialized_appropriately, headless_nullptr_parent_pointer)
+TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -94,7 +94,7 @@ TEST(brain_must_be_initialized_appropriately, headless_nullptr_parent_pointer)
     ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
 }
 
-TEST(brain_must_be_initialized_appropriately, headless_parent_valid_global_name)
+TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_global_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -129,7 +129,7 @@ TEST(brain_must_be_initialized_appropriately, headless_parent_valid_global_name)
     ASSERT_EQ(brain->get_number_of_non_variable_children(), 0);
 }
 
-TEST(brain_must_be_initialized_appropriately, headless_parent_invalid_global_name)
+TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
