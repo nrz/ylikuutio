@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
 // Include standard headers
+#include <limits>  // std::numeric_limits
 #include <cstddef> // std::size_t, uintptr_t
 
 TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
