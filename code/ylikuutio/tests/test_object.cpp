@@ -46,9 +46,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -154,9 +152,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -192,9 +188,7 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 

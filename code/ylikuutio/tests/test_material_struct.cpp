@@ -16,12 +16,141 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/ontology/ecosystem.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 
-TEST(material_struct_must_be_initialized_appropriately, material_struct)
+TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosystem_parent_nullptr_pipeline)
 {
-    const yli::ontology::MaterialStruct test_material_struct;
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(ecosystem, nullptr);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
     ASSERT_EQ(test_material_struct.pipeline, nullptr);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_parent_nullptr_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(scene, nullptr);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, nullptr);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_symbiosis_parent_nullptr_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::ModelStruct model_struct;
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            model_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(symbiosis, nullptr);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, nullptr);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosystem_parent_valid_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct;
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(ecosystem, pipeline);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, pipeline);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_parent_valid_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct;
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(scene, pipeline);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, pipeline);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_symbiosis_parent_valid_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::ModelStruct model_struct;
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            model_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct;
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct(symbiosis, pipeline);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Symbiosis*>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, pipeline);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }

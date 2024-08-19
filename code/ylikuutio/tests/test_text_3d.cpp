@@ -47,9 +47,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = ecosystem;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -101,9 +99,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 

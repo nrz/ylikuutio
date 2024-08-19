@@ -344,9 +344,7 @@ namespace hirvi
         }
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct;
-        helsinki_east_downtown_grass_material_struct.parent = helsinki_east_downtown_scene;
-        helsinki_east_downtown_grass_material_struct.pipeline = helsinki_east_downtown_pipeline;
+        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
         helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -362,9 +360,7 @@ namespace hirvi
         helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `orange_fur_material`.
-        yli::ontology::MaterialStruct orange_fur_material_struct;
-        orange_fur_material_struct.parent = helsinki_east_downtown_scene;
-        orange_fur_material_struct.pipeline = helsinki_east_downtown_pipeline;
+        yli::ontology::MaterialStruct orange_fur_material_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 

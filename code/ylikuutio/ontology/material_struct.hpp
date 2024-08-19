@@ -39,6 +39,27 @@ namespace yli::ontology
 
     struct MaterialStruct : public yli::ontology::EntityStruct
     {
+        MaterialStruct(yli::ontology::Ecosystem* const ecosystem_parent,
+                yli::ontology::Pipeline* const pipeline)
+            : parent { ecosystem_parent },
+            pipeline { pipeline }
+        {
+        }
+
+        MaterialStruct(yli::ontology::Scene* const scene_parent,
+                yli::ontology::Pipeline* const pipeline)
+            : parent { scene_parent },
+            pipeline { pipeline }
+        {
+        }
+
+        MaterialStruct(yli::ontology::Symbiosis* const symbiosis_parent,
+                yli::ontology::Pipeline* const pipeline)
+            : parent { symbiosis_parent },
+            pipeline { pipeline }
+        {
+        }
+
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
         std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;

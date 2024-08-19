@@ -299,9 +299,7 @@ namespace yli::ontology
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
-                yli::ontology::MaterialStruct material_struct;
-                material_struct.pipeline = pipeline;
-                material_struct.parent = this;
+                yli::ontology::MaterialStruct material_struct(this, pipeline);
                 material_struct.ofbx_texture = ofbx_texture;
 
                 yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();

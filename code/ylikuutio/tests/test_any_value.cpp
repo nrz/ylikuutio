@@ -456,7 +456,11 @@ TEST(any_value_must_be_initialized_appropriately, pipeline)
 TEST(any_value_must_be_initialized_appropriately, material)
 {
     mock::MockApplication application;
-    yli::ontology::MaterialStruct material_struct;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::MaterialStruct material_struct(ecosystem, nullptr);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 

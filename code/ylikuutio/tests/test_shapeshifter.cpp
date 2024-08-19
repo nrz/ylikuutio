@@ -47,9 +47,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -102,9 +100,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -166,9 +162,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -227,9 +221,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -299,9 +291,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct;
-    material_struct.parent = scene;
-    material_struct.pipeline = pipeline;
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 

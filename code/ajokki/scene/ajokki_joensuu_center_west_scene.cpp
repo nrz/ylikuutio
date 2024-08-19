@@ -95,9 +95,7 @@ namespace ajokki
         joensuu_center_west_pipeline->set_global_name("joensuu_center_west_pipeline");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct;
-        joensuu_center_west_grass_material_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_grass_material_struct.pipeline = joensuu_center_west_pipeline;
+        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct(joensuu_center_west_scene, joensuu_center_west_pipeline);
         joensuu_center_west_grass_material_struct.texture_file_format = "png";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -138,9 +136,7 @@ namespace ajokki
         this->entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct;
-        orange_fur_material_joensuu_struct.parent = joensuu_center_west_scene;
-        orange_fur_material_joensuu_struct.pipeline = joensuu_center_west_pipeline;
+        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct(joensuu_center_west_scene, joensuu_center_west_pipeline);
         orange_fur_material_joensuu_struct.texture_file_format = "png";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
