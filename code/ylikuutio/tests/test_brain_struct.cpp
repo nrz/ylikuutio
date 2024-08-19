@@ -18,9 +18,21 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::holds_alternative, std::monostate
+
+namespace yli::ontology
+{
+    class Scene;
+}
+
 TEST(brain_struct_must_be_initialized_appropriately, brain_struct)
 {
     const yli::ontology::BrainStruct test_brain_struct;
     ASSERT_FALSE(test_brain_struct.parent.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_brain_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_brain_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_brain_struct.parent));
     ASSERT_EQ(test_brain_struct.callback_engine, nullptr);
 }
