@@ -66,11 +66,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct;
-    rest_brain_struct.parent = helsinki_east_downtown_scene;
+    yli::ontology::BrainStruct rest_brain_struct(helsinki_east_downtown_scene, rest_callback_engine);
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
-    rest_brain_struct.callback_engine = rest_callback_engine;
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
 
     yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct;

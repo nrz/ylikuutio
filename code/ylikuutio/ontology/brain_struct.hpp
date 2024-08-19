@@ -30,6 +30,22 @@ namespace yli::ontology
 
     struct BrainStruct : public yli::ontology::EntityStruct
     {
+        BrainStruct(
+                yli::ontology::Scene* const scene_parent,
+                yli::ontology::CallbackEngine* const callback_engine)
+            : parent        { scene_parent },
+            callback_engine { callback_engine }
+        {
+        }
+
+        BrainStruct(
+                const std::string& scene_parent,
+                yli::ontology::CallbackEngine* const callback_engine)
+            : parent        { scene_parent },
+            callback_engine { callback_engine }
+        {
+        }
+
         std::variant<std::monostate, yli::ontology::Scene*, std::string> parent {};
         yli::ontology::CallbackEngine* callback_engine { nullptr };
     };

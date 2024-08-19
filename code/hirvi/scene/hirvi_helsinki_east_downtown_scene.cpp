@@ -145,11 +145,9 @@ namespace hirvi
         // Create the `Brain`s.
 
         // `rest_brain`.
-        yli::ontology::BrainStruct rest_brain_struct;
-        rest_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct rest_brain_struct(helsinki_east_downtown_scene, rest_callback_engine);
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
-        rest_brain_struct.callback_engine = rest_callback_engine;
         std::cout << "Creating yli::ontology::Brain* rest_brain ...\n";
         yli::ontology::Brain* const rest_brain = this->entity_factory.create_brain(rest_brain_struct);
 
@@ -160,11 +158,9 @@ namespace hirvi
         }
 
         // `go_east_brain`.
-        yli::ontology::BrainStruct go_east_brain_struct;
-        go_east_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct go_east_brain_struct(helsinki_east_downtown_scene, go_east_callback_engine);
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
-        go_east_brain_struct.callback_engine = go_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_east_brain ...\n";
         if (this->entity_factory.create_brain(go_east_brain_struct) == nullptr)
         {
@@ -173,11 +169,9 @@ namespace hirvi
         }
 
         // `go_west_brain`.
-        yli::ontology::BrainStruct go_west_brain_struct;
-        go_west_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct go_west_brain_struct(helsinki_east_downtown_scene, go_west_callback_engine);
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
-        go_west_brain_struct.callback_engine = go_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_west_brain ...\n";
         if (this->entity_factory.create_brain(go_west_brain_struct) == nullptr)
         {
@@ -186,11 +180,9 @@ namespace hirvi
         }
 
         // `go_north_brain`.
-        yli::ontology::BrainStruct go_north_brain_struct;
-        go_north_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct go_north_brain_struct(helsinki_east_downtown_scene, go_north_callback_engine);
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
-        go_north_brain_struct.callback_engine = go_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_north_brain ...\n";
         if (this->entity_factory.create_brain(go_north_brain_struct) == nullptr)
         {
@@ -199,11 +191,9 @@ namespace hirvi
         }
 
         // `go_south_brain`.
-        yli::ontology::BrainStruct go_south_brain_struct;
-        go_south_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct go_south_brain_struct(helsinki_east_downtown_scene, go_south_callback_engine);
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
-        go_south_brain_struct.callback_engine = go_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* go_south_brain ...\n";
         if (this->entity_factory.create_brain(go_south_brain_struct) == nullptr)
         {
@@ -212,11 +202,9 @@ namespace hirvi
         }
 
         // `orient_to_east_brain`.
-        yli::ontology::BrainStruct orient_to_east_brain_struct;
-        orient_to_east_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_to_east_brain_struct(helsinki_east_downtown_scene, orient_to_east_callback_engine);
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
-        orient_to_east_brain_struct.callback_engine = orient_to_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_east_brain ...\n";
         if (this->entity_factory.create_brain(orient_to_east_brain_struct) == nullptr)
         {
@@ -225,11 +213,9 @@ namespace hirvi
         }
 
         // `orient_to_west_brain`.
-        yli::ontology::BrainStruct orient_to_west_brain_struct;
-        orient_to_west_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_to_west_brain_struct(helsinki_east_downtown_scene, orient_to_west_callback_engine);
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
-        orient_to_west_brain_struct.callback_engine = orient_to_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_west_brain ...\n";
         if (this->entity_factory.create_brain(orient_to_west_brain_struct) == nullptr)
         {
@@ -238,11 +224,9 @@ namespace hirvi
         }
 
         // `orient_to_north_brain`.
-        yli::ontology::BrainStruct orient_to_north_brain_struct;
-        orient_to_north_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_to_north_brain_struct(helsinki_east_downtown_scene, orient_to_north_callback_engine);
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
-        orient_to_north_brain_struct.callback_engine = orient_to_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_north_brain ...\n";
         if (this->entity_factory.create_brain(orient_to_north_brain_struct) == nullptr)
         {
@@ -251,11 +235,9 @@ namespace hirvi
         }
 
         // `orient_to_south_brain`.
-        yli::ontology::BrainStruct orient_to_south_brain_struct;
-        orient_to_south_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_to_south_brain_struct(helsinki_east_downtown_scene, orient_to_south_callback_engine);
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
-        orient_to_south_brain_struct.callback_engine = orient_to_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_to_south_brain ...\n";
         if (this->entity_factory.create_brain(orient_to_south_brain_struct) == nullptr)
         {
@@ -264,11 +246,9 @@ namespace hirvi
         }
 
         // `rotate_clockwise_brain`.
-        yli::ontology::BrainStruct rotate_clockwise_brain_struct;
-        rotate_clockwise_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct rotate_clockwise_brain_struct(helsinki_east_downtown_scene, rotate_clockwise_callback_engine);
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
-        rotate_clockwise_brain_struct.callback_engine = rotate_clockwise_callback_engine;
         std::cout << "Creating yli::ontology::Brain* rotate_clockwise_brain ...\n";
         if (this->entity_factory.create_brain(rotate_clockwise_brain_struct) == nullptr)
         {
@@ -277,11 +257,9 @@ namespace hirvi
         }
 
         // `orient_and_go_east_brain`.
-        yli::ontology::BrainStruct orient_and_go_east_brain_struct;
-        orient_and_go_east_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_and_go_east_brain_struct(helsinki_east_downtown_scene, orient_and_go_east_callback_engine);
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
-        orient_and_go_east_brain_struct.callback_engine = orient_and_go_east_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_east_brain ...\n";
         if (this->entity_factory.create_brain(orient_and_go_east_brain_struct) == nullptr)
         {
@@ -290,11 +268,9 @@ namespace hirvi
         }
 
         // `orient_and_go_west_brain`.
-        yli::ontology::BrainStruct orient_and_go_west_brain_struct;
-        orient_and_go_west_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_and_go_west_brain_struct(helsinki_east_downtown_scene, orient_and_go_west_callback_engine);
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
-        orient_and_go_west_brain_struct.callback_engine = orient_and_go_west_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_west_brain ...\n";
         if (this->entity_factory.create_brain(orient_and_go_west_brain_struct) == nullptr)
         {
@@ -303,11 +279,9 @@ namespace hirvi
         }
 
         // `orient_and_go_north_brain`.
-        yli::ontology::BrainStruct orient_and_go_north_brain_struct;
-        orient_and_go_north_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_and_go_north_brain_struct(helsinki_east_downtown_scene, orient_and_go_north_callback_engine);
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
-        orient_and_go_north_brain_struct.callback_engine = orient_and_go_north_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_north_brain ...\n";
         if (this->entity_factory.create_brain(orient_and_go_north_brain_struct) == nullptr)
         {
@@ -316,11 +290,9 @@ namespace hirvi
         }
 
         // `orient_and_go_south_brain`.
-        yli::ontology::BrainStruct orient_and_go_south_brain_struct;
-        orient_and_go_south_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct orient_and_go_south_brain_struct(helsinki_east_downtown_scene, orient_and_go_south_callback_engine);
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
-        orient_and_go_south_brain_struct.callback_engine = orient_and_go_south_callback_engine;
         std::cout << "Creating yli::ontology::Brain* orient_and_go_south_brain ...\n";
         if (this->entity_factory.create_brain(orient_and_go_south_brain_struct) == nullptr)
         {
@@ -329,11 +301,9 @@ namespace hirvi
         }
 
         // `rotate_counterclockwise_brain`.
-        yli::ontology::BrainStruct rotate_counterclockwise_brain_struct;
-        rotate_counterclockwise_brain_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(helsinki_east_downtown_scene, rotate_counterclockwise_callback_engine);
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
-        rotate_counterclockwise_brain_struct.callback_engine = rotate_counterclockwise_callback_engine;
         std::cout << "Creating yli::ontology::Brain* rotate_counterclockwise_brain ...\n";
         if (this->entity_factory.create_brain(rotate_counterclockwise_brain_struct) == nullptr)
         {
