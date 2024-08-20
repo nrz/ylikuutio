@@ -31,12 +31,12 @@ namespace yli::ontology
 
     struct PipelineStruct : public yli::ontology::EntityStruct
     {
-        PipelineStruct(yli::ontology::Ecosystem* const ecosystem_parent)
+        explicit PipelineStruct(yli::ontology::Ecosystem* const ecosystem_parent)
             : parent { ecosystem_parent }
         {
         }
 
-        PipelineStruct(yli::ontology::Scene* const scene_parent)
+        explicit PipelineStruct(yli::ontology::Scene* const scene_parent)
             : parent { scene_parent }
         {
         }
