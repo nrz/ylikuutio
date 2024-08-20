@@ -28,9 +28,9 @@ namespace yli::ontology
     struct WaypointStruct final : public yli::ontology::MovableStruct
     {
         WaypointStruct(
-                yli::ontology::Brain* const brain,
-                yli::ontology::Scene* const parent)
-            : MovableStruct(brain, parent)
+                yli::ontology::Brain* const brain_master,
+                yli::ontology::Scene* const scene_parent)
+            : MovableStruct(brain_master, scene_parent)
         {
         }
     };
