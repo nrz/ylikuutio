@@ -44,8 +44,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct;
-    helsinki_east_downtown_pipeline_struct.parent = helsinki_east_downtown_scene;
+    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct(helsinki_east_downtown_scene);
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";

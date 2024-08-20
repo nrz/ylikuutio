@@ -64,8 +64,7 @@ namespace gpgpu_test
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
         // Create the pipeline, store it in `identity_pipeline`.
-        yli::ontology::PipelineStruct identity_pipeline_struct;
-        identity_pipeline_struct.parent = gpgpu_test_scene;
+        yli::ontology::PipelineStruct identity_pipeline_struct(gpgpu_test_scene);
         identity_pipeline_struct.vertex_shader = "identity.vert";
         identity_pipeline_struct.fragment_shader = "identity.frag";
 
@@ -116,8 +115,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `sobel_pipeline`.
-        yli::ontology::PipelineStruct sobel_pipeline_struct;
-        sobel_pipeline_struct.parent = gpgpu_test_scene;
+        yli::ontology::PipelineStruct sobel_pipeline_struct(gpgpu_test_scene);
         sobel_pipeline_struct.vertex_shader = "identity.vert";
         sobel_pipeline_struct.fragment_shader = "sobel_gradient_magnitude.frag";
 
@@ -150,8 +148,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `go_west_pipeline`.
-        yli::ontology::PipelineStruct go_west_pipeline_struct;
-        go_west_pipeline_struct.parent = gpgpu_test_scene;
+        yli::ontology::PipelineStruct go_west_pipeline_struct(gpgpu_test_scene);
         go_west_pipeline_struct.vertex_shader = "identity.vert";
         go_west_pipeline_struct.fragment_shader = "go_west.frag";
 
@@ -184,8 +181,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `vanish_west_pipeline`.
-        yli::ontology::PipelineStruct vanish_west_pipeline_struct;
-        vanish_west_pipeline_struct.parent = gpgpu_test_scene;
+        yli::ontology::PipelineStruct vanish_west_pipeline_struct(gpgpu_test_scene);
         vanish_west_pipeline_struct.vertex_shader = "identity.vert";
         vanish_west_pipeline_struct.fragment_shader = "vanish_west.frag";
 
@@ -218,8 +214,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `floyd_warshall_pipeline`.
-        yli::ontology::PipelineStruct floyd_warshall_pipeline_struct;
-        floyd_warshall_pipeline_struct.parent = gpgpu_test_scene;
+        yli::ontology::PipelineStruct floyd_warshall_pipeline_struct(gpgpu_test_scene);
         floyd_warshall_pipeline_struct.vertex_shader = "identity.vert";
         floyd_warshall_pipeline_struct.fragment_shader = "floyd_warshall.frag";
 

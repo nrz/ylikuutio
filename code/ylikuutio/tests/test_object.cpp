@@ -41,8 +41,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -147,8 +146,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -183,8 +181,7 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 

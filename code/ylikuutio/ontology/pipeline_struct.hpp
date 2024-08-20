@@ -31,6 +31,16 @@ namespace yli::ontology
 
     struct PipelineStruct : public yli::ontology::EntityStruct
     {
+        PipelineStruct(yli::ontology::Ecosystem* const ecosystem_parent)
+            : parent { ecosystem_parent }
+        {
+        }
+
+        PipelineStruct(yli::ontology::Scene* const scene_parent)
+            : parent { scene_parent }
+        {
+        }
+
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
         std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent; // Pointer to `Ecosystem` or `Scene`.

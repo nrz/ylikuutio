@@ -37,8 +37,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -86,8 +85,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 

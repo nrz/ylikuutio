@@ -42,8 +42,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -95,8 +94,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -157,8 +155,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -216,8 +213,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -286,8 +282,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct;
-    pipeline_struct.parent = scene;
+    yli::ontology::PipelineStruct pipeline_struct(scene);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 

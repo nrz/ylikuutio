@@ -76,8 +76,7 @@ namespace ajokki
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
         // Create the pipeline, store it in `joensuu_center_west_pipeline`.
-        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct;
-        joensuu_center_west_pipeline_struct.parent = joensuu_center_west_scene;
+        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct(joensuu_center_west_scene);
         joensuu_center_west_pipeline_struct.global_name = "joensuu_center_west_pipeline";
         joensuu_center_west_pipeline_struct.local_name = "joensuu_regular_pipeline";
         joensuu_center_west_pipeline_struct.vertex_shader = "standard_shading.vert";

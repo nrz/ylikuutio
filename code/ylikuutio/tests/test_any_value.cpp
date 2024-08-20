@@ -441,7 +441,11 @@ TEST(any_value_must_be_initialized_appropriately, scene)
 TEST(any_value_must_be_initialized_appropriately, pipeline)
 {
     mock::MockApplication application;
-    yli::ontology::PipelineStruct pipeline_struct;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
