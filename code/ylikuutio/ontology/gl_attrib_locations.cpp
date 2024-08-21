@@ -27,7 +27,7 @@ namespace yli::ontology
         if (pipeline != nullptr && mesh_module != nullptr)
         {
             mesh_module->set_vertex_position_modelspace_id(glGetAttribLocation(pipeline->get_program_id(), "vertex_position_modelspace"));
-            mesh_module->set_vertex_uv_id(glGetAttribLocation(pipeline->get_program_id(), "vertexUV"));
+            mesh_module->set_vertex_uv_id(glGetAttribLocation(pipeline->get_program_id(), "vertex_uv"));
             mesh_module->set_vertex_normal_modelspace_id(glGetAttribLocation(pipeline->get_program_id(), "vertex_normal_modelspace"));
         }
     }

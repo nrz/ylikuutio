@@ -122,7 +122,7 @@ namespace yli::ontology
                 this->vertex_position_in_screenspace_id = glGetAttribLocation(
                         font_2d_parent->get_program_id(),
                         "vertex_position_screenspace");
-                this->vertex_uv_id = glGetAttribLocation(font_2d_parent->get_program_id(), "vertexUV");
+                this->vertex_uv_id = glGetAttribLocation(font_2d_parent->get_program_id(), "vertex_uv");
             }
 
             this->vertices_and_uvs_loaded = true;

@@ -90,7 +90,7 @@ namespace yli::ontology
             GLuint vertexbuffer;                     // Buffer containing the vertices
             GLuint uvbuffer;                         // Buffer containing the UVs
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                      // Location of the program's `vertexUV` attribute.
+            GLint vertex_uv_id;                      // Location of the program's `vertex_uv` attribute.
 
             std::string text;
             std::string horizontal_alignment;

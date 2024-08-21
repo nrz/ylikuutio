@@ -100,7 +100,7 @@ namespace yli::ontology
 
                 // Get a handle for our buffers.
                 this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
-                this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertexUV");
+                this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertex_uv");
 
                 // Initialize uniforms' IDs.
                 this->text_2d_uniform_id = glGetUniformLocation(this->program_id, "texture_sampler");

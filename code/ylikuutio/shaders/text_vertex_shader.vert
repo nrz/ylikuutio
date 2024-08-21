@@ -2,7 +2,7 @@
 
 // Input vertex data, different for all executions of this shader.
 attribute vec2 vertex_position_screenspace;
-attribute vec2 vertexUV;
+attribute vec2 vertex_uv;
 
 uniform int screen_width;
 uniform int screen_height;
@@ -22,5 +22,5 @@ void main()
     gl_Position = vec4(vertex_position_homogenousspace, 0, 1);
 
     // UV of the vertex. No special space for this one.
-    UV = vertexUV;
+    UV = vertex_uv;
 }

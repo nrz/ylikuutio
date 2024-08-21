@@ -68,7 +68,7 @@ namespace yli::ontology
 
             // Get a handle for our buffers.
             this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertexUV");
+            this->vertex_uv_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_uv");
             this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
             yli::load::ModelLoaderStruct model_loader_struct;
