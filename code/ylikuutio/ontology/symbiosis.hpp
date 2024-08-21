@@ -69,7 +69,7 @@ namespace yli::ontology
     class Pipeline;
     class SymbiontMaterial;
     class SymbiontSpecies;
-    struct ModelStruct;
+    struct SymbiosisStruct;
 
     class Symbiosis final : public yli::ontology::Entity
     {
@@ -96,7 +96,7 @@ namespace yli::ontology
             Symbiosis(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::SymbiosisStruct& symbiosis_struct,
                     yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
                     yli::ontology::GenericMasterModule* const pipeline_master_module);
 

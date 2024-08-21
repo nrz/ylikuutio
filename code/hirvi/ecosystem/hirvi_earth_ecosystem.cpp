@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cerr
@@ -64,14 +64,12 @@ namespace hirvi
             return nullptr;
         }
 
-        yli::ontology::ModelStruct turbo_polizei_png_model_struct;
-        turbo_polizei_png_model_struct.parent = earth_ecosystem;
-        turbo_polizei_png_model_struct.pipeline = earth_pipeline;
-        turbo_polizei_png_model_struct.model_file_format = "fbx";
-        turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
+        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(earth_ecosystem, earth_pipeline);
+        turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
+        turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
         std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
+        yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {

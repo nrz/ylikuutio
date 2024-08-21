@@ -71,6 +71,7 @@
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "object_struct.hpp"
+#include "symbiosis_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
@@ -582,7 +583,7 @@ namespace yli::ontology
 
             // TODO: implement `create_heightmap_sheet` here!
 
-            yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::ModelStruct& model_struct) const override
+            yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const override
             {
                 using SymbiosisMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Symbiosis, 256>;
 
@@ -594,15 +595,15 @@ namespace yli::ontology
                 yli::ontology::Symbiosis* const symbiosis = allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
+                        symbiosis_struct,
                         // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_symbioses) :
-                         (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_symbioses) :
+                        ((std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent) && std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent)->parent_of_symbioses) :
+                         (std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent) && std::get<yli::ontology::Scene*>(symbiosis_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(symbiosis_struct.parent)->parent_of_symbioses) :
                          nullptr),
-                        (model_struct.pipeline != nullptr ? &model_struct.pipeline->master_of_symbioses : nullptr));
+                        (symbiosis_struct.pipeline != nullptr ? &symbiosis_struct.pipeline->master_of_symbioses : nullptr));
 
-                symbiosis->set_global_name(model_struct.global_name);
-                symbiosis->set_local_name(model_struct.local_name);
+                symbiosis->set_global_name(symbiosis_struct.global_name);
+                symbiosis->set_local_name(symbiosis_struct.local_name);
                 return symbiosis;
             }
 

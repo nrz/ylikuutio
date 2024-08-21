@@ -67,9 +67,13 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
 TEST(material_struct_must_be_initialized_appropriately, material_struct_symbiosis_parent_nullptr_pipeline)
 {
     mock::MockApplication application;
-    yli::ontology::ModelStruct model_struct;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     const yli::ontology::MaterialStruct test_material_struct(symbiosis, nullptr);
 
@@ -139,13 +143,13 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_symbiosi
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
-
     yli::ontology::PipelineStruct pipeline_struct(ecosystem);
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
 
     const yli::ontology::MaterialStruct test_material_struct(symbiosis, pipeline);
 

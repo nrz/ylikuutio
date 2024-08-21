@@ -41,11 +41,9 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = ecosystem;
-    model_struct.pipeline = pipeline;
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, pipeline);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
 
@@ -88,11 +86,9 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = ecosystem;
-    model_struct.pipeline = pipeline;
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, pipeline);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -133,11 +129,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
-    model_struct.pipeline = pipeline;
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -174,13 +168,11 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
-    model_struct.pipeline = pipeline;
-    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    model_struct.model_file_format = "FBX";
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -213,10 +205,9 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
     yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = ecosystem1;
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem1, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
     ASSERT_EQ(symbiosis->get_scene(), nullptr);
     ASSERT_EQ(symbiosis->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
@@ -254,11 +245,9 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene1;
-    model_struct.pipeline = pipeline;
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene1, pipeline);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     ASSERT_EQ(symbiosis->get_scene(), scene1);
     ASSERT_EQ(symbiosis->get_parent(), scene1);
@@ -292,10 +281,9 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecos
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
@@ -326,10 +314,9 @@ TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scen
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = ecosystem;
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
@@ -364,13 +351,11 @@ TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice)
     yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
-    model_struct.pipeline = pipeline1;
-    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    model_struct.model_file_format = "FBX";
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline1);
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
     ASSERT_EQ(symbiosis->get_pipeline(), pipeline1);
 
     yli::ontology::Pipeline* const pipeline2 = application.get_generic_entity_factory().create_pipeline(

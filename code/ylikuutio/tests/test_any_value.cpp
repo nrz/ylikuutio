@@ -39,6 +39,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
@@ -509,9 +510,13 @@ TEST(any_value_must_be_initialized_appropriately, object)
 TEST(any_value_must_be_initialized_appropriately, symbiosis)
 {
     mock::MockApplication application;
-    yli::ontology::ModelStruct model_struct;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::data::AnyValue symbiosis_any_value = yli::data::AnyValue(*symbiosis);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(symbiosis_any_value.data));
@@ -528,10 +533,9 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, nullptr);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(

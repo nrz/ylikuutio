@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // uintptr_t
@@ -51,12 +51,10 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::ModelStruct turbo_polizei_png_model_struct;
-    turbo_polizei_png_model_struct.parent = helsinki_east_downtown_scene;
-    turbo_polizei_png_model_struct.pipeline = helsinki_east_downtown_pipeline;
-    turbo_polizei_png_model_struct.model_file_format = "fbx";
-    turbo_polizei_png_model_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_model_struct);
+    yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
+    turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
+    turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(yli::ontology::Symbiosis), 0);
     yli::memory::ConstructibleModule symbiosis_constructible_module = turbo_polizei_png_symbiosis->get_constructible_module();

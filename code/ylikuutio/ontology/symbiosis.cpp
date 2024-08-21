@@ -24,7 +24,7 @@
 #include "symbiont_species.hpp"
 #include "generic_entity_factory.hpp"
 #include "material_struct.hpp"
-#include "model_struct.hpp"
+#include "symbiosis_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -151,10 +151,10 @@ namespace yli::ontology
     Symbiosis::Symbiosis(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::ModelStruct& model_struct,
+            const yli::ontology::SymbiosisStruct& symbiosis_struct,
             yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
             yli::ontology::GenericMasterModule* const pipeline_master_module)
-        : Entity(application, universe, model_struct),
+        : Entity(application, universe, symbiosis_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         parent_of_symbiont_materials(
                 *this,
@@ -162,8 +162,8 @@ namespace yli::ontology
                 "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master_module, this),
         master_of_holobionts(this, &this->registry, "holobionts"),
-        model_filename     { model_struct.model_filename },
-        model_file_format  { model_struct.model_file_format }
+        model_filename     { symbiosis_struct.model_filename },
+        model_file_format  { symbiosis_struct.model_file_format }
     {
         this->create_symbionts();
 

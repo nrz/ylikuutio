@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 
 // Include standard headers
@@ -41,11 +41,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
-    model_struct.pipeline = pipeline;
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
@@ -89,13 +87,11 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ModelStruct model_struct;
-    model_struct.parent = scene;
-    model_struct.pipeline = pipeline;
-    model_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    model_struct.model_file_format = "FBX";
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            model_struct);
+            symbiosis_struct);
 
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
