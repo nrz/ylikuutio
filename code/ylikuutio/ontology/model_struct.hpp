@@ -30,7 +30,7 @@
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <variant>  // std::variant
+#include <variant>  // std::monostate, std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -62,7 +62,7 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*> parent {};
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*> parent {};
         yli::ontology::Pipeline* pipeline                                      { nullptr }; // Pointer to `Pipeline`.
         yli::ontology::Material* material                                      { nullptr }; // Pointer to `Material`.
         yli::ontology::SymbiontMaterial* symbiont_material                     { nullptr }; // Pointer to `SymbiontMaterial`.

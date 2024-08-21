@@ -27,7 +27,15 @@
 // Include standard headers
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
+#include <variant>  // std::holds_alternative, std::monostate
 #include <vector>   // std::vector
+
+namespace yli::ontology
+{
+    class Ecosystem;
+    class Scene;
+    class VectorFont;
+}
 
 TEST(model_struct_must_be_initialized_appropriately, model_struct)
 {
@@ -44,6 +52,13 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_EQ(test_model_struct.vertices, std::vector<glm::vec3> { });
     ASSERT_EQ(test_model_struct.uvs, std::vector<glm::vec2> { });
     ASSERT_EQ(test_model_struct.normals, std::vector<glm::vec3> { });
+
+    ASSERT_FALSE(test_model_struct.parent.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_model_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_model_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_model_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::VectorFont*>(test_model_struct.parent));
+
     ASSERT_EQ(test_model_struct.pipeline, nullptr);
     ASSERT_EQ(test_model_struct.material, nullptr);
     ASSERT_EQ(test_model_struct.symbiont_material, nullptr);
