@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
+#include "code/ylikuutio/ontology/model_struct.hpp"
 
 TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosystem_parent_nullptr_pipeline)
 {
