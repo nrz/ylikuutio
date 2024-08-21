@@ -72,21 +72,21 @@ namespace yli::ontology
             this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
             yli::load::ModelLoaderStruct model_loader_struct;
-            model_loader_struct.model_struct.model_filename               = this->model_filename;
-            model_loader_struct.model_struct.model_file_format            = this->model_file_format;
-            model_loader_struct.model_struct.color_channel                = this->color_channel;
-            model_loader_struct.model_struct.divisor                      = this->divisor;
-            model_loader_struct.model_struct.latitude                     = this->latitude;
-            model_loader_struct.model_struct.longitude                    = this->longitude;
-            model_loader_struct.model_struct.mesh_i                       = this->mesh_i;
-            model_loader_struct.model_struct.x_step                       = this->x_step;
-            model_loader_struct.model_struct.y_step                       = this->y_step;
-            model_loader_struct.model_struct.parent                       = model_struct.parent;
-            model_loader_struct.model_struct.pipeline                     = model_struct.pipeline;
+            model_loader_struct.model_struct.model_filename                = this->model_filename;
+            model_loader_struct.model_struct.model_file_format             = this->model_file_format;
+            model_loader_struct.model_struct.color_channel                 = this->color_channel;
+            model_loader_struct.model_struct.divisor                       = this->divisor;
+            model_loader_struct.model_struct.latitude                      = this->latitude;
+            model_loader_struct.model_struct.longitude                     = this->longitude;
+            model_loader_struct.model_struct.mesh_i                        = this->mesh_i;
+            model_loader_struct.model_struct.x_step                        = this->x_step;
+            model_loader_struct.model_struct.y_step                        = this->y_step;
+            model_loader_struct.model_struct.parent                        = model_struct.parent;
+            model_loader_struct.model_struct.pipeline                      = model_struct.pipeline;
             model_loader_struct.model_struct.material_or_symbiont_material = model_struct.material_or_symbiont_material;
-            model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
-            model_loader_struct.image_width_pointer                       = &this->image_width;
-            model_loader_struct.image_height_pointer                      = &this->image_height;
+            model_loader_struct.model_struct.use_real_texture_coordinates  = this->use_real_texture_coordinates;
+            model_loader_struct.image_width_pointer                        = &this->image_width;
+            model_loader_struct.image_height_pointer                       = &this->image_height;
 
             const bool is_debug_mode = true;
 
