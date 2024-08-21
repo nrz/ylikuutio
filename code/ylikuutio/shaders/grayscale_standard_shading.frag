@@ -1,7 +1,7 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders.
-varying vec2 UV;
+varying vec2 uv;
 varying vec3 position_worldspace;
 varying vec3 normal_cameraspace;
 varying vec3 eye_direction_cameraspace;
@@ -31,7 +31,7 @@ void main()
     }
 
     // Material properties
-    vec3 material_diffuse_color = texture(texture_sampler, UV).rgb;
+    vec3 material_diffuse_color = texture(texture_sampler, uv).rgb;
     vec3 material_ambient_color = vec3(0.1, 0.1, 0.1) * material_diffuse_color;
     vec3 material_specular_color = vec3(0.3, 0.3, 0.3);
 

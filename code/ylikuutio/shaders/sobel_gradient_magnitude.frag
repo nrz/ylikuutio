@@ -1,7 +1,7 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders.
-varying vec2 UV;
+varying vec2 uv;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D texture_sampler;
@@ -13,23 +13,23 @@ out vec4 color;
 
 void main()
 {
-    vec2 UV_northwest = UV + vec2(-1.0f / screen_width, 1.0f / screen_height);
+    vec2 UV_northwest = uv + vec2(-1.0f / screen_width, 1.0f / screen_height);
     vec3 northwest = texture(texture_sampler, UV_northwest).rgb;
-    vec2 UV_north = UV + vec2(0.0f, 1.0f / screen_height);
+    vec2 UV_north = uv + vec2(0.0f, 1.0f / screen_height);
     vec3 north = texture(texture_sampler, UV_north).rgb;
-    vec2 UV_northeast = UV + vec2(1.0f / screen_width, 1.0f / screen_height);
+    vec2 UV_northeast = uv + vec2(1.0f / screen_width, 1.0f / screen_height);
     vec3 northeast = texture(texture_sampler, UV_northeast).rgb;
 
-    vec2 UV_west = UV + vec2(-1.0f / screen_width, 0.0f);
+    vec2 UV_west = uv + vec2(-1.0f / screen_width, 0.0f);
     vec3 west = texture(texture_sampler, UV_west).rgb;
-    vec2 UV_east = UV + vec2(1.0f / screen_width, 0.0f);
+    vec2 UV_east = uv + vec2(1.0f / screen_width, 0.0f);
     vec3 east = texture(texture_sampler, UV_east).rgb;
 
-    vec2 UV_southwest = UV + vec2(-1.0f / screen_width, -1.0f / screen_height);
+    vec2 UV_southwest = uv + vec2(-1.0f / screen_width, -1.0f / screen_height);
     vec3 southwest = texture(texture_sampler, UV_southwest).rgb;
-    vec2 UV_south = UV + vec2(0.0f, -1.0f / screen_height);
+    vec2 UV_south = uv + vec2(0.0f, -1.0f / screen_height);
     vec3 south = texture(texture_sampler, UV_south).rgb;
-    vec2 UV_southeast = UV + vec2(1.0f / screen_width, -1.0f / screen_height);
+    vec2 UV_southeast = uv + vec2(1.0f / screen_width, -1.0f / screen_height);
     vec3 southeast = texture(texture_sampler, UV_southeast).rgb;
 
     float x_red_value = -1.0f * northwest.r - 2.0f * west.r - 1.0f * southwest.r + 1.0f * northeast.r + 2.0f * east.r + 1.0f * southeast.r;

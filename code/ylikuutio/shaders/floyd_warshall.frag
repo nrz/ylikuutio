@@ -1,7 +1,7 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders.
-varying vec2 UV;
+varying vec2 uv;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D texture_sampler;
@@ -17,11 +17,11 @@ void main()
 {
     // All texture coordinates are in the range [0, 1].
     // Therefore, the type of all texture coordinates must be `float`.
-    // `UV.x` is `i`.
-    // `UV.y` is `j`.
+    // `uv.x` is `i`.
+    // `uv.y` is `j`.
     // `iteration_i` divided by
-    float i = UV.x;
-    float j = UV.y;
+    float i = uv.x;
+    float j = uv.y;
     float k = float(iteration_i) / float(screen_width);
 
     vec2 UV_i_j = vec2(i, j);

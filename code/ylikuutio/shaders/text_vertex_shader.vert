@@ -8,7 +8,7 @@ uniform int screen_width;
 uniform int screen_height;
 
 // Output data ; will be interpolated for each fragment.
-varying vec2 UV;
+varying vec2 uv;
 
 void main()
 {
@@ -22,5 +22,5 @@ void main()
     gl_Position = vec4(vertex_position_homogenousspace, 0, 1);
 
     // UV of the vertex. No special space for this one.
-    UV = vertex_uv;
+    uv = vertex_uv;
 }

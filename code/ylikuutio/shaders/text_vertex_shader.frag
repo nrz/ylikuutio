@@ -1,7 +1,7 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders
-varying vec2 UV;
+varying vec2 uv;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D texture_sampler;
@@ -10,5 +10,5 @@ out vec4 color;
 
 void main()
 {
-    color = texture(texture_sampler, UV);
+    color = texture(texture_sampler, uv);
 }
