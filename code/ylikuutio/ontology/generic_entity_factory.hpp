@@ -76,6 +76,7 @@ namespace yli::ontology
     struct MaterialStruct;
     struct ModelStruct;
     struct ObjectStruct;
+    struct SymbiontSpeciesStruct;
     struct HolobiontStruct;
     struct BiontStruct;
     struct ShapeshifterSequenceStruct;
@@ -122,7 +123,7 @@ namespace yli::ontology
             virtual yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const = 0;
             virtual yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::ModelStruct& model_struct) const = 0;
             virtual yli::ontology::SymbiontMaterial* create_symbiont_material(const MaterialStruct& material_struct) const = 0;
-            virtual yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::ModelStruct& model_struct) const = 0;
+            virtual yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct) const = 0;
             virtual yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const = 0;
             virtual yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const = 0;
             virtual yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(

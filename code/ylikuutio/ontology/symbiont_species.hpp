@@ -55,7 +55,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class Scene;
-    struct ModelStruct;
+    struct SymbiontSpeciesStruct;
 
     class SymbiontSpecies final : public yli::ontology::Entity
     {
@@ -63,7 +63,7 @@ namespace yli::ontology
             SymbiontSpecies(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct,
                     yli::ontology::GenericParentModule* const symbiont_material_parent_module);
 
             ~SymbiontSpecies() = default;

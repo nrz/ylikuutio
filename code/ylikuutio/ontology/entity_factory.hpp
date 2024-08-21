@@ -71,6 +71,7 @@
 #include "material_struct.hpp"
 #include "model_struct.hpp"
 #include "object_struct.hpp"
+#include "symbiont_species_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "shapeshifter_sequence_struct.hpp"
@@ -624,7 +625,7 @@ namespace yli::ontology
                          nullptr));
             }
 
-            yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::ModelStruct& model_struct) const override
+            yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct) const override
             {
                 using SymbiontSpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontSpecies, 256>;
 
@@ -633,15 +634,12 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SYMBIONT_SPECIES));
                 SymbiontSpeciesMemoryAllocator& allocator = static_cast<SymbiontSpeciesMemoryAllocator&>(generic_allocator);
 
-                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
-
                 return allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
-                        (std::holds_alternative<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material) &&
-                         std::get<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material) != nullptr ?
-                         &(std::get<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material)->parent_of_symbiont_species) :
+                        symbiont_species_struct,
+                        (symbiont_species_struct.symbiont_material != nullptr ?
+                         &(symbiont_species_struct.symbiont_material->parent_of_symbiont_species) :
                          nullptr));
             }
 

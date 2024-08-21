@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
-#include "model_struct.hpp"
+#include "symbiont_species_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -35,12 +35,12 @@ namespace yli::ontology
     SymbiontSpecies::SymbiontSpecies(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::ModelStruct& model_struct,
+            const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct,
             yli::ontology::GenericParentModule* const symbiont_material_parent_module)
-        : Entity(application, universe, model_struct),
+        : Entity(application, universe, symbiont_species_struct),
         child_of_symbiont_material(symbiont_material_parent_module, *this),
         master_of_bionts(this, &this->registry, "bionts"),
-        mesh(universe, model_struct)
+        mesh(universe, symbiont_species_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontSpecies*";

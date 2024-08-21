@@ -45,6 +45,16 @@ namespace yli::ontology
 
     struct ModelStruct : public yli::ontology::EntityStruct
     {
+        ModelStruct() = default;
+
+        ModelStruct(
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::SymbiontMaterial* const symbiont_material)
+            : pipeline                    { pipeline },
+            material_or_symbiont_material { symbiont_material }
+        {
+        }
+
         std::string model_filename;                         // Filename of the model file.
         std::string model_file_format;                      // Type of the model file. Supported file formats so far:
                                                             // `"png"`/`"PNG"` - PNG heightmap.
