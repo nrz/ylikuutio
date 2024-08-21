@@ -390,7 +390,7 @@ namespace ajokki
         yli::ontology::ModelStruct helsinki_east_downtown_terrain_model_struct;
         helsinki_east_downtown_terrain_model_struct.parent = helsinki_east_downtown_scene;
         helsinki_east_downtown_terrain_model_struct.pipeline = helsinki_east_downtown_pipeline;
-        helsinki_east_downtown_terrain_model_struct.material = helsinki_east_downtown_grass_material;
+        helsinki_east_downtown_terrain_model_struct.material_or_symbiont_material = helsinki_east_downtown_grass_material;
         helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_model_struct.x_step = 4;
@@ -417,7 +417,7 @@ namespace ajokki
         cat_model_struct.global_name = "cat_species";
         cat_model_struct.local_name = "cat";
         cat_model_struct.pipeline = helsinki_east_downtown_pipeline;
-        cat_model_struct.material = orange_fur_material;
+        cat_model_struct.material_or_symbiont_material = orange_fur_material;
         cat_model_struct.model_file_format = "fbx";
         cat_model_struct.model_filename = "cat.fbx";
 

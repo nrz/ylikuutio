@@ -112,7 +112,7 @@ namespace ajokki
         yli::ontology::ModelStruct joensuu_center_west_terrain_model_struct;
         joensuu_center_west_terrain_model_struct.parent = joensuu_center_west_scene;
         joensuu_center_west_terrain_model_struct.pipeline = joensuu_center_west_pipeline;
-        joensuu_center_west_terrain_model_struct.material = joensuu_center_west_grass_material;
+        joensuu_center_west_terrain_model_struct.material_or_symbiont_material = joensuu_center_west_grass_material;
         joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_model_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_model_struct.x_step = 4;
@@ -153,7 +153,7 @@ namespace ajokki
         yli::ontology::ModelStruct horse_model_struct;
         horse_model_struct.parent = joensuu_center_west_scene;
         horse_model_struct.pipeline = joensuu_center_west_pipeline;
-        horse_model_struct.material = orange_fur_material_joensuu;
+        horse_model_struct.material_or_symbiont_material = orange_fur_material_joensuu;
         horse_model_struct.model_file_format = "fbx";
         horse_model_struct.model_filename = "horse.fbx";
 

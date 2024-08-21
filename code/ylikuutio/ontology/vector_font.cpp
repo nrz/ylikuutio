@@ -173,7 +173,7 @@ namespace yli::ontology
                 yli::ontology::ModelStruct model_struct;
                 model_struct.parent = this;
                 model_struct.pipeline = pipeline_parent_of_material;
-                model_struct.material = material_parent;
+                model_struct.material_or_symbiont_material = material_parent;
                 model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 model_struct.unicode_char_pointer = unicode_char_pointer;

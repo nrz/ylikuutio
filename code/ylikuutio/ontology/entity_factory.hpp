@@ -527,6 +527,8 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SPECIES));
                 SpeciesMemoryAllocator& allocator = static_cast<SpeciesMemoryAllocator&>(generic_allocator);
 
+                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
+
                 yli::ontology::Species* const species = allocator.build_in(
                         this->application,
                         this->get_universe(),
@@ -535,7 +537,9 @@ namespace yli::ontology
                         ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
                          (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
                          nullptr),
-                        (model_struct.material != nullptr ? &model_struct.material->master_of_species : nullptr));
+                        (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
+                         std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
+                         &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->master_of_species) : nullptr));
 
                 species->set_global_name(model_struct.global_name);
                 species->set_local_name(model_struct.local_name);
@@ -629,12 +633,15 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SYMBIONT_SPECIES));
                 SymbiontSpeciesMemoryAllocator& allocator = static_cast<SymbiontSpeciesMemoryAllocator&>(generic_allocator);
 
+                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
+
                 return allocator.build_in(
                         this->application,
                         this->get_universe(),
                         model_struct,
-                        (model_struct.symbiont_material != nullptr ?
-                         &model_struct.symbiont_material->parent_of_symbiont_species :
+                        (std::holds_alternative<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material) &&
+                         std::get<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material) != nullptr ?
+                         &(std::get<yli::ontology::SymbiontMaterial*>(material_or_symbiont_material)->parent_of_symbiont_species) :
                          nullptr));
             }
 
@@ -688,11 +695,15 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
                 ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
+                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
+
                 yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         model_struct,
-                        (model_struct.material != nullptr ? &model_struct.material->parent_of_shapeshifter_transformations :
+                        (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
+                         std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
+                         &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->parent_of_shapeshifter_transformations) :
                          nullptr));
 
                 shapeshifter_transformation->set_global_name(model_struct.global_name);

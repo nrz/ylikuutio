@@ -315,7 +315,7 @@ namespace yli::ontology
                     model_struct.model_filename = this->model_filename;
                     model_struct.model_file_format = this->model_file_format;
                     model_struct.pipeline = pipeline;
-                    model_struct.symbiont_material = symbiont_material;
+                    model_struct.material_or_symbiont_material = symbiont_material;
                     model_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
                     model_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
                     model_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();

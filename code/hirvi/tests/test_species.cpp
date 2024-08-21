@@ -63,7 +63,7 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     cat_model_struct.global_name = "cat_species";
     cat_model_struct.local_name = "cat";
     cat_model_struct.pipeline = helsinki_east_downtown_pipeline;
-    cat_model_struct.material = orange_fur_material;
+    cat_model_struct.material_or_symbiont_material = orange_fur_material;
     cat_model_struct.model_file_format = "fbx";
     cat_model_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);

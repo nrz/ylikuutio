@@ -495,7 +495,7 @@ TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     application.get_generic_entity_factory().create_species(
             model_struct);
 
@@ -518,7 +518,7 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene1;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     application.get_generic_entity_factory().create_species(
             model_struct);
 

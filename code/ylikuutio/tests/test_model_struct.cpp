@@ -34,6 +34,8 @@ namespace yli::ontology
 {
     class Ecosystem;
     class Scene;
+    class Material;
+    class SymbiontMaterial;
     class VectorFont;
 }
 
@@ -60,8 +62,12 @@ TEST(model_struct_must_be_initialized_appropriately, model_struct)
     ASSERT_FALSE(std::holds_alternative<yli::ontology::VectorFont*>(test_model_struct.parent));
 
     ASSERT_EQ(test_model_struct.pipeline, nullptr);
-    ASSERT_EQ(test_model_struct.material, nullptr);
-    ASSERT_EQ(test_model_struct.symbiont_material, nullptr);
+
+    ASSERT_FALSE(test_model_struct.material_or_symbiont_material.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_model_struct.material_or_symbiont_material));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_model_struct.material_or_symbiont_material));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(test_model_struct.material_or_symbiont_material));
+
     ASSERT_EQ(test_model_struct.shapeshifter_transformation, nullptr);
     ASSERT_EQ(test_model_struct.glyph_vertex_data, nullptr);
     ASSERT_EQ(test_model_struct.glyph_name_pointer, nullptr);

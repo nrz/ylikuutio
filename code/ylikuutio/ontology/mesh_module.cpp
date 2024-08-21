@@ -83,8 +83,7 @@ namespace yli::ontology
             model_loader_struct.model_struct.y_step                       = this->y_step;
             model_loader_struct.model_struct.parent                       = model_struct.parent;
             model_loader_struct.model_struct.pipeline                     = model_struct.pipeline;
-            model_loader_struct.model_struct.material                     = model_struct.material;
-            model_loader_struct.model_struct.symbiont_material            = model_struct.symbiont_material;
+            model_loader_struct.model_struct.material_or_symbiont_material = model_struct.material_or_symbiont_material;
             model_loader_struct.model_struct.use_real_texture_coordinates = this->use_real_texture_coordinates;
             model_loader_struct.image_width_pointer                       = &this->image_width;
             model_loader_struct.image_height_pointer                      = &this->image_height;

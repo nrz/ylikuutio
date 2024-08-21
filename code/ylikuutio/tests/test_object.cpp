@@ -52,7 +52,7 @@ TEST(object_must_be_initialized_appropriately, headless)
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
@@ -157,7 +157,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
@@ -192,7 +192,7 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             model_struct);
 

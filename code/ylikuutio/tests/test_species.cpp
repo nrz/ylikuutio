@@ -52,7 +52,7 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
     ASSERT_NE(species, nullptr);
@@ -107,7 +107,7 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = ecosystem;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
@@ -159,7 +159,7 @@ TEST(species_must_be_initialized_appropriately, headless)
     yli::ontology::ModelStruct model_struct;
     model_struct.parent = scene;
     model_struct.pipeline = pipeline;
-    model_struct.material = material;
+    model_struct.material_or_symbiont_material = material;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             model_struct);
 
