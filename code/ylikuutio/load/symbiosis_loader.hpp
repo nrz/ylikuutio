@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_LOAD_SYMBIOSIS_LOADER_HPP_INCLUDED
 #define YLIKUUTIO_LOAD_SYMBIOSIS_LOADER_HPP_INCLUDED
 
-#include "model_loader_struct.hpp"
+#include "symbiosis_loader_struct.hpp"
 #include <ofbx.h>
 
 // Include GLM
@@ -36,7 +36,7 @@
 namespace yli::load
 {
     bool load_symbiosis(
-            yli::load::ModelLoaderStruct& model_loader_struct,
+            yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,

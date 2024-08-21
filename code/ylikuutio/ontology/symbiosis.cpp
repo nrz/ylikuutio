@@ -29,7 +29,7 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
-#include "code/ylikuutio/load/model_loader_struct.hpp"
+#include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -247,14 +247,12 @@ namespace yli::ontology
 
     void Symbiosis::create_symbionts()
     {
-        yli::load::ModelLoaderStruct model_loader_struct;
-        model_loader_struct.model_struct.model_filename = this->model_filename;
-        model_loader_struct.model_struct.model_file_format = this->model_file_format;
+        yli::load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
 
         const bool is_debug_mode = true;
 
         if (yli::load::load_symbiosis(
-                    model_loader_struct,
+                    symbiosis_loader_struct,
                     this->vertices,
                     this->uvs,
                     this->normals,
