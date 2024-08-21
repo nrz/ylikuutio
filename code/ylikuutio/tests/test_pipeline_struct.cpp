@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 
 // Include standard headers
-#include <variant> // std::holds_alternative, std::monostate, std::variant
+#include <variant> // std::holds_alternative, std::monostate
 
 TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosystem_parent)
 {

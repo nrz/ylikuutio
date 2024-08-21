@@ -29,7 +29,7 @@
 // Include standard headers
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
-#include <variant>  // std::holds_alternative, std::variant
+#include <variant>  // std::holds_alternative
 
 namespace yli::ontology
 {

@@ -21,7 +21,7 @@
 #include "movable_struct.hpp"
 
 // Include standard headers
-#include <variant> // std::holds_alternative, std::monostate, std::variant
+#include <variant> // std::monostate, std::variant
 
 namespace yli::ontology
 {
