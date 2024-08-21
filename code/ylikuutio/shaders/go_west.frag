@@ -13,6 +13,6 @@ out vec4 color;
 void main()
 {
     // Go west.
-    vec2 UV_east = uv + vec2(1.0f / screen_width, 0.0f);
-    color = texture(texture_sampler, UV_east);
+    vec2 uv_east = uv + vec2(1.0f / screen_width, 0.0f);
+    color = texture(texture_sampler, uv_east);
 }

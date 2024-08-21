@@ -24,13 +24,13 @@ void main()
     float j = uv.y;
     float k = float(iteration_i) / float(screen_width);
 
-    vec2 UV_i_j = vec2(i, j);
-    vec2 UV_i_k = vec2(i, k);
-    vec2 UV_k_j = vec2(k, j);
+    vec2 uv_i_j = vec2(i, j);
+    vec2 uv_i_k = vec2(i, k);
+    vec2 uv_k_j = vec2(k, j);
 
-    float dist_i_j = texture(texture_sampler, UV_i_j).r;
-    float dist_i_k = texture(texture_sampler, UV_i_k).r;
-    float dist_k_j = texture(texture_sampler, UV_k_j).r;
+    float dist_i_j = texture(texture_sampler, uv_i_j).r;
+    float dist_i_k = texture(texture_sampler, uv_i_k).r;
+    float dist_k_j = texture(texture_sampler, uv_k_j).r;
 
     if (dist_i_j > dist_i_k + dist_k_j)
     {

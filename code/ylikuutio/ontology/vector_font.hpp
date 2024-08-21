@@ -112,7 +112,7 @@ namespace yli::ontology
             float vertex_scaling_factor;
 
             std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
-            std::vector<std::vector<glm::vec2>> glyph_UV_data;
+            std::vector<std::vector<glm::vec2>> glyph_uv_data;
             std::vector<std::vector<glm::vec2>> glyph_normal_data;
             std::vector<std::string> glyph_names;
             std::vector<std::string> unicode_strings;
