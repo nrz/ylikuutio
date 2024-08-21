@@ -735,7 +735,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterForm* create_shapeshifter_form(
-                const yli::ontology::ModelStruct& model_struct) const override
+                    const yli::ontology::ModelStruct& model_struct) const override
             {
                 using ShapeshifterFormMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
