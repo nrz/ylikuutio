@@ -29,8 +29,6 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::variant
-#include <vector>   // std::vector
 
 namespace yli::core
 {
