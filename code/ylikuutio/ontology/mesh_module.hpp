@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
 
-#include "pipeline.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
