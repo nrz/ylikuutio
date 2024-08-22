@@ -97,7 +97,7 @@ namespace yli::ontology
             GLuint normalbuffer  { 0 }; // Dummy value.
             GLuint elementbuffer { 0 }; // Dummy value.
 
-            bool use_real_texture_coordinates { true };
+            bool use_real_texture_coordinates   { true };
             bool are_opengl_buffers_initialized { false };
     };
 }
