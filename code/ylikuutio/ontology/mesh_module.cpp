@@ -43,15 +43,6 @@ namespace yli::ontology
     MeshModule::MeshModule(
             yli::ontology::Universe& universe,
             const yli::ontology::ModelStruct& model_struct)
-        : model_filename { model_struct.model_filename },
-        model_file_format { model_struct.model_file_format },
-        color_channel { model_struct.color_channel },
-        divisor { model_struct.divisor },
-        latitude { model_struct.latitude },
-        longitude { model_struct.longitude },
-        mesh_i { model_struct.mesh_i },
-        x_step { model_struct.x_step },
-        y_step { model_struct.y_step }
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -73,16 +64,16 @@ namespace yli::ontology
             this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
             yli::load::ModelLoaderStruct model_loader_struct;
-            model_loader_struct.model_filename                = this->model_filename;
-            model_loader_struct.model_file_format             = this->model_file_format;
-            model_loader_struct.color_channel                 = this->color_channel;
-            model_loader_struct.divisor                       = this->divisor;
-            model_loader_struct.latitude                      = this->latitude;
-            model_loader_struct.longitude                     = this->longitude;
-            model_loader_struct.mesh_i                        = this->mesh_i;
-            model_loader_struct.x_step                        = this->x_step;
-            model_loader_struct.y_step                        = this->y_step;
-            model_loader_struct.use_real_texture_coordinates  = this->use_real_texture_coordinates;
+            model_loader_struct.model_filename                = model_struct.model_filename;
+            model_loader_struct.model_file_format             = model_struct.model_file_format;
+            model_loader_struct.color_channel                 = model_struct.color_channel;
+            model_loader_struct.divisor                       = model_struct.divisor;
+            model_loader_struct.latitude                      = model_struct.latitude;
+            model_loader_struct.longitude                     = model_struct.longitude;
+            model_loader_struct.mesh_i                        = model_struct.mesh_i;
+            model_loader_struct.x_step                        = model_struct.x_step;
+            model_loader_struct.y_step                        = model_struct.y_step;
+            model_loader_struct.use_real_texture_coordinates  = model_struct.use_real_texture_coordinates;
             model_loader_struct.image_width_pointer           = &this->image_width;
             model_loader_struct.image_height_pointer          = &this->image_height;
 
