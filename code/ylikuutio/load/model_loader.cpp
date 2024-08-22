@@ -60,31 +60,31 @@ namespace yli::load
     {
         bool model_loading_result = false;
 
-        if (model_loader_struct.model_struct.model_file_format == "obj" || model_loader_struct.model_struct.model_file_format == "OBJ")
+        if (model_loader_struct.model_file_format == "obj" || model_loader_struct.model_file_format == "OBJ")
         {
             model_loading_result = yli::load::load_obj(
-                    model_loader_struct.model_struct.model_filename,
+                    model_loader_struct.model_filename,
                     out_vertices,
                     out_uvs,
                     out_normals);
         }
-        else if (model_loader_struct.model_struct.model_file_format == "fbx" || model_loader_struct.model_struct.model_file_format == "FBX")
+        else if (model_loader_struct.model_file_format == "fbx" || model_loader_struct.model_file_format == "FBX")
         {
             model_loading_result = yli::load::load_fbx(
-                    model_loader_struct.model_struct.model_filename,
-                    model_loader_struct.model_struct.mesh_i,
+                    model_loader_struct.model_filename,
+                    model_loader_struct.mesh_i,
                     out_vertices,
                     out_uvs,
                     out_normals,
                     is_debug_mode);
 
-            std::cout << model_loader_struct.model_struct.model_filename << " loaded successfully.\n";
+            std::cout << model_loader_struct.model_filename << " loaded successfully.\n";
         }
-        else if (model_loader_struct.model_struct.model_file_format == "srtm" || model_loader_struct.model_struct.model_file_format == "SRTM" ||
-                model_loader_struct.model_struct.model_file_format == "png" || model_loader_struct.model_struct.model_file_format == "PNG" ||
-                model_loader_struct.model_struct.model_file_format == "asc" ||
-                model_loader_struct.model_struct.model_file_format == "ascii_grid" ||
-                model_loader_struct.model_struct.model_file_format == "ASCII_grid")
+        else if (model_loader_struct.model_file_format == "srtm" || model_loader_struct.model_file_format == "SRTM" ||
+                model_loader_struct.model_file_format == "png" || model_loader_struct.model_file_format == "PNG" ||
+                model_loader_struct.model_file_format == "asc" ||
+                model_loader_struct.model_file_format == "ascii_grid" ||
+                model_loader_struct.model_file_format == "ASCII_grid")
         {
             if (model_loader_struct.image_width_pointer == nullptr)
             {
@@ -101,27 +101,27 @@ namespace yli::load
             }
 
             yli::load::HeightmapLoaderStruct heightmap_loader_struct;
-            heightmap_loader_struct.filename                     = model_loader_struct.model_struct.model_filename;
-            heightmap_loader_struct.file_format                  = model_loader_struct.model_struct.model_file_format;
-            heightmap_loader_struct.latitude                     = model_loader_struct.model_struct.latitude;
-            heightmap_loader_struct.longitude                    = model_loader_struct.model_struct.longitude;
-            heightmap_loader_struct.divisor                      = model_loader_struct.model_struct.divisor;
-            heightmap_loader_struct.x_step                       = model_loader_struct.model_struct.x_step;
-            heightmap_loader_struct.y_step                       = model_loader_struct.model_struct.y_step;
-            heightmap_loader_struct.use_real_texture_coordinates = model_loader_struct.model_struct.use_real_texture_coordinates;
+            heightmap_loader_struct.filename                     = model_loader_struct.model_filename;
+            heightmap_loader_struct.file_format                  = model_loader_struct.model_file_format;
+            heightmap_loader_struct.latitude                     = model_loader_struct.latitude;
+            heightmap_loader_struct.longitude                    = model_loader_struct.longitude;
+            heightmap_loader_struct.divisor                      = model_loader_struct.divisor;
+            heightmap_loader_struct.x_step                       = model_loader_struct.x_step;
+            heightmap_loader_struct.y_step                       = model_loader_struct.y_step;
+            heightmap_loader_struct.use_real_texture_coordinates = model_loader_struct.use_real_texture_coordinates;
 
-            if (model_loader_struct.model_struct.model_file_format == "srtm" || model_loader_struct.model_struct.model_file_format == "SRTM")
+            if (model_loader_struct.model_file_format == "srtm" || model_loader_struct.model_file_format == "SRTM")
             {
                 model_loading_result = yli::load::load_srtm_terrain(
                         heightmap_loader_struct,
-                        model_loader_struct.model_struct.model_filename,
+                        model_loader_struct.model_filename,
                         out_vertices,
                         out_uvs,
                         out_normals,
                         *model_loader_struct.image_width_pointer,
                         *model_loader_struct.image_height_pointer);
             }
-            else if (model_loader_struct.model_struct.model_file_format == "png" || model_loader_struct.model_struct.model_file_format == "PNG")
+            else if (model_loader_struct.model_file_format == "png" || model_loader_struct.model_file_format == "PNG")
             {
                 model_loading_result = yli::load::load_png_terrain(
                         heightmap_loader_struct,
@@ -130,11 +130,11 @@ namespace yli::load
                         out_normals,
                         *model_loader_struct.image_width_pointer,
                         *model_loader_struct.image_height_pointer,
-                        model_loader_struct.model_struct.color_channel);
+                        model_loader_struct.color_channel);
             }
-            else if (model_loader_struct.model_struct.model_file_format == "asc" ||
-                    model_loader_struct.model_struct.model_file_format == "ascii_grid" ||
-                    model_loader_struct.model_struct.model_file_format == "ASCII_grid")
+            else if (model_loader_struct.model_file_format == "asc" ||
+                    model_loader_struct.model_file_format == "ascii_grid" ||
+                    model_loader_struct.model_file_format == "ASCII_grid")
             {
                 model_loading_result = yli::load::load_ascii_grid_terrain(
                         heightmap_loader_struct,
@@ -149,7 +149,7 @@ namespace yli::load
         else
         {
             std::cerr << "ERROR: `yli::load::load_model`: no model was loaded!\n";
-            std::cerr << "Model file format: " << model_loader_struct.model_struct.model_file_format << "\n";
+            std::cerr << "Model file format: " << model_loader_struct.model_file_format << "\n";
             return false;
         }
 
