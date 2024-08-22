@@ -27,6 +27,7 @@
 namespace yli::ontology
 {
     class Scene;
+    class Brain;
     class Symbiosis;
 
     struct HolobiontStruct : public yli::ontology::MovableStruct
@@ -34,17 +35,26 @@ namespace yli::ontology
         HolobiontStruct(
                 yli::ontology::Scene& parent,
                 yli::ontology::Symbiosis& symbiosis)
-            : symbiosis { &symbiosis }
+            : MovableStruct(nullptr, &parent),
+            symbiosis { &symbiosis }
         {
-            this->scene = &parent;
         }
 
         HolobiontStruct(
                 const std::string& parent,
                 yli::ontology::Symbiosis& symbiosis)
-            : symbiosis { &symbiosis }
+            : MovableStruct(nullptr, parent),
+            symbiosis { &symbiosis }
         {
-            this->scene = parent;
+        }
+
+        HolobiontStruct(
+                yli::ontology::Brain* const brain,
+                const std::string& parent,
+                yli::ontology::Symbiosis& symbiosis)
+            : MovableStruct(brain, parent),
+            symbiosis { &symbiosis }
+        {
         }
 
         yli::ontology::Symbiosis* symbiosis { nullptr }; // pointer to the `Symbiosis`.
