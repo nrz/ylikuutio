@@ -20,6 +20,9 @@
 
 #include "movable_struct.hpp"
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::ontology
 {
     class Brain;
@@ -31,6 +34,13 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain_master,
                 yli::ontology::Scene* const scene_parent)
             : MovableStruct(brain_master, scene_parent)
+        {
+        }
+
+        WaypointStruct(
+                yli::ontology::Brain* const brain,
+                const std::string& scene_parent)
+            : MovableStruct(brain, scene_parent)
         {
         }
     };

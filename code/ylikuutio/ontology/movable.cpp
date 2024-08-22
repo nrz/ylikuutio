@@ -85,7 +85,13 @@ namespace yli::ontology
             yli::ontology::GenericMasterModule* const brain_master_module)
         : Entity(application, universe, movable_struct),
         apprentice_of_brain(brain_master_module, this),
-        rigid_body_module(movable_struct.rigid_body_module_struct, movable_struct.scene, this),
+        rigid_body_module(
+                movable_struct.rigid_body_module_struct,
+                (std::holds_alternative<yli::ontology::Scene*>(movable_struct.scene) ? std::get<yli::ontology::Scene*>(movable_struct.scene) :
+                 (std::holds_alternative<std::string>(movable_struct.scene) ?
+                  dynamic_cast<yli::ontology::Scene*>(universe.registry.get_entity(std::get<std::string>(movable_struct.scene))) :
+                  nullptr)),
+                this),
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },
         initial_rotate_angles { movable_struct.initial_rotate_angles },
         original_scale_vector { movable_struct.original_scale_vector },

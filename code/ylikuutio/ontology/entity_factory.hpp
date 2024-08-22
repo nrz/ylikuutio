@@ -414,11 +414,21 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::WAYPOINT));
                 WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* scene_parent { nullptr };
+                if (std::holds_alternative<std::string>(waypoint_struct.scene)) [[likely]]
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(waypoint_struct.scene)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(waypoint_struct.scene))
+                {
+                    scene_parent = std::get<yli::ontology::Scene*>(waypoint_struct.scene);
+                }
+
                 yli::ontology::Waypoint* const waypoint = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         waypoint_struct,
-                        (waypoint_struct.scene != nullptr ? &waypoint_struct.scene->parent_of_waypoints : nullptr),
+                        (scene_parent != nullptr ? &scene_parent->parent_of_waypoints : nullptr),
                         // `Brain` master.
                         (waypoint_struct.brain != nullptr ? waypoint_struct.brain->get_generic_master_module() : nullptr));
 
@@ -436,11 +446,21 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::CAMERA));
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* scene_parent { nullptr };
+                if (std::holds_alternative<std::string>(camera_struct.scene)) [[likely]]
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
+                {
+                    scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
+                }
+
                 yli::ontology::Camera* const camera = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         camera_struct,
-                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_cameras : nullptr),
+                        (scene_parent != nullptr ? &scene_parent->parent_of_cameras : nullptr),
                         (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
 
                 camera->set_global_name(camera_struct.global_name);
@@ -457,11 +477,21 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::CAMERA));
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* scene_parent { nullptr };
+                if (std::holds_alternative<std::string>(camera_struct.scene)) [[likely]]
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
+                {
+                    scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
+                }
+
                 yli::ontology::Camera* const camera = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         camera_struct,
-                        (camera_struct.scene != nullptr ? &camera_struct.scene->parent_of_default_camera : nullptr),
+                        (scene_parent != nullptr ? &scene_parent->parent_of_default_camera : nullptr),
                         (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
 
                 camera->set_global_name(camera_struct.global_name);
@@ -558,12 +588,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::OBJECT));
                 ObjectMemoryAllocator& allocator = static_cast<ObjectMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* scene_parent { nullptr };
+                if (std::holds_alternative<std::string>(object_struct.scene)) [[likely]]
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
+                {
+                    scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
+                }
+
                 yli::ontology::Object* const object = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         object_struct,
                         // `Scene` parent.
-                        ((object_struct.scene != nullptr) ? &object_struct.scene->parent_of_objects : nullptr),
+                        ((scene_parent != nullptr) ? &scene_parent->parent_of_objects : nullptr),
                         // mesh master.
                         ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
                          &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -654,11 +694,21 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::HOLOBIONT));
                 HolobiontMemoryAllocator& allocator = static_cast<HolobiontMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Scene* scene_parent { nullptr };
+                if (std::holds_alternative<std::string>(holobiont_struct.scene)) [[likely]]
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
+                {
+                    scene_parent = std::get<yli::ontology::Scene*>(holobiont_struct.scene);
+                }
+
                 yli::ontology::Holobiont* const holobiont = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         holobiont_struct,
-                        (holobiont_struct.scene != nullptr ? &holobiont_struct.scene->parent_of_holobionts : nullptr),
+                        (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                         (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                         (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
 
@@ -1183,13 +1233,23 @@ namespace yli::ontology
                     ObjectDerivativeMemoryAllocator& allocator =
                         static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
 
+                    yli::ontology::Scene* scene_parent { nullptr };
+                    if (std::holds_alternative<std::string>(object_struct.scene)) [[likely]]
+                    {
+                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
+                    }
+                    else if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
+                    {
+                        scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
+                    }
+
                     T* const object = allocator.build_in(
                             this->application,
                             this->get_universe(),
                             object_struct,
                             module_args...,
                             // `Scene` parent.
-                            ((object_struct.scene != nullptr) ? &object_struct.scene->parent_of_objects : nullptr),
+                            ((scene_parent != nullptr) ? &scene_parent->parent_of_objects : nullptr),
                             // mesh master.
                             ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
                              &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -1219,12 +1279,22 @@ namespace yli::ontology
                     HolobiontDerivativeMemoryAllocator& allocator =
                         static_cast<HolobiontDerivativeMemoryAllocator&>(generic_allocator);
 
+                    yli::ontology::Scene* scene_parent { nullptr };
+                    if (std::holds_alternative<std::string>(holobiont_struct.scene)) [[likely]]
+                    {
+                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
+                    }
+                    else if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
+                    {
+                        scene_parent = std::get<yli::ontology::Scene*>(holobiont_struct.scene);
+                    }
+
                     T* const holobiont = allocator.build_in(
                             this->application,
                             this->get_universe(),
                             holobiont_struct,
                             module_args...,
-                            (holobiont_struct.scene != nullptr ? &holobiont_struct.scene->parent_of_holobionts : nullptr),
+                            (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                             (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
 

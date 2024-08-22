@@ -28,9 +28,10 @@
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // uintptr_t, std::size_t
+#include <limits>  // std::numeric_limits
 
-TEST(holobiont_must_be_initialized_appropriately, headless)
+TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -76,6 +77,100 @@ TEST(holobiont_must_be_initialized_appropriately, headless)
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 0);
 }
 
+TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct("foo", *symbiosis);
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
+            holobiont_struct);
+    ASSERT_NE(holobiont, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `symbiosis`, `holobiont`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_scene(), scene);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), 0);
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_scene(), scene);
+    ASSERT_EQ(holobiont->get_parent(), scene);
+    ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 0);
+}
+
+TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct("bar", *symbiosis);
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
+            holobiont_struct);
+    ASSERT_NE(holobiont, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_scene(), scene);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_scene(), nullptr);
+    ASSERT_EQ(holobiont->get_parent(), nullptr);
+    ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 0);
+}
+
 TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 {
     mock::MockApplication application;
@@ -96,6 +191,8 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
+    ASSERT_NE(holobiont, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

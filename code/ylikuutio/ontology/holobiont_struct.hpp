@@ -21,6 +21,7 @@
 #include "movable_struct.hpp"
 
 // Include standard headers
+#include <string> // std::string
 #include <vector> // std::vector
 
 namespace yli::ontology
@@ -36,6 +37,14 @@ namespace yli::ontology
             : symbiosis { &symbiosis }
         {
             this->scene = &parent;
+        }
+
+        HolobiontStruct(
+                const std::string& parent,
+                yli::ontology::Symbiosis& symbiosis)
+            : symbiosis { &symbiosis }
+        {
+            this->scene = parent;
         }
 
         yli::ontology::Symbiosis* symbiosis { nullptr }; // pointer to the `Symbiosis`.

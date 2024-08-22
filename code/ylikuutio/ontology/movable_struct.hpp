@@ -33,6 +33,7 @@
 // Include standard headers
 #include <cmath>  // NAN
 #include <string> // std::string
+#include <variant> // std::monostate, std::variant
 #include <vector> // std::vector
 
 namespace yli::ontology
@@ -82,9 +83,17 @@ namespace yli::ontology
         {
         }
 
+        MovableStruct(
+                yli::ontology::Brain* const brain,
+                const std::string& scene)
+            : brain { brain },
+            scene { scene }
+        {
+        }
+
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
         yli::ontology::Brain* brain { nullptr };
-        yli::ontology::Scene* scene { nullptr };
+        std::variant<std::monostate, yli::ontology::Scene*, std::string> scene {};
 
         std::vector<glm::vec3> initial_rotate_vectors;
         std::vector<float> initial_rotate_angles;

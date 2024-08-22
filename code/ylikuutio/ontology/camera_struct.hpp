@@ -20,10 +20,31 @@
 
 #include "movable_struct.hpp"
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::ontology
 {
+    class Brain;
+    class Scene;
+
     struct CameraStruct : public yli::ontology::MovableStruct
     {
+        CameraStruct() = default;
+
+        CameraStruct(
+                yli::ontology::Brain* const brain,
+                yli::ontology::Scene* const parent)
+            : MovableStruct(brain, parent)
+        {
+        }
+
+        CameraStruct(
+                yli::ontology::Brain* const brain,
+                const std::string& scene)
+            : MovableStruct(brain, scene)
+        {
+        }
     };
 }
 

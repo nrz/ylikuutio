@@ -21,6 +21,7 @@
 #include "movable_struct.hpp"
 
 // Include standard headers
+#include <string>  // std::string
 #include <variant> // std::monostate, std::variant
 
 namespace yli::ontology
@@ -43,6 +44,15 @@ namespace yli::ontology
                 yli::ontology::Brain* const brain,
                 yli::ontology::Scene* const parent)
             : MovableStruct(brain, parent)
+        {
+        }
+
+        ObjectStruct(
+                yli::ontology::Brain* const brain,
+                const std::string& scene,
+                yli::ontology::Species* const species)
+            : MovableStruct(brain, scene),
+            mesh_master { species }
         {
         }
 

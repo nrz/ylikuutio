@@ -32,9 +32,10 @@
 #include "code/ylikuutio/ontology/object_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
+#include <limits>  // std::numeric_limits
 
-TEST(object_must_be_initialized_appropriately, headless)
+TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -99,7 +100,204 @@ TEST(object_must_be_initialized_appropriately, headless)
     ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
 }
 
-TEST(object_must_bind_to_scene_appropriately, scenes_no_pipelines_no_materials_no_species_no_shapeshifters_no_text_3ds)
+TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.parent = scene;
+    species_struct.pipeline = pipeline;
+    species_struct.material_or_symbiont_material = material;
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
+            species_struct);
+
+    yli::ontology::ObjectStruct object_struct(static_cast<yli::ontology::Scene*>(nullptr), species);
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    ASSERT_NE(object, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(object) % alignof(yli::ontology::Object), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `material`, `species`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_scene(), scene);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
+
+    // `Entity` member functions of `Species`.
+    ASSERT_EQ(species->get_scene(), scene);
+    ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
+    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_scene(), nullptr);
+    ASSERT_EQ(object->get_parent(), nullptr);
+    ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
+}
+
+TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.parent = scene;
+    species_struct.pipeline = pipeline;
+    species_struct.material_or_symbiont_material = material;
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
+            species_struct);
+
+    yli::ontology::ObjectStruct object_struct(nullptr, "foo", species);
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    ASSERT_NE(object, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(object) % alignof(yli::ontology::Object), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 5); // Default `Camera`, `pipeline`, `material`, `species`, `object`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_scene(), scene);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
+
+    // `Entity` member functions of `Species`.
+    ASSERT_EQ(species->get_scene(), scene);
+    ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
+    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), 0);
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_scene(), scene);
+    ASSERT_EQ(object->get_parent(), scene);
+    ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
+}
+
+TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(scene, pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::SpeciesStruct species_struct;
+    species_struct.parent = scene;
+    species_struct.pipeline = pipeline;
+    species_struct.material_or_symbiont_material = material;
+    yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
+            species_struct);
+
+    yli::ontology::ObjectStruct object_struct(nullptr, "bar", species);
+    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+            object_struct);
+    ASSERT_NE(object, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(object) % alignof(yli::ontology::Object), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `material`, `species`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_scene(), scene);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 1); // `species`.
+
+    // `Entity` member functions of `Species`.
+    ASSERT_EQ(species->get_scene(), scene);
+    ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
+    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_mesh.get_master(), species);
+    ASSERT_EQ(object->apprentice_of_mesh.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(object->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->get_type(), "yli::ontology::Object*");
+    ASSERT_TRUE(object->get_can_be_erased());
+    ASSERT_EQ(object->get_scene(), nullptr);
+    ASSERT_EQ(object->get_parent(), nullptr);
+    ASSERT_EQ(object->get_number_of_non_variable_children(), 0);
+}
+
+TEST(object_must_bind_to_scene_appropriately, headless_with_parent_provided_as_valid_pointer_scenes_no_pipelines_no_materials_no_species_no_shapeshifters_no_text_3ds)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
@@ -135,7 +333,7 @@ TEST(object_must_bind_to_scene_appropriately, scenes_no_pipelines_no_materials_n
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);
 }
 
-TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
+TEST(object_must_bind_to_brain_appropriately, headless_with_parent_provided_as_valid_pointer_master_and_apprentice)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -174,7 +372,7 @@ TEST(object_must_bind_to_brain_appropriately, master_and_apprentice)
     ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), 0);
 }
 
-TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
+TEST(object_must_bind_to_species_appropriately, headless_with_parent_provided_as_valid_pointer_master_and_apprentice)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -221,7 +419,7 @@ TEST(object_must_bind_to_species_appropriately, master_and_apprentice)
     ASSERT_EQ(species2->get_number_of_apprentices(), 0);
 }
 
-TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_only_local_name)
+TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_with_parent_provided_as_valid_pointer_object_with_only_local_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -250,7 +448,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 }
 
-TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_universe_object_with_global_name_and_local_name)
+TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless_with_parent_provided_as_valid_pointer_object_with_global_name_and_local_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -284,7 +482,7 @@ TEST(object_must_maintain_the_local_name_after_binding_to_a_new_parent, headless
     ASSERT_EQ(scene2->get_number_of_non_variable_children(), 1); // Default `Camera`.
 }
 
-TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_only_local_name)
+TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_with_parent_provided_as_valid_pointer_objects_with_only_local_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -312,7 +510,7 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     ASSERT_TRUE(scene2->has_child("foo"));
 }
 
-TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_universe_objects_with_different_global_names_and_same_local_name)
+TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, headless_with_parent_provided_as_valid_pointer_objects_with_different_global_names_and_same_local_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;

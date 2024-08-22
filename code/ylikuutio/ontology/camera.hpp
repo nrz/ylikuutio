@@ -123,11 +123,11 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_scene;
 
-        private:
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             // variables related to the projection.
             glm::mat4 projection_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
             glm::mat4 view_matrix { glm::mat4(1.0f) };       // identity matrix (dummy value).
