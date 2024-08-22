@@ -70,6 +70,7 @@
 #include "pipeline_struct.hpp"
 #include "material_struct.hpp"
 #include "model_struct.hpp"
+#include "species_struct.hpp"
 #include "object_struct.hpp"
 #include "symbiosis_struct.hpp"
 #include "symbiont_species_struct.hpp"
@@ -520,7 +521,7 @@ namespace yli::ontology
                 return material;
             }
 
-            yli::ontology::Species* create_species(const yli::ontology::ModelStruct& model_struct) const override
+            yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const override
             {
                 using SpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Species, 256>;
 
@@ -529,22 +530,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SPECIES));
                 SpeciesMemoryAllocator& allocator = static_cast<SpeciesMemoryAllocator&>(generic_allocator);
 
-                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
+                auto& material_or_symbiont_material = species_struct.material_or_symbiont_material;
 
                 yli::ontology::Species* const species = allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
+                        species_struct,
                         // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) && std::get<yli::ontology::Ecosystem*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(model_struct.parent)->parent_of_species) :
-                         (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) && std::get<yli::ontology::Scene*>(model_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(model_struct.parent)->parent_of_species) :
+                        ((std::holds_alternative<yli::ontology::Ecosystem*>(species_struct.parent) && std::get<yli::ontology::Ecosystem*>(species_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(species_struct.parent)->parent_of_species) :
+                         (std::holds_alternative<yli::ontology::Scene*>(species_struct.parent) && std::get<yli::ontology::Scene*>(species_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(species_struct.parent)->parent_of_species) :
                          nullptr),
                         (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
                          std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
                          &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->master_of_species) : nullptr));
 
-                species->set_global_name(model_struct.global_name);
-                species->set_local_name(model_struct.local_name);
+                species->set_global_name(species_struct.global_name);
+                species->set_local_name(species_struct.local_name);
                 return species;
             }
 

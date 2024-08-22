@@ -75,6 +75,7 @@ namespace yli::ontology
     struct PipelineStruct;
     struct MaterialStruct;
     struct ModelStruct;
+    struct SpeciesStruct;
     struct ObjectStruct;
     struct SymbiosisStruct;
     struct SymbiontSpeciesStruct;
@@ -120,7 +121,7 @@ namespace yli::ontology
             virtual yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const = 0;
             virtual yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const = 0;
             virtual yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const = 0;
-            virtual yli::ontology::Species* create_species(const yli::ontology::ModelStruct& model_struct) const = 0;
+            virtual yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const = 0;
             virtual yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const = 0;
             virtual yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& model_struct) const = 0;
             virtual yli::ontology::SymbiontMaterial* create_symbiont_material(const MaterialStruct& material_struct) const = 0;

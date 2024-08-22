@@ -50,7 +50,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Material;
-    struct ModelStruct;
+    struct SpeciesStruct;
 
     class Species final : public yli::ontology::Entity
     {
@@ -77,7 +77,7 @@ namespace yli::ontology
             Species(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::SpeciesStruct& species_struct,
                     yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
                     yli::ontology::GenericMasterModule* const material_master_module);
 

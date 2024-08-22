@@ -27,7 +27,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
@@ -83,15 +83,15 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    yli::ontology::ModelStruct cat_model_struct;
-    cat_model_struct.parent = helsinki_east_downtown_scene;
-    cat_model_struct.global_name = "cat_species";
-    cat_model_struct.local_name = "cat";
-    cat_model_struct.pipeline = helsinki_east_downtown_pipeline;
-    cat_model_struct.material_or_symbiont_material = orange_fur_material;
-    cat_model_struct.model_file_format = "fbx";
-    cat_model_struct.model_filename = "cat.fbx";
-    yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_model_struct);
+    yli::ontology::SpeciesStruct cat_species_struct;
+    cat_species_struct.parent = helsinki_east_downtown_scene;
+    cat_species_struct.global_name = "cat_species";
+    cat_species_struct.local_name = "cat";
+    cat_species_struct.pipeline = helsinki_east_downtown_pipeline;
+    cat_species_struct.material_or_symbiont_material = orange_fur_material;
+    cat_species_struct.model_file_format = "fbx";
+    cat_species_struct.model_filename = "cat.fbx";
+    yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
 
     yli::ontology::ObjectStruct cat1_object_struct(helsinki_east_downtown_scene);
     cat1_object_struct.mesh_master = cat_species;

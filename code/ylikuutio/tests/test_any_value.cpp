@@ -38,6 +38,7 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
@@ -480,9 +481,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
 TEST(any_value_must_be_initialized_appropriately, species)
 {
     mock::MockApplication application;
-    yli::ontology::ModelStruct model_struct;
+    yli::ontology::SpeciesStruct species_struct;
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
-            model_struct);
+            species_struct);
 
     yli::data::AnyValue species_any_value = yli::data::AnyValue(*species);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data));

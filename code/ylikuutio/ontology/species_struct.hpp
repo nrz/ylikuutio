@@ -15,27 +15,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_SPECIES_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_SPECIES_STRUCT_HPP_INCLUDED
 
 #include "model_struct.hpp"
 
 namespace yli::ontology
 {
-    class Pipeline;
-    class SymbiontMaterial;
-
-    struct SymbiontSpeciesStruct final : public yli::ontology::ModelStruct
+    struct SpeciesStruct final : public yli::ontology::ModelStruct
     {
-        SymbiontSpeciesStruct(
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::SymbiontMaterial* const symbiont_material)
-            : ModelStruct(pipeline, symbiont_material),
-            symbiont_material { symbiont_material }
-        {
-        }
-
-        yli::ontology::SymbiontMaterial* const symbiont_material { nullptr };
     };
 }
 

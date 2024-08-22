@@ -34,7 +34,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
@@ -387,16 +387,16 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        yli::ontology::ModelStruct helsinki_east_downtown_terrain_model_struct;
-        helsinki_east_downtown_terrain_model_struct.parent = helsinki_east_downtown_scene;
-        helsinki_east_downtown_terrain_model_struct.pipeline = helsinki_east_downtown_pipeline;
-        helsinki_east_downtown_terrain_model_struct.material_or_symbiont_material = helsinki_east_downtown_grass_material;
-        helsinki_east_downtown_terrain_model_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_model_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
-        helsinki_east_downtown_terrain_model_struct.x_step = 4;
-        helsinki_east_downtown_terrain_model_struct.y_step = 4;
+        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
+        helsinki_east_downtown_terrain_species_struct.parent = helsinki_east_downtown_scene;
+        helsinki_east_downtown_terrain_species_struct.pipeline = helsinki_east_downtown_pipeline;
+        helsinki_east_downtown_terrain_species_struct.material_or_symbiont_material = helsinki_east_downtown_grass_material;
+        helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
+        helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_east_downtown_terrain_species_struct.x_step = 4;
+        helsinki_east_downtown_terrain_species_struct.y_step = 4;
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
-        yli::ontology::Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_model_struct);
+        yli::ontology::Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
 
         if (helsinki_east_downtown_terrain_species == nullptr)
         {
@@ -412,17 +412,17 @@ namespace ajokki
         helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);
 
-        yli::ontology::ModelStruct cat_model_struct;
-        cat_model_struct.parent = helsinki_east_downtown_scene;
-        cat_model_struct.global_name = "cat_species";
-        cat_model_struct.local_name = "cat";
-        cat_model_struct.pipeline = helsinki_east_downtown_pipeline;
-        cat_model_struct.material_or_symbiont_material = orange_fur_material;
-        cat_model_struct.model_file_format = "fbx";
-        cat_model_struct.model_filename = "cat.fbx";
+        yli::ontology::SpeciesStruct cat_species_struct;
+        cat_species_struct.parent = helsinki_east_downtown_scene;
+        cat_species_struct.global_name = "cat_species";
+        cat_species_struct.local_name = "cat";
+        cat_species_struct.pipeline = helsinki_east_downtown_pipeline;
+        cat_species_struct.material_or_symbiont_material = orange_fur_material;
+        cat_species_struct.model_file_format = "fbx";
+        cat_species_struct.model_filename = "cat.fbx";
 
         std::cout << "Creating yli::ontology::Species* cat_species ...\n";
-        yli::ontology::Species* const cat_species = this->entity_factory.create_species(cat_model_struct);
+        yli::ontology::Species* const cat_species = this->entity_factory.create_species(cat_species_struct);
 
         if (cat_species == nullptr)
         {

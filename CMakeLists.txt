@@ -685,6 +685,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
+    code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
     code/ylikuutio/ontology/symbiont_species.cpp

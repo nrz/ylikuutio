@@ -26,7 +26,7 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 
@@ -109,16 +109,16 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
-        yli::ontology::ModelStruct joensuu_center_west_terrain_model_struct;
-        joensuu_center_west_terrain_model_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_terrain_model_struct.pipeline = joensuu_center_west_pipeline;
-        joensuu_center_west_terrain_model_struct.material_or_symbiont_material = joensuu_center_west_grass_material;
-        joensuu_center_west_terrain_model_struct.model_file_format = "ASCII_grid";
-        joensuu_center_west_terrain_model_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
-        joensuu_center_west_terrain_model_struct.x_step = 4;
-        joensuu_center_west_terrain_model_struct.y_step = 4;
+        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
+        joensuu_center_west_terrain_species_struct.parent = joensuu_center_west_scene;
+        joensuu_center_west_terrain_species_struct.pipeline = joensuu_center_west_pipeline;
+        joensuu_center_west_terrain_species_struct.material_or_symbiont_material = joensuu_center_west_grass_material;
+        joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
+        joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
+        joensuu_center_west_terrain_species_struct.x_step = 4;
+        joensuu_center_west_terrain_species_struct.y_step = 4;
         std::cout << "Creating yli::ontology::Species* joensuu_center_west_terrain_species ...\n";
-        yli::ontology::Species* const joensuu_center_west_terrain_species = this->entity_factory.create_species(joensuu_center_west_terrain_model_struct);
+        yli::ontology::Species* const joensuu_center_west_terrain_species = this->entity_factory.create_species(joensuu_center_west_terrain_species_struct);
 
         if (joensuu_center_west_terrain_species == nullptr)
         {
@@ -150,15 +150,15 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
-        yli::ontology::ModelStruct horse_model_struct;
-        horse_model_struct.parent = joensuu_center_west_scene;
-        horse_model_struct.pipeline = joensuu_center_west_pipeline;
-        horse_model_struct.material_or_symbiont_material = orange_fur_material_joensuu;
-        horse_model_struct.model_file_format = "fbx";
-        horse_model_struct.model_filename = "horse.fbx";
+        yli::ontology::SpeciesStruct horse_species_struct;
+        horse_species_struct.parent = joensuu_center_west_scene;
+        horse_species_struct.pipeline = joensuu_center_west_pipeline;
+        horse_species_struct.material_or_symbiont_material = orange_fur_material_joensuu;
+        horse_species_struct.model_file_format = "fbx";
+        horse_species_struct.model_filename = "horse.fbx";
 
         std::cout << "Creating yli::ontology::Species* horse_species ...\n";
-        yli::ontology::Species* const horse_species = this->entity_factory.create_species(horse_model_struct);
+        yli::ontology::Species* const horse_species = this->entity_factory.create_species(horse_species_struct);
 
         if (horse_species == nullptr)
         {
