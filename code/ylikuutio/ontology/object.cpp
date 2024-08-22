@@ -267,8 +267,6 @@ namespace yli::ontology
                 return;
             }
 
-            const std::string model_file_format = species->get_model_file_format();
-
             if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size()) [[likely]]
             {
                 for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
