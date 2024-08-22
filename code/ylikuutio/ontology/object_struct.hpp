@@ -57,6 +57,14 @@ namespace yli::ontology
         }
 
         ObjectStruct(
+                const std::string& scene,
+                yli::ontology::Species* const species)
+            : MovableStruct(nullptr, scene),
+            mesh_master { species }
+        {
+        }
+
+        ObjectStruct(
                 yli::ontology::Scene* const parent,
                 std::variant<
                 std::monostate,
