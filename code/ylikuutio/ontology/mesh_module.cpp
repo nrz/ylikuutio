@@ -17,6 +17,7 @@
 
 #include "mesh_module.hpp"
 #include "universe.hpp"
+#include "pipeline.hpp"
 #include "model_struct.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
