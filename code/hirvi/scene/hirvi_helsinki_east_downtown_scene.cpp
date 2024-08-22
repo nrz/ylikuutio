@@ -452,7 +452,6 @@ namespace hirvi
         cat2_object_struct.global_name = "cat2";
         cat2_object_struct.local_name = "kissa2";
         cat2_object_struct.brain = rest_brain;
-        cat2_object_struct.scene = helsinki_east_downtown_scene;
         cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         cat2_object_struct.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
