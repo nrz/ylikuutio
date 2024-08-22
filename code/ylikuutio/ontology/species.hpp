@@ -29,7 +29,6 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
 
 namespace yli::core
 {
@@ -91,12 +90,8 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            uint32_t get_x_step() const;
-            uint32_t get_y_step() const;
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;
-
-            const std::string& get_model_file_format() const;
 
             void render(const yli::ontology::Scene* const target_scene);
 

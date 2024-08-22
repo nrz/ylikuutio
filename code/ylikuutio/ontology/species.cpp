@@ -31,7 +31,6 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
-#include <string>    // std::string
 
 namespace yli::core
 {
@@ -185,16 +184,6 @@ namespace yli::ontology
                 this->mesh, this->master_of_objects, new_target_scene);
     }
 
-    uint32_t Species::get_x_step() const
-    {
-        return this->mesh.x_step;
-    }
-
-    uint32_t Species::get_y_step() const
-    {
-        return this->mesh.y_step;
-    }
-
     uint32_t Species::get_image_width() const
     {
         return this->mesh.image_width;
@@ -203,11 +192,6 @@ namespace yli::ontology
     uint32_t Species::get_image_height() const
     {
         return this->mesh.image_height;
-    }
-
-    const std::string& Species::get_model_file_format() const
-    {
-        return this->mesh.model_file_format;
     }
 
     yli::ontology::Scene* Species::get_scene() const
