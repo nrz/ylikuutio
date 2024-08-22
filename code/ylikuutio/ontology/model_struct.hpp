@@ -73,9 +73,9 @@ namespace yli::ontology
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
         std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*> parent {};
-        yli::ontology::Pipeline* pipeline                                      { nullptr }; // Pointer to `Pipeline`.
+        yli::ontology::Pipeline* pipeline                                      { nullptr };
         std::variant<std::monostate, yli::ontology::Material*, yli::ontology::SymbiontMaterial*> material_or_symbiont_material {};
-        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr }; // Pointer to `ShapeshifterTransformation`.
+        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr };
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr }; // For `Glyph`s.
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
