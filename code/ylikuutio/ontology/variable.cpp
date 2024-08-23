@@ -93,14 +93,14 @@ namespace yli::ontology
     {
         yli::ontology::Entity* const entity_parent = this->get_parent();
 
-        if (entity_parent == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Variable::get`: `entity_parent` is `nullptr`!");
-        }
-
         if (this->read_callback == nullptr)
         {
             return this->variable_value;
+        }
+
+        if (entity_parent == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Variable::get`: `entity_parent` is `nullptr`!");
         }
 
         return this->read_callback(*entity_parent);
