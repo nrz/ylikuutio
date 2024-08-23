@@ -70,6 +70,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VariableStruct& variable_struct,
+                    yli::ontology::Entity* entity_parent,
                     const yli::data::AnyValue& any_value);
 
             ~Variable() = default;

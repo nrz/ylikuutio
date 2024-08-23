@@ -42,9 +42,10 @@ namespace yli::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::VariableStruct& variable_struct,
+            yli::ontology::Entity* const entity_parent,
             const yli::data::AnyValue& any_value)
         : Entity(application, universe, variable_struct),
-        child_of_entity(&variable_struct.parent.parent_of_variables, *this),
+        child_of_entity(&entity_parent->parent_of_variables, *this),
         variable_value    { any_value },
         activate_callback { variable_struct.activate_callback },
         read_callback     { variable_struct.read_callback }
