@@ -94,7 +94,7 @@ TEST(set_must_set_global_x, set_x)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
-    yli::ontology::VariableStruct x_variable_struct(universe, universe);
+    yli::ontology::VariableStruct x_variable_struct(universe, &universe);
     x_variable_struct.local_name = "x";
     x_variable_struct.activate_callback = &yli::ontology::activate_x;
     x_variable_struct.read_callback = &yli::ontology::read_x;
@@ -133,7 +133,7 @@ TEST(set_must_set_global_y, set_y)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     float y = 1234.25f;
-    yli::ontology::VariableStruct y_variable_struct(universe, universe);
+    yli::ontology::VariableStruct y_variable_struct(universe, &universe);
     y_variable_struct.local_name = "y";
     y_variable_struct.activate_callback = &yli::ontology::activate_y;
     y_variable_struct.read_callback = &yli::ontology::read_y;
@@ -172,7 +172,7 @@ TEST(set_must_set_global_z, set_z)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     float z = 1234.25f;
-    yli::ontology::VariableStruct z_variable_struct(universe, universe);
+    yli::ontology::VariableStruct z_variable_struct(universe, &universe);
     z_variable_struct.local_name = "z";
     z_variable_struct.activate_callback = &yli::ontology::activate_z;
     z_variable_struct.read_callback = &yli::ontology::read_z;
@@ -211,7 +211,7 @@ TEST(set_must_set_global_roll, set_roll)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     const float roll = 0.0f;
-    yli::ontology::VariableStruct roll_variable_struct(universe, universe);
+    yli::ontology::VariableStruct roll_variable_struct(universe, &universe);
     roll_variable_struct.local_name = "roll";
     roll_variable_struct.activate_callback = &yli::ontology::activate_roll;
     roll_variable_struct.read_callback = &yli::ontology::read_roll;
@@ -249,7 +249,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     const float yaw = 0.0f;
-    yli::ontology::VariableStruct yaw_variable_struct(universe, universe);
+    yli::ontology::VariableStruct yaw_variable_struct(universe, &universe);
     yaw_variable_struct.local_name = "yaw";
     yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
     yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
@@ -287,7 +287,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     const float pitch = 0.0f;
-    yli::ontology::VariableStruct pitch_variable_struct(universe, universe);
+    yli::ontology::VariableStruct pitch_variable_struct(universe, &universe);
     pitch_variable_struct.local_name = "pitch";
     pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
     pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
@@ -325,7 +325,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     application.get_generic_entity_factory().create_scene(scene_struct);
 
     const float azimuth = 0.0f;
-    yli::ontology::VariableStruct azimuth_variable_struct(universe, universe);
+    yli::ontology::VariableStruct azimuth_variable_struct(universe, &universe);
     azimuth_variable_struct.local_name = "azimuth";
     azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
     azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;

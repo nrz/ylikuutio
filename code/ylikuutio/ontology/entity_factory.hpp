@@ -169,7 +169,15 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::VARIABLE));
                 VariableMemoryAllocator& allocator = static_cast<VariableMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Entity* const entity_parent = &variable_struct.parent;
+                yli::ontology::Entity* entity_parent { nullptr };
+                if (std::holds_alternative<std::string>(variable_struct.parent)) [[likely]]
+                {
+                    entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(variable_struct.parent));
+                }
+                else if (std::holds_alternative<yli::ontology::Entity*>(variable_struct.parent))
+                {
+                    entity_parent = std::get<yli::ontology::Entity*>(variable_struct.parent);
+                }
 
                 // The `Universe&` needs to be taken from `VariableStruct`
                 // because `Universe` constructor creates its `Variable`
@@ -179,7 +187,7 @@ namespace yli::ontology
                         this->application,
                         variable_struct.universe,
                         variable_struct,
-                        entity_parent,
+                        ((entity_parent != nullptr) ? &entity_parent->parent_of_variables : nullptr),
                         any_value);
 
                 if (variable_struct.is_variable_of_universe)

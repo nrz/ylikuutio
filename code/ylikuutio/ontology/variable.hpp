@@ -57,6 +57,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Entity;
     class Universe;
     class Scene;
@@ -70,7 +71,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::VariableStruct& variable_struct,
-                    yli::ontology::Entity* entity_parent,
+                    yli::ontology::GenericParentModule* const entity_parent_module,
                     const yli::data::AnyValue& any_value);
 
             ~Variable() = default;

@@ -22,6 +22,10 @@
 #include "activate_callback.hpp"
 #include "read_callback.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::monostate, std::variant
+
 namespace yli::ontology
 {
     class Entity;
@@ -34,7 +38,14 @@ namespace yli::ontology
         // instances using `EntityFactory` before `EntityFactory::create_universe`
         // has initialized `universe` member variable of `EntityFactory`.
 
-        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity& parent)
+        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity* const parent)
+            : universe { universe },
+            parent { parent }
+        {
+            this->is_variable = true;
+        }
+
+        VariableStruct(yli::ontology::Universe& universe, const std::string& parent)
             : universe { universe },
             parent { parent }
         {
@@ -43,7 +54,7 @@ namespace yli::ontology
 
         VariableStruct(const yli::ontology::VariableStruct& variable_struct) = default;
 
-        VariableStruct(yli::ontology::Entity& parent, const yli::ontology::VariableStruct& variable_struct)
+        VariableStruct(yli::ontology::Entity* const parent, const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
             universe { variable_struct.universe },
             parent { parent },
@@ -59,7 +70,7 @@ namespace yli::ontology
         ~VariableStruct() = default;
 
         yli::ontology::Universe& universe;
-        yli::ontology::Entity& parent;
+        std::variant<std::monostate, yli::ontology::Entity*, std::string> parent {};
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
         bool is_variable_of_universe                       { false };
