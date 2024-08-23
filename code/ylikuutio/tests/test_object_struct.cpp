@@ -32,6 +32,7 @@
 
 // Include standard headers
 #include <cmath>   // std::isnan
+#include <string>  // std::string
 #include <variant> // std::holds_alternative, std::monostate
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)
