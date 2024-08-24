@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct CallbackObjectStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::CallbackEngine* parent { nullptr };
+        yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
     };
 }
 

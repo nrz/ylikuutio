@@ -53,7 +53,7 @@ namespace yli::ontology
         yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
-        callback_object_struct.parent = this;
+        callback_object_struct.callback_engine_parent = this;
         return entity_factory.create_callback_object(callback_object_struct);
     }
 
@@ -63,7 +63,7 @@ namespace yli::ontology
         yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         yli::ontology::CallbackObjectStruct callback_object_struct;
-        callback_object_struct.parent = this;
+        callback_object_struct.callback_engine_parent = this;
         auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;

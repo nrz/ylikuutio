@@ -278,8 +278,8 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         callback_object_struct,
-                        ((callback_object_struct.parent != nullptr) ?
-                         &callback_object_struct.parent->parent_of_callback_objects :
+                        ((callback_object_struct.callback_engine_parent != nullptr) ?
+                         &callback_object_struct.callback_engine_parent->parent_of_callback_objects :
                          nullptr));
                 callback_object->set_global_name(callback_object_struct.global_name);
                 callback_object->set_local_name(callback_object_struct.local_name);
