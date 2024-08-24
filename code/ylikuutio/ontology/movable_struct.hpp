@@ -31,10 +31,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>  // NAN
-#include <string> // std::string
+#include <cmath>   // NAN
+#include <string>  // std::string
 #include <variant> // std::monostate, std::variant
-#include <vector> // std::vector
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
