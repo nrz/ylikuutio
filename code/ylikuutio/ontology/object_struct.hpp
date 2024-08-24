@@ -72,9 +72,9 @@ namespace yli::ontology
                 yli::ontology::ShapeshifterSequence*,
                 yli::ontology::Text3D*>
                 mesh_master)
-            : mesh_master { mesh_master }
+            : MovableStruct(nullptr, parent),
+            mesh_master { mesh_master }
         {
-            this->scene = parent;
         }
 
         ObjectStruct(
