@@ -41,8 +41,8 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
@@ -66,8 +66,8 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
@@ -91,8 +91,8 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
@@ -116,8 +116,8 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_EQ(test_object_struct.glyph, nullptr);
