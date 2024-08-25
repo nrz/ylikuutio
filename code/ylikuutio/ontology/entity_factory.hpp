@@ -170,13 +170,13 @@ namespace yli::ontology
                 VariableMemoryAllocator& allocator = static_cast<VariableMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Entity* entity_parent { nullptr };
-                if (std::holds_alternative<std::string>(variable_struct.parent)) [[likely]]
-                {
-                    entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(variable_struct.parent));
-                }
-                else if (std::holds_alternative<yli::ontology::Entity*>(variable_struct.parent))
+                if (std::holds_alternative<yli::ontology::Entity*>(variable_struct.parent))
                 {
                     entity_parent = std::get<yli::ontology::Entity*>(variable_struct.parent);
+                }
+                else if (std::holds_alternative<std::string>(variable_struct.parent))
+                {
+                    entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(variable_struct.parent));
                 }
 
                 // The `Universe&` needs to be taken from `VariableStruct`
@@ -275,14 +275,14 @@ namespace yli::ontology
                 CallbackObjectMemoryAllocator& allocator = static_cast<CallbackObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
-                if (std::holds_alternative<std::string>(callback_object_struct.callback_engine_parent)) [[likely]]
+                if (std::holds_alternative<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent))
+                {
+                    callback_engine_parent = std::get<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent);
+                }
+                else if (std::holds_alternative<std::string>(callback_object_struct.callback_engine_parent))
                 {
                     callback_engine_parent = dynamic_cast<yli::ontology::CallbackEngine*>(this->get_universe().registry.get_entity(
                                 std::get<std::string>(callback_object_struct.callback_engine_parent)));
-                }
-                else if (std::holds_alternative<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent))
-                {
-                    callback_engine_parent = std::get<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent);
                 }
 
                 yli::ontology::CallbackObject* const callback_object = allocator.build_in(
@@ -407,13 +407,13 @@ namespace yli::ontology
                 BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(brain_struct.parent)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(brain_struct.parent)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(brain_struct.parent))
+                if (std::holds_alternative<yli::ontology::Scene*>(brain_struct.parent))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(brain_struct.parent);
+                }
+                else if (std::holds_alternative<std::string>(brain_struct.parent))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(brain_struct.parent)));
                 }
 
                 yli::ontology::Brain* const brain = allocator.build_in(
@@ -437,13 +437,13 @@ namespace yli::ontology
                 WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(waypoint_struct.scene)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(waypoint_struct.scene)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(waypoint_struct.scene))
+                if (std::holds_alternative<yli::ontology::Scene*>(waypoint_struct.scene))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(waypoint_struct.scene);
+                }
+                else if (std::holds_alternative<std::string>(waypoint_struct.scene))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(waypoint_struct.scene)));
                 }
 
                 yli::ontology::Waypoint* const waypoint = allocator.build_in(
@@ -469,13 +469,13 @@ namespace yli::ontology
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(camera_struct.scene)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
+                if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
+                }
+                else if (std::holds_alternative<std::string>(camera_struct.scene))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
                 }
 
                 yli::ontology::Camera* const camera = allocator.build_in(
@@ -500,13 +500,13 @@ namespace yli::ontology
                 CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(camera_struct.scene)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
+                if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
+                }
+                else if (std::holds_alternative<std::string>(camera_struct.scene))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
                 }
 
                 yli::ontology::Camera* const camera = allocator.build_in(
@@ -611,13 +611,13 @@ namespace yli::ontology
                 ObjectMemoryAllocator& allocator = static_cast<ObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(object_struct.scene)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
+                if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
+                }
+                else if (std::holds_alternative<std::string>(object_struct.scene))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
                 }
 
                 yli::ontology::Object* const object = allocator.build_in(
@@ -717,13 +717,13 @@ namespace yli::ontology
                 HolobiontMemoryAllocator& allocator = static_cast<HolobiontMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<std::string>(holobiont_struct.scene)) [[likely]]
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
+                if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
                 {
                     scene_parent = std::get<yli::ontology::Scene*>(holobiont_struct.scene);
+                }
+                else if (std::holds_alternative<std::string>(holobiont_struct.scene))
+                {
+                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
                 }
 
                 yli::ontology::Holobiont* const holobiont = allocator.build_in(
@@ -1256,13 +1256,13 @@ namespace yli::ontology
                         static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
 
                     yli::ontology::Scene* scene_parent { nullptr };
-                    if (std::holds_alternative<std::string>(object_struct.scene)) [[likely]]
-                    {
-                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
-                    }
-                    else if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
+                    if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
                     {
                         scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
+                    }
+                    else if (std::holds_alternative<std::string>(object_struct.scene))
+                    {
+                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
                     }
 
                     T* const object = allocator.build_in(
@@ -1302,13 +1302,13 @@ namespace yli::ontology
                         static_cast<HolobiontDerivativeMemoryAllocator&>(generic_allocator);
 
                     yli::ontology::Scene* scene_parent { nullptr };
-                    if (std::holds_alternative<std::string>(holobiont_struct.scene)) [[likely]]
-                    {
-                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
-                    }
-                    else if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
+                    if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
                     {
                         scene_parent = std::get<yli::ontology::Scene*>(holobiont_struct.scene);
+                    }
+                    else if (std::holds_alternative<std::string>(holobiont_struct.scene))
+                    {
+                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
                     }
 
                     T* const holobiont = allocator.build_in(
