@@ -314,8 +314,8 @@ namespace yli::ontology
                         this->get_universe(),
                         callback_parameter_struct,
                         any_value,
-                        ((callback_parameter_struct.parent != nullptr) ?
-                         &callback_parameter_struct.parent->parent_of_callback_parameters :
+                        ((callback_parameter_struct.callback_object_parent != nullptr) ?
+                         &callback_parameter_struct.callback_object_parent->parent_of_callback_parameters :
                          nullptr));
 
                 callback_parameter->set_global_name(callback_parameter_struct.global_name);

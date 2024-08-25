@@ -78,7 +78,7 @@ namespace yli::ontology
         yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         yli::ontology::CallbackParameterStruct callback_parameter_struct;
-        callback_parameter_struct.parent = this;
+        callback_parameter_struct.callback_object_parent = this;
         callback_parameter_struct.local_name = name;
         return static_cast<yli::ontology::CallbackParameter*>(
                 entity_factory.create_callback_parameter(callback_parameter_struct, any_value));
