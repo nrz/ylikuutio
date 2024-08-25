@@ -989,6 +989,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_brain_snippets.cpp
         code/ylikuutio/tests/test_brain_struct.cpp
         code/ylikuutio/tests/test_callback_engine.cpp
+        code/ylikuutio/tests/test_callback_object.cpp
+        code/ylikuutio/tests/test_callback_object_struct.cpp
         code/ylikuutio/tests/test_callback_system.cpp
         code/ylikuutio/tests/test_camera.cpp
         code/ylikuutio/tests/test_cartesian_coordinates_module.cpp

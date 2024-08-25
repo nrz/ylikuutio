@@ -274,12 +274,23 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::CALLBACK_OBJECT));
                 CallbackObjectMemoryAllocator& allocator = static_cast<CallbackObjectMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
+                if (std::holds_alternative<std::string>(callback_object_struct.callback_engine_parent)) [[likely]]
+                {
+                    callback_engine_parent = dynamic_cast<yli::ontology::CallbackEngine*>(this->get_universe().registry.get_entity(
+                                std::get<std::string>(callback_object_struct.callback_engine_parent)));
+                }
+                else if (std::holds_alternative<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent))
+                {
+                    callback_engine_parent = std::get<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent);
+                }
+
                 yli::ontology::CallbackObject* const callback_object = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         callback_object_struct,
-                        ((callback_object_struct.callback_engine_parent != nullptr) ?
-                         &callback_object_struct.callback_engine_parent->parent_of_callback_objects :
+                        ((callback_engine_parent != nullptr) ?
+                         &callback_engine_parent->parent_of_callback_objects :
                          nullptr));
                 callback_object->set_global_name(callback_object_struct.global_name);
                 callback_object->set_local_name(callback_object_struct.local_name);

@@ -20,13 +20,27 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::monostate, std::variant
+
 namespace yli::ontology
 {
     class CallbackEngine;
 
     struct CallbackObjectStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
+        CallbackObjectStruct(yli::ontology::CallbackEngine* const callback_engine_parent)
+            : callback_engine_parent { callback_engine_parent }
+        {
+        }
+
+        CallbackObjectStruct(const std::string& callback_engine_parent)
+            : callback_engine_parent { callback_engine_parent }
+        {
+        }
+
+        std::variant<std::monostate, yli::ontology::CallbackEngine*, std::string> callback_engine_parent {};
     };
 }
 
