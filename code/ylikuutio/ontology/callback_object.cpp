@@ -49,6 +49,8 @@ namespace yli::ontology
                 this->registry,
                 "callback_parameters")
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::CallbackObject*";
     }
 
     CallbackObject::CallbackObject(
@@ -65,6 +67,8 @@ namespace yli::ontology
                 "callback_parameters"),
         callback { callback }
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::CallbackObject*";
     }
 
     yli::ontology::CallbackParameter* CallbackObject::create_callback_parameter(
