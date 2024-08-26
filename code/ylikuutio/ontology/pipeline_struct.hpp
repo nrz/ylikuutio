@@ -41,9 +41,14 @@ namespace yli::ontology
         {
         }
 
+        explicit PipelineStruct(const std::string& parent)
+            : parent { parent }
+        {
+        }
+
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent; // Pointer to `Ecosystem` or `Scene`.
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
         bool is_gpgpu_pipeline { false }; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }

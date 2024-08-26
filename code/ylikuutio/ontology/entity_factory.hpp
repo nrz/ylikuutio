@@ -543,16 +543,45 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::PIPELINE));
                 PipelineMemoryAllocator& allocator = static_cast<PipelineMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Pipeline* const pipeline = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        pipeline_struct,
-                        // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(pipeline_struct.parent) && std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent)->parent_of_pipelines) :
-                         (std::holds_alternative<yli::ontology::Scene*>(pipeline_struct.parent) && std::get<yli::ontology::Scene*>(pipeline_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::Scene*>(pipeline_struct.parent)->parent_of_pipelines) :
-                         nullptr));
+                yli::ontology::Pipeline* pipeline { nullptr };
+                if (std::holds_alternative<yli::ontology::Ecosystem*>(pipeline_struct.parent))
+                {
+                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent);
+
+                    pipeline = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            pipeline_struct,
+                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_pipelines) : nullptr));
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(pipeline_struct.parent))
+                {
+                    auto const scene_parent = std::get<yli::ontology::Scene*>(pipeline_struct.parent);
+
+                    pipeline = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            pipeline_struct,
+                            (scene_parent != nullptr ? &(scene_parent->parent_of_pipelines) : nullptr));
+                }
+                else if (std::holds_alternative<std::string>(pipeline_struct.parent))
+                {
+                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(pipeline_struct.parent));
+
+                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
+                    {
+                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, &(ecosystem_parent->parent_of_pipelines));
+                    }
+                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
+                    {
+                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, &(scene_parent->parent_of_pipelines));
+                    }
+                    else
+                    {
+                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, nullptr);
+                    }
+                }
+
                 pipeline->set_global_name(pipeline_struct.global_name);
                 pipeline->set_local_name(pipeline_struct.local_name);
                 return pipeline;

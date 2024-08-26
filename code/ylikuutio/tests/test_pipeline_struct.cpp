@@ -38,6 +38,7 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosyste
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
     ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
     ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }
@@ -54,6 +55,19 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_scene_pa
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
+    ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
+    ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
+}
+
+TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_parent_string)
+{
+    const yli::ontology::PipelineStruct test_pipeline_struct("foo");
+    ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
     ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
     ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }
