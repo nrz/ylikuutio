@@ -46,9 +46,16 @@ namespace yli::ontology
         {
         }
 
+        MaterialStruct(const std::string& parent,
+                yli::ontology::Pipeline* const pipeline)
+            : parent { parent },
+            pipeline { pipeline }
+        {
+        }
+
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent;
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
         yli::ontology::Pipeline* pipeline   { nullptr }; // Pointer to `Pipeline` master.
     };
 }

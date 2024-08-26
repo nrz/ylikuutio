@@ -597,17 +597,50 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::MATERIAL));
                 MaterialMemoryAllocator& allocator = static_cast<MaterialMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Material* const material = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        material_struct,
-                        // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(material_struct.parent) && std::get<yli::ontology::Ecosystem*>(material_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::Ecosystem*>(material_struct.parent)->parent_of_materials) :
-                         (std::holds_alternative<yli::ontology::Scene*>(material_struct.parent) && std::get<yli::ontology::Scene*>(material_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::Scene*>(material_struct.parent)->parent_of_materials) :
-                         nullptr),
-                        (material_struct.pipeline != nullptr ? material_struct.pipeline->get_master_module() : nullptr));
+                yli::ontology::Material* material { nullptr };
+                auto pipeline_master = material_struct.pipeline != nullptr ? material_struct.pipeline->get_master_module() : nullptr;
+
+                if (std::holds_alternative<yli::ontology::Ecosystem*>(material_struct.parent))
+                {
+                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(material_struct.parent);
+
+                    material = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            material_struct,
+                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_materials) : nullptr),
+                            pipeline_master);
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(material_struct.parent))
+                {
+                    auto const scene_parent = std::get<yli::ontology::Scene*>(material_struct.parent);
+
+                    material = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            material_struct,
+                            (scene_parent != nullptr ? &(scene_parent->parent_of_materials) : nullptr),
+                            pipeline_master);
+                }
+                else if (std::holds_alternative<std::string>(material_struct.parent))
+                {
+                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(material_struct.parent));
+
+                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const material_parent = &(ecosystem_parent->parent_of_materials);
+                        material = allocator.build_in(this->application, this->get_universe(), material_struct, material_parent, pipeline_master);
+                    }
+                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const material_parent = &(scene_parent->parent_of_materials);
+                        material = allocator.build_in(this->application, this->get_universe(), material_struct, material_parent, pipeline_master);
+                    }
+                    else
+                    {
+                        material = allocator.build_in(this->application, this->get_universe(), material_struct, nullptr, pipeline_master);
+                    }
+                }
 
                 material->set_global_name(material_struct.global_name);
                 material->set_local_name(material_struct.local_name);

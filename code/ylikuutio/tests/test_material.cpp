@@ -29,9 +29,10 @@
 #include "code/ylikuutio/ontology/species_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
+#include <limits>  // std::numeric_limits
 
-TEST(material_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem)
+TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -78,7 +79,7 @@ TEST(material_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
 }
 
-TEST(material_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_scene)
+TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_of_scene_ecosystem_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -96,6 +97,8 @@ TEST(material_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -131,6 +134,214 @@ TEST(material_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
 }
 
+TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    ecosystem_struct.global_name = "foo";
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct("foo", pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `ecosystem`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), nullptr);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 1); // `material`.
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    ASSERT_EQ(material->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(material->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), 0);
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_scene(), nullptr);
+    ASSERT_EQ(material->get_parent(), ecosystem);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+}
+
+TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_of_scene_scene_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct("foo", pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `ecosystem`, `scene`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 1); // `material`.
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    ASSERT_EQ(material->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(material->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), 0);
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_scene(), scene);
+    ASSERT_EQ(material->get_parent(), scene);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+}
+
+TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_ecosystem_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    ecosystem_struct.global_name = "foo";
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct("bar", pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `ecosystem`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 1); // `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), nullptr);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 1); // `material`.
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    ASSERT_EQ(material->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(material->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_scene(), nullptr);
+    ASSERT_EQ(material->get_parent(), nullptr);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+}
+
+TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_of_scene_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct("bar", pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `ecosystem`, `scene`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `pipeline`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Pipeline` member functions.
+    ASSERT_EQ(pipeline->get_number_of_apprentices(), 1); // `material`.
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    ASSERT_EQ(material->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(material->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(material->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(material->get_type(), "yli::ontology::Material*");
+    ASSERT_TRUE(material->get_can_be_erased());
+    ASSERT_EQ(material->get_scene(), nullptr);
+    ASSERT_EQ(material->get_parent(), nullptr);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+}
+
 TEST(material_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -145,6 +356,8 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::MaterialStruct material_struct(scene, pipeline);
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
+    ASSERT_NE(material, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

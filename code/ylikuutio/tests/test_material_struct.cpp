@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
 // Include standard headers
+#include <string>  // std::string
 #include <variant> // std::holds_alternative, std::monostate
 
 TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosystem_parent_nullptr_pipeline)
@@ -39,6 +40,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
 
     ASSERT_EQ(test_material_struct.pipeline, nullptr);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
@@ -58,6 +60,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
 
     ASSERT_EQ(test_material_struct.pipeline, nullptr);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
@@ -81,6 +84,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
 
     ASSERT_EQ(test_material_struct.pipeline, pipeline);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
@@ -104,6 +108,31 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
+
+    ASSERT_EQ(test_material_struct.pipeline, pipeline);
+    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_TRUE(test_material_struct.texture_filename.empty());
+}
+
+TEST(material_struct_must_be_initialized_appropriately, material_struct_parent_given_as_string_valid_pipeline)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    const yli::ontology::MaterialStruct test_material_struct("foo", pipeline);
+
+    ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_material_struct.parent));
 
     ASSERT_EQ(test_material_struct.pipeline, pipeline);
     ASSERT_TRUE(test_material_struct.texture_file_format.empty());
