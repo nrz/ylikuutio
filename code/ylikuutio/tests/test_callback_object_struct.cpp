@@ -18,6 +18,10 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/callback_object_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::holds_alternative, std::monostate
+
 namespace yli::ontology
 {
     class CallbackEngine;
