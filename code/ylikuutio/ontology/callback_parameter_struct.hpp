@@ -20,13 +20,27 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::monostate, std::variant
+
 namespace yli::ontology
 {
     class CallbackObject;
 
     struct CallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        yli::ontology::CallbackObject* callback_object_parent { nullptr };
+        explicit CallbackParameterStruct(yli::ontology::CallbackObject* const callback_object_parent)
+            : callback_object_parent { callback_object_parent }
+        {
+        }
+
+        explicit CallbackParameterStruct(const std::string& callback_object_parent)
+            : callback_object_parent { callback_object_parent }
+        {
+        }
+
+        std::variant<std::monostate, yli::ontology::CallbackObject*, std::string> callback_object_parent {};
     };
 }
 

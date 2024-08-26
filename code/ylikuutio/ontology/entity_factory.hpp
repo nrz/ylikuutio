@@ -309,13 +309,24 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::CALLBACK_PARAMETER));
                 CallbackParameterMemoryAllocator& allocator = static_cast<CallbackParameterMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::CallbackObject* callback_object_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::CallbackObject*>(callback_parameter_struct.callback_object_parent))
+                {
+                    callback_object_parent = std::get<yli::ontology::CallbackObject*>(callback_parameter_struct.callback_object_parent);
+                }
+                else if (std::holds_alternative<std::string>(callback_parameter_struct.callback_object_parent))
+                {
+                    callback_object_parent = dynamic_cast<yli::ontology::CallbackObject*>(this->get_universe().registry.get_entity(
+                                std::get<std::string>(callback_parameter_struct.callback_object_parent)));
+                }
+
                 yli::ontology::CallbackParameter* const callback_parameter = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         callback_parameter_struct,
                         any_value,
-                        ((callback_parameter_struct.callback_object_parent != nullptr) ?
-                         &callback_parameter_struct.callback_object_parent->parent_of_callback_parameters :
+                        ((callback_object_parent != nullptr) ?
+                         &callback_object_parent->parent_of_callback_parameters :
                          nullptr));
 
                 callback_parameter->set_global_name(callback_parameter_struct.global_name);
