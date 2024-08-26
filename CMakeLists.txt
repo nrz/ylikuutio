@@ -688,6 +688,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
+    code/ylikuutio/ontology/symbiont_material_struct.hpp
     code/ylikuutio/ontology/symbiont_species.cpp
     code/ylikuutio/ontology/symbiont_species.hpp
     code/ylikuutio/ontology/symbiosis.cpp
@@ -1044,6 +1045,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_pipeline_struct.cpp
         code/ylikuutio/tests/test_shapeshifter.cpp
         code/ylikuutio/tests/test_species.cpp
+        code/ylikuutio/tests/test_symbiont_material_struct.cpp
         code/ylikuutio/tests/test_symbiosis.cpp
         code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
         code/ylikuutio/tests/test_text_2d.cpp

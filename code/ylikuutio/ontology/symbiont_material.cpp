@@ -18,7 +18,7 @@
 #include "symbiont_material.hpp"
 #include "pipeline.hpp"
 #include "symbiosis.hpp"
-#include "material_struct.hpp"
+#include "symbiont_material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
@@ -43,9 +43,9 @@ namespace yli::ontology
     SymbiontMaterial::SymbiontMaterial(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::MaterialStruct& material_struct,
+            const yli::ontology::SymbiontMaterialStruct& symbiont_material_struct,
             yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
-        : Entity(application, universe, material_struct),
+        : Entity(application, universe, symbiont_material_struct),
         child_of_symbiosis(symbiosis_parent_module, *this),
         parent_of_symbiont_species(
                 *this,
@@ -54,7 +54,7 @@ namespace yli::ontology
         texture(
                 universe,
                 &this->registry,
-                material_struct.ofbx_texture,
+                symbiont_material_struct.ofbx_texture,
                 yli::load::ImageLoaderStruct(),
                 "texture")
     {

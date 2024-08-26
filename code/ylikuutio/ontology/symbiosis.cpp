@@ -23,8 +23,8 @@
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
 #include "generic_entity_factory.hpp"
-#include "material_struct.hpp"
 #include "symbiosis_struct.hpp"
+#include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -298,11 +298,11 @@ namespace yli::ontology
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
-                yli::ontology::MaterialStruct material_struct(this, pipeline);
-                material_struct.ofbx_texture = ofbx_texture;
+                yli::ontology::SymbiontMaterialStruct symbiont_material_struct(this, pipeline);
+                symbiont_material_struct.ofbx_texture = ofbx_texture;
 
                 yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
-                auto symbiont_material = entity_factory.create_symbiont_material(material_struct);
+                auto symbiont_material = entity_factory.create_symbiont_material(symbiont_material_struct);
 
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 

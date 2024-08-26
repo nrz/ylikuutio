@@ -43,7 +43,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Pipeline;
-    struct MaterialStruct;
+    struct SymbiontMaterialStruct;
 
     class SymbiontMaterial final : public yli::ontology::Entity
     {
@@ -51,7 +51,7 @@ namespace yli::ontology
             SymbiontMaterial(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::MaterialStruct& material_struct,
+                    const yli::ontology::SymbiontMaterialStruct& symbiont_material_struct,
                     yli::ontology::GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
 
             ~SymbiontMaterial() = default;

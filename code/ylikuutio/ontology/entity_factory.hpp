@@ -73,6 +73,7 @@
 #include "species_struct.hpp"
 #include "object_struct.hpp"
 #include "symbiosis_struct.hpp"
+#include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
@@ -710,7 +711,7 @@ namespace yli::ontology
                 return symbiosis;
             }
 
-            yli::ontology::SymbiontMaterial* create_symbiont_material(const MaterialStruct& material_struct) const override
+            yli::ontology::SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const override
             {
                 using SymbiontMaterialMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontMaterial, 256>;
 
@@ -722,10 +723,9 @@ namespace yli::ontology
                 return allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        material_struct,
-                        ((std::holds_alternative<yli::ontology::Symbiosis*>(material_struct.parent) &&
-                          std::get<yli::ontology::Symbiosis*>(material_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::Symbiosis*>(material_struct.parent)->parent_of_symbiont_materials) :
+                        symbiont_material_struct,
+                        (symbiont_material_struct.symbiosis_parent != nullptr ?
+                         &(symbiont_material_struct.symbiosis_parent->parent_of_symbiont_materials) :
                          nullptr));
             }
 
