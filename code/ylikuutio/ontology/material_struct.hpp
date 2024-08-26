@@ -24,18 +24,11 @@
 #include <string>   // std::string
 #include <variant>  // std::holds_alternative, std::monostate, std::variant
 
-namespace ofbx
-{
-    // OpenFBX.
-    struct Texture;
-}
-
 namespace yli::ontology
 {
     class Ecosystem;
     class Scene;
     class Pipeline;
-    class Symbiosis;
 
     struct MaterialStruct : public yli::ontology::EntityStruct
     {
@@ -53,18 +46,10 @@ namespace yli::ontology
         {
         }
 
-        MaterialStruct(yli::ontology::Symbiosis* const symbiosis_parent,
-                yli::ontology::Pipeline* const pipeline)
-            : parent { symbiosis_parent },
-            pipeline { pipeline }
-        {
-        }
-
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::Symbiosis*> parent;
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*> parent;
         yli::ontology::Pipeline* pipeline   { nullptr }; // Pointer to `Pipeline` master.
-        const ofbx::Texture* ofbx_texture   { nullptr }; // For `SymbiontMaterial`s.
     };
 }
 
