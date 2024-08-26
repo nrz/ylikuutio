@@ -32,7 +32,7 @@
 // Include standard headers
 #include <cstddef> // uintptr_t
 
-TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless)
+TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_with_ecosystem_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -64,7 +64,7 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 }
 
-TEST(pipeline_must_be_initialized_appropriately, headless)
+TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -94,7 +94,7 @@ TEST(pipeline_must_be_initialized_appropriately, headless)
     ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
 }
 
-TEST(pipeline_must_bind_to_ecosystem_appropriately, ecosystem)
+TEST(pipeline_must_bind_to_ecosystem_appropriately, headless_with_ecosystem_parents_provided_as_valid_pointers)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -130,7 +130,7 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately, ecosystem)
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
 }
 
-TEST(pipeline_must_bind_to_scene_appropriately, scenes)
+TEST(pipeline_must_bind_to_scene_appropriately, headless_with_scene_parents_provided_as_valid_pointers)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -165,7 +165,7 @@ TEST(pipeline_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);
 }
 
-TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene)
+TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, headless_with_ecosystem_parent_and_scene_parent_provided_as_valid_pointers)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -198,7 +198,7 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosy
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);  // `ecosystem`, `scene`.
 }
 
-TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem)
+TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, headless_with_ecosystem_parent_and_scene_parent_provided_as_valid_pointers)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -231,7 +231,7 @@ TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
 }
 
-TEST(pipeline_must_be_given_a_global_name_appropriately, headless)
+TEST(pipeline_must_be_given_a_global_name_appropriately, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -253,7 +253,7 @@ TEST(pipeline_must_be_given_a_global_name_appropriately, headless)
     ASSERT_EQ(scene->get_entity("foo"), nullptr);
 }
 
-TEST(pipeline_must_be_given_a_local_name_appropriately, headless)
+TEST(pipeline_must_be_given_a_local_name_appropriately, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -275,7 +275,7 @@ TEST(pipeline_must_be_given_a_local_name_appropriately, headless)
     ASSERT_EQ(scene->get_entity("foo"), pipeline);
 }
 
-TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless)
+TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_name, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -302,7 +302,7 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_n
     ASSERT_EQ(scene->get_entity("bar"), nullptr);
 }
 
-TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless)
+TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_name, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -329,7 +329,7 @@ TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_nam
     ASSERT_EQ(scene->get_entity("bar"), pipeline);
 }
 
-TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless)
+TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_name, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -356,7 +356,7 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_na
     ASSERT_EQ(scene->get_entity("bar"), nullptr);
 }
 
-TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless)
+TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_global_name, headless_with_scene_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
