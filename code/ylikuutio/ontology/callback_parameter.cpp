@@ -51,6 +51,8 @@ namespace yli::ontology
         child_of_callback_object(callback_object_parent_module, *this),
         any_value { any_value }
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::CallbackParameter*";
     }
 
     const yli::data::AnyValue& CallbackParameter::get_any_value() const
