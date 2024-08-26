@@ -30,12 +30,12 @@ namespace yli::ontology
 
     struct CallbackObjectStruct : public yli::ontology::EntityStruct
     {
-        CallbackObjectStruct(yli::ontology::CallbackEngine* const callback_engine_parent)
+        explicit CallbackObjectStruct(yli::ontology::CallbackEngine* const callback_engine_parent)
             : callback_engine_parent { callback_engine_parent }
         {
         }
 
-        CallbackObjectStruct(const std::string& callback_engine_parent)
+        explicit CallbackObjectStruct(const std::string& callback_engine_parent)
             : callback_engine_parent { callback_engine_parent }
         {
         }
