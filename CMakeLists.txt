@@ -188,7 +188,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include(FetchContent)
     FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/77962730563eece3525f40b8769e4ca0c6baf64c.zip
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
         )
 
     FetchContent_MakeAvailable(googletest)
