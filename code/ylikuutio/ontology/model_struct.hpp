@@ -80,7 +80,6 @@ namespace yli::ontology
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };
-        float water_level { -1.0f * std::numeric_limits<float>::infinity() }; // Water level in meters. used only for terrains (planets and moons).
         bool use_real_texture_coordinates { true };
     };
 }
