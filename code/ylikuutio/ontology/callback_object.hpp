@@ -73,7 +73,7 @@ namespace yli::ontology
         public:
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const std::string& name,
-                    const yli::data::AnyValue& any_value);
+                    yli::data::AnyValue&& any_value);
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);

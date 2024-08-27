@@ -112,7 +112,7 @@ namespace yli::ontology
 
             virtual yli::ontology::CallbackParameter* create_callback_parameter(
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
-                    const yli::data::AnyValue& any_value) const = 0;
+                    yli::data::AnyValue&& any_value) const = 0;
 
             virtual yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const = 0;
             virtual yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const = 0;

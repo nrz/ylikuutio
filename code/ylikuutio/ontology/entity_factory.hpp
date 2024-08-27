@@ -101,6 +101,7 @@
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
+#include <utility>    // std::forward
 #include <variant>    // std::holds_alternative
 
 namespace yli::core
@@ -300,7 +301,7 @@ namespace yli::ontology
 
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
-                    const yli::data::AnyValue& any_value) const override
+                    yli::data::AnyValue&& any_value) const override
             {
                 using CallbackParameterMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
@@ -325,7 +326,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         callback_parameter_struct,
-                        any_value,
+                        std::forward<yli::data::AnyValue&&>(any_value),
                         ((callback_object_parent != nullptr) ?
                          &callback_object_parent->parent_of_callback_parameters :
                          nullptr));

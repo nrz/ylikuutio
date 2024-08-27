@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t, uintptr_t
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
@@ -46,7 +47,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
     const yli::ontology::CallbackParameterStruct callback_parameter_struct(callback_object);
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
-            zero_value);
+            std::move(zero_value));
     ASSERT_NE(callback_parameter, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_parameter) % alignof(yli::ontology::CallbackParameter), 0);
 
@@ -80,7 +81,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
     const yli::ontology::CallbackParameterStruct callback_parameter_struct(static_cast<yli::ontology::CallbackObject*>(nullptr));
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
-            zero_value);
+            std::move(zero_value));
     ASSERT_NE(callback_parameter, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_parameter) % alignof(yli::ontology::CallbackParameter), 0);
 
@@ -115,7 +116,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_va
     const yli::ontology::CallbackParameterStruct callback_parameter_struct("foo");
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
-            zero_value);
+            std::move(zero_value));
     ASSERT_NE(callback_parameter, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_parameter) % alignof(yli::ontology::CallbackParameter), 0);
 
@@ -150,7 +151,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_in
     const yli::ontology::CallbackParameterStruct callback_parameter_struct("bar");
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
-            zero_value);
+            std::move(zero_value));
     ASSERT_NE(callback_parameter, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_parameter) % alignof(yli::ontology::CallbackParameter), 0);
 
