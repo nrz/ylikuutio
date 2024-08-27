@@ -109,10 +109,10 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
-        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct;
-        joensuu_center_west_terrain_species_struct.parent = joensuu_center_west_scene;
-        joensuu_center_west_terrain_species_struct.pipeline = joensuu_center_west_pipeline;
-        joensuu_center_west_terrain_species_struct.material_or_symbiont_material = joensuu_center_west_grass_material;
+        yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct(
+                joensuu_center_west_scene,
+                joensuu_center_west_pipeline,
+                joensuu_center_west_grass_material);
         joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.x_step = 4;
@@ -150,10 +150,7 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
-        yli::ontology::SpeciesStruct horse_species_struct;
-        horse_species_struct.parent = joensuu_center_west_scene;
-        horse_species_struct.pipeline = joensuu_center_west_pipeline;
-        horse_species_struct.material_or_symbiont_material = orange_fur_material_joensuu;
+        yli::ontology::SpeciesStruct horse_species_struct(joensuu_center_west_scene, joensuu_center_west_pipeline, orange_fur_material_joensuu);
         horse_species_struct.model_file_format = "fbx";
         horse_species_struct.model_filename = "horse.fbx";
 

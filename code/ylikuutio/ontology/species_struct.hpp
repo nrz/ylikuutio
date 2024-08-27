@@ -20,10 +20,41 @@
 
 #include "model_struct.hpp"
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::ontology
 {
+    class Ecosystem;
+    class Scene;
+    class Pipeline;
+    class Material;
+
     struct SpeciesStruct final : public yli::ontology::ModelStruct
     {
+        SpeciesStruct(
+                yli::ontology::Ecosystem* const ecosystem_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : ModelStruct(ecosystem_parent, pipeline, material_master)
+        {
+        }
+
+        SpeciesStruct(
+                yli::ontology::Scene* const scene_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : ModelStruct(scene_parent, pipeline, material_master)
+        {
+        }
+
+        SpeciesStruct(
+                const std::string& parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : ModelStruct(parent, pipeline, material_master)
+        {
+        }
     };
 }
 

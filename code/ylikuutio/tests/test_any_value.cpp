@@ -481,7 +481,7 @@ TEST(any_value_must_be_initialized_appropriately, material)
 TEST(any_value_must_be_initialized_appropriately, species)
 {
     mock::MockApplication application;
-    yli::ontology::SpeciesStruct species_struct;
+    yli::ontology::SpeciesStruct species_struct(static_cast<yli::ontology::Ecosystem*>(nullptr), nullptr, nullptr);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 

@@ -50,10 +50,7 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -115,10 +112,7 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -181,10 +175,7 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -247,10 +238,7 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -352,10 +340,7 @@ TEST(object_must_bind_to_brain_appropriately, headless_with_parent_provided_as_v
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -387,10 +372,7 @@ TEST(object_must_bind_to_species_appropriately, headless_with_parent_provided_as
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.pipeline = pipeline;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, pipeline, material);
     yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             species_struct);
 

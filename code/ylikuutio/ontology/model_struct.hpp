@@ -48,6 +48,36 @@ namespace yli::ontology
         ModelStruct() = default;
 
         ModelStruct(
+                yli::ontology::Ecosystem* const ecosystem_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : parent                      { ecosystem_parent },
+            pipeline                      { pipeline },
+            material_or_symbiont_material { material_master }
+        {
+        }
+
+        ModelStruct(
+                yli::ontology::Scene* const scene_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : parent                      { scene_parent },
+            pipeline                      { pipeline },
+            material_or_symbiont_material { material_master }
+        {
+        }
+
+        ModelStruct(
+                const std::string& parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : parent                      { parent },
+            pipeline                      { pipeline },
+            material_or_symbiont_material { material_master }
+        {
+        }
+
+        ModelStruct(
                 yli::ontology::Pipeline* const pipeline,
                 yli::ontology::SymbiontMaterial* const symbiont_material)
             : pipeline                    { pipeline },
@@ -72,7 +102,7 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*> parent {};
+        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, yli::ontology::VectorFont*, std::string> parent {};
         yli::ontology::Pipeline* pipeline                                      { nullptr };
         std::variant<std::monostate, yli::ontology::Material*, yli::ontology::SymbiontMaterial*> material_or_symbiont_material {};
         yli::ontology::ShapeshifterTransformation* shapeshifter_transformation { nullptr };

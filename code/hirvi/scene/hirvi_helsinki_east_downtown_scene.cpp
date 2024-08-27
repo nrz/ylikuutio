@@ -373,10 +373,10 @@ namespace hirvi
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct;
-        helsinki_east_downtown_terrain_species_struct.parent = helsinki_east_downtown_scene;
-        helsinki_east_downtown_terrain_species_struct.pipeline = helsinki_east_downtown_pipeline;
-        helsinki_east_downtown_terrain_species_struct.material_or_symbiont_material = helsinki_east_downtown_grass_material;
+        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct(
+                helsinki_east_downtown_scene,
+                helsinki_east_downtown_pipeline,
+                helsinki_east_downtown_grass_material);
         helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_species_struct.x_step = 4;
@@ -398,12 +398,9 @@ namespace hirvi
         helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);
 
-        yli::ontology::SpeciesStruct cat_species_struct;
-        cat_species_struct.parent = helsinki_east_downtown_scene;
+        yli::ontology::SpeciesStruct cat_species_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline, orange_fur_material);
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
-        cat_species_struct.pipeline = helsinki_east_downtown_pipeline;
-        cat_species_struct.material_or_symbiont_material = orange_fur_material;
         cat_species_struct.model_file_format = "fbx";
         cat_species_struct.model_filename = "cat.fbx";
 

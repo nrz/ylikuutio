@@ -83,12 +83,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    yli::ontology::SpeciesStruct cat_species_struct;
-    cat_species_struct.parent = helsinki_east_downtown_scene;
+    yli::ontology::SpeciesStruct cat_species_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline, orange_fur_material);
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
-    cat_species_struct.pipeline = helsinki_east_downtown_pipeline;
-    cat_species_struct.material_or_symbiont_material = orange_fur_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);

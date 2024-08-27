@@ -657,19 +657,53 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SPECIES));
                 SpeciesMemoryAllocator& allocator = static_cast<SpeciesMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Species* species { nullptr };
                 auto& material_or_symbiont_material = species_struct.material_or_symbiont_material;
+                auto const material_master = (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
+                        std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
+                        &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->master_of_species) : nullptr);
 
-                yli::ontology::Species* const species = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        species_struct,
-                        // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(species_struct.parent) && std::get<yli::ontology::Ecosystem*>(species_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(species_struct.parent)->parent_of_species) :
-                         (std::holds_alternative<yli::ontology::Scene*>(species_struct.parent) && std::get<yli::ontology::Scene*>(species_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(species_struct.parent)->parent_of_species) :
-                         nullptr),
-                        (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
-                         std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
-                         &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->master_of_species) : nullptr));
+                if (std::holds_alternative<yli::ontology::Ecosystem*>(species_struct.parent))
+                {
+                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(species_struct.parent);
+
+                    species = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            species_struct,
+                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_species) : nullptr),
+                            material_master);
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(species_struct.parent))
+                {
+                    auto const scene_parent = std::get<yli::ontology::Scene*>(species_struct.parent);
+
+                    species = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            species_struct,
+                            (scene_parent != nullptr ? &(scene_parent->parent_of_species) : nullptr),
+                            material_master);
+                }
+                else if (std::holds_alternative<std::string>(species_struct.parent))
+                {
+                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(species_struct.parent));
+
+                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const parent_module = &(ecosystem_parent->parent_of_species);
+                        species = allocator.build_in(this->application, this->get_universe(), species_struct, parent_module, material_master);
+                    }
+                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const parent_module = &(scene_parent->parent_of_species);
+                        species = allocator.build_in(this->application, this->get_universe(), species_struct, parent_module, material_master);
+                    }
+                    else
+                    {
+                        species = allocator.build_in(this->application, this->get_universe(), species_struct, nullptr, material_master);
+                    }
+                }
 
                 species->set_global_name(species_struct.global_name);
                 species->set_local_name(species_struct.local_name);

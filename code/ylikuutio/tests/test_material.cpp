@@ -706,9 +706,7 @@ TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene, nullptr, material);
     application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -729,9 +727,7 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct;
-    species_struct.parent = scene1;
-    species_struct.material_or_symbiont_material = material;
+    yli::ontology::SpeciesStruct species_struct(scene1, nullptr, material);
     application.get_generic_entity_factory().create_species(
             species_struct);
 
