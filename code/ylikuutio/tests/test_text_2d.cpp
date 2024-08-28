@@ -38,7 +38,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
             font_struct);
 
     yli::ontology::TextStruct text_struct;
-    text_struct.parent = font_2d;
+    text_struct.font_2d_parent = font_2d;
     yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);

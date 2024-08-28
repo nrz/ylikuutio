@@ -1021,7 +1021,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         text_struct,
-                        (text_struct.parent != nullptr ? &text_struct.parent->parent_of_text_2ds : nullptr));
+                        (text_struct.font_2d_parent != nullptr ? &text_struct.font_2d_parent->parent_of_text_2ds : nullptr));
 
                 text_2d->set_global_name(text_struct.global_name);
                 text_2d->set_local_name(text_struct.local_name);
