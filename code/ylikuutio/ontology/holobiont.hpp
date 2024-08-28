@@ -66,7 +66,7 @@ namespace yli::ontology
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Entity* get_parent() const final;
 
             void update_x(const float x);
             void update_y(const float y);
@@ -112,13 +112,13 @@ namespace yli::ontology
             yli::ontology::GenericParentModule parent_of_bionts;
             yli::ontology::ApprenticeModule apprentice_of_symbiosis;
 
-            yli::ontology::Scene* get_scene() const override;
+            yli::ontology::Scene* get_scene() const final;
 
             yli::ontology::Symbiosis* get_symbiosis() const;
 
         private:
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+            std::size_t get_number_of_children() const final;
+            std::size_t get_number_of_descendants() const final;
 
         public:
             // this method renders this `Holobiont`.
