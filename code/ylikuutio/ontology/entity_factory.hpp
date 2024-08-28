@@ -101,7 +101,7 @@
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
-#include <utility>    // std::forward
+#include <utility>    // std::move
 #include <variant>    // std::holds_alternative
 
 namespace yli::core
@@ -326,7 +326,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         callback_parameter_struct,
-                        std::forward<yli::data::AnyValue&&>(any_value),
+                        std::move(any_value),
                         ((callback_object_parent != nullptr) ?
                          &callback_object_parent->parent_of_callback_parameters :
                          nullptr));

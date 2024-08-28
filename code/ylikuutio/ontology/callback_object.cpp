@@ -32,7 +32,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
-#include <utility>  // std::forward
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
@@ -81,7 +81,7 @@ namespace yli::ontology
         yli::ontology::CallbackParameterStruct callback_parameter_struct(this);
         callback_parameter_struct.local_name = name;
         return static_cast<yli::ontology::CallbackParameter*>(
-                entity_factory.create_callback_parameter(callback_parameter_struct, std::forward<yli::data::AnyValue&&>(any_value)));
+                entity_factory.create_callback_parameter(callback_parameter_struct, std::move(any_value)));
     }
 
     // getter function for callbacks and callback objects.
