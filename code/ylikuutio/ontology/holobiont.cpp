@@ -68,7 +68,7 @@ namespace yli::ontology
                 "bionts"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {
-        if (this->get_parent() != nullptr && this->get_symbiosis() != nullptr)
+        if (this->Holobiont::get_parent() != nullptr && this->Holobiont::get_symbiosis() != nullptr)
         {
             Holobiont::create_bionts(*this, holobiont_struct.should_render_bionts_vector);
         }
