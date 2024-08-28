@@ -95,7 +95,7 @@ namespace yli::ontology
             Object(const Object&) = delete;            // Delete copy constructor.
             Object& operator=(const Object&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            yli::ontology::Entity* get_parent() const final;
 
             // Public callbacks.
 
@@ -130,13 +130,13 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            yli::ontology::Scene* get_scene() const override;
+            yli::ontology::Scene* get_scene() const final;
 
             yli::ontology::Pipeline* get_pipeline() const;
 
         private:
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+            std::size_t get_number_of_children() const final;
+            std::size_t get_number_of_descendants() const final;
 
         public:
             // this method renders this `Object`.
