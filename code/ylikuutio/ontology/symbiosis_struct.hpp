@@ -33,10 +33,18 @@ namespace yli::ontology
     struct SymbiosisStruct final : public yli::ontology::EntityStruct
     {
         SymbiosisStruct(
-                std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*> parent,
-                yli::ontology::Pipeline* const pipeline)
-            : parent { parent },
-            pipeline { pipeline }
+                yli::ontology::Ecosystem* const ecosystem_parent,
+                yli::ontology::Pipeline* const pipeline_master)
+            : parent { ecosystem_parent },
+            pipeline { pipeline_master }
+        {
+        }
+
+        SymbiosisStruct(
+                yli::ontology::Scene* const scene_parent,
+                yli::ontology::Pipeline* const pipeline_master)
+            : parent { scene_parent },
+            pipeline { pipeline_master }
         {
         }
 
