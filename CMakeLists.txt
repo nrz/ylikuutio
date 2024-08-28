@@ -39,11 +39,7 @@ set(COMPILE_ZLIB_FROM_SOURCE false)
 # the options part intended to be modified ends here.   |
 #-------------------------------------------------------+
 
-if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android")
-    find_library(OpenGL REQUIRED)
-else()
-    find_package(OpenGL REQUIRED)
-endif()
+find_package(OpenGL REQUIRED)
 
 find_package(Threads REQUIRED)
 
@@ -169,19 +165,13 @@ endif()
 include_directories(
     # external/asio/asio/include/
     external/FastNoiseSIMD/
+    external/glew-2.0.0/include/
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
     external/soloud/include/
     .
     )
-
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    # do not try co compile GLEW when targeting Android.
-    include_directories(
-        external/glew-2.0.0/include/
-        )
-endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     # for Google Test.
@@ -201,19 +191,12 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
+    GLEW_200
     pugixml
     miniz
     OpenFBX
     soloud
     )
-
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    # do not try co compile GLEW when targeting Android.
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        GLEW_200
-        )
-endif()
 
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
@@ -266,19 +249,13 @@ else()
 endif()
 
 add_definitions(
+    -DGLEW_STATIC
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
     -D_CRT_SECURE_NO_WARNINGS
     -DPNG_NO_SETJMP
     )
-
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    # do not try co compile GLEW when targeting Android.
-    add_definitions(
-        -DGLEW_STATIC
-        )
-endif()
 
 # Shaders.
 configure_file(code/ylikuutio/shaders/floyd_warshall.frag floyd_warshall.frag COPYONLY)
