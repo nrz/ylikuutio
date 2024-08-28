@@ -764,15 +764,51 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SYMBIOSIS));
                 SymbiosisMemoryAllocator& allocator = static_cast<SymbiosisMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Symbiosis* const symbiosis = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        symbiosis_struct,
-                        // `Ecosystem` or `Scene` parent.
-                        ((std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent) && std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent) != nullptr) ? &(std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent)->parent_of_symbioses) :
-                         (std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent) && std::get<yli::ontology::Scene*>(symbiosis_struct.parent) != nullptr) ? &(std::get<yli::ontology::Scene*>(symbiosis_struct.parent)->parent_of_symbioses) :
-                         nullptr),
-                        (symbiosis_struct.pipeline != nullptr ? &symbiosis_struct.pipeline->master_of_symbioses : nullptr));
+                yli::ontology::Symbiosis* symbiosis { nullptr };
+                auto& pipeline = symbiosis_struct.pipeline;
+                auto const pipeline_master_module = (pipeline != nullptr ? &(pipeline->master_of_symbioses) : nullptr);
+
+                if (std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent))
+                {
+                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent);
+
+                    symbiosis = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            symbiosis_struct,
+                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_symbioses) : nullptr),
+                            pipeline_master_module);
+                }
+                else if (std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent))
+                {
+                    auto const scene_parent = std::get<yli::ontology::Scene*>(symbiosis_struct.parent);
+
+                    symbiosis = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            symbiosis_struct,
+                            (scene_parent != nullptr ? &(scene_parent->parent_of_symbioses) : nullptr),
+                            pipeline_master_module);
+                }
+                else if (std::holds_alternative<std::string>(symbiosis_struct.parent))
+                {
+                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(symbiosis_struct.parent));
+
+                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const parent_module = &(ecosystem_parent->parent_of_symbioses);
+                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, parent_module, pipeline_master_module);
+                    }
+                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
+                    {
+                        yli::ontology::GenericParentModule* const parent_module = &(scene_parent->parent_of_symbioses);
+                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, parent_module, pipeline_master_module);
+                    }
+                    else
+                    {
+                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, nullptr, pipeline_master_module);
+                    }
+                }
 
                 symbiosis->set_global_name(symbiosis_struct.global_name);
                 symbiosis->set_local_name(symbiosis_struct.local_name);

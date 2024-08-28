@@ -48,11 +48,19 @@ namespace yli::ontology
         {
         }
 
+        SymbiosisStruct(
+                const std::string& parent,
+                yli::ontology::Pipeline* const pipeline_master)
+            : parent { parent },
+            pipeline { pipeline_master }
+        {
+        }
+
         std::string model_filename;                         // Filename of the model file.
         std::string model_file_format;                      // Type of the model file. Supported file formats so far:
                                                             // `"fbx"`/`"FBX"` - FBX model.
 
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*> parent {};
+        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent {};
         yli::ontology::Pipeline* pipeline { nullptr };
     };
 }

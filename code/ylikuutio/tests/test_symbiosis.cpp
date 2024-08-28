@@ -28,9 +28,10 @@
 #include "code/ylikuutio/ontology/model_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
+#include <limits>  // std::numeric_limits
 
-TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem)
+TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -71,7 +72,49 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 }
 
-TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_scene)
+TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    ecosystem_struct.global_name = "foo";
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct("foo", pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+    ASSERT_NE(symbiosis, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_scene(), nullptr);
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `symbiosis`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), nullptr);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), 0);
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_scene(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), ecosystem);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_scene_ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -118,7 +161,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 }
 
-TEST(symbiosis_must_be_initialized_appropriately, headless)
+TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -157,7 +200,87 @@ TEST(symbiosis_must_be_initialized_appropriately, headless)
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
 }
 
-TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
+TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct("foo", pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), 0);
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_scene(), scene);
+    ASSERT_EQ(symbiosis->get_parent(), scene);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    scene_struct.global_name = "foo";
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct("bar", pipeline);
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `pipeline`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_scene(), nullptr);
+    ASSERT_EQ(symbiosis->get_parent(), nullptr);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 0);
+}
+
+TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -198,7 +321,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);    // 2 `SymbiontMaterial`s.
 }
 
-TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
+TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -234,7 +357,7 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem)
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `ecosystem1`, `ecosystem2`.
 }
 
-TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
+TEST(symbiosis_must_bind_to_scene_appropriately, scenes_scene_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -274,7 +397,7 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes)
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);
 }
 
-TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene)
+TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosystem_scene_scene_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -307,7 +430,7 @@ TEST(symbiosis_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecos
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);  // `ecosystem`, `scene`.
 }
 
-TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem)
+TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene_ecosystem_ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -340,7 +463,7 @@ TEST(symbiosis_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scen
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);  // `Ecosystem`, `Scene`.
 }
 
-TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice)
+TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice_scene_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
