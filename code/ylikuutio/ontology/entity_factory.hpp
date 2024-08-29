@@ -984,11 +984,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_FORM));
                 ShapeshifterFormMemoryAllocator& allocator = static_cast<ShapeshifterFormMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_form_struct.parent))
+                {
+                    shapeshifter_transformation_parent = std::get<yli::ontology::ShapeshifterTransformation*>(shapeshifter_form_struct.parent);
+                }
+                else if (std::holds_alternative<std::string>(shapeshifter_form_struct.parent))
+                {
+                    shapeshifter_transformation_parent = dynamic_cast<yli::ontology::ShapeshifterTransformation*>(this->get_universe().registry.get_entity(
+                                std::get<std::string>(shapeshifter_form_struct.parent)));
+                }
+
                 yli::ontology::ShapeshifterForm* const shapeshifter_form = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         shapeshifter_form_struct,
-                        (shapeshifter_form_struct.shapeshifter_transformation != nullptr ? &shapeshifter_form_struct.shapeshifter_transformation->parent_of_shapeshifter_forms :
+                        (shapeshifter_transformation_parent != nullptr ? &shapeshifter_transformation_parent->parent_of_shapeshifter_forms :
                          nullptr));
 
                 shapeshifter_form->set_global_name(shapeshifter_form_struct.global_name);

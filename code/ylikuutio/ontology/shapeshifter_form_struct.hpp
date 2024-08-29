@@ -20,11 +20,32 @@
 
 #include "model_struct.hpp"
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::ontology
 {
+    class Pipeline;
+    class Material;
+    class ShapeshifterTransformation;
+
     struct ShapeshifterFormStruct final : public yli::ontology::ModelStruct
     {
-        ShapeshifterFormStruct() = default;
+        ShapeshifterFormStruct(
+                yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
+        {
+        }
+
+        ShapeshifterFormStruct(
+                const std::string& shapeshifter_transformation_parent,
+                yli::ontology::Pipeline* const pipeline,
+                yli::ontology::Material* const material_master)
+            : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
+        {
+        }
     };
 }
 
