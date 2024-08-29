@@ -30,7 +30,7 @@ namespace yli::ontology
     struct VectorFontStruct final : public yli::ontology::EntityStruct
     {
         // used for all files (for all `VectorFont`s).
-        yli::ontology::Material* parent { nullptr }; // pointer to the `Material`.
+        yli::ontology::Material* material_parent { nullptr }; // pointer to the `Material`.
         float vertex_scaling_factor     { 0.001f };  // Default value.
         std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
         std::string font_filename;       // filename of the font file.

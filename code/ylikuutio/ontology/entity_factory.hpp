@@ -1086,7 +1086,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         vector_font_struct,
-                        (vector_font_struct.parent != nullptr ? &vector_font_struct.parent->parent_of_vector_fonts : nullptr));
+                        (vector_font_struct.material_parent != nullptr ? &vector_font_struct.material_parent->parent_of_vector_fonts : nullptr));
 
                 vector_font->set_global_name(vector_font_struct.global_name);
                 vector_font->set_local_name(vector_font_struct.local_name);
