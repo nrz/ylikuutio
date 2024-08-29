@@ -20,6 +20,10 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::variant
+
 namespace yli::ontology
 {
     class Material;
@@ -31,7 +35,12 @@ namespace yli::ontology
         {
         }
 
-        yli::ontology::Material* material_parent { nullptr };
+        ShapeshifterTransformationStruct(const std::string& material_parent)
+            : material_parent { material_parent }
+        {
+        }
+
+        std::variant<yli::ontology::Material*, std::string> material_parent {};
     };
 }
 

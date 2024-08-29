@@ -915,7 +915,16 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
                 ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
-                auto& material_parent = shapeshifter_transformation_struct.material_parent;
+                yli::ontology::Material* material_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Material*>(shapeshifter_transformation_struct.material_parent))
+                {
+                    material_parent = std::get<yli::ontology::Material*>(shapeshifter_transformation_struct.material_parent);
+                }
+                else if (std::holds_alternative<std::string>(shapeshifter_transformation_struct.material_parent))
+                {
+                    material_parent = dynamic_cast<yli::ontology::Material*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(shapeshifter_transformation_struct.material_parent)));
+                }
 
                 yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
                         this->application,
