@@ -19,7 +19,7 @@
 #include "universe.hpp"
 #include "material.hpp"
 #include "shapeshifter_sequence.hpp"
-#include "model_struct.hpp"
+#include "shapeshifter_transformation_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
@@ -72,9 +72,9 @@ namespace yli::ontology
     ShapeshifterTransformation::ShapeshifterTransformation(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::ModelStruct& model_struct,
+            const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
             yli::ontology::GenericParentModule* const material_parent_module)
-        : Entity(application, universe, model_struct),
+        : Entity(application, universe, shapeshifter_transformation_struct),
         child_of_material(material_parent_module, *this),
         parent_of_shapeshifter_forms(
                 *this,

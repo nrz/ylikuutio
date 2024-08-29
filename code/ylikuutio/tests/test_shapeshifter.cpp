@@ -30,6 +30,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
 
 // Include standard headers
@@ -50,7 +51,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ModelStruct shapeshifter_transformation_struct;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material_or_symbiont_material = material;
@@ -102,7 +103,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ModelStruct shapeshifter_transformation_struct;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material_or_symbiont_material = material;
@@ -163,7 +164,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ModelStruct shapeshifter_transformation_struct;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material_or_symbiont_material = material;
@@ -221,7 +222,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ModelStruct shapeshifter_transformation_struct;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material_or_symbiont_material = material;
@@ -290,7 +291,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ModelStruct shapeshifter_transformation_struct;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
     shapeshifter_transformation_struct.parent = scene;
     shapeshifter_transformation_struct.pipeline = pipeline;
     shapeshifter_transformation_struct.material_or_symbiont_material = material;

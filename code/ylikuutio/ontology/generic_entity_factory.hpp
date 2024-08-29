@@ -82,6 +82,7 @@ namespace yli::ontology
     struct SymbiontSpeciesStruct;
     struct HolobiontStruct;
     struct BiontStruct;
+    struct ShapeshifterTransformationStruct;
     struct ShapeshifterSequenceStruct;
     struct VectorFontStruct;
     struct Text3DStruct;
@@ -130,7 +131,7 @@ namespace yli::ontology
             virtual yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const = 0;
             virtual yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const = 0;
             virtual yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(
-                    const yli::ontology::ModelStruct& model_struct) const = 0;
+                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const = 0;
             virtual yli::ontology::ShapeshifterSequence* create_shapeshifter_sequence(
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const = 0;
             virtual yli::ontology::ShapeshifterForm* create_shapeshifter_form(

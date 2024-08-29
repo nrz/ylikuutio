@@ -48,7 +48,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Material;
-    struct ModelStruct;
+    struct ShapeshifterTransformationStruct;
 
     class ShapeshifterTransformation final : public yli::ontology::Entity
     {
@@ -63,7 +63,7 @@ namespace yli::ontology
             ShapeshifterTransformation(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
                     yli::ontology::GenericParentModule* const material_parent_module);
 
             ~ShapeshifterTransformation() = default;

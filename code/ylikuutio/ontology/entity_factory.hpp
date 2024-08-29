@@ -77,6 +77,7 @@
 #include "symbiont_species_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
+#include "shapeshifter_transformation_struct.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
@@ -903,7 +904,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(
-                    const yli::ontology::ModelStruct& model_struct) const override
+                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const override
             {
                 using ShapeshifterTransformationMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterTransformation, 1024>;
@@ -913,19 +914,19 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
                 ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
-                auto& material_or_symbiont_material = model_struct.material_or_symbiont_material;
+                auto& material_or_symbiont_material = shapeshifter_transformation_struct.material_or_symbiont_material;
 
                 yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
+                        shapeshifter_transformation_struct,
                         (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
                          std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
                          &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->parent_of_shapeshifter_transformations) :
                          nullptr));
 
-                shapeshifter_transformation->set_global_name(model_struct.global_name);
-                shapeshifter_transformation->set_local_name(model_struct.local_name);
+                shapeshifter_transformation->set_global_name(shapeshifter_transformation_struct.global_name);
+                shapeshifter_transformation->set_local_name(shapeshifter_transformation_struct.local_name);
                 return shapeshifter_transformation;
             }
 

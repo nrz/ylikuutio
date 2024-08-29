@@ -660,6 +660,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
     code/ylikuutio/ontology/shapeshifter_transformation.cpp
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
+    code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_struct.hpp
