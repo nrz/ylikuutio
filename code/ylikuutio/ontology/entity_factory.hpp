@@ -1051,11 +1051,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::TEXT_2D));
                 Text2DMemoryAllocator& allocator = static_cast<Text2DMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Font2D* font_2d_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Font2D*>(text_struct.font_2d_parent))
+                {
+                    font_2d_parent = std::get<yli::ontology::Font2D*>(text_struct.font_2d_parent);
+                }
+                else if (std::holds_alternative<std::string>(text_struct.font_2d_parent))
+                {
+                    font_2d_parent = dynamic_cast<yli::ontology::Font2D*>(this->get_universe().registry.get_entity(
+                                std::get<std::string>(text_struct.font_2d_parent)));
+                }
+
                 yli::ontology::Text2D* const text_2d = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         text_struct,
-                        (text_struct.font_2d_parent != nullptr ? &text_struct.font_2d_parent->parent_of_text_2ds : nullptr));
+                        (font_2d_parent != nullptr ? &font_2d_parent->parent_of_text_2ds : nullptr));
 
                 text_2d->set_global_name(text_struct.global_name);
                 text_2d->set_local_name(text_struct.local_name);

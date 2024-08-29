@@ -23,6 +23,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -30,7 +31,19 @@ namespace yli::ontology
 
     struct TextStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::Font2D* font_2d_parent { nullptr };
+        TextStruct() = default;
+
+        explicit TextStruct(yli::ontology::Font2D* const font_2d_parent)
+            : font_2d_parent { font_2d_parent }
+        {
+        }
+
+        explicit TextStruct(const std::string& font_2d_parent)
+            : font_2d_parent { font_2d_parent }
+        {
+        }
+
+        std::variant<yli::ontology::Font2D*, std::string> font_2d_parent {};
         std::size_t screen_width  { 0 };
         std::size_t screen_height { 0 };
         std::size_t x             { 0 };

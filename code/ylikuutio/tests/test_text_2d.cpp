@@ -24,9 +24,10 @@
 #include "code/ylikuutio/ontology/text_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
+#include <limits>  // std::numeric_limits
 
-TEST(text_2d_must_be_initialized_appropriately, headless)
+TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::FontStruct font_struct;
@@ -37,8 +38,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
     yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct;
-    text_struct.font_2d_parent = font_2d;
+    yli::ontology::TextStruct text_struct(font_2d);
     yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -58,5 +58,107 @@ TEST(text_2d_must_be_initialized_appropriately, headless)
     ASSERT_FALSE(text_2d->get_can_be_erased());
     ASSERT_EQ(text_2d->get_scene(), nullptr);
     ASSERT_EQ(text_2d->get_parent(), font_2d);
+    ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);
+}
+
+TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_nullptr)
+{
+    mock::MockApplication application;
+    yli::ontology::FontStruct font_struct;
+    font_struct.screen_width = application.get_universe().get_window_width();
+    font_struct.screen_height = application.get_universe().get_window_height();
+    font_struct.text_size = application.get_universe().get_text_size();
+    font_struct.font_size = application.get_universe().get_font_size();
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
+            font_struct);
+
+    yli::ontology::TextStruct text_struct(nullptr);
+    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+            text_struct);
+    ASSERT_NE(text_2d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Font2D`.
+    ASSERT_EQ(font_2d->get_scene(), nullptr);
+    ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(text_2d->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_FALSE(text_2d->get_can_be_erased());
+    ASSERT_EQ(text_2d->get_parent(), nullptr);
+    ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);
+}
+
+TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::FontStruct font_struct;
+    font_struct.global_name = "foo";
+    font_struct.screen_width = application.get_universe().get_window_width();
+    font_struct.screen_height = application.get_universe().get_window_height();
+    font_struct.text_size = application.get_universe().get_text_size();
+    font_struct.font_size = application.get_universe().get_font_size();
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
+            font_struct);
+
+    yli::ontology::TextStruct text_struct("foo");
+    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+            text_struct);
+    ASSERT_NE(text_2d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Font2D`.
+    ASSERT_EQ(font_2d->get_scene(), nullptr);
+    ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 1); // `text_2d`.
+
+    // `Entity` member functions.
+    ASSERT_EQ(text_2d->get_childID(), 0);
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_FALSE(text_2d->get_can_be_erased());
+    ASSERT_EQ(text_2d->get_scene(), nullptr);
+    ASSERT_EQ(text_2d->get_parent(), font_2d);
+    ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);
+}
+
+TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::FontStruct font_struct;
+    font_struct.global_name = "foo";
+    font_struct.screen_width = application.get_universe().get_window_width();
+    font_struct.screen_height = application.get_universe().get_window_height();
+    font_struct.text_size = application.get_universe().get_text_size();
+    font_struct.font_size = application.get_universe().get_font_size();
+    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
+            font_struct);
+
+    yli::ontology::TextStruct text_struct("bar");
+    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+            text_struct);
+    ASSERT_NE(text_2d, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Font2D`.
+    ASSERT_EQ(font_2d->get_scene(), nullptr);
+    ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(text_2d->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_FALSE(text_2d->get_can_be_erased());
+    ASSERT_EQ(text_2d->get_parent(), nullptr);
     ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);
 }
