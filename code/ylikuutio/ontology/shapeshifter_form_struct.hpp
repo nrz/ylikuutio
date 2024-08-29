@@ -24,10 +24,7 @@ namespace yli::ontology
 {
     struct ShapeshifterFormStruct final : public yli::ontology::ModelStruct
     {
-        ShapeshifterFormStruct()
-        {
-            // constructor.
-        }
+        ShapeshifterFormStruct() = default;
     };
 }
 
