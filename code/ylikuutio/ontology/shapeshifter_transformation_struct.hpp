@@ -30,12 +30,12 @@ namespace yli::ontology
 
     struct ShapeshifterTransformationStruct final : public yli::ontology::EntityStruct
     {
-        ShapeshifterTransformationStruct(yli::ontology::Material* const material_parent)
+        explicit ShapeshifterTransformationStruct(yli::ontology::Material* const material_parent)
             : material_parent { material_parent }
         {
         }
 
-        ShapeshifterTransformationStruct(const std::string& material_parent)
+        explicit ShapeshifterTransformationStruct(const std::string& material_parent)
             : material_parent { material_parent }
         {
         }
