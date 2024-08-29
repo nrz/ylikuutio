@@ -7,6 +7,9 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 - [ ] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
@@ -64,9 +67,6 @@
 - [ ] AI Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 - [ ] OPTIMIZE Implement octree segmentation.
 - [ ] OPTIMIZE Implement frustum culling using bounding spheres.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 - [ ] ANIMATION Implement skeletal animation.
 - [ ] CONSOLE/YLILISP/ONTOLOGY Implement creating new named `Variable`s using `Console`.
 - [ ] TOOLS Implement YliEdit editor.
