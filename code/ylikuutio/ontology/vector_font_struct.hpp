@@ -29,7 +29,7 @@ namespace yli::ontology
 
     struct VectorFontStruct final : public yli::ontology::EntityStruct
     {
-        VectorFontStruct(yli::ontology::Material* const material_parent)
+        explicit VectorFontStruct(yli::ontology::Material* const material_parent)
             : material_parent { material_parent }
         {
         }
