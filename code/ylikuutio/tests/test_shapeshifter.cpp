@@ -51,10 +51,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.pipeline = pipeline;
-    shapeshifter_transformation_struct.material_or_symbiont_material = material;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct(material);
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
     ASSERT_NE(shapeshifter_transformation, nullptr);
@@ -103,10 +100,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.pipeline = pipeline;
-    shapeshifter_transformation_struct.material_or_symbiont_material = material;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct(material);
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
@@ -164,10 +158,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.pipeline = pipeline;
-    shapeshifter_transformation_struct.material_or_symbiont_material = material;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct(material);
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
@@ -222,10 +213,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.pipeline = pipeline;
-    shapeshifter_transformation_struct.material_or_symbiont_material = material;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct(material);
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
@@ -291,10 +279,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct;
-    shapeshifter_transformation_struct.parent = scene;
-    shapeshifter_transformation_struct.pipeline = pipeline;
-    shapeshifter_transformation_struct.material_or_symbiont_material = material;
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct(material);
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 

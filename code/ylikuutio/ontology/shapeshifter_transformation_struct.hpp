@@ -18,15 +18,20 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_TRANSFORMATION_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_TRANSFORMATION_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    struct ShapeshifterTransformationStruct final : public yli::ontology::ModelStruct
+    class Material;
+
+    struct ShapeshifterTransformationStruct final : public yli::ontology::EntityStruct
     {
-        ShapeshifterTransformationStruct()
+        ShapeshifterTransformationStruct(yli::ontology::Material* const material_parent)
+            : material_parent { material_parent }
         {
         }
+
+        yli::ontology::Material* material_parent { nullptr };
     };
 }
 

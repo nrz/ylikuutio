@@ -915,15 +915,14 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
                 ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
-                auto& material_or_symbiont_material = shapeshifter_transformation_struct.material_or_symbiont_material;
+                auto& material_parent = shapeshifter_transformation_struct.material_parent;
 
                 yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         shapeshifter_transformation_struct,
-                        (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
-                         std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
-                         &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->parent_of_shapeshifter_transformations) :
+                        (material_parent != nullptr ?
+                         &(material_parent->parent_of_shapeshifter_transformations) :
                          nullptr));
 
                 shapeshifter_transformation->set_global_name(shapeshifter_transformation_struct.global_name);
