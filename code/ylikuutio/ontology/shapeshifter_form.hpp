@@ -44,7 +44,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class ShapeshifterTransformation;
-    struct ModelStruct;
+    struct ShapeshifterFormStruct;
 
     class ShapeshifterForm final : public yli::ontology::Entity
     {
@@ -52,7 +52,7 @@ namespace yli::ontology
             ShapeshifterForm(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct,
                     yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);
 
             ~ShapeshifterForm() = default;

@@ -79,6 +79,7 @@
 #include "biont_struct.hpp"
 #include "shapeshifter_transformation_struct.hpp"
 #include "shapeshifter_sequence_struct.hpp"
+#include "shapeshifter_form_struct.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "vector_font_struct.hpp"
@@ -954,7 +955,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterForm* create_shapeshifter_form(
-                    const yli::ontology::ModelStruct& model_struct) const override
+                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const override
             {
                 using ShapeshifterFormMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
@@ -967,12 +968,12 @@ namespace yli::ontology
                 yli::ontology::ShapeshifterForm* const shapeshifter_form = allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
-                        (model_struct.shapeshifter_transformation != nullptr ? &model_struct.shapeshifter_transformation->parent_of_shapeshifter_forms :
+                        shapeshifter_form_struct,
+                        (shapeshifter_form_struct.shapeshifter_transformation != nullptr ? &shapeshifter_form_struct.shapeshifter_transformation->parent_of_shapeshifter_forms :
                          nullptr));
 
-                shapeshifter_form->set_global_name(model_struct.global_name);
-                shapeshifter_form->set_local_name(model_struct.local_name);
+                shapeshifter_form->set_global_name(shapeshifter_form_struct.global_name);
+                shapeshifter_form->set_local_name(shapeshifter_form_struct.local_name);
                 return shapeshifter_form;
             }
 

@@ -655,6 +655,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/pipeline_struct.hpp
     code/ylikuutio/ontology/shapeshifter_form.cpp
     code/ylikuutio/ontology/shapeshifter_form.hpp
+    code/ylikuutio/ontology/shapeshifter_form_struct.hpp
     code/ylikuutio/ontology/shapeshifter_sequence.cpp
     code/ylikuutio/ontology/shapeshifter_sequence.hpp
     code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp

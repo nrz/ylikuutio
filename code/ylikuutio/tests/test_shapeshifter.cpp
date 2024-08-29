@@ -28,10 +28,10 @@
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp"
+#include "code/ylikuutio/ontology/shapeshifter_form_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // uintptr_t
@@ -110,7 +110,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ModelStruct shapeshifter_form_struct;
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
@@ -229,7 +229,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ModelStruct shapeshifter_form_struct;
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
@@ -298,7 +298,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ModelStruct shapeshifter_form_struct;
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct;
     shapeshifter_form_struct.shapeshifter_transformation = shapeshifter_transformation;
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);

@@ -84,6 +84,7 @@ namespace yli::ontology
     struct BiontStruct;
     struct ShapeshifterTransformationStruct;
     struct ShapeshifterSequenceStruct;
+    struct ShapeshifterFormStruct;
     struct VectorFontStruct;
     struct Text3DStruct;
     struct InputModeStruct;
@@ -135,7 +136,7 @@ namespace yli::ontology
             virtual yli::ontology::ShapeshifterSequence* create_shapeshifter_sequence(
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const = 0;
             virtual yli::ontology::ShapeshifterForm* create_shapeshifter_form(
-                    const yli::ontology::ModelStruct& model_struct) const = 0;
+                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const = 0;
             virtual yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const = 0;
             virtual yli::ontology::Glyph* create_glyph(const yli::ontology::ModelStruct& model_struct) const = 0;
             virtual yli::ontology::Text2D* create_text_2d(const yli::ontology::TextStruct& text_struct) const = 0;
