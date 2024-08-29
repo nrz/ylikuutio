@@ -950,11 +950,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE));
                 ShapeshifterSequenceMemoryAllocator& allocator = static_cast<ShapeshifterSequenceMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_sequence_struct.shapeshifter_transformation_parent))
+                {
+                    shapeshifter_transformation_parent = std::get<yli::ontology::ShapeshifterTransformation*>(shapeshifter_sequence_struct.shapeshifter_transformation_parent);
+                }
+                else if (std::holds_alternative<std::string>(shapeshifter_sequence_struct.shapeshifter_transformation_parent))
+                {
+                    shapeshifter_transformation_parent = dynamic_cast<yli::ontology::ShapeshifterTransformation*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(shapeshifter_sequence_struct.shapeshifter_transformation_parent)));
+                }
+
                 yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         shapeshifter_sequence_struct,
-                        (shapeshifter_sequence_struct.shapeshifter_transformation_parent != nullptr ? &shapeshifter_sequence_struct.shapeshifter_transformation_parent->parent_of_shapeshifter_sequences :
+                        (shapeshifter_transformation_parent != nullptr ? &shapeshifter_transformation_parent->parent_of_shapeshifter_sequences :
                          nullptr));
 
                 shapeshifter_sequence->set_global_name(shapeshifter_sequence_struct.global_name);

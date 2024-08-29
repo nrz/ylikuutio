@@ -22,6 +22,8 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -34,7 +36,12 @@ namespace yli::ontology
         {
         }
 
-        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr }; // Pointer to `ShapeshifterTransformation` object.
+        explicit ShapeshifterSequenceStruct(const std::string& shapeshifter_transformation_parent)
+            : shapeshifter_transformation_parent { shapeshifter_transformation_parent }
+        {
+        }
+
+        std::variant<yli::ontology::ShapeshifterTransformation*, std::string> shapeshifter_transformation_parent {};
         float transformation_speed                        { 0.0f };    // Negative speed means inverse initial transition direction.
         std::size_t initial_offset                        { 0 };       // Index of the `ShapeshifterForm` from which to begin the transition.
 
