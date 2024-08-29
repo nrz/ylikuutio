@@ -273,14 +273,14 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless)
 
     // `Entity` member functions of `Material`.
     ASSERT_EQ(material->get_scene(), scene);
-    ASSERT_EQ(material->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 1); // `shapeshifter_transformation`.
 
     // `Material` member functions.
     ASSERT_EQ(material->get_number_of_apprentices(), 0);
 
     // `Entity` member functions of `ShapeshifterTransformation`.
     ASSERT_EQ(shapeshifter_transformation->get_scene(), scene);
-    ASSERT_EQ(shapeshifter_transformation->get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(shapeshifter_transformation->get_number_of_non_variable_children(), 1); // `shapeshifter_form`.
 
     // `Entity` member functions.
     ASSERT_EQ(shapeshifter_form->get_childID(), 0);
