@@ -22,7 +22,7 @@ TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct)
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    const yli::ontology::VectorFontStruct test_vector_font_struct;
+    const yli::ontology::VectorFontStruct test_vector_font_struct(nullptr);
     ASSERT_EQ(test_vector_font_struct.material_parent, nullptr);
     ASSERT_EQ(test_vector_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
     ASSERT_TRUE(test_vector_font_struct.font_file_format.empty());

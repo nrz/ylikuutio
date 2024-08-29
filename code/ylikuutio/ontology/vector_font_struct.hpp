@@ -29,6 +29,11 @@ namespace yli::ontology
 
     struct VectorFontStruct final : public yli::ontology::EntityStruct
     {
+        VectorFontStruct(yli::ontology::Material* const material_parent)
+            : material_parent { material_parent }
+        {
+        }
+
         // used for all files (for all `VectorFont`s).
         yli::ontology::Material* material_parent { nullptr }; // pointer to the `Material`.
         float vertex_scaling_factor     { 0.001f };  // Default value.
