@@ -954,7 +954,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         shapeshifter_sequence_struct,
-                        (shapeshifter_sequence_struct.parent != nullptr ? &shapeshifter_sequence_struct.parent->parent_of_shapeshifter_sequences :
+                        (shapeshifter_sequence_struct.shapeshifter_transformation_parent != nullptr ? &shapeshifter_sequence_struct.shapeshifter_transformation_parent->parent_of_shapeshifter_sequences :
                          nullptr));
 
                 shapeshifter_sequence->set_global_name(shapeshifter_sequence_struct.global_name);

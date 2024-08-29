@@ -29,7 +29,7 @@ namespace yli::ontology
 
     struct ShapeshifterSequenceStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::ShapeshifterTransformation* parent { nullptr }; // Pointer to `ShapeshifterTransformation` object.
+        yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr }; // Pointer to `ShapeshifterTransformation` object.
         float transformation_speed                        { 0.0f };    // Negative speed means inverse initial transition direction.
         std::size_t initial_offset                        { 0 };       // Index of the `ShapeshifterForm` from which to begin the transition.
 

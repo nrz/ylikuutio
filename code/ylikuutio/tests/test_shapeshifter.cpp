@@ -311,7 +311,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless)
             shapeshifter_transformation_struct);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
-    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    shapeshifter_sequence_struct.shapeshifter_transformation_parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
     ASSERT_NE(shapeshifter_sequence, nullptr);
@@ -371,7 +371,7 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
             shapeshifter_form_struct);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
-    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    shapeshifter_sequence_struct.shapeshifter_transformation_parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
 
@@ -437,7 +437,7 @@ TEST(shapeshifter_object_must_be_initialized_appropriately, headless)
             shapeshifter_form_struct);
 
     yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct;
-    shapeshifter_sequence_struct.parent = shapeshifter_transformation;
+    shapeshifter_sequence_struct.shapeshifter_transformation_parent = shapeshifter_transformation;
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
 
