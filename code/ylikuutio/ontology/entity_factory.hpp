@@ -116,6 +116,8 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    struct UniverseStruct;
+
     template<typename TypeEnumType>
         class EntityFactory : public yli::ontology::GenericEntityFactory
     {
