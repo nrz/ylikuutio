@@ -27,7 +27,7 @@ namespace yli::ontology
 {
     class Material;
 
-    struct VectorFontStruct : public yli::ontology::EntityStruct
+    struct VectorFontStruct final : public yli::ontology::EntityStruct
     {
         // used for all files (for all `VectorFont`s).
         yli::ontology::Material* parent { nullptr }; // pointer to the `Material`.
