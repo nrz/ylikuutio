@@ -569,13 +569,13 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
     mock::MockApplication application;
     yli::ontology::TextStruct text_struct;
-    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
 
     yli::data::AnyValue text_2d_any_value = yli::data::AnyValue(*text_2d);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text2D>>(text_2d_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text2D>>(text_2d_any_value.data).get(), *text_2d);
-    ASSERT_EQ(std::strcmp(text_2d_any_value.get_datatype().c_str(), "yli::ontology::Text2D&"), 0);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(text_2d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text2d>>(text_2d_any_value.data).get(), *text_2d);
+    ASSERT_EQ(std::strcmp(text_2d_any_value.get_datatype().c_str(), "yli::ontology::Text2d&"), 0);
     ASSERT_EQ(text_2d_any_value.get_entity_ref(), *text_2d);
     ASSERT_EQ(text_2d_any_value.get_const_entity_ref(), *text_2d);
 }

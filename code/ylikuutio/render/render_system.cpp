@@ -279,7 +279,7 @@ namespace yli::render
 
     void RenderSystem::render_text_2ds(yli::ontology::GenericParentModule& parent) const
     {
-        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Text2D*>(parent);
+        yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Text2d*>(parent);
     }
 
     void RenderSystem::render_consoles(yli::ontology::GenericMasterModule& master) const

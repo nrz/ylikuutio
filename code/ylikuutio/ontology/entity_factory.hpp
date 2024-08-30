@@ -1042,14 +1042,14 @@ namespace yli::ontology
                 return font_2d;
             }
 
-            yli::ontology::Text2D* create_text_2d(const yli::ontology::TextStruct& text_struct) const override
+            yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const override
             {
-                using Text2DMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text2D, 256>;
+                using Text2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text2d, 256>;
 
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Text2DMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<Text2dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::TEXT_2D));
-                Text2DMemoryAllocator& allocator = static_cast<Text2DMemoryAllocator&>(generic_allocator);
+                Text2dMemoryAllocator& allocator = static_cast<Text2dMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Font2D* font_2d_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Font2D*>(text_struct.font_2d_parent))
@@ -1062,7 +1062,7 @@ namespace yli::ontology
                                 std::get<std::string>(text_struct.font_2d_parent)));
                 }
 
-                yli::ontology::Text2D* const text_2d = allocator.build_in(
+                yli::ontology::Text2d* const text_2d = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         text_struct,

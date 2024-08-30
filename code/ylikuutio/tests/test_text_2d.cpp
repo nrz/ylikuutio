@@ -39,10 +39,10 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
             font_struct);
 
     yli::ontology::TextStruct text_struct(font_2d);
-    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -54,7 +54,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 
     // `Entity` member functions.
     ASSERT_EQ(text_2d->get_childID(), 0);
-    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2d*");
     ASSERT_FALSE(text_2d->get_can_be_erased());
     ASSERT_EQ(text_2d->get_scene(), nullptr);
     ASSERT_EQ(text_2d->get_parent(), font_2d);
@@ -73,10 +73,10 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
             font_struct);
 
     yli::ontology::TextStruct text_struct(nullptr);
-    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -88,7 +88,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 
     // `Entity` member functions.
     ASSERT_EQ(text_2d->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2d*");
     ASSERT_FALSE(text_2d->get_can_be_erased());
     ASSERT_EQ(text_2d->get_parent(), nullptr);
     ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);
@@ -107,10 +107,10 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
             font_struct);
 
     yli::ontology::TextStruct text_struct("foo");
-    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -122,7 +122,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 
     // `Entity` member functions.
     ASSERT_EQ(text_2d->get_childID(), 0);
-    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2d*");
     ASSERT_FALSE(text_2d->get_can_be_erased());
     ASSERT_EQ(text_2d->get_scene(), nullptr);
     ASSERT_EQ(text_2d->get_parent(), font_2d);
@@ -142,10 +142,10 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
             font_struct);
 
     yli::ontology::TextStruct text_struct("bar");
-    yli::ontology::Text2D* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2D), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -157,7 +157,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 
     // `Entity` member functions.
     ASSERT_EQ(text_2d->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2D*");
+    ASSERT_EQ(text_2d->get_type(), "yli::ontology::Text2d*");
     ASSERT_FALSE(text_2d->get_can_be_erased());
     ASSERT_EQ(text_2d->get_parent(), nullptr);
     ASSERT_EQ(text_2d->get_number_of_non_variable_children(), 0);

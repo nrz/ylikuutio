@@ -91,7 +91,7 @@ namespace yli::memory
     using ShapeshifterSequenceMemoryAllocator        = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterSequence, 1024>;
     using ShapeshifterFormMemoryAllocator            = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
     using Font2DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Font2D, 256>;
-    using Text2DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text2D, 256>;
+    using Text2dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text2d, 256>;
     using VectorFontMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
     using Text3dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
@@ -204,7 +204,7 @@ namespace yli::memory
                     this->create_allocator<ShapeshifterSequenceMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE);
                     this->create_allocator<ShapeshifterFormMemoryAllocator>(yli::data::Datatype::SHAPESHIFTER_FORM);
                     this->create_allocator<Font2DMemoryAllocator>(yli::data::Datatype::FONT_2D);
-                    this->create_allocator<Text2DMemoryAllocator>(yli::data::Datatype::TEXT_2D);
+                    this->create_allocator<Text2dMemoryAllocator>(yli::data::Datatype::TEXT_2D);
                     this->create_allocator<VectorFontMemoryAllocator>(yli::data::Datatype::VECTOR_FONT);
                     this->create_allocator<GlyphMemoryAllocator>(yli::data::Datatype::GLYPH);
                     this->create_allocator<Text3dMemoryAllocator>(yli::data::Datatype::TEXT_3D);

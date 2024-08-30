@@ -843,7 +843,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Text2D&>::type> convert_string_to_value_and_advance_index<yli::ontology::Text2D&>(
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Text2d&>::type> convert_string_to_value_and_advance_index<yli::ontology::Text2d&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
                 yli::ontology::Entity*& context,
@@ -857,7 +857,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            yli::ontology::Text2D* const value = dynamic_cast<yli::ontology::Text2D*>(universe.get_entity(my_string));
+            yli::ontology::Text2d* const value = dynamic_cast<yli::ontology::Text2d*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -865,7 +865,7 @@ namespace yli::lisp
             }
 
             context = value;
-            return yli::data::WrapAllButStrings<yli::ontology::Text2D&>::type(*value);
+            return yli::data::WrapAllButStrings<yli::ontology::Text2d&>::type(*value);
         }
 
     template<>

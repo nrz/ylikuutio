@@ -1112,8 +1112,8 @@ namespace ajokki
         // `Entity` binding callbacks, `ShapeshifterTransformation`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::ShapeshifterTransformation::bind_to_new_material_parent);
 
-        // `Entity` binding callbacks, `Text2D`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text2D::bind_to_new_font_2d_parent);
+        // `Entity` binding callbacks, `Text2d`.
+        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text2d::bind_to_new_font_2d_parent);
 
         // `Entity` binding callbacks, `Text3d`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text3d::bind_to_new_vector_font_parent);

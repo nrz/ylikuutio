@@ -46,7 +46,7 @@ namespace yli::ontology
     class Symbiosis;
     class Holobiont;
     class Font2D;
-    class Text2D;
+    class Text2d;
     class VectorFont;
     class Text3d;
     class Console;
@@ -119,7 +119,7 @@ namespace yli::data
             explicit AnyValue(yli::ontology::Symbiosis& symbiosis_ref);
             explicit AnyValue(yli::ontology::Holobiont& holobiont_ref);
             explicit AnyValue(yli::ontology::Font2D& font_2d_ref);
-            explicit AnyValue(yli::ontology::Text2D& text_2d_ref);
+            explicit AnyValue(yli::ontology::Text2d& text_2d_ref);
             explicit AnyValue(yli::ontology::VectorFont& vector_font_ref);
             explicit AnyValue(yli::ontology::Text3d& text_3d_ref);
             explicit AnyValue(yli::ontology::Console& console_ref);
@@ -176,7 +176,7 @@ namespace yli::data
                 // TODO
                 // `yli::ontology` datatypes, 'text 2D' path.
                 std::reference_wrapper<yli::ontology::Font2D>,
-                std::reference_wrapper<yli::ontology::Text2D>,
+                std::reference_wrapper<yli::ontology::Text2d>,
                 // `yli::ontology` datatypes, 'text 3D' path.
                 std::reference_wrapper<yli::ontology::VectorFont>,
                 std::reference_wrapper<yli::ontology::Text3d>,

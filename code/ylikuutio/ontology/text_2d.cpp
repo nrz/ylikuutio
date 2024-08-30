@@ -47,8 +47,8 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Text2D::bind_to_new_font_2d_parent(
-            yli::ontology::Text2D& text_2d,
+    std::optional<yli::data::AnyValue> Text2d::bind_to_new_font_2d_parent(
+            yli::ontology::Text2d& text_2d,
             yli::ontology::Font2D& new_parent)
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
@@ -58,12 +58,12 @@ namespace yli::ontology
 
         if (old_font_2d_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text2D::bind_to_new_font_2d_parent`: `old_font_2d_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text2d::bind_to_new_font_2d_parent`: `old_font_2d_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_2d.local_name))
         {
-            std::cerr << "ERROR: `Text2D::bind_to_new_font_2d_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Text2d::bind_to_new_font_2d_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
@@ -73,7 +73,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    Text2D::Text2D(
+    Text2d::Text2d(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::TextStruct& text_struct,
@@ -129,10 +129,10 @@ namespace yli::ontology
         }
 
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Text2D*";
+        this->type_string = "yli::ontology::Text2d*";
     }
 
-    Text2D::~Text2D()
+    Text2d::~Text2d()
     {
         if (this->vertices_and_uvs_loaded)
         {
@@ -142,7 +142,7 @@ namespace yli::ontology
         }
     }
 
-    void Text2D::render()
+    void Text2d::render()
     {
         if (!this->should_render || !this->universe.get_is_opengl_in_use())
         {
@@ -212,7 +212,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "ERROR: `Text2D::render`: invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Text2d::render`: invalid horizontal alignment: " << horizontal_alignment << "\n";
             return;
         }
 
@@ -230,7 +230,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "ERROR: `Text2D::render`: invalid vertical alignment: " << this->vertical_alignment << "\n";
+            std::cerr << "ERROR: `Text2d::render`: invalid vertical alignment: " << this->vertical_alignment << "\n";
             return;
         }
 
@@ -320,7 +320,7 @@ namespace yli::ontology
             }
             else
             {
-                std::cerr << "ERROR: `Text2D::render`: invalid `font_texture_file_format`: " << font_texture_file_format << "\n";
+                std::cerr << "ERROR: `Text2d::render`: invalid `font_texture_file_format`: " << font_texture_file_format << "\n";
                 return;
             }
 
@@ -369,34 +369,34 @@ namespace yli::ontology
         yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
     }
 
-    yli::ontology::Entity* Text2D::get_parent() const
+    yli::ontology::Entity* Text2d::get_parent() const
     {
         return this->child_of_font_2d.get_parent();
     }
 
-    yli::ontology::Scene* Text2D::get_scene() const
+    yli::ontology::Scene* Text2d::get_scene() const
     {
         const yli::ontology::Entity* const font_2d_parent = this->get_parent();
 
         if (font_2d_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text2D::get_scene`: `font_2d_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text2d::get_scene`: `font_2d_parent` is `nullptr`!");
         }
 
         return font_2d_parent->get_scene();
     }
 
-    std::size_t Text2D::get_number_of_children() const
+    std::size_t Text2d::get_number_of_children() const
     {
-        return 0; // `Text2D` has no children.
+        return 0; // `Text2d` has no children.
     }
 
-    std::size_t Text2D::get_number_of_descendants() const
+    std::size_t Text2d::get_number_of_descendants() const
     {
-        return 0; // `Text2D` has no children.
+        return 0; // `Text2d` has no children.
     }
 
-    void Text2D::change_string(const std::string& text)
+    void Text2d::change_string(const std::string& text)
     {
         this->text = text;
     }

@@ -169,7 +169,7 @@ namespace yli::data
         }
 
     template<>
-        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text2D>()
+        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text2d>()
         {
             return yli::data::Datatype::TEXT_2D;
         }

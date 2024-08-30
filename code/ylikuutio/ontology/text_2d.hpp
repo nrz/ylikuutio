@@ -47,27 +47,27 @@ namespace yli::ontology
     class Font2D;
     struct TextStruct;
 
-    class Text2D final : public yli::ontology::Entity
+    class Text2d final : public yli::ontology::Entity
     {
         public:
             // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
-                    yli::ontology::Text2D& text_2d,
+                    yli::ontology::Text2d& text_2d,
                     yli::ontology::Font2D& new_parent);
 
         private:
-            Text2D(
+            Text2d(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::TextStruct& text_struct,
                     yli::ontology::GenericParentModule* const font_2d_parent_module);
 
-            ~Text2D();
+            ~Text2d();
 
         public:
-            Text2D(const Text2D&) = delete;            // Delete copy constructor.
-            Text2D& operator=(const Text2D&) = delete; // Delete copy assignment.
+            Text2d(const Text2d&) = delete;            // Delete copy constructor.
+            Text2d& operator=(const Text2d&) = delete; // Delete copy assignment.
 
             void render();
 

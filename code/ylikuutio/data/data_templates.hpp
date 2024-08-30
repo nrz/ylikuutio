@@ -202,9 +202,9 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Text2D* data)
+        std::string get_type_string(yli::ontology::Text2d* data)
         {
-            return "yli::ontology::Text2D*";
+            return "yli::ontology::Text2d*";
         }
 
     template<>
