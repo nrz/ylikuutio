@@ -1137,7 +1137,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         text_3d_struct,
-                        (text_3d_struct.parent != nullptr ? &text_3d_struct.parent->parent_of_text_3ds : nullptr),
+                        (text_3d_struct.vector_font_parent != nullptr ? &text_3d_struct.vector_font_parent->parent_of_text_3ds : nullptr),
                         (text_3d_struct.brain != nullptr ? text_3d_struct.brain->get_generic_master_module() : nullptr));
 
                 text_3d->set_global_name(text_3d_struct.global_name);
