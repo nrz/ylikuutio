@@ -130,6 +130,12 @@ struct_name = snake_case_class_name + "_struct"
 # struct filename.
 struct_filename = struct_name + ".hpp"
 
+# test filename.
+test_filename = "test_" + class_filename_cpp
+
+# struct test filename.
+struct_test_filename = "test_" + struct_name + ".cpp"
+
 # base class filename.
 # base class needs to be #include'd always because it is inherited.
 if base_class_name != "":
@@ -350,6 +356,28 @@ struct_constructor_lines = \
 "            // constructor.\n"\
 "        }"
 
+# test file specific lines.
+gtest_include_line = include_space_double_quote + "gtest/gtest.h\""
+ontology_path_with_slash_from_project_root = "code/ylikuutio/ontology/"
+class_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + class_filename_hpp + "\""
+struct_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + struct_filename + "\""
+test_opening_parenthesis = "TEST("
+init_appropriately = "_must_be_initialized_appropriately"
+as_valid_ptr = "_provided_as_valid_pointer)"
+test_class_instance_init_parent_pointer = test_opening_parenthesis + snake_case_class_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
+as_nullptr = "_provided_as_nullptr)"
+test_class_instance_init_nullptr = test_opening_parenthesis + snake_case_class_name + init_appropriately + ", " + snake_case_parent_class_name + as_nullptr
+as_valid_name = "_provided_as_valid_global_name)"
+test_class_instance_init_valid_name = test_opening_parenthesis + snake_case_class_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_name
+as_invalid_name = "_provided_as_invalid_global_name)"
+test_class_instance_init_invalid_name = test_opening_parenthesis + snake_case_class_name + init_appropriately + ", " + snake_case_parent_class_name + as_invalid_name
+opening_braces = "{"
+closing_braces = "}"
+
+# struct test file specific lines.
+test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
+test_struct_instance_init_global_name = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_name
+
 with open(class_filename_hpp, 'w') as f:
     print(copyright_notice, file = f)
     print(file = f)
@@ -460,3 +488,40 @@ with open(struct_filename, 'w') as f:
     print(end_namespace_lines, file = f)
     print(file = f)
     print(endif_line, file = f)
+
+with open(test_filename, 'w') as f:
+    print(copyright_notice, file = f)
+    print(file = f)
+    print(gtest_include_line, file = f)
+    print(class_file_include_line_from_project_root, file = f)
+    print(struct_file_include_line_from_project_root, file = f)
+    print(file = f)
+    print(test_class_instance_init_parent_pointer, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
+    print(file = f)
+    print(test_class_instance_init_nullptr, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
+    print(file = f)
+    print(test_class_instance_init_valid_name, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
+    print(file = f)
+    print(test_class_instance_init_invalid_name, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
+
+with open(struct_test_filename, 'w') as f:
+    print(copyright_notice, file = f)
+    print(file = f)
+    print(gtest_include_line, file = f)
+    print(struct_file_include_line_from_project_root, file = f)
+    print(file = f)
+    print(test_struct_instance_init_parent_pointer, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
+    print(file = f)
+    print(test_struct_instance_init_global_name, file = f)
+    print(opening_braces, file = f)
+    print(closing_braces, file = f)
