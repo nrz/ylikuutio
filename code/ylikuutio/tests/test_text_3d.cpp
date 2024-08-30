@@ -54,8 +54,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3DStruct text_3d_struct;
-    text_3d_struct.vector_font_parent = vector_font;
+    yli::ontology::Text3DStruct text_3d_struct(vector_font);
     yli::ontology::Text3D* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
     ASSERT_NE(text_3d, nullptr);
@@ -104,8 +103,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3DStruct text_3d_struct;
-    text_3d_struct.vector_font_parent = vector_font;
+    yli::ontology::Text3DStruct text_3d_struct(vector_font);
     yli::ontology::Text3D* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 

@@ -29,6 +29,11 @@ namespace yli::ontology
 
     struct Text3DStruct final : public yli::ontology::MovableStruct
     {
+        explicit Text3DStruct(yli::ontology::VectorFont* const vector_font_parent)
+            : vector_font_parent { vector_font_parent }
+        {
+        }
+
         std::string text_string;
         yli::ontology::VectorFont* vector_font_parent { nullptr }; // pointer to the `VectorFont` (parent).
     };
