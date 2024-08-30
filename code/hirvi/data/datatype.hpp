@@ -105,6 +105,7 @@ namespace hirvi
         VECTOR_FONT                 = 220,
         GLYPH                       = 221,
         TEXT_3D                     = 222,
+        CHARACTER                   = 223,
         // `yli::ontology` datatypes, 'input' path.
         INPUT_MODE                  = 230,
         KEY_BINDING                 = 231,
