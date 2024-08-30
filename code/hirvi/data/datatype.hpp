@@ -98,6 +98,7 @@ namespace hirvi
         SHAPESHIFTER_TRANSFORMATION = 200,
         SHAPESHIFTER_SEQUENCE       = 201,
         SHAPESHIFTER_FORM           = 202,
+        SHAPESHIFTER                = 203,
         // `yli::ontology` datatypes, 'text 2D' path.
         FONT_2D                     = 210,
         TEXT_2D                     = 211,
