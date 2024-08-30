@@ -1082,11 +1082,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::VECTOR_FONT));
                 VectorFontMemoryAllocator& allocator = static_cast<VectorFontMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Material* material_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Material*>(vector_font_struct.material_parent))
+                {
+                    material_parent = std::get<yli::ontology::Material*>(vector_font_struct.material_parent);
+                }
+                else if (std::holds_alternative<std::string>(vector_font_struct.material_parent))
+                {
+                    material_parent = dynamic_cast<yli::ontology::Material*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(vector_font_struct.material_parent)));
+                }
+
                 yli::ontology::VectorFont* const vector_font = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         vector_font_struct,
-                        (vector_font_struct.material_parent != nullptr ? &vector_font_struct.material_parent->parent_of_vector_fonts : nullptr));
+                        (material_parent != nullptr ? &material_parent->parent_of_vector_fonts : nullptr));
 
                 vector_font->set_global_name(vector_font_struct.global_name);
                 vector_font->set_local_name(vector_font_struct.local_name);

@@ -30,9 +30,10 @@
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
+#include <limits>  // std::numeric_limits
 
-TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
+TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_material_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
@@ -80,7 +81,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
 }
 
-TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_scene)
+TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_scene_material_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -123,5 +124,149 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     ASSERT_TRUE(vector_font->get_can_be_erased());
     ASSERT_EQ(vector_font->get_scene(), scene);
     ASSERT_EQ(vector_font->get_parent(), material);
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+}
+
+TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_material_parent_provided_as_nullptr)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::VectorFontStruct vector_font_struct(nullptr);
+    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+            vector_font_struct);
+    ASSERT_NE(vector_font, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(vector_font->get_type(), "yli::ontology::VectorFont*");
+    ASSERT_TRUE(vector_font->get_can_be_erased());
+    ASSERT_EQ(vector_font->get_parent(), nullptr);
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+}
+
+TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_material_parent_provided_as_valid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    material_struct.global_name = "foo";
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::VectorFontStruct vector_font_struct("foo");
+    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+            vector_font_struct);
+    ASSERT_NE(vector_font, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 1); // `vector_font`.
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_childID(), 0);
+    ASSERT_EQ(vector_font->get_type(), "yli::ontology::VectorFont*");
+    ASSERT_TRUE(vector_font->get_can_be_erased());
+    ASSERT_EQ(vector_font->get_scene(), nullptr);
+    ASSERT_EQ(vector_font->get_parent(), material);
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+}
+
+TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_material_parent_provided_as_invalid_global_name)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    material_struct.global_name = "foo";
+    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+            material_struct);
+
+    yli::ontology::VectorFontStruct vector_font_struct("bar");
+    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+            vector_font_struct);
+    ASSERT_NE(vector_font, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
+
+    // `Entity` member functions of `Ecosystem`.
+    ASSERT_EQ(ecosystem->get_number_of_non_variable_children(), 2); // `pipeline`, `material`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Material`.
+    ASSERT_EQ(material->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
+
+    // `Material` member functions.
+    ASSERT_EQ(material->get_number_of_apprentices(), 0);
+
+    // `Entity` member functions of `VectorFont`.
+    ASSERT_EQ(vector_font->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(vector_font->get_type(), "yli::ontology::VectorFont*");
+    ASSERT_TRUE(vector_font->get_can_be_erased());
+    ASSERT_EQ(vector_font->get_parent(), nullptr);
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 0);
 }

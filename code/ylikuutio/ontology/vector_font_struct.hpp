@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <string> // std::string
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -34,8 +35,13 @@ namespace yli::ontology
         {
         }
 
+        explicit VectorFontStruct(const std::string& material_parent)
+            : material_parent { material_parent }
+        {
+        }
+
         // used for all files (for all `VectorFont`s).
-        yli::ontology::Material* material_parent { nullptr }; // pointer to the `Material`.
+        std::variant<yli::ontology::Material*, std::string> material_parent {};
         float vertex_scaling_factor     { 0.001f };  // Default value.
         std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
         std::string font_filename;       // filename of the font file.

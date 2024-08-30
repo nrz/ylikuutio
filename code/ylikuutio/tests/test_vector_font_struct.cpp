@@ -18,12 +18,35 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 
-TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct)
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::holds_alternative
+
+TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_material_parent_provided_as_nullptr)
 {
     const float default_vertex_scaling_factor = 0.001f;
 
     const yli::ontology::VectorFontStruct test_vector_font_struct(nullptr);
-    ASSERT_EQ(test_vector_font_struct.material_parent, nullptr);
+
+    ASSERT_FALSE(test_vector_font_struct.material_parent.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent));
+
+    ASSERT_EQ(test_vector_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
+    ASSERT_TRUE(test_vector_font_struct.font_file_format.empty());
+    ASSERT_TRUE(test_vector_font_struct.font_filename.empty());
+}
+
+TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_material_parent_provided_as_global_name)
+{
+    const float default_vertex_scaling_factor = 0.001f;
+
+    const yli::ontology::VectorFontStruct test_vector_font_struct("foo");
+
+    ASSERT_FALSE(test_vector_font_struct.material_parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent));
+
     ASSERT_EQ(test_vector_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
     ASSERT_TRUE(test_vector_font_struct.font_file_format.empty());
     ASSERT_TRUE(test_vector_font_struct.font_filename.empty());
