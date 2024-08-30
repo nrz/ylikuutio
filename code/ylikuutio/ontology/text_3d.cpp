@@ -37,8 +37,8 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> Text3D::bind_to_new_vector_font_parent(
-            yli::ontology::Text3D& text_3d,
+    std::optional<yli::data::AnyValue> Text3d::bind_to_new_vector_font_parent(
+            yli::ontology::Text3d& text_3d,
             yli::ontology::VectorFont& new_parent)
     {
         // Disable all character `Object`s of `text_3d`,
@@ -52,12 +52,12 @@ namespace yli::ontology
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text3D::bind_to_new_vector_font_parent`: `vector_font_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text3d::bind_to_new_vector_font_parent`: `vector_font_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_3d.local_name))
         {
-            std::cerr << "ERROR: `Text3D::bind_to_new_vector_font_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Text3d::bind_to_new_vector_font_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
@@ -67,10 +67,10 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    Text3D::Text3D(
+    Text3d::Text3d(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::Text3DStruct& text_3d_struct,
+            const yli::ontology::Text3dStruct& text_3d_struct,
             yli::ontology::GenericParentModule* const vector_font_parent_module,
             yli::ontology::GenericMasterModule* const brain_master_module)
         : Movable(
@@ -81,9 +81,9 @@ namespace yli::ontology
         child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects")
     {
-        // TODO: `Text3D` constructor also creates each `Object`,
+        // TODO: `Text3d` constructor also creates each `Object`,
         // and binds each to its corresponding `Glyph` for rendering hierarchy,
-        // and also binds each to this `Text3D` for ontological hierarchy.
+        // and also binds each to this `Text3d` for ontological hierarchy.
 
         this->text_string = text_3d_struct.text_string;
 
@@ -92,46 +92,46 @@ namespace yli::ontology
         yli::ontology::create_glyph_objects(this->text_string, *this);
 
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Text3D*";
+        this->type_string = "yli::ontology::Text3d*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Text3D::get_parent() const
+    yli::ontology::Entity* Text3d::get_parent() const
     {
         return this->child_of_vector_font.get_parent();
     }
 
-    yli::ontology::Scene* Text3D::get_scene() const
+    yli::ontology::Scene* Text3d::get_scene() const
     {
         const yli::ontology::Entity* const vector_font_parent = this->get_parent();
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text3D::get_scene`: `vector_font_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text3d::get_scene`: `vector_font_parent` is `nullptr`!");
         }
 
         return vector_font_parent->get_scene();
     }
 
-    yli::ontology::Pipeline* Text3D::get_pipeline() const
+    yli::ontology::Pipeline* Text3d::get_pipeline() const
     {
         const yli::ontology::VectorFont* const vector_font_parent = static_cast<yli::ontology::VectorFont*>(this->get_parent());
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text3D::get_pipeline`: `vector_font_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text3d::get_pipeline`: `vector_font_parent` is `nullptr`!");
         }
 
         return vector_font_parent->get_pipeline();
     }
 
-    std::size_t Text3D::get_number_of_children() const
+    std::size_t Text3d::get_number_of_children() const
     {
-        return 0; // `Text3D` has no children.
+        return 0; // `Text3d` has no children.
     }
 
-    std::size_t Text3D::get_number_of_descendants() const
+    std::size_t Text3d::get_number_of_descendants() const
     {
-        return 0; // `Text3D` has no children.
+        return 0; // `Text3d` has no children.
     }
 }

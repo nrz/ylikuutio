@@ -48,7 +48,7 @@ namespace yli::ontology
     class Font2D;
     class Text2D;
     class VectorFont;
-    class Text3D;
+    class Text3d;
     class Console;
     class ComputeTask;
 }
@@ -121,7 +121,7 @@ namespace yli::data
             explicit AnyValue(yli::ontology::Font2D& font_2d_ref);
             explicit AnyValue(yli::ontology::Text2D& text_2d_ref);
             explicit AnyValue(yli::ontology::VectorFont& vector_font_ref);
-            explicit AnyValue(yli::ontology::Text3D& text_3d_ref);
+            explicit AnyValue(yli::ontology::Text3d& text_3d_ref);
             explicit AnyValue(yli::ontology::Console& console_ref);
             explicit AnyValue(yli::ontology::ComputeTask& compute_task_ref);
 
@@ -179,7 +179,7 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Text2D>,
                 // `yli::ontology` datatypes, 'text 3D' path.
                 std::reference_wrapper<yli::ontology::VectorFont>,
-                std::reference_wrapper<yli::ontology::Text3D>,
+                std::reference_wrapper<yli::ontology::Text3d>,
                 // `yli::ontology` datatypes, 'console' path.
                 std::reference_wrapper<yli::ontology::Console>,
                 // `yli::ontology` datatypes, 'compute' path.

@@ -54,11 +54,11 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3DStruct text_3d_struct(vector_font);
-    yli::ontology::Text3D* text_3d = application.get_generic_entity_factory().create_text_3d(
+    yli::ontology::Text3dStruct text_3d_struct(vector_font);
+    yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
     ASSERT_NE(text_3d, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_3d) % alignof(yli::ontology::Text3D), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(text_3d) % alignof(yli::ontology::Text3d), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
@@ -75,9 +75,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     // `Entity` member functions of `VectorFont`.
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 1); // `text_3d`.
 
-    // `Entity` member functions of `Text3D`.
+    // `Entity` member functions of `Text3d`.
     ASSERT_EQ(text_3d->get_childID(), 0);
-    ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3D*");
+    ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3d*");
     ASSERT_TRUE(text_3d->get_can_be_erased());
     ASSERT_EQ(text_3d->get_scene(), nullptr);
     ASSERT_EQ(text_3d->get_parent(), vector_font);
@@ -103,8 +103,8 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3DStruct text_3d_struct(vector_font);
-    yli::ontology::Text3D* text_3d = application.get_generic_entity_factory().create_text_3d(
+    yli::ontology::Text3dStruct text_3d_struct(vector_font);
+    yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 
     // `Entity` member functions of `Universe`.
@@ -122,9 +122,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     // `Entity` member functions of `VectorFont`.
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 1); // `text_3d`.
 
-    // `Entity` member functions of `Text3D`.
+    // `Entity` member functions of `Text3d`.
     ASSERT_EQ(text_3d->get_childID(), 0);
-    ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3D*");
+    ASSERT_EQ(text_3d->get_type(), "yli::ontology::Text3d*");
     ASSERT_TRUE(text_3d->get_can_be_erased());
     ASSERT_EQ(text_3d->get_scene(), scene);
     ASSERT_EQ(text_3d->get_parent(), vector_font);

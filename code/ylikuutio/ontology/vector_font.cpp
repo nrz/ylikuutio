@@ -45,7 +45,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
-    class Text3D;
+    class Text3d;
     class Glyph;
 
     std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(

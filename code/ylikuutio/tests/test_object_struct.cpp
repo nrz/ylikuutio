@@ -49,7 +49,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     ASSERT_TRUE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3D*>(test_object_struct.mesh_master));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
 
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -74,7 +74,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3D*>(test_object_struct.mesh_master));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
 
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -99,7 +99,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3D*>(test_object_struct.mesh_master));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
 
     ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -112,7 +112,7 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 {
     const yli::ontology::ObjectStruct test_object_struct(
             static_cast<yli::ontology::Scene*>(nullptr),
-            static_cast<yli::ontology::Text3D*>(nullptr));
+            static_cast<yli::ontology::Text3d*>(nullptr));
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));

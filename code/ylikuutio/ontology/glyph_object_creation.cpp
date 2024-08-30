@@ -36,7 +36,7 @@ namespace yli::ontology
 {
     class Glyph;
 
-    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D& text_3d)
+    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3d& text_3d)
     {
         const yli::ontology::VectorFont* const vector_font_parent_of_text_3d = static_cast<yli::ontology::VectorFont*>(text_3d.get_parent());
 

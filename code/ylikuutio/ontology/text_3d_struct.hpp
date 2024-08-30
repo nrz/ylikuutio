@@ -27,9 +27,9 @@ namespace yli::ontology
 {
     class VectorFont;
 
-    struct Text3DStruct final : public yli::ontology::MovableStruct
+    struct Text3dStruct final : public yli::ontology::MovableStruct
     {
-        explicit Text3DStruct(yli::ontology::VectorFont* const vector_font_parent)
+        explicit Text3dStruct(yli::ontology::VectorFont* const vector_font_parent)
             : vector_font_parent { vector_font_parent }
         {
         }

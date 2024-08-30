@@ -187,7 +187,7 @@ namespace yli::data
         }
 
     template<>
-        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text3D>()
+        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text3d>()
         {
             return yli::data::Datatype::TEXT_3D;
         }

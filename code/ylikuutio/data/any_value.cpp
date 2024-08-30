@@ -264,11 +264,11 @@ namespace yli::data
             return std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data).get() ==
                 std::get<std::reference_wrapper<yli::ontology::VectorFont>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text3D>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Text3D>>(rhs.data).get();
+            return std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data).get() ==
+                std::get<std::reference_wrapper<yli::ontology::Text3d>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(rhs.data))
@@ -429,9 +429,9 @@ namespace yli::data
         {
             return "yli::ontology::VectorFont&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
         {
-            return "yli::ontology::Text3D&";
+            return "yli::ontology::Text3d&";
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
         {
@@ -617,9 +617,9 @@ namespace yli::data
         {
             any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text3D>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
         {
@@ -713,9 +713,9 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text3D>>(this->data);
+            return std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data);
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
         {
@@ -934,7 +934,7 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Font2D>,
                 std::reference_wrapper<yli::ontology::Text2D>,
                 std::reference_wrapper<yli::ontology::VectorFont>,
-                std::reference_wrapper<yli::ontology::Text3D>,
+                std::reference_wrapper<yli::ontology::Text3d>,
                 std::reference_wrapper<yli::ontology::Console>,
                 std::reference_wrapper<yli::ontology::ComputeTask>>(type, value_string))
     {
@@ -1120,8 +1120,8 @@ namespace yli::data
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Text3D& text_3d_ref)
-        : data(std::reference_wrapper<yli::ontology::Text3D>(text_3d_ref))
+    AnyValue::AnyValue(yli::ontology::Text3d& text_3d_ref)
+        : data(std::reference_wrapper<yli::ontology::Text3d>(text_3d_ref))
     {
     }
 

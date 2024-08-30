@@ -94,7 +94,7 @@ namespace yli::memory
     using Text2DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text2D, 256>;
     using VectorFontMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
-    using Text3DMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
+    using Text3dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
     using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
     using ConsoleCallbackEngineMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
@@ -207,7 +207,7 @@ namespace yli::memory
                     this->create_allocator<Text2DMemoryAllocator>(yli::data::Datatype::TEXT_2D);
                     this->create_allocator<VectorFontMemoryAllocator>(yli::data::Datatype::VECTOR_FONT);
                     this->create_allocator<GlyphMemoryAllocator>(yli::data::Datatype::GLYPH);
-                    this->create_allocator<Text3DMemoryAllocator>(yli::data::Datatype::TEXT_3D);
+                    this->create_allocator<Text3dMemoryAllocator>(yli::data::Datatype::TEXT_3D);
                     this->create_allocator<ConsoleMemoryAllocator>(yli::data::Datatype::CONSOLE);
                     this->create_allocator<ConsoleCallbackEngineMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE);
                     this->create_allocator<ConsoleCallbackObjectMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT);

@@ -49,7 +49,7 @@ namespace yli::ontology
     class Pipeline;
     class Species;
     class ShapeshifterSequence;
-    class Text3D;
+    class Text3d;
     class GenericParentModule;
     class GenericMasterModule;
 
@@ -78,7 +78,7 @@ namespace yli::ontology
             // and request a new apprenticeID from `new_text_3d`.
             static std::optional<yli::data::AnyValue> bind_to_new_text_3d_master(
                     yli::ontology::Object& object,
-                    yli::ontology::Text3D& new_text_3d) noexcept;
+                    yli::ontology::Text3d& new_text_3d) noexcept;
 
         protected:
             Object(

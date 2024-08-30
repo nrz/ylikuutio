@@ -47,7 +47,7 @@
 // `Biont`     - child of `Holobiont`.
 // `Camera`    - non-material `Movable`, child of `Scene`.
 //
-// `Text3D`, child of `VectorFont`, is not implemented yet.
+// `Text3d`, child of `VectorFont`, is not implemented yet.
 
 namespace yli::core
 {

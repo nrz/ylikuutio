@@ -744,8 +744,8 @@ namespace yli::ontology
                          &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
                          (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) != nullptr) ?
                          &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master)->master_of_objects) :
-                         (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master) && std::get<yli::ontology::Text3D*>(object_struct.mesh_master) != nullptr) ?
-                         &(std::get<yli::ontology::Text3D*>(object_struct.mesh_master)->master_of_objects) :
+                         (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master) && std::get<yli::ontology::Text3d*>(object_struct.mesh_master) != nullptr) ?
+                         &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
                          nullptr),
                         // `Brain` master.
                         (object_struct.brain != nullptr ? object_struct.brain->get_generic_master_module() : nullptr));
@@ -1124,16 +1124,16 @@ namespace yli::ontology
                 return glyph;
             }
 
-            yli::ontology::Text3D* create_text_3d(const yli::ontology::Text3DStruct& text_3d_struct) const override
+            yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const override
             {
-                using Text3DMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text3D, 256>;
+                using Text3dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
 
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Text3DMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<Text3dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::TEXT_3D));
-                Text3DMemoryAllocator& allocator = static_cast<Text3DMemoryAllocator&>(generic_allocator);
+                Text3dMemoryAllocator& allocator = static_cast<Text3dMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Text3D* const text_3d = allocator.build_in(
+                yli::ontology::Text3d* const text_3d = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         text_3d_struct,
@@ -1477,8 +1477,8 @@ namespace yli::ontology
                              &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
                              (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) != nullptr) ?
                              &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master)->master_of_objects) :
-                             (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master) && std::get<yli::ontology::Text3D*>(object_struct.mesh_master) != nullptr) ?
-                             &(std::get<yli::ontology::Text3D*>(object_struct.mesh_master)->master_of_objects) :
+                             (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master) && std::get<yli::ontology::Text3d*>(object_struct.mesh_master) != nullptr) ?
+                             &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
                              nullptr),
                             // `Brain` master.
                             (object_struct.brain != nullptr ? object_struct.brain->get_generic_master_module() : nullptr));

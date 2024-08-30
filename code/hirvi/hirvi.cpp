@@ -777,8 +777,8 @@ namespace hirvi
         // `Entity` binding callbacks, `Text2D`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text2D::bind_to_new_font_2d_parent);
 
-        // `Entity` binding callbacks, `Text3D`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text3D::bind_to_new_vector_font_parent);
+        // `Entity` binding callbacks, `Text3d`.
+        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Text3d::bind_to_new_vector_font_parent);
 
         // `Entity` binding callbacks, `Console`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Console::bind_to_new_font_2d);

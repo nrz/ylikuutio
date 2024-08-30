@@ -602,15 +602,15 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3DStruct text_3d_struct(nullptr);
+    yli::ontology::Text3dStruct text_3d_struct(nullptr);
     text_3d_struct.vector_font_parent = vector_font;
-    yli::ontology::Text3D* const text_3d = application.get_generic_entity_factory().create_text_3d(
+    yli::ontology::Text3d* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 
     yli::data::AnyValue text_3d_any_value = yli::data::AnyValue(*text_3d);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text3D>>(text_3d_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text3D>>(text_3d_any_value.data).get(), *text_3d);
-    ASSERT_EQ(std::strcmp(text_3d_any_value.get_datatype().c_str(), "yli::ontology::Text3D&"), 0);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(text_3d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text3d>>(text_3d_any_value.data).get(), *text_3d);
+    ASSERT_EQ(std::strcmp(text_3d_any_value.get_datatype().c_str(), "yli::ontology::Text3d&"), 0);
     ASSERT_EQ(text_3d_any_value.get_entity_ref(), *text_3d);
     ASSERT_EQ(text_3d_any_value.get_const_entity_ref(), *text_3d);
 }

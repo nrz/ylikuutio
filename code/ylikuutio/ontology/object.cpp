@@ -153,7 +153,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Object::bind_to_new_text_3d_master(
             yli::ontology::Object& object,
-            yli::ontology::Text3D& new_text_3d) noexcept
+            yli::ontology::Text3d& new_text_3d) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_text_3d`.
@@ -165,7 +165,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `CHARACTER` type `Object`s can be bound to `Text3D`!\n";
+            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `CHARACTER` type `Object`s can be bound to `Text3d`!\n";
         }
 
         return std::nullopt;
@@ -194,7 +194,7 @@ namespace yli::ontology
         {
             this->object_type = yli::ontology::ObjectType::SHAPESHIFTER;
         }
-        else if (std::holds_alternative<yli::ontology::Text3D*>(object_struct.mesh_master))
+        else if (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master))
         {
             this->object_type = yli::ontology::ObjectType::CHARACTER;
         }
@@ -431,7 +431,7 @@ namespace yli::ontology
         }
         else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
         {
-            if (const auto* const text_3d = static_cast<yli::ontology::Text3D*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
+            if (const auto* const text_3d = static_cast<yli::ontology::Text3d*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
             {
                 return text_3d->get_pipeline();
             }

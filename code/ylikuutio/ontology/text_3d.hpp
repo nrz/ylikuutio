@@ -43,9 +43,9 @@ namespace yli::ontology
     class Pipeline;
     class Object;
     class VectorFont;
-    struct Text3DStruct;
+    struct Text3dStruct;
 
-    class Text3D final : public yli::ontology::Movable
+    class Text3d final : public yli::ontology::Movable
     {
         public:
             // Disable all character `Object`s of `text_3d`,
@@ -55,25 +55,25 @@ namespace yli::ontology
             // TODO: implement creation and enabling the character `Object`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
             static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(
-                    yli::ontology::Text3D& text_3d,
+                    yli::ontology::Text3d& text_3d,
                     yli::ontology::VectorFont& new_parent);
 
-            Text3D(
+            Text3d(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::Text3DStruct& text_3d_struct,
+                    const yli::ontology::Text3dStruct& text_3d_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module,
                     yli::ontology::GenericMasterModule* const brain_master_module);
 
-            ~Text3D() = default;
+            ~Text3d() = default;
 
-            Text3D(const Text3D&) = delete;            // Delete copy constructor.
-            Text3D& operator=(const Text3D&) = delete; // Delete copy assignment.
+            Text3d(const Text3d&) = delete;            // Delete copy constructor.
+            Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.
 
             yli::ontology::Entity* get_parent() const override;
 
             friend class yli::ontology::Object;
-            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3D& text_3d);
+            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3d& text_3d);
 
             yli::ontology::ChildModule child_of_vector_font;
             yli::ontology::GenericMasterModule master_of_objects;

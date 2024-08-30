@@ -31,7 +31,7 @@ namespace yli::ontology
     class Species;
     class ShapeshifterSequence;
     class Glyph;
-    class Text3D;
+    class Text3d;
 
     struct ObjectStruct : public yli::ontology::MovableStruct
     {
@@ -70,7 +70,7 @@ namespace yli::ontology
                 std::monostate,
                 yli::ontology::Species*,
                 yli::ontology::ShapeshifterSequence*,
-                yli::ontology::Text3D*>
+                yli::ontology::Text3d*>
                 mesh_master)
             : MovableStruct(nullptr, parent),
             mesh_master { mesh_master }
@@ -84,14 +84,14 @@ namespace yli::ontology
                 std::monostate,
                 yli::ontology::Species*,
                 yli::ontology::ShapeshifterSequence*,
-                yli::ontology::Text3D*>
+                yli::ontology::Text3d*>
                 mesh_master)
             : MovableStruct(brain, parent),
             mesh_master { mesh_master }
         {
         }
 
-        std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3D*> mesh_master {};
+        std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3d*> mesh_master {};
         yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
     };
 }
