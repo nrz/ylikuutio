@@ -122,8 +122,13 @@ class_filename_cpp = snake_case_class_name + ".cpp"
 
 class_include_line = include_space_double_quote + class_filename_hpp + "\""
 
+# struct variable type and name.
+struct_variable_type = class_name + "Struct"
+const_struct_reference_variable_type = "const " + namespace + "::" + struct_variable_type + "&"
+struct_name = snake_case_class_name + "_struct"
+
 # struct filename.
-struct_filename = snake_case_class_name + "_struct.hpp"
+struct_filename = struct_name + ".hpp"
 
 # base class filename.
 # base class needs to be #include'd always because it is inherited.
@@ -136,11 +141,6 @@ child_module_include_line = "#include \"child_module.hpp\""
 
 # child module variable name.
 child_module_variable_name = "child_of_" + snake_case_parent_class_name
-
-# struct variable type and name.
-struct_variable_type = class_name + "Struct"
-const_struct_reference_variable_type = "const " + namespace + "::" + struct_variable_type + "&"
-struct_name = snake_case_class_name + "_struct"
 
 # include line for the corresponding struct file.
 struct_include_line = include_space_double_quote + struct_name + ".hpp\""
