@@ -554,13 +554,13 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
     mock::MockApplication application;
     yli::ontology::FontStruct font_struct;
-    yli::ontology::Font2D* const font_2d = application.get_generic_entity_factory().create_font_2d(
+    yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
     yli::data::AnyValue font_2d_any_value = yli::data::AnyValue(*font_2d);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(font_2d_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Font2D>>(font_2d_any_value.data).get(), *font_2d);
-    ASSERT_EQ(std::strcmp(font_2d_any_value.get_datatype().c_str(), "yli::ontology::Font2D&"), 0);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(font_2d_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Font2d>>(font_2d_any_value.data).get(), *font_2d);
+    ASSERT_EQ(std::strcmp(font_2d_any_value.get_datatype().c_str(), "yli::ontology::Font2d&"), 0);
     ASSERT_EQ(font_2d_any_value.get_entity_ref(), *font_2d);
     ASSERT_EQ(font_2d_any_value.get_const_entity_ref(), *font_2d);
 }

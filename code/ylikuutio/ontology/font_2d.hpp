@@ -48,20 +48,20 @@ namespace yli::ontology
     struct FontStruct;
     struct TextStruct;
 
-    class Font2D final : public yli::ontology::Entity
+    class Font2d final : public yli::ontology::Entity
     {
         private:
-            Font2D(
+            Font2d(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::FontStruct& font_struct,
                     yli::ontology::GenericParentModule* const universe_parent_module);
 
-            ~Font2D();
+            ~Font2d();
 
         public:
-            Font2D(const Font2D&) = delete;            // Delete copy constructor.
-            Font2D& operator=(const Font2D&) = delete; // Delete copy assignment.
+            Font2d(const Font2d&) = delete;            // Delete copy constructor.
+            Font2d& operator=(const Font2d&) = delete; // Delete copy assignment.
 
             yli::ontology::Entity* get_parent() const override;
 

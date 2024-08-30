@@ -44,7 +44,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class Scene;
-    class Font2D;
+    class Font2d;
     struct TextStruct;
 
     class Text2d final : public yli::ontology::Entity
@@ -54,7 +54,7 @@ namespace yli::ontology
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
                     yli::ontology::Text2d& text_2d,
-                    yli::ontology::Font2D& new_parent);
+                    yli::ontology::Font2d& new_parent);
 
         private:
             Text2d(

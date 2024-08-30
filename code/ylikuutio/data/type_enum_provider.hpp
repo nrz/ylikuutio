@@ -163,7 +163,7 @@ namespace yli::data
         }
 
     template<>
-        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Font2D>()
+        inline yli::data::Datatype TypeEnumProvider::get_type_enum<yli::ontology::Font2d>()
         {
             return yli::data::Datatype::FONT_2D;
         }

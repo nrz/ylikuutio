@@ -27,13 +27,13 @@
 
 namespace yli::ontology
 {
-    class Font2D;
+    class Font2d;
 
     struct TextStruct : public yli::ontology::EntityStruct
     {
         TextStruct() = default;
 
-        explicit TextStruct(yli::ontology::Font2D* const font_2d_parent)
+        explicit TextStruct(yli::ontology::Font2d* const font_2d_parent)
             : font_2d_parent { font_2d_parent }
         {
         }
@@ -43,7 +43,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::Font2D*, std::string> font_2d_parent {};
+        std::variant<yli::ontology::Font2d*, std::string> font_2d_parent {};
         std::size_t screen_width  { 0 };
         std::size_t screen_height { 0 };
         std::size_t x             { 0 };

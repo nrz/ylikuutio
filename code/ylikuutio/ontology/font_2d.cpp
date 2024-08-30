@@ -58,7 +58,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    Font2D::Font2D(
+    Font2d::Font2d(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::FontStruct& font_struct,
@@ -115,15 +115,15 @@ namespace yli::ontology
             }
             else if (this->universe.get_is_vulkan_in_use())
             {
-                std::cerr << "ERROR: `Font2D::Font2D`: Vulkan is not supported yet!\n";
+                std::cerr << "ERROR: `Font2d::Font2d`: Vulkan is not supported yet!\n";
             }
         }
 
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Font2D*";
+        this->type_string = "yli::ontology::Font2d*";
     }
 
-    Font2D::~Font2D()
+    Font2d::~Font2d()
     {
         if (this->universe.get_is_opengl_in_use())
         {
@@ -139,48 +139,48 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* Font2D::get_parent() const
+    yli::ontology::Entity* Font2d::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
-    yli::ontology::Scene* Font2D::get_scene() const
+    yli::ontology::Scene* Font2d::get_scene() const
     {
-        // `Font2D` does not belong in any `Scene`.
+        // `Font2d` does not belong in any `Scene`.
         return nullptr;
     }
 
-    std::size_t Font2D::get_number_of_children() const
+    std::size_t Font2d::get_number_of_children() const
     {
         return this->parent_of_text_2ds.get_number_of_children();
     }
 
-    std::size_t Font2D::get_number_of_descendants() const
+    std::size_t Font2d::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
     }
 
-    uint32_t Font2D::get_text_size() const
+    uint32_t Font2d::get_text_size() const
     {
         return this->text_size;
     }
 
-    uint32_t Font2D::get_font_size() const
+    uint32_t Font2d::get_font_size() const
     {
         return this->font_size;
     }
 
-    const std::string& Font2D::get_font_texture_file_format() const
+    const std::string& Font2d::get_font_texture_file_format() const
     {
         return this->texture.get_texture_file_format();
     }
 
-    uint32_t Font2D::get_program_id() const
+    uint32_t Font2d::get_program_id() const
     {
         return this->program_id;
     }
 
-    void Font2D::prepare_to_print() const
+    void Font2d::prepare_to_print() const
     {
         if (this->should_render && this->universe.get_is_opengl_in_use())
         {
@@ -205,7 +205,7 @@ namespace yli::ontology
         }
     }
 
-    void Font2D::render()
+    void Font2d::render()
     {
         if (!this->should_render || !this->universe.get_is_opengl_in_use())
         {
@@ -216,7 +216,7 @@ namespace yli::ontology
 
         if (render_system == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Font2D::render`: `render_system` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Font2d::render`: `render_system` is `nullptr`!");
         }
 
         this->prepare_to_print();
@@ -225,7 +225,7 @@ namespace yli::ontology
         glDisable(GL_BLEND);
     }
 
-    void Font2D::print_text_2d(
+    void Font2d::print_text_2d(
             const uint32_t x,
             const uint32_t y,
             const uint32_t text_size,
@@ -296,7 +296,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "ERROR: `Font2D::print_text_2d`: invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << horizontal_alignment << "\n";
             return;
         }
 
@@ -314,7 +314,7 @@ namespace yli::ontology
         }
         else
         {
-            std::cerr << "ERROR: `Font2D::print_text_2d`: invalid vertical alignment: " << vertical_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << vertical_alignment << "\n";
             return;
         }
 
@@ -391,7 +391,7 @@ namespace yli::ontology
             }
             else
             {
-                std::cerr << "ERROR: `Font2D::print_text_2d`: invalid font_texture_file_format " << font_texture_file_format << "\n";
+                std::cerr << "ERROR: `Font2d::print_text_2d`: invalid font_texture_file_format " << font_texture_file_format << "\n";
                 return;
             }
 
@@ -440,7 +440,7 @@ namespace yli::ontology
         }
     }
 
-    void Font2D::print_text_2d(const yli::ontology::TextStruct& text_struct) const
+    void Font2d::print_text_2d(const yli::ontology::TextStruct& text_struct) const
     {
         if (!this->should_render)
         {
@@ -458,7 +458,7 @@ namespace yli::ontology
                 text_struct.vertical_alignment);
     }
 
-    void Font2D::print_text_2d(
+    void Font2d::print_text_2d(
             const uint32_t x,
             const uint32_t y,
             const uint32_t text_size,

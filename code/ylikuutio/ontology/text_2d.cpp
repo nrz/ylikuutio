@@ -49,7 +49,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Text2d::bind_to_new_font_2d_parent(
             yli::ontology::Text2d& text_2d,
-            yli::ontology::Font2D& new_parent)
+            yli::ontology::Font2d& new_parent)
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -115,7 +115,7 @@ namespace yli::ontology
             glGenBuffers(1, &this->uvbuffer);
 
             // Get a handle for our buffers.
-            const yli::ontology::Font2D* const font_2d_parent = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2d* const font_2d_parent = static_cast<yli::ontology::Font2d*>(this->get_parent());
 
             if (font_2d_parent != nullptr)
             {
@@ -310,7 +310,7 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            const yli::ontology::Font2D* const font_2d_parent = static_cast<yli::ontology::Font2D*>(this->get_parent());
+            const yli::ontology::Font2d* const font_2d_parent = static_cast<yli::ontology::Font2d*>(this->get_parent());
 
             const std::string& font_texture_file_format = font_2d_parent->get_font_texture_file_format();
 

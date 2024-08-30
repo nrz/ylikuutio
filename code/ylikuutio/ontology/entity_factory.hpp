@@ -1007,16 +1007,16 @@ namespace yli::ontology
                 return shapeshifter_form;
             }
 
-            yli::ontology::Font2D* create_font_2d(const yli::ontology::FontStruct& font_struct) const override
+            yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const override
             {
-                using Font2DMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Font2D, 256>;
+                using Font2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Font2d, 256>;
 
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Font2DMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<Font2dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::FONT_2D));
-                Font2DMemoryAllocator& allocator = static_cast<Font2DMemoryAllocator&>(generic_allocator);
+                Font2dMemoryAllocator& allocator = static_cast<Font2dMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Font2D* const font_2d = allocator.build_in(
+                yli::ontology::Font2d* const font_2d = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         font_struct,
@@ -1034,9 +1034,9 @@ namespace yli::ontology
                 }
                 else if (!font_struct.global_name.empty() && !font_struct.local_name.empty())
                 {
-                    std::cerr << "ERROR: `EntityFactory::create_font_2d`: both global and local names given for a `Font2D`\n";
+                    std::cerr << "ERROR: `EntityFactory::create_font_2d`: both global and local names given for a `Font2d`\n";
                     std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Font2D`!\n";
+                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Font2d`!\n";
                 }
 
                 return font_2d;
@@ -1051,14 +1051,14 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::TEXT_2D));
                 Text2dMemoryAllocator& allocator = static_cast<Text2dMemoryAllocator&>(generic_allocator);
 
-                yli::ontology::Font2D* font_2d_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Font2D*>(text_struct.font_2d_parent))
+                yli::ontology::Font2d* font_2d_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Font2d*>(text_struct.font_2d_parent))
                 {
-                    font_2d_parent = std::get<yli::ontology::Font2D*>(text_struct.font_2d_parent);
+                    font_2d_parent = std::get<yli::ontology::Font2d*>(text_struct.font_2d_parent);
                 }
                 else if (std::holds_alternative<std::string>(text_struct.font_2d_parent))
                 {
-                    font_2d_parent = dynamic_cast<yli::ontology::Font2D*>(this->get_universe().registry.get_entity(
+                    font_2d_parent = dynamic_cast<yli::ontology::Font2d*>(this->get_universe().registry.get_entity(
                                 std::get<std::string>(text_struct.font_2d_parent)));
                 }
 

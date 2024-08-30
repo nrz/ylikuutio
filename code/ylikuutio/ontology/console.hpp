@@ -77,7 +77,7 @@ namespace yli::ontology
     class CallbackObject;
     class CallbackParameter;
     class Scene;
-    class Font2D;
+    class Font2d;
     class InputMode;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
@@ -90,7 +90,7 @@ namespace yli::ontology
             // and request a new apprenticeID from `new_font_2d`.
             static std::optional<yli::data::AnyValue> bind_to_new_font_2d(
                     yli::ontology::Console& console,
-                    yli::ontology::Font2D& new_font_2d) noexcept;
+                    yli::ontology::Font2d& new_font_2d) noexcept;
 
         private:
             Console(

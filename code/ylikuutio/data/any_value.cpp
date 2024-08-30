@@ -246,11 +246,11 @@ namespace yli::data
             return std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data).get() ==
                 std::get<std::reference_wrapper<yli::ontology::Holobiont>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Font2D>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Font2D>>(rhs.data).get();
+            return std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data).get() ==
+                std::get<std::reference_wrapper<yli::ontology::Font2d>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(rhs.data))
@@ -417,9 +417,9 @@ namespace yli::data
         {
             return "yli::ontology::Holobiont&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
         {
-            return "yli::ontology::Font2D&";
+            return "yli::ontology::Font2d&";
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
         {
@@ -605,9 +605,9 @@ namespace yli::data
         {
             any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Font2D>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
         {
@@ -701,9 +701,9 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2D>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Font2D>>(this->data);
+            return std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data);
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
         {
@@ -931,7 +931,7 @@ namespace yli::data
                 std::reference_wrapper<yli::ontology::Object>,
                 std::reference_wrapper<yli::ontology::Symbiosis>,
                 std::reference_wrapper<yli::ontology::Holobiont>,
-                std::reference_wrapper<yli::ontology::Font2D>,
+                std::reference_wrapper<yli::ontology::Font2d>,
                 std::reference_wrapper<yli::ontology::Text2d>,
                 std::reference_wrapper<yli::ontology::VectorFont>,
                 std::reference_wrapper<yli::ontology::Text3d>,
@@ -1105,8 +1105,8 @@ namespace yli::data
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Font2D& font_2d_ref)
-        : data(std::reference_wrapper<yli::ontology::Font2D>(font_2d_ref))
+    AnyValue::AnyValue(yli::ontology::Font2d& font_2d_ref)
+        : data(std::reference_wrapper<yli::ontology::Font2d>(font_2d_ref))
     {
     }
 

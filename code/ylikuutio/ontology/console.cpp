@@ -52,7 +52,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(
             yli::ontology::Console& console,
-            yli::ontology::Font2D& new_font_2d) noexcept
+            yli::ontology::Font2d& new_font_2d) noexcept
     {
         // Set pointer to `console` to `nullptr`, set font according to the input,
         // and request a new apprenticeID from `new_font_2d`.
@@ -240,7 +240,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
+        yli::ontology::Font2d* const font_2d = static_cast<yli::ontology::Font2d*>(
                 this->apprentice_of_font_2d.get_master());
 
         if (font_2d == nullptr)

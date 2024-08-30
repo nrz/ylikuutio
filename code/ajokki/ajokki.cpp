@@ -375,16 +375,16 @@ namespace ajokki
         font_struct.text_size = this->get_universe().get_text_size();
         font_struct.font_size = this->get_universe().get_font_size();
 
-        std::cout << "Creating yli::ontology::Font2D* my_font_2d ...\n";
-        yli::ontology::Font2D* const my_font_2d = this->entity_factory.create_font_2d(font_struct);
+        std::cout << "Creating yli::ontology::Font2d* my_font_2d ...\n";
+        yli::ontology::Font2d* const my_font_2d = this->entity_factory.create_font_2d(font_struct);
 
         if (my_font_2d == nullptr)
         {
-            std::cerr << "Failed to create Font2D.\n";
+            std::cerr << "Failed to create Font2d.\n";
             return false;
         }
 
-        std::cout << "Font2D created successfully.\n";
+        std::cout << "Font2d created successfully.\n";
         my_font_2d->set_global_name("my_font_2d");
 
         yli::ontology::Console::bind_to_new_font_2d(*my_console, *my_font_2d);

@@ -51,7 +51,7 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class ShapeshifterSequence;
     class ShapeshifterForm;
-    class Font2D;
+    class Font2d;
     class Text2d;
     class VectorFont;
     class Glyph;
@@ -141,7 +141,7 @@ namespace yli::ontology
             virtual yli::ontology::Glyph* create_glyph(const yli::ontology::ModelStruct& model_struct) const = 0;
             virtual yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const = 0;
             virtual yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const = 0;
-            virtual yli::ontology::Font2D* create_font_2d(const yli::ontology::FontStruct& font_struct) const = 0;
+            virtual yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const = 0;
             virtual yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const = 0;
             virtual yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const = 0;
             virtual yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const = 0;

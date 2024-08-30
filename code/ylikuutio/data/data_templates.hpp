@@ -196,9 +196,9 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Font2D* data)
+        std::string get_type_string(yli::ontology::Font2d* data)
         {
-            return "yli::ontology::Font2D*";
+            return "yli::ontology::Font2d*";
         }
 
     template<>

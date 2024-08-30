@@ -101,7 +101,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
-    class Font2D;
+    class Font2d;
 
     struct InputModeStruct;
 
@@ -253,7 +253,7 @@ namespace yli::ontology
 
         yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        yli::ontology::Font2D* const font_2d = static_cast<yli::ontology::Font2D*>(
+        yli::ontology::Font2d* const font_2d = static_cast<yli::ontology::Font2d*>(
                 yli::hierarchy::get_first_child(
                     this->parent_of_font_2ds.child_pointer_vector,
                     this->parent_of_font_2ds.get_number_of_children()));

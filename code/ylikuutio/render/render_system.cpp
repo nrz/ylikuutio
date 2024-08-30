@@ -192,7 +192,7 @@ namespace yli::render
 
         if (render_struct.parent_of_font_2ds != nullptr) [[likely]]
         {
-            yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Font2D*>(*render_struct.parent_of_font_2ds);
+            yli::render::render_children<yli::ontology::GenericParentModule&, yli::ontology::Font2d*>(*render_struct.parent_of_font_2ds);
         }
 
         if (render_struct.should_change_depth_test) [[likely]]
