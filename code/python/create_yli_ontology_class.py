@@ -96,7 +96,7 @@ if base_class_name != "":
     fully_qualified_base_class_name = namespace + "::" + base_class_name
 
 # snake_case lowercase names.
-class_name_word_boundaries = r'(?<!^)(?=[A-Z0-9])'
+class_name_word_boundaries = r'(?<!^)(?=[A-Z]|(?<![A-Z0-9])(?=[0-9]))'
 snake_case_class_name = re.sub(class_name_word_boundaries, '_', class_name).lower()
 snake_case_parent_class_name = re.sub(class_name_word_boundaries, '_', parent_class_name).lower()
 
