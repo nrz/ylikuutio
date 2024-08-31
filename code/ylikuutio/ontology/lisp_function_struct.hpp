@@ -20,6 +20,10 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::variant
+
 namespace yli::ontology
 {
     class Console;
@@ -31,7 +35,12 @@ namespace yli::ontology
         {
         }
 
-        yli::ontology::Console* console_parent { nullptr };
+        explicit LispFunctionStruct(const std::string& console_parent)
+            : console_parent { console_parent }
+        {
+        }
+
+        std::variant<yli::ontology::Console*, std::string> console_parent {};
     };
 }
 

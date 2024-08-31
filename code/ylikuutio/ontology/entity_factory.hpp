@@ -1408,11 +1408,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::LISP_FUNCTION));
                 LispFunctionMemoryAllocator& allocator = static_cast<LispFunctionMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Console* console_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Console*>(lisp_function_struct.console_parent))
+                {
+                    console_parent = std::get<yli::ontology::Console*>(lisp_function_struct.console_parent);
+                }
+                else if (std::holds_alternative<std::string>(lisp_function_struct.console_parent))
+                {
+                    console_parent = dynamic_cast<yli::ontology::Console*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(lisp_function_struct.console_parent)));
+                }
+
                 yli::ontology::LispFunction* const lisp_function = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         lisp_function_struct,
-                        (lisp_function_struct.console_parent != nullptr ? &lisp_function_struct.console_parent->parent_of_lisp_functions : nullptr));
+                        (console_parent != nullptr ? &console_parent->parent_of_lisp_functions : nullptr));
 
                 lisp_function->set_global_name(lisp_function_struct.global_name);
                 lisp_function->set_local_name(lisp_function_struct.local_name);
