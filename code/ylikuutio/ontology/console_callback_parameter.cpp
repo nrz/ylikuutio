@@ -51,6 +51,8 @@ namespace yli::ontology
         child_of_console_callback_object(console_callback_object_parent_module, *this),
         any_value { any_value }
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::ConsoleCallbackParameter*";
     }
 
     const yli::data::AnyValue& ConsoleCallbackParameter::get_any_value() const
