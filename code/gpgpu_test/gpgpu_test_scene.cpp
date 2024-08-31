@@ -81,7 +81,7 @@ namespace gpgpu_test
         identity_pipeline_png_compute_task_struct.texture_file_format = "png";
         identity_pipeline_png_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         identity_pipeline_png_compute_task_struct.output_filename = "gpgpu_identity_output.data";
-        identity_pipeline_png_compute_task_struct.parent = identity_pipeline;
+        identity_pipeline_png_compute_task_struct.pipeline_parent = identity_pipeline;
         identity_pipeline_png_compute_task_struct.texture_width = 512;
         identity_pipeline_png_compute_task_struct.texture_height = 512;
 
@@ -98,7 +98,7 @@ namespace gpgpu_test
         identity_pipeline_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
         identity_pipeline_csv_unsigned_short_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
         identity_pipeline_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_short_with_fill.data";
-        identity_pipeline_csv_unsigned_short_compute_task_struct.parent = identity_pipeline;
+        identity_pipeline_csv_unsigned_short_compute_task_struct.pipeline_parent = identity_pipeline;
         identity_pipeline_csv_unsigned_short_compute_task_struct.format = GL_RED;
         identity_pipeline_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
         identity_pipeline_csv_unsigned_short_compute_task_struct.type = GL_UNSIGNED_SHORT;
@@ -132,7 +132,7 @@ namespace gpgpu_test
         sobel_pipeline_compute_task_struct.texture_file_format = "png";
         sobel_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         sobel_pipeline_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
-        sobel_pipeline_compute_task_struct.parent = sobel_pipeline;
+        sobel_pipeline_compute_task_struct.pipeline_parent = sobel_pipeline;
         sobel_pipeline_compute_task_struct.n_max_iterations = 5;
         sobel_pipeline_compute_task_struct.texture_width = 512;
         sobel_pipeline_compute_task_struct.texture_height = 512;
@@ -165,7 +165,7 @@ namespace gpgpu_test
         go_west_pipeline_compute_task_struct.texture_file_format = "png";
         go_west_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         go_west_pipeline_compute_task_struct.output_filename = "gpgpu_go_west_output.data";
-        go_west_pipeline_compute_task_struct.parent = go_west_pipeline;
+        go_west_pipeline_compute_task_struct.pipeline_parent = go_west_pipeline;
         go_west_pipeline_compute_task_struct.n_max_iterations = 256;
         go_west_pipeline_compute_task_struct.texture_width = 512;
         go_west_pipeline_compute_task_struct.texture_height = 512;
@@ -198,7 +198,7 @@ namespace gpgpu_test
         vanish_west_pipeline_compute_task_struct.texture_file_format = "png";
         vanish_west_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         vanish_west_pipeline_compute_task_struct.output_filename = "gpgpu_vanish_west_output.data";
-        vanish_west_pipeline_compute_task_struct.parent = vanish_west_pipeline;
+        vanish_west_pipeline_compute_task_struct.pipeline_parent = vanish_west_pipeline;
         vanish_west_pipeline_compute_task_struct.n_max_iterations = 256;
         vanish_west_pipeline_compute_task_struct.texture_width = 512;
         vanish_west_pipeline_compute_task_struct.texture_height = 512;
@@ -231,7 +231,7 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_short.data";
-        floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.parent = floyd_warshall_pipeline;
+        floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.pipeline_parent = floyd_warshall_pipeline;
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.n_max_iterations = 32;
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.format = GL_RED;
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.internal_format = GL_R16;
@@ -252,7 +252,7 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_float_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_pipeline_csv_float_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_pipeline_csv_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float.data";
-        floyd_warshall_pipeline_csv_float_compute_task_struct.parent = floyd_warshall_pipeline;
+        floyd_warshall_pipeline_csv_float_compute_task_struct.pipeline_parent = floyd_warshall_pipeline;
         floyd_warshall_pipeline_csv_float_compute_task_struct.n_max_iterations = 32;
         floyd_warshall_pipeline_csv_float_compute_task_struct.format = GL_RED;
         floyd_warshall_pipeline_csv_float_compute_task_struct.internal_format = GL_R32F;

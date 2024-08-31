@@ -38,7 +38,7 @@ namespace yli::ontology
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        yli::ontology::Pipeline* parent { nullptr }; // Pointer to the `Pipeline`.
+        yli::ontology::Pipeline* pipeline_parent { nullptr }; // Pointer to the `Pipeline`.
         yli::ontology::CallbackEngine* end_condition_callback_engine { nullptr };
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;

@@ -39,7 +39,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
-    compute_task_struct.parent = pipeline;
+    compute_task_struct.pipeline_parent = pipeline;
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -78,7 +78,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct;
-    compute_task_struct.parent = pipeline;
+    compute_task_struct.pipeline_parent = pipeline;
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
 
