@@ -58,14 +58,13 @@ namespace yli::ontology
 
             ~ConsoleCallbackEngine() = default;
 
-        private:
+        public:
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::GenericParentModule parent_of_console_callback_objects;
 

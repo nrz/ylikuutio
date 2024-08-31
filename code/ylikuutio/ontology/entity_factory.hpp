@@ -1303,12 +1303,23 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT));
                 ConsoleCallbackObjectMemoryAllocator& allocator = static_cast<ConsoleCallbackObjectMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::ConsoleCallbackEngine* console_callback_engine_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::ConsoleCallbackEngine*>(console_callback_object_struct.console_callback_engine_parent))
+                {
+                    console_callback_engine_parent = std::get<yli::ontology::ConsoleCallbackEngine*>(console_callback_object_struct.console_callback_engine_parent);
+                }
+                else if (std::holds_alternative<std::string>(console_callback_object_struct.console_callback_engine_parent))
+                {
+                    console_callback_engine_parent = dynamic_cast<yli::ontology::ConsoleCallbackEngine*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(console_callback_object_struct.console_callback_engine_parent)));
+                }
+
                 yli::ontology::ConsoleCallbackObject* const console_callback_object = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         console_callback_object_struct,
-                        ((console_callback_object_struct.console_callback_engine_parent != nullptr) ?
-                         &console_callback_object_struct.console_callback_engine_parent->parent_of_console_callback_objects :
+                        ((console_callback_engine_parent != nullptr) ?
+                         &console_callback_engine_parent->parent_of_console_callback_objects :
                          nullptr));
 
                 console_callback_object->set_global_name(console_callback_object_struct.global_name);
