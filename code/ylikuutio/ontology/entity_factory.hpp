@@ -69,7 +69,6 @@
 #include "camera_struct.hpp"
 #include "pipeline_struct.hpp"
 #include "material_struct.hpp"
-#include "model_struct.hpp"
 #include "species_struct.hpp"
 #include "object_struct.hpp"
 #include "symbiosis_struct.hpp"
@@ -84,6 +83,7 @@
 #include "text_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text_3d_struct.hpp"
+#include "glyph_struct.hpp"
 #include "input_mode_struct.hpp"
 #include "audio_track_struct.hpp"
 #include "console_struct.hpp"
@@ -1104,7 +1104,7 @@ namespace yli::ontology
                 return vector_font;
             }
 
-            yli::ontology::Glyph* create_glyph(const yli::ontology::ModelStruct& model_struct) const override
+            yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const override
             {
                 using GlyphMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
 
@@ -1116,9 +1116,9 @@ namespace yli::ontology
                 yli::ontology::Glyph* const glyph = allocator.build_in(
                         this->application,
                         this->get_universe(),
-                        model_struct,
-                        (std::holds_alternative<yli::ontology::VectorFont*>(model_struct.parent) && (std::get<yli::ontology::VectorFont*>(model_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::VectorFont*>(model_struct.parent)->parent_of_glyphs) :
+                        glyph_struct,
+                        (std::holds_alternative<yli::ontology::VectorFont*>(glyph_struct.parent) && (std::get<yli::ontology::VectorFont*>(glyph_struct.parent) != nullptr) ?
+                         &(std::get<yli::ontology::VectorFont*>(glyph_struct.parent)->parent_of_glyphs) :
                          nullptr));
 
                 return glyph;

@@ -74,7 +74,6 @@ namespace yli::ontology
     struct CameraStruct;
     struct PipelineStruct;
     struct MaterialStruct;
-    struct ModelStruct;
     struct SpeciesStruct;
     struct ObjectStruct;
     struct SymbiosisStruct;
@@ -86,6 +85,7 @@ namespace yli::ontology
     struct ShapeshifterSequenceStruct;
     struct ShapeshifterFormStruct;
     struct VectorFontStruct;
+    struct GlyphStruct;
     struct Text3dStruct;
     struct InputModeStruct;
     struct AudioTrackStruct;
@@ -138,7 +138,7 @@ namespace yli::ontology
             virtual yli::ontology::ShapeshifterForm* create_shapeshifter_form(
                     const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const = 0;
             virtual yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const = 0;
-            virtual yli::ontology::Glyph* create_glyph(const yli::ontology::ModelStruct& model_struct) const = 0;
+            virtual yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const = 0;
             virtual yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const = 0;
             virtual yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const = 0;
             virtual yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const = 0;

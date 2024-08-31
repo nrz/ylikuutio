@@ -51,7 +51,7 @@ namespace yli::ontology
     class Scene;
     class Object;
     class VectorFont;
-    struct ModelStruct;
+    struct GlyphStruct;
 
     class Glyph final : public yli::ontology::Entity
     {
@@ -59,7 +59,7 @@ namespace yli::ontology
             Glyph(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct,
+                    const yli::ontology::GlyphStruct& glyph_struct,
                     yli::ontology::GenericParentModule* const vector_font_parent_module);
 
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.

@@ -95,6 +95,18 @@ namespace yli::ontology
         {
         }
 
+        explicit ModelStruct(
+                yli::ontology::VectorFont* const vector_font_parent)
+            : parent { vector_font_parent }
+        {
+        }
+
+        explicit ModelStruct(
+                const std::string& vector_font_parent)
+            : parent { vector_font_parent }
+        {
+        }
+
         std::string model_filename;    // Filename of the model file.
         std::string model_file_format; // Type of the model file. Supported file formats so far:
                                        // `"png"`/`"PNG"` - PNG heightmap.

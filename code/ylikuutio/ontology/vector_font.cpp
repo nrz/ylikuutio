@@ -23,8 +23,8 @@
 #include "text_3d.hpp"
 #include "generic_entity_factory.hpp"
 #include "family_templates.hpp"
-#include "model_struct.hpp"
 #include "vector_font_struct.hpp"
+#include "glyph_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
@@ -170,20 +170,19 @@ namespace yli::ontology
                     continue;
                 }
 
-                yli::ontology::ModelStruct model_struct;
-                model_struct.parent = this;
-                model_struct.pipeline = pipeline_parent_of_material;
-                model_struct.material_or_symbiont_material = material_parent;
-                model_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
-                model_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
-                model_struct.unicode_char_pointer = unicode_char_pointer;
+                yli::ontology::GlyphStruct glyph_struct(this);
+                glyph_struct.pipeline = pipeline_parent_of_material;
+                glyph_struct.material_or_symbiont_material = material_parent;
+                glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
+                glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
+                glyph_struct.unicode_char_pointer = unicode_char_pointer;
 
-                std::string glyph_name_string = model_struct.glyph_name_pointer;
-                std::string unicode_string = model_struct.unicode_char_pointer;
+                std::string glyph_name_string = glyph_struct.glyph_name_pointer;
+                std::string unicode_string = glyph_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
 
                 yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
-                yli::ontology::Glyph* glyph = entity_factory.create_glyph(model_struct);
+                yli::ontology::Glyph* glyph = entity_factory.create_glyph(glyph_struct);
 
                 // So that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.

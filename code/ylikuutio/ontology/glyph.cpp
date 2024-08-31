@@ -17,7 +17,7 @@
 
 #include "glyph.hpp"
 #include "universe.hpp"
-#include "model_struct.hpp"
+#include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 
@@ -39,15 +39,15 @@ namespace yli::ontology
     Glyph::Glyph(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::ModelStruct& model_struct,
+            const yli::ontology::GlyphStruct& glyph_struct,
             yli::ontology::GenericParentModule* const vector_font_parent_module)
-        : Entity(application, universe, model_struct),
+        : Entity(application, universe, glyph_struct),
         child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
-        mesh(universe, model_struct),
-        glyph_vertex_data    { model_struct.glyph_vertex_data },
-        glyph_name_pointer   { model_struct.glyph_name_pointer },
-        unicode_char_pointer { model_struct.unicode_char_pointer }
+        mesh(universe, glyph_struct),
+        glyph_vertex_data    { glyph_struct.glyph_vertex_data },
+        glyph_name_pointer   { glyph_struct.glyph_name_pointer },
+        unicode_char_pointer { glyph_struct.unicode_char_pointer }
     {
         // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -56,10 +56,10 @@ namespace yli::ontology
             this->universe.get_is_vulkan_in_use() ||
             this->universe.get_is_software_rendering_in_use();
 
-        if (should_load_texture && model_struct.pipeline != nullptr)
+        if (should_load_texture && glyph_struct.pipeline != nullptr)
         {
             // Get a handle for our buffers.
-            yli::ontology::set_gl_attrib_locations(model_struct.pipeline, &this->mesh);
+            yli::ontology::set_gl_attrib_locations(glyph_struct.pipeline, &this->mesh);
         }
 
         // `yli::ontology::Entity` member variables begin here.
