@@ -1377,11 +1377,22 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::COMPUTETASK));
                 ComputeTaskMemoryAllocator& allocator = static_cast<ComputeTaskMemoryAllocator&>(generic_allocator);
 
+                yli::ontology::Pipeline* pipeline_parent { nullptr };
+                if (std::holds_alternative<yli::ontology::Pipeline*>(compute_task_struct.pipeline_parent))
+                {
+                    pipeline_parent = std::get<yli::ontology::Pipeline*>(compute_task_struct.pipeline_parent);
+                }
+                else if (std::holds_alternative<std::string>(compute_task_struct.pipeline_parent))
+                {
+                    pipeline_parent = dynamic_cast<yli::ontology::Pipeline*>(
+                            this->get_universe().registry.get_entity(std::get<std::string>(compute_task_struct.pipeline_parent)));
+                }
+
                 yli::ontology::ComputeTask* const compute_task = allocator.build_in(
                         this->application,
                         this->get_universe(),
                         compute_task_struct,
-                        compute_task_struct.pipeline_parent != nullptr ? &compute_task_struct.pipeline_parent->parent_of_compute_tasks : nullptr);
+                        pipeline_parent != nullptr ? &pipeline_parent->parent_of_compute_tasks : nullptr);
 
                 compute_task->set_global_name(compute_task_struct.global_name);
                 compute_task->set_local_name(compute_task_struct.local_name);

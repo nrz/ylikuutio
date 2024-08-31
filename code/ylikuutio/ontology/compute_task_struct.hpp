@@ -27,6 +27,7 @@
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <variant>  // std::variant
 
 namespace yli::ontology
 {
@@ -39,10 +40,15 @@ namespace yli::ontology
         {
         }
 
+        explicit ComputeTaskStruct(const std::string& pipeline_parent)
+            : pipeline_parent { pipeline_parent }
+        {
+        }
+
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        yli::ontology::Pipeline* pipeline_parent { nullptr }; // Pointer to the `Pipeline`.
+        std::variant<yli::ontology::Pipeline*, std::string> pipeline_parent {};
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
