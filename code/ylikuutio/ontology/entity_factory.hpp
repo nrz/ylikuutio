@@ -1432,8 +1432,7 @@ namespace yli::ontology
                     if (lisp_function_entity == nullptr)
                     {
                         // There was not any `Entity` with that name.
-                        yli::ontology::LispFunctionStruct lisp_function_struct;
-                        lisp_function_struct.console_parent = &console;
+                        yli::ontology::LispFunctionStruct lisp_function_struct(&console);
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)

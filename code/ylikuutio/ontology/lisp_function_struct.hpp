@@ -26,6 +26,11 @@ namespace yli::ontology
 
     struct LispFunctionStruct : public yli::ontology::EntityStruct
     {
+        explicit LispFunctionStruct(yli::ontology::Console* const console_parent)
+            : console_parent { console_parent }
+        {
+        }
+
         yli::ontology::Console* console_parent { nullptr };
     };
 }
