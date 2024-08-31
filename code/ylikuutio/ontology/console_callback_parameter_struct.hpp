@@ -20,13 +20,29 @@
 
 #include "entity_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::variant
+
 namespace yli::ontology
 {
     class ConsoleCallbackObject;
 
     struct ConsoleCallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        yli::ontology::ConsoleCallbackObject* console_callback_object_parent { nullptr };
+        ConsoleCallbackParameterStruct(
+                yli::ontology::ConsoleCallbackObject* const console_callback_object_parent)
+            : console_callback_object_parent { console_callback_object_parent }
+        {
+        }
+
+        ConsoleCallbackParameterStruct(
+                const std::string& console_callback_object_parent)
+            : console_callback_object_parent { console_callback_object_parent }
+        {
+        }
+
+        std::variant<yli::ontology::ConsoleCallbackObject*, std::string> console_callback_object_parent {};
     };
 }
 
