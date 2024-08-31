@@ -50,6 +50,8 @@ namespace yli::ontology
         console_callback { console_callback_object_struct.console_callback },
         console_pointer { console_callback_object_struct.console_pointer }
     {
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::ConsoleCallbackObject*";
     }
 
     yli::ontology::Entity* ConsoleCallbackObject::get_parent() const
