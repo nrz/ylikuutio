@@ -25,7 +25,7 @@
 
 TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct)
 {
-    const yli::ontology::ComputeTaskStruct test_compute_task_struct;
+    const yli::ontology::ComputeTaskStruct test_compute_task_struct(nullptr);
     ASSERT_EQ(test_compute_task_struct.texture_file_format, "");
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");

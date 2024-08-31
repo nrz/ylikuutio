@@ -34,6 +34,11 @@ namespace yli::ontology
 
     struct ComputeTaskStruct : public yli::ontology::EntityStruct
     {
+        explicit ComputeTaskStruct(yli::ontology::Pipeline* const pipeline_parent)
+            : pipeline_parent { pipeline_parent }
+        {
+        }
+
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
