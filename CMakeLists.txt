@@ -983,6 +983,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_compute_task.cpp
         code/ylikuutio/tests/test_console.cpp
         code/ylikuutio/tests/test_console_callback_object.cpp
+        code/ylikuutio/tests/test_console_callback_object_struct.cpp
         code/ylikuutio/tests/test_constructible_module.cpp
         code/ylikuutio/tests/test_csv_loader.cpp
         code/ylikuutio/tests/test_ecosystem.cpp
