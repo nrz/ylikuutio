@@ -1159,7 +1159,7 @@ namespace yli::ontology
                         this->get_universe(),
                         input_mode_struct,
                         &this->get_universe().parent_of_input_modes,
-                        (input_mode_struct.console != nullptr ? &input_mode_struct.console->master_of_input_modes : nullptr));
+                        (input_mode_struct.console_master != nullptr ? &input_mode_struct.console_master->master_of_input_modes : nullptr));
 
                 if (!input_mode_struct.global_name.empty() && input_mode_struct.local_name.empty())
                 {

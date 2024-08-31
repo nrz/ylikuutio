@@ -81,7 +81,7 @@ TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
             console_struct);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
-    console_mode_input_mode_struct.console = console;
+    console_mode_input_mode_struct.console_master = console;
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     ASSERT_EQ(console->get_input_mode(), input_mode);
@@ -168,7 +168,7 @@ TEST(enter_console_must_function_appropriately, no_font)
     application.get_universe().set_active_console(console);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
-    console_mode_input_mode_struct.console = console;
+    console_mode_input_mode_struct.console_master = console;
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
@@ -185,7 +185,7 @@ TEST(exit_console_must_function_appropriately, no_font)
     application.get_universe().set_active_console(console);
 
     yli::ontology::InputModeStruct console_mode_input_mode_struct;
-    console_mode_input_mode_struct.console = console;
+    console_mode_input_mode_struct.console_master = console;
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();

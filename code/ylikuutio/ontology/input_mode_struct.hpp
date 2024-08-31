@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct InputModeStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::Console* console { nullptr };
+        yli::ontology::Console* console_master { nullptr };
     };
 }
 

@@ -959,7 +959,7 @@ namespace ajokki
         // Keyrelease callbacks for `my_console`.
         // Key releases are checked in the order of this struct.
         yli::ontology::InputModeStruct my_console_mode_input_mode_struct;
-        my_console_mode_input_mode_struct.console = my_console;
+        my_console_mode_input_mode_struct.console_master = my_console;
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
         yli::ontology::InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(my_console_mode_input_mode_struct);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, my_release_left_control_in_console_callback_engine);
@@ -1004,7 +1004,7 @@ namespace ajokki
         // Keyrelease callbacks for `mini_console`.
         // Key releases are checked in the order of this struct.
         yli::ontology::InputModeStruct mini_console_mode_input_mode_struct;
-        mini_console_mode_input_mode_struct.console = mini_console;
+        mini_console_mode_input_mode_struct.console_master = mini_console;
         mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
         yli::ontology::InputMode* const mini_console_mode_input_mode = this->entity_factory.create_input_mode(mini_console_mode_input_mode_struct);
         mini_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, mini_release_left_control_in_console_callback_engine);
