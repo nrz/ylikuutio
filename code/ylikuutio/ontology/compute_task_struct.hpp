@@ -30,7 +30,6 @@
 
 namespace yli::ontology
 {
-    class CallbackEngine;
     class Pipeline;
 
     struct ComputeTaskStruct : public yli::ontology::EntityStruct
@@ -39,7 +38,6 @@ namespace yli::ontology
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
         yli::ontology::Pipeline* pipeline_parent { nullptr }; // Pointer to the `Pipeline`.
-        yli::ontology::CallbackEngine* end_condition_callback_engine { nullptr };
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
