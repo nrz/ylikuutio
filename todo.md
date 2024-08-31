@@ -10,7 +10,6 @@
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
-- [ ] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
@@ -333,3 +332,4 @@
 - [x] MATH Change to right-handed Z-up coordinate system so that X points east, Y points north, and Z points up.
 - [x] MATH Add support for Tait-Bryan angles. https://en.wikipedia.org/wiki/Euler_angles#Tait%E2%80%93Bryan_angles
 - [x] BUG/MATH Fix Brain snippets.
+- [x] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
