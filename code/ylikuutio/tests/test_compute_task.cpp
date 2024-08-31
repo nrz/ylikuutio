@@ -27,6 +27,9 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 
+// Include standard headers
+#include <cstddef> // uintptr_t
+
 TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, headless_pipeline_is_a_child_of_an_ecosystem)
 {
     mock::MockApplication application;
