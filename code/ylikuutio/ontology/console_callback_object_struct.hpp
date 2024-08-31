@@ -29,7 +29,7 @@ namespace yli::ontology
     struct ConsoleCallbackObjectStruct final : public yli::ontology::EntityStruct
     {
         InputParametersToAnyValueCallbackWithConsole console_callback { nullptr };
-        yli::ontology::ConsoleCallbackEngine* parent                  { nullptr };
+        yli::ontology::ConsoleCallbackEngine* console_callback_engine_parent { nullptr };
         yli::ontology::Console* console_pointer                       { nullptr };
     };
 }
