@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct ConsoleCallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        yli::ontology::ConsoleCallbackObject* parent { nullptr };
+        yli::ontology::ConsoleCallbackObject* console_callback_object_parent { nullptr };
     };
 }
 

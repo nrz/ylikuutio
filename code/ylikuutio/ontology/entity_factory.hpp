@@ -1344,8 +1344,8 @@ namespace yli::ontology
                         this->get_universe(),
                         console_callback_parameter_struct,
                         any_value,
-                        ((console_callback_parameter_struct.parent != nullptr) ?
-                         &console_callback_parameter_struct.parent->parent_of_console_callback_parameters :
+                        ((console_callback_parameter_struct.console_callback_object_parent != nullptr) ?
+                         &console_callback_parameter_struct.console_callback_object_parent->parent_of_console_callback_parameters :
                          nullptr));
 
                 console_callback_parameter->set_global_name(console_callback_parameter_struct.global_name);
