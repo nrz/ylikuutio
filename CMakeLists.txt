@@ -979,8 +979,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_cartesian_coordinates_module.cpp
         code/ylikuutio/tests/test_check_and_report_if_some_string_matches.cpp
         code/ylikuutio/tests/test_command_line_master.cpp
-        code/ylikuutio/tests/test_compute_struct.cpp
         code/ylikuutio/tests/test_compute_task.cpp
+        code/ylikuutio/tests/test_compute_task_struct.cpp
         code/ylikuutio/tests/test_console.cpp
         code/ylikuutio/tests/test_console_callback_object.cpp
         code/ylikuutio/tests/test_console_callback_object_struct.cpp
