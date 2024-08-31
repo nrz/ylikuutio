@@ -1412,7 +1412,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         lisp_function_struct,
-                        (lisp_function_struct.parent != nullptr ? &lisp_function_struct.parent->parent_of_lisp_functions : nullptr));
+                        (lisp_function_struct.console_parent != nullptr ? &lisp_function_struct.console_parent->parent_of_lisp_functions : nullptr));
 
                 lisp_function->set_global_name(lisp_function_struct.global_name);
                 lisp_function->set_local_name(lisp_function_struct.local_name);
@@ -1433,7 +1433,7 @@ namespace yli::ontology
                     {
                         // There was not any `Entity` with that name.
                         yli::ontology::LispFunctionStruct lisp_function_struct;
-                        lisp_function_struct.parent = &console;
+                        lisp_function_struct.console_parent = &console;
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)

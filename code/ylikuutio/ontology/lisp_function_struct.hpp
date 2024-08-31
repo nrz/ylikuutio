@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct LispFunctionStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::Console* parent { nullptr };
+        yli::ontology::Console* console_parent { nullptr };
     };
 }
 
