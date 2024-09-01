@@ -34,10 +34,10 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_construc
 
     const yli::ontology::VariableStruct test_variable_struct(application.get_universe(), &application.get_universe());
 
-    ASSERT_FALSE(test_variable_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_variable_struct.parent));
+    ASSERT_FALSE(test_variable_struct.entity_parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.entity_parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.entity_parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_variable_struct.entity_parent));
 
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
@@ -53,10 +53,10 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_construc
 
     const yli::ontology::VariableStruct test_variable_struct(application.get_universe(), nullptr);
 
-    ASSERT_FALSE(test_variable_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_variable_struct.parent));
+    ASSERT_FALSE(test_variable_struct.entity_parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.entity_parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.entity_parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_variable_struct.entity_parent));
 
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
@@ -72,10 +72,10 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_construc
 
     const yli::ontology::VariableStruct test_variable_struct(application.get_universe(), "foo");
 
-    ASSERT_FALSE(test_variable_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_variable_struct.parent));
+    ASSERT_FALSE(test_variable_struct.entity_parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_variable_struct.entity_parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Entity*>(test_variable_struct.entity_parent));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_variable_struct.entity_parent));
 
     ASSERT_EQ(test_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(test_variable_struct.read_callback, nullptr);
@@ -94,10 +94,10 @@ TEST(variable_struct_must_be_initialized_appropriately, variable_struct_copy_con
     original_variable_struct.local_name = "bar";
     const yli::ontology::VariableStruct copy_variable_struct(original_variable_struct);
 
-    ASSERT_FALSE(copy_variable_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(copy_variable_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(copy_variable_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(copy_variable_struct.parent));
+    ASSERT_FALSE(copy_variable_struct.entity_parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<std::monostate>(copy_variable_struct.entity_parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Entity*>(copy_variable_struct.entity_parent));
+    ASSERT_FALSE(std::holds_alternative<std::string>(copy_variable_struct.entity_parent));
 
     ASSERT_EQ(copy_variable_struct.activate_callback, nullptr);
     ASSERT_EQ(copy_variable_struct.read_callback, nullptr);

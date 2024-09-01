@@ -38,26 +38,26 @@ namespace yli::ontology
         // instances using `EntityFactory` before `EntityFactory::create_universe`
         // has initialized `universe` member variable of `EntityFactory`.
 
-        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity* const parent)
+        VariableStruct(yli::ontology::Universe& universe, yli::ontology::Entity* const entity_parent)
             : universe { universe },
-            parent { parent }
+            entity_parent { entity_parent }
         {
             this->is_variable = true;
         }
 
-        VariableStruct(yli::ontology::Universe& universe, const std::string& parent)
+        VariableStruct(yli::ontology::Universe& universe, const std::string& entity_parent)
             : universe { universe },
-            parent { parent }
+            entity_parent { entity_parent }
         {
             this->is_variable = true;
         }
 
         VariableStruct(const yli::ontology::VariableStruct& variable_struct) = default;
 
-        VariableStruct(yli::ontology::Entity* const parent, const yli::ontology::VariableStruct& variable_struct)
+        VariableStruct(yli::ontology::Entity* const entity_parent, const yli::ontology::VariableStruct& variable_struct)
             : EntityStruct(variable_struct),
             universe { variable_struct.universe },
-            parent { parent },
+            entity_parent { entity_parent },
             activate_callback { variable_struct.activate_callback },
             read_callback { variable_struct.read_callback },
             should_call_activate_callback_now { variable_struct.should_call_activate_callback_now }
@@ -70,7 +70,7 @@ namespace yli::ontology
         ~VariableStruct() = default;
 
         yli::ontology::Universe& universe;
-        std::variant<std::monostate, yli::ontology::Entity*, std::string> parent {};
+        std::variant<std::monostate, yli::ontology::Entity*, std::string> entity_parent {};
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
         bool is_variable_of_universe                       { false };
