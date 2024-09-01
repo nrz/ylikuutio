@@ -81,7 +81,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
     yli::ontology::HolobiontStruct turbo_polizei_png_police_car_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-    turbo_polizei_png_police_car_struct1.brain = rest_brain;
+    turbo_polizei_png_police_car_struct1.brain_master = rest_brain;
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
     turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
     turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);

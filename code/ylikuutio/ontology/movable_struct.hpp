@@ -49,19 +49,19 @@ namespace yli::ontology
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain,
+                yli::ontology::Brain* const brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
                 const float pitch)
-            : brain { brain },
+            : brain_master { brain_master },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain,
+                yli::ontology::Brain* const brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
@@ -69,30 +69,30 @@ namespace yli::ontology
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
-            brain { brain },
+            brain_master { brain_master },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain,
+                yli::ontology::Brain* const brain_master,
                 yli::ontology::Scene* const scene)
-            : brain { brain },
+            : brain_master { brain_master },
             scene { scene }
         {
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain,
+                yli::ontology::Brain* const brain_master,
                 const std::string& scene)
-            : brain { brain },
+            : brain_master { brain_master },
             scene { scene }
         {
         }
 
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
-        yli::ontology::Brain* brain { nullptr };
+        yli::ontology::Brain* brain_master { nullptr };
         std::variant<std::monostate, yli::ontology::Scene*, std::string> scene {};
 
         std::vector<glm::vec3> initial_rotate_vectors;

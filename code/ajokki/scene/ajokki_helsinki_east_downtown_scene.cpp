@@ -452,7 +452,7 @@ namespace ajokki
                 cat_object_struct1.mesh_master = cat_species;
                 cat_object_struct1.global_name = "cat" + index_string;
                 cat_object_struct1.local_name = "kissa" + index_string;
-                cat_object_struct1.brain = rest_brain;
+                cat_object_struct1.brain_master = rest_brain;
                 cat_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
                 cat_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
                 cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
@@ -477,7 +477,7 @@ namespace ajokki
         if (turbo_polizei_png_symbiosis != nullptr)
         {
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-            turbo_polizei_png_holobiont_struct1.brain = rest_brain;
+            turbo_polizei_png_holobiont_struct1.brain_master = rest_brain;
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -496,7 +496,7 @@ namespace ajokki
             turbo_polizei_png1->set_local_name("sinivuokko1");
 
             yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-            turbo_polizei_png_holobiont_struct2.brain = rest_brain;
+            turbo_polizei_png_holobiont_struct2.brain_master = rest_brain;
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);

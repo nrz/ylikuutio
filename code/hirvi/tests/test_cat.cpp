@@ -94,7 +94,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat1_object_struct.mesh_master = cat_species;
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
-    cat1_object_struct.brain = rest_brain;
+    cat1_object_struct.brain_master = rest_brain;
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
     cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
     cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);

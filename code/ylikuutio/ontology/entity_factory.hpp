@@ -469,7 +469,7 @@ namespace yli::ontology
                         waypoint_struct,
                         (scene_parent != nullptr ? &scene_parent->parent_of_waypoints : nullptr),
                         // `Brain` master.
-                        (waypoint_struct.brain != nullptr ? waypoint_struct.brain->get_generic_master_module() : nullptr));
+                        (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
 
                 waypoint->set_global_name(waypoint_struct.global_name);
                 waypoint->set_local_name(waypoint_struct.local_name);
@@ -500,7 +500,7 @@ namespace yli::ontology
                         this->get_universe(),
                         camera_struct,
                         (scene_parent != nullptr ? &scene_parent->parent_of_cameras : nullptr),
-                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
+                        (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
 
                 camera->set_global_name(camera_struct.global_name);
                 camera->set_local_name(camera_struct.local_name);
@@ -531,7 +531,7 @@ namespace yli::ontology
                         this->get_universe(),
                         camera_struct,
                         (scene_parent != nullptr ? &scene_parent->parent_of_default_camera : nullptr),
-                        (camera_struct.brain != nullptr ? camera_struct.brain->get_generic_master_module() : nullptr));
+                        (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
 
                 camera->set_global_name(camera_struct.global_name);
                 camera->set_local_name(camera_struct.local_name);
@@ -748,7 +748,7 @@ namespace yli::ontology
                          &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
                          nullptr),
                         // `Brain` master.
-                        (object_struct.brain != nullptr ? object_struct.brain->get_generic_master_module() : nullptr));
+                        (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
 
                 object->set_global_name(object_struct.global_name);
                 object->set_local_name(object_struct.local_name);
@@ -880,7 +880,7 @@ namespace yli::ontology
                         holobiont_struct,
                         (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                         (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                        (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
+                        (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
 
                 holobiont->set_global_name(holobiont_struct.global_name);
                 holobiont->set_local_name(holobiont_struct.local_name);
@@ -1138,7 +1138,7 @@ namespace yli::ontology
                         this->get_universe(),
                         text_3d_struct,
                         (text_3d_struct.vector_font_parent != nullptr ? &text_3d_struct.vector_font_parent->parent_of_text_3ds : nullptr),
-                        (text_3d_struct.brain != nullptr ? text_3d_struct.brain->get_generic_master_module() : nullptr));
+                        (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module() : nullptr));
 
                 text_3d->set_global_name(text_3d_struct.global_name);
                 text_3d->set_local_name(text_3d_struct.local_name);
@@ -1524,7 +1524,7 @@ namespace yli::ontology
                              &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
                              nullptr),
                             // `Brain` master.
-                            (object_struct.brain != nullptr ? object_struct.brain->get_generic_master_module() : nullptr));
+                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
 
                     object->set_global_name(object_struct.global_name);
                     object->set_local_name(object_struct.local_name);
@@ -1561,7 +1561,7 @@ namespace yli::ontology
                             module_args...,
                             (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                            (holobiont_struct.brain != nullptr ? holobiont_struct.brain->get_generic_master_module() : nullptr));
+                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
 
                     holobiont->set_global_name(holobiont_struct.global_name);
                     holobiont->set_local_name(holobiont_struct.local_name);
