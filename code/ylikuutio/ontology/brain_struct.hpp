@@ -21,7 +21,7 @@
 #include "entity_struct.hpp"
 
 // Include standard headers
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -46,7 +46,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<std::monostate, yli::ontology::Scene*, std::string> parent {};
+        std::variant<yli::ontology::Scene*, std::string> parent {};
         yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
 }
