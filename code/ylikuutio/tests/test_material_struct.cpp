@@ -25,7 +25,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::holds_alternative, std::monostate
+#include <variant> // std::holds_alternative
 
 TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosystem_parent_nullptr_pipeline)
 {
@@ -37,7 +37,6 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     const yli::ontology::MaterialStruct test_material_struct(ecosystem, nullptr);
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
@@ -57,7 +56,6 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     const yli::ontology::MaterialStruct test_material_struct(scene, nullptr);
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
@@ -81,7 +79,6 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     const yli::ontology::MaterialStruct test_material_struct(ecosystem, pipeline);
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
@@ -105,7 +102,6 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     const yli::ontology::MaterialStruct test_material_struct(scene, pipeline);
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_material_struct.parent));
@@ -129,7 +125,6 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_parent_g
     const yli::ontology::MaterialStruct test_material_struct("foo", pipeline);
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<std::string>(test_material_struct.parent));
