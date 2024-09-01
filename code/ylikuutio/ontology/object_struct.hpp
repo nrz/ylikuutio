@@ -36,8 +36,8 @@ namespace yli::ontology
     struct ObjectStruct : public yli::ontology::MovableStruct
     {
         explicit ObjectStruct(yli::ontology::Scene* const scene_parent)
+            : MovableStruct(nullptr, scene_parent)
         {
-            this->scene = scene_parent;
         }
 
         ObjectStruct(
