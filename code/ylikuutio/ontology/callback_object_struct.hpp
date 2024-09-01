@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -40,7 +40,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<std::monostate, yli::ontology::CallbackEngine*, std::string> callback_engine_parent {};
+        std::variant<yli::ontology::CallbackEngine*, std::string> callback_engine_parent {};
     };
 }
 
