@@ -35,58 +35,58 @@ namespace yli::ontology
 
     struct ObjectStruct : public yli::ontology::MovableStruct
     {
-        explicit ObjectStruct(yli::ontology::Scene* const parent)
+        explicit ObjectStruct(yli::ontology::Scene* const scene_parent)
         {
-            this->scene = parent;
+            this->scene = scene_parent;
         }
 
         ObjectStruct(
                 yli::ontology::Brain* const brain,
-                yli::ontology::Scene* const parent)
-            : MovableStruct(brain, parent)
+                yli::ontology::Scene* const scene_parent)
+            : MovableStruct(brain, scene_parent)
         {
         }
 
         ObjectStruct(
                 yli::ontology::Brain* const brain,
-                const std::string& scene,
+                const std::string& scene_parent,
                 yli::ontology::Species* const species)
-            : MovableStruct(brain, scene),
+            : MovableStruct(brain, scene_parent),
             mesh_master { species }
         {
         }
 
         ObjectStruct(
-                const std::string& scene,
+                const std::string& scene_parent,
                 yli::ontology::Species* const species)
-            : MovableStruct(nullptr, scene),
+            : MovableStruct(nullptr, scene_parent),
             mesh_master { species }
         {
         }
 
         ObjectStruct(
-                yli::ontology::Scene* const parent,
+                yli::ontology::Scene* const scene_parent,
                 std::variant<
                 std::monostate,
                 yli::ontology::Species*,
                 yli::ontology::ShapeshifterSequence*,
                 yli::ontology::Text3d*>
                 mesh_master)
-            : MovableStruct(nullptr, parent),
+            : MovableStruct(nullptr, scene_parent),
             mesh_master { mesh_master }
         {
         }
 
         ObjectStruct(
                 yli::ontology::Brain* const brain,
-                yli::ontology::Scene* const parent,
+                yli::ontology::Scene* const scene_parent,
                 std::variant<
                 std::monostate,
                 yli::ontology::Species*,
                 yli::ontology::ShapeshifterSequence*,
                 yli::ontology::Text3d*>
                 mesh_master)
-            : MovableStruct(brain, parent),
+            : MovableStruct(brain, scene_parent),
             mesh_master { mesh_master }
         {
         }
