@@ -31,8 +31,8 @@ namespace yli::ontology
 
     struct BiontStruct : public yli::ontology::MovableStruct
     {
-        yli::ontology::Holobiont* parent                 { nullptr };    // pointer to the `Holobiont`.
-        yli::ontology::SymbiontSpecies* symbiont_species { nullptr };    // pointer to the `SymbiontSpecies` (not a parent!).
+        yli::ontology::Holobiont* parent                 { nullptr };
+        yli::ontology::SymbiontSpecies* symbiont_species { nullptr };
         std::size_t biontID { std::numeric_limits<std::size_t>::max() }; // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
         bool should_render { true };
     };

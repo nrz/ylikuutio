@@ -35,7 +35,7 @@ namespace yli::ontology
         }
 
         std::string text_string;
-        yli::ontology::VectorFont* vector_font_parent { nullptr }; // pointer to the `VectorFont` (parent).
+        yli::ontology::VectorFont* vector_font_parent { nullptr };
     };
 }
 

@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct ConsoleStruct : public yli::ontology::EntityStruct
     {
-        yli::ontology::Font2d* font_2d { nullptr }; // pointer to the `Font2d` master.
+        yli::ontology::Font2d* font_2d { nullptr };
     };
 }
 

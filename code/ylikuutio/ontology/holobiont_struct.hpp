@@ -57,7 +57,7 @@ namespace yli::ontology
         {
         }
 
-        yli::ontology::Symbiosis* symbiosis { nullptr }; // pointer to the `Symbiosis`.
+        yli::ontology::Symbiosis* symbiosis { nullptr };
 
         std::vector<bool> should_render_bionts_vector;
     };

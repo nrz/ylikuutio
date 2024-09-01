@@ -92,7 +92,7 @@ namespace yli::ontology
         }
 
         std::variant<std::monostate, yli::ontology::Species*, yli::ontology::ShapeshifterSequence*, yli::ontology::Text3d*> mesh_master {};
-        yli::ontology::Glyph* glyph { nullptr }; // pointer to the `Glyph` (not a parent!).
+        yli::ontology::Glyph* glyph { nullptr };
     };
 }
 
