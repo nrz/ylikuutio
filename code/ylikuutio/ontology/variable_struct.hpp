@@ -24,7 +24,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -70,7 +70,7 @@ namespace yli::ontology
         ~VariableStruct() = default;
 
         yli::ontology::Universe& universe;
-        std::variant<std::monostate, yli::ontology::Entity*, std::string> entity_parent {};
+        std::variant<yli::ontology::Entity*, std::string> entity_parent {};
         ActivateCallback activate_callback                 { nullptr };
         ReadCallback read_callback                         { nullptr };
         bool is_variable_of_universe                       { false };
