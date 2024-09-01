@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::holds_alternative, std::monostate
+#include <variant> // std::holds_alternative
 
 namespace yli::ontology
 {
@@ -32,7 +32,6 @@ TEST(callback_parameter_struct_must_be_initialized_appropriately, parent_provide
     const yli::ontology::CallbackParameterStruct test_callback_parameter_struct(static_cast<yli::ontology::CallbackObject*>(nullptr));
 
     ASSERT_FALSE(test_callback_parameter_struct.callback_object_parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackObject*>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_EQ(std::get<yli::ontology::CallbackObject*>(test_callback_parameter_struct.callback_object_parent), nullptr);
@@ -43,7 +42,6 @@ TEST(callback_parameter_struct_must_be_initialized_appropriately, parent_provide
     const yli::ontology::CallbackParameterStruct test_callback_parameter_struct("foo");
 
     ASSERT_FALSE(test_callback_parameter_struct.callback_object_parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::CallbackObject*>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_TRUE(std::holds_alternative<std::string>(test_callback_parameter_struct.callback_object_parent));
     ASSERT_EQ(std::get<std::string>(test_callback_parameter_struct.callback_object_parent), "foo");
