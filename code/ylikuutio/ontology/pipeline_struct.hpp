@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -48,7 +48,7 @@ namespace yli::ontology
 
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        std::variant<std::monostate, yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
+        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
         bool is_gpgpu_pipeline { false }; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }

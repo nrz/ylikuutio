@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 
 // Include standard headers
-#include <variant> // std::holds_alternative, std::monostate
+#include <variant> // std::holds_alternative
 
 TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosystem_parent)
 {
@@ -35,7 +35,6 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosyste
 
     const yli::ontology::PipelineStruct test_pipeline_struct(ecosystem);
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
@@ -52,7 +51,6 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_scene_pa
 
     const yli::ontology::PipelineStruct test_pipeline_struct(scene);
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
@@ -64,7 +62,6 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_parent_s
 {
     const yli::ontology::PipelineStruct test_pipeline_struct("foo");
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
