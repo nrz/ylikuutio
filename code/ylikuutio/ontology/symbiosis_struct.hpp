@@ -22,7 +22,7 @@
 
 // Include standard headers
 #include <string>  // std::string
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
