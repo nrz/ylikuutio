@@ -166,7 +166,7 @@ namespace yli::ontology
 
             yli::ontology::Variable* create_variable(
                     const yli::ontology::VariableStruct& variable_struct,
-                    const yli::data::AnyValue& any_value) const override
+                    const yli::data::AnyValue& any_value) const final
             {
                 using VariableMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Variable, 4096>;
 
@@ -234,7 +234,7 @@ namespace yli::ontology
             }
 
             yli::ontology::CallbackEngine* create_callback_engine(
-                    const yli::ontology::CallbackEngineStruct& callback_engine_struct) const override
+                    const yli::ontology::CallbackEngineStruct& callback_engine_struct) const final
             {
                 using CallbackEngineMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::CallbackEngine, 256>;
@@ -270,7 +270,7 @@ namespace yli::ontology
             }
 
             yli::ontology::CallbackObject* create_callback_object(
-                    const yli::ontology::CallbackObjectStruct& callback_object_struct) const override
+                    const yli::ontology::CallbackObjectStruct& callback_object_struct) const final
             {
                 using CallbackObjectMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::CallbackObject, 256>;
@@ -305,7 +305,7 @@ namespace yli::ontology
 
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
-                    yli::data::AnyValue&& any_value) const override
+                    yli::data::AnyValue&& any_value) const final
             {
                 using CallbackParameterMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
@@ -344,7 +344,7 @@ namespace yli::ontology
 
             // TODO: implement `create_widget` here!
 
-            yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const override
+            yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const final
             {
                 using EcosystemMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
 
@@ -379,7 +379,7 @@ namespace yli::ontology
                 return ecosystem;
             }
 
-            yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const override
+            yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const final
             {
                 using SceneMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Scene, 256>;
 
@@ -414,7 +414,7 @@ namespace yli::ontology
                 return scene;
             }
 
-            yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const override
+            yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const final
             {
                 using BrainMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
 
@@ -444,7 +444,7 @@ namespace yli::ontology
                 return brain;
             }
 
-            yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const override
+            yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const final
             {
                 using WaypointMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
 
@@ -476,7 +476,7 @@ namespace yli::ontology
                 return waypoint;
             }
 
-            yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const override
+            yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
                 using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
 
@@ -507,7 +507,7 @@ namespace yli::ontology
                 return camera;
             }
 
-            yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const override
+            yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
                 using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
 
@@ -540,7 +540,7 @@ namespace yli::ontology
 
             // TODO: implement `create_camera_widget` here!
 
-            yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const override
+            yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const final
             {
                 using PipelineMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Pipeline, 256>;
 
@@ -593,7 +593,7 @@ namespace yli::ontology
                 return pipeline;
             }
 
-            yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const override
+            yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const final
             {
                 using MaterialMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Material, 256>;
 
@@ -652,7 +652,7 @@ namespace yli::ontology
                 return material;
             }
 
-            yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const override
+            yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const final
             {
                 using SpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Species, 256>;
 
@@ -714,7 +714,7 @@ namespace yli::ontology
                 return species;
             }
 
-            yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const override
+            yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const final
             {
                 using ObjectMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Object, 256>;
 
@@ -759,7 +759,7 @@ namespace yli::ontology
 
             // TODO: implement `create_heightmap_sheet` here!
 
-            yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const override
+            yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const final
             {
                 using SymbiosisMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Symbiosis, 256>;
 
@@ -819,7 +819,7 @@ namespace yli::ontology
                 return symbiosis;
             }
 
-            yli::ontology::SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const override
+            yli::ontology::SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const final
             {
                 using SymbiontMaterialMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontMaterial, 256>;
 
@@ -837,7 +837,7 @@ namespace yli::ontology
                          nullptr));
             }
 
-            yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct) const override
+            yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct) const final
             {
                 using SymbiontSpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontSpecies, 256>;
 
@@ -855,7 +855,7 @@ namespace yli::ontology
                          nullptr));
             }
 
-            yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const override
+            yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const final
             {
                 using HolobiontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Holobiont, 256>;
 
@@ -887,7 +887,7 @@ namespace yli::ontology
                 return holobiont;
             }
 
-            yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const override
+            yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const final
             {
                 using BiontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Biont, 1024>;
 
@@ -905,7 +905,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(
-                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const override
+                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const final
             {
                 using ShapeshifterTransformationMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterTransformation, 1024>;
@@ -940,7 +940,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterSequence* create_shapeshifter_sequence(
-                    const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const override
+                    const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const final
             {
                 using ShapeshifterSequenceMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterSequence, 1024>;
@@ -974,7 +974,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ShapeshifterForm* create_shapeshifter_form(
-                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const override
+                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const final
             {
                 using ShapeshifterFormMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
@@ -1007,7 +1007,7 @@ namespace yli::ontology
                 return shapeshifter_form;
             }
 
-            yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const override
+            yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const final
             {
                 using Font2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Font2d, 256>;
 
@@ -1042,7 +1042,7 @@ namespace yli::ontology
                 return font_2d;
             }
 
-            yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const override
+            yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const final
             {
                 using Text2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text2d, 256>;
 
@@ -1073,7 +1073,7 @@ namespace yli::ontology
                 return text_2d;
             }
 
-            yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const override
+            yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const final
             {
                 using VectorFontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
 
@@ -1104,7 +1104,7 @@ namespace yli::ontology
                 return vector_font;
             }
 
-            yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const override
+            yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const final
             {
                 using GlyphMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
 
@@ -1124,7 +1124,7 @@ namespace yli::ontology
                 return glyph;
             }
 
-            yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const override
+            yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const final
             {
                 using Text3dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
 
@@ -1145,7 +1145,7 @@ namespace yli::ontology
                 return text_3d;
             }
 
-            yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const override
+            yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const final
             {
                 using InputModeMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
 
@@ -1185,7 +1185,7 @@ namespace yli::ontology
 
             // TODO: implement `create_playlist` here!
 
-            yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const override
+            yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const final
             {
                 using AudioTrackMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::AudioTrack, 256>;
 
@@ -1220,7 +1220,7 @@ namespace yli::ontology
                 return audio_track;
             }
 
-            yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const override
+            yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const final
             {
                 using ConsoleMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
 
@@ -1257,7 +1257,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
-                    const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const override
+                    const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const final
             {
                 using ConsoleCallbackEngineMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
@@ -1293,7 +1293,7 @@ namespace yli::ontology
             }
 
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
-                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const override
+                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const final
             {
                 using ConsoleCallbackObjectMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
@@ -1329,7 +1329,7 @@ namespace yli::ontology
 
             yli::ontology::ConsoleCallbackParameter* create_console_callback_parameter(
                     const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    const yli::data::AnyValue& any_value) const override
+                    const yli::data::AnyValue& any_value) const final
             {
                 using ConsoleCallbackParameterMemoryAllocator =
                     yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackParameter, 256>;
@@ -1368,7 +1368,7 @@ namespace yli::ontology
 
             // TODO: implement `create_node` here!
 
-            yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const override
+            yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const final
             {
                 using ComputeTaskMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
 
@@ -1399,7 +1399,7 @@ namespace yli::ontology
                 return compute_task;
             }
 
-            yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const override
+            yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const final
             {
                 using LispFunctionMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
 
