@@ -51,6 +51,7 @@
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
+#include "code/ylikuutio/ontology/audio_track.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
@@ -96,6 +97,7 @@ namespace yli::memory
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
     using Text3dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
     using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
+    using AudioTrackMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::AudioTrack, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
     using ConsoleCallbackEngineMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
     using ConsoleCallbackObjectMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
@@ -213,6 +215,7 @@ namespace yli::memory
                     this->create_allocator<ConsoleCallbackObjectMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT);
                     this->create_allocator<ConsoleCallbackParameterMemoryAllocator>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER);
                     this->create_allocator<InputModeMemoryAllocator>(yli::data::Datatype::INPUT_MODE);
+                    this->create_allocator<AudioTrackMemoryAllocator>(yli::data::Datatype::AUDIO_TRACK);
                     this->create_allocator<ComputeTaskMemoryAllocator>(yli::data::Datatype::COMPUTETASK);
                     this->create_allocator<LispFunctionMemoryAllocator>(yli::data::Datatype::LISP_FUNCTION);
                     this->create_allocator<GenericLispFunctionOverloadMemoryAllocator>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD);
