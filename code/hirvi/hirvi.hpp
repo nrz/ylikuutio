@@ -76,6 +76,11 @@ namespace hirvi
 
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const override;
 
+            bool has_memory_allocator(const int type) const
+            {
+                return this->memory_system.has_allocator(type);
+            }
+
             template<typename Type>
                 yli::memory::MemoryAllocator<Type>& get_memory_allocator(const int type) const
             {
@@ -95,7 +100,6 @@ namespace hirvi
             bool create_simulation() override;
 
         private:
-            void create_memory_allocators();
             yli::ontology::Ecosystem* create_earth_ecosystem();
             yli::ontology::Scene* create_helsinki_east_downtown_scene();
 

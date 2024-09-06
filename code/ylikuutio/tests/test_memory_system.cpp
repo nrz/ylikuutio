@@ -31,7 +31,7 @@ namespace yli::memory
 
 TEST(memory_system_must_be_initialized_appropriately, default_memory_system_no_application)
 {
-    yli::memory::MemorySystem memory_system(nullptr, yli::data::Datatype::UNIVERSE);
+    yli::memory::MemorySystem memory_system(yli::data::Datatype::UNIVERSE);
     ASSERT_FALSE(memory_system.has_allocator(yli::data::Datatype::UNIVERSE));
     ASSERT_EQ(memory_system.get_number_of_allocators(), 0);
     ASSERT_EQ(memory_system.get_universe_datatype(), yli::data::Datatype::UNIVERSE);

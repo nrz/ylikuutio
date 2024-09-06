@@ -97,7 +97,7 @@ namespace tulevaisuus
 
     TulevaisuusApplication::TulevaisuusApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        memory_system(this, universe_enum_value),
+        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },

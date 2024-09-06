@@ -98,14 +98,12 @@ namespace hirvi
 
     HirviApplication::HirviApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        memory_system(this, universe_enum_value),
+        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
         audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
-        this->create_memory_allocators();
-
         std::cout << "HirviApplication initialized!\n";
     }
 
@@ -141,12 +139,6 @@ namespace hirvi
     yli::memory::MemorySystem<hirvi::Datatype>& HirviApplication::get_memory_system() const
     {
         return this->memory_system.get();
-    }
-
-    void HirviApplication::create_memory_allocators()
-    {
-        this->memory_system.create_allocator<CatMemoryAllocator>(hirvi::Datatype::CAT);
-        this->memory_system.create_allocator<PoliceCarMemoryAllocator>(hirvi::Datatype::POLICE_CAR);
     }
 
     yli::memory::GenericMemoryAllocator& HirviApplication::get_generic_memory_allocator(const int type) const
