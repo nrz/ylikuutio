@@ -26,7 +26,7 @@ namespace yli::ontology
 
     struct GlyphStruct final : public yli::ontology::ModelStruct
     {
-        GlyphStruct(
+        explicit GlyphStruct(
                 yli::ontology::VectorFont* const vector_font_parent)
             : ModelStruct(vector_font_parent)
         {
