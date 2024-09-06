@@ -30,13 +30,13 @@ namespace yli::ontology
 
     struct ConsoleCallbackParameterStruct final : public yli::ontology::EntityStruct
     {
-        ConsoleCallbackParameterStruct(
+        explicit ConsoleCallbackParameterStruct(
                 yli::ontology::ConsoleCallbackObject* const console_callback_object_parent)
             : console_callback_object_parent { console_callback_object_parent }
         {
         }
 
-        ConsoleCallbackParameterStruct(
+        explicit ConsoleCallbackParameterStruct(
                 const std::string& console_callback_object_parent)
             : console_callback_object_parent { console_callback_object_parent }
         {
