@@ -97,6 +97,7 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
+#include "code/ylikuutio/memory/memory_allocator_types.hpp"
 
 // Include standard headers
 #include <iostream>   // std::cerr
@@ -139,12 +140,10 @@ namespace yli::ontology
 
             yli::ontology::Universe* create_universe(const yli::ontology::UniverseStruct& universe_struct)
             {
-                using UniverseMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Universe, 1>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<UniverseMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::UniverseMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::UNIVERSE));
-                UniverseMemoryAllocator& allocator = static_cast<UniverseMemoryAllocator&>(generic_allocator);
+                yli::memory::UniverseMemoryAllocator& allocator = static_cast<yli::memory::UniverseMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Universe* const universe = allocator.build_in(
                         this->application,
@@ -168,12 +167,10 @@ namespace yli::ontology
                     const yli::ontology::VariableStruct& variable_struct,
                     const yli::data::AnyValue& any_value) const final
             {
-                using VariableMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Variable, 4096>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<VariableMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::VariableMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::VARIABLE));
-                VariableMemoryAllocator& allocator = static_cast<VariableMemoryAllocator&>(generic_allocator);
+                yli::memory::VariableMemoryAllocator& allocator = static_cast<yli::memory::VariableMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Entity* entity_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Entity*>(variable_struct.entity_parent))
@@ -236,13 +233,10 @@ namespace yli::ontology
             yli::ontology::CallbackEngine* create_callback_engine(
                     const yli::ontology::CallbackEngineStruct& callback_engine_struct) const final
             {
-                using CallbackEngineMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::CallbackEngine, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CallbackEngineMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackEngineMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CALLBACK_ENGINE));
-                CallbackEngineMemoryAllocator& allocator = static_cast<CallbackEngineMemoryAllocator&>(generic_allocator);
+                yli::memory::CallbackEngineMemoryAllocator& allocator = static_cast<yli::memory::CallbackEngineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackEngine* const callback_engine = allocator.build_in(
                         this->application,
@@ -272,13 +266,10 @@ namespace yli::ontology
             yli::ontology::CallbackObject* create_callback_object(
                     const yli::ontology::CallbackObjectStruct& callback_object_struct) const final
             {
-                using CallbackObjectMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::CallbackObject, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CallbackObjectMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackObjectMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CALLBACK_OBJECT));
-                CallbackObjectMemoryAllocator& allocator = static_cast<CallbackObjectMemoryAllocator&>(generic_allocator);
+                yli::memory::CallbackObjectMemoryAllocator& allocator = static_cast<yli::memory::CallbackObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent))
@@ -307,13 +298,10 @@ namespace yli::ontology
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
                     yli::data::AnyValue&& any_value) const final
             {
-                using CallbackParameterMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::CallbackParameter, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CallbackParameterMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackParameterMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CALLBACK_PARAMETER));
-                CallbackParameterMemoryAllocator& allocator = static_cast<CallbackParameterMemoryAllocator&>(generic_allocator);
+                yli::memory::CallbackParameterMemoryAllocator& allocator = static_cast<yli::memory::CallbackParameterMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::CallbackObject* callback_object_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::CallbackObject*>(callback_parameter_struct.callback_object_parent))
@@ -346,12 +334,10 @@ namespace yli::ontology
 
             yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const final
             {
-                using EcosystemMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Ecosystem, 16>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<EcosystemMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::EcosystemMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::ECOSYSTEM));
-                EcosystemMemoryAllocator& allocator = static_cast<EcosystemMemoryAllocator&>(generic_allocator);
+                yli::memory::EcosystemMemoryAllocator& allocator = static_cast<yli::memory::EcosystemMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Ecosystem* const ecosystem = allocator.build_in(
                         this->application,
@@ -381,12 +367,10 @@ namespace yli::ontology
 
             yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const final
             {
-                using SceneMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Scene, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_scene_allocator =
-                    this->memory_system.template get_or_create_allocator<SceneMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::SceneMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SCENE));
-                SceneMemoryAllocator& scene_allocator = static_cast<SceneMemoryAllocator&>(generic_scene_allocator);
+                yli::memory::SceneMemoryAllocator& scene_allocator = static_cast<yli::memory::SceneMemoryAllocator&>(generic_scene_allocator);
 
                 yli::ontology::Scene* const scene = scene_allocator.build_in(
                         this->application,
@@ -416,12 +400,10 @@ namespace yli::ontology
 
             yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const final
             {
-                using BrainMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Brain, 16>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<BrainMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::BrainMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::BRAIN));
-                BrainMemoryAllocator& allocator = static_cast<BrainMemoryAllocator&>(generic_allocator);
+                yli::memory::BrainMemoryAllocator& allocator = static_cast<yli::memory::BrainMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(brain_struct.parent))
@@ -446,12 +428,10 @@ namespace yli::ontology
 
             yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const final
             {
-                using WaypointMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Waypoint, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<WaypointMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::WaypointMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::WAYPOINT));
-                WaypointMemoryAllocator& allocator = static_cast<WaypointMemoryAllocator&>(generic_allocator);
+                yli::memory::WaypointMemoryAllocator& allocator = static_cast<yli::memory::WaypointMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(waypoint_struct.scene))
@@ -478,12 +458,10 @@ namespace yli::ontology
 
             yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
-                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::CameraMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CAMERA));
-                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
+                yli::memory::CameraMemoryAllocator& allocator = static_cast<yli::memory::CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
@@ -509,12 +487,10 @@ namespace yli::ontology
 
             yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
-                using CameraMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Camera, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<CameraMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::CameraMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CAMERA));
-                CameraMemoryAllocator& allocator = static_cast<CameraMemoryAllocator&>(generic_allocator);
+                yli::memory::CameraMemoryAllocator& allocator = static_cast<yli::memory::CameraMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
@@ -542,12 +518,10 @@ namespace yli::ontology
 
             yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const final
             {
-                using PipelineMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Pipeline, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<PipelineMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::PipelineMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::PIPELINE));
-                PipelineMemoryAllocator& allocator = static_cast<PipelineMemoryAllocator&>(generic_allocator);
+                yli::memory::PipelineMemoryAllocator& allocator = static_cast<yli::memory::PipelineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Pipeline* pipeline { nullptr };
                 if (std::holds_alternative<yli::ontology::Ecosystem*>(pipeline_struct.parent))
@@ -595,12 +569,10 @@ namespace yli::ontology
 
             yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const final
             {
-                using MaterialMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Material, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<MaterialMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::MaterialMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::MATERIAL));
-                MaterialMemoryAllocator& allocator = static_cast<MaterialMemoryAllocator&>(generic_allocator);
+                yli::memory::MaterialMemoryAllocator& allocator = static_cast<yli::memory::MaterialMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Material* material { nullptr };
                 auto pipeline_master = material_struct.pipeline != nullptr ? material_struct.pipeline->get_master_module() : nullptr;
@@ -654,12 +626,10 @@ namespace yli::ontology
 
             yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const final
             {
-                using SpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Species, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<SpeciesMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::SpeciesMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SPECIES));
-                SpeciesMemoryAllocator& allocator = static_cast<SpeciesMemoryAllocator&>(generic_allocator);
+                yli::memory::SpeciesMemoryAllocator& allocator = static_cast<yli::memory::SpeciesMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Species* species { nullptr };
                 auto& material_or_symbiont_material = species_struct.material_or_symbiont_material;
@@ -716,12 +686,10 @@ namespace yli::ontology
 
             yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const final
             {
-                using ObjectMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Object, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ObjectMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ObjectMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::OBJECT));
-                ObjectMemoryAllocator& allocator = static_cast<ObjectMemoryAllocator&>(generic_allocator);
+                yli::memory::ObjectMemoryAllocator& allocator = static_cast<yli::memory::ObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
@@ -761,12 +729,10 @@ namespace yli::ontology
 
             yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const final
             {
-                using SymbiosisMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Symbiosis, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<SymbiosisMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::SymbiosisMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SYMBIOSIS));
-                SymbiosisMemoryAllocator& allocator = static_cast<SymbiosisMemoryAllocator&>(generic_allocator);
+                yli::memory::SymbiosisMemoryAllocator& allocator = static_cast<yli::memory::SymbiosisMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Symbiosis* symbiosis { nullptr };
                 auto& pipeline = symbiosis_struct.pipeline;
@@ -821,12 +787,10 @@ namespace yli::ontology
 
             yli::ontology::SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const final
             {
-                using SymbiontMaterialMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontMaterial, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<SymbiontMaterialMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::SymbiontMaterialMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SYMBIONT_MATERIAL));
-                SymbiontMaterialMemoryAllocator& allocator = static_cast<SymbiontMaterialMemoryAllocator&>(generic_allocator);
+                yli::memory::SymbiontMaterialMemoryAllocator& allocator = static_cast<yli::memory::SymbiontMaterialMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
                         this->application,
@@ -839,12 +803,10 @@ namespace yli::ontology
 
             yli::ontology::SymbiontSpecies* create_symbiont_species(const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct) const final
             {
-                using SymbiontSpeciesMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::SymbiontSpecies, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<SymbiontSpeciesMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::SymbiontSpeciesMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SYMBIONT_SPECIES));
-                SymbiontSpeciesMemoryAllocator& allocator = static_cast<SymbiontSpeciesMemoryAllocator&>(generic_allocator);
+                yli::memory::SymbiontSpeciesMemoryAllocator& allocator = static_cast<yli::memory::SymbiontSpeciesMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
                         this->application,
@@ -857,12 +819,10 @@ namespace yli::ontology
 
             yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const final
             {
-                using HolobiontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Holobiont, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<HolobiontMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::HolobiontMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::HOLOBIONT));
-                HolobiontMemoryAllocator& allocator = static_cast<HolobiontMemoryAllocator&>(generic_allocator);
+                yli::memory::HolobiontMemoryAllocator& allocator = static_cast<yli::memory::HolobiontMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Scene* scene_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
@@ -889,12 +849,10 @@ namespace yli::ontology
 
             yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const final
             {
-                using BiontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Biont, 1024>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<BiontMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::BiontMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::BIONT));
-                BiontMemoryAllocator& allocator = static_cast<BiontMemoryAllocator&>(generic_allocator);
+                yli::memory::BiontMemoryAllocator& allocator = static_cast<yli::memory::BiontMemoryAllocator&>(generic_allocator);
 
                 return allocator.build_in(
                         this->application,
@@ -907,13 +865,10 @@ namespace yli::ontology
             yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(
                     const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const final
             {
-                using ShapeshifterTransformationMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ShapeshifterTransformation, 1024>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ShapeshifterTransformationMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterTransformationMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
-                ShapeshifterTransformationMemoryAllocator& allocator = static_cast<ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
+                yli::memory::ShapeshifterTransformationMemoryAllocator& allocator = static_cast<yli::memory::ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Material* material_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Material*>(shapeshifter_transformation_struct.material_parent))
@@ -942,13 +897,10 @@ namespace yli::ontology
             yli::ontology::ShapeshifterSequence* create_shapeshifter_sequence(
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const final
             {
-                using ShapeshifterSequenceMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ShapeshifterSequence, 1024>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ShapeshifterSequenceMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterSequenceMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE));
-                ShapeshifterSequenceMemoryAllocator& allocator = static_cast<ShapeshifterSequenceMemoryAllocator&>(generic_allocator);
+                yli::memory::ShapeshifterSequenceMemoryAllocator& allocator = static_cast<yli::memory::ShapeshifterSequenceMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_sequence_struct.shapeshifter_transformation_parent))
@@ -976,13 +928,10 @@ namespace yli::ontology
             yli::ontology::ShapeshifterForm* create_shapeshifter_form(
                     const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const final
             {
-                using ShapeshifterFormMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ShapeshifterFormMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterFormMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::SHAPESHIFTER_FORM));
-                ShapeshifterFormMemoryAllocator& allocator = static_cast<ShapeshifterFormMemoryAllocator&>(generic_allocator);
+                yli::memory::ShapeshifterFormMemoryAllocator& allocator = static_cast<yli::memory::ShapeshifterFormMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_form_struct.parent))
@@ -1009,12 +958,10 @@ namespace yli::ontology
 
             yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const final
             {
-                using Font2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Font2d, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Font2dMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::Font2dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::FONT_2D));
-                Font2dMemoryAllocator& allocator = static_cast<Font2dMemoryAllocator&>(generic_allocator);
+                yli::memory::Font2dMemoryAllocator& allocator = static_cast<yli::memory::Font2dMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Font2d* const font_2d = allocator.build_in(
                         this->application,
@@ -1044,12 +991,10 @@ namespace yli::ontology
 
             yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const final
             {
-                using Text2dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text2d, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Text2dMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::Text2dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::TEXT_2D));
-                Text2dMemoryAllocator& allocator = static_cast<Text2dMemoryAllocator&>(generic_allocator);
+                yli::memory::Text2dMemoryAllocator& allocator = static_cast<yli::memory::Text2dMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Font2d* font_2d_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Font2d*>(text_struct.font_2d_parent))
@@ -1075,12 +1020,10 @@ namespace yli::ontology
 
             yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const final
             {
-                using VectorFontMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<VectorFontMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::VectorFontMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::VECTOR_FONT));
-                VectorFontMemoryAllocator& allocator = static_cast<VectorFontMemoryAllocator&>(generic_allocator);
+                yli::memory::VectorFontMemoryAllocator& allocator = static_cast<yli::memory::VectorFontMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Material* material_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Material*>(vector_font_struct.material_parent))
@@ -1106,12 +1049,10 @@ namespace yli::ontology
 
             yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const final
             {
-                using GlyphMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<GlyphMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::GlyphMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::GLYPH));
-                GlyphMemoryAllocator& allocator = static_cast<GlyphMemoryAllocator&>(generic_allocator);
+                yli::memory::GlyphMemoryAllocator& allocator = static_cast<yli::memory::GlyphMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Glyph* const glyph = allocator.build_in(
                         this->application,
@@ -1126,12 +1067,10 @@ namespace yli::ontology
 
             yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const final
             {
-                using Text3dMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<Text3dMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::Text3dMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::TEXT_3D));
-                Text3dMemoryAllocator& allocator = static_cast<Text3dMemoryAllocator&>(generic_allocator);
+                yli::memory::Text3dMemoryAllocator& allocator = static_cast<yli::memory::Text3dMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Text3d* const text_3d = allocator.build_in(
                         this->application,
@@ -1147,12 +1086,10 @@ namespace yli::ontology
 
             yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const final
             {
-                using InputModeMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<InputModeMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::InputModeMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::INPUT_MODE));
-                InputModeMemoryAllocator& allocator = static_cast<InputModeMemoryAllocator&>(generic_allocator);
+                yli::memory::InputModeMemoryAllocator& allocator = static_cast<yli::memory::InputModeMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::InputMode* const input_mode = allocator.build_in(
                         this->application,
@@ -1187,12 +1124,10 @@ namespace yli::ontology
 
             yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const final
             {
-                using AudioTrackMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::AudioTrack, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<AudioTrackMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::AudioTrackMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::AUDIO_TRACK));
-                AudioTrackMemoryAllocator& allocator = static_cast<AudioTrackMemoryAllocator&>(generic_allocator);
+                yli::memory::AudioTrackMemoryAllocator& allocator = static_cast<yli::memory::AudioTrackMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::AudioTrack* const audio_track = allocator.build_in(
                         this->application,
@@ -1222,12 +1157,10 @@ namespace yli::ontology
 
             yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const final
             {
-                using ConsoleMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ConsoleMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CONSOLE));
-                ConsoleMemoryAllocator& allocator = static_cast<ConsoleMemoryAllocator&>(generic_allocator);
+                yli::memory::ConsoleMemoryAllocator& allocator = static_cast<yli::memory::ConsoleMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Console* const console = allocator.build_in(
                         this->application,
@@ -1259,13 +1192,10 @@ namespace yli::ontology
             yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
                     const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const final
             {
-                using ConsoleCallbackEngineMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackEngine, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ConsoleCallbackEngineMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleCallbackEngineMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE));
-                ConsoleCallbackEngineMemoryAllocator& allocator = static_cast<ConsoleCallbackEngineMemoryAllocator&>(generic_allocator);
+                yli::memory::ConsoleCallbackEngineMemoryAllocator& allocator = static_cast<yli::memory::ConsoleCallbackEngineMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackEngine* const console_callback_engine = allocator.build_in(
                         this->application,
@@ -1295,13 +1225,10 @@ namespace yli::ontology
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct) const final
             {
-                using ConsoleCallbackObjectMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ConsoleCallbackObjectMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleCallbackObjectMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_OBJECT));
-                ConsoleCallbackObjectMemoryAllocator& allocator = static_cast<ConsoleCallbackObjectMemoryAllocator&>(generic_allocator);
+                yli::memory::ConsoleCallbackObjectMemoryAllocator& allocator = static_cast<yli::memory::ConsoleCallbackObjectMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackEngine* console_callback_engine_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::ConsoleCallbackEngine*>(console_callback_object_struct.console_callback_engine_parent))
@@ -1331,13 +1258,10 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
                     const yli::data::AnyValue& any_value) const final
             {
-                using ConsoleCallbackParameterMemoryAllocator =
-                    yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackParameter, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ConsoleCallbackParameterMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleCallbackParameterMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER));
-                ConsoleCallbackParameterMemoryAllocator& allocator = static_cast<ConsoleCallbackParameterMemoryAllocator&>(generic_allocator);
+                yli::memory::ConsoleCallbackParameterMemoryAllocator& allocator = static_cast<yli::memory::ConsoleCallbackParameterMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::ConsoleCallbackObject* console_callback_object_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::ConsoleCallbackObject*>(console_callback_parameter_struct.console_callback_object_parent))
@@ -1370,12 +1294,10 @@ namespace yli::ontology
 
             yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const final
             {
-                using ComputeTaskMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<ComputeTaskMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::ComputeTaskMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::COMPUTETASK));
-                ComputeTaskMemoryAllocator& allocator = static_cast<ComputeTaskMemoryAllocator&>(generic_allocator);
+                yli::memory::ComputeTaskMemoryAllocator& allocator = static_cast<yli::memory::ComputeTaskMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Pipeline* pipeline_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Pipeline*>(compute_task_struct.pipeline_parent))
@@ -1401,12 +1323,10 @@ namespace yli::ontology
 
             yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const final
             {
-                using LispFunctionMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
-
                 yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<LispFunctionMemoryAllocator>(
+                    this->memory_system.template get_or_create_allocator<yli::memory::LispFunctionMemoryAllocator>(
                             static_cast<int>(yli::data::Datatype::LISP_FUNCTION));
-                LispFunctionMemoryAllocator& allocator = static_cast<LispFunctionMemoryAllocator&>(generic_allocator);
+                yli::memory::LispFunctionMemoryAllocator& allocator = static_cast<yli::memory::LispFunctionMemoryAllocator&>(generic_allocator);
 
                 yli::ontology::Console* console_parent { nullptr };
                 if (std::holds_alternative<yli::ontology::Console*>(lisp_function_struct.console_parent))
@@ -1466,15 +1386,12 @@ namespace yli::ontology
                         }
                     }
 
-                    using GenericLispFunctionOverloadMemoryAllocator =
-                        yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
-
                     yli::memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<GenericLispFunctionOverloadMemoryAllocator>(
+                        this->memory_system.template get_or_create_allocator<yli::memory::GenericLispFunctionOverloadMemoryAllocator>(
                                 static_cast<int>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD));
 
-                    GenericLispFunctionOverloadMemoryAllocator& allocator =
-                        static_cast<GenericLispFunctionOverloadMemoryAllocator&>(generic_allocator);
+                    yli::memory::GenericLispFunctionOverloadMemoryAllocator& allocator =
+                        static_cast<yli::memory::GenericLispFunctionOverloadMemoryAllocator&>(generic_allocator);
 
                     yli::ontology::GenericLispFunctionOverload* const generic_lisp_function_overload = allocator.build_in(
                             this->application,

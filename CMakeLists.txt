@@ -485,6 +485,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/memory/generic_memory_allocator.hpp
     code/ylikuutio/memory/generic_memory_system.hpp
     code/ylikuutio/memory/memory_allocator.hpp
+    code/ylikuutio/memory/memory_allocator_types.hpp
     code/ylikuutio/memory/memory_storage.hpp
     code/ylikuutio/memory/memory_system.hpp
     code/ylikuutio/memory/memory_templates.hpp
