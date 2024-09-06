@@ -42,7 +42,7 @@ namespace yli::memory
             // management for a given application.
 
             public:
-                MemorySystem(TypeEnumType universe_datatype)
+                explicit MemorySystem(TypeEnumType universe_datatype)
                     : universe_datatype { universe_datatype }
                 {
                 }
