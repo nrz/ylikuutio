@@ -33,10 +33,12 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
+    struct ConsoleCallbackEngineStruct;
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
+            const yli::ontology::ConsoleCallbackEngineStruct&,
             yli::ontology::GenericParentModule* const universe_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
         child_of_universe(universe_parent_module, *this),

@@ -47,6 +47,7 @@ namespace yli::ontology
     class Scene;
     class Console;
     class ConsoleCallbackObject;
+    struct ConsoleCallbackEngineStruct;
 
     class ConsoleCallbackEngine final : public yli::ontology::GenericCallbackEngine
     {
@@ -54,6 +55,7 @@ namespace yli::ontology
             ConsoleCallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
+                    const yli::ontology::ConsoleCallbackEngineStruct&,
                     yli::ontology::GenericParentModule* const universe_parent_module);
 
             ~ConsoleCallbackEngine() = default;

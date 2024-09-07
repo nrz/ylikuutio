@@ -241,6 +241,7 @@ namespace yli::ontology
                 yli::ontology::CallbackEngine* const callback_engine = allocator.build_in(
                         this->application,
                         this->get_universe(),
+                        callback_engine_struct,
                         &this->get_universe().parent_of_callback_engines);
 
                 if (!callback_engine_struct.global_name.empty() && callback_engine_struct.local_name.empty())
@@ -1200,6 +1201,7 @@ namespace yli::ontology
                 yli::ontology::ConsoleCallbackEngine* const console_callback_engine = allocator.build_in(
                         this->application,
                         this->get_universe(),
+                        console_callback_engine_struct,
                         &this->get_universe().parent_of_console_callback_engines);
 
                 if (!console_callback_engine_struct.global_name.empty() && console_callback_engine_struct.local_name.empty())

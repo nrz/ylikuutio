@@ -45,6 +45,7 @@ namespace yli::ontology
     class Universe;
     class CallbackObject;
     class Scene;
+    struct CallbackEngineStruct;
 
     class CallbackEngine : public yli::ontology::GenericCallbackEngine
     {
@@ -74,6 +75,7 @@ namespace yli::ontology
             CallbackEngine(
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
+                    const yli::ontology::CallbackEngineStruct&,
                     yli::ontology::GenericParentModule* const entity_parent_module);
 
             virtual ~CallbackEngine() = default;
