@@ -233,35 +233,13 @@ namespace yli::ontology
             yli::ontology::CallbackEngine* create_callback_engine(
                     const yli::ontology::CallbackEngineStruct& callback_engine_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackEngineMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CALLBACK_ENGINE));
-                auto& allocator = static_cast<yli::memory::CallbackEngineMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::CallbackEngine* const callback_engine = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        callback_engine_struct,
-                        &this->get_universe().parent_of_callback_engines);
-
-                if (!callback_engine_struct.global_name.empty() && callback_engine_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    callback_engine->set_global_name(callback_engine_struct.global_name);
-                }
-                else if (callback_engine_struct.global_name.empty() && !callback_engine_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    callback_engine->set_local_name(callback_engine_struct.local_name);
-                }
-                else if (!callback_engine_struct.global_name.empty() && !callback_engine_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_callback_engine`: both global and local names given for a `CallbackEngine`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `CallbackEngine`!\n";
-                }
-
-                return callback_engine;
+                return this->create_child_of_universe<
+                    yli::ontology::CallbackEngine,
+                    yli::memory::CallbackEngineMemoryAllocator,
+                    yli::ontology::CallbackEngineStruct>(
+                            yli::data::Datatype::CALLBACK_ENGINE,
+                            callback_engine_struct,
+                            &this->get_universe().parent_of_callback_engines);
             }
 
             yli::ontology::CallbackObject* create_callback_object(
@@ -335,68 +313,24 @@ namespace yli::ontology
 
             yli::ontology::Ecosystem* create_ecosystem(const yli::ontology::EcosystemStruct& ecosystem_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::EcosystemMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::ECOSYSTEM));
-                auto& allocator = static_cast<yli::memory::EcosystemMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Ecosystem* const ecosystem = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        ecosystem_struct,
-                        &this->get_universe().parent_of_ecosystems);
-
-                if (!ecosystem_struct.global_name.empty() && ecosystem_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    ecosystem->set_global_name(ecosystem_struct.global_name);
-                }
-                else if (ecosystem_struct.global_name.empty() && !ecosystem_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    ecosystem->set_local_name(ecosystem_struct.local_name);
-                }
-                else if (!ecosystem_struct.global_name.empty() && !ecosystem_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_ecosystem`: both global and local names given for a `Ecosystem`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Ecosystem`!\n";
-                }
-
-                return ecosystem;
+                return this->create_child_of_universe<
+                    yli::ontology::Ecosystem,
+                    yli::memory::EcosystemMemoryAllocator,
+                    yli::ontology::EcosystemStruct>(
+                            yli::data::Datatype::ECOSYSTEM,
+                            ecosystem_struct,
+                            &this->get_universe().parent_of_ecosystems);
             }
 
             yli::ontology::Scene* create_scene(const yli::ontology::SceneStruct& scene_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_scene_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::SceneMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SCENE));
-                yli::memory::SceneMemoryAllocator& scene_allocator = static_cast<yli::memory::SceneMemoryAllocator&>(generic_scene_allocator);
-
-                yli::ontology::Scene* const scene = scene_allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        scene_struct,
-                        &this->get_universe().parent_of_scenes);
-
-                if (!scene_struct.global_name.empty() && scene_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    scene->set_global_name(scene_struct.global_name);
-                }
-                else if (scene_struct.global_name.empty() && !scene_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    scene->set_local_name(scene_struct.local_name);
-                }
-                else if (!scene_struct.global_name.empty() && !scene_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_scene`: both global and local names given for a `Scene`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Scene`!\n";
-                }
-
-                return scene;
+                return this->create_child_of_universe<
+                    yli::ontology::Scene,
+                    yli::memory::SceneMemoryAllocator,
+                    yli::ontology::SceneStruct>(
+                            yli::data::Datatype::SCENE,
+                            scene_struct,
+                            &this->get_universe().parent_of_scenes);
             }
 
             yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const final
@@ -959,35 +893,13 @@ namespace yli::ontology
 
             yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::Font2dMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::FONT_2D));
-                auto& allocator = static_cast<yli::memory::Font2dMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Font2d* const font_2d = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        font_struct,
-                        &this->get_universe().parent_of_font_2ds);
-
-                if (!font_struct.global_name.empty() && font_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    font_2d->set_global_name(font_struct.global_name);
-                }
-                else if (font_struct.global_name.empty() && !font_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    font_2d->set_local_name(font_struct.local_name);
-                }
-                else if (!font_struct.global_name.empty() && !font_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_font_2d`: both global and local names given for a `Font2d`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Font2d`!\n";
-                }
-
-                return font_2d;
+                return this->create_child_of_universe<
+                    yli::ontology::Font2d,
+                    yli::memory::Font2dMemoryAllocator,
+                    yli::ontology::FontStruct>(
+                            yli::data::Datatype::FONT_2D,
+                            font_struct,
+                            &this->get_universe().parent_of_font_2ds);
             }
 
             yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const final
@@ -1125,35 +1037,13 @@ namespace yli::ontology
 
             yli::ontology::AudioTrack* create_audio_track(const yli::ontology::AudioTrackStruct& audio_track_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::AudioTrackMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::AUDIO_TRACK));
-                auto& allocator = static_cast<yli::memory::AudioTrackMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::AudioTrack* const audio_track = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        audio_track_struct,
-                        &this->get_universe().parent_of_audio_tracks);
-
-                if (!audio_track_struct.global_name.empty() && audio_track_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    audio_track->set_global_name(audio_track_struct.global_name);
-                }
-                else if (audio_track_struct.global_name.empty() && !audio_track_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    audio_track->set_local_name(audio_track_struct.local_name);
-                }
-                else if (!audio_track_struct.global_name.empty() && !audio_track_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_audio_track`: both global and local names given for a `AudioTrack`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `AudioTrack`!\n";
-                }
-
-                return audio_track;
+                return this->create_child_of_universe<
+                    yli::ontology::AudioTrack,
+                    yli::memory::AudioTrackMemoryAllocator,
+                    yli::ontology::AudioTrackStruct>(
+                            yli::data::Datatype::AUDIO_TRACK,
+                            audio_track_struct,
+                            &this->get_universe().parent_of_audio_tracks);
             }
 
             yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const final
@@ -1193,35 +1083,13 @@ namespace yli::ontology
             yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
                     const yli::ontology::ConsoleCallbackEngineStruct& console_callback_engine_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleCallbackEngineMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_ENGINE));
-                auto& allocator = static_cast<yli::memory::ConsoleCallbackEngineMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::ConsoleCallbackEngine* const console_callback_engine = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        console_callback_engine_struct,
-                        &this->get_universe().parent_of_console_callback_engines);
-
-                if (!console_callback_engine_struct.global_name.empty() && console_callback_engine_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    console_callback_engine->set_global_name(console_callback_engine_struct.global_name);
-                }
-                else if (console_callback_engine_struct.global_name.empty() && !console_callback_engine_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    console_callback_engine->set_local_name(console_callback_engine_struct.local_name);
-                }
-                else if (!console_callback_engine_struct.global_name.empty() && !console_callback_engine_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_console_callback_engine`: both global and local names given for a `ConsoleCallbackEngine`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `ConsoleCallbackEngine`!\n";
-                }
-
-                return console_callback_engine;
+                return this->create_child_of_universe<
+                    yli::ontology::ConsoleCallbackEngine,
+                    yli::memory::ConsoleCallbackEngineMemoryAllocator,
+                    yli::ontology::ConsoleCallbackEngineStruct>(
+                            yli::data::Datatype::CONSOLE_CALLBACK_ENGINE,
+                            console_callback_engine_struct,
+                            &this->get_universe().parent_of_console_callback_engines);
             }
 
             yli::ontology::ConsoleCallbackObject* create_console_callback_object(
@@ -1488,6 +1356,39 @@ namespace yli::ontology
                 }
 
         private:
+            template<typename T, typename TypeAllocator, typename DataStruct>
+                T* create_child_of_universe(const int type, const DataStruct& data_struct, yli::ontology::GenericParentModule* const parent_module) const
+                {
+                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                        this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
+                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+
+                    T* const instance = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            data_struct,
+                            parent_module);
+
+                    if (!data_struct.global_name.empty() && data_struct.local_name.empty())
+                    {
+                        // Only `global_name` given, OK.
+                        instance->set_global_name(data_struct.global_name);
+                    }
+                    else if (data_struct.global_name.empty() && !data_struct.local_name.empty())
+                    {
+                        // Only `local_name` given, OK.
+                        instance->set_local_name(data_struct.local_name);
+                    }
+                    else if (!data_struct.global_name.empty() && !data_struct.local_name.empty())
+                    {
+                        std::cerr << "ERROR: `EntityFactory::create_child_of_universe`: both global and local names given for type: " << instance->get_type() << "\n";
+                        std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                        std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " << instance->get_type() << " !\n";
+                    }
+
+                    return instance;
+                }
+
             yli::core::Application& application;
             yli::memory::MemorySystem<TypeEnumType>& memory_system;
             yli::ontology::Universe* universe { nullptr };
