@@ -60,7 +60,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `camera`.
 
     // `Entity` member functions.
-    ASSERT_EQ(camera->get_childID(), 0);
+    ASSERT_EQ(camera->get_childID(), 1); // Default `Camera` has id 0.
     ASSERT_EQ(camera->get_type(), "yli::ontology::Camera*");
     ASSERT_TRUE(camera->get_can_be_erased());
     ASSERT_EQ(camera->get_scene(), scene);
@@ -131,7 +131,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `camera`.
 
     // `Entity` member functions.
-    ASSERT_EQ(camera->get_childID(), 0);
+    ASSERT_EQ(camera->get_childID(), 1); // Default `Camera` has id 0.
     ASSERT_EQ(camera->get_type(), "yli::ontology::Camera*");
     ASSERT_TRUE(camera->get_can_be_erased());
     ASSERT_EQ(camera->get_scene(), scene);

@@ -128,7 +128,6 @@ namespace yli::ontology
 
             yli::ontology::ChildModule child_of_universe;
             yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
-            yli::ontology::GenericParentModule parent_of_default_camera;
             yli::ontology::GenericParentModule parent_of_cameras;
             yli::ontology::GenericParentModule parent_of_brains;
             yli::ontology::GenericParentModule parent_of_waypoints;

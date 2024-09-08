@@ -67,10 +67,6 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "pipelines"),
-        parent_of_default_camera(
-                *this,
-                this->registry,
-                "default_camera"),
         parent_of_cameras(
                 *this,
                 this->registry,
@@ -208,7 +204,7 @@ namespace yli::ontology
 
     yli::ontology::Camera* Scene::get_default_camera() const
     {
-        return static_cast<yli::ontology::Camera*>(this->parent_of_default_camera.get(0));
+        return static_cast<yli::ontology::Camera*>(this->parent_of_cameras.get(0));
     }
 
     yli::ontology::Camera* Scene::get_active_camera() const
@@ -252,7 +248,6 @@ namespace yli::ontology
     std::size_t Scene::get_number_of_children() const
     {
         return this->parent_of_pipelines.get_number_of_children() +
-            this->parent_of_default_camera.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
             this->parent_of_brains.get_number_of_children() +
             this->parent_of_waypoints.get_number_of_children() +
@@ -266,7 +261,6 @@ namespace yli::ontology
     std::size_t Scene::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_default_camera.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +

@@ -441,7 +441,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         camera_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_default_camera : nullptr),
+                        (scene_parent != nullptr ? &scene_parent->parent_of_cameras : nullptr),
                         (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
 
                 camera->set_global_name(camera_struct.global_name);
