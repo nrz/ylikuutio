@@ -52,14 +52,14 @@ int main(const int argc, const char* const argv[]) try
 
     if (application == nullptr)
     {
-        std::cerr << "ERROR: error in `yli::core::create_application`!\n";
+        std::cerr << "ERROR: `main`: error in `yli::core::create_application`!\n";
         return EXIT_FAILURE;
     }
 
     if (!application->command_line_master.get_are_arguments_valid())
     {
         // Some of the arguments do not comply with the Ylikuutio argument syntax.
-        std::cerr << "ERROR: Invalid syntax used in command line parameters.\n";
+        std::cerr << "ERROR: `main`: invalid syntax used in command line parameters.\n";
         application->command_line_master.print_keys_and_values();
         return EXIT_FAILURE;
     }
@@ -98,13 +98,13 @@ int main(const int argc, const char* const argv[]) try
 
     if (!application->command_line_master.check_keys(valid_keys))
     {
-        std::cerr << "ERROR: 1 or more invalid command line parameters given.\n";
+        std::cerr << "ERROR: `main`: 1 or more invalid command line parameters given.\n";
 
         const std::vector<std::string> invalid_keys = application->command_line_master.get_invalid_keys(valid_keys);
 
         for (std::vector<std::string>::const_iterator it = invalid_keys.begin(); it != invalid_keys.end(); ++it)
         {
-            std::cerr << "ERROR: Invalid command line parameter: " << *it << "\n";
+            std::cerr << "ERROR: `main`: invalid command line parameter: " << *it << "\n";
         }
 
         return EXIT_FAILURE;
@@ -115,14 +115,14 @@ int main(const int argc, const char* const argv[]) try
 
     if (!universe.create_window_and_setup_context())
     {
-        std::cerr << "ERROR: creting window and setting up context failed!\n";
+        std::cerr << "ERROR: `main`: creating window and setting up context failed!\n";
         return EXIT_FAILURE;
     }
 
     // 4. The simulation is created by running `Application::create_simulation`.
     if (!application->create_simulation())
     {
-        std::cerr << "ERROR: creating the simulation failed!\n";
+        std::cerr << "ERROR: `main`: creating the simulation failed!\n";
         return EXIT_FAILURE;
     }
 
@@ -145,7 +145,7 @@ int main(const int argc, const char* const argv[]) try
 }
 catch (const std::exception& exception)
 {
-    std::cerr << "ERROR: exception: " << exception.what() << "\n";
+    std::cerr << "ERROR: `main`: exception: " << exception.what() << "\n";
     return EXIT_FAILURE;
 }
 
