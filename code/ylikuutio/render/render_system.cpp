@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/generic_parent_module.hpp"
 #include "code/ylikuutio/ontology/parent_of_pipelines_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -49,18 +50,13 @@
 #include <iostream> // std::cout, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace yli::ontology
-{
-    class Universe;
-}
-
 namespace yli::render
 {
     RenderSystem::RenderSystem(yli::ontology::Universe* const universe, const yli::render::RenderSystemStruct& render_system_struct)
         : universe { universe },
         hidden_window_title { render_system_struct.hidden_window_title },
-        hidden_window_width { render_system_struct.hidden_window_width },
-        hidden_window_height { render_system_struct.hidden_window_height },
+        hidden_window_width { universe != nullptr ? universe->get_window_width() : 0 },
+        hidden_window_height { universe != nullptr ? universe->get_window_height() : 0 },
         is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
     {
         // Open a window and create its OpenGL context.
