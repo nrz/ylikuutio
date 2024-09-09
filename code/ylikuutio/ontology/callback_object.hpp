@@ -81,6 +81,8 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
             std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;

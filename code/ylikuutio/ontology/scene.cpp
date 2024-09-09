@@ -31,6 +31,7 @@
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
@@ -344,5 +345,47 @@ namespace yli::ontology
     void Scene::set_is_flight_mode_in_use(const bool is_flight_mode_in_use)
     {
         this->is_flight_mode_in_use = is_flight_mode_in_use;
+    }
+
+    yli::ontology::GenericParentModule* Scene::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::PIPELINE)
+        {
+            return &this->parent_of_pipelines;
+        }
+        else if (type == yli::data::Datatype::CAMERA)
+        {
+            return &this->parent_of_cameras;
+        }
+        else if (type == yli::data::Datatype::BRAIN)
+        {
+            return &this->parent_of_brains;
+        }
+        else if (type == yli::data::Datatype::WAYPOINT)
+        {
+            return &this->parent_of_waypoints;
+        }
+        else if (type == yli::data::Datatype::MATERIAL)
+        {
+            return &this->parent_of_materials;
+        }
+        else if (type == yli::data::Datatype::SPECIES)
+        {
+            return &this->parent_of_species;
+        }
+        else if (type == yli::data::Datatype::OBJECT)
+        {
+            return &this->parent_of_objects;
+        }
+        else if (type == yli::data::Datatype::SYMBIOSIS)
+        {
+            return &this->parent_of_symbioses;
+        }
+        else if (type == yli::data::Datatype::HOLOBIONT)
+        {
+            return &this->parent_of_holobionts;
+        }
+
+        return nullptr;
     }
 }

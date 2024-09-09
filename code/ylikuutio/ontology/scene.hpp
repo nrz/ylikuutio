@@ -123,6 +123,8 @@ namespace yli::ontology
             bool get_is_flight_mode_in_use() const;
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 

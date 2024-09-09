@@ -40,6 +40,11 @@ namespace yli::ontology
         {
         }
 
+        std::variant<yli::ontology::CallbackObject*, std::string> get_parent() const
+        {
+            return this->callback_object_parent;
+        }
+
         std::variant<yli::ontology::CallbackObject*, std::string> callback_object_parent {};
     };
 }

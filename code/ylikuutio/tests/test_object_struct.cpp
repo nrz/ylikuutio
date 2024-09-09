@@ -33,20 +33,18 @@
 // Include standard headers
 #include <cmath>   // std::isnan
 #include <string>  // std::string
-#include <variant> // std::holds_alternative, std::monostate
+#include <variant> // std::holds_alternative
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)
 {
     const yli::ontology::ObjectStruct test_object_struct(static_cast<yli::ontology::Scene*>(nullptr));
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
@@ -65,13 +63,11 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
             static_cast<yli::ontology::Species*>(nullptr));
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
@@ -90,13 +86,11 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
             static_cast<yli::ontology::ShapeshifterSequence*>(nullptr));
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
 
     ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
@@ -115,7 +109,6 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
             static_cast<yli::ontology::Text3d*>(nullptr));
 
     ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<std::monostate>(test_object_struct.scene));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);

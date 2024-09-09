@@ -26,6 +26,7 @@
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -141,6 +142,16 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    yli::ontology::GenericParentModule* CallbackObject::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::CALLBACK_PARAMETER)
+        {
+            return &this->parent_of_callback_parameters;
+        }
+
+        return nullptr;
     }
 
     yli::ontology::Entity* CallbackObject::get_parent() const

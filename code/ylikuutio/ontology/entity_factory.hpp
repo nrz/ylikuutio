@@ -100,11 +100,12 @@
 #include "code/ylikuutio/memory/memory_allocator_types.hpp"
 
 // Include standard headers
+#include <concepts>   // std::derived_from, std::same_as
 #include <iostream>   // std::cerr
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
-#include <utility>    // std::move
+#include <utility>    // std::forward, std::move
 #include <variant>    // std::holds_alternative
 
 namespace yli::core
@@ -120,6 +121,12 @@ namespace yli::memory
 namespace yli::ontology
 {
     struct UniverseStruct;
+
+    template<typename T>
+        concept EntityNotUniverse = requires(T instance)
+        {
+            std::derived_from<T, yli::ontology::Entity> && (!std::same_as<T, yli::ontology::Universe>);
+        };
 
     template<typename TypeEnumType>
         class EntityFactory : public yli::ontology::GenericEntityFactory
@@ -245,66 +252,29 @@ namespace yli::ontology
             yli::ontology::CallbackObject* create_callback_object(
                     const yli::ontology::CallbackObjectStruct& callback_object_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackObjectMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CALLBACK_OBJECT));
-                auto& allocator = static_cast<yli::memory::CallbackObjectMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::CallbackEngine* callback_engine_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent))
-                {
-                    callback_engine_parent = std::get<yli::ontology::CallbackEngine*>(callback_object_struct.callback_engine_parent);
-                }
-                else if (std::holds_alternative<std::string>(callback_object_struct.callback_engine_parent))
-                {
-                    callback_engine_parent = dynamic_cast<yli::ontology::CallbackEngine*>(this->get_universe().registry.get_entity(
-                                std::get<std::string>(callback_object_struct.callback_engine_parent)));
-                }
-
-                yli::ontology::CallbackObject* const callback_object = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        callback_object_struct,
-                        ((callback_engine_parent != nullptr) ?
-                         &callback_engine_parent->parent_of_callback_objects :
-                         nullptr));
-                callback_object->set_global_name(callback_object_struct.global_name);
-                callback_object->set_local_name(callback_object_struct.local_name);
-                return callback_object;
+                return this->create_child<
+                    yli::ontology::CallbackObject,
+                    yli::ontology::CallbackEngine,
+                    yli::memory::CallbackObjectMemoryAllocator,
+                    yli::ontology::CallbackObjectStruct>(
+                            yli::data::Datatype::CALLBACK_OBJECT,
+                            callback_object_struct.get_parent(),
+                            callback_object_struct);
             }
 
             yli::ontology::CallbackParameter* create_callback_parameter(
                     const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
                     yli::data::AnyValue&& any_value) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::CallbackParameterMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CALLBACK_PARAMETER));
-                auto& allocator = static_cast<yli::memory::CallbackParameterMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::CallbackObject* callback_object_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::CallbackObject*>(callback_parameter_struct.callback_object_parent))
-                {
-                    callback_object_parent = std::get<yli::ontology::CallbackObject*>(callback_parameter_struct.callback_object_parent);
-                }
-                else if (std::holds_alternative<std::string>(callback_parameter_struct.callback_object_parent))
-                {
-                    callback_object_parent = dynamic_cast<yli::ontology::CallbackObject*>(this->get_universe().registry.get_entity(
-                                std::get<std::string>(callback_parameter_struct.callback_object_parent)));
-                }
-
-                yli::ontology::CallbackParameter* const callback_parameter = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
+                return this->create_child<
+                    yli::ontology::CallbackParameter,
+                yli::ontology::CallbackObject,
+                yli::memory::CallbackParameterMemoryAllocator,
+                yli::ontology::CallbackParameterStruct>(
+                        yli::data::Datatype::CALLBACK_PARAMETER,
+                        callback_parameter_struct.get_parent(),
                         callback_parameter_struct,
-                        std::move(any_value),
-                        ((callback_object_parent != nullptr) ?
-                         &callback_object_parent->parent_of_callback_parameters :
-                         nullptr));
-
-                callback_parameter->set_global_name(callback_parameter_struct.global_name);
-                callback_parameter->set_local_name(callback_parameter_struct.local_name);
-                return callback_parameter;
+                        std::move(any_value));
             }
 
             // TODO: implement `create_window` here!
@@ -335,118 +305,53 @@ namespace yli::ontology
 
             yli::ontology::Brain* create_brain(const yli::ontology::BrainStruct& brain_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::BrainMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::BRAIN));
-                auto& allocator = static_cast<yli::memory::BrainMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(brain_struct.parent))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(brain_struct.parent);
-                }
-                else if (std::holds_alternative<std::string>(brain_struct.parent))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(brain_struct.parent)));
-                }
-
-                yli::ontology::Brain* const brain = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        brain_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_brains : nullptr));
-
-                brain->set_global_name(brain_struct.global_name);
-                brain->set_local_name(brain_struct.local_name);
-                return brain;
+                return this->create_child<
+                    yli::ontology::Brain,
+                    yli::ontology::Scene,
+                    yli::memory::BrainMemoryAllocator,
+                    yli::ontology::BrainStruct>(
+                            yli::data::Datatype::BRAIN,
+                            brain_struct.get_parent(),
+                            brain_struct);
             }
 
             yli::ontology::Waypoint* create_waypoint(const yli::ontology::WaypointStruct& waypoint_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::WaypointMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::WAYPOINT));
-                auto& allocator = static_cast<yli::memory::WaypointMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(waypoint_struct.scene))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(waypoint_struct.scene);
-                }
-                else if (std::holds_alternative<std::string>(waypoint_struct.scene))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(waypoint_struct.scene)));
-                }
-
-                yli::ontology::Waypoint* const waypoint = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        waypoint_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_waypoints : nullptr),
-                        // `Brain` master.
-                        (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
-
-                waypoint->set_global_name(waypoint_struct.global_name);
-                waypoint->set_local_name(waypoint_struct.local_name);
-                return waypoint;
+                return this->create_child<
+                    yli::ontology::Waypoint,
+                    yli::ontology::Scene,
+                    yli::memory::WaypointMemoryAllocator,
+                    yli::ontology::WaypointStruct>(
+                            yli::data::Datatype::WAYPOINT,
+                            waypoint_struct.get_parent(),
+                            waypoint_struct,
+                            (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             yli::ontology::Camera* create_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::CameraMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CAMERA));
-                auto& allocator = static_cast<yli::memory::CameraMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
-                }
-                else if (std::holds_alternative<std::string>(camera_struct.scene))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
-                }
-
-                yli::ontology::Camera* const camera = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        camera_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_cameras : nullptr),
-                        (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
-
-                camera->set_global_name(camera_struct.global_name);
-                camera->set_local_name(camera_struct.local_name);
-                return camera;
+                return this->create_child<
+                    yli::ontology::Camera,
+                    yli::ontology::Scene,
+                    yli::memory::CameraMemoryAllocator,
+                    yli::ontology::CameraStruct>(
+                            yli::data::Datatype::CAMERA,
+                            camera_struct.get_parent(),
+                            camera_struct,
+                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             yli::ontology::Camera* create_default_camera(const yli::ontology::CameraStruct& camera_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::CameraMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CAMERA));
-                auto& allocator = static_cast<yli::memory::CameraMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(camera_struct.scene))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(camera_struct.scene);
-                }
-                else if (std::holds_alternative<std::string>(camera_struct.scene))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(camera_struct.scene)));
-                }
-
-                yli::ontology::Camera* const camera = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        camera_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_cameras : nullptr),
-                        (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
-
-                camera->set_global_name(camera_struct.global_name);
-                camera->set_local_name(camera_struct.local_name);
-                return camera;
+                return this->create_child<
+                    yli::ontology::Camera,
+                    yli::ontology::Scene,
+                    yli::memory::CameraMemoryAllocator,
+                    yli::ontology::CameraStruct>(
+                            yli::data::Datatype::CAMERA,
+                            camera_struct.get_parent(),
+                            camera_struct,
+                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             // TODO: implement `create_camera_widget` here!
@@ -754,32 +659,16 @@ namespace yli::ontology
 
             yli::ontology::Holobiont* create_holobiont(const yli::ontology::HolobiontStruct& holobiont_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::HolobiontMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::HOLOBIONT));
-                auto& allocator = static_cast<yli::memory::HolobiontMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(holobiont_struct.scene))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(holobiont_struct.scene);
-                }
-                else if (std::holds_alternative<std::string>(holobiont_struct.scene))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(holobiont_struct.scene)));
-                }
-
-                yli::ontology::Holobiont* const holobiont = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        holobiont_struct,
-                        (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
-                        (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                        (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
-
-                holobiont->set_global_name(holobiont_struct.global_name);
-                holobiont->set_local_name(holobiont_struct.local_name);
-                return holobiont;
+                return this->create_child<
+                    yli::ontology::Holobiont,
+                    yli::ontology::Scene,
+                    yli::memory::HolobiontMemoryAllocator,
+                    yli::ontology::HolobiontStruct>(
+                            yli::data::Datatype::HOLOBIONT,
+                            holobiont_struct.get_parent(),
+                            holobiont_struct,
+                            (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
+                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             yli::ontology::Biont* create_biont(const yli::ontology::BiontStruct& biont_struct) const final
@@ -1356,8 +1245,12 @@ namespace yli::ontology
                 }
 
         private:
-            template<typename T, typename TypeAllocator, typename DataStruct>
-                T* create_child_of_universe(const int type, const DataStruct& data_struct, yli::ontology::GenericParentModule* const parent_module) const
+            template<typename T, typename TypeAllocator, typename DataStruct, typename... Args>
+                T* create_child_of_universe(
+                        const int type,
+                        const DataStruct& data_struct,
+                        yli::ontology::GenericParentModule* const parent_module,
+                        Args... args) const
                 {
                     yli::memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
@@ -1367,7 +1260,8 @@ namespace yli::ontology
                             this->application,
                             this->get_universe(),
                             data_struct,
-                            parent_module);
+                            parent_module,
+                            std::forward<Args>(args)...);
 
                     if (!data_struct.global_name.empty() && data_struct.local_name.empty())
                     {
@@ -1386,6 +1280,45 @@ namespace yli::ontology
                         std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " << instance->get_type() << " !\n";
                     }
 
+                    return instance;
+                }
+
+            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Args>
+                Type* create_child(
+                        const int type,
+                        std::variant<ParentType*, std::string> parent,
+                        const DataStruct& data_struct,
+                        Args... args) const
+                {
+                    // Create an instance of a derived class of `Entity`.
+                    // The type of the `Entity` must not be `Universe`.
+                    // The type of the parent of the `Entity` must not be `Universe`.
+
+                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                        this->memory_system.template get_or_create_allocator<TypeAllocator>(
+                                static_cast<int>(type));
+                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+
+                    ParentType* parent_type_parent { nullptr };
+                    if (std::holds_alternative<ParentType*>(parent))
+                    {
+                        parent_type_parent = std::get<ParentType*>(parent);
+                    }
+                    else if (std::holds_alternative<std::string>(parent))
+                    {
+                        parent_type_parent = dynamic_cast<ParentType*>(this->get_universe().registry.get_entity(
+                                    std::get<std::string>(parent)));
+                    }
+
+                    Type* const instance = allocator.build_in(
+                            this->application,
+                            this->get_universe(),
+                            data_struct,
+                            (parent_type_parent != nullptr ? parent_type_parent->get_generic_parent_module(type) : nullptr),
+                            std::forward<Args>(args)...);
+
+                    instance->set_global_name(data_struct.global_name);
+                    instance->set_local_name(data_struct.local_name);
                     return instance;
                 }
 

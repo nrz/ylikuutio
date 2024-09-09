@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <string> // std::string
+#include <variant> // std::variant
 #include <vector> // std::vector
 
 namespace yli::ontology
@@ -55,6 +56,11 @@ namespace yli::ontology
             : MovableStruct(brain, parent),
             symbiosis { &symbiosis }
         {
+        }
+
+        std::variant<yli::ontology::Scene*, std::string> get_parent() const
+        {
+            return this->scene;
         }
 
         yli::ontology::Symbiosis* symbiosis { nullptr };

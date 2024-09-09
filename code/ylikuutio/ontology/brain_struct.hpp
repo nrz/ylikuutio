@@ -46,6 +46,11 @@ namespace yli::ontology
         {
         }
 
+        std::variant<yli::ontology::Scene*, std::string> get_parent() const
+        {
+            return this->parent;
+        }
+
         std::variant<yli::ontology::Scene*, std::string> parent {};
         yli::ontology::CallbackEngine* callback_engine { nullptr };
     };
