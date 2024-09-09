@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <string> // std::string
-#include <variant> // std::variant
 
 namespace yli::ontology
 {
@@ -43,11 +42,6 @@ namespace yli::ontology
                 const std::string& scene_parent)
             : MovableStruct(brain, scene_parent)
         {
-        }
-
-        std::variant<yli::ontology::Scene*, std::string> get_parent() const
-        {
-            return this->scene;
         }
     };
 }

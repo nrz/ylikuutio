@@ -258,7 +258,7 @@ namespace yli::ontology
                     yli::memory::CallbackObjectMemoryAllocator,
                     yli::ontology::CallbackObjectStruct>(
                             yli::data::Datatype::CALLBACK_OBJECT,
-                            callback_object_struct.get_parent(),
+                            callback_object_struct.callback_engine_parent,
                             callback_object_struct);
             }
 
@@ -272,7 +272,7 @@ namespace yli::ontology
                 yli::memory::CallbackParameterMemoryAllocator,
                 yli::ontology::CallbackParameterStruct>(
                         yli::data::Datatype::CALLBACK_PARAMETER,
-                        callback_parameter_struct.get_parent(),
+                        callback_parameter_struct.callback_object_parent,
                         callback_parameter_struct,
                         std::move(any_value));
             }
@@ -311,7 +311,7 @@ namespace yli::ontology
                     yli::memory::BrainMemoryAllocator,
                     yli::ontology::BrainStruct>(
                             yli::data::Datatype::BRAIN,
-                            brain_struct.get_parent(),
+                            brain_struct.parent,
                             brain_struct);
             }
 
@@ -323,7 +323,7 @@ namespace yli::ontology
                     yli::memory::WaypointMemoryAllocator,
                     yli::ontology::WaypointStruct>(
                             yli::data::Datatype::WAYPOINT,
-                            waypoint_struct.get_parent(),
+                            waypoint_struct.scene,
                             waypoint_struct,
                             (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
             }
@@ -336,7 +336,7 @@ namespace yli::ontology
                     yli::memory::CameraMemoryAllocator,
                     yli::ontology::CameraStruct>(
                             yli::data::Datatype::CAMERA,
-                            camera_struct.get_parent(),
+                            camera_struct.scene,
                             camera_struct,
                             (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
@@ -349,7 +349,7 @@ namespace yli::ontology
                     yli::memory::CameraMemoryAllocator,
                     yli::ontology::CameraStruct>(
                             yli::data::Datatype::CAMERA,
-                            camera_struct.get_parent(),
+                            camera_struct.scene,
                             camera_struct,
                             (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
@@ -665,7 +665,7 @@ namespace yli::ontology
                     yli::memory::HolobiontMemoryAllocator,
                     yli::ontology::HolobiontStruct>(
                             yli::data::Datatype::HOLOBIONT,
-                            holobiont_struct.get_parent(),
+                            holobiont_struct.scene,
                             holobiont_struct,
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                             (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
