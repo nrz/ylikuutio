@@ -2,11 +2,13 @@
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 ## Fixes needed
+- [ ] BUG/HIRVI Esc key should exit to OS in Hirvi and Ajokki.
 - [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi prototype)
+- [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
