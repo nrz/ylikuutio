@@ -1288,7 +1288,7 @@ namespace yli::ontology
                         const int type,
                         std::variant<ParentType*, std::string> parent,
                         const DataStruct& data_struct,
-                        Args... args) const
+                        Args&&... args) const
                 {
                     // Create an instance of a derived class of `Entity`.
                     // The type of the `Entity` must not be `Universe`.
