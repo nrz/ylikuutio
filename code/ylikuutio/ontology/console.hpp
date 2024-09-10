@@ -124,6 +124,8 @@ namespace yli::ontology
             bool exit_console();
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             // Public callbacks.
 
             // Action mode keypress callbacks begin here.

@@ -24,6 +24,7 @@
 #include "text_struct.hpp"
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -519,6 +520,16 @@ namespace yli::ontology
             ++this->cursor_it;
             this->cursor_index++;
         }
+    }
+
+    yli::ontology::GenericParentModule* Console::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::LISP_FUNCTION)
+        {
+            return &this->parent_of_lisp_functions;
+        }
+
+        return nullptr;
     }
 
     void Console::copy_historical_input_into_current_input()

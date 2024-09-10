@@ -793,31 +793,14 @@ namespace yli::ontology
 
             yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::LispFunctionMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::LISP_FUNCTION));
-                auto& allocator = static_cast<yli::memory::LispFunctionMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Console* console_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Console*>(lisp_function_struct.console_parent))
-                {
-                    console_parent = std::get<yli::ontology::Console*>(lisp_function_struct.console_parent);
-                }
-                else if (std::holds_alternative<std::string>(lisp_function_struct.console_parent))
-                {
-                    console_parent = dynamic_cast<yli::ontology::Console*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(lisp_function_struct.console_parent)));
-                }
-
-                yli::ontology::LispFunction* const lisp_function = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        lisp_function_struct,
-                        (console_parent != nullptr ? &console_parent->parent_of_lisp_functions : nullptr));
-
-                lisp_function->set_global_name(lisp_function_struct.global_name);
-                lisp_function->set_local_name(lisp_function_struct.local_name);
-                return lisp_function;
+                return this->create_child<
+                    yli::ontology::LispFunction,
+                    yli::ontology::Console,
+                    yli::memory::LispFunctionMemoryAllocator,
+                    yli::ontology::LispFunctionStruct>(
+                            yli::data::Datatype::LISP_FUNCTION,
+                            lisp_function_struct.console_parent,
+                            lisp_function_struct);
             }
 
             template<typename... Args>
