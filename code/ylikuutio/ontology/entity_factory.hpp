@@ -240,6 +240,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::CallbackEngine,
+                    yli::ontology::GenericParentModule,
                     yli::memory::CallbackEngineMemoryAllocator,
                     yli::ontology::CallbackEngineStruct>(
                             yli::data::Datatype::CALLBACK_ENGINE,
@@ -283,6 +284,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::Ecosystem,
+                    yli::ontology::GenericParentModule,
                     yli::memory::EcosystemMemoryAllocator,
                     yli::ontology::EcosystemStruct>(
                             yli::data::Datatype::ECOSYSTEM,
@@ -294,6 +296,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::Scene,
+                    yli::ontology::GenericParentModule,
                     yli::memory::SceneMemoryAllocator,
                     yli::ontology::SceneStruct>(
                             yli::data::Datatype::SCENE,
@@ -535,6 +538,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::Font2d,
+                    yli::ontology::GenericParentModule,
                     yli::memory::Font2dMemoryAllocator,
                     yli::ontology::FontStruct>(
                             yli::data::Datatype::FONT_2D,
@@ -593,36 +597,15 @@ namespace yli::ontology
 
             yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::InputModeMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::INPUT_MODE));
-                auto& allocator = static_cast<yli::memory::InputModeMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::InputMode* const input_mode = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        input_mode_struct,
-                        &this->get_universe().parent_of_input_modes,
-                        (input_mode_struct.console_master != nullptr ? &input_mode_struct.console_master->master_of_input_modes : nullptr));
-
-                if (!input_mode_struct.global_name.empty() && input_mode_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    input_mode->set_global_name(input_mode_struct.global_name);
-                }
-                else if (input_mode_struct.global_name.empty() && !input_mode_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    input_mode->set_local_name(input_mode_struct.local_name);
-                }
-                else if (!input_mode_struct.global_name.empty() && !input_mode_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_input_mode`: both global and local names given for a `InputMode`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `InputMode`!\n";
-                }
-
-                return input_mode;
+                return this->create_child_of_universe<
+                    yli::ontology::InputMode,
+                    yli::ontology::ParentOfInputModesModule,
+                    yli::memory::InputModeMemoryAllocator,
+                    yli::ontology::InputModeStruct>(
+                            yli::data::Datatype::INPUT_MODE,
+                            input_mode_struct,
+                            &this->get_universe().parent_of_input_modes,
+                            (input_mode_struct.console_master != nullptr ? &input_mode_struct.console_master->master_of_input_modes : nullptr));
             }
 
             // TODO: implement `create_key_binding` here!
@@ -633,6 +616,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::AudioTrack,
+                    yli::ontology::GenericParentModule,
                     yli::memory::AudioTrackMemoryAllocator,
                     yli::ontology::AudioTrackStruct>(
                             yli::data::Datatype::AUDIO_TRACK,
@@ -644,6 +628,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::Console,
+                    yli::ontology::GenericParentModule,
                     yli::memory::ConsoleMemoryAllocator,
                     yli::ontology::ConsoleStruct>(
                             yli::data::Datatype::CONSOLE,
@@ -657,6 +642,7 @@ namespace yli::ontology
             {
                 return this->create_child_of_universe<
                     yli::ontology::ConsoleCallbackEngine,
+                    yli::ontology::GenericParentModule,
                     yli::memory::ConsoleCallbackEngineMemoryAllocator,
                     yli::ontology::ConsoleCallbackEngineStruct>(
                             yli::data::Datatype::CONSOLE_CALLBACK_ENGINE,
@@ -894,11 +880,11 @@ namespace yli::ontology
                 }
 
         private:
-            template<typename T, typename TypeAllocator, typename DataStruct, typename... Args>
+            template<typename T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
                 T* create_child_of_universe(
                         const int type,
                         const DataStruct& data_struct,
-                        yli::ontology::GenericParentModule* const parent_module,
+                        ParentModuleType* const parent_module,
                         Args&&... args) const
                 {
                     yli::memory::GenericMemoryAllocator& generic_allocator =
