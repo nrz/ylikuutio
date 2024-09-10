@@ -667,34 +667,15 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
                     const yli::data::AnyValue& any_value) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleCallbackParameterMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER));
-                auto& allocator = static_cast<yli::memory::ConsoleCallbackParameterMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::ConsoleCallbackObject* console_callback_object_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::ConsoleCallbackObject*>(console_callback_parameter_struct.console_callback_object_parent))
-                {
-                    console_callback_object_parent = std::get<yli::ontology::ConsoleCallbackObject*>(console_callback_parameter_struct.console_callback_object_parent);
-                }
-                else if (std::holds_alternative<std::string>(console_callback_parameter_struct.console_callback_object_parent))
-                {
-                    console_callback_object_parent = dynamic_cast<yli::ontology::ConsoleCallbackObject*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(console_callback_parameter_struct.console_callback_object_parent)));
-                }
-
-                yli::ontology::ConsoleCallbackParameter* const console_callback_parameter = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        console_callback_parameter_struct,
-                        any_value,
-                        ((console_callback_object_parent != nullptr) ?
-                         &console_callback_object_parent->parent_of_console_callback_parameters :
-                         nullptr));
-
-                console_callback_parameter->set_global_name(console_callback_parameter_struct.global_name);
-                console_callback_parameter->set_local_name(console_callback_parameter_struct.local_name);
-                return console_callback_parameter;
+                return this->create_child<
+                    yli::ontology::ConsoleCallbackParameter,
+                    yli::ontology::ConsoleCallbackObject,
+                    yli::memory::ConsoleCallbackParameterMemoryAllocator,
+                    yli::ontology::ConsoleCallbackParameterStruct>(
+                            yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER,
+                            console_callback_parameter_struct.console_callback_object_parent,
+                            console_callback_parameter_struct,
+                            any_value);
             }
 
             // TODO: implement `create_graph` here!

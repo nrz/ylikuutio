@@ -59,6 +59,8 @@ namespace yli::ontology
                     const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
                     yli::ontology::GenericParentModule* const console_callback_engine_parent_module);
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             yli::ontology::Entity* get_parent() const override;
             yli::ontology::Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
