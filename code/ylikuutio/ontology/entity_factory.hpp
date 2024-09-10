@@ -764,29 +764,14 @@ namespace yli::ontology
                         const yli::ontology::ObjectStruct& object_struct,
                         ModuleArgs&&... module_args)
                 {
-                    yli::memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<ObjectDerivativeMemoryAllocator>(
-                                static_cast<int>(object_derivative_type));
-
-                    ObjectDerivativeMemoryAllocator& allocator =
-                        static_cast<ObjectDerivativeMemoryAllocator&>(generic_allocator);
-
-                    yli::ontology::Scene* scene_parent { nullptr };
-                    if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
-                    {
-                        scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
-                    }
-                    else if (std::holds_alternative<std::string>(object_struct.scene))
-                    {
-                        scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
-                    }
-
-                    T* const object = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
+                return this->create_child<
+                    T,
+                    yli::ontology::Scene,
+                    ObjectDerivativeMemoryAllocator,
+                    yli::ontology::ObjectStruct>(
+                            object_derivative_type,
+                            object_struct.scene,
                             object_struct,
-                            // `Scene` parent.
-                            ((scene_parent != nullptr) ? &scene_parent->parent_of_objects : nullptr),
                             // mesh master.
                             ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
                              &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -797,11 +782,8 @@ namespace yli::ontology
                              nullptr),
                             // `Brain` master.
                             (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr),
+                            // Skill modules.
                             module_args...);
-
-                    object->set_global_name(object_struct.global_name);
-                    object->set_local_name(object_struct.local_name);
-                    return object;
                 }
 
             template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
