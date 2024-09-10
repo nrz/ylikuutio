@@ -783,7 +783,7 @@ namespace yli::ontology
                             // `Brain` master.
                             (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr),
                             // Skill modules.
-                            module_args...);
+                            std::forward<ModuleArgs>(module_args)...);
                 }
 
             template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
