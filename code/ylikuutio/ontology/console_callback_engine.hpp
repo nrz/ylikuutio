@@ -61,6 +61,8 @@ namespace yli::ontology
             ~ConsoleCallbackEngine() = default;
 
         public:
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             yli::ontology::Entity* get_parent() const override;
 
             yli::ontology::Scene* get_scene() const override;

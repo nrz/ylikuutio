@@ -24,6 +24,7 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -115,5 +116,15 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    yli::ontology::GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::CONSOLE_CALLBACK_OBJECT)
+        {
+            return &this->parent_of_console_callback_objects;
+        }
+
+        return nullptr;
     }
 }
