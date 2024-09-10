@@ -393,41 +393,24 @@ namespace yli::ontology
 
             yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ObjectMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::OBJECT));
-                auto& allocator = static_cast<yli::memory::ObjectMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Scene* scene_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Scene*>(object_struct.scene))
-                {
-                    scene_parent = std::get<yli::ontology::Scene*>(object_struct.scene);
-                }
-                else if (std::holds_alternative<std::string>(object_struct.scene))
-                {
-                    scene_parent = dynamic_cast<yli::ontology::Scene*>(this->get_universe().registry.get_entity(std::get<std::string>(object_struct.scene)));
-                }
-
-                yli::ontology::Object* const object = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        object_struct,
-                        // `Scene` parent.
-                        ((scene_parent != nullptr) ? &scene_parent->parent_of_objects : nullptr),
-                        // mesh master.
-                        ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
-                         &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
-                         (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) != nullptr) ?
-                         &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master)->master_of_objects) :
-                         (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master) && std::get<yli::ontology::Text3d*>(object_struct.mesh_master) != nullptr) ?
-                         &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
-                         nullptr),
-                        // `Brain` master.
-                        (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
-
-                object->set_global_name(object_struct.global_name);
-                object->set_local_name(object_struct.local_name);
-                return object;
+                return this->create_child<
+                    yli::ontology::Object,
+                    yli::ontology::Scene,
+                    yli::memory::ObjectMemoryAllocator,
+                    yli::ontology::ObjectStruct>(
+                            yli::data::Datatype::OBJECT,
+                            object_struct.scene,
+                            object_struct,
+                            // mesh master.
+                            ((std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master) && std::get<yli::ontology::Species*>(object_struct.mesh_master) != nullptr) ?
+                             &(std::get<yli::ontology::Species*>(object_struct.mesh_master)->master_of_objects) :
+                             (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) && std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master) != nullptr) ?
+                             &(std::get<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master)->master_of_objects) :
+                             (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master) && std::get<yli::ontology::Text3d*>(object_struct.mesh_master) != nullptr) ?
+                             &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
+                             nullptr),
+                            // `Brain` master.
+                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             // TODO: implement `create_heightmap` here!
