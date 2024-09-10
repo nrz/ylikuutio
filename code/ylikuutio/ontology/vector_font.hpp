@@ -85,6 +85,8 @@ namespace yli::ontology
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             // The rest fields are created in the constructor.
 
             template<typename T1, std::size_t DataSize>

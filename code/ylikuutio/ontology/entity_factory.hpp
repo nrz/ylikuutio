@@ -760,20 +760,14 @@ namespace yli::ontology
 
             yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::GlyphMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::GLYPH));
-                auto& allocator = static_cast<yli::memory::GlyphMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Glyph* const glyph = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        glyph_struct,
-                        (std::holds_alternative<yli::ontology::VectorFont*>(glyph_struct.parent) && (std::get<yli::ontology::VectorFont*>(glyph_struct.parent) != nullptr) ?
-                         &(std::get<yli::ontology::VectorFont*>(glyph_struct.parent)->parent_of_glyphs) :
-                         nullptr));
-
-                return glyph;
+                return this->create_child<
+                    yli::ontology::Glyph,
+                    yli::ontology::VectorFont,
+                    yli::memory::GlyphMemoryAllocator,
+                    yli::ontology::GlyphStruct>(
+                            yli::data::Datatype::GLYPH,
+                            glyph_struct.parent,
+                            glyph_struct);
             }
 
             yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const final

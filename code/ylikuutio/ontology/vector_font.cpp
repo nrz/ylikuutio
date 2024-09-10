@@ -27,6 +27,7 @@
 #include "glyph_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -258,5 +259,19 @@ namespace yli::ontology
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
+    }
+
+    yli::ontology::GenericParentModule* VectorFont::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::GLYPH)
+        {
+            return &this->parent_of_glyphs;
+        }
+        else if (type == yli::data::Datatype::TEXT_3D)
+        {
+            return &this->parent_of_text_3ds;
+        }
+
+        return nullptr;
     }
 }
