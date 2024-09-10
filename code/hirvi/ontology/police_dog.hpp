@@ -46,13 +46,13 @@ namespace hirvi
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& police_dog_struct,
+                    yli::ontology::GenericParentModule* const scene_parent,
+                    yli::ontology::GenericMasterModule* const symbiosis_master,
+                    yli::ontology::GenericMasterModule* const brain_master,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,
                     const yli::ontology::LocomotionModuleStruct& run_struct,
                     const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    const yli::ontology::LocomotionModuleStruct& gallop_struct);
 
             PoliceDog(const PoliceDog&) = delete;            // Delete copy constructor.
             PoliceDog &operator=(const PoliceDog&) = delete; // Delete copy assignment.

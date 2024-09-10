@@ -45,14 +45,14 @@ namespace hirvi
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& cat_struct,
+                    yli::ontology::GenericParentModule* const scene_parent,
+                    yli::ontology::GenericMasterModule* const mesh_master,
+                    yli::ontology::GenericMasterModule* const brain_master,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,
                     const yli::ontology::LocomotionModuleStruct& trot_struct,
                     const yli::ontology::LocomotionModuleStruct& canter_struct,
                     const yli::ontology::LocomotionModuleStruct& gallop_struct,
-                    const yli::ontology::LocomotionModuleStruct& climb_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const mesh_master,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    const yli::ontology::LocomotionModuleStruct& climb_struct);
 
             Cat(const Cat&) = delete;            // Delete copy constructor.
             Cat &operator=(const Cat&) = delete; // Delete copy assignment.

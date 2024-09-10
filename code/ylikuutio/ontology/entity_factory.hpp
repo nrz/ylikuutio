@@ -785,7 +785,6 @@ namespace yli::ontology
                             this->application,
                             this->get_universe(),
                             object_struct,
-                            module_args...,
                             // `Scene` parent.
                             ((scene_parent != nullptr) ? &scene_parent->parent_of_objects : nullptr),
                             // mesh master.
@@ -797,7 +796,8 @@ namespace yli::ontology
                              &(std::get<yli::ontology::Text3d*>(object_struct.mesh_master)->master_of_objects) :
                              nullptr),
                             // `Brain` master.
-                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
+                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr),
+                            module_args...);
 
                     object->set_global_name(object_struct.global_name);
                     object->set_local_name(object_struct.local_name);
@@ -831,10 +831,10 @@ namespace yli::ontology
                             this->application,
                             this->get_universe(),
                             holobiont_struct,
-                            module_args...,
                             (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
+                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr),
+                            module_args...);
 
                     holobiont->set_global_name(holobiont_struct.global_name);
                     holobiont->set_local_name(holobiont_struct.local_name);

@@ -45,10 +45,10 @@ namespace hirvi
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& police_car_struct,
-                    const yli::ontology::LocomotionModuleStruct& road_vehicle_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
                     yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    yli::ontology::GenericMasterModule* const brain_master,
+                    const yli::ontology::LocomotionModuleStruct& road_vehicle_struct);
 
             PoliceCar(const PoliceCar&) = delete;            // Delete copy constructor.
             PoliceCar &operator=(const PoliceCar&) = delete; // Delete copy assignment.

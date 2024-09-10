@@ -45,13 +45,13 @@ namespace hirvi
                     yli::core::Application& application,
                     yli::ontology::Universe& universe,
                     const yli::ontology::HolobiontStruct& elk_struct,
+                    yli::ontology::GenericParentModule* const scene_parent,
+                    yli::ontology::GenericMasterModule* const symbiosis_master,
+                    yli::ontology::GenericMasterModule* const brain_master,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,
                     const yli::ontology::LocomotionModuleStruct& trot_struct,
                     const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const brain_master);
+                    const yli::ontology::LocomotionModuleStruct& gallop_struct);
 
             Elk(const Elk&) = delete;            // Delete copy constructor.
             Elk &operator=(const Elk&) = delete; // Delete copy assignment.
