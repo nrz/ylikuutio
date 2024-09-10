@@ -1250,7 +1250,7 @@ namespace yli::ontology
                         const int type,
                         const DataStruct& data_struct,
                         yli::ontology::GenericParentModule* const parent_module,
-                        Args... args) const
+                        Args&&... args) const
                 {
                     yli::memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
