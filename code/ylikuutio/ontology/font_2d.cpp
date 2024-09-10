@@ -21,6 +21,7 @@
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -472,5 +473,15 @@ namespace yli::ontology
         }
 
         this->print_text_2d(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
+    }
+
+    yli::ontology::GenericParentModule* Font2d::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::TEXT_2D)
+        {
+            return &this->parent_of_text_2ds;
+        }
+
+        return nullptr;
     }
 }

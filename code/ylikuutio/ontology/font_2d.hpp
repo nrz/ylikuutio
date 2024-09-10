@@ -94,6 +94,8 @@ namespace yli::ontology
                     const std::string& text,
                     const std::string& font_texture_file_format) const;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 

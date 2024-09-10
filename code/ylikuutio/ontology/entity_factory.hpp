@@ -736,31 +736,14 @@ namespace yli::ontology
 
             yli::ontology::Text2d* create_text_2d(const yli::ontology::TextStruct& text_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::Text2dMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::TEXT_2D));
-                auto& allocator = static_cast<yli::memory::Text2dMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Font2d* font_2d_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Font2d*>(text_struct.font_2d_parent))
-                {
-                    font_2d_parent = std::get<yli::ontology::Font2d*>(text_struct.font_2d_parent);
-                }
-                else if (std::holds_alternative<std::string>(text_struct.font_2d_parent))
-                {
-                    font_2d_parent = dynamic_cast<yli::ontology::Font2d*>(this->get_universe().registry.get_entity(
-                                std::get<std::string>(text_struct.font_2d_parent)));
-                }
-
-                yli::ontology::Text2d* const text_2d = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        text_struct,
-                        (font_2d_parent != nullptr ? &font_2d_parent->parent_of_text_2ds : nullptr));
-
-                text_2d->set_global_name(text_struct.global_name);
-                text_2d->set_local_name(text_struct.local_name);
-                return text_2d;
+                return this->create_child<
+                    yli::ontology::Text2d,
+                    yli::ontology::Font2d,
+                    yli::memory::Text2dMemoryAllocator,
+                    yli::ontology::TextStruct>(
+                            yli::data::Datatype::TEXT_2D,
+                            text_struct.font_2d_parent,
+                            text_struct);
             }
 
             yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const final
