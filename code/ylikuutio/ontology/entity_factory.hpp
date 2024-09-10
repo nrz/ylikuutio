@@ -786,7 +786,7 @@ namespace yli::ontology
                     yli::ontology::Pipeline,
                     yli::memory::ComputeTaskMemoryAllocator,
                     yli::ontology::ComputeTaskStruct>(
-                            yli::data::Datatype::COMPUTETASK,
+                            yli::data::Datatype::COMPUTE_TASK,
                             compute_task_struct.pipeline_parent,
                             compute_task_struct);
             }

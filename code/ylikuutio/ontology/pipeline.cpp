@@ -230,7 +230,7 @@ namespace yli::ontology
 
     yli::ontology::GenericParentModule* Pipeline::get_generic_parent_module(const int type)
     {
-        if (type == yli::data::Datatype::COMPUTETASK)
+        if (type == yli::data::Datatype::COMPUTE_TASK)
         {
             return &this->parent_of_compute_tasks;
         }

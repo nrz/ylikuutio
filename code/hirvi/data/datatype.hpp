@@ -123,7 +123,7 @@ namespace hirvi
         GRAPH                       = 270,
         NODE                        = 271,
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTETASK                 = 280,
+        COMPUTE_TASK                = 280,
         // `yli::ontology` datatypes, 'lisp' path.
         LISP_FUNCTION                  = 290,
         GENERIC_LISP_FUNCTION_OVERLOAD = 291,
