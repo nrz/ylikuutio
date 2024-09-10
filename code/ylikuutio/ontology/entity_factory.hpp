@@ -580,21 +580,15 @@ namespace yli::ontology
 
             yli::ontology::Text3d* create_text_3d(const yli::ontology::Text3dStruct& text_3d_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::Text3dMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::TEXT_3D));
-                auto& allocator = static_cast<yli::memory::Text3dMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Text3d* const text_3d = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        text_3d_struct,
-                        (text_3d_struct.vector_font_parent != nullptr ? &text_3d_struct.vector_font_parent->parent_of_text_3ds : nullptr),
-                        (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module() : nullptr));
-
-                text_3d->set_global_name(text_3d_struct.global_name);
-                text_3d->set_local_name(text_3d_struct.local_name);
-                return text_3d;
+                return this->create_child<
+                    yli::ontology::Text3d,
+                    yli::ontology::VectorFont,
+                    yli::memory::Text3dMemoryAllocator,
+                    yli::ontology::Text3dStruct>(
+                            yli::data::Datatype::TEXT_3D,
+                            text_3d_struct.vector_font_parent,
+                            text_3d_struct,
+                            (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
             yli::ontology::InputMode* create_input_mode(const yli::ontology::InputModeStruct& input_mode_struct) const final

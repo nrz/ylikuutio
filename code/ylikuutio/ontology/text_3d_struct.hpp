@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <string>   // std::string
+#include <variant>  // std::variant
 
 namespace yli::ontology
 {
@@ -35,7 +36,7 @@ namespace yli::ontology
         }
 
         std::string text_string;
-        yli::ontology::VectorFont* vector_font_parent { nullptr };
+        std::variant<yli::ontology::VectorFont*, std::string> vector_font_parent {};
     };
 }
 
