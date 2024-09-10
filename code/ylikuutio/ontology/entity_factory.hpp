@@ -687,95 +687,40 @@ namespace yli::ontology
             yli::ontology::ShapeshifterTransformation* create_shapeshifter_transformation(
                     const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterTransformationMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION));
-                auto& allocator = static_cast<yli::memory::ShapeshifterTransformationMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Material* material_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Material*>(shapeshifter_transformation_struct.material_parent))
-                {
-                    material_parent = std::get<yli::ontology::Material*>(shapeshifter_transformation_struct.material_parent);
-                }
-                else if (std::holds_alternative<std::string>(shapeshifter_transformation_struct.material_parent))
-                {
-                    material_parent = dynamic_cast<yli::ontology::Material*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(shapeshifter_transformation_struct.material_parent)));
-                }
-
-                yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        shapeshifter_transformation_struct,
-                        (material_parent != nullptr ?
-                         &(material_parent->parent_of_shapeshifter_transformations) :
-                         nullptr));
-
-                shapeshifter_transformation->set_global_name(shapeshifter_transformation_struct.global_name);
-                shapeshifter_transformation->set_local_name(shapeshifter_transformation_struct.local_name);
-                return shapeshifter_transformation;
+                return this->create_child<
+                    yli::ontology::ShapeshifterTransformation,
+                    yli::ontology::Material,
+                    yli::memory::ShapeshifterTransformationMemoryAllocator,
+                    yli::ontology::ShapeshifterTransformationStruct>(
+                            yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION,
+                            shapeshifter_transformation_struct.material_parent,
+                            shapeshifter_transformation_struct);
             }
 
             yli::ontology::ShapeshifterSequence* create_shapeshifter_sequence(
                     const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterSequenceMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SHAPESHIFTER_SEQUENCE));
-                auto& allocator = static_cast<yli::memory::ShapeshifterSequenceMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_sequence_struct.shapeshifter_transformation_parent))
-                {
-                    shapeshifter_transformation_parent = std::get<yli::ontology::ShapeshifterTransformation*>(shapeshifter_sequence_struct.shapeshifter_transformation_parent);
-                }
-                else if (std::holds_alternative<std::string>(shapeshifter_sequence_struct.shapeshifter_transformation_parent))
-                {
-                    shapeshifter_transformation_parent = dynamic_cast<yli::ontology::ShapeshifterTransformation*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(shapeshifter_sequence_struct.shapeshifter_transformation_parent)));
-                }
-
-                yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        shapeshifter_sequence_struct,
-                        (shapeshifter_transformation_parent != nullptr ? &shapeshifter_transformation_parent->parent_of_shapeshifter_sequences :
-                         nullptr));
-
-                shapeshifter_sequence->set_global_name(shapeshifter_sequence_struct.global_name);
-                shapeshifter_sequence->set_local_name(shapeshifter_sequence_struct.local_name);
-                return shapeshifter_sequence;
+                return this->create_child<
+                    yli::ontology::ShapeshifterSequence,
+                    yli::ontology::ShapeshifterTransformation,
+                    yli::memory::ShapeshifterSequenceMemoryAllocator,
+                    yli::ontology::ShapeshifterSequenceStruct>(
+                            yli::data::Datatype::SHAPESHIFTER_SEQUENCE,
+                            shapeshifter_sequence_struct.shapeshifter_transformation_parent,
+                            shapeshifter_sequence_struct);
             }
 
             yli::ontology::ShapeshifterForm* create_shapeshifter_form(
                     const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ShapeshifterFormMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SHAPESHIFTER_FORM));
-                auto& allocator = static_cast<yli::memory::ShapeshifterFormMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::ShapeshifterTransformation* shapeshifter_transformation_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(shapeshifter_form_struct.parent))
-                {
-                    shapeshifter_transformation_parent = std::get<yli::ontology::ShapeshifterTransformation*>(shapeshifter_form_struct.parent);
-                }
-                else if (std::holds_alternative<std::string>(shapeshifter_form_struct.parent))
-                {
-                    shapeshifter_transformation_parent = dynamic_cast<yli::ontology::ShapeshifterTransformation*>(this->get_universe().registry.get_entity(
-                                std::get<std::string>(shapeshifter_form_struct.parent)));
-                }
-
-                yli::ontology::ShapeshifterForm* const shapeshifter_form = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        shapeshifter_form_struct,
-                        (shapeshifter_transformation_parent != nullptr ? &shapeshifter_transformation_parent->parent_of_shapeshifter_forms :
-                         nullptr));
-
-                shapeshifter_form->set_global_name(shapeshifter_form_struct.global_name);
-                shapeshifter_form->set_local_name(shapeshifter_form_struct.local_name);
-                return shapeshifter_form;
+                return this->create_child<
+                    yli::ontology::ShapeshifterForm,
+                    yli::ontology::ShapeshifterTransformation,
+                    yli::memory::ShapeshifterFormMemoryAllocator,
+                    yli::ontology::ShapeshifterFormStruct>(
+                            yli::data::Datatype::SHAPESHIFTER_FORM,
+                            shapeshifter_form_struct.parent,
+                            shapeshifter_form_struct);
             }
 
             yli::ontology::Font2d* create_font_2d(const yli::ontology::FontStruct& font_struct) const final
@@ -1281,10 +1226,10 @@ namespace yli::ontology
                     return instance;
                 }
 
-            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Args>
+            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Args, typename... Types>
                 Type* create_child(
                         const int type,
-                        std::variant<ParentType*, std::string> parent,
+                        std::variant<Types...> parent,
                         const DataStruct& data_struct,
                         Args&&... args) const
                 {

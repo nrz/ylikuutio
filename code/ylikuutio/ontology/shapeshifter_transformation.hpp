@@ -86,6 +86,8 @@ namespace yli::ontology
 
             yli::ontology::Pipeline* get_pipeline() const;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;

@@ -22,6 +22,7 @@
 #include "shapeshifter_transformation_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
@@ -144,6 +145,20 @@ namespace yli::ontology
         }
 
         return material_parent->get_pipeline();
+    }
+
+    yli::ontology::GenericParentModule* ShapeshifterTransformation::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::SHAPESHIFTER_FORM)
+        {
+            return &this->parent_of_shapeshifter_forms;
+        }
+        else if (type == yli::data::Datatype::SHAPESHIFTER_SEQUENCE)
+        {
+            return &this->parent_of_shapeshifter_sequences;
+        }
+
+        return nullptr;
     }
 
     std::size_t ShapeshifterTransformation::get_number_of_children() const

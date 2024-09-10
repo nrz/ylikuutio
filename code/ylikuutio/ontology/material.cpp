@@ -23,6 +23,7 @@
 #include "material_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -265,5 +266,19 @@ namespace yli::ontology
     uint32_t Material::get_image_size() const
     {
         return this->texture.get_image_size();
+    }
+
+    yli::ontology::GenericParentModule* Material::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION)
+        {
+            return &this->parent_of_shapeshifter_transformations;
+        }
+        else if (type == yli::data::Datatype::VECTOR_FONT)
+        {
+            return &this->parent_of_vector_fonts;
+        }
+
+        return nullptr;
     }
 }

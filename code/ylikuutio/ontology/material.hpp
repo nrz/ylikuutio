@@ -90,6 +90,7 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
             yli::ontology::GenericMasterModule* get_generic_master_module() const;
 
             std::size_t get_number_of_apprentices() const;
