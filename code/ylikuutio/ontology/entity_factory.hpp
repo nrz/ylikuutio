@@ -123,10 +123,8 @@ namespace yli::ontology
     struct UniverseStruct;
 
     template<typename T>
-        concept EntityNotUniverse = requires(T instance)
-        {
-            std::derived_from<T, yli::ontology::Entity> && (!std::same_as<T, yli::ontology::Universe>);
-        };
+        concept EntityNotUniverse =
+        std::derived_from<T, yli::ontology::Entity> && (!std::same_as<T, yli::ontology::Universe>);
 
     template<typename TypeEnumType>
         class EntityFactory : public yli::ontology::GenericEntityFactory
