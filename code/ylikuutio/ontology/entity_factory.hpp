@@ -748,31 +748,14 @@ namespace yli::ontology
 
             yli::ontology::VectorFont* create_vector_font(const yli::ontology::VectorFontStruct& vector_font_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::VectorFontMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::VECTOR_FONT));
-                auto& allocator = static_cast<yli::memory::VectorFontMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Material* material_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Material*>(vector_font_struct.material_parent))
-                {
-                    material_parent = std::get<yli::ontology::Material*>(vector_font_struct.material_parent);
-                }
-                else if (std::holds_alternative<std::string>(vector_font_struct.material_parent))
-                {
-                    material_parent = dynamic_cast<yli::ontology::Material*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(vector_font_struct.material_parent)));
-                }
-
-                yli::ontology::VectorFont* const vector_font = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        vector_font_struct,
-                        (material_parent != nullptr ? &material_parent->parent_of_vector_fonts : nullptr));
-
-                vector_font->set_global_name(vector_font_struct.global_name);
-                vector_font->set_local_name(vector_font_struct.local_name);
-                return vector_font;
+                return this->create_child<
+                    yli::ontology::VectorFont,
+                    yli::ontology::Material,
+                    yli::memory::VectorFontMemoryAllocator,
+                    yli::ontology::VectorFontStruct>(
+                            yli::data::Datatype::VECTOR_FONT,
+                            vector_font_struct.material_parent,
+                            vector_font_struct);
             }
 
             yli::ontology::Glyph* create_glyph(const yli::ontology::GlyphStruct& glyph_struct) const final
