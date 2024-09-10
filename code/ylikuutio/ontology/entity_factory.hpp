@@ -764,8 +764,8 @@ namespace yli::ontology
                         const yli::ontology::ObjectStruct& object_struct,
                         ModuleArgs&&... module_args)
                 {
-                return this->create_child<
-                    T,
+                    return this->create_child<
+                        T,
                     yli::ontology::Scene,
                     ObjectDerivativeMemoryAllocator,
                     yli::ontology::ObjectStruct>(
