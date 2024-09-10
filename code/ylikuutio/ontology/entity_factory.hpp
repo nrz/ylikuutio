@@ -356,170 +356,39 @@ namespace yli::ontology
 
             yli::ontology::Pipeline* create_pipeline(const yli::ontology::PipelineStruct& pipeline_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::PipelineMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::PIPELINE));
-                auto& allocator = static_cast<yli::memory::PipelineMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Pipeline* pipeline { nullptr };
-                if (std::holds_alternative<yli::ontology::Ecosystem*>(pipeline_struct.parent))
-                {
-                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(pipeline_struct.parent);
-
-                    pipeline = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            pipeline_struct,
-                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_pipelines) : nullptr));
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(pipeline_struct.parent))
-                {
-                    auto const scene_parent = std::get<yli::ontology::Scene*>(pipeline_struct.parent);
-
-                    pipeline = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            pipeline_struct,
-                            (scene_parent != nullptr ? &(scene_parent->parent_of_pipelines) : nullptr));
-                }
-                else if (std::holds_alternative<std::string>(pipeline_struct.parent))
-                {
-                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(pipeline_struct.parent));
-
-                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
-                    {
-                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, &(ecosystem_parent->parent_of_pipelines));
-                    }
-                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
-                    {
-                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, &(scene_parent->parent_of_pipelines));
-                    }
-                    else
-                    {
-                        pipeline = allocator.build_in(this->application, this->get_universe(), pipeline_struct, nullptr);
-                    }
-                }
-
-                pipeline->set_global_name(pipeline_struct.global_name);
-                pipeline->set_local_name(pipeline_struct.local_name);
-                return pipeline;
+                return this->create_child_of_ecosystem_or_scene<
+                    yli::ontology::Pipeline,
+                    yli::memory::PipelineMemoryAllocator,
+                    yli::ontology::PipelineStruct>(
+                            yli::data::Datatype::PIPELINE,
+                            pipeline_struct);
             }
 
             yli::ontology::Material* create_material(const yli::ontology::MaterialStruct& material_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::MaterialMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::MATERIAL));
-                auto& allocator = static_cast<yli::memory::MaterialMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Material* material { nullptr };
-                auto pipeline_master = material_struct.pipeline != nullptr ? material_struct.pipeline->get_master_module() : nullptr;
-
-                if (std::holds_alternative<yli::ontology::Ecosystem*>(material_struct.parent))
-                {
-                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(material_struct.parent);
-
-                    material = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
+                return this->create_child_of_ecosystem_or_scene<
+                    yli::ontology::Material,
+                    yli::memory::MaterialMemoryAllocator,
+                    yli::ontology::MaterialStruct>(
+                            yli::data::Datatype::MATERIAL,
                             material_struct,
-                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_materials) : nullptr),
-                            pipeline_master);
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(material_struct.parent))
-                {
-                    auto const scene_parent = std::get<yli::ontology::Scene*>(material_struct.parent);
-
-                    material = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            material_struct,
-                            (scene_parent != nullptr ? &(scene_parent->parent_of_materials) : nullptr),
-                            pipeline_master);
-                }
-                else if (std::holds_alternative<std::string>(material_struct.parent))
-                {
-                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(material_struct.parent));
-
-                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const material_parent = &(ecosystem_parent->parent_of_materials);
-                        material = allocator.build_in(this->application, this->get_universe(), material_struct, material_parent, pipeline_master);
-                    }
-                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const material_parent = &(scene_parent->parent_of_materials);
-                        material = allocator.build_in(this->application, this->get_universe(), material_struct, material_parent, pipeline_master);
-                    }
-                    else
-                    {
-                        material = allocator.build_in(this->application, this->get_universe(), material_struct, nullptr, pipeline_master);
-                    }
-                }
-
-                material->set_global_name(material_struct.global_name);
-                material->set_local_name(material_struct.local_name);
-                return material;
+                            (material_struct.pipeline != nullptr ? material_struct.pipeline->get_master_module() : nullptr));
             }
 
             yli::ontology::Species* create_species(const yli::ontology::SpeciesStruct& species_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::SpeciesMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SPECIES));
-                auto& allocator = static_cast<yli::memory::SpeciesMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Species* species { nullptr };
                 auto& material_or_symbiont_material = species_struct.material_or_symbiont_material;
-                auto const material_master_module = (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
+                auto const species_master_module = (std::holds_alternative<yli::ontology::Material*>(material_or_symbiont_material) &&
                         std::get<yli::ontology::Material*>(material_or_symbiont_material) != nullptr ?
                         &(std::get<yli::ontology::Material*>(material_or_symbiont_material)->master_of_species) : nullptr);
 
-                if (std::holds_alternative<yli::ontology::Ecosystem*>(species_struct.parent))
-                {
-                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(species_struct.parent);
-
-                    species = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
+                return this->create_child_of_ecosystem_or_scene<
+                    yli::ontology::Species,
+                    yli::memory::SpeciesMemoryAllocator,
+                    yli::ontology::SpeciesStruct>(
+                            yli::data::Datatype::SPECIES,
                             species_struct,
-                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_species) : nullptr),
-                            material_master_module);
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(species_struct.parent))
-                {
-                    auto const scene_parent = std::get<yli::ontology::Scene*>(species_struct.parent);
-
-                    species = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            species_struct,
-                            (scene_parent != nullptr ? &(scene_parent->parent_of_species) : nullptr),
-                            material_master_module);
-                }
-                else if (std::holds_alternative<std::string>(species_struct.parent))
-                {
-                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(species_struct.parent));
-
-                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const parent_module = &(ecosystem_parent->parent_of_species);
-                        species = allocator.build_in(this->application, this->get_universe(), species_struct, parent_module, material_master_module);
-                    }
-                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const parent_module = &(scene_parent->parent_of_species);
-                        species = allocator.build_in(this->application, this->get_universe(), species_struct, parent_module, material_master_module);
-                    }
-                    else
-                    {
-                        species = allocator.build_in(this->application, this->get_universe(), species_struct, nullptr, material_master_module);
-                    }
-                }
-
-                species->set_global_name(species_struct.global_name);
-                species->set_local_name(species_struct.local_name);
-                return species;
+                            species_master_module);
             }
 
             yli::ontology::Object* create_object(const yli::ontology::ObjectStruct& object_struct) const final
@@ -567,60 +436,16 @@ namespace yli::ontology
 
             yli::ontology::Symbiosis* create_symbiosis(const yli::ontology::SymbiosisStruct& symbiosis_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::SymbiosisMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::SYMBIOSIS));
-                auto& allocator = static_cast<yli::memory::SymbiosisMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Symbiosis* symbiosis { nullptr };
                 auto& pipeline = symbiosis_struct.pipeline;
                 auto const pipeline_master_module = (pipeline != nullptr ? &(pipeline->master_of_symbioses) : nullptr);
 
-                if (std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent))
-                {
-                    auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent);
-
-                    symbiosis = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
+                return this->create_child_of_ecosystem_or_scene<
+                    yli::ontology::Symbiosis,
+                    yli::memory::SymbiosisMemoryAllocator,
+                    yli::ontology::SymbiosisStruct>(
+                            yli::data::Datatype::SYMBIOSIS,
                             symbiosis_struct,
-                            (ecosystem_parent != nullptr ? &(ecosystem_parent->parent_of_symbioses) : nullptr),
                             pipeline_master_module);
-                }
-                else if (std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent))
-                {
-                    auto const scene_parent = std::get<yli::ontology::Scene*>(symbiosis_struct.parent);
-
-                    symbiosis = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            symbiosis_struct,
-                            (scene_parent != nullptr ? &(scene_parent->parent_of_symbioses) : nullptr),
-                            pipeline_master_module);
-                }
-                else if (std::holds_alternative<std::string>(symbiosis_struct.parent))
-                {
-                    yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(symbiosis_struct.parent));
-
-                    if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const parent_module = &(ecosystem_parent->parent_of_symbioses);
-                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, parent_module, pipeline_master_module);
-                    }
-                    else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
-                    {
-                        yli::ontology::GenericParentModule* const parent_module = &(scene_parent->parent_of_symbioses);
-                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, parent_module, pipeline_master_module);
-                    }
-                    else
-                    {
-                        symbiosis = allocator.build_in(this->application, this->get_universe(), symbiosis_struct, nullptr, pipeline_master_module);
-                    }
-                }
-
-                symbiosis->set_global_name(symbiosis_struct.global_name);
-                symbiosis->set_local_name(symbiosis_struct.local_name);
-                return symbiosis;
             }
 
             yli::ontology::SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const final
@@ -1183,6 +1008,73 @@ namespace yli::ontology
                         std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " << instance->get_type() << " !\n";
                     }
 
+                    return instance;
+                }
+
+            template<EntityNotUniverse T, typename TypeAllocator, typename DataStruct, typename... Args>
+                T* create_child_of_ecosystem_or_scene(
+                        const int type,
+                        const DataStruct& data_struct,
+                        Args&&... args) const
+                {
+                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                        this->memory_system.template get_or_create_allocator<TypeAllocator>(
+                                static_cast<int>(type));
+                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+
+                    T* instance { nullptr };
+                    if (std::holds_alternative<yli::ontology::Ecosystem*>(data_struct.parent))
+                    {
+                        auto const ecosystem_parent = std::get<yli::ontology::Ecosystem*>(data_struct.parent);
+
+                        instance = allocator.build_in(
+                                this->application,
+                                this->get_universe(),
+                                data_struct,
+                                (ecosystem_parent != nullptr ? ecosystem_parent->get_generic_parent_module(type) : nullptr),
+                                std::forward<Args>(args)...);
+                    }
+                    else if (std::holds_alternative<yli::ontology::Scene*>(data_struct.parent))
+                    {
+                        auto const scene_parent = std::get<yli::ontology::Scene*>(data_struct.parent);
+
+                        instance = allocator.build_in(
+                                this->application,
+                                this->get_universe(),
+                                data_struct,
+                                (scene_parent != nullptr ? scene_parent->get_generic_parent_module(type) : nullptr),
+                                std::forward<Args>(args)...);
+                    }
+                    else if (std::holds_alternative<std::string>(data_struct.parent))
+                    {
+                        yli::ontology::Entity* const entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(data_struct.parent));
+
+                        if (auto const ecosystem_parent = dynamic_cast<yli::ontology::Ecosystem*>(entity_parent); ecosystem_parent != nullptr)
+                        {
+                            instance = allocator.build_in(
+                                    this->application,
+                                    this->get_universe(),
+                                    data_struct,
+                                    ecosystem_parent->get_generic_parent_module(type),
+                                    std::forward<Args>(args)...);
+                        }
+                        else if (auto const scene_parent = dynamic_cast<yli::ontology::Scene*>(entity_parent); scene_parent != nullptr)
+                        {
+                            instance = allocator.build_in(
+                                    this->application,
+                                    this->get_universe(),
+                                    data_struct,
+                                    scene_parent->get_generic_parent_module(type),
+                                    std::forward<Args>(args)...);
+                        }
+                        else
+                        {
+                            instance = allocator.build_in(this->application, this->get_universe(), data_struct, nullptr, std::forward<Args>(args)...);
+                        }
+                    }
+
+                    instance->set_global_name(data_struct.global_name);
+                    instance->set_local_name(data_struct.local_name);
                     return instance;
                 }
 

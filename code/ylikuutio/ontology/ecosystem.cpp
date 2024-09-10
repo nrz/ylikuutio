@@ -18,6 +18,7 @@
 #include "ecosystem.hpp"
 #include "ecosystem_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -64,6 +65,28 @@ namespace yli::ontology
     yli::ontology::Entity* Ecosystem::get_parent() const
     {
         return this->child_of_universe.get_parent();
+    }
+
+    yli::ontology::GenericParentModule* Ecosystem::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::PIPELINE)
+        {
+            return &this->parent_of_pipelines;
+        }
+        else if (type == yli::data::Datatype::MATERIAL)
+        {
+            return &this->parent_of_materials;
+        }
+        else if (type == yli::data::Datatype::SPECIES)
+        {
+            return &this->parent_of_species;
+        }
+        else if (type == yli::data::Datatype::SYMBIOSIS)
+        {
+            return &this->parent_of_symbioses;
+        }
+
+        return nullptr;
     }
 
     yli::ontology::Scene* Ecosystem::get_scene() const

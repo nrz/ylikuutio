@@ -65,6 +65,8 @@ namespace yli::ontology
 
             yli::ontology::Entity* get_parent() const override;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
