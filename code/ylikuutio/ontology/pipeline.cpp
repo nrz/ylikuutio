@@ -22,6 +22,7 @@
 #include "pipeline_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
@@ -225,5 +226,15 @@ namespace yli::ontology
     GLuint Pipeline::get_program_id() const
     {
         return this->program_id;
+    }
+
+    yli::ontology::GenericParentModule* Pipeline::get_generic_parent_module(const int type)
+    {
+        if (type == yli::data::Datatype::COMPUTETASK)
+        {
+            return &this->parent_of_compute_tasks;
+        }
+
+        return nullptr;
     }
 }

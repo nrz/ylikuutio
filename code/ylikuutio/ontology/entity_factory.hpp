@@ -781,31 +781,14 @@ namespace yli::ontology
 
             yli::ontology::ComputeTask* create_compute_task(const yli::ontology::ComputeTaskStruct& compute_task_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ComputeTaskMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::COMPUTETASK));
-                auto& allocator = static_cast<yli::memory::ComputeTaskMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Pipeline* pipeline_parent { nullptr };
-                if (std::holds_alternative<yli::ontology::Pipeline*>(compute_task_struct.pipeline_parent))
-                {
-                    pipeline_parent = std::get<yli::ontology::Pipeline*>(compute_task_struct.pipeline_parent);
-                }
-                else if (std::holds_alternative<std::string>(compute_task_struct.pipeline_parent))
-                {
-                    pipeline_parent = dynamic_cast<yli::ontology::Pipeline*>(
-                            this->get_universe().registry.get_entity(std::get<std::string>(compute_task_struct.pipeline_parent)));
-                }
-
-                yli::ontology::ComputeTask* const compute_task = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        compute_task_struct,
-                        pipeline_parent != nullptr ? &pipeline_parent->parent_of_compute_tasks : nullptr);
-
-                compute_task->set_global_name(compute_task_struct.global_name);
-                compute_task->set_local_name(compute_task_struct.local_name);
-                return compute_task;
+                return this->create_child<
+                    yli::ontology::ComputeTask,
+                    yli::ontology::Pipeline,
+                    yli::memory::ComputeTaskMemoryAllocator,
+                    yli::ontology::ComputeTaskStruct>(
+                            yli::data::Datatype::COMPUTETASK,
+                            compute_task_struct.pipeline_parent,
+                            compute_task_struct);
             }
 
             yli::ontology::LispFunction* create_lisp_function(const yli::ontology::LispFunctionStruct& lisp_function_struct) const final

@@ -95,6 +95,8 @@ namespace yli::ontology
 
             GLuint get_program_id() const;
 
+            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+
             friend class yli::ontology::PipelineCompare;
 
             template<typename T1, std::size_t DataSize>
