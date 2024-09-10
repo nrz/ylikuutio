@@ -665,36 +665,14 @@ namespace yli::ontology
 
             yli::ontology::Console* create_console(const yli::ontology::ConsoleStruct& console_struct) const final
             {
-                yli::memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<yli::memory::ConsoleMemoryAllocator>(
-                            static_cast<int>(yli::data::Datatype::CONSOLE));
-                auto& allocator = static_cast<yli::memory::ConsoleMemoryAllocator&>(generic_allocator);
-
-                yli::ontology::Console* const console = allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        console_struct,
-                        &this->get_universe().parent_of_consoles,
-                        (console_struct.font_2d != nullptr ? &console_struct.font_2d->master_of_consoles : nullptr));
-
-                if (!console_struct.global_name.empty() && console_struct.local_name.empty())
-                {
-                    // Only `global_name` given, OK.
-                    console->set_global_name(console_struct.global_name);
-                }
-                else if (console_struct.global_name.empty() && !console_struct.local_name.empty())
-                {
-                    // Only `local_name` given, OK.
-                    console->set_local_name(console_struct.local_name);
-                }
-                else if (!console_struct.global_name.empty() && !console_struct.local_name.empty())
-                {
-                    std::cerr << "ERROR: `EntityFactory::create_console`: both global and local names given for a `Console`\n";
-                    std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Console`!\n";
-                }
-
-                return console;
+                return this->create_child_of_universe<
+                    yli::ontology::Console,
+                    yli::memory::ConsoleMemoryAllocator,
+                    yli::ontology::ConsoleStruct>(
+                            yli::data::Datatype::CONSOLE,
+                            console_struct,
+                            &this->get_universe().parent_of_consoles,
+                            (console_struct.font_2d != nullptr ? &console_struct.font_2d->master_of_consoles : nullptr));
             }
 
             yli::ontology::ConsoleCallbackEngine* create_console_callback_engine(
