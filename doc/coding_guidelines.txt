@@ -39,14 +39,10 @@ General
 * Try to keep source code headers clear of code. Unfortunately,
   function templates and delegating constructors need to be in headers.
 * Avoid polluting the global namespace. Use your own `namespace`.
-* Use class names without namespace when deleting copy constructors,
-  e.g. `Entity(const Entity&) = delete;`. This is to make lines shorter.
-* Use class names without namespace when deleting copy assignments,
-  e.g. `Entity& operator=(const Entity&) = delete;`. This is to make lines shorter.
-* Prefer C++-style functions over C-style functions.
+* Use class names without namespace where appropriate. This is to make lines shorter.
 * Prefer virtual functions to function templates.
   Use function templates where needed e.g. for speed.
-* Prefer `std::shared_ptr` and `std::make_shared` to raw pointers.
+* Prefer `std::unique_ptr` and `std::make_unique` to raw pointers.
 * Prefer references to pointers.
 * If the lifetime of a pointer may extend beyond the lifetime of the
   referenced Entity, or if the user may be able to define the value of
@@ -67,7 +63,7 @@ General
 * Write getters and setters where appropriate.
 * Keep both getters and setters in the same order as member variables.
 * Keep each getter immediately before the corresponding setter.
-* Write creator functions (e.g. `SettingMaster::create_Setting`) for the necessary `new`.
+* For `yli::ontology`, write factory functions in `EntityFactory`.
 * If a constructor is to be called only from a creator function belonging
   to a `friend` class, then the constructor should be made `private`.
 * Explicit default construction of base classes is not necessary.
@@ -111,15 +107,15 @@ Forward declarations
 * Forward declarations follow the same ordering rules as `#include` lines.
 
 Naming
-* Use CamelCase for class names: `class MyClass;`.
+* Use PascalCase for class names: `class MyClass;`.
 * Parts of class names separated by uppercase characters should reflect
   a functionality or a subsystem. Therefore, `ShapeshifterTransformation`, not
   `ShapeShifterTransformation`, because `ShapeshifterTransformation` is not
   related to any general 'shifting' functionality or subsystem, but it is
   related to the 'shapeshifting' functionality.
 * An exception to the above rule are suffixes that mark the number of dimensions
-  involved such as  `2D`, `3D` and `4D`. These suffixes may appear
-  in the end of the class name, such as `Text2D` and `Text3D`.
+  involved such as  `2d`, `3d` and `4d`. These suffixes may appear
+  in the end of the class name, such as `Text2d` and `Text3d`.
 * Use snake_case for variable names: `std::string my_string`.
 * An exception to the above rule is `ID` suffix that marks that the
   variable in an ID of an `Entity`, e.g. `childID`, `biontID`, `apprenticeID`.
@@ -136,11 +132,11 @@ Naming
   when multiple words are needed.
 * Use snake_case for namespace names: `std::string my_string`.
 * Write acronyms properly with either upper or lowercase: `class AI;`, `yli::ontology::AI* ai`.
-* Use lowercase_snake_case in all function names.
-* Class names in function names should be in lowercase_snake_case as well,
+* Use snake_case in all function names.
+* Class names in function names should be in snake_case as well,
   e.g. `create_holobiont`, `create_setting`.
 * Acronyms, file formats, etc. in function names should be
-  in lowercase_snake_case as well, e.g. `load_bmp_file`.
+  in snake_case as well, e.g. `load_bmp_file`.
 * Use snake_case also for variable names with dimensionality suffixes,
   e.g. `my_font_2d`.
 * Separate numbers in variable names with an underscore, e.g.
@@ -178,10 +174,11 @@ Real-time-code specific issues
 * Think about OpenGL state changes before writing any real-time code.
 * Avoid void pointers (`void*`) where possible, but not at the cost of speed of real-time code.
 
-Compiling
-* Avoid large libraries. Try to keep the compiling time reasonable.
-* All code should compile with both GCC and Clang in amd64 Debian Buster.
-* All code should crosscompile with MinGW-GCC from amd64 Debian Buster
+Building
+* Avoid large libraries. Try to keep build times reasonable.
+* All code should compile with both GCC and Clang in amd64 Debian bookworm.
+* All code should crosscompile with MinGW-GCC from amd64 Debian bookworm
   to a 64-bit Windows (Google Test unfortunately does not).
-* All code should compile in the environment provided by GitHub Actions.
+* All code should compile with both GCC and Clang in GitHub Actions Ubuntu runner.
+* All code should compile with AppleClang in GitHub Actions MacOS runner.
 * All code should compile in one `cmake .. && make` run.
