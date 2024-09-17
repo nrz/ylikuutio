@@ -239,10 +239,7 @@ namespace yli::ontology
                     const CallbackEngineStruct& callback_engine_struct) const final
             {
                 return this->create_child_of_universe<
-                    CallbackEngine,
-                    GenericParentModule,
-                    yli::memory::CallbackEngineMemoryAllocator,
-                    CallbackEngineStruct>(
+                    CallbackEngine, GenericParentModule, yli::memory::CallbackEngineMemoryAllocator, CallbackEngineStruct>(
                             yli::data::Datatype::CALLBACK_ENGINE,
                             callback_engine_struct,
                             &this->get_universe().parent_of_callback_engines);
@@ -252,10 +249,7 @@ namespace yli::ontology
                     const CallbackObjectStruct& callback_object_struct) const final
             {
                 return this->create_child<
-                    CallbackObject,
-                    CallbackEngine,
-                    yli::memory::CallbackObjectMemoryAllocator,
-                    CallbackObjectStruct>(
+                    CallbackObject, CallbackEngine, yli::memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
                             yli::data::Datatype::CALLBACK_OBJECT,
                             callback_object_struct.callback_engine_parent,
                             callback_object_struct);
@@ -266,14 +260,11 @@ namespace yli::ontology
                     yli::data::AnyValue&& any_value) const final
             {
                 return this->create_child<
-                    CallbackParameter,
-                CallbackObject,
-                yli::memory::CallbackParameterMemoryAllocator,
-                CallbackParameterStruct>(
-                        yli::data::Datatype::CALLBACK_PARAMETER,
-                        callback_parameter_struct.callback_object_parent,
-                        callback_parameter_struct,
-                        std::move(any_value));
+                    CallbackParameter, CallbackObject, yli::memory::CallbackParameterMemoryAllocator, CallbackParameterStruct>(
+                            yli::data::Datatype::CALLBACK_PARAMETER,
+                            callback_parameter_struct.callback_object_parent,
+                            callback_parameter_struct,
+                            std::move(any_value));
             }
 
             // TODO: implement `create_window` here!
