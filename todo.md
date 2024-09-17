@@ -11,6 +11,7 @@
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
+- [ ] TEXT Add support for vector fonts.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
@@ -83,7 +84,6 @@
 ## Tasks which are necessary for the third stage
 - [ ] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [ ] BUILD Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
-- [ ] TEXT Add support for vector fonts.
 - [ ] NETWORK Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 - [ ] NETWORK/LIBRARIES/EVALUATE Evaluate ZeroMQ: https://zeromq.org/
 - [ ] NETWORK/LIBRARIES/EVALUATE Evaluate SDL_net: https://www.libsdl.org/projects/SDL_net/
