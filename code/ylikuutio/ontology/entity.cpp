@@ -33,6 +33,7 @@
 #include <limits>        // std::numeric_limits
 #include <regex>         // std::regex, std::regex_match
 #include <string>        // std::string
+#include <utility>       // std::move
 
 namespace yli::ontology
 {
@@ -230,12 +231,12 @@ namespace yli::ontology
         this->registry.erase_entity(name);
     }
 
-    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value)
+    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, yli::data::AnyValue&& any_value)
     {
         yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         const yli::ontology::VariableStruct new_variable_struct(this, variable_struct);
-        entity_factory.create_variable(new_variable_struct, any_value);
+        entity_factory.create_variable(new_variable_struct, std::move(any_value));
     }
 
     bool Entity::has_variable(const std::string& variable_name) const

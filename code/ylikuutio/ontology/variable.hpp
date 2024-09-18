@@ -72,7 +72,7 @@ namespace yli::ontology
                     Universe& universe,
                     const VariableStruct& variable_struct,
                     GenericParentModule* const entity_parent_module,
-                    const yli::data::AnyValue& any_value);
+                    yli::data::AnyValue&& any_value);
 
             ~Variable() = default;
 

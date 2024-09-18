@@ -113,7 +113,7 @@ namespace yli::ontology
             void add_entity(const std::string& name, Entity& entity);
             void erase_entity(const std::string& name);
 
-            void create_variable(const VariableStruct& variable_struct, const yli::data::AnyValue& any_value);
+            void create_variable(const VariableStruct& variable_struct, yli::data::AnyValue&& any_value);
             bool has_variable(const std::string& variable_name) const;
             Variable* get_variable(const std::string& variable_name) const;
             bool set_variable(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value);

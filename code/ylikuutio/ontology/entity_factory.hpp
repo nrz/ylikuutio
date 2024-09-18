@@ -170,7 +170,7 @@ namespace yli::ontology
 
             Variable* create_variable(
                     const VariableStruct& variable_struct,
-                    const yli::data::AnyValue& any_value) const final
+                    yli::data::AnyValue&& any_value) const final
             {
                 yli::memory::GenericMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<yli::memory::VariableMemoryAllocator>(
@@ -196,7 +196,7 @@ namespace yli::ontology
                         variable_struct.universe,
                         variable_struct,
                         ((entity_parent != nullptr) ? &entity_parent->parent_of_variables : nullptr),
-                        any_value);
+                        std::move(any_value));
 
                 if (variable_struct.is_variable_of_universe)
                 {

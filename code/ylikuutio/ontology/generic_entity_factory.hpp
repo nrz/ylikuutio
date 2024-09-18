@@ -104,7 +104,7 @@ namespace yli::ontology
         public:
             virtual Variable* create_variable(
                     const VariableStruct& variable_struct,
-                    const yli::data::AnyValue& any_value) const = 0;
+                    yli::data::AnyValue&& any_value) const = 0;
 
             virtual CallbackEngine* create_callback_engine(
                     const CallbackEngineStruct& callback_engine_struct) const = 0;

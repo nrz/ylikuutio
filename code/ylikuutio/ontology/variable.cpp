@@ -26,6 +26,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <utility>   // std::move
 
 namespace yli::core
 {
@@ -44,10 +45,10 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::VariableStruct& variable_struct,
             yli::ontology::GenericParentModule* const entity_parent_module,
-            const yli::data::AnyValue& any_value)
+            yli::data::AnyValue&& any_value)
         : Entity(application, universe, variable_struct),
         child_of_entity(entity_parent_module, *this),
-        variable_value    { any_value },
+        variable_value    { std::move(any_value) },
         activate_callback { variable_struct.activate_callback },
         read_callback     { variable_struct.read_callback }
     {
