@@ -25,12 +25,12 @@ namespace yli::ontology
     class MasterOfInputModesModule;
     class Entity;
 
-    class InputModeApprenticeModule final : public yli::ontology::ApprenticeModule
+    class InputModeApprenticeModule final : public ApprenticeModule
     {
         public:
             InputModeApprenticeModule(
-                    yli::ontology::MasterOfInputModesModule* const master_of_input_modes_module,
-                    yli::ontology::Entity* const apprentice);
+                    MasterOfInputModesModule* const master_of_input_modes_module,
+                    Entity* const apprentice);
     };
 }
 

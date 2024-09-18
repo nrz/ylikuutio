@@ -27,19 +27,19 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_x(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity& entity);
+    std::optional<yli::data::AnyValue> read_cartesian_coordinates(Entity& entity);
+    std::optional<yli::data::AnyValue> read_x(Entity& entity);
+    std::optional<yli::data::AnyValue> read_y(Entity& entity);
+    std::optional<yli::data::AnyValue> read_z(Entity& entity);
 
-    std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity& entity);
+    std::optional<yli::data::AnyValue> read_up(Entity& entity);
+    std::optional<yli::data::AnyValue> read_right(Entity& entity);
 
-    std::optional<yli::data::AnyValue> read_roll(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity& entity);
-    std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity& entity);
+    std::optional<yli::data::AnyValue> read_roll(Entity& entity);
+    std::optional<yli::data::AnyValue> read_yaw(Entity& entity);
+    std::optional<yli::data::AnyValue> read_pitch(Entity& entity);
 
-    std::optional<yli::data::AnyValue> read_azimuth(yli::ontology::Entity& entity);
+    std::optional<yli::data::AnyValue> read_azimuth(Entity& entity);
 }
 
 #endif

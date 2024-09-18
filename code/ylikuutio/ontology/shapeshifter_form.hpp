@@ -46,29 +46,29 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     struct ShapeshifterFormStruct;
 
-    class ShapeshifterForm final : public yli::ontology::Entity
+    class ShapeshifterForm final : public Entity
     {
         private:
             ShapeshifterForm(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct,
-                    yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);
+                    Universe& universe,
+                    const ShapeshifterFormStruct& shapeshifter_form_struct,
+                    GenericParentModule* const shapeshifter_transformation_parent_module);
 
             ~ShapeshifterForm() = default;
 
         public:
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         private:
-            yli::ontology::ChildModule child_of_shapeshifter_transformation;
-            yli::ontology::MeshModule mesh;
+            ChildModule child_of_shapeshifter_transformation;
+            MeshModule mesh;
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

@@ -50,43 +50,43 @@ namespace yli::ontology
     class Pipeline;
     struct ShapeshifterSequenceStruct;
 
-    class ShapeshifterSequence final : public yli::ontology::Entity
+    class ShapeshifterSequence final : public Entity
     {
         private:
             ShapeshifterSequence(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
-                    yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module);
+                    Universe& universe,
+                    const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
+                    GenericParentModule* const shapeshifter_transformation_parent_module);
 
             ~ShapeshifterSequence() = default;
 
         public:
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         private:
-            yli::ontology::ChildModule child_of_shapeshifter_transformation;
+            ChildModule child_of_shapeshifter_transformation;
 
         public:
-            yli::ontology::GenericMasterModule master_of_objects;
+            GenericMasterModule master_of_objects;
 
         private:
             void bind_to_parent() noexcept;
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
         private:
             float transformation_speed; // Negative speed means inverse initial transition direction.

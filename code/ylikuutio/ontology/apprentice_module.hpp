@@ -43,23 +43,23 @@ namespace yli::ontology
 
         private:
             void bind_to_new_generic_master_module(
-                    yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
+                    GenericMasterModule* const new_generic_master) noexcept;
 
         public:
             void unbind_from_any_master_belonging_to_other_scene(
-                    const yli::ontology::Scene& scene) noexcept;
+                    const Scene& scene) noexcept;
 
             void unbind_and_bind_to_new_generic_master_module(
-                    yli::ontology::GenericMasterModule* const new_generic_master) noexcept;
+                    GenericMasterModule* const new_generic_master) noexcept;
 
             ApprenticeModule(
-                    yli::ontology::GenericMasterModule* const generic_master_module,
-                    yli::ontology::Entity* const apprentice) noexcept;
+                    GenericMasterModule* const generic_master_module,
+                    Entity* const apprentice) noexcept;
 
             virtual ~ApprenticeModule() noexcept;
 
-            yli::ontology::Entity* get_master() const noexcept;
-            yli::ontology::Entity* get_apprentice() const noexcept;
+            Entity* get_master() const noexcept;
+            Entity* get_apprentice() const noexcept;
             std::size_t get_apprenticeID() const noexcept;
 
             void release() noexcept;
@@ -67,10 +67,10 @@ namespace yli::ontology
             ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
             ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
 
-            friend class yli::ontology::GenericMasterModule;
+            friend class GenericMasterModule;
 
             template<typename M>
-                friend class yli::ontology::MasterModule;
+                friend class MasterModule;
 
             template<typename T1>
                 friend void yli::hierarchy::set_child_pointer(
@@ -91,9 +91,9 @@ namespace yli::ontology
                         std::size_t& number_of_apprentices) noexcept;
 
         private:
-            yli::ontology::GenericMasterModule* generic_master_module { nullptr };
+            GenericMasterModule* generic_master_module { nullptr };
 
-            yli::ontology::Entity* const apprentice;
+            Entity* const apprentice;
             std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }

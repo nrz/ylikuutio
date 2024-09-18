@@ -34,8 +34,8 @@ namespace yli::ontology
     {
         public:
             ParentOfInputModesModule(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Registry& registry,
+                    Universe& universe,
+                    Registry& registry,
                     const std::string& name) noexcept;
 
             ParentOfInputModesModule(const ParentOfInputModesModule&) = delete;            // Delete copy constructor.
@@ -43,17 +43,17 @@ namespace yli::ontology
 
             ~ParentOfInputModesModule() = default;
 
-            void set_active_input_mode(yli::ontology::InputMode* const input_mode);
-            yli::ontology::InputMode* get_active_input_mode() const;
+            void set_active_input_mode(InputMode* const input_mode);
+            InputMode* get_active_input_mode() const;
 
             void pop_input_mode();
 
             yli::input::InputMethod get_input_method() const;
 
         private:
-            yli::ontology::InputMode* active_input_mode { nullptr };
+            InputMode* active_input_mode { nullptr };
 
-            std::stack<yli::ontology::InputMode*> input_mode_stack;
+            std::stack<InputMode*> input_mode_stack;
 
             yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
     };

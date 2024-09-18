@@ -49,32 +49,32 @@ namespace yli::ontology
     class ConsoleCallbackObject;
     struct ConsoleCallbackEngineStruct;
 
-    class ConsoleCallbackEngine final : public yli::ontology::GenericCallbackEngine
+    class ConsoleCallbackEngine final : public GenericCallbackEngine
     {
         private:
             ConsoleCallbackEngine(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ConsoleCallbackEngineStruct&,
-                    yli::ontology::GenericParentModule* const universe_parent_module);
+                    Universe& universe,
+                    const ConsoleCallbackEngineStruct&,
+                    GenericParentModule* const universe_parent_module);
 
             ~ConsoleCallbackEngine() = default;
 
         public:
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::ChildModule child_of_universe;
-            yli::ontology::GenericParentModule parent_of_console_callback_objects;
+            ChildModule child_of_universe;
+            GenericParentModule parent_of_console_callback_objects;
 
-            yli::ontology::ConsoleCallbackObject* create_console_callback_object(
+            ConsoleCallbackObject* create_console_callback_object(
                     const InputParametersToAnyValueCallbackWithConsole callback,
-                    yli::ontology::Console* const console_pointer);
+                    Console* const console_pointer);
 
             // execute all callbacks with a parameter.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;

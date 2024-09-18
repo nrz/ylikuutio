@@ -45,14 +45,14 @@ namespace yli::ontology
     class Pipeline;
     struct SymbiontMaterialStruct;
 
-    class SymbiontMaterial final : public yli::ontology::Entity
+    class SymbiontMaterial final : public Entity
     {
         private:
             SymbiontMaterial(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::SymbiontMaterialStruct& symbiont_material_struct,
-                    yli::ontology::GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
+                    Universe& universe,
+                    const SymbiontMaterialStruct& symbiont_material_struct,
+                    GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
 
             ~SymbiontMaterial() = default;
 
@@ -60,18 +60,18 @@ namespace yli::ontology
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
             SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
-            yli::ontology::Scene* get_scene() const override;
-            yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Pipeline* get_pipeline() const;
+            Scene* get_scene() const override;
+            Entity* get_parent() const override;
+            Pipeline* get_pipeline() const;
 
             GLint get_openGL_textureID() const;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_symbiosis;
-            yli::ontology::GenericParentModule parent_of_symbiont_species;
-            yli::ontology::TextureModule texture;
+            ChildModule child_of_symbiosis;
+            GenericParentModule parent_of_symbiont_species;
+            TextureModule texture;
 
         protected:
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.

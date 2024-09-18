@@ -30,12 +30,12 @@ namespace yli::ontology
     class Entity;
     class InputMode;
 
-    class MasterOfInputModesModule final : public yli::ontology::GenericMasterModule
+    class MasterOfInputModesModule final : public GenericMasterModule
     {
         public:
             MasterOfInputModesModule(
-                    yli::ontology::Entity* const generic_master,
-                    yli::ontology::Registry* const registry,
+                    Entity* const generic_master,
+                    Registry* const registry,
                     const std::string& name) noexcept;
 
             MasterOfInputModesModule(const MasterOfInputModesModule&) = delete;            // Delete copy constructor.
@@ -44,13 +44,13 @@ namespace yli::ontology
             ~MasterOfInputModesModule() = default;
 
             bool has_current_input_mode() const;
-            void set_current_input_mode(yli::ontology::InputMode* const input_mode);
-            yli::ontology::InputMode* get_current_input_mode() const;
+            void set_current_input_mode(InputMode* const input_mode);
+            InputMode* get_current_input_mode() const;
             void activate_current_input_mode();
             void deactivate_current_input_mode();
 
         private:
-            yli::ontology::InputMode* current_input_mode { nullptr };
+            InputMode* current_input_mode { nullptr };
     };
 }
 

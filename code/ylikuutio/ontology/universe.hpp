@@ -82,16 +82,16 @@ namespace yli::ontology
     struct UniverseStruct;
     struct InputModeStruct;
 
-    class Universe final : public yli::ontology::Entity
+    class Universe final : public Entity
     {
         public:
-            void bind_entity(yli::ontology::Entity* const entity) noexcept;
+            void bind_entity(Entity* const entity) noexcept;
             void unbind_entity(const std::size_t entityID) noexcept;
 
         private:
             Universe(
                     yli::core::Application& application,
-                    const yli::ontology::UniverseStruct& universe_struct);
+                    const UniverseStruct& universe_struct);
 
             ~Universe();
 
@@ -121,13 +121,13 @@ namespace yli::ontology
             void render_without_changing_depth_test();
 
             // This method sets the active `Scene`.
-            void set_active_scene(yli::ontology::Scene* const scene);
+            void set_active_scene(Scene* const scene);
 
-            yli::ontology::Camera* get_active_camera() const;
+            Camera* get_active_camera() const;
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
-            void set_active_camera(yli::ontology::Camera* const camera) const;
+            void set_active_camera(Camera* const camera) const;
 
             const glm::vec3& get_xyz() const;
             void set_xyz(glm::vec3&& xyz);
@@ -164,8 +164,8 @@ namespace yli::ontology
 
             float get_azimuth() const;
 
-            yli::ontology::Console* get_active_console() const;
-            void set_active_console(yli::ontology::Console* const console);
+            Console* get_active_console() const;
+            void set_active_console(Console* const console);
 
             yli::input::InputMethod get_input_method() const;
 
@@ -184,14 +184,14 @@ namespace yli::ontology
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
 
-            yli::ontology::GenericParentModule& get_parent_of_ecosystems();
-            yli::ontology::Scene* get_scene() const override;
+            GenericParentModule& get_parent_of_ecosystems();
+            Scene* get_scene() const override;
             std::size_t get_number_of_ecosystems() const;
             std::size_t get_number_of_scenes() const;
 
-            yli::ontology::Scene* get_active_scene() const;
+            Scene* get_active_scene() const;
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             [[nodiscard]] bool create_window();
             [[nodiscard]] bool setup_context();
@@ -260,54 +260,54 @@ namespace yli::ontology
             // Public `Entity` delete callbacks.
 
             static std::optional<yli::data::AnyValue> delete_entity(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Entity& entity);
+                    Universe& universe,
+                    Entity& entity);
 
             // Public `Entity` naming callbacks.
 
             static std::optional<yli::data::AnyValue> set_global_name_for_entity(
-                    yli::ontology::Entity& entity,
+                    Entity& entity,
                     const std::string& new_value);
 
             static std::optional<yli::data::AnyValue> set_local_name_for_entity(
-                    yli::ontology::Entity& entity,
+                    Entity& entity,
                     const std::string& new_value);
 
             // Public `Entity` activate callbacks.
 
-            static std::optional<yli::data::AnyValue> activate_entity(yli::ontology::Entity& entity);
+            static std::optional<yli::data::AnyValue> activate_entity(Entity& entity);
 
             // Public YliLisp-related callbacks.
 
             static std::optional<yli::data::AnyValue> eval(
-                    yli::ontology::Console& console,
-                    yli::ontology::Universe& universe,
+                    Console& console,
+                    Universe& universe,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
 
             static std::optional<yli::data::AnyValue> info0(
-                    const yli::ontology::Universe& universe,
-                    yli::ontology::Console& console);
+                    const Universe& universe,
+                    Console& console);
 
             static std::optional<yli::data::AnyValue> info1(
-                    const yli::ontology::Universe& universe,
-                    yli::ontology::Console& console,
-                    const yli::ontology::Entity& entity);
+                    const Universe& universe,
+                    Console& console,
+                    const Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_entities(
-                    const yli::ontology::Universe& universe,
-                    yli::ontology::Console& console);
+                    const Universe& universe,
+                    Console& console);
 
             static std::optional<yli::data::AnyValue> print_parent(
-                    const yli::ontology::Universe&,
-                    yli::ontology::Console& console,
-                    const yli::ontology::Entity& entity);
+                    const Universe&,
+                    Console& console,
+                    const Entity& entity);
 
             // Other public callbacks.
 
             static std::optional<yli::data::AnyValue> screenshot(
-                    yli::ontology::Universe& universe,
+                    Universe& universe,
                     const std::string& filename);
 
             // Public callbacks end here.
@@ -343,15 +343,15 @@ namespace yli::ontology
             float background_blue  { NAN };
             float background_alpha { NAN };
 
-            yli::ontology::GenericParentModule parent_of_ecosystems;
-            yli::ontology::GenericParentModule parent_of_scenes;
-            yli::ontology::GenericParentModule parent_of_audio_tracks;
-            yli::ontology::GenericParentModule parent_of_font_2ds;
-            yli::ontology::ParentOfInputModesModule parent_of_input_modes;
-            yli::ontology::GenericParentModule parent_of_consoles;
-            yli::ontology::GenericParentModule parent_of_console_callback_engines;
+            GenericParentModule parent_of_ecosystems;
+            GenericParentModule parent_of_scenes;
+            GenericParentModule parent_of_audio_tracks;
+            GenericParentModule parent_of_font_2ds;
+            ParentOfInputModesModule parent_of_input_modes;
+            GenericParentModule parent_of_consoles;
+            GenericParentModule parent_of_console_callback_engines;
 
-            yli::ontology::FramebufferModule framebuffer_module;
+            FramebufferModule framebuffer_module;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -361,12 +361,12 @@ namespace yli::ontology
 
             bool compute_and_update_matrices_from_inputs();
 
-            std::vector<yli::ontology::Entity*> entity_pointer_vector;
+            std::vector<Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
             std::size_t number_of_entities { 0 };
 
-            yli::ontology::Scene* active_scene     { nullptr };
-            yli::ontology::Console* active_console { nullptr };
+            Scene* active_scene     { nullptr };
+            Console* active_console { nullptr };
 
             std::unique_ptr<yli::render::RenderSystem> render_system { nullptr };
 
@@ -384,7 +384,7 @@ namespace yli::ontology
             SDL_Window* window { nullptr };
             uint32_t window_width;
             uint32_t window_height;
-            std::string window_title { "Ylikuutio " + yli::ontology::Universe::version };
+            std::string window_title { "Ylikuutio " + Universe::version };
 
             int32_t mouse_x;
             int32_t mouse_y;

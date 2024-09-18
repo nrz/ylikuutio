@@ -29,20 +29,20 @@ namespace yli::ontology
     class Material;
     class ShapeshifterTransformation;
 
-    struct ShapeshifterFormStruct final : public yli::ontology::ModelStruct
+    struct ShapeshifterFormStruct final : public ModelStruct
     {
         ShapeshifterFormStruct(
-                yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation_parent,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                ShapeshifterTransformation* const shapeshifter_transformation_parent,
+                Pipeline* const pipeline,
+                Material* const material_master)
             : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
         {
         }
 
         ShapeshifterFormStruct(
                 const std::string& shapeshifter_transformation_parent,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                Pipeline* const pipeline,
+                Material* const material_master)
             : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
         {
         }

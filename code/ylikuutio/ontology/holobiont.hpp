@@ -49,16 +49,16 @@ namespace yli::ontology
     class Symbiosis;
     struct HolobiontStruct;
 
-    class Holobiont : public yli::ontology::Movable
+    class Holobiont : public Movable
     {
         protected:
             Holobiont(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& holobiont_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const symbiosis_master_module,
-                    yli::ontology::GenericMasterModule* const brain_master_module);
+                    Universe& universe,
+                    const HolobiontStruct& holobiont_struct,
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const symbiosis_master_module,
+                    GenericMasterModule* const brain_master_module);
 
             virtual ~Holobiont() = default;
 
@@ -66,7 +66,7 @@ namespace yli::ontology
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const final;
+            Entity* get_parent() const final;
 
             void update_x(const float x);
             void update_y(const float y);
@@ -75,16 +75,16 @@ namespace yli::ontology
             // Public callbacks.
 
             static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Symbiosis& symbiosis,
+                    Scene& parent,
+                    Symbiosis& symbiosis,
                     const std::string& holobiont_name,
                     const std::string& x,
                     const std::string& y,
                     const std::string& z);
 
             static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Symbiosis& symbiosis,
+                    Scene& parent,
+                    Symbiosis& symbiosis,
                     const std::string& holobiont_name,
                     const std::string& x,
                     const std::string& y,
@@ -93,8 +93,8 @@ namespace yli::ontology
                     const std::string& pitch);
 
             static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Symbiosis& symbiosis,
+                    Scene& parent,
+                    Symbiosis& symbiosis,
                     const std::string& holobiont_name,
                     const std::string& x,
                     const std::string& y,
@@ -108,13 +108,13 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_scene;
-            yli::ontology::GenericParentModule parent_of_bionts;
-            yli::ontology::ApprenticeModule apprentice_of_symbiosis;
+            ChildModule child_of_scene;
+            GenericParentModule parent_of_bionts;
+            ApprenticeModule apprentice_of_symbiosis;
 
-            yli::ontology::Scene* get_scene() const final;
+            Scene* get_scene() const final;
 
-            yli::ontology::Symbiosis* get_symbiosis() const;
+            Symbiosis* get_symbiosis() const;
 
         private:
             std::size_t get_number_of_children() const final;
@@ -122,10 +122,10 @@ namespace yli::ontology
 
         public:
             // this method renders this `Holobiont`.
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
         private:
-            static void create_bionts(yli::ontology::Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
+            static void create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
     };
 }
 

@@ -64,14 +64,14 @@ namespace yli::ontology
     class Console;
     struct VariableStruct;
 
-    class Variable final : public yli::ontology::Entity
+    class Variable final : public Entity
     {
         private:
             Variable(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::VariableStruct& variable_struct,
-                    yli::ontology::GenericParentModule* const entity_parent_module,
+                    Universe& universe,
+                    const VariableStruct& variable_struct,
+                    GenericParentModule* const entity_parent_module,
                     const yli::data::AnyValue& any_value);
 
             ~Variable() = default;
@@ -80,9 +80,9 @@ namespace yli::ontology
             Variable(const Variable&) = delete;            // Delete copy constructor.
             Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
@@ -95,88 +95,88 @@ namespace yli::ontology
             // Public callbacks.
 
             static std::optional<yli::data::AnyValue> set_variable_const_std_string(
-                    yli::ontology::Variable& variable,
+                    Variable& variable,
                     const std::string& new_value);
 
             static std::optional<yli::data::AnyValue> set_variable_variable(
-                    yli::ontology::Variable& dest_variable,
-                    const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
-                    const yli::ontology::Variable& src_variable);
+                    Variable& dest_variable,
+                    const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
+                    const Variable& src_variable);
 
             static std::optional<yli::data::AnyValue> print_value1(
-                    yli::ontology::Console& console,
-                    const yli::ontology::Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
-                    const yli::ontology::Variable& variable);
+                    Console& console,
+                    const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
+                    const Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_window_width(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_window_height(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_framebuffer_width(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_framebuffer_height(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_background_color(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_wireframe(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_speed(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_turbo_factor(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_twin_turbo_factor(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_mouse_speed(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_is_flight_mode_in_use(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_console_top_y(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_console_bottom_y(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_console_left_x(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> activate_console_right_x(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Variable& variable);
+                    Entity& entity,
+                    Variable& variable);
 
             static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(
-                    yli::ontology::Entity& entity);
+                    Entity& entity);
 
             // Public callbacks and here.
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_entity;
+            ChildModule child_of_entity;
 
             void activate() override;
 

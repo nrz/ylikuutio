@@ -24,9 +24,9 @@ namespace yli::ontology
 {
     class Font2d;
 
-    struct ConsoleStruct : public yli::ontology::EntityStruct
+    struct ConsoleStruct : public EntityStruct
     {
-        yli::ontology::Font2d* font_2d { nullptr };
+        Font2d* font_2d { nullptr };
     };
 }
 

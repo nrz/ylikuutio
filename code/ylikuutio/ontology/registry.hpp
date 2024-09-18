@@ -46,8 +46,8 @@ namespace yli::ontology
             bool is_indexable(const std::string& name) const;
             bool is_entity(const std::string& name) const;
 
-            void add_indexable(yli::ontology::Indexable& indexable, const std::string& name);
-            void add_entity(yli::ontology::Entity& entity, const std::string& name);
+            void add_indexable(Indexable& indexable, const std::string& name);
+            void add_entity(Entity& entity, const std::string& name);
 
             void erase_entity(const std::string& name);
 
@@ -55,14 +55,14 @@ namespace yli::ontology
             std::string complete(const std::string& input) const;
             std::vector<std::string> get_completions(const std::string& input) const;
 
-            yli::ontology::Entity* get_indexed_entity(const std::string& indexable_name, std::size_t index) const;
-            yli::ontology::Entity* get_entity(const std::string& name) const;
+            Entity* get_indexed_entity(const std::string& indexable_name, std::size_t index) const;
+            Entity* get_entity(const std::string& name) const;
 
-            std::string get_entity_name(const yli::ontology::Entity& entity) const;
+            std::string get_entity_name(const Entity& entity) const;
             std::string get_entity_names() const;
 
-            const std::unordered_map<std::string, yli::ontology::Indexable*>& get_indexable_map() const;
-            const std::unordered_map<std::string, yli::ontology::Entity*>& get_entity_map() const;
+            const std::unordered_map<std::string, Indexable*>& get_indexable_map() const;
+            const std::unordered_map<std::string, Entity*>& get_entity_map() const;
 
         private:
             // Completable modules are stored here.
@@ -70,10 +70,10 @@ namespace yli::ontology
             yli::string::StringSet completable_string_set;
 
             // Indexable modules are stored here.
-            std::unordered_map<std::string, yli::ontology::Indexable*> indexable_map;
+            std::unordered_map<std::string, Indexable*> indexable_map;
 
             // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
+            std::unordered_map<std::string, Entity*> entity_map;
     };
 }
 

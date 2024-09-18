@@ -86,15 +86,15 @@ namespace yli::ontology
     class GenericMasterModule;
     struct CameraStruct;
 
-    class Camera final : public yli::ontology::Movable
+    class Camera final : public Movable
     {
         private:
             Camera(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::CameraStruct& camera_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const brain_master_module);
+                    Universe& universe,
+                    const CameraStruct& camera_struct,
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const brain_master_module);
 
             ~Camera() = default;
 
@@ -102,7 +102,7 @@ namespace yli::ontology
             Camera(const Camera&) = delete;            // Delete copy constructor.
             Camera& operator=(const Camera&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             void activate() override;
 
@@ -116,14 +116,14 @@ namespace yli::ontology
 
             GLuint get_camera_uniform_block() const;
 
-            friend class yli::ontology::Universe;
+            friend class Universe;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_scene;
+            ChildModule child_of_scene;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

@@ -54,32 +54,32 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    class GenericMasterModule : public yli::ontology::Indexable
+    class GenericMasterModule : public Indexable
     {
         public:
             // Iterator typedefs.
             typedef ApprenticeIterator       iterator;
             typedef ApprenticeIterator const_iterator;
 
-            void bind_apprentice_module(yli::ontology::ApprenticeModule& apprentice_module);
+            void bind_apprentice_module(ApprenticeModule& apprentice_module);
             void unbind_apprentice_module(const std::size_t apprenticeID) noexcept;
-            void unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene) noexcept;
+            void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* const scene) noexcept;
 
-            GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept;
+            GenericMasterModule(Entity* const generic_master, Registry* const registry, const std::string& name) noexcept;
 
             GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
             GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
 
             virtual ~GenericMasterModule() noexcept;
 
-            yli::ontology::Entity* get_generic_master() const noexcept;
+            Entity* get_generic_master() const noexcept;
 
-            std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
-            const std::vector<yli::ontology::ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
+            std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
+            const std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
 
             std::size_t get_number_of_apprentices() const noexcept;
 
-            yli::ontology::Entity* get(const std::size_t index) const noexcept override;
+            Entity* get(const std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()
@@ -103,10 +103,10 @@ namespace yli::ontology
             }
 
         private:
-            yli::ontology::Entity* const generic_master; // The `Entity` that owns this `GenericMasterModule`.
+            Entity* const generic_master; // The `Entity` that owns this `GenericMasterModule`.
 
         protected:
-            std::vector<yli::ontology::ApprenticeModule*> apprentice_module_pointer_vector;
+            std::vector<ApprenticeModule*> apprentice_module_pointer_vector;
 
         private:
             std::queue<std::size_t> free_apprenticeID_queue;

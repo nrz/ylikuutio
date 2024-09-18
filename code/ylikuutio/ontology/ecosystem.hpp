@@ -48,14 +48,14 @@ namespace yli::ontology
     class Scene;
     struct EcosystemStruct;
 
-    class Ecosystem final : public yli::ontology::Entity
+    class Ecosystem final : public Entity
     {
         private:
             Ecosystem(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::EcosystemStruct& ecosystem_struct,
-                    yli::ontology::GenericParentModule* const universe_parent_module);
+                    Universe& universe,
+                    const EcosystemStruct& ecosystem_struct,
+                    GenericParentModule* const universe_parent_module);
 
             ~Ecosystem() = default;
 
@@ -63,20 +63,20 @@ namespace yli::ontology
             Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
             Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
-            yli::ontology::GenericParentModule parent_of_materials;
-            yli::ontology::GenericParentModule parent_of_species;
-            yli::ontology::GenericParentModule parent_of_symbioses;
+            ChildModule child_of_universe;
+            ParentOfPipelinesModule parent_of_pipelines;
+            GenericParentModule parent_of_materials;
+            GenericParentModule parent_of_species;
+            GenericParentModule parent_of_symbioses;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

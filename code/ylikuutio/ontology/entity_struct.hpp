@@ -27,7 +27,7 @@ namespace yli::ontology
     {
         EntityStruct() = default;
 
-        EntityStruct(const yli::ontology::EntityStruct& entity_struct) = default;
+        EntityStruct(const EntityStruct& entity_struct) = default;
 
         EntityStruct(const std::string& global_name, const std::string& local_name) noexcept
             : global_name { global_name },

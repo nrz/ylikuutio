@@ -30,15 +30,15 @@ namespace yli::ontology
     class Registry;
     class Entity;
 
-    class ParentOfPipelinesModule final : public yli::ontology::GenericParentModule
+    class ParentOfPipelinesModule final : public GenericParentModule
     {
         public:
-            bool bind_child(yli::ontology::Entity& pipeline_child) noexcept override;
+            bool bind_child(Entity& pipeline_child) noexcept override;
             void unbind_child(const std::size_t childID) noexcept override;
 
             ParentOfPipelinesModule(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Registry& registry,
+                    Entity& entity,
+                    Registry& registry,
                     const std::string& name) noexcept;
 
             ParentOfPipelinesModule(const ParentOfPipelinesModule&) = delete;            // Delete copy constructor.
@@ -47,8 +47,8 @@ namespace yli::ontology
             ~ParentOfPipelinesModule() = default;
 
         private:
-            // `yli::ontology::PipelinePriorityQueue` is a priority queue for `Pipeline`s.
-            // `yli::ontology::PipelinePriorityQueue` also has
+            // `PipelinePriorityQueue` is a priority queue for `Pipeline`s.
+            // `PipelinePriorityQueue` also has
             // a function `remove(const std::size_t childID)`.
             //
             // A priority queue is needed for `Pipeline`s in the future so that GPGPU
@@ -59,7 +59,7 @@ namespace yli::ontology
             // in later GPGPU `Pipeline`s. The rendering order within GPGPU `Pipeline`s is
             // according to the `childID` values, the GPGPU `Pipeline` with the smallest
             // `childID` first.
-            yli::ontology::PipelinePriorityQueue pipeline_priority_queue;
+            PipelinePriorityQueue pipeline_priority_queue;
     };
 }
 

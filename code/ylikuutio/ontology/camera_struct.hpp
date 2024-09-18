@@ -28,19 +28,19 @@ namespace yli::ontology
     class Brain;
     class Scene;
 
-    struct CameraStruct : public yli::ontology::MovableStruct
+    struct CameraStruct : public MovableStruct
     {
         CameraStruct() = default;
 
         CameraStruct(
-                yli::ontology::Brain* const brain,
-                yli::ontology::Scene* const parent)
+                Brain* const brain,
+                Scene* const parent)
             : MovableStruct(brain, parent)
         {
         }
 
         CameraStruct(
-                yli::ontology::Brain* const brain,
+                Brain* const brain,
                 const std::string& scene)
             : MovableStruct(brain, scene)
         {

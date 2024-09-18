@@ -62,14 +62,14 @@ namespace yli::ontology
     class Scene;
     struct ComputeTaskStruct;
 
-    class ComputeTask final : public yli::ontology::Entity
+    class ComputeTask final : public Entity
     {
         private:
             ComputeTask(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ComputeTaskStruct& compute_task_struct,
-                    yli::ontology::GenericParentModule* const pipeline_parent_module);
+                    Universe& universe,
+                    const ComputeTaskStruct& compute_task_struct,
+                    GenericParentModule* const pipeline_parent_module);
 
             ~ComputeTask();
 
@@ -77,12 +77,12 @@ namespace yli::ontology
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
             ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::ChildModule child_of_pipeline;
+            ChildModule child_of_pipeline;
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -90,7 +90,7 @@ namespace yli::ontology
 
         public:
             // This method renders this `ComputeTask`, that is, computes this task.
-            void render(const yli::ontology::Scene* const);
+            void render(const Scene* const);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;

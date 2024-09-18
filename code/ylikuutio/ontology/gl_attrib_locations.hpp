@@ -23,7 +23,7 @@ namespace yli::ontology
     class Pipeline;
     class MeshModule;
 
-    void set_gl_attrib_locations(yli::ontology::Pipeline* const pipeline, yli::ontology::MeshModule* const mesh_module);
+    void set_gl_attrib_locations(Pipeline* const pipeline, MeshModule* const mesh_module);
 }
 
 #endif

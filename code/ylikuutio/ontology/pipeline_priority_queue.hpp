@@ -34,7 +34,7 @@ namespace yli::ontology
     // Insert:             O(log(n))
     // Delete:             O(log(n))
 
-    class PipelinePriorityQueue final : public std::priority_queue<yli::ontology::Pipeline*, std::vector<yli::ontology::Pipeline*>>
+    class PipelinePriorityQueue final : public std::priority_queue<Pipeline*, std::vector<Pipeline*>>
     {
         public:
             bool remove(const std::size_t childID);

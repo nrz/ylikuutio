@@ -44,14 +44,14 @@ namespace yli::ontology
     class CallbackObject;
     struct CallbackParameterStruct;
 
-    class CallbackParameter final : public yli::ontology::Entity
+    class CallbackParameter final : public Entity
     {
         private:
             CallbackParameter(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::CallbackParameterStruct& callback_parameter_struct,
-                    yli::ontology::GenericParentModule* const callback_object_parent_module,
+                    Universe& universe,
+                    const CallbackParameterStruct& callback_parameter_struct,
+                    GenericParentModule* const callback_object_parent_module,
                     yli::data::AnyValue&& any_value);
 
             ~CallbackParameter() = default;
@@ -59,15 +59,15 @@ namespace yli::ontology
         public:
             const yli::data::AnyValue& get_any_value() const;
 
-            yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Scene* get_scene() const override;
+            Entity* get_parent() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_callback_object;
+            ChildModule child_of_callback_object;
 
             friend class CallbackObject;
 

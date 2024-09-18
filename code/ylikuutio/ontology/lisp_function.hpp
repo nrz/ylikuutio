@@ -47,14 +47,14 @@ namespace yli::ontology
     class Console;
     struct LispFunctionStruct;
 
-    class LispFunction final : public yli::ontology::Entity
+    class LispFunction final : public Entity
     {
         private:
             LispFunction(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::LispFunctionStruct& lisp_function_struct,
-                    yli::ontology::GenericParentModule* const console_parent_module);
+                    Universe& universe,
+                    const LispFunctionStruct& lisp_function_struct,
+                    GenericParentModule* const console_parent_module);
 
             ~LispFunction() = default;
 
@@ -62,18 +62,18 @@ namespace yli::ontology
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_console;
-            yli::ontology::GenericParentModule parent_of_generic_lisp_function_overloads;
+            ChildModule child_of_console;
+            GenericParentModule parent_of_generic_lisp_function_overloads;
 
         private:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

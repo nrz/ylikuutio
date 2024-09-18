@@ -29,7 +29,7 @@
 
 namespace yli::ontology
 {
-    struct UniverseStruct : public yli::ontology::EntityStruct
+    struct UniverseStruct : public EntityStruct
     {
         explicit UniverseStruct(const yli::render::GraphicsApiBackend graphics_api_backend) noexcept
             : graphics_api_backend { graphics_api_backend }
@@ -37,8 +37,8 @@ namespace yli::ontology
             this->is_universe = true;
         }
 
-        UniverseStruct(const yli::ontology::UniverseStruct& universe_struct) = default;
-        yli::ontology::UniverseStruct& operator=(const yli::ontology::UniverseStruct& universe_struct) = default;
+        UniverseStruct(const UniverseStruct& universe_struct) = default;
+        UniverseStruct& operator=(const UniverseStruct& universe_struct) = default;
 
         ~UniverseStruct() = default;
 
@@ -61,7 +61,7 @@ namespace yli::ontology
         bool is_fullscreen         { false };   // Windowed mode in use.
         bool is_desktop_fullscreen { false };   // Windowed mode in use.
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
-        yli::ontology::FramebufferModuleStruct framebuffer_module_struct;
+        FramebufferModuleStruct framebuffer_module_struct;
     };
 }
 

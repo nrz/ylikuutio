@@ -57,14 +57,14 @@ namespace yli::ontology
     class Scene;
     struct SymbiontSpeciesStruct;
 
-    class SymbiontSpecies final : public yli::ontology::Entity
+    class SymbiontSpecies final : public Entity
     {
         private:
             SymbiontSpecies(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct,
-                    yli::ontology::GenericParentModule* const symbiont_material_parent_module);
+                    Universe& universe,
+                    const SymbiontSpeciesStruct& symbiont_species_struct,
+                    GenericParentModule* const symbiont_material_parent_module);
 
             ~SymbiontSpecies() = default;
 
@@ -72,7 +72,7 @@ namespace yli::ontology
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             std::size_t get_number_of_apprentices() const;
 
@@ -80,8 +80,8 @@ namespace yli::ontology
             void bind_to_parent() noexcept;
 
         public:
-            yli::ontology::GenericMasterModule* get_renderables_container() const;
-            yli::ontology::Scene* get_scene() const override;
+            GenericMasterModule* get_renderables_container() const;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -91,9 +91,9 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_symbiont_material;
-            yli::ontology::GenericMasterModule master_of_bionts;
-            yli::ontology::MeshModule mesh;
+            ChildModule child_of_symbiont_material;
+            GenericMasterModule master_of_bionts;
+            MeshModule mesh;
 
         private:
             std::string model_file_format; // Type of the model file, eg. `"png"`.

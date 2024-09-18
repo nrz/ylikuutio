@@ -53,50 +53,50 @@ namespace yli::ontology
     class VectorFont;
     struct GlyphStruct;
 
-    class Glyph final : public yli::ontology::Entity
+    class Glyph final : public Entity
     {
         private:
             Glyph(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::GlyphStruct& glyph_struct,
-                    yli::ontology::GenericParentModule* const vector_font_parent_module);
+                    Universe& universe,
+                    const GlyphStruct& glyph_struct,
+                    GenericParentModule* const vector_font_parent_module);
 
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph() = default;
 
         public:
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             const char* get_unicode_char_pointer() const;
 
-            friend class yli::ontology::VectorFont;
+            friend class VectorFont;
 
         private:
             Glyph(const Glyph&) = delete;            // Delete copy constructor.
             Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
-            yli::ontology::GenericMasterModule* get_renderables_container();
+            GenericMasterModule* get_renderables_container();
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         private:
-            yli::ontology::ChildModule child_of_vector_font;
-            yli::ontology::GenericMasterModule master_of_objects;
+            ChildModule child_of_vector_font;
+            GenericMasterModule master_of_objects;
 
         public:
-            yli::ontology::MeshModule mesh;
+            MeshModule mesh;
 
         private:
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };

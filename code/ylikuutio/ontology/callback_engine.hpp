@@ -47,7 +47,7 @@ namespace yli::ontology
     class Scene;
     struct CallbackEngineStruct;
 
-    class CallbackEngine : public yli::ontology::GenericCallbackEngine
+    class CallbackEngine : public GenericCallbackEngine
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
@@ -74,15 +74,15 @@ namespace yli::ontology
         protected:
             CallbackEngine(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::CallbackEngineStruct&,
-                    yli::ontology::GenericParentModule* const entity_parent_module);
+                    Universe& universe,
+                    const CallbackEngineStruct&,
+                    GenericParentModule* const entity_parent_module);
 
             virtual ~CallbackEngine() = default;
 
         public:
-            yli::ontology::CallbackObject* create_callback_object();
-            yli::ontology::CallbackObject* create_callback_object(
+            CallbackObject* create_callback_object();
+            CallbackObject* create_callback_object(
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
@@ -92,18 +92,18 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> get_nth_return_value(const std::size_t n) const;
             std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
-            yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Scene* get_scene() const override;
+            Entity* get_parent() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_entity;
-            yli::ontology::GenericParentModule parent_of_callback_objects;
+            ChildModule child_of_entity;
+            GenericParentModule parent_of_callback_objects;
 
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;

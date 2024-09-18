@@ -33,19 +33,19 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    class GenericParentModule : public yli::ontology::Indexable
+    class GenericParentModule : public Indexable
     {
         public:
             // Iterator typedefs.
             typedef ChildIterator       iterator;
             typedef ChildIterator const_iterator;
 
-            [[nodiscard]] virtual bool bind_child(yli::ontology::Entity& child) noexcept;
+            [[nodiscard]] virtual bool bind_child(Entity& child) noexcept;
             virtual void unbind_child(const std::size_t childID) noexcept;
 
             GenericParentModule(
-                    yli::ontology::Entity& entity,
-                    yli::ontology::Registry& registry,
+                    Entity& entity,
+                    Registry& registry,
                     const std::string& name) noexcept;
 
             GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
@@ -54,15 +54,15 @@ namespace yli::ontology
             virtual ~GenericParentModule() noexcept;
 
             // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
-            yli::ontology::GenericParentModule* get() const noexcept;
+            GenericParentModule* get() const noexcept;
 
-            yli::ontology::Entity* get_entity() const noexcept;
+            Entity* get_entity() const noexcept;
             std::size_t get_number_of_children() const noexcept;
             std::size_t get_number_of_descendants() const noexcept;
 
-            yli::ontology::Scene* get_scene() const noexcept;
+            Scene* get_scene() const noexcept;
 
-            yli::ontology::Entity* get(const std::size_t index) const noexcept override;
+            Entity* get(const std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()
@@ -85,13 +85,13 @@ namespace yli::ontology
                 return const_iterator(this->child_pointer_vector.end());
             }
 
-            std::vector<yli::ontology::Entity*> child_pointer_vector;
+            std::vector<Entity*> child_pointer_vector;
 
         protected:
             std::queue<std::size_t> free_childID_queue;
             std::size_t number_of_children { 0 };
 
-            yli::ontology::Entity& entity; // The `Entity` that owns this `GenericParentModule`.
+            Entity& entity; // The `Entity` that owns this `GenericParentModule`.
     };
 }
 

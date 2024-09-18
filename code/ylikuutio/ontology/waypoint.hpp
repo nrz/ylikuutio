@@ -38,28 +38,28 @@ namespace yli::ontology
     class Scene;
     struct WaypointStruct;
 
-    class Waypoint final : public yli::ontology::Movable
+    class Waypoint final : public Movable
     {
         public:
             Waypoint(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::WaypointStruct& waypoint_struct,
-                    yli::ontology::GenericParentModule* const parent_module,
-                    yli::ontology::GenericMasterModule* const brain_master_module);
+                    Universe& universe,
+                    const WaypointStruct& waypoint_struct,
+                    GenericParentModule* const parent_module,
+                    GenericMasterModule* const brain_master_module);
 
             Waypoint(const Waypoint&) = delete;            // Delete copy constructor.
             Waypoint &operator=(const Waypoint&) = delete; // Delete copy assignment.
 
             virtual ~Waypoint() = default;
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
-            yli::ontology::ChildModule child_of_scene;
+            ChildModule child_of_scene;
     };
 }
 

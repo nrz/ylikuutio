@@ -50,49 +50,49 @@ namespace yli::ontology
     class Material;
     struct ShapeshifterTransformationStruct;
 
-    class ShapeshifterTransformation final : public yli::ontology::Entity
+    class ShapeshifterTransformation final : public Entity
     {
         public:
             // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_material_parent(
-                    yli::ontology::ShapeshifterTransformation& shapeshifter_transformation,
-                    yli::ontology::Material& new_parent);
+                    ShapeshifterTransformation& shapeshifter_transformation,
+                    Material& new_parent);
 
         private:
             ShapeshifterTransformation(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
-                    yli::ontology::GenericParentModule* const material_parent_module);
+                    Universe& universe,
+                    const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
+                    GenericParentModule* const material_parent_module);
 
             ~ShapeshifterTransformation() = default;
 
         public:
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_material;
-            yli::ontology::GenericParentModule parent_of_shapeshifter_forms;
-            yli::ontology::GenericParentModule parent_of_shapeshifter_sequences;
+            ChildModule child_of_material;
+            GenericParentModule parent_of_shapeshifter_forms;
+            GenericParentModule parent_of_shapeshifter_sequences;
 
         private:
             void bind_to_parent() noexcept;
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
     };
 }
 

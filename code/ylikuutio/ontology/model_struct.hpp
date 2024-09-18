@@ -43,14 +43,14 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class VectorFont;
 
-    struct ModelStruct : public yli::ontology::EntityStruct
+    struct ModelStruct : public EntityStruct
     {
         ModelStruct() = default;
 
         ModelStruct(
-                yli::ontology::Ecosystem* const ecosystem_parent,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                Ecosystem* const ecosystem_parent,
+                Pipeline* const pipeline,
+                Material* const material_master)
             : parent                      { ecosystem_parent },
             pipeline                      { pipeline },
             material_or_symbiont_material { material_master }
@@ -58,9 +58,9 @@ namespace yli::ontology
         }
 
         ModelStruct(
-                yli::ontology::Scene* const scene_parent,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                Scene* const scene_parent,
+                Pipeline* const pipeline,
+                Material* const material_master)
             : parent                      { scene_parent },
             pipeline                      { pipeline },
             material_or_symbiont_material { material_master }
@@ -68,9 +68,9 @@ namespace yli::ontology
         }
 
         ModelStruct(
-                yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                ShapeshifterTransformation* const shapeshifter_transformation,
+                Pipeline* const pipeline,
+                Material* const material_master)
             : parent                      { shapeshifter_transformation },
             pipeline                      { pipeline },
             material_or_symbiont_material { material_master }
@@ -79,8 +79,8 @@ namespace yli::ontology
 
         ModelStruct(
                 const std::string& parent,
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::Material* const material_master)
+                Pipeline* const pipeline,
+                Material* const material_master)
             : parent                      { parent },
             pipeline                      { pipeline },
             material_or_symbiont_material { material_master }
@@ -88,15 +88,15 @@ namespace yli::ontology
         }
 
         ModelStruct(
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::SymbiontMaterial* const symbiont_material)
+                Pipeline* const pipeline,
+                SymbiontMaterial* const symbiont_material)
             : pipeline                    { pipeline },
             material_or_symbiont_material { symbiont_material }
         {
         }
 
         explicit ModelStruct(
-                yli::ontology::VectorFont* const vector_font_parent)
+                VectorFont* const vector_font_parent)
             : parent { vector_font_parent }
         {
         }
@@ -126,13 +126,13 @@ namespace yli::ontology
         std::vector<glm::vec3> normals;
         std::variant<
             std::monostate,
-            yli::ontology::Ecosystem*,
-            yli::ontology::Scene*,
-            yli::ontology::ShapeshifterTransformation*,
-            yli::ontology::VectorFont*,
+            Ecosystem*,
+            Scene*,
+            ShapeshifterTransformation*,
+            VectorFont*,
             std::string> parent {};
-        yli::ontology::Pipeline* pipeline                                      { nullptr };
-        std::variant<std::monostate, yli::ontology::Material*, yli::ontology::SymbiontMaterial*> material_or_symbiont_material {};
+        Pipeline* pipeline                     { nullptr };
+        std::variant<std::monostate, Material*, SymbiontMaterial*> material_or_symbiont_material {};
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr }; // For `Glyph`s.
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.

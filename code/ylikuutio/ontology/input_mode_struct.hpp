@@ -24,9 +24,9 @@ namespace yli::ontology
 {
     class Console;
 
-    struct InputModeStruct : public yli::ontology::EntityStruct
+    struct InputModeStruct : public EntityStruct
     {
-        yli::ontology::Console* console_master { nullptr };
+        Console* console_master { nullptr };
     };
 }
 

@@ -36,9 +36,9 @@ namespace yli::ontology
 }
 
 typedef std::shared_ptr<yli::data::AnyValue> (*GetContentCallback) (
-        yli::ontology::CallbackEngine*,
-        yli::ontology::CallbackObject*,
-        std::vector<yli::ontology::CallbackParameter*>&,
+        CallbackEngine*,
+        CallbackObject*,
+        std::vector<CallbackParameter*>&,
         uint32_t x_start,
         uint32_t y_start,
         uint32_t z_start,

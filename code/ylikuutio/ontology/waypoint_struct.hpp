@@ -28,17 +28,17 @@ namespace yli::ontology
     class Brain;
     class Scene;
 
-    struct WaypointStruct final : public yli::ontology::MovableStruct
+    struct WaypointStruct final : public MovableStruct
     {
         WaypointStruct(
-                yli::ontology::Brain* const brain_master,
-                yli::ontology::Scene* const scene_parent)
+                Brain* const brain_master,
+                Scene* const scene_parent)
             : MovableStruct(brain_master, scene_parent)
         {
         }
 
         WaypointStruct(
-                yli::ontology::Brain* const brain,
+                Brain* const brain,
                 const std::string& scene_parent)
             : MovableStruct(brain, scene_parent)
         {

@@ -28,10 +28,10 @@ namespace yli::ontology
 {
     class ConsoleCallbackObject;
 
-    struct ConsoleCallbackParameterStruct final : public yli::ontology::EntityStruct
+    struct ConsoleCallbackParameterStruct final : public EntityStruct
     {
         explicit ConsoleCallbackParameterStruct(
-                yli::ontology::ConsoleCallbackObject* const console_callback_object_parent)
+                ConsoleCallbackObject* const console_callback_object_parent)
             : console_callback_object_parent { console_callback_object_parent }
         {
         }
@@ -42,7 +42,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::ConsoleCallbackObject*, std::string> console_callback_object_parent {};
+        std::variant<ConsoleCallbackObject*, std::string> console_callback_object_parent {};
     };
 }
 

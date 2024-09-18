@@ -34,13 +34,13 @@ namespace yli::ontology
     class Universe;
     struct GenericCallbackEngineStruct;
 
-    class GenericCallbackEngine : public yli::ontology::Entity
+    class GenericCallbackEngine : public Entity
     {
         public:
             GenericCallbackEngine(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::GenericCallbackEngineStruct& generic_callback_engine_struct);
+                    Universe& universe,
+                    const GenericCallbackEngineStruct& generic_callback_engine_struct);
 
             GenericCallbackEngine(const GenericCallbackEngine&) = delete;            // Delete copy constructor.
             GenericCallbackEngine &operator=(const GenericCallbackEngine&) = delete; // Delete copy assignment.

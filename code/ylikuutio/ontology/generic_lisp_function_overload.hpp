@@ -46,13 +46,13 @@ namespace yli::ontology
     class Scene;
     class Console;
 
-    class GenericLispFunctionOverload : public yli::ontology::Entity
+    class GenericLispFunctionOverload : public Entity
     {
         protected:
             GenericLispFunctionOverload(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const lisp_function_parent_module);
+                    Universe& universe,
+                    GenericParentModule* const lisp_function_parent_module);
 
             virtual ~GenericLispFunctionOverload() = default;
 
@@ -60,17 +60,17 @@ namespace yli::ontology
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             virtual std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) = 0;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryAllocator;
 
-            yli::ontology::ChildModule child_of_lisp_function;
+            ChildModule child_of_lisp_function;
 
         private:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

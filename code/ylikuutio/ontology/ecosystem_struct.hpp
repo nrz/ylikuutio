@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct EcosystemStruct : public yli::ontology::EntityStruct
+    struct EcosystemStruct : public EntityStruct
     {
     };
 }

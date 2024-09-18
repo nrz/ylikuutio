@@ -65,21 +65,21 @@ namespace yli::ontology
     class GenericParentModule;
     struct BrainStruct;
 
-    class Brain final : public yli::ontology::Entity
+    class Brain final : public Entity
     {
         private:
             Brain(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::BrainStruct& brain_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module);
+                    Universe& universe,
+                    const BrainStruct& brain_struct,
+                    GenericParentModule* const scene_parent_module);
 
             ~Brain() = default;
 
         public:
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::GenericMasterModule* get_generic_master_module() const;
+            GenericMasterModule* get_generic_master_module() const;
 
             std::size_t get_number_of_apprentices() const;
 
@@ -88,16 +88,16 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_scene;
-            yli::ontology::GenericMasterModule master_of_movables;
+            ChildModule child_of_scene;
+            GenericMasterModule master_of_movables;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::CallbackEngine* callback_engine { nullptr };
+            CallbackEngine* callback_engine { nullptr };
     };
 }
 

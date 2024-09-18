@@ -28,11 +28,11 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
 
-    struct BrainStruct : public yli::ontology::EntityStruct
+    struct BrainStruct : public EntityStruct
     {
         BrainStruct(
-                yli::ontology::Scene* const scene_parent,
-                yli::ontology::CallbackEngine* const callback_engine)
+                Scene* const scene_parent,
+                CallbackEngine* const callback_engine)
             : parent        { scene_parent },
             callback_engine { callback_engine }
         {
@@ -40,14 +40,14 @@ namespace yli::ontology
 
         BrainStruct(
                 const std::string& scene_parent,
-                yli::ontology::CallbackEngine* const callback_engine)
+                CallbackEngine* const callback_engine)
             : parent        { scene_parent },
             callback_engine { callback_engine }
         {
         }
 
-        std::variant<yli::ontology::Scene*, std::string> parent {};
-        yli::ontology::CallbackEngine* callback_engine { nullptr };
+        std::variant<Scene*, std::string> parent {};
+        CallbackEngine* callback_engine { nullptr };
     };
 }
 

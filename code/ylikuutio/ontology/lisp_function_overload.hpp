@@ -64,18 +64,18 @@ namespace yli::ontology
     class GenericParentModule;
 
     template<typename... Types>
-        class LispFunctionOverload final : public yli::ontology::GenericLispFunctionOverload
+        class LispFunctionOverload final : public GenericLispFunctionOverload
     {
         private:
             LispFunctionOverload(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    yli::ontology::GenericParentModule* const lisp_function_parent_module,
+                    Universe& universe,
+                    GenericParentModule* const lisp_function_parent_module,
                     std::optional<yli::data::AnyValue>(*callback)(Types...))
                 : GenericLispFunctionOverload(application, universe, lisp_function_parent_module),
                 callback(callback)
             {
-                // `yli::ontology::Entity` member variables begin here.
+                // `Entity` member variables begin here.
                 this->type_string = "yli::ontology::LispFunctionOverload*";
             }
 
@@ -87,14 +87,14 @@ namespace yli::ontology
 
             std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
             {
-                yli::ontology::LispFunction* const lisp_function_parent = static_cast<yli::ontology::LispFunction*>(this->get_parent());
+                LispFunction* const lisp_function_parent = static_cast<LispFunction*>(this->get_parent());
 
                 if (lisp_function_parent == nullptr) [[unlikely]]
                 {
                     throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
                 }
 
-                yli::ontology::Console* const console_parent_of_lisp_function = static_cast<yli::ontology::Console*>(lisp_function_parent->get_parent());
+                Console* const console_parent_of_lisp_function = static_cast<Console*>(lisp_function_parent->get_parent());
 
                 if (console_parent_of_lisp_function == nullptr) [[unlikely]]
                 {
@@ -105,7 +105,7 @@ namespace yli::ontology
                 // Now, process the arguments and call.
 
                 std::size_t parameter_i = 0;                      // Start from the first parameter.
-                yli::ontology::Entity* context = &this->universe; // `Universe` is the default context.
+                Entity* context = &this->universe; // `Universe` is the default context.
 
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
@@ -128,9 +128,9 @@ namespace yli::ontology
             template<typename Tag>
                 std::optional<std::tuple<>> process_args(
                         std::size_t,
-                        yli::ontology::Universe&,
-                        yli::ontology::Console&,
-                        yli::ontology::Entity*&,
+                        Universe&,
+                        Console&,
+                        Entity*&,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
                 {
@@ -150,9 +150,9 @@ namespace yli::ontology
             template<typename Tag, typename T1, typename... RestTypes>
                 std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
                         std::size_t tag,
-                        yli::ontology::Universe& universe,
-                        yli::ontology::Console& console,
-                        yli::ontology::Entity*& context,
+                        Universe& universe,
+                        Console& console,
+                        Entity*& context,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
                 {

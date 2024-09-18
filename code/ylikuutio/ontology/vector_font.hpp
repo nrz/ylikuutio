@@ -57,21 +57,21 @@ namespace yli::ontology
     class Glyph;
     struct VectorFontStruct;
 
-    class VectorFont final : public yli::ontology::Entity
+    class VectorFont final : public Entity
     {
         public:
             // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_material_parent(
-                    yli::ontology::VectorFont& vector_font,
-                    yli::ontology::Material& new_parent);
+                    VectorFont& vector_font,
+                    Material& new_parent);
 
         private:
             VectorFont(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::VectorFontStruct& vector_font_struct,
-                    yli::ontology::GenericParentModule* const material_parent_module);
+                    Universe& universe,
+                    const VectorFontStruct& vector_font_struct,
+                    GenericParentModule* const material_parent_module);
 
             ~VectorFont() = default;
 
@@ -79,26 +79,26 @@ namespace yli::ontology
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
             VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
+            Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
             // The rest fields are created in the constructor.
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_material;
-            yli::ontology::GenericParentModule parent_of_glyphs;
-            yli::ontology::GenericParentModule parent_of_text_3ds;
+            ChildModule child_of_material;
+            GenericParentModule parent_of_glyphs;
+            GenericParentModule parent_of_text_3ds;
 
         public:
-            yli::ontology::Scene* get_scene() const override;
-            yli::ontology::Pipeline* get_pipeline() const;
+            Scene* get_scene() const override;
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -106,7 +106,7 @@ namespace yli::ontology
 
         public:
             // This method renders all `Glyph`s of this `VectorFont`.
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
         private:
             std::string font_file_format; // Type of the model file, eg. `"png"`.
@@ -119,7 +119,7 @@ namespace yli::ontology
             std::vector<std::string> glyph_names;
             std::vector<std::string> unicode_strings;
 
-            std::unordered_map<int32_t, yli::ontology::Glyph*> unicode_glyph_map;
+            std::unordered_map<int32_t, Glyph*> unicode_glyph_map;
     };
 }
 

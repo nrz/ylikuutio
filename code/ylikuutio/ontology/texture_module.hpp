@@ -39,16 +39,16 @@ namespace yli::ontology
     {
         public:
             TextureModule(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Registry* const registry,
+                    Universe& universe,
+                    Registry* const registry,
                     const std::string& texture_filename,
                     const std::string& texture_file_format,
                     const yli::load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);
 
             TextureModule(
-                    yli::ontology::Universe& universe,
-                    yli::ontology::Registry* const registry,
+                    Universe& universe,
+                    Registry* const registry,
                     const ofbx::Texture* ofbx_texture,
                     const yli::load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);

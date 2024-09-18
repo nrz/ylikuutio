@@ -30,7 +30,7 @@ namespace yli::ontology
     class ChildModule
     {
         public:
-            ChildModule(yli::ontology::GenericParentModule* const parent_module, yli::ontology::Entity& entity) noexcept
+            ChildModule(GenericParentModule* const parent_module, Entity& entity) noexcept
                 : parent_module { parent_module },
                 entity { entity }
             {
@@ -42,27 +42,27 @@ namespace yli::ontology
 
             ~ChildModule() noexcept;
 
-            yli::ontology::Entity* get_parent() const noexcept;
-            yli::ontology::Entity* get_child() const noexcept;
+            Entity* get_parent() const noexcept;
+            Entity* get_child() const noexcept;
             void release() noexcept;
 
-            yli::ontology::Scene* get_scene() const noexcept;
+            Scene* get_scene() const noexcept;
             std::size_t get_childID() const noexcept;
 
         private:
             void unbind_child() const noexcept;
             void set_parent_module_and_bind_to_new_parent(
-                    yli::ontology::GenericParentModule* const new_parent_module) noexcept;
+                    GenericParentModule* const new_parent_module) noexcept;
 
         public:
             void unbind_and_bind_to_new_parent(
-                    yli::ontology::GenericParentModule* const new_parent_module) noexcept;
+                    GenericParentModule* const new_parent_module) noexcept;
 
         private:
             void bind_to_parent_module() noexcept;
 
-            yli::ontology::GenericParentModule* parent_module;
-            yli::ontology::Entity& entity;
+            GenericParentModule* parent_module;
+            Entity& entity;
     };
 }
 

@@ -55,27 +55,27 @@ namespace yli::ontology
     class PipelineCompare;
     struct PipelineStruct;
 
-    class Pipeline final : public yli::ontology::Entity
+    class Pipeline final : public Entity
     {
         public:
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
-                    yli::ontology::Pipeline& pipeline,
-                    yli::ontology::Ecosystem& new_parent);
+                    Pipeline& pipeline,
+                    Ecosystem& new_parent);
 
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
-                    yli::ontology::Pipeline& pipeline,
-                    yli::ontology::Scene& new_parent);
+                    Pipeline& pipeline,
+                    Scene& new_parent);
 
         private:
             Pipeline(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::PipelineStruct& pipeline_struct,
-                    yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module);
+                    Universe& universe,
+                    const PipelineStruct& pipeline_struct,
+                    GenericParentModule* const ecosystem_or_scene_parent_module);
 
             ~Pipeline();
 
@@ -83,21 +83,21 @@ namespace yli::ontology
             Pipeline(const Pipeline&) = delete;            // Delete copy constructor.
             Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
 
-            yli::ontology::Scene* get_scene() const override;
-            yli::ontology::Entity* get_parent() const override;
+            Scene* get_scene() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::MasterModule<yli::ontology::Pipeline*>* get_master_module() const
+            MasterModule<Pipeline*>* get_master_module() const
             {
-                return const_cast<yli::ontology::MasterModule<yli::ontology::Pipeline*>*>(&this->master_of_materials);
+                return const_cast<MasterModule<Pipeline*>*>(&this->master_of_materials);
             }
 
             std::size_t get_number_of_apprentices() const;
 
             GLuint get_program_id() const;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
-            friend class yli::ontology::PipelineCompare;
+            friend class PipelineCompare;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
@@ -105,10 +105,10 @@ namespace yli::ontology
             template<typename T1>
                 friend void yli::hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
-            yli::ontology::ChildModule child_of_ecosystem_or_scene;
-            yli::ontology::GenericParentModule parent_of_compute_tasks;
-            yli::ontology::MasterModule<yli::ontology::Pipeline*> master_of_materials;
-            yli::ontology::GenericMasterModule master_of_symbioses;
+            ChildModule child_of_ecosystem_or_scene;
+            GenericParentModule parent_of_compute_tasks;
+            MasterModule<Pipeline*> master_of_materials;
+            GenericMasterModule master_of_symbioses;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -116,7 +116,7 @@ namespace yli::ontology
 
         public:
             // This method renders all materials using this `Pipeline`.
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
         private:
             GLuint program_id     { 0 };          // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.

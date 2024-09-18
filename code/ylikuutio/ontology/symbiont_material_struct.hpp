@@ -31,17 +31,17 @@ namespace yli::ontology
     class Pipeline;
     class Symbiosis;
 
-    struct SymbiontMaterialStruct : public yli::ontology::EntityStruct
+    struct SymbiontMaterialStruct : public EntityStruct
     {
-        SymbiontMaterialStruct(yli::ontology::Symbiosis* const symbiosis_parent,
-                yli::ontology::Pipeline* const pipeline_master)
+        SymbiontMaterialStruct(Symbiosis* const symbiosis_parent,
+                Pipeline* const pipeline_master)
             : symbiosis_parent { symbiosis_parent },
             pipeline_master { pipeline_master }
         {
         }
 
-        yli::ontology::Symbiosis* symbiosis_parent { nullptr };
-        yli::ontology::Pipeline* pipeline_master   { nullptr };
+        Symbiosis* symbiosis_parent                { nullptr };
+        Pipeline* pipeline_master                  { nullptr };
         const ofbx::Texture* ofbx_texture          { nullptr };
     };
 }

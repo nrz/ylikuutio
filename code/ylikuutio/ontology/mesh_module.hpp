@@ -41,8 +41,8 @@ namespace yli::ontology
     {
         public:
             MeshModule(
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ModelStruct& model_struct);
+                    Universe& universe,
+                    const ModelStruct& model_struct);
 
             MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
             MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.

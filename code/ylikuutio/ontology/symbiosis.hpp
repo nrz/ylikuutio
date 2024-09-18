@@ -71,34 +71,34 @@ namespace yli::ontology
     class SymbiontSpecies;
     struct SymbiosisStruct;
 
-    class Symbiosis final : public yli::ontology::Entity
+    class Symbiosis final : public Entity
     {
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
-                    yli::ontology::Symbiosis& symbiosis,
-                    yli::ontology::Ecosystem& new_parent);
+                    Symbiosis& symbiosis,
+                    Ecosystem& new_parent);
 
             // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
-                    yli::ontology::Symbiosis& symbiosis,
-                    yli::ontology::Scene& new_parent);
+                    Symbiosis& symbiosis,
+                    Scene& new_parent);
 
             // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_pipeline`.
             static std::optional<yli::data::AnyValue> bind_to_new_pipeline(
-                    yli::ontology::Symbiosis& symbiosis,
-                    yli::ontology::Pipeline& new_pipeline) noexcept;
+                    Symbiosis& symbiosis,
+                    Pipeline& new_pipeline) noexcept;
 
         private:
             Symbiosis(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::SymbiosisStruct& symbiosis_struct,
-                    yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
-                    yli::ontology::GenericMasterModule* const pipeline_master_module);
+                    Universe& universe,
+                    const SymbiosisStruct& symbiosis_struct,
+                    GenericParentModule* const ecosystem_or_scene_parent_module,
+                    GenericMasterModule* const pipeline_master_module);
 
             ~Symbiosis() = default;
 
@@ -106,20 +106,20 @@ namespace yli::ontology
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.
             Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
             std::size_t get_number_of_symbiont_materials() const;
             std::size_t get_number_of_symbiont_species() const;
 
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
             const std::string& get_model_file_format() const;
 
-            yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
-            yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
+            SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
+            SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
             GLint get_vertex_position_modelspace_id(const std::size_t biontID) const;
             GLint get_vertex_uv_id(const std::size_t biontID) const;
             GLint get_vertex_normal_modelspace_id(const std::size_t biontID) const;
@@ -139,12 +139,12 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_ecosystem_or_scene;
-            yli::ontology::GenericParentModule parent_of_symbiont_materials;
-            yli::ontology::ApprenticeModule apprentice_of_pipeline;
-            yli::ontology::GenericMasterModule master_of_holobionts;
+            ChildModule child_of_ecosystem_or_scene;
+            GenericParentModule parent_of_symbiont_materials;
+            ApprenticeModule apprentice_of_pipeline;
+            GenericMasterModule master_of_holobionts;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -165,8 +165,8 @@ namespace yli::ontology
             std::vector<std::vector<glm::vec3>> indexed_normals;
 
             std::unordered_map<const ofbx::Texture*, std::vector<int32_t>> ofbx_diffuse_texture_mesh_map;
-            std::vector<yli::ontology::SymbiontMaterial*> biontID_symbiont_material_vector;
-            std::vector<yli::ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
+            std::vector<SymbiontMaterial*> biontID_symbiont_material_vector;
+            std::vector<SymbiontSpecies*> biontID_symbiont_species_vector;
             std::vector<const ofbx::Mesh*> ofbx_meshes;
             std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
             std::vector<const ofbx::Texture*> ofbx_normal_texture_vector;  // currently not in use.

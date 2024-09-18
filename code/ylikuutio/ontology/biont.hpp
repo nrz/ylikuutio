@@ -46,15 +46,15 @@ namespace yli::ontology
     class GenericMasterModule;
     struct BiontStruct;
 
-    class Biont final : public yli::ontology::Movable
+    class Biont final : public Movable
     {
         private:
             Biont(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::BiontStruct& biont_struct,
-                    yli::ontology::GenericParentModule* const holobiont_parent_module,
-                    yli::ontology::GenericMasterModule* const symbiont_species_master_module);
+                    Universe& universe,
+                    const BiontStruct& biont_struct,
+                    GenericParentModule* const holobiont_parent_module,
+                    GenericMasterModule* const symbiont_species_master_module);
 
             ~Biont() = default;
 
@@ -62,13 +62,13 @@ namespace yli::ontology
             Biont(const Biont&) = delete;            // Delete copy constructor.
             Biont& operator=(const Biont&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_holobiont;
-            yli::ontology::ApprenticeModule apprentice_of_symbiont_species;
+            ChildModule child_of_holobiont;
+            ApprenticeModule apprentice_of_symbiont_species;
 
             // This method renders this `Biont`.
             void render();
@@ -79,7 +79,7 @@ namespace yli::ontology
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 
         private:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

@@ -47,21 +47,21 @@ namespace yli::ontology
     class Font2d;
     struct TextStruct;
 
-    class Text2d final : public yli::ontology::Entity
+    class Text2d final : public Entity
     {
         public:
             // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
-                    yli::ontology::Text2d& text_2d,
-                    yli::ontology::Font2d& new_parent);
+                    Text2d& text_2d,
+                    Font2d& new_parent);
 
         private:
             Text2d(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::TextStruct& text_struct,
-                    yli::ontology::GenericParentModule* const font_2d_parent_module);
+                    Universe& universe,
+                    const TextStruct& text_struct,
+                    GenericParentModule* const font_2d_parent_module);
 
             ~Text2d();
 
@@ -71,16 +71,16 @@ namespace yli::ontology
 
             void render();
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             void change_string(const std::string& text);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_font_2d;
+            ChildModule child_of_font_2d;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

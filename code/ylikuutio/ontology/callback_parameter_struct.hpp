@@ -28,9 +28,9 @@ namespace yli::ontology
 {
     class CallbackObject;
 
-    struct CallbackParameterStruct final : public yli::ontology::EntityStruct
+    struct CallbackParameterStruct final : public EntityStruct
     {
-        explicit CallbackParameterStruct(yli::ontology::CallbackObject* const callback_object_parent)
+        explicit CallbackParameterStruct(CallbackObject* const callback_object_parent)
             : callback_object_parent { callback_object_parent }
         {
         }
@@ -40,7 +40,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::CallbackObject*, std::string> callback_object_parent {};
+        std::variant<CallbackObject*, std::string> callback_object_parent {};
     };
 }
 

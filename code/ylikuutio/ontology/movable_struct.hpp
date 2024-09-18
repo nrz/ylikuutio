@@ -41,7 +41,7 @@ namespace yli::ontology
     class Brain;
     class Scene;
 
-    struct MovableStruct : public yli::ontology::EntityStruct
+    struct MovableStruct : public EntityStruct
     {
         MovableStruct()
             : orientation(0.0f, 0.0f, 0.0f)
@@ -49,7 +49,7 @@ namespace yli::ontology
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain_master,
+                Brain* const brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
@@ -61,7 +61,7 @@ namespace yli::ontology
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain_master,
+                Brain* const brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
@@ -76,15 +76,15 @@ namespace yli::ontology
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain_master,
-                yli::ontology::Scene* const scene)
+                Brain* const brain_master,
+                Scene* const scene)
             : brain_master { brain_master },
             scene { scene }
         {
         }
 
         MovableStruct(
-                yli::ontology::Brain* const brain_master,
+                Brain* const brain_master,
                 const std::string& scene)
             : brain_master { brain_master },
             scene { scene }
@@ -92,20 +92,20 @@ namespace yli::ontology
         }
 
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
-        yli::ontology::Brain* brain_master { nullptr };
-        std::variant<yli::ontology::Scene*, std::string> scene {};
+        Brain* brain_master { nullptr };
+        std::variant<Scene*, std::string> scene {};
 
         std::vector<glm::vec3> initial_rotate_vectors;
         std::vector<float> initial_rotate_angles;
 
         glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
-        yli::ontology::CartesianCoordinatesModule cartesian_coordinates { NAN, NAN, NAN };
-        yli::ontology::OrientationModule orientation;
+        CartesianCoordinatesModule cartesian_coordinates { NAN, NAN, NAN };
+        OrientationModule orientation;
 
         float scale { 1.0f };
 
-        yli::ontology::RigidBodyModuleStruct rigid_body_module_struct;
+        RigidBodyModuleStruct rigid_body_module_struct;
     };
 }
 

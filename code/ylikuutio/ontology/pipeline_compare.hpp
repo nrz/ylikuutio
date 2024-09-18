@@ -25,7 +25,7 @@ namespace yli::ontology
     class PipelineCompare final
     {
         public:
-            bool operator() (yli::ontology::Pipeline* first, yli::ontology::Pipeline* second);
+            bool operator() (Pipeline* first, Pipeline* second);
     };
 }
 

@@ -30,24 +30,24 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    struct MaterialStruct : public yli::ontology::EntityStruct
+    struct MaterialStruct : public EntityStruct
     {
-        MaterialStruct(yli::ontology::Ecosystem* const ecosystem_parent,
-                yli::ontology::Pipeline* const pipeline)
+        MaterialStruct(Ecosystem* const ecosystem_parent,
+                Pipeline* const pipeline)
             : parent { ecosystem_parent },
             pipeline { pipeline }
         {
         }
 
-        MaterialStruct(yli::ontology::Scene* const scene_parent,
-                yli::ontology::Pipeline* const pipeline)
+        MaterialStruct(Scene* const scene_parent,
+                Pipeline* const pipeline)
             : parent { scene_parent },
             pipeline { pipeline }
         {
         }
 
         MaterialStruct(const std::string& parent,
-                yli::ontology::Pipeline* const pipeline)
+                Pipeline* const pipeline)
             : parent { parent },
             pipeline { pipeline }
         {
@@ -55,8 +55,8 @@ namespace yli::ontology
 
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
-        yli::ontology::Pipeline* pipeline   { nullptr };
+        std::variant<Ecosystem*, Scene*, std::string> parent;
+        Pipeline* pipeline { nullptr };
     };
 }
 

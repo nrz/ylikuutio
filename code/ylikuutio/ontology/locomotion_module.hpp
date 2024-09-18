@@ -27,11 +27,11 @@ namespace yli::ontology
     class LocomotionModule
     {
         public:
-            explicit LocomotionModule(yli::ontology::LocomotionEnvironment environment);
-            yli::ontology::LocomotionEnvironment get_environment() const;
+            explicit LocomotionModule(LocomotionEnvironment environment);
+            LocomotionEnvironment get_environment() const;
 
         private:
-            yli::ontology::LocomotionEnvironment environment;
+            LocomotionEnvironment environment;
     };
 }
 

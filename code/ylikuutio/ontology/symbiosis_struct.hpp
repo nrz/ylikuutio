@@ -30,19 +30,19 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    struct SymbiosisStruct final : public yli::ontology::EntityStruct
+    struct SymbiosisStruct final : public EntityStruct
     {
         SymbiosisStruct(
-                yli::ontology::Ecosystem* const ecosystem_parent,
-                yli::ontology::Pipeline* const pipeline_master)
+                Ecosystem* const ecosystem_parent,
+                Pipeline* const pipeline_master)
             : parent { ecosystem_parent },
             pipeline { pipeline_master }
         {
         }
 
         SymbiosisStruct(
-                yli::ontology::Scene* const scene_parent,
-                yli::ontology::Pipeline* const pipeline_master)
+                Scene* const scene_parent,
+                Pipeline* const pipeline_master)
             : parent { scene_parent },
             pipeline { pipeline_master }
         {
@@ -50,7 +50,7 @@ namespace yli::ontology
 
         SymbiosisStruct(
                 const std::string& parent,
-                yli::ontology::Pipeline* const pipeline_master)
+                Pipeline* const pipeline_master)
             : parent { parent },
             pipeline { pipeline_master }
         {
@@ -60,8 +60,8 @@ namespace yli::ontology
         std::string model_file_format;                      // Type of the model file. Supported file formats so far:
                                                             // `"fbx"`/`"FBX"` - FBX model.
 
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent {};
-        yli::ontology::Pipeline* pipeline { nullptr };
+        std::variant<Ecosystem*, Scene*, std::string> parent {};
+        Pipeline* pipeline { nullptr };
     };
 }
 

@@ -56,8 +56,8 @@ namespace yli::ontology
     class Entity
     {
         public:
-            bool operator==(const yli::ontology::Entity& rhs) const noexcept;
-            bool operator!=(const yli::ontology::Entity& rhs) const = default;
+            bool operator==(const Entity& rhs) const noexcept;
+            bool operator!=(const Entity& rhs) const = default;
 
             yli::core::Application& get_application() const;
 
@@ -66,8 +66,8 @@ namespace yli::ontology
         protected:
             Entity(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::EntityStruct& entity_struct);
+                    Universe& universe,
+                    const EntityStruct& entity_struct);
 
         public:
             virtual ~Entity();
@@ -87,15 +87,15 @@ namespace yli::ontology
 
             bool get_can_be_erased() const;
 
-            yli::ontology::Universe& get_universe() const;
+            Universe& get_universe() const;
 
             // Different classes are bound to `Scene` in different ways,
             // so they need to `override` this to provide the functionality.
             // Note: not all classes have any relation to a specific `Scene`.
             // E.g. `Universe` may have many `Scene`s, but is descendant of none.
-            virtual yli::ontology::Scene* get_scene() const = 0;
+            virtual Scene* get_scene() const = 0;
 
-            virtual yli::ontology::Entity* get_parent() const = 0;
+            virtual Entity* get_parent() const = 0;
             std::size_t get_number_of_all_children() const;
             std::size_t get_number_of_all_descendants() const;
             std::size_t get_number_of_variables() const;
@@ -107,15 +107,15 @@ namespace yli::ontology
             void set_local_name(const std::string& local_name);
 
             bool has_child(const std::string& name) const;
-            yli::ontology::Entity* get_entity(const std::string& name) const;
+            Entity* get_entity(const std::string& name) const;
             std::string get_entity_names() const;
             std::string complete(const std::string& input) const;
-            void add_entity(const std::string& name, yli::ontology::Entity& entity);
+            void add_entity(const std::string& name, Entity& entity);
             void erase_entity(const std::string& name);
 
-            void create_variable(const yli::ontology::VariableStruct& variable_struct, const yli::data::AnyValue& any_value);
+            void create_variable(const VariableStruct& variable_struct, const yli::data::AnyValue& any_value);
             bool has_variable(const std::string& variable_name) const;
-            yli::ontology::Variable* get_variable(const std::string& variable_name) const;
+            Variable* get_variable(const std::string& variable_name) const;
             bool set_variable(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value);
 
             virtual std::string help() const;                         // this function returns general help string.
@@ -126,7 +126,7 @@ namespace yli::ontology
             // Public `Entity` creation callbacks.
 
             static std::optional<yli::data::AnyValue> create_variable_with_parent_name_type_value(
-                    yli::ontology::Entity& parent,
+                    Entity& parent,
                     const std::string& variable_name,
                     const std::string& variable_type,
                     const std::string& variable_value);
@@ -134,24 +134,24 @@ namespace yli::ontology
             // Public data printing callbacks.
 
             static std::optional<yli::data::AnyValue> print_children(
-                    yli::ontology::Console& console,
-                    const yli::ontology::Entity& entity);
+                    Console& console,
+                    const Entity& entity);
 
             static std::optional<yli::data::AnyValue> print_variables0(
-                    const yli::ontology::Universe& universe,
-                    yli::ontology::Console& console);
+                    const Universe& universe,
+                    Console& console);
 
             static std::optional<yli::data::AnyValue> print_variables1(
-                    const yli::ontology::Universe&,
-                    yli::ontology::Console& console,
-                    const yli::ontology::Entity& entity);
+                    const Universe&,
+                    Console& console,
+                    const Entity& entity);
 
             // Public callbacks end here.
 
             bool should_render { false };
 
-            friend class yli::ontology::GenericParentModule;
-            friend class yli::ontology::Universe;
+            friend class GenericParentModule;
+            friend class Universe;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryAllocator;
@@ -168,12 +168,12 @@ namespace yli::ontology
 
         public:
             // Named entities are stored here so that they can be recalled, if needed.
-            yli::ontology::Registry registry;
-            yli::ontology::GenericParentModule parent_of_variables;
-            yli::ontology::GenericParentModule parent_of_callback_engines;
+            Registry registry;
+            GenericParentModule parent_of_variables;
+            GenericParentModule parent_of_callback_engines;
 
         protected:
-            yli::ontology::Universe& universe;
+            Universe& universe;
             std::size_t entityID { std::numeric_limits<std::size_t>::max() };
 
             std::string type_string;

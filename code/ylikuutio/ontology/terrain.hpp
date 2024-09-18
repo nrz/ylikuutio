@@ -32,16 +32,16 @@ namespace yli::ontology
     class Universe;
     struct ObjectStruct;
 
-    class Terrain final : public yli::ontology::Object
+    class Terrain final : public Object
     {
         public:
             Terrain(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ObjectStruct& terrain_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const mesh_master_module,
-                    yli::ontology::GenericMasterModule* const /* brain_master_module */);
+                    Universe& universe,
+                    const ObjectStruct& terrain_struct,
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const mesh_master_module,
+                    GenericMasterModule* const /* brain_master_module */);
 
             ~Terrain() = default;
 

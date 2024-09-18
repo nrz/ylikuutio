@@ -30,11 +30,11 @@ namespace yli::ontology
     class Brain;
     class Symbiosis;
 
-    struct HolobiontStruct : public yli::ontology::MovableStruct
+    struct HolobiontStruct : public MovableStruct
     {
         HolobiontStruct(
-                yli::ontology::Scene& parent,
-                yli::ontology::Symbiosis& symbiosis)
+                Scene& parent,
+                Symbiosis& symbiosis)
             : MovableStruct(nullptr, &parent),
             symbiosis { &symbiosis }
         {
@@ -42,22 +42,22 @@ namespace yli::ontology
 
         HolobiontStruct(
                 const std::string& parent,
-                yli::ontology::Symbiosis& symbiosis)
+                Symbiosis& symbiosis)
             : MovableStruct(nullptr, parent),
             symbiosis { &symbiosis }
         {
         }
 
         HolobiontStruct(
-                yli::ontology::Brain* const brain,
+                Brain* const brain,
                 const std::string& parent,
-                yli::ontology::Symbiosis& symbiosis)
+                Symbiosis& symbiosis)
             : MovableStruct(brain, parent),
             symbiosis { &symbiosis }
         {
         }
 
-        yli::ontology::Symbiosis* symbiosis { nullptr };
+        Symbiosis* symbiosis { nullptr };
 
         std::vector<bool> should_render_bionts_vector;
     };

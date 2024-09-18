@@ -35,7 +35,7 @@ namespace yli::ontology
 
             virtual ~Indexable() = default;
 
-            virtual yli::ontology::Entity* get(const std::size_t index) const = 0;
+            virtual Entity* get(const std::size_t index) const = 0;
     };
 }
 

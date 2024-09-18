@@ -44,14 +44,14 @@ namespace yli::ontology
     class ConsoleCallbackObject;
     struct ConsoleCallbackParameterStruct;
 
-    class ConsoleCallbackParameter final : public yli::ontology::Entity
+    class ConsoleCallbackParameter final : public Entity
     {
         private:
             ConsoleCallbackParameter(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    yli::ontology::GenericParentModule* const console_callback_object_parent_module,
+                    Universe& universe,
+                    const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+                    GenericParentModule* const console_callback_object_parent_module,
                     const yli::data::AnyValue& any_value);
 
             ~ConsoleCallbackParameter() = default;
@@ -59,15 +59,15 @@ namespace yli::ontology
         public:
             const yli::data::AnyValue& get_any_value() const;
 
-            yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Scene* get_scene() const override;
+            Entity* get_parent() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_console_callback_object;
+            ChildModule child_of_console_callback_object;
 
             friend class ConsoleCallbackObject;
 

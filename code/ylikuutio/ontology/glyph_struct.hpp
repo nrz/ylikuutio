@@ -24,10 +24,10 @@ namespace yli::ontology
 {
     class VectorFont;
 
-    struct GlyphStruct final : public yli::ontology::ModelStruct
+    struct GlyphStruct final : public ModelStruct
     {
         explicit GlyphStruct(
-                yli::ontology::VectorFont* const vector_font_parent)
+                VectorFont* const vector_font_parent)
             : ModelStruct(vector_font_parent)
         {
         }

@@ -27,11 +27,11 @@ namespace yli::ontology
     class Console;
 
     void print_to_console(
-            yli::ontology::Console& console,
+            Console& console,
             const std::string& text);
 
     void print_words_to_console(
-            yli::ontology::Console& console,
+            Console& console,
             const std::vector<std::string>& words);
 }
 

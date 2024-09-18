@@ -33,9 +33,9 @@ namespace yli::ontology
 {
     class Pipeline;
 
-    struct ComputeTaskStruct : public yli::ontology::EntityStruct
+    struct ComputeTaskStruct : public EntityStruct
     {
-        explicit ComputeTaskStruct(yli::ontology::Pipeline* const pipeline_parent)
+        explicit ComputeTaskStruct(Pipeline* const pipeline_parent)
             : pipeline_parent { pipeline_parent }
         {
         }
@@ -48,7 +48,7 @@ namespace yli::ontology
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        std::variant<yli::ontology::Pipeline*, std::string> pipeline_parent {};
+        std::variant<Pipeline*, std::string> pipeline_parent {};
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).

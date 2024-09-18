@@ -33,12 +33,12 @@ namespace yli::ontology
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = yli::ontology::Entity*;
+            using value_type        = Entity*;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = yli::ontology::Entity**;
-            using reference         = yli::ontology::Entity*&;
+            using pointer           = Entity**;
+            using reference         = Entity*&;
 
-            explicit ApprenticeIterator(std::vector<yli::ontology::ApprenticeModule*>::iterator it)
+            explicit ApprenticeIterator(std::vector<ApprenticeModule*>::iterator it)
                 : it { it }
             {
             }
@@ -50,7 +50,7 @@ namespace yli::ontology
             ApprenticeIterator& operator=(const ApprenticeIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            ApprenticeIterator& operator=(std::vector<yli::ontology::ApprenticeModule*>::iterator it)
+            ApprenticeIterator& operator=(std::vector<ApprenticeModule*>::iterator it)
             {
                 this->it = it;
                 return *this;
@@ -91,9 +91,9 @@ namespace yli::ontology
                 return temp;
             }
 
-            yli::ontology::Entity* operator*()
+            Entity* operator*()
             {
-                yli::ontology::ApprenticeModule* const apprentice_module = *(this->it);
+                ApprenticeModule* const apprentice_module = *(this->it);
 
                 if (apprentice_module != nullptr)
                 {
@@ -106,7 +106,7 @@ namespace yli::ontology
         private:
             // Note: `GenericMasterModule` stores pointers to `ApprenticeModule`s,
             // not pointers to Entities directly, like `GenericParentModule` does!
-            std::vector<yli::ontology::ApprenticeModule*>::iterator it;
+            std::vector<ApprenticeModule*>::iterator it;
     };
 }
 

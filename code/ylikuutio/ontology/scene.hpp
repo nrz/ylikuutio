@@ -73,14 +73,14 @@ namespace yli::ontology
     class RigidBodyModule;
     struct SceneStruct;
 
-    class Scene final : public yli::ontology::Entity
+    class Scene final : public Entity
     {
         private:
             Scene(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::SceneStruct& scene_struct,
-                    yli::ontology::GenericParentModule* const universe_parent_module);
+                    Universe& universe,
+                    const SceneStruct& scene_struct,
+                    GenericParentModule* const universe_parent_module);
 
             ~Scene();
 
@@ -88,7 +88,7 @@ namespace yli::ontology
             Scene(const Scene&) = delete;            // Delete copy constructor.
             Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             // this method processes the physics.
             void do_physics();
@@ -101,10 +101,10 @@ namespace yli::ontology
             // this method renders all `Pipeline`s of this `Scene`.
             void render();
 
-            yli::ontology::Camera* get_default_camera() const;
+            Camera* get_default_camera() const;
 
-            yli::ontology::Camera* get_active_camera() const;
-            void set_active_camera(yli::ontology::Camera* camera);
+            Camera* get_active_camera() const;
+            void set_active_camera(Camera* camera);
 
             // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
             float get_turbo_factor() const;
@@ -115,7 +115,7 @@ namespace yli::ontology
             float get_gravity() const;
             void set_gravity(const float gravity);
 
-            void add_rigid_body_module(const yli::ontology::RigidBodyModule& rigid_body_module, yli::ontology::Scene& scene);
+            void add_rigid_body_module(const RigidBodyModule& rigid_body_module, Scene& scene);
 
             const glm::vec4& get_light_position() const;
             float get_water_level() const;
@@ -123,29 +123,29 @@ namespace yli::ontology
             bool get_is_flight_mode_in_use() const;
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_universe;
-            yli::ontology::ParentOfPipelinesModule parent_of_pipelines;
-            yli::ontology::GenericParentModule parent_of_cameras;
-            yli::ontology::GenericParentModule parent_of_brains;
-            yli::ontology::GenericParentModule parent_of_waypoints;
-            yli::ontology::GenericParentModule parent_of_materials;
-            yli::ontology::GenericParentModule parent_of_species;
-            yli::ontology::GenericParentModule parent_of_objects;
-            yli::ontology::GenericParentModule parent_of_symbioses;
-            yli::ontology::GenericParentModule parent_of_holobionts;
+            ChildModule child_of_universe;
+            ParentOfPipelinesModule parent_of_pipelines;
+            GenericParentModule parent_of_cameras;
+            GenericParentModule parent_of_brains;
+            GenericParentModule parent_of_waypoints;
+            GenericParentModule parent_of_materials;
+            GenericParentModule parent_of_species;
+            GenericParentModule parent_of_objects;
+            GenericParentModule parent_of_symbioses;
+            GenericParentModule parent_of_holobionts;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::Camera* active_camera { nullptr };
+            Camera* active_camera { nullptr };
 
             // Variables related to location and orientation.
 

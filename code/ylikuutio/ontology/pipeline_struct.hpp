@@ -29,14 +29,14 @@ namespace yli::ontology
     class Ecosystem;
     class Scene;
 
-    struct PipelineStruct : public yli::ontology::EntityStruct
+    struct PipelineStruct : public EntityStruct
     {
-        explicit PipelineStruct(yli::ontology::Ecosystem* const ecosystem_parent)
+        explicit PipelineStruct(Ecosystem* const ecosystem_parent)
             : parent { ecosystem_parent }
         {
         }
 
-        explicit PipelineStruct(yli::ontology::Scene* const scene_parent)
+        explicit PipelineStruct(Scene* const scene_parent)
             : parent { scene_parent }
         {
         }
@@ -48,7 +48,7 @@ namespace yli::ontology
 
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        std::variant<yli::ontology::Ecosystem*, yli::ontology::Scene*, std::string> parent;
+        std::variant<Ecosystem*, Scene*, std::string> parent;
         bool is_gpgpu_pipeline { false }; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }

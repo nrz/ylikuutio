@@ -31,12 +31,12 @@ namespace yli::ontology
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = yli::ontology::Entity*;
+            using value_type        = Entity*;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = yli::ontology::Entity**;
-            using reference         = yli::ontology::Entity*&;
+            using pointer           = Entity**;
+            using reference         = Entity*&;
 
-            explicit ChildIterator(std::vector<yli::ontology::Entity*>::iterator it)
+            explicit ChildIterator(std::vector<Entity*>::iterator it)
                 : it { it }
             {
             }
@@ -48,7 +48,7 @@ namespace yli::ontology
             ChildIterator& operator=(const ChildIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            ChildIterator& operator=(std::vector<yli::ontology::Entity*>::iterator it)
+            ChildIterator& operator=(std::vector<Entity*>::iterator it)
             {
                 this->it = it;
                 return *this;
@@ -89,7 +89,7 @@ namespace yli::ontology
                 return temp;
             }
 
-            yli::ontology::Entity* operator*()
+            Entity* operator*()
             {
                 return *(this->it);
             }
@@ -97,7 +97,7 @@ namespace yli::ontology
         private:
             // Note: `GenericParentModule` stores pointers to Entities directly!
             // This is different compared to `GenericMasterModule`!
-            std::vector<yli::ontology::Entity*>::iterator it;
+            std::vector<Entity*>::iterator it;
     };
 }
 

@@ -25,17 +25,17 @@ namespace yli::ontology
     class Pipeline;
     class SymbiontMaterial;
 
-    struct SymbiontSpeciesStruct final : public yli::ontology::ModelStruct
+    struct SymbiontSpeciesStruct final : public ModelStruct
     {
         SymbiontSpeciesStruct(
-                yli::ontology::Pipeline* const pipeline,
-                yli::ontology::SymbiontMaterial* const symbiont_material)
+                Pipeline* const pipeline,
+                SymbiontMaterial* const symbiont_material)
             : ModelStruct(pipeline, symbiont_material),
             symbiont_material { symbiont_material }
         {
         }
 
-        yli::ontology::SymbiontMaterial* const symbiont_material { nullptr };
+        SymbiontMaterial* const symbiont_material { nullptr };
     };
 }
 

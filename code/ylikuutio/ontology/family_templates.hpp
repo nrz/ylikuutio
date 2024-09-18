@@ -40,7 +40,7 @@ namespace yli::ontology
                 std::vector<T1*>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                yli::ontology::Registry& registry) noexcept
+                Registry& registry) noexcept
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -75,7 +75,7 @@ namespace yli::ontology
                 std::vector<T1*>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map) noexcept
+                std::unordered_map<std::string, Entity*>& entity_map) noexcept
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -111,7 +111,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                yli::ontology::Registry& registry) noexcept
+                Registry& registry) noexcept
         {
             // requirements:
             // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -145,7 +145,7 @@ namespace yli::ontology
                 std::vector<T1>& child_pointer_vector,
                 std::queue<std::size_t>& free_childID_queue,
                 std::size_t& number_of_children,
-                std::unordered_map<std::string, yli::ontology::Entity*>& entity_map) noexcept
+                std::unordered_map<std::string, Entity*>& entity_map) noexcept
         {
             // requirements:
             // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.

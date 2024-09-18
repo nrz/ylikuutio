@@ -28,9 +28,9 @@ namespace yli::ontology
 {
     class Material;
 
-    struct ShapeshifterTransformationStruct final : public yli::ontology::EntityStruct
+    struct ShapeshifterTransformationStruct final : public EntityStruct
     {
-        explicit ShapeshifterTransformationStruct(yli::ontology::Material* const material_parent)
+        explicit ShapeshifterTransformationStruct(Material* const material_parent)
             : material_parent { material_parent }
         {
         }
@@ -40,7 +40,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::Material*, std::string> material_parent {};
+        std::variant<Material*, std::string> material_parent {};
     };
 }
 

@@ -25,12 +25,12 @@ namespace yli::ontology
     class ParentOfInputModesModule;
     class Entity;
 
-    class InputModeChildModule final : public yli::ontology::ChildModule
+    class InputModeChildModule final : public ChildModule
     {
         public:
             InputModeChildModule(
-                    yli::ontology::ParentOfInputModesModule* const parent_module,
-                    yli::ontology::Entity& entity) noexcept;
+                    ParentOfInputModesModule* const parent_module,
+                    Entity& entity) noexcept;
     };
 }
 

@@ -28,9 +28,9 @@ namespace yli::ontology
 {
     class Console;
 
-    struct LispFunctionStruct : public yli::ontology::EntityStruct
+    struct LispFunctionStruct : public EntityStruct
     {
-        explicit LispFunctionStruct(yli::ontology::Console* const console_parent)
+        explicit LispFunctionStruct(Console* const console_parent)
             : console_parent { console_parent }
         {
         }
@@ -40,7 +40,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::Console*, std::string> console_parent {};
+        std::variant<Console*, std::string> console_parent {};
     };
 }
 

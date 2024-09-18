@@ -48,21 +48,21 @@ namespace yli::ontology
     class ConsoleCallbackEngine;
     struct ConsoleCallbackObjectStruct;
 
-    class ConsoleCallbackObject final : public yli::ontology::Entity
+    class ConsoleCallbackObject final : public Entity
     {
         public:
             ~ConsoleCallbackObject() = default;
 
             ConsoleCallbackObject(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
-                    yli::ontology::GenericParentModule* const console_callback_engine_parent_module);
+                    Universe& universe,
+                    const ConsoleCallbackObjectStruct& console_callback_object_struct,
+                    GenericParentModule* const console_callback_engine_parent_module);
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
-            yli::ontology::Entity* get_parent() const override;
-            yli::ontology::Scene* get_scene() const override;
+            Entity* get_parent() const override;
+            Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
@@ -74,12 +74,12 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_console_callback_engine;
-            yli::ontology::GenericParentModule parent_of_console_callback_parameters;
+            ChildModule child_of_console_callback_engine;
+            GenericParentModule parent_of_console_callback_parameters;
 
         private:
             InputParametersToAnyValueCallbackWithConsole console_callback;
-            yli::ontology::Console* console_pointer;
+            Console* console_pointer;
     };
 }
 

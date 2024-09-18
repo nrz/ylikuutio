@@ -45,7 +45,7 @@ namespace yli::ontology
     class VectorFont;
     struct Text3dStruct;
 
-    class Text3d final : public yli::ontology::Movable
+    class Text3d final : public Movable
     {
         public:
             // Disable all character `Object`s of `text_3d`,
@@ -55,32 +55,32 @@ namespace yli::ontology
             // TODO: implement creation and enabling the character `Object`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
             static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(
-                    yli::ontology::Text3d& text_3d,
-                    yli::ontology::VectorFont& new_parent);
+                    Text3d& text_3d,
+                    VectorFont& new_parent);
 
             Text3d(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::Text3dStruct& text_3d_struct,
-                    yli::ontology::GenericParentModule* const vector_font_parent_module,
-                    yli::ontology::GenericMasterModule* const brain_master_module);
+                    Universe& universe,
+                    const Text3dStruct& text_3d_struct,
+                    GenericParentModule* const vector_font_parent_module,
+                    GenericMasterModule* const brain_master_module);
 
             ~Text3d() = default;
 
             Text3d(const Text3d&) = delete;            // Delete copy constructor.
             Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            friend class yli::ontology::Object;
-            friend void yli::ontology::create_glyph_objects(const std::string& text_string, yli::ontology::Text3d& text_3d);
+            friend class Object;
+            friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
 
-            yli::ontology::ChildModule child_of_vector_font;
-            yli::ontology::GenericMasterModule master_of_objects;
+            ChildModule child_of_vector_font;
+            GenericMasterModule master_of_objects;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;

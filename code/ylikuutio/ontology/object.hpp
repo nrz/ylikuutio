@@ -53,41 +53,41 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
 
-    class Object : public yli::ontology::Movable
+    class Object : public Movable
     {
         public:
             // Set pointer to `object` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
-                    yli::ontology::Object& object,
-                    yli::ontology::Scene& new_parent);
+                    Object& object,
+                    Scene& new_parent);
 
             // Set pointer to `object` to `nullptr`, set mesh according to the input,
             // and request a new apprenticeID from `new_species`.
             static std::optional<yli::data::AnyValue> bind_to_new_species_master(
-                    yli::ontology::Object& object,
-                    yli::ontology::Species& new_species) noexcept;
+                    Object& object,
+                    Species& new_species) noexcept;
 
             // Set pointer to `object` to `nullptr`, set mesh according to the input,
             // and request a new apprenticeID from `new_shapeshifter_sequence`.
             static std::optional<yli::data::AnyValue> bind_to_new_shapeshifter_sequence_master(
-                    yli::ontology::Object& object,
-                    yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence) noexcept;
+                    Object& object,
+                    ShapeshifterSequence& new_shapeshifter_sequence) noexcept;
 
             // Set pointer to `object` to `nullptr`, set mesh according to the input,
             // and request a new apprenticeID from `new_text_3d`.
             static std::optional<yli::data::AnyValue> bind_to_new_text_3d_master(
-                    yli::ontology::Object& object,
-                    yli::ontology::Text3d& new_text_3d) noexcept;
+                    Object& object,
+                    Text3d& new_text_3d) noexcept;
 
         protected:
             Object(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ObjectStruct& object_struct,
-                    yli::ontology::GenericParentModule* const scene_parent_module,
-                    yli::ontology::GenericMasterModule* const mesh_master_module,
-                    yli::ontology::GenericMasterModule* const brain_master_module);
+                    Universe& universe,
+                    const ObjectStruct& object_struct,
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const mesh_master_module,
+                    GenericMasterModule* const brain_master_module);
 
             virtual ~Object() = default;
 
@@ -95,21 +95,21 @@ namespace yli::ontology
             Object(const Object&) = delete;            // Delete copy constructor.
             Object& operator=(const Object&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const final;
+            Entity* get_parent() const final;
 
             // Public callbacks.
 
             static std::optional<yli::data::AnyValue> with_parent_name_x_y_z(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Species& species,
+                    Scene& parent,
+                    Species& species,
                     const std::string& object_name,
                     const std::string& x,
                     const std::string& y,
                     const std::string& z);
 
             static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Species& species,
+                    Scene& parent,
+                    Species& species,
                     const std::string& object_name,
                     const std::string& x,
                     const std::string& y,
@@ -118,8 +118,8 @@ namespace yli::ontology
                     const std::string& pitch);
 
             static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
-                    yli::ontology::Scene& parent,
-                    yli::ontology::Species& species,
+                    Scene& parent,
+                    Species& species,
                     const std::string& object_name,
                     const std::string& x,
                     const std::string& y,
@@ -130,9 +130,9 @@ namespace yli::ontology
 
             // Public callbacks end here.
 
-            yli::ontology::Scene* get_scene() const final;
+            Scene* get_scene() const final;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const final;
@@ -140,20 +140,20 @@ namespace yli::ontology
 
         public:
             // this method renders this `Object`.
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
 
         private:
-            void render_this_object(yli::ontology::Pipeline* const pipeline);
+            void render_this_object(Pipeline* const pipeline);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
         public:
-            yli::ontology::ChildModule child_of_scene;
-            yli::ontology::ApprenticeModule apprentice_of_mesh;
+            ChildModule child_of_scene;
+            ApprenticeModule apprentice_of_mesh;
 
         private:
-            yli::ontology::ObjectType object_type { yli::ontology::ObjectType::REGULAR };
+            ObjectType object_type { ObjectType::REGULAR };
     };
 }
 

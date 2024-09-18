@@ -48,14 +48,14 @@ namespace yli::ontology
     struct FontStruct;
     struct TextStruct;
 
-    class Font2d final : public yli::ontology::Entity
+    class Font2d final : public Entity
     {
         private:
             Font2d(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::FontStruct& font_struct,
-                    yli::ontology::GenericParentModule* const universe_parent_module);
+                    Universe& universe,
+                    const FontStruct& font_struct,
+                    GenericParentModule* const universe_parent_module);
 
             ~Font2d();
 
@@ -63,7 +63,7 @@ namespace yli::ontology
             Font2d(const Font2d&) = delete;            // Delete copy constructor.
             Font2d& operator=(const Font2d&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
             uint32_t get_text_size() const;
             uint32_t get_font_size() const;
@@ -84,7 +84,7 @@ namespace yli::ontology
                     const std::string& horizontal_alignment,
                     const std::string& vertical_alignment) const;
 
-            void print_text_2d(const yli::ontology::TextStruct& text_struct) const;
+            void print_text_2d(const TextStruct& text_struct) const;
 
             void print_text_2d(
                     const uint32_t x,
@@ -94,17 +94,17 @@ namespace yli::ontology
                     const std::string& text,
                     const std::string& font_texture_file_format) const;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
+            GenericParentModule* get_generic_parent_module(const int type);
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_universe;
-            yli::ontology::GenericParentModule parent_of_text_2ds;
-            yli::ontology::GenericMasterModule master_of_consoles;
-            yli::ontology::TextureModule texture;
+            ChildModule child_of_universe;
+            GenericParentModule parent_of_text_2ds;
+            GenericMasterModule master_of_consoles;
+            TextureModule texture;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;

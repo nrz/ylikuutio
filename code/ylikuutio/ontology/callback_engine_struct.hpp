@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct CallbackEngineStruct : public yli::ontology::EntityStruct
+    struct CallbackEngineStruct : public EntityStruct
     {
     };
 }

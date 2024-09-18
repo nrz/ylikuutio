@@ -36,28 +36,28 @@ namespace yli::ontology
     class Scene;
     struct MissionStruct;
 
-    class Mission final : public yli::ontology::Entity
+    class Mission final : public Entity
     {
         private:
             Mission(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::MissionStruct& mission_struct,
-                    yli::ontology::GenericParentModule* const universe_parent_module);
+                    Universe& universe,
+                    const MissionStruct& mission_struct,
+                    GenericParentModule* const universe_parent_module);
 
             virtual ~Mission() = default;
 
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         public:
             Mission(const Mission&) = delete;            // Delete copy constructor.
             Mission &operator=(const Mission&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            yli::ontology::ChildModule child_of_universe;
+            ChildModule child_of_universe;
     };
 }
 

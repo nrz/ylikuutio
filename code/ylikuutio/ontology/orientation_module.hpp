@@ -29,15 +29,15 @@ namespace yli::ontology
     class OrientationModule
     {
         public:
-            bool operator==(const yli::ontology::OrientationModule& rhs) const noexcept;
-            bool operator!=(const yli::ontology::OrientationModule& rhs) const = default;
-            yli::ontology::OrientationModule& operator=(const yli::ontology::OrientationModule& other) = default;
+            bool operator==(const OrientationModule& rhs) const noexcept;
+            bool operator!=(const OrientationModule& rhs) const = default;
+            OrientationModule& operator=(const OrientationModule& other) = default;
 
             OrientationModule() = default;
 
             ~OrientationModule() = default;
 
-            OrientationModule(const yli::ontology::OrientationModule& original) = default;
+            OrientationModule(const OrientationModule& original) = default;
 
             OrientationModule(const float roll, const float yaw, const float pitch)
                 : roll { roll },

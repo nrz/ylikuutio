@@ -29,9 +29,9 @@ namespace yli::ontology
 {
     class ShapeshifterTransformation;
 
-    struct ShapeshifterSequenceStruct : public yli::ontology::EntityStruct
+    struct ShapeshifterSequenceStruct : public EntityStruct
     {
-        explicit ShapeshifterSequenceStruct(yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation_parent)
+        explicit ShapeshifterSequenceStruct(ShapeshifterTransformation* const shapeshifter_transformation_parent)
             : shapeshifter_transformation_parent { shapeshifter_transformation_parent }
         {
         }
@@ -41,7 +41,7 @@ namespace yli::ontology
         {
         }
 
-        std::variant<yli::ontology::ShapeshifterTransformation*, std::string> shapeshifter_transformation_parent {};
+        std::variant<ShapeshifterTransformation*, std::string> shapeshifter_transformation_parent {};
         float transformation_speed                        { 0.0f };    // Negative speed means inverse initial transition direction.
         std::size_t initial_offset                        { 0 };       // Index of the `ShapeshifterForm` from which to begin the transition.
 

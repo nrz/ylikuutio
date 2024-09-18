@@ -32,9 +32,9 @@ namespace yli::ontology
     {
         public:
             RigidBodyModule(
-                    const yli::ontology::RigidBodyModuleStruct& rigid_body_module_struct,
-                    yli::ontology::Scene* const scene,
-                    yli::ontology::Movable* const movable)
+                    const RigidBodyModuleStruct& rigid_body_module_struct,
+                    Scene* const scene,
+                    Movable* const movable)
                 : movable { movable },
                 mass { rigid_body_module_struct.mass }
             {
@@ -49,10 +49,10 @@ namespace yli::ontology
 
             ~RigidBodyModule() = default;
 
-            void add_rigid_body_module_to_scene(yli::ontology::Scene& scene) const;
+            void add_rigid_body_module_to_scene(Scene& scene) const;
 
         private:
-            yli::ontology::Movable* movable { nullptr };
+            Movable* movable { nullptr };
 
             float mass { 0.0f }; // An object is static if and only if its mass is 0.
     };

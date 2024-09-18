@@ -52,14 +52,14 @@ namespace yli::ontology
     class Entity;
 
     template<typename M>
-        class MasterModule final : public yli::ontology::GenericMasterModule
+        class MasterModule final : public GenericMasterModule
     {
         public:
             MasterModule(
                     M const master,
-                    yli::ontology::Registry* const registry,
+                    Registry* const registry,
                     const std::string& name,
-                    std::function<void (const M&, yli::ontology::Entity*)> unbind_callback)
+                    std::function<void (const M&, Entity*)> unbind_callback)
                 : GenericMasterModule(master, registry, name),
                 unbind_callback { unbind_callback }
             {
@@ -72,7 +72,7 @@ namespace yli::ontology
             {
                 for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
                 {
-                    yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
+                    ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
 
                     if (apprentice_module != nullptr)
                     {
@@ -87,9 +87,9 @@ namespace yli::ontology
                 return this->master;
             }
 
-            friend class yli::ontology::ApprenticeModule;
+            friend class ApprenticeModule;
 
-            std::function<void (const M&, yli::ontology::Entity*)> unbind_callback;
+            std::function<void (const M&, Entity*)> unbind_callback;
     };
 }
 

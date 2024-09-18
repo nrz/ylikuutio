@@ -29,11 +29,11 @@ namespace yli::ontology
     class CartesianCoordinatesModule
     {
         public:
-            bool operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept;
-            bool operator!=(const yli::ontology::CartesianCoordinatesModule& rhs) const = default;
-            yli::ontology::CartesianCoordinatesModule& operator=(const yli::ontology::CartesianCoordinatesModule& other) = default;
+            bool operator==(const CartesianCoordinatesModule& rhs) const noexcept;
+            bool operator!=(const CartesianCoordinatesModule& rhs) const = default;
+            CartesianCoordinatesModule& operator=(const CartesianCoordinatesModule& other) = default;
 
-            CartesianCoordinatesModule(const yli::ontology::CartesianCoordinatesModule& original) = default;
+            CartesianCoordinatesModule(const CartesianCoordinatesModule& original) = default;
 
             explicit CartesianCoordinatesModule(const glm::vec3& xyz) noexcept;
 

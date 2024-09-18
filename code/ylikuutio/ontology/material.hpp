@@ -53,34 +53,34 @@ namespace yli::ontology
     class Pipeline;
     struct MaterialStruct;
 
-    class Material final : public yli::ontology::Entity
+    class Material final : public Entity
     {
         public:
             // Set pointer to `material` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
-                    yli::ontology::Material& material,
-                    yli::ontology::Ecosystem& new_parent);
+                    Material& material,
+                    Ecosystem& new_parent);
 
             // Set pointer to `material` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
-                    yli::ontology::Material& material,
-                    yli::ontology::Scene& new_parent);
+                    Material& material,
+                    Scene& new_parent);
 
             // Set pointer to `material` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_parent`.
             static std::optional<yli::data::AnyValue> bind_to_new_pipeline(
-                    yli::ontology::Material& material,
-                    yli::ontology::Pipeline& new_pipeline) noexcept;
+                    Material& material,
+                    Pipeline& new_pipeline) noexcept;
 
         private:
             Material(
                     yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::MaterialStruct& material_struct,
-                    yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
-                    yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module);
+                    Universe& universe,
+                    const MaterialStruct& material_struct,
+                    GenericParentModule* const ecosystem_or_scene_parent_module,
+                    MasterModule<Pipeline*>* pipeline_master_module);
 
             ~Material() = default;
 
@@ -88,14 +88,14 @@ namespace yli::ontology
             Material(const Material&) = delete;            // Delete copy constructor.
             Material& operator=(const Material&) = delete; // Delete copy assignment.
 
-            yli::ontology::Entity* get_parent() const override;
+            Entity* get_parent() const override;
 
-            yli::ontology::GenericParentModule* get_generic_parent_module(const int type);
-            yli::ontology::GenericMasterModule* get_generic_master_module() const;
+            GenericParentModule* get_generic_parent_module(const int type);
+            GenericMasterModule* get_generic_master_module() const;
 
             std::size_t get_number_of_apprentices() const;
 
-            yli::ontology::Pipeline* get_pipeline() const;
+            Pipeline* get_pipeline() const;
 
             const std::string& get_texture_file_format() const;
             const std::string& get_texture_filename() const;
@@ -106,25 +106,25 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            yli::ontology::ChildModule child_of_ecosystem_or_scene;
-            yli::ontology::GenericParentModule parent_of_shapeshifter_transformations;
-            yli::ontology::GenericParentModule parent_of_vector_fonts;
-            yli::ontology::ApprenticeModule apprentice_of_pipeline;
-            yli::ontology::GenericMasterModule master_of_species;
-            yli::ontology::TextureModule texture;
+            ChildModule child_of_ecosystem_or_scene;
+            GenericParentModule parent_of_shapeshifter_transformations;
+            GenericParentModule parent_of_vector_fonts;
+            ApprenticeModule apprentice_of_pipeline;
+            GenericMasterModule master_of_species;
+            TextureModule texture;
 
         protected:
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
         public:
-            yli::ontology::Scene* get_scene() const override;
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render(const yli::ontology::Scene* const target_scene);
+            void render(const Scene* const target_scene);
     };
 }
 
