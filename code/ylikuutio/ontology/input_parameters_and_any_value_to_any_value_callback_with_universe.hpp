@@ -29,7 +29,6 @@ namespace yli::ontology
     class Universe;
     class CallbackEngine;
     class CallbackObject;
-}
 
 typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
         yli::ontology::Universe&,
@@ -37,5 +36,6 @@ typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValu
         yli::ontology::CallbackObject*,
         yli::ontology::GenericParentModule&,
         const yli::data::AnyValue&);
+}
 
 #endif

@@ -44,7 +44,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
     yli::ontology::CallbackEngine* const rest_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -82,7 +82,7 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
     yli::ontology::CallbackEngine* const rest_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -120,7 +120,7 @@ TEST(go_east_brain_must_go_east, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
 
     yli::ontology::CallbackEngineStruct go_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -160,7 +160,7 @@ TEST(go_east_brain_must_go_east, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
 
     yli::ontology::CallbackEngineStruct go_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -200,7 +200,7 @@ TEST(go_west_brain_must_go_west, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
 
     yli::ontology::CallbackEngineStruct go_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -240,7 +240,7 @@ TEST(go_west_brain_must_go_west, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
 
     yli::ontology::CallbackEngineStruct go_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -280,7 +280,7 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
 
     yli::ontology::CallbackEngineStruct go_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -320,7 +320,7 @@ TEST(go_north_brain_must_go_north, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
 
     yli::ontology::CallbackEngineStruct go_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -360,7 +360,7 @@ TEST(go_south_brain_must_go_south, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
 
     yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -400,7 +400,7 @@ TEST(go_south_brain_must_go_south, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
 
     yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -440,7 +440,7 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
 
     yli::ontology::CallbackEngineStruct orient_to_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -480,7 +480,7 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
 
     yli::ontology::CallbackEngineStruct orient_to_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -520,7 +520,7 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
 
     yli::ontology::CallbackEngineStruct orient_to_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -560,7 +560,7 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
 
     yli::ontology::CallbackEngineStruct orient_to_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -600,7 +600,7 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
 
     yli::ontology::CallbackEngineStruct orient_to_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -640,7 +640,7 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
 
     yli::ontology::CallbackEngineStruct orient_to_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -680,7 +680,7 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
 
     yli::ontology::CallbackEngineStruct orient_to_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -720,7 +720,7 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
 
     yli::ontology::CallbackEngineStruct orient_to_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -760,7 +760,7 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
 
     yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -801,7 +801,7 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
 
     yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -842,7 +842,7 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
 
     yli::ontology::CallbackEngineStruct orient_and_go_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -883,7 +883,7 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
 
     yli::ontology::CallbackEngineStruct orient_and_go_west_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -924,7 +924,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
 
     yli::ontology::CallbackEngineStruct orient_and_go_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -965,7 +965,7 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
 
     yli::ontology::CallbackEngineStruct orient_and_go_north_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1006,7 +1006,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
 
     yli::ontology::CallbackEngineStruct orient_and_go_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1047,7 +1047,7 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
 
     yli::ontology::CallbackEngineStruct orient_and_go_south_callback_engine_struct;
     yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1088,7 +1088,7 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
 
     yli::ontology::CallbackEngineStruct rotate_clockwise_callback_engine_struct;
     yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1132,7 +1132,7 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
 
     yli::ontology::CallbackEngineStruct rotate_clockwise_callback_engine_struct;
     yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1176,7 +1176,7 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
 
     yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
     yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
@@ -1220,7 +1220,7 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
+    yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
 
     yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
     yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
