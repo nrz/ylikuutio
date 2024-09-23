@@ -6,12 +6,28 @@
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
-## Tasks which are necessary for the first stage (Hirvi prototype)
+## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
+- [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
+- [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
+- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+- [ ] GUI Add support for multiple windows.
+- [ ] GUI Add support for multiple widgets in each window.
+- [ ] ONTOLOGY/LISP/GUI Implement `create-window` built-in YliLisp function.
+- [ ] ONTOLOGY/LISP/GUI Implement `create-widget` built-in YliLisp function.
+- [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
+- [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
+- [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
+- [ ] TEXT/UI Change to a more readable bitmap font.
+- [ ] TEXT Add support for vector fonts using FreeType and HarfBuzz.
+
+## Tasks which are necessary for the second stage (Hirvi prototype)
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
-- [ ] TEXT Add support for vector fonts.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
@@ -39,12 +55,7 @@
 - [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
 - [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
 
-## Tasks which are necessary for the second stage
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
-- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
-- [ ] GUI Add support for multiple windows.
-- [ ] GUI Add support for multiple widgets in each window.
+## Tasks which are necessary for the third stage
 - [ ] ONTOLOGY Add `scale_up_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic creation of additional `Biont`s.
 - [ ] ONTOLOGY Add `scale_down_limit` `Variable*` of type `uint32_t` to `Holobiont` to control the automatic deletion of excessive `Biont`s.
 - [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
@@ -60,28 +71,22 @@
 - [ ] YLILISP Modify `set` console command so that setting a value is done using `set 'value foo bar` or `set 'value foo bar baz` (`'value` must be used).
 - [ ] YLILISP Modify `set` console command so that setting a global name is done using `set 'global-name foo bar`.
 - [ ] YLILISP Modify `set` console command so that setting a local name is done using `set 'local-name foo bar`.
-- [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
-- [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 - [ ] YLILISP Implement continuations for YliLisp by logging the last relevant successful `Variable::set` function call for each `Variable` and setting that again when needed.
 - [ ] YLILISP Implement closures for YliLisp.
-- [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] AI Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
 - [ ] OPTIMIZE Implement octree segmentation.
 - [ ] OPTIMIZE Implement frustum culling using bounding spheres.
 - [ ] ANIMATION Implement skeletal animation.
 - [ ] CONSOLE/YLILISP/ONTOLOGY Implement creating new named `Variable`s using `Console`.
-- [ ] TOOLS Implement YliEdit editor.
 - [ ] MATH Plan coordinate systems and physics for interplanetary/interstellar/intergalactic travel.
 - [ ] TERRAIN/VOXELS Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 - [ ] TEXT/UI Add support for changing font size.
 - [ ] RENDERING Implement transparent rendering of 3D objects.
 - [ ] RENDERING Implement transparent rendering of 4D objects.
 - [ ] WATER/RENDERING Implement dynamic not flowing water, using Vulkan shaders.
-- [ ] TEXT/LIBRARIES/EVALUATE Evaluate FreeType.
-- [ ] TEXT/LIBRARIES/EVALUATE Evaluate HarfBuzz.
 - [ ] TEXT/GUI Implement better font support.
 
-## Tasks which are necessary for the third stage
+## Tasks which are necessary for the fourth stage
 - [ ] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [ ] BUILD Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
 - [ ] NETWORK Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
