@@ -19,6 +19,9 @@
 - [ ] ONTOLOGY/LISP/GUI Implement `create-widget` built-in YliLisp function.
 - [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
+- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
+- [ ] VULKAN/RENDERING Add Vulkan support.
+- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
 - [ ] MATH/RENDERING Implement shadows.
@@ -36,9 +39,6 @@
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
-- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
-- [ ] VULKAN/RENDERING Add Vulkan support.
-- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 - [ ] UI/TESTS Write unit tests for keyboard callback snippets.
