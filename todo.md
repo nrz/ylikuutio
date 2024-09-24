@@ -87,7 +87,6 @@
 - [ ] TEXT/GUI Implement better font support.
 
 ## Tasks which are necessary for the fourth stage
-- [ ] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [ ] BUILD Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
 - [ ] NETWORK Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 - [ ] NETWORK/LIBRARIES/EVALUATE Evaluate ZeroMQ: https://zeromq.org/
@@ -341,3 +340,4 @@
 - [x] ONTOLOGY Enable support for referring to parent in the factory functions by using parent's global name instead of parent's memory address.
 - [x] BUG Fix graphics rendering in full screen mode on high DPI displays (graphics are rendered currently only in bottom left of the screen).
 - [x] BUG/HIRVI Esc key should exit to OS in Hirvi and Ajokki.
+- [x] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
