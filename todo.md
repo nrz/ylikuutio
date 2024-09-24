@@ -21,6 +21,9 @@
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
+- [ ] MATH/RENDERING Implement shadows.
+- [ ] RENDERING Implement skybox.
+- [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 - [ ] TEXT/UI Change to a more readable bitmap font.
 - [ ] TEXT Add support for vector fonts using FreeType and HarfBuzz.
 
@@ -62,7 +65,6 @@
 - [ ] ONTOLOGY/MATH Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 - [ ] GUI Add support for multiple displays.
 - [ ] MATH Implement support for multiple light sources in each `Scene`.
-- [ ] MATH/RENDERING Implement shadows.
 - [ ] MATH/RENDERING Implement HDR rendering.
 - [ ] UI Add support for different keyboard layouts in `Console`.
 - [ ] REFACTOR Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
