@@ -29,7 +29,6 @@
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
 #include <stdexcept> // std::runtime_error
-#include <string>    // std::string
 #include <utility>   // std::forward
 #include <vector>    // std::vector
 
