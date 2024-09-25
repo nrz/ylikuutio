@@ -26,6 +26,8 @@
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
 - [ ] MATH/RENDERING Implement shadows.
 - [ ] RENDERING Implement skybox.
+- [ ] RENDERING Add support for screenspace effects.
+- [ ] RENDERING Implement Larusse fire clouds. See Complex - Dope for a reference: https://youtu.be/HtXxM0pezAs
 - [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 - [ ] TEXT/UI Change to a more readable bitmap font.
 - [ ] TEXT Add support for vector fonts using FreeType and HarfBuzz.
