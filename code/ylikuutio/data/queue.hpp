@@ -18,9 +18,13 @@
 #ifndef YLIKUUTIO_DATA_QUEUE_HPP_INCLUDED
 #define YLIKUUTIO_DATA_QUEUE_HPP_INCLUDED
 
+#include "queue_iterator.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
+
 // Include standard headers
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
+#include <iterator>  // std::advance
 #include <stdexcept> // std::runtime_error
 
 namespace yli::data
@@ -29,6 +33,10 @@ namespace yli::data
         class Queue
         {
             public:
+                // Iterator typedefs.
+                typedef QueueIterator<QueueMaxSize>       iterator;
+                typedef QueueIterator<QueueMaxSize> const_iterator;
+
                 void push(const std::size_t value)
                 {
                     if (this->queue_size >= QueueMaxSize) [[unlikely]]
@@ -86,6 +94,49 @@ namespace yli::data
                 const std::array<std::size_t, QueueMaxSize>& data() const
                 {
                     return this->queue;
+                }
+
+                void move_to_beginning()
+                {
+                    yli::memory::copy_circular_buffer_into_begin(this->queue, this->head, this->queue_size);
+                    this->head = 0;
+                }
+
+                // Iterator functions.
+                iterator begin()
+                {
+                    return iterator(this->queue.begin());
+                }
+
+                iterator end()
+                {
+                    return iterator(this->queue.end());
+                }
+
+                iterator last()
+                {
+                    // Use only after calling `move_to_beginning`.
+                    typename std::array<std::size_t, QueueMaxSize>::iterator it = this->queue.begin();
+                    std::advance(it, queue_size);
+                    return iterator(it);
+                }
+
+                const_iterator cbegin()
+                {
+                    return const_iterator(this->queue.begin());
+                }
+
+                const_iterator cend()
+                {
+                    return const_iterator(this->queue.end());
+                }
+
+                const_iterator clast()
+                {
+                    // Use only after calling `move_to_beginning`.
+                    typename std::array<std::size_t, QueueMaxSize>::const_iterator it = this->queue.cbegin();
+                    std::advance(it, queue_size);
+                    return const_iterator(it);
                 }
 
             private:
