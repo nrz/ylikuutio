@@ -57,7 +57,7 @@ namespace yli::memory
         }
 
     template<typename T1, std::size_t DataSize>
-        std::vector<T1> copy_circular_buffer_into_vector(const std::array<T1, DataSize> buffer, const std::size_t start_i, const std::size_t buffer_size)
+        std::vector<T1> copy_circular_buffer_into_vector(const std::array<T1, DataSize>& buffer, const std::size_t start_i, const std::size_t buffer_size)
         {
             if (buffer_size > buffer.size())
             {
