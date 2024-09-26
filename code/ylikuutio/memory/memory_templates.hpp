@@ -24,6 +24,7 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cerr
 #include <iterator>  // std::back_inserter
+#include <limits>    // std::numeric_limits
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
 
@@ -83,6 +84,61 @@ namespace yli::memory
             }
 
             return dest;
+        }
+
+    template<typename T1, std::size_t DataSize>
+        void copy_circular_buffer_into_begin(std::array<T1, DataSize>& buffer, const std::size_t start_i, const std::size_t buffer_size)
+        {
+            if (buffer_size > buffer.size())
+            {
+                std::cerr << "ERROR: `yli::memory::copy_circular_buffer_into_begin`: `buffer_size > buffer.size()`\n";
+                return;
+            }
+
+            if (start_i == 0 || buffer_size == 0 || DataSize == 0) [[unlikely]]
+            {
+                return;
+            }
+
+            std::size_t temp_dest_i = (start_i > 0 ? start_i - 1 : buffer_size - 1);
+            T1 temp = buffer[temp_dest_i]; // One value needs to be kept in a temp.
+
+            // Without additional memory allocations the copy is done backwards one element at a time.
+            // Time complexity: O(n^2).
+            // We need as many iterations as far as `start_i` is from array index 0.
+            for (std::size_t iteration_i = 0, iteration_start_i = start_i; iteration_i < start_i; iteration_i++, iteration_start_i--)
+            {
+                if (iteration_start_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+                {
+                    // Overflow. Adjust appropriately.
+                    iteration_start_i = buffer_size - 1;
+                }
+
+                {
+
+                    for (
+                            std::size_t src_i = iteration_start_i, dest_i = (src_i > 0 ? src_i - 1 : buffer_size - 1), counter = 0;
+                            counter < buffer_size;
+                            counter++, src_i++, dest_i++)
+                    {
+                        if (src_i == buffer_size) [[unlikely]]
+                        {
+                            // Past end of buffer. Adjust appropriately.
+                            src_i = 0;
+                        }
+
+                        if (dest_i == buffer_size) [[unlikely]]
+                        {
+                            // Past end of buffer. Adjust appropriately.
+                            dest_i = 0;
+                        }
+
+                        buffer[dest_i] = buffer[src_i];
+                    }
+                }
+            }
+
+            buffer[buffer_size - 1] = temp;
         }
 }
 
