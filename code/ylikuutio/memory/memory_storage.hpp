@@ -23,14 +23,12 @@
 #include "code/ylikuutio/data/queue.hpp"
 
 // Include standard headers
-#include <algorithm> // std::sort
 #include <array>     // std::array
 #include <cstddef>   // std::byte, std::size_t
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
 #include <stdexcept> // std::runtime_error
 #include <utility>   // std::forward
-#include <vector>    // std::vector
 
 namespace yli::memory
 {
@@ -64,25 +62,40 @@ namespace yli::memory
                     // for finding out which slots are in use.
                     //
                     // First, copy the data so that the head of the queue is at index 0.
+                    this->free_slot_id_queue.move_to_beginning();
 
-                    std::vector<std::size_t> copy_of_free_slot_id_queue = yli::memory::copy_circular_buffer_into_vector(
-                            this->free_slot_id_queue.data(),
-                            this->free_slot_id_queue.get_head(),
-                            this->free_slot_id_queue.size());
+                    // Sort.
+                    for (
+                            typename yli::data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
+                            left_it != this->free_slot_id_queue.last();
+                            ++left_it)
+                    {
+                        typename yli::data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
+                        ++right_it;
 
-                    std::sort(copy_of_free_slot_id_queue.begin(), copy_of_free_slot_id_queue.end());
+                        for ( ; right_it != this->free_slot_id_queue.last(); ++right_it)
+                        {
+                            if (*left_it > *right_it)
+                            {
+                                std::size_t temp = *left_it;
+                                *left_it = *right_it;
+                                *right_it = temp;
+                            }
+                        }
+                    }
+
+                    typename yli::data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
 
                     for (
-                            std::size_t slot_i = 0, queue_copy_i = 0, count = 0;
+                            std::size_t slot_i = 0, count = 0;
                             count < this->number_of_instances;
                             slot_i++)
                     {
-                        if (queue_copy_i < copy_of_free_slot_id_queue.size() &&
-                                slot_i == copy_of_free_slot_id_queue.at(queue_copy_i))
+                        if (queue_it != free_slot_id_queue.last() && slot_i == *queue_it)
                         {
                             // This slot ID was not in use.
 
-                            queue_copy_i++;
+                            ++queue_it;
                             continue;
                         }
 
