@@ -40,7 +40,7 @@ namespace yli::ontology
             ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
             ChildModule& operator=(const ChildModule&) = delete; // Delete copy assignment.
 
-            ~ChildModule() noexcept;
+            ~ChildModule();
 
             Entity* get_parent() const noexcept;
             Entity* get_child() const noexcept;

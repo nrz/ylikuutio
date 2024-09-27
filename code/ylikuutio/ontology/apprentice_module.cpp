@@ -88,7 +88,7 @@ namespace yli::ontology
         this->bind_to_generic_master_module();
     }
 
-    ApprenticeModule::~ApprenticeModule() noexcept
+    ApprenticeModule::~ApprenticeModule()
     {
         this->unbind_from_generic_master_module();
     }

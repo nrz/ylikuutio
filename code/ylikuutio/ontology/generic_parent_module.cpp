@@ -86,7 +86,7 @@ namespace yli::ontology
         registry.add_indexable(*this, name);
     }
 
-    GenericParentModule::~GenericParentModule() noexcept
+    GenericParentModule::~GenericParentModule()
     {
         for (yli::ontology::Entity* const child : this->child_pointer_vector)
         {

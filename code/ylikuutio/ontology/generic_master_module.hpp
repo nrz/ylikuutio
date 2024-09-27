@@ -70,7 +70,7 @@ namespace yli::ontology
             GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
             GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
 
-            virtual ~GenericMasterModule() noexcept;
+            virtual ~GenericMasterModule();
 
             Entity* get_generic_master() const noexcept;
 

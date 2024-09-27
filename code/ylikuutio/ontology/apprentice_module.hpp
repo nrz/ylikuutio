@@ -56,7 +56,7 @@ namespace yli::ontology
                     GenericMasterModule* const generic_master_module,
                     Entity* const apprentice) noexcept;
 
-            virtual ~ApprenticeModule() noexcept;
+            virtual ~ApprenticeModule();
 
             Entity* get_master() const noexcept;
             Entity* get_apprentice() const noexcept;

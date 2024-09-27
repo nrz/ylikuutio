@@ -42,7 +42,7 @@ namespace yli::ontology
         this->parent_module->bind_child(this->entity);
     }
 
-    ChildModule::~ChildModule() noexcept
+    ChildModule::~ChildModule()
     {
         // requirements:
         // `this->parent_module` must not be `nullptr`.

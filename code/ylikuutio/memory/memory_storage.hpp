@@ -50,7 +50,7 @@ namespace yli::memory
                     }
                 }
 
-                ~MemoryStorage() noexcept
+                ~MemoryStorage()
                 {
                     if (this->number_of_instances == 0) [[unlikely]]
                     {

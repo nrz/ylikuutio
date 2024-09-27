@@ -98,7 +98,7 @@ namespace yli::ontology
         registry->add_indexable(*this, name);
     }
 
-    GenericMasterModule::~GenericMasterModule() noexcept
+    GenericMasterModule::~GenericMasterModule()
     {
         for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
         {
