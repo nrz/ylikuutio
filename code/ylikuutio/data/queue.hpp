@@ -24,7 +24,6 @@
 // Include standard headers
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
-#include <iterator>  // std::advance
 #include <stdexcept> // std::runtime_error
 
 namespace yli::data
@@ -117,7 +116,7 @@ namespace yli::data
                 {
                     // Use only after calling `move_to_beginning`.
                     typename std::array<std::size_t, QueueMaxSize>::iterator it = this->queue.begin();
-                    std::advance(it, queue_size);
+                    it += queue_size;
                     return iterator(it);
                 }
 
@@ -135,7 +134,7 @@ namespace yli::data
                 {
                     // Use only after calling `move_to_beginning`.
                     typename std::array<std::size_t, QueueMaxSize>::const_iterator it = this->queue.cbegin();
-                    std::advance(it, queue_size);
+                    it += queue_size;
                     return const_iterator(it);
                 }
 
