@@ -90,10 +90,6 @@ copyright_notice = \
 
 namespace = "yli::ontology"
 fully_qualified_class_name = namespace + "::" + class_name
-fully_qualified_parent_class_name = namespace + "::" + parent_class_name
-
-if base_class_name != "":
-    fully_qualified_base_class_name = namespace + "::" + base_class_name
 
 # snake_case lowercase names.
 class_name_word_boundaries = r'(?<!^)(?=[A-Z]|(?<![A-Z0-9])(?=[0-9]))'
@@ -124,7 +120,7 @@ class_include_line = include_space_double_quote + class_filename_hpp + "\""
 
 # struct variable type and name.
 struct_variable_type = class_name + "Struct"
-const_struct_reference_variable_type = "const " + namespace + "::" + struct_variable_type + "&"
+const_struct_reference_variable_type = "const " + struct_variable_type + "&"
 struct_name = snake_case_class_name + "_struct"
 
 # struct filename.
@@ -153,14 +149,14 @@ struct_include_line = include_space_double_quote + struct_name + ".hpp\""
 
 # base class' variable type and name.
 if base_class_name != "":
-    fully_qualified_base_class_struct_variable_type = fully_qualified_base_class_name + "Struct"
+    base_class_struct_variable_type = base_class_name + "Struct"
 
 # standard headers include lines.
 standard_headers_include_lines = \
 "// Include standard headers\n"\
 "#include <cstddef> // std::size_t"
 
-parent_module_type_and_name = "yli::ontology::GenericParentModule* const parent_module"
+parent_module_type_and_name = "GenericParentModule* const parent_module"
 
 # forwacd declarations in core namespace
 core_namespace_forward_declarations = \
@@ -193,7 +189,7 @@ four_spaces_class_space = "    class "
 newline = "\n"
 if base_class_name != "":
     begin_class_definition = \
-    four_spaces_class_space + class_name + " final : public " + fully_qualified_base_class_name + newline + \
+    four_spaces_class_space + class_name + " final : public " + base_class_name + newline + \
     "    {"
 else:
     begin_class_definition = \
@@ -206,7 +202,7 @@ private_line = \
 "        private:"
 
 parent_pointer_line_in_header = \
-"            " + fully_qualified_parent_class_name + "* parent { nullptr };"
+"            " + parent_class_name + "* parent { nullptr };"
 
 end_class_definition = \
 "    };"
@@ -222,14 +218,14 @@ def get_class_constructor_signature(parent_class_name, n_leading_whitespace, is_
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
-                (' ' * (n_leading_whitespace + 8)) + "yli::ontology::Universe& universe,\n" + \
+                (' ' * (n_leading_whitespace + 8)) + "Universe& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ",\n" + \
                 (' ' * (n_leading_whitespace + 8)) + parent_module_type_and_name + ")"
     else:
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
-                (' ' * (n_leading_whitespace + 8)) + "yli::ontology::Universe& universe,\n" + \
+                (' ' * (n_leading_whitespace + 8)) + "Universe& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ")"
 
 class_constructor_child_module_line = \
@@ -267,10 +263,10 @@ destructor_declaration_lines = \
 "            virtual ~" + class_name + "() = default;"
 
 get_static_cast_parent_declaration = \
-"            " + fully_qualified_parent_class_name + "* get_" + snake_case_parent_class_name + "() const;"
+"            " + parent_class_name + "* get_" + snake_case_parent_class_name + "() const;"
 
 get_parent_const_override_line = \
-"            yli::ontology::Entity* get_parent() const override;"
+"            Entity* get_parent() const override;"
 
 get_number_of_children_const_override_line = \
 "            std::size_t get_number_of_children() const override;"
@@ -279,10 +275,10 @@ get_number_of_descendants_const_override_line = \
 "            std::size_t get_number_of_descendants() const override;"
 
 get_scene_const_override_line = \
-"            yli::ontology::Scene* get_scene() const override;"
+"            Scene* get_scene() const override;"
 
 child_module_lines = \
-"            " + namespace + "::ChildModule " + child_module_variable_name + ";"
+"            ChildModule " + child_module_variable_name + ";"
 
 # Lines specific to the `.cpp` file.
 if base_class_name != "":
@@ -294,15 +290,15 @@ if base_class_name != "":
         "        : " + base_class_name + "(application, universe, " + struct_name + ")"
 
 get_parent_function_lines = \
-"    yli::ontology::Entity* " + class_name + "::get_parent() const\n"\
+"    Entity* " + class_name + "::get_parent() const\n"\
 "    {\n"\
 "        return this->" + child_module_variable_name + ".get_parent();\n"\
 "    }"
 
 get_static_cast_parent_function_lines = \
-"    " + fully_qualified_parent_class_name + "* " + class_name + "::get_" + snake_case_parent_class_name + "() const\n"\
+"    " + parent_class_name + "* " + class_name + "::get_" + snake_case_parent_class_name + "() const\n"\
 "    {\n"\
-"        return static_cast<" + fully_qualified_parent_class_name + "*>(this->get_parent());\n"\
+"        return static_cast<" + parent_class_name + "*>(this->get_parent());\n"\
 "    }"
 
 get_number_of_children_lines = \
@@ -318,7 +314,7 @@ get_number_of_descendants_lines = \
 "    }"
 
 get_scene_lines = \
-"    yli::ontology::Scene* " + class_name + "::get_scene() const\n"\
+"    Scene* " + class_name + "::get_scene() const\n"\
 "    {\n"\
 "        return this->" + child_module_variable_name + ".get_scene(); // TODO: modify this line if needed!\n"\
 "    }"
@@ -334,7 +330,7 @@ struct_define_line = "#define " + struct_include_guard_macro_name
 four_spaces_struct_space = "    struct "
 if base_class_name != "":
     begin_struct_definition = \
-    four_spaces_struct_space + struct_variable_type + " final : public " + fully_qualified_base_class_struct_variable_type + newline + \
+    four_spaces_struct_space + struct_variable_type + " final : public " + base_class_struct_variable_type + newline + \
     "    {"
 else:
     begin_struct_definition = \
