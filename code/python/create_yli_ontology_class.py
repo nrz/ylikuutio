@@ -289,11 +289,18 @@ if base_class_name != "":
         class_constructor_base_initialization = \
         "        : " + base_class_name + "(application, universe, " + struct_name + ")"
 
-get_parent_function_lines = \
-"    Entity* " + class_name + "::get_parent() const\n"\
-"    {\n"\
-"        return this->" + child_module_variable_name + ".get_parent();\n"\
-"    }"
+if parent_class_name != "":
+    get_parent_function_lines = \
+            "    Entity* " + class_name + "::get_parent() const\n"\
+            "    {\n"\
+            "        return this->" + child_module_variable_name + ".get_parent();\n"\
+            "    }"
+else:
+        get_parent_function_lines = \
+                "    Entity* " + class_name + "::get_parent() const\n"\
+                "    {\n"\
+                "        return nullptr;\n"\
+                "    }"
 
 get_static_cast_parent_function_lines = \
 "    " + parent_class_name + "* " + class_name + "::get_" + snake_case_parent_class_name + "() const\n"\
@@ -313,11 +320,18 @@ get_number_of_descendants_lines = \
 "        return 0; // TODO: modify this line if this class has children!\n"\
 "    }"
 
-get_scene_lines = \
-"    Scene* " + class_name + "::get_scene() const\n"\
-"    {\n"\
-"        return this->" + child_module_variable_name + ".get_scene(); // TODO: modify this line if needed!\n"\
-"    }"
+if parent_class_name != "":
+    get_scene_lines = \
+            "    Scene* " + class_name + "::get_scene() const\n"\
+            "    {\n"\
+            "        return this->" + child_module_variable_name + ".get_scene(); // TODO: modify this line if needed!\n"\
+            "    }"
+else:
+    get_scene_lines = \
+            "    Scene* " + class_name + "::get_scene() const\n"\
+            "    {\n"\
+            "        return nullptr; // TODO: modify this line if needed!\n"\
+            "    }"
 
 # struct file specific lines.
 
