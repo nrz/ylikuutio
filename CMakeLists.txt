@@ -43,7 +43,7 @@ find_package(OpenGL REQUIRED)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_package(Vulkan REQUIRED MoltenVK)
-else()
+elseif(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
     find_package(Vulkan REQUIRED)
 endif()
 
