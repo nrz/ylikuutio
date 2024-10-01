@@ -25,7 +25,7 @@ following Blender's licensing.
 Ylikuutio is a 3D game engine designed for 3D games and simulations.
 Ylikuutio aims to run fast and support also older hardware.
 Currently Ylikuutio works on 64-bit GNU/Linux, MacOS, and Windows systems.
-OpenGL 3.3 is required.
+OpenGL 3.3 is required. Vulkan is required.
 
 ## Ylikuutio 0.0.8 screenshots
 ![View of Helsinki with cats and Ylikuutio console](screenshots/helsinki_cats_2020-10-08.png?raw=true)
@@ -59,11 +59,11 @@ In Debian or Ubuntu it's simple.
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
 You all need these packages:
-cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
+cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev vulkan-validationlayers-dev zlib1g-dev
 
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev zlib1g-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev vulkan-validationlayers-dev zlib1g-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
@@ -336,11 +336,7 @@ A: Currently supported target platforms are Linux, MacOS, and Windows.
    Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
-A: Ylikuutio targets OpenGL version 3.3.
-
-Q: Are there plans to support other graphics APIs?
-A: Vulkan will be supported in the future. Support for newer
-   OpenGL versions needs to be considered.
+A: Ylikuutio targets OpenGL version 3.3. Vulkan support is a work in progress.
 
 Q: Does Ylikuutio use modern OpenGL (VAOs and VBOs etc.)?
 A: Yes, Ylikuutio uses VAOs (vertex array objects), VBOs (vertex buffer
