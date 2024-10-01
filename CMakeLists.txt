@@ -41,6 +41,8 @@ set(COMPILE_ZLIB_FROM_SOURCE false)
 
 find_package(OpenGL REQUIRED)
 
+find_package(Vulkan REQUIRED)
+
 find_package(Threads REQUIRED)
 
 if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
