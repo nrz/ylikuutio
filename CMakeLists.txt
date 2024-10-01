@@ -41,7 +41,11 @@ set(COMPILE_ZLIB_FROM_SOURCE false)
 
 find_package(OpenGL REQUIRED)
 
-find_package(Vulkan REQUIRED)
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    find_package(Vulkan REQUIRED MoltenVK)
+else()
+    find_package(Vulkan REQUIRED)
+endif()
 
 find_package(Threads REQUIRED)
 
