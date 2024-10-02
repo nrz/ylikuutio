@@ -19,6 +19,7 @@ include_directories(
     OpenFBX/src/
     pugixml/src/
     soloud/include/
+    zlib/
     )
 
 if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
