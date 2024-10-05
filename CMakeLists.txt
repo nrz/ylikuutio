@@ -42,8 +42,11 @@ set(COMPILE_ZLIB_FROM_SOURCE false)
 find_package(OpenGL REQUIRED)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    find_package(Vulkan REQUIRED MoltenVK)
-elseif(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+    # TODO: implement MoltenVK support for MacOS.
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # TODO: implement Vulkan support for Windows
+else()
+    # Use Vulkan on Linux.
     find_package(Vulkan REQUIRED)
 endif()
 
