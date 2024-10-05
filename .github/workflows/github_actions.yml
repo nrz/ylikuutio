@@ -60,7 +60,6 @@ jobs:
         with:
           submodules: recursive
       - uses: ilammy/msvc-dev-cmd@v1.4.1
-      - run: vcpkg install zlib
       - run: clang -v
       - run: clang++ -v
       - run: mkdir build_native_clang
