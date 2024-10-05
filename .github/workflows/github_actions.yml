@@ -60,7 +60,14 @@ jobs:
         with:
           submodules: recursive
       - uses: ilammy/msvc-dev-cmd@v1.4.1
-      - run: vcpkg install zlib
+      - name: install zlib using scoop # from https://github.com/opensearch-project/k-NN/pull/1513/commits/e15d4724a10e755f2c0849dae73df7ba7890bdde
+        run: |
+          echo "C:/Users/runneradmin/scoop/shims" >> $env:GITHUB_PATH
+          Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+          refreshenv
+          scoop bucket add extras
+          scoop install zlib
+          regedit /s "C:\\Users\\runneradmin\\scoop\\apps\\zlib\\current\\register.reg"
       - run: clang -v
       - run: clang++ -v
       - run: mkdir build_native_clang
