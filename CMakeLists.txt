@@ -66,8 +66,8 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    # Native compiling on Windows must compile SDL and libpng from source.
-    # Native compiling on MacOS must compile SDL and libpng from source.
+    # Native compiling on Windows must compile SDL from source.
+    # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
 
     # Native compiling on Windows must compile libpng from source.
