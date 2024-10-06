@@ -1,33 +1,21 @@
 add_definitions(
+    -DGLEW_STATIC
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    # do not try co compile GLEW when targeting Android.
-    add_definitions(
-        -DGLEW_STATIC
-        )
-endif()
-
 include_directories(
     # asio/asio/include/
     FastNoiseSIMD/
+    glew-2.0.0/include/
     glm/
     OpenFBX/src/
     pugixml/src/
     soloud/include/
     zlib/
     )
-
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    # do not try co compile GLEW when targeting Android.
-    include_directories(
-        glew-2.0.0/include/
-        )
-endif()
 
 # Compile external dependencies
 
