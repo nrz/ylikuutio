@@ -68,8 +68,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     # https://stackoverflow.com/questions/6874883/cmake-hierarchy-zlib-libpng-and-my-own-app
     set(PNG_BUILD_ZLIB ON CACHE BOOL "" FORCE)
     add_subdirectory(libpng-1.6.37)
-    target_include_directories(png PUBLIC zlib/ zlib/)
-    target_include_directories(png PUBLIC libpng-1.6.37/ libpng-1.6.37/)
 elseif(COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.37)
 endif()
