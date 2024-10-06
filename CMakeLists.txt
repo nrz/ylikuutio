@@ -45,7 +45,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # TODO: implement MoltenVK support for MacOS.
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # TODO: implement Vulkan support for Windows
-else()
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     # Use Vulkan on Linux.
     find_package(Vulkan REQUIRED)
 endif()
@@ -65,7 +65,7 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Native compiling on Windows must compile SDL from source.
     # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
