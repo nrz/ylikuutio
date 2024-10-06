@@ -58,6 +58,7 @@ if(COMPILE_ZLIB_FROM_SOURCE)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+    find_package(ZLIB REQUIRED)
     # https://github.com/carla-simulator/carla/issues/6976
     set(ZLIB_INCLUDE_DIR "zlib")
     set(ZLIB_LIBRARY "zlib/Release")
