@@ -55,7 +55,7 @@ set(DFA_XTRA ""
     CACHE FILEPATH "File containing extra configuration settings")
 
 # Allow the users to switch on/off various library build types.
-option(PNG_SHARED "Build libpng as a shared library" ON)
+option(PNG_SHARED "Build libpng as a shared library" OFF)
 option(PNG_STATIC "Build libpng as a static library" ON)
 if(APPLE)
   option(PNG_FRAMEWORK "Build libpng as a framework bundle" ON)
