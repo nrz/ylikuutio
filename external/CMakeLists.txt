@@ -11,6 +11,7 @@ include_directories(
     FastNoiseSIMD/
     glew-2.0.0/include/
     glm/
+    libpng-1.6.44/
     OpenFBX/src/
     pugixml/src/
     soloud/include/
