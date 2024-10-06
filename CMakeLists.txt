@@ -159,6 +159,13 @@ else()
     endif()
 endif()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # https://github.com/carla-simulator/carla/issues/6976
+    set(ZLIB_INCLUDE_DIR "build/zlib-install/include")
+    set(ZLIB_FOUND TRUE)
+    set(ZLIB_VERSION 1.3.1)
+endif()
+
 if(COMPILE_ZLIB_FROM_SOURCE)
     include_directories(
         external/zlib/
