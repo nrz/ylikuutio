@@ -56,19 +56,7 @@ if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
-    # https://github.com/carla-simulator/carla/issues/6976
-    set(ZLIB_INCLUDE_DIR "zlib")
-    set(ZLIB_LIBRARY "zlib")
-    set(ZLIB_FOUND TRUE)
-    set(ZLIB_VERSION 1.3.1)
-endif()
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
-    # https://stackoverflow.com/questions/6874883/cmake-hierarchy-zlib-libpng-and-my-own-app
-    set(PNG_BUILD_ZLIB ON CACHE BOOL "" FORCE)
-    add_subdirectory(libpng-1.6.44)
-elseif(COMPILE_LIBPNG_FROM_SOURCE)
+if(COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.44)
 endif()
 
