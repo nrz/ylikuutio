@@ -72,11 +72,11 @@ option(PNG_TESTS "Build the libpng tests" OFF)
 if (ANDROID OR IOS)
   option(PNG_TOOLS "Build the libpng tools" OFF)
 else()
-  option(PNG_TOOLS "Build the libpng tools" ON)
+  option(PNG_TOOLS "Build the libpng tools" OFF)
 endif()
 
 # Maintain backwards compatibility with the deprecated option PNG_EXECUTABLES.
-option(PNG_EXECUTABLES "[Deprecated; please use PNG_TOOLS]" ON)
+option(PNG_EXECUTABLES "[Deprecated; please use PNG_TOOLS]" OFF)
 if(NOT PNG_EXECUTABLES)
   message(DEPRECATION "The option PNG_EXECUTABLES has been deprecated in favour of PNG_TOOLS")
   if(PNG_TOOLS)
