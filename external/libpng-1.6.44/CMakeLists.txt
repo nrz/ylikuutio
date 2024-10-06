@@ -64,7 +64,7 @@ endif()
 # Allow the users to switch on/off the auxiliary build and test artifacts.
 # These artifacts are NOT part of libpng proper, and are subject to change
 # at any time.
-option(PNG_TESTS "Build the libpng tests" ON)
+option(PNG_TESTS "Build the libpng tests" OFF)
 
 # Same as above, but for the third-party tools.
 # Although these tools are targetted at development environments only,
