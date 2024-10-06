@@ -284,7 +284,7 @@ add_definitions(
 
 # zlib.
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
-    configure_file(code/external/zlib/zconf.h.included code/external/zlib/zconf.h COPYONLY)
+    configure_file(external/zlib/zconf.h.included external/zlib/zconf.h COPYONLY)
 endif()
 
 # Shaders.
