@@ -62,10 +62,10 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1.4.1
       - run: clang -v
       - run: clang++ -v
-      - run: mkdir build_native_clang
-      - run: echo "Running cmake for Clang native compiler"
-      - run: cmake -Bbuild_native_clang
-      - run: cmake --build build_native_clang
+      - run: mkdir build
+      - run: echo "Running cmake for MSVC"
+      - run: cmake -Bbuild
+      - run: cmake --build build
   run-sonar-cloud-on-ubuntu:
     runs-on: ubuntu-22.04
     env:
