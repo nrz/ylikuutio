@@ -41,18 +41,22 @@ set(COMPILE_ZLIB_FROM_SOURCE false)
 
 find_package(OpenGL REQUIRED)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    # TODO: implement MoltenVK support for MacOS.
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    # TODO: implement Vulkan support for Windows
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+# Build config should be in the following order: Linux, Darwin, Windows.
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     # Use Vulkan on Linux.
     find_package(Vulkan REQUIRED)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    # TODO: implement MoltenVK support for MacOS.
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # TODO: implement Vulkan support for Windows.
 endif()
 
 find_package(Threads REQUIRED)
 
-if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    # Compile unit tests when compiling natively on Linux.
+    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Crosscompiling from Linux to Windows must compile SDL and libpng from source.
     # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
@@ -65,26 +69,29 @@ if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    # Native compiling on Windows must compile SDL from source.
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # Native compiling on Windows must compile libpng from source.
     # Native compiling on MacOS must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # Native compiling on Windows must compile zlib from source.
     # Native compiling on MacOS must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
 
-    # Do not compile unit tests when building on Windows or on MacOS.
+    # Do not compile unit tests when building on MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # Compile unit tests when compiling natively on GCC or Clang.
-    set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
-else()
-    # Do not compile unit tests when compiling natively on Visual Studio.
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # Native compiling on Windows must compile SDL from source.
+    set(COMPILE_SDL_FROM_SOURCE true)
+
+    # Native compiling on Windows must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
+
+    # Native compiling on Windows must compile zlib from source.
+    set(COMPILE_ZLIB_FROM_SOURCE true)
+
+    # Do not compile unit tests when building on Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
 endif()
 
