@@ -17,7 +17,7 @@ include_directories(
     zlib/
     )
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     # https://github.com/carla-simulator/carla/issues/6976
     set(ZLIB_INCLUDE_DIR "zlib")
     set(ZLIB_LIBRARY "zlib")
