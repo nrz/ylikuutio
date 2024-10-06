@@ -205,6 +205,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 endif()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+    set(THREAD_LIBS
+    )
+else()
+    set(THREAD_LIBS
+        pthread
+    )
+endif()
+
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLEW_200
@@ -826,7 +835,7 @@ add_executable(ajokki
     code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
     )
-target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # GPGPU test
 add_executable(gpgpu_test
@@ -839,7 +848,7 @@ add_executable(gpgpu_test
     code/ylikuutio/snippets/keyboard_callback_snippets.cpp
     code/ylikuutio/snippets/keyboard_callback_snippets.hpp
     )
-target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Hirvi libraries
 add_library(hirvi_lib STATIC
@@ -871,7 +880,7 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/train.cpp
     code/hirvi/ontology/train.hpp
     )
-target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Hirvi game application
 add_executable(hirvi
@@ -887,7 +896,7 @@ add_executable(mock
     code/mock/mock_application.cpp
     code/mock/mock_application.hpp
     )
-target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Tulevaisuus
 add_executable(tulevaisuus
@@ -897,7 +906,7 @@ add_executable(tulevaisuus
     code/tulevaisuus/tulevaisuus_console_callbacks.cpp
     code/tulevaisuus/tulevaisuus_console_callbacks.hpp
     )
-target_link_libraries(tulevaisuus snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(tulevaisuus snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # YliEdit
 add_executable(yli_edit
@@ -907,43 +916,43 @@ add_executable(yli_edit
     code/edit/yli_edit_console_callbacks.cpp
     code/edit/yli_edit_console_callbacks.hpp
     )
-target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} pthread)
+target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Asio-test
 if(FALSE)
     add_executable(asio_chat_server
         code/asio/asio_chat_server.cpp
         )
-    target_link_libraries(asio_chat_server pthread)
+    target_link_libraries(asio_chat_server ${THREAD_LIBS})
 
     add_executable(asio_chat_client
         code/asio/asio_chat_client.cpp
         )
-    target_link_libraries(asio_chat_client pthread)
+    target_link_libraries(asio_chat_client ${THREAD_LIBS})
 
     add_executable(asio_nslookup
         code/asio/asio_nslookup.cpp
         )
-    target_link_libraries(asio_nslookup pthread)
+    target_link_libraries(asio_nslookup ${THREAD_LIBS})
 endif()
 
 # future-test
 add_executable(future_test
     code/thread_test/future_test.cpp
     )
-target_link_libraries(future_test pthread)
+target_link_libraries(future_test ${THREAD_LIBS})
 
 # thread-test
 add_executable(thread_test
     code/thread_test/thread_test.cpp
     )
-target_link_libraries(thread_test pthread)
+target_link_libraries(thread_test ${THREAD_LIBS})
 
 # dining philosophers
 add_executable(dining_philosophers
     code/thread_test/dining_philosophers.cpp
     )
-target_link_libraries(dining_philosophers pthread)
+target_link_libraries(dining_philosophers ${THREAD_LIBS})
 
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
     # Planetary simulation library
@@ -1115,11 +1124,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} pthread)
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
     else()
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} pthread)
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
     endif()
 
     include(GoogleTest)
