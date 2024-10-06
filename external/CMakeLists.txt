@@ -17,6 +17,14 @@ include_directories(
     zlib/
     )
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # https://github.com/carla-simulator/carla/issues/6976
+    set(ZLIB_INCLUDE_DIR "zlib")
+    set(ZLIB_LIBRARY "zlib")
+    set(ZLIB_FOUND TRUE)
+    set(ZLIB_VERSION 1.3.1)
+endif()
+
 # Compile external dependencies
 
 # pugixml
