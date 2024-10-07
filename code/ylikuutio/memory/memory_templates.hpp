@@ -114,27 +114,24 @@ namespace yli::memory
                     iteration_start_i = buffer_size - 1;
                 }
 
+                for (
+                        std::size_t src_i = iteration_start_i, dest_i = (src_i > 0 ? src_i - 1 : buffer_size - 1), counter = 0;
+                        counter < buffer_size;
+                        counter++, src_i++, dest_i++)
                 {
-
-                    for (
-                            std::size_t src_i = iteration_start_i, dest_i = (src_i > 0 ? src_i - 1 : buffer_size - 1), counter = 0;
-                            counter < buffer_size;
-                            counter++, src_i++, dest_i++)
+                    if (src_i == buffer_size) [[unlikely]]
                     {
-                        if (src_i == buffer_size) [[unlikely]]
-                        {
-                            // Past end of buffer. Adjust appropriately.
-                            src_i = 0;
-                        }
-
-                        if (dest_i == buffer_size) [[unlikely]]
-                        {
-                            // Past end of buffer. Adjust appropriately.
-                            dest_i = 0;
-                        }
-
-                        buffer[dest_i] = buffer[src_i];
+                        // Past end of buffer. Adjust appropriately.
+                        src_i = 0;
                     }
+
+                    if (dest_i == buffer_size) [[unlikely]]
+                    {
+                        // Past end of buffer. Adjust appropriately.
+                        dest_i = 0;
+                    }
+
+                    buffer[dest_i] = buffer[src_i];
                 }
             }
 
