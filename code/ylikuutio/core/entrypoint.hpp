@@ -31,7 +31,7 @@
 namespace yli::core
 {
     // `Application::create_application` is defined by the application!
-    extern std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[]);
+    extern std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
 }
 
 int main(const int argc, const char* const argv[]) try

@@ -52,7 +52,7 @@ namespace yli::core
             Application(const int argc, const char* const argv[]);
 
             Application(const Application&) = delete;            // Delete copy constructor.
-            yli::core::Application& operator=(const Application&) = delete; // Delete copy assignment.
+            Application& operator=(const Application&) = delete; // Delete copy assignment.
 
             virtual ~Application() = default;
 
@@ -79,7 +79,7 @@ namespace yli::core
             yli::command_line::CommandLineMaster command_line_master;
     };
 
-    std::unique_ptr<yli::core::Application> create_application();
+    std::unique_ptr<Application> create_application();
 }
 
 #endif
