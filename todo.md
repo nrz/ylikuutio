@@ -19,7 +19,6 @@
 - [ ] ONTOLOGY/LISP/GUI Implement `create-widget` built-in YliLisp function.
 - [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
-- [ ] BUILD Implement building on GitHub Actions Windows runner.
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
 - [ ] VULKAN/RENDERING Add Vulkan support.
 - [ ] OPENGL/RENDERING Remove OpenGL support.
@@ -34,6 +33,7 @@
 - [ ] TEXT Add support for vector fonts using FreeType and HarfBuzz.
 
 ## Tasks which are necessary for the second stage (Hirvi prototype)
+- [ ] BUILD Implement building on GitHub Actions Windows runner.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
