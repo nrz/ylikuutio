@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <stdexcept> // std::runtime_error
 
 namespace yli::ontology
 {
