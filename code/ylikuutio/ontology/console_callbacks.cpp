@@ -588,7 +588,7 @@ namespace yli::ontology
         }
 
         // Copy current input into a `std::string`.
-        std::string input_string(console.current_input.begin(), console.current_input.end());
+        const std::string input_string(console.current_input.begin(), console.current_input.end());
 
         // Copy current input into the command history.
         console.command_history.emplace_back(console.current_input);
