@@ -837,7 +837,7 @@ namespace yli::ontology
                     return instance;
                 }
 
-            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Args, typename... Types>
+            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Types, typename... Args>
                 Type* create_child(
                         const int type,
                         std::variant<Types...> parent,
