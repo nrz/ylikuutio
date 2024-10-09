@@ -105,6 +105,7 @@
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
+#include <tuple>      // std::tuple
 #include <utility>    // std::forward, std::move
 #include <variant>    // std::holds_alternative
 
@@ -252,7 +253,8 @@ namespace yli::ontology
                     CallbackObject, CallbackEngine, yli::memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
                             yli::data::Datatype::CALLBACK_OBJECT,
                             callback_object_struct.callback_engine_parent,
-                            callback_object_struct);
+                            callback_object_struct,
+                            {});
             }
 
             CallbackParameter* create_callback_parameter(
@@ -264,6 +266,7 @@ namespace yli::ontology
                             yli::data::Datatype::CALLBACK_PARAMETER,
                             callback_parameter_struct.callback_object_parent,
                             callback_parameter_struct,
+                            {},
                             std::move(any_value));
             }
 
@@ -295,7 +298,8 @@ namespace yli::ontology
                     Brain, Scene, yli::memory::BrainMemoryAllocator, BrainStruct>(
                             yli::data::Datatype::BRAIN,
                             brain_struct.parent,
-                            brain_struct);
+                            brain_struct,
+                            {});
             }
 
             Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const final
@@ -305,6 +309,7 @@ namespace yli::ontology
                             yli::data::Datatype::WAYPOINT,
                             waypoint_struct.scene,
                             waypoint_struct,
+                            {},
                             (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
@@ -315,6 +320,7 @@ namespace yli::ontology
                             yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
+                            {},
                             (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
@@ -325,6 +331,7 @@ namespace yli::ontology
                             yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
+                            {},
                             (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
@@ -368,6 +375,7 @@ namespace yli::ontology
                             yli::data::Datatype::OBJECT,
                             object_struct.scene,
                             object_struct,
+                            {},
                             // mesh master.
                             ((std::holds_alternative<Species*>(object_struct.mesh_master) && std::get<Species*>(object_struct.mesh_master) != nullptr) ?
                              &(std::get<Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -435,6 +443,7 @@ namespace yli::ontology
                             yli::data::Datatype::HOLOBIONT,
                             holobiont_struct.scene,
                             holobiont_struct,
+                            {},
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
                             (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
             }
@@ -461,7 +470,8 @@ namespace yli::ontology
                     ShapeshifterTransformation, Material, yli::memory::ShapeshifterTransformationMemoryAllocator, ShapeshifterTransformationStruct>(
                             yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION,
                             shapeshifter_transformation_struct.material_parent,
-                            shapeshifter_transformation_struct);
+                            shapeshifter_transformation_struct,
+                            {});
             }
 
             ShapeshifterSequence* create_shapeshifter_sequence(
@@ -471,7 +481,8 @@ namespace yli::ontology
                     ShapeshifterSequence, ShapeshifterTransformation, yli::memory::ShapeshifterSequenceMemoryAllocator, ShapeshifterSequenceStruct>(
                             yli::data::Datatype::SHAPESHIFTER_SEQUENCE,
                             shapeshifter_sequence_struct.shapeshifter_transformation_parent,
-                            shapeshifter_sequence_struct);
+                            shapeshifter_sequence_struct,
+                            {});
             }
 
             ShapeshifterForm* create_shapeshifter_form(
@@ -481,7 +492,8 @@ namespace yli::ontology
                     ShapeshifterForm, ShapeshifterTransformation, yli::memory::ShapeshifterFormMemoryAllocator, ShapeshifterFormStruct>(
                             yli::data::Datatype::SHAPESHIFTER_FORM,
                             shapeshifter_form_struct.parent,
-                            shapeshifter_form_struct);
+                            shapeshifter_form_struct,
+                            {});
             }
 
             Font2d* create_font_2d(const FontStruct& font_struct) const final
@@ -499,7 +511,8 @@ namespace yli::ontology
                     Text2d, Font2d, yli::memory::Text2dMemoryAllocator, TextStruct>(
                             yli::data::Datatype::TEXT_2D,
                             text_struct.font_2d_parent,
-                            text_struct);
+                            text_struct,
+                            {});
             }
 
             VectorFont* create_vector_font(const VectorFontStruct& vector_font_struct) const final
@@ -508,7 +521,8 @@ namespace yli::ontology
                     VectorFont, Material, yli::memory::VectorFontMemoryAllocator, VectorFontStruct>(
                             yli::data::Datatype::VECTOR_FONT,
                             vector_font_struct.material_parent,
-                            vector_font_struct);
+                            vector_font_struct,
+                            {});
             }
 
             Glyph* create_glyph(const GlyphStruct& glyph_struct) const final
@@ -517,7 +531,8 @@ namespace yli::ontology
                     Glyph, VectorFont, yli::memory::GlyphMemoryAllocator, GlyphStruct>(
                             yli::data::Datatype::GLYPH,
                             glyph_struct.parent,
-                            glyph_struct);
+                            glyph_struct,
+                            {});
             }
 
             Text3d* create_text_3d(const Text3dStruct& text_3d_struct) const final
@@ -527,6 +542,7 @@ namespace yli::ontology
                             yli::data::Datatype::TEXT_3D,
                             text_3d_struct.vector_font_parent,
                             text_3d_struct,
+                            {},
                             (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module() : nullptr));
             }
 
@@ -580,7 +596,8 @@ namespace yli::ontology
                     ConsoleCallbackObject, ConsoleCallbackEngine, yli::memory::ConsoleCallbackObjectMemoryAllocator, ConsoleCallbackObjectStruct>(
                             yli::data::Datatype::CONSOLE_CALLBACK_OBJECT,
                             console_callback_object_struct.console_callback_engine_parent,
-                            console_callback_object_struct);
+                            console_callback_object_struct,
+                            {});
             }
 
             ConsoleCallbackParameter* create_console_callback_parameter(
@@ -592,6 +609,7 @@ namespace yli::ontology
                             yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER,
                             console_callback_parameter_struct.console_callback_object_parent,
                             console_callback_parameter_struct,
+                            {},
                             any_value);
             }
 
@@ -605,7 +623,8 @@ namespace yli::ontology
                     ComputeTask, Pipeline, yli::memory::ComputeTaskMemoryAllocator, ComputeTaskStruct>(
                             yli::data::Datatype::COMPUTE_TASK,
                             compute_task_struct.pipeline_parent,
-                            compute_task_struct);
+                            compute_task_struct,
+                            {});
             }
 
             LispFunction* create_lisp_function(const LispFunctionStruct& lisp_function_struct) const final
@@ -614,7 +633,8 @@ namespace yli::ontology
                     LispFunction, Console, yli::memory::LispFunctionMemoryAllocator, LispFunctionStruct>(
                             yli::data::Datatype::LISP_FUNCTION,
                             lisp_function_struct.console_parent,
-                            lisp_function_struct);
+                            lisp_function_struct,
+                            {});
             }
 
             template<typename... Args>
@@ -680,6 +700,7 @@ namespace yli::ontology
                                 object_derivative_type,
                                 object_struct.scene,
                                 object_struct,
+                                {},
                                 // mesh master.
                                 ((std::holds_alternative<Species*>(object_struct.mesh_master) && std::get<Species*>(object_struct.mesh_master) != nullptr) ?
                                  &(std::get<Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -837,11 +858,12 @@ namespace yli::ontology
                     return instance;
                 }
 
-            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Types, typename... Args>
+            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Masters, typename... Types, typename... Args>
                 Type* create_child(
                         const int type,
                         std::variant<Types...> parent,
                         const DataStruct& data_struct,
+                        std::tuple<Masters...> masters,
                         Args&&... args) const
                 {
                     // Create an instance of a derived class of `Entity`.
