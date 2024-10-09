@@ -47,7 +47,7 @@ namespace yli::ontology
         child_of_scene(scene_parent_module, *this),
         master_of_movables(this, &this->registry, "movables")
     {
-        this->callback_engine    = brain_struct.callback_engine;
+        this->callback_engine = brain_struct.callback_engine;
 
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Brain*";
