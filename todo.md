@@ -28,6 +28,7 @@
 - [ ] RENDERING Implement skybox.
 - [ ] RENDERING Add support for screenspace effects.
 - [ ] RENDERING Implement Larusse fire clouds. See Complex - Dope for a reference: https://youtu.be/HtXxM0pezAs
+- [ ] RENDERING Implement pattern vectors. See Renaissance - Amnesia for a reference: https://youtu.be/sxW6CW0RWlg
 - [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 - [ ] TEXT/UI Change to a more readable bitmap font.
 - [ ] TEXT Add support for vector fonts using FreeType and HarfBuzz.
