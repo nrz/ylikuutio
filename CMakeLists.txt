@@ -408,6 +408,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/queue.hpp
     code/ylikuutio/data/queue_iterator.hpp
+    code/ylikuutio/data/tuple_templates.hpp
     code/ylikuutio/data/type_enum_provider.hpp
     code/ylikuutio/data/variant_templates.hpp
     code/ylikuutio/data/wrap.hpp
