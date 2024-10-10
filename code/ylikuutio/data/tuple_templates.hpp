@@ -19,6 +19,7 @@
 #define YLIKUUTIO_DATA_TUPLE_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <tuple>    // std::apply, std::tie, std::tuple, std::tuple_cat
 #include <utility>  // std::index_sequence, std::integer_sequence
 
