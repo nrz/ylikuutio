@@ -17,12 +17,18 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // uintptr_t
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(font_2d_must_be_initialized_appropriately, headless)
 {
@@ -36,6 +42,20 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
             font_struct);
     ASSERT_NE(font_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(font_2d) % alignof(yli::ontology::Font2d), 0);
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = font_2d->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::TEXT_2D)
+        {
+            ASSERT_NE(generic_parent_module, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
