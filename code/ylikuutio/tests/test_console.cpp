@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -27,6 +28,11 @@
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
 
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
+
 TEST(console_must_be_initialized_appropriately, no_font)
 {
     mock::MockApplication application;
@@ -35,6 +41,21 @@ TEST(console_must_be_initialized_appropriately, no_font)
             console_struct);
     ASSERT_NE(console, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console) % alignof(yli::ontology::Console), 0);
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = console->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::LISP_FUNCTION)
+        {
+            ASSERT_NE(generic_parent_module, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
+
     ASSERT_TRUE(console->get_current_input().empty());
     ASSERT_TRUE(console->get_temp_input().empty());
     ASSERT_EQ(console->get_prompt(), "$ ");        // This may change in the future.
