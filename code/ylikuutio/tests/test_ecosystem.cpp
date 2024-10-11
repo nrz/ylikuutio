@@ -25,6 +25,11 @@
 // Include standard headers
 #include <cstddef> // uintptr_t
 
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
+
 TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
@@ -33,6 +38,45 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
             ecosystem_struct1);
     ASSERT_NE(ecosystem1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem1) % alignof(yli::ontology::Ecosystem), 0);
+
+    const yli::ontology::GenericParentModule* parent_of_pipelines  { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_materials  { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_species    { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_symbioses  { nullptr };
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = ecosystem1->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::PIPELINE)
+        {
+            parent_of_pipelines = generic_parent_module;
+            ASSERT_NE(parent_of_pipelines, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::MATERIAL)
+        {
+            parent_of_materials = generic_parent_module;
+            ASSERT_NE(parent_of_materials, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::SPECIES)
+        {
+            parent_of_species = generic_parent_module;
+            ASSERT_NE(parent_of_species, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::SYMBIOSIS)
+        {
+            parent_of_symbioses = generic_parent_module;
+            ASSERT_NE(parent_of_symbioses, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
+
+    ASSERT_LT(parent_of_pipelines, parent_of_materials);
+    ASSERT_LT(parent_of_materials, parent_of_species);
+    ASSERT_LT(parent_of_species, parent_of_symbioses);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 1);
