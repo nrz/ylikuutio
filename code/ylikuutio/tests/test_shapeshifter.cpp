@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -36,6 +37,11 @@
 // Include standard headers
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_material_parent_provided_as_valid_pointer)
 {
@@ -57,6 +63,31 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
             shapeshifter_transformation_struct);
     ASSERT_NE(shapeshifter_transformation, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(shapeshifter_transformation) % alignof(yli::ontology::ShapeshifterTransformation), 0);
+
+    const yli::ontology::GenericParentModule* parent_of_shapeshifter_forms     { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_shapeshifter_sequences { nullptr };
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = shapeshifter_transformation->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::SHAPESHIFTER_FORM)
+        {
+            parent_of_shapeshifter_forms = generic_parent_module;
+            ASSERT_NE(parent_of_shapeshifter_forms, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::SHAPESHIFTER_SEQUENCE)
+        {
+            parent_of_shapeshifter_sequences = generic_parent_module;
+            ASSERT_NE(parent_of_shapeshifter_sequences, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
+
+    ASSERT_LT(parent_of_shapeshifter_forms, parent_of_shapeshifter_sequences);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
