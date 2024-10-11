@@ -17,6 +17,7 @@
 
 #include "input_mode.hpp"
 #include "parent_of_input_modes_module.hpp"
+#include "master_of_input_modes_module.hpp"
 #include "universe.hpp"
 #include "input_mode_struct.hpp"
 
@@ -32,7 +33,7 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    class MasterOfInputModesModule;
+    class GenericMasterModule;
     class GenericCallbackEngine;
     class Scene;
 
@@ -41,10 +42,10 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::InputModeStruct& input_mode_struct,
             yli::ontology::ParentOfInputModesModule* const parent_module,
-            yli::ontology::MasterOfInputModesModule* const console_master_module)
+            yli::ontology::GenericMasterModule* const console_master_module)
         : Entity(application, universe, input_mode_struct),
         child_of_universe(parent_module, *this),
-        apprentice_of_console(console_master_module, this)
+        apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::InputMode*";

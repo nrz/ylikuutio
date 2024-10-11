@@ -43,7 +43,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class ParentOfInputModesModule;
-    class MasterOfInputModesModule;
+    class GenericMasterModule;
     class Universe;
     class GenericCallbackEngine;
     struct InputModeStruct;
@@ -56,7 +56,7 @@ namespace yli::ontology
                     Universe& universe,
                     const InputModeStruct& input_mode_struct,
                     ParentOfInputModesModule* const parent_module,
-                    MasterOfInputModesModule* const console_master_module);
+                    GenericMasterModule* const console_master_module);
 
             ~InputMode() = default;
 
