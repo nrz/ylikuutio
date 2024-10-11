@@ -23,6 +23,7 @@
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "master_of_input_modes_module.hpp"
+#include "input_mode.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -125,6 +126,18 @@ namespace yli::ontology
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
             GenericParentModule* get_generic_parent_module(const int type);
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module()
+                {
+                    static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Console::get_generic_master_module` for the type!");
+                }
+
+            template<>
+                GenericMasterModule* get_generic_master_module<InputMode>()
+                {
+                    return &this->master_of_input_modes;
+                }
 
             // Public callbacks.
 

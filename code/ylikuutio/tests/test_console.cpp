@@ -56,6 +56,8 @@ TEST(console_must_be_initialized_appropriately, no_font)
         }
     }
 
+    ASSERT_NE(console->get_generic_master_module<yli::ontology::InputMode>(), nullptr);
+
     ASSERT_TRUE(console->get_current_input().empty());
     ASSERT_TRUE(console->get_temp_input().empty());
     ASSERT_EQ(console->get_prompt(), "$ ");        // This may change in the future.
