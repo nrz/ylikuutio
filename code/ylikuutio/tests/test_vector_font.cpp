@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -32,6 +33,11 @@
 // Include standard headers
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_material_parent_provided_as_valid_pointer)
 {
@@ -53,6 +59,31 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
+
+    const yli::ontology::GenericParentModule* parent_of_glyphs   { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_text_3ds { nullptr };
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = vector_font->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::GLYPH)
+        {
+            parent_of_glyphs = generic_parent_module;
+            ASSERT_NE(parent_of_glyphs, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::TEXT_3D)
+        {
+            parent_of_text_3ds = generic_parent_module;
+            ASSERT_NE(parent_of_text_3ds, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
+
+    ASSERT_LT(parent_of_glyphs, parent_of_text_3ds);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
