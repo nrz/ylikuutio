@@ -513,14 +513,15 @@ with open(test_filename, 'w') as f:
     print(test_class_instance_init_nullptr, file = f)
     print(opening_braces, file = f)
     print(closing_braces, file = f)
-    print(file = f)
-    print(test_class_instance_init_valid_name, file = f)
-    print(opening_braces, file = f)
-    print(closing_braces, file = f)
-    print(file = f)
-    print(test_class_instance_init_invalid_name, file = f)
-    print(opening_braces, file = f)
-    print(closing_braces, file = f)
+    if parent_class_name != "" and parent_class_name != "Universe":
+        print(file = f)
+        print(test_class_instance_init_valid_name, file = f)
+        print(opening_braces, file = f)
+        print(closing_braces, file = f)
+        print(file = f)
+        print(test_class_instance_init_invalid_name, file = f)
+        print(opening_braces, file = f)
+        print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
     print(copyright_notice, file = f)
