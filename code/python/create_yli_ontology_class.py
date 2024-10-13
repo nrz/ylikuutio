@@ -396,6 +396,27 @@ class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_c
 assert_class_instance_not_nullptr_line = "    ASSERT_NE(" + snake_case_class_name + ", nullptr);"
 assert_class_instance_gets_proper_alignment = "    ASSERT_EQ(reinterpret_cast<uintptr_t>(" + snake_case_class_name + ") % alignof(" + \
         fully_qualified_class_name + "), 0);"
+entity_member_functions_of_parent_line = \
+        "    // `Entity` member functions of `" + parent_class_name + "`."
+entity_member_functions_of_class_instance_line = \
+        "    // `Entity` member functions."
+todo_line = "    // TODO: modify as needed!"
+assert_class_instance_child_id_0 = "    ASSERT_EQ(" + snake_case_class_name + "->get_childID(), 0);"
+assert_class_instance_type_is_correct = "    ASSERT_EQ(" + snake_case_class_name + "->get_type(), " + fully_qualified_class_name + "*);"
+assert_class_instance_can_not_be_erased = "    ASSERT_FALSE(" + snake_case_class_name + "->can_be_erased(); // TODO: modify if needed!"
+if parent_class_name == "Universe":
+    assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), nullptr);"
+elif parent_class_name == "Ecosystem":
+    assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), nullptr);"
+elif parent_class_name == "Scene":
+    assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), scene);"
+else:
+    assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), " + \
+            snake_case_parent_class_name + "->get_scene()); // TODO: modify if needed!"
+
+assert_class_instance_get_parent = "    ASSERT_EQ(" + snake_case_class_name + "->get_parent(), " + snake_case_parent_class_name + ");"
+assert_class_instance_get_number_of_non_variable_children = "    ASSERT_EQ(" + \
+        snake_case_class_name + "->get_number_of_non_variable_children(), 0); // TODO: modify if needed!"
 
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
@@ -530,6 +551,17 @@ with open(test_filename, 'w') as f:
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
     print(assert_class_instance_gets_proper_alignment, file = f)
+    print(file = f)
+    print(entity_member_functions_of_parent_line, file = f)
+    print(todo_line, file = f)
+    print(file = f)
+    print(entity_member_functions_of_class_instance_line, file = f)
+    print(assert_class_instance_child_id_0, file = f)
+    print(assert_class_instance_type_is_correct, file = f)
+    print(assert_class_instance_can_not_be_erased, file = f)
+    print(assert_class_instance_get_scene, file = f)
+    print(assert_class_instance_get_parent, file = f)
+    print(assert_class_instance_get_number_of_non_variable_children, file = f)
     print(closing_braces, file = f)
     print(file = f)
     print(test_class_instance_init_nullptr, file = f)
