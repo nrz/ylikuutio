@@ -368,6 +368,7 @@ struct_constructor_lines = \
 
 # test file specific lines.
 gtest_include_line = include_space_double_quote + "gtest/gtest.h\""
+mock_application_include_line = include_space_double_quote + "code/mock/mock_application.hpp\""
 ontology_path_with_slash_from_project_root = "code/ylikuutio/ontology/"
 class_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + class_filename_hpp + "\""
 struct_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + struct_filename + "\""
@@ -383,6 +384,7 @@ as_invalid_name = "_provided_as_invalid_global_name)"
 test_class_instance_init_invalid_name = test_opening_parenthesis + snake_case_class_name + init_appropriately + ", " + snake_case_parent_class_name + as_invalid_name
 opening_braces = "{"
 closing_braces = "}"
+mock_application_line = "    mock::MockApplication application;"
 
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
@@ -503,24 +505,29 @@ with open(test_filename, 'w') as f:
     print(copyright_notice, file = f)
     print(file = f)
     print(gtest_include_line, file = f)
+    print(mock_application_include_line, file = f)
     print(class_file_include_line_from_project_root, file = f)
     print(struct_file_include_line_from_project_root, file = f)
     print(file = f)
     print(test_class_instance_init_parent_pointer, file = f)
     print(opening_braces, file = f)
+    print(mock_application_line, file = f)
     print(closing_braces, file = f)
     print(file = f)
     print(test_class_instance_init_nullptr, file = f)
     print(opening_braces, file = f)
+    print(mock_application_line, file = f)
     print(closing_braces, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(file = f)
         print(test_class_instance_init_valid_name, file = f)
         print(opening_braces, file = f)
+        print(mock_application_line, file = f)
         print(closing_braces, file = f)
         print(file = f)
         print(test_class_instance_init_invalid_name, file = f)
         print(opening_braces, file = f)
+        print(mock_application_line, file = f)
         print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
