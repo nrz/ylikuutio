@@ -390,6 +390,7 @@ class_struct_line = "    " + fully_qualified_struct_variable_type + " " + struct
 class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_case_class_name + \
         " = application.get_generic_entity_factory().create_" + snake_case_class_name + "(\n" \
         "            " + struct_name + ");"
+assert_class_instance_not_nullptr_line = "    ASSERT_NE(" + snake_case_class_name + ", nullptr);"
 
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
@@ -519,6 +520,7 @@ with open(test_filename, 'w') as f:
     print(mock_application_line, file = f)
     print(class_struct_line, file = f)
     print(class_instance_line, file = f)
+    print(assert_class_instance_not_nullptr_line, file = f)
     print(closing_braces, file = f)
     print(file = f)
     print(test_class_instance_init_nullptr, file = f)
@@ -526,6 +528,7 @@ with open(test_filename, 'w') as f:
     print(mock_application_line, file = f)
     print(class_struct_line, file = f)
     print(class_instance_line, file = f)
+    print(assert_class_instance_not_nullptr_line, file = f)
     print(closing_braces, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(file = f)
@@ -534,6 +537,7 @@ with open(test_filename, 'w') as f:
         print(mock_application_line, file = f)
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
+        print(assert_class_instance_not_nullptr_line, file = f)
         print(closing_braces, file = f)
         print(file = f)
         print(test_class_instance_init_invalid_name, file = f)
@@ -541,6 +545,7 @@ with open(test_filename, 'w') as f:
         print(mock_application_line, file = f)
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
+        print(assert_class_instance_not_nullptr_line, file = f)
         print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
