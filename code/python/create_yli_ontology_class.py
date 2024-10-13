@@ -159,6 +159,7 @@ include_standard_headers_line = "// Include standard headers"
 standard_headers_include_lines = include_standard_headers_line + "\n"\
 "#include <cstddef> // std::size_t"
 cstddef_uintptr_t_include_line = include_space_smaller_than + "cstddef> // uintptr_t"
+limits_std_numeric_limits_include_line = include_space_smaller_than + "limits>  // std::numeric_limits"
 
 parent_module_type_and_name = "GenericParentModule* const parent_module"
 
@@ -418,6 +419,10 @@ assert_class_instance_get_parent = "    ASSERT_EQ(" + snake_case_class_name + "-
 assert_class_instance_get_number_of_non_variable_children = "    ASSERT_EQ(" + \
         snake_case_class_name + "->get_number_of_non_variable_children(), 0); // TODO: modify if needed!"
 
+assert_class_instance_child_id_undefined = "    ASSERT_EQ(" + snake_case_class_name + "->get_childID(), std::numeric_limits<std::size_t>::max());"
+assert_class_instance_get_scene_nullptr = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), nullptr);"
+assert_class_instance_get_parent_nullptr = "    ASSERT_EQ(" + snake_case_class_name + "->get_parent(), nullptr);"
+
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
 test_struct_instance_init_global_name = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_name
@@ -543,6 +548,7 @@ with open(test_filename, 'w') as f:
     print(file = f)
     print(include_standard_headers_line, file = f)
     print(cstddef_uintptr_t_include_line, file = f)
+    print(limits_std_numeric_limits_include_line, file = f)
     print(file = f)
     print(test_class_instance_init_parent_pointer, file = f)
     print(opening_braces, file = f)
@@ -571,6 +577,17 @@ with open(test_filename, 'w') as f:
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
     print(assert_class_instance_gets_proper_alignment, file = f)
+    print(file = f)
+    print(entity_member_functions_of_parent_line, file = f)
+    print(todo_line, file = f)
+    print(file = f)
+    print(entity_member_functions_of_class_instance_line, file = f)
+    print(assert_class_instance_child_id_undefined, file = f)
+    print(assert_class_instance_type_is_correct, file = f)
+    print(assert_class_instance_can_not_be_erased, file = f)
+    print(assert_class_instance_get_scene_nullptr, file = f)
+    print(assert_class_instance_get_parent_nullptr, file = f)
+    print(assert_class_instance_get_number_of_non_variable_children, file = f)
     print(closing_braces, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(file = f)
@@ -581,6 +598,17 @@ with open(test_filename, 'w') as f:
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
         print(assert_class_instance_gets_proper_alignment, file = f)
+        print(file = f)
+        print(entity_member_functions_of_parent_line, file = f)
+        print(todo_line, file = f)
+        print(file = f)
+        print(entity_member_functions_of_class_instance_line, file = f)
+        print(assert_class_instance_child_id_0, file = f)
+        print(assert_class_instance_type_is_correct, file = f)
+        print(assert_class_instance_can_not_be_erased, file = f)
+        print(assert_class_instance_get_scene, file = f)
+        print(assert_class_instance_get_parent, file = f)
+        print(assert_class_instance_get_number_of_non_variable_children, file = f)
         print(closing_braces, file = f)
         print(file = f)
         print(test_class_instance_init_invalid_name, file = f)
@@ -590,6 +618,17 @@ with open(test_filename, 'w') as f:
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
         print(assert_class_instance_gets_proper_alignment, file = f)
+        print(file = f)
+        print(entity_member_functions_of_parent_line, file = f)
+        print(todo_line, file = f)
+        print(file = f)
+        print(entity_member_functions_of_class_instance_line, file = f)
+        print(assert_class_instance_child_id_undefined, file = f)
+        print(assert_class_instance_type_is_correct, file = f)
+        print(assert_class_instance_can_not_be_erased, file = f)
+        print(assert_class_instance_get_scene_nullptr, file = f)
+        print(assert_class_instance_get_parent_nullptr, file = f)
+        print(assert_class_instance_get_number_of_non_variable_children, file = f)
         print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
