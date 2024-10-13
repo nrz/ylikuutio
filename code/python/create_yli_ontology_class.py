@@ -101,7 +101,9 @@ if base_class_name != "":
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-include_space_double_quote = "#include \""
+include_space = "#include "
+include_space_double_quote = include_space + "\""
+include_space_smaller_than = include_space + "<"
 endif_line = "#endif"
 
 if parent_class_name != "":
@@ -153,9 +155,10 @@ if base_class_name != "":
     base_class_struct_variable_type = base_class_name + "Struct"
 
 # standard headers include lines.
-standard_headers_include_lines = \
-"// Include standard headers\n"\
+include_standard_headers_line = "// Include standard headers"
+standard_headers_include_lines = include_standard_headers_line + "\n"\
 "#include <cstddef> // std::size_t"
+cstddef_uintptr_t_include_line = include_space_smaller_than + "cstddef> // uintptr_t"
 
 parent_module_type_and_name = "GenericParentModule* const parent_module"
 
@@ -391,6 +394,8 @@ class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_c
         " = application.get_generic_entity_factory().create_" + snake_case_class_name + "(\n" \
         "            " + struct_name + ");"
 assert_class_instance_not_nullptr_line = "    ASSERT_NE(" + snake_case_class_name + ", nullptr);"
+assert_class_instance_gets_proper_alignment = "    ASSERT_EQ(reinterpret_cast<uintptr_t>(" + snake_case_class_name + ") % alignof(" + \
+        fully_qualified_class_name + "), 0);"
 
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
@@ -515,12 +520,16 @@ with open(test_filename, 'w') as f:
     print(class_file_include_line_from_project_root, file = f)
     print(struct_file_include_line_from_project_root, file = f)
     print(file = f)
+    print(include_standard_headers_line, file = f)
+    print(cstddef_uintptr_t_include_line, file = f)
+    print(file = f)
     print(test_class_instance_init_parent_pointer, file = f)
     print(opening_braces, file = f)
     print(mock_application_line, file = f)
     print(class_struct_line, file = f)
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
+    print(assert_class_instance_gets_proper_alignment, file = f)
     print(closing_braces, file = f)
     print(file = f)
     print(test_class_instance_init_nullptr, file = f)
@@ -529,6 +538,7 @@ with open(test_filename, 'w') as f:
     print(class_struct_line, file = f)
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
+    print(assert_class_instance_gets_proper_alignment, file = f)
     print(closing_braces, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(file = f)
@@ -538,6 +548,7 @@ with open(test_filename, 'w') as f:
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
+        print(assert_class_instance_gets_proper_alignment, file = f)
         print(closing_braces, file = f)
         print(file = f)
         print(test_class_instance_init_invalid_name, file = f)
@@ -546,6 +557,7 @@ with open(test_filename, 'w') as f:
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
+        print(assert_class_instance_gets_proper_alignment, file = f)
         print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
