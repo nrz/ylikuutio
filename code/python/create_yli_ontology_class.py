@@ -120,6 +120,7 @@ class_include_line = include_space_double_quote + class_filename_hpp + "\""
 
 # struct variable type and name.
 struct_variable_type = class_name + "Struct"
+fully_qualified_struct_variable_type = namespace + "::" + struct_variable_type
 const_struct_reference_variable_type = "const " + struct_variable_type + "&"
 struct_name = snake_case_class_name + "_struct"
 
@@ -385,6 +386,7 @@ test_class_instance_init_invalid_name = test_opening_parenthesis + snake_case_cl
 opening_braces = "{"
 closing_braces = "}"
 mock_application_line = "    mock::MockApplication application;"
+class_struct_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + ";"
 
 # struct test file specific lines.
 test_struct_instance_init_parent_pointer = test_opening_parenthesis + struct_name + init_appropriately + ", " + snake_case_parent_class_name + as_valid_ptr
@@ -512,22 +514,26 @@ with open(test_filename, 'w') as f:
     print(test_class_instance_init_parent_pointer, file = f)
     print(opening_braces, file = f)
     print(mock_application_line, file = f)
+    print(class_struct_line, file = f)
     print(closing_braces, file = f)
     print(file = f)
     print(test_class_instance_init_nullptr, file = f)
     print(opening_braces, file = f)
     print(mock_application_line, file = f)
+    print(class_struct_line, file = f)
     print(closing_braces, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(file = f)
         print(test_class_instance_init_valid_name, file = f)
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
+        print(class_struct_line, file = f)
         print(closing_braces, file = f)
         print(file = f)
         print(test_class_instance_init_invalid_name, file = f)
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
+        print(class_struct_line, file = f)
         print(closing_braces, file = f)
 
 with open(struct_test_filename, 'w') as f:
