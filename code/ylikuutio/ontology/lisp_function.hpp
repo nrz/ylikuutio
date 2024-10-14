@@ -72,8 +72,9 @@ namespace yli::ontology
             ChildModule child_of_console;
             GenericParentModule parent_of_generic_lisp_function_overloads;
 
-        private:
             Scene* get_scene() const override;
+
+        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };
