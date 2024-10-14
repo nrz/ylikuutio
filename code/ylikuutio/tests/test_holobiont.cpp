@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -30,6 +31,11 @@
 // Include standard headers
 #include <cstddef> // uintptr_t, std::size_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
@@ -51,6 +57,20 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = holobiont->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::BIONT)
+        {
+            ASSERT_NE(generic_parent_module, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

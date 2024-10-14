@@ -112,6 +112,8 @@ namespace yli::ontology
             GenericParentModule parent_of_bionts;
             ApprenticeModule apprentice_of_symbiosis;
 
+            GenericParentModule* get_generic_parent_module(const int type);
+
             Scene* get_scene() const final;
 
             Symbiosis* get_symbiosis() const;
