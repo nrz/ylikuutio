@@ -1015,6 +1015,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_compute_task.cpp
         code/ylikuutio/tests/test_compute_task_struct.cpp
         code/ylikuutio/tests/test_console.cpp
+        code/ylikuutio/tests/test_console_callback_engine.cpp
         code/ylikuutio/tests/test_console_callback_object.cpp
         code/ylikuutio/tests/test_console_callback_object_struct.cpp
         code/ylikuutio/tests/test_console_callback_parameter.cpp
