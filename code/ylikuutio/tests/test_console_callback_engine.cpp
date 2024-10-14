@@ -17,12 +17,18 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // uintptr_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(console_callback_engine_must_be_initialized_appropriately, universe_provided_as_valid_pointer)
 {
@@ -32,6 +38,20 @@ TEST(console_callback_engine_must_be_initialized_appropriately, universe_provide
             console_callback_engine_struct);
     ASSERT_NE(console_callback_engine, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_callback_engine) % alignof(yli::ontology::ConsoleCallbackEngine), 0);
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = console_callback_engine->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::CONSOLE_CALLBACK_OBJECT)
+        {
+            ASSERT_NE(generic_parent_module, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
