@@ -401,10 +401,15 @@ opening_braces = "{"
 closing_braces = "}"
 mock_application_line = "    mock::MockApplication application;"
 parent_class_struct_line = "    " + fully_qualified_parent_struct_name + " " + snake_case_parent_struct_name + "(nullptr); // TODO: modify as needed!"
+parent_struct_global_name_foo_line = "    " + snake_case_parent_struct_name + ".global_name = \"foo\";"
 parent_class_instance_line = "    " + fully_qualified_parent_class_name +  "* const " + snake_case_parent_class_name + \
         " = application.get_generic_entity_factory().create_" + snake_case_parent_class_name + "(\n" \
         "            " + snake_case_parent_struct_name + ");"
 class_struct_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + ";"
+class_struct_from_parent_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(" + snake_case_parent_class_name + ");"
+class_struct_from_nullptr_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(nullptr);"
+class_struct_from_foo_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(\"foo\");"
+class_struct_from_bar_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(\"bar\");"
 class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_case_class_name + \
         " = application.get_generic_entity_factory().create_" + snake_case_class_name + "(\n" \
         "            " + struct_name + ");"
@@ -570,7 +575,9 @@ with open(test_filename, 'w') as f:
     if parent_class_name != "" and parent_class_name != "Universe":
         print(parent_class_struct_line, file = f)
         print(parent_class_instance_line, file = f)
-    print(class_struct_line, file = f)
+        print(class_struct_from_parent_line, file = f)
+    else:
+        print(class_struct_line, file = f)
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
     print(assert_class_instance_gets_proper_alignment, file = f)
@@ -590,7 +597,7 @@ with open(test_filename, 'w') as f:
     print(test_class_instance_init_nullptr, file = f)
     print(opening_braces, file = f)
     print(mock_application_line, file = f)
-    print(class_struct_line, file = f)
+    print(class_struct_from_nullptr_line, file = f)
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
     print(assert_class_instance_gets_proper_alignment, file = f)
@@ -612,8 +619,9 @@ with open(test_filename, 'w') as f:
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
         print(parent_class_struct_line, file = f)
+        print(parent_struct_global_name_foo_line, file = f)
         print(parent_class_instance_line, file = f)
-        print(class_struct_line, file = f)
+        print(class_struct_from_foo_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
         print(assert_class_instance_gets_proper_alignment, file = f)
@@ -634,8 +642,9 @@ with open(test_filename, 'w') as f:
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
         print(parent_class_struct_line, file = f)
+        print(parent_struct_global_name_foo_line, file = f)
         print(parent_class_instance_line, file = f)
-        print(class_struct_line, file = f)
+        print(class_struct_from_bar_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
         print(assert_class_instance_gets_proper_alignment, file = f)
