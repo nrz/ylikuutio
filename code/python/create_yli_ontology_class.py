@@ -420,8 +420,14 @@ entity_member_functions_of_parent_line = \
         "    // `Entity` member functions of `" + parent_class_name + "`."
 entity_member_functions_of_class_instance_line = \
         "    // `Entity` member functions."
-number_of_non_variable_children_of_parent_instance_is_0_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 0);"
-number_of_non_variable_children_of_parent_instance_is_1_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 1);"
+
+if parent_class_name == "Universe":
+    number_of_non_variable_children_of_parent_instance_is_0_line = "    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);"
+    number_of_non_variable_children_of_parent_instance_is_1_line = "    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);"
+else:
+    number_of_non_variable_children_of_parent_instance_is_0_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 0);"
+    number_of_non_variable_children_of_parent_instance_is_1_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 1);"
+
 todo_line = "    // TODO: modify as needed!"
 assert_class_instance_child_id_0 = "    ASSERT_EQ(" + snake_case_class_name + "->get_childID(), 0);"
 assert_class_instance_type_is_correct = "    ASSERT_EQ(" + snake_case_class_name + "->get_type(), \"" + fully_qualified_class_name + "*\");"
@@ -436,7 +442,11 @@ else:
     assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), " + \
             snake_case_parent_class_name + "->get_scene()); // TODO: modify if needed!"
 
-assert_class_instance_get_parent = "    ASSERT_EQ(" + snake_case_class_name + "->get_parent(), " + snake_case_parent_class_name + ");"
+if parent_class_name == "Universe":
+    assert_class_instance_get_parent = "    ASSERT_EQ(" + snake_case_class_name + "->get_parent(), &application.get_universe());"
+else:
+    assert_class_instance_get_parent = "    ASSERT_EQ(" + snake_case_class_name + "->get_parent(), " + snake_case_parent_class_name + ");"
+
 assert_class_instance_get_number_of_non_variable_children = "    ASSERT_EQ(" + \
         snake_case_class_name + "->get_number_of_non_variable_children(), 0); // TODO: modify if needed!"
 
