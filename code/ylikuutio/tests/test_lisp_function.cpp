@@ -36,6 +36,9 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
     ASSERT_NE(lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(lisp_function) % alignof(yli::ontology::LispFunction), 0);
 
+    // `Entity` member functions of `Console`.
+    ASSERT_EQ(console->get_number_of_non_variable_children(), 1);
+
     // `Entity` member functions.
     ASSERT_EQ(lisp_function->get_childID(), 0);
     ASSERT_EQ(lisp_function->get_type(), "yli::ontology::LispFunction*");
@@ -76,6 +79,9 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
     ASSERT_NE(lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(lisp_function) % alignof(yli::ontology::LispFunction), 0);
 
+    // `Entity` member functions of `Console`.
+    ASSERT_EQ(console->get_number_of_non_variable_children(), 1);
+
     // `Entity` member functions.
     ASSERT_EQ(lisp_function->get_childID(), 0);
     ASSERT_EQ(lisp_function->get_type(), "yli::ontology::LispFunction*");
@@ -97,6 +103,9 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_invali
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(lisp_function) % alignof(yli::ontology::LispFunction), 0);
+
+    // `Entity` member functions of `Console`.
+    ASSERT_EQ(console->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
     ASSERT_EQ(lisp_function->get_childID(), std::numeric_limits<std::size_t>::max());
