@@ -22,6 +22,7 @@
 #include "registry.hpp"
 #include "console_struct.hpp"
 #include "text_struct.hpp"
+#include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -363,12 +364,12 @@ namespace yli::ontology
 
     std::size_t Console::get_number_of_children() const
     {
-        return 0; // `Console` has no children.
+        return this->parent_of_lisp_functions.get_number_of_children();
     }
 
     std::size_t Console::get_number_of_descendants() const
     {
-        return 0; // `Console` has no children.
+        return yli::ontology::get_number_of_descendants(this->parent_of_lisp_functions.child_pointer_vector);
     }
 
     bool Console::enter_console()
