@@ -20,6 +20,7 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 
 // Include standard headers
@@ -56,6 +57,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
             ASSERT_EQ(generic_parent_module, nullptr);
         }
     }
+
+    ASSERT_NE(font_2d->get_generic_master_module<yli::ontology::Console>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);

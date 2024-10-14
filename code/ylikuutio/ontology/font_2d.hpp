@@ -23,6 +23,7 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "texture_module.hpp"
+#include "console.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -95,6 +96,18 @@ namespace yli::ontology
                     const std::string& font_texture_file_format) const;
 
             GenericParentModule* get_generic_parent_module(const int type);
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module()
+                {
+                    static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Font2d::get_generic_master_module` for the type!");
+                }
+
+            template<>
+                GenericMasterModule* get_generic_master_module<Console>()
+                {
+                    return &this->master_of_consoles;
+                }
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
