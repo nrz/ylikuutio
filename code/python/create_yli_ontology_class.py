@@ -420,6 +420,8 @@ entity_member_functions_of_parent_line = \
         "    // `Entity` member functions of `" + parent_class_name + "`."
 entity_member_functions_of_class_instance_line = \
         "    // `Entity` member functions."
+number_of_non_variable_children_of_parent_instance_is_0_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 0);"
+number_of_non_variable_children_of_parent_instance_is_1_line = "    ASSERT_EQ(" + snake_case_parent_class_name + "->get_number_of_non_variable_children(), 1);"
 todo_line = "    // TODO: modify as needed!"
 assert_class_instance_child_id_0 = "    ASSERT_EQ(" + snake_case_class_name + "->get_childID(), 0);"
 assert_class_instance_type_is_correct = "    ASSERT_EQ(" + snake_case_class_name + "->get_type(), \"" + fully_qualified_class_name + "*\");"
@@ -583,7 +585,7 @@ with open(test_filename, 'w') as f:
     print(assert_class_instance_gets_proper_alignment, file = f)
     print(file = f)
     print(entity_member_functions_of_parent_line, file = f)
-    print(todo_line, file = f)
+    print(number_of_non_variable_children_of_parent_instance_is_1_line, file = f)
     print(file = f)
     print(entity_member_functions_of_class_instance_line, file = f)
     print(assert_class_instance_child_id_0, file = f)
@@ -627,7 +629,7 @@ with open(test_filename, 'w') as f:
         print(assert_class_instance_gets_proper_alignment, file = f)
         print(file = f)
         print(entity_member_functions_of_parent_line, file = f)
-        print(todo_line, file = f)
+        print(number_of_non_variable_children_of_parent_instance_is_1_line, file = f)
         print(file = f)
         print(entity_member_functions_of_class_instance_line, file = f)
         print(assert_class_instance_child_id_0, file = f)
@@ -650,7 +652,7 @@ with open(test_filename, 'w') as f:
         print(assert_class_instance_gets_proper_alignment, file = f)
         print(file = f)
         print(entity_member_functions_of_parent_line, file = f)
-        print(todo_line, file = f)
+        print(number_of_non_variable_children_of_parent_instance_is_0_line, file = f)
         print(file = f)
         print(entity_member_functions_of_class_instance_line, file = f)
         print(assert_class_instance_child_id_undefined, file = f)
