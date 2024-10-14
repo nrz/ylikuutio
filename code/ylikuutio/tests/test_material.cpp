@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -31,6 +32,11 @@
 // Include standard headers
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+}
 
 TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_parent_provided_as_valid_pointer)
 {
@@ -48,6 +54,31 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
             material_struct);
     ASSERT_NE(material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
+
+    const yli::ontology::GenericParentModule* parent_of_shapeshifter_transformations { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_vector_fonts                 { nullptr };
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = material->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION)
+        {
+            parent_of_shapeshifter_transformations = generic_parent_module;
+            ASSERT_NE(parent_of_shapeshifter_transformations, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::VECTOR_FONT)
+        {
+            parent_of_vector_fonts = generic_parent_module;
+            ASSERT_NE(parent_of_vector_fonts, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
+
+    ASSERT_LT(parent_of_shapeshifter_transformations, parent_of_vector_fonts);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
