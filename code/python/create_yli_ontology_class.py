@@ -404,7 +404,7 @@ entity_member_functions_of_class_instance_line = \
 todo_line = "    // TODO: modify as needed!"
 assert_class_instance_child_id_0 = "    ASSERT_EQ(" + snake_case_class_name + "->get_childID(), 0);"
 assert_class_instance_type_is_correct = "    ASSERT_EQ(" + snake_case_class_name + "->get_type(), \"" + fully_qualified_class_name + "*\");"
-assert_class_instance_can_not_be_erased = "    ASSERT_FALSE(" + snake_case_class_name + "->can_be_erased()); // TODO: modify if needed!"
+assert_class_instance_can_not_be_erased = "    ASSERT_FALSE(" + snake_case_class_name + "->get_can_be_erased()); // TODO: modify if needed!"
 if parent_class_name == "Universe":
     assert_class_instance_get_scene = "    ASSERT_EQ(" + snake_case_class_name + "->get_scene(), nullptr);"
 elif parent_class_name == "Ecosystem":
