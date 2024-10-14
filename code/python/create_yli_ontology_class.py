@@ -91,10 +91,20 @@ copyright_notice = \
 namespace = "yli::ontology"
 fully_qualified_class_name = namespace + "::" + class_name
 
+if parent_class_name != "":
+    parent_struct_type = parent_class_name + "Struct"
+    fully_qualified_parent_class_name = namespace + "::" + parent_class_name
+    fully_qualified_parent_struct_name = namespace + "::" + parent_struct_type
+else:
+    parent_struct_type = ""
+    fully_qualified_parent_class_name = ""
+    fully_qualified_parent_struct_name = ""
+
 # snake_case lowercase names.
 class_name_word_boundaries = r'(?<!^)(?=[A-Z]|(?<![A-Z0-9])(?=[0-9]))'
 snake_case_class_name = re.sub(class_name_word_boundaries, '_', class_name).lower()
 snake_case_parent_class_name = re.sub(class_name_word_boundaries, '_', parent_class_name).lower()
+snake_case_parent_struct_name = snake_case_parent_class_name + "_struct"
 
 if base_class_name != "":
     snake_case_base_class_name = re.sub(class_name_word_boundaries, '_', base_class_name).lower()
@@ -390,6 +400,10 @@ test_class_instance_init_invalid_name = test_opening_parenthesis + snake_case_cl
 opening_braces = "{"
 closing_braces = "}"
 mock_application_line = "    mock::MockApplication application;"
+parent_class_struct_line = "    " + fully_qualified_parent_struct_name + " " + snake_case_parent_struct_name + "(nullptr); // TODO: modify as needed!"
+parent_class_instance_line = "    " + fully_qualified_parent_class_name +  "* const " + snake_case_parent_class_name + \
+        " = application.get_generic_entity_factory().create_" + snake_case_parent_class_name + "(\n" \
+        "            " + snake_case_parent_struct_name + ");"
 class_struct_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + ";"
 class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_case_class_name + \
         " = application.get_generic_entity_factory().create_" + snake_case_class_name + "(\n" \
@@ -553,6 +567,9 @@ with open(test_filename, 'w') as f:
     print(test_class_instance_init_parent_pointer, file = f)
     print(opening_braces, file = f)
     print(mock_application_line, file = f)
+    if parent_class_name != "" and parent_class_name != "Universe":
+        print(parent_class_struct_line, file = f)
+        print(parent_class_instance_line, file = f)
     print(class_struct_line, file = f)
     print(class_instance_line, file = f)
     print(assert_class_instance_not_nullptr_line, file = f)
@@ -594,6 +611,8 @@ with open(test_filename, 'w') as f:
         print(test_class_instance_init_valid_name, file = f)
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
+        print(parent_class_struct_line, file = f)
+        print(parent_class_instance_line, file = f)
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
@@ -614,6 +633,8 @@ with open(test_filename, 'w') as f:
         print(test_class_instance_init_invalid_name, file = f)
         print(opening_braces, file = f)
         print(mock_application_line, file = f)
+        print(parent_class_struct_line, file = f)
+        print(parent_class_instance_line, file = f)
         print(class_struct_line, file = f)
         print(class_instance_line, file = f)
         print(assert_class_instance_not_nullptr_line, file = f)
