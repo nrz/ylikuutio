@@ -69,6 +69,7 @@ namespace yli::ontology
     class Pipeline;
     class SymbiontMaterial;
     class SymbiontSpecies;
+    class Holobiont;
     struct SymbiosisStruct;
 
     class Symbiosis final : public Entity
@@ -109,6 +110,9 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             Pipeline* get_pipeline() const;
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
 
             std::size_t get_number_of_symbiont_materials() const;
             std::size_t get_number_of_symbiont_species() const;
@@ -173,6 +177,12 @@ namespace yli::ontology
             std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
             std::size_t ofbx_mesh_count { 0 };                             // the value of `ofbx_mesh_count` comes from OpenFBX.
     };
+
+    template<>
+        inline GenericMasterModule* Symbiosis::get_generic_master_module<Holobiont>()
+        {
+            return &this->master_of_holobionts;
+        }
 }
 
 #endif

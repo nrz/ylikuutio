@@ -31,6 +31,11 @@
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
 
+namespace yli::ontology
+{
+    class Holobiont;
+}
+
 TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
@@ -47,6 +52,8 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
             symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
+
+    ASSERT_NE(symbiosis->get_generic_master_module<yli::ontology::Holobiont>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
