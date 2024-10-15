@@ -119,7 +119,7 @@ namespace yli::ontology
             void render(const Scene* const target_scene);
 
         private:
-            GLuint program_id     { 0 };          // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.
+            GLuint program_id                  { 0 }; // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.
             GLuint scene_uniform_block_index   { 0 }; // Dummy value.
             GLuint movable_uniform_block_index { 0 }; // Dummy value.
             GLuint camera_uniform_block_index  { 0 }; // Dummy value.
