@@ -36,6 +36,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Species;
 }
 
 TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_ecosystem_ecosystem_parent_provided_as_valid_pointer)
@@ -79,6 +80,8 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
     }
 
     ASSERT_LT(parent_of_shapeshifter_transformations, parent_of_vector_fonts);
+
+    ASSERT_NE(material->get_generic_master_module<yli::ontology::Species>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
