@@ -20,6 +20,10 @@
 
 #include "model_struct.hpp"
 
+// Include standard headers
+#include <string>  // std::string
+#include <variant> // std::variant
+
 namespace yli::ontology
 {
     class Pipeline;
@@ -35,7 +39,7 @@ namespace yli::ontology
         {
         }
 
-        SymbiontMaterial* const symbiont_material_parent { nullptr };
+        std::variant<SymbiontMaterial*, std::string> symbiont_material_parent {};
     };
 }
 

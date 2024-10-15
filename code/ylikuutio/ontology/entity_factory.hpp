@@ -428,12 +428,23 @@ namespace yli::ontology
                             static_cast<int>(yli::data::Datatype::SYMBIONT_SPECIES));
                 auto& allocator = static_cast<yli::memory::SymbiontSpeciesMemoryAllocator&>(generic_allocator);
 
+                SymbiontMaterial* symbiont_material_parent { nullptr };
+                if (std::holds_alternative<SymbiontMaterial*>(symbiont_species_struct.symbiont_material_parent))
+                {
+                    symbiont_material_parent = std::get<SymbiontMaterial*>(symbiont_species_struct.symbiont_material_parent);
+                }
+                else if (std::holds_alternative<std::string>(symbiont_species_struct.symbiont_material_parent))
+                {
+                    symbiont_material_parent = dynamic_cast<SymbiontMaterial*>(this->get_universe().registry.get_entity(
+                                std::get<std::string>(symbiont_species_struct.symbiont_material_parent)));
+                }
+
                 return allocator.build_in(
                         this->application,
                         this->get_universe(),
                         symbiont_species_struct,
-                        (symbiont_species_struct.symbiont_material_parent != nullptr ?
-                         &(symbiont_species_struct.symbiont_material_parent->parent_of_symbiont_species) :
+                        (symbiont_material_parent != nullptr ?
+                         &(symbiont_material_parent->parent_of_symbiont_species) :
                          nullptr));
             }
 
