@@ -23,7 +23,6 @@
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "master_of_input_modes_module.hpp"
-#include "input_mode.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"

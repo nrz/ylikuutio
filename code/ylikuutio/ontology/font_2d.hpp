@@ -23,7 +23,6 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "texture_module.hpp"
-#include "console.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -46,6 +45,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
+    class Console;
     struct FontStruct;
     struct TextStruct;
 
