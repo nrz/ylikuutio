@@ -52,6 +52,8 @@ namespace yli::ontology
     class Universe;
     class Ecosystem;
     class Scene;
+    class Material;
+    class Symbiosis;
     class PipelineCompare;
     struct PipelineStruct;
 
@@ -97,6 +99,9 @@ namespace yli::ontology
                 return const_cast<MasterModule<Pipeline*>*>(&this->master_of_materials);
             }
 
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
             friend class PipelineCompare;
 
             template<typename T1, std::size_t DataSize>
@@ -132,6 +137,18 @@ namespace yli::ontology
 
             bool is_gpgpu_pipeline;               // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
     };
+
+    template<>
+        inline GenericMasterModule* Pipeline::get_generic_master_module<Material>()
+        {
+            return &this->master_of_materials;
+        }
+
+    template<>
+        inline GenericMasterModule* Pipeline::get_generic_master_module<Symbiosis>()
+        {
+            return &this->master_of_symbioses;
+        }
 }
 
 #endif

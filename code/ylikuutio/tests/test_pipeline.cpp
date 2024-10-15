@@ -37,6 +37,8 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Material;
+    class Symbiosis;
 }
 
 TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_with_ecosystem_parent_provided_as_valid_pointer)
@@ -65,6 +67,12 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
             ASSERT_EQ(generic_parent_module, nullptr);
         }
     }
+
+    yli::ontology::GenericMasterModule* const master_of_materials = pipeline->get_generic_master_module<yli::ontology::Material>();
+    yli::ontology::GenericMasterModule* const master_of_symbioses = pipeline->get_generic_master_module<yli::ontology::Symbiosis>();
+    ASSERT_NE(master_of_materials, nullptr);
+    ASSERT_NE(master_of_symbioses, nullptr);
+    ASSERT_LT(master_of_materials, master_of_symbioses);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
