@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "brain.hpp"
-#include "generic_master_module.hpp"
 #include "movable.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
@@ -57,11 +56,6 @@ namespace yli::ontology
     yli::ontology::Entity* Brain::get_parent() const
     {
         return this->child_of_scene.get_parent();
-    }
-
-    yli::ontology::GenericMasterModule* Brain::get_generic_master_module() const
-    {
-        return const_cast<yli::ontology::GenericMasterModule*>(&this->master_of_movables);
     }
 
     std::size_t Brain::get_number_of_children() const

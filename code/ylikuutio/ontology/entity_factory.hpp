@@ -21,6 +21,7 @@
 #include "generic_entity_factory.hpp"
 #include "generic_master_module.hpp"
 #include "entity.hpp"
+#include "movable.hpp"
 #include "universe.hpp"
 #include "variable.hpp"
 #include "callback_engine.hpp"
@@ -310,7 +311,7 @@ namespace yli::ontology
                             waypoint_struct.scene,
                             waypoint_struct,
                             {},
-                            (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module() : nullptr));
+                            (waypoint_struct.brain_master != nullptr ? waypoint_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             Camera* create_camera(const CameraStruct& camera_struct) const final
@@ -321,7 +322,7 @@ namespace yli::ontology
                             camera_struct.scene,
                             camera_struct,
                             {},
-                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
+                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             Camera* create_default_camera(const CameraStruct& camera_struct) const final
@@ -332,7 +333,7 @@ namespace yli::ontology
                             camera_struct.scene,
                             camera_struct,
                             {},
-                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module() : nullptr));
+                            (camera_struct.brain_master != nullptr ? camera_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             // TODO: implement `create_camera_widget` here!
@@ -385,7 +386,7 @@ namespace yli::ontology
                              &(std::get<Text3d*>(object_struct.mesh_master)->master_of_objects) :
                              nullptr),
                             // `Brain` master.
-                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr));
+                            (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             // TODO: implement `create_heightmap` here!
@@ -445,7 +446,7 @@ namespace yli::ontology
                             holobiont_struct,
                             {},
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr));
+                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             Biont* create_biont(const BiontStruct& biont_struct) const final
@@ -543,7 +544,7 @@ namespace yli::ontology
                             text_3d_struct.vector_font_parent,
                             text_3d_struct,
                             {},
-                            (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module() : nullptr));
+                            (text_3d_struct.brain_master != nullptr ? text_3d_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
             InputMode* create_input_mode(const InputModeStruct& input_mode_struct) const final
@@ -710,7 +711,7 @@ namespace yli::ontology
                                  &(std::get<Text3d*>(object_struct.mesh_master)->master_of_objects) :
                                  nullptr),
                                 // `Brain` master.
-                                (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module() : nullptr),
+                                (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module<Movable>() : nullptr),
                                 // Skill modules.
                                 std::forward<ModuleArgs>(module_args)...);
                 }
@@ -744,7 +745,7 @@ namespace yli::ontology
                             holobiont_struct,
                             (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
                             (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
-                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module() : nullptr),
+                            (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module<Movable>() : nullptr),
                             module_args...);
 
                     holobiont->set_global_name(holobiont_struct.global_name);

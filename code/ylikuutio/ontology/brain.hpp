@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
+#include "movable.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -79,7 +80,8 @@ namespace yli::ontology
         public:
             Entity* get_parent() const override;
 
-            GenericMasterModule* get_generic_master_module() const;
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
 
             std::size_t get_number_of_apprentices() const;
 
@@ -99,6 +101,12 @@ namespace yli::ontology
 
             CallbackEngine* callback_engine { nullptr };
     };
+
+    template<>
+        inline GenericMasterModule* Brain::get_generic_master_module<Movable>()
+        {
+            return &this->master_of_movables;
+        }
 }
 
 #endif
