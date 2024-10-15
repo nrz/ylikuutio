@@ -98,10 +98,7 @@ namespace yli::ontology
             GenericParentModule* get_generic_parent_module(const int type);
 
             template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module()
-                {
-                    static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Font2d::get_generic_master_module` for the type!");
-                }
+                GenericMasterModule* get_generic_master_module() = delete;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;

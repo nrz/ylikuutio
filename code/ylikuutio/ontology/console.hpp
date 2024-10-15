@@ -128,10 +128,7 @@ namespace yli::ontology
             GenericParentModule* get_generic_parent_module(const int type);
 
             template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module()
-                {
-                    static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Console::get_generic_master_module` for the type!");
-                }
+                GenericMasterModule* get_generic_master_module() = delete;
 
             // Public callbacks.
 
