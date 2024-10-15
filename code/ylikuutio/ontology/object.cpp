@@ -176,8 +176,8 @@ namespace yli::ontology
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& object_struct,
             yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const mesh_master_module,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            yli::ontology::GenericMasterModule* const brain_master_module,
+            yli::ontology::GenericMasterModule* const mesh_master_module)
         : Movable(
                 application,
                 universe,
