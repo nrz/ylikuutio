@@ -72,15 +72,15 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
+            Scene* get_scene() const override;
+
+            Pipeline* get_pipeline() const;
+
             friend class Object;
             friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
 
             ChildModule child_of_vector_font;
             GenericMasterModule master_of_objects;
-
-            Scene* get_scene() const override;
-
-            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;
