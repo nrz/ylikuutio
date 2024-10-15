@@ -27,6 +27,11 @@
 #include <limits>  // std::numeric_limits
 #include <cstddef> // std::size_t, uintptr_t
 
+namespace yli::ontology
+{
+    class Movable;
+}
+
 TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
@@ -39,6 +44,8 @@ TEST(brain_must_be_initialized_appropriately, headless_with_parent_provided_as_v
             brain_struct);
     ASSERT_NE(brain, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(brain) % alignof(yli::ontology::Brain), 0);
+
+    ASSERT_NE(brain->get_generic_master_module<yli::ontology::Movable>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
