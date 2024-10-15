@@ -86,16 +86,16 @@ namespace yli::ontology
             Scene* get_scene() const override;
             Entity* get_parent() const override;
 
-            MasterModule<Pipeline*>* get_master_module() const
-            {
-                return const_cast<MasterModule<Pipeline*>*>(&this->master_of_materials);
-            }
-
             std::size_t get_number_of_apprentices() const;
 
             GLuint get_program_id() const;
 
             GenericParentModule* get_generic_parent_module(const int type);
+
+            MasterModule<Pipeline*>* get_master_module() const
+            {
+                return const_cast<MasterModule<Pipeline*>*>(&this->master_of_materials);
+            }
 
             friend class PipelineCompare;
 
