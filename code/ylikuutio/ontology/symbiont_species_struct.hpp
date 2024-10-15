@@ -29,13 +29,13 @@ namespace yli::ontology
     {
         SymbiontSpeciesStruct(
                 Pipeline* const pipeline,
-                SymbiontMaterial* const symbiont_material)
-            : ModelStruct(pipeline, symbiont_material),
-            symbiont_material { symbiont_material }
+                SymbiontMaterial* const symbiont_material_parent)
+            : ModelStruct(pipeline, symbiont_material_parent),
+            symbiont_material_parent { symbiont_material_parent }
         {
         }
 
-        SymbiontMaterial* const symbiont_material { nullptr };
+        SymbiontMaterial* const symbiont_material_parent { nullptr };
     };
 }
 

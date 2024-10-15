@@ -431,8 +431,8 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         symbiont_species_struct,
-                        (symbiont_species_struct.symbiont_material != nullptr ?
-                         &(symbiont_species_struct.symbiont_material->parent_of_symbiont_species) :
+                        (symbiont_species_struct.symbiont_material_parent != nullptr ?
+                         &(symbiont_species_struct.symbiont_material_parent->parent_of_symbiont_species) :
                          nullptr));
             }
 
