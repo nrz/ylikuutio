@@ -21,8 +21,8 @@
 #include "entity_struct.hpp"
 
 // Include standard headers
-#include <string>   // std::string
-#include <variant>  // std::variant
+#include <string>  // std::string
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
