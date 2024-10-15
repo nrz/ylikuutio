@@ -41,6 +41,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Object;
 }
 
 TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_material_parent_provided_as_valid_pointer)
@@ -516,6 +517,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
             shapeshifter_sequence_struct);
     ASSERT_NE(shapeshifter_sequence, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(shapeshifter_sequence) % alignof(yli::ontology::ShapeshifterSequence), 0);
+
+    ASSERT_NE(shapeshifter_sequence->get_generic_master_module<yli::ontology::Object>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

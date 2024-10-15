@@ -48,6 +48,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Pipeline;
+    class Object;
     struct ShapeshifterSequenceStruct;
 
     class ShapeshifterSequence final : public Entity
@@ -81,6 +82,9 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -103,6 +107,12 @@ namespace yli::ontology
             bool bounce_from_start;
             bool bounce_from_end;
     };
+
+    template<>
+        inline GenericMasterModule* ShapeshifterSequence::get_generic_master_module<Object>()
+        {
+            return &this->master_of_objects;
+        }
 }
 
 #endif
