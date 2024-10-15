@@ -133,12 +133,6 @@ namespace yli::ontology
                     static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Console::get_generic_master_module` for the type!");
                 }
 
-            template<>
-                GenericMasterModule* get_generic_master_module<InputMode>()
-                {
-                    return &this->master_of_input_modes;
-                }
-
             // Public callbacks.
 
             // Action mode keypress callbacks begin here.
@@ -512,6 +506,12 @@ namespace yli::ontology
             bool in_history                 { false };
             bool in_historical_input        { false };
     };
+
+    template<>
+        inline GenericMasterModule* Console::get_generic_master_module<InputMode>()
+        {
+            return &this->master_of_input_modes;
+        }
 }
 
 #endif

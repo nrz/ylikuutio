@@ -103,12 +103,6 @@ namespace yli::ontology
                     static_assert(sizeof(ApprenticeType) == -1, "You need to specialize `yli::ontology::Font2d::get_generic_master_module` for the type!");
                 }
 
-            template<>
-                GenericMasterModule* get_generic_master_module<Console>()
-                {
-                    return &this->master_of_consoles;
-                }
-
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
@@ -138,6 +132,12 @@ namespace yli::ontology
             uint32_t text_size;
             uint32_t font_size;
     };
+
+    template<>
+        inline GenericMasterModule* Font2d::get_generic_master_module<Console>()
+        {
+            return &this->master_of_consoles;
+        }
 }
 
 #endif
