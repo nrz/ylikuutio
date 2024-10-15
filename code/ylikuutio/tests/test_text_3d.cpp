@@ -35,6 +35,11 @@
 // Include standard headers
 #include <cstddef> // uintptr_t
 
+namespace yli::ontology
+{
+    class Object;
+}
+
 TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem)
 {
     mock::MockApplication application;
@@ -59,6 +64,8 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
             text_3d_struct);
     ASSERT_NE(text_3d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_3d) % alignof(yli::ontology::Text3d), 0);
+
+    ASSERT_NE(text_3d->get_generic_master_module<yli::ontology::Object>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.

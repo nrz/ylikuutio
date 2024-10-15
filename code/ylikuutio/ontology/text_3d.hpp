@@ -76,6 +76,9 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
             friend class Object;
             friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
 
@@ -88,6 +91,12 @@ namespace yli::ontology
 
             std::string text_string;
     };
+
+    template<>
+        inline GenericMasterModule* Text3d::get_generic_master_module<Object>()
+        {
+            return &this->master_of_objects;
+        }
 }
 
 #endif
