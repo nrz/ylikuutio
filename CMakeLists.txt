@@ -1066,6 +1066,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_shapeshifter.cpp
         code/ylikuutio/tests/test_species.cpp
         code/ylikuutio/tests/test_symbiont_material_struct.cpp
+        code/ylikuutio/tests/test_symbiont_species.cpp
         code/ylikuutio/tests/test_symbiosis.cpp
         code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
         code/ylikuutio/tests/test_symbiosis_struct.cpp
