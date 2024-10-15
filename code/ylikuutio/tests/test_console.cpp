@@ -19,7 +19,6 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
@@ -31,6 +30,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class InputMode;
 }
 
 TEST(console_must_be_initialized_appropriately, no_font)

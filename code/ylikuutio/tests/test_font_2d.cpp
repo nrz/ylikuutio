@@ -20,7 +20,6 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
-#include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 
 // Include standard headers
@@ -29,6 +28,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Console;
 }
 
 TEST(font_2d_must_be_initialized_appropriately, headless)
