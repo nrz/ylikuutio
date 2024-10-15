@@ -79,6 +79,9 @@ namespace yli::ontology
         public:
             Scene* get_scene() const override;
 
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -103,6 +106,12 @@ namespace yli::ontology
             const char* glyph_name_pointer                         { nullptr };
             const char* unicode_char_pointer                       { nullptr };
     };
+
+    template<>
+        inline GenericMasterModule* Glyph::get_generic_master_module<Object>()
+        {
+            return &this->master_of_objects;
+        }
 }
 
 #endif

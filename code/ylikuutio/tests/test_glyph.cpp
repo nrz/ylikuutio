@@ -24,6 +24,11 @@
 #include <cstddef> // uintptr_t
 #include <limits>  // std::numeric_limits
 
+namespace yli::ontology
+{
+    class Object;
+}
+
 TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_pointer)
 {
     mock::MockApplication application;
@@ -35,6 +40,8 @@ TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_poin
             glyph_struct);
     ASSERT_NE(glyph, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(glyph) % alignof(yli::ontology::Glyph), 0);
+
+    ASSERT_NE(glyph->get_generic_master_module<yli::ontology::Object>(), nullptr);
 
     // `Entity` member functions of `VectorFont`.
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 1);
