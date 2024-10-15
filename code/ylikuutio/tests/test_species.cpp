@@ -35,6 +35,11 @@
 #include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
 
+namespace yli::ontology
+{
+    class Object;
+}
+
 TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_pipeline_and_material_are_children_of_an_ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
@@ -55,6 +60,8 @@ TEST(species_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headl
             species_struct);
     ASSERT_NE(species, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(species) % alignof(yli::ontology::Species), 0);
+
+    ASSERT_NE(species->get_generic_master_module<yli::ontology::Object>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.

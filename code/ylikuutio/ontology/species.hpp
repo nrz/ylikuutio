@@ -49,6 +49,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Material;
+    class Object;
     struct SpeciesStruct;
 
     class Species final : public Entity
@@ -99,6 +100,9 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -113,6 +117,12 @@ namespace yli::ontology
             ApprenticeModule apprentice_of_material;
             MeshModule mesh;
     };
+
+    template<>
+        inline GenericMasterModule* Species::get_generic_master_module<Object>()
+        {
+            return &this->master_of_objects;
+        }
 }
 
 #endif
