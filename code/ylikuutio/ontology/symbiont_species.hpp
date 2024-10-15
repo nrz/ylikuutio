@@ -45,6 +45,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Universe;
     class Scene;
+    class Biont;
     struct SymbiontSpeciesStruct;
 
     class SymbiontSpecies final : public Entity
@@ -63,6 +64,9 @@ namespace yli::ontology
             SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
             Entity* get_parent() const override;
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
 
             std::size_t get_number_of_apprentices() const;
 
@@ -89,6 +93,12 @@ namespace yli::ontology
             std::string model_file_format; // Type of the model file, eg. `"png"`.
             std::string model_filename;    // Filename of the model file.
     };
+
+    template<>
+        inline GenericMasterModule* SymbiontSpecies::get_generic_master_module<Biont>()
+        {
+            return &this->master_of_bionts;
+        }
 }
 
 #endif

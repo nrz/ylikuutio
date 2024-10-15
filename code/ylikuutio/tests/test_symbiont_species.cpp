@@ -24,6 +24,11 @@
 #include <cstddef> // uintptr_t
 #include <limits>  // std::numeric_limits
 
+namespace yli::ontology
+{
+    class Biont;
+}
+
 TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provided_as_valid_pointer)
 {
     mock::MockApplication application;
@@ -35,6 +40,8 @@ TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provi
             symbiont_species_struct);
     ASSERT_NE(symbiont_species, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiont_species) % alignof(yli::ontology::SymbiontSpecies), 0);
+
+    ASSERT_NE(symbiont_species->get_generic_master_module<yli::ontology::Biont>(), nullptr);
 
     // `Entity` member functions of `SymbiontMaterial`.
     ASSERT_EQ(symbiont_material->get_number_of_non_variable_children(), 1);
