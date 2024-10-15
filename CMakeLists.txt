@@ -1031,6 +1031,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_file_loader.cpp
         code/ylikuutio/tests/test_font_2d.cpp
         code/ylikuutio/tests/test_font_loader.cpp
+        code/ylikuutio/tests/test_glyph.cpp
         code/ylikuutio/tests/test_graph.cpp
         code/ylikuutio/tests/test_holobiont.cpp
         code/ylikuutio/tests/test_indexing.cpp
