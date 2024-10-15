@@ -82,10 +82,7 @@ namespace yli::lisp
                 yli::ontology::Console&,
                 yli::ontology::Entity*&, // context.
                 const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            static_assert(sizeof(T1) == -1, "You need to specialize `yli::data::convert_string_to_value_and_advance_index` for the type!");
-        }
+                std::size_t&) = delete;          // parameter_i.
 
     template<>
         inline std::optional<typename yli::data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(

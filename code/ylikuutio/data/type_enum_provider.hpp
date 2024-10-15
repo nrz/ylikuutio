@@ -53,11 +53,7 @@ namespace yli::data
     struct TypeEnumProvider
     {
         template<typename T1>
-            yli::data::Datatype get_type_enum()
-            {
-                static_assert(sizeof(T1) == -1, "You need to specialize `yli::data::TypeEnumProvider::get_type_enum` for the type!");
-                return yli::data::Datatype::UNKNOWN;
-            }
+            yli::data::Datatype get_type_enum() = delete;
     };
 
     template<>
