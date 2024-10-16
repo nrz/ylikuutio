@@ -34,30 +34,30 @@ namespace yli::ontology
     {
         HolobiontStruct(
                 Scene& parent,
-                Symbiosis& symbiosis)
+                Symbiosis& symbiosis_master)
             : MovableStruct(nullptr, &parent),
-            symbiosis { &symbiosis }
+            symbiosis_master { &symbiosis_master }
         {
         }
 
         HolobiontStruct(
                 const std::string& parent,
-                Symbiosis& symbiosis)
+                Symbiosis& symbiosis_master)
             : MovableStruct(nullptr, parent),
-            symbiosis { &symbiosis }
+            symbiosis_master { &symbiosis_master }
         {
         }
 
         HolobiontStruct(
                 Brain* const brain,
                 const std::string& parent,
-                Symbiosis& symbiosis)
+                Symbiosis& symbiosis_master)
             : MovableStruct(brain, parent),
-            symbiosis { &symbiosis }
+            symbiosis_master { &symbiosis_master }
         {
         }
 
-        Symbiosis* symbiosis { nullptr };
+        Symbiosis* symbiosis_master { nullptr };
 
         std::vector<bool> should_render_bionts_vector;
     };

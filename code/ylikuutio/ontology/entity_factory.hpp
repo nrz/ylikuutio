@@ -456,7 +456,7 @@ namespace yli::ontology
                             holobiont_struct.scene,
                             holobiont_struct,
                             {},
-                            (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
+                            (holobiont_struct.symbiosis_master != nullptr ? &holobiont_struct.symbiosis_master->master_of_holobionts : nullptr),
                             (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module<Movable>() : nullptr));
             }
 
@@ -755,7 +755,7 @@ namespace yli::ontology
                             this->get_universe(),
                             holobiont_struct,
                             (scene_parent != nullptr ? &scene_parent->parent_of_holobionts : nullptr),
-                            (holobiont_struct.symbiosis != nullptr ? &holobiont_struct.symbiosis->master_of_holobionts : nullptr),
+                            (holobiont_struct.symbiosis_master != nullptr ? &holobiont_struct.symbiosis_master->master_of_holobionts : nullptr),
                             (holobiont_struct.brain_master != nullptr ? holobiont_struct.brain_master->get_generic_master_module<Movable>() : nullptr),
                             module_args...);
 
