@@ -713,6 +713,8 @@ namespace yli::ontology
                                 object_struct.scene,
                                 object_struct,
                                 {},
+                                // `Brain` master.
+                                (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module<Movable>() : nullptr),
                                 // mesh master.
                                 ((std::holds_alternative<Species*>(object_struct.mesh_master) && std::get<Species*>(object_struct.mesh_master) != nullptr) ?
                                  &(std::get<Species*>(object_struct.mesh_master)->master_of_objects) :
@@ -721,8 +723,6 @@ namespace yli::ontology
                                  (std::holds_alternative<Text3d*>(object_struct.mesh_master) && std::get<Text3d*>(object_struct.mesh_master) != nullptr) ?
                                  &(std::get<Text3d*>(object_struct.mesh_master)->master_of_objects) :
                                  nullptr),
-                                // `Brain` master.
-                                (object_struct.brain_master != nullptr ? object_struct.brain_master->get_generic_master_module<Movable>() : nullptr),
                                 // Skill modules.
                                 std::forward<ModuleArgs>(module_args)...);
                 }
