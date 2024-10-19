@@ -25,7 +25,6 @@
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
-#include "code/ylikuutio/ontology/model_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t, uintptr_t
