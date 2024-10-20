@@ -18,17 +18,17 @@
 #ifndef YLIKUUTIO_ONTOLOGY_GLYPH_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_GLYPH_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "mesh_provider_struct.hpp"
 
 namespace yli::ontology
 {
     class VectorFont;
 
-    struct GlyphStruct final : public ModelStruct
+    struct GlyphStruct final : public MeshProviderStruct
     {
         explicit GlyphStruct(
                 VectorFont* const vector_font_parent)
-            : ModelStruct(vector_font_parent)
+            : MeshProviderStruct(vector_font_parent)
         {
         }
     };

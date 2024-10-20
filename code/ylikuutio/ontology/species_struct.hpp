@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SPECIES_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SPECIES_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "mesh_provider_struct.hpp"
 
 // Include standard headers
 #include <string> // std::string
@@ -30,13 +30,13 @@ namespace yli::ontology
     class Pipeline;
     class Material;
 
-    struct SpeciesStruct final : public ModelStruct
+    struct SpeciesStruct final : public MeshProviderStruct
     {
         SpeciesStruct(
                 Ecosystem* const ecosystem_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
-            : ModelStruct(ecosystem_parent, pipeline, material_master)
+            : MeshProviderStruct(ecosystem_parent, pipeline, material_master)
         {
         }
 
@@ -44,7 +44,7 @@ namespace yli::ontology
                 Scene* const scene_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
-            : ModelStruct(scene_parent, pipeline, material_master)
+            : MeshProviderStruct(scene_parent, pipeline, material_master)
         {
         }
 
@@ -52,7 +52,7 @@ namespace yli::ontology
                 const std::string& parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
-            : ModelStruct(parent, pipeline, material_master)
+            : MeshProviderStruct(parent, pipeline, material_master)
         {
         }
     };

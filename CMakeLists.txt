@@ -644,10 +644,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/material_struct.hpp
     code/ylikuutio/ontology/mesh_module.cpp
     code/ylikuutio/ontology/mesh_module.hpp
+    code/ylikuutio/ontology/mesh_provider_struct.hpp
     code/ylikuutio/ontology/mission.cpp
     code/ylikuutio/ontology/mission.hpp
     code/ylikuutio/ontology/mission_struct.hpp
-    code/ylikuutio/ontology/model_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
     code/ylikuutio/ontology/movable_struct.hpp

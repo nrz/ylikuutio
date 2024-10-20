@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/model_struct.hpp"
+#include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -40,39 +40,39 @@ namespace yli::ontology
     class VectorFont;
 }
 
-TEST(model_struct_must_be_initialized_appropriately, model_struct)
+TEST(mesh_provider_struct_must_be_initialized_appropriately, mesh_provider_struct)
 {
-    const yli::ontology::ModelStruct test_model_struct;
-    ASSERT_EQ(test_model_struct.model_filename, "");
-    ASSERT_EQ(test_model_struct.model_file_format, "");
-    ASSERT_EQ(test_model_struct.color_channel, "");
-    ASSERT_EQ(test_model_struct.divisor, 1.0f);
-    ASSERT_EQ(test_model_struct.latitude, 0.0f);
-    ASSERT_EQ(test_model_struct.longitude, 0.0f);
-    ASSERT_EQ(test_model_struct.mesh_i, 0);
-    ASSERT_EQ(test_model_struct.x_step, 1);
-    ASSERT_EQ(test_model_struct.y_step, 1);
-    ASSERT_EQ(test_model_struct.vertices, std::vector<glm::vec3> { });
-    ASSERT_EQ(test_model_struct.uvs, std::vector<glm::vec2> { });
-    ASSERT_EQ(test_model_struct.normals, std::vector<glm::vec3> { });
+    const yli::ontology::MeshProviderStruct test_mesh_provider_struct;
+    ASSERT_EQ(test_mesh_provider_struct.model_filename, "");
+    ASSERT_EQ(test_mesh_provider_struct.model_file_format, "");
+    ASSERT_EQ(test_mesh_provider_struct.color_channel, "");
+    ASSERT_EQ(test_mesh_provider_struct.divisor, 1.0f);
+    ASSERT_EQ(test_mesh_provider_struct.latitude, 0.0f);
+    ASSERT_EQ(test_mesh_provider_struct.longitude, 0.0f);
+    ASSERT_EQ(test_mesh_provider_struct.mesh_i, 0);
+    ASSERT_EQ(test_mesh_provider_struct.x_step, 1);
+    ASSERT_EQ(test_mesh_provider_struct.y_step, 1);
+    ASSERT_EQ(test_mesh_provider_struct.vertices, std::vector<glm::vec3> { });
+    ASSERT_EQ(test_mesh_provider_struct.uvs, std::vector<glm::vec2> { });
+    ASSERT_EQ(test_mesh_provider_struct.normals, std::vector<glm::vec3> { });
 
-    ASSERT_FALSE(test_model_struct.parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_model_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_model_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_model_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(test_model_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::VectorFont*>(test_model_struct.parent));
+    ASSERT_FALSE(test_mesh_provider_struct.parent.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_mesh_provider_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_mesh_provider_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_mesh_provider_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterTransformation*>(test_mesh_provider_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::VectorFont*>(test_mesh_provider_struct.parent));
 
-    ASSERT_EQ(test_model_struct.pipeline, nullptr);
+    ASSERT_EQ(test_mesh_provider_struct.pipeline, nullptr);
 
-    ASSERT_FALSE(test_model_struct.material_or_symbiont_material.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_model_struct.material_or_symbiont_material));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_model_struct.material_or_symbiont_material));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(test_model_struct.material_or_symbiont_material));
+    ASSERT_FALSE(test_mesh_provider_struct.material_or_symbiont_material.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<std::monostate>(test_mesh_provider_struct.material_or_symbiont_material));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_mesh_provider_struct.material_or_symbiont_material));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(test_mesh_provider_struct.material_or_symbiont_material));
 
-    ASSERT_EQ(test_model_struct.glyph_vertex_data, nullptr);
-    ASSERT_EQ(test_model_struct.glyph_name_pointer, nullptr);
-    ASSERT_EQ(test_model_struct.unicode_char_pointer, nullptr);
-    ASSERT_EQ(test_model_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
-    ASSERT_TRUE(test_model_struct.use_real_texture_coordinates);
+    ASSERT_EQ(test_mesh_provider_struct.glyph_vertex_data, nullptr);
+    ASSERT_EQ(test_mesh_provider_struct.glyph_name_pointer, nullptr);
+    ASSERT_EQ(test_mesh_provider_struct.unicode_char_pointer, nullptr);
+    ASSERT_EQ(test_mesh_provider_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
+    ASSERT_TRUE(test_mesh_provider_struct.use_real_texture_coordinates);
 }

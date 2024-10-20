@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "mesh_provider_struct.hpp"
 
 // Include standard headers
 #include <string> // std::string
@@ -29,13 +29,13 @@ namespace yli::ontology
     class Material;
     class ShapeshifterTransformation;
 
-    struct ShapeshifterFormStruct final : public ModelStruct
+    struct ShapeshifterFormStruct final : public MeshProviderStruct
     {
         ShapeshifterFormStruct(
                 ShapeshifterTransformation* const shapeshifter_transformation_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
-            : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
+            : MeshProviderStruct(shapeshifter_transformation_parent, pipeline, material_master)
         {
         }
 
@@ -43,7 +43,7 @@ namespace yli::ontology
                 const std::string& shapeshifter_transformation_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
-            : ModelStruct(shapeshifter_transformation_parent, pipeline, material_master)
+            : MeshProviderStruct(shapeshifter_transformation_parent, pipeline, material_master)
         {
         }
     };

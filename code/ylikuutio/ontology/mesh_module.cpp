@@ -18,7 +18,7 @@
 #include "mesh_module.hpp"
 #include "universe.hpp"
 #include "pipeline.hpp"
-#include "model_struct.hpp"
+#include "mesh_provider_struct.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -42,7 +42,7 @@ namespace yli::ontology
 
     MeshModule::MeshModule(
             yli::ontology::Universe& universe,
-            const yli::ontology::ModelStruct& model_struct)
+            const yli::ontology::MeshProviderStruct& mesh_provider_struct)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -53,27 +53,27 @@ namespace yli::ontology
 
         if (should_load_vertices_uvs_and_normals &&
                 universe.get_is_opengl_in_use() &&
-                model_struct.pipeline != nullptr)
+                mesh_provider_struct.pipeline != nullptr)
         {
             // VAO.
             glGenVertexArrays(1, &this->vao);
 
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_uv");
-            this->vertex_normal_modelspace_id = glGetAttribLocation(model_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
+            this->vertex_position_modelspace_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_position_modelspace");
+            this->vertex_uv_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_uv");
+            this->vertex_normal_modelspace_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
             yli::load::ModelLoaderStruct model_loader_struct;
-            model_loader_struct.model_filename                = model_struct.model_filename;
-            model_loader_struct.model_file_format             = model_struct.model_file_format;
-            model_loader_struct.color_channel                 = model_struct.color_channel;
-            model_loader_struct.divisor                       = model_struct.divisor;
-            model_loader_struct.latitude                      = model_struct.latitude;
-            model_loader_struct.longitude                     = model_struct.longitude;
-            model_loader_struct.mesh_i                        = model_struct.mesh_i;
-            model_loader_struct.x_step                        = model_struct.x_step;
-            model_loader_struct.y_step                        = model_struct.y_step;
-            model_loader_struct.use_real_texture_coordinates  = model_struct.use_real_texture_coordinates;
+            model_loader_struct.model_filename                = mesh_provider_struct.model_filename;
+            model_loader_struct.model_file_format             = mesh_provider_struct.model_file_format;
+            model_loader_struct.color_channel                 = mesh_provider_struct.color_channel;
+            model_loader_struct.divisor                       = mesh_provider_struct.divisor;
+            model_loader_struct.latitude                      = mesh_provider_struct.latitude;
+            model_loader_struct.longitude                     = mesh_provider_struct.longitude;
+            model_loader_struct.mesh_i                        = mesh_provider_struct.mesh_i;
+            model_loader_struct.x_step                        = mesh_provider_struct.x_step;
+            model_loader_struct.y_step                        = mesh_provider_struct.y_step;
+            model_loader_struct.use_real_texture_coordinates  = mesh_provider_struct.use_real_texture_coordinates;
             model_loader_struct.image_width_pointer           = &this->image_width;
             model_loader_struct.image_height_pointer          = &this->image_height;
 
@@ -100,18 +100,18 @@ namespace yli::ontology
         }
         else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
         {
-            if (std::holds_alternative<yli::ontology::Ecosystem*>(model_struct.parent) &&
-                    std::get<yli::ontology::Ecosystem*>(model_struct.parent) == nullptr)
+            if (std::holds_alternative<yli::ontology::Ecosystem*>(mesh_provider_struct.parent) &&
+                    std::get<yli::ontology::Ecosystem*>(mesh_provider_struct.parent) == nullptr)
             {
                 std::cerr << "ERROR: `MeshModule::MeshModule`: `Ecosystem` parent is `nullptr`!\n";
             }
-            else if (std::holds_alternative<yli::ontology::Scene*>(model_struct.parent) &&
-                    std::get<yli::ontology::Scene*>(model_struct.parent) == nullptr)
+            else if (std::holds_alternative<yli::ontology::Scene*>(mesh_provider_struct.parent) &&
+                    std::get<yli::ontology::Scene*>(mesh_provider_struct.parent) == nullptr)
             {
                 std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
             }
 
-            if (model_struct.pipeline == nullptr)
+            if (mesh_provider_struct.pipeline == nullptr)
             {
                 std::cerr << "ERROR: `MeshModule::MeshModule`: `this->pipeline` is `nullptr`!\n";
             }

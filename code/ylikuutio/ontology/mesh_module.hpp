@@ -35,14 +35,14 @@ namespace yli::ontology
 {
     class Universe;
     class Ecosystem;
-    struct ModelStruct;
+    struct MeshProviderStruct;
 
     class MeshModule final
     {
         public:
             MeshModule(
                     Universe& universe,
-                    const ModelStruct& model_struct);
+                    const MeshProviderStruct& mesh_provider_struct);
 
             MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
             MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.

@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_STRUCT_HPP_INCLUDED
 
-#include "model_struct.hpp"
+#include "mesh_provider_struct.hpp"
 
 // Include standard headers
 #include <string>  // std::string
@@ -29,12 +29,12 @@ namespace yli::ontology
     class Pipeline;
     class SymbiontMaterial;
 
-    struct SymbiontSpeciesStruct final : public ModelStruct
+    struct SymbiontSpeciesStruct final : public MeshProviderStruct
     {
         SymbiontSpeciesStruct(
                 Pipeline* const pipeline,
                 SymbiontMaterial* const symbiont_material_parent)
-            : ModelStruct(pipeline, symbiont_material_parent),
+            : MeshProviderStruct(pipeline, symbiont_material_parent),
             symbiont_material_parent { symbiont_material_parent }
         {
         }

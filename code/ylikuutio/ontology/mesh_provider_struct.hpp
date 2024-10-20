@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_MODEL_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_MODEL_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_MESH_PROVIDER_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_MESH_PROVIDER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 
@@ -43,11 +43,11 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class VectorFont;
 
-    struct ModelStruct : public EntityStruct
+    struct MeshProviderStruct : public EntityStruct
     {
-        ModelStruct() = default;
+        MeshProviderStruct() = default;
 
-        ModelStruct(
+        MeshProviderStruct(
                 Ecosystem* const ecosystem_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
@@ -57,7 +57,7 @@ namespace yli::ontology
         {
         }
 
-        ModelStruct(
+        MeshProviderStruct(
                 Scene* const scene_parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
@@ -67,7 +67,7 @@ namespace yli::ontology
         {
         }
 
-        ModelStruct(
+        MeshProviderStruct(
                 ShapeshifterTransformation* const shapeshifter_transformation,
                 Pipeline* const pipeline,
                 Material* const material_master)
@@ -77,7 +77,7 @@ namespace yli::ontology
         {
         }
 
-        ModelStruct(
+        MeshProviderStruct(
                 const std::string& parent,
                 Pipeline* const pipeline,
                 Material* const material_master)
@@ -87,7 +87,7 @@ namespace yli::ontology
         {
         }
 
-        ModelStruct(
+        MeshProviderStruct(
                 Pipeline* const pipeline,
                 SymbiontMaterial* const symbiont_material)
             : pipeline                    { pipeline },
@@ -95,13 +95,13 @@ namespace yli::ontology
         {
         }
 
-        explicit ModelStruct(
+        explicit MeshProviderStruct(
                 VectorFont* const vector_font_parent)
             : parent { vector_font_parent }
         {
         }
 
-        explicit ModelStruct(
+        explicit MeshProviderStruct(
                 const std::string& vector_font_parent)
             : parent { vector_font_parent }
         {
