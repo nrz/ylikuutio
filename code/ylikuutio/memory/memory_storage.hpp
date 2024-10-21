@@ -133,8 +133,7 @@ namespace yli::memory
                             slot_i = this->free_slot_id_queue.pop();
                         }
 
-                        T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
-                        auto* instance { new (&data[slot_i]) T1(std::forward<Args>(args)...) };
+                        T1* instance = new (this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
                         instance->constructible_module = yli::memory::ConstructibleModule(this->allocator, this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
