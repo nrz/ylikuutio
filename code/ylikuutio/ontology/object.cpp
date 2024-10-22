@@ -131,46 +131,6 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_shapeshifter_sequence_master(
-            yli::ontology::Object& object,
-            yli::ontology::ShapeshifterSequence& new_shapeshifter_sequence) noexcept
-    {
-        // Set pointer to `object` to `nullptr`, set mesh according to the input,
-        // and request a new apprenticeID from `new_shapeshifter_sequence`.
-
-        if (object.object_type == yli::ontology::ObjectType::SHAPESHIFTER)
-        {
-            object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(
-                    &new_shapeshifter_sequence.master_of_objects);
-        }
-        else
-        {
-            std::cerr << "ERROR: `Object::bind_to_new_shapeshifter_sequence_master`: only `SHAPESHIFTER` type `Object`s can be bound to `ShapeshifterSequence`!\n";
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> Object::bind_to_new_text_3d_master(
-            yli::ontology::Object& object,
-            yli::ontology::Text3d& new_text_3d) noexcept
-    {
-        // Set pointer to `object` to `nullptr`, set mesh according to the input,
-        // and request a new apprenticeID from `new_text_3d`.
-
-        if (object.object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
-        {
-            object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(
-                    &new_text_3d.master_of_objects);
-        }
-        else
-        {
-            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `GLYPH_OBJECT` type `Object`s can be bound to `Text3d`!\n";
-        }
-
-        return std::nullopt;
-    }
-
     Object::Object(
             yli::core::Application& application,
             yli::ontology::Universe& universe,

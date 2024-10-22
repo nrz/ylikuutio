@@ -755,8 +755,6 @@ namespace hirvi
         // `Entity` binding callbacks, `Object`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Object::bind_to_new_scene_parent);
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Object::bind_to_new_species_master);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Object::bind_to_new_shapeshifter_sequence_master);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Object::bind_to_new_text_3d_master);
 
         // `Entity` binding callbacks, `Symbiosis`.
         this->entity_factory.create_lisp_function_overload("bind", *my_console, &yli::ontology::Symbiosis::bind_to_new_ecosystem_parent);
