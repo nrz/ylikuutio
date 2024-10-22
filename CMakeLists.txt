@@ -668,6 +668,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp
+    code/ylikuutio/ontology/request.hpp
     code/ylikuutio/ontology/rigid_body_module.cpp
     code/ylikuutio/ontology/rigid_body_module.hpp
     code/ylikuutio/ontology/rigid_body_module_struct.hpp
@@ -1061,6 +1062,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_quad_triangulation.cpp
         code/ylikuutio/tests/test_queue.cpp
         code/ylikuutio/tests/test_registry.cpp
+        code/ylikuutio/tests/test_request.cpp
         code/ylikuutio/tests/test_scene.cpp
         code/ylikuutio/tests/test_pipeline.cpp
         code/ylikuutio/tests/test_pipeline_struct.cpp
