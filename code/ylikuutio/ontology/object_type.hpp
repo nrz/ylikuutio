@@ -24,7 +24,7 @@ namespace yli::ontology
     {
         REGULAR,
         SHAPESHIFTER,
-        CHARACTER
+        GLYPH_OBJECT
     };
 }
 

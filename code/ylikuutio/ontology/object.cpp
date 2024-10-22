@@ -158,14 +158,14 @@ namespace yli::ontology
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_text_3d`.
 
-        if (object.object_type == yli::ontology::ObjectType::CHARACTER)
+        if (object.object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
         {
             object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(
                     &new_text_3d.master_of_objects);
         }
         else
         {
-            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `CHARACTER` type `Object`s can be bound to `Text3d`!\n";
+            std::cerr << "ERROR: `Object::bind_to_new_text_3d_master`: only `GLYPH_OBJECT` type `Object`s can be bound to `Text3d`!\n";
         }
 
         return std::nullopt;
@@ -196,7 +196,7 @@ namespace yli::ontology
         }
         else if (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master))
         {
-            this->object_type = yli::ontology::ObjectType::CHARACTER;
+            this->object_type = yli::ontology::ObjectType::GLYPH_OBJECT;
         }
 
         // `yli::ontology::Entity` member variables begin here.
@@ -227,7 +227,7 @@ namespace yli::ontology
         }
 
         if (this->object_type == yli::ontology::ObjectType::REGULAR ||
-                this->object_type == yli::ontology::ObjectType::CHARACTER) [[likely]]
+                this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT) [[likely]]
         {
             this->render_this_object(this->get_pipeline());
         }
@@ -318,7 +318,7 @@ namespace yli::ontology
             // TODO: set `master_model` so that it points to the correct `ShapeshifterForm` for the current frame!
             throw std::runtime_error("ERROR: `Object::render_this_object`: shapeshifters are not implemented yet!");
         }
-        else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        else if (this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
         {
             yli::ontology::Glyph* const master_glyph = static_cast<yli::ontology::Glyph*>(this->apprentice_of_mesh.get_master());
 
@@ -429,7 +429,7 @@ namespace yli::ontology
 
             throw std::runtime_error("ERROR: `Object::get_pipeline`: `shapeshifter_sequence` is `nullptr`!");
         }
-        else if (this->object_type == yli::ontology::ObjectType::CHARACTER)
+        else if (this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
         {
             if (const auto* const text_3d = static_cast<yli::ontology::Text3d*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
             {
