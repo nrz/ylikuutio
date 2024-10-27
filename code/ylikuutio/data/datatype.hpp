@@ -53,8 +53,8 @@ namespace yli::data
         // Systems.
         AUDIO_SYSTEM        = 50,
         // `yli::ontology` datatypes, 'entity' path.
-        ENTITY              = 117,
-        MOVABLE             = 118,
+        ENTITY              = 110,
+        MOVABLE             = 112,
         // `yli::ontology` datatypes, 'universe' path.
         UNIVERSE            = 119,
         // `yli::ontology` datatypes, 'variable' path.
