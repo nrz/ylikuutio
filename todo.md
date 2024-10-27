@@ -10,6 +10,11 @@
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
 - [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
+- [ ] ONTOLOGY/RENDERING Implement `MeshProvider` class.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `MeshProvider`.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose apprentices are `Shapeshifter`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::Shapeshifter`, child of `Scene`, apprentice of `ShapeshifterSequence`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
@@ -40,9 +45,6 @@
 
 ## Tasks which are necessary for the second stage (Hirvi prototype)
 - [ ] BUILD Implement building on GitHub Actions Windows runner.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose children are `Object`s.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
@@ -73,7 +75,9 @@
 - [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 - [ ] ONTOLOGY/MATH Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 - [ ] GUI Add support for multiple displays.
-- [ ] MATH Implement support for multiple light sources in each `Scene`.
+- [ ] MATH/RENDERING Implement support for multiple light sources in each `Scene`.
+- [ ] RENDERING Implement deferred rendering.
+- [ ] RENDERING Implement post processing.
 - [ ] MATH/RENDERING Implement HDR rendering.
 - [ ] UI Add support for different keyboard layouts in `Console`.
 - [ ] REFACTOR Convert local variables of `Application::create_simulation` implementations into heap-allocated ones so that `Universe::start_simulation` can be called from `main`.
