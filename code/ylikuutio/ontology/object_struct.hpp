@@ -26,8 +26,8 @@
 
 namespace yli::ontology
 {
-    class Brain;
     class Scene;
+    class Brain;
     class Species;
     class ShapeshifterSequence;
     class Glyph;

@@ -60,10 +60,10 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class Universe;
     class CallbackEngine;
     class Scene;
-    class GenericParentModule;
     struct BrainStruct;
 
     class Brain final : public Entity

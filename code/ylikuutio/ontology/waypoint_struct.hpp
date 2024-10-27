@@ -25,8 +25,8 @@
 
 namespace yli::ontology
 {
-    class Brain;
     class Scene;
+    class Brain;
 
     struct WaypointStruct final : public MovableStruct
     {

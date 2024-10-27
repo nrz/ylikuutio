@@ -38,8 +38,8 @@
 
 namespace yli::ontology
 {
-    class Brain;
     class Scene;
+    class Brain;
 
     struct MovableStruct : public EntityStruct
     {
