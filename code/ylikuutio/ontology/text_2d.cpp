@@ -48,13 +48,13 @@ namespace yli::ontology
     class Scene;
 
     std::optional<yli::data::AnyValue> Text2d::bind_to_new_font_2d_parent(
-            yli::ontology::Text2d& text_2d,
-            yli::ontology::Font2d& new_parent)
+            Text2d& text_2d,
+            Font2d& new_parent)
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_font_2d_parent = text_2d.get_parent();
+        const Entity* const old_font_2d_parent = text_2d.get_parent();
 
         if (old_font_2d_parent == nullptr) [[unlikely]]
         {
@@ -75,9 +75,9 @@ namespace yli::ontology
 
     Text2d::Text2d(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::TextStruct& text_struct,
-            yli::ontology::GenericParentModule* const font_2d_parent_module)
+            Universe& universe,
+            const TextStruct& text_struct,
+            GenericParentModule* const font_2d_parent_module)
         : Entity(application, universe, text_struct),
         child_of_font_2d(font_2d_parent_module, *this)
     {
@@ -115,7 +115,7 @@ namespace yli::ontology
             glGenBuffers(1, &this->uvbuffer);
 
             // Get a handle for our buffers.
-            const yli::ontology::Font2d* const font_2d_parent = static_cast<yli::ontology::Font2d*>(this->get_parent());
+            const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
 
             if (font_2d_parent != nullptr)
             {
@@ -128,7 +128,7 @@ namespace yli::ontology
             this->vertices_and_uvs_loaded = true;
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Text2d*";
     }
 
@@ -310,7 +310,7 @@ namespace yli::ontology
             float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
             float uv_y;
 
-            const yli::ontology::Font2d* const font_2d_parent = static_cast<yli::ontology::Font2d*>(this->get_parent());
+            const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
 
             const std::string& font_texture_file_format = font_2d_parent->get_font_texture_file_format();
 
@@ -369,14 +369,14 @@ namespace yli::ontology
         yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
     }
 
-    yli::ontology::Entity* Text2d::get_parent() const
+    Entity* Text2d::get_parent() const
     {
         return this->child_of_font_2d.get_parent();
     }
 
-    yli::ontology::Scene* Text2d::get_scene() const
+    Scene* Text2d::get_scene() const
     {
-        const yli::ontology::Entity* const font_2d_parent = this->get_parent();
+        const Entity* const font_2d_parent = this->get_parent();
 
         if (font_2d_parent == nullptr) [[unlikely]]
         {

@@ -39,7 +39,7 @@ namespace yli::ontology
             if ((*it)->get_childID() == childID)
             {
                 this->c.erase(it);
-                std::make_heap(this->c.begin(), this->c.end(), yli::ontology::PipelineCompare());
+                std::make_heap(this->c.begin(), this->c.end(), PipelineCompare());
                 return true;
             }
         }

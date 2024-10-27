@@ -45,13 +45,13 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(
-            yli::ontology::Species& species,
-            yli::ontology::Ecosystem& new_parent)
+            Species& species,
+            Ecosystem& new_parent)
     {
         // Set pointer to `Species` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = species.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = species.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -79,13 +79,13 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_scene_parent(
-            yli::ontology::Species& species,
-            yli::ontology::Scene& new_parent)
+            Species& species,
+            Scene& new_parent)
     {
         // Set pointer to `species` to `nullptr`, set parent according to the input,
         // and request a new childID from the new `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = species.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = species.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -113,8 +113,8 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Species::bind_to_new_material(
-            yli::ontology::Species& species,
-            yli::ontology::Material& new_material) noexcept
+            Species& species,
+            Material& new_material) noexcept
     {
         // Set pointer to `species` to `nullptr`, set material according to the input,
         // and request a new apprenticeID from `new_material`.
@@ -138,22 +138,22 @@ namespace yli::ontology
 
     Species::Species(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::SpeciesStruct& species_struct,
-            yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
-            yli::ontology::GenericMasterModule* const material_master_module)
+            Universe& universe,
+            const SpeciesStruct& species_struct,
+            GenericParentModule* const ecosystem_or_scene_parent_module,
+            GenericMasterModule* const material_master_module)
         : Entity(application, universe, species_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
         apprentice_of_material(material_master_module, this),
         mesh(universe, species_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Species*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Species::get_parent() const
+    Entity* Species::get_parent() const
     {
         return this->child_of_ecosystem_or_scene.get_parent();
     }
@@ -163,14 +163,14 @@ namespace yli::ontology
         return this->master_of_objects.get_number_of_apprentices();
     }
 
-    void Species::render(const yli::ontology::Scene* const target_scene)
+    void Species::render(const Scene* const target_scene)
     {
         if (!this->should_render)
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -178,9 +178,9 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::render_model<yli::ontology::GenericMasterModule&, yli::ontology::Object*>(
+        yli::render::render_model<GenericMasterModule&, Object*>(
                 this->mesh, this->master_of_objects, new_target_scene);
     }
 
@@ -194,14 +194,14 @@ namespace yli::ontology
         return this->mesh.image_height;
     }
 
-    yli::ontology::Scene* Species::get_scene() const
+    Scene* Species::get_scene() const
     {
         return this->child_of_ecosystem_or_scene.get_scene();
     }
 
-    yli::ontology::Pipeline* Species::get_pipeline() const
+    Pipeline* Species::get_pipeline() const
     {
-        yli::ontology::Material* const material = static_cast<yli::ontology::Material*>(
+        Material* const material = static_cast<Material*>(
                 this->apprentice_of_material.get_master());
 
         if (material != nullptr)

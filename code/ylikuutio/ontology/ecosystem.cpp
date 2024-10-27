@@ -35,9 +35,9 @@ namespace yli::ontology
 
     Ecosystem::Ecosystem(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::EcosystemStruct& ecosystem_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const EcosystemStruct& ecosystem_struct,
+            GenericParentModule* const universe_parent_module)
         : Entity(application, universe, ecosystem_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_pipelines(
@@ -57,17 +57,17 @@ namespace yli::ontology
                 this->registry,
                 "symbioses")
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Ecosystem*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Ecosystem::get_parent() const
+    Entity* Ecosystem::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
-    yli::ontology::GenericParentModule* Ecosystem::get_generic_parent_module(const int type)
+    GenericParentModule* Ecosystem::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::PIPELINE)
         {
@@ -89,7 +89,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Scene* Ecosystem::get_scene() const
+    Scene* Ecosystem::get_scene() const
     {
         // `Ecosystem` does not belong in any `Scene`.
         return nullptr;

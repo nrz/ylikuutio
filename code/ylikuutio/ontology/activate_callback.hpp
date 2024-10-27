@@ -28,7 +28,7 @@ namespace yli::ontology
     class Entity;
     class Variable;
 
-    typedef std::optional<yli::data::AnyValue> (*ActivateCallback) (yli::ontology::Entity& entity, yli::ontology::Variable& variable);
+    typedef std::optional<yli::data::AnyValue> (*ActivateCallback) (Entity& entity, Variable& variable);
 }
 
 #endif

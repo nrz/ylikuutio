@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_GENERIC_MASTER_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_GENERIC_MASTER_MODULE_HPP_INCLUDED
 
-// `yli::ontology::GenericMasterModule` is a module that implements
+// `GenericMasterModule` is a module that implements
 // the master part of a master-apprentice relationship.
 //
 // In Ylikuutio terminology, master-apprentice relationship

@@ -38,8 +38,8 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<yli::data::AnyValue> Text3d::bind_to_new_vector_font_parent(
-            yli::ontology::Text3d& text_3d,
-            yli::ontology::VectorFont& new_parent)
+            Text3d& text_3d,
+            VectorFont& new_parent)
     {
         // Disable all character `Object`s of `text_3d`,
         // set `parent` according to the input, request a new childID
@@ -48,7 +48,7 @@ namespace yli::ontology
         // TODO: implement creation and enabling the character `Object`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        const yli::ontology::Entity* const vector_font_parent = text_3d.get_parent();
+        const Entity* const vector_font_parent = text_3d.get_parent();
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
@@ -69,10 +69,10 @@ namespace yli::ontology
 
     Text3d::Text3d(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::Text3dStruct& text_3d_struct,
-            yli::ontology::GenericParentModule* const vector_font_parent_module,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            Universe& universe,
+            const Text3dStruct& text_3d_struct,
+            GenericParentModule* const vector_font_parent_module,
+            GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
@@ -89,21 +89,21 @@ namespace yli::ontology
 
         // Let's create each glyph `Object` in a loop.
 
-        yli::ontology::create_glyph_objects(this->text_string, *this);
+        create_glyph_objects(this->text_string, *this);
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Text3d*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Text3d::get_parent() const
+    Entity* Text3d::get_parent() const
     {
         return this->child_of_vector_font.get_parent();
     }
 
-    yli::ontology::Scene* Text3d::get_scene() const
+    Scene* Text3d::get_scene() const
     {
-        const yli::ontology::Entity* const vector_font_parent = this->get_parent();
+        const Entity* const vector_font_parent = this->get_parent();
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
@@ -113,9 +113,9 @@ namespace yli::ontology
         return vector_font_parent->get_scene();
     }
 
-    yli::ontology::Pipeline* Text3d::get_pipeline() const
+    Pipeline* Text3d::get_pipeline() const
     {
-        const yli::ontology::VectorFont* const vector_font_parent = static_cast<yli::ontology::VectorFont*>(this->get_parent());
+        const VectorFont* const vector_font_parent = static_cast<VectorFont*>(this->get_parent());
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {

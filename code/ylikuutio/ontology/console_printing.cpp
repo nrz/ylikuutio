@@ -26,17 +26,17 @@
 namespace yli::ontology
 {
     void print_to_console(
-            yli::ontology::Console& console,
+            Console& console,
             const std::string& text)
     {
         console.print_text(text);
     }
 
     void print_words_to_console(
-            yli::ontology::Console& console,
+            Console& console,
             const std::vector<std::string>& words)
     {
-        const yli::ontology::Universe& universe = console.get_universe();
+        const Universe& universe = console.get_universe();
 
         std::size_t characters_for_line = universe.get_window_width() / universe.get_text_size();
 

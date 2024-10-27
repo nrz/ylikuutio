@@ -38,9 +38,9 @@ namespace yli::ontology
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ConsoleCallbackEngineStruct&,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const ConsoleCallbackEngineStruct&,
+            GenericParentModule* const universe_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
         child_of_universe(universe_parent_module, *this),
         parent_of_console_callback_objects(
@@ -48,17 +48,17 @@ namespace yli::ontology
                 this->registry,
                 "console_callback_objects")
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackEngine*";
     }
 
-    yli::ontology::Scene* ConsoleCallbackEngine::get_scene() const
+    Scene* ConsoleCallbackEngine::get_scene() const
     {
         // `ConsoleCallbackEngine` does not belong in any `Scene`.
         return nullptr;
     }
 
-    yli::ontology::Entity* ConsoleCallbackEngine::get_parent() const
+    Entity* ConsoleCallbackEngine::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
@@ -73,13 +73,13 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_objects.child_pointer_vector);
     }
 
-    yli::ontology::ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
+    ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
             const InputParametersToAnyValueCallbackWithConsole callback,
-            yli::ontology::Console* const console_pointer)
+            Console* const console_pointer)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct(this);
+        ConsoleCallbackObjectStruct console_callback_object_struct(this);
         console_callback_object_struct.console_callback = callback;
         console_callback_object_struct.console_pointer = console_pointer;
         return entity_factory.create_console_callback_object(console_callback_object_struct);
@@ -93,7 +93,7 @@ namespace yli::ontology
         // execute all callbacks.
         for (std::size_t child_i = 0; child_i < this->parent_of_console_callback_objects.child_pointer_vector.size(); child_i++)
         {
-            yli::ontology::ConsoleCallbackObject* console_callback_object_pointer = static_cast<yli::ontology::ConsoleCallbackObject*>(
+            ConsoleCallbackObject* console_callback_object_pointer = static_cast<ConsoleCallbackObject*>(
                     this->parent_of_console_callback_objects.child_pointer_vector.at(child_i));
 
             if (console_callback_object_pointer != nullptr)
@@ -118,7 +118,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    yli::ontology::GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module(const int type)
+    GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::CONSOLE_CALLBACK_OBJECT)
         {

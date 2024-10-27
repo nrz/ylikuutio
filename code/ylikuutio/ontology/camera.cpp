@@ -56,10 +56,10 @@ namespace yli::ontology
 
     Camera::Camera(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::CameraStruct& camera_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            Universe& universe,
+            const CameraStruct& camera_struct,
+            GenericParentModule* const scene_parent_module,
+            GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
@@ -82,18 +82,18 @@ namespace yli::ontology
 
         this->activate();
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Camera*";
     }
 
-    yli::ontology::Entity* Camera::get_parent() const
+    Entity* Camera::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
 
     void Camera::activate()
     {
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (scene != nullptr)
         {
@@ -109,9 +109,9 @@ namespace yli::ontology
         glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::CAMERA, this->camera_uniform_block);
     }
 
-    yli::ontology::Scene* Camera::get_scene() const
+    Scene* Camera::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+        return static_cast<Scene*>(this->child_of_scene.get_parent());
     }
 
     std::size_t Camera::get_number_of_children() const

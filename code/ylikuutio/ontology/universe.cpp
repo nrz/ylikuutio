@@ -107,7 +107,7 @@ namespace yli::ontology
 
     const std::string Universe::version = "0.0.10";
 
-    void Universe::bind_entity(yli::ontology::Entity* const entity) noexcept
+    void Universe::bind_entity(Entity* const entity) noexcept
     {
         // no-op when called during initialization of the `Entity` base class of `Universe` itself.
         if (entity == this)
@@ -134,7 +134,7 @@ namespace yli::ontology
 
     Universe::Universe(
             yli::core::Application& application,
-            const yli::ontology::UniverseStruct& universe_struct)
+            const UniverseStruct& universe_struct)
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
         parent_of_ecosystems(
                 *this,
@@ -194,7 +194,7 @@ namespace yli::ontology
 
         if (this->window_title.empty())
         {
-            this->window_title = "Ylikuutio " + yli::ontology::Universe::version;
+            this->window_title = "Ylikuutio " + Universe::version;
         }
 
         this->create_should_render_variable();
@@ -209,7 +209,7 @@ namespace yli::ontology
             this->render_system = std::make_unique<yli::render::RenderSystem>(this, render_system_struct);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Universe*";
     }
 
@@ -251,9 +251,9 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        yli::ontology::Font2d* const font_2d = static_cast<yli::ontology::Font2d*>(
+        Font2d* const font_2d = static_cast<Font2d*>(
                 yli::hierarchy::get_first_child(
                     this->parent_of_font_2ds.child_pointer_vector,
                     this->parent_of_font_2ds.get_number_of_children()));
@@ -264,7 +264,7 @@ namespace yli::ontology
         }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
-        yli::ontology::TextStruct angles_and_coordinates_text_struct;
+        TextStruct angles_and_coordinates_text_struct;
         angles_and_coordinates_text_struct.font_2d_parent = font_2d;
         angles_and_coordinates_text_struct.screen_width = this->window_width;
         angles_and_coordinates_text_struct.screen_height = this->window_height;
@@ -275,7 +275,7 @@ namespace yli::ontology
         angles_and_coordinates_text_struct.font_texture_file_format = "png";
         angles_and_coordinates_text_struct.horizontal_alignment = "left";
         angles_and_coordinates_text_struct.vertical_alignment = "bottom";
-        yli::ontology::Text2d* angles_and_coordinates_text_2d = entity_factory.create_text_2d(angles_and_coordinates_text_struct);
+        Text2d* angles_and_coordinates_text_2d = entity_factory.create_text_2d(angles_and_coordinates_text_struct);
 
         if (angles_and_coordinates_text_2d == nullptr)
         {
@@ -283,7 +283,7 @@ namespace yli::ontology
         }
 
         // Create time data text, on top left corner.
-        yli::ontology::TextStruct time_text_struct;
+        TextStruct time_text_struct;
         time_text_struct.font_2d_parent = font_2d;
         time_text_struct.screen_width = this->window_width;
         time_text_struct.screen_height = this->window_height;
@@ -294,7 +294,7 @@ namespace yli::ontology
         time_text_struct.font_texture_file_format = "png";
         time_text_struct.horizontal_alignment = "left";
         time_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2d* time_text_2d = entity_factory.create_text_2d(time_text_struct);
+        Text2d* time_text_2d = entity_factory.create_text_2d(time_text_struct);
 
         if (time_text_2d == nullptr)
         {
@@ -302,7 +302,7 @@ namespace yli::ontology
         }
 
         // Create help text.
-        yli::ontology::TextStruct help_text_struct;
+        TextStruct help_text_struct;
         help_text_struct.font_2d_parent = font_2d;
         help_text_struct.screen_width = this->window_width;
         help_text_struct.screen_height = this->window_height;
@@ -313,7 +313,7 @@ namespace yli::ontology
         help_text_struct.font_texture_file_format = "png";
         help_text_struct.horizontal_alignment = "left";
         help_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2d* help_text_2d = entity_factory.create_text_2d(help_text_struct);
+        Text2d* help_text_2d = entity_factory.create_text_2d(help_text_struct);
 
         if (help_text_2d == nullptr)
         {
@@ -321,7 +321,7 @@ namespace yli::ontology
         }
 
         // Print frame rate data on top right corner.
-        yli::ontology::TextStruct frame_rate_text_struct;
+        TextStruct frame_rate_text_struct;
         frame_rate_text_struct.font_2d_parent = font_2d;
         frame_rate_text_struct.screen_width = this->window_width;
         frame_rate_text_struct.screen_height = this->window_height;
@@ -332,7 +332,7 @@ namespace yli::ontology
         frame_rate_text_struct.font_texture_file_format = "png";
         frame_rate_text_struct.horizontal_alignment = "right";
         frame_rate_text_struct.vertical_alignment = "top";
-        yli::ontology::Text2d* frame_rate_text_2d = entity_factory.create_text_2d(frame_rate_text_struct);
+        Text2d* frame_rate_text_2d = entity_factory.create_text_2d(frame_rate_text_struct);
 
         if (frame_rate_text_2d == nullptr)
         {
@@ -397,7 +397,7 @@ namespace yli::ontology
                 this->mouse_x = this->window_width / 2;
                 this->mouse_y = this->window_height / 2;
 
-                const yli::ontology::InputMode* const input_mode = this->parent_of_input_modes.get_active_input_mode();
+                const InputMode* const input_mode = this->parent_of_input_modes.get_active_input_mode();
 
                 if (input_mode == nullptr)
                 {
@@ -417,7 +417,7 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode->get_keypress_callback_engine(scancode);
+                        GenericCallbackEngine* const generic_callback_engine = input_mode->get_keypress_callback_engine(scancode);
 
                         if (generic_callback_engine != nullptr)
                         {
@@ -425,13 +425,13 @@ namespace yli::ontology
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                                    std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
                             {
                                 this->request_exit();
                             }
                         }
 
-                        yli::ontology::Console* const active_console = this->active_console;
+                        Console* const active_console = this->active_console;
 
                         if (active_console != nullptr)
                         {
@@ -442,7 +442,7 @@ namespace yli::ontology
                     {
                         const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                        yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
+                        GenericCallbackEngine* const generic_callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
 
                         if (generic_callback_engine == nullptr)
                         {
@@ -453,7 +453,7 @@ namespace yli::ontology
 
                         if (any_value &&
                                 std::holds_alternative<uint32_t>(any_value->data) &&
-                                std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                                std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
                         {
                             this->request_exit();
                         }
@@ -522,7 +522,7 @@ namespace yli::ontology
                 if (!this->in_console)
                 {
                     const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
-                    const std::vector<yli::ontology::GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
+                    const std::vector<GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
                     if (continuous_keypress_callback_engines == nullptr)
                     {
                         continue;
@@ -555,7 +555,7 @@ namespace yli::ontology
 
                         if (is_pressed)
                         {
-                            yli::ontology::GenericCallbackEngine* const generic_callback_engine = continuous_keypress_callback_engines->at(i);
+                            GenericCallbackEngine* const generic_callback_engine = continuous_keypress_callback_engines->at(i);
 
                             if (generic_callback_engine == nullptr)
                             {
@@ -566,7 +566,7 @@ namespace yli::ontology
 
                             if (any_value &&
                                     std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                                    std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
                             {
                                 this->request_exit();
                             }
@@ -615,9 +615,9 @@ namespace yli::ontology
                 {
                     if (this->in_help_mode && this->can_display_help_screen)
                     {
-                        yli::ontology::Scene* const scene = this->active_scene;
+                        Scene* const scene = this->active_scene;
                         const std::string help_text_string =
-                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + yli::ontology::Universe::version + "\n"
+                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + Universe::version + "\n"
                             "\n"
                             "arrow keys\n"
                             "space jump\n"
@@ -718,7 +718,7 @@ namespace yli::ontology
         this->render(render_struct);
     }
 
-    void Universe::set_active_scene(yli::ontology::Scene* const scene)
+    void Universe::set_active_scene(Scene* const scene)
     {
         this->active_scene = scene;
 
@@ -729,7 +729,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Camera* Universe::get_active_camera() const
+    Camera* Universe::get_active_camera() const
     {
         if (this->active_scene != nullptr) [[likely]]
         {
@@ -739,11 +739,11 @@ namespace yli::ontology
         return nullptr; // No active `Scene`, so no active `Camera` either.
     }
 
-    void Universe::set_active_camera(yli::ontology::Camera* const camera) const
+    void Universe::set_active_camera(Camera* const camera) const
     {
         // Changing the active `Camera` does not change the active `Scene`!
 
-        yli::ontology::Scene* const scene_parent_of_camera = static_cast<yli::ontology::Scene*>(camera->get_parent());
+        Scene* const scene_parent_of_camera = static_cast<Scene*>(camera->get_parent());
 
         if (scene_parent_of_camera == nullptr) [[unlikely]]
         {
@@ -755,7 +755,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_xyz() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -767,7 +767,7 @@ namespace yli::ontology
 
     void Universe::set_xyz(glm::vec3&& xyz)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -779,7 +779,7 @@ namespace yli::ontology
 
     void Universe::update_xyz(const glm::vec3& xyz)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -791,7 +791,7 @@ namespace yli::ontology
 
     float Universe::get_x() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -803,7 +803,7 @@ namespace yli::ontology
 
     void Universe::set_x(const float x)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -815,7 +815,7 @@ namespace yli::ontology
 
     float Universe::get_y() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -827,7 +827,7 @@ namespace yli::ontology
 
     void Universe::set_y(const float y)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -839,7 +839,7 @@ namespace yli::ontology
 
     float Universe::get_z() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -851,7 +851,7 @@ namespace yli::ontology
 
     void Universe::set_z(const float z)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -863,7 +863,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_direction() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -875,7 +875,7 @@ namespace yli::ontology
 
     void Universe::set_direction(glm::vec3&& direction)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -887,7 +887,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_right() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -899,7 +899,7 @@ namespace yli::ontology
 
     void Universe::set_right(glm::vec3&& right)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -911,7 +911,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_up() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -923,7 +923,7 @@ namespace yli::ontology
 
     void Universe::set_up(glm::vec3&& up)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -935,7 +935,7 @@ namespace yli::ontology
 
     float Universe::get_roll() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -947,7 +947,7 @@ namespace yli::ontology
 
     void Universe::set_roll(const float roll)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -959,7 +959,7 @@ namespace yli::ontology
 
     float Universe::get_yaw() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -971,7 +971,7 @@ namespace yli::ontology
 
     void Universe::set_yaw(const float yaw)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -990,7 +990,7 @@ namespace yli::ontology
 
     float Universe::get_pitch() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1002,7 +1002,7 @@ namespace yli::ontology
 
     void Universe::set_pitch(const float pitch)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1022,7 +1022,7 @@ namespace yli::ontology
 
     float Universe::get_azimuth() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1032,9 +1032,9 @@ namespace yli::ontology
         return camera->get_azimuth();
     }
 
-    yli::ontology::Console* Universe::get_active_console() const
+    Console* Universe::get_active_console() const
     {
-        for (yli::ontology::Entity* console : this->parent_of_consoles.child_pointer_vector)
+        for (Entity* console : this->parent_of_consoles.child_pointer_vector)
         {
             if (console == this->active_console)
             {
@@ -1045,7 +1045,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    void Universe::set_active_console(yli::ontology::Console* const console)
+    void Universe::set_active_console(Console* const console)
     {
         this->active_console = console;
     }
@@ -1100,23 +1100,23 @@ namespace yli::ontology
         return this->parent_of_scenes.get_number_of_children();
     }
 
-    yli::ontology::Scene* Universe::get_active_scene() const
+    Scene* Universe::get_active_scene() const
     {
         return this->active_scene;
     }
 
-    yli::ontology::Entity* Universe::get_parent() const
+    Entity* Universe::get_parent() const
     {
         // `Universe` has no parent.
         return nullptr;
     }
 
-    yli::ontology::GenericParentModule& Universe::get_parent_of_ecosystems()
+    GenericParentModule& Universe::get_parent_of_ecosystems()
     {
         return this->parent_of_ecosystems;
     }
 
-    yli::ontology::Scene* Universe::get_scene() const
+    Scene* Universe::get_scene() const
     {
         // `Universe` does not belong in any `Scene`.
         return nullptr;
@@ -1429,7 +1429,7 @@ namespace yli::ontology
 
     const glm::mat4& Universe::get_projection_matrix() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1441,7 +1441,7 @@ namespace yli::ontology
 
     void Universe::set_projection_matrix(glm::mat4&& projection_matrix)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1453,7 +1453,7 @@ namespace yli::ontology
 
     const glm::mat4& Universe::get_view_matrix() const
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1465,7 +1465,7 @@ namespace yli::ontology
 
     void Universe::set_view_matrix(glm::mat4&& view_matrix)
     {
-        yli::ontology::Camera* const camera = this->get_active_camera();
+        Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1514,11 +1514,11 @@ namespace yli::ontology
         this->should_render = !this->get_is_headless();
 
         // Create `Variable` `should_render` here because it can't be done in `Entity` constructor.
-        yli::ontology::VariableStruct should_render_variable_struct(*this, this);
+        VariableStruct should_render_variable_struct(*this, this);
         should_render_variable_struct.is_variable_of_universe = true;
         should_render_variable_struct.local_name = "should_render";
-        should_render_variable_struct.activate_callback = &yli::ontology::activate_should_render;
-        should_render_variable_struct.read_callback = &yli::ontology::read_should_render;
+        should_render_variable_struct.activate_callback = &activate_should_render;
+        should_render_variable_struct.read_callback = &read_should_render;
         should_render_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(should_render_variable_struct);` ...\n";
         this->create_variable(should_render_variable_struct, yli::data::AnyValue(this->should_render));

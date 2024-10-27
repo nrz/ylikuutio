@@ -43,15 +43,15 @@ namespace yli::ontology
 
     ConsoleCallbackParameter::ConsoleCallbackParameter(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ConsoleCallbackParameterStruct& callback_parameter_struct,
-            yli::ontology::GenericParentModule* const console_callback_object_parent_module,
+            Universe& universe,
+            const ConsoleCallbackParameterStruct& callback_parameter_struct,
+            GenericParentModule* const console_callback_object_parent_module,
             const yli::data::AnyValue& any_value)
         : Entity(application, universe, callback_parameter_struct),
         child_of_console_callback_object(console_callback_object_parent_module, *this),
         any_value { any_value }
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackParameter*";
     }
 
@@ -60,12 +60,12 @@ namespace yli::ontology
         return this->any_value;
     }
 
-    yli::ontology::Entity* ConsoleCallbackParameter::get_parent() const
+    Entity* ConsoleCallbackParameter::get_parent() const
     {
         return this->child_of_console_callback_object.get_parent();
     }
 
-    yli::ontology::Scene* ConsoleCallbackParameter::get_scene() const
+    Scene* ConsoleCallbackParameter::get_scene() const
     {
         return this->child_of_console_callback_object.get_scene();
     }

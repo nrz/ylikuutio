@@ -44,12 +44,12 @@ namespace yli::ontology
     // Public `Entity` delete callbacks.
 
     std::optional<yli::data::AnyValue> Universe::delete_entity(
-            yli::ontology::Universe& universe,
-            yli::ontology::Entity& entity)
+            Universe& universe,
+            Entity& entity)
     {
         if (entity.get_can_be_erased())
         {
-            yli::ontology::Entity* const entity_parent_of_entity = entity.get_parent();
+            Entity* const entity_parent_of_entity = entity.get_parent();
 
             if (entity_parent_of_entity != nullptr)
             {
@@ -70,7 +70,7 @@ namespace yli::ontology
     // Public `Entity` naming callbacks.
 
     std::optional<yli::data::AnyValue> Universe::set_global_name_for_entity(
-            yli::ontology::Entity& entity,
+            Entity& entity,
             const std::string& global_name)
     {
         entity.set_global_name(global_name);
@@ -79,7 +79,7 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::set_local_name_for_entity(
-            yli::ontology::Entity& entity,
+            Entity& entity,
             const std::string& local_name)
     {
         entity.set_local_name(local_name);
@@ -89,7 +89,7 @@ namespace yli::ontology
 
     // Public `Entity` activate callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::activate_entity(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> Universe::activate_entity(Entity& entity)
     {
         entity.activate();
 
@@ -99,8 +99,8 @@ namespace yli::ontology
     // Public YliLisp-related callbacks.
 
     std::optional<yli::data::AnyValue> Universe::eval(
-            yli::ontology::Console& console,
-            yli::ontology::Universe& universe,
+            Console& console,
+            Universe& universe,
             const std::vector<std::string>& command_parameters)
     {
         // Command parameters must form a valid YliLisp expression.
@@ -126,8 +126,8 @@ namespace yli::ontology
     // Public data printing callbacks.
 
     std::optional<yli::data::AnyValue> Universe::info0(
-            const yli::ontology::Universe& universe,
-            yli::ontology::Console& console)
+            const Universe& universe,
+            Console& console)
     {
         // Print names of named entities.
         yli::map::print_keys_to_console(universe.registry.get_entity_map(), console);
@@ -135,9 +135,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::info1(
-            const yli::ontology::Universe& /* universe */,
-            yli::ontology::Console& console,
-            const yli::ontology::Entity& entity)
+            const Universe& /* universe */,
+            Console& console,
+            const Entity& entity)
     {
         // OK, let's find out information about this `Entity`.
 
@@ -185,10 +185,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::print_entities(
-            const yli::ontology::Universe& universe,
-            yli::ontology::Console& console)
+            const Universe& universe,
+            Console& console)
     {
-        std::vector<std::pair<std::string, yli::ontology::Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe.registry.get_entity_map());
+        std::vector<std::pair<std::string, Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe.registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {
@@ -204,9 +204,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Universe::print_parent(
-            const yli::ontology::Universe&,
-            yli::ontology::Console& console,
-            const yli::ontology::Entity& entity)
+            const Universe&,
+            Console& console,
+            const Entity& entity)
     {
         // OK, let's find out the parent of this `Entity`.
 
@@ -231,7 +231,7 @@ namespace yli::ontology
     // Other public callbacks.
 
     std::optional<yli::data::AnyValue> Universe::screenshot(
-            yli::ontology::Universe& universe,
+            Universe& universe,
             const std::string& filename)
     {
         if (!universe.framebuffer_module.get_in_use())

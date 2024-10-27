@@ -70,13 +70,13 @@ namespace yli::ontology
     class Entity;
 
     std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(
-            yli::ontology::Object& object,
-            yli::ontology::Scene& new_parent)
+            Object& object,
+            Scene& new_parent)
     {
         // Set pointer to `object` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Scene* const old_scene_parent = object.get_scene();
+        const Scene* const old_scene_parent = object.get_scene();
 
         if (old_scene_parent == nullptr) [[unlikely]]
         {
@@ -101,13 +101,13 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Object::bind_to_new_species_master(
-            yli::ontology::Object& object,
-            yli::ontology::Species& new_species) noexcept
+            Object& object,
+            Species& new_species) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_species`.
 
-        if (object.object_type == yli::ontology::ObjectType::REGULAR)
+        if (object.object_type == ObjectType::REGULAR)
         {
             // Master and apprentice must belong to the same `Scene`,
             // if both belong to some `Scene`, and not `Ecosystem`.
@@ -133,11 +133,11 @@ namespace yli::ontology
 
     Object::Object(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ObjectStruct& object_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const brain_master_module,
-            yli::ontology::GenericMasterModule* const mesh_master_module)
+            Universe& universe,
+            const ObjectStruct& object_struct,
+            GenericParentModule* const scene_parent_module,
+            GenericMasterModule* const brain_master_module,
+            GenericMasterModule* const mesh_master_module)
         : Movable(
                 application,
                 universe,
@@ -146,30 +146,30 @@ namespace yli::ontology
         child_of_scene(scene_parent_module, *this),
         apprentice_of_mesh(mesh_master_module, this)
     {
-        if (std::holds_alternative<yli::ontology::Species*>(object_struct.mesh_master))
+        if (std::holds_alternative<Species*>(object_struct.mesh_master))
         {
-            this->object_type = yli::ontology::ObjectType::REGULAR;
+            this->object_type = ObjectType::REGULAR;
         }
-        else if (std::holds_alternative<yli::ontology::ShapeshifterSequence*>(object_struct.mesh_master))
+        else if (std::holds_alternative<ShapeshifterSequence*>(object_struct.mesh_master))
         {
-            this->object_type = yli::ontology::ObjectType::SHAPESHIFTER;
+            this->object_type = ObjectType::SHAPESHIFTER;
         }
-        else if (std::holds_alternative<yli::ontology::Text3d*>(object_struct.mesh_master))
+        else if (std::holds_alternative<Text3d*>(object_struct.mesh_master))
         {
-            this->object_type = yli::ontology::ObjectType::GLYPH_OBJECT;
+            this->object_type = ObjectType::GLYPH_OBJECT;
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Object*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Object::get_parent() const
+    Entity* Object::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
 
-    void Object::render(const yli::ontology::Scene* const target_scene)
+    void Object::render(const Scene* const target_scene)
     {
         // render this `Object`.
 
@@ -178,7 +178,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene) [[unlikely]]
         {
@@ -186,18 +186,18 @@ namespace yli::ontology
             return;
         }
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR ||
-                this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT) [[likely]]
+        if (this->object_type == ObjectType::REGULAR ||
+                this->object_type == ObjectType::GLYPH_OBJECT) [[likely]]
         {
             this->render_this_object(this->get_pipeline());
         }
-        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        else if (this->object_type == ObjectType::SHAPESHIFTER)
         {
             // TODO.
         }
     }
 
-    void Object::render_this_object(yli::ontology::Pipeline* const pipeline)
+    void Object::render_this_object(Pipeline* const pipeline)
     {
         if (this->universe.get_render_system() == nullptr) [[unlikely]]
         {
@@ -209,7 +209,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER) [[unlikely]]
+        if (this->object_type == ObjectType::SHAPESHIFTER) [[unlikely]]
         {
             // TODO: implement rendering for `SHAPESHIFTER`!
             // Meanwhile this block just exists to exit this function.
@@ -218,9 +218,9 @@ namespace yli::ontology
 
         this->model_matrix = glm::mat4(1.0f);
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
+        if (this->object_type == ObjectType::REGULAR) [[likely]]
         {
-            yli::ontology::Species* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
+            Species* const species = static_cast<Species*>(this->apprentice_of_mesh.get_master());
 
             if (species == nullptr) [[unlikely]]
             {
@@ -262,25 +262,25 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Object::render_this_object`: Vulkan is not supported yet!");
         }
 
-        yli::ontology::MeshModule* master_model = nullptr;
+        MeshModule* master_model = nullptr;
 
-        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
+        if (this->object_type == ObjectType::REGULAR) [[likely]]
         {
-            yli::ontology::Species* const master_species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master());
+            Species* const master_species = static_cast<Species*>(this->apprentice_of_mesh.get_master());
 
             if (master_species != nullptr)
             {
                 master_model = &master_species->mesh;
             }
         }
-        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        else if (this->object_type == ObjectType::SHAPESHIFTER)
         {
             // TODO: set `master_model` so that it points to the correct `ShapeshifterForm` for the current frame!
             throw std::runtime_error("ERROR: `Object::render_this_object`: shapeshifters are not implemented yet!");
         }
-        else if (this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
+        else if (this->object_type == ObjectType::GLYPH_OBJECT)
         {
-            yli::ontology::Glyph* const master_glyph = static_cast<yli::ontology::Glyph*>(this->apprentice_of_mesh.get_master());
+            Glyph* const master_glyph = static_cast<Glyph*>(this->apprentice_of_mesh.get_master());
 
             if (master_glyph != nullptr)
             {
@@ -363,35 +363,35 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Scene* Object::get_scene() const
+    Scene* Object::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->child_of_scene.get_parent());
+        return static_cast<Scene*>(this->child_of_scene.get_parent());
     }
 
-    yli::ontology::Pipeline* Object::get_pipeline() const
+    Pipeline* Object::get_pipeline() const
     {
-        if (this->object_type == yli::ontology::ObjectType::REGULAR) [[likely]]
+        if (this->object_type == ObjectType::REGULAR) [[likely]]
         {
-            if (const auto* const species = static_cast<yli::ontology::Species*>(this->apprentice_of_mesh.get_master()); species != nullptr) [[likely]]
+            if (const auto* const species = static_cast<Species*>(this->apprentice_of_mesh.get_master()); species != nullptr) [[likely]]
             {
                 return species->get_pipeline();
             }
 
             throw std::runtime_error("ERROR: `Object::get_pipeline`: `species` is `nullptr`!");
         }
-        else if (this->object_type == yli::ontology::ObjectType::SHAPESHIFTER)
+        else if (this->object_type == ObjectType::SHAPESHIFTER)
         {
             if (const auto* const shapeshifter_sequence =
-                    static_cast<yli::ontology::ShapeshifterSequence*>(this->apprentice_of_mesh.get_master()); shapeshifter_sequence != nullptr) [[likely]]
+                    static_cast<ShapeshifterSequence*>(this->apprentice_of_mesh.get_master()); shapeshifter_sequence != nullptr) [[likely]]
             {
                 return shapeshifter_sequence->get_pipeline();
             }
 
             throw std::runtime_error("ERROR: `Object::get_pipeline`: `shapeshifter_sequence` is `nullptr`!");
         }
-        else if (this->object_type == yli::ontology::ObjectType::GLYPH_OBJECT)
+        else if (this->object_type == ObjectType::GLYPH_OBJECT)
         {
-            if (const auto* const text_3d = static_cast<yli::ontology::Text3d*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
+            if (const auto* const text_3d = static_cast<Text3d*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
             {
                 return text_3d->get_pipeline();
             }
@@ -415,19 +415,19 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z(
-            yli::ontology::Scene& parent,
-            yli::ontology::Species& species,
+            Scene& parent,
+            Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
             const std::string& z)
     {
-        return yli::ontology::Object::with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
+        return Object::with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
     }
 
     std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_yaw_pitch(
-            yli::ontology::Scene& parent,
-            yli::ontology::Species& species,
+            Scene& parent,
+            Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
@@ -435,12 +435,12 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return yli::ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
+        return Object::with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
     std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_roll_yaw_pitch(
-            yli::ontology::Scene& parent,
-            yli::ontology::Species& species,
+            Scene& parent,
+            Species& species,
             const std::string& object_name,
             const std::string& x,
             const std::string& y,
@@ -449,7 +449,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);
@@ -501,10 +501,10 @@ namespace yli::ontology
         float float_yaw = std::get<float>(yaw_any_value.data);
         float float_pitch = std::get<float>(pitch_any_value.data);
 
-        yli::ontology::ObjectStruct object_struct(&parent);
+        ObjectStruct object_struct(&parent);
         object_struct.mesh_master = &species;
-        object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(float_x, float_y, float_z);
-        object_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
+        object_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
+        object_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
         object_struct.local_name = object_name;
         entity_factory.create_object(object_struct);
         return std::nullopt;

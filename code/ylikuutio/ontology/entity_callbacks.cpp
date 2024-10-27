@@ -31,20 +31,20 @@ namespace yli::ontology
     class Console;
 
     std::optional<yli::data::AnyValue> Entity::create_variable_with_parent_name_type_value(
-            yli::ontology::Entity& parent,
+            Entity& parent,
             const std::string& variable_name,
             const std::string& variable_type,
             const std::string& variable_value)
     {
-        yli::ontology::VariableStruct variable_struct(parent.get_universe(), &parent);
+        VariableStruct variable_struct(parent.get_universe(), &parent);
         variable_struct.local_name    = variable_name;
         parent.create_variable(variable_struct, yli::data::AnyValue(variable_type, variable_value));
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Entity::print_children(
-            yli::ontology::Console& console,
-            const yli::ontology::Entity& entity)
+            Console& console,
+            const Entity& entity)
     {
         // OK, let's print the children of this `Entity`.
         yli::map::print_keys_to_console(entity.registry.get_entity_map(), console);
@@ -53,24 +53,24 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Entity::print_variables0(
-            const yli::ontology::Universe& universe,
-            yli::ontology::Console& console)
+            const Universe& universe,
+            Console& console)
     {
         // Print global variable names.
 
-        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(universe.registry.get_entity_map(), console);
+        yli::map::print_keys_of_specific_type_to_console<Entity*, Variable*>(universe.registry.get_entity_map(), console);
 
         return std::nullopt;
     }
 
     std::optional<yli::data::AnyValue> Entity::print_variables1(
-            const yli::ontology::Universe&,
-            yli::ontology::Console& console,
-            const yli::ontology::Entity& entity)
+            const Universe&,
+            Console& console,
+            const Entity& entity)
     {
         // Print the variable names of the `Entity`.
 
-        yli::map::print_keys_of_specific_type_to_console<yli::ontology::Entity*, yli::ontology::Variable*>(entity.registry.get_entity_map(), console);
+        yli::map::print_keys_of_specific_type_to_console<Entity*, Variable*>(entity.registry.get_entity_map(), console);
 
         return std::nullopt;
     }

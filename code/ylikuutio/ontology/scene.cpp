@@ -59,9 +59,9 @@ namespace yli::ontology
 
     Scene::Scene(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::SceneStruct& scene_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const SceneStruct& scene_struct,
+            GenericParentModule* const universe_parent_module)
     : Entity(application, universe, scene_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_pipelines(
@@ -124,11 +124,11 @@ namespace yli::ontology
         this->activate();
 
         // create the default `Camera`.
-        yli::ontology::CameraStruct camera_struct = scene_struct.default_camera_struct;
+        CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = this;
         this->get_application().get_generic_entity_factory().create_default_camera(camera_struct);
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";
         this->can_be_erased = true;
     }
@@ -151,9 +151,9 @@ namespace yli::ontology
     {
         // Intentional actors (AIs and keyboard controlled ones).
 
-        for (yli::ontology::Entity* const brain_entity : this->parent_of_brains.child_pointer_vector)
+        for (Entity* const brain_entity : this->parent_of_brains.child_pointer_vector)
         {
-            yli::ontology::Brain* const brain = static_cast<yli::ontology::Brain*>(brain_entity);
+            Brain* const brain = static_cast<Brain*>(brain_entity);
 
             if (brain != nullptr)
             {
@@ -203,17 +203,17 @@ namespace yli::ontology
         render_system->render_pipelines(this->parent_of_pipelines, this);
     }
 
-    yli::ontology::Camera* Scene::get_default_camera() const
+    Camera* Scene::get_default_camera() const
     {
-        return static_cast<yli::ontology::Camera*>(this->parent_of_cameras.get(0));
+        return static_cast<Camera*>(this->parent_of_cameras.get(0));
     }
 
-    yli::ontology::Camera* Scene::get_active_camera() const
+    Camera* Scene::get_active_camera() const
     {
         return this->active_camera;
     }
 
-    void Scene::set_active_camera(yli::ontology::Camera* camera)
+    void Scene::set_active_camera(Camera* camera)
     {
         if (camera != nullptr && camera->get_parent() != this)
         {
@@ -228,7 +228,7 @@ namespace yli::ontology
         // requirements for further actions:
         // `this->parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const active_scene = this->universe.get_active_scene();
+        Scene* const active_scene = this->universe.get_active_scene();
 
         if (active_scene == nullptr)
         {
@@ -236,14 +236,14 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* Scene::get_parent() const
+    Entity* Scene::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
-    yli::ontology::Scene* Scene::get_scene() const
+    Scene* Scene::get_scene() const
     {
-        return const_cast<yli::ontology::Scene*>(this);
+        return const_cast<Scene*>(this);
     }
 
     std::size_t Scene::get_number_of_children() const
@@ -322,7 +322,7 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body_module(const yli::ontology::RigidBodyModule& /* rigid_body_module */, yli::ontology::Scene& /* scene */ )
+    void Scene::add_rigid_body_module(const RigidBodyModule& /* rigid_body_module */, Scene& /* scene */ )
     {
         // TODO: implement!
     }
@@ -347,7 +347,7 @@ namespace yli::ontology
         this->is_flight_mode_in_use = is_flight_mode_in_use;
     }
 
-    yli::ontology::GenericParentModule* Scene::get_generic_parent_module(const int type)
+    GenericParentModule* Scene::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::PIPELINE)
         {

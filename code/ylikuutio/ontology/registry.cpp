@@ -42,7 +42,7 @@ namespace yli::ontology
         return this->entity_map.count(name) == 1;
     }
 
-    void Registry::add_indexable(yli::ontology::Indexable& indexable, const std::string& name)
+    void Registry::add_indexable(Indexable& indexable, const std::string& name)
     {
         if (!name.empty() && !this->is_name(name))
         {
@@ -51,7 +51,7 @@ namespace yli::ontology
         }
     }
 
-    void Registry::add_entity(yli::ontology::Entity& entity, const std::string& name)
+    void Registry::add_entity(Entity& entity, const std::string& name)
     {
         if (!name.empty() && !this->is_name(name))
         {
@@ -84,11 +84,11 @@ namespace yli::ontology
         return this->completable_string_set.get_completions(input);
     }
 
-    yli::ontology::Entity* Registry::get_indexed_entity(const std::string& indexable_name, std::size_t index) const
+    Entity* Registry::get_indexed_entity(const std::string& indexable_name, std::size_t index) const
     {
         if (this->indexable_map.count(indexable_name) == 1)
         {
-            yli::ontology::Indexable* const indexable = this->indexable_map.at(indexable_name);
+            Indexable* const indexable = this->indexable_map.at(indexable_name);
 
             if (indexable != nullptr)
             {
@@ -99,7 +99,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Entity* Registry::get_entity(const std::string& name) const
+    Entity* Registry::get_entity(const std::string& name) const
     {
         if (this->entity_map.count(name) == 1)
         {
@@ -109,7 +109,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::string Registry::get_entity_name(const yli::ontology::Entity& entity) const
+    std::string Registry::get_entity_name(const Entity& entity) const
     {
         for (auto& key_and_value : this->entity_map)
         {
@@ -143,12 +143,12 @@ namespace yli::ontology
         return entity_names;
     }
 
-    const std::unordered_map<std::string, yli::ontology::Indexable*>& Registry::get_indexable_map() const
+    const std::unordered_map<std::string, Indexable*>& Registry::get_indexable_map() const
     {
         return this->indexable_map;
     }
 
-    const std::unordered_map<std::string, yli::ontology::Entity*>& Registry::get_entity_map() const
+    const std::unordered_map<std::string, Entity*>& Registry::get_entity_map() const
     {
         return this->entity_map;
     }

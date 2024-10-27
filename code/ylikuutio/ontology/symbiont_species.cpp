@@ -34,19 +34,19 @@ namespace yli::ontology
 
     SymbiontSpecies::SymbiontSpecies(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::SymbiontSpeciesStruct& symbiont_species_struct,
-            yli::ontology::GenericParentModule* const symbiont_material_parent_module)
+            Universe& universe,
+            const SymbiontSpeciesStruct& symbiont_species_struct,
+            GenericParentModule* const symbiont_material_parent_module)
         : Entity(application, universe, symbiont_species_struct),
         child_of_symbiont_material(symbiont_material_parent_module, *this),
         master_of_bionts(this, &this->registry, "bionts"),
         mesh(universe, symbiont_species_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontSpecies*";
     }
 
-    yli::ontology::Entity* SymbiontSpecies::get_parent() const
+    Entity* SymbiontSpecies::get_parent() const
     {
         return this->child_of_symbiont_material.get_parent();
     }
@@ -56,14 +56,14 @@ namespace yli::ontology
         return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
     }
 
-    yli::ontology::GenericMasterModule* SymbiontSpecies::get_renderables_container() const
+    GenericMasterModule* SymbiontSpecies::get_renderables_container() const
     {
-        return const_cast<yli::ontology::GenericMasterModule*>(&this->master_of_bionts);
+        return const_cast<GenericMasterModule*>(&this->master_of_bionts);
     }
 
-    yli::ontology::Scene* SymbiontSpecies::get_scene() const
+    Scene* SymbiontSpecies::get_scene() const
     {
-        const yli::ontology::Entity* const symbiont_material_parent = this->get_parent();
+        const Entity* const symbiont_material_parent = this->get_parent();
 
         if (symbiont_material_parent == nullptr) [[unlikely]]
         {

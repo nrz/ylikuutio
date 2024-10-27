@@ -50,13 +50,13 @@ namespace yli::ontology
     class Glyph;
 
     std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(
-            yli::ontology::VectorFont& vector_font,
-            yli::ontology::Material& new_parent)
+            VectorFont& vector_font,
+            Material& new_parent)
     {
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(vector_font.get_parent());
+        const Material* const material_parent = static_cast<Material*>(vector_font.get_parent());
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -75,7 +75,7 @@ namespace yli::ontology
 
     // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
     // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-    yli::ontology::Glyph* VectorFont::get_glyph_pointer(const int32_t unicode_value) const
+    Glyph* VectorFont::get_glyph_pointer(const int32_t unicode_value) const
     {
         if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
@@ -88,9 +88,9 @@ namespace yli::ontology
 
     VectorFont::VectorFont(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::VectorFontStruct& vector_font_struct,
-            yli::ontology::GenericParentModule* const material_parent_module)
+            Universe& universe,
+            const VectorFontStruct& vector_font_struct,
+            GenericParentModule* const material_parent_module)
         : Entity(application, universe, vector_font_struct),
         child_of_material(material_parent_module, *this),
         parent_of_glyphs(
@@ -120,14 +120,14 @@ namespace yli::ontology
                     is_debug_mode);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::VectorFont*";
         this->can_be_erased = true;
 
         // Requirements for further actions:
         // `this->parent` must not be `nullptr`.
 
-        yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
+        Material* const material_parent = static_cast<Material*>(this->get_parent());
 
         if (material_parent == nullptr)
         {
@@ -135,7 +135,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Pipeline* const pipeline_parent_of_material = static_cast<yli::ontology::Pipeline*>(material_parent->get_parent());
+        Pipeline* const pipeline_parent_of_material = static_cast<Pipeline*>(material_parent->get_parent());
 
         if (pipeline_parent_of_material == nullptr)
         {
@@ -143,7 +143,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (scene == nullptr)
         {
@@ -171,7 +171,7 @@ namespace yli::ontology
                     continue;
                 }
 
-                yli::ontology::GlyphStruct glyph_struct(this);
+                GlyphStruct glyph_struct(this);
                 glyph_struct.pipeline = pipeline_parent_of_material;
                 glyph_struct.material_or_symbiont_material = material_parent;
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
@@ -182,8 +182,8 @@ namespace yli::ontology
                 std::string unicode_string = glyph_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
 
-                yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
-                yli::ontology::Glyph* glyph = entity_factory.create_glyph(glyph_struct);
+                GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+                Glyph* glyph = entity_factory.create_glyph(glyph_struct);
 
                 // So that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.
@@ -193,7 +193,7 @@ namespace yli::ontology
 
     }
 
-    void VectorFont::render(const yli::ontology::Scene* const target_scene)
+    void VectorFont::render(const Scene* const target_scene)
     {
         if (!this->should_render) [[unlikely]]
         {
@@ -207,7 +207,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `VectorFont::render`: `render_system` is `nullptr`!");
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -215,19 +215,19 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         render_system->render_glyphs(this->parent_of_glyphs, new_target_scene);
     }
 
-    yli::ontology::Entity* VectorFont::get_parent() const
+    Entity* VectorFont::get_parent() const
     {
         return this->child_of_material.get_parent();
     }
 
-    yli::ontology::Scene* VectorFont::get_scene() const
+    Scene* VectorFont::get_scene() const
     {
-        yli::ontology::Entity* const material_parent = this->get_parent();
+        Entity* const material_parent = this->get_parent();
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -237,9 +237,9 @@ namespace yli::ontology
         return material_parent->get_scene();
     }
 
-    yli::ontology::Pipeline* VectorFont::get_pipeline() const
+    Pipeline* VectorFont::get_pipeline() const
     {
-        const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
+        const Material* const material_parent = static_cast<Material*>(this->get_parent());
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -261,7 +261,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
     }
 
-    yli::ontology::GenericParentModule* VectorFont::get_generic_parent_module(const int type)
+    GenericParentModule* VectorFont::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::GLYPH)
         {

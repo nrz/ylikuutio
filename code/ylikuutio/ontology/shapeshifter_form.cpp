@@ -36,25 +36,25 @@ namespace yli::ontology
 
     ShapeshifterForm::ShapeshifterForm(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ShapeshifterFormStruct& shapeshifter_form_struct,
-            yli::ontology::GenericParentModule* const shapeshifter_transformation_parent_module)
+            Universe& universe,
+            const ShapeshifterFormStruct& shapeshifter_form_struct,
+            GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(application, universe, shapeshifter_form_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
         mesh(universe, shapeshifter_form_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterForm*";
     }
 
-    yli::ontology::Entity* ShapeshifterForm::get_parent() const
+    Entity* ShapeshifterForm::get_parent() const
     {
         return this->child_of_shapeshifter_transformation.get_parent();
     }
 
-    yli::ontology::Scene* ShapeshifterForm::get_scene() const
+    Scene* ShapeshifterForm::get_scene() const
     {
-        const yli::ontology::Entity* const shapeshifter_transformation_parent = this->get_parent();
+        const Entity* const shapeshifter_transformation_parent = this->get_parent();
 
         if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
         {

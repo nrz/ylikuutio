@@ -23,7 +23,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    void RigidBodyModule::add_rigid_body_module_to_scene(yli::ontology::Scene& scene) const
+    void RigidBodyModule::add_rigid_body_module_to_scene(Scene& scene) const
     {
         // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `Movable`
         // is not initialized before initialization of `RigidBodyModule` composited in it.

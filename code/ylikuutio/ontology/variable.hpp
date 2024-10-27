@@ -29,7 +29,7 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
-// `yli::ontology::Variable` provides variable-related functionality.
+// `Variable` provides variable-related functionality.
 // `Variable`s must be bound to an `Entity`.
 //
 // Each `Variable` may have `activate_callback` and `read_callback`.

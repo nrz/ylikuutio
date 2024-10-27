@@ -25,7 +25,7 @@
 
 namespace yli::ontology
 {
-    bool CartesianCoordinatesModule::operator==(const yli::ontology::CartesianCoordinatesModule& rhs) const noexcept
+    bool CartesianCoordinatesModule::operator==(const CartesianCoordinatesModule& rhs) const noexcept
     {
         return this->xyz == rhs.xyz;
     }

@@ -45,13 +45,13 @@ namespace yli::ontology
     class Entity;
 
     std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(
-            yli::ontology::Pipeline& pipeline,
-            yli::ontology::Ecosystem& new_parent)
+            Pipeline& pipeline,
+            Ecosystem& new_parent)
     {
         // Set pointer to `Pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -79,13 +79,13 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Pipeline::bind_to_new_scene_parent(
-            yli::ontology::Pipeline& pipeline,
-            yli::ontology::Scene& new_parent)
+            Pipeline& pipeline,
+            Scene& new_parent)
     {
         // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = pipeline.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -114,9 +114,9 @@ namespace yli::ontology
 
     Pipeline::Pipeline(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::PipelineStruct& pipeline_struct,
-            yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module)
+            Universe& universe,
+            const PipelineStruct& pipeline_struct,
+            GenericParentModule* const ecosystem_or_scene_parent_module)
         : Entity(application, universe, pipeline_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         parent_of_compute_tasks(
@@ -152,7 +152,7 @@ namespace yli::ontology
             glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, yli::opengl::UboBlockIndices::CAMERA);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Pipeline*";
         this->can_be_erased = true;
     }
@@ -165,14 +165,14 @@ namespace yli::ontology
         }
     }
 
-    void Pipeline::render(const yli::ontology::Scene* const target_scene)
+    void Pipeline::render(const Scene* const target_scene)
     {
         if (!this->should_render)
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -180,7 +180,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -197,12 +197,12 @@ namespace yli::ontology
         render_system->render_symbioses(this->master_of_symbioses, new_target_scene);
     }
 
-    yli::ontology::Scene* Pipeline::get_scene() const
+    Scene* Pipeline::get_scene() const
     {
         return this->child_of_ecosystem_or_scene.get_scene();
     }
 
-    yli::ontology::Entity* Pipeline::get_parent() const
+    Entity* Pipeline::get_parent() const
     {
         return this->child_of_ecosystem_or_scene.get_parent();
     }
@@ -228,7 +228,7 @@ namespace yli::ontology
         return this->program_id;
     }
 
-    yli::ontology::GenericParentModule* Pipeline::get_generic_parent_module(const int type)
+    GenericParentModule* Pipeline::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::COMPUTE_TASK)
         {

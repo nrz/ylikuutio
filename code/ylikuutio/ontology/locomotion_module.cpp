@@ -21,12 +21,12 @@ namespace yli::ontology
 {
     enum class LocomotionEnvironment;
 
-    LocomotionModule::LocomotionModule(yli::ontology::LocomotionEnvironment environment)
+    LocomotionModule::LocomotionModule(LocomotionEnvironment environment)
         : environment { environment }
     {
     };
 
-    yli::ontology::LocomotionEnvironment LocomotionModule::get_environment() const
+    LocomotionEnvironment LocomotionModule::get_environment() const
     {
         return this->environment;
     }

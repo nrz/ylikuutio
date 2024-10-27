@@ -53,8 +53,8 @@ namespace yli::ontology
     class Scene;
 
     std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(
-            yli::ontology::Console& console,
-            yli::ontology::Font2d& new_font_2d) noexcept
+            Console& console,
+            Font2d& new_font_2d) noexcept
     {
         // Set pointer to `console` to `nullptr`, set font according to the input,
         // and request a new apprenticeID from `new_font_2d`.
@@ -78,10 +78,10 @@ namespace yli::ontology
 
     Console::Console(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ConsoleStruct& console_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module,
-            yli::ontology::GenericMasterModule* const font_2d_master_module)
+            Universe& universe,
+            const ConsoleStruct& console_struct,
+            GenericParentModule* const universe_parent_module,
+            GenericMasterModule* const font_2d_master_module)
         : Entity(application, universe, console_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_lisp_functions(
@@ -94,7 +94,7 @@ namespace yli::ontology
         this->adjust_n_columns();
         this->adjust_n_rows();
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
         this->can_be_erased = true;
     }
@@ -127,7 +127,7 @@ namespace yli::ontology
         }
     }
 
-    void Console::set_input_mode(yli::ontology::InputMode* const input_mode)
+    void Console::set_input_mode(InputMode* const input_mode)
     {
         this->master_of_input_modes.set_current_input_mode(input_mode);
     }
@@ -233,7 +233,7 @@ namespace yli::ontology
         this->enter_console();
     }
 
-    void Console::render(const yli::ontology::Scene* const) const
+    void Console::render(const Scene* const) const
     {
         if (!this->in_console ||
                 !this->should_render ||
@@ -242,7 +242,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Font2d* const font_2d = static_cast<yli::ontology::Font2d*>(
+        Font2d* const font_2d = static_cast<Font2d*>(
                 this->apprentice_of_font_2d.get_master());
 
         if (font_2d == nullptr)
@@ -254,7 +254,7 @@ namespace yli::ontology
         const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         // Draw the console to screen using `font_2d::print_text_2d`.
-        yli::ontology::TextStruct text_struct;
+        TextStruct text_struct;
         text_struct.screen_width = this->universe.get_window_width();
         text_struct.screen_height = this->universe.get_window_height();
         text_struct.text_size = this->universe.get_text_size();
@@ -346,12 +346,12 @@ namespace yli::ontology
         font_2d->print_text_2d(text_struct);
     }
 
-    yli::ontology::Entity* Console::get_parent() const
+    Entity* Console::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
-    yli::ontology::Scene* Console::get_scene() const
+    Scene* Console::get_scene() const
     {
         // `Console` does not belong in any `Scene`.
         return nullptr;
@@ -523,7 +523,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::GenericParentModule* Console::get_generic_parent_module(const int type)
+    GenericParentModule* Console::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::LISP_FUNCTION)
         {
@@ -611,7 +611,7 @@ namespace yli::ontology
         }
     }
 
-    void Console::print_completions(const yli::ontology::Registry& registry, const std::string& input)
+    void Console::print_completions(const Registry& registry, const std::string& input)
     {
         if (registry.get_number_of_completions(input) > 1)
         {
@@ -643,7 +643,7 @@ namespace yli::ontology
         return this->prompt;
     }
 
-    yli::ontology::InputMode* Console::get_input_mode() const
+    InputMode* Console::get_input_mode() const
     {
         return this->master_of_input_modes.get_current_input_mode();
     }
@@ -796,7 +796,7 @@ namespace yli::ontology
     // Console command callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::clear(
-            yli::ontology::Console& console)
+            Console& console)
     {
         console.in_history = false;
         console.in_historical_input = false;
@@ -806,7 +806,7 @@ namespace yli::ontology
         console.console_history.clear();
         console.current_input.clear();
 
-        const uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
+        const uint32_t clear_console_magic_number = CallbackMagicNumber::CLEAR_CONSOLE;
         return yli::data::AnyValue(clear_console_magic_number);
     }
 

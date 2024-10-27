@@ -49,8 +49,8 @@ namespace yli::core
 namespace yli::ontology
 {
     std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(
-            yli::ontology::Movable& movable,
-            yli::ontology::Brain& new_brain) noexcept
+            Movable& movable,
+            Brain& new_brain) noexcept
     {
         // Set pointer to `movable` to `nullptr`, set brain according to the input,
         // and request a new apprenticeID from `new_brain`.
@@ -72,7 +72,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Movable::unbind_from_brain(yli::ontology::Movable& movable) noexcept
+    std::optional<yli::data::AnyValue> Movable::unbind_from_brain(Movable& movable) noexcept
     {
         movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(nullptr);
         return std::nullopt;
@@ -80,16 +80,16 @@ namespace yli::ontology
 
     Movable::Movable(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::MovableStruct& movable_struct,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            Universe& universe,
+            const MovableStruct& movable_struct,
+            GenericMasterModule* const brain_master_module)
         : Entity(application, universe, movable_struct),
         apprentice_of_brain(brain_master_module, this),
         rigid_body_module(
                 movable_struct.rigid_body_module_struct,
-                (std::holds_alternative<yli::ontology::Scene*>(movable_struct.scene) ? std::get<yli::ontology::Scene*>(movable_struct.scene) :
+                (std::holds_alternative<Scene*>(movable_struct.scene) ? std::get<Scene*>(movable_struct.scene) :
                  (std::holds_alternative<std::string>(movable_struct.scene) ?
-                  dynamic_cast<yli::ontology::Scene*>(universe.registry.get_entity(std::get<std::string>(movable_struct.scene))) :
+                  dynamic_cast<Scene*>(universe.registry.get_entity(std::get<std::string>(movable_struct.scene))) :
                   nullptr)),
                 this),
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },
@@ -115,7 +115,7 @@ namespace yli::ontology
 
         this->create_coordinate_and_angle_variables();
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Movable*";
         this->can_be_erased = true;
     }
@@ -182,43 +182,43 @@ namespace yli::ontology
 
     // Public callbacks (to be called from AI scripts written in YliLisp).
 
-    void Movable::set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z)
+    void Movable::set_dest(Movable* const movable, const float x, const float y, const float z)
     {
         // Set target towards which to move.
         movable->location.xyz = glm::vec3(x, y, z);
     }
 
-    float Movable::get_x(const yli::ontology::Movable* const movable)
+    float Movable::get_x(const Movable* const movable)
     {
         // Get x coordinate of `movable`.
         return movable->location.get_x();
     }
 
-    float Movable::get_y(const yli::ontology::Movable* const movable)
+    float Movable::get_y(const Movable* const movable)
     {
         // Get y coordinate of `movable`.
         return movable->location.get_y();
     }
 
-    float Movable::get_z(const yli::ontology::Movable* const movable)
+    float Movable::get_z(const Movable* const movable)
     {
         // Get z coordinate of `movable`.
         return movable->location.get_z();
     }
 
-    float Movable::get_dest_x(const yli::ontology::Movable* const movable)
+    float Movable::get_dest_x(const Movable* const movable)
     {
         // Get x destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.x;
     }
 
-    float Movable::get_dest_y(const yli::ontology::Movable* const movable)
+    float Movable::get_dest_y(const Movable* const movable)
     {
         // Get y destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.y;
     }
 
-    float Movable::get_dest_z(const yli::ontology::Movable* const movable)
+    float Movable::get_dest_z(const Movable* const movable)
     {
         // Get z destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.z;
@@ -232,74 +232,74 @@ namespace yli::ontology
         float& float_y = this->location.xyz.y;
         float& float_z = this->location.xyz.z;
 
-        yli::ontology::VariableStruct cartesian_coordinates_variable_struct(this->get_universe(), this);
+        VariableStruct cartesian_coordinates_variable_struct(this->get_universe(), this);
         cartesian_coordinates_variable_struct.local_name = "cartesian";
-        cartesian_coordinates_variable_struct.activate_callback = &yli::ontology::activate_cartesian_coordinates;
-        cartesian_coordinates_variable_struct.read_callback = &yli::ontology::read_cartesian_coordinates;
+        cartesian_coordinates_variable_struct.activate_callback = &activate_cartesian_coordinates;
+        cartesian_coordinates_variable_struct.read_callback = &read_cartesian_coordinates;
         cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(float_x, float_y, float_z)));
 
-        yli::ontology::VariableStruct x_variable_struct(this->get_universe(), this);
+        VariableStruct x_variable_struct(this->get_universe(), this);
         x_variable_struct.local_name = "x";
-        x_variable_struct.activate_callback = &yli::ontology::activate_x;
-        x_variable_struct.read_callback = &yli::ontology::read_x;
+        x_variable_struct.activate_callback = &activate_x;
+        x_variable_struct.read_callback = &read_x;
         x_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(x_variable_struct, yli::data::AnyValue(float_x));
 
-        yli::ontology::VariableStruct y_variable_struct(this->get_universe(), this);
+        VariableStruct y_variable_struct(this->get_universe(), this);
         y_variable_struct.local_name = "y";
-        y_variable_struct.activate_callback = &yli::ontology::activate_y;
-        y_variable_struct.read_callback = &yli::ontology::read_y;
+        y_variable_struct.activate_callback = &activate_y;
+        y_variable_struct.read_callback = &read_y;
         y_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(y_variable_struct, yli::data::AnyValue(float_y));
 
-        yli::ontology::VariableStruct z_variable_struct(this->get_universe(), this);
+        VariableStruct z_variable_struct(this->get_universe(), this);
         z_variable_struct.local_name = "z";
-        z_variable_struct.activate_callback = &yli::ontology::activate_z;
-        z_variable_struct.read_callback = &yli::ontology::read_z;
+        z_variable_struct.activate_callback = &activate_z;
+        z_variable_struct.read_callback = &read_z;
         z_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(z_variable_struct, yli::data::AnyValue(float_z));
 
-        yli::ontology::VariableStruct roll_variable_struct(this->get_universe(), this);
+        VariableStruct roll_variable_struct(this->get_universe(), this);
         roll_variable_struct.local_name = "roll";
-        roll_variable_struct.activate_callback = &yli::ontology::activate_roll;
-        roll_variable_struct.read_callback = &yli::ontology::read_roll;
+        roll_variable_struct.activate_callback = &activate_roll;
+        roll_variable_struct.read_callback = &read_roll;
         roll_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(roll_variable_struct, yli::data::AnyValue(this->orientation.roll));
 
-        yli::ontology::VariableStruct yaw_variable_struct(this->get_universe(), this);
+        VariableStruct yaw_variable_struct(this->get_universe(), this);
         yaw_variable_struct.local_name = "yaw";
-        yaw_variable_struct.activate_callback = &yli::ontology::activate_yaw;
-        yaw_variable_struct.read_callback = &yli::ontology::read_yaw;
+        yaw_variable_struct.activate_callback = &activate_yaw;
+        yaw_variable_struct.read_callback = &read_yaw;
         yaw_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(yaw_variable_struct, yli::data::AnyValue(this->orientation.yaw));
 
-        yli::ontology::VariableStruct pitch_variable_struct(this->get_universe(), this);
+        VariableStruct pitch_variable_struct(this->get_universe(), this);
         pitch_variable_struct.local_name = "pitch";
-        pitch_variable_struct.activate_callback = &yli::ontology::activate_pitch;
-        pitch_variable_struct.read_callback = &yli::ontology::read_pitch;
+        pitch_variable_struct.activate_callback = &activate_pitch;
+        pitch_variable_struct.read_callback = &read_pitch;
         pitch_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(pitch_variable_struct, yli::data::AnyValue(this->orientation.pitch));
 
         const float azimuth = 0.0f;
-        yli::ontology::VariableStruct azimuth_variable_struct(this->get_universe(), this);
+        VariableStruct azimuth_variable_struct(this->get_universe(), this);
         azimuth_variable_struct.local_name = "azimuth";
-        azimuth_variable_struct.activate_callback = &yli::ontology::activate_azimuth;
-        azimuth_variable_struct.read_callback = &yli::ontology::read_azimuth;
+        azimuth_variable_struct.activate_callback = &activate_azimuth;
+        azimuth_variable_struct.read_callback = &read_azimuth;
         azimuth_variable_struct.should_call_activate_callback_now = false;
         this->create_variable(azimuth_variable_struct, yli::data::AnyValue(azimuth));
 
         const float scale = this->scale;
-        yli::ontology::VariableStruct scale_variable_struct(this->get_universe(), this);
+        VariableStruct scale_variable_struct(this->get_universe(), this);
         scale_variable_struct.local_name = "scale";
-        scale_variable_struct.activate_callback = &yli::ontology::activate_scale;
+        scale_variable_struct.activate_callback = &activate_scale;
         scale_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(scale_variable_struct, yli::data::AnyValue(scale));
 
         const float speed = this->speed;
-        yli::ontology::VariableStruct speed_variable_struct(this->get_universe(), this);
+        VariableStruct speed_variable_struct(this->get_universe(), this);
         speed_variable_struct.local_name = "speed";
-        speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
+        speed_variable_struct.activate_callback = &Variable::activate_speed;
         speed_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(speed_variable_struct, yli::data::AnyValue(speed));
     }

@@ -30,11 +30,11 @@ namespace yli::ontology
 
     GenericCallbackEngine::GenericCallbackEngine(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::GenericCallbackEngineStruct& generic_callback_engine_struct)
+            Universe& universe,
+            const GenericCallbackEngineStruct& generic_callback_engine_struct)
         : Entity(application, universe, generic_callback_engine_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::GenericCallbackEngine*";
     }
 }

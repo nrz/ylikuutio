@@ -61,9 +61,9 @@ namespace yli::ontology
 
     Font2d::Font2d(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::FontStruct& font_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const FontStruct& font_struct,
+            GenericParentModule* const universe_parent_module)
         : Entity(application, universe, font_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_text_2ds(
@@ -120,7 +120,7 @@ namespace yli::ontology
             }
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Font2d*";
     }
 
@@ -140,12 +140,12 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* Font2d::get_parent() const
+    Entity* Font2d::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
-    yli::ontology::Scene* Font2d::get_scene() const
+    Scene* Font2d::get_scene() const
     {
         // `Font2d` does not belong in any `Scene`.
         return nullptr;
@@ -441,7 +441,7 @@ namespace yli::ontology
         }
     }
 
-    void Font2d::print_text_2d(const yli::ontology::TextStruct& text_struct) const
+    void Font2d::print_text_2d(const TextStruct& text_struct) const
     {
         if (!this->should_render)
         {
@@ -475,7 +475,7 @@ namespace yli::ontology
         this->print_text_2d(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
     }
 
-    yli::ontology::GenericParentModule* Font2d::get_generic_parent_module(const int type)
+    GenericParentModule* Font2d::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::TEXT_2D)
         {

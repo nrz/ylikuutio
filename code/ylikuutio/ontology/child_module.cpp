@@ -69,7 +69,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* ChildModule::get_parent() const noexcept
+    Entity* ChildModule::get_parent() const noexcept
     {
         if (this->parent_module == nullptr)
         {
@@ -79,7 +79,7 @@ namespace yli::ontology
         return this->parent_module->get_entity();
     }
 
-    yli::ontology::Entity* ChildModule::get_child() const noexcept
+    Entity* ChildModule::get_child() const noexcept
     {
         return &this->entity;
     }
@@ -90,7 +90,7 @@ namespace yli::ontology
         this->entity.set_childID(std::numeric_limits<std::size_t>::max());
     }
 
-    yli::ontology::Scene* ChildModule::get_scene() const noexcept
+    Scene* ChildModule::get_scene() const noexcept
     {
         if (this->parent_module != nullptr)
         {
@@ -116,7 +116,7 @@ namespace yli::ontology
     }
 
     void ChildModule::set_parent_module_and_bind_to_new_parent(
-            yli::ontology::GenericParentModule* const new_parent_module) noexcept
+            GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module == nullptr)
         {
@@ -128,7 +128,7 @@ namespace yli::ontology
     }
 
     void ChildModule::unbind_and_bind_to_new_parent(
-            yli::ontology::GenericParentModule* const new_parent_module) noexcept
+            GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module != this->parent_module)
         {

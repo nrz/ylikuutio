@@ -50,13 +50,13 @@ namespace yli::ontology
     // Action mode keypress callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::enter_console(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
+            Universe& universe,
+            CallbackEngine*,
+            CallbackObject*,
+            GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        yli::ontology::Console* const console = universe.get_active_console();
+        Console* const console = universe.get_active_console();
 
         if (console == nullptr)
         {
@@ -67,7 +67,7 @@ namespace yli::ontology
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
-            uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
+            uint32_t enter_console_magic_number = CallbackMagicNumber::ENTER_CONSOLE;
             return yli::data::AnyValue(enter_console_magic_number);
         }
 
@@ -78,10 +78,10 @@ namespace yli::ontology
     // Console mode keyrelease callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::release_left_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -91,10 +91,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -104,10 +104,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_left_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -117,10 +117,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -130,10 +130,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_left_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -143,10 +143,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::release_right_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -156,10 +156,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_move_to_previous_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -169,10 +169,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_move_to_next_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -182,10 +182,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_backspace(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -195,10 +195,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_tab(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -208,10 +208,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_enter_key(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -221,10 +221,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_ctrl_c(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -234,10 +234,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_ctrl_w(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -247,10 +247,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_page_up(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -260,10 +260,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_page_down(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -273,10 +273,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_home(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -286,10 +286,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enable_end(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -301,15 +301,15 @@ namespace yli::ontology
     // Console mode keypress callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::exit_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.exit_console())
         {
             // Signal to caller that we have exited the console.
-            uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
+            uint32_t exit_console_magic_number = CallbackMagicNumber::EXIT_CONSOLE;
             return yli::data::AnyValue(exit_console_magic_number);
         }
 
@@ -318,10 +318,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -331,10 +331,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -344,10 +344,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -357,10 +357,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -370,10 +370,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_left_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -383,10 +383,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::press_right_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console)
         {
@@ -396,10 +396,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::move_to_previous_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_move_to_previous_input)
         {
@@ -436,10 +436,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::move_to_next_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_move_to_next_input && !console.command_history.empty())
         {
@@ -471,10 +471,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::backspace(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console &&
                 console.can_backspace &&
@@ -488,12 +488,12 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::tab(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
-        yli::ontology::Universe& universe = console.get_universe();
+        Universe& universe = console.get_universe();
 
         if (console.in_console && console.can_tab)
         {
@@ -577,10 +577,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::enter_key(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (!console.in_console || !console.can_enter_key)
         {
@@ -644,10 +644,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::ctrl_c(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console &&
                 console.can_ctrl_c &&
@@ -665,10 +665,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::ctrl_w(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console &&
                 console.can_ctrl_w &&
@@ -710,10 +710,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::page_up(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_page_up)
         {
@@ -739,10 +739,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::page_down(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_page_down)
         {
@@ -762,10 +762,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::home(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_home)
         {
@@ -786,10 +786,10 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Console::end(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+            ConsoleCallbackEngine*,
+            ConsoleCallbackObject*,
+            GenericParentModule&,
+            Console& console)
     {
         if (console.in_console && console.can_end)
         {

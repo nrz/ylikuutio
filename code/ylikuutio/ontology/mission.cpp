@@ -33,25 +33,25 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    yli::ontology::Entity* Mission::get_parent() const
+    Entity* Mission::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
     Mission::Mission(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::MissionStruct& mission_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const MissionStruct& mission_struct,
+            GenericParentModule* const universe_parent_module)
         : Entity(application, universe, mission_struct),
         child_of_universe(universe_parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Mission*";
-        // TODO: add other `yli::ontology::Entity` member variables such as `can_be_erased` if needed!
+        // TODO: add other `Entity` member variables such as `can_be_erased` if needed!
     }
 
-    yli::ontology::Scene* Mission::get_scene() const
+    Scene* Mission::get_scene() const
     {
         // `Mission` is not specific to any `Scene`.
         return nullptr;

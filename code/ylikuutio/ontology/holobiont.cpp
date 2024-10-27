@@ -52,11 +52,11 @@ namespace yli::ontology
 
     Holobiont::Holobiont(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::HolobiontStruct& holobiont_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module,
-            yli::ontology::GenericMasterModule* const symbiosis_master_module,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            Universe& universe,
+            const HolobiontStruct& holobiont_struct,
+            GenericParentModule* const scene_parent_module,
+            GenericMasterModule* const symbiosis_master_module,
+            GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
@@ -74,24 +74,24 @@ namespace yli::ontology
             Holobiont::create_bionts(*this, holobiont_struct.should_render_bionts_vector);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Holobiont*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Holobiont::get_parent() const
+    Entity* Holobiont::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
 
-    void Holobiont::render(const yli::ontology::Scene* const target_scene)
+    void Holobiont::render(const Scene* const target_scene)
     {
         if (!this->should_render)
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -110,20 +110,20 @@ namespace yli::ontology
         render_system->render_bionts(this->parent_of_bionts);
     }
 
-    void Holobiont::create_bionts(yli::ontology::Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector)
+    void Holobiont::create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector)
     {
         // requirements:
         // `scene` must not be `nullptr`.
         // `this->symbiosis_parent` must not be `nullptr`.
 
-        yli::ontology::Scene* const scene = holobiont.get_scene();
+        Scene* const scene = holobiont.get_scene();
 
         if (scene == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `scene` is `nullptr`!");
         }
 
-        const yli::ontology::Symbiosis* const symbiosis = holobiont.get_symbiosis();
+        const Symbiosis* const symbiosis = holobiont.get_symbiosis();
 
         if (symbiosis == nullptr) [[unlikely]]
         {
@@ -148,14 +148,14 @@ namespace yli::ontology
                 continue;
             }
 
-            yli::ontology::SymbiontSpecies* const symbiont_species = symbiosis->get_symbiont_species(biontID);
+            SymbiontSpecies* const symbiont_species = symbiosis->get_symbiont_species(biontID);
 
             if (symbiont_species == nullptr)
             {
                 continue;
             }
 
-            yli::ontology::BiontStruct biont_struct;
+            BiontStruct biont_struct;
             biont_struct.biontID                = biontID;
             biont_struct.scene                  = scene;
             biont_struct.parent                 = &holobiont;
@@ -168,7 +168,7 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            yli::ontology::GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
+            GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
             entity_factory.create_biont(biont_struct);
         }
     }
@@ -178,9 +178,9 @@ namespace yli::ontology
         this->location.set_x(x);
         this->model_matrix[3][0] = x;
 
-        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            Biont* const biont = static_cast<Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -195,9 +195,9 @@ namespace yli::ontology
         this->location.set_y(y);
         this->model_matrix[3][1] = y;
 
-        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            Biont* const biont = static_cast<Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -212,9 +212,9 @@ namespace yli::ontology
         this->location.set_z(z);
         this->model_matrix[3][2] = z;
 
-        for (yli::ontology::Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
+        for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            yli::ontology::Biont* const biont = static_cast<yli::ontology::Biont*>(biont_entity);
+            Biont* const biont = static_cast<Biont*>(biont_entity);
 
             if (biont != nullptr)
             {
@@ -224,7 +224,7 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::GenericParentModule* Holobiont::get_generic_parent_module(const int type)
+    GenericParentModule* Holobiont::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::BIONT)
         {
@@ -234,14 +234,14 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Scene* Holobiont::get_scene() const
+    Scene* Holobiont::get_scene() const
     {
         return this->child_of_scene.get_scene();
     }
 
-    yli::ontology::Symbiosis* Holobiont::get_symbiosis() const
+    Symbiosis* Holobiont::get_symbiosis() const
     {
-        return static_cast<yli::ontology::Symbiosis*>(this->apprentice_of_symbiosis.get_master());
+        return static_cast<Symbiosis*>(this->apprentice_of_symbiosis.get_master());
     }
 
     std::size_t Holobiont::get_number_of_children() const
@@ -257,19 +257,19 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
-            yli::ontology::Scene& parent,
-            yli::ontology::Symbiosis& symbiosis,
+            Scene& parent,
+            Symbiosis& symbiosis,
             const std::string& holobiont_name,
             const std::string& x,
             const std::string& y,
             const std::string& z)
     {
-        return yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", "0.0");
+        return Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", "0.0");
     }
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-            yli::ontology::Scene& parent,
-            yli::ontology::Symbiosis& symbiosis,
+            Scene& parent,
+            Symbiosis& symbiosis,
             const std::string& holobiont_name,
             const std::string& x,
             const std::string& y,
@@ -277,12 +277,12 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", yaw, pitch);
+        return Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", yaw, pitch);
     }
 
     std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
-            yli::ontology::Scene& parent,
-            yli::ontology::Symbiosis& symbiosis,
+            Scene& parent,
+            Symbiosis& symbiosis,
             const std::string& holobiont_name,
             const std::string& x,
             const std::string& y,
@@ -291,7 +291,7 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        const yli::ontology::GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
         yli::data::AnyValue x_any_value("float", x);
         yli::data::AnyValue y_any_value("float", y);
@@ -343,9 +343,9 @@ namespace yli::ontology
         const float float_yaw = std::get<float>(yaw_any_value.data);
         const float float_pitch = std::get<float>(pitch_any_value.data);
 
-        yli::ontology::HolobiontStruct holobiont_struct(parent, symbiosis);
-        holobiont_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(float_x, float_y, float_z);
-        holobiont_struct.orientation = yli::ontology::OrientationModule(float_roll, float_yaw, float_pitch);
+        HolobiontStruct holobiont_struct(parent, symbiosis);
+        holobiont_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
+        holobiont_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
         entity_factory.create_holobiont(holobiont_struct);
         return std::nullopt;

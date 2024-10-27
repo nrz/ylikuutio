@@ -39,9 +39,9 @@ namespace yli::ontology
 
     ConsoleCallbackObject::ConsoleCallbackObject(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ConsoleCallbackObjectStruct& console_callback_object_struct,
-            yli::ontology::GenericParentModule* const console_callback_engine_parent_module)
+            Universe& universe,
+            const ConsoleCallbackObjectStruct& console_callback_object_struct,
+            GenericParentModule* const console_callback_engine_parent_module)
         : Entity(application, universe, console_callback_object_struct),
         child_of_console_callback_engine(console_callback_engine_parent_module, *this),
         parent_of_console_callback_parameters(
@@ -51,16 +51,16 @@ namespace yli::ontology
         console_callback { console_callback_object_struct.console_callback },
         console_pointer { console_callback_object_struct.console_pointer }
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackObject*";
     }
 
-    yli::ontology::Entity* ConsoleCallbackObject::get_parent() const
+    Entity* ConsoleCallbackObject::get_parent() const
     {
         return this->child_of_console_callback_engine.get_parent();
     }
 
-    yli::ontology::Scene* ConsoleCallbackObject::get_scene() const
+    Scene* ConsoleCallbackObject::get_scene() const
     {
         // `ConsoleCallbackObject` does not belong in any `Scene`.
         return nullptr;
@@ -82,7 +82,7 @@ namespace yli::ontology
         {
             return yli::data::AnyValue(
                     this->console_callback(
-                        static_cast<yli::ontology::ConsoleCallbackEngine*>(this->get_parent()),
+                        static_cast<ConsoleCallbackEngine*>(this->get_parent()),
                         this,
                         this->parent_of_console_callback_parameters,
                         *this->console_pointer));
@@ -91,7 +91,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    yli::ontology::GenericParentModule* ConsoleCallbackObject::get_generic_parent_module(const int type)
+    GenericParentModule* ConsoleCallbackObject::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER)
         {

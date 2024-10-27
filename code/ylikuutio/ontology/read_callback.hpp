@@ -27,7 +27,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    typedef std::optional<yli::data::AnyValue> (*ReadCallback) (yli::ontology::Entity& entity);
+    typedef std::optional<yli::data::AnyValue> (*ReadCallback) (Entity& entity);
 }
 
 #endif

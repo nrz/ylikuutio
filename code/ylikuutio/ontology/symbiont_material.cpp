@@ -42,9 +42,9 @@ namespace yli::ontology
 
     SymbiontMaterial::SymbiontMaterial(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::SymbiontMaterialStruct& symbiont_material_struct,
-            yli::ontology::GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
+            Universe& universe,
+            const SymbiontMaterialStruct& symbiont_material_struct,
+            GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
         : Entity(application, universe, symbiont_material_struct),
         child_of_symbiosis(symbiosis_parent_module, *this),
         parent_of_symbiont_species(
@@ -60,7 +60,7 @@ namespace yli::ontology
     {
         if (this->texture.get_is_texture_loaded())
         {
-            yli::ontology::Pipeline* const pipeline = this->get_pipeline();
+            Pipeline* const pipeline = this->get_pipeline();
 
             if (pipeline != nullptr)
             {
@@ -68,13 +68,13 @@ namespace yli::ontology
             }
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontMaterial*";
     }
 
-    yli::ontology::Scene* SymbiontMaterial::get_scene() const
+    Scene* SymbiontMaterial::get_scene() const
     {
-        const yli::ontology::Entity* const symbiosis_parent = this->get_parent();
+        const Entity* const symbiosis_parent = this->get_parent();
 
         if (symbiosis_parent == nullptr) [[unlikely]]
         {
@@ -84,21 +84,21 @@ namespace yli::ontology
         return symbiosis_parent->get_scene();
     }
 
-    yli::ontology::Entity* SymbiontMaterial::get_parent() const
+    Entity* SymbiontMaterial::get_parent() const
     {
         return this->child_of_symbiosis.get_parent();
     }
 
-    yli::ontology::Pipeline* SymbiontMaterial::get_pipeline() const
+    Pipeline* SymbiontMaterial::get_pipeline() const
     {
-        const yli::ontology::Symbiosis* const symbiosis_parent = static_cast<yli::ontology::Symbiosis*>(this->get_parent());
+        const Symbiosis* const symbiosis_parent = static_cast<Symbiosis*>(this->get_parent());
 
         if (symbiosis_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `SymbiontMaterial::get_pipeline`: `symbiosis_parent` is `nullptr`!");
         }
 
-        return static_cast<yli::ontology::Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
+        return static_cast<Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const

@@ -34,23 +34,23 @@ namespace yli::ontology
 
     GenericLispFunctionOverload::GenericLispFunctionOverload(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            yli::ontology::GenericParentModule* const lisp_function_parent_module)
-        : Entity(application, universe, yli::ontology::EntityStruct()),
+            Universe& universe,
+            GenericParentModule* const lisp_function_parent_module)
+        : Entity(application, universe, EntityStruct()),
         child_of_lisp_function(lisp_function_parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::GenericLispFunctionOverload*";
     }
 
-    yli::ontology::Entity* GenericLispFunctionOverload::get_parent() const
+    Entity* GenericLispFunctionOverload::get_parent() const
     {
         return this->child_of_lisp_function.get_parent();
     }
 
-    yli::ontology::Scene* GenericLispFunctionOverload::get_scene() const
+    Scene* GenericLispFunctionOverload::get_scene() const
     {
-        const yli::ontology::Entity* const lisp_function_parent = this->get_parent();
+        const Entity* const lisp_function_parent = this->get_parent();
 
         if (lisp_function_parent == nullptr) [[unlikely]]
         {

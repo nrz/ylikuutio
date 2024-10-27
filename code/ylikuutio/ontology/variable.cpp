@@ -42,9 +42,9 @@ namespace yli::ontology
 
     Variable::Variable(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::VariableStruct& variable_struct,
-            yli::ontology::GenericParentModule* const entity_parent_module,
+            Universe& universe,
+            const VariableStruct& variable_struct,
+            GenericParentModule* const entity_parent_module,
             yli::data::AnyValue&& any_value)
         : Entity(application, universe, variable_struct),
         child_of_entity(entity_parent_module, *this),
@@ -52,19 +52,19 @@ namespace yli::ontology
         activate_callback { variable_struct.activate_callback },
         read_callback     { variable_struct.read_callback }
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Variable*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Variable::get_parent() const
+    Entity* Variable::get_parent() const
     {
         return this->child_of_entity.get_parent();
     }
 
-    yli::ontology::Scene* Variable::get_scene() const
+    Scene* Variable::get_scene() const
     {
-        const yli::ontology::Entity* const entity_parent = this->get_parent();
+        const Entity* const entity_parent = this->get_parent();
 
         if (entity_parent == nullptr) [[unlikely]]
         {
@@ -93,7 +93,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> Variable::get() const
     {
-        yli::ontology::Entity* const entity_parent = this->get_parent();
+        Entity* const entity_parent = this->get_parent();
 
         if (this->read_callback == nullptr)
         {
@@ -110,7 +110,7 @@ namespace yli::ontology
 
     void Variable::set(const yli::data::AnyValue& new_value)
     {
-        yli::ontology::Entity* const entity_parent = this->get_parent();
+        Entity* const entity_parent = this->get_parent();
 
         if (entity_parent == nullptr) [[unlikely]]
         {
@@ -127,7 +127,7 @@ namespace yli::ontology
 
     void Variable::set(const std::string& new_value)
     {
-        yli::ontology::Entity* const entity_parent = this->get_parent();
+        Entity* const entity_parent = this->get_parent();
 
         if (entity_parent == nullptr) [[unlikely]]
         {
@@ -145,7 +145,7 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<yli::data::AnyValue> Variable::set_variable_const_std_string(
-            yli::ontology::Variable& variable,
+            Variable& variable,
             const std::string& new_value)
     {
         // Usage:
@@ -157,9 +157,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Variable::set_variable_variable(
-            yli::ontology::Variable& dest_variable,
-            const yli::ontology::Universe&,              // A context is needed so that correct `Variable` is bound to the function call.
-            const yli::ontology::Variable& src_variable)
+            Variable& dest_variable,
+            const Universe&,              // A context is needed so that correct `Variable` is bound to the function call.
+            const Variable& src_variable)
     {
         // Usage:
         // to set variable: set <dest-variable-name> <src-variable-name>
@@ -177,9 +177,9 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Variable::print_value1(
-            yli::ontology::Console& console,
-            const yli::ontology::Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
-            const yli::ontology::Variable& variable)
+            Console& console,
+            const Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
+            const Variable& variable)
     {
         // Usage:
         // to get variable value: get1 <variable-name>

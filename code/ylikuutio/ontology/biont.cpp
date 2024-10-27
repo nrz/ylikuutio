@@ -67,10 +67,10 @@ namespace yli::ontology
 
     Biont::Biont(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::BiontStruct& biont_struct,
-            yli::ontology::GenericParentModule* const holobiont_parent_module,
-            yli::ontology::GenericMasterModule* const symbiont_species_master_module)
+            Universe& universe,
+            const BiontStruct& biont_struct,
+            GenericParentModule* const holobiont_parent_module,
+            GenericMasterModule* const symbiont_species_master_module)
         : Movable(
                 application,
                 universe,
@@ -82,11 +82,11 @@ namespace yli::ontology
         this->biontID       = biont_struct.biontID;
         this->should_render = biont_struct.should_render;
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Biont*";
     }
 
-    yli::ontology::Entity* Biont::get_parent() const
+    Entity* Biont::get_parent() const
     {
         return this->child_of_holobiont.get_parent();
     }
@@ -104,14 +104,14 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
+        const Holobiont* const holobiont_parent = static_cast<Holobiont*>(this->get_parent());
 
         if (holobiont_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!");
         }
 
-        const yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
+        const Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
         if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
@@ -132,21 +132,21 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!");
         }
 
-        const yli::ontology::Holobiont* const holobiont_parent = static_cast<yli::ontology::Holobiont*>(this->get_parent());
+        const Holobiont* const holobiont_parent = static_cast<Holobiont*>(this->get_parent());
 
         if (holobiont_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `holobiont_parent` is `nullptr`!");
         }
 
-        yli::ontology::Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
+        Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
 
         if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
-        const yli::ontology::SymbiontSpecies* const symbiont_species_master = static_cast<yli::ontology::SymbiontSpecies*>(
+        const SymbiontSpecies* const symbiont_species_master = static_cast<SymbiontSpecies*>(
                 this->apprentice_of_symbiont_species.get_master());
 
         if (symbiont_species_master == nullptr) [[unlikely]]
@@ -191,7 +191,7 @@ namespace yli::ontology
 
             // '`Species`' part begins here.
 
-            const yli::ontology::MeshModule& mesh = symbiont_species_master->mesh;
+            const MeshModule& mesh = symbiont_species_master->mesh;
 
             // 1st attribute buffer : vertices.
             yli::opengl::enable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
@@ -286,9 +286,9 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Scene* Biont::get_scene() const
+    Scene* Biont::get_scene() const
     {
-        const yli::ontology::Entity* const holobiont_parent = this->get_parent();
+        const Entity* const holobiont_parent = this->get_parent();
 
         if (holobiont_parent == nullptr) [[unlikely]]
         {

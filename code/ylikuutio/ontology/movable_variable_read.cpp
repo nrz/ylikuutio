@@ -34,16 +34,16 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> read_cartesian_coordinates(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_cartesian_coordinates(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->location.xyz);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -53,16 +53,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_x(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_x(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->location.get_x());
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -72,16 +72,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_y(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_y(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->location.get_y());
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -91,16 +91,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_z(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_z(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->location.get_z());
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -110,16 +110,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_up(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_up(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->up);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -129,16 +129,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_right(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_right(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->right);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -148,16 +148,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_roll(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_roll(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->orientation.roll);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -167,16 +167,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_yaw(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_yaw(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->orientation.yaw);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -186,16 +186,16 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_pitch(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_pitch(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             return yli::data::AnyValue(movable->orientation.pitch);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
@@ -205,9 +205,9 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_azimuth(yli::ontology::Entity& entity)
+    std::optional<yli::data::AnyValue> read_azimuth(Entity& entity)
     {
-        yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(&entity);
+        Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
@@ -215,7 +215,7 @@ namespace yli::ontology
             return yli::data::AnyValue(azimuth);
         }
 
-        yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(&entity);
+        Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {

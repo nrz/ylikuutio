@@ -45,13 +45,13 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
-            yli::ontology::ShapeshifterTransformation& shapeshifter_transformation,
-            yli::ontology::Material& new_parent)
+            ShapeshifterTransformation& shapeshifter_transformation,
+            Material& new_parent)
     {
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const material_parent = shapeshifter_transformation.get_parent();
+        const Entity* const material_parent = shapeshifter_transformation.get_parent();
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -72,9 +72,9 @@ namespace yli::ontology
 
     ShapeshifterTransformation::ShapeshifterTransformation(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
-            yli::ontology::GenericParentModule* const material_parent_module)
+            Universe& universe,
+            const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
+            GenericParentModule* const material_parent_module)
         : Entity(application, universe, shapeshifter_transformation_struct),
         child_of_material(material_parent_module, *this),
         parent_of_shapeshifter_forms(
@@ -86,19 +86,19 @@ namespace yli::ontology
                 this->registry,
                 "shapeshifter_sequences")
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterTransformation*";
         this->can_be_erased = true;
     }
 
-    void ShapeshifterTransformation::render(const yli::ontology::Scene* const target_scene)
+    void ShapeshifterTransformation::render(const Scene* const target_scene)
     {
         if (!this->should_render)
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -106,7 +106,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -118,14 +118,14 @@ namespace yli::ontology
         render_system->render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences, new_target_scene);
     }
 
-    yli::ontology::Entity* ShapeshifterTransformation::get_parent() const
+    Entity* ShapeshifterTransformation::get_parent() const
     {
         return this->child_of_material.get_parent();
     }
 
-    yli::ontology::Scene* ShapeshifterTransformation::get_scene() const
+    Scene* ShapeshifterTransformation::get_scene() const
     {
-        yli::ontology::Entity* material_parent = this->get_parent();
+        Entity* material_parent = this->get_parent();
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -135,9 +135,9 @@ namespace yli::ontology
         return material_parent->get_scene();
     }
 
-    yli::ontology::Pipeline* ShapeshifterTransformation::get_pipeline() const
+    Pipeline* ShapeshifterTransformation::get_pipeline() const
     {
-        const yli::ontology::Material* const material_parent = static_cast<yli::ontology::Material*>(this->get_parent());
+        const Material* const material_parent = static_cast<Material*>(this->get_parent());
 
         if (material_parent == nullptr) [[unlikely]]
         {
@@ -147,7 +147,7 @@ namespace yli::ontology
         return material_parent->get_pipeline();
     }
 
-    yli::ontology::GenericParentModule* ShapeshifterTransformation::get_generic_parent_module(const int type)
+    GenericParentModule* ShapeshifterTransformation::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::SHAPESHIFTER_FORM)
         {

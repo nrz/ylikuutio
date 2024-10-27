@@ -28,14 +28,14 @@ namespace yli::ontology
     class Registry;
 
     ParentOfInputModesModule::ParentOfInputModesModule(
-            yli::ontology::Universe& universe,
-            yli::ontology::Registry& registry,
+            Universe& universe,
+            Registry& registry,
             const std::string& name) noexcept
         : GenericParentModule(universe, registry, name)
     {
     }
 
-    void ParentOfInputModesModule::set_active_input_mode(yli::ontology::InputMode* const input_mode)
+    void ParentOfInputModesModule::set_active_input_mode(InputMode* const input_mode)
     {
         if (this->active_input_mode != nullptr)
         {
@@ -45,7 +45,7 @@ namespace yli::ontology
         this->active_input_mode = input_mode;
     }
 
-    yli::ontology::InputMode* ParentOfInputModesModule::get_active_input_mode() const
+    InputMode* ParentOfInputModesModule::get_active_input_mode() const
     {
         return this->active_input_mode;
     }

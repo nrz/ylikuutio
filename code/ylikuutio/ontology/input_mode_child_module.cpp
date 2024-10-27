@@ -21,8 +21,8 @@
 namespace yli::ontology
 {
     InputModeChildModule::InputModeChildModule(
-            yli::ontology::ParentOfInputModesModule* const parent_module,
-            yli::ontology::Entity& entity) noexcept
+            ParentOfInputModesModule* const parent_module,
+            Entity& entity) noexcept
         : ChildModule(parent_module, entity)
     {
     }

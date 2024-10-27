@@ -29,8 +29,8 @@ namespace yli::ontology
     class Entity;
 
     MasterOfInputModesModule::MasterOfInputModesModule(
-            yli::ontology::Entity* const generic_master,
-            yli::ontology::Registry* const registry,
+            Entity* const generic_master,
+            Registry* const registry,
             const std::string& name) noexcept
         : GenericMasterModule(generic_master, registry, name)
     {
@@ -41,12 +41,12 @@ namespace yli::ontology
         return this->current_input_mode != nullptr;
     }
 
-    void MasterOfInputModesModule::set_current_input_mode(yli::ontology::InputMode* const input_mode)
+    void MasterOfInputModesModule::set_current_input_mode(InputMode* const input_mode)
     {
         this->current_input_mode = input_mode;
     }
 
-    yli::ontology::InputMode* MasterOfInputModesModule::get_current_input_mode() const
+    InputMode* MasterOfInputModesModule::get_current_input_mode() const
     {
         return this->current_input_mode;
     }

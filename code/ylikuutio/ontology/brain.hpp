@@ -26,7 +26,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-// `yli::ontology::Brain` is a general purpose AI and controller class for `Movable`s.
+// `Brain` is a general purpose AI and controller class for `Movable`s.
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
 // The actions the defined in the callback, referenced using `this->callback_engine`.
 // There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.

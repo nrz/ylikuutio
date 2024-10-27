@@ -41,9 +41,9 @@ namespace yli::ontology
 
     LispFunction::LispFunction(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::LispFunctionStruct& lisp_function_struct,
-            yli::ontology::GenericParentModule* const console_parent_module)
+            Universe& universe,
+            const LispFunctionStruct& lisp_function_struct,
+            GenericParentModule* const console_parent_module)
         : Entity(application, universe, lisp_function_struct),
         child_of_console(console_parent_module, *this),
         parent_of_generic_lisp_function_overloads(
@@ -51,16 +51,16 @@ namespace yli::ontology
                 this->registry,
                 "generic_lisp_function_overloads")
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::LispFunction*";
     }
 
-    yli::ontology::Entity* LispFunction::get_parent() const
+    Entity* LispFunction::get_parent() const
     {
         return this->child_of_console.get_parent();
     }
 
-    yli::ontology::Scene* LispFunction::get_scene() const
+    Scene* LispFunction::get_scene() const
     {
         // `LispFunction` does not belong in any `Scene`.
         return nullptr;
@@ -96,12 +96,12 @@ namespace yli::ontology
         // If there are no `GenericLispFunctionOverload`s,
         // then `std::nullopt` is returned as well.
 
-        for (std::vector<yli::ontology::Entity*>::const_iterator it = this->parent_of_generic_lisp_function_overloads.child_pointer_vector.begin();
+        for (std::vector<Entity*>::const_iterator it = this->parent_of_generic_lisp_function_overloads.child_pointer_vector.begin();
                 it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
                 ++it)
         {
             std::optional<yli::data::AnyValue> result =
-                static_cast<yli::ontology::GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
+                static_cast<GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
 
             if (result)
             {

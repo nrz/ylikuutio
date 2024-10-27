@@ -34,17 +34,17 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    yli::ontology::Entity* Waypoint::get_parent() const
+    Entity* Waypoint::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
 
     Waypoint::Waypoint(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::WaypointStruct& waypoint_struct,
-            yli::ontology::GenericParentModule* const parent_module,
-            yli::ontology::GenericMasterModule* const brain_master_module)
+            Universe& universe,
+            const WaypointStruct& waypoint_struct,
+            GenericParentModule* const parent_module,
+            GenericMasterModule* const brain_master_module)
         : Movable(
                 application,
                 universe,
@@ -52,7 +52,7 @@ namespace yli::ontology
                 brain_master_module),
         child_of_scene(parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Waypoint*";
         this->can_be_erased = true;
     }
@@ -67,8 +67,8 @@ namespace yli::ontology
         return 0; // `Waypoint` has no children.
     }
 
-    yli::ontology::Scene* Waypoint::get_scene() const
+    Scene* Waypoint::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->get_parent());
+        return static_cast<Scene*>(this->get_parent());
     }
 }

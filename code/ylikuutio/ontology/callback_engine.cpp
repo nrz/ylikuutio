@@ -37,9 +37,9 @@ namespace yli::ontology
 
     CallbackEngine::CallbackEngine(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::CallbackEngineStruct&,
-            yli::ontology::GenericParentModule* const entity_parent_module)
+            Universe& universe,
+            const CallbackEngineStruct&,
+            GenericParentModule* const entity_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
         child_of_entity(entity_parent_module, *this),
         parent_of_callback_objects(
@@ -47,24 +47,24 @@ namespace yli::ontology
                 this->registry,
                 "callback_objects")
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";
     }
 
-    yli::ontology::CallbackObject* CallbackEngine::create_callback_object()
+    CallbackObject* CallbackEngine::create_callback_object()
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        yli::ontology::CallbackObjectStruct callback_object_struct(this);
+        CallbackObjectStruct callback_object_struct(this);
         return entity_factory.create_callback_object(callback_object_struct);
     }
 
-    yli::ontology::CallbackObject* CallbackEngine::create_callback_object(
+    CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        yli::ontology::CallbackObjectStruct callback_object_struct(this);
+        CallbackObjectStruct callback_object_struct(this);
         auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;
@@ -78,7 +78,7 @@ namespace yli::ontology
         // execute all callbacks.
         for (std::size_t child_i = 0; child_i < this->parent_of_callback_objects.child_pointer_vector.size(); child_i++)
         {
-            yli::ontology::CallbackObject* callback_object_pointer = static_cast<yli::ontology::CallbackObject*>(
+            CallbackObject* callback_object_pointer = static_cast<CallbackObject*>(
                     this->parent_of_callback_objects.child_pointer_vector.at(child_i));
 
             if (callback_object_pointer != nullptr)
@@ -134,7 +134,7 @@ namespace yli::ontology
         return this->return_values.back();
     }
 
-    yli::ontology::GenericParentModule* CallbackEngine::get_generic_parent_module(const int type)
+    GenericParentModule* CallbackEngine::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::CALLBACK_OBJECT)
         {
@@ -144,12 +144,12 @@ namespace yli::ontology
         return nullptr;
     }
 
-    yli::ontology::Entity* CallbackEngine::get_parent() const
+    Entity* CallbackEngine::get_parent() const
     {
         return this->child_of_entity.get_parent();
     }
 
-    yli::ontology::Scene* CallbackEngine::get_scene() const
+    Scene* CallbackEngine::get_scene() const
     {
         return this->child_of_entity.get_scene();
     }

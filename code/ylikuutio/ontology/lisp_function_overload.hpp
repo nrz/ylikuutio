@@ -37,7 +37,7 @@
 // This is a bit complicated, as the callback may receive different kinds of arguments.
 //
 // If any lookup or conversion fails, the callback will not be called.
-// If `dynamic_cast` from `yli::ontology::Entity*` into its subtype results in `nullptr`, the callback will not be called.
+// If `dynamic_cast` from `Entity*` into its subtype results in `nullptr`, the callback will not be called.
 // If there is not enough parameters for all conversions, the callback will not be called.
 // If not all parameters are consumed, the callback will not be called.
 //

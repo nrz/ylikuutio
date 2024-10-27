@@ -48,13 +48,13 @@ namespace yli::ontology
     class Entity;
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
-            yli::ontology::Material& material,
-            yli::ontology::Ecosystem& new_parent)
+            Material& material,
+            Ecosystem& new_parent)
     {
         // Set pointer to `Material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = material.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = material.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -82,13 +82,13 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(
-            yli::ontology::Material& material,
-            yli::ontology::Scene& new_parent)
+            Material& material,
+            Scene& new_parent)
     {
         // Set pointer to `material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const yli::ontology::Entity* const old_ecosystem_or_scene_parent = material.get_parent();
+        const Entity* const old_ecosystem_or_scene_parent = material.get_parent();
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
@@ -116,8 +116,8 @@ namespace yli::ontology
     }
 
     std::optional<yli::data::AnyValue> Material::bind_to_new_pipeline(
-            yli::ontology::Material& material,
-            yli::ontology::Pipeline& new_pipeline) noexcept
+            Material& material,
+            Pipeline& new_pipeline) noexcept
     {
         // Set pointer to `material` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_parent`.
@@ -140,10 +140,10 @@ namespace yli::ontology
 
     Material::Material(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::MaterialStruct& material_struct,
-            yli::ontology::GenericParentModule* const ecosystem_or_scene_parent_module,
-            yli::ontology::MasterModule<yli::ontology::Pipeline*>* pipeline_master_module)
+            Universe& universe,
+            const MaterialStruct& material_struct,
+            GenericParentModule* const ecosystem_or_scene_parent_module,
+            MasterModule<Pipeline*>* pipeline_master_module)
         : Entity(application, universe, material_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         parent_of_shapeshifter_transformations(
@@ -154,7 +154,7 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "vector_fonts"),
-        apprentice_of_pipeline(static_cast<yli::ontology::GenericMasterModule*>(pipeline_master_module), this),
+        apprentice_of_pipeline(static_cast<GenericMasterModule*>(pipeline_master_module), this),
         master_of_species(this, &this->registry, "species"),
         texture(
                 universe,
@@ -167,23 +167,23 @@ namespace yli::ontology
         if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
         {
             // Get a handle for our "texture_sampler" uniform.
-            yli::ontology::Pipeline* const pipeline = this->get_pipeline();
+            Pipeline* const pipeline = this->get_pipeline();
             this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Material*";
         this->can_be_erased = true;
     }
 
-    void Material::render(const yli::ontology::Scene* const target_scene)
+    void Material::render(const Scene* const target_scene)
     {
         if (!this->texture.get_is_texture_loaded() || !this->should_render)
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -191,7 +191,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -211,17 +211,17 @@ namespace yli::ontology
         render_system->render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
     }
 
-    yli::ontology::Entity* Material::get_parent() const
+    Entity* Material::get_parent() const
     {
         return this->child_of_ecosystem_or_scene.get_parent();
     }
 
-    yli::ontology::Pipeline* Material::get_pipeline() const
+    Pipeline* Material::get_pipeline() const
     {
-        return static_cast<yli::ontology::Pipeline*>(this->apprentice_of_pipeline.get_master());
+        return static_cast<Pipeline*>(this->apprentice_of_pipeline.get_master());
     }
 
-    yli::ontology::Scene* Material::get_scene() const
+    Scene* Material::get_scene() const
     {
         return this->child_of_ecosystem_or_scene.get_scene();
     }
@@ -268,7 +268,7 @@ namespace yli::ontology
         return this->texture.get_image_size();
     }
 
-    yli::ontology::GenericParentModule* Material::get_generic_parent_module(const int type)
+    GenericParentModule* Material::get_generic_parent_module(const int type)
     {
         if (type == yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION)
         {

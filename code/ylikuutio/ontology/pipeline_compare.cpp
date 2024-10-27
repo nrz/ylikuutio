@@ -20,7 +20,7 @@
 
 namespace yli::ontology
 {
-    bool PipelineCompare::operator() (yli::ontology::Pipeline* first, yli::ontology::Pipeline* second)
+    bool PipelineCompare::operator() (Pipeline* first, Pipeline* second)
     {
         if (first->is_gpgpu_pipeline)
         {

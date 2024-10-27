@@ -39,21 +39,21 @@ namespace yli::ontology
 
     Brain::Brain(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::BrainStruct& brain_struct,
-            yli::ontology::GenericParentModule* const scene_parent_module)
+            Universe& universe,
+            const BrainStruct& brain_struct,
+            GenericParentModule* const scene_parent_module)
         : Entity(application, universe, brain_struct),
         child_of_scene(scene_parent_module, *this),
         master_of_movables(this, &this->registry, "movables")
     {
         this->callback_engine = brain_struct.callback_engine;
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Brain*";
         this->can_be_erased = true;
     }
 
-    yli::ontology::Entity* Brain::get_parent() const
+    Entity* Brain::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
@@ -68,9 +68,9 @@ namespace yli::ontology
         return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
     }
 
-    yli::ontology::Scene* Brain::get_scene() const
+    Scene* Brain::get_scene() const
     {
-        return static_cast<yli::ontology::Scene*>(this->get_parent());
+        return static_cast<Scene*>(this->get_parent());
     }
 
     std::size_t Brain::get_number_of_apprentices() const
@@ -86,14 +86,14 @@ namespace yli::ontology
             return;
         }
 
-        for (const yli::ontology::ApprenticeModule* apprentice_module : this->master_of_movables.get_apprentice_module_pointer_vector_const_reference())
+        for (const ApprenticeModule* apprentice_module : this->master_of_movables.get_apprentice_module_pointer_vector_const_reference())
         {
             if (apprentice_module == nullptr)
             {
                 continue;
             }
 
-            yli::ontology::Movable* movable = static_cast<yli::ontology::Movable*>(apprentice_module->get_apprentice());
+            Movable* movable = static_cast<Movable*>(apprentice_module->get_apprentice());
 
             if (movable != nullptr)
             {

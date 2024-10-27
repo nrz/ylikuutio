@@ -38,9 +38,9 @@ namespace yli::ontology
 
     Glyph::Glyph(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::GlyphStruct& glyph_struct,
-            yli::ontology::GenericParentModule* const vector_font_parent_module)
+            Universe& universe,
+            const GlyphStruct& glyph_struct,
+            GenericParentModule* const vector_font_parent_module)
         : Entity(application, universe, glyph_struct),
         child_of_vector_font(vector_font_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
@@ -59,21 +59,21 @@ namespace yli::ontology
         if (should_load_texture && glyph_struct.pipeline != nullptr)
         {
             // Get a handle for our buffers.
-            yli::ontology::set_gl_attrib_locations(glyph_struct.pipeline, &this->mesh);
+            set_gl_attrib_locations(glyph_struct.pipeline, &this->mesh);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Glyph*";
     }
 
-    yli::ontology::Entity* Glyph::get_parent() const
+    Entity* Glyph::get_parent() const
     {
         return this->child_of_vector_font.get_parent();
     }
 
-    yli::ontology::Scene* Glyph::get_scene() const
+    Scene* Glyph::get_scene() const
     {
-        const yli::ontology::Entity* const vector_font_parent = this->get_parent();
+        const Entity* const vector_font_parent = this->get_parent();
 
         if (vector_font_parent == nullptr) [[unlikely]]
         {
@@ -93,14 +93,14 @@ namespace yli::ontology
         return 0; // `Glyph` has no children.
     }
 
-    void Glyph::render(const yli::ontology::Scene* const target_scene)
+    void Glyph::render(const Scene* const target_scene)
     {
         if (!this->should_render || this->universe.get_is_headless())
         {
             return;
         }
 
-        yli::ontology::Scene* const scene = this->get_scene();
+        Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -108,7 +108,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::ontology::Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
+        const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::RenderSystem* const render_system = this->universe.get_render_system();
 
@@ -120,7 +120,7 @@ namespace yli::ontology
         render_system->render_glyph(this, new_target_scene);
     }
 
-    yli::ontology::GenericMasterModule* Glyph::get_renderables_container()
+    GenericMasterModule* Glyph::get_renderables_container()
     {
         return &this->master_of_objects;
     }

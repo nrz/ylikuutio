@@ -55,9 +55,9 @@ namespace yli::ontology
 
     ComputeTask::ComputeTask(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::ComputeTaskStruct& compute_task_struct,
-            yli::ontology::GenericParentModule* const pipeline_parent_module)
+            Universe& universe,
+            const ComputeTaskStruct& compute_task_struct,
+            GenericParentModule* const pipeline_parent_module)
         : Entity(application, universe, compute_task_struct),
         child_of_pipeline(pipeline_parent_module, *this),
         texture_file_format              { compute_task_struct.texture_file_format },
@@ -84,7 +84,7 @@ namespace yli::ontology
             this->universe.get_is_opengl_in_use() ||
             this->universe.get_is_vulkan_in_use();
 
-        yli::ontology::Pipeline* const pipeline_parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
+        Pipeline* const pipeline_parent = static_cast<Pipeline*>(this->get_parent());
 
         if (pipeline_parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
         {
@@ -95,7 +95,7 @@ namespace yli::ontology
             glUseProgram(pipeline_parent->get_program_id());
         }
 
-        // Load the source texture, just like in `yli::ontology::Material` constructor.
+        // Load the source texture, just like in `Material` constructor.
         if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
             uint32_t n_color_channels = 0;
@@ -200,7 +200,7 @@ namespace yli::ontology
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2, &indices[0], GL_STATIC_DRAW);
         }
 
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ComputeTask*";
         this->can_be_erased = true;
     }
@@ -225,7 +225,7 @@ namespace yli::ontology
         }
     }
 
-    void ComputeTask::render(const yli::ontology::Scene* const)
+    void ComputeTask::render(const Scene* const)
     {
         if (!this->is_texture_loaded)
         {
@@ -422,14 +422,14 @@ namespace yli::ontology
         this->is_ready = true;
     }
 
-    yli::ontology::Entity* ComputeTask::get_parent() const
+    Entity* ComputeTask::get_parent() const
     {
         return this->child_of_pipeline.get_parent();
     }
 
-    yli::ontology::Scene* ComputeTask::get_scene() const
+    Scene* ComputeTask::get_scene() const
     {
-        const yli::ontology::Pipeline* const pipeline_parent = static_cast<yli::ontology::Pipeline*>(this->get_parent());
+        const Pipeline* const pipeline_parent = static_cast<Pipeline*>(this->get_parent());
 
         if (pipeline_parent == nullptr) [[unlikely]]
         {

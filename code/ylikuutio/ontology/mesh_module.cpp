@@ -41,8 +41,8 @@ namespace yli::ontology
     class Scene;
 
     MeshModule::MeshModule(
-            yli::ontology::Universe& universe,
-            const yli::ontology::MeshProviderStruct& mesh_provider_struct)
+            Universe& universe,
+            const MeshProviderStruct& mesh_provider_struct)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -90,13 +90,13 @@ namespace yli::ontology
         }
         else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
         {
-            if (std::holds_alternative<yli::ontology::Ecosystem*>(mesh_provider_struct.parent) &&
-                    std::get<yli::ontology::Ecosystem*>(mesh_provider_struct.parent) == nullptr)
+            if (std::holds_alternative<Ecosystem*>(mesh_provider_struct.parent) &&
+                    std::get<Ecosystem*>(mesh_provider_struct.parent) == nullptr)
             {
                 std::cerr << "ERROR: `MeshModule::MeshModule`: `Ecosystem` parent is `nullptr`!\n";
             }
-            else if (std::holds_alternative<yli::ontology::Scene*>(mesh_provider_struct.parent) &&
-                    std::get<yli::ontology::Scene*>(mesh_provider_struct.parent) == nullptr)
+            else if (std::holds_alternative<Scene*>(mesh_provider_struct.parent) &&
+                    std::get<Scene*>(mesh_provider_struct.parent) == nullptr)
             {
                 std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
             }

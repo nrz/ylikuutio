@@ -47,7 +47,7 @@ namespace yli::ontology
             // in each constructor, usually after setting
             // `this->parent`. So, get `childID` from the parent,
             // because every child deserves a unique ID!
-            // If `yli::ontology::ChildModule` is used, then it will
+            // If `ChildModule` is used, then it will
             // take care of calling this function and in that case
             // this function must not be called elsewhere.
             // Note: this function modifies child's `childID` and thus
@@ -82,7 +82,7 @@ namespace yli::ontology
             // in each constructor, usually after setting
             // `this->parent`. So, get `childID` from the parent,
             // because every child deserves a unique ID!
-            // If `yli::ontology::ChildModule` is used, then it will
+            // If `ChildModule` is used, then it will
             // take care of calling this function and in that case
             // this function must not be called elsewhere.
             // Note: this function modifies child's `childID` and thus
@@ -119,7 +119,7 @@ namespace yli::ontology
 
             if (childID == std::numeric_limits<std::size_t>::max())
             {
-                std::cerr << "ERROR: `yli::ontology::unbind_child_from_parent`: `childID` is uninitialized!\n";
+                std::cerr << "ERROR: `unbind_child_from_parent`: `childID` is uninitialized!\n";
                 return;
             }
 
@@ -153,7 +153,7 @@ namespace yli::ontology
 
             if (childID == std::numeric_limits<std::size_t>::max())
             {
-                std::cerr << "ERROR: `yli::ontology::unbind_child_from_parent`: `childID` is uninitialized!\n";
+                std::cerr << "ERROR: `unbind_child_from_parent`: `childID` is uninitialized!\n";
                 return;
             }
 

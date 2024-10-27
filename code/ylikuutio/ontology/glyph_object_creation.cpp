@@ -36,9 +36,9 @@ namespace yli::ontology
 {
     class Glyph;
 
-    void create_glyph_objects(const std::string& text_string, yli::ontology::Text3d& text_3d)
+    void create_glyph_objects(const std::string& text_string, Text3d& text_3d)
     {
-        const yli::ontology::VectorFont* const vector_font_parent_of_text_3d = static_cast<yli::ontology::VectorFont*>(text_3d.get_parent());
+        const VectorFont* const vector_font_parent_of_text_3d = static_cast<VectorFont*>(text_3d.get_parent());
 
         if (vector_font_parent_of_text_3d == nullptr) [[unlikely]]
         {
@@ -50,7 +50,7 @@ namespace yli::ontology
         while (*text_pointer != '\0')
         {
             int32_t unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
-            yli::ontology::Glyph* glyph_pointer = vector_font_parent_of_text_3d->get_glyph_pointer(unicode_value);
+            Glyph* glyph_pointer = vector_font_parent_of_text_3d->get_glyph_pointer(unicode_value);
 
             if (glyph_pointer == nullptr)
             {
@@ -61,13 +61,13 @@ namespace yli::ontology
 
             std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
 
-            yli::ontology::ObjectStruct object_struct(text_3d.get_scene());
+            ObjectStruct object_struct(text_3d.get_scene());
             object_struct.mesh_master = &text_3d;
             object_struct.glyph = glyph_pointer;
             object_struct.original_scale_vector = text_3d.original_scale_vector;
             object_struct.cartesian_coordinates = text_3d.location; // TODO: adjust this as needed.
 
-            yli::ontology::GenericEntityFactory& entity_factory = text_3d.get_application().get_generic_entity_factory();
+            GenericEntityFactory& entity_factory = text_3d.get_application().get_generic_entity_factory();
             entity_factory.create_object(object_struct);
         }
 

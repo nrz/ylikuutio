@@ -34,7 +34,7 @@
 #include <cmath>   // NAN
 #include <cstddef> // std::size_t
 
-// How `yli::ontology::Scene` class works:
+// How `Scene` class works:
 //
 // By default no `Scene` is activated.
 // The `Universe` knows the active `Scene`.

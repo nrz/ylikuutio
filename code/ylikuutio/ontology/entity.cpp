@@ -39,7 +39,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    bool Entity::operator==(const yli::ontology::Entity& rhs) const noexcept
+    bool Entity::operator==(const Entity& rhs) const noexcept
     {
         return this == &rhs;
     }
@@ -57,8 +57,8 @@ namespace yli::ontology
 
     Entity::Entity(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::EntityStruct& entity_struct)
+            Universe& universe,
+            const EntityStruct& entity_struct)
         : application { application },
         registry(),
         parent_of_variables(
@@ -79,10 +79,10 @@ namespace yli::ontology
         {
             this->should_render = !this->universe.get_is_headless();
 
-            yli::ontology::VariableStruct should_render_variable_struct(this->universe, this);
+            VariableStruct should_render_variable_struct(this->universe, this);
             should_render_variable_struct.local_name = "should_render";
-            should_render_variable_struct.activate_callback = &yli::ontology::activate_should_render;
-            should_render_variable_struct.read_callback = &yli::ontology::read_should_render;
+            should_render_variable_struct.activate_callback = &activate_should_render;
+            should_render_variable_struct.read_callback = &read_should_render;
             should_render_variable_struct.should_call_activate_callback_now = true;
             this->create_variable(should_render_variable_struct, yli::data::AnyValue(this->should_render));
         }
@@ -104,7 +104,7 @@ namespace yli::ontology
         }
 
         // Local names must be erased in the destructors
-        // of classes that inherit `yli::ontology::Entity`!
+        // of classes that inherit `Entity`!
         // They can not be erased here in `Entity` destructor,
         // because `Entity` class does not keep track of the
         // parent. `Entity` only provides virtual function
@@ -155,7 +155,7 @@ namespace yli::ontology
         return this->can_be_erased;
     }
 
-    yli::ontology::Universe& Entity::get_universe() const
+    Universe& Entity::get_universe() const
     {
         return this->universe;
     }
@@ -165,7 +165,7 @@ namespace yli::ontology
         return this->registry.is_entity(name);
     }
 
-    yli::ontology::Entity* Entity::get_entity(const std::string& name) const
+    Entity* Entity::get_entity(const std::string& name) const
     {
         // Requirements:
         // `name` must not be empty.
@@ -201,7 +201,7 @@ namespace yli::ontology
             return nullptr;
         }
 
-        const yli::ontology::Entity* const entity = this->registry.get_entity(first);
+        const Entity* const entity = this->registry.get_entity(first);
 
         if (entity == nullptr)
         {
@@ -221,7 +221,7 @@ namespace yli::ontology
         return this->registry.complete(input);
     }
 
-    void Entity::add_entity(const std::string& name, yli::ontology::Entity& entity)
+    void Entity::add_entity(const std::string& name, Entity& entity)
     {
         this->registry.add_entity(entity, name);
     }
@@ -231,11 +231,11 @@ namespace yli::ontology
         this->registry.erase_entity(name);
     }
 
-    void Entity::create_variable(const yli::ontology::VariableStruct& variable_struct, yli::data::AnyValue&& any_value)
+    void Entity::create_variable(const VariableStruct& variable_struct, yli::data::AnyValue&& any_value)
     {
-        yli::ontology::GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        const yli::ontology::VariableStruct new_variable_struct(this, variable_struct);
+        const VariableStruct new_variable_struct(this, variable_struct);
         entity_factory.create_variable(new_variable_struct, std::move(any_value));
     }
 
@@ -244,14 +244,14 @@ namespace yli::ontology
         return this->get_variable(variable_name) != nullptr;
     }
 
-    yli::ontology::Variable* Entity::get_variable(const std::string& variable_name) const
+    Variable* Entity::get_variable(const std::string& variable_name) const
     {
-        return dynamic_cast<yli::ontology::Variable*>(this->registry.get_entity(variable_name));
+        return dynamic_cast<Variable*>(this->registry.get_entity(variable_name));
     }
 
     bool Entity::set_variable(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value)
     {
-        yli::ontology::Variable* const variable = this->get_variable(variable_name);
+        Variable* const variable = this->get_variable(variable_name);
 
         if (variable == nullptr)
         {
@@ -274,7 +274,7 @@ namespace yli::ontology
 
     std::string Entity::help_for_variable(const std::string& variable_name) const
     {
-        const yli::ontology::Variable* const variable = this->get_variable(variable_name);
+        const Variable* const variable = this->get_variable(variable_name);
 
         if (variable == nullptr)
         {
@@ -365,7 +365,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::ontology::Entity* const entity_parent = this->get_parent();
+        Entity* const entity_parent = this->get_parent();
 
         if (entity_parent == nullptr)
         {

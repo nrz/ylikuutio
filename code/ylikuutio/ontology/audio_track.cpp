@@ -38,21 +38,21 @@ namespace yli::ontology
         return this->filename;
     }
 
-    yli::ontology::Entity* AudioTrack::get_parent() const
+    Entity* AudioTrack::get_parent() const
     {
         return this->child_of_universe.get_parent();
     }
 
     AudioTrack::AudioTrack(
             yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::AudioTrackStruct& audio_track_struct,
-            yli::ontology::GenericParentModule* const universe_parent_module)
+            Universe& universe,
+            const AudioTrackStruct& audio_track_struct,
+            GenericParentModule* const universe_parent_module)
         : Entity(application, universe, audio_track_struct),
         child_of_universe(universe_parent_module, *this),
         filename { audio_track_struct.filename }
     {
-        // `yli::ontology::Entity` member variables begin here.
+        // `Entity` member variables begin here.
         this->type_string = "yli::ontology::AudioTrack*";
         this->can_be_erased = true;
     }
@@ -67,7 +67,7 @@ namespace yli::ontology
         return 0; // `AudioTrack` has no children.
     }
 
-    yli::ontology::Scene* AudioTrack::get_scene() const
+    Scene* AudioTrack::get_scene() const
     {
         // `AudioTrack` does not belong in any `Scene`.
         return nullptr;

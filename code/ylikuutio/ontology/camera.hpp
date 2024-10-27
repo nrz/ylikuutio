@@ -33,7 +33,7 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 
-// How `yli::ontology::Camera` class works:
+// How `Camera` class works:
 //
 // By default no `Camera` is activated.
 // `Universe` knows the coordinates and the angles.

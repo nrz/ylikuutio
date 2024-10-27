@@ -30,12 +30,12 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-// `yli::ontology::ComputeTask` is a class which contains the data for a single
+// `ComputeTask` is a class which contains the data for a single
 // computing task. `ComputeTask` does not have the OpenGL shaders used to process
 // the data. Instead, the shaders are contained by the parent `Entity` which is
-// an `yli::ontology::Pipeline` instance.
+// an `Pipeline` instance.
 //
-// For example, `yli::ontology::Pipeline` can have vertex and fragment shaders for
+// For example, `Pipeline` can have vertex and fragment shaders for
 // computing the distances between nodes of a graph. Then, each `ComputeTask`
 // would contain the graph data, eg. as a distance matrix. Then, rendering a
 // `ComputeTask` means computing that task.

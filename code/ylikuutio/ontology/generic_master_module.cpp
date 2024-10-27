@@ -32,9 +32,9 @@ namespace yli::ontology
 {
     class Scene;
 
-    void GenericMasterModule::bind_apprentice_module(yli::ontology::ApprenticeModule& apprentice_module)
+    void GenericMasterModule::bind_apprentice_module(ApprenticeModule& apprentice_module)
     {
-        yli::hierarchy::bind_apprentice_to_master<yli::ontology::ApprenticeModule>(
+        yli::hierarchy::bind_apprentice_to_master<ApprenticeModule>(
                 apprentice_module,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
@@ -56,14 +56,14 @@ namespace yli::ontology
         }
 
         // `ApprenticeModule*` must be read into a pointer before unbinding otherwise it will be out of bounds access.
-        yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
+        ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
 
         if (apprentice_module == nullptr)
         {
             return; // No changes happened.
         }
 
-        yli::hierarchy::unbind_child_from_parent<yli::ontology::ApprenticeModule*>(
+        yli::hierarchy::unbind_child_from_parent<ApprenticeModule*>(
                 apprenticeID,
                 this->apprentice_module_pointer_vector,
                 this->free_apprenticeID_queue,
@@ -72,15 +72,15 @@ namespace yli::ontology
         apprentice_module->release();
     }
 
-    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const yli::ontology::Scene* const scene) noexcept
+    void GenericMasterModule::unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* const scene) noexcept
     {
         for (std::size_t apprenticeID = 0; apprenticeID < this->apprentice_module_pointer_vector.size(); apprenticeID++)
         {
-            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
+            const ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprenticeID);
 
             if (apprentice_module != nullptr)
             {
-                const yli::ontology::Entity* const apprentice = apprentice_module->get_apprentice();
+                const Entity* const apprentice = apprentice_module->get_apprentice();
 
                 if (apprentice->get_scene() != scene)
                 {
@@ -92,7 +92,7 @@ namespace yli::ontology
         }
     }
 
-    GenericMasterModule::GenericMasterModule(yli::ontology::Entity* const generic_master, yli::ontology::Registry* const registry, const std::string& name) noexcept
+    GenericMasterModule::GenericMasterModule(Entity* const generic_master, Registry* const registry, const std::string& name) noexcept
         : generic_master { generic_master }
     {
         registry->add_indexable(*this, name);
@@ -102,7 +102,7 @@ namespace yli::ontology
     {
         for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
         {
-            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
+            const ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
 
             if (apprentice_module != nullptr)
             {
@@ -112,17 +112,17 @@ namespace yli::ontology
         }
     }
 
-    yli::ontology::Entity* GenericMasterModule::get_generic_master() const noexcept
+    Entity* GenericMasterModule::get_generic_master() const noexcept
     {
         return this->generic_master;
     }
 
-    std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference() noexcept
+    std::vector<ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_reference() noexcept
     {
         return this->apprentice_module_pointer_vector;
     }
 
-    const std::vector<yli::ontology::ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const noexcept
+    const std::vector<ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const noexcept
     {
         return this->apprentice_module_pointer_vector;
     }
@@ -132,11 +132,11 @@ namespace yli::ontology
         return this->number_of_apprentices;
     }
 
-    yli::ontology::Entity* GenericMasterModule::get(const std::size_t index) const noexcept
+    Entity* GenericMasterModule::get(const std::size_t index) const noexcept
     {
         if (index < this->apprentice_module_pointer_vector.size())
         {
-            const yli::ontology::ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(index);
+            const ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(index);
 
             if (apprentice_module != nullptr)
             {
