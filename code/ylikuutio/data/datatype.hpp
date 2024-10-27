@@ -54,6 +54,7 @@ namespace yli::data
         AUDIO_SYSTEM        = 50,
         // `yli::ontology` datatypes, interfaces.
         ENTITY              = 110,
+        MESH_PROVIDER       = 111,
         MOVABLE             = 112,
         // `yli::ontology` datatypes, 'universe' path.
         UNIVERSE            = 119,
