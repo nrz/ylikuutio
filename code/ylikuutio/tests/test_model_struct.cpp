@@ -70,9 +70,6 @@ TEST(mesh_provider_struct_must_be_initialized_appropriately, mesh_provider_struc
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_mesh_provider_struct.material_or_symbiont_material));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(test_mesh_provider_struct.material_or_symbiont_material));
 
-    ASSERT_EQ(test_mesh_provider_struct.glyph_vertex_data, nullptr);
-    ASSERT_EQ(test_mesh_provider_struct.glyph_name_pointer, nullptr);
-    ASSERT_EQ(test_mesh_provider_struct.unicode_char_pointer, nullptr);
     ASSERT_EQ(test_mesh_provider_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
     ASSERT_TRUE(test_mesh_provider_struct.use_real_texture_coordinates);
 }

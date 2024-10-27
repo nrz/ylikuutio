@@ -20,6 +20,15 @@
 
 #include "mesh_provider_struct.hpp"
 
+// Include GLM
+#ifndef GLM_GLM_HPP_INCLUDED
+#define GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <vector> // std::vector
+
 namespace yli::ontology
 {
     class VectorFont;
@@ -31,6 +40,10 @@ namespace yli::ontology
             : MeshProviderStruct(vector_font_parent)
         {
         }
+
+        std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr }; // For `Glyph`s.
+        const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
+        const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
     };
 }
 
