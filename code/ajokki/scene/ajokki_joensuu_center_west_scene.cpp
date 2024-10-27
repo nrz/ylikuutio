@@ -113,10 +113,10 @@ namespace ajokki
                 joensuu_center_west_scene,
                 joensuu_center_west_pipeline,
                 joensuu_center_west_grass_material);
-        joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
-        joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
-        joensuu_center_west_terrain_species_struct.x_step = 4;
-        joensuu_center_west_terrain_species_struct.y_step = 4;
+        joensuu_center_west_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
+        joensuu_center_west_terrain_species_struct.model_loader_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
+        joensuu_center_west_terrain_species_struct.model_loader_struct.x_step = 4;
+        joensuu_center_west_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating yli::ontology::Species* joensuu_center_west_terrain_species ...\n";
         yli::ontology::Species* const joensuu_center_west_terrain_species = this->entity_factory.create_species(joensuu_center_west_terrain_species_struct);
 
@@ -151,8 +151,8 @@ namespace ajokki
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
         yli::ontology::SpeciesStruct horse_species_struct(joensuu_center_west_scene, joensuu_center_west_pipeline, orange_fur_material_joensuu);
-        horse_species_struct.model_file_format = "fbx";
-        horse_species_struct.model_filename = "horse.fbx";
+        horse_species_struct.model_loader_struct.model_file_format = "fbx";
+        horse_species_struct.model_loader_struct.model_filename = "horse.fbx";
 
         std::cout << "Creating yli::ontology::Species* horse_species ...\n";
         yli::ontology::Species* const horse_species = this->entity_factory.create_species(horse_species_struct);

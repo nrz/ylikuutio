@@ -43,15 +43,15 @@ namespace yli::ontology
 TEST(mesh_provider_struct_must_be_initialized_appropriately, mesh_provider_struct)
 {
     const yli::ontology::MeshProviderStruct test_mesh_provider_struct;
-    ASSERT_EQ(test_mesh_provider_struct.model_filename, "");
-    ASSERT_EQ(test_mesh_provider_struct.model_file_format, "");
-    ASSERT_EQ(test_mesh_provider_struct.color_channel, "");
-    ASSERT_EQ(test_mesh_provider_struct.divisor, 1.0f);
-    ASSERT_EQ(test_mesh_provider_struct.latitude, 0.0f);
-    ASSERT_EQ(test_mesh_provider_struct.longitude, 0.0f);
-    ASSERT_EQ(test_mesh_provider_struct.mesh_i, 0);
-    ASSERT_EQ(test_mesh_provider_struct.x_step, 1);
-    ASSERT_EQ(test_mesh_provider_struct.y_step, 1);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.model_filename, "");
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.model_file_format, "");
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.color_channel, "");
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.divisor, 1.0f);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.latitude, 0.0f);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.longitude, 0.0f);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.mesh_i, 0);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.x_step, 1);
+    ASSERT_EQ(test_mesh_provider_struct.model_loader_struct.y_step, 1);
     ASSERT_EQ(test_mesh_provider_struct.vertices, std::vector<glm::vec3> { });
     ASSERT_EQ(test_mesh_provider_struct.uvs, std::vector<glm::vec2> { });
     ASSERT_EQ(test_mesh_provider_struct.normals, std::vector<glm::vec3> { });
@@ -71,5 +71,5 @@ TEST(mesh_provider_struct_must_be_initialized_appropriately, mesh_provider_struc
     ASSERT_FALSE(std::holds_alternative<yli::ontology::SymbiontMaterial*>(test_mesh_provider_struct.material_or_symbiont_material));
 
     ASSERT_EQ(test_mesh_provider_struct.vertex_count, std::numeric_limits<std::uint32_t>::max());
-    ASSERT_TRUE(test_mesh_provider_struct.use_real_texture_coordinates);
+    ASSERT_TRUE(test_mesh_provider_struct.model_loader_struct.use_real_texture_coordinates);
 }

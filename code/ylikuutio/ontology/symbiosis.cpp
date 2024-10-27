@@ -311,13 +311,13 @@ namespace yli::ontology
                 for (const std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     yli::ontology::SymbiontSpeciesStruct symbiont_species_struct(pipeline, symbiont_material);
-                    symbiont_species_struct.model_filename = this->model_filename;
-                    symbiont_species_struct.model_file_format = this->model_file_format;
+                    symbiont_species_struct.model_loader_struct.model_filename = this->model_filename;
+                    symbiont_species_struct.model_loader_struct.model_file_format = this->model_file_format;
                     symbiont_species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
                     symbiont_species_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
                     symbiont_species_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
                     symbiont_species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
-                    symbiont_species_struct.mesh_i = mesh_i;
+                    symbiont_species_struct.model_loader_struct.mesh_i = mesh_i;
 
                     std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 

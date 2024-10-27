@@ -391,10 +391,10 @@ namespace ajokki
                 helsinki_east_downtown_scene,
                 helsinki_east_downtown_pipeline,
                 helsinki_east_downtown_grass_material);
-        helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
-        helsinki_east_downtown_terrain_species_struct.x_step = 4;
-        helsinki_east_downtown_terrain_species_struct.y_step = 4;
+        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
+        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
+        helsinki_east_downtown_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
         yli::ontology::Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
 
@@ -415,8 +415,8 @@ namespace ajokki
         yli::ontology::SpeciesStruct cat_species_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline, orange_fur_material);
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
-        cat_species_struct.model_file_format = "fbx";
-        cat_species_struct.model_filename = "cat.fbx";
+        cat_species_struct.model_loader_struct.model_file_format = "fbx";
+        cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
 
         std::cout << "Creating yli::ontology::Species* cat_species ...\n";
         yli::ontology::Species* const cat_species = this->entity_factory.create_species(cat_species_struct);

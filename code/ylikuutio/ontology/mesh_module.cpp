@@ -63,17 +63,7 @@ namespace yli::ontology
             this->vertex_uv_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_uv");
             this->vertex_normal_modelspace_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
 
-            yli::load::ModelLoaderStruct model_loader_struct;
-            model_loader_struct.model_filename                = mesh_provider_struct.model_filename;
-            model_loader_struct.model_file_format             = mesh_provider_struct.model_file_format;
-            model_loader_struct.color_channel                 = mesh_provider_struct.color_channel;
-            model_loader_struct.divisor                       = mesh_provider_struct.divisor;
-            model_loader_struct.latitude                      = mesh_provider_struct.latitude;
-            model_loader_struct.longitude                     = mesh_provider_struct.longitude;
-            model_loader_struct.mesh_i                        = mesh_provider_struct.mesh_i;
-            model_loader_struct.x_step                        = mesh_provider_struct.x_step;
-            model_loader_struct.y_step                        = mesh_provider_struct.y_step;
-            model_loader_struct.use_real_texture_coordinates  = mesh_provider_struct.use_real_texture_coordinates;
+            yli::load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
             model_loader_struct.image_width_pointer           = &this->image_width;
             model_loader_struct.image_height_pointer          = &this->image_height;
 
