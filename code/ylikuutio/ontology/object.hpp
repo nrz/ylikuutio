@@ -48,8 +48,6 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Species;
-    class ShapeshifterSequence;
-    class Text3d;
     class GenericParentModule;
     class GenericMasterModule;
 
