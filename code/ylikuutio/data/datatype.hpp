@@ -52,7 +52,7 @@ namespace yli::data
         GLM_VEC4            = 16,
         // Systems.
         AUDIO_SYSTEM        = 50,
-        // `yli::ontology` datatypes, 'entity' path.
+        // `yli::ontology` datatypes, interfaces.
         ENTITY              = 110,
         MOVABLE             = 112,
         // `yli::ontology` datatypes, 'universe' path.
