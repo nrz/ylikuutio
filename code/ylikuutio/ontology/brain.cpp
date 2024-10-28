@@ -86,7 +86,7 @@ namespace yli::ontology
 
     void Brain::update()
     {
-        yli::ontology::CallbackEngine* const callback_engine_master = this->get_callback_engine_master();
+        CallbackEngine* const callback_engine_master = this->get_callback_engine_master();
 
         if (callback_engine_master == nullptr)
         {
