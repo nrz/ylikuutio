@@ -32,22 +32,22 @@ namespace yli::ontology
     {
         BrainStruct(
                 Scene* const scene_parent,
-                CallbackEngine* const callback_engine)
+                CallbackEngine* const callback_engine_master)
             : parent        { scene_parent },
-            callback_engine { callback_engine }
+            callback_engine_master { callback_engine_master }
         {
         }
 
         BrainStruct(
                 const std::string& scene_parent,
-                CallbackEngine* const callback_engine)
+                CallbackEngine* const callback_engine_master)
             : parent        { scene_parent },
-            callback_engine { callback_engine }
+            callback_engine_master { callback_engine_master }
         {
         }
 
         std::variant<Scene*, std::string> parent {};
-        CallbackEngine* callback_engine { nullptr };
+        CallbackEngine* callback_engine_master { nullptr };
     };
 }
 
