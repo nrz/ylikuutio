@@ -300,7 +300,8 @@ namespace yli::ontology
                             yli::data::Datatype::BRAIN,
                             brain_struct.parent,
                             brain_struct,
-                            {});
+                            {},
+                            (brain_struct.callback_engine_master != nullptr ? brain_struct.callback_engine_master->get_generic_master_module<Brain>() : nullptr));
             }
 
             Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const final

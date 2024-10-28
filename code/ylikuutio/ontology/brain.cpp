@@ -34,6 +34,7 @@ namespace yli::core
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Universe;
 
@@ -41,13 +42,13 @@ namespace yli::ontology
             yli::core::Application& application,
             Universe& universe,
             const BrainStruct& brain_struct,
-            GenericParentModule* const scene_parent_module)
+            GenericParentModule* const scene_parent_module,
+            GenericMasterModule* const callback_engine_master_module)
         : Entity(application, universe, brain_struct),
         child_of_scene(scene_parent_module, *this),
+        apprentice_of_callback_engine(callback_engine_master_module, this),
         master_of_movables(this, &this->registry, "movables")
     {
-        this->callback_engine = brain_struct.callback_engine_master;
-
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Brain*";
         this->can_be_erased = true;
@@ -56,6 +57,11 @@ namespace yli::ontology
     Entity* Brain::get_parent() const
     {
         return this->child_of_scene.get_parent();
+    }
+
+    CallbackEngine* Brain::get_callback_engine_master() const
+    {
+        return static_cast<CallbackEngine*>(this->apprentice_of_callback_engine.get_master());
     }
 
     std::size_t Brain::get_number_of_children() const
@@ -80,9 +86,10 @@ namespace yli::ontology
 
     void Brain::update()
     {
-        if (this->callback_engine == nullptr)
+        yli::ontology::CallbackEngine* const callback_engine_master = this->get_callback_engine_master();
+
+        if (callback_engine_master == nullptr)
         {
-            std::cerr << "ERROR: `Brain::update`: `this->callback_engine` is `nullptr`!\n";
             return;
         }
 
@@ -97,7 +104,7 @@ namespace yli::ontology
 
             if (movable != nullptr)
             {
-                this->callback_engine->execute(yli::data::AnyValue(*movable));
+                callback_engine_master->execute(yli::data::AnyValue(*movable));
             }
         }
     }

@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "movable.hpp"
 
@@ -28,7 +29,9 @@
 
 // `Brain` is a general purpose AI and controller class for `Movable`s.
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
-// The actions the defined in the callback, referenced using `this->callback_engine`.
+// The actions the defined in the callback, referenced using
+// `this->apprentice_of_callback_engine`.
+//
 // There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.
 // In the future, some of the callbacks will process YliLisp, with an API offered
 // to the YliLisp scripts. The API still needs to be defined.
@@ -61,6 +64,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Universe;
     class CallbackEngine;
     class Scene;
@@ -73,12 +77,15 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const BrainStruct& brain_struct,
-                    GenericParentModule* const scene_parent_module);
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const callback_engine_master_module);
 
             ~Brain() = default;
 
         public:
             Entity* get_parent() const override;
+
+            CallbackEngine* get_callback_engine_master() const;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -91,6 +98,7 @@ namespace yli::ontology
                 friend class yli::memory::MemoryStorage;
 
             ChildModule child_of_scene;
+            ApprenticeModule apprentice_of_callback_engine;
             GenericMasterModule master_of_movables;
 
             Scene* get_scene() const override;
@@ -98,8 +106,6 @@ namespace yli::ontology
         private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
-
-            CallbackEngine* callback_engine { nullptr };
     };
 
     template<>
