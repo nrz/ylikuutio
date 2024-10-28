@@ -29,8 +29,8 @@
 
 // `Brain` is a general purpose AI and controller class for `Movable`s.
 // Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
-// The actions the defined in the callback, referenced using
-// `this->apprentice_of_callback_engine`.
+// The actions the defined by the `CallbackEngine` master to which `Brain` binds itself
+// with its `apprentice_of_callback_engine`.
 //
 // There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.
 // In the future, some of the callbacks will process YliLisp, with an API offered
