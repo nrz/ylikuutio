@@ -86,14 +86,14 @@ namespace yli::ontology
             return;
         }
 
-        for (const ApprenticeModule* apprentice_module : this->master_of_movables.get_apprentice_module_pointer_vector_const_reference())
+        for (const ApprenticeModule* movable_apprentice_module : this->master_of_movables.get_apprentice_module_pointer_vector_const_reference())
         {
-            if (apprentice_module == nullptr)
+            if (movable_apprentice_module == nullptr)
             {
                 continue;
             }
 
-            Movable* movable = static_cast<Movable*>(apprentice_module->get_apprentice());
+            Movable* movable = static_cast<Movable*>(movable_apprentice_module->get_apprentice());
 
             if (movable != nullptr)
             {
