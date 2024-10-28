@@ -21,6 +21,7 @@
 #include "generic_callback_engine.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -104,6 +105,7 @@ namespace yli::ontology
 
             ChildModule child_of_entity;
             GenericParentModule parent_of_callback_objects;
+            GenericMasterModule master_of_brains;
 
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;

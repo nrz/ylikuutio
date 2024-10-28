@@ -45,7 +45,11 @@ namespace yli::ontology
         parent_of_callback_objects(
                 *this,
                 this->registry,
-                "callback_objects")
+                "callback_objects"),
+        master_of_brains(
+                this,
+                &this->registry,
+                "brains")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";
