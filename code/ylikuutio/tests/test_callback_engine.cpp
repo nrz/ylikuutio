@@ -28,6 +28,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Brain;
 }
 
 TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
@@ -53,6 +54,8 @@ TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
             ASSERT_EQ(generic_parent_module, nullptr);
         }
     }
+
+    ASSERT_NE(callback_engine->get_generic_master_module<yli::ontology::Brain>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);

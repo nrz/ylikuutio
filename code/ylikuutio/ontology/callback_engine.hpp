@@ -46,6 +46,7 @@ namespace yli::ontology
     class Universe;
     class CallbackObject;
     class Scene;
+    class Brain;
     struct CallbackEngineStruct;
 
     class CallbackEngine : public GenericCallbackEngine
@@ -97,6 +98,10 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
+
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
@@ -110,6 +115,12 @@ namespace yli::ontology
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;
     };
+
+    template<>
+        inline GenericMasterModule* CallbackEngine::get_generic_master_module<Brain>()
+        {
+            return &this->master_of_brains;
+        }
 }
 
 #endif
