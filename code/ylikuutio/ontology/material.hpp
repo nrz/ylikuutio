@@ -23,7 +23,6 @@
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
-#include "master_module.hpp"
 #include "texture_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -81,7 +80,7 @@ namespace yli::ontology
                     Universe& universe,
                     const MaterialStruct& material_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module,
-                    MasterModule<Pipeline*>* pipeline_master_module);
+                    GenericMasterModule* const pipeline_master_module);
 
             ~Material() = default;
 

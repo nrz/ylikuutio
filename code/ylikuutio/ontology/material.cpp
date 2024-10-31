@@ -47,9 +47,6 @@ namespace yli::ontology
 {
     class Entity;
 
-    template<typename M>
-        class MasterModule;
-
     std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
             Material& material,
             Ecosystem& new_parent)
@@ -146,7 +143,7 @@ namespace yli::ontology
             Universe& universe,
             const MaterialStruct& material_struct,
             GenericParentModule* const ecosystem_or_scene_parent_module,
-            MasterModule<Pipeline*>* pipeline_master_module)
+            GenericMasterModule* const pipeline_master_module)
         : Entity(application, universe, material_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         parent_of_shapeshifter_transformations(
@@ -157,7 +154,7 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "vector_fonts"),
-        apprentice_of_pipeline(static_cast<GenericMasterModule*>(pipeline_master_module), this),
+        apprentice_of_pipeline(pipeline_master_module, this),
         master_of_species(this, &this->registry, "species"),
         texture(
                 universe,
