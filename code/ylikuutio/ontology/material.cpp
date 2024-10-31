@@ -47,6 +47,9 @@ namespace yli::ontology
 {
     class Entity;
 
+    template<typename M>
+        class MasterModule;
+
     std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
             Material& material,
             Ecosystem& new_parent)
