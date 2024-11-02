@@ -51,11 +51,13 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class ShapeshifterSequence;
     class ShapeshifterForm;
+    class Shapeshifter;
     class Font2d;
     class Text2d;
     class VectorFont;
     class Glyph;
     class Text3d;
+    class GlyphObject;
     class InputMode;
     class AudioTrack;
     class Console;
@@ -84,9 +86,11 @@ namespace yli::ontology
     struct ShapeshifterTransformationStruct;
     struct ShapeshifterSequenceStruct;
     struct ShapeshifterFormStruct;
+    struct ShapeshifterStruct;
     struct VectorFontStruct;
     struct GlyphStruct;
     struct Text3dStruct;
+    struct GlyphObjectStruct;
     struct InputModeStruct;
     struct AudioTrackStruct;
     struct ConsoleStruct;
@@ -137,10 +141,13 @@ namespace yli::ontology
                     const ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const = 0;
             virtual ShapeshifterForm* create_shapeshifter_form(
                     const ShapeshifterFormStruct& shapeshifter_form_struct) const = 0;
+            virtual Shapeshifter* create_shapeshifter(
+                    const ShapeshifterStruct& shapeshifter_struct) const = 0;
             virtual VectorFont* create_vector_font(const VectorFontStruct& vector_font_struct) const = 0;
             virtual Glyph* create_glyph(const GlyphStruct& glyph_struct) const = 0;
             virtual Text2d* create_text_2d(const TextStruct& text_struct) const = 0;
             virtual Text3d* create_text_3d(const Text3dStruct& text_3d_struct) const = 0;
+            virtual GlyphObject* create_glyph_object(const GlyphObjectStruct& glyph_object_struct) const = 0;
             virtual Font2d* create_font_2d(const FontStruct& font_struct) const = 0;
             virtual InputMode* create_input_mode(const InputModeStruct& input_mode_struct) const = 0;
             virtual AudioTrack* create_audio_track(const AudioTrackStruct& audio_track_struct) const = 0;

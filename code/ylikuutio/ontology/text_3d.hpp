@@ -20,6 +20,7 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
+#include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "glyph_object_creation.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -37,33 +38,45 @@ namespace yli::core
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Universe;
     class Scene;
     class Pipeline;
-    class Object;
     class VectorFont;
+    class GlyphObject;
     struct Text3dStruct;
 
     class Text3d final : public Movable
     {
         public:
-            // Disable all character `Object`s of `text_3d`,
+            // Disable all `GlyphObject`s of `text_3d`,
             // set `parent` according to the input, request a new childID
             // from the `new_parent`, and create and enable the needed
-            // character `Object`s of `text_3d`.
-            // TODO: implement creation and enabling the character `Object`s!
+            // `GlyphObject`s of `text_3d`.
+            // TODO: implement creation and enabling the `GlyphObject`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_parent(
+            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
                     Text3d& text_3d,
-                    VectorFont& new_parent);
+                    Scene& new_parent);
+
+            // Disable all `GlyphObject`s of `text_3d`,
+            // set `master` according to the input, request a new childID
+            // from the `new_master`, and create and enable the needed
+            // `GlyphObject`s of `text_3d`.
+            // TODO: implement creation and enabling the `GlyphObject`s!
+            // Note: different fonts may provide glyphs for different Unicode code points!
+            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_master(
+                    Text3d& text_3d,
+                    VectorFont& new_master);
 
             Text3d(
                     yli::core::Application& application,
                     Universe& universe,
                     const Text3dStruct& text_3d_struct,
-                    GenericParentModule* const vector_font_parent_module,
-                    GenericMasterModule* const brain_master_module);
+                    GenericParentModule* const scene_parent_module,
+                    GenericMasterModule* const brain_master_module,
+                    GenericMasterModule* const vector_font_master_module);
 
             ~Text3d() = default;
 
@@ -76,14 +89,16 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
+            VectorFont* get_vector_font_master() const;
+
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
-            friend class Object;
             friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
 
-            ChildModule child_of_vector_font;
-            GenericMasterModule master_of_objects;
+            ChildModule child_of_scene;
+            ApprenticeModule apprentice_of_vector_font;
+            GenericMasterModule master_of_glyph_objects;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -93,9 +108,9 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericMasterModule* Text3d::get_generic_master_module<Object>()
+        inline GenericMasterModule* Text3d::get_generic_master_module<GlyphObject>()
         {
-            return &this->master_of_objects;
+            return &this->master_of_glyph_objects;
         }
 }
 

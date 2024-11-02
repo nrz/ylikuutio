@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/callback_object_struct.hpp"
 
 // Include standard headers
@@ -29,20 +30,20 @@ namespace yli::ontology
 
 TEST(callback_object_struct_must_be_initialized_appropriately, parent_provided_as_nullptr)
 {
-    const yli::ontology::CallbackObjectStruct test_callback_object_struct(static_cast<yli::ontology::CallbackEngine*>(nullptr));
+    const yli::ontology::CallbackObjectStruct test_callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
 
-    ASSERT_FALSE(test_callback_object_struct.callback_engine_parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_callback_object_struct.callback_engine_parent));
-    ASSERT_EQ(std::get<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent), nullptr);
+    ASSERT_FALSE(test_callback_object_struct.callback_engine_parent.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_callback_object_struct.callback_engine_parent.data));
+    ASSERT_EQ(std::get<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent.data), nullptr);
 }
 
 TEST(callback_object_struct_must_be_initialized_appropriately, parent_provided_as_global_name)
 {
-    const yli::ontology::CallbackObjectStruct test_callback_object_struct("foo");
+    const yli::ontology::CallbackObjectStruct test_callback_object_struct(yli::ontology::Request<yli::ontology::CallbackEngine>("foo"));
 
-    ASSERT_FALSE(test_callback_object_struct.callback_engine_parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_callback_object_struct.callback_engine_parent));
-    ASSERT_EQ(std::get<std::string>(test_callback_object_struct.callback_engine_parent), "foo");
+    ASSERT_FALSE(test_callback_object_struct.callback_engine_parent.data.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_callback_object_struct.callback_engine_parent.data));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_callback_object_struct.callback_engine_parent.data));
+    ASSERT_EQ(std::get<std::string>(test_callback_object_struct.callback_engine_parent.data), "foo");
 }

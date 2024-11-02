@@ -56,7 +56,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackEngineStruct&,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* const console_parent_module);
 
             ~ConsoleCallbackEngine() = default;
 
@@ -66,15 +66,17 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             Scene* get_scene() const override;
+
+            Console* get_console() const;
+
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            ChildModule child_of_universe;
+            ChildModule child_of_console;
             GenericParentModule parent_of_console_callback_objects;
 
             ConsoleCallbackObject* create_console_callback_object(
-                    const InputParametersToAnyValueCallbackWithConsole callback,
-                    Console* const console_pointer);
+                    const InputParametersToAnyValueCallbackWithConsole callback);
 
             // execute all callbacks with a parameter.
             std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;

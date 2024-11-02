@@ -24,6 +24,7 @@
 #include "biont.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "generic_entity_factory.hpp"
+#include "request.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "family_templates.hpp"
@@ -55,8 +56,8 @@ namespace yli::ontology
             Universe& universe,
             const HolobiontStruct& holobiont_struct,
             GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const symbiosis_master_module,
-            GenericMasterModule* const brain_master_module)
+            GenericMasterModule* const brain_master_module,
+            GenericMasterModule* const symbiosis_master_module)
         : Movable(
                 application,
                 universe,
@@ -114,7 +115,7 @@ namespace yli::ontology
     {
         // requirements:
         // `scene` must not be `nullptr`.
-        // `this->symbiosis_parent` must not be `nullptr`.
+        // `symbiosis` must not be `nullptr`.
 
         Scene* const scene = holobiont.get_scene();
 
@@ -155,11 +156,11 @@ namespace yli::ontology
                 continue;
             }
 
-            BiontStruct biont_struct;
+            BiontStruct biont_struct(
+                    (Request(&holobiont)),
+                    (Request(scene)),
+                    (Request(symbiont_species)));
             biont_struct.biontID                = biontID;
-            biont_struct.scene                  = scene;
-            biont_struct.parent                 = &holobiont;
-            biont_struct.symbiont_species       = symbiont_species;
             biont_struct.initial_rotate_vectors = holobiont.initial_rotate_vectors;
             biont_struct.initial_rotate_angles  = holobiont.initial_rotate_angles;
             biont_struct.original_scale_vector  = holobiont.original_scale_vector;
@@ -343,7 +344,7 @@ namespace yli::ontology
         const float float_yaw = std::get<float>(yaw_any_value.data);
         const float float_pitch = std::get<float>(pitch_any_value.data);
 
-        HolobiontStruct holobiont_struct(parent, symbiosis);
+        HolobiontStruct holobiont_struct((Request<Scene>(&parent)), Request<Symbiosis>(&symbiosis));
         holobiont_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
         holobiont_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;

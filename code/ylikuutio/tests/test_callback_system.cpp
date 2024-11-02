@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/generic_entity_factory.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/callback_object_struct.hpp"
 #include "code/ylikuutio/snippets/callback_snippets.hpp"
@@ -45,7 +46,7 @@ TEST(callback_engine_must_function_properly, nop)
     yli::ontology::CallbackEngineStruct callback_engine_struct;
     auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
 
-    yli::ontology::CallbackObjectStruct callback_object_struct(callback_engine);
+    yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request(callback_engine)));
     auto callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::nop);
 

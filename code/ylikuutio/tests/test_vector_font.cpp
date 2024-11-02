@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -46,22 +47,21 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct(material);
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request(material)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(vector_font) % alignof(yli::ontology::VectorFont), 0);
-
-    const yli::ontology::GenericParentModule* parent_of_glyphs   { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_text_3ds { nullptr };
 
     for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
     {
@@ -69,21 +69,13 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
 
         if (datatype == yli::data::Datatype::GLYPH)
         {
-            parent_of_glyphs = generic_parent_module;
-            ASSERT_NE(parent_of_glyphs, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::TEXT_3D)
-        {
-            parent_of_text_3ds = generic_parent_module;
-            ASSERT_NE(parent_of_text_3ds, nullptr);
+            ASSERT_NE(generic_parent_module, nullptr);
         }
         else
         {
             ASSERT_EQ(generic_parent_module, nullptr);
         }
     }
-
-    ASSERT_LT(parent_of_glyphs, parent_of_text_3ds);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);  // `ecosystem`.
@@ -119,15 +111,17 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(scene, pipeline);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct(material);
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request(material)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
@@ -165,15 +159,17 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct(nullptr);
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
@@ -212,16 +208,18 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request(pipeline)));
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct("foo");
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>("foo")));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
@@ -261,16 +259,18 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(ecosystem, pipeline);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request(pipeline)));
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct("bar");
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>("bar")));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);

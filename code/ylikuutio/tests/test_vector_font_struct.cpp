@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 
 // Include standard headers
@@ -26,11 +27,11 @@ TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_ma
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    const yli::ontology::VectorFontStruct test_vector_font_struct(nullptr);
+    const yli::ontology::VectorFontStruct test_vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
 
-    ASSERT_FALSE(test_vector_font_struct.material_parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent));
+    ASSERT_FALSE(test_vector_font_struct.material_parent.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent.data));
 
     ASSERT_EQ(test_vector_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
     ASSERT_TRUE(test_vector_font_struct.font_file_format.empty());
@@ -41,11 +42,11 @@ TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_ma
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    const yli::ontology::VectorFontStruct test_vector_font_struct("foo");
+    const yli::ontology::VectorFontStruct test_vector_font_struct((yli::ontology::Request<yli::ontology::Material>("foo")));
 
-    ASSERT_FALSE(test_vector_font_struct.material_parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent));
+    ASSERT_FALSE(test_vector_font_struct.material_parent.data.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent.data));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_vector_font_struct.material_parent.data));
 
     ASSERT_EQ(test_vector_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
     ASSERT_TRUE(test_vector_font_struct.font_file_format.empty());

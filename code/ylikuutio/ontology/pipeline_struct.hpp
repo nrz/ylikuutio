@@ -19,9 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_PIPELINE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <string>  // std::string
+#include <utility> // std::move
 #include <variant> // std::variant
 
 namespace yli::ontology
@@ -31,24 +33,19 @@ namespace yli::ontology
 
     struct PipelineStruct : public EntityStruct
     {
-        explicit PipelineStruct(Ecosystem* const ecosystem_parent)
-            : parent { ecosystem_parent }
+        explicit PipelineStruct(Request<Ecosystem>&& ecosystem_parent)
+            : parent { std::move(ecosystem_parent) }
         {
         }
 
-        explicit PipelineStruct(Scene* const scene_parent)
-            : parent { scene_parent }
+        explicit PipelineStruct(Request<Scene>&& scene_parent)
+            : parent { std::move(scene_parent) }
         {
         }
 
-        explicit PipelineStruct(const std::string& parent)
-            : parent { parent }
-        {
-        }
-
+        std::variant<Request<Ecosystem>, Request<Scene>> parent {};
         std::string vertex_shader;    // filename of vertex shader.
         std::string fragment_shader;  // filename of fragment shader.
-        std::variant<Ecosystem*, Scene*, std::string> parent;
         bool is_gpgpu_pipeline { false }; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result textures can be used by `Material`s.
     };
 }

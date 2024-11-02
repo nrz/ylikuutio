@@ -84,6 +84,10 @@ namespace yli::ontology
             GenericMasterModule* const font_2d_master_module)
         : Entity(application, universe, console_struct),
         child_of_universe(universe_parent_module, *this),
+        parent_of_console_callback_engines(
+                *this,
+                this->registry,
+                "console_callback_engines"),
         parent_of_lisp_functions(
                 *this,
                 this->registry,
@@ -364,12 +368,14 @@ namespace yli::ontology
 
     std::size_t Console::get_number_of_children() const
     {
-        return this->parent_of_lisp_functions.get_number_of_children();
+        return this->parent_of_console_callback_engines.get_number_of_children() +
+            this->parent_of_lisp_functions.get_number_of_children();
     }
 
     std::size_t Console::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_lisp_functions.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_lisp_functions.child_pointer_vector);
     }
 
     bool Console::enter_console()
@@ -525,7 +531,11 @@ namespace yli::ontology
 
     GenericParentModule* Console::get_generic_parent_module(const int type)
     {
-        if (type == yli::data::Datatype::LISP_FUNCTION)
+        if (type == yli::data::Datatype::CONSOLE_CALLBACK_ENGINE)
+        {
+            return &this->parent_of_console_callback_engines;
+        }
+        else if (type == yli::data::Datatype::LISP_FUNCTION)
         {
             return &this->parent_of_lisp_functions;
         }

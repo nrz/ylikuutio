@@ -21,6 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
+#include "generic_master_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include GLM
@@ -55,6 +56,7 @@ namespace yli::ontology
     class Pipeline;
     class Material;
     class Glyph;
+    class Text3d;
     struct VectorFontStruct;
 
     class VectorFont final : public Entity
@@ -94,11 +96,14 @@ namespace yli::ontology
 
             ChildModule child_of_material;
             GenericParentModule parent_of_glyphs;
-            GenericParentModule parent_of_text_3ds;
+            GenericMasterModule master_of_text_3ds;
 
         public:
             Scene* get_scene() const override;
             Pipeline* get_pipeline() const;
+
+            template<typename ApprenticeType>
+                GenericMasterModule* get_generic_master_module() = delete;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -121,6 +126,12 @@ namespace yli::ontology
 
             std::unordered_map<int32_t, Glyph*> unicode_glyph_map;
     };
+
+    template<>
+        inline GenericMasterModule* VectorFont::get_generic_master_module<Text3d>()
+        {
+            return &this->master_of_text_3ds;
+        }
 }
 
 #endif

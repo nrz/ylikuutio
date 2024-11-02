@@ -365,6 +365,7 @@ namespace yli::ontology
                 friend class yli::memory::MemoryStorage;
 
             ChildModule child_of_universe;
+            GenericParentModule parent_of_console_callback_engines;
             GenericParentModule parent_of_lisp_functions;
             ApprenticeModule apprentice_of_font_2d;
             MasterOfInputModesModule master_of_input_modes;

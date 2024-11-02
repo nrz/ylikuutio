@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_INPUT_MODE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 namespace yli::ontology
 {
@@ -26,7 +27,7 @@ namespace yli::ontology
 
     struct InputModeStruct : public EntityStruct
     {
-        Console* console_master { nullptr };
+        Request<Console> console_master {};
     };
 }
 

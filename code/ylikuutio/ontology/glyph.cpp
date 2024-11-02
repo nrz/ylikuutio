@@ -17,6 +17,7 @@
 
 #include "glyph.hpp"
 #include "universe.hpp"
+#include "material.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
@@ -32,19 +33,23 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class GenericMasterModule;
     class Entity;
     class Scene;
+    class Pipeline;
 
     Glyph::Glyph(
             yli::core::Application& application,
             Universe& universe,
             const GlyphStruct& glyph_struct,
-            GenericParentModule* const vector_font_parent_module)
+            GenericParentModule* const vector_font_parent_module,
+            GenericMasterModule* const material_master_module)
         : Entity(application, universe, glyph_struct),
         child_of_vector_font(vector_font_parent_module, *this),
-        master_of_objects(this, &this->registry, "objects"),
-        mesh(universe, glyph_struct),
+        apprentice_of_material(material_master_module, this),
+        master_of_glyph_objects(this, &this->registry, "glyph_objects"),
+        mesh(universe, glyph_struct, this->get_pipeline()),
         glyph_vertex_data    { glyph_struct.glyph_vertex_data },
         glyph_name_pointer   { glyph_struct.glyph_name_pointer },
         unicode_char_pointer { glyph_struct.unicode_char_pointer }
@@ -56,11 +61,7 @@ namespace yli::ontology
             this->universe.get_is_vulkan_in_use() ||
             this->universe.get_is_software_rendering_in_use();
 
-        if (should_load_texture && glyph_struct.pipeline != nullptr)
-        {
-            // Get a handle for our buffers.
-            set_gl_attrib_locations(glyph_struct.pipeline, &this->mesh);
-        }
+        // FIXME: implement mesh loading!
 
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Glyph*";
@@ -81,6 +82,19 @@ namespace yli::ontology
         }
 
         return vector_font_parent->get_scene();
+    }
+
+    Pipeline* Glyph::get_pipeline() const
+    {
+        Material* const material = static_cast<Material*>(
+                this->apprentice_of_material.get_master());
+
+        if (material != nullptr)
+        {
+            return material->get_pipeline();
+        }
+
+        return nullptr;
     }
 
     std::size_t Glyph::get_number_of_children() const
@@ -122,7 +136,7 @@ namespace yli::ontology
 
     GenericMasterModule* Glyph::get_renderables_container()
     {
-        return &this->master_of_objects;
+        return &this->master_of_glyph_objects;
     }
 
     const char* Glyph::get_unicode_char_pointer() const

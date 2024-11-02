@@ -15,16 +15,33 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_OBJECT_TYPE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_OBJECT_TYPE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_MESH_PROVIDER_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_MESH_PROVIDER_HPP_INCLUDED
+
+#include "entity.hpp"
+
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
-    enum class ObjectType
+    class Universe;
+    struct MeshProviderStruct;
+
+    class MeshProvider : public Entity
     {
-        REGULAR,
-        SHAPESHIFTER,
-        GLYPH_OBJECT
+        protected:
+            MeshProvider(
+                    yli::core::Application& application,
+                    Universe& universe,
+                    const MeshProviderStruct& mesh_provider_struct);
+
+            virtual ~MeshProvider() = default;
+
+            MeshProvider(const MeshProvider&) = delete;            // Delete copy constructor.
+            MeshProvider& operator=(const MeshProvider&) = delete; // Delete copy assignment.
     };
 }
 

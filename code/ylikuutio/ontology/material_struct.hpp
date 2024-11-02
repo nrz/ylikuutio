@@ -19,9 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_MATERIAL_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <string>  // std::string
+#include <utility> // std::move
 #include <variant> // std::variant
 
 namespace yli::ontology
@@ -32,31 +34,26 @@ namespace yli::ontology
 
     struct MaterialStruct : public EntityStruct
     {
-        MaterialStruct(Ecosystem* const ecosystem_parent,
-                Pipeline* const pipeline)
-            : parent { ecosystem_parent },
-            pipeline { pipeline }
+        MaterialStruct(
+                Request<Ecosystem>&& ecosystem_parent,
+                Request<Pipeline>&& pipeline_master)
+            : parent { std::move(ecosystem_parent) },
+            pipeline_master { std::move(pipeline_master) }
         {
         }
 
-        MaterialStruct(Scene* const scene_parent,
-                Pipeline* const pipeline)
-            : parent { scene_parent },
-            pipeline { pipeline }
+        MaterialStruct(
+                Request<Scene>&& scene_parent,
+                Request<Pipeline>&& pipeline_master)
+            : parent { std::move(scene_parent) },
+            pipeline_master { std::move(pipeline_master) }
         {
         }
 
-        MaterialStruct(const std::string& parent,
-                Pipeline* const pipeline)
-            : parent { parent },
-            pipeline { pipeline }
-        {
-        }
-
+        std::variant<Request<Ecosystem>, Request<Scene>> parent {};
+        Request<Pipeline> pipeline_master {};
         std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
         std::string texture_filename;        // Filename of the model file.
-        std::variant<Ecosystem*, Scene*, std::string> parent;
-        Pipeline* pipeline { nullptr };
     };
 }
 

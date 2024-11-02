@@ -22,6 +22,7 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
@@ -49,7 +50,9 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct(helsinki_east_downtown_scene, rest_callback_engine);
+    yli::ontology::BrainStruct rest_brain_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(rest_callback_engine)));
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);

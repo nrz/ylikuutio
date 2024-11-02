@@ -19,10 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_TRANSFORMATION_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -30,17 +30,12 @@ namespace yli::ontology
 
     struct ShapeshifterTransformationStruct final : public EntityStruct
     {
-        explicit ShapeshifterTransformationStruct(Material* const material_parent)
-            : material_parent { material_parent }
+        explicit ShapeshifterTransformationStruct(Request<Material>&& material_parent)
+            : material_parent { std::move(material_parent) }
         {
         }
 
-        explicit ShapeshifterTransformationStruct(const std::string& material_parent)
-            : material_parent { material_parent }
-        {
-        }
-
-        std::variant<Material*, std::string> material_parent {};
+        Request<Material> material_parent {};
     };
 }
 

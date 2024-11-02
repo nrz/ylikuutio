@@ -19,11 +19,23 @@
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
+
+// Include standard headers
+#include <utility> // std::move
 
 namespace yli::ontology
 {
+    class Console;
+
     struct ConsoleCallbackEngineStruct : public EntityStruct
     {
+        explicit ConsoleCallbackEngineStruct(Request<Console>&& console_parent)
+            : console_parent { std::move(console_parent) }
+        {
+        }
+
+        Request<Console> console_parent {};
     };
 }
 

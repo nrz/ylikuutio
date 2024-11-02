@@ -19,6 +19,7 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -33,11 +34,10 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosyste
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    const yli::ontology::PipelineStruct test_pipeline_struct(ecosystem);
+    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request(ecosystem)));
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));
     ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
     ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }
@@ -49,22 +49,30 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_scene_pa
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    const yli::ontology::PipelineStruct test_pipeline_struct(scene);
+    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request(scene)));
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));
     ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
     ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }
 
-TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_parent_string)
+TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosystem_parent_string)
 {
-    const yli::ontology::PipelineStruct test_pipeline_struct("foo");
+    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request<yli::ontology::Ecosystem>("foo")));
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(test_pipeline_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(test_pipeline_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_pipeline_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));
+    ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
+    ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
+}
+
+TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_scene_parent_string)
+{
+    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request<yli::ontology::Scene>("foo")));
+    ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));
     ASSERT_TRUE(test_pipeline_struct.vertex_shader.empty());
     ASSERT_TRUE(test_pipeline_struct.fragment_shader.empty());
 }

@@ -20,14 +20,12 @@
 #include "mesh_module.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
-#include "object_type.hpp"
-#include "glyph.hpp"
 #include "pipeline.hpp"
 #include "scene.hpp"
 #include "species.hpp"
-#include "shapeshifter_sequence.hpp"
 #include "text_3d.hpp"
 #include "generic_entity_factory.hpp"
+#include "request.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -95,7 +93,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        object.apprentice_of_mesh.unbind_from_any_master_belonging_to_other_scene(new_parent);
+        object.apprentice_of_species.unbind_from_any_master_belonging_to_other_scene(new_parent);
         object.child_of_scene.unbind_and_bind_to_new_parent(&new_parent.parent_of_objects);
         return std::nullopt;
     }
@@ -107,25 +105,18 @@ namespace yli::ontology
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_species`.
 
-        if (object.object_type == ObjectType::REGULAR)
+        // Master and apprentice must belong to the same `Scene`,
+        // if both belong to some `Scene`, and not `Ecosystem`.
+        if (object.get_scene() == new_species.get_scene() ||
+                object.get_scene() == nullptr ||
+                new_species.get_scene() == nullptr)
         {
-            // Master and apprentice must belong to the same `Scene`,
-            // if both belong to some `Scene`, and not `Ecosystem`.
-            if (object.get_scene() == new_species.get_scene() ||
-                    object.get_scene() == nullptr ||
-                    new_species.get_scene() == nullptr)
-            {
-                object.apprentice_of_mesh.unbind_and_bind_to_new_generic_master_module(
-                        &new_species.master_of_objects);
-            }
-            else
-            {
-                std::cerr << "ERROR: `Object::bind_to_new_species_master`: master and apprentice can not belong to different `Scene`s!\n";
-            }
+            object.apprentice_of_species.unbind_and_bind_to_new_generic_master_module(
+                    &new_species.master_of_objects);
         }
         else
         {
-            std::cerr << "ERROR: `Object::bind_to_new_species_master`: only `REGULAR` type `Object`s can be bound to `Species`!\n";
+            std::cerr << "ERROR: `Object::bind_to_new_species_master`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
@@ -137,28 +128,15 @@ namespace yli::ontology
             const ObjectStruct& object_struct,
             GenericParentModule* const scene_parent_module,
             GenericMasterModule* const brain_master_module,
-            GenericMasterModule* const mesh_master_module)
+            GenericMasterModule* const species_master_module)
         : Movable(
                 application,
                 universe,
                 object_struct,
                 brain_master_module),
         child_of_scene(scene_parent_module, *this),
-        apprentice_of_mesh(mesh_master_module, this)
+        apprentice_of_species(species_master_module, this)
     {
-        if (std::holds_alternative<Species*>(object_struct.mesh_master))
-        {
-            this->object_type = ObjectType::REGULAR;
-        }
-        else if (std::holds_alternative<ShapeshifterSequence*>(object_struct.mesh_master))
-        {
-            this->object_type = ObjectType::SHAPESHIFTER;
-        }
-        else if (std::holds_alternative<Text3d*>(object_struct.mesh_master))
-        {
-            this->object_type = ObjectType::GLYPH_OBJECT;
-        }
-
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Object*";
         this->can_be_erased = true;
@@ -186,15 +164,7 @@ namespace yli::ontology
             return;
         }
 
-        if (this->object_type == ObjectType::REGULAR ||
-                this->object_type == ObjectType::GLYPH_OBJECT) [[likely]]
-        {
-            this->render_this_object(this->get_pipeline());
-        }
-        else if (this->object_type == ObjectType::SHAPESHIFTER)
-        {
-            // TODO.
-        }
+        this->render_this_object(this->get_pipeline());
     }
 
     void Object::render_this_object(Pipeline* const pipeline)
@@ -209,30 +179,20 @@ namespace yli::ontology
             return;
         }
 
-        if (this->object_type == ObjectType::SHAPESHIFTER) [[unlikely]]
+        this->model_matrix = glm::mat4(1.0f);
+
+        Species* const species = static_cast<Species*>(this->apprentice_of_species.get_master());
+
+        if (species == nullptr) [[unlikely]]
         {
-            // TODO: implement rendering for `SHAPESHIFTER`!
-            // Meanwhile this block just exists to exit this function.
             return;
         }
 
-        this->model_matrix = glm::mat4(1.0f);
-
-        if (this->object_type == ObjectType::REGULAR) [[likely]]
+        if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size()) [[likely]]
         {
-            Species* const species = static_cast<Species*>(this->apprentice_of_mesh.get_master());
-
-            if (species == nullptr) [[unlikely]]
+            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
             {
-                return;
-            }
-
-            if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size()) [[likely]]
-            {
-                for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
-                {
-                    this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
-                }
+                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
             }
         }
 
@@ -264,32 +224,11 @@ namespace yli::ontology
 
         MeshModule* master_model = nullptr;
 
-        if (this->object_type == ObjectType::REGULAR) [[likely]]
-        {
-            Species* const master_species = static_cast<Species*>(this->apprentice_of_mesh.get_master());
+        Species* const master_species = static_cast<Species*>(this->apprentice_of_species.get_master());
 
-            if (master_species != nullptr)
-            {
-                master_model = &master_species->mesh;
-            }
-        }
-        else if (this->object_type == ObjectType::SHAPESHIFTER)
+        if (master_species != nullptr)
         {
-            // TODO: set `master_model` so that it points to the correct `ShapeshifterForm` for the current frame!
-            throw std::runtime_error("ERROR: `Object::render_this_object`: shapeshifters are not implemented yet!");
-        }
-        else if (this->object_type == ObjectType::GLYPH_OBJECT)
-        {
-            Glyph* const master_glyph = static_cast<Glyph*>(this->apprentice_of_mesh.get_master());
-
-            if (master_glyph != nullptr)
-            {
-                master_model = &master_glyph->mesh;
-            }
-            else
-            {
-                return;
-            }
+            master_model = &master_species->mesh;
         }
 
         if (this->universe.get_is_opengl_in_use() && master_model != nullptr) [[likely]]
@@ -370,36 +309,12 @@ namespace yli::ontology
 
     Pipeline* Object::get_pipeline() const
     {
-        if (this->object_type == ObjectType::REGULAR) [[likely]]
+        if (const auto* const species = static_cast<Species*>(this->apprentice_of_species.get_master()); species != nullptr) [[likely]]
         {
-            if (const auto* const species = static_cast<Species*>(this->apprentice_of_mesh.get_master()); species != nullptr) [[likely]]
-            {
-                return species->get_pipeline();
-            }
-
-            throw std::runtime_error("ERROR: `Object::get_pipeline`: `species` is `nullptr`!");
-        }
-        else if (this->object_type == ObjectType::SHAPESHIFTER)
-        {
-            if (const auto* const shapeshifter_sequence =
-                    static_cast<ShapeshifterSequence*>(this->apprentice_of_mesh.get_master()); shapeshifter_sequence != nullptr) [[likely]]
-            {
-                return shapeshifter_sequence->get_pipeline();
-            }
-
-            throw std::runtime_error("ERROR: `Object::get_pipeline`: `shapeshifter_sequence` is `nullptr`!");
-        }
-        else if (this->object_type == ObjectType::GLYPH_OBJECT)
-        {
-            if (const auto* const text_3d = static_cast<Text3d*>(this->apprentice_of_mesh.get_master()); text_3d != nullptr) [[likely]]
-            {
-                return text_3d->get_pipeline();
-            }
-
-            throw std::runtime_error("ERROR: `Object::get_pipeline`: `text_3d` is `nullptr`!");
+            return species->get_pipeline();
         }
 
-        throw std::runtime_error("ERROR: `Object::get_pipeline`: unknown object type!");
+        throw std::runtime_error("ERROR: `Object::get_pipeline`: `species` is `nullptr`!");
     }
 
     std::size_t Object::get_number_of_children() const
@@ -501,8 +416,8 @@ namespace yli::ontology
         float float_yaw = std::get<float>(yaw_any_value.data);
         float float_pitch = std::get<float>(pitch_any_value.data);
 
-        ObjectStruct object_struct(&parent);
-        object_struct.mesh_master = &species;
+        ObjectStruct object_struct((Request<Scene>(&parent)));
+        object_struct.species_master = Request(&species);
         object_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
         object_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
         object_struct.local_name = object_name;

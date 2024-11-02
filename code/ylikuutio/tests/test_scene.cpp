@@ -39,31 +39,23 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_NE(scene, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
 
-    const yli::ontology::GenericParentModule* parent_of_pipelines  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_cameras    { nullptr };
     const yli::ontology::GenericParentModule* parent_of_brains     { nullptr };
     const yli::ontology::GenericParentModule* parent_of_waypoints  { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_cameras    { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_pipelines  { nullptr };
     const yli::ontology::GenericParentModule* parent_of_materials  { nullptr };
     const yli::ontology::GenericParentModule* parent_of_species    { nullptr };
     const yli::ontology::GenericParentModule* parent_of_objects    { nullptr };
     const yli::ontology::GenericParentModule* parent_of_symbioses  { nullptr };
     const yli::ontology::GenericParentModule* parent_of_holobionts { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_shapeshifters { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_text_3ds      { nullptr };
 
     for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
     {
         const yli::ontology::GenericParentModule* const generic_parent_module = scene->get_generic_parent_module(datatype);
 
-        if (datatype == yli::data::Datatype::PIPELINE)
-        {
-            parent_of_pipelines = generic_parent_module;
-            ASSERT_NE(parent_of_pipelines, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::CAMERA)
-        {
-            parent_of_cameras = generic_parent_module;
-            ASSERT_NE(parent_of_cameras, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::BRAIN)
+        if (datatype == yli::data::Datatype::BRAIN)
         {
             parent_of_brains = generic_parent_module;
             ASSERT_NE(parent_of_brains, nullptr);
@@ -72,6 +64,16 @@ TEST(scene_must_be_initialized_appropriately, headless)
         {
             parent_of_waypoints = generic_parent_module;
             ASSERT_NE(parent_of_waypoints, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::CAMERA)
+        {
+            parent_of_cameras = generic_parent_module;
+            ASSERT_NE(parent_of_cameras, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::PIPELINE)
+        {
+            parent_of_pipelines = generic_parent_module;
+            ASSERT_NE(parent_of_pipelines, nullptr);
         }
         else if (datatype == yli::data::Datatype::MATERIAL)
         {
@@ -98,20 +100,32 @@ TEST(scene_must_be_initialized_appropriately, headless)
             parent_of_holobionts = generic_parent_module;
             ASSERT_NE(parent_of_holobionts, nullptr);
         }
+        else if (datatype == yli::data::Datatype::SHAPESHIFTER)
+        {
+            parent_of_shapeshifters = generic_parent_module;
+            ASSERT_NE(parent_of_cameras, nullptr);
+        }
+        else if (datatype == yli::data::Datatype::TEXT_3D)
+        {
+            parent_of_text_3ds = generic_parent_module;
+            ASSERT_NE(parent_of_text_3ds, nullptr);
+        }
         else
         {
             ASSERT_EQ(generic_parent_module, nullptr);
         }
     }
 
-    ASSERT_LT(parent_of_pipelines, parent_of_cameras);
-    ASSERT_LT(parent_of_cameras, parent_of_brains);
     ASSERT_LT(parent_of_brains, parent_of_waypoints);
-    ASSERT_LT(parent_of_waypoints, parent_of_materials);
+    ASSERT_LT(parent_of_waypoints, parent_of_cameras);
+    ASSERT_LT(parent_of_cameras, parent_of_pipelines);
+    ASSERT_LT(parent_of_pipelines, parent_of_materials);
     ASSERT_LT(parent_of_materials, parent_of_species);
     ASSERT_LT(parent_of_species, parent_of_objects);
     ASSERT_LT(parent_of_objects, parent_of_symbioses);
     ASSERT_LT(parent_of_symbioses, parent_of_holobionts);
+    ASSERT_LT(parent_of_holobionts, parent_of_shapeshifters);
+    ASSERT_LT(parent_of_shapeshifters, parent_of_text_3ds);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 0);

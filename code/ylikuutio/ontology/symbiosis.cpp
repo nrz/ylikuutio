@@ -23,6 +23,7 @@
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
 #include "generic_entity_factory.hpp"
+#include "request.hpp"
 #include "symbiosis_struct.hpp"
 #include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
@@ -291,13 +292,6 @@ namespace yli::ontology
                 ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
             }
 
-            Pipeline* const pipeline = this->get_pipeline();
-
-            if (pipeline == nullptr) [[unlikely]]
-            {
-                throw std::runtime_error("ERROR: `Symbiosis::create_symbionts`: `pipeline` is `nullptr`!");
-            }
-
             // Create `SymbiontMaterial`s.
             for (const ofbx::Texture* const ofbx_texture : ofbx_diffuse_texture_pointer_vector)
             {
@@ -311,7 +305,7 @@ namespace yli::ontology
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
-                SymbiontMaterialStruct symbiont_material_struct(this, pipeline);
+                SymbiontMaterialStruct symbiont_material_struct((yli::ontology::Request(this)));
                 symbiont_material_struct.ofbx_texture = ofbx_texture;
 
                 GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
@@ -323,7 +317,7 @@ namespace yli::ontology
                 // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                 for (const std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
-                    SymbiontSpeciesStruct symbiont_species_struct(pipeline, symbiont_material);
+                    SymbiontSpeciesStruct symbiont_species_struct((Request(symbiont_material)));
                     symbiont_species_struct.model_loader_struct.model_filename = this->model_filename;
                     symbiont_species_struct.model_loader_struct.model_file_format = this->model_file_format;
                     symbiont_species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;

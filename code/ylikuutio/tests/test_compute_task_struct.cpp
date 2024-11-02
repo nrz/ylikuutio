@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -31,15 +32,15 @@ namespace yli::ontology
 
 TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_parent_provided_as_nullptr)
 {
-    const yli::ontology::ComputeTaskStruct test_compute_task_struct(nullptr);
+    const yli::ontology::ComputeTaskStruct test_compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     ASSERT_EQ(test_compute_task_struct.texture_file_format, "");
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");
 
-    ASSERT_FALSE(test_compute_task_struct.pipeline_parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_compute_task_struct.pipeline_parent));
-    ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent), nullptr);
+    ASSERT_FALSE(test_compute_task_struct.pipeline_parent.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_compute_task_struct.pipeline_parent.data));
+    ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent.data), nullptr);
 
     ASSERT_EQ(test_compute_task_struct.n_max_iterations, 1);
     ASSERT_EQ(test_compute_task_struct.compute_taskID, std::numeric_limits<std::size_t>::max());
@@ -56,15 +57,15 @@ TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_
 
 TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_parent_provided_as_global_name)
 {
-    const yli::ontology::ComputeTaskStruct test_compute_task_struct("foo");
+    const yli::ontology::ComputeTaskStruct test_compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("foo")));
     ASSERT_EQ(test_compute_task_struct.texture_file_format, "");
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");
 
-    ASSERT_FALSE(test_compute_task_struct.pipeline_parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_compute_task_struct.pipeline_parent));
-    ASSERT_EQ(std::get<std::string>(test_compute_task_struct.pipeline_parent), "foo");
+    ASSERT_FALSE(test_compute_task_struct.pipeline_parent.data.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Pipeline*>(test_compute_task_struct.pipeline_parent.data));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_compute_task_struct.pipeline_parent.data));
+    ASSERT_EQ(std::get<std::string>(test_compute_task_struct.pipeline_parent.data), "foo");
 
     ASSERT_EQ(test_compute_task_struct.n_max_iterations, 1);
     ASSERT_EQ(test_compute_task_struct.compute_taskID, std::numeric_limits<std::size_t>::max());

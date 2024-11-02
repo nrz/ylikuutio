@@ -27,6 +27,7 @@
 #include "camera.hpp"
 #include "brain.hpp"
 #include "generic_entity_factory.hpp"
+#include "request.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
 #include "family_templates.hpp"
@@ -64,14 +65,6 @@ namespace yli::ontology
             GenericParentModule* const universe_parent_module)
     : Entity(application, universe, scene_struct),
         child_of_universe(universe_parent_module, *this),
-        parent_of_pipelines(
-                *this,
-                this->registry,
-                "pipelines"),
-        parent_of_cameras(
-                *this,
-                this->registry,
-                "cameras"),
         parent_of_brains(
                 *this,
                 this->registry,
@@ -80,6 +73,14 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "waypoints"),
+        parent_of_cameras(
+                *this,
+                this->registry,
+                "cameras"),
+        parent_of_pipelines(
+                *this,
+                this->registry,
+                "pipelines"),
         parent_of_materials(
                 *this,
                 this->registry,
@@ -100,6 +101,14 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "holobionts"),
+        parent_of_shapeshifters(
+                *this,
+                this->registry,
+                "shapeshifters"),
+        parent_of_text_3ds(
+                *this,
+                this->registry,
+                "text_3ds"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },
         water_level           { scene_struct.water_level },
@@ -125,7 +134,7 @@ namespace yli::ontology
 
         // create the default `Camera`.
         CameraStruct camera_struct = scene_struct.default_camera_struct;
-        camera_struct.scene = this;
+        camera_struct.scene = Request(this);
         this->get_application().get_generic_entity_factory().create_default_camera(camera_struct);
 
         // `Entity` member variables begin here.
@@ -248,28 +257,32 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_children() const
     {
-        return this->parent_of_pipelines.get_number_of_children() +
-            this->parent_of_cameras.get_number_of_children() +
-            this->parent_of_brains.get_number_of_children() +
+        return this->parent_of_brains.get_number_of_children() +
             this->parent_of_waypoints.get_number_of_children() +
+            this->parent_of_cameras.get_number_of_children() +
+            this->parent_of_pipelines.get_number_of_children() +
             this->parent_of_materials.get_number_of_children() +
             this->parent_of_species.get_number_of_children() +
             this->parent_of_objects.get_number_of_children() +
             this->parent_of_symbioses.get_number_of_children() +
-            this->parent_of_holobionts.get_number_of_children();
+            this->parent_of_holobionts.get_number_of_children() +
+            this->parent_of_shapeshifters.get_number_of_children() +
+            this->parent_of_text_3ds.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_shapeshifters.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const
@@ -349,21 +362,21 @@ namespace yli::ontology
 
     GenericParentModule* Scene::get_generic_parent_module(const int type)
     {
-        if (type == yli::data::Datatype::PIPELINE)
-        {
-            return &this->parent_of_pipelines;
-        }
-        else if (type == yli::data::Datatype::CAMERA)
-        {
-            return &this->parent_of_cameras;
-        }
-        else if (type == yli::data::Datatype::BRAIN)
+        if (type == yli::data::Datatype::BRAIN)
         {
             return &this->parent_of_brains;
         }
         else if (type == yli::data::Datatype::WAYPOINT)
         {
             return &this->parent_of_waypoints;
+        }
+        else if (type == yli::data::Datatype::CAMERA)
+        {
+            return &this->parent_of_cameras;
+        }
+        else if (type == yli::data::Datatype::PIPELINE)
+        {
+            return &this->parent_of_pipelines;
         }
         else if (type == yli::data::Datatype::MATERIAL)
         {
@@ -384,6 +397,14 @@ namespace yli::ontology
         else if (type == yli::data::Datatype::HOLOBIONT)
         {
             return &this->parent_of_holobionts;
+        }
+        else if (type == yli::data::Datatype::SHAPESHIFTER)
+        {
+            return &this->parent_of_shapeshifters;
+        }
+        else if (type == yli::data::Datatype::TEXT_3D)
+        {
+            return &this->parent_of_text_3ds;
         }
 
         return nullptr;

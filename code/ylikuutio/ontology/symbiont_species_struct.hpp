@@ -19,27 +19,23 @@
 #define YLIKUUTIO_ONTOLOGY_SYMBIONT_SPECIES_STRUCT_HPP_INCLUDED
 
 #include "mesh_provider_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
-    class Pipeline;
     class SymbiontMaterial;
 
     struct SymbiontSpeciesStruct final : public MeshProviderStruct
     {
-        SymbiontSpeciesStruct(
-                Pipeline* const pipeline,
-                SymbiontMaterial* const symbiont_material_parent)
-            : MeshProviderStruct(pipeline, symbiont_material_parent),
-            symbiont_material_parent { symbiont_material_parent }
+        explicit SymbiontSpeciesStruct(Request<SymbiontMaterial>&& symbiont_material_parent)
+            : symbiont_material_parent { std::move(symbiont_material_parent) }
         {
         }
 
-        std::variant<SymbiontMaterial*, std::string> symbiont_material_parent {};
+        Request<SymbiontMaterial> symbiont_material_parent {};
     };
 }
 

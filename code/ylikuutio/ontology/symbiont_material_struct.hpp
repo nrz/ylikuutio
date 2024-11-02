@@ -19,6 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_SYMBIONT_MATERIAL_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
+
+// Include standard headers
+#include <utility> // std::move
 
 namespace ofbx
 {
@@ -28,20 +32,16 @@ namespace ofbx
 
 namespace yli::ontology
 {
-    class Pipeline;
     class Symbiosis;
 
     struct SymbiontMaterialStruct : public EntityStruct
     {
-        SymbiontMaterialStruct(Symbiosis* const symbiosis_parent,
-                Pipeline* const pipeline_master)
-            : symbiosis_parent { symbiosis_parent },
-            pipeline_master { pipeline_master }
+        SymbiontMaterialStruct(Request<Symbiosis>&& symbiosis_parent)
+            : symbiosis_parent { std::move(symbiosis_parent) }
         {
         }
 
-        Symbiosis* symbiosis_parent                { nullptr };
-        Pipeline* pipeline_master                  { nullptr };
+        Request<Symbiosis> symbiosis_parent {};
         const ofbx::Texture* ofbx_texture          { nullptr };
     };
 }

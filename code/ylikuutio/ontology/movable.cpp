@@ -23,6 +23,7 @@
 #include "scene.hpp"
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
+#include "request_resolver.hpp"
 #include "movable_struct.hpp"
 #include "variable_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -87,10 +88,7 @@ namespace yli::ontology
         apprentice_of_brain(brain_master_module, this),
         rigid_body_module(
                 movable_struct.rigid_body_module_struct,
-                (std::holds_alternative<Scene*>(movable_struct.scene) ? std::get<Scene*>(movable_struct.scene) :
-                 (std::holds_alternative<std::string>(movable_struct.scene) ?
-                  dynamic_cast<Scene*>(universe.registry.get_entity(std::get<std::string>(movable_struct.scene))) :
-                  nullptr)),
+                resolve_request(movable_struct.scene, universe.registry),
                 this),
         initial_rotate_vectors { movable_struct.initial_rotate_vectors },
         initial_rotate_angles { movable_struct.initial_rotate_angles },

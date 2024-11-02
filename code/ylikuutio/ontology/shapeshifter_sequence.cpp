@@ -42,9 +42,9 @@ namespace yli::ontology
             Universe& universe,
             const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(application, universe, shapeshifter_sequence_struct),
+        : MeshProvider(application, universe, shapeshifter_sequence_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-        master_of_objects(this, &this->registry, "objects")
+        master_of_shapeshifters(this, &this->registry, "shapeshifters")
     {
         this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
         this->initial_offset              = shapeshifter_sequence_struct.initial_offset;

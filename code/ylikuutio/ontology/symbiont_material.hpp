@@ -64,6 +64,8 @@ namespace yli::ontology
             Entity* get_parent() const override;
             Pipeline* get_pipeline() const;
 
+            GenericParentModule* get_generic_parent_module(const int type);
+
             GLint get_openGL_textureID() const;
 
             template<typename T1, std::size_t DataSize>

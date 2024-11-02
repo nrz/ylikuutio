@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_3d.hpp"
+#include "scene.hpp"
 #include "vector_font.hpp"
 #include "text_3d_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -33,36 +34,67 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
-    class Scene;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> Text3d::bind_to_new_vector_font_parent(
+    std::optional<yli::data::AnyValue> Text3d::bind_to_new_scene_parent(
             Text3d& text_3d,
-            VectorFont& new_parent)
+            Scene& new_parent)
     {
-        // Disable all character `Object`s of `text_3d`,
+        // Disable all `GlyphObject`s of `text_3d`,
         // set `parent` according to the input, request a new childID
         // from the `new_parent`, and create and enable the needed
-        // character `Object`s of `text_3d`.
-        // TODO: implement creation and enabling the character `Object`s!
+        // `GlyphObject`s of `text_3d`.
+        // TODO: implement creation and enabling the `GlyphObject`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        const Entity* const vector_font_parent = text_3d.get_parent();
+        const Entity* const scene_parent = text_3d.get_parent();
 
-        if (vector_font_parent == nullptr) [[unlikely]]
+        if (scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text3d::bind_to_new_vector_font_parent`: `vector_font_parent` is `nullptr`!");
+            throw std::runtime_error("ERROR: `Text3d::bind_to_new_scene_parent`: `scene_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(text_3d.local_name))
         {
-            std::cerr << "ERROR: `Text3d::bind_to_new_vector_font_parent`: local name is already in use!\n";
+            std::cerr << "ERROR: `Text3d::bind_to_new_scene_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
-        text_3d.child_of_vector_font.unbind_and_bind_to_new_parent(
+        text_3d.child_of_scene.unbind_and_bind_to_new_parent(
                 &new_parent.parent_of_text_3ds);
+
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> Text3d::bind_to_new_vector_font_master(
+            Text3d& text_3d,
+            VectorFont& new_master)
+    {
+        // Disable all `GlyphObject`s of `text_3d`,
+        // set `master` according to the input, request a new apprenticeID
+        // from the `new_master`, and create and enable the needed
+        // `GlyphObject`s of `text_3d`.
+        // TODO: implement creation and enabling the `GlyphObject`s!
+        // Note: different fonts may provide glyphs for different Unicode code points!
+
+        VectorFont* const vector_font_master = text_3d.get_vector_font_master();
+
+        if (vector_font_master == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Text3d::bind_to_new_vector_font_master`: `vector_font_master` is `nullptr`!");
+        }
+
+        if (new_master.has_child(text_3d.local_name))
+        {
+            std::cerr << "ERROR: `Text3d::bind_to_new_vector_font_master`: local name is already in use!\n";
+            return std::nullopt;
+        }
+
+        text_3d.apprentice_of_vector_font.unbind_and_bind_to_new_generic_master_module(
+                &new_master.master_of_text_3ds);
 
         return std::nullopt;
     }
@@ -71,23 +103,25 @@ namespace yli::ontology
             yli::core::Application& application,
             Universe& universe,
             const Text3dStruct& text_3d_struct,
-            GenericParentModule* const vector_font_parent_module,
-            GenericMasterModule* const brain_master_module)
+            GenericParentModule* const scene_parent_module,
+            GenericMasterModule* const brain_master_module,
+            GenericMasterModule* const vector_font_master_module)
         : Movable(
                 application,
                 universe,
                 text_3d_struct,
                 brain_master_module),
-        child_of_vector_font(vector_font_parent_module, *this),
-        master_of_objects(this, &this->registry, "objects")
+        child_of_scene(scene_parent_module, *this),
+        apprentice_of_vector_font(vector_font_master_module, this),
+        master_of_glyph_objects(this, &this->registry, "glyph_objects")
     {
-        // TODO: `Text3d` constructor also creates each `Object`,
+        // TODO: `Text3d` constructor also creates each `GlyphObject`,
         // and binds each to its corresponding `Glyph` for rendering hierarchy,
         // and also binds each to this `Text3d` for ontological hierarchy.
 
         this->text_string = text_3d_struct.text_string;
 
-        // Let's create each glyph `Object` in a loop.
+        // Let's create each `GlyphObject` in a loop.
 
         create_glyph_objects(this->text_string, *this);
 
@@ -98,31 +132,29 @@ namespace yli::ontology
 
     Entity* Text3d::get_parent() const
     {
-        return this->child_of_vector_font.get_parent();
+        return this->child_of_scene.get_parent();
     }
 
     Scene* Text3d::get_scene() const
     {
-        const Entity* const vector_font_parent = this->get_parent();
-
-        if (vector_font_parent == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Text3d::get_scene`: `vector_font_parent` is `nullptr`!");
-        }
-
-        return vector_font_parent->get_scene();
+        return static_cast<Scene*>(this->get_parent());
     }
 
     Pipeline* Text3d::get_pipeline() const
     {
-        const VectorFont* const vector_font_parent = static_cast<VectorFont*>(this->get_parent());
+        const VectorFont* const vector_font_master = this->get_vector_font_master();
 
-        if (vector_font_parent == nullptr) [[unlikely]]
+        if (vector_font_master == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text3d::get_pipeline`: `vector_font_parent` is `nullptr`!");
         }
 
-        return vector_font_parent->get_pipeline();
+        return vector_font_master->get_pipeline();
+    }
+
+    VectorFont* Text3d::get_vector_font_master() const
+    {
+        return static_cast<VectorFont*>(this->apprentice_of_vector_font.get_master());
     }
 
     std::size_t Text3d::get_number_of_children() const

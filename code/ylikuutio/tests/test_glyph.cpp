@@ -17,7 +17,9 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/glyph_struct.hpp"
 
 // Include standard headers
@@ -26,22 +28,25 @@
 
 namespace yli::ontology
 {
-    class Object;
+    class Material;
+    class GlyphObject;
 }
 
 TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct(nullptr);
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
-    yli::ontology::GlyphStruct glyph_struct(vector_font);
+    yli::ontology::GlyphStruct glyph_struct(
+            (yli::ontology::Request(vector_font)),
+            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::Glyph* const glyph = application.get_generic_entity_factory().create_glyph(
             glyph_struct);
     ASSERT_NE(glyph, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(glyph) % alignof(yli::ontology::Glyph), 0);
 
-    ASSERT_NE(glyph->get_generic_master_module<yli::ontology::Object>(), nullptr);
+    ASSERT_NE(glyph->get_generic_master_module<yli::ontology::GlyphObject>(), nullptr);
 
     // `Entity` member functions of `VectorFont`.
     ASSERT_EQ(vector_font->get_number_of_non_variable_children(), 1);
@@ -57,7 +62,9 @@ TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_poin
 TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::GlyphStruct glyph_struct(nullptr);
+    yli::ontology::GlyphStruct glyph_struct(
+            (yli::ontology::Request<yli::ontology::VectorFont>(nullptr)),
+            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::Glyph* const glyph = application.get_generic_entity_factory().create_glyph(
             glyph_struct);
     ASSERT_NE(glyph, nullptr);

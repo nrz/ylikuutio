@@ -54,6 +54,8 @@ namespace yli::ontology
     class Scene;
     class Material;
     class Symbiosis;
+    class ShapeshifterForm;
+    class Glyph;
     class PipelineCompare;
     struct PipelineStruct;
 
@@ -114,6 +116,8 @@ namespace yli::ontology
             GenericParentModule parent_of_compute_tasks;
             MasterModule<Pipeline*> master_of_materials;
             GenericMasterModule master_of_symbioses;
+            GenericMasterModule master_of_shapeshifter_forms;
+            GenericMasterModule master_of_glyphs;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -148,6 +152,18 @@ namespace yli::ontology
         inline GenericMasterModule* Pipeline::get_generic_master_module<Symbiosis>()
         {
             return &this->master_of_symbioses;
+        }
+
+    template<>
+        inline GenericMasterModule* Pipeline::get_generic_master_module<ShapeshifterForm>()
+        {
+            return &this->master_of_shapeshifter_forms;
+        }
+
+    template<>
+        inline GenericMasterModule* Pipeline::get_generic_master_module<Glyph>()
+        {
+            return &this->master_of_glyphs;
         }
 }
 

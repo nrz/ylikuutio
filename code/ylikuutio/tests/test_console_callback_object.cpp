@@ -20,6 +20,7 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_object_struct.hpp"
 
@@ -30,17 +31,18 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Console;
     class ConsoleCallbackEngine;
 }
 
 TEST(console_callback_object_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct;
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
-    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct(console_callback_engine);
+    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request(console_callback_engine)));
     yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
@@ -62,7 +64,7 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `console_callback_engine`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `ConsoleCallbackEngine`.
     ASSERT_EQ(console_callback_engine->get_scene(), nullptr);
@@ -80,11 +82,11 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 TEST(console_callback_object_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct;
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
-    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct(static_cast<yli::ontology::ConsoleCallbackEngine*>(nullptr));
+    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>(nullptr)));
     yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
@@ -92,7 +94,7 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `console_callback_engine`.   
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `ConsoleCallbackEngine`.
     ASSERT_EQ(console_callback_engine->get_scene(), nullptr);
@@ -110,12 +112,12 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct;
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     console_callback_engine_struct.global_name = "foo";
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
-    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct("foo");
+    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("foo")));
     yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
@@ -123,7 +125,7 @@ TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `console_callback_engine`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `ConsoleCallbackEngine`.
     ASSERT_EQ(console_callback_engine->get_scene(), nullptr);
@@ -141,12 +143,12 @@ TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_
 TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct;
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     console_callback_engine_struct.global_name = "foo";
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
-    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct("bar");
+    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("bar")));
     yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
@@ -154,7 +156,7 @@ TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `console_callback_engine`.
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `ConsoleCallbackEngine`.
     ASSERT_EQ(console_callback_engine->get_scene(), nullptr);

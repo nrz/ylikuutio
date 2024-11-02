@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_COMPUTE_TASK_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -27,7 +28,7 @@
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <variant>  // std::variant
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
@@ -35,20 +36,15 @@ namespace yli::ontology
 
     struct ComputeTaskStruct : public EntityStruct
     {
-        explicit ComputeTaskStruct(Pipeline* const pipeline_parent)
-            : pipeline_parent { pipeline_parent }
+        explicit ComputeTaskStruct(Request<Pipeline>&& pipeline_parent)
+            : pipeline_parent { std::move(pipeline_parent) }
         {
         }
 
-        explicit ComputeTaskStruct(const std::string& pipeline_parent)
-            : pipeline_parent { pipeline_parent }
-        {
-        }
-
+        Request<Pipeline> pipeline_parent {};
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        std::variant<Pipeline*, std::string> pipeline_parent {};
         yli::data::AnyValue left_filler_vector_any_value;
         yli::data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).

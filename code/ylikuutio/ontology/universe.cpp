@@ -36,6 +36,7 @@
 #include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
+#include "request.hpp"
 #include "universe_struct.hpp"
 #include "variable_struct.hpp"
 #include "text_struct.hpp"
@@ -160,10 +161,6 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "consoles"),
-        parent_of_console_callback_engines(
-                *this,
-                this->registry,
-                "console_callback_engines"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name      { universe_struct.application_name },
         graphics_api_backend  { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
@@ -265,7 +262,7 @@ namespace yli::ontology
 
         // Create angles and cartesian coordinates text, on bottom left corner.
         TextStruct angles_and_coordinates_text_struct;
-        angles_and_coordinates_text_struct.font_2d_parent = font_2d;
+        angles_and_coordinates_text_struct.font_2d_parent = Request(font_2d);
         angles_and_coordinates_text_struct.screen_width = this->window_width;
         angles_and_coordinates_text_struct.screen_height = this->window_height;
         angles_and_coordinates_text_struct.x = 0;
@@ -283,8 +280,7 @@ namespace yli::ontology
         }
 
         // Create time data text, on top left corner.
-        TextStruct time_text_struct;
-        time_text_struct.font_2d_parent = font_2d;
+        TextStruct time_text_struct((Request(font_2d)));
         time_text_struct.screen_width = this->window_width;
         time_text_struct.screen_height = this->window_height;
         time_text_struct.x = 0;
@@ -302,8 +298,7 @@ namespace yli::ontology
         }
 
         // Create help text.
-        TextStruct help_text_struct;
-        help_text_struct.font_2d_parent = font_2d;
+        TextStruct help_text_struct((Request(font_2d)));
         help_text_struct.screen_width = this->window_width;
         help_text_struct.screen_height = this->window_height;
         help_text_struct.x = 0;
@@ -321,8 +316,7 @@ namespace yli::ontology
         }
 
         // Print frame rate data on top right corner.
-        TextStruct frame_rate_text_struct;
-        frame_rate_text_struct.font_2d_parent = font_2d;
+        TextStruct frame_rate_text_struct((Request(font_2d)));
         frame_rate_text_struct.screen_width = this->window_width;
         frame_rate_text_struct.screen_height = this->window_height;
         frame_rate_text_struct.x = this->window_width;
@@ -1130,8 +1124,7 @@ namespace yli::ontology
             this->parent_of_audio_tracks.get_number_of_children() +
             this->parent_of_font_2ds.get_number_of_children() +
             this->parent_of_input_modes.get_number_of_children() +
-            this->parent_of_consoles.get_number_of_children() +
-            this->parent_of_console_callback_engines.get_number_of_children();
+            this->parent_of_consoles.get_number_of_children();
     }
 
     std::size_t Universe::get_number_of_descendants() const
@@ -1142,8 +1135,7 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector);
+            yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
     }
 
     [[nodiscard]] bool Universe::create_window()

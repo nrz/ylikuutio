@@ -18,6 +18,7 @@
 #include "mesh_module.hpp"
 #include "universe.hpp"
 #include "pipeline.hpp"
+#include "request.hpp"
 #include "mesh_provider_struct.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
@@ -42,7 +43,8 @@ namespace yli::ontology
 
     MeshModule::MeshModule(
             Universe& universe,
-            const MeshProviderStruct& mesh_provider_struct)
+            const MeshProviderStruct& mesh_provider_struct,
+            Pipeline* const pipeline)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -53,15 +55,15 @@ namespace yli::ontology
 
         if (should_load_vertices_uvs_and_normals &&
                 universe.get_is_opengl_in_use() &&
-                mesh_provider_struct.pipeline != nullptr)
+                pipeline != nullptr)
         {
             // VAO.
             glGenVertexArrays(1, &this->vao);
 
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_uv");
-            this->vertex_normal_modelspace_id = glGetAttribLocation(mesh_provider_struct.pipeline->get_program_id(), "vertex_normal_modelspace");
+            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_position_modelspace");
+            this->vertex_uv_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_uv");
+            this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_normal_modelspace");
 
             yli::load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
             model_loader_struct.image_width_pointer           = &this->image_width;
@@ -87,26 +89,6 @@ namespace yli::ontology
                     is_debug_mode);
 
             this->are_opengl_buffers_initialized = true;
-        }
-        else if (should_load_vertices_uvs_and_normals && universe.get_is_opengl_in_use())
-        {
-            if (std::holds_alternative<Ecosystem*>(mesh_provider_struct.parent) &&
-                    std::get<Ecosystem*>(mesh_provider_struct.parent) == nullptr)
-            {
-                std::cerr << "ERROR: `MeshModule::MeshModule`: `Ecosystem` parent is `nullptr`!\n";
-            }
-            else if (std::holds_alternative<Scene*>(mesh_provider_struct.parent) &&
-                    std::get<Scene*>(mesh_provider_struct.parent) == nullptr)
-            {
-                std::cerr << "ERROR: `MeshModule::MeshModule`: `Scene` parent is `nullptr`!\n";
-            }
-
-            if (mesh_provider_struct.pipeline == nullptr)
-            {
-                std::cerr << "ERROR: `MeshModule::MeshModule`: `this->pipeline` is `nullptr`!\n";
-            }
-
-            // Do not load model.
         }
     }
 

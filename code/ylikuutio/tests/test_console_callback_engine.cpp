@@ -19,10 +19,11 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstddef> // std::size_t, uintptr_t
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology
@@ -33,7 +34,7 @@ namespace yli::ontology
 TEST(console_callback_engine_must_be_initialized_appropriately, universe_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct;
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
     ASSERT_NE(console_callback_engine, nullptr);
@@ -54,13 +55,13 @@ TEST(console_callback_engine_must_be_initialized_appropriately, universe_provide
     }
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(console_callback_engine->get_childID(), 0);
+    ASSERT_EQ(console_callback_engine->get_childID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(console_callback_engine->get_type(), "yli::ontology::ConsoleCallbackEngine*");
     ASSERT_FALSE(console_callback_engine->get_can_be_erased());
     ASSERT_EQ(console_callback_engine->get_scene(), nullptr);
-    ASSERT_EQ(console_callback_engine->get_parent(), &application.get_universe());
+    ASSERT_EQ(console_callback_engine->get_parent(), nullptr);
     ASSERT_EQ(console_callback_engine->get_number_of_non_variable_children(), 0);
 }

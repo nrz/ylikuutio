@@ -23,6 +23,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -76,7 +77,7 @@ namespace ajokki
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
         // Create the pipeline, store it in `joensuu_center_west_pipeline`.
-        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct(joensuu_center_west_scene);
+        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct((yli::ontology::Request(joensuu_center_west_scene)));
         joensuu_center_west_pipeline_struct.global_name = "joensuu_center_west_pipeline";
         joensuu_center_west_pipeline_struct.local_name = "joensuu_regular_pipeline";
         joensuu_center_west_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -94,7 +95,9 @@ namespace ajokki
         joensuu_center_west_pipeline->set_global_name("joensuu_center_west_pipeline");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct(joensuu_center_west_scene, joensuu_center_west_pipeline);
+        yli::ontology::MaterialStruct joensuu_center_west_grass_material_struct(
+                (yli::ontology::Request(joensuu_center_west_scene)),
+                (yli::ontology::Request(joensuu_center_west_pipeline)));
         joensuu_center_west_grass_material_struct.texture_file_format = "png";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -110,9 +113,8 @@ namespace ajokki
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
         yli::ontology::SpeciesStruct joensuu_center_west_terrain_species_struct(
-                joensuu_center_west_scene,
-                joensuu_center_west_pipeline,
-                joensuu_center_west_grass_material);
+                (yli::ontology::Request(joensuu_center_west_scene)),
+                (yli::ontology::Request(joensuu_center_west_grass_material)));
         joensuu_center_west_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_species_struct.model_loader_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.model_loader_struct.x_step = 4;
@@ -129,13 +131,15 @@ namespace ajokki
         joensuu_center_west_terrain_species->set_global_name("joensuu_center_west_terrain_species");
 
         // Create Joensuu center west terrain.
-        yli::ontology::ObjectStruct joensuu_center_west_struct(joensuu_center_west_scene);
-        joensuu_center_west_struct.mesh_master = joensuu_center_west_terrain_species;
+        yli::ontology::ObjectStruct joensuu_center_west_struct((yli::ontology::Request(joensuu_center_west_scene)));
+        joensuu_center_west_struct.species_master = yli::ontology::Request(joensuu_center_west_terrain_species);
         joensuu_center_west_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct(joensuu_center_west_scene, joensuu_center_west_pipeline);
+        yli::ontology::MaterialStruct orange_fur_material_joensuu_struct(
+                (yli::ontology::Request(joensuu_center_west_scene)),
+                (yli::ontology::Request(joensuu_center_west_pipeline)));
         orange_fur_material_joensuu_struct.texture_file_format = "png";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
@@ -150,7 +154,9 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
-        yli::ontology::SpeciesStruct horse_species_struct(joensuu_center_west_scene, joensuu_center_west_pipeline, orange_fur_material_joensuu);
+        yli::ontology::SpeciesStruct horse_species_struct(
+                (yli::ontology::Request(joensuu_center_west_scene)),
+                (yli::ontology::Request(orange_fur_material_joensuu)));
         horse_species_struct.model_loader_struct.model_file_format = "fbx";
         horse_species_struct.model_loader_struct.model_filename = "horse.fbx";
 
@@ -165,8 +171,8 @@ namespace ajokki
 
         horse_species->set_global_name("horse_species");
 
-        yli::ontology::ObjectStruct horse_object_struct1(joensuu_center_west_scene);
-        horse_object_struct1.mesh_master = horse_species;
+        yli::ontology::ObjectStruct horse_object_struct1((yli::ontology::Request(joensuu_center_west_scene)));
+        horse_object_struct1.species_master = yli::ontology::Request(horse_species);
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         horse_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
@@ -183,7 +189,7 @@ namespace ajokki
         horse1->set_global_name("horse1");
 
         yli::ontology::CameraStruct horse_camera_struct;
-        horse_camera_struct.scene = joensuu_center_west_scene;
+        horse_camera_struct.scene = yli::ontology::Request(joensuu_center_west_scene);
         horse_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(2303.00f, -1822.00f, 201.00f);
         horse_camera_struct.orientation.yaw = -0.97f;
         horse_camera_struct.orientation.pitch = -0.18f;

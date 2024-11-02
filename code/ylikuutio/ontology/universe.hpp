@@ -349,7 +349,6 @@ namespace yli::ontology
             GenericParentModule parent_of_font_2ds;
             ParentOfInputModesModule parent_of_input_modes;
             GenericParentModule parent_of_consoles;
-            GenericParentModule parent_of_console_callback_engines;
 
             FramebufferModule framebuffer_module;
 

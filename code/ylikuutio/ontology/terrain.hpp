@@ -40,7 +40,7 @@ namespace yli::ontology
                     Universe& universe,
                     const ObjectStruct& terrain_struct,
                     GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const mesh_master_module,
+                    GenericMasterModule* const species_master_module,
                     GenericMasterModule* const /* brain_master_module */);
 
             ~Terrain() = default;

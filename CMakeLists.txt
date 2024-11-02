@@ -612,8 +612,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/gl_attrib_locations.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/glyph_object.cpp
+    code/ylikuutio/ontology/glyph_object.hpp
     code/ylikuutio/ontology/glyph_object_creation.cpp
     code/ylikuutio/ontology/glyph_object_creation.hpp
+    code/ylikuutio/ontology/glyph_object_struct.hpp
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
@@ -644,6 +647,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/material_struct.hpp
     code/ylikuutio/ontology/mesh_module.cpp
     code/ylikuutio/ontology/mesh_module.hpp
+    code/ylikuutio/ontology/mesh_provider.cpp
+    code/ylikuutio/ontology/mesh_provider.hpp
     code/ylikuutio/ontology/mesh_provider_struct.hpp
     code/ylikuutio/ontology/mission.cpp
     code/ylikuutio/ontology/mission.hpp
@@ -658,7 +663,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
-    code/ylikuutio/ontology/object_type.hpp
     code/ylikuutio/ontology/orientation_module.cpp
     code/ylikuutio/ontology/orientation_module.hpp
     code/ylikuutio/ontology/parent_of_input_modes_module.cpp
@@ -689,12 +693,15 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/pipeline_priority_queue.cpp
     code/ylikuutio/ontology/pipeline_priority_queue.hpp
     code/ylikuutio/ontology/pipeline_struct.hpp
+    code/ylikuutio/ontology/shapeshifter.cpp
+    code/ylikuutio/ontology/shapeshifter.hpp
     code/ylikuutio/ontology/shapeshifter_form.cpp
     code/ylikuutio/ontology/shapeshifter_form.hpp
     code/ylikuutio/ontology/shapeshifter_form_struct.hpp
     code/ylikuutio/ontology/shapeshifter_sequence.cpp
     code/ylikuutio/ontology/shapeshifter_sequence.hpp
     code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
+    code/ylikuutio/ontology/shapeshifter_struct.hpp
     code/ylikuutio/ontology/shapeshifter_transformation.cpp
     code/ylikuutio/ontology/shapeshifter_transformation.hpp
     code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp
@@ -1069,6 +1076,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_pipeline_struct.cpp
         code/ylikuutio/tests/test_shapeshifter.cpp
         code/ylikuutio/tests/test_species.cpp
+        code/ylikuutio/tests/test_symbiont_material.cpp
         code/ylikuutio/tests/test_symbiont_material_struct.cpp
         code/ylikuutio/tests/test_symbiont_species.cpp
         code/ylikuutio/tests/test_symbiosis.cpp

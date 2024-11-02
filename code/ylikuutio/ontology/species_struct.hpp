@@ -19,42 +19,40 @@
 #define YLIKUUTIO_ONTOLOGY_SPECIES_STRUCT_HPP_INCLUDED
 
 #include "mesh_provider_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string> // std::string
+#include <utility> // std::move
+#include <variant> // std::variant
 
 namespace yli::ontology
 {
     class Ecosystem;
     class Scene;
-    class Pipeline;
     class Material;
 
     struct SpeciesStruct final : public MeshProviderStruct
     {
         SpeciesStruct(
-                Ecosystem* const ecosystem_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : MeshProviderStruct(ecosystem_parent, pipeline, material_master)
+                Request<Ecosystem>&& ecosystem_parent,
+                Request<Material>&& material_master)
+            : parent { std::move(ecosystem_parent) },
+            material_master { std::move(material_master) }
         {
         }
 
         SpeciesStruct(
-                Scene* const scene_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : MeshProviderStruct(scene_parent, pipeline, material_master)
+                Request<Scene>&& scene_parent,
+                Request<Material>&& material_master)
+            : parent { std::move(scene_parent) },
+            material_master { std::move(material_master) }
         {
         }
 
-        SpeciesStruct(
-                const std::string& parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : MeshProviderStruct(parent, pipeline, material_master)
-        {
-        }
+        // TODO: rename `parent` to `ecosystem_or_scene` parent and
+        // modify `EntityFactory` accordingly!
+        std::variant<Request<Ecosystem>, Request<Scene>> parent {};
+        Request<Material> material_master {};
     };
 }
 

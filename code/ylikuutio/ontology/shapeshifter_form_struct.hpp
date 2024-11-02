@@ -19,33 +19,23 @@
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_FORM_STRUCT_HPP_INCLUDED
 
 #include "mesh_provider_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string> // std::string
+#include <utility> // std::move
 
 namespace yli::ontology
 {
-    class Pipeline;
-    class Material;
     class ShapeshifterTransformation;
 
     struct ShapeshifterFormStruct final : public MeshProviderStruct
     {
-        ShapeshifterFormStruct(
-                ShapeshifterTransformation* const shapeshifter_transformation_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : MeshProviderStruct(shapeshifter_transformation_parent, pipeline, material_master)
+        ShapeshifterFormStruct(Request<ShapeshifterTransformation>&& shapeshifter_transformation_parent)
+            : shapeshifter_transformation_parent { std::move(shapeshifter_transformation_parent) }
         {
         }
 
-        ShapeshifterFormStruct(
-                const std::string& shapeshifter_transformation_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : MeshProviderStruct(shapeshifter_transformation_parent, pipeline, material_master)
-        {
-        }
+        Request<ShapeshifterTransformation> shapeshifter_transformation_parent {};
     };
 }
 

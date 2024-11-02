@@ -19,24 +19,29 @@
 #define YLIKUUTIO_ONTOLOGY_TEXT_3D_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <string>   // std::string
-#include <variant>  // std::variant
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
+    class Scene;
     class VectorFont;
 
     struct Text3dStruct final : public MovableStruct
     {
-        explicit Text3dStruct(VectorFont* const vector_font_parent)
-            : vector_font_parent { vector_font_parent }
+        explicit Text3dStruct(
+                Request<Scene>&& scene_parent,
+                Request<VectorFont>&& vector_font_master)
+            : MovableStruct(std::move(scene_parent)),
+            vector_font_master { std::move(vector_font_master) }
         {
         }
 
+        Request<VectorFont> vector_font_master {};
         std::string text_string;
-        std::variant<VectorFont*, std::string> vector_font_parent {};
     };
 }
 

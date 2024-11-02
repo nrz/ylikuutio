@@ -18,7 +18,6 @@
 #include "species.hpp"
 #include "entity.hpp"
 #include "ecosystem.hpp"
-#include "mesh_module.hpp"
 #include "scene.hpp"
 #include "material.hpp"
 #include "object.hpp"
@@ -146,7 +145,7 @@ namespace yli::ontology
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
         master_of_objects(this, &this->registry, "objects"),
         apprentice_of_material(material_master_module, this),
-        mesh(universe, species_struct)
+        mesh(universe, species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Species*";

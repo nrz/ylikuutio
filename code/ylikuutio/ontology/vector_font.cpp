@@ -23,6 +23,7 @@
 #include "text_3d.hpp"
 #include "generic_entity_factory.hpp"
 #include "family_templates.hpp"
+#include "request.hpp"
 #include "vector_font_struct.hpp"
 #include "glyph_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -97,9 +98,9 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "glyphs"),
-        parent_of_text_3ds(
-                *this,
-                this->registry,
+        master_of_text_3ds(
+                this,
+                &this->registry,
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },
         font_filename         { vector_font_struct.font_filename },
@@ -135,22 +136,6 @@ namespace yli::ontology
             return;
         }
 
-        Pipeline* const pipeline_parent_of_material = static_cast<Pipeline*>(material_parent->get_parent());
-
-        if (pipeline_parent_of_material == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::VectorFont`: `pipeline_parent_of_material` is `nullptr`!\n";
-            return;
-        }
-
-        Scene* const scene = this->get_scene();
-
-        if (scene == nullptr)
-        {
-            std::cerr << "ERROR: `VectorFont::VectorFont`: `scene` is `nullptr`!\n";
-            return;
-        }
-
         if (font_loading_result)
         {
             // OK, `VectorFont` loading was successful.
@@ -171,9 +156,9 @@ namespace yli::ontology
                     continue;
                 }
 
-                GlyphStruct glyph_struct(this);
-                glyph_struct.pipeline = pipeline_parent_of_material;
-                glyph_struct.material_or_symbiont_material = material_parent;
+                GlyphStruct glyph_struct(
+                        (Request(this)),
+                        (Request(material_parent)));
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 glyph_struct.unicode_char_pointer = unicode_char_pointer;
@@ -251,14 +236,12 @@ namespace yli::ontology
 
     std::size_t VectorFont::get_number_of_children() const
     {
-        return this->parent_of_glyphs.get_number_of_children() +
-            this->parent_of_text_3ds.get_number_of_children();
+        return this->parent_of_glyphs.get_number_of_children();
     }
 
     std::size_t VectorFont::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector);
     }
 
     GenericParentModule* VectorFont::get_generic_parent_module(const int type)
@@ -266,10 +249,6 @@ namespace yli::ontology
         if (type == yli::data::Datatype::GLYPH)
         {
             return &this->parent_of_glyphs;
-        }
-        else if (type == yli::data::Datatype::TEXT_3D)
-        {
-            return &this->parent_of_text_3ds;
         }
 
         return nullptr;

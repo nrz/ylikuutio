@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
+#include "symbiont_material.hpp"
 #include "symbiont_species_struct.hpp"
 
 // Include standard headers
@@ -28,6 +29,8 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
     class Universe;
     class Scene;
@@ -40,7 +43,7 @@ namespace yli::ontology
         : Entity(application, universe, symbiont_species_struct),
         child_of_symbiont_material(symbiont_material_parent_module, *this),
         master_of_bionts(this, &this->registry, "bionts"),
-        mesh(universe, symbiont_species_struct)
+        mesh(universe, symbiont_species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontSpecies*";
@@ -72,6 +75,20 @@ namespace yli::ontology
 
         return symbiont_material_parent->get_scene();
     }
+
+    Pipeline* SymbiontSpecies::get_pipeline() const
+    {
+        SymbiontMaterial* const symbiont_material = static_cast<SymbiontMaterial*>(
+                this->child_of_symbiont_material.get_parent());
+
+        if (symbiont_material != nullptr)
+        {
+            return symbiont_material->get_pipeline();
+        }
+
+        return nullptr;
+    }
+
 
     std::size_t SymbiontSpecies::get_number_of_children() const
     {

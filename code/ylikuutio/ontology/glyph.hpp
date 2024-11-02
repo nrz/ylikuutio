@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
 
@@ -47,10 +48,12 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Universe;
     class Scene;
-    class Object;
+    class Pipeline;
     class VectorFont;
+    class GlyphObject;
     struct GlyphStruct;
 
     class Glyph final : public Entity
@@ -60,7 +63,8 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const GlyphStruct& glyph_struct,
-                    GenericParentModule* const vector_font_parent_module);
+                    GenericParentModule* const vector_font_parent_module,
+                    GenericMasterModule* const material_master_module);
 
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph() = default;
@@ -79,6 +83,8 @@ namespace yli::ontology
         public:
             Scene* get_scene() const override;
 
+            Pipeline* get_pipeline() const;
+
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
@@ -96,7 +102,8 @@ namespace yli::ontology
 
         private:
             ChildModule child_of_vector_font;
-            GenericMasterModule master_of_objects;
+            ApprenticeModule apprentice_of_material;
+            GenericMasterModule master_of_glyph_objects;
 
         public:
             MeshModule mesh;
@@ -108,9 +115,9 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericMasterModule* Glyph::get_generic_master_module<Object>()
+        inline GenericMasterModule* Glyph::get_generic_master_module<GlyphObject>()
         {
-            return &this->master_of_objects;
+            return &this->master_of_glyph_objects;
         }
 }
 

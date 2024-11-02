@@ -19,10 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -30,17 +30,12 @@ namespace yli::ontology
 
     struct LispFunctionStruct : public EntityStruct
     {
-        explicit LispFunctionStruct(Console* const console_parent)
-            : console_parent { console_parent }
+        explicit LispFunctionStruct(Request<Console>&& console_parent)
+            : console_parent { std::move(console_parent) }
         {
         }
 
-        explicit LispFunctionStruct(const std::string& console_parent)
-            : console_parent { console_parent }
-        {
-        }
-
-        std::variant<Console*, std::string> console_parent {};
+        Request<Console> console_parent {};
     };
 }
 

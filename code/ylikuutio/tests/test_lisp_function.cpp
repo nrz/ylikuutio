@@ -18,11 +18,17 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/lisp_function.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/lisp_function_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // uintptr_t
 #include <limits>  // std::numeric_limits
+
+namespace yli::ontology
+{
+    class Console;
+}
 
 TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_pointer)
 {
@@ -30,7 +36,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::LispFunctionStruct lisp_function_struct(console);
+    yli::ontology::LispFunctionStruct lisp_function_struct((yli::ontology::Request(console)));
     yli::ontology::LispFunction* const lisp_function = application.get_generic_entity_factory().create_lisp_function(
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);
@@ -51,7 +57,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
 TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::LispFunctionStruct lisp_function_struct(nullptr);
+    yli::ontology::LispFunctionStruct lisp_function_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
     yli::ontology::LispFunction* const lisp_function = application.get_generic_entity_factory().create_lisp_function(
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);
@@ -73,7 +79,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
     console_struct.global_name = "foo";
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::LispFunctionStruct lisp_function_struct("foo");
+    yli::ontology::LispFunctionStruct lisp_function_struct((yli::ontology::Request<yli::ontology::Console>("foo")));
     yli::ontology::LispFunction* const lisp_function = application.get_generic_entity_factory().create_lisp_function(
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);
@@ -98,7 +104,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_invali
     console_struct.global_name = "foo";
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::LispFunctionStruct lisp_function_struct("bar");
+    yli::ontology::LispFunctionStruct lisp_function_struct((yli::ontology::Request<yli::ontology::Console>("bar")));
     yli::ontology::LispFunction* const lisp_function = application.get_generic_entity_factory().create_lisp_function(
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);

@@ -69,6 +69,7 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
     struct BrainStruct;
+    class GenericMasterModule;
 
     class Brain final : public Entity
     {

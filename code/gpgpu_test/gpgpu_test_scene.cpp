@@ -20,6 +20,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
@@ -64,7 +65,7 @@ namespace gpgpu_test
         gpgpu_test_scene->set_twin_turbo_factor(100.0f);
 
         // Create the pipeline, store it in `identity_pipeline`.
-        yli::ontology::PipelineStruct identity_pipeline_struct(gpgpu_test_scene);
+        yli::ontology::PipelineStruct identity_pipeline_struct((yli::ontology::Request(gpgpu_test_scene)));
         identity_pipeline_struct.vertex_shader = "identity.vert";
         identity_pipeline_struct.fragment_shader = "identity.frag";
 
@@ -77,7 +78,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct identity_pipeline_png_compute_task_struct(identity_pipeline);
+        yli::ontology::ComputeTaskStruct identity_pipeline_png_compute_task_struct((yli::ontology::Request(identity_pipeline)));
         identity_pipeline_png_compute_task_struct.texture_file_format = "png";
         identity_pipeline_png_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         identity_pipeline_png_compute_task_struct.output_filename = "gpgpu_identity_output.data";
@@ -93,7 +94,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct identity_pipeline_csv_unsigned_short_compute_task_struct(identity_pipeline);
+        yli::ontology::ComputeTaskStruct identity_pipeline_csv_unsigned_short_compute_task_struct((yli::ontology::Request(identity_pipeline)));
         identity_pipeline_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
         identity_pipeline_csv_unsigned_short_compute_task_struct.texture_filename = "some_finnish_railway_stations_unsigned_integer_with_fill.csv";
         identity_pipeline_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_identity_output_unsigned_short_with_fill.data";
@@ -113,7 +114,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `sobel_pipeline`.
-        yli::ontology::PipelineStruct sobel_pipeline_struct(gpgpu_test_scene);
+        yli::ontology::PipelineStruct sobel_pipeline_struct((yli::ontology::Request(gpgpu_test_scene)));
         sobel_pipeline_struct.vertex_shader = "identity.vert";
         sobel_pipeline_struct.fragment_shader = "sobel_gradient_magnitude.frag";
 
@@ -126,7 +127,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct sobel_pipeline_compute_task_struct(sobel_pipeline);
+        yli::ontology::ComputeTaskStruct sobel_pipeline_compute_task_struct((yli::ontology::Request(sobel_pipeline)));
         sobel_pipeline_compute_task_struct.texture_file_format = "png";
         sobel_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         sobel_pipeline_compute_task_struct.output_filename = "gpgpu_sobel_output.data";
@@ -145,7 +146,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `go_west_pipeline`.
-        yli::ontology::PipelineStruct go_west_pipeline_struct(gpgpu_test_scene);
+        yli::ontology::PipelineStruct go_west_pipeline_struct((yli::ontology::Request(gpgpu_test_scene)));
         go_west_pipeline_struct.vertex_shader = "identity.vert";
         go_west_pipeline_struct.fragment_shader = "go_west.frag";
 
@@ -158,7 +159,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct go_west_pipeline_compute_task_struct(go_west_pipeline);
+        yli::ontology::ComputeTaskStruct go_west_pipeline_compute_task_struct((yli::ontology::Request(go_west_pipeline)));
         go_west_pipeline_compute_task_struct.texture_file_format = "png";
         go_west_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         go_west_pipeline_compute_task_struct.output_filename = "gpgpu_go_west_output.data";
@@ -177,7 +178,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `vanish_west_pipeline`.
-        yli::ontology::PipelineStruct vanish_west_pipeline_struct(gpgpu_test_scene);
+        yli::ontology::PipelineStruct vanish_west_pipeline_struct((yli::ontology::Request(gpgpu_test_scene)));
         vanish_west_pipeline_struct.vertex_shader = "identity.vert";
         vanish_west_pipeline_struct.fragment_shader = "vanish_west.frag";
 
@@ -190,7 +191,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct vanish_west_pipeline_compute_task_struct(vanish_west_pipeline);
+        yli::ontology::ComputeTaskStruct vanish_west_pipeline_compute_task_struct((yli::ontology::Request(vanish_west_pipeline)));
         vanish_west_pipeline_compute_task_struct.texture_file_format = "png";
         vanish_west_pipeline_compute_task_struct.texture_filename = "numbers_123456_black_and_white.png";
         vanish_west_pipeline_compute_task_struct.output_filename = "gpgpu_vanish_west_output.data";
@@ -209,7 +210,7 @@ namespace gpgpu_test
         }
 
         // Create the pipeline, store it in `floyd_warshall_pipeline`.
-        yli::ontology::PipelineStruct floyd_warshall_pipeline_struct(gpgpu_test_scene);
+        yli::ontology::PipelineStruct floyd_warshall_pipeline_struct((yli::ontology::Request(gpgpu_test_scene)));
         floyd_warshall_pipeline_struct.vertex_shader = "identity.vert";
         floyd_warshall_pipeline_struct.fragment_shader = "floyd_warshall.frag";
 
@@ -222,7 +223,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct(floyd_warshall_pipeline);
+        yli::ontology::ComputeTaskStruct floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct((yli::ontology::Request(floyd_warshall_pipeline)));
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_unsigned_short.data";
@@ -242,7 +243,7 @@ namespace gpgpu_test
             return nullptr;
         }
 
-        yli::ontology::ComputeTaskStruct floyd_warshall_pipeline_csv_float_compute_task_struct(floyd_warshall_pipeline);
+        yli::ontology::ComputeTaskStruct floyd_warshall_pipeline_csv_float_compute_task_struct((yli::ontology::Request(floyd_warshall_pipeline)));
         floyd_warshall_pipeline_csv_float_compute_task_struct.texture_file_format = "csv";
         floyd_warshall_pipeline_csv_float_compute_task_struct.texture_filename = "more_finnish_railway_stations_unsigned_integer.csv";
         floyd_warshall_pipeline_csv_float_compute_task_struct.output_filename = "gpgpu_floyd_warshall_output_float.data";

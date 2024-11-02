@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
@@ -52,11 +53,15 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
 
     rest_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rest_brain_struct(scene, rest_callback_engine);
+    yli::ontology::BrainStruct rest_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rest_callback_engine)));
     yli::ontology::Brain* const rest_brain = application.get_generic_entity_factory().create_brain(
             rest_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rest_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rest_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -90,11 +95,15 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_2)
 
     rest_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rest_brain_struct(scene, rest_callback_engine);
+    yli::ontology::BrainStruct rest_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rest_callback_engine)));
     yli::ontology::Brain* const rest_brain = application.get_generic_entity_factory().create_brain(
             rest_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rest_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rest_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -128,11 +137,15 @@ TEST(go_east_brain_must_go_east, object_with_speed_1)
 
     go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_east_brain_struct(scene, go_east_callback_engine);
+    yli::ontology::BrainStruct go_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_east_callback_engine)));
     yli::ontology::Brain* const go_east_brain = application.get_generic_entity_factory().create_brain(
             go_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -168,11 +181,15 @@ TEST(go_east_brain_must_go_east, object_with_speed_2)
 
     go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_east_brain_struct(scene, go_east_callback_engine);
+    yli::ontology::BrainStruct go_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_east_callback_engine)));
     yli::ontology::Brain* const go_east_brain = application.get_generic_entity_factory().create_brain(
             go_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -208,11 +225,15 @@ TEST(go_west_brain_must_go_west, object_with_speed_1)
 
     go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_west_brain_struct(scene, go_west_callback_engine);
+    yli::ontology::BrainStruct go_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_west_callback_engine)));
     yli::ontology::Brain* const go_west_brain = application.get_generic_entity_factory().create_brain(
             go_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -248,11 +269,15 @@ TEST(go_west_brain_must_go_west, object_with_speed_2)
 
     go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_west_brain_struct(scene, go_west_callback_engine);
+    yli::ontology::BrainStruct go_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_west_callback_engine)));
     yli::ontology::Brain* const go_west_brain = application.get_generic_entity_factory().create_brain(
             go_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -288,11 +313,15 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
 
     go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_north_brain_struct(scene, go_north_callback_engine);
+    yli::ontology::BrainStruct go_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_north_callback_engine)));
     yli::ontology::Brain* const go_north_brain = application.get_generic_entity_factory().create_brain(
             go_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -328,11 +357,15 @@ TEST(go_north_brain_must_go_north, object_with_speed_2)
 
     go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_north_brain_struct(scene, go_north_callback_engine);
+    yli::ontology::BrainStruct go_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_north_callback_engine)));
     yli::ontology::Brain* const go_north_brain = application.get_generic_entity_factory().create_brain(
             go_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -368,11 +401,15 @@ TEST(go_south_brain_must_go_south, object_with_speed_1)
 
     go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_south_brain_struct(scene, go_south_callback_engine);
+    yli::ontology::BrainStruct go_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_south_callback_engine)));
     yli::ontology::Brain* const go_south_brain = application.get_generic_entity_factory().create_brain(
             go_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -408,11 +445,15 @@ TEST(go_south_brain_must_go_south, object_with_speed_2)
 
     go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_south_brain_struct(scene, go_south_callback_engine);
+    yli::ontology::BrainStruct go_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_south_callback_engine)));
     yli::ontology::Brain* const go_south_brain = application.get_generic_entity_factory().create_brain(
             go_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(go_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(go_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -448,11 +489,15 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_1)
 
     orient_to_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_east_brain_struct(scene, orient_to_east_callback_engine);
+    yli::ontology::BrainStruct orient_to_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_east_callback_engine)));
     yli::ontology::Brain* const orient_to_east_brain = application.get_generic_entity_factory().create_brain(
             orient_to_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -488,11 +533,15 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_2)
 
     orient_to_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_east_brain_struct(scene, orient_to_east_callback_engine);
+    yli::ontology::BrainStruct orient_to_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_east_callback_engine)));
     yli::ontology::Brain* const orient_to_east_brain = application.get_generic_entity_factory().create_brain(
             orient_to_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -528,11 +577,15 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
 
     orient_to_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_west_brain_struct(scene, orient_to_west_callback_engine);
+    yli::ontology::BrainStruct orient_to_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_west_callback_engine)));
     yli::ontology::Brain* const orient_to_west_brain = application.get_generic_entity_factory().create_brain(
             orient_to_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -568,11 +621,15 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
 
     orient_to_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_west_brain_struct(scene, orient_to_west_callback_engine);
+    yli::ontology::BrainStruct orient_to_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_west_callback_engine)));
     yli::ontology::Brain* const orient_to_west_brain = application.get_generic_entity_factory().create_brain(
             orient_to_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -608,11 +665,15 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
 
     orient_to_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_north_brain_struct(scene, orient_to_north_callback_engine);
+    yli::ontology::BrainStruct orient_to_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_north_callback_engine)));
     yli::ontology::Brain* const orient_to_north_brain = application.get_generic_entity_factory().create_brain(
             orient_to_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -648,11 +709,15 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
 
     orient_to_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_north_brain_struct(scene, orient_to_north_callback_engine);
+    yli::ontology::BrainStruct orient_to_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_north_callback_engine)));
     yli::ontology::Brain* const orient_to_north_brain = application.get_generic_entity_factory().create_brain(
             orient_to_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -688,11 +753,15 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
 
     orient_to_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_south_brain_struct(scene, orient_to_south_callback_engine);
+    yli::ontology::BrainStruct orient_to_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_south_callback_engine)));
     yli::ontology::Brain* const orient_to_south_brain = application.get_generic_entity_factory().create_brain(
             orient_to_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -728,11 +797,15 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
 
     orient_to_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_south_brain_struct(scene, orient_to_south_callback_engine);
+    yli::ontology::BrainStruct orient_to_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_south_callback_engine)));
     yli::ontology::Brain* const orient_to_south_brain = application.get_generic_entity_factory().create_brain(
             orient_to_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_to_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_to_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -768,11 +841,15 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_east_brain_struct(scene, orient_and_go_east_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_east_callback_engine)));
     yli::ontology::Brain* const orient_and_go_east_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -809,11 +886,15 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_2)
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_east_brain_struct(scene, orient_and_go_east_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_east_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_east_callback_engine)));
     yli::ontology::Brain* const orient_and_go_east_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_east_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_east_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_east_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -850,11 +931,15 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_west_brain_struct(scene, orient_and_go_west_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_west_callback_engine)));
     yli::ontology::Brain* const orient_and_go_west_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -891,11 +976,15 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_west_brain_struct(scene, orient_and_go_west_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_west_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_west_callback_engine)));
     yli::ontology::Brain* const orient_and_go_west_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_west_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_west_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_west_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -932,11 +1021,15 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_north_brain_struct(scene, orient_and_go_north_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_north_callback_engine)));
     yli::ontology::Brain* const orient_and_go_north_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -973,11 +1066,15 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_north_brain_struct(scene, orient_and_go_north_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_north_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_north_callback_engine)));
     yli::ontology::Brain* const orient_and_go_north_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_north_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_north_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_north_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1014,11 +1111,15 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_south_brain_struct(scene, orient_and_go_south_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_south_callback_engine)));
     yli::ontology::Brain* const orient_and_go_south_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1055,11 +1156,15 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_south_brain_struct(scene, orient_and_go_south_callback_engine);
+    yli::ontology::BrainStruct orient_and_go_south_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_south_callback_engine)));
     yli::ontology::Brain* const orient_and_go_south_brain = application.get_generic_entity_factory().create_brain(
             orient_and_go_south_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(orient_and_go_south_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(orient_and_go_south_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1096,11 +1201,15 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_clockwise_brain_struct(scene, rotate_clockwise_callback_engine);
+    yli::ontology::BrainStruct rotate_clockwise_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_clockwise_callback_engine)));
     yli::ontology::Brain* const rotate_clockwise_brain = application.get_generic_entity_factory().create_brain(
             rotate_clockwise_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rotate_clockwise_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_clockwise_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1140,11 +1249,15 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_clockwise_brain_struct(scene, rotate_clockwise_callback_engine);
+    yli::ontology::BrainStruct rotate_clockwise_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_clockwise_callback_engine)));
     yli::ontology::Brain* const rotate_clockwise_brain = application.get_generic_entity_factory().create_brain(
             rotate_clockwise_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rotate_clockwise_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_clockwise_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1184,11 +1297,15 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(scene, rotate_counterclockwise_callback_engine);
+    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_counterclockwise_callback_engine)));
     yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
             rotate_counterclockwise_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rotate_counterclockwise_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_counterclockwise_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1228,11 +1345,15 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(scene, rotate_counterclockwise_callback_engine);
+    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_counterclockwise_callback_engine)));
     yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
             rotate_counterclockwise_brain_struct);
 
-    yli::ontology::ObjectStruct object_struct(rotate_counterclockwise_brain, scene);
+    yli::ontology::ObjectStruct object_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(rotate_counterclockwise_brain)));
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(

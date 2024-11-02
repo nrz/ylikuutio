@@ -19,9 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_WAYPOINT_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string> // std::string
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -31,16 +32,9 @@ namespace yli::ontology
     struct WaypointStruct final : public MovableStruct
     {
         WaypointStruct(
-                Brain* const brain_master,
-                Scene* const scene_parent)
-            : MovableStruct(brain_master, scene_parent)
-        {
-        }
-
-        WaypointStruct(
-                Brain* const brain,
-                const std::string& scene_parent)
-            : MovableStruct(brain, scene_parent)
+                Request<Scene>&& scene_parent,
+                Request<Brain>&& brain_master)
+            : MovableStruct(std::move(scene_parent), std::move(brain_master))
         {
         }
     };

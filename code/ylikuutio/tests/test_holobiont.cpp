@@ -23,6 +23,7 @@
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
@@ -44,15 +45,19 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
+    yli::ontology::HolobiontStruct holobiont_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(symbiosis)));
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);
@@ -105,15 +110,19 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct("foo", *symbiosis);
+    yli::ontology::HolobiontStruct holobiont_struct(
+            (yli::ontology::Request<yli::ontology::Scene>("foo")),
+            (yli::ontology::Request(symbiosis)));
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);
@@ -152,15 +161,19 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(pipeline)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct("bar", *symbiosis);
+    yli::ontology::HolobiontStruct holobiont_struct(
+            (yli::ontology::Request<yli::ontology::Scene>("bar")),
+            (yli::ontology::Request(symbiosis)));
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);
@@ -198,17 +211,21 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(scene, pipeline);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(pipeline)));
     symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
+    yli::ontology::HolobiontStruct holobiont_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(symbiosis)));
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);

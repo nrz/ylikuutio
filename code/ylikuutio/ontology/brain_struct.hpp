@@ -19,9 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -31,23 +32,16 @@ namespace yli::ontology
     struct BrainStruct : public EntityStruct
     {
         BrainStruct(
-                Scene* const scene_parent,
-                CallbackEngine* const callback_engine_master)
-            : parent        { scene_parent },
-            callback_engine_master { callback_engine_master }
+                Request<Scene>&& scene_parent,
+                Request<CallbackEngine>&& callback_engine_master)
+            : scene_parent { std::move(scene_parent) },
+            callback_engine_master { std::move(callback_engine_master) }
         {
         }
 
-        BrainStruct(
-                const std::string& scene_parent,
-                CallbackEngine* const callback_engine_master)
-            : parent        { scene_parent },
-            callback_engine_master { callback_engine_master }
-        {
-        }
-
-        std::variant<Scene*, std::string> parent {};
-        CallbackEngine* callback_engine_master { nullptr };
+        // `Scene` is before `CallbackEngine` because `Scene` is parent of `Brain`.
+        Request<Scene> scene_parent                    {};
+        Request<CallbackEngine> callback_engine_master {};
     };
 }
 

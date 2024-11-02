@@ -51,6 +51,8 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Species;
+    class SymbiontSpecies;
+    class Glyph;
     struct MaterialStruct;
 
     class Material final : public Entity
@@ -113,6 +115,8 @@ namespace yli::ontology
             GenericParentModule parent_of_vector_fonts;
             ApprenticeModule apprentice_of_pipeline;
             GenericMasterModule master_of_species;
+            GenericMasterModule master_of_symbiont_species;
+            GenericMasterModule master_of_glyphs;
             TextureModule texture;
 
         protected:
@@ -133,6 +137,18 @@ namespace yli::ontology
         inline GenericMasterModule* Material::get_generic_master_module<Species>()
         {
             return &this->master_of_species;
+        }
+
+    template<>
+        inline GenericMasterModule* Material::get_generic_master_module<SymbiontSpecies>()
+        {
+            return &this->master_of_symbiont_species;
+        }
+
+    template<>
+        inline GenericMasterModule* Material::get_generic_master_module<Glyph>()
+        {
+            return &this->master_of_glyphs;
         }
 }
 

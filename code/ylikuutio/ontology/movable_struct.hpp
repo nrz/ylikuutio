@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
+#include "request.hpp"
 #include "rigid_body_module_struct.hpp"
 #include "code/ylikuutio/input/input.hpp"
 
@@ -33,6 +34,7 @@
 // Include standard headers
 #include <cmath>   // NAN
 #include <string>  // std::string
+#include <utility> // std::move
 #include <variant> // std::variant
 #include <vector>  // std::vector
 
@@ -43,25 +45,40 @@ namespace yli::ontology
 
     struct MovableStruct : public EntityStruct
     {
-        MovableStruct()
-            : orientation(0.0f, 0.0f, 0.0f)
+        // Default constructor of `MovableStruct` is used
+        // for the default `Camera` in each `Scene`.
+        MovableStruct() = default;
+
+        MovableStruct(
+                Request<Scene>&& scene)
+            : scene { std::move(scene) }
         {
         }
 
         MovableStruct(
-                Brain* const brain_master,
+                Request<Scene>&& scene,
+                Request<Brain>&& brain_master)
+            : scene { std::move(scene) },
+            brain_master { std::move(brain_master) }
+        {
+        }
+
+        MovableStruct(
+                Request<Scene>&& scene,
+                Request<Brain>&& brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
                 const float pitch)
-            : brain_master { brain_master },
+            : scene { std::move(scene) },
+            brain_master { std::move(brain_master) },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
 
         MovableStruct(
-                Brain* const brain_master,
+                Request<Brain>&& brain_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
@@ -69,31 +86,15 @@ namespace yli::ontology
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
-            brain_master { brain_master },
+            brain_master { std::move(brain_master) },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
 
-        MovableStruct(
-                Brain* const brain_master,
-                Scene* const scene)
-            : brain_master { brain_master },
-            scene { scene }
-        {
-        }
-
-        MovableStruct(
-                Brain* const brain_master,
-                const std::string& scene)
-            : brain_master { brain_master },
-            scene { scene }
-        {
-        }
-
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
-        Brain* brain_master { nullptr };
-        std::variant<Scene*, std::string> scene {};
+        Request<Scene> scene        {};
+        Request<Brain> brain_master {};
 
         std::vector<glm::vec3> initial_rotate_vectors;
         std::vector<float> initial_rotate_angles;
@@ -101,7 +102,7 @@ namespace yli::ontology
         glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
         CartesianCoordinatesModule cartesian_coordinates { NAN, NAN, NAN };
-        OrientationModule orientation;
+        OrientationModule orientation { 0.0f, 0.0f, 0.0f };
 
         float scale { 1.0f };
 

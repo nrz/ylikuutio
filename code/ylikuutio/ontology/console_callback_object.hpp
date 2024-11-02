@@ -63,6 +63,9 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
+
+            Console* get_console() const;
+
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
@@ -79,7 +82,6 @@ namespace yli::ontology
 
         private:
             InputParametersToAnyValueCallbackWithConsole console_callback;
-            Console* console_pointer;
     };
 }
 

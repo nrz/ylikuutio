@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -38,11 +39,11 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct(pipeline);
+    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request(pipeline)));
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -76,11 +77,11 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(scene);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct(pipeline);
+    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request(pipeline)));
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
 
@@ -112,11 +113,11 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct(nullptr);
+    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -149,12 +150,12 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     pipeline_struct.global_name = "foo";
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct("foo");
+    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("foo")));
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -188,12 +189,12 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     pipeline_struct.global_name = "foo";
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct("bar");
+    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("bar")));
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);

@@ -20,6 +20,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/callback_object_struct.hpp"
 #include "code/ylikuutio/ontology/callback_parameter_struct.hpp"
 
@@ -37,14 +38,14 @@ namespace yli::ontology
 TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    const yli::ontology::CallbackObjectStruct callback_object_struct(static_cast<yli::ontology::CallbackEngine*>(nullptr));
+    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
     const int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
-    const yli::ontology::CallbackParameterStruct callback_parameter_struct(callback_object);
+    const yli::ontology::CallbackParameterStruct callback_parameter_struct((yli::ontology::Request(callback_object)));
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
             std::move(zero_value));
@@ -71,14 +72,14 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
 TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
 {
     mock::MockApplication application;
-    const yli::ontology::CallbackObjectStruct callback_object_struct(static_cast<yli::ontology::CallbackEngine*>(nullptr));
+    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
     const int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
-    const yli::ontology::CallbackParameterStruct callback_parameter_struct(static_cast<yli::ontology::CallbackObject*>(nullptr));
+    const yli::ontology::CallbackParameterStruct callback_parameter_struct((yli::ontology::Request<yli::ontology::CallbackObject>(nullptr)));
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
             std::move(zero_value));
@@ -105,7 +106,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
 TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::CallbackObjectStruct callback_object_struct(static_cast<yli::ontology::CallbackEngine*>(nullptr));
+    yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
     callback_object_struct.global_name = "foo";
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
@@ -113,7 +114,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_va
     const int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
-    const yli::ontology::CallbackParameterStruct callback_parameter_struct("foo");
+    const yli::ontology::CallbackParameterStruct callback_parameter_struct(yli::ontology::Request<yli::ontology::CallbackObject>("foo"));
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
             std::move(zero_value));
@@ -140,7 +141,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_va
 TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::CallbackObjectStruct callback_object_struct(static_cast<yli::ontology::CallbackEngine*>(nullptr));
+    yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
     callback_object_struct.global_name = "foo";
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
@@ -148,7 +149,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_in
     const int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
-    const yli::ontology::CallbackParameterStruct callback_parameter_struct("bar");
+    const yli::ontology::CallbackParameterStruct callback_parameter_struct(yli::ontology::Request<yli::ontology::CallbackObject>("bar"));
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
             std::move(zero_value));

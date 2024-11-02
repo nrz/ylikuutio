@@ -33,6 +33,7 @@
 #include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -369,7 +370,7 @@ TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(nullptr);
+    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
     yli::ontology::Movable* const object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
@@ -384,7 +385,7 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(nullptr);
+    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
     const yli::ontology::Movable* const const_object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
@@ -446,7 +447,7 @@ TEST(any_value_must_be_initialized_appropriately, pipeline)
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -465,7 +466,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::MaterialStruct material_struct(ecosystem, nullptr);
+    yli::ontology::MaterialStruct material_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -480,7 +483,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
 TEST(any_value_must_be_initialized_appropriately, species)
 {
     mock::MockApplication application;
-    yli::ontology::SpeciesStruct species_struct(static_cast<yli::ontology::Ecosystem*>(nullptr), nullptr, nullptr);
+    yli::ontology::SpeciesStruct species_struct(
+            (yli::ontology::Request<yli::ontology::Ecosystem>(nullptr)),
+            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -495,7 +500,7 @@ TEST(any_value_must_be_initialized_appropriately, species)
 TEST(any_value_must_be_initialized_appropriately, object)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(nullptr);
+    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
 
@@ -514,7 +519,9 @@ TEST(any_value_must_be_initialized_appropriately, symbiosis)
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, nullptr);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -533,11 +540,15 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(scene, nullptr);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(*scene, *symbiosis);
+    yli::ontology::HolobiontStruct holobiont_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(symbiosis)));
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
@@ -582,7 +593,7 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
     mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct(nullptr);
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
@@ -597,12 +608,17 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
 TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
     mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct(nullptr);
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3dStruct text_3d_struct(nullptr);
-    text_3d_struct.vector_font_parent = vector_font;
+    yli::ontology::Text3dStruct text_3d_struct(
+            (yli::ontology::Request(scene)),
+            (yli::ontology::Request(vector_font)));
     yli::ontology::Text3d* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 

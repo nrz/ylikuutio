@@ -20,6 +20,7 @@
 #include "callback_engine.hpp"
 #include "callback_parameter.hpp"
 #include "generic_entity_factory.hpp"
+#include "request.hpp"
 #include "callback_object_struct.hpp"
 #include "callback_parameter_struct.hpp"
 #include "family_templates.hpp"
@@ -79,7 +80,7 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        CallbackParameterStruct callback_parameter_struct(this);
+        CallbackParameterStruct callback_parameter_struct((Request(this)));
         callback_parameter_struct.local_name = name;
         return static_cast<CallbackParameter*>(
                 entity_factory.create_callback_parameter(callback_parameter_struct, std::move(any_value)));

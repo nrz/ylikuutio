@@ -19,11 +19,12 @@
 #define YLIKUUTIO_ONTOLOGY_TEXT_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -33,17 +34,12 @@ namespace yli::ontology
     {
         TextStruct() = default;
 
-        explicit TextStruct(Font2d* const font_2d_parent)
-            : font_2d_parent { font_2d_parent }
+        explicit TextStruct(Request<Font2d>&& font_2d_parent)
+            : font_2d_parent { std::move(font_2d_parent) }
         {
         }
 
-        explicit TextStruct(const std::string& font_2d_parent)
-            : font_2d_parent { font_2d_parent }
-        {
-        }
-
-        std::variant<Font2d*, std::string> font_2d_parent {};
+        Request<Font2d> font_2d_parent {};
         std::size_t screen_width  { 0 };
         std::size_t screen_height { 0 };
         std::size_t x             { 0 };

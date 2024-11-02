@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 namespace yli::ontology
 {
@@ -26,7 +27,7 @@ namespace yli::ontology
 
     struct ConsoleStruct : public EntityStruct
     {
-        Font2d* font_2d { nullptr };
+        Request<Font2d> font_2d_master {};
     };
 }
 

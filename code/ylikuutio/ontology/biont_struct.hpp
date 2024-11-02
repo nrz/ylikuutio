@@ -19,10 +19,12 @@
 #define YLIKUUTIO_ONTOLOGY_BIONT_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <utility>  // std::move
 
 namespace yli::ontology
 {
@@ -31,8 +33,18 @@ namespace yli::ontology
 
     struct BiontStruct : public MovableStruct
     {
-        Holobiont* parent                 { nullptr };
-        SymbiontSpecies* symbiont_species { nullptr };
+        BiontStruct(
+                Request<Holobiont>&& holobiont_parent,
+                Request<Scene>&& scene_master,
+                Request<SymbiontSpecies>&& symbiont_species_master)
+            : MovableStruct(std::move(scene_master)),
+            holobiont_parent { std::move(holobiont_parent) },
+            symbiont_species_master { std::move(symbiont_species_master) }
+        {
+        }
+
+        Request<Holobiont> holobiont_parent              {};
+        Request<SymbiontSpecies> symbiont_species_master {};
         std::size_t biontID { std::numeric_limits<std::size_t>::max() }; // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
         bool should_render { true };
     };

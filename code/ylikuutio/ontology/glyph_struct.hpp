@@ -19,28 +19,29 @@
 #define YLIKUUTIO_ONTOLOGY_GLYPH_STRUCT_HPP_INCLUDED
 
 #include "mesh_provider_struct.hpp"
-
-// Include GLM
-#ifndef GLM_GLM_HPP_INCLUDED
-#define GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
+#include "request.hpp"
 
 // Include standard headers
-#include <vector> // std::vector
+#include <utility> // std::move
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
+    class Material;
     class VectorFont;
 
     struct GlyphStruct final : public MeshProviderStruct
     {
-        explicit GlyphStruct(
-                VectorFont* const vector_font_parent)
-            : MeshProviderStruct(vector_font_parent)
+        GlyphStruct(
+                Request<VectorFont>&& vector_font_parent,
+                Request<Material>&& material_master)
+            : vector_font_parent { std::move(vector_font_parent) },
+            material_master { std::move(material_master) }
         {
         }
 
+        Request<VectorFont> vector_font_parent {};
+        Request<Material> material_master      {};
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr }; // For `Glyph`s.
         const char* glyph_name_pointer         { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.
         const char* unicode_char_pointer       { nullptr }; // We need only a pointer, because `Glyph`s are always created by the `VectorFont` constructor.

@@ -17,8 +17,10 @@
 
 #include "brain.hpp"
 #include "movable.hpp"
+#include "universe.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
+#include "request_resolver.hpp"
 #include "brain_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -36,7 +38,6 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
-    class Universe;
 
     Brain::Brain(
             yli::core::Application& application,

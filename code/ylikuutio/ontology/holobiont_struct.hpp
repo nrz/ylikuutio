@@ -19,9 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_HOLOBIONT_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string> // std::string
+#include <utility> // std::move
 #include <vector> // std::vector
 
 namespace yli::ontology
@@ -33,31 +34,23 @@ namespace yli::ontology
     struct HolobiontStruct : public MovableStruct
     {
         HolobiontStruct(
-                Scene& parent,
-                Symbiosis& symbiosis_master)
-            : MovableStruct(nullptr, &parent),
-            symbiosis_master { &symbiosis_master }
+                Request<Scene>&& scene_parent,
+                Request<Symbiosis>&& symbiosis_master)
+            : MovableStruct(std::move(scene_parent)),
+            symbiosis_master { std::move(symbiosis_master) }
         {
         }
 
         HolobiontStruct(
-                const std::string& parent,
-                Symbiosis& symbiosis_master)
-            : MovableStruct(nullptr, parent),
-            symbiosis_master { &symbiosis_master }
+                Request<Scene>&& scene_parent,
+                Request<Brain>&& brain_master,
+                Request<Symbiosis>&& symbiosis_master)
+            : MovableStruct(std::move(scene_parent), std::move(brain_master)),
+            symbiosis_master { std::move(symbiosis_master) }
         {
         }
 
-        HolobiontStruct(
-                Brain* const brain,
-                const std::string& parent,
-                Symbiosis& symbiosis_master)
-            : MovableStruct(brain, parent),
-            symbiosis_master { &symbiosis_master }
-        {
-        }
-
-        Symbiosis* symbiosis_master { nullptr };
+        Request<Symbiosis> symbiosis_master {};
 
         std::vector<bool> should_render_bionts_vector;
     };

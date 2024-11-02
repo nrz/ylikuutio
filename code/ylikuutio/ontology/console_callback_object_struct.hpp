@@ -20,31 +20,24 @@
 
 #include "entity_struct.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
-    class Console;
     class ConsoleCallbackEngine;
 
     struct ConsoleCallbackObjectStruct final : public EntityStruct
     {
-        explicit ConsoleCallbackObjectStruct(ConsoleCallbackEngine* const console_callback_engine_parent)
-            : console_callback_engine_parent { console_callback_engine_parent }
+        explicit ConsoleCallbackObjectStruct(Request<ConsoleCallbackEngine>&& console_callback_engine_parent)
+            : console_callback_engine_parent { std::move(console_callback_engine_parent) }
         {
         }
 
-        explicit ConsoleCallbackObjectStruct(const std::string& console_callback_engine_parent)
-            : console_callback_engine_parent { console_callback_engine_parent }
-        {
-        }
-
+        Request<ConsoleCallbackEngine> console_callback_engine_parent {};
         InputParametersToAnyValueCallbackWithConsole console_callback { nullptr };
-        std::variant<ConsoleCallbackEngine*, std::string> console_callback_engine_parent {};
-        Console* console_pointer                                      { nullptr };
     };
 }
 

@@ -20,7 +20,6 @@
 
 #include "registry.hpp"
 #include "request.hpp"
-#include "request_resolver.hpp"
 
 // Include standard headers
 #include <string>  // std::string

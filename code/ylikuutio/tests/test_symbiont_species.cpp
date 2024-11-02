@@ -18,6 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/symbiont_species.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/symbiont_species_struct.hpp"
 
 // Include standard headers
@@ -26,16 +27,33 @@
 
 namespace yli::ontology
 {
+    class Ecosystem;
+    class Pipeline;
+    class Symbiosis;
     class Biont;
 }
 
 TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::SymbiontMaterialStruct symbiont_material_struct(nullptr, nullptr);
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+        (yli::ontology::Request(ecosystem)),
+        (yli::ontology::Request(pipeline)));
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    yli::ontology::SymbiontMaterialStruct symbiont_material_struct((yli::ontology::Request(symbiosis)));
     yli::ontology::SymbiontMaterial* const symbiont_material = application.get_generic_entity_factory().create_symbiont_material(
             symbiont_material_struct);
-    yli::ontology::SymbiontSpeciesStruct symbiont_species_struct(nullptr, symbiont_material);
+    yli::ontology::SymbiontSpeciesStruct symbiont_species_struct((yli::ontology::Request(symbiont_material)));
     yli::ontology::SymbiontSpecies* const symbiont_species = application.get_generic_entity_factory().create_symbiont_species(
             symbiont_species_struct);
     ASSERT_NE(symbiont_species, nullptr);
@@ -57,7 +75,7 @@ TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provi
 TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::SymbiontSpeciesStruct symbiont_species_struct(nullptr, nullptr);
+    yli::ontology::SymbiontSpeciesStruct symbiont_species_struct((yli::ontology::Request<yli::ontology::SymbiontMaterial>(nullptr)));
     yli::ontology::SymbiontSpecies* const symbiont_species = application.get_generic_entity_factory().create_symbiont_species(
             symbiont_species_struct);
     ASSERT_NE(symbiont_species, nullptr);

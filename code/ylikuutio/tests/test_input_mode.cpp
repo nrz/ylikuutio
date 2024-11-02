@@ -19,6 +19,7 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
@@ -54,7 +55,7 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(console_struct);
 
     yli::ontology::InputModeStruct input_mode_struct;
-    input_mode_struct.console_master = console;
+    input_mode_struct.console_master = yli::ontology::Request(console);
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(input_mode_struct);
 
     // `Entity` member functions of `Universe`.

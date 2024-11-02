@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "mesh_provider.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 
@@ -45,13 +45,14 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Entity;
     class Universe;
     class Scene;
     class Pipeline;
-    class Object;
+    class Shapeshifter;
     struct ShapeshifterSequenceStruct;
 
-    class ShapeshifterSequence final : public Entity
+    class ShapeshifterSequence final : public MeshProvider
     {
         private:
             ShapeshifterSequence(
@@ -72,7 +73,7 @@ namespace yli::ontology
             ChildModule child_of_shapeshifter_transformation;
 
         public:
-            GenericMasterModule master_of_objects;
+            GenericMasterModule master_of_shapeshifters;
 
         private:
             void bind_to_parent() noexcept;
@@ -109,9 +110,9 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericMasterModule* ShapeshifterSequence::get_generic_master_module<Object>()
+        inline GenericMasterModule* ShapeshifterSequence::get_generic_master_module<Shapeshifter>()
         {
-            return &this->master_of_objects;
+            return &this->master_of_shapeshifters;
         }
 }
 

@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 
 namespace yli::ontology
@@ -26,44 +27,48 @@ namespace yli::ontology
 }
 
 // Include standard headers
-#include <string>  // std::string
 #include <variant> // std::get, std::holds_alternative
 
 TEST(symbiosis_struct_must_be_initialized_appropriately, symbiosis_struct_ecosystem_parent_provided_as_nullptr)
 {
     yli::ontology::SymbiosisStruct symbiosis_struct(
-            static_cast<yli::ontology::Ecosystem*>(nullptr),
-            static_cast<yli::ontology::Pipeline*>(nullptr));
+            yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr));
 
     ASSERT_FALSE(symbiosis_struct.parent.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(symbiosis_struct.parent));
-    ASSERT_EQ(std::get<yli::ontology::Ecosystem*>(symbiosis_struct.parent), nullptr);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(symbiosis_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(symbiosis_struct.parent));
 }
 
 TEST(symbiosis_struct_must_be_initialized_appropriately, symbiosis_struct_scene_parent_provided_as_nullptr)
 {
     yli::ontology::SymbiosisStruct symbiosis_struct(
-            static_cast<yli::ontology::Scene*>(nullptr),
-            static_cast<yli::ontology::Pipeline*>(nullptr));
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr));
 
     ASSERT_FALSE(symbiosis_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<std::string>(symbiosis_struct.parent));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(symbiosis_struct.parent), nullptr);
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(symbiosis_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(symbiosis_struct.parent));
 }
 
-TEST(symbiosis_struct_must_be_initialized_appropriately, symbiosis_struct_string_parent)
+TEST(symbiosis_struct_must_be_initialized_appropriately, symbiosis_struct_ecosystem_parent_provided_as_string)
 {
     yli::ontology::SymbiosisStruct symbiosis_struct(
-            "foo",
-            static_cast<yli::ontology::Pipeline*>(nullptr));
+            yli::ontology::Request<yli::ontology::Ecosystem>("foo"),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr));
 
     ASSERT_FALSE(symbiosis_struct.parent.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Ecosystem*>(symbiosis_struct.parent));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Scene*>(symbiosis_struct.parent));
-    ASSERT_TRUE(std::holds_alternative<std::string>(symbiosis_struct.parent));
-    ASSERT_EQ(std::get<std::string>(symbiosis_struct.parent), "foo");
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(symbiosis_struct.parent));
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(symbiosis_struct.parent));
+}
+
+TEST(symbiosis_struct_must_be_initialized_appropriately, symbiosis_struct_scene_parent_provided_as_string)
+{
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            yli::ontology::Request<yli::ontology::Scene>("foo"),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr));
+
+    ASSERT_FALSE(symbiosis_struct.parent.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(symbiosis_struct.parent));
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(symbiosis_struct.parent));
 }

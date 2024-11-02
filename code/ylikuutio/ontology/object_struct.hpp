@@ -19,80 +19,49 @@
 #define YLIKUUTIO_ONTOLOGY_OBJECT_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::monostate, std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
     class Scene;
     class Brain;
     class Species;
-    class ShapeshifterSequence;
-    class Glyph;
-    class Text3d;
 
     struct ObjectStruct : public MovableStruct
     {
-        explicit ObjectStruct(Scene* const scene_parent)
-            : MovableStruct(nullptr, scene_parent)
+        explicit ObjectStruct(Request<Scene>&& scene_parent)
+            : MovableStruct(std::move(scene_parent))
         {
         }
 
         ObjectStruct(
-                Brain* const brain,
-                Scene* const scene_parent)
-            : MovableStruct(brain, scene_parent)
+                Request<Scene>&& scene_parent,
+                Request<Brain>&& brain_master)
+            : MovableStruct(std::move(scene_parent), std::move(brain_master))
         {
         }
 
         ObjectStruct(
-                Brain* const brain,
-                const std::string& scene_parent,
-                Species* const species)
-            : MovableStruct(brain, scene_parent),
-            mesh_master { species }
+                Request<Scene>&& scene_parent,
+                Request<Species>&& species_master)
+            : MovableStruct(std::move(scene_parent)),
+            species_master { std::move(species_master) }
         {
         }
 
         ObjectStruct(
-                const std::string& scene_parent,
-                Species* const species)
-            : MovableStruct(nullptr, scene_parent),
-            mesh_master { species }
+                Request<Scene>&& scene_parent,
+                Request<Brain>&& brain_master,
+                Request<Species>&& species_master)
+            : MovableStruct(std::move(scene_parent), std::move(brain_master)),
+            species_master { std::move(species_master) }
         {
         }
 
-        ObjectStruct(
-                Scene* const scene_parent,
-                std::variant<
-                std::monostate,
-                Species*,
-                ShapeshifterSequence*,
-                Text3d*>
-                mesh_master)
-            : MovableStruct(nullptr, scene_parent),
-            mesh_master { mesh_master }
-        {
-        }
-
-        ObjectStruct(
-                Brain* const brain,
-                Scene* const scene_parent,
-                std::variant<
-                std::monostate,
-                Species*,
-                ShapeshifterSequence*,
-                Text3d*>
-                mesh_master)
-            : MovableStruct(brain, scene_parent),
-            mesh_master { mesh_master }
-        {
-        }
-
-        std::variant<std::monostate, Species*, ShapeshifterSequence*, Text3d*> mesh_master {};
-        Glyph* glyph { nullptr };
+        Request<Species> species_master {};
     };
 }
 

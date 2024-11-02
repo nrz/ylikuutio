@@ -48,8 +48,7 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "console_callback_parameters"),
-        console_callback { console_callback_object_struct.console_callback },
-        console_pointer { console_callback_object_struct.console_pointer }
+        console_callback { console_callback_object_struct.console_callback }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackObject*";
@@ -66,6 +65,18 @@ namespace yli::ontology
         return nullptr;
     }
 
+    Console* ConsoleCallbackObject::get_console() const
+    {
+        auto* const console_callback_engine = static_cast<yli::ontology::ConsoleCallbackEngine*>(this->get_parent());
+
+        if (console_callback_engine != nullptr)
+        {
+            return console_callback_engine->get_console();
+        }
+
+        return nullptr;
+    }
+
     std::size_t ConsoleCallbackObject::get_number_of_children() const
     {
         return this->parent_of_console_callback_parameters.get_number_of_children();
@@ -78,14 +89,16 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
     {
-        if (this->get_parent() != nullptr && this->console_callback != nullptr && this->console_pointer != nullptr)
+        // `ConsoleCallbackObject::get_console` returns `nullptr` if
+        // `ConsoleCallbackEngine` is `nullptr` or if `Console` is `nullptr`.
+        if (Console* const console = this->get_console(); console != nullptr && this->console_callback != nullptr)
         {
             return yli::data::AnyValue(
                     this->console_callback(
                         static_cast<ConsoleCallbackEngine*>(this->get_parent()),
                         this,
                         this->parent_of_console_callback_parameters,
-                        *this->console_pointer));
+                        *console));
         }
 
         return std::nullopt;

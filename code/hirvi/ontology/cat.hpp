@@ -46,7 +46,7 @@ namespace hirvi
                     yli::ontology::Universe& universe,
                     const yli::ontology::ObjectStruct& cat_struct,
                     yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const mesh_master,
+                    yli::ontology::GenericMasterModule* const species_master,
                     yli::ontology::GenericMasterModule* const brain_master,
                     const yli::ontology::LocomotionModuleStruct& walk_struct,
                     const yli::ontology::LocomotionModuleStruct& trot_struct,

@@ -129,15 +129,17 @@ namespace yli::ontology
                 friend class yli::memory::MemoryStorage;
 
             ChildModule child_of_universe;
-            ParentOfPipelinesModule parent_of_pipelines;
-            GenericParentModule parent_of_cameras;
             GenericParentModule parent_of_brains;
             GenericParentModule parent_of_waypoints;
+            GenericParentModule parent_of_cameras;
+            ParentOfPipelinesModule parent_of_pipelines;
             GenericParentModule parent_of_materials;
             GenericParentModule parent_of_species;
             GenericParentModule parent_of_objects;
             GenericParentModule parent_of_symbioses;
             GenericParentModule parent_of_holobionts;
+            GenericParentModule parent_of_shapeshifters;
+            GenericParentModule parent_of_text_3ds;
 
             Scene* get_scene() const override;
 

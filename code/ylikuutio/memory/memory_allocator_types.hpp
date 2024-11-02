@@ -40,11 +40,13 @@
 #include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_form.hpp"
+#include "code/ylikuutio/ontology/shapeshifter.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text_3d.hpp"
+#include "code/ylikuutio/ontology/glyph_object.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/audio_track.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -79,11 +81,13 @@ namespace yli::memory
     using ShapeshifterTransformationMemoryAllocator  = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterTransformation, 1024>;
     using ShapeshifterSequenceMemoryAllocator        = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterSequence, 1024>;
     using ShapeshifterFormMemoryAllocator            = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;
+    using ShapeshifterMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::Shapeshifter, 256>;
     using Font2dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Font2d, 256>;
     using Text2dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text2d, 256>;
     using VectorFontMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::VectorFont, 256>;
     using GlyphMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Glyph, 256>;
     using Text3dMemoryAllocator                      = yli::memory::MemoryAllocator<yli::ontology::Text3d, 256>;
+    using GlyphObjectMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::GlyphObject, 256>;
     using InputModeMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::InputMode, 256>;
     using AudioTrackMemoryAllocator                  = yli::memory::MemoryAllocator<yli::ontology::AudioTrack, 256>;
     using ConsoleMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Console, 256>;

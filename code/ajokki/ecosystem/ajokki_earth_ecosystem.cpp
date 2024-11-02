@@ -19,6 +19,7 @@
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
@@ -49,7 +50,7 @@ namespace ajokki
         }
 
         // Create the pipeline, store it in `earth_pipeline`.
-        yli::ontology::PipelineStruct earth_pipeline_struct(earth_ecosystem);
+        yli::ontology::PipelineStruct earth_pipeline_struct((yli::ontology::Request(earth_ecosystem)));
         earth_pipeline_struct.global_name = "earth_pipeline";
         earth_pipeline_struct.local_name = "helsinki_regular_pipeline";
         earth_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -64,7 +65,9 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(earth_ecosystem, earth_pipeline);
+        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(
+                (yli::ontology::Request(earth_ecosystem)),
+                (yli::ontology::Request(earth_pipeline)));
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 

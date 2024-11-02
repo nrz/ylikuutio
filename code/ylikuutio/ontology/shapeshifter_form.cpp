@@ -33,6 +33,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Entity;
     class Scene;
+    class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
             yli::core::Application& application,
@@ -41,7 +42,7 @@ namespace yli::ontology
             GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(application, universe, shapeshifter_form_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-        mesh(universe, shapeshifter_form_struct)
+        mesh(universe, shapeshifter_form_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterForm*";
@@ -62,6 +63,18 @@ namespace yli::ontology
         }
 
         return shapeshifter_transformation_parent->get_scene();
+    }
+
+    Pipeline* ShapeshifterForm::get_pipeline() const
+    {
+        auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->get_parent());
+
+        if (shapeshifter_transformation_parent != nullptr)
+        {
+            return shapeshifter_transformation_parent->get_pipeline();
+        }
+
+        return nullptr;
     }
 
     std::size_t ShapeshifterForm::get_number_of_children() const

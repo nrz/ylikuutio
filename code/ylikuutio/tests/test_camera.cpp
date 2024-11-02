@@ -20,6 +20,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 
@@ -40,7 +41,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::CameraStruct camera_struct(nullptr, scene);
+    yli::ontology::CameraStruct camera_struct((yli::ontology::Request(scene)));
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(
             camera_struct);
     ASSERT_NE(camera, nullptr);
@@ -75,7 +76,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::CameraStruct camera_struct(nullptr, nullptr);
+    yli::ontology::CameraStruct camera_struct((yli::ontology::Request<yli::ontology::Scene>(nullptr)));
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(
             camera_struct);
     ASSERT_NE(camera, nullptr);
@@ -111,7 +112,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::CameraStruct camera_struct(nullptr, "foo");
+    yli::ontology::CameraStruct camera_struct((yli::ontology::Request<yli::ontology::Scene>("foo")));
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(
             camera_struct);
     ASSERT_NE(camera, nullptr);
@@ -147,7 +148,7 @@ TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_w
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::CameraStruct camera_struct(nullptr, "bar");
+    yli::ontology::CameraStruct camera_struct((yli::ontology::Request<yli::ontology::Scene>("bar")));
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(
             camera_struct);
     ASSERT_NE(camera, nullptr);

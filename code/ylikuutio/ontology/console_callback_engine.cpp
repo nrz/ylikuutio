@@ -16,7 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console_callback_engine.hpp"
+#include "console.hpp"
 #include "console_callback_object.hpp"
+#include "request.hpp"
 #include "console_callback_object_struct.hpp"
 #include "generic_entity_factory.hpp"
 #include "generic_callback_engine_struct.hpp"
@@ -40,9 +42,9 @@ namespace yli::ontology
             yli::core::Application& application,
             Universe& universe,
             const ConsoleCallbackEngineStruct&,
-            GenericParentModule* const universe_parent_module)
+            GenericParentModule* const console_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
-        child_of_universe(universe_parent_module, *this),
+        child_of_console(console_parent_module, *this),
         parent_of_console_callback_objects(
                 *this,
                 this->registry,
@@ -58,9 +60,14 @@ namespace yli::ontology
         return nullptr;
     }
 
+    Console* ConsoleCallbackEngine::get_console() const
+    {
+        return static_cast<Console*>(this->get_parent());
+    }
+
     Entity* ConsoleCallbackEngine::get_parent() const
     {
-        return this->child_of_universe.get_parent();
+        return this->child_of_console.get_parent();
     }
 
     std::size_t ConsoleCallbackEngine::get_number_of_children() const
@@ -74,14 +81,12 @@ namespace yli::ontology
     }
 
     ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
-            const InputParametersToAnyValueCallbackWithConsole callback,
-            Console* const console_pointer)
+            const InputParametersToAnyValueCallbackWithConsole callback)
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        ConsoleCallbackObjectStruct console_callback_object_struct(this);
+        ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request(this)));
         console_callback_object_struct.console_callback = callback;
-        console_callback_object_struct.console_pointer = console_pointer;
         return entity_factory.create_console_callback_object(console_callback_object_struct);
     }
 

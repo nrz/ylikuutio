@@ -18,30 +18,25 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_STRUCT_HPP_INCLUDED
 
-#include "entity_struct.hpp"
+#include "mesh_provider_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
     class ShapeshifterTransformation;
 
-    struct ShapeshifterSequenceStruct : public EntityStruct
+    struct ShapeshifterSequenceStruct : public MeshProviderStruct
     {
-        explicit ShapeshifterSequenceStruct(ShapeshifterTransformation* const shapeshifter_transformation_parent)
-            : shapeshifter_transformation_parent { shapeshifter_transformation_parent }
+        explicit ShapeshifterSequenceStruct(Request<ShapeshifterTransformation>&& shapeshifter_transformation_parent)
+            : shapeshifter_transformation_parent { std::move(shapeshifter_transformation_parent) }
         {
         }
 
-        explicit ShapeshifterSequenceStruct(const std::string& shapeshifter_transformation_parent)
-            : shapeshifter_transformation_parent { shapeshifter_transformation_parent }
-        {
-        }
-
-        std::variant<ShapeshifterTransformation*, std::string> shapeshifter_transformation_parent {};
+        Request<ShapeshifterTransformation> shapeshifter_transformation_parent {};
         float transformation_speed                        { 0.0f };    // Negative speed means inverse initial transition direction.
         std::size_t initial_offset                        { 0 };       // Index of the `ShapeshifterForm` from which to begin the transition.
 

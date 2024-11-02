@@ -30,6 +30,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/brain_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -64,25 +65,31 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct(helsinki_east_downtown_scene, rest_callback_engine);
+    yli::ontology::BrainStruct rest_brain_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(rest_callback_engine)));
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct(helsinki_east_downtown_scene);
+    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
+    yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(helsinki_east_downtown_pipeline)));
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
-    yli::ontology::HolobiontStruct turbo_polizei_png_police_car_struct1(*helsinki_east_downtown_scene, *turbo_polizei_png_symbiosis);
-    turbo_polizei_png_police_car_struct1.brain_master = rest_brain;
+    yli::ontology::HolobiontStruct turbo_polizei_png_police_car_struct1(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(rest_brain)),
+            (yli::ontology::Request(turbo_polizei_png_symbiosis)));
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
     turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
     turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);

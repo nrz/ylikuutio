@@ -19,10 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_VECTOR_FONT_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <string> // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -30,18 +31,13 @@ namespace yli::ontology
 
     struct VectorFontStruct final : public EntityStruct
     {
-        explicit VectorFontStruct(Material* const material_parent)
-            : material_parent { material_parent }
-        {
-        }
-
-        explicit VectorFontStruct(const std::string& material_parent)
-            : material_parent { material_parent }
+        explicit VectorFontStruct(Request<Material>&& material_parent)
+            : material_parent { std::move(material_parent) }
         {
         }
 
         // used for all files (for all `VectorFont`s).
-        std::variant<Material*, std::string> material_parent {};
+        Request<Material> material_parent {};
         float vertex_scaling_factor     { 0.001f };  // Default value.
         std::string font_file_format;    // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
         std::string font_filename;       // filename of the font file.

@@ -19,46 +19,32 @@
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/symbiont_material_struct.hpp"
 
-TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_material_struct_symbiosis_parent_nullptr_pipeline)
+// Include standard headers
+#include <variant> // std::holds_alternative
+
+namespace yli::ontology
 {
-    mock::MockApplication application;
-    yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
-            ecosystem_struct);
-
-    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, nullptr);
-    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
-            symbiosis_struct);
-
-    const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct(symbiosis, nullptr);
-
-    ASSERT_EQ(test_symbiont_material_struct.symbiosis_parent, symbiosis);
-
-    ASSERT_EQ(test_symbiont_material_struct.pipeline_master, nullptr);
+    class Pipeline;
 }
 
-TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_material_struct_symbiosis_parent_valid_pipeline)
+TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_material_struct_symbiosis_parent)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct(ecosystem);
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
-            pipeline_struct);
-
-    yli::ontology::SymbiosisStruct symbiosis_struct(ecosystem, pipeline);
+    yli::ontology::SymbiosisStruct symbiosis_struct(
+            (yli::ontology::Request(ecosystem)),
+            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct(symbiosis, pipeline);
+    const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct((yli::ontology::Request(symbiosis)));
 
-    ASSERT_EQ(test_symbiont_material_struct.symbiosis_parent, symbiosis);
-
-    ASSERT_EQ(test_symbiont_material_struct.pipeline_master, pipeline);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Symbiosis*>(test_symbiont_material_struct.symbiosis_parent.data));
+    ASSERT_EQ(std::get<yli::ontology::Symbiosis*>(test_symbiont_material_struct.symbiosis_parent.data), symbiosis);
 }

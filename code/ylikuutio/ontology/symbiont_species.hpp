@@ -20,6 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
+#include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
 
@@ -43,8 +44,10 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Universe;
     class Scene;
+    class Pipeline;
     class Biont;
     struct SymbiontSpeciesStruct;
 
@@ -76,6 +79,8 @@ namespace yli::ontology
         public:
             GenericMasterModule* get_renderables_container() const;
             Scene* get_scene() const override;
+
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;

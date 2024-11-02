@@ -18,6 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -44,14 +45,16 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct(helsinki_east_downtown_scene);
+    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
+    yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(helsinki_east_downtown_pipeline)));
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);

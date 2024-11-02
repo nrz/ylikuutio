@@ -19,9 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_SYMBIOSIS_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
 #include <string>  // std::string
+#include <utility> // std::move
 #include <variant> // std::variant
 
 namespace yli::ontology
@@ -33,26 +35,18 @@ namespace yli::ontology
     struct SymbiosisStruct final : public EntityStruct
     {
         SymbiosisStruct(
-                Ecosystem* const ecosystem_parent,
-                Pipeline* const pipeline_master)
-            : parent { ecosystem_parent },
-            pipeline { pipeline_master }
+                Request<Ecosystem>&& ecosystem_parent,
+                Request<Pipeline>&& pipeline_master)
+            : parent { std::move(ecosystem_parent) },
+            pipeline_master { std::move(pipeline_master) }
         {
         }
 
         SymbiosisStruct(
-                Scene* const scene_parent,
-                Pipeline* const pipeline_master)
-            : parent { scene_parent },
-            pipeline { pipeline_master }
-        {
-        }
-
-        SymbiosisStruct(
-                const std::string& parent,
-                Pipeline* const pipeline_master)
-            : parent { parent },
-            pipeline { pipeline_master }
+                Request<Scene>&& scene_parent,
+                Request<Pipeline>&& pipeline_master)
+            : parent { std::move(scene_parent) },
+            pipeline_master { std::move(pipeline_master) }
         {
         }
 
@@ -60,8 +54,8 @@ namespace yli::ontology
         std::string model_file_format;                      // Type of the model file. Supported file formats so far:
                                                             // `"fbx"`/`"FBX"` - FBX model.
 
-        std::variant<Ecosystem*, Scene*, std::string> parent {};
-        Pipeline* pipeline { nullptr };
+        std::variant<Request<Ecosystem>, Request<Scene>> parent {};
+        Request<Pipeline> pipeline_master {};
     };
 }
 

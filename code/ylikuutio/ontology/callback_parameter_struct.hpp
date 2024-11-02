@@ -19,10 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_CALLBACK_PARAMETER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string>  // std::string
-#include <variant> // std::variant
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -30,17 +30,12 @@ namespace yli::ontology
 
     struct CallbackParameterStruct final : public EntityStruct
     {
-        explicit CallbackParameterStruct(CallbackObject* const callback_object_parent)
-            : callback_object_parent { callback_object_parent }
+        explicit CallbackParameterStruct(Request<CallbackObject>&& callback_object_parent)
+            : callback_object_parent { std::move(callback_object_parent) }
         {
         }
 
-        explicit CallbackParameterStruct(const std::string& callback_object_parent)
-            : callback_object_parent { callback_object_parent }
-        {
-        }
-
-        std::variant<CallbackObject*, std::string> callback_object_parent {};
+        Request<CallbackObject> callback_object_parent {};
     };
 }
 

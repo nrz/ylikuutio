@@ -19,9 +19,10 @@
 #define YLIKUUTIO_ONTOLOGY_CAMERA_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
+#include "request.hpp"
 
 // Include standard headers
-#include <string> // std::string
+#include <utility> // std::move
 
 namespace yli::ontology
 {
@@ -33,16 +34,15 @@ namespace yli::ontology
         CameraStruct() = default;
 
         CameraStruct(
-                Brain* const brain,
-                Scene* const parent)
-            : MovableStruct(brain, parent)
+                Request<Scene>&& parent)
+            : MovableStruct(std::move(parent))
         {
         }
 
         CameraStruct(
-                Brain* const brain,
-                const std::string& scene)
-            : MovableStruct(brain, scene)
+                Request<Scene>&& parent,
+                Request<Brain>&& brain)
+            : MovableStruct(std::move(parent), std::move(brain))
         {
         }
     };

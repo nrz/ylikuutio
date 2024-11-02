@@ -35,9 +35,9 @@ namespace yli::ontology
             Universe& universe,
             const ObjectStruct& terrain_struct,
             GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const mesh_master_module,
+            GenericMasterModule* const species_master_module,
             GenericMasterModule* const /* brain_master_module */)
-        : Object(application, universe, terrain_struct, scene_parent_module, mesh_master_module, nullptr)
+        : Object(application, universe, terrain_struct, scene_parent_module, species_master_module, nullptr)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Terrain*";

@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_MESH_PROVIDER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
+#include "request.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 
 // Include GLM
@@ -30,98 +31,22 @@
 // Include standard headers
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <variant>  // std::monostate, std::variant
 #include <vector>   // std::vector
 
 namespace yli::ontology
 {
     class Ecosystem;
     class Scene;
-    class Pipeline;
-    class Material;
-    class SymbiontMaterial;
     class ShapeshifterTransformation;
     class VectorFont;
 
     struct MeshProviderStruct : public EntityStruct
     {
-        MeshProviderStruct() = default;
-
-        MeshProviderStruct(
-                Ecosystem* const ecosystem_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : parent                      { ecosystem_parent },
-            pipeline                      { pipeline },
-            material_or_symbiont_material { material_master }
-        {
-        }
-
-        MeshProviderStruct(
-                Scene* const scene_parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : parent                      { scene_parent },
-            pipeline                      { pipeline },
-            material_or_symbiont_material { material_master }
-        {
-        }
-
-        MeshProviderStruct(
-                ShapeshifterTransformation* const shapeshifter_transformation,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : parent                      { shapeshifter_transformation },
-            pipeline                      { pipeline },
-            material_or_symbiont_material { material_master }
-        {
-        }
-
-        MeshProviderStruct(
-                const std::string& parent,
-                Pipeline* const pipeline,
-                Material* const material_master)
-            : parent                      { parent },
-            pipeline                      { pipeline },
-            material_or_symbiont_material { material_master }
-        {
-        }
-
-        MeshProviderStruct(
-                Pipeline* const pipeline,
-                SymbiontMaterial* const symbiont_material)
-            : pipeline                    { pipeline },
-            material_or_symbiont_material { symbiont_material }
-        {
-        }
-
-        explicit MeshProviderStruct(
-                VectorFont* const vector_font_parent)
-            : parent { vector_font_parent }
-        {
-        }
-
-        explicit MeshProviderStruct(
-                const std::string& vector_font_parent)
-            : parent { vector_font_parent }
-        {
-        }
-
         yli::load::ModelLoaderStruct model_loader_struct;
 
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        std::variant<
-            std::monostate,
-            Ecosystem*,
-            Scene*,
-            ShapeshifterTransformation*,
-            VectorFont*,
-            std::string> parent {};
-        Pipeline* pipeline                     { nullptr };
-        std::variant<std::monostate, Material*, SymbiontMaterial*> material_or_symbiont_material {};
         uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };
     };
 }

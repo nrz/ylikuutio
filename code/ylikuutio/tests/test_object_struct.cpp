@@ -18,10 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
-#include "code/ylikuutio/ontology/text_3d.hpp"
-#include "code/ylikuutio/ontology/glyph.hpp"
-#include "code/ylikuutio/ontology/object_type.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 
 // Include GLM
@@ -37,19 +34,15 @@
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)
 {
-    const yli::ontology::ObjectStruct test_object_struct(static_cast<yli::ontology::Scene*>(nullptr));
+    const yli::ontology::ObjectStruct test_object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
 
-    ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene.data));
+    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene.data), nullptr);
 
-    ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
+    ASSERT_FALSE(test_object_struct.species_master.data.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.species_master.data));
 
-    ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.x));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.y));
@@ -59,61 +52,17 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent_species_master)
 {
     const yli::ontology::ObjectStruct test_object_struct(
-            static_cast<yli::ontology::Scene*>(nullptr),
-            static_cast<yli::ontology::Species*>(nullptr));
+            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
+            (yli::ontology::Request<yli::ontology::Species>(nullptr)));
 
-    ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
+    ASSERT_FALSE(test_object_struct.scene.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene.data));
+    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene.data), nullptr);
 
-    ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
+    ASSERT_FALSE(test_object_struct.species_master.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.species_master.data));
 
-    ASSERT_EQ(test_object_struct.glyph, nullptr);
-    ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.x));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.y));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.z));
-}
-
-TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent_shapeshifter_sequence_master)
-{
-    const yli::ontology::ObjectStruct test_object_struct(
-            static_cast<yli::ontology::Scene*>(nullptr),
-            static_cast<yli::ontology::ShapeshifterSequence*>(nullptr));
-
-    ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
-
-    ASSERT_FALSE(test_object_struct.mesh_master.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Species*>(test_object_struct.mesh_master));
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::ShapeshifterSequence*>(test_object_struct.mesh_master));
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Text3d*>(test_object_struct.mesh_master));
-
-    ASSERT_EQ(test_object_struct.glyph, nullptr);
-    ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.x));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.y));
-    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.z));
-}
-
-TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent_shapeshifter_text_3d_master)
-{
-    const yli::ontology::ObjectStruct test_object_struct(
-            static_cast<yli::ontology::Scene*>(nullptr),
-            static_cast<yli::ontology::Text3d*>(nullptr));
-
-    ASSERT_FALSE(test_object_struct.scene.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_object_struct.scene), nullptr);
-
-    ASSERT_EQ(test_object_struct.glyph, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.x));
     ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.xyz.y));

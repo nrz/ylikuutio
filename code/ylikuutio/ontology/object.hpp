@@ -21,7 +21,6 @@
 #include "movable.hpp"
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
-#include "object_type.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -73,7 +72,7 @@ namespace yli::ontology
                     const ObjectStruct& object_struct,
                     GenericParentModule* const scene_parent_module,
                     GenericMasterModule* const brain_master_module,
-                    GenericMasterModule* const mesh_master_module);
+                    GenericMasterModule* const species_master_module);
 
             virtual ~Object() = default;
 
@@ -136,10 +135,7 @@ namespace yli::ontology
 
         public:
             ChildModule child_of_scene;
-            ApprenticeModule apprentice_of_mesh;
-
-        private:
-            ObjectType object_type { ObjectType::REGULAR };
+            ApprenticeModule apprentice_of_species;
     };
 }
 

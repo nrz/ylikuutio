@@ -41,8 +41,10 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Universe;
     class Scene;
+    class Pipeline;
     class ShapeshifterTransformation;
     struct ShapeshifterFormStruct;
 
@@ -69,6 +71,8 @@ namespace yli::ontology
 
         public:
             Scene* get_scene() const override;
+
+            Pipeline* get_pipeline() const;
 
         private:
             std::size_t get_number_of_children() const override;

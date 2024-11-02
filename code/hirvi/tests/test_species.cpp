@@ -19,6 +19,7 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -46,19 +47,23 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     scene_struct.water_level = 0.9f;
     yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct(helsinki_east_downtown_scene);
+    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::MaterialStruct orange_fur_material_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline);
+    yli::ontology::MaterialStruct orange_fur_material_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(helsinki_east_downtown_pipeline)));
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    yli::ontology::SpeciesStruct cat_species_struct(helsinki_east_downtown_scene, helsinki_east_downtown_pipeline, orange_fur_material);
+    yli::ontology::SpeciesStruct cat_species_struct(
+            (yli::ontology::Request(helsinki_east_downtown_scene)),
+            (yli::ontology::Request(orange_fur_material)));
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
