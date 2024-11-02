@@ -56,6 +56,8 @@
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
     class Entity;
 
     std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
