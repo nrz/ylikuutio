@@ -111,6 +111,8 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
+            GenericParentModule* get_generic_parent_module(const int type);
+
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 

@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -51,6 +52,20 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
             symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
+
+    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
+    {
+        const yli::ontology::GenericParentModule* const generic_parent_module = symbiosis->get_generic_parent_module(datatype);
+
+        if (datatype == yli::data::Datatype::SYMBIONT_MATERIAL)
+        {
+            ASSERT_NE(generic_parent_module, nullptr);
+        }
+        else
+        {
+            ASSERT_EQ(generic_parent_module, nullptr);
+        }
+    }
 
     ASSERT_NE(symbiosis->get_generic_master_module<yli::ontology::Holobiont>(), nullptr);
 
