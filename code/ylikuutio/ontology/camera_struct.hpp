@@ -33,7 +33,7 @@ namespace yli::ontology
     {
         CameraStruct() = default;
 
-        CameraStruct(
+        explicit CameraStruct(
                 Request<Scene>&& parent)
             : MovableStruct(std::move(parent))
         {

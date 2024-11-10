@@ -49,7 +49,7 @@ namespace yli::ontology
         // for the default `Camera` in each `Scene`.
         MovableStruct() = default;
 
-        MovableStruct(
+        explicit MovableStruct(
                 Request<Scene>&& scene)
             : scene { std::move(scene) }
         {

@@ -36,7 +36,7 @@ namespace yli::ontology
 
     struct SymbiontMaterialStruct : public EntityStruct
     {
-        SymbiontMaterialStruct(Request<Symbiosis>&& symbiosis_parent)
+        explicit SymbiontMaterialStruct(Request<Symbiosis>&& symbiosis_parent)
             : symbiosis_parent { std::move(symbiosis_parent) }
         {
         }

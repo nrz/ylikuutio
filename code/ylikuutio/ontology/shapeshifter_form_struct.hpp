@@ -30,7 +30,7 @@ namespace yli::ontology
 
     struct ShapeshifterFormStruct final : public MeshProviderStruct
     {
-        ShapeshifterFormStruct(Request<ShapeshifterTransformation>&& shapeshifter_transformation_parent)
+        explicit ShapeshifterFormStruct(Request<ShapeshifterTransformation>&& shapeshifter_transformation_parent)
             : shapeshifter_transformation_parent { std::move(shapeshifter_transformation_parent) }
         {
         }
