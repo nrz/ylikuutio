@@ -10,9 +10,8 @@
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
 - [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
-- [ ] ONTOLOGY/RENDERING Implement `MeshProvider` class.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `MeshProvider`.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `Entity`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose apprentices are `Shapeshifter`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::Shapeshifter`, child of `Scene`, apprentice of `ShapeshifterSequence`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
