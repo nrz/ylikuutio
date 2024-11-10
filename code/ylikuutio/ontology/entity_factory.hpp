@@ -179,14 +179,14 @@ namespace yli::ontology
             template<typename... Requests>
                 GenericParentModule* get_generic_parent_module_from_variant(const int type, const std::variant<Requests...>& variant) const
                 {
-                    auto lambda = [this, type](auto&& request){ return this->get_generic_parent_module(type, request); };
+                    auto lambda = [this, type](const auto& request){ return this->get_generic_parent_module(type, request); };
                     return std::visit(lambda, variant);
                 }
 
             template<typename ApprenticeType, typename... Requests>
                 GenericMasterModule* get_generic_master_module_from_variant(const std::variant<Requests...>& variant) const
                 {
-                    auto lambda = [this](auto&& request){ return this->get_generic_master_module<ApprenticeType>(request); };
+                    auto lambda = [this](const auto& request){ return this->get_generic_master_module<ApprenticeType>(request); };
                     return std::visit(lambda, variant);
                 }
 
