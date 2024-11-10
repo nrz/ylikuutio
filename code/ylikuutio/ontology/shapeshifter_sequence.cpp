@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shapeshifter_sequence.hpp"
+#include "entity.hpp"
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "family_templates.hpp"
@@ -42,7 +43,7 @@ namespace yli::ontology
             Universe& universe,
             const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             GenericParentModule* const shapeshifter_transformation_parent_module)
-        : MeshProvider(application, universe, shapeshifter_sequence_struct),
+        : Entity(application, universe, shapeshifter_sequence_struct),
         child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
         master_of_shapeshifters(this, &this->registry, "shapeshifters")
     {

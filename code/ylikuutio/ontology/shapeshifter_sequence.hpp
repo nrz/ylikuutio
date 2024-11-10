@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_SHAPESHIFTER_SEQUENCE_HPP_INCLUDED
 
-#include "mesh_provider.hpp"
+#include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 
@@ -52,7 +52,7 @@ namespace yli::ontology
     class Shapeshifter;
     struct ShapeshifterSequenceStruct;
 
-    class ShapeshifterSequence final : public MeshProvider
+    class ShapeshifterSequence final : public Entity
     {
         private:
             ShapeshifterSequence(
