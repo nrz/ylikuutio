@@ -22,6 +22,3 @@
 [submodule "external/fastgltf"]
 	path = external/fastgltf
 	url = https://github.com/spnda/fastgltf
-[submodule "external/libpng"]
-	path = external/libpng
-	url = https://git.code.sf.net/p/libpng/code
