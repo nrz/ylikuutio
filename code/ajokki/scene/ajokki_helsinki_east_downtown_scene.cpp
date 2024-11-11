@@ -514,9 +514,9 @@ namespace ajokki
 
         if (turbo_polizei_png_symbiosis != nullptr)
         {
-            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1(
-                    (yli::ontology::Request(helsinki_east_downtown_scene)),
-                    (yli::ontology::Request(turbo_polizei_png_symbiosis)));
+            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct1 {
+                    yli::ontology::Request(helsinki_east_downtown_scene),
+                    yli::ontology::Request(turbo_polizei_png_symbiosis) };
             turbo_polizei_png_holobiont_struct1.brain_master = yli::ontology::Request(rest_brain);
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
@@ -535,9 +535,9 @@ namespace ajokki
             turbo_polizei_png1->set_global_name("turbo_polizei_png1");
             turbo_polizei_png1->set_local_name("sinivuokko1");
 
-            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2(
-                    (yli::ontology::Request(helsinki_east_downtown_scene)),
-                    (yli::ontology::Request(turbo_polizei_png_symbiosis)));
+            yli::ontology::HolobiontStruct turbo_polizei_png_holobiont_struct2 {
+                    yli::ontology::Request(helsinki_east_downtown_scene),
+                    yli::ontology::Request(turbo_polizei_png_symbiosis) };
             turbo_polizei_png_holobiont_struct2.brain_master = yli::ontology::Request(rest_brain);
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
