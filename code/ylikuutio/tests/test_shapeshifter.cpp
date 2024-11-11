@@ -56,9 +56,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -132,9 +132,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -182,9 +182,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
@@ -234,9 +234,9 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
@@ -285,9 +285,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -344,9 +344,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -402,9 +402,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -462,9 +462,9 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -521,9 +521,9 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -579,9 +579,9 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -634,9 +634,9 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -691,9 +691,9 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -747,9 +747,9 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -813,9 +813,9 @@ TEST(shapeshifter_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -831,9 +831,9 @@ TEST(shapeshifter_must_be_initialized_appropriately, headless)
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
 
-    yli::ontology::ShapeshifterStruct shapeshifter_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(shapeshifter_sequence)));
+    yli::ontology::ShapeshifterStruct shapeshifter_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(shapeshifter_sequence) };
     yli::ontology::Shapeshifter* const shapeshifter = application.get_generic_entity_factory().create_shapeshifter(
             shapeshifter_struct);
 

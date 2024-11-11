@@ -48,9 +48,9 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-        (yli::ontology::Request(ecosystem)),
-        (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+        yli::ontology::Request(ecosystem),
+        yli::ontology::Request(pipeline) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
@@ -155,9 +155,9 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately, hea
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -200,9 +200,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_val
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -325,9 +325,9 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_p
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
@@ -406,9 +406,9 @@ TEST(symbiosis_must_bind_to_scene_appropriately, scenes_scene_provided_as_valid_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -518,9 +518,9 @@ TEST(symbiosis_must_bind_to_pipeline_appropriately, master_and_apprentice_scene_
     yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline1)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline1) };
     symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(

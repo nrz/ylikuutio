@@ -56,9 +56,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -69,9 +69,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
 
-    yli::ontology::Text3dStruct text_3d_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(vector_font)));
+    yli::ontology::Text3dStruct text_3d_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(vector_font) };
     yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
     ASSERT_NE(text_3d, nullptr);
@@ -117,9 +117,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -130,9 +130,9 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `material`.
 
-    yli::ontology::Text3dStruct text_3d_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(vector_font)));
+    yli::ontology::Text3dStruct text_3d_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(vector_font) };
     yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 

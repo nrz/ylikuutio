@@ -65,9 +65,9 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct(
-                (yli::ontology::Request(earth_ecosystem)),
-                (yli::ontology::Request(earth_pipeline)));
+        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct {
+                yli::ontology::Request(earth_ecosystem),
+                yli::ontology::Request(earth_pipeline) };
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 

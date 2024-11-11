@@ -546,9 +546,9 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(symbiosis)));
+    yli::ontology::HolobiontStruct holobiont_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(symbiosis) };
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
@@ -616,9 +616,9 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3dStruct text_3d_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(vector_font)));
+    yli::ontology::Text3dStruct text_3d_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(vector_font) };
     yli::ontology::Text3d* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 

@@ -68,9 +68,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct(
-            (yli::ontology::Request(helsinki_east_downtown_scene)),
-            (yli::ontology::Request(rest_callback_engine)));
+    yli::ontology::BrainStruct rest_brain_struct {
+            yli::ontology::Request(helsinki_east_downtown_scene),
+            yli::ontology::Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
@@ -82,16 +82,16 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::MaterialStruct orange_fur_material_struct(
-            (yli::ontology::Request(helsinki_east_downtown_scene)),
-            (yli::ontology::Request(helsinki_east_downtown_pipeline)));
+    yli::ontology::MaterialStruct orange_fur_material_struct {
+            yli::ontology::Request(helsinki_east_downtown_scene),
+            yli::ontology::Request(helsinki_east_downtown_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    yli::ontology::SpeciesStruct cat_species_struct(
-            (yli::ontology::Request(helsinki_east_downtown_scene)),
-            (yli::ontology::Request(orange_fur_material)));
+    yli::ontology::SpeciesStruct cat_species_struct {
+            yli::ontology::Request(helsinki_east_downtown_scene),
+            yli::ontology::Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";

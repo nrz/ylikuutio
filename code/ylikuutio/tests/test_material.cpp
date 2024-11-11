@@ -53,9 +53,9 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -135,9 +135,9 @@ TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -404,9 +404,9 @@ TEST(material_must_be_initialized_appropriately, headless)
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -598,9 +598,9 @@ TEST(material_must_bind_to_pipeline_appropriately, master_and_apprentice)
     yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline1)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline1) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -783,9 +783,9 @@ TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(material)));
+    yli::ontology::SpeciesStruct species_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(material) };
     application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -808,9 +808,9 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SpeciesStruct species_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(material)));
+    yli::ontology::SpeciesStruct species_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(material) };
     application.get_generic_entity_factory().create_species(
             species_struct);
 

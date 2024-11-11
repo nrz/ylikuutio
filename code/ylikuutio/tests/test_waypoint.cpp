@@ -47,9 +47,9 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
-    yli::ontology::WaypointStruct waypoint_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(brain)));
+    yli::ontology::WaypointStruct waypoint_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(brain) };
     yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);

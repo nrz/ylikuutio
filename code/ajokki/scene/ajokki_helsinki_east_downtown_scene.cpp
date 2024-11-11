@@ -144,9 +144,9 @@ namespace ajokki
         // Create the `Brain`s.
 
         // `rest_brain`.
-        yli::ontology::BrainStruct rest_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(rest_callback_engine)));
+        yli::ontology::BrainStruct rest_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(rest_callback_engine) };
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         std::cout << "Creating yli::ontology::Brain* rest_brain ...\n";
@@ -159,9 +159,9 @@ namespace ajokki
         }
 
         // `go_east_brain`.
-        yli::ontology::BrainStruct go_east_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(go_east_callback_engine)));
+        yli::ontology::BrainStruct go_east_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(go_east_callback_engine) };
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         std::cout << "Creating yli::ontology::Brain* go_east_brain ...\n";
@@ -172,9 +172,9 @@ namespace ajokki
         }
 
         // `go_west_brain`.
-        yli::ontology::BrainStruct go_west_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(go_west_callback_engine)));
+        yli::ontology::BrainStruct go_west_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(go_west_callback_engine) };
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         std::cout << "Creating yli::ontology::Brain* go_west_brain ...\n";
@@ -185,9 +185,9 @@ namespace ajokki
         }
 
         // `go_north_brain`.
-        yli::ontology::BrainStruct go_north_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(go_north_callback_engine)));
+        yli::ontology::BrainStruct go_north_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(go_north_callback_engine) };
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         std::cout << "Creating yli::ontology::Brain* go_north_brain ...\n";
@@ -198,9 +198,9 @@ namespace ajokki
         }
 
         // `go_south_brain`.
-        yli::ontology::BrainStruct go_south_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(go_south_callback_engine)));
+        yli::ontology::BrainStruct go_south_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(go_south_callback_engine) };
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         std::cout << "Creating yli::ontology::Brain* go_south_brain ...\n";
@@ -211,9 +211,9 @@ namespace ajokki
         }
 
         // `orient_to_east_brain`.
-        yli::ontology::BrainStruct orient_to_east_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_to_east_callback_engine)));
+        yli::ontology::BrainStruct orient_to_east_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_to_east_callback_engine) };
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         std::cout << "Creating yli::ontology::Brain* orient_to_east_brain ...\n";
@@ -224,9 +224,9 @@ namespace ajokki
         }
 
         // `orient_to_west_brain`.
-        yli::ontology::BrainStruct orient_to_west_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_to_west_callback_engine)));
+        yli::ontology::BrainStruct orient_to_west_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_to_west_callback_engine) };
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         std::cout << "Creating yli::ontology::Brain* orient_to_west_brain ...\n";
@@ -237,9 +237,9 @@ namespace ajokki
         }
 
         // `orient_to_north_brain`.
-        yli::ontology::BrainStruct orient_to_north_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_to_north_callback_engine)));
+        yli::ontology::BrainStruct orient_to_north_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_to_north_callback_engine) };
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         std::cout << "Creating yli::ontology::Brain* orient_to_north_brain ...\n";
@@ -250,9 +250,9 @@ namespace ajokki
         }
 
         // `orient_to_south_brain`.
-        yli::ontology::BrainStruct orient_to_south_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_to_south_callback_engine)));
+        yli::ontology::BrainStruct orient_to_south_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_to_south_callback_engine) };
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         std::cout << "Creating yli::ontology::Brain* orient_to_south_brain ...\n";
@@ -263,9 +263,9 @@ namespace ajokki
         }
 
         // `rotate_clockwise_brain`.
-        yli::ontology::BrainStruct rotate_clockwise_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(rotate_clockwise_callback_engine)));
+        yli::ontology::BrainStruct rotate_clockwise_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(rotate_clockwise_callback_engine) };
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         std::cout << "Creating yli::ontology::Brain* rotate_clockwise_brain ...\n";
@@ -276,9 +276,9 @@ namespace ajokki
         }
 
         // `orient_and_go_east_brain`.
-        yli::ontology::BrainStruct orient_and_go_east_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_and_go_east_callback_engine)));
+        yli::ontology::BrainStruct orient_and_go_east_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_and_go_east_callback_engine) };
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         std::cout << "Creating yli::ontology::Brain* orient_and_go_east_brain ...\n";
@@ -289,9 +289,9 @@ namespace ajokki
         }
 
         // `orient_and_go_west_brain`.
-        yli::ontology::BrainStruct orient_and_go_west_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_and_go_west_callback_engine)));
+        yli::ontology::BrainStruct orient_and_go_west_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_and_go_west_callback_engine) };
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         std::cout << "Creating yli::ontology::Brain* orient_and_go_west_brain ...\n";
@@ -302,9 +302,9 @@ namespace ajokki
         }
 
         // `orient_and_go_north_brain`.
-        yli::ontology::BrainStruct orient_and_go_north_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_and_go_north_callback_engine)));
+        yli::ontology::BrainStruct orient_and_go_north_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_and_go_north_callback_engine) };
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         std::cout << "Creating yli::ontology::Brain* orient_and_go_north_brain ...\n";
@@ -315,9 +315,9 @@ namespace ajokki
         }
 
         // `orient_and_go_south_brain`.
-        yli::ontology::BrainStruct orient_and_go_south_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orient_and_go_south_callback_engine)));
+        yli::ontology::BrainStruct orient_and_go_south_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orient_and_go_south_callback_engine) };
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         std::cout << "Creating yli::ontology::Brain* orient_and_go_south_brain ...\n";
@@ -328,9 +328,9 @@ namespace ajokki
         }
 
         // `rotate_counterclockwise_brain`.
-        yli::ontology::BrainStruct rotate_counterclockwise_brain_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(rotate_counterclockwise_callback_engine)));
+        yli::ontology::BrainStruct rotate_counterclockwise_brain_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(rotate_counterclockwise_callback_engine) };
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating yli::ontology::Brain* rotate_counterclockwise_brain ...\n";
@@ -371,9 +371,9 @@ namespace ajokki
         }
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(helsinki_east_downtown_pipeline)));
+        yli::ontology::MaterialStruct helsinki_east_downtown_grass_material_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(helsinki_east_downtown_pipeline) };
         helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -389,9 +389,9 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        yli::ontology::MaterialStruct pink_geometric_tiles_material_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(helsinki_east_downtown_pipeline)));
+        yli::ontology::MaterialStruct pink_geometric_tiles_material_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(helsinki_east_downtown_pipeline) };
         pink_geometric_tiles_material_struct.texture_file_format = "png";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
@@ -407,9 +407,9 @@ namespace ajokki
         pink_geometric_tiles_material->set_global_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        yli::ontology::MaterialStruct orange_fur_material_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(helsinki_east_downtown_pipeline)));
+        yli::ontology::MaterialStruct orange_fur_material_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(helsinki_east_downtown_pipeline) };
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
@@ -424,9 +424,9 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(helsinki_east_downtown_grass_material)));
+        yli::ontology::SpeciesStruct helsinki_east_downtown_terrain_species_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(helsinki_east_downtown_grass_material) };
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
@@ -448,9 +448,9 @@ namespace ajokki
         helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);
 
-        yli::ontology::SpeciesStruct cat_species_struct(
-                (yli::ontology::Request(helsinki_east_downtown_scene)),
-                (yli::ontology::Request(orange_fur_material)));
+        yli::ontology::SpeciesStruct cat_species_struct {
+                yli::ontology::Request(helsinki_east_downtown_scene),
+                yli::ontology::Request(orange_fur_material) };
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
         cat_species_struct.model_loader_struct.model_file_format = "fbx";

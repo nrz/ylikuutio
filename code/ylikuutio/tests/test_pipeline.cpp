@@ -747,9 +747,9 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -774,9 +774,9 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -801,9 +801,9 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -824,9 +824,9 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -847,15 +847,15 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -876,9 +876,9 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -902,9 +902,9 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -928,15 +928,15 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request(pipeline)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request(pipeline) };
     application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
