@@ -11,7 +11,7 @@ include_directories(
     FastNoiseSIMD/
     glew-2.0.0/include/
     glm/
-    libpng-1.6.44/
+    libpng/
     OpenFBX/src/
     pugixml/src/
     soloud/include/
@@ -67,9 +67,9 @@ endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     # https://stackoverflow.com/questions/6874883/cmake-hierarchy-zlib-libpng-and-my-own-app
     set(PNG_BUILD_ZLIB ON CACHE BOOL "" FORCE)
-    add_subdirectory(libpng-1.6.44)
+    add_subdirectory(libpng)
 elseif(COMPILE_LIBPNG_FROM_SOURCE)
-    add_subdirectory(libpng-1.6.44)
+    add_subdirectory(libpng)
 endif()
 
 add_library(miniz STATIC
