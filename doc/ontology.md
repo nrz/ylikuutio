@@ -7,9 +7,10 @@ See [class_diagram.tex](class_diagram.tex) for a partial class diagram. TODO: up
 Inheriting [`yli::ontology::Entity`](../code/ylikuutio/ontology/entity.hpp) enables the use of virtual functions common for all ontological Entities.
 
 ## Universe and EntityFactory
-The recommended way to create Entities in a game or simulation is to first create [`yli::ontology::Universe`](../code/ylikuutio/ontology/universe.hpp)
-and then get a [`yli::ontology::EntityFactory*`](../code/ylikuutio/ontology/entity_factory.hpp) pointer using `Universe::get_entity_factory` and then
-create all other Entities using the member functions of that [`EntityFactory`](../code/ylikuutio/ontology/entity_factory.hpp).
+The recommended way to create Entities in a game or simulation is as follows:
+First the application must create [`yli::ontology::Universe`](../code/ylikuutio/ontology/universe.hpp) instance in the constructor of that derived type of [`yli::core::Application`](../code/ylikuutio/core/application.hpp). For an example, see [`hirvi::HirviApplication`](../code/hirvi/hirvi.cpp).
+
+Ensure that your derived class of `Application` has an instantiation of [`yli::ontology::EntityFactory`](../code/ylikuutio/ontology/entity_factory.hpp) class template as a member variable, and then use that `EntityFactory` instantiation to create all other Entities using the member functions of that `EntityFactory` instantiation.
 
 There is no support for multiple simultaneous [`Universe`](../code/ylikuutio/ontology/universe.hpp) Entities. Do not create more than 1 `Universe`!
 
@@ -17,7 +18,10 @@ There is no support for multiple simultaneous [`Universe`](../code/ylikuutio/ont
 All Entities of the ontological hierarchy form a tree with [`Universe`](../code/ylikuutio/ontology/universe.hpp) as the top node. Therefore every [`Entity`](../code/ylikuutio/ontology/entity.hpp) must be given a parent upon creation.
 
 ## GenericParentModule and ChildModule
-Many parent-child-relationships are similar. Therefore some 'module' classes have been created to avoid writing the same binding and unbinding etc. code again and again. [`GenericParentModule`](../code/ylikuutio/ontology/generic_parent_module.hpp) provides 'parenting' functionality and [`ChildModule`](../code/ylikuutio/ontology/child_module.hpp) provides 'childing' functionality. `GenericParentModule` can be inherited to create some specialized module for some special 'parenting' needs, see [`ParentOfPipelinesModule`](../code/ylikuutio/ontology/parent_of_pipelines_module.hpp) for an example.
+Many composition relationships, in Ylikuutio usually called parent-child-relationships, are similar. Therefore some 'module' classes have been created to avoid writing the same binding and unbinding etc. code again and again. [`GenericParentModule`](../code/ylikuutio/ontology/generic_parent_module.hpp) provides 'parenting' functionality and [`ChildModule`](../code/ylikuutio/ontology/child_module.hpp) provides 'childing' functionality. `GenericParentModule` can be inherited to create some specialized module for some special 'parenting' needs, see [`ParentOfPipelinesModule`](../code/ylikuutio/ontology/parent_of_pipelines_module.hpp) for an example.
+
+## GenericMasterModule and ApprenticeModule
+Not all relationships are composition relationships. Aggregation relatioships in Ylikuutio are called master-apprentice-relationships, and for them the corresponding 'module' classes [`GenericMasterModule`](../code/ylikuutio/ontology/generic_master_module.hpp) and [`ApprenticeModule`](../code/ylikuutio/ontology/apprentice_module.hpp) are provided. Depending on the class, apprentice may have multiple masters belonging to different classes, and each apprentice has a lifetime independent of its masters. If master moves to an another [`Scene`](../code/ylikuutio/ontology/scene.hpp), apprentices do not follow the master, and master-apprentice relationship is ended. However, master residing in an [`Ecosystem`](../code/ylikuutio/ontology/ecosystem.hpp) may serve apprentices residing in multiple different scenes.
 
 ## Ecosystem and Scene
 [`Universe`](../code/ylikuutio/ontology/universe.hpp) must be created as the first [`Entity`](../code/ylikuutio/ontology/entity.hpp). After creation of the `Universe`, 2 `Entity` classes of particular interest can be created, among others to be discussed later: [`Ecosystem`](../code/ylikuutio/ontology/ecosystem.hpp) and [`Scene`](../code/ylikuutio/ontology/scene.hpp). `Ecosystem` is basically an owner of collection of Entities, that's all it is. `Scene` is also a collection of Entities (just like an `Ecosystem`, but it is also a place that can be rendered with the [`Movable`](../code/ylikuutio/ontology/movable.hpp) Entities residing in it.
