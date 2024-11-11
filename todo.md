@@ -8,7 +8,6 @@
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
-- [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `Entity`.
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose apprentices are `Shapeshifter`s.
@@ -355,3 +354,4 @@
 - [x] BUG/HIRVI Esc key should exit to OS in Hirvi and Ajokki.
 - [x] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [x] BUG/LISP Fix the behavior of `std::nullopt` in YliLisp by wrapping the `std::optional<yli::data::AnyValue>` return value into a wrapper with success information.
+- [x] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
