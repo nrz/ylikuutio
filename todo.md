@@ -5,7 +5,6 @@
 - [ ] BUG Fix bug on console size after changing window size small enough. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix bug that current console line is not visible after a lot of output produced e.g. by `info` in a small window size. (to be fixed in the `Widget` implementation)
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
-- [ ] BUG/LISP Fix the behavior of `std::nullopt` in YliLisp by wrapping the `std::optional<yli::data::AnyValue>` return value into a wrapper with success information.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
@@ -355,3 +354,4 @@
 - [x] BUG Fix graphics rendering in full screen mode on high DPI displays (graphics are rendered currently only in bottom left of the screen).
 - [x] BUG/HIRVI Esc key should exit to OS in Hirvi and Ajokki.
 - [x] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
+- [x] BUG/LISP Fix the behavior of `std::nullopt` in YliLisp by wrapping the `std::optional<yli::data::AnyValue>` return value into a wrapper with success information.
