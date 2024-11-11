@@ -677,7 +677,7 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
-    yli::ontology::PipelineStruct pipeline_struct1((yli::ontology::Request(scene1)));
+    yli::ontology::PipelineStruct pipeline_struct1 { yli::ontology::Request(scene1) };
     yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct1);
 
@@ -685,7 +685,7 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct2);
 
-    yli::ontology::PipelineStruct pipeline_struct2((yli::ontology::Request(scene2)));
+    yli::ontology::PipelineStruct pipeline_struct2 { yli::ontology::Request(scene2) };
     yli::ontology::Pipeline* const pipeline2 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct2);
 
@@ -707,7 +707,7 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
             scene_struct1);
 
-    yli::ontology::PipelineStruct pipeline_struct1((yli::ontology::Request(scene1)));
+    yli::ontology::PipelineStruct pipeline_struct1 { yli::ontology::Request(scene1) };
     yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct1);
 
@@ -715,7 +715,7 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct2);
 
-    yli::ontology::PipelineStruct pipeline_struct2((yli::ontology::Request(scene2)));
+    yli::ontology::PipelineStruct pipeline_struct2 { yli::ontology::Request(scene2) };
     yli::ontology::Pipeline* const pipeline2 = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct2);
 

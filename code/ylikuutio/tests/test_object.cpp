@@ -513,11 +513,11 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::ObjectStruct object_struct1((yli::ontology::Request(scene1)));
+    yli::ontology::ObjectStruct object_struct1 { yli::ontology::Request(scene1) };
     yli::ontology::Object* const object1 = application.get_generic_entity_factory().create_object(
             object_struct1);
 
-    yli::ontology::ObjectStruct object_struct2((yli::ontology::Request(scene2)));
+    yli::ontology::ObjectStruct object_struct2 { yli::ontology::Request(scene2) };
     yli::ontology::Object* const object2 = application.get_generic_entity_factory().create_object(
             object_struct2);
 
@@ -541,11 +541,11 @@ TEST(object_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, hea
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::ObjectStruct object_struct1((yli::ontology::Request(scene1)));
+    yli::ontology::ObjectStruct object_struct1 { yli::ontology::Request(scene1) };
     yli::ontology::Object* const object1 = application.get_generic_entity_factory().create_object(
             object_struct1);
 
-    yli::ontology::ObjectStruct object_struct2((yli::ontology::Request(scene2)));
+    yli::ontology::ObjectStruct object_struct2 { yli::ontology::Request(scene2) };
     yli::ontology::Object* const object2 = application.get_generic_entity_factory().create_object(
             object_struct2);
 

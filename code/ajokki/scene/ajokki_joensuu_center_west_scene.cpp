@@ -171,7 +171,7 @@ namespace ajokki
 
         horse_species->set_global_name("horse_species");
 
-        yli::ontology::ObjectStruct horse_object_struct1((yli::ontology::Request(joensuu_center_west_scene)));
+        yli::ontology::ObjectStruct horse_object_struct1 { yli::ontology::Request(joensuu_center_west_scene) };
         horse_object_struct1.species_master = yli::ontology::Request(horse_species);
         horse_object_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         horse_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };

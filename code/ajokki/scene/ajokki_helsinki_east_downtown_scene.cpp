@@ -486,7 +486,7 @@ namespace ajokki
 
                 const float first_cat_scale { 10.0f };
 
-                yli::ontology::ObjectStruct cat_object_struct1((yli::ontology::Request(helsinki_east_downtown_scene)));
+                yli::ontology::ObjectStruct cat_object_struct1 { yli::ontology::Request(helsinki_east_downtown_scene) };
                 cat_object_struct1.species_master = yli::ontology::Request(cat_species);
                 cat_object_struct1.global_name = "cat" + index_string;
                 cat_object_struct1.local_name = "kissa" + index_string;
