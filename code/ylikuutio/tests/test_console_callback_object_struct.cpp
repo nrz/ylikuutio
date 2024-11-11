@@ -30,7 +30,7 @@ namespace yli::ontology
 
 TEST(console_callback_object_struct_must_be_initialized_appropriately, parent_provided_as_nullptr)
 {
-    const yli::ontology::ConsoleCallbackObjectStruct test_console_callback_object_struct((yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>(nullptr)));
+    const yli::ontology::ConsoleCallbackObjectStruct test_console_callback_object_struct { yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>(nullptr) };
 
     ASSERT_FALSE(test_console_callback_object_struct.console_callback_engine_parent.data.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::ConsoleCallbackEngine*>(test_console_callback_object_struct.console_callback_engine_parent.data));
@@ -40,7 +40,7 @@ TEST(console_callback_object_struct_must_be_initialized_appropriately, parent_pr
 
 TEST(console_callback_object_struct_must_be_initialized_appropriately, parent_provided_as_global_name)
 {
-    const yli::ontology::ConsoleCallbackObjectStruct test_console_callback_object_struct((yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("foo")));
+    const yli::ontology::ConsoleCallbackObjectStruct test_console_callback_object_struct { yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("foo") };
 
     ASSERT_FALSE(test_console_callback_object_struct.console_callback_engine_parent.data.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::ConsoleCallbackEngine*>(test_console_callback_object_struct.console_callback_engine_parent.data));

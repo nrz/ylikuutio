@@ -32,7 +32,7 @@ namespace yli::ontology
 
 TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_parent_provided_as_nullptr)
 {
-    const yli::ontology::ComputeTaskStruct test_compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    const yli::ontology::ComputeTaskStruct test_compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     ASSERT_EQ(test_compute_task_struct.texture_file_format, "");
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");
@@ -57,7 +57,7 @@ TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_
 
 TEST(compute_task_struct_must_be_initialized_appropriately, compute_task_struct_parent_provided_as_global_name)
 {
-    const yli::ontology::ComputeTaskStruct test_compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("foo")));
+    const yli::ontology::ComputeTaskStruct test_compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>("foo") };
     ASSERT_EQ(test_compute_task_struct.texture_file_format, "");
     ASSERT_EQ(test_compute_task_struct.texture_filename, "");
     ASSERT_EQ(test_compute_task_struct.output_filename, "");

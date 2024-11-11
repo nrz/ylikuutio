@@ -34,7 +34,7 @@ namespace yli::ontology
 TEST(console_callback_engine_must_be_initialized_appropriately, universe_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
+    yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
     ASSERT_NE(console_callback_engine, nullptr);

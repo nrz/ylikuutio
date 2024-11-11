@@ -343,8 +343,7 @@ namespace hirvi
         }
 
         // Create the pipeline, store it in `helsinki_east_downtown_pipeline`.
-        yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct(
-                (yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene")));
+        yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene") };
         helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
         helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
         helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -360,8 +359,7 @@ namespace hirvi
         }
 
         // Create the grayscale pipeline, store it in `helsinki_east_downtown_grayscale_pipeline`.
-        yli::ontology::PipelineStruct helsinki_east_downtown_grayscale_pipeline_struct(
-                (yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene")));
+        yli::ontology::PipelineStruct helsinki_east_downtown_grayscale_pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene") };
         helsinki_east_downtown_grayscale_pipeline_struct.global_name = "helsinki_east_downtown_grayscale_pipeline";
         helsinki_east_downtown_grayscale_pipeline_struct.local_name = "helsinki_grayscale_pipeline";
         helsinki_east_downtown_grayscale_pipeline_struct.vertex_shader = "standard_shading.vert";

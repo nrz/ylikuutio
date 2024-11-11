@@ -35,7 +35,7 @@ namespace yli::ontology
 TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     yli::ontology::GlyphStruct glyph_struct {

@@ -117,7 +117,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -155,7 +155,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("foo")));
+    yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>("foo") };
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
@@ -194,7 +194,7 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct((yli::ontology::Request<yli::ontology::Pipeline>("bar")));
+    yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>("bar") };
     yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);

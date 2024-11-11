@@ -138,7 +138,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
     ASSERT_NE(shapeshifter_transformation, nullptr);
@@ -189,7 +189,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct((yli::ontology::Request<yli::ontology::Material>("foo")));
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct { yli::ontology::Request<yli::ontology::Material>("foo") };
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
     ASSERT_NE(shapeshifter_transformation, nullptr);
@@ -241,7 +241,7 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct((yli::ontology::Request<yli::ontology::Material>("bar")));
+    yli::ontology::ShapeshifterTransformationStruct shapeshifter_transformation_struct { yli::ontology::Request<yli::ontology::Material>("bar") };
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
     ASSERT_NE(shapeshifter_transformation, nullptr);
@@ -354,7 +354,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>(nullptr)));
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>(nullptr) };
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
     ASSERT_NE(shapeshifter_form, nullptr);
@@ -413,7 +413,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("foo")));
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("foo") };
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
     ASSERT_NE(shapeshifter_form, nullptr);
@@ -473,7 +473,7 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("bar")));
+    yli::ontology::ShapeshifterFormStruct shapeshifter_form_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("bar") };
     yli::ontology::ShapeshifterForm* const shapeshifter_form = application.get_generic_entity_factory().create_shapeshifter_form(
             shapeshifter_form_struct);
     ASSERT_NE(shapeshifter_form, nullptr);
@@ -589,7 +589,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>(nullptr)));
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>(nullptr) };
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
     ASSERT_NE(shapeshifter_sequence, nullptr);
@@ -645,7 +645,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("foo")));
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("foo") };
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
     ASSERT_NE(shapeshifter_sequence, nullptr);
@@ -702,7 +702,7 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
     yli::ontology::ShapeshifterTransformation* const shapeshifter_transformation = application.get_generic_entity_factory().create_shapeshifter_transformation(
             shapeshifter_transformation_struct);
 
-    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct((yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("bar")));
+    yli::ontology::ShapeshifterSequenceStruct shapeshifter_sequence_struct { yli::ontology::Request<yli::ontology::ShapeshifterTransformation>("bar") };
     yli::ontology::ShapeshifterSequence* const shapeshifter_sequence = application.get_generic_entity_factory().create_shapeshifter_sequence(
             shapeshifter_sequence_struct);
     ASSERT_NE(shapeshifter_sequence, nullptr);

@@ -27,7 +27,7 @@ TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_ma
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    const yli::ontology::VectorFontStruct test_vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    const yli::ontology::VectorFontStruct test_vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
 
     ASSERT_FALSE(test_vector_font_struct.material_parent.data.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent.data));
@@ -42,7 +42,7 @@ TEST(vector_font_struct_must_be_initialized_appropriately, vector_font_struct_ma
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    const yli::ontology::VectorFontStruct test_vector_font_struct((yli::ontology::Request<yli::ontology::Material>("foo")));
+    const yli::ontology::VectorFontStruct test_vector_font_struct { yli::ontology::Request<yli::ontology::Material>("foo") };
 
     ASSERT_FALSE(test_vector_font_struct.material_parent.data.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Material*>(test_vector_font_struct.material_parent.data));

@@ -30,7 +30,7 @@ namespace yli::ontology
 
 TEST(callback_parameter_struct_must_be_initialized_appropriately, parent_provided_as_nullptr)
 {
-    const yli::ontology::CallbackParameterStruct test_callback_parameter_struct((yli::ontology::Request<yli::ontology::CallbackObject>(nullptr)));
+    const yli::ontology::CallbackParameterStruct test_callback_parameter_struct { yli::ontology::Request<yli::ontology::CallbackObject>(nullptr) };
 
     ASSERT_FALSE(test_callback_parameter_struct.callback_object_parent.data.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackObject*>(test_callback_parameter_struct.callback_object_parent.data));
@@ -40,7 +40,7 @@ TEST(callback_parameter_struct_must_be_initialized_appropriately, parent_provide
 
 TEST(callback_parameter_struct_must_be_initialized_appropriately, parent_provided_as_global_name)
 {
-    const yli::ontology::CallbackParameterStruct test_callback_parameter_struct((yli::ontology::Request<yli::ontology::CallbackObject>("foo")));
+    const yli::ontology::CallbackParameterStruct test_callback_parameter_struct { yli::ontology::Request<yli::ontology::CallbackObject>("foo") };
 
     ASSERT_FALSE(test_callback_parameter_struct.callback_object_parent.data.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::CallbackObject*>(test_callback_parameter_struct.callback_object_parent.data));

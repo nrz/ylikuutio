@@ -29,7 +29,7 @@ namespace yli::ontology
 
 TEST(lisp_function_struct_must_be_initialized_appropriately, lisp_function_struct_parent_provided_as_nullptr)
 {
-    const yli::ontology::LispFunctionStruct test_lisp_function_struct((yli::ontology::Request<yli::ontology::Console>(nullptr)));
+    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
 
     ASSERT_FALSE(test_lisp_function_struct.console_parent.data.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Console*>(test_lisp_function_struct.console_parent.data));
@@ -39,7 +39,7 @@ TEST(lisp_function_struct_must_be_initialized_appropriately, lisp_function_struc
 
 TEST(lisp_function_struct_must_be_initialized_appropriately, lisp_function_struct_parent_provided_as_global_name)
 {
-    const yli::ontology::LispFunctionStruct test_lisp_function_struct((yli::ontology::Request<yli::ontology::Console>("foo")));
+    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::Console>("foo") };
 
     ASSERT_FALSE(test_lisp_function_struct.console_parent.data.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Console*>(test_lisp_function_struct.console_parent.data));

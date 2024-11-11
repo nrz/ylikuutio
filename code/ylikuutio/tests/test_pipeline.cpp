@@ -132,7 +132,7 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Ecosystem>("foo")));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>("foo") };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
@@ -165,7 +165,7 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Scene>("foo")));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("foo") };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -196,7 +196,7 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Ecosystem>("bar")));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>("bar") };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
@@ -229,7 +229,7 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Scene>("bar")));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("bar") };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -259,7 +259,7 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Ecosystem>(nullptr)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>(nullptr) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
@@ -291,7 +291,7 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request<yli::ontology::Scene>(nullptr)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 

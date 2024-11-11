@@ -593,7 +593,7 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
     mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
@@ -612,7 +612,7 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 

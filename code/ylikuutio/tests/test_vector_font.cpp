@@ -169,7 +169,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
@@ -219,7 +219,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>("foo")));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>("foo") };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);
@@ -270,7 +270,7 @@ TEST(vector_font_must_be_initialized_and_must_bind_to_material_appropriately, he
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request<yli::ontology::Material>("bar")));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>("bar") };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
     ASSERT_NE(vector_font, nullptr);

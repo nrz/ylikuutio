@@ -85,7 +85,7 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
     yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
 
-    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
@@ -116,7 +116,7 @@ TEST(callback_object_must_be_initialized_appropriately, parent_provided_as_valid
     yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
 
-    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>("foo")));
+    const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>("foo") };
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
@@ -147,7 +147,7 @@ TEST(callback_object_must_be_initialized_appropriately, parent_provided_as_inval
     yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
 
-    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request<yli::ontology::CallbackEngine>("bar")));
+    const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>("bar") };
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
