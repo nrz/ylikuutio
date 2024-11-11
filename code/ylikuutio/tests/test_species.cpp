@@ -652,15 +652,15 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::SpeciesStruct species_struct1(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::SpeciesStruct species_struct1 {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             species_struct1);
 
-    yli::ontology::SpeciesStruct species_struct2(
-            (yli::ontology::Request(scene2)),
-            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::SpeciesStruct species_struct2 {
+            yli::ontology::Request(scene2),
+            yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species2 = application.get_generic_entity_factory().create_species(
             species_struct2);
 
@@ -684,15 +684,15 @@ TEST(species_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, he
     yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::SpeciesStruct species_struct1(
-            (yli::ontology::Request(scene1)),
-            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::SpeciesStruct species_struct1 {
+            yli::ontology::Request(scene1),
+            yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species1 = application.get_generic_entity_factory().create_species(
             species_struct1);
 
-    yli::ontology::SpeciesStruct species_struct2(
-            (yli::ontology::Request(scene2)),
-            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::SpeciesStruct species_struct2 {
+            yli::ontology::Request(scene2),
+            yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species2 = application.get_generic_entity_factory().create_species(
             species_struct2);
 

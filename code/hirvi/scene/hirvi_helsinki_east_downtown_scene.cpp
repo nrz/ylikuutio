@@ -581,7 +581,7 @@ namespace hirvi
         turbo_polizei_png2->set_global_name("turbo_polizei_png2");
         turbo_polizei_png2->set_local_name("sinivuokko2");
 
-        yli::ontology::CameraStruct cat_camera_struct(yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene"));
+        yli::ontology::CameraStruct cat_camera_struct { yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene") };
         cat_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(800.00f, -950.00f, 400.00f);
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
@@ -597,7 +597,7 @@ namespace hirvi
 
         cat_camera->set_global_name("cat_camera");
 
-        yli::ontology::CameraStruct turbo_polizei_camera_struct(yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene"));
+        yli::ontology::CameraStruct turbo_polizei_camera_struct { yli::ontology::Request<yli::ontology::Scene>("helsinki_east_downtown_scene") };
         turbo_polizei_camera_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(87.00f, -169.00f, 28.00f);
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
