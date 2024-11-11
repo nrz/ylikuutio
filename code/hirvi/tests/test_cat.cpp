@@ -54,66 +54,68 @@ namespace yli::ontology
 
 TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 {
+    using namespace yli::ontology; 
+
     const int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    yli::ontology::SceneStruct scene_struct;
+    SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_east_downtown_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
+    CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
-    yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
+    Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
+    PipelineStruct helsinki_east_downtown_pipeline_struct { Request(helsinki_east_downtown_scene) };
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
-    yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+    Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::MaterialStruct orange_fur_material_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(helsinki_east_downtown_pipeline) };
+    MaterialStruct orange_fur_material_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(helsinki_east_downtown_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    yli::ontology::SpeciesStruct cat_species_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(orange_fur_material) };
+    SpeciesStruct cat_species_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
-    yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
+    Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
 
-    yli::ontology::ObjectStruct cat1_object_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(rest_brain),
-            yli::ontology::Request(cat_species) };
+    ObjectStruct cat1_object_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(rest_brain),
+            Request(cat_species) };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
     cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
     cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-    cat1_object_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(500.00f, 100.00f, 1000.00f);
+    cat1_object_struct.cartesian_coordinates = CartesianCoordinatesModule(500.00f, 100.00f, 1000.00f);
 
-    yli::ontology::LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
-    yli::ontology::LocomotionModuleStruct cat1_trot_struct(5.0f);
-    yli::ontology::LocomotionModuleStruct cat1_canter_struct(10.0f);
-    yli::ontology::LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
-    yli::ontology::LocomotionModuleStruct cat1_climb_struct;
+    LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
+    LocomotionModuleStruct cat1_trot_struct(5.0f);
+    LocomotionModuleStruct cat1_canter_struct(10.0f);
+    LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
+    LocomotionModuleStruct cat1_climb_struct;
 
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::OBJECT));
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::CAT));

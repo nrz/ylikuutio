@@ -36,28 +36,30 @@ namespace yli::ontology
 
 TEST(brain_must_be_initialized_appropriately, hirvi_brain)
 {
+    using namespace yli::ontology;
+
     const int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    yli::ontology::SceneStruct scene_struct;
+    SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_east_downtown_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
+    CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    yli::ontology::BrainStruct rest_brain_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
-    yli::ontology::Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
+    Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
     ASSERT_NE(rest_brain, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_brain) % alignof(yli::ontology::Brain), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_brain) % alignof(Brain), 0);
     yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
     ASSERT_EQ(brain_constructible_module.storage_i, 0);
     ASSERT_EQ(brain_constructible_module.slot_i, 0);

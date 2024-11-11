@@ -35,31 +35,33 @@ namespace yli::ontology
 
 TEST(material_must_be_initialized_appropriately, hirvi_material)
 {
+    using namespace yli::ontology;
+
     const int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    yli::ontology::SceneStruct scene_struct;
+    SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_east_downtown_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    yli::ontology::Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
-    yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
+    PipelineStruct helsinki_east_downtown_pipeline_struct { Request(helsinki_east_downtown_scene) };
     helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
     helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
-    yli::ontology::Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+    Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    yli::ontology::MaterialStruct orange_fur_material_struct {
-            yli::ontology::Request(helsinki_east_downtown_scene),
-            yli::ontology::Request(helsinki_east_downtown_pipeline) };
+    MaterialStruct orange_fur_material_struct {
+            Request(helsinki_east_downtown_scene),
+            Request(helsinki_east_downtown_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    yli::ontology::Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(yli::ontology::Material), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
     yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
     ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
