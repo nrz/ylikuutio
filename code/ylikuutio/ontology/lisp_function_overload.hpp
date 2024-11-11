@@ -21,6 +21,7 @@
 #include "generic_lisp_function_overload.hpp"
 #include "console.hpp"
 #include "lisp_function.hpp"
+#include "result.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/wrap.hpp"
 #include "code/ylikuutio/lisp/function_arg_extractor.hpp"
@@ -85,7 +86,7 @@ namespace yli::ontology
             LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
             LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
 
-            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) override
+            Result execute(const std::vector<std::string>& parameter_vector) override
             {
                 LispFunction* const lisp_function_parent = static_cast<LispFunction*>(this->get_parent());
 
@@ -118,10 +119,10 @@ namespace yli::ontology
 
                 if (arg_tuple)
                 {
-                    return std::apply(this->callback, *arg_tuple);
+                    return Result(std::apply(this->callback, *arg_tuple));
                 }
 
-                return std::nullopt;
+                return Result(false);
             }
 
         private:

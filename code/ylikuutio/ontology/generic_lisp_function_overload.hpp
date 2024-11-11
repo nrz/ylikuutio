@@ -20,11 +20,10 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
+#include "result.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
-#include <optional>   // std::optional
 #include <string>     // std::string
 #include <vector>     // std::vector
 
@@ -62,7 +61,7 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
-            virtual std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector) = 0;
+            virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryAllocator;

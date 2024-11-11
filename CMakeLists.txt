@@ -672,6 +672,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/registry.hpp
     code/ylikuutio/ontology/request.hpp
     code/ylikuutio/ontology/request_resolver.hpp
+    code/ylikuutio/ontology/result.hpp
     code/ylikuutio/ontology/rigid_body_module.cpp
     code/ylikuutio/ontology/rigid_body_module.hpp
     code/ylikuutio/ontology/rigid_body_module_struct.hpp

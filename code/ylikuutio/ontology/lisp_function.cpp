@@ -18,6 +18,7 @@
 #include "lisp_function.hpp"
 #include "entity.hpp"
 #include "generic_lisp_function_overload.hpp"
+#include "result.hpp"
 #include "lisp_function_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -100,12 +101,12 @@ namespace yli::ontology
                 it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
                 ++it)
         {
-            std::optional<yli::data::AnyValue> result =
+            Result result =
                 static_cast<GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
 
             if (result)
             {
-                return result;
+                return std::get<std::optional<yli::data::AnyValue>>(result.data);
             }
         }
 
