@@ -34,7 +34,7 @@
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent)
 {
-    const yli::ontology::ObjectStruct test_object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
+    const yli::ontology::ObjectStruct test_object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
 
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene.data));
     ASSERT_FALSE(std::holds_alternative<std::string>(test_object_struct.scene.data));

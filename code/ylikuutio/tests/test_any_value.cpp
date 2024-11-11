@@ -370,7 +370,7 @@ TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
+    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     yli::ontology::Movable* const object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
@@ -385,7 +385,7 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
+    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     const yli::ontology::Movable* const const_object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
@@ -500,7 +500,7 @@ TEST(any_value_must_be_initialized_appropriately, species)
 TEST(any_value_must_be_initialized_appropriately, object)
 {
     mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct(yli::ontology::Request<yli::ontology::Scene>(nullptr));
+    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
 
