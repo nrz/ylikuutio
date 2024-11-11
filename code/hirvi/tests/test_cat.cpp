@@ -98,10 +98,10 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
     yli::ontology::Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
 
-    yli::ontology::ObjectStruct cat1_object_struct(
-            (yli::ontology::Request(helsinki_east_downtown_scene)),
-            (yli::ontology::Request(rest_brain)),
-            (yli::ontology::Request(cat_species)));
+    yli::ontology::ObjectStruct cat1_object_struct {
+            yli::ontology::Request(helsinki_east_downtown_scene),
+            yli::ontology::Request(rest_brain),
+            yli::ontology::Request(cat_species) };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
