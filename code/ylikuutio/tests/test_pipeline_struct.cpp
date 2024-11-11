@@ -34,7 +34,7 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_ecosyste
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request(ecosystem)));
+    const yli::ontology::PipelineStruct test_pipeline_struct { yli::ontology::Request(ecosystem) };
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));
@@ -49,7 +49,7 @@ TEST(pipeline_struct_must_be_initialized_appropriately, pipeline_struct_scene_pa
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    const yli::ontology::PipelineStruct test_pipeline_struct((yli::ontology::Request(scene)));
+    const yli::ontology::PipelineStruct test_pipeline_struct { yli::ontology::Request(scene) };
     ASSERT_FALSE(test_pipeline_struct.parent.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_pipeline_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_pipeline_struct.parent));

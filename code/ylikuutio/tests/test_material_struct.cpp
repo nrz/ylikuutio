@@ -73,7 +73,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -97,7 +97,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -121,7 +121,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -145,7 +145,7 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 

@@ -43,7 +43,7 @@ TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_materi
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct((yli::ontology::Request(symbiosis)));
+    const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct { yli::ontology::Request(symbiosis) };
 
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Symbiosis*>(test_symbiont_material_struct.symbiosis_parent.data));
     ASSERT_EQ(std::get<yli::ontology::Symbiosis*>(test_symbiont_material_struct.symbiosis_parent.data), symbiosis);

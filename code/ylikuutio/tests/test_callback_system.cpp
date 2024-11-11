@@ -46,7 +46,7 @@ TEST(callback_engine_must_function_properly, nop)
     yli::ontology::CallbackEngineStruct callback_engine_struct;
     auto callback_engine = application.get_generic_entity_factory().create_callback_engine(callback_engine_struct);
 
-    yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request(callback_engine)));
+    yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request(callback_engine) };
     auto callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::nop);
 

@@ -85,7 +85,7 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request(this)));
+        ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request(this) };
         console_callback_object_struct.console_callback = callback;
         return entity_factory.create_console_callback_object(console_callback_object_struct);
     }

@@ -115,7 +115,7 @@ TEST(scene_and_camera_must_be_activated_appropriately, universe_callback)
             scene_struct);
     scene->set_global_name(scene_name);
 
-    yli::ontology::CameraStruct camera_struct((yli::ontology::Request(scene)));
+    yli::ontology::CameraStruct camera_struct { yli::ontology::Request(scene) };
     camera_struct.global_name = "bar";
     yli::ontology::Camera* const camera = application.get_generic_entity_factory().create_camera(camera_struct);
 

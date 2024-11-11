@@ -341,7 +341,7 @@ namespace ajokki
         }
 
         // Create the pipeline, store it in `helsinki_east_downtown_pipeline`.
-        yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
+        yli::ontology::PipelineStruct helsinki_east_downtown_pipeline_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
         helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
         helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
         helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -357,7 +357,7 @@ namespace ajokki
         }
 
         // Create the grayscale pipeline, store it in `helsinki_east_downtown_grayscale_pipeline`.
-        yli::ontology::PipelineStruct helsinki_east_downtown_grayscale_pipeline_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
+        yli::ontology::PipelineStruct helsinki_east_downtown_grayscale_pipeline_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
         helsinki_east_downtown_grayscale_pipeline_struct.global_name = "helsinki_east_downtown_grayscale_pipeline";
         helsinki_east_downtown_grayscale_pipeline_struct.local_name = "helsinki_grayscale_pipeline";
         helsinki_east_downtown_grayscale_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -443,7 +443,7 @@ namespace ajokki
         helsinki_east_downtown_terrain_species->set_global_name("helsinki_east_downtown_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        yli::ontology::ObjectStruct helsinki_east_downtown_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
+        yli::ontology::ObjectStruct helsinki_east_downtown_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
         helsinki_east_downtown_struct.species_master = yli::ontology::Request(helsinki_east_downtown_terrain_species);
         helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);

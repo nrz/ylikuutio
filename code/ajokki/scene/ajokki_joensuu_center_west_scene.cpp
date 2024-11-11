@@ -77,7 +77,7 @@ namespace ajokki
         joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
         // Create the pipeline, store it in `joensuu_center_west_pipeline`.
-        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct((yli::ontology::Request(joensuu_center_west_scene)));
+        yli::ontology::PipelineStruct joensuu_center_west_pipeline_struct { yli::ontology::Request(joensuu_center_west_scene) };
         joensuu_center_west_pipeline_struct.global_name = "joensuu_center_west_pipeline";
         joensuu_center_west_pipeline_struct.local_name = "joensuu_regular_pipeline";
         joensuu_center_west_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -131,7 +131,7 @@ namespace ajokki
         joensuu_center_west_terrain_species->set_global_name("joensuu_center_west_terrain_species");
 
         // Create Joensuu center west terrain.
-        yli::ontology::ObjectStruct joensuu_center_west_struct((yli::ontology::Request(joensuu_center_west_scene)));
+        yli::ontology::ObjectStruct joensuu_center_west_struct { yli::ontology::Request(joensuu_center_west_scene) };
         joensuu_center_west_struct.species_master = yli::ontology::Request(joensuu_center_west_terrain_species);
         joensuu_center_west_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(joensuu_center_west_struct);

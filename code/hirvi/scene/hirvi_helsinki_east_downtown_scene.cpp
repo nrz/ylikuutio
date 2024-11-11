@@ -429,7 +429,7 @@ namespace hirvi
         helsinki_east_downtown_terrain_species->set_global_name("helsinki_east_downtown_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        yli::ontology::ObjectStruct helsinki_east_downtown_struct((yli::ontology::Request(helsinki_east_downtown_scene)));
+        yli::ontology::ObjectStruct helsinki_east_downtown_struct { yli::ontology::Request(helsinki_east_downtown_scene) };
         helsinki_east_downtown_struct.species_master = yli::ontology::Request(helsinki_east_downtown_terrain_species);
         helsinki_east_downtown_struct.cartesian_coordinates = yli::ontology::CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);

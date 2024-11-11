@@ -50,7 +50,7 @@ namespace ajokki
         }
 
         // Create the pipeline, store it in `earth_pipeline`.
-        yli::ontology::PipelineStruct earth_pipeline_struct((yli::ontology::Request(earth_ecosystem)));
+        yli::ontology::PipelineStruct earth_pipeline_struct { yli::ontology::Request(earth_ecosystem) };
         earth_pipeline_struct.global_name = "earth_pipeline";
         earth_pipeline_struct.local_name = "helsinki_regular_pipeline";
         earth_pipeline_struct.vertex_shader = "standard_shading.vert";

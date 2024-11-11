@@ -45,7 +45,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
     const int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
-    const yli::ontology::CallbackParameterStruct callback_parameter_struct((yli::ontology::Request(callback_object)));
+    const yli::ontology::CallbackParameterStruct callback_parameter_struct { yli::ontology::Request(callback_object) };
     yli::ontology::CallbackParameter* const callback_parameter = application.get_generic_entity_factory().create_callback_parameter(
             callback_parameter_struct,
             std::move(zero_value));

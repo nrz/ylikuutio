@@ -446,87 +446,87 @@ namespace hirvi
         std::cout << "Defining console keyrelease callback engines for `my_console`.\n";
 
         // Callback code for left Control release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_left_control_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_left_control_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_left_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_control_in_console_callback_engine_struct);
         my_release_left_control_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_left_control_in_console);
 
         // Callback code for right Control release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_right_control_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_right_control_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_right_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_control_in_console_callback_engine_struct);
         my_release_right_control_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_right_control_in_console);
 
         // Callback code for left Alt release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_left_alt_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_left_alt_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_left_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_alt_in_console_callback_engine_struct);
         my_release_left_alt_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_left_alt_in_console);
 
         // Callback code for right Alt release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_right_alt_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_right_alt_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_right_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_alt_in_console_callback_engine_struct);
         my_release_right_alt_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_right_alt_in_console);
 
         // Callback code for left Shift release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_left_shift_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_left_shift_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_left_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_shift_in_console_callback_engine_struct);
         my_release_left_shift_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_left_shift_in_console);
 
         // Callback code for right Shift release.
-        yli::ontology::ConsoleCallbackEngineStruct my_release_right_shift_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_release_right_shift_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_release_right_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_shift_in_console_callback_engine_struct);
         my_release_right_shift_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::release_right_shift_in_console);
 
         // Callback code for key up release: enable move to previous input.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_move_to_previous_input_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_move_to_previous_input_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_move_to_previous_input_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_move_to_previous_input_callback_engine_struct);
         my_enable_move_to_previous_input_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_move_to_previous_input);
 
         // Callback code for key down release: enable move to next input.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_move_to_next_input_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_move_to_next_input_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_move_to_next_input_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_move_to_next_input_callback_engine_struct);
         my_enable_move_to_next_input_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_move_to_next_input);
 
         // Callback code for backspace release: enable backspace.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_backspace_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_backspace_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_backspace_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_backspace_callback_engine_struct);
         my_enable_backspace_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_backspace);
 
         // Callback code for Tab release: enable Tab.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_tab_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_tab_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_tab_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_tab_callback_engine_struct);
         my_enable_tab_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_tab);
 
         // Callback code for enter release: enable Enter key.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_enter_key_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_enter_key_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_enter_key_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_enter_key_callback_engine_struct);
         my_enable_enter_key_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_enter_key);
 
         // Callback code for C release: enable Control-C.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_ctrl_c_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_ctrl_c_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_ctrl_c_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_ctrl_c_callback_engine_struct);
         my_enable_ctrl_c_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_ctrl_c);
 
         // Callback code for W release: enable Control-W.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_ctrl_w_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_ctrl_w_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_ctrl_w_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_ctrl_w_callback_engine_struct);
         my_enable_ctrl_w_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_ctrl_w);
 
         // Callback code for PgUp release: enable PgUp.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_page_up_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_page_up_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_page_up_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_page_up_callback_engine_struct);
         my_enable_page_up_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_page_up);
 
         // Callback code for PgDn release: enable PgDn.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_page_down_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_page_down_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_page_down_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_page_down_callback_engine_struct);
         my_enable_page_down_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_page_down);
 
         // Callback code for Home release: enable Home.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_home_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_home_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_home_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_home_callback_engine_struct);
         my_enable_home_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_home);
 
         // Callback code for End release: enable End.
-        yli::ontology::ConsoleCallbackEngineStruct my_enable_end_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enable_end_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enable_end_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_end_callback_engine_struct);
         my_enable_end_callback_engine->create_console_callback_object(&yli::ontology::Console::enable_end);
 
@@ -537,92 +537,92 @@ namespace hirvi
         std::cout << "Defining console keypress callback engines for `my_console`.\n";
 
         // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-        yli::ontology::ConsoleCallbackEngineStruct my_exit_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_exit_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_exit_console_callback_engine = this->entity_factory.create_console_callback_engine(my_exit_console_callback_engine_struct);
         my_exit_console_callback_engine->create_console_callback_object(&yli::ontology::Console::exit_console);
 
         // Callback code for left Control press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_left_control_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_left_control_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_left_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_control_in_console_callback_engine_struct);
         my_press_left_control_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_left_control_in_console);
 
         // Callback code for right Control press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_right_control_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_right_control_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_right_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_control_in_console_callback_engine_struct);
         my_press_right_control_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_right_control_in_console);
 
         // Callback code for left Alt press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_left_alt_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_left_alt_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_left_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_alt_in_console_callback_engine_struct);
         my_press_left_alt_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_left_alt_in_console);
 
         // Callback code for right Alt press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_right_alt_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_right_alt_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_right_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_alt_in_console_callback_engine_struct);
         my_press_right_alt_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_right_alt_in_console);
 
         // Callback code for left Shift press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_left_shift_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_left_shift_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_left_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_shift_in_console_callback_engine_struct);
         my_press_left_shift_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_left_shift_in_console);
 
         // Callback code for right Shift press.
-        yli::ontology::ConsoleCallbackEngineStruct my_press_right_shift_in_console_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_press_right_shift_in_console_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_press_right_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_shift_in_console_callback_engine_struct);
         my_press_right_shift_in_console_callback_engine->create_console_callback_object(&yli::ontology::Console::press_right_shift_in_console);
 
         // Callback code for key up: move to previous input.
-        yli::ontology::ConsoleCallbackEngineStruct my_move_to_previous_input_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_move_to_previous_input_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_move_to_previous_input_callback_engine = this->entity_factory.create_console_callback_engine(my_move_to_previous_input_callback_engine_struct);
         my_move_to_previous_input_callback_engine->create_console_callback_object(&yli::ontology::Console::move_to_previous_input);
 
         // Callback code for key down: move to next input.
-        yli::ontology::ConsoleCallbackEngineStruct my_move_to_next_input_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_move_to_next_input_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_move_to_next_input_callback_engine = this->entity_factory.create_console_callback_engine(my_move_to_next_input_callback_engine_struct);
         my_move_to_next_input_callback_engine->create_console_callback_object(&yli::ontology::Console::move_to_next_input);
 
         // Callback code for backspace: delete character left of cursor from current input in console.
-        yli::ontology::ConsoleCallbackEngineStruct my_backspace_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_backspace_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_backspace_callback_engine = this->entity_factory.create_console_callback_engine(my_backspace_callback_engine_struct);
         my_backspace_callback_engine->create_console_callback_object(&yli::ontology::Console::backspace);
 
         // Callback code for Tab.
-        yli::ontology::ConsoleCallbackEngineStruct my_tab_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_tab_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_tab_callback_engine = this->entity_factory.create_console_callback_engine(my_tab_callback_engine_struct);
         my_tab_callback_engine->create_console_callback_object(&yli::ontology::Console::tab);
 
         // Callback code for Enter key.
-        yli::ontology::ConsoleCallbackEngineStruct my_enter_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_enter_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_enter_callback_engine = this->entity_factory.create_console_callback_engine(my_enter_callback_engine_struct);
         my_enter_callback_engine->create_console_callback_object(&yli::ontology::Console::enter_key);
 
         // Callback code for C: Control-C.
-        yli::ontology::ConsoleCallbackEngineStruct my_ctrl_c_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_ctrl_c_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_ctrl_c_callback_engine = this->entity_factory.create_console_callback_engine(my_ctrl_c_callback_engine_struct);
         my_ctrl_c_callback_engine->create_console_callback_object(&yli::ontology::Console::ctrl_c);
 
         // Callback code for W: Control-W.
-        yli::ontology::ConsoleCallbackEngineStruct my_ctrl_w_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_ctrl_w_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_ctrl_w_callback_engine = this->entity_factory.create_console_callback_engine(my_ctrl_w_callback_engine_struct);
         my_ctrl_w_callback_engine->create_console_callback_object(&yli::ontology::Console::ctrl_w);
 
         // Callback code for PgUp.
-        yli::ontology::ConsoleCallbackEngineStruct my_page_up_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_page_up_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_page_up_callback_engine = this->entity_factory.create_console_callback_engine(my_page_up_callback_engine_struct);
         my_page_up_callback_engine->create_console_callback_object(&yli::ontology::Console::page_up);
 
         // Callback code for PgDn.
-        yli::ontology::ConsoleCallbackEngineStruct my_page_down_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_page_down_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_page_down_callback_engine = this->entity_factory.create_console_callback_engine(my_page_down_callback_engine_struct);
         my_page_down_callback_engine->create_console_callback_object(&yli::ontology::Console::page_down);
 
         // Callback code for Home.
-        yli::ontology::ConsoleCallbackEngineStruct my_home_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_home_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_home_callback_engine = this->entity_factory.create_console_callback_engine(my_home_callback_engine_struct);
         my_home_callback_engine->create_console_callback_object(&yli::ontology::Console::home);
 
         // Callback code for End.
-        yli::ontology::ConsoleCallbackEngineStruct my_end_callback_engine_struct((yli::ontology::Request(my_console)));
+        yli::ontology::ConsoleCallbackEngineStruct my_end_callback_engine_struct { yli::ontology::Request(my_console) };
         auto my_end_callback_engine = this->entity_factory.create_console_callback_engine(my_end_callback_engine_struct);
         my_end_callback_engine->create_console_callback_object(&yli::ontology::Console::end);
 

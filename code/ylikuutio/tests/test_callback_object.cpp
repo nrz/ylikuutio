@@ -41,7 +41,7 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
     yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
             callback_engine_struct);
 
-    const yli::ontology::CallbackObjectStruct callback_object_struct((yli::ontology::Request(callback_engine)));
+    const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request(callback_engine) };
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);

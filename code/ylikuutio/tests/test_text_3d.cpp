@@ -52,7 +52,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(ecosystem)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -62,7 +62,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request(material)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request(material) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
@@ -113,7 +113,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct((yli::ontology::Request(scene)));
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
@@ -123,7 +123,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct((yli::ontology::Request(material)));
+    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request(material) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 

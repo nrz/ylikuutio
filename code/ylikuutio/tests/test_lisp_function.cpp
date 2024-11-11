@@ -36,7 +36,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
     yli::ontology::ConsoleStruct console_struct;
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::LispFunctionStruct lisp_function_struct((yli::ontology::Request(console)));
+    yli::ontology::LispFunctionStruct lisp_function_struct { yli::ontology::Request(console) };
     yli::ontology::LispFunction* const lisp_function = application.get_generic_entity_factory().create_lisp_function(
             lisp_function_struct);
     ASSERT_NE(lisp_function, nullptr);

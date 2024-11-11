@@ -42,7 +42,7 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
     yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
-    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct((yli::ontology::Request(console_callback_engine)));
+    const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request(console_callback_engine) };
     yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
