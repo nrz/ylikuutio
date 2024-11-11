@@ -43,15 +43,13 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 ### GLEW ###
 
-if(NOT (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android"))
-    add_library(GLEW_200 STATIC)
-    target_sources(GLEW_200 PRIVATE
-        glew-2.0.0/src/glew.c)
-    target_link_libraries(GLEW_200
-        ${OPENGL_LIBRARY}
-        ${EXTRA_LIBS}
-        )
-endif()
+add_library(GLEW_200 STATIC)
+target_sources(GLEW_200 PRIVATE
+    glew-2.0.0/src/glew.c)
+target_link_libraries(GLEW_200
+    ${OPENGL_LIBRARY}
+    ${EXTRA_LIBS}
+)
 
 if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
