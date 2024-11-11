@@ -416,7 +416,7 @@ namespace yli::ontology
         float float_yaw = std::get<float>(yaw_any_value.data);
         float float_pitch = std::get<float>(pitch_any_value.data);
 
-        ObjectStruct object_struct((Request<Scene>(&parent)));
+        ObjectStruct object_struct { Request<Scene>(&parent) };
         object_struct.species_master = Request(&species);
         object_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
         object_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);

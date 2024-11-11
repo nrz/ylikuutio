@@ -693,7 +693,7 @@ namespace yli::ontology
                     if (lisp_function_entity == nullptr)
                     {
                         // There was not any `Entity` with that name.
-                        LispFunctionStruct lisp_function_struct((Request<Console>(&console)));
+                        LispFunctionStruct lisp_function_struct { Request<Console>(&console) };
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)

@@ -156,9 +156,9 @@ namespace yli::ontology
                     continue;
                 }
 
-                GlyphStruct glyph_struct(
-                        (Request(this)),
-                        (Request(material_parent)));
+                GlyphStruct glyph_struct {
+                        Request(this),
+                        Request(material_parent) };
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 glyph_struct.unicode_char_pointer = unicode_char_pointer;

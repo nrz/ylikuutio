@@ -64,10 +64,10 @@ namespace yli::ontology
 
             std::cout << "Creating `GlyphObject` instance for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
 
-            GlyphObjectStruct glyph_object_struct(
-                    (Request(scene_parent_of_text_3d)),
-                    (Request(glyph_pointer)),
-                    (Request(&text_3d)));
+            GlyphObjectStruct glyph_object_struct {
+                    Request(scene_parent_of_text_3d),
+                    Request(glyph_pointer),
+                    Request(&text_3d) };
             glyph_object_struct.original_scale_vector = text_3d.original_scale_vector;
             glyph_object_struct.cartesian_coordinates = text_3d.location; // TODO: adjust this as needed.
 

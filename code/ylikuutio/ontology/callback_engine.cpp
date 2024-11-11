@@ -60,7 +60,7 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        CallbackObjectStruct callback_object_struct((Request(this)));
+        CallbackObjectStruct callback_object_struct { Request(this) };
         return entity_factory.create_callback_object(callback_object_struct);
     }
 
@@ -69,7 +69,7 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        CallbackObjectStruct callback_object_struct((Request(this)));
+        CallbackObjectStruct callback_object_struct { Request(this) };
         auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;
