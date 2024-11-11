@@ -37,9 +37,9 @@ namespace yli::ontology
 TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
     yli::ontology::SymbiontMaterialStruct symbiont_material_struct { yli::ontology::Request(symbiosis) };
@@ -94,9 +94,9 @@ TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_
 TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request<yli::ontology::Ecosystem>(nullptr)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     symbiosis_struct.global_name = "foo";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
@@ -121,9 +121,9 @@ TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_
 TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request<yli::ontology::Ecosystem>(nullptr)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     symbiosis_struct.global_name = "foo";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);

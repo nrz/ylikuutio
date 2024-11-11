@@ -466,9 +466,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::MaterialStruct material_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::MaterialStruct material_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -483,9 +483,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
 TEST(any_value_must_be_initialized_appropriately, species)
 {
     mock::MockApplication application;
-    yli::ontology::SpeciesStruct species_struct(
-            (yli::ontology::Request<yli::ontology::Ecosystem>(nullptr)),
-            (yli::ontology::Request<yli::ontology::Material>(nullptr)));
+    yli::ontology::SpeciesStruct species_struct {
+            yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
+            yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
@@ -519,9 +519,9 @@ TEST(any_value_must_be_initialized_appropriately, symbiosis)
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
@@ -540,9 +540,9 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 

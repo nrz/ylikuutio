@@ -120,9 +120,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(
-            (yli::ontology::Request<yli::ontology::Scene>("foo")),
-            (yli::ontology::Request(symbiosis)));
+    yli::ontology::HolobiontStruct holobiont_struct {
+            yli::ontology::Request<yli::ontology::Scene>("foo"),
+            yli::ontology::Request(symbiosis) };
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);
@@ -171,9 +171,9 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct(
-            (yli::ontology::Request<yli::ontology::Scene>("bar")),
-            (yli::ontology::Request(symbiosis)));
+    yli::ontology::HolobiontStruct holobiont_struct {
+            yli::ontology::Request<yli::ontology::Scene>("bar"),
+            yli::ontology::Request(symbiosis) };
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
     ASSERT_NE(holobiont, nullptr);

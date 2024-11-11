@@ -41,9 +41,9 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    yli::ontology::BrainStruct brain_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
@@ -79,15 +79,15 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    yli::ontology::BrainStruct brain_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
-    yli::ontology::WaypointStruct waypoint_struct(
-            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
-            (yli::ontology::Request(brain)));
+    yli::ontology::WaypointStruct waypoint_struct {
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request(brain) };
     yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
@@ -118,15 +118,15 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    yli::ontology::BrainStruct brain_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
-    yli::ontology::WaypointStruct waypoint_struct(
-            (yli::ontology::Request<yli::ontology::Scene>("foo")),
-            (yli::ontology::Request(brain)));
+    yli::ontology::WaypointStruct waypoint_struct {
+            yli::ontology::Request<yli::ontology::Scene>("foo"),
+            yli::ontology::Request(brain) };
     yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
@@ -157,15 +157,15 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    yli::ontology::BrainStruct brain_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
-    yli::ontology::WaypointStruct waypoint_struct(
-            (yli::ontology::Request<yli::ontology::Scene>("bar")),
-            (yli::ontology::Request(brain)));
+    yli::ontology::WaypointStruct waypoint_struct {
+            yli::ontology::Request<yli::ontology::Scene>("bar"),
+            yli::ontology::Request(brain) };
     yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);

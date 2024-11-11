@@ -30,9 +30,9 @@ namespace yli::ontology
 
 TEST(brain_struct_must_be_initialized_appropriately, brain_struct)
 {
-    const yli::ontology::BrainStruct test_brain_struct(
-            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    const yli::ontology::BrainStruct test_brain_struct {
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
 
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_brain_struct.scene_parent.data));
     ASSERT_EQ(std::get<yli::ontology::Scene*>(test_brain_struct.scene_parent.data), nullptr);

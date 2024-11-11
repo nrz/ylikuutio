@@ -51,9 +51,9 @@ TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent
 
 TEST(object_struct_must_be_initialized_appropriately, object_struct_scene_parent_species_master)
 {
-    const yli::ontology::ObjectStruct test_object_struct(
-            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
-            (yli::ontology::Request<yli::ontology::Species>(nullptr)));
+    const yli::ontology::ObjectStruct test_object_struct {
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request<yli::ontology::Species>(nullptr) };
 
     ASSERT_FALSE(test_object_struct.scene.data.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_object_struct.scene.data));

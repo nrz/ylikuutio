@@ -37,9 +37,9 @@ TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_materi
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct(
-            (yli::ontology::Request(ecosystem)),
-            (yli::ontology::Request<yli::ontology::Pipeline>(nullptr)));
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(ecosystem),
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 

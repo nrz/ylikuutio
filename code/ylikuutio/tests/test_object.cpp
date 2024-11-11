@@ -132,9 +132,9 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
-    yli::ontology::ObjectStruct object_struct(
-            (yli::ontology::Request<yli::ontology::Scene>(nullptr)),
-            (yli::ontology::Request(species)));
+    yli::ontology::ObjectStruct object_struct {
+            yli::ontology::Request<yli::ontology::Scene>(nullptr),
+            yli::ontology::Request(species) };
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
     ASSERT_NE(object, nullptr);
@@ -201,9 +201,9 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
-    yli::ontology::ObjectStruct object_struct(
-            (yli::ontology::Request<yli::ontology::Scene>("foo")),
-            (yli::ontology::Request(species)));
+    yli::ontology::ObjectStruct object_struct {
+            yli::ontology::Request<yli::ontology::Scene>("foo"),
+            yli::ontology::Request(species) };
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
     ASSERT_NE(object, nullptr);
@@ -270,9 +270,9 @@ TEST(object_must_be_initialized_appropriately, headless_with_scene_parent_provid
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
-    yli::ontology::ObjectStruct object_struct(
-        (yli::ontology::Request<yli::ontology::Scene>("bar")),
-        (yli::ontology::Request(species)));
+    yli::ontology::ObjectStruct object_struct {
+        yli::ontology::Request<yli::ontology::Scene>("bar"),
+        yli::ontology::Request(species) };
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
     ASSERT_NE(object, nullptr);
@@ -358,9 +358,9 @@ TEST(object_must_bind_to_brain_appropriately, headless_with_parent_provided_as_v
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct(
-            (yli::ontology::Request(scene)),
-            (yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr)));
+    yli::ontology::BrainStruct brain_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
             brain_struct);
 
