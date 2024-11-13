@@ -52,9 +52,7 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct {
-            Request(helsinki_east_downtown_scene),
-            Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);

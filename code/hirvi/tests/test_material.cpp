@@ -54,9 +54,7 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct {
-            Request(helsinki_east_downtown_scene),
-            Request(helsinki_east_downtown_pipeline) };
+    MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);

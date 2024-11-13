@@ -67,9 +67,7 @@ namespace hirvi
             return nullptr;
         }
 
-        SymbiosisStruct turbo_polizei_png_symbiosis_struct {
-            Request(earth_ecosystem),
-                Request(earth_pipeline) };
+        SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(earth_ecosystem), Request(earth_pipeline) };
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 

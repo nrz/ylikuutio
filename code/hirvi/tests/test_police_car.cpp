@@ -67,9 +67,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct {
-            Request(helsinki_east_downtown_scene),
-            Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
@@ -81,17 +79,12 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
     Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
-    SymbiosisStruct turbo_polizei_png_symbiosis_struct {
-            Request(helsinki_east_downtown_scene),
-            Request(helsinki_east_downtown_pipeline) };
+    SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
-    HolobiontStruct turbo_polizei_png_police_car_struct1 {
-            Request(helsinki_east_downtown_scene),
-            Request(rest_brain),
-            Request(turbo_polizei_png_symbiosis) };
+    HolobiontStruct turbo_polizei_png_police_car_struct1 { Request(helsinki_east_downtown_scene), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
     turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
     turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
