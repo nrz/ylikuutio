@@ -34,15 +34,17 @@ namespace yli::ontology
 
 namespace ajokki
 {
-    yli::ontology::Ecosystem* AjokkiApplication::create_earth_ecosystem()
+    using namespace yli::ontology;
+
+    Ecosystem* AjokkiApplication::create_earth_ecosystem()
     {
         // Earth `Ecosystem` begins here.
 
-        std::cout << "Creating yli::ontology::Entity* earth_ecosystem and its contents ...\n";
-        yli::ontology::EcosystemStruct earth_ecosystem_struct;
+        std::cout << "Creating Entity* earth_ecosystem and its contents ...\n";
+        EcosystemStruct earth_ecosystem_struct;
         earth_ecosystem_struct.global_name = "earth_ecosystem";
-        std::cout << "Creating yli::ontology::Ecosystem* earth_ecosystem ...\n";
-        yli::ontology::Ecosystem* const earth_ecosystem = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
+        std::cout << "Creating Ecosystem* earth_ecosystem ...\n";
+        Ecosystem* const earth_ecosystem = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
 
         if (earth_ecosystem == nullptr)
         {
@@ -50,14 +52,14 @@ namespace ajokki
         }
 
         // Create the pipeline, store it in `earth_pipeline`.
-        yli::ontology::PipelineStruct earth_pipeline_struct { yli::ontology::Request(earth_ecosystem) };
+        PipelineStruct earth_pipeline_struct { Request(earth_ecosystem) };
         earth_pipeline_struct.global_name = "earth_pipeline";
         earth_pipeline_struct.local_name = "helsinki_regular_pipeline";
         earth_pipeline_struct.vertex_shader = "standard_shading.vert";
         earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating yli::ontology::Pipeline* earth_pipeline ...\n";
-        yli::ontology::Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
+        std::cout << "Creating Pipeline* earth_pipeline ...\n";
+        Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
 
         if (earth_pipeline == nullptr)
         {
@@ -65,14 +67,14 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::SymbiosisStruct turbo_polizei_png_symbiosis_struct {
-                yli::ontology::Request(earth_ecosystem),
-                yli::ontology::Request(earth_pipeline) };
+        SymbiosisStruct turbo_polizei_png_symbiosis_struct {
+                Request(earth_ecosystem),
+                Request(earth_pipeline) };
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
-        std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        yli::ontology::Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
+        std::cout << "Creating Symbiosis* turbo_polizei_png_symbiosis ...\n";
+        Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {
