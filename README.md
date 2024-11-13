@@ -471,7 +471,8 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * Ronja Koistinen (support for building in a Podman container)
 
 ## Contact info
-(found bugs and suggestions are very welcome!)
+(found bugs are very welcome!)
+(at them moment I do not take code contributions)
 
 | variable       | value                                                         |
 |:-------------- |:------------------------------------------------------------- |
