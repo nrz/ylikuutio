@@ -146,9 +146,7 @@ namespace ajokki
         // Create the `Brain`s.
 
         // `rest_brain`.
-        BrainStruct rest_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(rest_callback_engine) };
+        BrainStruct rest_brain_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         std::cout << "Creating Brain* rest_brain ...\n";
@@ -161,9 +159,7 @@ namespace ajokki
         }
 
         // `go_east_brain`.
-        BrainStruct go_east_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(go_east_callback_engine) };
+        BrainStruct go_east_brain_struct { Request(helsinki_east_downtown_scene), Request(go_east_callback_engine) };
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         std::cout << "Creating Brain* go_east_brain ...\n";
@@ -174,9 +170,7 @@ namespace ajokki
         }
 
         // `go_west_brain`.
-        BrainStruct go_west_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(go_west_callback_engine) };
+        BrainStruct go_west_brain_struct { Request(helsinki_east_downtown_scene), Request(go_west_callback_engine) };
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         std::cout << "Creating Brain* go_west_brain ...\n";
@@ -187,9 +181,7 @@ namespace ajokki
         }
 
         // `go_north_brain`.
-        BrainStruct go_north_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(go_north_callback_engine) };
+        BrainStruct go_north_brain_struct { Request(helsinki_east_downtown_scene), Request(go_north_callback_engine) };
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         std::cout << "Creating Brain* go_north_brain ...\n";
@@ -200,9 +192,7 @@ namespace ajokki
         }
 
         // `go_south_brain`.
-        BrainStruct go_south_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(go_south_callback_engine) };
+        BrainStruct go_south_brain_struct { Request(helsinki_east_downtown_scene), Request(go_south_callback_engine) };
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         std::cout << "Creating Brain* go_south_brain ...\n";
@@ -213,9 +203,7 @@ namespace ajokki
         }
 
         // `orient_to_east_brain`.
-        BrainStruct orient_to_east_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_to_east_callback_engine) };
+        BrainStruct orient_to_east_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_to_east_callback_engine) };
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         std::cout << "Creating Brain* orient_to_east_brain ...\n";
@@ -226,9 +214,7 @@ namespace ajokki
         }
 
         // `orient_to_west_brain`.
-        BrainStruct orient_to_west_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_to_west_callback_engine) };
+        BrainStruct orient_to_west_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_to_west_callback_engine) };
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         std::cout << "Creating Brain* orient_to_west_brain ...\n";
@@ -239,9 +225,7 @@ namespace ajokki
         }
 
         // `orient_to_north_brain`.
-        BrainStruct orient_to_north_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_to_north_callback_engine) };
+        BrainStruct orient_to_north_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_to_north_callback_engine) };
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         std::cout << "Creating Brain* orient_to_north_brain ...\n";
@@ -252,9 +236,7 @@ namespace ajokki
         }
 
         // `orient_to_south_brain`.
-        BrainStruct orient_to_south_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_to_south_callback_engine) };
+        BrainStruct orient_to_south_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_to_south_callback_engine) };
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         std::cout << "Creating Brain* orient_to_south_brain ...\n";
@@ -265,9 +247,7 @@ namespace ajokki
         }
 
         // `rotate_clockwise_brain`.
-        BrainStruct rotate_clockwise_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(rotate_clockwise_callback_engine) };
+        BrainStruct rotate_clockwise_brain_struct { Request(helsinki_east_downtown_scene), Request(rotate_clockwise_callback_engine) };
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         std::cout << "Creating Brain* rotate_clockwise_brain ...\n";
@@ -278,9 +258,7 @@ namespace ajokki
         }
 
         // `orient_and_go_east_brain`.
-        BrainStruct orient_and_go_east_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_and_go_east_callback_engine) };
+        BrainStruct orient_and_go_east_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_east_callback_engine) };
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         std::cout << "Creating Brain* orient_and_go_east_brain ...\n";
@@ -291,9 +269,7 @@ namespace ajokki
         }
 
         // `orient_and_go_west_brain`.
-        BrainStruct orient_and_go_west_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_and_go_west_callback_engine) };
+        BrainStruct orient_and_go_west_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_west_callback_engine) };
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         std::cout << "Creating Brain* orient_and_go_west_brain ...\n";
@@ -304,9 +280,7 @@ namespace ajokki
         }
 
         // `orient_and_go_north_brain`.
-        BrainStruct orient_and_go_north_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_and_go_north_callback_engine) };
+        BrainStruct orient_and_go_north_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_north_callback_engine) };
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         std::cout << "Creating Brain* orient_and_go_north_brain ...\n";
@@ -317,9 +291,7 @@ namespace ajokki
         }
 
         // `orient_and_go_south_brain`.
-        BrainStruct orient_and_go_south_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orient_and_go_south_callback_engine) };
+        BrainStruct orient_and_go_south_brain_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_south_callback_engine) };
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         std::cout << "Creating Brain* orient_and_go_south_brain ...\n";
@@ -330,9 +302,7 @@ namespace ajokki
         }
 
         // `rotate_counterclockwise_brain`.
-        BrainStruct rotate_counterclockwise_brain_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(rotate_counterclockwise_callback_engine) };
+        BrainStruct rotate_counterclockwise_brain_struct { Request(helsinki_east_downtown_scene), Request(rotate_counterclockwise_callback_engine) };
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating Brain* rotate_counterclockwise_brain ...\n";
@@ -373,9 +343,7 @@ namespace ajokki
         }
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(helsinki_east_downtown_pipeline) };
+        MaterialStruct helsinki_east_downtown_grass_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
         helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -391,9 +359,7 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        MaterialStruct pink_geometric_tiles_material_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(helsinki_east_downtown_pipeline) };
+        MaterialStruct pink_geometric_tiles_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
         pink_geometric_tiles_material_struct.texture_file_format = "png";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
@@ -409,9 +375,7 @@ namespace ajokki
         pink_geometric_tiles_material->set_global_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(helsinki_east_downtown_pipeline) };
+        MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
@@ -426,9 +390,7 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        SpeciesStruct helsinki_east_downtown_terrain_species_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(helsinki_east_downtown_grass_material) };
+        SpeciesStruct helsinki_east_downtown_terrain_species_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_grass_material) };
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
@@ -450,9 +412,7 @@ namespace ajokki
         helsinki_east_downtown_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_east_downtown_struct);
 
-        SpeciesStruct cat_species_struct {
-                Request(helsinki_east_downtown_scene),
-                Request(orange_fur_material) };
+        SpeciesStruct cat_species_struct { Request(helsinki_east_downtown_scene), Request(orange_fur_material) };
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
         cat_species_struct.model_loader_struct.model_file_format = "fbx";
@@ -516,9 +476,7 @@ namespace ajokki
 
         if (turbo_polizei_png_symbiosis != nullptr)
         {
-            HolobiontStruct turbo_polizei_png_holobiont_struct1 {
-                    Request(helsinki_east_downtown_scene),
-                    Request(turbo_polizei_png_symbiosis) };
+            HolobiontStruct turbo_polizei_png_holobiont_struct1 { Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis) };
             turbo_polizei_png_holobiont_struct1.brain_master = Request(rest_brain);
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
@@ -537,9 +495,7 @@ namespace ajokki
             turbo_polizei_png1->set_global_name("turbo_polizei_png1");
             turbo_polizei_png1->set_local_name("sinivuokko1");
 
-            HolobiontStruct turbo_polizei_png_holobiont_struct2 {
-                    Request(helsinki_east_downtown_scene),
-                    Request(turbo_polizei_png_symbiosis) };
+            HolobiontStruct turbo_polizei_png_holobiont_struct2 { Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis) };
             turbo_polizei_png_holobiont_struct2.brain_master = Request(rest_brain);
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };

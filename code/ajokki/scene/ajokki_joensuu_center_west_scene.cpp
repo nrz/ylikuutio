@@ -97,9 +97,7 @@ namespace ajokki
         joensuu_center_west_pipeline->set_global_name("joensuu_center_west_pipeline");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        MaterialStruct joensuu_center_west_grass_material_struct {
-                Request(joensuu_center_west_scene),
-                Request(joensuu_center_west_pipeline) };
+        MaterialStruct joensuu_center_west_grass_material_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline) };
         joensuu_center_west_grass_material_struct.texture_file_format = "png";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -114,9 +112,7 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
-        SpeciesStruct joensuu_center_west_terrain_species_struct {
-                Request(joensuu_center_west_scene),
-                Request(joensuu_center_west_grass_material) };
+        SpeciesStruct joensuu_center_west_terrain_species_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_grass_material) };
         joensuu_center_west_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_species_struct.model_loader_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.model_loader_struct.x_step = 4;
@@ -139,9 +135,7 @@ namespace ajokki
         this->entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        MaterialStruct orange_fur_material_joensuu_struct {
-                Request(joensuu_center_west_scene),
-                Request(joensuu_center_west_pipeline) };
+        MaterialStruct orange_fur_material_joensuu_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline) };
         orange_fur_material_joensuu_struct.texture_file_format = "png";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
@@ -156,9 +150,7 @@ namespace ajokki
 
         orange_fur_material_joensuu->set_global_name("joensuu_center_west_orange_fur_material");
 
-        SpeciesStruct horse_species_struct {
-                Request(joensuu_center_west_scene),
-                Request(orange_fur_material_joensuu) };
+        SpeciesStruct horse_species_struct { Request(joensuu_center_west_scene), Request(orange_fur_material_joensuu) };
         horse_species_struct.model_loader_struct.model_file_format = "fbx";
         horse_species_struct.model_loader_struct.model_filename = "horse.fbx";
 
