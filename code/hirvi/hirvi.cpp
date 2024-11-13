@@ -299,17 +299,17 @@ namespace hirvi
 
         // Helsinki `Scene` begins here.
 
-        std::cout << "Creating Scene* helsinki_east_downtown_scene ...\n";
-        Scene* const helsinki_east_downtown_scene = this->create_helsinki_east_downtown_scene();
+        std::cout << "Creating Scene* helsinki_scene ...\n";
+        Scene* const helsinki_scene = this->create_helsinki_scene();
 
-        if (helsinki_east_downtown_scene == nullptr)
+        if (helsinki_scene == nullptr)
         {
             return false;
         }
 
-        // Set `helsinki_east_downtown_scene` to be the currently active `Scene`.
-        std::cout << "Setting helsinki_east_downtown_scene as the active scene ...\n";
-        this->get_universe().set_active_scene(helsinki_east_downtown_scene);
+        // Set `helsinki_scene` to be the currently active `Scene`.
+        std::cout << "Setting helsinki_scene as the active scene ...\n";
+        this->get_universe().set_active_scene(helsinki_scene);
 
         // Helsinki `Scene` ends here.
 

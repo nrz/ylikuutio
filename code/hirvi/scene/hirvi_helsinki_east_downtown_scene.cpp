@@ -63,26 +63,26 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Scene* HirviApplication::create_helsinki_east_downtown_scene()
+    Scene* HirviApplication::create_helsinki_scene()
     {
         // Helsinki `Scene` begins here.
 
-        std::cout << "Creating Entity* helsinki_east_downtown_scene_entity ...\n";
+        std::cout << "Creating Entity* helsinki_scene_entity ...\n";
         SceneStruct scene_struct;
-        scene_struct.global_name = "helsinki_east_downtown_scene";
+        scene_struct.global_name = "helsinki_scene";
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
-        std::cout << "Creating Scene* helsinki_east_downtown_scene ...\n";
-        Scene* const helsinki_east_downtown_scene = this->entity_factory.create_scene(scene_struct);
+        std::cout << "Creating Scene* helsinki_scene ...\n";
+        Scene* const helsinki_scene = this->entity_factory.create_scene(scene_struct);
 
-        if (helsinki_east_downtown_scene == nullptr)
+        if (helsinki_scene == nullptr)
         {
             std::cerr << "Failed to create Scene.\n";
             return nullptr;
         }
 
-        helsinki_east_downtown_scene->set_turbo_factor(5.0f);
-        helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
+        helsinki_scene->set_turbo_factor(5.0f);
+        helsinki_scene->set_twin_turbo_factor(100.0f);
 
         // Create the `CallbackEngine`s for the `Brain`s.
         CallbackEngineStruct rest_callback_engine_struct;
@@ -163,7 +163,7 @@ namespace hirvi
         // Create the `Brain`s.
 
         // `rest_brain`.
-        BrainStruct rest_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rest_callback_engine") };
+        BrainStruct rest_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rest_callback_engine") };
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         std::cout << "Creating Brain* rest_brain ...\n";
@@ -176,7 +176,7 @@ namespace hirvi
         }
 
         // `go_east_brain`.
-        BrainStruct go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_east_callback_engine") };
+        BrainStruct go_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_east_callback_engine") };
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         std::cout << "Creating Brain* go_east_brain ...\n";
@@ -187,7 +187,7 @@ namespace hirvi
         }
 
         // `go_west_brain`.
-        BrainStruct go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_west_callback_engine") };
+        BrainStruct go_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_west_callback_engine") };
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         std::cout << "Creating Brain* go_west_brain ...\n";
@@ -198,7 +198,7 @@ namespace hirvi
         }
 
         // `go_north_brain`.
-        BrainStruct go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_north_callback_engine") };
+        BrainStruct go_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_north_callback_engine") };
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         std::cout << "Creating Brain* go_north_brain ...\n";
@@ -209,7 +209,7 @@ namespace hirvi
         }
 
         // `go_south_brain`.
-        BrainStruct go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_south_callback_engine") };
+        BrainStruct go_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_south_callback_engine") };
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         std::cout << "Creating Brain* go_south_brain ...\n";
@@ -220,7 +220,7 @@ namespace hirvi
         }
 
         // `orient_to_east_brain`.
-        BrainStruct orient_to_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_east_callback_engine") };
+        BrainStruct orient_to_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_east_callback_engine") };
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         std::cout << "Creating Brain* orient_to_east_brain ...\n";
@@ -231,7 +231,7 @@ namespace hirvi
         }
 
         // `orient_to_west_brain`.
-        BrainStruct orient_to_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_west_callback_engine") };
+        BrainStruct orient_to_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_west_callback_engine") };
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         std::cout << "Creating Brain* orient_to_west_brain ...\n";
@@ -242,7 +242,7 @@ namespace hirvi
         }
 
         // `orient_to_north_brain`.
-        BrainStruct orient_to_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_north_callback_engine") };
+        BrainStruct orient_to_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_north_callback_engine") };
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         std::cout << "Creating Brain* orient_to_north_brain ...\n";
@@ -253,7 +253,7 @@ namespace hirvi
         }
 
         // `orient_to_south_brain`.
-        BrainStruct orient_to_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_south_callback_engine") };
+        BrainStruct orient_to_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_south_callback_engine") };
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         std::cout << "Creating Brain* orient_to_south_brain ...\n";
@@ -264,7 +264,7 @@ namespace hirvi
         }
 
         // `rotate_clockwise_brain`.
-        BrainStruct rotate_clockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rotate_clockwise_callback_engine") };
+        BrainStruct rotate_clockwise_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_clockwise_callback_engine") };
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         std::cout << "Creating Brain* rotate_clockwise_brain ...\n";
@@ -275,7 +275,7 @@ namespace hirvi
         }
 
         // `orient_and_go_east_brain`.
-        BrainStruct orient_and_go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_east_callback_engine") };
+        BrainStruct orient_and_go_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_east_callback_engine") };
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         std::cout << "Creating Brain* orient_and_go_east_brain ...\n";
@@ -286,7 +286,7 @@ namespace hirvi
         }
 
         // `orient_and_go_west_brain`.
-        BrainStruct orient_and_go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_west_callback_engine") };
+        BrainStruct orient_and_go_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_west_callback_engine") };
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         std::cout << "Creating Brain* orient_and_go_west_brain ...\n";
@@ -297,7 +297,7 @@ namespace hirvi
         }
 
         // `orient_and_go_north_brain`.
-        BrainStruct orient_and_go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_north_callback_engine") };
+        BrainStruct orient_and_go_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_north_callback_engine") };
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         std::cout << "Creating Brain* orient_and_go_north_brain ...\n";
@@ -308,7 +308,7 @@ namespace hirvi
         }
 
         // `orient_and_go_south_brain`.
-        BrainStruct orient_and_go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_south_callback_engine") };
+        BrainStruct orient_and_go_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_south_callback_engine") };
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         std::cout << "Creating Brain* orient_and_go_south_brain ...\n";
@@ -319,7 +319,7 @@ namespace hirvi
         }
 
         // `rotate_counterclockwise_brain`.
-        BrainStruct rotate_counterclockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rotate_counterclockwise_callback_engine") };
+        BrainStruct rotate_counterclockwise_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_counterclockwise_callback_engine") };
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating Brain* rotate_counterclockwise_brain ...\n";
@@ -329,54 +329,54 @@ namespace hirvi
             return nullptr;
         }
 
-        // Create the pipeline, store it in `helsinki_east_downtown_pipeline`.
-        PipelineStruct helsinki_east_downtown_pipeline_struct { Request<Scene>("helsinki_east_downtown_scene") };
-        helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
-        helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
-        helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
-        helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
+        // Create the pipeline, store it in `helsinki_pipeline`.
+        PipelineStruct helsinki_pipeline_struct { Request<Scene>("helsinki_scene") };
+        helsinki_pipeline_struct.global_name = "helsinki_pipeline";
+        helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
+        helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
+        helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
 
-        std::cout << "Creating Pipeline* helsinki_east_downtown_pipeline ...\n";
-        Pipeline* const helsinki_east_downtown_pipeline = this->entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+        std::cout << "Creating Pipeline* helsinki_pipeline ...\n";
+        Pipeline* const helsinki_pipeline = this->entity_factory.create_pipeline(helsinki_pipeline_struct);
 
-        if (helsinki_east_downtown_pipeline == nullptr)
+        if (helsinki_pipeline == nullptr)
         {
             std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
         }
 
-        // Create the grayscale pipeline, store it in `helsinki_east_downtown_grayscale_pipeline`.
-        PipelineStruct helsinki_east_downtown_grayscale_pipeline_struct { Request<Scene>("helsinki_east_downtown_scene") };
-        helsinki_east_downtown_grayscale_pipeline_struct.global_name = "helsinki_east_downtown_grayscale_pipeline";
-        helsinki_east_downtown_grayscale_pipeline_struct.local_name = "helsinki_grayscale_pipeline";
-        helsinki_east_downtown_grayscale_pipeline_struct.vertex_shader = "standard_shading.vert";
-        helsinki_east_downtown_grayscale_pipeline_struct.fragment_shader = "grayscale_standard_shading.frag";
+        // Create the grayscale pipeline, store it in `helsinki_grayscale_pipeline`.
+        PipelineStruct helsinki_grayscale_pipeline_struct { Request<Scene>("helsinki_scene") };
+        helsinki_grayscale_pipeline_struct.global_name = "helsinki_grayscale_pipeline";
+        helsinki_grayscale_pipeline_struct.local_name = "helsinki_grayscale_pipeline";
+        helsinki_grayscale_pipeline_struct.vertex_shader = "standard_shading.vert";
+        helsinki_grayscale_pipeline_struct.fragment_shader = "grayscale_standard_shading.frag";
 
-        std::cout << "Creating Pipeline* helsinki_east_downtown_grayscale_pipeline ...\n";
-        if (this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct) == nullptr)
+        std::cout << "Creating Pipeline* helsinki_grayscale_pipeline ...\n";
+        if (this->entity_factory.create_pipeline(helsinki_grayscale_pipeline_struct) == nullptr)
         {
             std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
         }
 
-        // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
-        helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
-        helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
+        // Create the material, store it in `helsinki_grass_material`.
+        MaterialStruct helsinki_grass_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
+        helsinki_grass_material_struct.texture_file_format = "png";
+        helsinki_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
-        std::cout << "Creating Material* helsinki_east_downtown_grass_material ...\n";
-        Material* const helsinki_east_downtown_grass_material = this->entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
+        std::cout << "Creating Material* helsinki_grass_material ...\n";
+        Material* const helsinki_grass_material = this->entity_factory.create_material(helsinki_grass_material_struct);
 
-        if (helsinki_east_downtown_grass_material == nullptr)
+        if (helsinki_grass_material == nullptr)
         {
             std::cerr << "Failed to create grass Material.\n";
             return nullptr;
         }
 
-        helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
+        helsinki_grass_material->set_global_name("helsinki_grass_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
+        MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
         orange_fur_material_struct.texture_file_format = "png";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
@@ -389,31 +389,31 @@ namespace hirvi
             return nullptr;
         }
 
-        orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
+        orange_fur_material->set_global_name("helsinki_orange_fur_material");
 
-        SpeciesStruct helsinki_east_downtown_terrain_species_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_grass_material) };
-        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
-        helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
-        helsinki_east_downtown_terrain_species_struct.model_loader_struct.y_step = 4;
-        std::cout << "Creating Species* helsinki_east_downtown_terrain_species ...\n";
-        Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
+        SpeciesStruct helsinki_terrain_species_struct { Request(helsinki_scene), Request(helsinki_grass_material) };
+        helsinki_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
+        helsinki_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_terrain_species_struct.model_loader_struct.x_step = 4;
+        helsinki_terrain_species_struct.model_loader_struct.y_step = 4;
+        std::cout << "Creating Species* helsinki_terrain_species ...\n";
+        Species* const helsinki_terrain_species = this->entity_factory.create_species(helsinki_terrain_species_struct);
 
-        if (helsinki_east_downtown_terrain_species == nullptr)
+        if (helsinki_terrain_species == nullptr)
         {
             std::cerr << "Failed to create Species.\n";
             return nullptr;
         }
 
-        helsinki_east_downtown_terrain_species->set_global_name("helsinki_east_downtown_terrain_species");
+        helsinki_terrain_species->set_global_name("helsinki_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        ObjectStruct helsinki_east_downtown_struct { Request(helsinki_east_downtown_scene) };
-        helsinki_east_downtown_struct.species_master = Request(helsinki_east_downtown_terrain_species);
-        helsinki_east_downtown_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
-        this->entity_factory.create_object(helsinki_east_downtown_struct);
+        ObjectStruct helsinki_struct { Request(helsinki_scene) };
+        helsinki_struct.species_master = Request(helsinki_terrain_species);
+        helsinki_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
+        this->entity_factory.create_object(helsinki_struct);
 
-        SpeciesStruct cat_species_struct { Request(helsinki_east_downtown_scene), Request(orange_fur_material) };
+        SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
         cat_species_struct.model_loader_struct.model_file_format = "fbx";
@@ -428,7 +428,7 @@ namespace hirvi
             return nullptr;
         }
 
-        ObjectStruct cat1_object_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(cat_species) };
+        ObjectStruct cat1_object_struct { Request<Scene>("helsinki_scene"), Request(cat_species) };
         cat1_object_struct.global_name = "cat1";
         cat1_object_struct.local_name = "kissa1";
         cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -457,7 +457,7 @@ namespace hirvi
             return nullptr;
         }
 
-        ObjectStruct cat2_object_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(cat_species) };
+        ObjectStruct cat2_object_struct { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(cat_species) };
         cat2_object_struct.global_name = "cat2";
         cat2_object_struct.local_name = "kissa2";
         cat2_object_struct.brain_master = Request(rest_brain);
@@ -499,7 +499,7 @@ namespace hirvi
             return nullptr;
         }
 
-        HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
+        HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -524,7 +524,7 @@ namespace hirvi
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
         turbo_polizei_png1->set_local_name("sinivuokko1");
 
-        HolobiontStruct turbo_polizei_png_police_car_struct2 { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
+        HolobiontStruct turbo_polizei_png_police_car_struct2 { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -549,7 +549,7 @@ namespace hirvi
         turbo_polizei_png2->set_global_name("turbo_polizei_png2");
         turbo_polizei_png2->set_local_name("sinivuokko2");
 
-        CameraStruct cat_camera_struct { Request<Scene>("helsinki_east_downtown_scene") };
+        CameraStruct cat_camera_struct { Request<Scene>("helsinki_scene") };
         cat_camera_struct.cartesian_coordinates = CartesianCoordinatesModule(800.00f, -950.00f, 400.00f);
         cat_camera_struct.orientation.yaw = -0.90f;
         cat_camera_struct.orientation.pitch = -1.00f;
@@ -565,7 +565,7 @@ namespace hirvi
 
         cat_camera->set_global_name("cat_camera");
 
-        CameraStruct turbo_polizei_camera_struct { Request<Scene>("helsinki_east_downtown_scene") };
+        CameraStruct turbo_polizei_camera_struct { Request<Scene>("helsinki_scene") };
         turbo_polizei_camera_struct.cartesian_coordinates = CartesianCoordinatesModule(87.00f, -169.00f, 28.00f);
         turbo_polizei_camera_struct.orientation.yaw = -0.45f;
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
@@ -581,7 +581,7 @@ namespace hirvi
 
         turbo_polizei_camera->set_global_name("turbo_polizei_camera");
 
-        return helsinki_east_downtown_scene;
+        return helsinki_scene;
         // Helsinki `Scene` ends here.
     }
 }

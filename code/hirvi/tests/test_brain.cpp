@@ -43,16 +43,16 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     hirvi::HirviApplication hirvi_application(argc, argv);
 
     SceneStruct scene_struct;
-    scene_struct.global_name = "helsinki_east_downtown_scene";
+    scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
     CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);

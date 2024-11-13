@@ -61,40 +61,40 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     hirvi::HirviApplication hirvi_application(argc, argv);
 
     SceneStruct scene_struct;
-    scene_struct.global_name = "helsinki_east_downtown_scene";
+    scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_east_downtown_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
 
     CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
+    BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
     Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
 
-    PipelineStruct helsinki_east_downtown_pipeline_struct { Request(helsinki_east_downtown_scene) };
-    helsinki_east_downtown_pipeline_struct.global_name = "helsinki_east_downtown_pipeline";
-    helsinki_east_downtown_pipeline_struct.local_name = "helsinki_regular_pipeline";
-    helsinki_east_downtown_pipeline_struct.vertex_shader = "standard_shading.vert";
-    helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_east_downtown_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+    PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
+    helsinki_pipeline_struct.global_name = "helsinki_pipeline";
+    helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
+    helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
+    helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
+    Pipeline* const helsinki_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
+    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
 
-    SpeciesStruct cat_species_struct { Request(helsinki_east_downtown_scene), Request(orange_fur_material) };
+    SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
     Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
 
-    ObjectStruct cat1_object_struct { Request(helsinki_east_downtown_scene), Request(rest_brain), Request(cat_species) };
+    ObjectStruct cat1_object_struct { Request(helsinki_scene), Request(rest_brain), Request(cat_species) };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };

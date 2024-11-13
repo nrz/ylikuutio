@@ -101,7 +101,7 @@ namespace hirvi
 
         private:
             yli::ontology::Ecosystem* create_earth_ecosystem();
-            yli::ontology::Scene* create_helsinki_east_downtown_scene();
+            yli::ontology::Scene* create_helsinki_scene();
 
             yli::memory::MemorySystem<hirvi::Datatype> memory_system;
 
