@@ -86,69 +86,84 @@ namespace hirvi
 
         // Create the `CallbackEngine`s for the `Brain`s.
         CallbackEngineStruct rest_callback_engine_struct;
+        rest_callback_engine_struct.global_name = "rest_callback_engine";
         auto rest_callback_engine = this->entity_factory.create_callback_engine(rest_callback_engine_struct);
         rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
         CallbackEngineStruct go_east_callback_engine_struct;
+        go_east_callback_engine_struct.global_name = "go_east_callback_engine";
         auto go_east_callback_engine = this->entity_factory.create_callback_engine(go_east_callback_engine_struct);
         go_east_callback_engine->create_callback_object(&yli::snippets::go_east);
 
         CallbackEngineStruct go_west_callback_engine_struct;
+        go_west_callback_engine_struct.global_name = "go_west_callback_engine";
         auto go_west_callback_engine = this->entity_factory.create_callback_engine(go_west_callback_engine_struct);
         go_west_callback_engine->create_callback_object(&yli::snippets::go_west);
 
         CallbackEngineStruct go_north_callback_engine_struct;
+        go_north_callback_engine_struct.global_name = "go_north_callback_engine";
         auto go_north_callback_engine = this->entity_factory.create_callback_engine(go_north_callback_engine_struct);
         go_north_callback_engine->create_callback_object(&yli::snippets::go_north);
 
         CallbackEngineStruct go_south_callback_engine_struct;
+        go_south_callback_engine_struct.global_name = "go_south_callback_engine";
         auto go_south_callback_engine = this->entity_factory.create_callback_engine(go_south_callback_engine_struct);
         go_south_callback_engine->create_callback_object(&yli::snippets::go_south);
 
         CallbackEngineStruct orient_to_east_callback_engine_struct;
+        orient_to_east_callback_engine_struct.global_name = "orient_to_east_callback_engine";
         auto orient_to_east_callback_engine = this->entity_factory.create_callback_engine(orient_to_east_callback_engine_struct);
         orient_to_east_callback_engine->create_callback_object(&yli::snippets::orient_to_east);
 
         CallbackEngineStruct orient_to_west_callback_engine_struct;
+        orient_to_west_callback_engine_struct.global_name = "orient_to_west_callback_engine";
         auto orient_to_west_callback_engine = this->entity_factory.create_callback_engine(orient_to_west_callback_engine_struct);
         orient_to_west_callback_engine->create_callback_object(&yli::snippets::orient_to_west);
 
         CallbackEngineStruct orient_to_north_callback_engine_struct;
+        orient_to_north_callback_engine_struct.global_name = "orient_to_north_callback_engine";
         auto orient_to_north_callback_engine = this->entity_factory.create_callback_engine(orient_to_north_callback_engine_struct);
         orient_to_north_callback_engine->create_callback_object(&yli::snippets::orient_to_north);
 
         CallbackEngineStruct orient_to_south_callback_engine_struct;
+        orient_to_south_callback_engine_struct.global_name = "orient_to_south_callback_engine";
         auto orient_to_south_callback_engine = this->entity_factory.create_callback_engine(orient_to_south_callback_engine_struct);
         orient_to_south_callback_engine->create_callback_object(&yli::snippets::orient_to_south);
 
         CallbackEngineStruct orient_and_go_east_callback_engine_struct;
+        orient_and_go_east_callback_engine_struct.global_name = "orient_and_go_east_callback_engine";
         auto orient_and_go_east_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_east_callback_engine_struct);
         orient_and_go_east_callback_engine->create_callback_object(&yli::snippets::orient_and_go_east);
 
         CallbackEngineStruct orient_and_go_west_callback_engine_struct;
+        orient_and_go_west_callback_engine_struct.global_name = "orient_and_go_west_callback_engine";
         auto orient_and_go_west_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_west_callback_engine_struct);
         orient_and_go_west_callback_engine->create_callback_object(&yli::snippets::orient_and_go_west);
 
         CallbackEngineStruct orient_and_go_north_callback_engine_struct;
+        orient_and_go_north_callback_engine_struct.global_name = "orient_and_go_north_callback_engine";
         auto orient_and_go_north_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_north_callback_engine_struct);
         orient_and_go_north_callback_engine->create_callback_object(&yli::snippets::orient_and_go_north);
 
         CallbackEngineStruct orient_and_go_south_callback_engine_struct;
+        orient_and_go_south_callback_engine_struct.global_name = "orient_and_go_south_callback_engine";
         auto orient_and_go_south_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_south_callback_engine_struct);
         orient_and_go_south_callback_engine->create_callback_object(&yli::snippets::orient_and_go_south);
 
         CallbackEngineStruct rotate_clockwise_callback_engine_struct;
+        rotate_clockwise_callback_engine_struct.global_name = "rotate_clockwise_callback_engine";
         auto rotate_clockwise_callback_engine = this->entity_factory.create_callback_engine(rotate_clockwise_callback_engine_struct);
         rotate_clockwise_callback_engine->create_callback_object(&yli::snippets::rotate_clockwise);
 
         CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
+        rotate_counterclockwise_callback_engine_struct.global_name = "rotate_counterclockwise_callback_engine";
         auto rotate_counterclockwise_callback_engine = this->entity_factory.create_callback_engine(rotate_counterclockwise_callback_engine_struct);
         rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
         // Create the `Brain`s.
 
         // `rest_brain`.
-        BrainStruct rest_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_callback_engine) };
+        BrainStruct rest_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rest_callback_engine") };
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         std::cout << "Creating Brain* rest_brain ...\n";
@@ -161,7 +176,7 @@ namespace hirvi
         }
 
         // `go_east_brain`.
-        BrainStruct go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(go_east_callback_engine) };
+        BrainStruct go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_east_callback_engine") };
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         std::cout << "Creating Brain* go_east_brain ...\n";
@@ -172,7 +187,7 @@ namespace hirvi
         }
 
         // `go_west_brain`.
-        BrainStruct go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(go_west_callback_engine) };
+        BrainStruct go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_west_callback_engine") };
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         std::cout << "Creating Brain* go_west_brain ...\n";
@@ -183,7 +198,7 @@ namespace hirvi
         }
 
         // `go_north_brain`.
-        BrainStruct go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(go_north_callback_engine) };
+        BrainStruct go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_north_callback_engine") };
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         std::cout << "Creating Brain* go_north_brain ...\n";
@@ -194,7 +209,7 @@ namespace hirvi
         }
 
         // `go_south_brain`.
-        BrainStruct go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(go_south_callback_engine) };
+        BrainStruct go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("go_south_callback_engine") };
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         std::cout << "Creating Brain* go_south_brain ...\n";
@@ -205,7 +220,7 @@ namespace hirvi
         }
 
         // `orient_to_east_brain`.
-        BrainStruct orient_to_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_to_east_callback_engine) };
+        BrainStruct orient_to_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_east_callback_engine") };
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         std::cout << "Creating Brain* orient_to_east_brain ...\n";
@@ -216,7 +231,7 @@ namespace hirvi
         }
 
         // `orient_to_west_brain`.
-        BrainStruct orient_to_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_to_west_callback_engine) };
+        BrainStruct orient_to_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_west_callback_engine") };
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         std::cout << "Creating Brain* orient_to_west_brain ...\n";
@@ -227,7 +242,7 @@ namespace hirvi
         }
 
         // `orient_to_north_brain`.
-        BrainStruct orient_to_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_to_north_callback_engine) };
+        BrainStruct orient_to_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_north_callback_engine") };
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         std::cout << "Creating Brain* orient_to_north_brain ...\n";
@@ -238,7 +253,7 @@ namespace hirvi
         }
 
         // `orient_to_south_brain`.
-        BrainStruct orient_to_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_to_south_callback_engine) };
+        BrainStruct orient_to_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_to_south_callback_engine") };
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         std::cout << "Creating Brain* orient_to_south_brain ...\n";
@@ -249,7 +264,7 @@ namespace hirvi
         }
 
         // `rotate_clockwise_brain`.
-        BrainStruct rotate_clockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(rotate_clockwise_callback_engine) };
+        BrainStruct rotate_clockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rotate_clockwise_callback_engine") };
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         std::cout << "Creating Brain* rotate_clockwise_brain ...\n";
@@ -260,7 +275,7 @@ namespace hirvi
         }
 
         // `orient_and_go_east_brain`.
-        BrainStruct orient_and_go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_and_go_east_callback_engine) };
+        BrainStruct orient_and_go_east_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_east_callback_engine") };
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         std::cout << "Creating Brain* orient_and_go_east_brain ...\n";
@@ -271,7 +286,7 @@ namespace hirvi
         }
 
         // `orient_and_go_west_brain`.
-        BrainStruct orient_and_go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_and_go_west_callback_engine) };
+        BrainStruct orient_and_go_west_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_west_callback_engine") };
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         std::cout << "Creating Brain* orient_and_go_west_brain ...\n";
@@ -282,7 +297,7 @@ namespace hirvi
         }
 
         // `orient_and_go_north_brain`.
-        BrainStruct orient_and_go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_and_go_north_callback_engine) };
+        BrainStruct orient_and_go_north_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_north_callback_engine") };
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         std::cout << "Creating Brain* orient_and_go_north_brain ...\n";
@@ -293,7 +308,7 @@ namespace hirvi
         }
 
         // `orient_and_go_south_brain`.
-        BrainStruct orient_and_go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(orient_and_go_south_callback_engine) };
+        BrainStruct orient_and_go_south_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("orient_and_go_south_callback_engine") };
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         std::cout << "Creating Brain* orient_and_go_south_brain ...\n";
@@ -304,7 +319,7 @@ namespace hirvi
         }
 
         // `rotate_counterclockwise_brain`.
-        BrainStruct rotate_counterclockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(rotate_counterclockwise_callback_engine) };
+        BrainStruct rotate_counterclockwise_brain_struct { Request<Scene>("helsinki_east_downtown_scene"), Request<CallbackEngine>("rotate_counterclockwise_callback_engine") };
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating Brain* rotate_counterclockwise_brain ...\n";

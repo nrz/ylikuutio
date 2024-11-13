@@ -52,7 +52,7 @@ namespace hirvi
         }
 
         // Create the pipeline, store it in `earth_pipeline`.
-        PipelineStruct earth_pipeline_struct { Request(earth_ecosystem) };
+        PipelineStruct earth_pipeline_struct { Request<Ecosystem>("earth_ecosystem") };
         earth_pipeline_struct.global_name = "earth_pipeline";
         earth_pipeline_struct.local_name = "helsinki_regular_pipeline";
         earth_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -67,7 +67,7 @@ namespace hirvi
             return nullptr;
         }
 
-        SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(earth_ecosystem), Request(earth_pipeline) };
+        SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline") };
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 

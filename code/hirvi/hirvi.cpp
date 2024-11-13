@@ -448,87 +448,87 @@ namespace hirvi
         std::cout << "Defining console keyrelease callback engines for `my_console`.\n";
 
         // Callback code for left Control release.
-        ConsoleCallbackEngineStruct my_release_left_control_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_left_control_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_left_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_control_in_console_callback_engine_struct);
         my_release_left_control_in_console_callback_engine->create_console_callback_object(&Console::release_left_control_in_console);
 
         // Callback code for right Control release.
-        ConsoleCallbackEngineStruct my_release_right_control_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_right_control_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_right_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_control_in_console_callback_engine_struct);
         my_release_right_control_in_console_callback_engine->create_console_callback_object(&Console::release_right_control_in_console);
 
         // Callback code for left Alt release.
-        ConsoleCallbackEngineStruct my_release_left_alt_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_left_alt_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_left_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_alt_in_console_callback_engine_struct);
         my_release_left_alt_in_console_callback_engine->create_console_callback_object(&Console::release_left_alt_in_console);
 
         // Callback code for right Alt release.
-        ConsoleCallbackEngineStruct my_release_right_alt_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_right_alt_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_right_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_alt_in_console_callback_engine_struct);
         my_release_right_alt_in_console_callback_engine->create_console_callback_object(&Console::release_right_alt_in_console);
 
         // Callback code for left Shift release.
-        ConsoleCallbackEngineStruct my_release_left_shift_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_left_shift_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_left_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_left_shift_in_console_callback_engine_struct);
         my_release_left_shift_in_console_callback_engine->create_console_callback_object(&Console::release_left_shift_in_console);
 
         // Callback code for right Shift release.
-        ConsoleCallbackEngineStruct my_release_right_shift_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_release_right_shift_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_release_right_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_release_right_shift_in_console_callback_engine_struct);
         my_release_right_shift_in_console_callback_engine->create_console_callback_object(&Console::release_right_shift_in_console);
 
         // Callback code for key up release: enable move to previous input.
-        ConsoleCallbackEngineStruct my_enable_move_to_previous_input_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_move_to_previous_input_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_move_to_previous_input_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_move_to_previous_input_callback_engine_struct);
         my_enable_move_to_previous_input_callback_engine->create_console_callback_object(&Console::enable_move_to_previous_input);
 
         // Callback code for key down release: enable move to next input.
-        ConsoleCallbackEngineStruct my_enable_move_to_next_input_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_move_to_next_input_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_move_to_next_input_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_move_to_next_input_callback_engine_struct);
         my_enable_move_to_next_input_callback_engine->create_console_callback_object(&Console::enable_move_to_next_input);
 
         // Callback code for backspace release: enable backspace.
-        ConsoleCallbackEngineStruct my_enable_backspace_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_backspace_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_backspace_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_backspace_callback_engine_struct);
         my_enable_backspace_callback_engine->create_console_callback_object(&Console::enable_backspace);
 
         // Callback code for Tab release: enable Tab.
-        ConsoleCallbackEngineStruct my_enable_tab_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_tab_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_tab_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_tab_callback_engine_struct);
         my_enable_tab_callback_engine->create_console_callback_object(&Console::enable_tab);
 
         // Callback code for enter release: enable Enter key.
-        ConsoleCallbackEngineStruct my_enable_enter_key_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_enter_key_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_enter_key_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_enter_key_callback_engine_struct);
         my_enable_enter_key_callback_engine->create_console_callback_object(&Console::enable_enter_key);
 
         // Callback code for C release: enable Control-C.
-        ConsoleCallbackEngineStruct my_enable_ctrl_c_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_ctrl_c_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_ctrl_c_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_ctrl_c_callback_engine_struct);
         my_enable_ctrl_c_callback_engine->create_console_callback_object(&Console::enable_ctrl_c);
 
         // Callback code for W release: enable Control-W.
-        ConsoleCallbackEngineStruct my_enable_ctrl_w_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_ctrl_w_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_ctrl_w_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_ctrl_w_callback_engine_struct);
         my_enable_ctrl_w_callback_engine->create_console_callback_object(&Console::enable_ctrl_w);
 
         // Callback code for PgUp release: enable PgUp.
-        ConsoleCallbackEngineStruct my_enable_page_up_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_page_up_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_page_up_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_page_up_callback_engine_struct);
         my_enable_page_up_callback_engine->create_console_callback_object(&Console::enable_page_up);
 
         // Callback code for PgDn release: enable PgDn.
-        ConsoleCallbackEngineStruct my_enable_page_down_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_page_down_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_page_down_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_page_down_callback_engine_struct);
         my_enable_page_down_callback_engine->create_console_callback_object(&Console::enable_page_down);
 
         // Callback code for Home release: enable Home.
-        ConsoleCallbackEngineStruct my_enable_home_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_home_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_home_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_home_callback_engine_struct);
         my_enable_home_callback_engine->create_console_callback_object(&Console::enable_home);
 
         // Callback code for End release: enable End.
-        ConsoleCallbackEngineStruct my_enable_end_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enable_end_callback_engine_struct { Request<Console>("my_console") };
         auto my_enable_end_callback_engine = this->entity_factory.create_console_callback_engine(my_enable_end_callback_engine_struct);
         my_enable_end_callback_engine->create_console_callback_object(&Console::enable_end);
 
@@ -539,92 +539,92 @@ namespace hirvi
         std::cout << "Defining console keypress callback engines for `my_console`.\n";
 
         // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
-        ConsoleCallbackEngineStruct my_exit_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_exit_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_exit_console_callback_engine = this->entity_factory.create_console_callback_engine(my_exit_console_callback_engine_struct);
         my_exit_console_callback_engine->create_console_callback_object(&Console::exit_console);
 
         // Callback code for left Control press.
-        ConsoleCallbackEngineStruct my_press_left_control_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_left_control_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_left_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_control_in_console_callback_engine_struct);
         my_press_left_control_in_console_callback_engine->create_console_callback_object(&Console::press_left_control_in_console);
 
         // Callback code for right Control press.
-        ConsoleCallbackEngineStruct my_press_right_control_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_right_control_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_right_control_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_control_in_console_callback_engine_struct);
         my_press_right_control_in_console_callback_engine->create_console_callback_object(&Console::press_right_control_in_console);
 
         // Callback code for left Alt press.
-        ConsoleCallbackEngineStruct my_press_left_alt_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_left_alt_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_left_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_alt_in_console_callback_engine_struct);
         my_press_left_alt_in_console_callback_engine->create_console_callback_object(&Console::press_left_alt_in_console);
 
         // Callback code for right Alt press.
-        ConsoleCallbackEngineStruct my_press_right_alt_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_right_alt_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_right_alt_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_alt_in_console_callback_engine_struct);
         my_press_right_alt_in_console_callback_engine->create_console_callback_object(&Console::press_right_alt_in_console);
 
         // Callback code for left Shift press.
-        ConsoleCallbackEngineStruct my_press_left_shift_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_left_shift_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_left_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_left_shift_in_console_callback_engine_struct);
         my_press_left_shift_in_console_callback_engine->create_console_callback_object(&Console::press_left_shift_in_console);
 
         // Callback code for right Shift press.
-        ConsoleCallbackEngineStruct my_press_right_shift_in_console_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_press_right_shift_in_console_callback_engine_struct { Request<Console>("my_console") };
         auto my_press_right_shift_in_console_callback_engine = this->entity_factory.create_console_callback_engine(my_press_right_shift_in_console_callback_engine_struct);
         my_press_right_shift_in_console_callback_engine->create_console_callback_object(&Console::press_right_shift_in_console);
 
         // Callback code for key up: move to previous input.
-        ConsoleCallbackEngineStruct my_move_to_previous_input_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_move_to_previous_input_callback_engine_struct { Request<Console>("my_console") };
         auto my_move_to_previous_input_callback_engine = this->entity_factory.create_console_callback_engine(my_move_to_previous_input_callback_engine_struct);
         my_move_to_previous_input_callback_engine->create_console_callback_object(&Console::move_to_previous_input);
 
         // Callback code for key down: move to next input.
-        ConsoleCallbackEngineStruct my_move_to_next_input_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_move_to_next_input_callback_engine_struct { Request<Console>("my_console") };
         auto my_move_to_next_input_callback_engine = this->entity_factory.create_console_callback_engine(my_move_to_next_input_callback_engine_struct);
         my_move_to_next_input_callback_engine->create_console_callback_object(&Console::move_to_next_input);
 
         // Callback code for backspace: delete character left of cursor from current input in console.
-        ConsoleCallbackEngineStruct my_backspace_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_backspace_callback_engine_struct { Request<Console>("my_console") };
         auto my_backspace_callback_engine = this->entity_factory.create_console_callback_engine(my_backspace_callback_engine_struct);
         my_backspace_callback_engine->create_console_callback_object(&Console::backspace);
 
         // Callback code for Tab.
-        ConsoleCallbackEngineStruct my_tab_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_tab_callback_engine_struct { Request<Console>("my_console") };
         auto my_tab_callback_engine = this->entity_factory.create_console_callback_engine(my_tab_callback_engine_struct);
         my_tab_callback_engine->create_console_callback_object(&Console::tab);
 
         // Callback code for Enter key.
-        ConsoleCallbackEngineStruct my_enter_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_enter_callback_engine_struct { Request<Console>("my_console") };
         auto my_enter_callback_engine = this->entity_factory.create_console_callback_engine(my_enter_callback_engine_struct);
         my_enter_callback_engine->create_console_callback_object(&Console::enter_key);
 
         // Callback code for C: Control-C.
-        ConsoleCallbackEngineStruct my_ctrl_c_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_ctrl_c_callback_engine_struct { Request<Console>("my_console") };
         auto my_ctrl_c_callback_engine = this->entity_factory.create_console_callback_engine(my_ctrl_c_callback_engine_struct);
         my_ctrl_c_callback_engine->create_console_callback_object(&Console::ctrl_c);
 
         // Callback code for W: Control-W.
-        ConsoleCallbackEngineStruct my_ctrl_w_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_ctrl_w_callback_engine_struct { Request<Console>("my_console") };
         auto my_ctrl_w_callback_engine = this->entity_factory.create_console_callback_engine(my_ctrl_w_callback_engine_struct);
         my_ctrl_w_callback_engine->create_console_callback_object(&Console::ctrl_w);
 
         // Callback code for PgUp.
-        ConsoleCallbackEngineStruct my_page_up_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_page_up_callback_engine_struct { Request<Console>("my_console") };
         auto my_page_up_callback_engine = this->entity_factory.create_console_callback_engine(my_page_up_callback_engine_struct);
         my_page_up_callback_engine->create_console_callback_object(&Console::page_up);
 
         // Callback code for PgDn.
-        ConsoleCallbackEngineStruct my_page_down_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_page_down_callback_engine_struct { Request<Console>("my_console") };
         auto my_page_down_callback_engine = this->entity_factory.create_console_callback_engine(my_page_down_callback_engine_struct);
         my_page_down_callback_engine->create_console_callback_object(&Console::page_down);
 
         // Callback code for Home.
-        ConsoleCallbackEngineStruct my_home_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_home_callback_engine_struct { Request<Console>("my_console") };
         auto my_home_callback_engine = this->entity_factory.create_console_callback_engine(my_home_callback_engine_struct);
         my_home_callback_engine->create_console_callback_object(&Console::home);
 
         // Callback code for End.
-        ConsoleCallbackEngineStruct my_end_callback_engine_struct { Request(my_console) };
+        ConsoleCallbackEngineStruct my_end_callback_engine_struct { Request<Console>("my_console") };
         auto my_end_callback_engine = this->entity_factory.create_console_callback_engine(my_end_callback_engine_struct);
         my_end_callback_engine->create_console_callback_object(&Console::end);
 
@@ -661,7 +661,7 @@ namespace hirvi
         // Keyrelease callbacks for `my_console`.
         // Key releases are checked in the order of this struct.
         InputModeStruct my_console_mode_input_mode_struct;
-        my_console_mode_input_mode_struct.console_master = Request(my_console);
+        my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
         InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(my_console_mode_input_mode_struct);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, my_release_left_control_in_console_callback_engine);
         my_console_mode_input_mode->set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, my_release_right_control_in_console_callback_engine);
