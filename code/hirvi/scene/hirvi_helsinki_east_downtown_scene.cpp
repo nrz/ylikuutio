@@ -413,9 +413,7 @@ namespace hirvi
             return nullptr;
         }
 
-        ObjectStruct cat1_object_struct(
-                Request<Scene>("helsinki_east_downtown_scene"),
-                Request(cat_species));
+        ObjectStruct cat1_object_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(cat_species) };
         cat1_object_struct.global_name = "cat1";
         cat1_object_struct.local_name = "kissa1";
         cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -444,10 +442,7 @@ namespace hirvi
             return nullptr;
         }
 
-        ObjectStruct cat2_object_struct(
-                Request<Scene>("helsinki_east_downtown_scene"),
-                Request(rest_brain),
-                Request(cat_species));
+        ObjectStruct cat2_object_struct { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(cat_species) };
         cat2_object_struct.global_name = "cat2";
         cat2_object_struct.local_name = "kissa2";
         cat2_object_struct.brain_master = Request(rest_brain);
@@ -489,10 +484,7 @@ namespace hirvi
             return nullptr;
         }
 
-        HolobiontStruct turbo_polizei_png_police_car_struct1(
-                Request<Scene>("helsinki_east_downtown_scene"),
-                Request(rest_brain),
-                Request(turbo_polizei_png_symbiosis));
+        HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -517,10 +509,7 @@ namespace hirvi
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
         turbo_polizei_png1->set_local_name("sinivuokko1");
 
-        HolobiontStruct turbo_polizei_png_police_car_struct2(
-                Request<Scene>("helsinki_east_downtown_scene"),
-                Request(rest_brain),
-                Request(turbo_polizei_png_symbiosis));
+        HolobiontStruct turbo_polizei_png_police_car_struct2 { Request<Scene>("helsinki_east_downtown_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
