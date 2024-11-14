@@ -7,12 +7,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
-- [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `Entity`.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose apprentices are `Shapeshifter`s.
-- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::Shapeshifter`, child of `Scene`, apprentice of `ShapeshifterSequence`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
@@ -42,6 +36,12 @@
 - [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 
 ## Tasks which are necessary for the second stage (Hirvi prototype)
+- [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
+- [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterForm`, inherits `Entity`.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterSequence`, whose apprentices are `Shapeshifter`s.
+- [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::Shapeshifter`, child of `Scene`, apprentice of `ShapeshifterSequence`.
 - [ ] BUILD Implement building on GitHub Actions Windows runner.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
