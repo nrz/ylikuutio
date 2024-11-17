@@ -1,0 +1,8 @@
+Testing graphics code
+https://aras-p.info/blog/2007/07/31/testing-graphics-code/
+
+How (not) to test graphics algorithms
+https://bartwronski.com/2019/08/14/how-not-to-test-graphics-algorithms/
+
+REAC 2024 DAY 1 Testing Rendering Code at Frostbite.
+https://www.youtube.com/watch?v=oJynPsNxYDM
