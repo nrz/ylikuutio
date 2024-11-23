@@ -51,6 +51,8 @@ namespace hirvi
         GLM_VEC3            = 15,
         GLM_VEC4            = 16,
         // Systems.
+        EVENT_SYSTEM        = 30,
+        INPUT_SYSTEM        = 40,
         AUDIO_SYSTEM        = 50,
         // `yli::ontology` datatypes, interfaces.
         ENTITY              = 110,
