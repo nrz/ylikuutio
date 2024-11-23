@@ -61,28 +61,28 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     CallbackEngineStruct rest_callback_engine_struct;
-    auto rest_callback_engine = hirvi_application.entity_factory.create_callback_engine(rest_callback_engine_struct);
+    auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
     BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_brain_struct.global_name = "rest_brain";
     rest_brain_struct.local_name = "rest";
-    Brain* const rest_brain = hirvi_application.entity_factory.create_brain(rest_brain_struct);
+    Brain* const rest_brain = hirvi_application.get_entity_factory().create_brain(rest_brain_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
+    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
     HolobiontStruct turbo_polizei_png_police_car_struct1 { Request(helsinki_scene), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
@@ -95,7 +95,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::BIONT));
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::POLICE_CAR));
 
-    hirvi::PoliceCar* const turbo_polizei1 = hirvi_application.entity_factory.create_holobiont_derivative<
+    hirvi::PoliceCar* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
         hirvi::PoliceCar,
         hirvi::PoliceCarMemoryAllocator>(
                 hirvi::Datatype::POLICE_CAR,

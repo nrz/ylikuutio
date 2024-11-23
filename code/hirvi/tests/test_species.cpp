@@ -47,26 +47,26 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
 
     SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
-    Species* const cat_species = hirvi_application.entity_factory.create_species(cat_species_struct);
+    Species* const cat_species = hirvi_application.get_entity_factory().create_species(cat_species_struct);
     ASSERT_NE(cat_species, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat_species) % alignof(Species), 0);
     yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();

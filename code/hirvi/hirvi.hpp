@@ -89,6 +89,11 @@ namespace hirvi
 
             yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
+            yli::ontology::EntityFactory<hirvi::Datatype>& get_entity_factory() const
+            {
+                return this->entity_factory.get();
+            }
+
             yli::audio::AudioSystem* get_audio_system() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
@@ -104,11 +109,7 @@ namespace hirvi
             yli::ontology::Scene* create_helsinki_scene();
 
             yli::memory::MemorySystem<hirvi::Datatype> memory_system;
-
-        public:
             yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
-
-        private:
             yli::core::SystemFactory<hirvi::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
             yli::audio::AudioSystem* const audio_system { nullptr };

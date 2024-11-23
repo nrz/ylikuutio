@@ -43,14 +43,14 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
     ASSERT_NE(helsinki_pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_pipeline) % alignof(Pipeline), 0);
     yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_pipeline->get_constructible_module();

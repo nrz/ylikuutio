@@ -45,19 +45,19 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.entity_factory.create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     orange_fur_material_struct.texture_file_format = "png";
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    Material* const orange_fur_material = hirvi_application.entity_factory.create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
     yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();

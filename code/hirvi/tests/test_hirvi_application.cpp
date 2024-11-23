@@ -31,7 +31,7 @@ TEST(hirvi_application_must_be_initialized_appropriately, hirvi_application)
     hirvi::HirviApplication hirvi_application(argc, argv);
     ASSERT_EQ(hirvi_application.get_memory_system().get_universe_datatype(), hirvi::Datatype::UNIVERSE);
 
-    yli::ontology::Universe& universe = hirvi_application.entity_factory.get_universe();
+    yli::ontology::Universe& universe = hirvi_application.get_entity_factory().get_universe();
     ASSERT_EQ(universe, hirvi_application.get_universe());
     ASSERT_EQ(reinterpret_cast<uintptr_t>(&universe) % alignof(yli::ontology::Universe), 0);
 }

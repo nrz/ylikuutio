@@ -34,7 +34,7 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    yli::ontology::Scene* const helsinki_scene = hirvi_application.entity_factory.create_scene(scene_struct);
+    yli::ontology::Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
     ASSERT_NE(helsinki_scene, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_scene) % alignof(yli::ontology::Scene), 0);
     yli::memory::ConstructibleModule scene_constructible_module = helsinki_scene->get_constructible_module();
