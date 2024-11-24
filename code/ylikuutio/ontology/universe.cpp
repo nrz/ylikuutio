@@ -31,7 +31,6 @@
 #include "font_2d.hpp"
 #include "text_2d.hpp"
 #include "camera.hpp"
-#include "input_mode.hpp"
 #include "console.hpp"
 #include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
@@ -105,6 +104,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Font2d;
+    class InputMode;
 
     struct InputModeStruct;
 
