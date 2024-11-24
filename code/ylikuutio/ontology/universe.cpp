@@ -26,6 +26,7 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
+#include "generic_callback_engine.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
 #include "font_2d.hpp"
