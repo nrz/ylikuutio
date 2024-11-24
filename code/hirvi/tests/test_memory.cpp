@@ -64,6 +64,12 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
                 ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
             }
+            else if (datatype == hirvi::Datatype::INPUT_SYSTEM)
+            {
+                // `InputSystem` gets created by the `HirviApplication` constructor.
+                ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
+                ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
+            }
             else if (datatype == hirvi::Datatype::AUDIO_SYSTEM)
             {
                 // `AudioSystem` gets created by the `HirviApplication` constructor.

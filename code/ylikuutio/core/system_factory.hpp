@@ -19,6 +19,7 @@
 #define YLIKUUTIO_CORE_SYSTEM_FACTORY_HPP_INCLUDED
 
 #include "code/ylikuutio/event/event_system.hpp"
+#include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 
@@ -47,6 +48,18 @@ namespace yli::core
                         this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(
                                 static_cast<int>(yli::data::Datatype::EVENT_SYSTEM));
                     EventSystemMemoryAllocator& allocator = static_cast<EventSystemMemoryAllocator&>(generic_allocator);
+
+                    return allocator.build_in(universe);
+                }
+
+                yli::input::InputSystem* create_input_system(yli::ontology::Universe& universe)
+                {
+                    using InputSystemMemoryAllocator = yli::memory::MemoryAllocator<yli::input::InputSystem, 1>;
+
+                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                        this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(
+                                static_cast<int>(yli::data::Datatype::INPUT_SYSTEM));
+                    InputSystemMemoryAllocator& allocator = static_cast<InputSystemMemoryAllocator&>(generic_allocator);
 
                     return allocator.build_in(universe);
                 }

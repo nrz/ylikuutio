@@ -30,6 +30,11 @@ namespace yli::event
     class EventSystem;
 }
 
+namespace yli::input
+{
+    class InputSystem;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -53,6 +58,11 @@ namespace yli::core
     }
 
     yli::event::EventSystem* Application::get_event_system() const
+    {
+        return nullptr; // `override` this in the inherited class.
+    }
+
+    yli::input::InputSystem* Application::get_input_system() const
     {
         return nullptr; // `override` this in the inherited class.
     }

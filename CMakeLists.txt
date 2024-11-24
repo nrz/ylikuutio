@@ -454,6 +454,8 @@ add_library(ylikuutio STATIC
     # input, in alphabetical order
     code/ylikuutio/input/input.cpp
     code/ylikuutio/input/input.hpp
+    code/ylikuutio/input/input_system.cpp
+    code/ylikuutio/input/input_system.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation.hpp

@@ -26,6 +26,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/event/event_system.hpp"
+#include "code/ylikuutio/input/input_system.hpp"
 
 #ifndef GOOGLE_TEST
 // Google Test provides its own `main` entrypoint.
@@ -107,6 +108,7 @@ namespace hirvi
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
         event_system { this->system_factory.create_event_system(this->get_universe()) },
+        input_system { this->system_factory.create_input_system(this->get_universe()) },
         audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "HirviApplication initialized!\n";
@@ -159,6 +161,11 @@ namespace hirvi
     yli::event::EventSystem* HirviApplication::get_event_system() const
     {
         return this->event_system;
+    }
+
+    yli::input::InputSystem* HirviApplication::get_input_system() const
+    {
+        return this->input_system;
     }
 
     yli::audio::AudioSystem* HirviApplication::get_audio_system() const

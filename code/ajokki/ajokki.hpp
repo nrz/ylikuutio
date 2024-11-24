@@ -40,6 +40,11 @@ namespace yli::event
     class EventSystem;
 }
 
+namespace yli::input
+{
+    class InputSystem;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
@@ -77,6 +82,8 @@ namespace ajokki
 
             yli::event::EventSystem* get_event_system() const override;
 
+            yli::input::InputSystem* get_input_system() const override;
+
             yli::audio::AudioSystem* get_audio_system() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
@@ -97,6 +104,7 @@ namespace ajokki
             yli::core::SystemFactory<yli::data::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
             yli::event::EventSystem* const event_system { nullptr };
+            yli::input::InputSystem* const input_system { nullptr };
             yli::audio::AudioSystem* const audio_system { nullptr };
     };
 }

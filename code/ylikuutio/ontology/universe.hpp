@@ -61,6 +61,7 @@ namespace yli::event
 
 namespace yli::input
 {
+    class InputSystem;
     enum class InputMethod;
 }
 
@@ -192,6 +193,7 @@ namespace yli::ontology
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const;
 
             yli::event::EventSystem& get_event_system() const;
+            yli::input::InputSystem& get_input_system() const;
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
 

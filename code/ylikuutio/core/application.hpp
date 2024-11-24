@@ -35,6 +35,11 @@ namespace yli::event
     class EventSystem;
 }
 
+namespace yli::input
+{
+    class InputSystem;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
@@ -73,6 +78,8 @@ namespace yli::core
             virtual yli::ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
 
             virtual yli::event::EventSystem* get_event_system() const;
+
+            virtual yli::input::InputSystem* get_input_system() const;
 
             virtual yli::audio::AudioSystem* get_audio_system() const;
 

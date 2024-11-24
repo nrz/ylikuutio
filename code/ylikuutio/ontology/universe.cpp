@@ -26,7 +26,6 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "generic_callback_engine.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
 #include "font_2d.hpp"
@@ -51,6 +50,7 @@
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input.hpp"
+#include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/memory/generic_memory_system.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
@@ -448,57 +448,7 @@ namespace yli::ontology
 
                 if (!this->in_console)
                 {
-                    const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
-                    const std::vector<GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode->get_continuous_keypress_callback_engines();
-                    if (continuous_keypress_callback_engines == nullptr)
-                    {
-                        continue;
-                    }
-
-                    // Check for keypresses and call corresponding callbacks.
-                    for (std::size_t i = 0; i < continuous_keypress_callback_engines->size(); i++)
-                    {
-                        bool is_pressed = false;
-
-                        if (this->get_input_method() == yli::input::InputMethod::KEYBOARD)
-                        {
-                            if (current_key_states[i] == 1) // 1 = pressed, 0 = not pressed.
-                            {
-                                is_pressed = true;
-                            }
-                        }
-                        else if (this->get_input_method() == yli::input::InputMethod::INPUT_FILE)
-                        {
-                            // TODO: implement optionally loading keyreleases from a file (do not execute `SDL_GetKeyboardState` in that case).
-                            if (false)
-                            {
-                                is_pressed = true;
-                            }
-                        }
-                        else
-                        {
-                            std::cerr << "ERROR: unsupported input method.\n";
-                        }
-
-                        if (is_pressed)
-                        {
-                            GenericCallbackEngine* const generic_callback_engine = continuous_keypress_callback_engines->at(i);
-
-                            if (generic_callback_engine == nullptr)
-                            {
-                                continue;
-                            }
-
-                            const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
-
-                            if (any_value &&
-                                    std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
-                            {
-                                this->request_exit();
-                            }
-                        }
-                    }
+                    this->get_input_system().process_keys(this->get_input_method(), *input_mode);
                 }
 
                 // 2. Process AI.
@@ -1360,6 +1310,16 @@ namespace yli::ontology
         }
 
         throw std::runtime_error("ERROR: `Universe::get_event_system`: `event_system` is `nullptr`!");
+    }
+
+    yli::input::InputSystem& Universe::get_input_system() const
+    {
+        if (yli::input::InputSystem* const input_system = this->application.get_input_system(); input_system != nullptr) [[likely]]
+        {
+            return input_system->get();
+        }
+
+        throw std::runtime_error("ERROR: `Universe::get_input_system`: `input_system` is `nullptr`!");
     }
 
     yli::render::RenderSystem* Universe::get_render_system() const
