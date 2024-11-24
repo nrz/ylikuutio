@@ -54,6 +54,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::event
+{
+    class EventSystem;
+}
+
 namespace yli::input
 {
     enum class InputMethod;
@@ -101,6 +106,11 @@ namespace yli::ontology
 
             // This method contains the main loop.
             void start_simulation();
+
+            void update_mouse_x(const int32_t x_change);
+            void update_mouse_y(const int32_t y_change);
+            void gain_focus();
+            void lose_focus();
 
             // This method requests exit.
             void request_exit();
@@ -181,6 +191,7 @@ namespace yli::ontology
 
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const;
 
+            yli::event::EventSystem& get_event_system() const;
             yli::render::RenderSystem* get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
 
@@ -385,6 +396,7 @@ namespace yli::ontology
             uint32_t window_height;
             std::string window_title { "Ylikuutio " + Universe::version };
 
+            bool has_mouse_focus { true };
             int32_t mouse_x;
             int32_t mouse_y;
 

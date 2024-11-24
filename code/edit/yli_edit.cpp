@@ -27,6 +27,7 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -101,6 +102,7 @@ namespace yli_edit
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
+        event_system { this->system_factory.create_event_system(this->get_universe()) },
         audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "YliEditApplication initialized!\n";
@@ -109,6 +111,11 @@ namespace yli_edit
     std::string YliEditApplication::get_name() const
     {
         return "YliEdit";
+    }
+
+    yli::event::EventSystem* YliEditApplication::get_event_system() const
+    {
+        return this->event_system;
     }
 
     yli::audio::AudioSystem* YliEditApplication::get_audio_system() const

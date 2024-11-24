@@ -30,6 +30,11 @@ namespace yli::audio
     class AudioSystem;
 }
 
+namespace yli::event
+{
+    class EventSystem;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
@@ -66,6 +71,8 @@ namespace yli::core
             virtual yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
 
             virtual yli::ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
+
+            virtual yli::event::EventSystem* get_event_system() const;
 
             virtual yli::audio::AudioSystem* get_audio_system() const;
 

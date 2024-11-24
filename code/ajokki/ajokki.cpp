@@ -25,6 +25,7 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
+#include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
@@ -118,6 +119,7 @@ namespace ajokki
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
+        event_system { this->system_factory.create_event_system(this->get_universe()) },
         audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "AjokkiApplication initialized!\n";
@@ -141,6 +143,11 @@ namespace ajokki
     GenericEntityFactory& AjokkiApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
+    }
+
+    yli::event::EventSystem* AjokkiApplication::get_event_system() const
+    {
+        return this->event_system;
     }
 
     yli::audio::AudioSystem* AjokkiApplication::get_audio_system() const

@@ -35,6 +35,11 @@ namespace yli::audio
     class AudioSystem;
 }
 
+namespace yli::event
+{
+    class EventSystem;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
@@ -68,6 +73,8 @@ namespace tulevaisuus
 
             yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
+            yli::event::EventSystem* get_event_system() const override;
+
             yli::audio::AudioSystem* get_audio_system() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
@@ -83,6 +90,7 @@ namespace tulevaisuus
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
             yli::core::SystemFactory<yli::data::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
+            yli::event::EventSystem* const event_system { nullptr };
             yli::audio::AudioSystem* const audio_system { nullptr };
     };
 }

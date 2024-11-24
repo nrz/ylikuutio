@@ -413,6 +413,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/data/variant_templates.hpp
     code/ylikuutio/data/wrap.hpp
 
+    # event, in alphabetical order
+    code/ylikuutio/event/event_system.cpp
+    code/ylikuutio/event/event_system.hpp
+
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
     code/ylikuutio/file/file_loader.hpp

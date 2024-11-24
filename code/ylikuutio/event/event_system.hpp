@@ -15,50 +15,46 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "application.hpp"
+#ifndef YLIKUUTIO_EVENT_EVENT_SYSTEM_HPP_INCLUDED
+#define YLIKUUTIO_EVENT_EVENT_SYSTEM_HPP_INCLUDED
+
+#include "code/ylikuutio/memory/constructible_module.hpp"
 
 // Include standard headers
-#include <string>   // std::string
+#include <cstddef> // std::size_t
 
-namespace yli::audio
+namespace yli::memory
 {
-    class AudioSystem;
-}
-
-namespace yli::event
-{
-    class EventSystem;
+    template<typename T1, std::size_t DataSize>
+        class MemoryStorage;
 }
 
 namespace yli::ontology
 {
     class Universe;
+    class InputMode;
 }
 
-namespace yli::core
+namespace yli::event
 {
-    Application::Application(const int argc, const char* const argv[])
-        : command_line_master(argc, argv)
+    class EventSystem
     {
-    }
+        public:
+            explicit EventSystem(yli::ontology::Universe& universe);
 
-    std::string Application::get_name() const
-    {
-        return ""; // `override` this in the inherited class.
-    }
+            void poll_events(const yli::ontology::InputMode& input_mode);
 
-    std::string Application::get_version() const
-    {
-        return ""; // `override` this in the inherited class.
-    }
+            EventSystem& get();
 
-    yli::event::EventSystem* Application::get_event_system() const
-    {
-        return nullptr; // `override` this in the inherited class.
-    }
+            template<typename T1, std::size_t DataSize>
+                friend class yli::memory::MemoryStorage;
 
-    yli::audio::AudioSystem* Application::get_audio_system() const
-    {
-        return nullptr;
-    }
+        private:
+            yli::memory::ConstructibleModule constructible_module;
+
+            yli::ontology::Universe& universe;
+    };
 }
+
+#endif
+

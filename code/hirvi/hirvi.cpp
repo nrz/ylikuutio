@@ -25,6 +25,7 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
+#include "code/ylikuutio/event/event_system.hpp"
 
 #ifndef GOOGLE_TEST
 // Google Test provides its own `main` entrypoint.
@@ -105,6 +106,7 @@ namespace hirvi
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
+        event_system { this->system_factory.create_event_system(this->get_universe()) },
         audio_system { this->system_factory.create_audio_system(this->get_universe()) }
     {
         std::cout << "HirviApplication initialized!\n";
@@ -152,6 +154,11 @@ namespace hirvi
     GenericEntityFactory& HirviApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();
+    }
+
+    yli::event::EventSystem* HirviApplication::get_event_system() const
+    {
+        return this->event_system;
     }
 
     yli::audio::AudioSystem* HirviApplication::get_audio_system() const

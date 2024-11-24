@@ -45,6 +45,7 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -333,11 +334,9 @@ namespace yli::ontology
             return;
         }
 
-        SDL_Event sdl_event;
         yli::sdl::flush_sdl_event_queue();
 
         // This method contains the main simulation loop.
-        bool has_mouse_focus = true;
 
         while (!this->is_exit_requested)
         {
@@ -400,74 +399,7 @@ namespace yli::ontology
 
                 // 1. Read and process inputs.
                 // Poll all SDL events.
-                while (SDL_PollEvent(&sdl_event))
-                {
-                    if (sdl_event.type == SDL_MOUSEMOTION)
-                    {
-                        this->mouse_x += sdl_event.motion.xrel; // horizontal motion relative to screen center.
-                        this->mouse_y += sdl_event.motion.yrel; // vertical motion relative to screen center.
-                    }
-                    else if (sdl_event.type == SDL_KEYDOWN)
-                    {
-                        const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
-
-                        GenericCallbackEngine* const generic_callback_engine = input_mode->get_keypress_callback_engine(scancode);
-
-                        if (generic_callback_engine != nullptr)
-                        {
-                            const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
-
-                            if (any_value &&
-                                    std::holds_alternative<uint32_t>(any_value->data) &&
-                                    std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
-                            {
-                                this->request_exit();
-                            }
-                        }
-
-                        Console* const active_console = this->active_console;
-
-                        if (active_console != nullptr)
-                        {
-                            active_console->process_key_event(sdl_event.key);
-                        }
-                    }
-                    else if (sdl_event.type == SDL_KEYUP)
-                    {
-                        const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
-
-                        GenericCallbackEngine* const generic_callback_engine = input_mode->get_keyrelease_callback_engine(scancode);
-
-                        if (generic_callback_engine == nullptr)
-                        {
-                            continue;
-                        }
-
-                        const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
-
-                        if (any_value &&
-                                std::holds_alternative<uint32_t>(any_value->data) &&
-                                std::get<uint32_t>(any_value->data) == CallbackMagicNumber::EXIT_PROGRAM)
-                        {
-                            this->request_exit();
-                        }
-                    }
-                    else if (sdl_event.type == SDL_WINDOWEVENT)
-                    {
-                        if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-                        {
-                            has_mouse_focus = true;
-                        }
-                        else if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
-                        {
-                            has_mouse_focus = false;
-                        }
-                    }
-                    else if (sdl_event.type == SDL_QUIT)
-                    {
-                        this->request_exit();
-                    }
-                }
+                this->get_event_system().poll_events(*input_mode);
 
                 // mouse position.
                 const float xpos = static_cast<float>(this->mouse_x);
@@ -643,6 +575,26 @@ namespace yli::ontology
                 this->finalize_delta_time_loop();
             }
         }
+    }
+
+    void Universe::update_mouse_x(const int32_t x_change)
+    {
+        this->mouse_x += x_change; // horizontal motion relative to screen center.
+    }
+
+    void Universe::update_mouse_y(const int32_t y_change)
+    {
+        this->mouse_y += y_change; // vertical motion relative to screen center.
+    }
+
+    void Universe::gain_focus()
+    {
+        this->has_mouse_focus = true;
+    }
+
+    void Universe::lose_focus()
+    {
+        this->has_mouse_focus = false;
     }
 
     void Universe::request_exit()
@@ -1397,6 +1349,16 @@ namespace yli::ontology
     yli::memory::GenericMemoryAllocator& Universe::get_generic_memory_allocator(const int type) const
     {
         return this->application.get_generic_memory_allocator(type);
+    }
+
+    yli::event::EventSystem& Universe::get_event_system() const
+    {
+        if (yli::event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[likely]]
+        {
+            return event_system->get();
+        }
+
+        throw std::runtime_error("ERROR: `Universe::get_event_system`: `event_system` is `nullptr`!");
     }
 
     yli::render::RenderSystem* Universe::get_render_system() const
