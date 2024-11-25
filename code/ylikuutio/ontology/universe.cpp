@@ -45,7 +45,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/event/event_system.hpp"
-#include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input.hpp"
@@ -232,7 +231,14 @@ namespace yli::ontology
             this->active_scene->do_physics();
         }
 
-        this->compute_and_update_matrices_from_inputs();
+        Camera* const camera = this->get_active_camera();
+
+        if (camera == nullptr) [[unlikely]]
+        {
+            throw std::runtime_error("ERROR: `Universe::do_physics`: `camera` is `nullptr`!");
+        }
+
+        camera->compute_and_update_matrices_from_inputs(this->initial_fov, this->aspect_ratio, this->znear, this->zfar);
     }
 
     void Universe::update()
@@ -1398,27 +1404,6 @@ namespace yli::ontology
     float Universe::get_initial_fov() const
     {
         return this->initial_fov;
-    }
-
-    void Universe::compute_and_update_matrices_from_inputs()
-    {
-        glm::vec3 camera_cartesian_coordinates;
-        camera_cartesian_coordinates.x = this->get_x();
-        camera_cartesian_coordinates.y = this->get_y();
-        camera_cartesian_coordinates.z = this->get_z();
-
-        // Compute the projection matrix.
-        this->set_projection_matrix(glm::perspective(
-                    yli::geometry::degrees_to_radians(this->initial_fov),
-                    this->aspect_ratio,
-                    this->znear,
-                    this->zfar));
-
-        // Compute the view matrix.
-        this->set_view_matrix(glm::lookAt(
-                    camera_cartesian_coordinates,                                  // Camera coordinates.
-                    camera_cartesian_coordinates + this->get_direction(),          // Camera looks here: at the same position, plus "current_camera_direction".
-                    this->get_up()));                                              // Head is up (set to 0,-1,0 to look upside-down).
     }
 
     void Universe::create_should_render_variable()

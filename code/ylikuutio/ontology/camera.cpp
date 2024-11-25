@@ -24,6 +24,7 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "camera_struct.hpp"
+#include "code/ylikuutio/geometry/degrees_to_radians.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -122,6 +123,22 @@ namespace yli::ontology
     std::size_t Camera::get_number_of_descendants() const
     {
         return 0; // `Camera` has no children.
+    }
+
+    void Camera::compute_and_update_matrices_from_inputs(const float initial_fov, const float aspect_ratio, const float znear, const float zfar)
+    {
+        // Compute the projection matrix.
+        this->set_projection_matrix(glm::perspective(
+                    yli::geometry::degrees_to_radians(initial_fov),
+                    aspect_ratio,
+                    znear,
+                    zfar));
+
+        // Compute the view matrix.
+        this->set_view_matrix(glm::lookAt(
+                    this->location.xyz,                   // Camera coordinates.
+                    this->location.xyz + this->direction, // Camera looks here: at the same position, plus "current_camera_direction".
+                    this->up));                           // Head is up (set to 0,-1,0 to look upside-down).
     }
 
     const glm::mat4& Camera::get_projection_matrix() const

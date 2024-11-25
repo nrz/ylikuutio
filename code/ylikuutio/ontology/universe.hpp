@@ -371,8 +371,6 @@ namespace yli::ontology
 
             void create_should_render_variable();
 
-            void compute_and_update_matrices_from_inputs();
-
             std::vector<Entity*> entity_pointer_vector;
             std::queue<std::size_t> free_entityID_queue;
             std::size_t number_of_entities { 0 };

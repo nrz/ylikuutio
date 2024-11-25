@@ -108,6 +108,8 @@ namespace yli::ontology
 
             void render();
 
+            void compute_and_update_matrices_from_inputs(const float initial_fov, const float aspect_ratio, const float znear, const float zfar);
+
             const glm::mat4& get_projection_matrix() const;
             void set_projection_matrix(glm::mat4&& projection_matrix);
 
