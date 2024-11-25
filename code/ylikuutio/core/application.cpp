@@ -69,6 +69,6 @@ namespace yli::core
 
     yli::audio::AudioSystem* Application::get_audio_system() const
     {
-        return nullptr;
+        return nullptr; // `override` this in the inherited class.
     }
 }
