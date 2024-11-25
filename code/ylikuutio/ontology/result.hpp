@@ -39,12 +39,12 @@ namespace yli::ontology
         //
         // For unsuccessful function call (binding failed):
         // `bool` contains `false`.
-        Result(std::optional<yli::data::AnyValue>&& any_value)
+        explicit Result(std::optional<yli::data::AnyValue>&& any_value)
             : data { std::move(any_value) }
         {
         }
 
-        Result(const bool success)
+        explicit Result(const bool success)
             : data { success }
         {
         }
