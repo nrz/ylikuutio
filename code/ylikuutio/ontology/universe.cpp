@@ -1400,7 +1400,7 @@ namespace yli::ontology
         return this->initial_fov;
     }
 
-    bool Universe::compute_and_update_matrices_from_inputs()
+    void Universe::compute_and_update_matrices_from_inputs()
     {
         glm::vec3 camera_cartesian_coordinates;
         camera_cartesian_coordinates.x = this->get_x();
@@ -1419,8 +1419,6 @@ namespace yli::ontology
                     camera_cartesian_coordinates,                                  // Camera coordinates.
                     camera_cartesian_coordinates + this->get_direction(),          // Camera looks here: at the same position, plus "current_camera_direction".
                     this->get_up()));                                              // Head is up (set to 0,-1,0 to look upside-down).
-
-        return true;
     }
 
     void Universe::create_should_render_variable()
