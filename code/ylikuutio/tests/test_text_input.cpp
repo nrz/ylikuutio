@@ -375,3 +375,189 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_cha
     const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
+
+TEST(ctrl_w_must_succeed_appropriately, no_input)
+{
+    yli::input::TextInput text_input;
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_character_a)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character('a');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_a_b)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character('a');
+    text_input.add_character(' ');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space_space)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character('a');
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 1);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 1);
+    const std::vector<yli::input::Codepoint> expected { ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_b)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 1);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 1);
+    const std::vector<yli::input::Codepoint> expected { ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_space)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character(' ');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 1);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 1);
+    const std::vector<yli::input::Codepoint> expected { ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 2);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 2);
+    const std::vector<yli::input::Codepoint> expected { ' ', ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('c');
+    text_input.add_character('d');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 6);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 6);
+    const std::vector<yli::input::Codepoint> expected { ' ', ' ', 'a', 'b', ' ', ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d_space)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('c');
+    text_input.add_character('d');
+    text_input.add_character(' ');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 6);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 6);
+    const std::vector<yli::input::Codepoint> expected { ' ', ' ', 'a', 'b', ' ', ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d_space_space)
+{
+    yli::input::TextInput text_input;
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.add_character('c');
+    text_input.add_character('d');
+    text_input.add_character(' ');
+    text_input.add_character(' ');
+    text_input.ctrl_w();
+    ASSERT_EQ(text_input.size(), 6);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), yli::input::Codepoint(' '));
+    ASSERT_EQ(text_input.get_cursor_index(), 6);
+    const std::vector<yli::input::Codepoint> expected { ' ', ' ', 'a', 'b', ' ', ' ' };
+    ASSERT_EQ(text_input.data(), expected);
+}

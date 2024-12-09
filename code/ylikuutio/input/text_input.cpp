@@ -75,6 +75,21 @@ namespace yli::input
         return false;
     }
 
+    void TextInput::ctrl_w()
+    {
+        // First, remove all spaces until a non-space is encountered.
+        while (this->cursor_index != 0 && this->get_character_to_the_left() == ' ')
+        {
+            this->delete_character();
+        }
+
+        // Then, remove all non-spaces until a space is encountered.
+        while (this->cursor_index != 0 && this->get_character_to_the_left() != ' ')
+        {
+            this->delete_character();
+        }
+    }
+
     void TextInput::clear()
     {
         // Clear the text field.

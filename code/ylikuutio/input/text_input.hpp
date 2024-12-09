@@ -46,6 +46,7 @@ namespace yli::input
             std::optional<Codepoint> get_character_to_the_left() const;
 
             bool delete_character();
+            void ctrl_w();
             void clear();
             bool move_cursor_left();
             bool move_cursor_right();
