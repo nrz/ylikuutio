@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/input/codepoint.hpp"
 #include "code/ylikuutio/input/text_input.hpp"
 
 // Include standard headers
@@ -26,7 +27,7 @@ TEST(text_input_must_be_initialized_appropriately, text_input)
     yli::input::TextInput text_input;
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(one_character_must_be_added_to_the_text_input_appropriately, single_character_a)
@@ -35,7 +36,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, single_charact
     text_input.add_character('a');
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -46,7 +47,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
     text_input.add_character('b');
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 2);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -58,40 +59,40 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_char
     text_input.add_character('c');
     ASSERT_EQ(text_input.size(), 3);
     ASSERT_EQ(text_input.get_cursor_index(), 3);
-    const std::vector<char> expected { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b', 'c' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
 TEST(one_character_must_be_added_to_the_text_input_appropriately, char_container_a)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a' };
+    const std::vector<yli::input::Codepoint> char_container { 'a' };
     text_input.add_characters(char_container);
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_container_a_b)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b' };
     text_input.add_characters(char_container);
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 2);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
 TEST(three_characters_must_be_added_to_the_text_input_appropriately, char_container_a_b_c)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
     text_input.add_characters(char_container);
     ASSERT_EQ(text_input.size(), 3);
     ASSERT_EQ(text_input.get_cursor_index(), 3);
-    const std::vector<char> expected { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b', 'c' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -99,23 +100,23 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
 {
     yli::input::TextInput text_input;
     text_input.add_character('a');
-    const std::vector<char> char_container { 'b' };
+    const std::vector<yli::input::Codepoint> char_container { 'b' };
     text_input.add_characters(char_container);
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 2);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_container_a_and_single_character_b)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a' };
+    const std::vector<yli::input::Codepoint> char_container { 'a' };
     text_input.add_characters(char_container);
     text_input.add_character('b');
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 2);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -125,7 +126,7 @@ TEST(deleting_a_character_must_fail_appropriately_for_empty_text_input, empty_te
     ASSERT_FALSE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(character_must_deleted_from_the_text_input_appropriately, single_character_a)
@@ -135,18 +136,18 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a' };
+    const std::vector<yli::input::Codepoint> char_container { 'a' };
     text_input.add_characters(char_container);
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(character_must_deleted_from_the_text_input_appropriately, single_character_a_b)
@@ -157,30 +158,30 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected_a { 'a' };
+    const std::vector<yli::input::Codepoint> expected_a { 'a' };
     ASSERT_EQ(text_input.data(), expected_a);
 
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a_b)
 {
     yli::input::TextInput text_input;
-    const std::vector<char> char_container { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b' };
     text_input.add_characters(char_container);
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected_a { 'a' };
+    const std::vector<yli::input::Codepoint> expected_a { 'a' };
     ASSERT_EQ(text_input.data(), expected_a);
 
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(text_input_must_be_cleared_appropriately, after_single_character_a)
@@ -208,7 +209,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, no_input)
     ASSERT_FALSE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(moving_cursor_to_left_must_succeed_appropriately, after_single_character_a)
@@ -218,7 +219,7 @@ TEST(moving_cursor_to_left_must_succeed_appropriately, after_single_character_a)
     ASSERT_TRUE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -230,7 +231,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, after_single_characters_a_b)
     ASSERT_TRUE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -240,7 +241,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, no_input)
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(moving_cursor_to_right_must_fail_appropriately, after_single_character_a)
@@ -250,7 +251,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_character_a)
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -262,7 +263,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_characters_a_b
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.size(), 2);
     ASSERT_EQ(text_input.get_cursor_index(), 2);
-    const std::vector<char> expected { 'a', 'b' };
+    const std::vector<yli::input::Codepoint> expected { 'a', 'b' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -273,7 +274,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, no_input_and_move_to_lef
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 TEST(moving_cursor_to_right_must_succeed_appropriately, after_single_character_a_and_move_to_left)
 {
@@ -283,7 +284,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, after_single_character_a
     ASSERT_TRUE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 1);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }
 
@@ -293,7 +294,7 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, no_input)
     text_input.move_cursor_to_start_of_line();
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(moving_cursor_to_end_of_line_must_succeed_appropriately, no_input)
@@ -302,7 +303,7 @@ TEST(moving_cursor_to_end_of_line_must_succeed_appropriately, no_input)
     text_input.move_cursor_to_end_of_line();
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    ASSERT_EQ(text_input.data(), std::vector<char>{});
+    ASSERT_EQ(text_input.data(), std::vector<yli::input::Codepoint>{});
 }
 
 TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_character_a)
@@ -312,6 +313,6 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_cha
     text_input.move_cursor_to_start_of_line();
     ASSERT_EQ(text_input.size(), 1);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
-    const std::vector<char> expected { 'a' };
+    const std::vector<yli::input::Codepoint> expected { 'a' };
     ASSERT_EQ(text_input.data(), expected);
 }

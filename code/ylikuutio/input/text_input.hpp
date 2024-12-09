@@ -18,6 +18,8 @@
 #ifndef YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
 #define YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
 
+#include "codepoint.hpp"
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <vector>  // std::vector
@@ -27,10 +29,10 @@ namespace yli::input
     class TextInput
     {
         public:
-            void add_character(const char character);
+            void add_character(const Codepoint& character);
 
             template<typename Alloc, template<typename, typename> typename Type>
-                void add_characters(const Type<char, Alloc>& char_container)
+                void add_characters(const Type<Codepoint, Alloc>& char_container)
                 {
                     // Assume there is memory available.
                     // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
@@ -46,12 +48,12 @@ namespace yli::input
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
             std::size_t size() const;
-            const std::vector<char>& data() const;
+            const std::vector<Codepoint>& data() const;
             std::size_t get_cursor_index() const;
 
         private:
-            std::vector<char> input; // This is used for actual inputs.
-            std::vector<char>::iterator cursor_it { this->input.begin() };
+            std::vector<Codepoint> input; // This is used for actual inputs.
+            std::vector<Codepoint>::iterator cursor_it { this->input.begin() };
             std::size_t cursor_index { 0 };
     };
 }

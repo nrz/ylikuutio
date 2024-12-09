@@ -23,7 +23,9 @@
 
 namespace yli::input
 {
-    void TextInput::add_character(const char character)
+    struct Codepoint;
+
+    void TextInput::add_character(const Codepoint& character)
     {
         // Assume there is memory available.
         // Insert a character at current index and make index grow by 1.
@@ -107,7 +109,7 @@ namespace yli::input
         return this->input.size();
     }
 
-    const std::vector<char>& TextInput::data() const
+    const std::vector<Codepoint>& TextInput::data() const
     {
         return this->input;
     }

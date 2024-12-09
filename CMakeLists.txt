@@ -452,6 +452,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # input, in alphabetical order
+    code/ylikuutio/input/codepoint.hpp
     code/ylikuutio/input/input.cpp
     code/ylikuutio/input/input.hpp
     code/ylikuutio/input/input_system.cpp
