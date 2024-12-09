@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <optional> // std::optional
 #include <vector>  // std::vector
 
 namespace yli::input
@@ -40,6 +41,9 @@ namespace yli::input
                     this->cursor_index += char_container.size();
                     this->cursor_it = this->input.begin() + this->cursor_index;
                 }
+
+            std::optional<Codepoint> get_character_at_current_index() const;
+            std::optional<Codepoint> get_character_to_the_left() const;
 
             bool delete_character();
             void clear();

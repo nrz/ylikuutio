@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <optional> // std::optional
 #include <vector>  // std::vector
 
 namespace yli::input
@@ -31,6 +32,27 @@ namespace yli::input
         // Insert a character at current index and make index grow by 1.
         this->input.insert(this->cursor_it, character);
         this->cursor_it = this->input.begin() + (++this->cursor_index);
+    }
+
+    std::optional<Codepoint> TextInput::get_character_at_current_index() const
+    {
+        if (this->cursor_it != this->input.end()) [[likely]]
+        {
+            return *this->cursor_it;
+        }
+
+        return std::nullopt;
+    }
+
+    std::optional<Codepoint> TextInput::get_character_to_the_left() const
+    {
+        if (this->cursor_it != this->input.begin()) [[likely]]
+        {
+            auto temp_it = cursor_it;
+            return *(--temp_it);
+        }
+
+        return std::nullopt;
     }
 
     bool TextInput::delete_character()
