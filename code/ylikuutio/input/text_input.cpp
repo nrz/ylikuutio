@@ -57,8 +57,7 @@ namespace yli::input
     {
         // Clear the text field.
         this->input.clear();
-        this->cursor_it = this->input.begin();
-        this->cursor_index = 0;
+        this->move_cursor_to_start_of_line();
     }
 
     bool TextInput::move_cursor_left()
