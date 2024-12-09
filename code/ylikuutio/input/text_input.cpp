@@ -86,7 +86,7 @@ namespace yli::input
     {
         // If index is > 0, decrease index by 1, and return `true` to signal success.
         // Otherwise, return `false` to signal fail.
-        if (this->cursor_it != this->input.begin())
+        if (this->cursor_it != this->input.begin()) [[likely]]
         {
             this->cursor_it--;
             this->cursor_index--;
