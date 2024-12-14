@@ -30,6 +30,16 @@ namespace yli::input
     class TextInput
     {
         public:
+            bool operator==(const TextInput& other) const
+            {
+                return this->input == other.input;
+            }
+
+            bool operator!=(const TextInput& other) const
+            {
+                return this->input != other.input;
+            }
+
             void add_character(const Codepoint& character);
 
             template<typename Alloc, template<typename, typename> typename Type>
