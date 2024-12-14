@@ -459,6 +459,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/input_system.hpp
     code/ylikuutio/input/text_input.cpp
     code/ylikuutio/input/text_input.hpp
+    code/ylikuutio/input/text_input_history.cpp
+    code/ylikuutio/input/text_input_history.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation.hpp
@@ -1093,6 +1095,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_text_2d.cpp
         code/ylikuutio/tests/test_text_3d.cpp
         code/ylikuutio/tests/test_text_input.cpp
+        code/ylikuutio/tests/test_text_input_history.cpp
         code/ylikuutio/tests/test_triangulation.cpp
         code/ylikuutio/tests/test_universe.cpp
         code/ylikuutio/tests/test_universe_callbacks.cpp
