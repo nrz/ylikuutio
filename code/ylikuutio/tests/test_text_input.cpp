@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <optional> // std::nullopt
-#include <vector> // std::vector
+#include <vector>   // std::vector
 
 TEST(text_input_must_be_initialized_appropriately, text_input)
 {
