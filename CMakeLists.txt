@@ -459,6 +459,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/input_system.hpp
     code/ylikuutio/input/text_input.cpp
     code/ylikuutio/input/text_input.hpp
+    code/ylikuutio/input/text_input_iterator.hpp
     code/ylikuutio/input/text_input_history.cpp
     code/ylikuutio/input/text_input_history.hpp
 

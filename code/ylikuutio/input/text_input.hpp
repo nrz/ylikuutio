@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
 #define YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
 
+#include "text_input_iterator.hpp"
 #include "codepoint.hpp"
 
 // Include standard headers
@@ -30,6 +31,10 @@ namespace yli::input
     class TextInput
     {
         public:
+            // Iterator typedefs.
+            typedef TextInputIterator       iterator;
+            typedef TextInputIterator const_iterator;
+
             bool operator==(const TextInput& other) const
             {
                 return this->input == other.input;
@@ -65,6 +70,27 @@ namespace yli::input
             std::size_t size() const;
             const std::vector<Codepoint>& data() const;
             std::size_t get_cursor_index() const;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->input.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->input.end());
+            }
+
+            const_iterator cbegin()
+            {
+                return const_iterator(this->input.begin());
+            }
+
+            const_iterator cend()
+            {
+                return const_iterator(this->input.end());
+            }
 
         private:
             std::vector<Codepoint> input; // This is used for actual inputs.

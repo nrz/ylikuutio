@@ -561,3 +561,67 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
     const std::vector<yli::input::Codepoint> expected { ' ', ' ', 'a', 'b', ' ', ' ' };
     ASSERT_EQ(text_input.data(), expected);
 }
+
+TEST(text_input_begin_iterator_must_work_appropriately, text_input_begin_iterator)
+{
+    yli::input::TextInput text_input;
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
+    text_input.add_characters(char_container);
+
+    auto it = text_input.begin();
+    ASSERT_EQ(*it, yli::input::Codepoint('a'));
+    ++it;
+    ASSERT_EQ(*it, yli::input::Codepoint('b'));
+    ++it;
+    ASSERT_EQ(*it, yli::input::Codepoint('c'));
+    ++it;
+    ASSERT_EQ(it, text_input.end());
+}
+
+TEST(text_input_cbegin_const_iterator_must_work_appropriately, text_input_cbegin_const_iterator)
+{
+    yli::input::TextInput text_input;
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
+    text_input.add_characters(char_container);
+
+    auto it = text_input.cbegin();
+    ASSERT_EQ(*it, yli::input::Codepoint('a'));
+    ++it;
+    ASSERT_EQ(*it, yli::input::Codepoint('b'));
+    ++it;
+    ASSERT_EQ(*it, yli::input::Codepoint('c'));
+    ++it;
+    ASSERT_EQ(it, text_input.cend());
+}
+
+TEST(text_input_end_iterator_must_work_appropriately, text_input_end_iterator)
+{
+    yli::input::TextInput text_input;
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
+    text_input.add_characters(char_container);
+
+    auto it = text_input.end();
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('c'));
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('b'));
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('a'));
+    ASSERT_EQ(it, text_input.begin());
+}
+
+TEST(text_input_cend_iterator_must_work_appropriately, text_input_cend_iterator)
+{
+    yli::input::TextInput text_input;
+    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
+    text_input.add_characters(char_container);
+
+    auto it = text_input.cend();
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('c'));
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('b'));
+    --it;
+    ASSERT_EQ(*it, yli::input::Codepoint('a'));
+    ASSERT_EQ(it, text_input.cbegin());
+}
