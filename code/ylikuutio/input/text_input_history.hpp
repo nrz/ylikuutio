@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_INPUT_TEXT_INPUT_HISTORY_HPP_INCLUDED
 #define YLIKUUTIO_INPUT_TEXT_INPUT_HISTORY_HPP_INCLUDED
 
+#include "text_input_history_iterator.hpp"
 #include "text_input.hpp"
 
 // Include standard headers
@@ -31,6 +32,10 @@ namespace yli::input
     class TextInputHistory
     {
         public:
+            // Iterator typedefs.
+            typedef TextInputHistoryIterator       iterator;
+            typedef TextInputHistoryIterator const_iterator;
+
             void add_to_history(const TextInput&& text_input);
 
             bool enter_history();
@@ -44,6 +49,27 @@ namespace yli::input
             bool get_is_in_history() const;
             std::size_t size() const;
             std::optional<TextInput> get_from_history() const;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->history.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->history.end());
+            }
+
+            const_iterator cbegin()
+            {
+                return const_iterator(this->history.begin());
+            }
+
+            const_iterator cend()
+            {
+                return const_iterator(this->history.end());
+            }
 
         private:
             std::vector<TextInput> history;

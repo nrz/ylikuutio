@@ -70,3 +70,135 @@ TEST(adding_an_input_must_work_appropriately, abc)
 
     ASSERT_EQ(*text_input_history.get_from_history(), text_input);
 }
+
+TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_history_begin_iterator)
+{
+    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+
+    yli::input::TextInputHistory text_input_history;
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    auto it = text_input_history.begin();
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    ++it;
+    ASSERT_EQ(it, text_input_history.end());
+}
+
+TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_input_history_cbegin_const_iterator)
+{
+    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+
+    yli::input::TextInputHistory text_input_history;
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    auto it = text_input_history.cbegin();
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    ++it;
+    ASSERT_EQ(it, text_input_history.cend());
+}
+
+TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history_end_iterator)
+{
+    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+
+    yli::input::TextInputHistory text_input_history;
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    auto it = text_input_history.end();
+    --it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ASSERT_EQ(it, text_input_history.begin());
+}
+
+TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_history_cend_iterator)
+{
+    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+
+    yli::input::TextInputHistory text_input_history;
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+    {
+        yli::input::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    auto it = text_input_history.cend();
+    --it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ASSERT_EQ(it, text_input_history.cbegin());
+}

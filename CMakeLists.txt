@@ -462,6 +462,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/text_input_iterator.hpp
     code/ylikuutio/input/text_input_history.cpp
     code/ylikuutio/input/text_input_history.hpp
+    code/ylikuutio/input/text_input_history_iterator.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation.hpp
