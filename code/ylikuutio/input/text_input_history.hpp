@@ -48,7 +48,7 @@ namespace yli::input
 
             bool get_is_in_history() const;
             std::size_t size() const;
-            std::optional<TextInput> get_from_history() const;
+            std::optional<TextInput> get() const;
 
             // Iterator functions.
             iterator begin()
