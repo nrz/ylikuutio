@@ -49,3 +49,6 @@ https://nvpro-samples.github.io/vk_raytracing_tutorial_KHR/
 
 Vulkan Hardware Database
 https://vulkan.gpuinfo.org/
+
+Writing an efficient Vulkan renderer
+https://zeux.io/2020/02/27/writing-an-efficient-vulkan-renderer/
