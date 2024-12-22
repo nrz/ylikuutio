@@ -404,6 +404,7 @@ add_library(ylikuutio STATIC
     # data, in alphabetical order
     code/ylikuutio/data/any_value.cpp
     code/ylikuutio/data/any_value.hpp
+    code/ylikuutio/data/codepoint.hpp
     code/ylikuutio/data/data_templates.hpp
     code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/queue.hpp
@@ -452,7 +453,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # input, in alphabetical order
-    code/ylikuutio/input/codepoint.hpp
     code/ylikuutio/input/input.cpp
     code/ylikuutio/input/input.hpp
     code/ylikuutio/input/input_system.cpp

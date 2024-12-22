@@ -19,7 +19,7 @@
 #define YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
 
 #include "text_input_iterator.hpp"
-#include "codepoint.hpp"
+#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -45,10 +45,10 @@ namespace yli::input
                 return this->input != other.input;
             }
 
-            void add_character(const Codepoint& character);
+            void add_character(const yli::data::Codepoint& character);
 
             template<typename Alloc, template<typename, typename> typename Type>
-                void add_characters(const Type<Codepoint, Alloc>& char_container)
+                void add_characters(const Type<yli::data::Codepoint, Alloc>& char_container)
                 {
                     // Assume there is memory available.
                     // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
@@ -57,8 +57,8 @@ namespace yli::input
                     this->cursor_it = this->input.begin() + this->cursor_index;
                 }
 
-            std::optional<Codepoint> get_character_at_current_index() const;
-            std::optional<Codepoint> get_character_to_the_left() const;
+            std::optional<yli::data::Codepoint> get_character_at_current_index() const;
+            std::optional<yli::data::Codepoint> get_character_to_the_left() const;
 
             bool delete_character();
             void ctrl_w();
@@ -68,7 +68,7 @@ namespace yli::input
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
             std::size_t size() const;
-            const std::vector<Codepoint>& data() const;
+            const std::vector<yli::data::Codepoint>& data() const;
             std::size_t get_cursor_index() const;
 
             // Iterator functions.
@@ -93,8 +93,8 @@ namespace yli::input
             }
 
         private:
-            std::vector<Codepoint> input; // This is used for actual inputs.
-            std::vector<Codepoint>::iterator cursor_it { this->input.begin() };
+            std::vector<yli::data::Codepoint> input; // This is used for actual inputs.
+            std::vector<yli::data::Codepoint>::iterator cursor_it { this->input.begin() };
             std::size_t cursor_index { 0 };
     };
 }

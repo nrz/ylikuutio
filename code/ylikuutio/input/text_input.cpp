@@ -22,11 +22,14 @@
 #include <optional> // std::optional
 #include <vector>   // std::vector
 
-namespace yli::input
+namespace yli::data
 {
     struct Codepoint;
+}
 
-    void TextInput::add_character(const Codepoint& character)
+namespace yli::input
+{
+    void TextInput::add_character(const yli::data::Codepoint& character)
     {
         // Assume there is memory available.
         // Insert a character at current index and make index grow by 1.
@@ -34,7 +37,7 @@ namespace yli::input
         this->cursor_it = this->input.begin() + (++this->cursor_index);
     }
 
-    std::optional<Codepoint> TextInput::get_character_at_current_index() const
+    std::optional<yli::data::Codepoint> TextInput::get_character_at_current_index() const
     {
         if (this->cursor_it != this->input.end()) [[likely]]
         {
@@ -44,7 +47,7 @@ namespace yli::input
         return std::nullopt;
     }
 
-    std::optional<Codepoint> TextInput::get_character_to_the_left() const
+    std::optional<yli::data::Codepoint> TextInput::get_character_to_the_left() const
     {
         if (this->cursor_it != this->input.begin()) [[likely]]
         {
@@ -145,7 +148,7 @@ namespace yli::input
         return this->input.size();
     }
 
-    const std::vector<Codepoint>& TextInput::data() const
+    const std::vector<yli::data::Codepoint>& TextInput::data() const
     {
         return this->input;
     }

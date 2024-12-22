@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/input/codepoint.hpp"
+#include "code/ylikuutio/data/codepoint.hpp"
 #include "code/ylikuutio/input/text_input.hpp"
 #include "code/ylikuutio/input/text_input_history.hpp"
 
@@ -56,7 +56,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     yli::input::TextInputHistory text_input_history;
 
     yli::input::TextInput text_input;
-    const std::vector<yli::input::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
     text_input.add_characters(char_container);
 
     text_input_history.add_to_history(std::move(text_input));
@@ -73,9 +73,9 @@ TEST(adding_an_input_must_work_appropriately, abc)
 
 TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_history_begin_iterator)
 {
-    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
     yli::input::TextInputHistory text_input_history;
     {
@@ -106,9 +106,9 @@ TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_histo
 
 TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_input_history_cbegin_const_iterator)
 {
-    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
     yli::input::TextInputHistory text_input_history;
     {
@@ -139,9 +139,9 @@ TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_inpu
 
 TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history_end_iterator)
 {
-    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
     yli::input::TextInputHistory text_input_history;
     {
@@ -172,9 +172,9 @@ TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history
 
 TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_history_cend_iterator)
 {
-    const std::vector<yli::input::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::input::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::input::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
+    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
     yli::input::TextInputHistory text_input_history;
     {

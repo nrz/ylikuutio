@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_INPUT_CODEPOINT_HPP_INCLUDED
-#define YLIKUUTIO_INPUT_CODEPOINT_HPP_INCLUDED
+#ifndef YLIKUUTIO_DATA_CODEPOINT_HPP_INCLUDED
+#define YLIKUUTIO_DATA_CODEPOINT_HPP_INCLUDED
 
 // Include standard headers
 #include <compare>  // <=>
 #include <stdint.h> // uint32_t
 
-namespace yli::input
+namespace yli::data
 {
     struct Codepoint
     {
