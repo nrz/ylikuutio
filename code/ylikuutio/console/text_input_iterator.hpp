@@ -25,7 +25,7 @@
 #include <iterator> // std::bidirectional_iterator_tag
 #include <vector>   // std::vector
 
-namespace yli::input
+namespace yli::console
 {
     class TextInputIterator
     {

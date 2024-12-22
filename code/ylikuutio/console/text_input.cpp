@@ -27,7 +27,7 @@ namespace yli::data
     struct Codepoint;
 }
 
-namespace yli::input
+namespace yli::console
 {
     void TextInput::add_character(const yli::data::Codepoint& character)
     {

@@ -26,7 +26,7 @@
 #include <optional> // std::optional
 #include <vector>  // std::vector
 
-namespace yli::input
+namespace yli::console
 {
     class TextInput
     {

@@ -395,6 +395,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.cpp
     code/ylikuutio/command_line/command_line_master.hpp
 
+    # console, in alphabetical order
+    code/ylikuutio/console/text_input.cpp
+    code/ylikuutio/console/text_input.hpp
+    code/ylikuutio/console/text_input_iterator.hpp
+    code/ylikuutio/console/text_input_history.cpp
+    code/ylikuutio/console/text_input_history.hpp
+    code/ylikuutio/console/text_input_history_iterator.hpp
+
     # core, in alphabetical order
     code/ylikuutio/core/application.cpp
     code/ylikuutio/core/application.hpp
@@ -457,12 +465,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/input/input.hpp
     code/ylikuutio/input/input_system.cpp
     code/ylikuutio/input/input_system.hpp
-    code/ylikuutio/input/text_input.cpp
-    code/ylikuutio/input/text_input.hpp
-    code/ylikuutio/input/text_input_iterator.hpp
-    code/ylikuutio/input/text_input_history.cpp
-    code/ylikuutio/input/text_input_history.hpp
-    code/ylikuutio/input/text_input_history_iterator.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation.hpp

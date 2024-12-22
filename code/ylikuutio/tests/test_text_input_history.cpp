@@ -17,8 +17,8 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/codepoint.hpp"
-#include "code/ylikuutio/input/text_input.hpp"
-#include "code/ylikuutio/input/text_input_history.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
+#include "code/ylikuutio/console/text_input_history.hpp"
 
 // Include standard headers
 #include <optional> // std::nullopt
@@ -27,7 +27,7 @@
 
 TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 {
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
     ASSERT_EQ(text_input_history.get(), std::nullopt);
@@ -35,7 +35,7 @@ TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 
 TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
 {
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     ASSERT_FALSE(text_input_history.move_to_previous());
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
@@ -44,7 +44,7 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 {
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     ASSERT_FALSE(text_input_history.move_to_next());
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
@@ -53,9 +53,9 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 
 TEST(adding_an_input_must_work_appropriately, abc)
 {
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
 
-    yli::input::TextInput text_input;
+    yli::console::TextInput text_input;
     const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
     text_input.add_characters(char_container);
 
@@ -65,7 +65,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.size(), 1);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    const std::optional<yli::input::TextInput> input_from_history = text_input_history.get();
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
 
     ASSERT_EQ(*text_input_history.get(), text_input);
@@ -77,19 +77,19 @@ TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_histo
     const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
     const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(def_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(ghi_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
@@ -110,19 +110,19 @@ TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_inpu
     const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
     const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(def_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(ghi_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
@@ -143,19 +143,19 @@ TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history
     const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
     const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(def_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(ghi_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
@@ -176,19 +176,19 @@ TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_histor
     const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
     const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
 
-    yli::input::TextInputHistory text_input_history;
+    yli::console::TextInputHistory text_input_history;
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(def_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }
     {
-        yli::input::TextInput text_input;
+        yli::console::TextInput text_input;
         text_input.add_characters(ghi_char_container);
         text_input_history.add_to_history(std::move(text_input));
     }

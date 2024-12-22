@@ -23,7 +23,7 @@
 #include <optional> // std::optional
 #include <utility>  // std::move
 
-namespace yli::input
+namespace yli::console
 {
     class TextInput;
 
