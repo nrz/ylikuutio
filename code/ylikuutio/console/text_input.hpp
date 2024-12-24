@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
-#define YLIKUUTIO_INPUT_TEXT_INPUT_HPP_INCLUDED
+#ifndef YLIKUUTIO_CONSOLE_TEXT_INPUT_HPP_INCLUDED
+#define YLIKUUTIO_CONSOLE_TEXT_INPUT_HPP_INCLUDED
 
 #include "text_input_iterator.hpp"
 #include "code/ylikuutio/data/codepoint.hpp"
