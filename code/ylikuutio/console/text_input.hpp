@@ -22,9 +22,9 @@
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <vector>  // std::vector
+#include <vector>   // std::vector
 
 namespace yli::console
 {
