@@ -402,6 +402,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/text_input_history.cpp
     code/ylikuutio/console/text_input_history.hpp
     code/ylikuutio/console/text_input_history_iterator.hpp
+    code/ylikuutio/console/text_line.cpp
+    code/ylikuutio/console/text_line.hpp
 
     # core, in alphabetical order
     code/ylikuutio/core/application.cpp
@@ -1100,6 +1102,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_text_3d.cpp
         code/ylikuutio/tests/test_text_input.cpp
         code/ylikuutio/tests/test_text_input_history.cpp
+        code/ylikuutio/tests/test_text_line.cpp
         code/ylikuutio/tests/test_triangulation.cpp
         code/ylikuutio/tests/test_universe.cpp
         code/ylikuutio/tests/test_universe_callbacks.cpp
