@@ -28,7 +28,7 @@ namespace yli::console
     class TextLine
     {
         public:
-            TextLine(const std::vector<yli::data::Codepoint>& text_line)
+            explicit TextLine(const std::vector<yli::data::Codepoint>& text_line)
                 : line { text_line }
             {
             }
