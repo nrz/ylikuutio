@@ -16,16 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_input.hpp"
+#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <vector>   // std::vector
-
-namespace yli::data
-{
-    struct Codepoint;
-}
 
 namespace yli::console
 {
@@ -81,13 +77,13 @@ namespace yli::console
     void TextInput::ctrl_w()
     {
         // First, remove all spaces until a non-space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() == ' ')
+        while (this->cursor_index != 0 && this->get_character_to_the_left() == yli::data::Codepoint(' '))
         {
             this->delete_character();
         }
 
         // Then, remove all non-spaces until a space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() != ' ')
+        while (this->cursor_index != 0 && this->get_character_to_the_left() != yli::data::Codepoint(' '))
         {
             this->delete_character();
         }

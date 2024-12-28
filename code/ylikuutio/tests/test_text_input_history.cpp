@@ -56,7 +56,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     yli::console::TextInputHistory text_input_history;
 
     yli::console::TextInput text_input;
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     text_input.add_characters(char_container);
 
     text_input_history.add_to_history(std::move(text_input));
@@ -73,9 +73,9 @@ TEST(adding_an_input_must_work_appropriately, abc)
 
 TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_history_begin_iterator)
 {
-    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
+    const std::vector<yli::data::Codepoint> def_char_container { yli::data::Codepoint('d'), yli::data::Codepoint('e'), yli::data::Codepoint('f') };
+    const std::vector<yli::data::Codepoint> ghi_char_container { yli::data::Codepoint('g'), yli::data::Codepoint('h'), yli::data::Codepoint('i') };
 
     yli::console::TextInputHistory text_input_history;
     {
@@ -106,9 +106,9 @@ TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_histo
 
 TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_input_history_cbegin_const_iterator)
 {
-    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
+    const std::vector<yli::data::Codepoint> def_char_container { yli::data::Codepoint('d'), yli::data::Codepoint('e'), yli::data::Codepoint('f') };
+    const std::vector<yli::data::Codepoint> ghi_char_container { yli::data::Codepoint('g'), yli::data::Codepoint('h'), yli::data::Codepoint('i') };
 
     yli::console::TextInputHistory text_input_history;
     {
@@ -139,9 +139,9 @@ TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_inpu
 
 TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history_end_iterator)
 {
-    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
+    const std::vector<yli::data::Codepoint> def_char_container { yli::data::Codepoint('d'), yli::data::Codepoint('e'), yli::data::Codepoint('f') };
+    const std::vector<yli::data::Codepoint> ghi_char_container { yli::data::Codepoint('g'), yli::data::Codepoint('h'), yli::data::Codepoint('i') };
 
     yli::console::TextInputHistory text_input_history;
     {
@@ -172,9 +172,9 @@ TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history
 
 TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_history_cend_iterator)
 {
-    const std::vector<yli::data::Codepoint> abc_char_container { 'a', 'b', 'c' };
-    const std::vector<yli::data::Codepoint> def_char_container { 'd', 'e', 'f' };
-    const std::vector<yli::data::Codepoint> ghi_char_container { 'g', 'h', 'i' };
+    const std::vector<yli::data::Codepoint> abc_char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
+    const std::vector<yli::data::Codepoint> def_char_container { yli::data::Codepoint('d'), yli::data::Codepoint('e'), yli::data::Codepoint('f') };
+    const std::vector<yli::data::Codepoint> ghi_char_container { yli::data::Codepoint('g'), yli::data::Codepoint('h'), yli::data::Codepoint('i') };
 
     yli::console::TextInputHistory text_input_history;
     {

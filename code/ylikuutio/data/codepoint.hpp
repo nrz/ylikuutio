@@ -26,7 +26,7 @@ namespace yli::data
 {
     struct Codepoint
     {
-        Codepoint(const char codepoint)
+        explicit Codepoint(const char codepoint)
             : codepoint { static_cast<uint32_t>(codepoint) }
         {
         }

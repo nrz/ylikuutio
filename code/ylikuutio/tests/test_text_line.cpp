@@ -24,14 +24,14 @@
 
 TEST(text_line_must_be_initialized_appropriately, text_line)
 {
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     yli::console::TextLine text_line(char_container);
     ASSERT_EQ(text_line.data(), char_container);
 }
 
 TEST(text_line_begin_iterator_must_work_appropriately, text_line_begin_iterator)
 {
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     yli::console::TextLine text_line(char_container);
 
     auto it = text_line.begin();
@@ -46,7 +46,7 @@ TEST(text_line_begin_iterator_must_work_appropriately, text_line_begin_iterator)
 
 TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_const_iterator)
 {
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     yli::console::TextLine text_line(char_container);
 
     auto it = text_line.cbegin();
@@ -61,7 +61,7 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
 
 TEST(text_line_end_iterator_must_work_appropriately, text_line_end_iterator)
 {
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     yli::console::TextLine text_line(char_container);
 
     auto it = text_line.end();
@@ -76,7 +76,7 @@ TEST(text_line_end_iterator_must_work_appropriately, text_line_end_iterator)
 
 TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
 {
-    const std::vector<yli::data::Codepoint> char_container { 'a', 'b', 'c' };
+    const std::vector<yli::data::Codepoint> char_container { yli::data::Codepoint('a'), yli::data::Codepoint('b'), yli::data::Codepoint('c') };
     yli::console::TextLine text_line(char_container);
 
     auto it = text_line.cend();
