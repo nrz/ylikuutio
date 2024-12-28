@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 
+#include "text_line_iterator.hpp"
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
@@ -28,12 +29,37 @@ namespace yli::console
     class TextLine
     {
         public:
+            // Iterator typedefs.
+            typedef TextLineIterator       iterator;
+            typedef TextLineIterator const_iterator;
+
             explicit TextLine(const std::vector<yli::data::Codepoint>& text_line)
                 : line { text_line }
             {
             }
 
             const std::vector<yli::data::Codepoint>& data() const;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->line.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->line.end());
+            }
+
+            const_iterator cbegin()
+            {
+                return const_iterator(this->line.begin());
+            }
+
+            const_iterator cend()
+            {
+                return const_iterator(this->line.end());
+            }
 
         private:
             std::vector<yli::data::Codepoint> line;
