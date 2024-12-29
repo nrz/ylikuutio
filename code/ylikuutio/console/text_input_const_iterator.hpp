@@ -33,8 +33,8 @@ namespace yli::console
             using iterator_category = std::bidirectional_iterator_tag;
             using value_type        = yli::data::Codepoint;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = yli::data::Codepoint*;
-            using reference         = yli::data::Codepoint&;
+            using pointer           = const yli::data::Codepoint*;
+            using reference         = const yli::data::Codepoint&;
 
             explicit TextInputConstIterator(std::vector<yli::data::Codepoint>::const_iterator it)
                 : it { it }
