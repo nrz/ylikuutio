@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_TEXT_LINE_ITERATOR_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_TEXT_LINE_ITERATOR_HPP_INCLUDED
+#ifndef YLIKUUTIO_CONSOLE_TEXT_LINE_CONST_ITERATOR_HPP_INCLUDED
+#define YLIKUUTIO_CONSOLE_TEXT_LINE_CONST_ITERATOR_HPP_INCLUDED
 
 #include "code/ylikuutio/data/codepoint.hpp"
 
@@ -27,64 +27,64 @@
 
 namespace yli::console
 {
-    class TextLineIterator
+    class TextLineConstIterator
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
             using value_type        = yli::data::Codepoint;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = yli::data::Codepoint*;
-            using reference         = yli::data::Codepoint&;
+            using pointer           = const yli::data::Codepoint*;
+            using reference         = const yli::data::Codepoint&;
 
-            explicit TextLineIterator(std::vector<yli::data::Codepoint>::iterator it)
+            explicit TextLineConstIterator(std::vector<yli::data::Codepoint>::const_iterator it)
                 : it { it }
             {
             }
 
             // copy constructor.
-            TextLineIterator(const TextLineIterator&) = default;
+            TextLineConstIterator(const TextLineConstIterator&) = default;
 
             // copy assignment.
-            TextLineIterator& operator=(const TextLineIterator&) = default;
+            TextLineConstIterator& operator=(const TextLineConstIterator&) = default;
 
-            // assignment of `std::vector` iterator.
-            TextLineIterator& operator=(std::vector<yli::data::Codepoint>::iterator it)
+            // assignment of `std::vector` const_iterator.
+            TextLineConstIterator& operator=(std::vector<yli::data::Codepoint>::const_iterator it)
             {
                 this->it = it;
                 return *this;
             }
 
-            ~TextLineIterator() = default;
+            ~TextLineConstIterator() = default;
 
-            bool operator==(const TextLineIterator& other_it) const noexcept
+            bool operator==(const TextLineConstIterator& other_it) const noexcept
             {
                 return this->it == other_it.it;
             }
 
-            bool operator!=(const TextLineIterator& other_it) const = default;
+            bool operator!=(const TextLineConstIterator& other_it) const = default;
 
-            TextLineIterator& operator++()
+            TextLineConstIterator& operator++()
             {
                 ++this->it;
                 return *this;
             }
 
-            TextLineIterator& operator--()
+            TextLineConstIterator& operator--()
             {
                 --this->it;
                 return *this;
             }
 
-            TextLineIterator& operator++(int)
+            TextLineConstIterator& operator++(int)
             {
-                TextLineIterator& temp { *this };
+                TextLineConstIterator& temp { *this };
                 ++this->it;
                 return temp;
             }
 
-            TextLineIterator& operator--(int)
+            TextLineConstIterator& operator--(int)
             {
-                TextLineIterator& temp { *this };
+                TextLineConstIterator& temp { *this };
                 --this->it;
                 return temp;
             }
@@ -95,7 +95,7 @@ namespace yli::console
             }
 
         private:
-            std::vector<yli::data::Codepoint>::iterator it;
+            std::vector<yli::data::Codepoint>::const_iterator it;
     };
 }
 
