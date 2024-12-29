@@ -24,11 +24,20 @@
 
 using yli::data::Codepoint;
 
+TEST(text_line_must_be_initialized_appropriately, empty_text_line)
+{
+    const std::vector<Codepoint> char_container {};
+    yli::console::TextLine text_line(char_container);
+    ASSERT_EQ(text_line.data(), char_container);
+    ASSERT_EQ(text_line.size(), 0);
+}
+
 TEST(text_line_must_be_initialized_appropriately, text_line)
 {
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     yli::console::TextLine text_line(char_container);
     ASSERT_EQ(text_line.data(), char_container);
+    ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_begin_iterator_must_work_appropriately, text_line_begin_iterator)
@@ -44,6 +53,7 @@ TEST(text_line_begin_iterator_must_work_appropriately, text_line_begin_iterator)
     ASSERT_EQ(*it, Codepoint('c'));
     ++it;
     ASSERT_EQ(it, text_line.end());
+    ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_const_iterator)
@@ -59,6 +69,7 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
     ASSERT_EQ(*it, Codepoint('c'));
     ++it;
     ASSERT_EQ(it, text_line.cend());
+    ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_end_iterator_must_work_appropriately, text_line_end_iterator)
@@ -74,6 +85,7 @@ TEST(text_line_end_iterator_must_work_appropriately, text_line_end_iterator)
     --it;
     ASSERT_EQ(*it, Codepoint('a'));
     ASSERT_EQ(it, text_line.begin());
+    ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
@@ -89,4 +101,5 @@ TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
     --it;
     ASSERT_EQ(*it, Codepoint('a'));
     ASSERT_EQ(it, text_line.cbegin());
+    ASSERT_EQ(text_line.size(), 3);
 }

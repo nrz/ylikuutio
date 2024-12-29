@@ -22,6 +22,7 @@
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
+#include <cstddef> // std::size_t
 #include <vector> // std::vector
 
 namespace yli::console
@@ -39,6 +40,8 @@ namespace yli::console
             }
 
             const std::vector<yli::data::Codepoint>& data() const;
+
+            std::size_t size() const;
 
             // Iterator functions.
             iterator begin()

@@ -18,6 +18,7 @@
 #include "text_line.hpp"
 
 // Include standard headers
+#include <cstddef> // std::size_t
 #include <vector> // std::vector
 
 namespace yli::data
@@ -30,5 +31,10 @@ namespace yli::console
     const std::vector<yli::data::Codepoint>& TextLine::data() const
     {
         return this->line;
+    }
+
+    std::size_t TextLine::size() const
+    {
+        return this->line.size();
     }
 }
