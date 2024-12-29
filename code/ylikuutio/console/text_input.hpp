@@ -19,6 +19,7 @@
 #define YLIKUUTIO_CONSOLE_TEXT_INPUT_HPP_INCLUDED
 
 #include "text_input_iterator.hpp"
+#include "text_input_const_iterator.hpp"
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
@@ -33,7 +34,7 @@ namespace yli::console
         public:
             // Iterator typedefs.
             typedef TextInputIterator       iterator;
-            typedef TextInputIterator const_iterator;
+            typedef TextInputConstIterator const_iterator;
 
             bool operator==(const TextInput& other) const
             {
@@ -82,14 +83,14 @@ namespace yli::console
                 return iterator(this->input.end());
             }
 
-            const_iterator cbegin()
+            const_iterator cbegin() const
             {
-                return const_iterator(this->input.begin());
+                return const_iterator(this->input.cbegin());
             }
 
-            const_iterator cend()
+            const_iterator cend() const
             {
-                return const_iterator(this->input.end());
+                return const_iterator(this->input.cend());
             }
 
         private:

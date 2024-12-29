@@ -398,6 +398,7 @@ add_library(ylikuutio STATIC
     # console, in alphabetical order
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp
+    code/ylikuutio/console/text_input_const_iterator.hpp
     code/ylikuutio/console/text_input_iterator.hpp
     code/ylikuutio/console/text_input_history.cpp
     code/ylikuutio/console/text_input_history.hpp
