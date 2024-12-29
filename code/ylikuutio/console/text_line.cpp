@@ -19,7 +19,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <vector> // std::vector
+#include <vector>  // std::vector
 
 namespace yli::data
 {
