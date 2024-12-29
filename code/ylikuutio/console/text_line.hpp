@@ -49,16 +49,6 @@ namespace yli::console
             std::size_t size() const;
 
             // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->line.begin());
-            }
-
-            iterator end()
-            {
-                return iterator(this->line.end());
-            }
-
             const_iterator cbegin()
             {
                 return const_iterator(this->line.begin());
