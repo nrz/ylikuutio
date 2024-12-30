@@ -55,7 +55,7 @@ namespace yli::console
 
             const_iterator cend() const
             {
-                return const_iterator(this->line.end());
+                return const_iterator(this->line.cend());
             }
 
         private:
