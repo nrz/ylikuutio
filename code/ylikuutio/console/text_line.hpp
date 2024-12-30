@@ -33,6 +33,16 @@ namespace yli::console
             // Iterator typedefs.
             typedef TextLineConstIterator const_iterator;
 
+            bool operator==(const TextLine& other) const
+            {
+                return this->line == other.line;
+            }
+
+            bool operator!=(const TextLine& other) const
+            {
+                return this->line != other.line;
+            }
+
             explicit TextLine(const std::vector<yli::data::Codepoint>& text_line)
                 : line { text_line }
             {
