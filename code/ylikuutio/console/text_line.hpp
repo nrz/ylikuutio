@@ -50,7 +50,7 @@ namespace yli::console
             // Iterator functions.
             const_iterator cbegin() const
             {
-                return const_iterator(this->line.begin());
+                return const_iterator(this->line.cbegin());
             }
 
             const_iterator cend() const
