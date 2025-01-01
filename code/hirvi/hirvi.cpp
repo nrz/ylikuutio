@@ -34,7 +34,6 @@
 #endif
 
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
@@ -99,11 +98,8 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    static constexpr hirvi::Datatype universe_enum_value = hirvi::Datatype::UNIVERSE;
-
     HirviApplication::HirviApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },

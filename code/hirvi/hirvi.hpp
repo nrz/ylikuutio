@@ -122,7 +122,7 @@ namespace hirvi
             yli::ontology::Ecosystem* create_earth_ecosystem();
             yli::ontology::Scene* create_helsinki_scene();
 
-            yli::memory::MemorySystem<hirvi::Datatype> memory_system;
+            yli::memory::MemorySystem<hirvi::Datatype> memory_system { hirvi::Datatype::UNIVERSE };
             yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
             yli::core::SystemFactory<hirvi::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
