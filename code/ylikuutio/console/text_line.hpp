@@ -59,12 +59,12 @@ namespace yli::console
             {
             }
 
-            TextLine(TextLine::const_iterator begin, TextLine::const_iterator end)
+            TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end)
                 : line(begin.unwrap(), end.unwrap())
             {
             }
 
-            TextLine(TextInput::const_iterator begin, TextInput::const_iterator end)
+            TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end)
                 : line(begin.unwrap(), end.unwrap())
             {
             }
