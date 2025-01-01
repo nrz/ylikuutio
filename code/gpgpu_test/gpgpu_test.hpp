@@ -73,7 +73,7 @@ namespace gpgpu_test
         private:
             yli::ontology::Scene* create_gpgpu_test_scene();
 
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system;
+            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
             yli::ontology::Universe* const universe { nullptr };
     };

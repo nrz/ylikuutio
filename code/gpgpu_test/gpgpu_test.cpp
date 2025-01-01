@@ -23,7 +23,6 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -72,11 +71,8 @@ namespace yli::ontology
 
 namespace gpgpu_test
 {
-    static constexpr yli::data::Datatype universe_enum_value = yli::data::Datatype::UNIVERSE;
-
     GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) }
     {
