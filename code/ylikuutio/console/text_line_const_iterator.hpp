@@ -94,6 +94,11 @@ namespace yli::console
                 return *(this->it);
             }
 
+            std::vector<yli::data::Codepoint>::const_iterator unwrap() const
+            {
+                return this->it;
+            }
+
         private:
             std::vector<yli::data::Codepoint>::const_iterator it;
     };
