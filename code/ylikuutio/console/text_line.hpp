@@ -35,6 +35,8 @@ namespace yli::console
     class TextLine
     {
         public:
+            TextLine(const TextLine& other);
+
             // Iterator typedefs.
             typedef TextLineConstIterator const_iterator;
 
