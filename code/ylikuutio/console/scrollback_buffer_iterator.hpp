@@ -36,7 +36,7 @@ namespace yli::console
             using pointer           = yli::console::TextLine*;
             using reference         = yli::console::TextLine&;
 
-            ScrollbackBufferIterator(std::vector<yli::console::TextLine>::iterator it)
+            explicit ScrollbackBufferIterator(std::vector<yli::console::TextLine>::iterator it)
                 : it { it }
             {
             }
