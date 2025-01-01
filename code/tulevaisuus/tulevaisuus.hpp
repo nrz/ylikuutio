@@ -93,7 +93,7 @@ namespace tulevaisuus
             bool create_simulation() override;
 
         private:
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system;
+            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
             yli::core::SystemFactory<yli::data::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
