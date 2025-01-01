@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/text_line.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
@@ -195,6 +196,18 @@ TEST(text_line_must_be_initialized_appropriately, from_text_line_begin_end_itera
     const std::vector<Codepoint> abcdef_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c'), Codepoint('d'), Codepoint('e'), Codepoint('f') };
     yli::console::TextLine abcdef_text_line(abcdef_char_container);
     yli::console::TextLine cd_text_line(abcdef_text_line.data().begin() + 2, abcdef_text_line.data().begin() + 4);
+
+    const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
+    yli::console::TextLine expected_text_line(cd_char_container);
+    ASSERT_EQ(cd_text_line.data(), expected_text_line.data());
+}
+
+TEST(text_line_must_be_initialized_appropriately, from_text_input_begin_end_iterators)
+{
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> abcdef_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c'), Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    text_input.add_characters(abcdef_char_container);
+    yli::console::TextLine cd_text_line(text_input.data().begin() + 2, text_input.data().begin() + 4);
 
     const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
     yli::console::TextLine expected_text_line(cd_char_container);

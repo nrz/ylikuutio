@@ -19,6 +19,7 @@
 #define YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 
 #include "text_line_const_iterator.hpp"
+#include "text_input.hpp"
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
@@ -54,6 +55,11 @@ namespace yli::console
             }
 
             TextLine(TextLine::const_iterator begin, TextLine::const_iterator end)
+                : line(begin.unwrap(), end.unwrap())
+            {
+            }
+
+            TextLine(TextInput::const_iterator begin, TextInput::const_iterator end)
                 : line(begin.unwrap(), end.unwrap())
             {
             }
