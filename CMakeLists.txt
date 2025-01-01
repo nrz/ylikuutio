@@ -396,6 +396,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.hpp
 
     # console, in alphabetical order
+    code/ylikuutio/console/scrollback_buffer.cpp
+    code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp
     code/ylikuutio/console/text_input_const_iterator.hpp
@@ -1092,6 +1094,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_scene.cpp
         code/ylikuutio/tests/test_pipeline.cpp
         code/ylikuutio/tests/test_pipeline_struct.cpp
+        code/ylikuutio/tests/test_scrollback_buffer.cpp
         code/ylikuutio/tests/test_shapeshifter.cpp
         code/ylikuutio/tests/test_species.cpp
         code/ylikuutio/tests/test_symbiont_material.cpp
