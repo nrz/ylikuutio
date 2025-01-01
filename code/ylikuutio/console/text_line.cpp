@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_line.hpp"
+#include "text_input.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -28,6 +29,41 @@ namespace yli::data
 
 namespace yli::console
 {
+    bool TextLine::operator==(const TextLine& other) const
+    {
+        return this->line == other.line;
+    }
+
+    bool TextLine::operator!=(const TextLine& other) const
+    {
+        return this->line != other.line;
+    }
+
+    TextLine::TextLine(const std::vector<yli::data::Codepoint>& text_line)
+        : line { text_line }
+    {
+    }
+
+    TextLine::TextLine(const TextInput& text_input)
+        : line { text_input.data() }
+    {
+    }
+
+    TextLine::TextLine(const std::vector<yli::data::Codepoint>::const_iterator begin, const std::vector<yli::data::Codepoint>::const_iterator end)
+        : line(begin, end)
+    {
+    }
+
+    TextLine::TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end)
+        : line(begin.unwrap(), end.unwrap())
+    {
+    }
+
+    TextLine::TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end)
+        : line(begin.unwrap(), end.unwrap())
+    {
+    }
+
     const std::vector<yli::data::Codepoint>& TextLine::data() const
     {
         return this->line;

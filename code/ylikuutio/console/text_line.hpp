@@ -34,40 +34,16 @@ namespace yli::console
             // Iterator typedefs.
             typedef TextLineConstIterator const_iterator;
 
-            bool operator==(const TextLine& other) const
-            {
-                return this->line == other.line;
-            }
+            bool operator==(const TextLine& other) const;
+            bool operator!=(const TextLine& other) const;
 
-            bool operator!=(const TextLine& other) const
-            {
-                return this->line != other.line;
-            }
+            explicit TextLine(const std::vector<yli::data::Codepoint>& text_line);
 
-            explicit TextLine(const std::vector<yli::data::Codepoint>& text_line)
-                : line { text_line }
-            {
-            }
+            explicit TextLine(const TextInput& text_input);
 
-            explicit TextLine(const TextInput& text_input)
-                : line { text_input.data() }
-            {
-            }
-
-            TextLine(const std::vector<yli::data::Codepoint>::const_iterator begin, const std::vector<yli::data::Codepoint>::const_iterator end)
-                : line(begin, end)
-            {
-            }
-
-            TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end)
-                : line(begin.unwrap(), end.unwrap())
-            {
-            }
-
-            TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end)
-                : line(begin.unwrap(), end.unwrap())
-            {
-            }
+            TextLine(const typename std::vector<yli::data::Codepoint>::const_iterator begin, const typename std::vector<yli::data::Codepoint>::const_iterator end);
+            TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
+            TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end);
 
             const std::vector<yli::data::Codepoint>& data() const;
 
