@@ -29,11 +29,6 @@ namespace yli::data
 
 namespace yli::console
 {
-    TextLine::TextLine(const TextLine& other)
-        : line { other.line }
-    {
-    }
-
     bool TextLine::operator==(const TextLine& other) const
     {
         return this->line == other.line;
