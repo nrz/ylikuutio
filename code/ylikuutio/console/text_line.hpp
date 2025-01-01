@@ -49,6 +49,11 @@ namespace yli::console
             {
             }
 
+            explicit TextLine(const TextInput& text_input)
+                : line { text_input.data() }
+            {
+            }
+
             TextLine(const std::vector<yli::data::Codepoint>::const_iterator begin, const std::vector<yli::data::Codepoint>::const_iterator end)
                 : line(begin, end)
             {

@@ -42,6 +42,17 @@ TEST(text_line_must_be_initialized_appropriately, text_line)
     ASSERT_EQ(text_line.size(), 3);
 }
 
+TEST(text_line_must_be_initialized_appropriately, from_text_input)
+{
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    yli::console::TextLine text_line(text_input);
+    ASSERT_EQ(text_line.data(), char_container);
+    ASSERT_EQ(text_line.size(), 3);
+}
+
 TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, empty_string_begin_0_end_0)
 {
     const std::vector<Codepoint> char_container {};
