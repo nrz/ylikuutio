@@ -23,7 +23,6 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #endif
 
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -49,11 +48,8 @@ namespace yli::ontology
 
 namespace mock
 {
-    static constexpr yli::data::Datatype universe_enum_value = yli::data::Datatype::UNIVERSE;
-
     MockApplication::MockApplication()
         : yli::core::Application(0, nullptr),
-        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) }
     {

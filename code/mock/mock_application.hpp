@@ -69,7 +69,7 @@ namespace mock
             bool create_simulation() override;
 
         private:
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system;
+            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
 
         public:
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
