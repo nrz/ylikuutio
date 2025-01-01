@@ -53,6 +53,11 @@ namespace yli::console
             {
             }
 
+            TextLine(TextLine::const_iterator begin, TextLine::const_iterator end)
+                : line(begin.unwrap(), end.unwrap())
+            {
+            }
+
             const std::vector<yli::data::Codepoint>& data() const;
 
             std::size_t size() const;

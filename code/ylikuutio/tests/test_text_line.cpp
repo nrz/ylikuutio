@@ -189,3 +189,14 @@ TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
     ASSERT_EQ(it, text_line.cbegin());
     ASSERT_EQ(text_line.size(), 3);
 }
+
+TEST(text_line_must_be_initialized_appropriately, from_text_line_begin_end_iterators)
+{
+    const std::vector<Codepoint> abcdef_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c'), Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    yli::console::TextLine abcdef_text_line(abcdef_char_container);
+    yli::console::TextLine cd_text_line(abcdef_text_line.data().begin() + 2, abcdef_text_line.data().begin() + 4);
+
+    const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
+    yli::console::TextLine expected_text_line(cd_char_container);
+    ASSERT_EQ(cd_text_line.data(), expected_text_line.data());
+}
