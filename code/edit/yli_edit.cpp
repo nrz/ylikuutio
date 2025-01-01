@@ -26,7 +26,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
@@ -95,11 +94,8 @@ namespace yli::ontology
 
 namespace yli_edit
 {
-    static constexpr yli::data::Datatype universe_enum_value = yli::data::Datatype::UNIVERSE;
-
     YliEditApplication::YliEditApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        memory_system(universe_enum_value),
         entity_factory(*this, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) },
