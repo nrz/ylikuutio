@@ -20,11 +20,15 @@
 
 #include "text_line_const_iterator.hpp"
 #include "text_input.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <vector>  // std::vector
+
+namespace yli::data
+{
+    struct Codepoint;
+}
 
 namespace yli::console
 {
