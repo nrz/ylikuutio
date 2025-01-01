@@ -398,6 +398,8 @@ add_library(ylikuutio STATIC
     # console, in alphabetical order
     code/ylikuutio/console/scrollback_buffer.cpp
     code/ylikuutio/console/scrollback_buffer.hpp
+    code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
+    code/ylikuutio/console/scrollback_buffer_iterator.hpp
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp
     code/ylikuutio/console/text_input_const_iterator.hpp

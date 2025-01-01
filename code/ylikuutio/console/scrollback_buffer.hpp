@@ -18,6 +18,8 @@
 #ifndef YLIKUUTIO_CONSOLE_SCROLLBACK_BUFFER_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_SCROLLBACK_BUFFER_HPP_INCLUDED
 
+#include "scrollback_buffer_iterator.hpp"
+#include "scrollback_buffer_const_iterator.hpp"
 #include "text_line.hpp"
 
 // Include standard headers
@@ -30,6 +32,10 @@ namespace yli::console
     class ScrollbackBuffer
     {
         public:
+            // Iterator typedefs.
+            typedef ScrollbackBufferIterator      iterator;
+            typedef ScrollbackBufferConstIterator const_iterator;
+
             explicit ScrollbackBuffer(const uint32_t input_field_width);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
@@ -41,6 +47,27 @@ namespace yli::console
 
             std::size_t size() const;
             uint32_t get_line_width() const;
+
+            // Iterator functions.
+            iterator begin()
+            {
+                return iterator(this->buffer.begin());
+            }
+
+            iterator end()
+            {
+                return iterator(this->buffer.end());
+            }
+
+            const_iterator cbegin() const
+            {
+                return const_iterator(this->buffer.cbegin());
+            }
+
+            const_iterator cend() const
+            {
+                return const_iterator(this->buffer.cend());
+            }
 
         private:
             std::vector<TextLine> buffer;

@@ -221,3 +221,135 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     const yli::console::TextLine expected_text_line_abc({ Codepoint('a'), Codepoint('b'), Codepoint('c') });
     ASSERT_EQ(scrollback_buffer.get_nth(0), expected_text_line_abc);
 }
+
+TEST(scrollback_buffer_begin_iterator_must_work_appropriately, scrollback_buffer_line_width_3_begin_iterator)
+{
+    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+
+    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+
+    auto it = scrollback_buffer.begin();
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    ++it;
+    ASSERT_EQ(it, scrollback_buffer.end());
+}
+
+TEST(scrollback_buffer_cbegin_iterator_must_work_appropriately, scrollback_buffer_line_width_3_cbegin_iterator)
+{
+    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+
+    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+
+    auto it = scrollback_buffer.cbegin();
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    ++it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    ++it;
+    ASSERT_EQ(it, scrollback_buffer.cend());
+}
+
+TEST(scrollback_buffer_end_iterator_must_work_appropriately, scrollback_buffer_line_width_3_end_iterator)
+{
+    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+
+    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+
+    auto it = scrollback_buffer.end();
+    --it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ASSERT_EQ(it, scrollback_buffer.begin());
+}
+
+TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_line_width_3_cend_iterator)
+{
+    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
+    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+
+    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(abc_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(def_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters(ghi_char_container);
+        scrollback_buffer.add_to_buffer(text_input);
+    }
+
+    auto it = scrollback_buffer.cend();
+    --it;
+    ASSERT_EQ((*it).data(), ghi_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), def_char_container);
+    --it;
+    ASSERT_EQ((*it).data(), abc_char_container);
+    ASSERT_EQ(it, scrollback_buffer.cbegin());
+}
