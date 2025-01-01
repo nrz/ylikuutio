@@ -35,6 +35,7 @@ namespace yli::console
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
 
+            void add_to_buffer(const TextInput& input);
             void add_to_buffer(const TextLine& text);
             const TextLine& get_nth(const std::size_t line_i) const;
 

@@ -170,3 +170,54 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     const yli::console::TextLine expected_text_line_abc({ Codepoint('a'), Codepoint('b'), Codepoint('c') });
     ASSERT_EQ(scrollback_buffer.get_nth(0), expected_text_line_abc);
 }
+
+TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_1_text_input_width_3)
+{
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    scrollback_buffer.add_to_buffer(text_input);
+    ASSERT_EQ(scrollback_buffer.size(), 3);
+    ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+
+    const yli::console::TextLine expected_text_line_a({ Codepoint('a') });
+    ASSERT_EQ(scrollback_buffer.get_nth(0), expected_text_line_a);
+    const yli::console::TextLine expected_text_line_b({ Codepoint('b') });
+    ASSERT_EQ(scrollback_buffer.get_nth(1), expected_text_line_b);
+    const yli::console::TextLine expected_text_line_c({ Codepoint('c') });
+    ASSERT_EQ(scrollback_buffer.get_nth(2), expected_text_line_c);
+}
+
+TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_2_text_input_width_3)
+{
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    scrollback_buffer.add_to_buffer(text_input);
+    ASSERT_EQ(scrollback_buffer.size(), 2);
+    ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+
+    const yli::console::TextLine expected_text_line_ab({ Codepoint('a'), Codepoint('b') });
+    ASSERT_EQ(scrollback_buffer.get_nth(0), expected_text_line_ab);
+    const yli::console::TextLine expected_text_line_c({ Codepoint('c') });
+    ASSERT_EQ(scrollback_buffer.get_nth(1), expected_text_line_c);
+}
+
+TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_3_text_input_width_3)
+{
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    scrollback_buffer.add_to_buffer(text_input);
+    ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
+
+    const yli::console::TextLine expected_text_line_abc({ Codepoint('a'), Codepoint('b'), Codepoint('c') });
+    ASSERT_EQ(scrollback_buffer.get_nth(0), expected_text_line_abc);
+}

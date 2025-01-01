@@ -25,9 +25,16 @@
 
 namespace yli::console
 {
+    class TextInput;
+
     ScrollbackBuffer::ScrollbackBuffer(const uint32_t line_width)
         : line_width { (line_width > 0 ? line_width : 1)  }
     {
+    }
+
+    void ScrollbackBuffer::add_to_buffer(const TextInput& text)
+    {
+        this->add_to_buffer(TextLine(text));
     }
 
     void ScrollbackBuffer::add_to_buffer(const TextLine& text)
