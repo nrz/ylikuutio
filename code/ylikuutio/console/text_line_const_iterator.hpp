@@ -21,7 +21,7 @@
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::ptrdiff_t
+#include <cstddef>  // std::ptrdiff_t, std::size_t
 #include <iterator> // std::bidirectional_iterator_tag
 #include <vector>   // std::vector
 
@@ -86,6 +86,20 @@ namespace yli::console
             {
                 TextLineConstIterator& temp { *this };
                 --this->it;
+                return temp;
+            }
+
+            TextLineConstIterator& operator+(const std::size_t count)
+            {
+                TextLineConstIterator& temp { *this };
+                this->it += count;
+                return temp;
+            }
+
+            TextLineConstIterator& operator-(const std::size_t count)
+            {
+                TextLineConstIterator& temp { *this };
+                this->it -= count;
                 return temp;
             }
 
