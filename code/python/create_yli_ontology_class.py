@@ -2,7 +2,7 @@
 
 # Ylikuutio - A 3D game and simulation engine.
 #
-# Copyright (C) 2015-2024 Antti Nuortimo.
+# Copyright (C) 2015-2025 Antti Nuortimo.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -73,7 +73,7 @@ for arg in sys.argv:
 copyright_notice = \
 "// Ylikuutio - A 3D game and simulation engine.\n"\
 "//\n"\
-"// Copyright (C) 2015-2024 Antti Nuortimo.\n"\
+"// Copyright (C) 2015-2025 Antti Nuortimo.\n"\
 "//\n"\
 "// This program is free software: you can redistribute it and/or modify\n"\
 "// it under the terms of the GNU Affero General Public License as\n"\
