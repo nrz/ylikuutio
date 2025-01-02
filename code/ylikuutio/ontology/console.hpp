@@ -108,9 +108,6 @@ namespace yli::ontology
 
             void activate() override;
 
-            void adjust_n_columns();
-            void adjust_n_rows();
-
             void set_input_mode(InputMode* const input_mode);
             void set_console_top_y(const uint32_t console_top_y);
             void set_console_bottom_y(const uint32_t console_bottom_y);

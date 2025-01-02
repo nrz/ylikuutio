@@ -95,9 +95,6 @@ namespace yli::ontology
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes")
     {
-        this->adjust_n_columns();
-        this->adjust_n_rows();
-
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
         this->can_be_erased = true;
@@ -110,24 +107,6 @@ namespace yli::ontology
         if (this->universe.get_active_console() == this)
         {
             this->universe.set_active_console(nullptr);
-        }
-    }
-
-    void Console::adjust_n_columns()
-    {
-        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
-        }
-    }
-
-    void Console::adjust_n_rows()
-    {
-        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
         }
     }
 
