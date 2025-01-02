@@ -93,7 +93,11 @@ namespace yli::ontology
                 this->registry,
                 "lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
-        master_of_input_modes(this, &this->registry, "input_modes")
+        master_of_input_modes(this, &this->registry, "input_modes"),
+        console_top_y    { console_struct.top_y },
+        console_bottom_y { console_struct.bottom_y },
+        console_left_x   { console_struct.left_x },
+        console_right_x  { console_struct.right_x }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
@@ -113,54 +117,6 @@ namespace yli::ontology
     void Console::set_input_mode(InputMode* const input_mode)
     {
         this->master_of_input_modes.set_current_input_mode(input_mode);
-    }
-
-    void Console::set_console_top_y(const uint32_t console_top_y)
-    {
-        this->console_top_y = console_top_y;
-        this->n_rows = this->console_top_y - this->console_bottom_y + 1;
-
-        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
-        }
-    }
-
-    void Console::set_console_bottom_y(const uint32_t console_bottom_y)
-    {
-        this->console_bottom_y = console_bottom_y;
-        this->n_rows = this->console_top_y - this->console_bottom_y + 1;
-
-        if (this->n_rows > this->universe.get_window_height() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of rows is window height divided by text size.
-            this->n_rows = this->universe.get_window_height() / this->universe.get_text_size();
-        }
-    }
-
-    void Console::set_console_left_x(const uint32_t console_left_x)
-    {
-        this->console_left_x = console_left_x;
-        this->n_columns = this->console_right_x - this->console_left_x + 1;
-
-        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
-        }
-    }
-
-    void Console::set_console_right_x(const uint32_t console_right_x)
-    {
-        this->console_right_x = console_right_x;
-        this->n_columns = this->console_right_x - this->console_left_x + 1;
-
-        if (this->n_columns > this->universe.get_window_width() / this->universe.get_text_size())
-        {
-            // Upper limit for the the number of columns is window width divided by text size.
-            this->n_columns = this->universe.get_window_width() / this->universe.get_text_size();
-        }
     }
 
     void Console::print_text(const std::string& text)

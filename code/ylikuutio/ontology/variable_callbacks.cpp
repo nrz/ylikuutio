@@ -20,7 +20,6 @@
 #include "movable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
-#include "console.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -279,118 +278,6 @@ namespace yli::ontology
         if (std::holds_alternative<bool>(is_flight_mode_in_use_any_value.data))
         {
             scene->set_is_flight_mode_in_use(std::get<bool>(is_flight_mode_in_use_any_value.data));
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> Variable::activate_console_top_y(
-            Entity& entity,
-            Variable& variable)
-    {
-        const yli::data::AnyValue& console_top_y_any_value = variable.variable_value;
-
-        if (!std::holds_alternative<uint32_t>(console_top_y_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        Universe* const universe = dynamic_cast<Universe*>(&entity);
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        Console* const console = universe->get_active_console();
-
-        if (console != nullptr)
-        {
-            console->set_console_top_y(std::get<uint32_t>(console_top_y_any_value.data));
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> Variable::activate_console_bottom_y(
-            Entity& entity,
-            Variable& variable)
-    {
-        const yli::data::AnyValue& console_bottom_y_any_value = variable.variable_value;
-
-        if (!std::holds_alternative<uint32_t>(console_bottom_y_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        Universe* const universe = dynamic_cast<Universe*>(&entity);
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        Console* const console = universe->get_active_console();
-
-        if (console != nullptr)
-        {
-            console->set_console_bottom_y(std::get<uint32_t>(console_bottom_y_any_value.data));
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> Variable::activate_console_left_x(
-            Entity& entity,
-            Variable& variable)
-    {
-        const yli::data::AnyValue& console_left_x_any_value = variable.variable_value;
-
-        if (!std::holds_alternative<uint32_t>(console_left_x_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        Universe* const universe = dynamic_cast<Universe*>(&entity);
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        Console* const console = universe->get_active_console();
-
-        if (console != nullptr)
-        {
-            console->set_console_left_x(std::get<uint32_t>(console_left_x_any_value.data));
-        }
-
-        return std::nullopt;
-    }
-
-    std::optional<yli::data::AnyValue> Variable::activate_console_right_x(
-            Entity& entity,
-            Variable& variable)
-    {
-        const yli::data::AnyValue& console_right_x_any_value = variable.variable_value;
-
-        if (!std::holds_alternative<uint32_t>(console_right_x_any_value.data))
-        {
-            return std::nullopt;
-        }
-
-        Universe* const universe = dynamic_cast<Universe*>(&entity);
-
-        if (universe == nullptr)
-        {
-            return std::nullopt;
-        }
-
-        Console* const console = universe->get_active_console();
-
-        if (console != nullptr)
-        {
-            console->set_console_right_x(std::get<uint32_t>(console_right_x_any_value.data));
         }
 
         return std::nullopt;

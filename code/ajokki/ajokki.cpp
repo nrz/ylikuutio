@@ -74,7 +74,6 @@
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/debug_snippets.hpp"
-#include "code/ylikuutio/snippets/console_snippets.hpp"
 #include "code/ylikuutio/snippets/movement_snippets.hpp"
 #include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
@@ -297,7 +296,7 @@ namespace ajokki
 
         // Create the main `Console`.
         std::cout << "Creating Entity* my_console_entity ...\n";
-        ConsoleStruct my_console_struct;
+        yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating Console* my_console ...\n";
         Console* const my_console = this->entity_factory.create_console(my_console_struct);
@@ -309,12 +308,9 @@ namespace ajokki
 
         this->get_universe().set_active_console(my_console);
 
-        std::cout << "Setting up console ...\n";
-        yli::snippets::set_console(&this->get_universe(), 15, 0, 0, 39);
-
         // Create the 'mini' `Console`.
         std::cout << "Creating Entity* mini_console_entity ...\n";
-        ConsoleStruct mini_console_struct;
+        ConsoleStruct mini_console_struct(15, 0, 0, 39);
         mini_console_struct.global_name = "mini_console";
         std::cout << "Creating Console* mini_console ...\n";
         Console* const mini_console = this->entity_factory.create_console(mini_console_struct);
@@ -325,9 +321,6 @@ namespace ajokki
         }
 
         this->get_universe().set_active_console(mini_console);
-
-        std::cout << "Setting up console ...\n";
-        yli::snippets::set_console(&this->get_universe(), 15, 0, 0, 39);
 
         this->get_universe().set_active_console(my_console);
 

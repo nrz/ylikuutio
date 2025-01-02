@@ -33,7 +33,7 @@ namespace yli::ontology
 TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     yli::ontology::LispFunctionStruct lisp_function_struct { yli::ontology::Request(console) };
@@ -75,7 +75,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_nullpt
 TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     console_struct.global_name = "foo";
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
@@ -100,7 +100,7 @@ TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_valid_
 TEST(lisp_function_must_be_initialized_appropriately, console_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     console_struct.global_name = "foo";
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);

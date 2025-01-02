@@ -67,7 +67,6 @@
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/debug_snippets.hpp"
-#include "code/ylikuutio/snippets/console_snippets.hpp"
 #include "code/ylikuutio/snippets/movement_snippets.hpp"
 #include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
@@ -283,7 +282,7 @@ namespace hirvi
 
         // Create the main `Console`.
         std::cout << "Creating Entity* my_console_entity ...\n";
-        ConsoleStruct my_console_struct;
+        yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating Console* my_console ...\n";
         Console* const my_console = this->entity_factory.create_console(my_console_struct);
@@ -298,9 +297,6 @@ namespace hirvi
         // Create an Earth `Ecosystem`.
 
         this->create_earth_ecosystem();
-
-        std::cout << "Setting up console ...\n";
-        yli::snippets::set_console(&this->get_universe(), 15, 0, 0, 39);
 
         // Create the `Scene`s.
         // The `Scene`s will be created in the following order:

@@ -144,22 +144,6 @@ namespace yli::ontology
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_console_top_y(
-                    Entity& entity,
-                    Variable& variable);
-
-            static std::optional<yli::data::AnyValue> activate_console_bottom_y(
-                    Entity& entity,
-                    Variable& variable);
-
-            static std::optional<yli::data::AnyValue> activate_console_left_x(
-                    Entity& entity,
-                    Variable& variable);
-
-            static std::optional<yli::data::AnyValue> activate_console_right_x(
-                    Entity& entity,
-                    Variable& variable);
-
             static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(
                     Entity& entity);
 

@@ -109,10 +109,6 @@ namespace yli::ontology
             void activate() override;
 
             void set_input_mode(InputMode* const input_mode);
-            void set_console_top_y(const uint32_t console_top_y);
-            void set_console_bottom_y(const uint32_t console_bottom_y);
-            void set_console_left_x(const uint32_t console_left_x);
-            void set_console_right_x(const uint32_t console_right_x);
             void print_text(const std::string& text);
             void print_help();
             void render(const Scene* const) const;
@@ -455,21 +451,10 @@ namespace yli::ontology
             std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
             std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
-            // Initialize `console_top_y` to 9.
-            // `console_top_y` should be set by `activate_console_top_y` anyway.
-            std::size_t console_top_y    { 9 };
-
-            // Initialize `console_bottom_y` to 0.
-            // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
-            std::size_t console_bottom_y { 0 };
-
-            // Initialize `console_left_x` to 0.
-            // `console_left_x` should be set by `activate_console_left_x` anyway.
-            std::size_t console_left_x   { 0 };
-
-            // Initialize `console_right_x` to 9.
-            // `console_right_x` should be set by `activate_console_right_x` anyway.
-            std::size_t console_right_x  { 9 };
+            const std::size_t console_top_y;
+            const std::size_t console_bottom_y;
+            const std::size_t console_left_x;
+            const std::size_t console_right_x;
 
             // Initialize `n_rows`.
             // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.

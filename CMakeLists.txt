@@ -825,8 +825,6 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/callback_snippets.hpp
     code/ylikuutio/snippets/console_callback_snippets.cpp
     code/ylikuutio/snippets/console_callback_snippets.hpp
-    code/ylikuutio/snippets/console_snippets.cpp
-    code/ylikuutio/snippets/console_snippets.hpp
     code/ylikuutio/snippets/debug_snippets.cpp
     code/ylikuutio/snippets/debug_snippets.hpp
     code/ylikuutio/snippets/framebuffer_snippets.cpp

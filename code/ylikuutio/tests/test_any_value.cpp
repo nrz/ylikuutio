@@ -633,7 +633,7 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
 TEST(any_value_must_be_initialized_appropriately, console)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
 
@@ -648,7 +648,7 @@ TEST(any_value_must_be_initialized_appropriately, console)
 TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
 

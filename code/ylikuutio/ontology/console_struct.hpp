@@ -21,13 +21,28 @@
 #include "entity_struct.hpp"
 #include "request.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace yli::ontology
 {
     class Font2d;
 
     struct ConsoleStruct : public EntityStruct
     {
+        ConsoleStruct(const uint32_t top_y, const uint32_t bottom_y, const uint32_t left_x, const uint32_t right_x)
+        : top_y  { top_y },
+        bottom_y { bottom_y },
+        left_x   { left_x },
+        right_x  { right_x }
+        {
+        }
+
         Request<Font2d> font_2d_master {};
+        uint32_t top_y;
+        uint32_t bottom_y;
+        uint32_t left_x;
+        uint32_t right_x;
     };
 }
 

@@ -74,7 +74,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_without_font_2d)
     mock::MockApplication application;
     const std::string console_name = "foo";
 
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     console->set_global_name(console_name);
@@ -93,7 +93,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 
     const std::string console_name = "foo";
 
-    yli::ontology::ConsoleStruct console_struct;
+    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     console->set_global_name(console_name);

@@ -40,7 +40,7 @@ TEST(variables_lisp_function_overload_must_function_appropriately, variables)
 {
     mock::MockApplication application;
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
@@ -62,7 +62,7 @@ TEST(set_lisp_function_overload_must_function_appropriately, set)
 {
     mock::MockApplication application;
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
@@ -80,7 +80,7 @@ TEST(set_must_set_global_x, set_x)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -119,7 +119,7 @@ TEST(set_must_set_global_y, set_y)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -158,7 +158,7 @@ TEST(set_must_set_global_z, set_z)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -197,7 +197,7 @@ TEST(set_must_set_global_roll, set_roll)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -235,7 +235,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -273,7 +273,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
@@ -311,7 +311,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     mock::MockApplication application;
     yli::ontology::Universe& universe = application.get_universe();
 
-    yli::ontology::ConsoleStruct my_console_struct;
+    yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39); // Some dummy dimensions.
     yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
 
     const std::string lisp_function_name = "set";
