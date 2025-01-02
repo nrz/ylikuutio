@@ -456,13 +456,8 @@ namespace yli::ontology
             const std::size_t console_left_x;
             const std::size_t console_right_x;
 
-            // Initialize `n_rows`.
-            // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.
-            std::size_t n_rows           { this->console_top_y - this->console_bottom_y + 1 };
-
-            // Initialize `n_columns`.
-            // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
-            std::size_t n_columns        { this->console_right_x - this->console_left_x + 1 };
+            const std::size_t n_rows;
+            const std::size_t n_columns;
 
             bool in_console                 { false };
             bool can_move_to_previous_input { false };

@@ -97,7 +97,9 @@ namespace yli::ontology
         console_top_y    { console_struct.top_y },
         console_bottom_y { console_struct.bottom_y },
         console_left_x   { console_struct.left_x },
-        console_right_x  { console_struct.right_x }
+        console_right_x  { console_struct.right_x },
+        n_rows           { this->console_top_y - this->console_bottom_y + 1 },
+        n_columns        { this->console_right_x - this->console_left_x + 1 }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
