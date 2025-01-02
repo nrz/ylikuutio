@@ -62,7 +62,6 @@
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
-#include "code/ylikuutio/snippets/window_snippets.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
 #include "code/ylikuutio/snippets/background_color_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
@@ -812,8 +811,6 @@ namespace hirvi
             this->audio_system->play_playlist("Hirvi_playlist");
         }
 
-        std::cout << "Setting up window size ...\n";
-        yli::snippets::set_window_size(&this->get_universe(), this->get_universe().get_window_width(), this->get_universe().get_window_height());
         std::cout << "Setting up framebuffer size ...\n";
         yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());
         std::cout << "Setting up background colors ...\n";

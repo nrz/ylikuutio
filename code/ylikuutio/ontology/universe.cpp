@@ -1196,31 +1196,9 @@ namespace yli::ontology
         return this->window_width;
     }
 
-    void Universe::set_window_width(const uint32_t window_width)
-    {
-        this->window_width = window_width;
-        this->adjust_opengl_viewport();
-
-        if (this->active_console != nullptr) [[likely]]
-        {
-            this->active_console->adjust_n_columns();
-        }
-    }
-
     uint32_t Universe::get_window_height() const
     {
         return this->window_height;
-    }
-
-    void Universe::set_window_height(const uint32_t window_height)
-    {
-        this->window_height = window_height;
-        this->adjust_opengl_viewport();
-
-        if (this->active_console != nullptr) [[likely]]
-        {
-            this->active_console->adjust_n_rows();
-        }
     }
 
     uint32_t Universe::get_text_size() const

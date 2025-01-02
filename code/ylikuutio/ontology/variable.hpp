@@ -108,14 +108,6 @@ namespace yli::ontology
                     const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
                     const Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_window_width(
-                    Entity& entity,
-                    Variable& variable);
-
-            static std::optional<yli::data::AnyValue> activate_window_height(
-                    Entity& entity,
-                    Variable& variable);
-
             static std::optional<yli::data::AnyValue> activate_framebuffer_width(
                     Entity& entity,
                     Variable& variable);

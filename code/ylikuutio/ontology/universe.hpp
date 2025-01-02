@@ -222,14 +222,8 @@ namespace yli::ontology
             // This method returns current `window_width`.
             uint32_t get_window_width() const;
 
-            // This method sets `window_width`.
-            void set_window_width(const uint32_t window_width);
-
             // This method returns current `window_height`.
             uint32_t get_window_height() const;
-
-            // This method sets `window_height`.
-            void set_window_height(const uint32_t window_height);
 
             // This method returns current `text_size`.
             uint32_t get_text_size() const;

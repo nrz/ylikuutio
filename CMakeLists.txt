@@ -837,8 +837,6 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/location_and_orientation_snippets.hpp
     code/ylikuutio/snippets/movement_snippets.cpp
     code/ylikuutio/snippets/movement_snippets.hpp
-    code/ylikuutio/snippets/window_snippets.cpp
-    code/ylikuutio/snippets/window_snippets.hpp
     code/ylikuutio/snippets/wireframe_snippets.cpp
     code/ylikuutio/snippets/wireframe_snippets.hpp
 
