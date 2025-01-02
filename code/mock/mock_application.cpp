@@ -34,6 +34,11 @@
 #include <string>    // std::string
 #include <vector>    // std::vector
 
+namespace yli::data
+{
+    enum Datatype;
+}
+
 namespace yli::memory
 {
     class GenericMemorySystem;
