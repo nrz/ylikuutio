@@ -26,11 +26,6 @@
 #include <cstddef> // std::size_t
 #include <vector>  // std::vector
 
-namespace yli::data
-{
-    struct Codepoint;
-}
-
 namespace yli::console
 {
     class TextLine
