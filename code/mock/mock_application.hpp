@@ -52,6 +52,8 @@ namespace mock
 
             ~MockApplication() = default;
 
+            yli::ontology::EntityFactory<yli::data::Datatype>& get_entity_factory();
+
             std::vector<std::string> get_valid_keys() const override;
 
             yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
@@ -70,11 +72,7 @@ namespace mock
 
         private:
             yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
-
-        public:
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
-
-        private:
             yli::ontology::Universe* const universe { nullptr };
     };
 }

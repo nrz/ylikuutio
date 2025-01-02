@@ -56,6 +56,11 @@ namespace mock
         std::cout << "MockApplication initialized!\n";
     }
 
+    yli::ontology::EntityFactory<yli::data::Datatype>& MockApplication::get_entity_factory()
+    {
+        return this->entity_factory.get();
+    }
+
     std::vector<std::string> MockApplication::get_valid_keys() const
     {
         return std::vector<std::string>();
