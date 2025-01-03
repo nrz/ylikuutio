@@ -115,6 +115,11 @@ namespace yli::console
         return this->history.size();
     }
 
+    bool TextInputHistory::empty() const
+    {
+        return this->size() == 0;
+    }
+
     std::optional<TextInput> TextInputHistory::get() const
     {
         if (this->history_index < this->history.size()) [[likely]]

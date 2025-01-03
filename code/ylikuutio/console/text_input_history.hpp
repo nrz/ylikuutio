@@ -48,6 +48,7 @@ namespace yli::console
 
             bool get_is_in_history() const;
             std::size_t size() const;
+            bool empty() const;
             std::optional<TextInput> get() const;
 
             // Iterator functions.
