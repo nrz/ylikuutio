@@ -144,6 +144,11 @@ namespace yli::console
         return this->input.size();
     }
 
+    bool TextInput::empty() const
+    {
+        return this->size() == 0;
+    }
+
     const std::vector<yli::data::Codepoint>& TextInput::data() const
     {
         return this->input;

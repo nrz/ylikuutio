@@ -29,6 +29,7 @@ TEST(text_input_must_be_initialized_appropriately, text_input)
 {
     yli::console::TextInput text_input;
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -43,6 +44,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, single_charact
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -56,6 +58,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 2);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -70,6 +73,7 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_char
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('c'));
     ASSERT_EQ(text_input.size(), 3);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 3);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     ASSERT_EQ(text_input.data(), expected);
@@ -83,6 +87,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, char_container
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -96,6 +101,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_containe
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 2);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -109,6 +115,7 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, char_contai
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('c'));
     ASSERT_EQ(text_input.size(), 3);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 3);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     ASSERT_EQ(text_input.data(), expected);
@@ -123,6 +130,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 2);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -137,6 +145,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_containe
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 2);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -149,6 +158,7 @@ TEST(deleting_a_character_must_fail_appropriately_for_empty_text_input, empty_te
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -161,6 +171,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -174,6 +185,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -187,6 +199,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected_a { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected_a);
@@ -195,6 +208,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -208,6 +222,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a_
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected_a { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected_a);
@@ -216,6 +231,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a_
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -228,6 +244,7 @@ TEST(text_input_must_be_cleared_appropriately, after_single_character_a)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
 }
 
@@ -240,6 +257,7 @@ TEST(text_input_must_be_cleared_appropriately, after_single_characters_a_b)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
 }
 
@@ -248,6 +266,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, no_input)
     yli::console::TextInput text_input;
     ASSERT_FALSE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -262,6 +281,7 @@ TEST(moving_cursor_to_left_must_succeed_appropriately, after_single_character_a)
     ASSERT_EQ(text_input.get_character_at_current_index(), Codepoint('a'));
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -276,6 +296,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, after_single_characters_a_b)
     ASSERT_EQ(text_input.get_character_at_current_index(), Codepoint('b'));
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -288,6 +309,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, no_input)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -300,6 +322,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_character_a)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -314,6 +337,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_characters_a_b
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 2);
     const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
     ASSERT_EQ(text_input.data(), expected);
@@ -327,6 +351,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, no_input_and_move_to_lef
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -339,6 +364,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, after_single_character_a
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 1);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -351,6 +377,7 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, no_input)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -362,6 +389,7 @@ TEST(moving_cursor_to_end_of_line_must_succeed_appropriately, no_input)
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     ASSERT_EQ(text_input.data(), std::vector<Codepoint>{});
 }
@@ -374,6 +402,7 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_cha
     ASSERT_EQ(text_input.get_character_at_current_index(), Codepoint('a'));
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_cursor_index(), 0);
     const std::vector<Codepoint> expected { Codepoint('a') };
     ASSERT_EQ(text_input.data(), expected);
@@ -384,6 +413,7 @@ TEST(ctrl_w_must_succeed_appropriately, no_input)
     yli::console::TextInput text_input;
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -396,6 +426,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_character_a)
     text_input.add_character(Codepoint('a'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -409,6 +440,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_b)
     text_input.add_character(Codepoint('b'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -422,6 +454,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space)
     text_input.add_character(Codepoint(' '));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -436,6 +469,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space_space)
     text_input.add_character(Codepoint(' '));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(text_input.get_cursor_index(), 0);
@@ -449,6 +483,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a)
     text_input.add_character(Codepoint('a'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 1);
@@ -464,6 +499,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_b)
     text_input.add_character(Codepoint('b'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 1);
@@ -479,6 +515,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_space)
     text_input.add_character(Codepoint(' '));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 1);
@@ -495,6 +532,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b)
     text_input.add_character(Codepoint('b'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 2);
@@ -515,6 +553,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
     text_input.add_character(Codepoint('d'));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 6);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 6);
@@ -536,6 +575,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
     text_input.add_character(Codepoint(' '));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 6);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 6);
@@ -558,6 +598,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
     text_input.add_character(Codepoint(' '));
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 6);
+    ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint(' '));
     ASSERT_EQ(text_input.get_cursor_index(), 6);

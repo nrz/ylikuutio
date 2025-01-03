@@ -69,6 +69,7 @@ namespace yli::console
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
             std::size_t size() const;
+            bool empty() const;
             const std::vector<yli::data::Codepoint>& data() const;
             std::size_t get_cursor_index() const;
 
