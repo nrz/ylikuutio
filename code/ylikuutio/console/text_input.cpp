@@ -33,6 +33,11 @@ namespace yli::console
         this->cursor_it = this->input.begin() + (++this->cursor_index);
     }
 
+    void TextInput::add_character(const char character)
+    {
+        this->add_character(yli::data::Codepoint(character));
+    }
+
     std::optional<yli::data::Codepoint> TextInput::get_character_at_current_index() const
     {
         if (this->cursor_it != this->input.end()) [[likely]]

@@ -47,6 +47,7 @@ namespace yli::console
             }
 
             void add_character(const yli::data::Codepoint& character);
+            void add_character(const char character);
 
             template<typename Alloc, template<typename, typename> typename Type>
                 void add_characters(const Type<yli::data::Codepoint, Alloc>& char_container)

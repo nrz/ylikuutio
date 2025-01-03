@@ -79,6 +79,48 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_char
     ASSERT_EQ(text_input.data(), expected);
 }
 
+TEST(one_character_must_be_added_to_the_text_input_appropriately, single_ascii_character_a)
+{
+    yli::console::TextInput text_input;
+    text_input.add_character('a');
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
+    ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), 1);
+    const std::vector<Codepoint> expected { Codepoint('a') };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_ascii_characters_a_b)
+{
+    yli::console::TextInput text_input;
+    text_input.add_character('a');
+    text_input.add_character('b');
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('b'));
+    ASSERT_EQ(text_input.size(), 2);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), 2);
+    const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
+TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_ascii_characters_a_b_c)
+{
+    yli::console::TextInput text_input;
+    text_input.add_character('a');
+    text_input.add_character('b');
+    text_input.add_character('c');
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('c'));
+    ASSERT_EQ(text_input.size(), 3);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), 3);
+    const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    ASSERT_EQ(text_input.data(), expected);
+}
+
 TEST(one_character_must_be_added_to_the_text_input_appropriately, char_container_a)
 {
     yli::console::TextInput text_input;
