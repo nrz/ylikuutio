@@ -451,13 +451,13 @@ namespace yli::ontology
             std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
             std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
-            const std::size_t console_top_y;
-            const std::size_t console_bottom_y;
-            const std::size_t console_left_x;
-            const std::size_t console_right_x;
+            const uint32_t console_top_y;
+            const uint32_t console_bottom_y;
+            const uint32_t console_left_x;
+            const uint32_t console_right_x;
 
-            const std::size_t n_rows;
-            const std::size_t n_columns;
+            const uint32_t n_rows;
+            const uint32_t n_columns;
 
             bool in_console                 { false };
             bool can_move_to_previous_input { false };
