@@ -39,7 +39,7 @@ namespace yli::console
             ~TextInput() = default;
 
             // Iterator typedefs.
-            typedef TextInputIterator       iterator;
+            typedef TextInputIterator      iterator;
             typedef TextInputConstIterator const_iterator;
 
             bool operator==(const TextInput& other) const
