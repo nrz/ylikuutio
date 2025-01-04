@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::data
@@ -61,6 +62,11 @@ namespace yli::console
 
     TextLine::TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end)
         : line(begin.unwrap(), end.unwrap())
+    {
+    }
+
+    TextLine::TextLine(const std::string& text)
+        : line { std::vector<yli::data::Codepoint>(text.begin(), text.end()) }
     {
     }
 

@@ -21,6 +21,7 @@
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
+#include <string> // std::string
 #include <vector> // std::vector
 
 using yli::data::Codepoint;
@@ -223,4 +224,14 @@ TEST(text_line_must_be_initialized_appropriately, from_text_input_begin_end_iter
     const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
     yli::console::TextLine expected_text_line(cd_char_container);
     ASSERT_EQ(cd_text_line.data(), expected_text_line.data());
+}
+
+TEST(text_line_must_be_initialized_appropriately, from_reference_to_const_std_string)
+{
+    const std::string abc_string("abc");
+    yli::console::TextLine text_line(abc_string);
+
+    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    ASSERT_EQ(text_line.data(), abc_char_container);
+    ASSERT_EQ(text_line.size(), 3);
 }

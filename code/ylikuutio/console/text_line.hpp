@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::console
@@ -47,6 +48,7 @@ namespace yli::console
             TextLine(const typename std::vector<yli::data::Codepoint>::const_iterator begin, const typename std::vector<yli::data::Codepoint>::const_iterator end);
             TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
             TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end);
+            TextLine(const std::string& text);
 
             const std::vector<yli::data::Codepoint>& data() const;
 
