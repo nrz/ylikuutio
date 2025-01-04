@@ -32,15 +32,15 @@ namespace yli::console
     class TextInput
     {
         public:
+            // Iterator typedefs.
+            typedef TextInputIterator      iterator;
+            typedef TextInputConstIterator const_iterator;
+
             TextInput() = default;
             TextInput(const TextInput&) = default;
             TextInput& operator=(const TextInput&) = default;
 
             ~TextInput() = default;
-
-            // Iterator typedefs.
-            typedef TextInputIterator      iterator;
-            typedef TextInputConstIterator const_iterator;
 
             bool operator==(const TextInput& other) const
             {
