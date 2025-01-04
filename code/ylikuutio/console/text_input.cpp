@@ -39,6 +39,13 @@ namespace yli::console
         this->add_character(yli::data::Codepoint(character));
     }
 
+    void TextInput::emplace_back(yli::data::Codepoint&& character)
+    {
+        this->input.emplace_back(std::move(character));
+        this->cursor_it = this->input.end(); // Keep the iterator valid.
+        this->cursor_index = this->size();   // Keep the index matched to the iterator.
+    }
+
     void TextInput::push_back(yli::data::Codepoint&& character)
     {
         this->input.push_back(std::move(character));
