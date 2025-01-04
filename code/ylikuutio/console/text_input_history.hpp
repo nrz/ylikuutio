@@ -37,6 +37,8 @@ namespace yli::console
             typedef TextInputHistoryIterator const_iterator;
 
             void add_to_history(TextInput&& text_input);
+            void emplace_back(TextInput&& text_input);
+            void push_back(TextInput&& text_input);
 
             bool enter_history();
             bool exit_history();

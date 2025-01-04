@@ -77,6 +77,48 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(*text_input_history.get(), text_input);
 }
 
+TEST(emplacing_back_an_input_must_work_appropriately, abc)
+{
+    yli::console::TextInputHistory text_input_history;
+
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    text_input_history.emplace_back(std::move(text_input));
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_EQ(text_input_history.size(), 1);
+    ASSERT_FALSE(text_input_history.empty());
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), text_input);
+}
+
+TEST(pushing_back_an_input_must_work_appropriately, abc)
+{
+    yli::console::TextInputHistory text_input_history;
+
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    text_input_history.push_back(std::move(text_input));
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_EQ(text_input_history.size(), 1);
+    ASSERT_FALSE(text_input_history.empty());
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), text_input);
+}
+
 TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_history_begin_iterator)
 {
     const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };

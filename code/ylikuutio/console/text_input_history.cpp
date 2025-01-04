@@ -32,6 +32,16 @@ namespace yli::console
         this->history.emplace_back(std::move(text_input));
     }
 
+    void TextInputHistory::emplace_back(TextInput&& text_input)
+    {
+        this->history.emplace_back(std::move(text_input));
+    }
+
+    void TextInputHistory::push_back(TextInput&& text_input)
+    {
+        this->history.push_back(std::move(text_input));
+    }
+
     bool TextInputHistory::enter_history()
     {
         if (std::size_t history_size = this->history.size(); !this->get_is_in_history() && history_size > 0) [[likely]]
