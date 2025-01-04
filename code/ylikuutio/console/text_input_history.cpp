@@ -27,7 +27,7 @@ namespace yli::console
 {
     class TextInput;
 
-    void TextInputHistory::add_to_history(const TextInput&& text_input)
+    void TextInputHistory::add_to_history(TextInput&& text_input)
     {
         this->history.emplace_back(std::move(text_input));
     }
