@@ -711,3 +711,16 @@ TEST(text_input_cend_iterator_must_work_appropriately, text_input_cend_iterator)
     ASSERT_EQ(*it, Codepoint('a'));
     ASSERT_EQ(it, text_input.cbegin());
 }
+
+TEST(one_character_must_be_pushed_back_to_the_text_input_appropriately, single_character_a)
+{
+    yli::console::TextInput text_input;
+    text_input.push_back(Codepoint('a'));
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), Codepoint('a'));
+    ASSERT_EQ(text_input.size(), 1);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), 1);
+    const std::vector<Codepoint> expected { Codepoint('a') };
+    ASSERT_EQ(text_input.data(), expected);
+}

@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <utility>  // std::move
 #include <vector>   // std::vector
 
 namespace yli::console
@@ -36,6 +37,13 @@ namespace yli::console
     void TextInput::add_character(const char character)
     {
         this->add_character(yli::data::Codepoint(character));
+    }
+
+    void TextInput::push_back(yli::data::Codepoint&& character)
+    {
+        this->input.push_back(std::move(character));
+        this->cursor_it = this->input.end(); // Keep the iterator valid.
+        this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
     std::optional<yli::data::Codepoint> TextInput::get_character_at_current_index() const

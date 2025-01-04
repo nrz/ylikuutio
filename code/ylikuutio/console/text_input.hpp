@@ -65,6 +65,8 @@ namespace yli::console
                     this->cursor_it = this->input.begin() + this->cursor_index;
                 }
 
+            void push_back(yli::data::Codepoint&& character);
+
             std::optional<yli::data::Codepoint> get_character_at_current_index() const;
             std::optional<yli::data::Codepoint> get_character_to_the_left() const;
 
