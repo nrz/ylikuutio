@@ -32,6 +32,8 @@ namespace yli::console
     class TextInput
     {
         public:
+            using value_type = yli::data::Codepoint;
+
             // Iterator typedefs.
             typedef TextInputIterator      iterator;
             typedef TextInputConstIterator const_iterator;
