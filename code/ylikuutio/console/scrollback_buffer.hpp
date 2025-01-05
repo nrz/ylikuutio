@@ -43,6 +43,9 @@ namespace yli::console
 
             void add_to_buffer(const TextInput& input);
             void add_to_buffer(const TextLine& text);
+            void emplace_back(const TextLine& text);
+            void push_back(const TextLine& text);
+
             const TextLine& at(const std::size_t line_i) const;
 
             std::size_t size() const;

@@ -353,3 +353,25 @@ TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_
     ASSERT_EQ((*it).data(), abc_char_container);
     ASSERT_EQ(it, scrollback_buffer.cbegin());
 }
+
+TEST(emplacing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
+{
+    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    const std::vector<Codepoint> char_container { Codepoint('a') };
+    const yli::console::TextLine text_line(char_container);
+    scrollback_buffer.emplace_back(text_line);
+    ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.at(0), text_line);
+}
+
+TEST(pushing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
+{
+    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    const std::vector<Codepoint> char_container { Codepoint('a') };
+    const yli::console::TextLine text_line(char_container);
+    scrollback_buffer.push_back(text_line);
+    ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.at(0), text_line);
+}

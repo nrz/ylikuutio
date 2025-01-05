@@ -54,6 +54,16 @@ namespace yli::console
         }
     }
 
+    void ScrollbackBuffer::emplace_back(const TextLine& text)
+    {
+        this->buffer.emplace_back(text);
+    }
+
+    void ScrollbackBuffer::push_back(const TextLine& text)
+    {
+        this->buffer.push_back(text);
+    }
+
     const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const
     {
         return *(this->buffer.begin() + line_i);
