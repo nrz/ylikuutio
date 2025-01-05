@@ -17,16 +17,12 @@
 
 #include "text_line.hpp"
 #include "text_input.hpp"
+#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 #include <vector>  // std::vector
-
-namespace yli::data
-{
-    struct Codepoint;
-}
 
 namespace yli::console
 {
@@ -73,6 +69,27 @@ namespace yli::console
     const std::vector<yli::data::Codepoint>& TextLine::data() const
     {
         return this->line;
+    }
+
+    std::string TextLine::to_string() const
+    {
+        std::string my_string;
+        my_string.reserve(this->size());
+
+        for (const yli::data::Codepoint codepoint : this->line)
+        {
+            if (codepoint.codepoint < 128)
+            {
+                my_string.push_back(static_cast<char>(codepoint.codepoint));
+            }
+            else
+            {
+                // TODO: implement Unicode rendering! This is just a workaround for now!
+                my_string.push_back('.');
+            }
+        }
+
+        return my_string;
     }
 
     std::size_t TextLine::size() const

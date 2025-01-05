@@ -52,6 +52,8 @@ namespace yli::console
 
             const std::vector<yli::data::Codepoint>& data() const;
 
+            std::string to_string() const;
+
             std::size_t size() const;
 
             // Iterator functions.
