@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -64,9 +65,41 @@ namespace yli::console
         this->buffer.push_back(text);
     }
 
+    bool ScrollbackBuffer::enter_buffer()
+    {
+        if (std::size_t buffer_size = this->buffer.size(); !this->get_is_in_buffer() && buffer_size > 0) [[likely]]
+        {
+            // If we are not in buffer and the buffer is not empty, enter the buffer.
+            this->buffer_index = buffer_size - 1;
+            this->buffer_it = this->buffer.begin() + buffer_index;
+            return true;
+        }
+
+        // Otherwise, entering buffer failed.
+        return false;
+    }
+
+    bool ScrollbackBuffer::exit_buffer()
+    {
+        if (this->get_is_in_buffer())
+        {
+            // If we are in buffer, exit the buffer.
+            this->buffer_index = std::numeric_limits<std::size_t>::max();
+            this->buffer_it = this->buffer.end();
+            return true;
+        }
+
+        return false;
+    }
+
     const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const
     {
         return *(this->buffer.begin() + line_i);
+    }
+
+    bool ScrollbackBuffer::get_is_in_buffer() const
+    {
+        return this->buffer_index < std::numeric_limits<std::size_t>::max();
     }
 
     std::size_t ScrollbackBuffer::size() const

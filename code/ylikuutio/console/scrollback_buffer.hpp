@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -46,8 +47,12 @@ namespace yli::console
             void emplace_back(const TextLine& text);
             void push_back(const TextLine& text);
 
+            bool enter_buffer();
+            bool exit_buffer();
+
             const TextLine& at(const std::size_t line_i) const;
 
+            bool get_is_in_buffer() const;
             std::size_t size() const;
             uint32_t get_line_width() const;
 
@@ -75,6 +80,8 @@ namespace yli::console
         private:
             std::vector<TextLine> buffer;
             const uint32_t line_width; // Line width must be at least 1.
+            std::vector<TextLine>::iterator buffer_it { this->buffer.end() };
+            std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
     };
 }
 
