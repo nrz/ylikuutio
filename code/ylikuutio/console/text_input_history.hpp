@@ -48,6 +48,8 @@ namespace yli::console
             void move_to_first();
             void move_to_last();
 
+            const TextInput& at(const std::size_t input_i) const;
+
             bool get_is_in_history() const;
             std::size_t size() const;
             bool empty() const;

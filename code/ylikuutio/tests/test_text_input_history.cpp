@@ -69,6 +69,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
@@ -90,6 +91,7 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
@@ -111,6 +113,7 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
     ASSERT_FALSE(text_input_history.get_is_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();

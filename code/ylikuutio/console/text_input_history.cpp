@@ -115,6 +115,11 @@ namespace yli::console
         }
     }
 
+    const TextInput& TextInputHistory::at(const std::size_t input_i) const
+    {
+        return *(this->history.begin() + input_i);
+    }
+
     bool TextInputHistory::get_is_in_history() const
     {
         return this->history_index < std::numeric_limits<std::size_t>::max();
