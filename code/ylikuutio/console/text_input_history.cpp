@@ -115,6 +115,16 @@ namespace yli::console
         }
     }
 
+    std::optional<TextInput> TextInputHistory::get() const
+    {
+        if (this->history_index < this->history.size()) [[likely]]
+        {
+            return this->history.at(this->history_index);
+        }
+
+        return std::nullopt;
+    }
+
     const TextInput& TextInputHistory::at(const std::size_t input_i) const
     {
         return *(this->history.begin() + input_i);
@@ -133,15 +143,5 @@ namespace yli::console
     bool TextInputHistory::empty() const
     {
         return this->size() == 0;
-    }
-
-    std::optional<TextInput> TextInputHistory::get() const
-    {
-        if (this->history_index < this->history.size()) [[likely]]
-        {
-            return this->history.at(this->history_index);
-        }
-
-        return std::nullopt;
     }
 }

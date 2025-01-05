@@ -48,12 +48,12 @@ namespace yli::console
             void move_to_first();
             void move_to_last();
 
+            std::optional<TextInput> get() const;
             const TextInput& at(const std::size_t input_i) const;
 
             bool get_is_in_history() const;
             std::size_t size() const;
             bool empty() const;
-            std::optional<TextInput> get() const;
 
             // Iterator functions.
             iterator begin()
