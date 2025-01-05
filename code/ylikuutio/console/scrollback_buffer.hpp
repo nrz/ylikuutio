@@ -43,7 +43,7 @@ namespace yli::console
 
             void add_to_buffer(const TextInput& input);
             void add_to_buffer(const TextLine& text);
-            const TextLine& get_nth(const std::size_t line_i) const;
+            const TextLine& at(const std::size_t line_i) const;
 
             std::size_t size() const;
             uint32_t get_line_width() const;

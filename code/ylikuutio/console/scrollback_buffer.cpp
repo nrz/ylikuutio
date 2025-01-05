@@ -54,7 +54,7 @@ namespace yli::console
         }
     }
 
-    const TextLine& ScrollbackBuffer::get_nth(const std::size_t line_i) const
+    const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const
     {
         return *(this->buffer.begin() + line_i);
     }
