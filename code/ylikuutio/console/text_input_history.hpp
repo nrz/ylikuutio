@@ -76,7 +76,7 @@ namespace yli::console
 
         private:
             std::vector<TextInput> history;
-            std::vector<TextInput>::const_iterator history_it { this->history.end() };
+            std::vector<TextInput>::iterator history_it { this->history.end() };
             std::size_t history_index { std::numeric_limits<std::size_t>::max() };
     };
 }
