@@ -56,6 +56,7 @@ namespace yli::console
 
             bool get_is_in_buffer() const;
             std::size_t size() const;
+            bool empty() const;
             uint32_t get_line_width() const;
 
             // Iterator functions.

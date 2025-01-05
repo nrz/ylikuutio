@@ -118,6 +118,11 @@ namespace yli::console
         return this->buffer.size();
     }
 
+    bool ScrollbackBuffer::empty() const
+    {
+        return this->size() == 0;
+    }
+
     uint32_t ScrollbackBuffer::get_line_width() const
     {
         return this->line_width;

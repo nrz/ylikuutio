@@ -31,6 +31,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_0)
     yli::console::ScrollbackBuffer scrollback_buffer(0);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
@@ -40,6 +41,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_1)
     yli::console::ScrollbackBuffer scrollback_buffer(1);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
@@ -49,6 +51,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
     yli::console::ScrollbackBuffer scrollback_buffer(2);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
@@ -59,6 +62,7 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1
     scrollback_buffer.add_to_buffer(TextLine(std::vector<Codepoint>({})));
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
 
     ASSERT_FALSE(scrollback_buffer.enter_buffer());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
@@ -73,6 +77,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
@@ -88,6 +93,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
@@ -103,6 +109,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
@@ -118,6 +125,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -137,6 +145,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -154,6 +163,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -171,6 +181,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -192,6 +203,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -211,6 +223,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -230,6 +243,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -253,6 +267,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -274,6 +289,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
@@ -422,6 +438,7 @@ TEST(emplacing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.emplace_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
@@ -434,6 +451,7 @@ TEST(pushing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_l
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.push_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
+    ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
