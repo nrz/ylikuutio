@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -90,6 +91,16 @@ namespace yli::console
         }
 
         return false;
+    }
+
+    std::optional<TextLine> ScrollbackBuffer::get() const
+    {
+        if (this->buffer_index < this->buffer.size()) [[likely]]
+        {
+            return this->buffer.at(this->buffer_index);
+        }
+
+        return std::nullopt;
     }
 
     const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const

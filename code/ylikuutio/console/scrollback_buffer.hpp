@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -50,6 +51,7 @@ namespace yli::console
             bool enter_buffer();
             bool exit_buffer();
 
+            std::optional<TextLine> get() const;
             const TextLine& at(const std::size_t line_i) const;
 
             bool get_is_in_buffer() const;

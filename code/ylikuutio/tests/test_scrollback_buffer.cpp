@@ -20,6 +20,9 @@
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 
+// Include standard headers
+#include <optional> // std::nullopt
+
 using yli::data::Codepoint;
 using yli::console::TextLine;
 
@@ -29,6 +32,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_0)
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_1)
@@ -37,6 +41,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_1)
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
@@ -45,6 +50,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
 
 TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1_text_line_width_0)
@@ -56,6 +62,7 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1
 
     ASSERT_FALSE(scrollback_buffer.enter_buffer());
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
 
 TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
@@ -67,6 +74,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -81,6 +89,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -95,6 +104,7 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -109,6 +119,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_a({ Codepoint('a') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
@@ -127,6 +138,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_ab({ Codepoint('a'), Codepoint('b') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
@@ -143,6 +155,7 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_ab({ Codepoint('a'), Codepoint('b') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
@@ -159,6 +172,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_a({ Codepoint('a') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
@@ -179,6 +193,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_ab({ Codepoint('a'), Codepoint('b') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
@@ -197,6 +212,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_abc({ Codepoint('a'), Codepoint('b'), Codepoint('c') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_abc);
@@ -215,6 +231,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_a({ Codepoint('a') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
@@ -237,6 +254,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 2);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_ab({ Codepoint('a'), Codepoint('b') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
@@ -257,6 +275,7 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 3);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
     const yli::console::TextLine expected_text_line_abc({ Codepoint('a'), Codepoint('b'), Codepoint('c') });
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_abc);
@@ -404,6 +423,7 @@ TEST(emplacing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with
     scrollback_buffer.emplace_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
 
@@ -415,5 +435,6 @@ TEST(pushing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_l
     scrollback_buffer.push_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_EQ(scrollback_buffer.get_line_width(), 1);
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
