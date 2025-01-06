@@ -56,6 +56,26 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 }
 
+TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_line_width_1)
+{
+    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    ASSERT_FALSE(scrollback_buffer.move_to_previous());
+    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
+}
+
+TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_line_width_1)
+{
+    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    ASSERT_FALSE(scrollback_buffer.move_to_next());
+    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_EQ(scrollback_buffer.size(), 0);
+    ASSERT_TRUE(scrollback_buffer.empty());
+    ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
+}
+
 TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1_text_line_width_0)
 {
     yli::console::ScrollbackBuffer scrollback_buffer(1);

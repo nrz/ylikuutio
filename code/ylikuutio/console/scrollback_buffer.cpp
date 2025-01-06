@@ -93,6 +93,52 @@ namespace yli::console
         return false;
     }
 
+    bool ScrollbackBuffer::move_to_previous()
+    {
+        if (this->get_is_in_buffer() && this->buffer_index > 0) [[likely]]
+        {
+            // If we are in the buffer and not in the oldest input, move to the previous input.
+            this->buffer_index--;
+            this->buffer_it--;
+            return true;
+        }
+
+        // Otherwise either buffer is empty, or we are not in buffer, or we are in the first input of the buffer.
+        return false;
+    }
+
+    bool ScrollbackBuffer::move_to_next()
+    {
+        if (this->get_is_in_buffer() && this->buffer_index < this->size()) [[likely]]
+        {
+            // If we are in the buffer and not in the newest input, move to the next input.
+            this->buffer_index++;
+            this->buffer_it++;
+            return true;
+        }
+
+        // Otherwise either buffer is empty, or we are not in buffer, or we are in the last input of the buffer.
+        return false;
+    }
+
+    void ScrollbackBuffer::move_to_first()
+    {
+        if (this->size() > 0 && this->get_is_in_buffer()) [[likely]]
+        {
+            this->buffer_index = 0;
+            this->buffer_it = this->buffer.begin();
+        }
+    }
+
+    void ScrollbackBuffer::move_to_last()
+    {
+        if (this->size() > 0 && this->get_is_in_buffer()) [[likely]]
+        {
+            this->buffer_index = this->size() - 1;
+            this->buffer_it = this->buffer.begin() + this->size() - 1;
+        }
+    }
+
     std::optional<TextLine> ScrollbackBuffer::get() const
     {
         if (this->buffer_index < this->buffer.size()) [[likely]]

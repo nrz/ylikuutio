@@ -51,6 +51,11 @@ namespace yli::console
             bool enter_buffer();
             bool exit_buffer();
 
+            bool move_to_previous();
+            bool move_to_next();
+            void move_to_first();
+            void move_to_last();
+
             std::optional<TextLine> get() const;
             const TextLine& at(const std::size_t line_i) const;
 
