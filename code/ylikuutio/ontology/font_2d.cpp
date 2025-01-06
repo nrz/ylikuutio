@@ -226,15 +226,7 @@ namespace yli::ontology
         glDisable(GL_BLEND);
     }
 
-    void Font2d::print_text_2d(
-            const uint32_t x,
-            const uint32_t y,
-            const uint32_t text_size,
-            const uint32_t font_size,
-            const std::string& text,
-            const std::string& font_texture_file_format,
-            const std::string& horizontal_alignment,
-            const std::string& vertical_alignment) const
+    void Font2d::print_text_2d(const TextStruct& text_struct) const
     {
         if (!this->should_render)
         {
@@ -250,7 +242,7 @@ namespace yli::ontology
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        const std::size_t length = text.size();
+        const std::size_t length = text_struct.text.size();
 
         // Count the number of lines.
         std::size_t number_of_lines = 1;
@@ -259,7 +251,7 @@ namespace yli::ontology
 
         while (i < length)
         {
-            char character = text[i++];
+            char character = text_struct.text[i++];
 
             if (i >= length)
             {
@@ -271,7 +263,7 @@ namespace yli::ontology
             if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text[i++];
+                character = text_struct.text[i++];
 
                 if (character == 'n')
                 {
@@ -283,39 +275,39 @@ namespace yli::ontology
         uint32_t current_left_x;
         uint32_t current_top_y;
 
-        if (horizontal_alignment == "left")
+        if (text_struct.horizontal_alignment == "left")
         {
-            current_left_x = x;
+            current_left_x = text_struct.x;
         }
-        else if (horizontal_alignment == "center")
+        else if (text_struct.horizontal_alignment == "center")
         {
-            current_left_x = x - 0.5f * length * text_size;
+            current_left_x = text_struct.x - 0.5f * length * text_size;
         }
-        else if (horizontal_alignment == "right")
+        else if (text_struct.horizontal_alignment == "right")
         {
-            current_left_x = x - length * text_size;
+            current_left_x = text_struct.x - length * text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << text_struct.horizontal_alignment << "\n";
             return;
         }
 
-        if (vertical_alignment == "top")
+        if (text_struct.vertical_alignment == "top")
         {
-            current_top_y = y;
+            current_top_y = text_struct.y;
         }
-        else if (vertical_alignment == "center")
+        else if (text_struct.vertical_alignment == "center")
         {
-            current_top_y = y + 0.5f * number_of_lines * text_size;
+            current_top_y = text_struct.y + 0.5f * number_of_lines * text_size;
         }
-        else if (vertical_alignment == "bottom")
+        else if (text_struct.vertical_alignment == "bottom")
         {
-            current_top_y = y + number_of_lines * text_size;
+            current_top_y = text_struct.y + number_of_lines * text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << vertical_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << text_struct.vertical_alignment << "\n";
             return;
         }
 
@@ -338,12 +330,12 @@ namespace yli::ontology
             uint32_t vertex_down_right_x;
             uint32_t vertex_down_right_y;
 
-            char character = text[i++];
+            char character = text_struct.text[i++];
 
             if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text[i++];
+                character = text_struct.text[i++];
 
                 if (i >= length)
                 {
@@ -357,7 +349,7 @@ namespace yli::ontology
                     // Jump to the beginning of the next line.
                     // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                     // TODO: implement newline for other horizontal and vertical alignments too!
-                    current_left_x = x;
+                    current_left_x = text_struct.x;
                     current_top_y -= text_size;
                     continue;
                 }
@@ -383,28 +375,28 @@ namespace yli::ontology
             vertices.emplace_back(vertex_up_right);
             vertices.emplace_back(vertex_down_left);
 
-            float uv_x = (character % font_size) / static_cast<float>(font_size);
+            float uv_x = (character % text_struct.font_size) / static_cast<float>(text_struct.font_size);
             float uv_y;
 
-            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
+            if (text_struct.font_texture_file_format == "png" || text_struct.font_texture_file_format == "PNG")
             {
-                uv_y = (character / font_size) / static_cast<float>(font_size);
+                uv_y = (character / text_struct.font_size) / static_cast<float>(text_struct.font_size);
             }
             else
             {
-                std::cerr << "ERROR: `Font2d::print_text_2d`: invalid font_texture_file_format " << font_texture_file_format << "\n";
+                std::cerr << "ERROR: `Font2d::print_text_2d`: invalid font_texture_file_format " << text_struct.font_texture_file_format << "\n";
                 return;
             }
 
             glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), uv_y);
+            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
-            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
+            if (text_struct.font_texture_file_format == "png" || text_struct.font_texture_file_format == "PNG")
             {
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y + 1.0f / static_cast<float>(font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(font_size)));
+                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
+                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
             }
             UVs.emplace_back(uv_up_left);
             UVs.emplace_back(uv_down_left);
@@ -439,40 +431,6 @@ namespace yli::ontology
             yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
             yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
         }
-    }
-
-    void Font2d::print_text_2d(const TextStruct& text_struct) const
-    {
-        if (!this->should_render)
-        {
-            return;
-        }
-
-        this->print_text_2d(
-                text_struct.x,
-                text_struct.y,
-                text_struct.text_size,
-                text_struct.font_size,
-                text_struct.text,
-                text_struct.font_texture_file_format,
-                text_struct.horizontal_alignment,
-                text_struct.vertical_alignment);
-    }
-
-    void Font2d::print_text_2d(
-            const uint32_t x,
-            const uint32_t y,
-            const uint32_t text_size,
-            const uint32_t font_size,
-            const std::string& text,
-            const std::string& font_texture_file_format) const
-    {
-        if (!this->should_render)
-        {
-            return;
-        }
-
-        this->print_text_2d(x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
     }
 
     GenericParentModule* Font2d::get_generic_parent_module(const int type)

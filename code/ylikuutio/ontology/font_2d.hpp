@@ -75,25 +75,7 @@ namespace yli::ontology
 
             void render();
 
-            void print_text_2d(
-                    const uint32_t x,
-                    const uint32_t y,
-                    const uint32_t text_size,
-                    const uint32_t font_size,
-                    const std::string& text,
-                    const std::string& font_texture_file_format,
-                    const std::string& horizontal_alignment,
-                    const std::string& vertical_alignment) const;
-
             void print_text_2d(const TextStruct& text_struct) const;
-
-            void print_text_2d(
-                    const uint32_t x,
-                    const uint32_t y,
-                    const uint32_t text_size,
-                    const uint32_t font_size,
-                    const std::string& text,
-                    const std::string& font_texture_file_format) const;
 
             GenericParentModule* get_generic_parent_module(const int type);
 
