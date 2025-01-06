@@ -35,6 +35,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <variant>   // std::holds_alternative
 #include <vector>    // std::vector
 
 namespace yli::core
@@ -81,7 +82,9 @@ namespace yli::ontology
         : Entity(application, universe, text_struct),
         child_of_font_2d(font_2d_parent_module, *this)
     {
-        this->text = text_struct.text;
+        this->text = (std::holds_alternative<std::string>(text_struct.text) ?
+                std::get<std::string>(text_struct.text) :
+                ""); // TODO: add support for `std::vector<std::string_view>`!
         this->horizontal_alignment = text_struct.horizontal_alignment;
         this->vertical_alignment = text_struct.vertical_alignment;
         this->screen_height = text_struct.screen_height;

@@ -24,7 +24,10 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
+#include <string_view> // std::string_view
 #include <utility> // std::move
+#include <variant> // std::variant
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
@@ -46,7 +49,7 @@ namespace yli::ontology
         std::size_t y             { 0 };
         std::size_t text_size     { 0 };
         std::size_t font_size     { 0 };
-        std::string text;
+        std::variant<std::string, std::vector<std::string_view>> text;
         std::string font_texture_file_format;
         std::string horizontal_alignment;
         std::string vertical_alignment;

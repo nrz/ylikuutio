@@ -38,6 +38,7 @@
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
+#include <variant>   // std::get
 #include <vector>    // std::vector
 
 namespace yli::core
@@ -216,7 +217,7 @@ namespace yli::ontology
                     history_i++)
             {
                 std::list<char> historical_text = this->console_history.at(history_i);
-                text_struct.text += yli::string::convert_char_container_to_std_string(
+                std::get<std::string>(text_struct.text) += yli::string::convert_char_container_to_std_string(
                         historical_text,
                         characters_for_line,
                         characters_for_line) +
@@ -253,7 +254,7 @@ namespace yli::ontology
                 // Print only n last lines.
                 for (std::size_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
                 {
-                    text_struct.text += current_input_vector.at(i) + "\\n";
+                    std::get<std::string>(text_struct.text) += current_input_vector.at(i) + "\\n";
                 }
             }
             else
@@ -273,14 +274,14 @@ namespace yli::ontology
                 for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                 {
                     const std::list<char> historical_text = this->console_history.at(history_i);
-                    text_struct.text += yli::string::convert_char_container_to_std_string(
+                    std::get<std::string>(text_struct.text) += yli::string::convert_char_container_to_std_string(
                             historical_text,
                             characters_for_line,
                             characters_for_line) +
                         "\\n";
                 }
 
-                text_struct.text += this->convert_current_input_into_string();
+                std::get<std::string>(text_struct.text) += this->convert_current_input_into_string();
             }
         }
 

@@ -47,6 +47,7 @@
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <utility>   // std::pair
+#include <variant>   // std::holds_alternative
 #include <vector>    // std::vector
 
 namespace yli::core
@@ -235,6 +236,12 @@ namespace yli::ontology
 
         this->prepare_to_print();
 
+        // TODO: implement support for `std::vector<std::string_view>`!
+        if (!std::holds_alternative<std::string>(text_struct.text))
+        {
+            return;
+        }
+
         // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
         // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
         // then there is no need to check the text beforehand for newlines.
@@ -242,7 +249,7 @@ namespace yli::ontology
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        const std::size_t length = text_struct.text.size();
+        const std::size_t length = std::get<std::string>(text_struct.text).size();
 
         // Count the number of lines.
         std::size_t number_of_lines = 1;
@@ -251,7 +258,7 @@ namespace yli::ontology
 
         while (i < length)
         {
-            char character = text_struct.text[i++];
+            char character = std::get<std::string>(text_struct.text)[i++];
 
             if (i >= length)
             {
@@ -263,7 +270,7 @@ namespace yli::ontology
             if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text_struct.text[i++];
+                character = std::get<std::string>(text_struct.text)[i++];
 
                 if (character == 'n')
                 {
@@ -330,12 +337,12 @@ namespace yli::ontology
             uint32_t vertex_down_right_x;
             uint32_t vertex_down_right_y;
 
-            char character = text_struct.text[i++];
+            char character = std::get<std::string>(text_struct.text)[i++];
 
             if (character == '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text_struct.text[i++];
+                character = std::get<std::string>(text_struct.text)[i++];
 
                 if (i >= length)
                 {
