@@ -55,6 +55,8 @@ namespace yli::console
             std::size_t size() const;
             bool empty() const;
 
+            std::size_t get_history_index() const;
+
             // Iterator functions.
             iterator begin()
             {

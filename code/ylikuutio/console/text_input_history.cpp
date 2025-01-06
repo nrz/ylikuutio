@@ -144,4 +144,9 @@ namespace yli::console
     {
         return this->size() == 0;
     }
+
+    std::size_t TextInputHistory::get_history_index() const
+    {
+        return this->history_index;
+    }
 }
