@@ -173,4 +173,9 @@ namespace yli::console
     {
         return this->line_width;
     }
+
+    std::size_t ScrollbackBuffer::get_buffer_index() const
+    {
+        return this->buffer_index;
+    }
 }

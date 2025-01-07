@@ -64,6 +64,8 @@ namespace yli::console
             bool empty() const;
             uint32_t get_line_width() const;
 
+            std::size_t get_buffer_index() const;
+
             // Iterator functions.
             iterator begin()
             {
