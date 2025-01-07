@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::console
@@ -83,6 +84,9 @@ namespace yli::console
             std::size_t size() const;
             bool empty() const;
             const std::vector<yli::data::Codepoint>& data() const;
+
+            std::string to_string() const;
+
             std::size_t get_cursor_index() const;
 
             // Iterator functions.

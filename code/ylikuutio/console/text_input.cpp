@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string>   // std::string
 #include <utility>  // std::move
 #include <vector>   // std::vector
 
@@ -172,6 +173,27 @@ namespace yli::console
     const std::vector<yli::data::Codepoint>& TextInput::data() const
     {
         return this->input;
+    }
+
+    std::string TextInput::to_string() const
+    {
+        std::string my_string;
+        my_string.reserve(this->size());
+
+        for (const yli::data::Codepoint codepoint : this->input)
+        {
+            if (codepoint.codepoint < 128)
+            {
+                my_string.push_back(static_cast<char>(codepoint.codepoint));
+            }
+            else
+            {
+                // TODO: implement Unicode rendering! This is just a workaround for now!
+                my_string.push_back('.');
+            }
+        }
+
+        return my_string;
     }
 
     std::size_t TextInput::get_cursor_index() const
