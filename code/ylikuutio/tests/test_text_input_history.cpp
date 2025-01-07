@@ -21,6 +21,7 @@
 #include "code/ylikuutio/console/text_input_history.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::nullopt
 #include <utility>  // std::move
