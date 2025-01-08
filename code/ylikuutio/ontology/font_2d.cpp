@@ -236,7 +236,7 @@ namespace yli::ontology
 
         this->prepare_to_print();
 
-        // TODO: implement support for `std::vector<std::string_view>`!
+        // TODO: implement support for `std::vector<std::string>`!
         if (!std::holds_alternative<std::string>(text_struct.text))
         {
             return;

@@ -84,7 +84,7 @@ namespace yli::ontology
     {
         this->text = (std::holds_alternative<std::string>(text_struct.text) ?
                 std::get<std::string>(text_struct.text) :
-                ""); // TODO: add support for `std::vector<std::string_view>`!
+                ""); // TODO: add support for `std::vector<std::string>`!
         this->horizontal_alignment = text_struct.horizontal_alignment;
         this->vertical_alignment = text_struct.vertical_alignment;
         this->screen_height = text_struct.screen_height;
