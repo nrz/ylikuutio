@@ -25,7 +25,13 @@
 
 namespace yli::console
 {
+    class ConsoleStateModule;
     class TextInput;
+
+    TextInputHistory::TextInputHistory(ConsoleStateModule& console_state_module)
+        : console_state_module { console_state_module }
+    {
+    }
 
     void TextInputHistory::add_to_history(TextInput&& text_input)
     {
