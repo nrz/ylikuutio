@@ -396,6 +396,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/command_line/command_line_master.hpp
 
     # console, in alphabetical order
+    code/ylikuutio/console/console_state.hpp
     code/ylikuutio/console/scrollback_buffer.cpp
     code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
