@@ -397,6 +397,8 @@ add_library(ylikuutio STATIC
 
     # console, in alphabetical order
     code/ylikuutio/console/console_state.hpp
+    code/ylikuutio/console/console_state_module.cpp
+    code/ylikuutio/console/console_state_module.hpp
     code/ylikuutio/console/scrollback_buffer.cpp
     code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
@@ -1048,6 +1050,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_console_callback_object_struct.cpp
         code/ylikuutio/tests/test_console_callback_parameter.cpp
         code/ylikuutio/tests/test_console_callback_parameter_struct.cpp
+        code/ylikuutio/tests/test_console_state_module.cpp
         code/ylikuutio/tests/test_constructible_module.cpp
         code/ylikuutio/tests/test_csv_loader.cpp
         code/ylikuutio/tests/test_ecosystem.cpp
