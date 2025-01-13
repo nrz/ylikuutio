@@ -30,10 +30,10 @@ namespace yli::console
             void enter_temp_input();
             void enter_scrollback_buffer();
 
-            yli::console::ConsoleState get() const;
+            ConsoleState get() const;
 
         private:
-            yli::console::ConsoleState state { ConsoleState::IN_CURRENT_INPUT };
+            ConsoleState state { ConsoleState::IN_CURRENT_INPUT };
     };
 }
 
