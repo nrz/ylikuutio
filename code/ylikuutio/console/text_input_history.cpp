@@ -16,6 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_input_history.hpp"
+#include "console_state.hpp"
+#include "console_state_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -53,6 +55,7 @@ namespace yli::console
         if (std::size_t history_size = this->history.size(); !this->get_is_in_history() && history_size > 0) [[likely]]
         {
             // If we are not in history and the history is not empty, enter the history.
+            this->console_state_module.enter_historical_input();
             this->history_index = history_size - 1;
             this->history_it = this->history.begin() + history_index;
             return true;
@@ -67,6 +70,7 @@ namespace yli::console
         if (this->get_is_in_history())
         {
             // If we are in history, exit the history.
+            this->console_state_module.enter_current_input();
             this->history_index = std::numeric_limits<std::size_t>::max();
             this->history_it = this->history.end();
             return true;
@@ -138,7 +142,7 @@ namespace yli::console
 
     bool TextInputHistory::get_is_in_history() const
     {
-        return this->history_index < std::numeric_limits<std::size_t>::max();
+        return this->console_state_module.get() == ConsoleState::IN_HISTORICAL_INPUT;
     }
 
     std::size_t TextInputHistory::size() const
