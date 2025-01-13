@@ -93,6 +93,24 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(*text_input_history.get(), text_input);
 }
 
+TEST(editing_a_historical_input_must_work_appropriately, historical_input)
+{
+    yli::console::ConsoleStateModule console_state;
+    yli::console::TextInputHistory text_input_history(console_state);
+
+    yli::console::TextInput text_input;
+    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
+    text_input.add_characters(char_container);
+
+    text_input_history.add_to_history(std::move(text_input));
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), 0);
+
+    ASSERT_TRUE(text_input_history.edit_historical_input());
+    ASSERT_EQ(console_state.get(), ConsoleState::IN_TEMP_INPUT);
+}
+
 TEST(emplacing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleStateModule console_state;
