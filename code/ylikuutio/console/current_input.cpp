@@ -15,20 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_CURRENT_INPUT_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_CURRENT_INPUT_HPP_INCLUDED
-
-#include "text_input.hpp"
+#include "current_input.hpp"
+#include "console_state_module.hpp"
 
 namespace yli::console
 {
-    class ConsoleStateModule;
-
-    class CurrentInput : public TextInput
+    CurrentInput::CurrentInput(ConsoleStateModule& console_state_module)
     {
-        public:
-            CurrentInput(ConsoleStateModule& console_state_module);
-    };
+        console_state_module.register_current_input(this);
+    }
 }
-
-#endif

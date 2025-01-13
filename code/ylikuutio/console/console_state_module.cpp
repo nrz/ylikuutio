@@ -20,6 +20,8 @@
 
 namespace yli::console
 {
+    class CurrentInput;
+
     void ConsoleStateModule::enter_current_input()
     {
         this->state = ConsoleState::IN_CURRENT_INPUT;
@@ -40,8 +42,18 @@ namespace yli::console
         this->state = ConsoleState::IN_SCROLLBACK_BUFFER;
     }
 
+    void ConsoleStateModule::register_current_input(CurrentInput* const current_input)
+    {
+        this->current_input = current_input;
+    }
+
     yli::console::ConsoleState ConsoleStateModule::get() const
     {
         return this->state;
+    }
+
+    CurrentInput* ConsoleStateModule::get_current_input() const
+    {
+        return this->current_input;
     }
 }

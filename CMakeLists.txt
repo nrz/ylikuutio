@@ -399,6 +399,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_state.hpp
     code/ylikuutio/console/console_state_module.cpp
     code/ylikuutio/console/console_state_module.hpp
+    code/ylikuutio/console/current_input.cpp
     code/ylikuutio/console/current_input.hpp
     code/ylikuutio/console/scrollback_buffer.cpp
     code/ylikuutio/console/scrollback_buffer.hpp

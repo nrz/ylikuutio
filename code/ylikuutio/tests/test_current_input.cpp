@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/codepoint.hpp"
+#include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/current_input.hpp"
 
 // Include standard headers
@@ -27,7 +28,10 @@ using yli::data::Codepoint;
 
 TEST(current_input_must_be_initialized_appropriately, current_input)
 {
-    yli::console::CurrentInput current_input;
+    yli::console::ConsoleStateModule console_state_module;
+    ASSERT_EQ(console_state_module.get_current_input(), nullptr);
+
+    yli::console::CurrentInput current_input(console_state_module);
     ASSERT_EQ(current_input.size(), 0);
     ASSERT_TRUE(current_input.empty());
     ASSERT_EQ(current_input.get_character_at_current_index(), std::nullopt);
@@ -36,4 +40,5 @@ TEST(current_input_must_be_initialized_appropriately, current_input)
     ASSERT_EQ(current_input.data(), std::vector<Codepoint>{});
     ASSERT_EQ(current_input.to_string(), "");
     ASSERT_EQ(current_input.cbegin().unwrap(), current_input.data().cbegin());
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
 }
