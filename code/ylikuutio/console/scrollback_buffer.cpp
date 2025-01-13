@@ -30,7 +30,7 @@ namespace yli::console
     class TextInput;
 
     ScrollbackBuffer::ScrollbackBuffer(const uint32_t line_width)
-        : line_width { (line_width > 0 ? line_width : 1)  }
+        : line_width { (line_width > 0 ? line_width : 1) }
     {
     }
 
