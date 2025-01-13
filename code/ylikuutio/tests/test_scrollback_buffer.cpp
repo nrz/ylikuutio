@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/codepoint.hpp"
+#include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 
@@ -30,7 +31,8 @@ using yli::console::TextLine;
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_0)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(0);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 0);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
@@ -41,7 +43,8 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_0)
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
@@ -52,7 +55,8 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_1)
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
@@ -63,7 +67,8 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, line_width_2)
 
 TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     ASSERT_FALSE(scrollback_buffer.move_to_previous());
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
@@ -74,7 +79,8 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_l
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     ASSERT_FALSE(scrollback_buffer.move_to_next());
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
@@ -85,7 +91,8 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_line_
 
 TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1_text_line_width_0)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     scrollback_buffer.add_to_buffer(TextLine(std::vector<Codepoint>({})));
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
@@ -100,7 +107,8 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_line_width_1
 
 TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     const std::vector<Codepoint> char_container { Codepoint('a') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -118,7 +126,8 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_2_text_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2);
     const std::vector<Codepoint> char_container { Codepoint('a') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -136,7 +145,8 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_3_text_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     const std::vector<Codepoint> char_container { Codepoint('a') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -154,7 +164,8 @@ TEST(adding_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_2)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -176,7 +187,8 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_width_2_text_line_width_2)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -196,7 +208,8 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_width_3_text_line_width_2)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -216,7 +229,8 @@ TEST(adding_a_line_width_of_2_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_3)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -240,7 +254,8 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_2_text_line_width_3)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -262,7 +277,8 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
 
 TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_width_3_text_line_width_3)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.add_to_buffer(text_line);
@@ -286,7 +302,8 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     text_input.add_characters(char_container);
 
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
@@ -312,7 +329,8 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     text_input.add_characters(char_container);
 
-    yli::console::ScrollbackBuffer scrollback_buffer(2);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2);
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
@@ -336,7 +354,8 @@ TEST(adding_a_line_width_of_3_must_work_properly, scrollback_buffer_with_line_wi
     const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
     text_input.add_characters(char_container);
 
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     scrollback_buffer.add_to_buffer(text_input);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -358,7 +377,8 @@ TEST(scrollback_buffer_begin_iterator_must_work_appropriately, scrollback_buffer
     const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
     const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
 
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -391,7 +411,8 @@ TEST(scrollback_buffer_cbegin_iterator_must_work_appropriately, scrollback_buffe
     const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
     const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
 
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -424,7 +445,8 @@ TEST(scrollback_buffer_end_iterator_must_work_appropriately, scrollback_buffer_l
     const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
     const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
 
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -457,7 +479,8 @@ TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_
     const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
     const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
 
-    yli::console::ScrollbackBuffer scrollback_buffer(3);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -486,7 +509,8 @@ TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_
 
 TEST(emplacing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     const std::vector<Codepoint> char_container { Codepoint('a') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.emplace_back(text_line);
@@ -500,7 +524,8 @@ TEST(emplacing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with
 
 TEST(pushing_back_a_line_width_of_1_must_work_properly, scrollback_buffer_with_line_width_1_text_line_width_1)
 {
-    yli::console::ScrollbackBuffer scrollback_buffer(1);
+    yli::console::ConsoleStateModule console_state;
+    yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1);
     const std::vector<Codepoint> char_container { Codepoint('a') };
     const yli::console::TextLine text_line(char_container);
     scrollback_buffer.push_back(text_line);

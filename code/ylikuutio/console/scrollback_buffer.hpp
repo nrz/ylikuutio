@@ -31,6 +31,8 @@
 
 namespace yli::console
 {
+    class ConsoleStateModule;
+
     class ScrollbackBuffer
     {
         public:
@@ -38,7 +40,7 @@ namespace yli::console
             typedef ScrollbackBufferIterator      iterator;
             typedef ScrollbackBufferConstIterator const_iterator;
 
-            explicit ScrollbackBuffer(const uint32_t input_field_width);
+            ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t input_field_width);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
@@ -88,6 +90,7 @@ namespace yli::console
             }
 
         private:
+            ConsoleStateModule& console_state_module;
             std::vector<TextLine> buffer;
             const uint32_t line_width; // Line width must be at least 1.
             std::vector<TextLine>::iterator buffer_it { this->buffer.end() };
