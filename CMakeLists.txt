@@ -403,6 +403,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
     code/ylikuutio/console/scrollback_buffer_iterator.hpp
+    code/ylikuutio/console/temp_input.hpp
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp
     code/ylikuutio/console/text_input_const_iterator.hpp
@@ -1105,6 +1106,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_symbiosis.cpp
         code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
         code/ylikuutio/tests/test_symbiosis_struct.cpp
+        code/ylikuutio/tests/test_temp_input.cpp
         code/ylikuutio/tests/test_text_2d.cpp
         code/ylikuutio/tests/test_text_3d.cpp
         code/ylikuutio/tests/test_text_input.cpp
