@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/codepoint.hpp"
+#include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/console/text_input_history.hpp"
@@ -29,6 +30,7 @@
 #include <vector>   // std::vector
 
 using yli::data::Codepoint;
+using yli::console::ConsoleState;
 
 TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 {
@@ -83,6 +85,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -108,6 +111,7 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -133,6 +137,7 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
