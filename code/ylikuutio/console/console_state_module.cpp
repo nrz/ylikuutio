@@ -21,6 +21,7 @@
 namespace yli::console
 {
     class CurrentInput;
+    class TempInput;
 
     void ConsoleStateModule::enter_current_input()
     {
@@ -47,6 +48,11 @@ namespace yli::console
         this->current_input = current_input;
     }
 
+    void ConsoleStateModule::register_temp_input(TempInput* const temp_input)
+    {
+        this->temp_input = temp_input;
+    }
+
     yli::console::ConsoleState ConsoleStateModule::get() const
     {
         return this->state;
@@ -55,5 +61,10 @@ namespace yli::console
     CurrentInput* ConsoleStateModule::get_current_input() const
     {
         return this->current_input;
+    }
+
+    TempInput* ConsoleStateModule::get_temp_input() const
+    {
+        return this->temp_input;
     }
 }

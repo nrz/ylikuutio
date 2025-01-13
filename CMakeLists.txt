@@ -405,6 +405,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
     code/ylikuutio/console/scrollback_buffer_iterator.hpp
+    code/ylikuutio/console/temp_input.cpp
     code/ylikuutio/console/temp_input.hpp
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp

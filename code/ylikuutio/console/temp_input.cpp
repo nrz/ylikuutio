@@ -15,20 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_TEMP_INPUT_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_TEMP_INPUT_HPP_INCLUDED
-
-#include "text_input.hpp"
+#include "temp_input.hpp"
+#include "console_state_module.hpp"
 
 namespace yli::console
 {
-    class ConsoleStateModule;
-
-    class TempInput : public TextInput
+    TempInput::TempInput(ConsoleStateModule& console_state_module)
     {
-        public:
-            TempInput(ConsoleStateModule& console_state_module);
-    };
+        console_state_module.register_temp_input(this);
+    }
 }
-
-#endif
