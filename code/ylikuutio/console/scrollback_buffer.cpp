@@ -16,6 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "scrollback_buffer.hpp"
+#include "console_state.hpp"
+#include "console_state_module.hpp"
 #include "text_line.hpp"
 
 // Include standard headers
@@ -72,6 +74,7 @@ namespace yli::console
         if (std::size_t buffer_size = this->buffer.size(); !this->get_is_in_buffer() && buffer_size > 0) [[likely]]
         {
             // If we are not in buffer and the buffer is not empty, enter the buffer.
+            this->console_state_module.enter_scrollback_buffer();
             this->buffer_index = buffer_size - 1;
             this->buffer_it = this->buffer.begin() + buffer_index;
             return true;
@@ -86,6 +89,7 @@ namespace yli::console
         if (this->get_is_in_buffer())
         {
             // If we are in buffer, exit the buffer.
+            this->console_state_module.enter_current_input();
             this->buffer_index = std::numeric_limits<std::size_t>::max();
             this->buffer_it = this->buffer.end();
             return true;
@@ -157,7 +161,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::get_is_in_buffer() const
     {
-        return this->buffer_index < std::numeric_limits<std::size_t>::max();
+        return this->console_state_module.get() == ConsoleState::IN_SCROLLBACK_BUFFER;
     }
 
     std::size_t ScrollbackBuffer::size() const
