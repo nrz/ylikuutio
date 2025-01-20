@@ -159,3 +159,9 @@ https://dewitters.com/dewitters-gameloop/
 
 Fix Your Timestep!
 https://gafferongames.com/post/fix_your_timestep/
+
+Text rendering
+https://learnopengl.com/In-Practice/Text-Rendering
+
+Text Rendering Hates You
+https://faultlore.com/blah/text-hates-you/
