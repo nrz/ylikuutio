@@ -165,3 +165,7 @@ https://learnopengl.com/In-Practice/Text-Rendering
 
 Text Rendering Hates You
 https://faultlore.com/blah/text-hates-you/
+
+Depth Precision Visualized
+(about inverse Z)
+https://developer.nvidia.com/content/depth-precision-visualized
