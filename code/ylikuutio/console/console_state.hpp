@@ -22,6 +22,7 @@ namespace yli::console
 {
     enum class ConsoleState
     {
+        NOT_IN_CONSOLE,
         IN_CURRENT_INPUT,
         IN_HISTORICAL_INPUT,
         IN_TEMP_INPUT,

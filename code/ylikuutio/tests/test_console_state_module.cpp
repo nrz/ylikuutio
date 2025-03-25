@@ -21,7 +21,7 @@
 TEST(console_state_module_must_be_initialized_appropriately, console_state_module)
 {
     yli::console::ConsoleStateModule console_state_module;
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::NOT_IN_CONSOLE);
 }
 
 TEST(entering_current_input_from_current_input_must_work_appropriately, current_input_from_current_input_no_effect)

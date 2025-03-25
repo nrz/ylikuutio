@@ -41,7 +41,7 @@ namespace yli::console
             TempInput* get_temp_input() const;
 
         private:
-            ConsoleState state { ConsoleState::IN_CURRENT_INPUT };
+            ConsoleState state { ConsoleState::NOT_IN_CONSOLE };
             CurrentInput* current_input { nullptr };
             TempInput*    temp_input    { nullptr };
     };
