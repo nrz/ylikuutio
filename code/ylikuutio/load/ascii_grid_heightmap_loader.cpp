@@ -38,6 +38,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::load
@@ -209,7 +210,7 @@ namespace yli::load
                                 *file_content,
                                 file_content_i,
                                 " \n",
-                                nullptr));
+                                std::string_view("")));
                 }
             }
         }

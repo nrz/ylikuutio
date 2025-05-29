@@ -62,46 +62,35 @@ namespace yli::load
         yli::string::print_hexdump(filename);
 
         // Find out the filename.
-        const std::size_t filename_buffer_size = 1024;
-        char filename_buffer[filename_buffer_size];
+        std::string filename_buffer;
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
         const std::size_t filename_length = yli::string::extract_last_part_of_string(
-                filename.c_str(),
-                filename.size(),
+                filename,
                 filename_buffer,
-                filename_buffer_size,
                 separator);
 
         std::cout << "Filename length: " << filename_length << " bytes.\n";
 
-        const char* const texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
-        std::cout << "Texture file: " << texture_filename << "\n";
+        std::cout << "Texture file: " << filename_buffer << "\n";
 
         // Find out the file suffix (filetype).
-        const std::size_t file_suffix_buffer_size = 16;
-        char file_suffix_buffer[file_suffix_buffer_size];
+        std::string file_suffix_buffer;
         const char suffix_separator = '.';
 
         yli::string::extract_last_part_of_string(
                 filename_buffer,
-                filename_length + 1,
                 file_suffix_buffer,
-                file_suffix_buffer_size,
                 suffix_separator);
 
-        const char* const texture_file_suffix_char = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
-        const std::string texture_file_suffix = std::string(texture_file_suffix_char);
+        std::cout << "Texture file suffix: " << file_suffix_buffer << "\n";
 
-        std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
-
-        if (texture_file_suffix == "png")
+        if (file_suffix_buffer == "png")
         {
-            const std::string filename_string = std::string((char*) &filename_buffer);
             yli::load::ImageLoaderStruct image_loader_struct;
             image_loader_struct.should_discard_alpha_channel = true;
             image_loader_struct.should_flip_vertically = true;
-            return yli::load::load_common_texture(filename_string, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, graphics_api_backend);
+            return yli::load::load_common_texture(filename_buffer, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, graphics_api_backend);
         }
 
         return false;

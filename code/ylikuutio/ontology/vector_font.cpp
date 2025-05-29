@@ -29,7 +29,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -111,14 +110,7 @@ namespace yli::ontology
 
         if (this->font_file_format == "svg" || this->font_file_format == "SVG")
         {
-            const bool is_debug_mode = true;
-
-            font_loading_result = yli::load::load_svg_font(
-                    this->font_filename,
-                    this->glyph_vertex_data,
-                    this->glyph_names,
-                    this->unicode_strings,
-                    is_debug_mode);
+            // TODO: implement SVG font loading!
         }
 
         // `Entity` member variables begin here.

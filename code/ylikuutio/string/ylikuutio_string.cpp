@@ -18,10 +18,8 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
-#include <algorithm> // std::copy
 #include <cstddef>   // std::byte, std::size_t
 #include <cstdlib>   // std::strtof, std::strtol, std::strtoul
-#include <cstring>   // std::strncmp
 #include <iomanip>   // std::setfill, std::setw
 #include <ios>       // std::dec, std::hex
 #include <iostream>  // std::cout, std::cerr
@@ -29,37 +27,13 @@
 #include <sstream>   // std::stringstream
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <vector>    // std::vector
 
 namespace yli::string
 {
     bool check_and_report_if_some_string_matches(
-            const char* const base_pointer,
-            const char* const data_pointer,
-            const std::size_t data_size,
-            const std::vector<std::string>& identifier_strings_vector)
-    {
-        for (const std::string& identifier_string : identifier_strings_vector)
-        {
-            const char* const identifier_string_char = identifier_string.c_str();
-
-            if (data_pointer + identifier_string.size() > base_pointer + data_size)
-            {
-                // If current `identifier_string` can't fit in the memory region,
-                // proceed to the next `identifier_string`, if there is any left.
-                continue;
-            }
-
-            if (std::strncmp(data_pointer, identifier_string_char, std::char_traits<char>::length(identifier_string_char)) == 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool check_and_report_if_some_string_matches(
-            const std::string& data_string,
+            std::string_view data_string,
             const std::size_t data_index,
             const std::vector<std::string>& identifier_strings_vector)
     {
@@ -81,7 +55,7 @@ namespace yli::string
     }
 
     void extract_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
             std::string& dest_string,
             const char separator)
@@ -94,106 +68,11 @@ namespace yli::string
                 char_end_string);
     }
 
-    void extract_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const dest_base_pointer,
-            char* dest_data_pointer,
-            const std::size_t dest_data_size,
-            const char* const char_end_string)
-    {
-        // + 1 needed for both source and dest because of the null terminator.
-        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
-                dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
-                std::strncmp(src_data_pointer, char_end_string, std::char_traits<char>::length(char_end_string)) != 0)
-        {
-            *dest_data_pointer++ = *src_data_pointer++;
-        }
-        *dest_data_pointer = '\0';
-    }
-
     void extract_string_with_several_endings(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const dest_base_pointer,
-            char* dest_data_pointer,
-            const std::size_t dest_data_size,
-            const char* const char_end_string)
-    {
-        // This function copies characters from `src_data_pointer` until a character matches.
-
-        // + 1 needed for both source and dest because of the null terminator.
-        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
-                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
-        {
-            const char* end_char_pointer;
-            end_char_pointer = char_end_string;
-
-            // Check if current character is any of the ending characters.
-            while (end_char_pointer != nullptr && *end_char_pointer != '\0')
-            {
-                if (std::strncmp(src_data_pointer, end_char_pointer, 1) == 0)
-                {
-                    *dest_data_pointer = '\0';
-                    return;
-                }
-                end_char_pointer++;
-            }
-
-            // OK, current character is not any of the ending characters.
-            // Copy it and advance the pointers accordingly.
-            *dest_data_pointer++ = *src_data_pointer++;
-        }
-
-        *dest_data_pointer = '\0';
-        return;
-    }
-
-    void extract_string_with_several_endings(
-            const std::string& data_string,
-            std::size_t& data_index,
-            const char* const dest_base_pointer,
-            char* dest_data_pointer,
-            const std::size_t dest_data_size,
-            const char* const char_end_string)
-    {
-        // This function copies characters from `src_data_pointer` until a character matches.
-
-        while (data_index < data_string.size() &&
-                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
-        {
-            const char* end_char_pointer;
-            end_char_pointer = char_end_string;
-            const std::string current_char_string = data_string.substr(data_index, 1);
-
-            // Check if current character is any of the ending characters.
-            while (end_char_pointer != nullptr && *end_char_pointer != '\0')
-            {
-                if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
-                {
-                    *dest_data_pointer = '\0';
-                    return;
-                }
-                end_char_pointer++;
-            }
-
-            // OK, current character is not any of the ending characters.
-            // Copy it and advance `dest_data_pointer` and `data_index` accordingly.
-            *dest_data_pointer++ = current_char_string[0];
-            data_index++;
-        }
-
-        *dest_data_pointer = '\0';
-        return;
-    }
-
-    void extract_string_with_several_endings(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
             std::string& dest_string,
-            const char* const char_end_string)
+            std::string_view char_end_string)
     {
         // This function copies characters from `src_data_pointer` until a character matches.
         if (data_index >= data_string.size())
@@ -205,19 +84,18 @@ namespace yli::string
 
         while (data_index < data_string.size())
         {
-            const char* end_char_pointer;
-            end_char_pointer = char_end_string;
-            const std::string current_char_string = data_string.substr(data_index, 1);
+            std::string_view::const_iterator end_char_it = char_end_string.begin();
+            const char current_char = data_string.at(data_index);
 
             // Check if current character is any of the ending characters.
-            while (end_char_pointer != nullptr && *end_char_pointer != '\0')
+            while (end_char_it != char_end_string.end())
             {
-                if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
+                if (current_char == *end_char_it)
                 {
                     dest_string = data_string.substr(original_data_index, data_index - original_data_index);
                     return;
                 }
-                end_char_pointer++;
+                end_char_it++;
             }
 
             // OK, current character is not any of the ending characters.
@@ -228,44 +106,7 @@ namespace yli::string
     }
 
     std::size_t extract_last_part_of_string(
-            const char* const src_base_pointer,
-            const std::size_t src_data_size,
-            char* const dest_base_pointer,
-            const std::size_t dest_data_size,
-            const char separator)
-    {
-        char* src_data_pointer = const_cast<char*>(src_base_pointer);
-        char* src_first_char_after_separator_pointer = nullptr;
-        char* dest_data_pointer = dest_base_pointer;
-        std::size_t length_of_last_part_of_string = 0; // length without trailing null byte.
-
-        // + 1 needed for both source and dest because of the null terminator.
-        for ( ; src_data_pointer < src_base_pointer + src_data_size && dest_data_pointer + 1 < dest_base_pointer + dest_data_size; src_data_pointer++)
-        {
-            if (*src_data_pointer == static_cast<char>(separator))
-            {
-                src_first_char_after_separator_pointer = src_data_pointer + 1;
-                length_of_last_part_of_string = 0;
-            }
-            else if (src_first_char_after_separator_pointer != nullptr)
-            {
-                // separator pointer found.
-                length_of_last_part_of_string++;
-            }
-        }
-
-        if (src_first_char_after_separator_pointer != nullptr)
-        {
-            std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + length_of_last_part_of_string, dest_base_pointer);
-        }
-
-        dest_data_pointer += length_of_last_part_of_string;
-        *dest_data_pointer = '\0';
-        return length_of_last_part_of_string;
-    }
-
-    std::size_t extract_last_part_of_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::string& dest_string,
             const char separator)
     {
@@ -297,26 +138,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            int8_t& value)
-    {
-        value = yli::string::extract_int8_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             int8_t& value)
     {
         value = yli::string::extract_int8_t_value_from_string(
@@ -327,26 +152,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            uint8_t& value)
-    {
-        value = yli::string::extract_uint8_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             uint8_t& value)
     {
         value = yli::string::extract_uint8_t_value_from_string(
@@ -357,26 +166,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            int16_t& value)
-    {
-        value = yli::string::extract_int16_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             int16_t& value)
     {
         value = yli::string::extract_int16_t_value_from_string(
@@ -387,26 +180,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            uint16_t& value)
-    {
-        value = yli::string::extract_uint16_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             uint16_t& value)
     {
         value = yli::string::extract_uint16_t_value_from_string(
@@ -417,26 +194,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            int32_t& value)
-    {
-        value = yli::string::extract_int32_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             int32_t& value)
     {
         value = yli::string::extract_int32_t_value_from_string(
@@ -447,26 +208,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            uint32_t& value)
-    {
-        value = yli::string::extract_uint32_t_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             uint32_t& value)
     {
         value = yli::string::extract_uint32_t_value_from_string(
@@ -477,26 +222,10 @@ namespace yli::string
     }
 
     void extract_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description,
-            float& value)
-    {
-        value = yli::string::extract_float_value_from_string(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description,
+            std::string_view char_end_string,
+            std::string_view description,
             float& value)
     {
         value = yli::string::extract_float_value_from_string(
@@ -507,23 +236,19 @@ namespace yli::string
     }
 
     int8_t extract_int8_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view data_string,
+            std::size_t& data_index,
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
+                data_string,
+                data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
         int8_t int8_t_value = 0;
 
         if (value < std::numeric_limits<int8_t>::min())
@@ -539,45 +264,7 @@ namespace yli::string
             int8_t_value = static_cast<int8_t>(value);
         }
 
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return int8_t_value;
-    }
-
-    int8_t extract_int8_t_value_from_string(
-            const std::string& data_string,
-            std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
-        int8_t int8_t_value = 0;
-
-        if (value < std::numeric_limits<int8_t>::min())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too small for `int8_t`! 0 returned.\n";
-        }
-        else if (value > std::numeric_limits<int8_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `int8_t`! 0 returned.\n";
-        }
-        else
-        {
-            int8_t_value = static_cast<int8_t>(value);
-        }
-
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -585,23 +272,19 @@ namespace yli::string
     }
 
     uint8_t extract_uint8_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view data_string,
+            std::size_t& data_index,
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
+                data_string,
+                data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
         uint8_t uint8_t_value = 0;
 
         if (value > std::numeric_limits<uint8_t>::max())
@@ -613,41 +296,7 @@ namespace yli::string
             uint8_t_value = static_cast<uint8_t>(value);
         }
 
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return uint8_t_value;
-    }
-
-    uint8_t extract_uint8_t_value_from_string(
-            const std::string& data_string,
-            std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
-        uint8_t uint8_t_value = 0;
-
-        if (value > std::numeric_limits<uint8_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
-        }
-        else
-        {
-            uint8_t_value = static_cast<uint8_t>(value);
-        }
-
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -655,23 +304,19 @@ namespace yli::string
     }
 
     int16_t extract_int16_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view data_string,
+            std::size_t& data_index,
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
+                data_string,
+                data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
         int16_t int16_t_value = 0;
 
         if (value < std::numeric_limits<int16_t>::min())
@@ -687,45 +332,7 @@ namespace yli::string
             int16_t_value = static_cast<int16_t>(value);
         }
 
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return int16_t_value;
-    }
-
-    int16_t extract_int16_t_value_from_string(
-            const std::string& data_string,
-            std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
-        int16_t int16_t_value = 0;
-
-        if (value < std::numeric_limits<int16_t>::min())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too small for `int16_t`! 0 returned.\n";
-        }
-        else if (value > std::numeric_limits<int16_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `int16_t`! 0 returned.\n";
-        }
-        else
-        {
-            int16_t_value = static_cast<int16_t>(value);
-        }
-
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -733,23 +340,19 @@ namespace yli::string
     }
 
     uint16_t extract_uint16_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view data_string,
+            std::size_t& data_index,
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
+                data_string,
+                data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
         uint16_t uint16_t_value = 0;
 
         if (value > std::numeric_limits<uint16_t>::max())
@@ -761,41 +364,7 @@ namespace yli::string
             uint16_t_value = static_cast<uint16_t>(value);
         }
 
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return uint16_t_value;
-    }
-
-    uint16_t extract_uint16_t_value_from_string(
-            const std::string& data_string,
-            std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
-        uint16_t uint16_t_value = 0;
-
-        if (value > std::numeric_limits<uint16_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
-        }
-        else
-        {
-            uint16_t_value = static_cast<uint16_t>(value);
-        }
-
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -803,49 +372,21 @@ namespace yli::string
     }
 
     int32_t extract_int32_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
-
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    int32_t extract_int32_t_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
                 data_string,
                 data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
 
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -853,49 +394,21 @@ namespace yli::string
     }
 
     uint32_t extract_uint32_t_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
-
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    uint32_t extract_uint32_t_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
                 data_string,
                 data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
 
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -903,49 +416,21 @@ namespace yli::string
     }
 
     float extract_float_value_from_string(
-            const char* const src_base_pointer,
-            const char*& src_data_pointer,
-            const std::size_t src_data_size,
-            const char* const char_end_string,
-            const char* const description)
-    {
-        char char_number_buffer[1024];
-        yli::string::extract_string_with_several_endings(
-                src_base_pointer,
-                src_data_pointer,
-                src_data_size,
-                char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
-                char_end_string);
-
-        float value = std::strtof(char_number_buffer, nullptr);
-
-        if (description != nullptr)
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    float extract_float_value_from_string(
-            const std::string& data_string,
+            std::string_view data_string,
             std::size_t& data_index,
-            const char* const char_end_string,
-            const char* const description)
+            std::string_view char_end_string,
+            std::string_view description)
     {
-        char char_number_buffer[1024];
+        std::string char_number_buffer;
         yli::string::extract_string_with_several_endings(
                 data_string,
                 data_index,
                 char_number_buffer,
-                char_number_buffer,
-                sizeof(char_number_buffer),
                 char_end_string);
 
-        float value = std::strtof(char_number_buffer, nullptr);
+        float value = std::strtof(char_number_buffer.c_str(), nullptr);
 
-        if (description != nullptr)
+        if (!description.empty())
         {
             std::cout << description << ": " << value << "\n";
         }
@@ -1011,19 +496,19 @@ namespace yli::string
         return unicode_value;
     }
 
-    bool check_if_float_string(const std::string& my_string)
+    bool check_if_float_string(std::string_view my_string)
     {
         const std::size_t maximum_safe_length_for_float_string = 38;
         return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
     }
 
-    bool check_if_double_string(const std::string& my_string)
+    bool check_if_double_string(std::string_view my_string)
     {
         const std::size_t maximum_safe_length_for_double_string = 308;
         return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
     }
 
-    bool check_if_floating_point_string(const std::string& my_string, const std::size_t safe_number_of_chars)
+    bool check_if_floating_point_string(std::string_view my_string, const std::size_t safe_number_of_chars)
     {
         std::size_t n_chars = 0;
 
@@ -1085,7 +570,7 @@ namespace yli::string
         return true;
     }
 
-    bool check_if_signed_integer_string(const std::string& my_string)
+    bool check_if_signed_integer_string(std::string_view my_string)
     {
         if (my_string.empty())
         {
@@ -1111,7 +596,7 @@ namespace yli::string
         return true;
     }
 
-    bool check_if_unsigned_integer_string(const std::string& my_string)
+    bool check_if_unsigned_integer_string(std::string_view my_string)
     {
         if (my_string.empty())
         {
@@ -1170,7 +655,7 @@ namespace yli::string
         std::cout << "\n";
     }
 
-    void print_hexdump(const std::string& my_string)
+    void print_hexdump(std::string_view my_string)
     {
         const std::size_t line_width_in_bytes = 16;
         std::size_t characters_on_this_line = 0;

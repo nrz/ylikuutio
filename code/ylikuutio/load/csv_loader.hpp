@@ -27,6 +27,7 @@
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::load
@@ -114,7 +115,7 @@ namespace yli::load
                 }
 
                 T1 value = 0;
-                yli::string::extract_value_from_string(*file_content, file_content_i, char_end_string, nullptr, value);
+                yli::string::extract_value_from_string(*file_content, file_content_i, char_end_string, std::string_view(""), value);
                 data_vector.emplace_back(value);
                 n_elements_in_current_line++;
 
