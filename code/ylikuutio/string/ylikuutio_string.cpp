@@ -95,7 +95,7 @@ namespace yli::string
                     dest_string = data_string.substr(original_data_index, data_index - original_data_index);
                     return;
                 }
-                end_char_it++;
+                ++end_char_it;
             }
 
             // OK, current character is not any of the ending characters.
