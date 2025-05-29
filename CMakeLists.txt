@@ -108,7 +108,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Command line arguments not supported by Visual Studio.
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type -Werror=nonnull")
     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
 endif()
 
