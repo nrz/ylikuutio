@@ -60,12 +60,11 @@ namespace yli::string
             std::string& dest_string,
             const char separator)
     {
-        const char char_end_string[2] = { separator, '\0' };
         yli::string::extract_string_with_several_endings(
                 data_string,
                 data_index,
                 dest_string,
-                char_end_string);
+                std::string(1, separator));
     }
 
     void extract_string_with_several_endings(
