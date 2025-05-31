@@ -22,13 +22,13 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cerr
-#include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <cstddef>     // std::size_t
+#include <iostream>    // std::cout, std::cerr
+#include <optional>    // std::optional
+#include <stdint.h>    // uint32_t etc.
+#include <string>      // std::string
 #include <string_view> // std::string_view
-#include <vector>   // std::vector
+#include <vector>      // std::vector
 
 namespace yli::load
 {

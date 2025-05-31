@@ -19,11 +19,11 @@
 #define YLIKUUTIO_STRING_YLIKUUTIO_STRING_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>   // std::byte, std::size_t
-#include <stdint.h>  // uint32_t etc.
-#include <string>    // std::string
+#include <cstddef>     // std::byte, std::size_t
+#include <stdint.h>    // uint32_t etc.
+#include <string>      // std::string
 #include <string_view> // std::string_view
-#include <vector>    // std::vector
+#include <vector>      // std::vector
 
 namespace yli::string
 {

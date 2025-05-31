@@ -19,8 +19,8 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <string>   // std::string
+#include <cstddef>     // std::size_t
+#include <string>      // std::string
 #include <string_view> // std::string_view
 
 TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
