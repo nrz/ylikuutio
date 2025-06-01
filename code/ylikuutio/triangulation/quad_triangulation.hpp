@@ -37,7 +37,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // std::isnan
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <vector>   // std::vector
