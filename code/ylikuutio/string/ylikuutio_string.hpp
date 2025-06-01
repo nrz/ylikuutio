@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
+#include <cstdlib>     // std::strtof, std::strtol, std::strtoul
 #include <iostream>    // std::cout, std::cerr
 #include <limits>      // std::numeric_limits
 #include <stdint.h>    // uint32_t etc.
