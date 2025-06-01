@@ -222,7 +222,7 @@ namespace ajokki
         {
             const std::string window_width = this->command_line_master.get_value("window_width");
             std::size_t index = 0;
-            universe_struct.window_width = yli::string::extract_uint32_t_value_from_string(window_width, index, "", "");
+            universe_struct.window_width = yli::string::extract_value_or_throw<uint32_t>(window_width, index, "", "");
         }
 
         if (this->command_line_master.is_key("window_height") &&
@@ -230,7 +230,7 @@ namespace ajokki
         {
             const std::string window_height = this->command_line_master.get_value("window_height");
             std::size_t index = 0;
-            universe_struct.window_height = yli::string::extract_uint32_t_value_from_string(window_height, index, "", "");
+            universe_struct.window_height = yli::string::extract_value_or_throw<uint32_t>(window_height, index, "", "");
         }
 
         if (this->command_line_master.is_key("framebuffer_width") &&
@@ -238,7 +238,7 @@ namespace ajokki
         {
             const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
             std::size_t index = 0;
-            universe_struct.framebuffer_module_struct.texture_width = yli::string::extract_uint32_t_value_from_string(framebuffer_width, index, "", "");
+            universe_struct.framebuffer_module_struct.texture_width = yli::string::extract_value_or_throw<uint32_t>(framebuffer_width, index, "", "");
         }
 
         if (this->command_line_master.is_key("framebuffer_height") &&
@@ -246,7 +246,7 @@ namespace ajokki
         {
             const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
             std::size_t index = 0;
-            universe_struct.framebuffer_module_struct.texture_height = yli::string::extract_uint32_t_value_from_string(framebuffer_height, index, "", "");
+            universe_struct.framebuffer_module_struct.texture_height = yli::string::extract_value_or_throw<uint32_t>(framebuffer_height, index, "", "");
         }
 
         if (this->command_line_master.is_key("speed") &&
@@ -254,7 +254,7 @@ namespace ajokki
         {
             const std::string speed = this->command_line_master.get_value("speed");
             std::size_t index = 0;
-            universe_struct.speed = yli::string::extract_float_value_from_string(speed, index, "", "");
+            universe_struct.speed = yli::string::extract_value_or_throw<float>(speed, index, "", "");
         }
 
         if (this->command_line_master.is_key("turbo_factor") &&
@@ -262,7 +262,7 @@ namespace ajokki
         {
             const std::string turbo_factor = this->command_line_master.get_value("turbo_factor");
             std::size_t index = 0;
-            universe_struct.turbo_factor = yli::string::extract_float_value_from_string(turbo_factor, index, "", "");
+            universe_struct.turbo_factor = yli::string::extract_value_or_throw<float>(turbo_factor, index, "", "");
         }
 
         if (this->command_line_master.is_key("twin_turbo_factor") &&
@@ -270,7 +270,7 @@ namespace ajokki
         {
             const std::string twin_turbo_factor = this->command_line_master.get_value("twin_turbo_factor");
             std::size_t index = 0;
-            universe_struct.twin_turbo_factor = yli::string::extract_float_value_from_string(twin_turbo_factor, index, "", "");
+            universe_struct.twin_turbo_factor = yli::string::extract_value_or_throw<float>(twin_turbo_factor, index, "", "");
         }
 
         if (this->command_line_master.is_key("mouse_speed") &&
@@ -278,7 +278,7 @@ namespace ajokki
         {
             const std::string mouse_speed = this->command_line_master.get_value("mouse_speed");
             std::size_t index = 0;
-            universe_struct.mouse_speed = yli::string::extract_float_value_from_string(mouse_speed, index, "", "");
+            universe_struct.mouse_speed = yli::string::extract_value_or_throw<float>(mouse_speed, index, "", "");
         }
 
         return universe_struct;

@@ -140,11 +140,18 @@ namespace yli::ontology
                 const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                 const char* temp_unicode_char_pointer = unicode_char_pointer;
 
-                int32_t unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
-                if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
+                std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
+
+                if (!unicode_value)
+                {
+                    std::cerr << "ERROR: `VectorFont::VectorFont`: exctracting Unicode value failed!\n";
+                    continue;
+                }
+
+                if (*unicode_value >= 0xd800 && *unicode_value <= 0xdfff)
                 {
                     // Invalid Unicode, skip to next `Glyph`.
-                    std::cerr << std::dec << "Error: invalid Unicode: " << unicode_value << "\n";
+                    std::cerr << std::dec << "Error: invalid Unicode: " << *unicode_value << "\n";
                     continue;
                 }
 
@@ -164,7 +171,7 @@ namespace yli::ontology
 
                 // So that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.
-                this->unicode_glyph_map[unicode_value] = glyph;
+                this->unicode_glyph_map[*unicode_value] = glyph;
             }
         }
 

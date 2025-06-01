@@ -29,6 +29,7 @@
 // Include standard headers
 #include <ios>       // std::dec, std::hex
 #include <iostream>  // std::cout, std::cerr
+#include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -52,17 +53,23 @@ namespace yli::ontology
 
         while (*text_pointer != '\0')
         {
-            int32_t unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
-            Glyph* glyph_pointer = vector_font_master_of_text_3d->get_glyph_pointer(unicode_value);
+            std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
+
+            if (!unicode_value)
+            {
+                throw std::runtime_error("ERROR: `create_glyph_objects`: exctracting Unicode value failed!");
+            }
+
+            Glyph* glyph_pointer = vector_font_master_of_text_3d->get_glyph_pointer(*unicode_value);
 
             if (glyph_pointer == nullptr)
             {
                 // `nullptr`, so skip this character.
-                std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
+                std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << *unicode_value << std::dec << "\n";
                 continue;
             }
 
-            std::cout << "Creating `GlyphObject` instance for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
+            std::cout << "Creating `GlyphObject` instance for unicode_value 0x" << std::hex << *unicode_value << std::dec << "\n";
 
             GlyphObjectStruct glyph_object_struct {
                     Request(scene_parent_of_text_3d),

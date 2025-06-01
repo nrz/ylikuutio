@@ -62,25 +62,21 @@ namespace yli::load
         yli::string::print_hexdump(filename);
 
         // Find out the filename.
-        std::string filename_buffer;
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-        const std::size_t filename_length = yli::string::extract_last_part_of_string(
+        std::string filename_buffer = yli::string::extract_last_part_of_string(
                 filename,
-                filename_buffer,
                 separator);
 
-        std::cout << "Filename length: " << filename_length << " bytes.\n";
+        std::cout << "Filename length: " << filename_buffer.size() << " characters.\n";
 
         std::cout << "Texture file: " << filename_buffer << "\n";
 
         // Find out the file suffix (filetype).
-        std::string file_suffix_buffer;
         const char suffix_separator = '.';
 
-        yli::string::extract_last_part_of_string(
+        std::string file_suffix_buffer = yli::string::extract_last_part_of_string(
                 filename_buffer,
-                file_suffix_buffer,
                 suffix_separator);
 
         std::cout << "Texture file suffix: " << file_suffix_buffer << "\n";

@@ -20,7 +20,10 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
+#include <iostream>    // std::cout, std::cerr
+#include <limits>      // std::numeric_limits
 #include <stdint.h>    // uint32_t etc.
+#include <optional>    // std::nullopt, std::optional
 #include <string>      // std::string
 #include <string_view> // std::string_view
 #include <vector>      // std::vector
@@ -38,115 +41,149 @@ namespace yli::string
     // If no string is extracted, then `data_index` or `src_data_pointer`
     // (according to the function) is not modified.
 
-    void extract_string(
+    std::string extract_string(
             std::string_view data_string,
             std::size_t& data_index,
-            std::string& dest_string,
             const char separator);
 
-    void extract_string_with_several_endings(
+    std::string extract_string_with_several_endings(
             std::string_view data_string,
             std::size_t& data_index,
-            std::string& dest_string,
             std::string_view char_end_string);
 
-    std::size_t extract_last_part_of_string(
+    std::string extract_last_part_of_string(
             std::string_view data_string,
-            std::string& dest_string,
             const char separator);
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int8_t& value);
+    template<typename T>
+        std::optional<T> convert_string_to_signed_integer(std::string_view string)
+        {
+            int32_t value = std::strtol(std::string(string).c_str(), nullptr, 10); // base 10.
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint8_t& value);
+            if (value < std::numeric_limits<T>::min())
+            {
+                std::cerr << "ERROR: `yli::string::convert_string_to_signed_integer`: value " << value << " is too small for the type!\n";
+                return std::nullopt;
+            }
+            else if (value > std::numeric_limits<T>::max())
+            {
+                std::cerr << "ERROR: `yli::string::convert_string_to_signed_integer`: value " << value << " is too big for the type!\n";
+                return std::nullopt;
+            }
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int16_t& value);
+            return static_cast<T>(value);
+        }
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint16_t& value);
+    template<typename T>
+        std::optional<T> convert_string_to_unsigned_integer(std::string_view string)
+        {
+            uint32_t value = std::strtoul(std::string(string).c_str(), nullptr, 10); // base 10.
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int32_t& value);
+            if (value > std::numeric_limits<T>::max())
+            {
+                std::cerr << "ERROR: `yli::string::convert_string_to_unsigned_integer`: value " << value << " is too big for the type!\n";
+                return std::nullopt;
+            }
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint32_t& value);
+            return static_cast<T>(value);
+        }
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            float& value);
+    template<typename T>
+        std::optional<T> convert_string_to_value(std::string_view string) = delete;
 
-    int8_t extract_int8_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<int8_t> convert_string_to_value<int8_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_signed_integer<int8_t>(string);
+        }
 
-    uint8_t extract_uint8_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<uint8_t> convert_string_to_value<uint8_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_unsigned_integer<uint8_t>(string);
+        }
 
-    int16_t extract_int16_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<int16_t> convert_string_to_value<int16_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_signed_integer<int16_t>(string);
+        }
 
-    uint16_t extract_uint16_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<uint16_t> convert_string_to_value<uint16_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_unsigned_integer<uint16_t>(string);
+        }
 
-    int32_t extract_int32_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<int32_t> convert_string_to_value<int32_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_signed_integer<int32_t>(string);
+        }
 
-    uint32_t extract_uint32_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<uint32_t> convert_string_to_value<uint32_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_unsigned_integer<uint32_t>(string);
+        }
 
-    float extract_float_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description);
+    template<>
+        inline std::optional<float> convert_string_to_value<float>(std::string_view string)
+        {
+            return std::strtof(std::string(string).c_str(), nullptr);
+        }
 
-    int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
+    template<>
+        inline std::optional<double> convert_string_to_value<double>(std::string_view string)
+        {
+            return std::strtod(std::string(string).c_str(), nullptr);
+        }
+
+    template<typename T>
+        std::optional<T> extract_value_from_string(
+                std::string_view data_string,
+                std::size_t& data_index,
+                std::string_view char_end_string,
+                std::string_view description)
+        {
+            std::string string = yli::string::extract_string_with_several_endings(
+                    data_string,
+                    data_index,
+                    char_end_string);
+
+            std::optional<T> value = yli::string::convert_string_to_value<T>(string);
+
+            if (!value)
+            {
+                std::cerr << "ERROR: `yli::string::extract_value_from_string`: converting string to value failed!\n";
+                return std::nullopt;
+            }
+
+            if (!description.empty())
+            {
+                std::cout << description << ": " << *value << "\n";
+            }
+            return value;
+        }
+
+    template<typename T>
+        T extract_value_or_throw(
+                std::string_view data_string,
+                std::size_t& data_index,
+                std::string_view char_end_string,
+                std::string_view description)
+        {
+            std::optional<T> value = yli::string::extract_value_from_string<T>(data_string, data_index, char_end_string, description);
+
+            if (!value)
+            {
+                throw std::runtime_error("ERROR: `yli::string::extract_value_or_throw`: extracting value failed!");
+            }
+
+            return *value;
+        }
+
+    std::optional<int32_t> extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
     template<typename Alloc, template<typename, typename> typename T1>
         std::string convert_char_container_to_std_string(

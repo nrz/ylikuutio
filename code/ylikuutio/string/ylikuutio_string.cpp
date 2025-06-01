@@ -24,6 +24,7 @@
 #include <ios>         // std::dec, std::hex
 #include <iostream>    // std::cout, std::cerr
 #include <limits>      // std::numeric_limits
+#include <optional>    // std::optional
 #include <sstream>     // std::stringstream
 #include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
@@ -54,29 +55,26 @@ namespace yli::string
         return false;
     }
 
-    void extract_string(
+    std::string extract_string(
             std::string_view data_string,
             std::size_t& data_index,
-            std::string& dest_string,
             const char separator)
     {
-        yli::string::extract_string_with_several_endings(
+        return yli::string::extract_string_with_several_endings(
                 data_string,
                 data_index,
-                dest_string,
                 std::string(1, separator));
     }
 
-    void extract_string_with_several_endings(
+    std::string extract_string_with_several_endings(
             std::string_view data_string,
             std::size_t& data_index,
-            std::string& dest_string,
             std::string_view char_end_string)
     {
         // This function copies characters from `src_data_pointer` until a character matches.
         if (data_index >= data_string.size())
         {
-            return;
+            return "";
         }
 
         std::size_t original_data_index = data_index;
@@ -91,8 +89,7 @@ namespace yli::string
             {
                 if (current_char == *end_char_it)
                 {
-                    dest_string = data_string.substr(original_data_index, data_index - original_data_index);
-                    return;
+                    return std::string(data_string.substr(original_data_index, data_index - original_data_index));
                 }
                 ++end_char_it;
             }
@@ -101,12 +98,11 @@ namespace yli::string
             data_index++;
         }
 
-        dest_string = data_string.substr(original_data_index, data_index - original_data_index);
+        return std::string(data_string.substr(original_data_index, data_index - original_data_index));
     }
 
-    std::size_t extract_last_part_of_string(
+    std::string extract_last_part_of_string(
             std::string_view data_string,
-            std::string& dest_string,
             const char separator)
     {
         std::size_t length_of_last_part_of_string = 0;
@@ -127,316 +123,14 @@ namespace yli::string
 
         if (separator_it == data_string.end())
         {
-            dest_string = "";
-            return 0;
+            return "";
         }
 
         ++separator_it;
-        dest_string = std::string(separator_it, data_string.end());
-        return length_of_last_part_of_string;
+        return std::string(separator_it, data_string.end());
     }
 
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int8_t& value)
-    {
-        value = yli::string::extract_int8_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint8_t& value)
-    {
-        value = yli::string::extract_uint8_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int16_t& value)
-    {
-        value = yli::string::extract_int16_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint16_t& value)
-    {
-        value = yli::string::extract_uint16_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            int32_t& value)
-    {
-        value = yli::string::extract_int32_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            uint32_t& value)
-    {
-        value = yli::string::extract_uint32_t_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    void extract_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description,
-            float& value)
-    {
-        value = yli::string::extract_float_value_from_string(
-                data_string,
-                data_index,
-                char_end_string,
-                description);
-    }
-
-    int8_t extract_int8_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
-        int8_t int8_t_value = 0;
-
-        if (value < std::numeric_limits<int8_t>::min())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too small for `int8_t`! 0 returned.\n";
-        }
-        else if (value > std::numeric_limits<int8_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `int8_t`! 0 returned.\n";
-        }
-        else
-        {
-            int8_t_value = static_cast<int8_t>(value);
-        }
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return int8_t_value;
-    }
-
-    uint8_t extract_uint8_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
-        uint8_t uint8_t_value = 0;
-
-        if (value > std::numeric_limits<uint8_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `uint8_t`! 0 returned.\n";
-        }
-        else
-        {
-            uint8_t_value = static_cast<uint8_t>(value);
-        }
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return uint8_t_value;
-    }
-
-    int16_t extract_int16_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
-        int16_t int16_t_value = 0;
-
-        if (value < std::numeric_limits<int16_t>::min())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too small for `int16_t`! 0 returned.\n";
-        }
-        else if (value > std::numeric_limits<int16_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `int16_t`! 0 returned.\n";
-        }
-        else
-        {
-            int16_t_value = static_cast<int16_t>(value);
-        }
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return int16_t_value;
-    }
-
-    uint16_t extract_uint16_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
-        uint16_t uint16_t_value = 0;
-
-        if (value > std::numeric_limits<uint16_t>::max())
-        {
-            std::cerr << "ERROR: `value` " << value << " is too big for `uint16_t`! 0 returned.\n";
-        }
-        else
-        {
-            uint16_t_value = static_cast<uint16_t>(value);
-        }
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return uint16_t_value;
-    }
-
-    int32_t extract_int32_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        int32_t value = std::strtol(char_number_buffer.c_str(), nullptr, 10); // base 10.
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    uint32_t extract_uint32_t_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        uint32_t value = std::strtoul(char_number_buffer.c_str(), nullptr, 10); // base 10.
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    float extract_float_value_from_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string,
-            std::string_view description)
-    {
-        std::string char_number_buffer;
-        yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                char_number_buffer,
-                char_end_string);
-
-        float value = std::strtof(char_number_buffer.c_str(), nullptr);
-
-        if (!description.empty())
-        {
-            std::cout << description << ": " << value << "\n";
-        }
-        return value;
-    }
-
-    int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer)
+    std::optional<int32_t> extract_unicode_value_from_string(const char*& unicode_char_pointer)
     {
         if (*unicode_char_pointer == '\0')
         {

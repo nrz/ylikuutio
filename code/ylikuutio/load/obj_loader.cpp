@@ -85,9 +85,8 @@ namespace yli::load
             }
 
             // OK, non-whitespace found.
-            std::string current_line_string;
             const char* newline_char_end_string = "\n";
-            yli::string::extract_string_with_several_endings(*file_content, file_content_i, current_line_string, newline_char_end_string);
+            std::string current_line_string = yli::string::extract_string_with_several_endings(*file_content, file_content_i, newline_char_end_string);
 
             // Replace slashes `'/'` with space `' '`, to make string processing easier.
             std::replace(current_line_string.begin(), current_line_string.end(), '/', ' ');

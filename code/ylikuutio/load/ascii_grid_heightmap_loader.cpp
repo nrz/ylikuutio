@@ -36,6 +36,7 @@
 #include <cmath>       // floor
 #include <cstddef>     // std::size_t
 #include <iostream>    // std::cout, std::cerr
+#include <optional>    // std::optional
 #include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
 #include <string_view> // std::string_view
@@ -103,29 +104,41 @@ namespace yli::load
             file_content_i++;
         }
 
-        const int32_t image_width_int32_t = yli::string::extract_int32_t_value_from_string(
+        std::optional<int32_t> image_width_int32_t = yli::string::extract_value_from_string<int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
                 "ncols");
 
+        if (!image_width_int32_t)
+        {
+            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting image width failed!\n";
+            return false;
+        }
+
         while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
-        const int32_t image_height_int32_t = yli::string::extract_int32_t_value_from_string(
+        std::optional<int32_t> image_height_int32_t = yli::string::extract_value_from_string<int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
                 "nrows");
 
+        if (!image_height_int32_t)
+        {
+            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting image height failed!\n";
+            return false;
+        }
+
         while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
-        yli::string::extract_float_value_from_string(
+        yli::string::extract_value_from_string<float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -136,7 +149,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_float_value_from_string(
+        yli::string::extract_value_from_string<float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -147,7 +160,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_float_value_from_string(
+        yli::string::extract_value_from_string<float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -158,7 +171,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_float_value_from_string(
+        yli::string::extract_value_from_string<float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -176,8 +189,8 @@ namespace yli::load
             return false;
         }
 
-        image_width = static_cast<uint32_t>(image_width_int32_t);
-        image_height = static_cast<uint32_t>(image_height_int32_t);
+        image_width = static_cast<uint32_t>(*image_width_int32_t);
+        image_height = static_cast<uint32_t>(*image_height_int32_t);
 
         std::vector<float> vertex_data;
         vertex_data.reserve(static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height));
@@ -206,11 +219,19 @@ namespace yli::load
                         file_content_i++;
                     }
 
-                    vertex_data.emplace_back(yli::string::extract_float_value_from_string(
-                                *file_content,
-                                file_content_i,
-                                " \n",
-                                std::string_view("")));
+                    std::optional<float> z_coordinate = yli::string::extract_value_from_string<float>(
+                            *file_content,
+                            file_content_i,
+                            " \n",
+                            std::string_view(""));
+
+                    if (!z_coordinate)
+                    {
+                        std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting z-coordinate failed!\n";
+                        return false;
+                    }
+
+                    vertex_data.emplace_back(*z_coordinate);
                 }
             }
         }

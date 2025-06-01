@@ -114,9 +114,15 @@ namespace yli::load
                     break;
                 }
 
-                T1 value = 0;
-                yli::string::extract_value_from_string(*file_content, file_content_i, char_end_string, std::string_view(""), value);
-                data_vector.emplace_back(value);
+                std::optional<T1> value = yli::string::extract_value_from_string<T1>(*file_content, file_content_i, char_end_string, std::string_view(""));
+
+                if (!value)
+                {
+                    std::cerr << "ERROR: `yli::load::load_csv_file`: extracting value from string failed!\n";
+                    return std::nullopt;
+                }
+
+                data_vector.emplace_back(*value);
                 n_elements_in_current_line++;
 
                 while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
