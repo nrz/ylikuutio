@@ -42,19 +42,19 @@ namespace yli::interpolation
             // Sampling is always done from the center of the texel.
 
             const float floor_x = std::floor(x);
-            const float floor_z = std::floor(y);
+            const float floor_y = std::floor(y);
 
             const float weight_x0 = (x - floor_x >= 0.5f ? 1.0f - (x - floor_x - 0.5f) : 0.5f - (x - floor_x)); // 0 <= weight_x0 <= 1
             const float weight_x1 = 1.0f - weight_x0;                                                           // 0 <= weight_x1 <= 1
 
-            const float weight_z0 = (y - floor_z >= 0.5f ? 1.0f - (y - floor_z - 0.5f) : 0.5f - (y - floor_z)); // 0 <= weight_z0 <= 1
+            const float weight_z0 = (y - floor_y >= 0.5f ? 1.0f - (y - floor_y - 0.5f) : 0.5f - (y - floor_y)); // 0 <= weight_z0 <= 1
             const float weight_z1 = 1.0f - weight_z0;                                                           // 0 <= weight_z1 <= 1
 
             const std::size_t x0 = (x - floor_x >= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x - 1));
             const std::size_t x1 = (x - floor_x <= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x + 1));
 
-            const std::size_t z0 = (y - floor_z >= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z - 1));
-            const std::size_t z1 = (y - floor_z <= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z + 1));
+            const std::size_t z0 = (y - floor_y >= 0.5f ? static_cast<std::size_t>(floor_y) : static_cast<std::size_t>(floor_y - 1));
+            const std::size_t z1 = (y - floor_y <= 0.5f ? static_cast<std::size_t>(floor_y) : static_cast<std::size_t>(floor_y + 1));
 
             const std::ptrdiff_t data_sw_ptrdiff_t = static_cast<ptrdiff_t>(image_width * z0 + x0); // southwest.
             const std::ptrdiff_t data_se_ptrdiff_t = static_cast<ptrdiff_t>(image_width * z0 + x1); // southeast.
