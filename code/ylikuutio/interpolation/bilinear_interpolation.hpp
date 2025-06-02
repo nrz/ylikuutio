@@ -47,8 +47,8 @@ namespace yli::interpolation
             const float weight_x0 = (x - floor_x >= 0.5f ? 1.0f - (x - floor_x - 0.5f) : 0.5f - (x - floor_x)); // 0 <= weight_x0 <= 1
             const float weight_x1 = 1.0f - weight_x0;                                                           // 0 <= weight_x1 <= 1
 
-            const float weight_z0 = (y - floor_y >= 0.5f ? 1.0f - (y - floor_y - 0.5f) : 0.5f - (y - floor_y)); // 0 <= weight_z0 <= 1
-            const float weight_z1 = 1.0f - weight_z0;                                                           // 0 <= weight_z1 <= 1
+            const float weight_y0 = (y - floor_y >= 0.5f ? 1.0f - (y - floor_y - 0.5f) : 0.5f - (y - floor_y)); // 0 <= weight_y0 <= 1
+            const float weight_y1 = 1.0f - weight_y0;                                                           // 0 <= weight_y1 <= 1
 
             const std::size_t x0 = (x - floor_x >= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x - 1));
             const std::size_t x1 = (x - floor_x <= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x + 1));
@@ -66,7 +66,7 @@ namespace yli::interpolation
             const float data_ne = static_cast<float>(*(source_image + data_ne_ptrdiff_t));
 
             // Interpolate.
-            return weight_x0 * weight_z0 * data_sw + weight_x1 * weight_z0 * data_se + weight_x0 * weight_z1 * data_nw + weight_x1 * weight_z1 * data_ne;
+            return weight_x0 * weight_y0 * data_sw + weight_x1 * weight_y0 * data_se + weight_x0 * weight_y1 * data_nw + weight_x1 * weight_y1 * data_ne;
         }
 
     template<typename T1>
