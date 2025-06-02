@@ -118,11 +118,11 @@ namespace yli::interpolation
             output_vector->reserve(n_output_vertices);
 
             const float delta_x = static_cast<float>(input_image_width) / static_cast<float>(output_image_width);
-            const float delta_z = static_cast<float>(input_image_height) / static_cast<float>(output_image_height);
+            const float delta_y = static_cast<float>(input_image_height) / static_cast<float>(output_image_height);
 
-            float y = 0.5f * delta_z;
+            float y = 0.5f * delta_y;
 
-            for (std::size_t z_index = 0; z_index < output_image_height; z_index++, y += delta_z)
+            for (std::size_t z_index = 0; z_index < output_image_height; z_index++, y += delta_y)
             {
                 float x = 0.5f * delta_x;
 
