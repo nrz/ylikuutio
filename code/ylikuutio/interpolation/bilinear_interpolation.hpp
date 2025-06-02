@@ -35,26 +35,26 @@ namespace yli::interpolation
                 const float image_width,
                 const float /* image_height */,
                 const float x,
-                const float z)
+                const float y)
         {
-            // (x,z) coordinates.
+            // (x,y) coordinates.
             // First texel extends from (0, 0) to (1, 1).
             // Sampling is always done from the center of the texel.
 
             const float floor_x = std::floor(x);
-            const float floor_z = std::floor(z);
+            const float floor_z = std::floor(y);
 
             const float weight_x0 = (x - floor_x >= 0.5f ? 1.0f - (x - floor_x - 0.5f) : 0.5f - (x - floor_x)); // 0 <= weight_x0 <= 1
             const float weight_x1 = 1.0f - weight_x0;                                                           // 0 <= weight_x1 <= 1
 
-            const float weight_z0 = (z - floor_z >= 0.5f ? 1.0f - (z - floor_z - 0.5f) : 0.5f - (z - floor_z)); // 0 <= weight_z0 <= 1
+            const float weight_z0 = (y - floor_z >= 0.5f ? 1.0f - (y - floor_z - 0.5f) : 0.5f - (y - floor_z)); // 0 <= weight_z0 <= 1
             const float weight_z1 = 1.0f - weight_z0;                                                           // 0 <= weight_z1 <= 1
 
             const std::size_t x0 = (x - floor_x >= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x - 1));
             const std::size_t x1 = (x - floor_x <= 0.5f ? static_cast<std::size_t>(floor_x) : static_cast<std::size_t>(floor_x + 1));
 
-            const std::size_t z0 = (z - floor_z >= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z - 1));
-            const std::size_t z1 = (z - floor_z <= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z + 1));
+            const std::size_t z0 = (y - floor_z >= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z - 1));
+            const std::size_t z1 = (y - floor_z <= 0.5f ? static_cast<std::size_t>(floor_z) : static_cast<std::size_t>(floor_z + 1));
 
             const std::ptrdiff_t data_sw_ptrdiff_t = static_cast<ptrdiff_t>(image_width * z0 + x0); // southwest.
             const std::ptrdiff_t data_se_ptrdiff_t = static_cast<ptrdiff_t>(image_width * z0 + x1); // southeast.
@@ -120,15 +120,15 @@ namespace yli::interpolation
             const float delta_x = static_cast<float>(input_image_width) / static_cast<float>(output_image_width);
             const float delta_z = static_cast<float>(input_image_height) / static_cast<float>(output_image_height);
 
-            float z = 0.5f * delta_z;
+            float y = 0.5f * delta_z;
 
-            for (std::size_t z_index = 0; z_index < output_image_height; z_index++, z += delta_z)
+            for (std::size_t z_index = 0; z_index < output_image_height; z_index++, y += delta_z)
             {
                 float x = 0.5f * delta_x;
 
                 for (std::size_t x_index = 0; x_index < output_image_width; x_index++, x += delta_x)
                 {
-                    const float value = yli::interpolation::sample_2d(source_image, input_image_width, input_image_height, x, z);
+                    const float value = yli::interpolation::sample_2d(source_image, input_image_width, input_image_height, x, y);
 
                     output_vector->emplace_back(value);
                 }
