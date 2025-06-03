@@ -27,7 +27,7 @@ namespace yli::console
     class CurrentInput : public TextInput
     {
         public:
-            CurrentInput(ConsoleStateModule& console_state_module);
+            explicit CurrentInput(ConsoleStateModule& console_state_module);
     };
 }
 
