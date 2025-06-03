@@ -27,7 +27,7 @@ namespace yli::console
     class TempInput : public TextInput
     {
         public:
-            TempInput(ConsoleStateModule& console_state_module);
+            explicit TempInput(ConsoleStateModule& console_state_module);
     };
 }
 
