@@ -499,7 +499,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/function_arg_extractor.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
-    code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp
 
     # load, in alphabetical order.
