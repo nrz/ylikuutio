@@ -311,14 +311,14 @@ namespace yli::string
             return value;
         }
 
-    template<typename T>
-        T extract_value_or_throw(
-                std::string_view data_string,
+    template<typename CharType, typename ValueType>
+        ValueType extract_value_or_throw(
+                std::basic_string_view<CharType> data_string,
                 std::size_t& data_index,
-                std::string_view char_end_string,
-                std::string_view description)
+                std::basic_string_view<CharType> char_end_string,
+                std::basic_string_view<CharType> description)
         {
-            std::optional<T> value = yli::string::extract_value_from_string<char, T>(data_string, data_index, char_end_string, description);
+            std::optional<ValueType> value = yli::string::extract_value_from_string<CharType, ValueType>(data_string, data_index, char_end_string, description);
 
             if (!value)
             {
