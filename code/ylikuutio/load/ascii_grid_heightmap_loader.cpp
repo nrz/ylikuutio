@@ -99,7 +99,7 @@ namespace yli::load
         // All possible block identifier strings.
         const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -116,7 +116,7 @@ namespace yli::load
             return false;
         }
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -133,7 +133,7 @@ namespace yli::load
             return false;
         }
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -144,7 +144,7 @@ namespace yli::load
                 " \n",
                 "xllcorner");
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -155,7 +155,7 @@ namespace yli::load
                 " \n",
                 "yllcorner");
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -166,7 +166,7 @@ namespace yli::load
                 " \n",
                 "cellsize");
 
-        while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
@@ -214,7 +214,7 @@ namespace yli::load
 
                 for (uint32_t x = 0; x < image_width; x++)
                 {
-                    while (!yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, number_strings_vector))
+                    while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
                     {
                         file_content_i++;
                     }

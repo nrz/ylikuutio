@@ -31,28 +31,29 @@
 
 namespace yli::string
 {
-    inline bool check_and_report_if_some_string_matches(
-            std::string_view data_string,
-            const std::size_t data_index,
-            const std::vector<std::string>& identifier_strings_vector)
-    {
-        for (const std::string& identifier_string : identifier_strings_vector)
+    template<typename CharType>
+        inline bool check_and_report_if_some_string_matches(
+                std::basic_string_view<CharType> data_string,
+                const std::size_t data_index,
+                const std::vector<std::basic_string<CharType>>& identifier_strings_vector)
         {
-            if (data_index + identifier_string.size() > data_string.size())
+            for (const std::basic_string<CharType>& identifier_string : identifier_strings_vector)
             {
-                // If current `identifier_string` can't fit in the memory region,
-                // proceed to the next `identifier_string`, if there is any left.
-                continue;
+                if (data_index + identifier_string.size() > data_string.size())
+                {
+                    // If current `identifier_string` can't fit in the memory region,
+                    // proceed to the next `identifier_string`, if there is any left.
+                    continue;
+                }
+
+                if (data_string.compare(data_index, identifier_string.size(), identifier_string) == 0)
+                {
+                    return true;
+                }
             }
 
-            if (data_string.compare(data_index, identifier_string.size(), identifier_string) == 0)
-            {
-                return true;
-            }
+            return false;
         }
-
-        return false;
-    }
 
     // All string extraction functions of `yli::string` advance either
     // `data_index` or `src_data_pointer` to the first character that

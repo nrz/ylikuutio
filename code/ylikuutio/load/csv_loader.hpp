@@ -78,7 +78,7 @@ namespace yli::load
                 // All possible block identifier strings.
                 const std::vector<std::string> whitespace_strings = { ",", " ", "\n" };
 
-                while (yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
+                while (yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_strings))
                 {
                     if (file_content_i < file_content->size() && file_content->at(file_content_i) == '\n')
                     {
@@ -125,7 +125,7 @@ namespace yli::load
                 data_vector.emplace_back(*value);
                 n_elements_in_current_line++;
 
-                while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches(*file_content, file_content_i, whitespace_strings))
+                while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_strings))
                 {
                     file_content_i++;
                 }
