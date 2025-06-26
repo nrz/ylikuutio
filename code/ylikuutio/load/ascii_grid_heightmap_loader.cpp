@@ -104,7 +104,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<int32_t> image_width_int32_t = yli::string::extract_value_from_string<int32_t>(
+        std::optional<int32_t> image_width_int32_t = yli::string::extract_value_from_string<char, int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -121,7 +121,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<int32_t> image_height_int32_t = yli::string::extract_value_from_string<int32_t>(
+        std::optional<int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -138,7 +138,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_value_from_string<float>(
+        yli::string::extract_value_from_string<char, float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -149,7 +149,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_value_from_string<float>(
+        yli::string::extract_value_from_string<char, float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -160,7 +160,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_value_from_string<float>(
+        yli::string::extract_value_from_string<char, float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -171,7 +171,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        yli::string::extract_value_from_string<float>(
+        yli::string::extract_value_from_string<char, float>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -219,7 +219,7 @@ namespace yli::load
                         file_content_i++;
                     }
 
-                    std::optional<float> z_coordinate = yli::string::extract_value_from_string<float>(
+                    std::optional<float> z_coordinate = yli::string::extract_value_from_string<char, float>(
                             *file_content,
                             file_content_i,
                             " \n",

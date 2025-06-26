@@ -114,7 +114,7 @@ namespace yli::load
                     break;
                 }
 
-                std::optional<T1> value = yli::string::extract_value_from_string<T1>(*file_content, file_content_i, char_end_string, std::string_view(""));
+                std::optional<T1> value = yli::string::extract_value_from_string<char, T1>(*file_content, file_content_i, char_end_string, std::string_view(""));
 
                 if (!value)
                 {

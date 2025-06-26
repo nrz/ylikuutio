@@ -284,19 +284,19 @@ namespace yli::string
             return std::strtod(std::string(string).c_str(), nullptr);
         }
 
-    template<typename T>
-        std::optional<T> extract_value_from_string(
+    template<typename CharType, typename ValueType>
+        std::optional<ValueType> extract_value_from_string(
                 std::string_view data_string,
                 std::size_t& data_index,
                 std::string_view char_end_string,
                 std::string_view description)
         {
-            std::string string = yli::string::extract_string_with_several_endings<char>(
+            std::string string = yli::string::extract_string_with_several_endings<CharType>(
                     data_string,
                     data_index,
                     char_end_string);
 
-            std::optional<T> value = yli::string::convert_string_to_value<T>(string);
+            std::optional<ValueType> value = yli::string::convert_string_to_value<ValueType>(string);
 
             if (!value)
             {
@@ -318,7 +318,7 @@ namespace yli::string
                 std::string_view char_end_string,
                 std::string_view description)
         {
-            std::optional<T> value = yli::string::extract_value_from_string<T>(data_string, data_index, char_end_string, description);
+            std::optional<T> value = yli::string::extract_value_from_string<char, T>(data_string, data_index, char_end_string, description);
 
             if (!value)
             {
