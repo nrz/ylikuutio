@@ -23,8 +23,8 @@
 #include <cstdlib>     // std::strtod, std::strtof, std::strtol, std::strtoul
 #include <iostream>    // std::cout, std::cerr
 #include <limits>      // std::numeric_limits
-#include <stdint.h>    // uint32_t etc.
 #include <optional>    // std::nullopt, std::optional
+#include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
 #include <string_view> // std::string_view
 #include <vector>      // std::vector
