@@ -31,10 +31,28 @@
 
 namespace yli::string
 {
-    bool check_and_report_if_some_string_matches(
+    inline bool check_and_report_if_some_string_matches(
             std::string_view data_string,
             const std::size_t data_index,
-            const std::vector<std::string>& identifier_strings_vector);
+            const std::vector<std::string>& identifier_strings_vector)
+    {
+        for (const std::string& identifier_string : identifier_strings_vector)
+        {
+            if (data_index + identifier_string.size() > data_string.size())
+            {
+                // If current `identifier_string` can't fit in the memory region,
+                // proceed to the next `identifier_string`, if there is any left.
+                continue;
+            }
+
+            if (data_string.compare(data_index, identifier_string.size(), identifier_string) == 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     // All string extraction functions of `yli::string` advance either
     // `data_index` or `src_data_pointer` to the first character that
