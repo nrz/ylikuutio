@@ -62,139 +62,143 @@ namespace yli::string
     // If no string is extracted, then `data_index` or `src_data_pointer`
     // (according to the function) is not modified.
 
-    inline std::string extract_string_with_several_endings(
-            std::string_view data_string,
-            std::size_t& data_index,
-            std::string_view char_end_string)
-    {
-        // This function copies characters from `src_data_pointer` until a character matches.
-        if (data_index >= data_string.size())
+    template<typename CharType>
+        inline std::basic_string<CharType> extract_string_with_several_endings(
+                std::basic_string_view<CharType> data_string,
+                std::size_t& data_index,
+                std::basic_string_view<CharType> char_end_string)
         {
-            return "";
-        }
-
-        std::size_t original_data_index = data_index;
-
-        while (data_index < data_string.size())
-        {
-            std::string_view::const_iterator end_char_it = char_end_string.begin();
-            const char current_char = data_string.at(data_index);
-
-            // Check if current character is any of the ending characters.
-            while (end_char_it != char_end_string.end())
+            // This function copies characters from `src_data_pointer` until a character matches.
+            if (data_index >= data_string.size())
             {
-                if (current_char == *end_char_it)
+                return "";
+            }
+
+            std::size_t original_data_index = data_index;
+
+            while (data_index < data_string.size())
+            {
+                typename std::basic_string_view<CharType>::const_iterator end_char_it = char_end_string.begin();
+                const CharType current_char = data_string.at(data_index);
+
+                // Check if current character is any of the ending characters.
+                while (end_char_it != char_end_string.end())
                 {
-                    return std::string(data_string.substr(original_data_index, data_index - original_data_index));
+                    if (current_char == *end_char_it)
+                    {
+                        return std::basic_string<CharType>(data_string.substr(original_data_index, data_index - original_data_index));
+                    }
+                    ++end_char_it;
                 }
-                ++end_char_it;
+
+                // OK, current character is not any of the ending characters.
+                data_index++;
             }
 
-            // OK, current character is not any of the ending characters.
-            data_index++;
+            return std::basic_string<CharType>(data_string.substr(original_data_index, data_index - original_data_index));
         }
 
-        return std::string(data_string.substr(original_data_index, data_index - original_data_index));
-    }
-
-    inline std::string extract_last_part_of_string(
-            std::string_view data_string,
-            const char separator)
-    {
-        std::size_t length_of_last_part_of_string = 0;
-        auto separator_it = data_string.end(); // by default no last part.
-
-        for (auto it = data_string.begin(); it != data_string.end(); ++it)
+    template<typename CharType>
+        inline std::basic_string<CharType> extract_last_part_of_string(
+                std::basic_string_view<CharType> data_string,
+                const CharType separator)
         {
-            if (*it == separator)
+            std::size_t length_of_last_part_of_string = 0;
+            auto separator_it = data_string.end(); // by default no last part.
+
+            for (auto it = data_string.begin(); it != data_string.end(); ++it)
             {
-                separator_it = it;
-                length_of_last_part_of_string = 0;
+                if (*it == separator)
+                {
+                    separator_it = it;
+                    length_of_last_part_of_string = 0;
+                }
+                else
+                {
+                    length_of_last_part_of_string++;
+                }
             }
-            else
+
+            if (separator_it == data_string.end())
             {
-                length_of_last_part_of_string++;
+                return "";
             }
+
+            ++separator_it;
+            return std::basic_string<CharType>(separator_it, data_string.end());
         }
 
-        if (separator_it == data_string.end())
+    template<typename CharType>
+        inline std::basic_string<CharType> extract_string(
+                std::basic_string_view<CharType> data_string,
+                std::size_t& data_index,
+                const CharType separator)
         {
-            return "";
+            return yli::string::extract_string_with_several_endings<CharType>(
+                    data_string,
+                    data_index,
+                    std::basic_string<CharType>(1, separator));
         }
 
-        ++separator_it;
-        return std::string(separator_it, data_string.end());
-    }
-
-    inline std::string extract_string(
-            std::string_view data_string,
-            std::size_t& data_index,
-            const char separator)
-    {
-        return yli::string::extract_string_with_several_endings(
-                data_string,
-                data_index,
-                std::string(1, separator));
-    }
-
-    inline std::optional<int32_t> extract_unicode_value_from_string(const char*& unicode_char_pointer)
-    {
-        if (*unicode_char_pointer == '\0')
-        {
-            unicode_char_pointer++;
-            std::cerr << "Error: Unicode can not begin with \\0!\n";
-            return 0xdfff; // invalid unicode!
-        }
-
-        if (*unicode_char_pointer != '&')
-        {
-            // it's just a character, so return its value,
-            // and advance to the next character.
-            return (int32_t) *unicode_char_pointer++;
-        }
-
-        if (*++unicode_char_pointer != '#')
-        {
-            // not valid format, must begin `"&#x"`.
-            unicode_char_pointer++;
-            std::cerr << "Error: Unicode string format not supported!\n";
-            return 0xdfff; // invalid unicode!
-        }
-
-        if (*++unicode_char_pointer != 'x')
-        {
-            // not valid format, must begin `"&#x"`.
-            unicode_char_pointer++;
-            std::cerr << "Error: Unicode string format not supported!\n";
-            return 0xdfff; // invalid unicode!
-        }
-
-        // valid format.
-        std::string hex_string;
-
-        // unicode string beginning with '&'
-        while (*++unicode_char_pointer != ';')
+    template<typename CharType>
+        inline std::optional<int32_t> extract_unicode_value_from_string(const CharType*& unicode_char_pointer)
         {
             if (*unicode_char_pointer == '\0')
             {
-                std::cerr << "Error: Null character \\0 reached before end of Unicode string!\n";
+                unicode_char_pointer++;
+                std::cerr << "Error: Unicode can not begin with \\0!\n";
                 return 0xdfff; // invalid unicode!
             }
 
-            hex_string.append(unicode_char_pointer);
+            if (*unicode_char_pointer != '&')
+            {
+                // it's just a character, so return its value,
+                // and advance to the next character.
+                return (int32_t) *unicode_char_pointer++;
+            }
+
+            if (*++unicode_char_pointer != '#')
+            {
+                // not valid format, must begin `"&#x"`.
+                unicode_char_pointer++;
+                std::cerr << "Error: Unicode string format not supported!\n";
+                return 0xdfff; // invalid unicode!
+            }
+
+            if (*++unicode_char_pointer != 'x')
+            {
+                // not valid format, must begin `"&#x"`.
+                unicode_char_pointer++;
+                std::cerr << "Error: Unicode string format not supported!\n";
+                return 0xdfff; // invalid unicode!
+            }
+
+            // valid format.
+            std::basic_string<CharType> hex_string;
+
+            // unicode string beginning with '&'
+            while (*++unicode_char_pointer != ';')
+            {
+                if (*unicode_char_pointer == '\0')
+                {
+                    std::cerr << "Error: Null character \\0 reached before end of Unicode string!\n";
+                    return 0xdfff; // invalid unicode!
+                }
+
+                hex_string.append(unicode_char_pointer);
+            }
+
+            // Advance to the next character.
+            unicode_char_pointer++;
+
+            // convert hexadecimal string to signed integer.
+            // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499
+            uint32_t unicode_value;
+            std::stringstream unicode_stringstream;
+            unicode_stringstream << std::hex << hex_string;
+            unicode_stringstream >> unicode_value;
+            return unicode_value;
         }
-
-        // Advance to the next character.
-        unicode_char_pointer++;
-
-        // convert hexadecimal string to signed integer.
-        // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499
-        uint32_t unicode_value;
-        std::stringstream unicode_stringstream;
-        unicode_stringstream << std::hex << hex_string;
-        unicode_stringstream >> unicode_value;
-        return unicode_value;
-    }
 
     template<typename T>
         std::optional<T> convert_string_to_signed_integer(std::string_view string)
@@ -287,7 +291,7 @@ namespace yli::string
                 std::string_view char_end_string,
                 std::string_view description)
         {
-            std::string string = yli::string::extract_string_with_several_endings(
+            std::string string = yli::string::extract_string_with_several_endings<char>(
                     data_string,
                     data_index,
                     char_end_string);
@@ -323,8 +327,6 @@ namespace yli::string
 
             return *value;
         }
-
-    std::optional<int32_t> extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
     template<typename Alloc, template<typename, typename> typename T1>
         std::string convert_char_container_to_std_string(

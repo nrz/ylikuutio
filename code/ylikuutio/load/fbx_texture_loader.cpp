@@ -64,7 +64,7 @@ namespace yli::load
         // Find out the filename.
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-        std::string filename_buffer = yli::string::extract_last_part_of_string(
+        std::string filename_buffer = yli::string::extract_last_part_of_string<char>(
                 filename,
                 separator);
 
@@ -75,7 +75,7 @@ namespace yli::load
         // Find out the file suffix (filetype).
         const char suffix_separator = '.';
 
-        std::string file_suffix_buffer = yli::string::extract_last_part_of_string(
+        std::string file_suffix_buffer = yli::string::extract_last_part_of_string<char>(
                 filename_buffer,
                 suffix_separator);
 

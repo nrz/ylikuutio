@@ -27,7 +27,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "";
     const char separator = 'a';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -36,7 +36,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "a";
     const char separator = 'b';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -45,7 +45,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "aa";
     const char separator = 'b';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -54,7 +54,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "ab";
     const char separator = 'c';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -63,7 +63,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "abc";
     const char separator = 'd';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -72,7 +72,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "ab";
     const char separator = 'b';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -81,7 +81,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "aa";
     const char separator = 'a';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -90,7 +90,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "aaa";
     const char separator = 'a';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -99,7 +99,7 @@ TEST(extract_last_part_of_string_std_string, 1_char_must_be_extracted_when_sourc
     const std::string my_string = "ab";
     const char separator = 'a';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_EQ(dest_string, "b");
 }
 
@@ -108,7 +108,7 @@ TEST(extract_last_part_of_string_std_string, nothing_must_be_extracted_when_sour
     const std::string my_string = "abc";
     const char separator = 'c';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_TRUE(dest_string.empty());
 }
 
@@ -117,7 +117,7 @@ TEST(extract_last_part_of_string_std_string, 1_char_must_be_extracted_when_sourc
     const std::string my_string = "abc";
     const char separator = 'b';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_EQ(dest_string, "c");
 }
 
@@ -126,6 +126,6 @@ TEST(extract_last_part_of_string_std_string, 2_chars_must_be_extracted_when_sour
     const std::string my_string = "abc";
     const char separator = 'a';
 
-    std::string dest_string = yli::string::extract_last_part_of_string(my_string, separator);
+    std::string dest_string = yli::string::extract_last_part_of_string<char>(my_string, separator);
     ASSERT_EQ(dest_string, "bc");
 }

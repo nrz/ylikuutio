@@ -53,7 +53,7 @@ namespace yli::ontology
 
         while (*text_pointer != '\0')
         {
-            std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
+            std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string<char>(text_pointer);
 
             if (!unicode_value)
             {

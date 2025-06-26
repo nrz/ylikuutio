@@ -30,7 +30,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -42,7 +42,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -54,7 +54,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "aa" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -66,7 +66,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "ab" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -78,7 +78,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -90,7 +90,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "ab" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -102,7 +102,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "ba" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -114,7 +114,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "aa" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -126,7 +126,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -138,7 +138,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -150,7 +150,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -162,7 +162,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -174,7 +174,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -186,7 +186,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -198,7 +198,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -210,7 +210,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -222,7 +222,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "bc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -234,7 +234,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "bc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -246,7 +246,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "bc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -258,7 +258,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "cb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -270,7 +270,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "cb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -282,7 +282,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "cb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -294,7 +294,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "bb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -306,7 +306,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "bb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -318,7 +318,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "bb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -330,7 +330,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -342,7 +342,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -354,7 +354,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -366,7 +366,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -378,7 +378,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -390,7 +390,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "a" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -402,7 +402,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -414,7 +414,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -426,7 +426,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "b" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -438,7 +438,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -450,7 +450,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -462,7 +462,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "c" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -474,7 +474,7 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
 
     std::string_view end_string { "d" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }
@@ -486,7 +486,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
 
     std::string_view end_string { "d" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }
@@ -498,7 +498,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 3_chars_
 
     std::string_view end_string { "d" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }
@@ -510,7 +510,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "ad" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -522,7 +522,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "ad" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -534,7 +534,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "ad" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -546,7 +546,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "da" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -558,7 +558,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "da" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -570,7 +570,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "da" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -582,7 +582,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "dea" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -594,7 +594,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "dea" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -606,7 +606,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "dea" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -618,7 +618,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "defa" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -630,7 +630,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "defa" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -642,7 +642,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "defa" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -654,7 +654,7 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     std::string_view end_string { "defga" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -666,7 +666,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
 
     std::string_view end_string { "defga" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -678,7 +678,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, nothing_
 
     std::string_view end_string { "defga" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -690,7 +690,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "bd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -702,7 +702,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "bd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -714,7 +714,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "bd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -726,7 +726,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "db" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -738,7 +738,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "db" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -750,7 +750,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "db" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -762,7 +762,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "deb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -774,7 +774,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "deb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -786,7 +786,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "deb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -798,7 +798,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "defb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -810,7 +810,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "defb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -822,7 +822,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "defb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -834,7 +834,7 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     std::string_view end_string { "defgb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -846,7 +846,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
 
     std::string_view end_string { "defgb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -858,7 +858,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 1_char_m
 
     std::string_view end_string { "defgb" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -870,7 +870,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "cd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -882,7 +882,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "cd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -894,7 +894,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "cd" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -906,7 +906,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "dc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -918,7 +918,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "dc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -930,7 +930,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "dc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -942,7 +942,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "dec" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -954,7 +954,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "dec" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -966,7 +966,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "dec" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -978,7 +978,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "defc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -990,7 +990,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "defc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -1002,7 +1002,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "defc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -1014,7 +1014,7 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     std::string_view end_string { "defgc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -1026,7 +1026,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
 
     std::string_view end_string { "defgc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -1038,7 +1038,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 2_chars_
 
     std::string_view end_string { "defgc" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -1050,7 +1050,7 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
 
     std::string_view end_string { "" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }
@@ -1062,7 +1062,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
 
     std::string_view end_string { "" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }
@@ -1074,7 +1074,7 @@ TEST(extract_string_with_several_endings_from_memory_std_string_in_out, 3_chars_
 
     std::string_view end_string { "" };
 
-    std::string dest_string = yli::string::extract_string_with_several_endings(text, data_index, end_string);
+    std::string dest_string = yli::string::extract_string_with_several_endings<char>(text, data_index, end_string);
     ASSERT_EQ(dest_string, "abc");
     ASSERT_EQ(data_index, 3);
 }

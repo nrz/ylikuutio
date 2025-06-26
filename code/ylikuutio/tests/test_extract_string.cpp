@@ -27,7 +27,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_e
     const std::string data_string = "";
     std::size_t data_index = 0;
     const char separator = 'a';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -37,7 +37,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_separator_matche
     const std::string data_string = "a";
     std::size_t data_index = 0;
     const char separator = 'a';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 0);
 }
@@ -47,7 +47,7 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_separator_does_no
     const std::string data_string = "a";
     std::size_t data_index = 0;
     const char separator = 'b';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -57,7 +57,7 @@ TEST(extract_string_from_memory, 2_chars_must_be_extracted_when_separator_does_n
     const std::string data_string = "ab";
     std::size_t data_index = 0;
     const char separator = 'c';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -67,7 +67,7 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_separator_matches
     const std::string data_string = "ab";
     std::size_t data_index = 0;
     const char separator = 'b';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_EQ(dest_string, "a");
     ASSERT_EQ(data_index, 1);
 }
@@ -77,7 +77,7 @@ TEST(extract_string_from_memory, 2_char_must_be_extracted_when_separator_matches
     const std::string data_string = "abc";
     std::size_t data_index = 0;
     const char separator = 'c';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_EQ(dest_string, "ab");
     ASSERT_EQ(data_index, 2);
 }
@@ -87,7 +87,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_e
     const std::string data_string = "";
     std::size_t data_index = 1;
     const char separator = 'a';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 1);
 }
@@ -97,7 +97,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_1
     const std::string data_string = "a";
     std::size_t data_index = 2;
     const char separator = 'b';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 2);
 }
@@ -107,7 +107,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_data_string_is_2
     const std::string data_string = "ab";
     std::size_t data_index = 2;
     const char separator = 'c';
-    std::string dest_string = yli::string::extract_string(data_string, data_index, separator);
+    std::string dest_string = yli::string::extract_string<char>(data_string, data_index, separator);
     ASSERT_TRUE(dest_string.empty());
     ASSERT_EQ(data_index, 2);
 }
