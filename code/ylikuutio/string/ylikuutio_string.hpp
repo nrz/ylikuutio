@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
 #include <cstdlib>     // std::strtod, std::strtof, std::strtol, std::strtoul
+#include <ios>         // std::hex
 #include <iostream>    // std::cout, std::cerr
 #include <limits>      // std::numeric_limits
 #include <optional>    // std::nullopt, std::optional
@@ -383,13 +384,126 @@ namespace yli::string
             return my_vector;
         }
 
-    bool check_if_float_string(std::string_view my_string);
-    bool check_if_double_string(std::string_view my_string);
-    bool check_if_floating_point_string(std::string_view my_string, const std::size_t safe_number_of_chars);
+    inline bool check_if_floating_point_string(std::string_view my_string, const std::size_t safe_number_of_chars)
+    {
+        std::size_t n_chars = 0;
 
-    bool check_if_signed_integer_string(std::string_view my_string);
+        if (my_string.empty())
+        {
+            return false;
+        }
 
-    bool check_if_unsigned_integer_string(std::string_view my_string);
+        bool is_dot_found = false;
+
+        for (std::size_t i = 0; i < my_string.size(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789.-
+            //
+            // Besides, there may be only 1 dot. The dot may not be the last character.
+            // Besides, there may be only 1 minus sign. The minus sign must be the first character.
+
+            if (my_string.at(i) == '-' && i == 0)
+            {
+                // Minus sign is OK.
+                continue;
+            }
+
+            if (my_string.at(i) == '.')
+            {
+                if (is_dot_found)
+                {
+                    // Two or more dots.
+                    return false;
+                }
+
+                if (i == my_string.size() - 1)
+                {
+                    // Last character is dot.
+                    return false;
+                }
+
+                // OK, decimal point here.
+                is_dot_found = true;
+                continue;
+            }
+
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+
+            if (!is_dot_found)
+            {
+                if (++n_chars > safe_number_of_chars)
+                {
+                    // Too many characters, maximum safe number is 38 characters for float, 308 for double.
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    inline bool check_if_signed_integer_string(std::string_view my_string)
+    {
+        if (my_string.empty())
+        {
+            return false;
+        }
+
+        for (std::size_t i = 0; i < my_string.size(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789
+            if (my_string.at(i) == '-' && i == 0)
+            {
+                // Minus sign is OK.
+                continue;
+            }
+
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    inline bool check_if_unsigned_integer_string(std::string_view my_string)
+    {
+        if (my_string.empty())
+        {
+            return false;
+        }
+
+        for (std::size_t i = 0; i < my_string.size(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789
+
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    inline bool check_if_float_string(std::string_view my_string)
+    {
+        const std::size_t maximum_safe_length_for_float_string = 38;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
+    }
+
+    inline bool check_if_double_string(std::string_view my_string)
+    {
+        const std::size_t maximum_safe_length_for_double_string = 308;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
+    }
 
     void print_hexdump(const std::byte* const start_address, const std::byte* const end_address); // `begin` is inclusive, `end is exclusive.
     void print_hexdump(std::string_view my_string);
