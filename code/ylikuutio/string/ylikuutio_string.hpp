@@ -384,67 +384,68 @@ namespace yli::string
             return my_vector;
         }
 
-    inline bool check_if_floating_point_string(std::string_view my_string, const std::size_t safe_number_of_chars)
-    {
-        std::size_t n_chars = 0;
-
-        if (my_string.empty())
+    template<typename CharType>
+        inline bool check_if_floating_point_string(std::basic_string_view<CharType> my_string, const std::size_t safe_number_of_chars)
         {
-            return false;
-        }
+            std::size_t n_chars = 0;
 
-        bool is_dot_found = false;
-
-        for (std::size_t i = 0; i < my_string.size(); i++)
-        {
-            // Each of the characters must be one of the following:
-            // 0123456789.-
-            //
-            // Besides, there may be only 1 dot. The dot may not be the last character.
-            // Besides, there may be only 1 minus sign. The minus sign must be the first character.
-
-            if (my_string.at(i) == '-' && i == 0)
-            {
-                // Minus sign is OK.
-                continue;
-            }
-
-            if (my_string.at(i) == '.')
-            {
-                if (is_dot_found)
-                {
-                    // Two or more dots.
-                    return false;
-                }
-
-                if (i == my_string.size() - 1)
-                {
-                    // Last character is dot.
-                    return false;
-                }
-
-                // OK, decimal point here.
-                is_dot_found = true;
-                continue;
-            }
-
-            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            if (my_string.empty())
             {
                 return false;
             }
 
-            if (!is_dot_found)
+            bool is_dot_found = false;
+
+            for (std::size_t i = 0; i < my_string.size(); i++)
             {
-                if (++n_chars > safe_number_of_chars)
+                // Each of the characters must be one of the following:
+                // 0123456789.-
+                //
+                // Besides, there may be only 1 dot. The dot may not be the last character.
+                // Besides, there may be only 1 minus sign. The minus sign must be the first character.
+
+                if (my_string.at(i) == '-' && i == 0)
                 {
-                    // Too many characters, maximum safe number is 38 characters for float, 308 for double.
+                    // Minus sign is OK.
+                    continue;
+                }
+
+                if (my_string.at(i) == '.')
+                {
+                    if (is_dot_found)
+                    {
+                        // Two or more dots.
+                        return false;
+                    }
+
+                    if (i == my_string.size() - 1)
+                    {
+                        // Last character is dot.
+                        return false;
+                    }
+
+                    // OK, decimal point here.
+                    is_dot_found = true;
+                    continue;
+                }
+
+                if (my_string.at(i) < '0' || my_string.at(i) > '9')
+                {
                     return false;
                 }
-            }
-        }
 
-        return true;
-    }
+                if (!is_dot_found)
+                {
+                    if (++n_chars > safe_number_of_chars)
+                    {
+                        // Too many characters, maximum safe number is 38 characters for float, 308 for double.
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
 
     inline bool check_if_signed_integer_string(std::string_view my_string)
     {
