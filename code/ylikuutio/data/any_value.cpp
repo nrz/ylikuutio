@@ -854,7 +854,7 @@ namespace yli::data
         }
         else if (std::holds_alternative<int32_t>(this->data))
         {
-            if (!yli::string::check_if_signed_integer_string(value_string))
+            if (!yli::string::check_if_signed_integer_string<char>(value_string))
             {
                 return false;
             }

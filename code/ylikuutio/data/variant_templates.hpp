@@ -76,7 +76,7 @@ namespace yli::data
             }
             else if (type == "int32_t")
             {
-                if (yli::string::check_if_signed_integer_string(value_string))
+                if (yli::string::check_if_signed_integer_string<char>(value_string))
                 {
                     int32_t int32_t_value;
                     value_stringstream << value_string;

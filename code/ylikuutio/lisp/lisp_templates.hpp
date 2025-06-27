@@ -205,7 +205,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            if (!yli::string::check_if_signed_integer_string(my_string))
+            if (!yli::string::check_if_signed_integer_string<char>(my_string))
             {
                 return std::nullopt;
             }

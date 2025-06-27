@@ -447,31 +447,32 @@ namespace yli::string
             return true;
         }
 
-    inline bool check_if_signed_integer_string(std::string_view my_string)
-    {
-        if (my_string.empty())
+    template<typename CharType>
+        inline bool check_if_signed_integer_string(std::basic_string_view<CharType> my_string)
         {
-            return false;
-        }
-
-        for (std::size_t i = 0; i < my_string.size(); i++)
-        {
-            // Each of the characters must be one of the following:
-            // 0123456789
-            if (my_string.at(i) == '-' && i == 0)
-            {
-                // Minus sign is OK.
-                continue;
-            }
-
-            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            if (my_string.empty())
             {
                 return false;
             }
-        }
 
-        return true;
-    }
+            for (std::size_t i = 0; i < my_string.size(); i++)
+            {
+                // Each of the characters must be one of the following:
+                // 0123456789
+                if (my_string.at(i) == '-' && i == 0)
+                {
+                    // Minus sign is OK.
+                    continue;
+                }
+
+                if (my_string.at(i) < '0' || my_string.at(i) > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     inline bool check_if_unsigned_integer_string(std::string_view my_string)
     {
