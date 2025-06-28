@@ -26,9 +26,9 @@
 #include <limits>      // std::numeric_limits
 #include <optional>    // std::nullopt, std::optional
 #include <stdint.h>    // uint32_t etc.
-#include <string>      // std::string
+#include <string>      // std::basic_string, std::string
 #include <sstream>     // std::stringstream
-#include <string_view> // std::string_view
+#include <string_view> // std::basic_string_view, std::string_view
 #include <vector>      // std::vector
 
 namespace yli::string
