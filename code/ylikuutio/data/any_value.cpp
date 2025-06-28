@@ -828,7 +828,7 @@ namespace yli::data
         }
         else if (std::holds_alternative<float>(this->data))
         {
-            if (!yli::string::check_if_float_string(value_string))
+            if (!yli::string::check_if_float_string<char>(value_string))
             {
                 return false;
             }

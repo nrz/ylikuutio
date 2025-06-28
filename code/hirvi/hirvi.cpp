@@ -236,7 +236,7 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("speed") &&
-                yli::string::check_if_float_string(this->command_line_master.get_value("speed")))
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("speed")))
         {
             const std::string speed = this->command_line_master.get_value("speed");
             std::size_t index = 0;
@@ -244,7 +244,7 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("turbo_factor") &&
-                yli::string::check_if_float_string(this->command_line_master.get_value("turbo_factor")))
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo_factor")))
         {
             const std::string turbo_factor = this->command_line_master.get_value("turbo_factor");
             std::size_t index = 0;
@@ -252,7 +252,7 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("twin_turbo_factor") &&
-                yli::string::check_if_float_string(this->command_line_master.get_value("twin_turbo_factor")))
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin_turbo_factor")))
         {
             const std::string twin_turbo_factor = this->command_line_master.get_value("twin_turbo_factor");
             std::size_t index = 0;
@@ -260,7 +260,7 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("mouse_speed") &&
-                yli::string::check_if_float_string(this->command_line_master.get_value("mouse_speed")))
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse_speed")))
         {
             const std::string mouse_speed = this->command_line_master.get_value("mouse_speed");
             std::size_t index = 0;

@@ -56,7 +56,7 @@ namespace yli::data
             }
             else if (type == "float")
             {
-                if (yli::string::check_if_float_string(value_string))
+                if (yli::string::check_if_float_string<char>(value_string))
                 {
                     float float_value;
                     value_stringstream << value_string;
