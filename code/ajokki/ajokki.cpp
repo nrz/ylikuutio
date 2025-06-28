@@ -218,7 +218,7 @@ namespace ajokki
         }
 
         if (this->command_line_master.is_key("window_width") &&
-                yli::string::check_if_unsigned_integer_string(this->command_line_master.get_value("window_width")))
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window_width")))
         {
             const std::string window_width = this->command_line_master.get_value("window_width");
             std::size_t index = 0;
@@ -226,7 +226,7 @@ namespace ajokki
         }
 
         if (this->command_line_master.is_key("window_height") &&
-                yli::string::check_if_unsigned_integer_string(this->command_line_master.get_value("window_height")))
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window_height")))
         {
             const std::string window_height = this->command_line_master.get_value("window_height");
             std::size_t index = 0;
@@ -234,7 +234,7 @@ namespace ajokki
         }
 
         if (this->command_line_master.is_key("framebuffer_width") &&
-                yli::string::check_if_unsigned_integer_string(this->command_line_master.get_value("framebuffer_width")))
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer_width")))
         {
             const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
             std::size_t index = 0;
@@ -242,7 +242,7 @@ namespace ajokki
         }
 
         if (this->command_line_master.is_key("framebuffer_height") &&
-                yli::string::check_if_unsigned_integer_string(this->command_line_master.get_value("framebuffer_height")))
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer_height")))
         {
             const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
             std::size_t index = 0;
