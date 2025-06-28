@@ -66,7 +66,7 @@ namespace yli::data
             }
             else if (type == "double")
             {
-                if (yli::string::check_if_double_string(value_string))
+                if (yli::string::check_if_double_string<char>(value_string))
                 {
                     double double_value;
                     value_stringstream << value_string;

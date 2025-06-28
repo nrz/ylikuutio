@@ -841,7 +841,7 @@ namespace yli::data
         }
         else if (std::holds_alternative<double>(this->data))
         {
-            if (!yli::string::check_if_double_string(value_string))
+            if (!yli::string::check_if_double_string<char>(value_string))
             {
                 return false;
             }

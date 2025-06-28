@@ -504,11 +504,12 @@ namespace yli::string
             return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
         }
 
-    inline bool check_if_double_string(std::string_view my_string)
-    {
-        const std::size_t maximum_safe_length_for_double_string = 308;
-        return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
-    }
+    template<typename CharType>
+        inline bool check_if_double_string(std::basic_string_view<CharType> my_string)
+        {
+            const std::size_t maximum_safe_length_for_double_string = 308;
+            return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
+        }
 
     void print_hexdump(const std::byte* const start_address, const std::byte* const end_address); // `begin` is inclusive, `end is exclusive.
     void print_hexdump(std::string_view my_string);

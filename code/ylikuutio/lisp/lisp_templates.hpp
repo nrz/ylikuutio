@@ -178,7 +178,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            if (!yli::string::check_if_double_string(my_string))
+            if (!yli::string::check_if_double_string<char>(my_string))
             {
                 return std::nullopt;
             }
