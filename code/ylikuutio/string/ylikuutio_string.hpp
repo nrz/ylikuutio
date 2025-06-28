@@ -496,7 +496,6 @@ namespace yli::string
             return true;
         }
 
-
     template<typename CharType>
         inline bool check_if_float_string(std::basic_string_view<CharType> my_string)
         {
