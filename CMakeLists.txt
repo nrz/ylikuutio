@@ -500,6 +500,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/function_arg_extractor.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/parser.hpp
+    code/ylikuutio/lisp/token.cpp
+    code/ylikuutio/lisp/token.hpp
+    code/ylikuutio/lisp/token_type.hpp
 
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
@@ -1112,6 +1115,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_text_input.cpp
         code/ylikuutio/tests/test_text_input_history.cpp
         code/ylikuutio/tests/test_text_line.cpp
+        code/ylikuutio/tests/test_token.cpp
         code/ylikuutio/tests/test_triangulation.cpp
         code/ylikuutio/tests/test_universe.cpp
         code/ylikuutio/tests/test_universe_callbacks.cpp
