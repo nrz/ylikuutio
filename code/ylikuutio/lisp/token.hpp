@@ -29,6 +29,9 @@ namespace yli::lisp
 {
     class Token
     {
+        // The lexeme provided for the constructor must outlive the use of `Token`.
+        // The string containing the lexeme can be owned e.g. by `yli::ontology::Console`.
+
         public:
             Token(TokenType type, std::u32string_view lexeme);
             Token(TokenType type, std::u32string_view lexeme, std::optional<std::size_t> line_number);
