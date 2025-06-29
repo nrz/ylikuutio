@@ -33,6 +33,7 @@ namespace yli::lisp
     {
         return this->type;
     }
+
     std::u32string_view Token::get_lexeme() const
     {
         return this->lexeme;
