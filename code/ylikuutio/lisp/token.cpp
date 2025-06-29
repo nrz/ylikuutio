@@ -19,6 +19,8 @@
 #include "token_type.hpp"
 
 // Include standard headers
+#include <cstddef>     // std::size_t
+#include <optional>    // std::optional
 #include <string_view> // std::u32string_view
 
 namespace yli::lisp
@@ -26,6 +28,13 @@ namespace yli::lisp
     Token::Token(TokenType type, std::u32string_view lexeme)
         : type { type },
         lexeme { lexeme }
+    {
+    }
+
+    Token::Token(TokenType type, std::u32string_view lexeme, std::optional<std::size_t> line_number)
+        : type { type },
+        lexeme { lexeme },
+        line_number { line_number }
     {
     }
 
@@ -37,5 +46,10 @@ namespace yli::lisp
     std::u32string_view Token::get_lexeme() const
     {
         return this->lexeme;
+    }
+
+    std::optional<std::size_t> Token::get_line_number() const
+    {
+        return this->line_number;
     }
 }
