@@ -20,20 +20,21 @@
 
 #include "text_input_iterator.hpp"
 #include "text_input_const_iterator.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <string>   // std::u32string
+#include <string_view> // std::u32string_view
 
 namespace yli::console
 {
     class TextInput
     {
+        // `TextInput` provides functionality for receiving text input from the user.
+
         public:
-            using value_type = yli::data::Codepoint;
+            using value_type = char32_t;
 
             // Iterator typedefs.
             typedef TextInputIterator      iterator;
@@ -55,11 +56,11 @@ namespace yli::console
                 return this->input != other.input;
             }
 
-            void add_character(const yli::data::Codepoint& character);
+            void add_character(const char32_t character);
             void add_character(const char character);
 
             template<typename Alloc, template<typename, typename> typename Type>
-                void add_characters(const Type<yli::data::Codepoint, Alloc>& char_container)
+                void add_characters(const Type<char32_t, Alloc>& char_container)
                 {
                     // Assume there is memory available.
                     // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
@@ -68,11 +69,13 @@ namespace yli::console
                     this->cursor_it = this->input.begin() + this->cursor_index;
                 }
 
-            void emplace_back(yli::data::Codepoint&& character);
-            void push_back(yli::data::Codepoint&& character);
+            void add_characters(std::u32string_view char_container);
 
-            std::optional<yli::data::Codepoint> get_character_at_current_index() const;
-            std::optional<yli::data::Codepoint> get_character_to_the_left() const;
+            void emplace_back(char32_t character);
+            void push_back(char32_t character);
+
+            std::optional<char32_t> get_character_at_current_index() const;
+            std::optional<char32_t> get_character_to_the_left() const;
 
             bool delete_character();
             void ctrl_w();
@@ -83,9 +86,7 @@ namespace yli::console
             void move_cursor_to_end_of_line();
             std::size_t size() const;
             bool empty() const;
-            const std::vector<yli::data::Codepoint>& data() const;
-
-            std::string to_string() const;
+            const std::u32string& data() const;
 
             std::size_t get_cursor_index() const;
 
@@ -111,8 +112,8 @@ namespace yli::console
             }
 
         private:
-            std::vector<yli::data::Codepoint> input; // This is used for actual inputs.
-            std::vector<yli::data::Codepoint>::iterator cursor_it { this->input.begin() };
+            std::u32string input; // This is used for actual inputs.
+            std::u32string::iterator cursor_it { this->input.begin() };
             std::size_t cursor_index { 0 };
     };
 }

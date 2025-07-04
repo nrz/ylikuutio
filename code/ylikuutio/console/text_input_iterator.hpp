@@ -18,12 +18,10 @@
 #ifndef YLIKUUTIO_CONSOLE_TEXT_INPUT_ITERATOR_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_TEXT_INPUT_ITERATOR_HPP_INCLUDED
 
-#include "code/ylikuutio/data/codepoint.hpp"
-
 // Include standard headers
 #include <cstddef>  // std::ptrdiff_t
 #include <iterator> // std::bidirectional_iterator_tag
-#include <vector>   // std::vector
+#include <string>   // std::u32string
 
 namespace yli::console
 {
@@ -31,12 +29,12 @@ namespace yli::console
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = yli::data::Codepoint;
+            using value_type        = char32_t;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = yli::data::Codepoint*;
-            using reference         = yli::data::Codepoint&;
+            using pointer           = char32_t*;
+            using reference         = char32_t&;
 
-            explicit TextInputIterator(std::vector<yli::data::Codepoint>::iterator it)
+            explicit TextInputIterator(std::u32string::iterator it)
                 : it { it }
             {
             }
@@ -48,7 +46,7 @@ namespace yli::console
             TextInputIterator& operator=(const TextInputIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            TextInputIterator& operator=(std::vector<yli::data::Codepoint>::iterator it)
+            TextInputIterator& operator=(std::u32string::iterator it)
             {
                 this->it = it;
                 return *this;
@@ -89,13 +87,13 @@ namespace yli::console
                 return temp;
             }
 
-            yli::data::Codepoint operator*()
+            char32_t operator*()
             {
                 return *(this->it);
             }
 
         private:
-            std::vector<yli::data::Codepoint>::iterator it;
+            std::u32string::iterator it;
     };
 }
 

@@ -16,18 +16,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_input.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <string>   // std::string
-#include <utility>  // std::move
-#include <vector>   // std::vector
+#include <string>   // std::u32string
+#include <string_view> // std::u32string_view
 
 namespace yli::console
 {
-    void TextInput::add_character(const yli::data::Codepoint& character)
+    void TextInput::add_character(const char32_t character)
     {
         // Assume there is memory available.
         // Insert a character at current index and make index grow by 1.
@@ -37,24 +35,31 @@ namespace yli::console
 
     void TextInput::add_character(const char character)
     {
-        this->add_character(yli::data::Codepoint(character));
+        this->add_character(char32_t(character));
     }
 
-    void TextInput::emplace_back(yli::data::Codepoint&& character)
+    void TextInput::add_characters(std::u32string_view char_container)
     {
-        this->input.emplace_back(std::move(character));
+        this->input.insert(this->input.end(), char_container.begin(), char_container.end());
+        this->cursor_index += char_container.size();
+        this->cursor_it = this->input.begin() + this->cursor_index;
+    }
+
+    void TextInput::emplace_back(char32_t character)
+    {
+        this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.
         this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
-    void TextInput::push_back(yli::data::Codepoint&& character)
+    void TextInput::push_back(char32_t character)
     {
-        this->input.push_back(std::move(character));
+        this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.
         this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
-    std::optional<yli::data::Codepoint> TextInput::get_character_at_current_index() const
+    std::optional<char32_t> TextInput::get_character_at_current_index() const
     {
         if (this->cursor_it != this->input.end()) [[likely]]
         {
@@ -64,7 +69,7 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::Codepoint> TextInput::get_character_to_the_left() const
+    std::optional<char32_t> TextInput::get_character_to_the_left() const
     {
         if (this->cursor_it != this->input.begin()) [[likely]]
         {
@@ -98,13 +103,13 @@ namespace yli::console
     void TextInput::ctrl_w()
     {
         // First, remove all spaces until a non-space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() == yli::data::Codepoint(' '))
+        while (this->cursor_index != 0 && this->get_character_to_the_left() == char32_t(' '))
         {
             this->delete_character();
         }
 
         // Then, remove all non-spaces until a space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() != yli::data::Codepoint(' '))
+        while (this->cursor_index != 0 && this->get_character_to_the_left() != char32_t(' '))
         {
             this->delete_character();
         }
@@ -170,30 +175,9 @@ namespace yli::console
         return this->size() == 0;
     }
 
-    const std::vector<yli::data::Codepoint>& TextInput::data() const
+    const std::u32string& TextInput::data() const
     {
         return this->input;
-    }
-
-    std::string TextInput::to_string() const
-    {
-        std::string my_string;
-        my_string.reserve(this->size());
-
-        for (const yli::data::Codepoint codepoint : this->input)
-        {
-            if (codepoint.codepoint < 128)
-            {
-                my_string.push_back(static_cast<char>(codepoint.codepoint));
-            }
-            else
-            {
-                // TODO: implement Unicode rendering! This is just a workaround for now!
-                my_string.push_back('.');
-            }
-        }
-
-        return my_string;
     }
 
     std::size_t TextInput::get_cursor_index() const

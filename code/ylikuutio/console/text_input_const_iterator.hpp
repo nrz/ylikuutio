@@ -18,12 +18,10 @@
 #ifndef YLIKUUTIO_CONSOLE_TEXT_INPUT_CONST_ITERATOR_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_TEXT_INPUT_CONST_ITERATOR_HPP_INCLUDED
 
-#include "code/ylikuutio/data/codepoint.hpp"
-
 // Include standard headers
 #include <cstddef>  // std::ptrdiff_t
 #include <iterator> // std::bidirectional_iterator_tag
-#include <vector>   // std::vector
+#include <string>   // std::u32string
 
 namespace yli::console
 {
@@ -31,12 +29,12 @@ namespace yli::console
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = yli::data::Codepoint;
+            using value_type        = char32_t;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = const yli::data::Codepoint*;
-            using reference         = const yli::data::Codepoint&;
+            using pointer           = const char32_t*;
+            using reference         = const char32_t&;
 
-            explicit TextInputConstIterator(std::vector<yli::data::Codepoint>::const_iterator it)
+            explicit TextInputConstIterator(std::u32string::const_iterator it)
                 : it { it }
             {
             }
@@ -47,8 +45,8 @@ namespace yli::console
             // copy assignment.
             TextInputConstIterator& operator=(const TextInputConstIterator&) = default;
 
-            // assignment of `std::vector` const_iterator.
-            TextInputConstIterator& operator=(std::vector<yli::data::Codepoint>::const_iterator it)
+            // assignment of `std::u32string` const_iterator.
+            TextInputConstIterator& operator=(std::u32string::const_iterator it)
             {
                 this->it = it;
                 return *this;
@@ -89,18 +87,18 @@ namespace yli::console
                 return temp;
             }
 
-            yli::data::Codepoint operator*()
+            char32_t operator*()
             {
                 return *(this->it);
             }
 
-            std::vector<yli::data::Codepoint>::const_iterator unwrap() const
+            std::u32string::const_iterator unwrap() const
             {
                 return this->it;
             }
 
         private:
-            std::vector<yli::data::Codepoint>::const_iterator it;
+            std::u32string::const_iterator it;
     };
 }
 

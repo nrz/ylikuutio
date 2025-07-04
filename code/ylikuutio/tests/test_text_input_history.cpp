@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/data/codepoint.hpp"
 #include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
@@ -26,10 +25,9 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::nullopt
+#include <string>   // std::u32string
 #include <utility>  // std::move
-#include <vector>   // std::vector
 
-using yli::data::Codepoint;
 using yli::console::ConsoleState;
 
 TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
@@ -73,8 +71,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    text_input.add_characters(char_container);
+    text_input.add_characters(U"abc");
 
     text_input_history.add_to_history(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
@@ -99,8 +96,7 @@ TEST(editing_a_historical_input_must_work_appropriately, historical_input)
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    text_input.add_characters(char_container);
+    text_input.add_characters(U"abc");
 
     text_input_history.add_to_history(std::move(text_input));
     ASSERT_TRUE(text_input_history.enter_history());
@@ -117,8 +113,7 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    text_input.add_characters(char_container);
+    text_input.add_characters(U"abc");
 
     text_input_history.emplace_back(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
@@ -143,8 +138,7 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    text_input.add_characters(char_container);
+    text_input.add_characters(U"abc");
 
     text_input_history.push_back(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
@@ -165,9 +159,9 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
 
 TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_history_begin_iterator)
 {
-    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+    const std::u32string abc_char_container { U"abc" };
+    const std::u32string def_char_container { U"def" };
+    const std::u32string ghi_char_container { U"ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
@@ -199,9 +193,9 @@ TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_histo
 
 TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_input_history_cbegin_const_iterator)
 {
-    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+    const std::u32string abc_char_container { U"abc" };
+    const std::u32string def_char_container { U"def" };
+    const std::u32string ghi_char_container { U"ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
@@ -233,9 +227,9 @@ TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_inpu
 
 TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history_end_iterator)
 {
-    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+    const std::u32string abc_char_container { U"abc" };
+    const std::u32string def_char_container { U"def" };
+    const std::u32string ghi_char_container { U"ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
@@ -267,9 +261,9 @@ TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history
 
 TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_history_cend_iterator)
 {
-    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    const std::vector<Codepoint> def_char_container { Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    const std::vector<Codepoint> ghi_char_container { Codepoint('g'), Codepoint('h'), Codepoint('i') };
+    const std::u32string abc_char_container { U"abc" };
+    const std::u32string def_char_container { U"def" };
+    const std::u32string ghi_char_container { U"ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);

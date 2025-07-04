@@ -16,15 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/data/codepoint.hpp"
 #include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/current_input.hpp"
 
 // Include standard headers
 #include <optional> // std::nullopt
 #include <vector>   // std::vector
-
-using yli::data::Codepoint;
 
 TEST(current_input_must_be_initialized_appropriately, current_input)
 {
@@ -37,8 +34,7 @@ TEST(current_input_must_be_initialized_appropriately, current_input)
     ASSERT_EQ(current_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(current_input.get_character_to_the_left(), std::nullopt);
     ASSERT_EQ(current_input.get_cursor_index(), 0);
-    ASSERT_EQ(current_input.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(current_input.to_string(), "");
+    ASSERT_EQ(current_input.data(), U"");
     ASSERT_EQ(current_input.cbegin().unwrap(), current_input.data().cbegin());
     ASSERT_EQ(console_state_module.get_current_input(), &current_input);
 }

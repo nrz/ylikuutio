@@ -18,187 +18,70 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
-#include <string> // std::string
-#include <vector> // std::vector
-
-using yli::data::Codepoint;
+#include <string_view> // std::u32string_view
 
 TEST(text_line_must_be_initialized_appropriately, empty_text_line)
 {
-    const std::vector<Codepoint> char_container {};
-    yli::console::TextLine text_line(char_container);
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "");
+    yli::console::TextLine text_line(U"");
+    ASSERT_EQ(text_line.data(), U"");
     ASSERT_EQ(text_line.size(), 0);
     ASSERT_EQ(text_line.cbegin().unwrap(), text_line.data().cbegin());
 }
 
 TEST(text_line_must_be_initialized_appropriately, text_line)
 {
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container);
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "abc");
+    yli::console::TextLine text_line(U"abc");
+    ASSERT_EQ(text_line.data(), U"abc");
     ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_must_be_initialized_appropriately, from_text_input)
 {
     yli::console::TextInput text_input;
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    text_input.add_characters(char_container);
+    text_input.add_characters(U"abc");
 
     yli::console::TextLine text_line(text_input);
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "abc");
+    ASSERT_EQ(text_line.data(), U"abc");
     ASSERT_EQ(text_line.size(), 3);
 }
 
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, empty_string_begin_0_end_0)
+TEST(text_line_must_be_initialized_appropriately, empty_string)
 {
-    const std::vector<Codepoint> char_container {};
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin());
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "");
+    std::u32string_view empty_string;
+    yli::console::TextLine text_line(empty_string);
+    ASSERT_EQ(text_line.data(), U"");
     ASSERT_EQ(text_line.size(), 0);
 }
 
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, a_string_begin_0_end_0)
+TEST(text_line_must_be_initialized_appropriately, a_string)
 {
-    const std::vector<Codepoint> char_container { Codepoint('a') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin());
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, a_string_begin_0_end_1)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin() + 1);
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "a");
+    std::u32string_view my_string { U"a" };
+    yli::console::TextLine text_line(my_string);
+    ASSERT_EQ(text_line.data(), U"a");
     ASSERT_EQ(text_line.size(), 1);
 }
 
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, a_string_begin_1_end_1)
+TEST(text_line_must_be_initialized_appropriately, abc_string)
 {
-    const std::vector<Codepoint> char_container { Codepoint('a') };
-    yli::console::TextLine text_line(char_container.cbegin() + 1, char_container.cbegin() + 1);
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_0_end_0)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin());
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_0_end_1)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin() + 1);
-    const std::vector<Codepoint> expected { Codepoint('a') };
-    ASSERT_EQ(text_line.data(), expected);
-    ASSERT_EQ(text_line.to_string(), "a");
-    ASSERT_EQ(text_line.size(), 1);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_0_end_2)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin() + 2);
-    const std::vector<Codepoint> expected { Codepoint('a'), Codepoint('b') };
-    ASSERT_EQ(text_line.data(), expected);
-    ASSERT_EQ(text_line.to_string(), "ab");
-    ASSERT_EQ(text_line.size(), 2);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_0_end_3)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin(), char_container.cbegin() + 3);
-    ASSERT_EQ(text_line.data(), char_container);
-    ASSERT_EQ(text_line.to_string(), "abc");
+    std::u32string_view my_string { U"abc" };
+    yli::console::TextLine text_line(my_string);
+    ASSERT_EQ(text_line.data(), U"abc");
     ASSERT_EQ(text_line.size(), 3);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_1_end_1)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 1, char_container.cbegin() + 1);
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_1_end_2)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 1, char_container.cbegin() + 2);
-    const std::vector<Codepoint> expected { Codepoint('b') };
-    ASSERT_EQ(text_line.data(), expected);
-    ASSERT_EQ(text_line.to_string(), "b");
-    ASSERT_EQ(text_line.size(), 1);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_1_end_3)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 1, char_container.cbegin() + 3);
-    const std::vector<Codepoint> expected { Codepoint('b'), Codepoint('c') };
-    ASSERT_EQ(text_line.data(), expected);
-    ASSERT_EQ(text_line.to_string(), "bc");
-    ASSERT_EQ(text_line.size(), 2);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_2_end_2)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 2, char_container.cbegin() + 2);
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_2_end_3)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 2, char_container.cbegin() + 3);
-    const std::vector<Codepoint> expected { Codepoint('c') };
-    ASSERT_EQ(text_line.data(), expected);
-    ASSERT_EQ(text_line.to_string(), "c");
-    ASSERT_EQ(text_line.size(), 1);
-}
-
-TEST(text_line_must_be_initialized_appropriatel_using_begin_and_end_iterators, abc_begin_3_end_3)
-{
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container.cbegin() + 3, char_container.cbegin() + 3);
-    ASSERT_EQ(text_line.data(), std::vector<Codepoint>{});
-    ASSERT_EQ(text_line.to_string(), "");
-    ASSERT_EQ(text_line.size(), 0);
 }
 
 TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_const_iterator)
 {
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container);
+    std::u32string_view my_string { U"abc" };
+    yli::console::TextLine text_line(my_string);
 
     auto it = text_line.cbegin();
-    ASSERT_EQ(*it, Codepoint('a'));
+    ASSERT_EQ(*it, U'a');
     ++it;
-    ASSERT_EQ(*it, Codepoint('b'));
+    ASSERT_EQ(*it, U'b');
     ++it;
-    ASSERT_EQ(*it, Codepoint('c'));
+    ASSERT_EQ(*it, U'c');
     ++it;
     ASSERT_EQ(it, text_line.cend());
     ASSERT_EQ(text_line.size(), 3);
@@ -206,49 +89,16 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
 
 TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
 {
-    const std::vector<Codepoint> char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    yli::console::TextLine text_line(char_container);
+    std::u32string_view my_string { U"abc" };
+    yli::console::TextLine text_line(my_string);
 
     auto it = text_line.cend();
     --it;
-    ASSERT_EQ(*it, Codepoint('c'));
+    ASSERT_EQ(*it, U'c');
     --it;
-    ASSERT_EQ(*it, Codepoint('b'));
+    ASSERT_EQ(*it, U'b');
     --it;
-    ASSERT_EQ(*it, Codepoint('a'));
+    ASSERT_EQ(*it, U'a');
     ASSERT_EQ(it, text_line.cbegin());
-    ASSERT_EQ(text_line.size(), 3);
-}
-
-TEST(text_line_must_be_initialized_appropriately, from_text_line_begin_end_iterators)
-{
-    const std::vector<Codepoint> abcdef_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c'), Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    yli::console::TextLine abcdef_text_line(abcdef_char_container);
-    yli::console::TextLine cd_text_line(abcdef_text_line.data().begin() + 2, abcdef_text_line.data().begin() + 4);
-
-    const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
-    yli::console::TextLine expected_text_line(cd_char_container);
-    ASSERT_EQ(cd_text_line.data(), expected_text_line.data());
-}
-
-TEST(text_line_must_be_initialized_appropriately, from_text_input_begin_end_iterators)
-{
-    yli::console::TextInput text_input;
-    const std::vector<Codepoint> abcdef_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c'), Codepoint('d'), Codepoint('e'), Codepoint('f') };
-    text_input.add_characters(abcdef_char_container);
-    yli::console::TextLine cd_text_line(text_input.data().begin() + 2, text_input.data().begin() + 4);
-
-    const std::vector<Codepoint> cd_char_container { Codepoint('c'), Codepoint('d') };
-    yli::console::TextLine expected_text_line(cd_char_container);
-    ASSERT_EQ(cd_text_line.data(), expected_text_line.data());
-}
-
-TEST(text_line_must_be_initialized_appropriately, from_reference_to_const_std_string)
-{
-    const std::string abc_string("abc");
-    yli::console::TextLine text_line(abc_string);
-
-    const std::vector<Codepoint> abc_char_container { Codepoint('a'), Codepoint('b'), Codepoint('c') };
-    ASSERT_EQ(text_line.data(), abc_char_container);
     ASSERT_EQ(text_line.size(), 3);
 }

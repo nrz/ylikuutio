@@ -20,12 +20,11 @@
 
 #include "text_line_const_iterator.hpp"
 #include "text_input.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <string>      // std::u32string
+#include <string_view> // std::u32string_view
 
 namespace yli::console
 {
@@ -41,18 +40,15 @@ namespace yli::console
             bool operator==(const TextLine& other) const;
             bool operator!=(const TextLine& other) const;
 
-            explicit TextLine(const std::vector<yli::data::Codepoint>& text_line);
+            explicit TextLine(std::u32string_view text_line);
 
             explicit TextLine(const TextInput& text_input);
 
-            TextLine(const typename std::vector<yli::data::Codepoint>::const_iterator begin, const typename std::vector<yli::data::Codepoint>::const_iterator end);
+            TextLine(const typename std::u32string::const_iterator begin, const typename std::u32string::const_iterator end);
             TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
             TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end);
-            explicit TextLine(const std::string& text);
 
-            const std::vector<yli::data::Codepoint>& data() const;
-
-            std::string to_string() const;
+            const std::u32string& data() const;
 
             std::size_t size() const;
 
@@ -68,7 +64,7 @@ namespace yli::console
             }
 
         private:
-            const std::vector<yli::data::Codepoint> line;
+            const std::u32string line;
     };
 }
 
