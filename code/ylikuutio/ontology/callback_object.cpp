@@ -78,7 +78,7 @@ namespace yli::ontology
             const std::string& name,
             yli::data::AnyValue&& any_value)
     {
-        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         CallbackParameterStruct callback_parameter_struct { Request(this) };
         callback_parameter_struct.local_name = name;
@@ -96,7 +96,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        CallbackParameter* const callback_parameter = dynamic_cast<CallbackParameter*>(named_entity);
+        const CallbackParameter* const callback_parameter = dynamic_cast<CallbackParameter*>(named_entity);
 
         if (callback_parameter == nullptr)
         {
@@ -114,7 +114,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        auto callback_parameter = static_cast<CallbackParameter*>(
+        const auto callback_parameter = static_cast<CallbackParameter*>(
                 this->parent_of_callback_parameters.child_pointer_vector.at(arg_i));
 
         if (callback_parameter == nullptr)

@@ -58,18 +58,18 @@ namespace yli::ontology
 
     CallbackObject* CallbackEngine::create_callback_object()
     {
-        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        CallbackObjectStruct callback_object_struct { Request(this) };
+        const CallbackObjectStruct callback_object_struct { Request(this) };
         return entity_factory.create_callback_object(callback_object_struct);
     }
 
     CallbackObject* CallbackEngine::create_callback_object(
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        CallbackObjectStruct callback_object_struct { Request(this) };
+        const CallbackObjectStruct callback_object_struct { Request(this) };
         auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;
@@ -117,7 +117,7 @@ namespace yli::ontology
     {
         // note: indexing of `n` begins from 0.
 
-        std::size_t n_of_return_values = this->get_n_of_return_values();
+        const std::size_t n_of_return_values = this->get_n_of_return_values();
 
         if (n_of_return_values <= n)
         {
@@ -129,7 +129,7 @@ namespace yli::ontology
 
     std::optional<yli::data::AnyValue> CallbackEngine::get_previous_return_value() const
     {
-        std::size_t n_of_return_values = this->get_n_of_return_values();
+        const std::size_t n_of_return_values = this->get_n_of_return_values();
 
         if (n_of_return_values == 0)
         {
