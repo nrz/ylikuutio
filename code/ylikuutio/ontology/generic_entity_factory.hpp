@@ -20,9 +20,6 @@
 
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
-// Include standard headers
-#include <string> // std::string
-
 namespace yli::data
 {
     class AnyValue;
