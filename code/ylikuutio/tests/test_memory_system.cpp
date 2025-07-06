@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/data/type_enum_provider.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_storage.hpp"
