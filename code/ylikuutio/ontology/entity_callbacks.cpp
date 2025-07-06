@@ -37,7 +37,7 @@ namespace yli::ontology
             const std::string& variable_value)
     {
         VariableStruct variable_struct(parent.get_universe(), &parent);
-        variable_struct.local_name    = variable_name;
+        variable_struct.local_name = variable_name;
         parent.create_variable(variable_struct, yli::data::AnyValue(variable_type, variable_value));
         return std::nullopt;
     }
