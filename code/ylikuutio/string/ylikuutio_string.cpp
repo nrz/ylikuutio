@@ -24,6 +24,7 @@
 #include <iostream>    // std::cout, std::cerr
 #include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
+#include <sstream>     // std::stringstream
 #include <string_view> // std::string_view
 
 namespace yli::string

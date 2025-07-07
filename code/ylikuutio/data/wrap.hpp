@@ -19,6 +19,7 @@
 #define YLIKUUTIO_DATA_WRAP_HPP_INCLUDED
 
 #include <functional> // std::reference_wrapper
+#include <string>     // std::string
 
 namespace yli::data
 {
