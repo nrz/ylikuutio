@@ -59,7 +59,7 @@ namespace yli::load
         // Load the texture.
         const std::string filename = std::string(ofbx_texture->getFileName().begin, ofbx_texture->getFileName().end);
 
-        yli::string::print_hexdump(filename);
+        yli::string::print_hexdump<char>(filename);
 
         // Find out the filename.
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
