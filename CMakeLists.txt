@@ -797,6 +797,8 @@ add_library(ylikuutio STATIC
     # string, in alphabetical order
     code/ylikuutio/string/string_set.cpp
     code/ylikuutio/string/string_set.hpp
+    code/ylikuutio/string/unicode.cpp
+    code/ylikuutio/string/unicode.hpp
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
 
@@ -1116,6 +1118,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_text_line.cpp
         code/ylikuutio/tests/test_token.cpp
         code/ylikuutio/tests/test_triangulation.cpp
+        code/ylikuutio/tests/test_unicode.cpp
         code/ylikuutio/tests/test_universe.cpp
         code/ylikuutio/tests/test_universe_callbacks.cpp
         code/ylikuutio/tests/test_universe_struct.cpp
