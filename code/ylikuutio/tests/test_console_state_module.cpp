@@ -22,6 +22,11 @@ TEST(console_state_module_must_be_initialized_appropriately, console_state_modul
 {
     yli::console::ConsoleStateModule console_state_module;
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::NOT_IN_CONSOLE);
+    ASSERT_FALSE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_current_input_must_work_appropriately, current_input_from_current_input_no_effect)
@@ -29,6 +34,11 @@ TEST(entering_current_input_from_current_input_must_work_appropriately, current_
     yli::console::ConsoleStateModule console_state_module;
     console_state_module.enter_current_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_TRUE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_current_input_must_work_appropriately, historical_input_from_current_input)
@@ -36,6 +46,11 @@ TEST(entering_historical_input_from_current_input_must_work_appropriately, histo
     yli::console::ConsoleStateModule console_state_module;
     console_state_module.enter_historical_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_TRUE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_current_input_must_work_appropriately, scrollback_buffer_from_current_input)
@@ -43,6 +58,11 @@ TEST(entering_scrollback_buffer_from_current_input_must_work_appropriately, scro
     yli::console::ConsoleStateModule console_state_module;
     console_state_module.enter_scrollback_buffer();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_historical_input_must_work_appropriately, current_input_from_historical_input)
@@ -51,6 +71,11 @@ TEST(entering_current_input_from_historical_input_must_work_appropriately, curre
     console_state_module.enter_historical_input();
     console_state_module.enter_current_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_TRUE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_historical_input_must_work_appropriately, historical_input_from_historical_input_no_effect)
@@ -59,6 +84,11 @@ TEST(entering_historical_input_from_historical_input_must_work_appropriately, hi
     console_state_module.enter_historical_input();
     console_state_module.enter_historical_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_TRUE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_input_from_historical_input)
@@ -67,6 +97,11 @@ TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_inp
     console_state_module.enter_historical_input();
     console_state_module.enter_temp_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_TRUE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, scrollback_buffer_from_historical_input)
@@ -75,6 +110,11 @@ TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, s
     console_state_module.enter_historical_input();
     console_state_module.enter_scrollback_buffer();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_temp_input_must_work_appropriately, current_input_from_temp_input)
@@ -84,6 +124,11 @@ TEST(entering_current_input_from_temp_input_must_work_appropriately, current_inp
     console_state_module.enter_temp_input();
     console_state_module.enter_current_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_TRUE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_temp_input_must_work_appropriately, historical_input_from_temp_input)
@@ -93,6 +138,11 @@ TEST(entering_historical_input_from_temp_input_must_work_appropriately, historic
     console_state_module.enter_temp_input();
     console_state_module.enter_historical_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_TRUE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_from_temp_input_no_effect)
@@ -102,6 +152,11 @@ TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_fro
     console_state_module.enter_temp_input();
     console_state_module.enter_temp_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_TRUE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollback_buffer_from_temp_input)
@@ -111,6 +166,11 @@ TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollb
     console_state_module.enter_temp_input();
     console_state_module.enter_scrollback_buffer();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_scrollback_buffer_must_work_appropriately, current_input_from_scrollback_buffer)
@@ -119,6 +179,11 @@ TEST(entering_current_input_from_scrollback_buffer_must_work_appropriately, curr
     console_state_module.enter_scrollback_buffer();
     console_state_module.enter_current_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_TRUE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_scrollback_buffer_must_work_appropriately, historical_input_from_scrollback_buffer)
@@ -127,6 +192,11 @@ TEST(entering_historical_input_from_scrollback_buffer_must_work_appropriately, h
     console_state_module.enter_scrollback_buffer();
     console_state_module.enter_historical_input();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_TRUE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_no_effect)
@@ -135,4 +205,9 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     console_state_module.enter_scrollback_buffer();
     console_state_module.enter_scrollback_buffer();
     ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
+    ASSERT_TRUE(console_state_module.get_in_console());
+    ASSERT_FALSE(console_state_module.get_in_current_input());
+    ASSERT_FALSE(console_state_module.get_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
 }
