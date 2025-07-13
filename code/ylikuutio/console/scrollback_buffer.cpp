@@ -31,9 +31,10 @@ namespace yli::console
 {
     class TextInput;
 
-    ScrollbackBuffer::ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t line_width)
+    ScrollbackBuffer::ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t line_width, const uint32_t n_rows)
         : console_state_module { console_state_module },
-        line_width { (line_width > 0 ? line_width : 1) }
+        line_width { (line_width > 0 ? line_width : 1) },
+        n_rows     { (n_rows > 0 ? n_rows : 1) }
     {
     }
 
@@ -177,6 +178,11 @@ namespace yli::console
     uint32_t ScrollbackBuffer::get_line_width() const
     {
         return this->line_width;
+    }
+
+    uint32_t ScrollbackBuffer::get_n_rows() const
+    {
+        return this->n_rows;
     }
 
     std::size_t ScrollbackBuffer::get_buffer_index() const

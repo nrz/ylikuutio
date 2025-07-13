@@ -40,7 +40,7 @@ namespace yli::console
             typedef ScrollbackBufferIterator      iterator;
             typedef ScrollbackBufferConstIterator const_iterator;
 
-            ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t line_width);
+            ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t line_width, const uint32_t n_rows);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
@@ -65,6 +65,7 @@ namespace yli::console
             std::size_t size() const;
             bool empty() const;
             uint32_t get_line_width() const;
+            uint32_t get_n_rows() const;
 
             std::size_t get_buffer_index() const;
 
@@ -93,6 +94,7 @@ namespace yli::console
             ConsoleStateModule& console_state_module;
             std::vector<TextLine> buffer;
             const uint32_t line_width; // Line width must be at least 1.
+            const uint32_t n_rows;     // Number of rows must be at least 1.
             std::vector<TextLine>::iterator buffer_it { this->buffer.end() };
             std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
     };
