@@ -31,9 +31,9 @@ namespace yli::console
 {
     class TextInput;
 
-    ScrollbackBuffer::ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t line_width, const uint32_t n_rows)
+    ScrollbackBuffer::ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t n_columns, const uint32_t n_rows)
         : console_state_module { console_state_module },
-        line_width { (line_width > 0 ? line_width : 1) },
+        n_columns { (n_columns > 0 ? n_columns : 1) },
         n_rows     { (n_rows > 0 ? n_rows : 1) }
     {
     }
@@ -45,11 +45,11 @@ namespace yli::console
 
     void ScrollbackBuffer::add_to_buffer(const TextLine& text)
     {
-        for (std::size_t text_i = 0; text_i < text.size(); text_i += this->line_width)
+        for (std::size_t text_i = 0; text_i < text.size(); text_i += this->n_columns)
         {
-            if (text_i + this->line_width <= text.size())
+            if (text_i + this->n_columns <= text.size())
             {
-                TextLine text_line(text.cbegin() + text_i, text.cbegin() + text_i + this->line_width);
+                TextLine text_line(text.cbegin() + text_i, text.cbegin() + text_i + this->n_columns);
                 this->buffer.emplace_back(text_line);
             }
             else
@@ -175,9 +175,9 @@ namespace yli::console
         return this->size() == 0;
     }
 
-    uint32_t ScrollbackBuffer::get_line_width() const
+    uint32_t ScrollbackBuffer::get_n_columns() const
     {
-        return this->line_width;
+        return this->n_columns;
     }
 
     uint32_t ScrollbackBuffer::get_n_rows() const
