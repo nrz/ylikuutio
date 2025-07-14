@@ -411,8 +411,8 @@ namespace yli::ontology
             std::size_t get_console_bottom_y() const;
             std::size_t get_console_left_x() const;
             std::size_t get_console_right_x() const;
-            std::size_t get_n_rows() const;
             std::size_t get_n_columns() const;
+            std::size_t get_n_rows() const;
 
             bool get_in_console() const;
             bool get_can_move_to_previous_input() const;
@@ -456,8 +456,8 @@ namespace yli::ontology
             const uint32_t console_left_x;
             const uint32_t console_right_x;
 
-            const uint32_t n_rows;
             const uint32_t n_columns;
+            const uint32_t n_rows;
 
             bool in_console                 { false };
             bool can_move_to_previous_input { false };

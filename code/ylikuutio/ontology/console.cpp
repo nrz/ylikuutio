@@ -99,8 +99,8 @@ namespace yli::ontology
         console_bottom_y { console_struct.bottom_y },
         console_left_x   { console_struct.left_x },
         console_right_x  { console_struct.right_x },
-        n_rows           { this->console_top_y - this->console_bottom_y + 1 },
-        n_columns        { this->console_right_x - this->console_left_x + 1 }
+        n_columns        { this->console_right_x - this->console_left_x + 1 },
+        n_rows           { this->console_top_y - this->console_bottom_y + 1 }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
@@ -631,14 +631,14 @@ namespace yli::ontology
         return this->console_right_x;
     }
 
-    std::size_t Console::get_n_rows() const
-    {
-        return this->n_rows;
-    }
-
     std::size_t Console::get_n_columns() const
     {
         return this->n_columns;
+    }
+
+    std::size_t Console::get_n_rows() const
+    {
+        return this->n_rows;
     }
 
     bool Console::get_in_console() const
