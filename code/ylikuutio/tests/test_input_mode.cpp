@@ -51,7 +51,7 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
 {
     mock::MockApplication application;
 
-    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(console_struct);
 
     yli::ontology::InputModeStruct input_mode_struct;

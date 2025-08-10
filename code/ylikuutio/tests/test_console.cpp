@@ -37,7 +37,7 @@ namespace yli::ontology
 TEST(console_must_be_initialized_appropriately, no_font)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
     ASSERT_NE(console, nullptr);
@@ -77,10 +77,10 @@ TEST(console_must_be_initialized_appropriately, no_font)
     ASSERT_EQ(console->get_cursor_index(), 0);
     ASSERT_EQ(console->get_history_line_i(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(console->get_historical_input_i(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(console->get_console_top_y(), 15);   // This may change in the future.
-    ASSERT_EQ(console->get_console_bottom_y(), 0); // This may change in the future.
     ASSERT_EQ(console->get_console_left_x(), 0);   // This may change in the future.
     ASSERT_EQ(console->get_console_right_x(), 39); // This may change in the future.
+    ASSERT_EQ(console->get_console_top_y(), 15);   // This may change in the future.
+    ASSERT_EQ(console->get_console_bottom_y(), 0); // This may change in the future.
     ASSERT_EQ(console->get_n_rows(), 16);          // This may change in the future.
     ASSERT_EQ(console->get_n_columns(), 40);       // This may change in the future.
     ASSERT_FALSE(console->get_in_console());
@@ -111,7 +111,7 @@ TEST(console_must_be_initialized_appropriately, no_font)
 TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
 
@@ -128,7 +128,7 @@ TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
 TEST(enter_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
 
@@ -145,7 +145,7 @@ TEST(enter_console_must_function_appropriately, no_font)
 TEST(exit_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(15, 0, 0, 39); // Some dummy dimensions.
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
 

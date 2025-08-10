@@ -95,10 +95,10 @@ namespace yli::ontology
                 "lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(this, &this->registry, "input_modes"),
-        console_top_y    { console_struct.top_y },
-        console_bottom_y { console_struct.bottom_y },
         console_left_x   { console_struct.left_x },
         console_right_x  { console_struct.right_x },
+        console_top_y    { console_struct.top_y },
+        console_bottom_y { console_struct.bottom_y },
         n_columns        { this->console_right_x - this->console_left_x + 1 },
         n_rows           { this->console_top_y - this->console_bottom_y + 1 }
     {
@@ -611,16 +611,6 @@ namespace yli::ontology
         return this->historical_input_i;
     }
 
-    std::size_t Console::get_console_top_y() const
-    {
-        return this->console_top_y;
-    }
-
-    std::size_t Console::get_console_bottom_y() const
-    {
-        return this->console_bottom_y;
-    }
-
     std::size_t Console::get_console_left_x() const
     {
         return this->console_left_x;
@@ -629,6 +619,16 @@ namespace yli::ontology
     std::size_t Console::get_console_right_x() const
     {
         return this->console_right_x;
+    }
+
+    std::size_t Console::get_console_top_y() const
+    {
+        return this->console_top_y;
+    }
+
+    std::size_t Console::get_console_bottom_y() const
+    {
+        return this->console_bottom_y;
     }
 
     std::size_t Console::get_n_columns() const

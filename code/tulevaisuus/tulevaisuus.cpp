@@ -274,7 +274,7 @@ namespace tulevaisuus
 
         // Create the main `Console`.
         std::cout << "Creating yli::ontology::Entity* my_console_entity ...\n";
-        yli::ontology::ConsoleStruct my_console_struct(15, 0, 0, 39);
+        yli::ontology::ConsoleStruct my_console_struct(0, 39, 15, 0);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating yli::ontology::Console* my_console ...\n";
         yli::ontology::Console* const my_console = this->entity_factory.create_console(my_console_struct);

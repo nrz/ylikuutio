@@ -407,10 +407,10 @@ namespace yli::ontology
             std::size_t get_cursor_index() const;
             std::size_t get_history_line_i() const;
             std::size_t get_historical_input_i() const;
-            std::size_t get_console_top_y() const;
-            std::size_t get_console_bottom_y() const;
             std::size_t get_console_left_x() const;
             std::size_t get_console_right_x() const;
+            std::size_t get_console_top_y() const;
+            std::size_t get_console_bottom_y() const;
             std::size_t get_n_columns() const;
             std::size_t get_n_rows() const;
 
@@ -451,10 +451,10 @@ namespace yli::ontology
             std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
             std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
-            const uint32_t console_top_y;
-            const uint32_t console_bottom_y;
             const uint32_t console_left_x;
             const uint32_t console_right_x;
+            const uint32_t console_top_y;
+            const uint32_t console_bottom_y;
 
             const uint32_t n_columns;
             const uint32_t n_rows;
