@@ -52,7 +52,7 @@ namespace yli::console
 
     bool TextInputHistory::enter_history()
     {
-        if (std::size_t history_size = this->history.size(); !this->get_is_in_history() && history_size > 0) [[likely]]
+        if (std::size_t history_size = this->history.size(); !this->get_is_active_in_history() && history_size > 0) [[likely]]
         {
             // If we are not in history and the history is not empty, enter the history.
             this->console_state_module.enter_historical_input();
@@ -67,7 +67,7 @@ namespace yli::console
 
     bool TextInputHistory::exit_history()
     {
-        if (this->get_is_in_history())
+        if (this->get_is_active_in_history())
         {
             // If we are in history, exit the history.
             this->console_state_module.enter_current_input();
@@ -81,7 +81,7 @@ namespace yli::console
 
     bool TextInputHistory::edit_historical_input()
     {
-        if (this->get_is_in_history())
+        if (this->get_is_active_in_history())
         {
             // If we are in history, enter temp input.
             // We still stay in the some historical index.
@@ -94,7 +94,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_previous()
     {
-        if (this->get_is_in_history() && this->history_index > 0) [[likely]]
+        if (this->get_is_active_in_history() && this->history_index > 0) [[likely]]
         {
             // If we are in the history and not in the oldest input, move to the previous input.
             this->history_index--;
@@ -108,7 +108,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_next()
     {
-        if (this->get_is_in_history() && this->history_index < this->size()) [[likely]]
+        if (this->get_is_active_in_history() && this->history_index < this->size()) [[likely]]
         {
             // If we are in the history and not in the newest input, move to the next input.
             this->history_index++;
@@ -122,7 +122,7 @@ namespace yli::console
 
     void TextInputHistory::move_to_first()
     {
-        if (this->size() > 0 && this->get_is_in_history()) [[likely]]
+        if (this->size() > 0 && this->get_is_active_in_history()) [[likely]]
         {
             this->history_index = 0;
             this->history_it = this->history.begin();
@@ -131,7 +131,7 @@ namespace yli::console
 
     void TextInputHistory::move_to_last()
     {
-        if (this->size() > 0 && this->get_is_in_history()) [[likely]]
+        if (this->size() > 0 && this->get_is_active_in_history()) [[likely]]
         {
             this->history_index = this->size() - 1;
             this->history_it = this->history.begin() + this->size() - 1;
@@ -153,9 +153,9 @@ namespace yli::console
         return *(this->history.begin() + input_i);
     }
 
-    bool TextInputHistory::get_is_in_history() const
+    bool TextInputHistory::get_is_active_in_history() const
     {
-        return this->console_state_module.get() == ConsoleState::IN_HISTORICAL_INPUT;
+        return this->console_state_module.get() == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT;
     }
 
     std::size_t TextInputHistory::size() const

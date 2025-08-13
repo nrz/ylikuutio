@@ -18,15 +18,31 @@
 #ifndef YLIKUUTIO_CONSOLE_STATE_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_STATE_HPP_INCLUDED
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace yli::console
 {
-    enum class ConsoleState
+    static const uint32_t active               = 1;
+    static const uint32_t in_scrollback_buffer = 1 << 1;
+    static const uint32_t in_current_input     = 1 << 2;
+    static const uint32_t in_historical_input  = 1 << 3;
+    static const uint32_t in_temp_input        = 1 << 4;
+
+    enum ConsoleState : uint32_t
     {
-        NOT_IN_CONSOLE,
-        IN_CURRENT_INPUT,
-        IN_HISTORICAL_INPUT,
-        IN_TEMP_INPUT,
-        IN_SCROLLBACK_BUFFER
+        INACTIVE_IN_CURRENT_INPUT = in_current_input,            // initial state: can activate -> current input
+        INACTIVE_IN_HISTORICAL_INPUT = in_historical_input,      // can activate -> historical input
+        INACTIVE_IN_TEMP_INPUT = in_temp_input,                  // can activate -> temp input
+        INACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT = in_scrollback_buffer | in_current_input,       // can activate -> scrollback buffer w/current input
+        INACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT = in_scrollback_buffer | in_historical_input, // can activate -> scrollback buffer w/historical input
+        INACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT = in_scrollback_buffer | in_temp_input,             // can activate -> scrollback buffer w/temp input
+        ACTIVE_IN_CURRENT_INPUT = active | in_current_input,       // active in current input
+        ACTIVE_IN_HISTORICAL_INPUT = active | in_historical_input, // active in historical input
+        ACTIVE_IN_TEMP_INPUT = active | in_temp_input,             // active in temp input
+        ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT = active | in_scrollback_buffer | in_current_input,       // active in scrollback buffer w/current input
+        ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT = active | in_scrollback_buffer | in_historical_input, // active in scrollback buffer w/historical input
+        ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT = active | in_scrollback_buffer | in_temp_input              // active in scrollback buffer w/temp input
     };
 }
 

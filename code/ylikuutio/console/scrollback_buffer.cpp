@@ -72,7 +72,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::enter_buffer()
     {
-        if (std::size_t buffer_size = this->buffer.size(); !this->get_is_in_buffer() && buffer_size > 0) [[likely]]
+        if (std::size_t buffer_size = this->buffer.size(); !this->get_is_active_in_buffer() && buffer_size > 0) [[likely]]
         {
             // If we are not in buffer and the buffer is not empty, enter the buffer.
             this->console_state_module.enter_scrollback_buffer();
@@ -87,7 +87,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::exit_buffer()
     {
-        if (this->get_is_in_buffer())
+        if (this->get_is_active_in_buffer())
         {
             // If we are in buffer, exit the buffer.
             this->console_state_module.enter_current_input();
@@ -101,7 +101,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::move_to_previous()
     {
-        if (this->get_is_in_buffer() && this->buffer_index > 0) [[likely]]
+        if (this->get_is_active_in_buffer() && this->buffer_index > 0) [[likely]]
         {
             // If we are in the buffer and not in the oldest input, move to the previous input.
             this->buffer_index--;
@@ -115,7 +115,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::move_to_next()
     {
-        if (this->get_is_in_buffer() && this->buffer_index < this->size()) [[likely]]
+        if (this->get_is_active_in_buffer() && this->buffer_index < this->size()) [[likely]]
         {
             // If we are in the buffer and not in the newest input, move to the next input.
             this->buffer_index++;
@@ -129,7 +129,7 @@ namespace yli::console
 
     void ScrollbackBuffer::move_to_first()
     {
-        if (this->size() > 0 && this->get_is_in_buffer()) [[likely]]
+        if (this->size() > 0 && this->get_is_active_in_buffer()) [[likely]]
         {
             this->buffer_index = 0;
             this->buffer_it = this->buffer.begin();
@@ -138,7 +138,7 @@ namespace yli::console
 
     void ScrollbackBuffer::move_to_last()
     {
-        if (this->size() > 0 && this->get_is_in_buffer()) [[likely]]
+        if (this->size() > 0 && this->get_is_active_in_buffer()) [[likely]]
         {
             this->buffer_index = this->size() - 1;
             this->buffer_it = this->buffer.begin() + this->size() - 1;
@@ -160,9 +160,9 @@ namespace yli::console
         return *(this->buffer.begin() + line_i);
     }
 
-    bool ScrollbackBuffer::get_is_in_buffer() const
+    bool ScrollbackBuffer::get_is_active_in_buffer() const
     {
-        return this->console_state_module.get() == ConsoleState::IN_SCROLLBACK_BUFFER;
+        return this->console_state_module.get_active_in_scrollback_buffer();
     }
 
     std::size_t ScrollbackBuffer::size() const

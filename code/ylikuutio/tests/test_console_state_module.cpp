@@ -16,203 +16,315 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
+#include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
+
+// Include standard headers
+#include <optional> // std::optional
 
 TEST(console_state_module_must_be_initialized_appropriately, console_state_module)
 {
     yli::console::ConsoleStateModule console_state_module;
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::NOT_IN_CONSOLE);
-    ASSERT_FALSE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_state_module.get_current_input(), nullptr);
     ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
 }
 
-TEST(entering_current_input_from_current_input_must_work_appropriately, current_input_from_current_input_no_effect)
+TEST(changing_to_scrollback_buffer_must_fail_appropriately, inactive_in_current_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    ASSERT_FALSE(console_state_module.enter_scrollback_buffer());
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
+}
+
+TEST(changing_to_historical_input_must_fail_appropriately, inactive_in_current_input)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    ASSERT_FALSE(console_state_module.enter_historical_input());
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
+}
+
+TEST(activation_must_work_appropriately, inactive_in_current_input)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_TRUE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
+}
+
+TEST(entering_current_input_from_current_input_must_work_appropriately, no_change)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_current_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_TRUE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_TRUE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_current_input_must_work_appropriately, historical_input_from_current_input)
 {
     yli::console::ConsoleStateModule console_state_module;
-    console_state_module.enter_historical_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_TRUE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    console_state_module.activate();
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_historical_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_TRUE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_current_input_must_work_appropriately, scrollback_buffer_from_current_input)
 {
     yli::console::ConsoleStateModule console_state_module;
-    console_state_module.enter_scrollback_buffer();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
+    console_state_module.activate();
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_historical_input_must_work_appropriately, current_input_from_historical_input)
 {
     yli::console::ConsoleStateModule console_state_module;
     console_state_module.enter_historical_input();
-    console_state_module.enter_current_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_TRUE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_current_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_TRUE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_historical_input_must_work_appropriately, historical_input_from_historical_input_no_effect)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
-    console_state_module.enter_historical_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_TRUE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_historical_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_TRUE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_input_from_historical_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
-    console_state_module.enter_temp_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_TEMP_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_TRUE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_temp_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_TRUE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, scrollback_buffer_from_historical_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
-    console_state_module.enter_scrollback_buffer();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_temp_input_must_work_appropriately, current_input_from_temp_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
     console_state_module.enter_temp_input();
-    console_state_module.enter_current_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_TRUE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_current_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_TRUE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_temp_input_must_work_appropriately, historical_input_from_temp_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
     console_state_module.enter_temp_input();
-    console_state_module.enter_historical_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_TRUE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_historical_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_TRUE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_from_temp_input_no_effect)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
     console_state_module.enter_temp_input();
-    console_state_module.enter_temp_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_TEMP_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_TRUE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_temp_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_TRUE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollback_buffer_from_temp_input)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_historical_input();
     console_state_module.enter_temp_input();
-    console_state_module.enter_scrollback_buffer();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_current_input_from_scrollback_buffer_must_work_appropriately, current_input_from_scrollback_buffer)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_scrollback_buffer();
-    console_state_module.enter_current_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_CURRENT_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_TRUE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_current_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_TRUE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(entering_historical_input_from_scrollback_buffer_must_work_appropriately, historical_input_from_scrollback_buffer)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_scrollback_buffer();
-    console_state_module.enter_historical_input();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_HISTORICAL_INPUT);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_TRUE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    ASSERT_FALSE(console_state_module.enter_historical_input());
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
 }
 
-TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_no_effect)
+TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_current_input_no_effect)
 {
     yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
     console_state_module.enter_scrollback_buffer();
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_CURRENT_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
+}
+
+TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_historical_input_no_effect)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
+    console_state_module.enter_historical_input();
     console_state_module.enter_scrollback_buffer();
-    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::IN_SCROLLBACK_BUFFER);
-    ASSERT_TRUE(console_state_module.get_in_console());
-    ASSERT_FALSE(console_state_module.get_in_current_input());
-    ASSERT_FALSE(console_state_module.get_in_historical_input());
-    ASSERT_FALSE(console_state_module.get_in_temp_input());
-    ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
+}
+
+TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_temp_input_no_effect)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.activate();
+    console_state_module.enter_historical_input();
+    console_state_module.enter_temp_input();
+    console_state_module.enter_scrollback_buffer();
+    std::optional<yli::console::ConsoleState> console_state = console_state_module.enter_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_state_module.get(), yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_state_module.get_active_in_console());
+    ASSERT_FALSE(console_state_module.get_active_in_current_input());
+    ASSERT_FALSE(console_state_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_state_module.get_active_in_temp_input());
+    ASSERT_TRUE(console_state_module.get_active_in_scrollback_buffer());
 }
 
 TEST(registering_current_input_must_work_appropriately, current_input)

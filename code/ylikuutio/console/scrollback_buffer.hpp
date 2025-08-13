@@ -61,7 +61,7 @@ namespace yli::console
             std::optional<TextLine> get() const;
             const TextLine& at(const std::size_t line_i) const;
 
-            bool get_is_in_buffer() const;
+            bool get_is_active_in_buffer() const;
             std::size_t size() const;
             bool empty() const;
             uint32_t get_n_columns() const;

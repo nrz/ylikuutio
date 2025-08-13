@@ -34,7 +34,7 @@ TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
     ASSERT_TRUE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
@@ -46,7 +46,7 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
     ASSERT_FALSE(text_input_history.move_to_previous());
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
     ASSERT_TRUE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
@@ -58,7 +58,7 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
     yli::console::ConsoleStateModule console_state;
     yli::console::TextInputHistory text_input_history(console_state);
     ASSERT_FALSE(text_input_history.move_to_next());
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
     ASSERT_TRUE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
@@ -68,6 +68,8 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 TEST(adding_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleStateModule console_state;
+    console_state.activate();
+
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
@@ -75,14 +77,14 @@ TEST(adding_an_input_must_work_appropriately, abc)
 
     text_input_history.add_to_history(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -93,6 +95,8 @@ TEST(adding_an_input_must_work_appropriately, abc)
 TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 {
     yli::console::ConsoleStateModule console_state;
+    console_state.activate();
+
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
@@ -100,16 +104,18 @@ TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 
     text_input_history.add_to_history(std::move(text_input));
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
 
     ASSERT_TRUE(text_input_history.edit_historical_input());
-    ASSERT_EQ(console_state.get(), ConsoleState::IN_TEMP_INPUT);
+    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
 
 TEST(emplacing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleStateModule console_state;
+    console_state.activate();
+
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
@@ -117,14 +123,14 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
 
     text_input_history.emplace_back(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -135,6 +141,8 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
 TEST(pushing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleStateModule console_state;
+    console_state.activate();
+
     yli::console::TextInputHistory text_input_history(console_state);
 
     yli::console::TextInput text_input;
@@ -142,14 +150,14 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
 
     text_input_history.push_back(std::move(text_input));
     ASSERT_FALSE(text_input_history.move_to_next());
-    ASSERT_FALSE(text_input_history.get_is_in_history());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 1);
     ASSERT_FALSE(text_input_history.empty());
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);

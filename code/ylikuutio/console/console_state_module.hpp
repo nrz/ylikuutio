@@ -20,6 +20,9 @@
 
 #include "code/ylikuutio/console/console_state.hpp"
 
+// Include standard headers
+#include <optional> // std::optional
+
 namespace yli::console
 {
     class TextInput;
@@ -27,19 +30,25 @@ namespace yli::console
     class ConsoleStateModule
     {
         public:
-            void enter_current_input();
-            void enter_historical_input();
-            void enter_temp_input();
-            void enter_scrollback_buffer();
+            void activate();   // This function implements all activation state changes.
+            void deactivate(); // This function implements all deactivation state changes.
+            std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
-            bool get_in_console() const;
-            bool get_in_current_input() const;
-            bool get_in_historical_input() const;
-            bool get_in_temp_input() const;
-            bool get_in_scrollback_buffer() const;
+            std::optional<ConsoleState> enter_current_input();
+            std::optional<ConsoleState> enter_historical_input();
+            std::optional<ConsoleState> enter_temp_input();
+            std::optional<ConsoleState> enter_scrollback_buffer();
+            std::optional<ConsoleState> exit_scrollback_buffer();
+
+            bool get_active_in_console() const;
+            bool get_active_in_current_input() const;
+            bool get_active_in_historical_input() const;
+            bool get_active_in_temp_input() const;
+            bool get_active_in_scrollback_buffer() const;
 
             void register_current_input(TextInput* const current_input);
             void register_temp_input(TextInput* const temp_input);
+            TextInput* edit_input();
 
             ConsoleState get() const;
             TextInput* get_current_input() const;
@@ -81,10 +90,10 @@ namespace yli::console
             void set_is_left_shift_pressed(const bool is_left_shift_pressed);
             void set_is_right_shift_pressed(const bool is_right_shift_pressed);
 
-            void exit_console();
+            ConsoleState exit_console();
 
         private:
-            ConsoleState state { ConsoleState::NOT_IN_CONSOLE };
+            ConsoleState state { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
             TextInput* current_input { nullptr };
             TextInput* temp_input    { nullptr };
 

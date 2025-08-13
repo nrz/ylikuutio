@@ -56,7 +56,7 @@ namespace yli::console
             std::optional<TextInput> get() const;
             const TextInput& at(const std::size_t input_i) const;
 
-            bool get_is_in_history() const;
+            bool get_is_active_in_history() const;
             std::size_t size() const;
             bool empty() const;
 

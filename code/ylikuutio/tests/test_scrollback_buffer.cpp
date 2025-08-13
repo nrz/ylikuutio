@@ -32,7 +32,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_0_n_rows_0)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 0, 0);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -45,7 +45,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_0_n_rows_1)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 0, 1);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -58,7 +58,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_0)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 0);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -71,7 +71,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_1)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -84,7 +84,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_1)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 1);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -97,7 +97,7 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_2)
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -111,7 +111,7 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_n
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
     ASSERT_FALSE(scrollback_buffer.move_to_previous());
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
@@ -123,7 +123,7 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_n_col
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
     ASSERT_FALSE(scrollback_buffer.move_to_next());
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
@@ -135,7 +135,7 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
     scrollback_buffer.add_to_buffer(TextLine(""));
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
@@ -153,7 +153,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
     const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -172,7 +172,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
     const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -191,7 +191,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
     const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 3);
@@ -210,7 +210,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
     const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -233,7 +233,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
     const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -254,7 +254,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
     const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 3);
@@ -275,7 +275,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
     const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -300,7 +300,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
     const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -323,7 +323,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
     const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 3);
@@ -346,7 +346,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
     scrollback_buffer.add_to_buffer(text_input);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
@@ -373,7 +373,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
     scrollback_buffer.add_to_buffer(text_input);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
@@ -398,7 +398,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
     scrollback_buffer.add_to_buffer(text_input);
-    ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
+    ASSERT_FALSE(scrollback_buffer.get_is_active_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 3);

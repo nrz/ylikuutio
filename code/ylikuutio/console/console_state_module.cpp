@@ -18,53 +18,173 @@
 #include "console_state_module.hpp"
 #include "console_state.hpp"
 
+// Include standard headers
+#include <optional> // std::optional
+
 namespace yli::console
 {
     class TextInput;
 
-    void ConsoleStateModule::enter_current_input()
+    // console states:
+    //  0. inactive, in current input (initial state)
+    //  1. inactive, in historical input
+    //  2. inactive, in temp input
+    //  3. inactive, in scrollback buffer while in current input
+    //  4. inactive, in scrollback buffer while in historical input
+    //  5. inactive, in scrollback buffer while in temp input
+    //
+    //  6. active, in current input
+    //  7. active, in historical input
+    //  8. active, in temp input
+    //  9. active, in scrollback buffer while in current input
+    // 10. active, in scrollback buffer while in historical input
+    // 11. active, in scrollback buffer while in temp input
+    //
+    // 0. initial state: inactive, in current input
+    // state transitions:
+    // -> 6. active, in current input (activate console)
+    //
+    // 1. inactive, in historical input (input index needs to keep tracked of)
+    // state transitions:
+    // -> 7. active, in historical input (input index needs to keep tracked of)
+    //
+    //  2. inactive, in temp input (input index needs to keep tracked of)
+    // state transitions:
+    // -> 8. active, in temp input (input index needs to keep tracked of)
+    //
+    //  3. inactive, in scrollback buffer while in current input (scrollback buffer line and input index need to keep tracked of)
+    // state transitions:
+    // -> 9. active, in scrollback buffer while in current input (scrollback buffer line and input index need to keep tracked of)
+    //
+    // 4. inactive, in scrollback buffer while in historical input (scrollback buffer line and input index need to keep tracked of)
+    // state transitions:
+    // -> 10. active, in scrollback buffer while in historical input (scrollback buffer line and input index need to keep tracked of)
+    //
+    // 5. inactive, in scrollback buffer while in temp input (scrollback buffer line and input index need to keep tracked of)
+    // state transitions:
+    // -> 11. active, in scrollback buffer while in temp input (scrollback buffer line and input index need to keep tracked of)
+    //
+    // 6. active, in current input
+    // state transitions:
+    // -> 0. inactive, in current input (deactivate)
+    // -> 7. active, in historical input (key up to historical input)
+    // -> 9. active, in scrollback buffer while in current input (pgup to scrollback buffer)
+    //
+    // 7. active, in historical input
+    // state transitions:
+    // ->  1. inactive, in historical input (deactivate)
+    // ->  6. active, in current input (key down to current input while in last historical input)
+    // ->  7. active, in temp input (edit historical input, that is, copy it to temp input for editing)
+    // -> 10. active, in scrollback buffer while in historical input (pgup to scrollback buffer)
+    //
+    // 8. active, in temp input
+    // state transitions:
+    // -> 2. inactive, in temp input (deactivate)
+    // -> 6. active, in current input (key down to current input while editing last historical input)
+    // -> 7. active, in historical input (key up or down to another historical input)
+    //
+    // 9. active, in scrollback buffer while in current input
+    // state transitions:
+    // -> 3. inactive, in scrollback buffer while in current input (deactivate)
+    // -> 7. active, in historical input (key up to exit scrollback buffer and to move to last historical input)
+    //
+    // 10. active, in scrollback buffer while in historical input
+    // state transitions:
+    // -> 4. inactive, in scrollback buffer while in historical input (deactivate)
+    // -> 6. active, in current input (key down to current input while in last historical input)
+    // -> 7. active, in historical input (key up or down to another historical input)
+    // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
+    //
+    // 11. active, in scrollback buffer while in temp input
+    // state transitions:
+    // -> 5. inactive, in scrollback buffer while in temp input (deactivate)
+    // -> 6. active, in current input (key down to current input while editing last historical input)
+    // -> 7. active, in historical input (key up or down to another historical input)
+    // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
+
+    void ConsoleStateModule::activate()
     {
-        this->state = ConsoleState::IN_CURRENT_INPUT;
+        // This function implements all activation state changes.
+        this->state = ConsoleState(this->state | yli::console::active);
     }
 
-    void ConsoleStateModule::enter_historical_input()
+    void ConsoleStateModule::deactivate()
     {
-        this->state = ConsoleState::IN_HISTORICAL_INPUT;
+        // This function implements all deactivation state changes.
+        this->state = ConsoleState(this->state & (!yli::console::active));
     }
 
-    void ConsoleStateModule::enter_temp_input()
+    std::optional<ConsoleState> ConsoleStateModule::switch_to_state(const ConsoleState new_state)
     {
-        this->state = ConsoleState::IN_TEMP_INPUT;
+        if (!((this->state ^ new_state) & (~yli::console::active)))
+        {
+            // If the old state and new state differ possibly only with regards to activation state,
+            // then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+        else if (!((this->state ^ new_state) & (~yli::console::in_scrollback_buffer)) && (this->state & yli::console::active))
+        {
+            // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
+            // and the current state in active, then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+        else if (const uint32_t any_input = in_current_input | in_historical_input | in_temp_input;
+                !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
+        {
+            // If the old state and new state differ possibly only with regards to which-buffer state,
+            // and the current state in active, then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+
+        return std::nullopt; // Transition failed.
     }
 
-    void ConsoleStateModule::enter_scrollback_buffer()
+    std::optional<ConsoleState> ConsoleStateModule::enter_current_input()
     {
-        this->state = ConsoleState::IN_SCROLLBACK_BUFFER;
+        return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
     }
 
-    bool ConsoleStateModule::get_in_console() const
+    std::optional<ConsoleState> ConsoleStateModule::enter_historical_input()
     {
-        return this->state != ConsoleState::NOT_IN_CONSOLE;
+        return this->switch_to_state(ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     }
 
-    bool ConsoleStateModule::get_in_current_input() const
+    std::optional<ConsoleState> ConsoleStateModule::enter_temp_input()
     {
-        return this->state == ConsoleState::IN_CURRENT_INPUT;
+        return this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
     }
 
-    bool ConsoleStateModule::get_in_historical_input() const
+    std::optional<ConsoleState> ConsoleStateModule::enter_scrollback_buffer()
     {
-        return this->state == ConsoleState::IN_HISTORICAL_INPUT;
+        return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
-    bool ConsoleStateModule::get_in_temp_input() const
+    bool ConsoleStateModule::get_active_in_console() const
     {
-        return this->state == ConsoleState::IN_TEMP_INPUT;
+        return this->state & yli::console::active;
     }
 
-    bool ConsoleStateModule::get_in_scrollback_buffer() const
+    bool ConsoleStateModule::get_active_in_current_input() const
     {
-        return this->state == ConsoleState::IN_SCROLLBACK_BUFFER;
+        return this->state == ConsoleState::ACTIVE_IN_CURRENT_INPUT;
+    }
+
+    bool ConsoleStateModule::get_active_in_historical_input() const
+    {
+        return this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT;
+    }
+
+    bool ConsoleStateModule::get_active_in_temp_input() const
+    {
+        return this->state == ConsoleState::ACTIVE_IN_TEMP_INPUT;
+    }
+
+    bool ConsoleStateModule::get_active_in_scrollback_buffer() const
+    {
+        return (this->state & yli::console::active) && (this->state & yli::console::in_scrollback_buffer);
     }
 
     void ConsoleStateModule::register_current_input(TextInput* const current_input)
@@ -262,8 +382,9 @@ namespace yli::console
         this->is_right_shift_pressed = is_right_shift_pressed;
     }
 
-    void ConsoleStateModule::exit_console()
+    ConsoleState ConsoleStateModule::exit_console()
     {
-        this->state = ConsoleState::NOT_IN_CONSOLE;
+        this->state = ConsoleState(this->state & (~yli::console::active));
+        return this->state;
     }
 }
