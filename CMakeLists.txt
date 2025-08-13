@@ -399,14 +399,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console_state.hpp
     code/ylikuutio/console/console_state_module.cpp
     code/ylikuutio/console/console_state_module.hpp
-    code/ylikuutio/console/current_input.cpp
-    code/ylikuutio/console/current_input.hpp
     code/ylikuutio/console/scrollback_buffer.cpp
     code/ylikuutio/console/scrollback_buffer.hpp
     code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
     code/ylikuutio/console/scrollback_buffer_iterator.hpp
-    code/ylikuutio/console/temp_input.cpp
-    code/ylikuutio/console/temp_input.hpp
     code/ylikuutio/console/text_input.cpp
     code/ylikuutio/console/text_input.hpp
     code/ylikuutio/console/text_input_const_iterator.hpp
@@ -1058,7 +1054,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_console_state_module.cpp
         code/ylikuutio/tests/test_constructible_module.cpp
         code/ylikuutio/tests/test_csv_loader.cpp
-        code/ylikuutio/tests/test_current_input.cpp
         code/ylikuutio/tests/test_ecosystem.cpp
         code/ylikuutio/tests/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/test_extract_string.cpp
@@ -1110,7 +1105,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_symbiosis.cpp
         code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
         code/ylikuutio/tests/test_symbiosis_struct.cpp
-        code/ylikuutio/tests/test_temp_input.cpp
         code/ylikuutio/tests/test_text_2d.cpp
         code/ylikuutio/tests/test_text_3d.cpp
         code/ylikuutio/tests/test_text_input.cpp

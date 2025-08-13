@@ -20,8 +20,7 @@
 
 namespace yli::console
 {
-    class CurrentInput;
-    class TempInput;
+    class TextInput;
 
     void ConsoleStateModule::enter_current_input()
     {
@@ -68,12 +67,12 @@ namespace yli::console
         return this->state == ConsoleState::IN_SCROLLBACK_BUFFER;
     }
 
-    void ConsoleStateModule::register_current_input(CurrentInput* const current_input)
+    void ConsoleStateModule::register_current_input(TextInput* const current_input)
     {
         this->current_input = current_input;
     }
 
-    void ConsoleStateModule::register_temp_input(TempInput* const temp_input)
+    void ConsoleStateModule::register_temp_input(TextInput* const temp_input)
     {
         this->temp_input = temp_input;
     }
@@ -83,12 +82,12 @@ namespace yli::console
         return this->state;
     }
 
-    CurrentInput* ConsoleStateModule::get_current_input() const
+    TextInput* ConsoleStateModule::get_current_input() const
     {
         return this->current_input;
     }
 
-    TempInput* ConsoleStateModule::get_temp_input() const
+    TextInput* ConsoleStateModule::get_temp_input() const
     {
         return this->temp_input;
     }

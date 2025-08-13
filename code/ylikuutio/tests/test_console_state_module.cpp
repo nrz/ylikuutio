@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/console_state_module.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
 
 TEST(console_state_module_must_be_initialized_appropriately, console_state_module)
 {
@@ -27,6 +28,8 @@ TEST(console_state_module_must_be_initialized_appropriately, console_state_modul
     ASSERT_FALSE(console_state_module.get_in_historical_input());
     ASSERT_FALSE(console_state_module.get_in_temp_input());
     ASSERT_FALSE(console_state_module.get_in_scrollback_buffer());
+    ASSERT_EQ(console_state_module.get_current_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
 }
 
 TEST(entering_current_input_from_current_input_must_work_appropriately, current_input_from_current_input_no_effect)
@@ -210,4 +213,48 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     ASSERT_FALSE(console_state_module.get_in_historical_input());
     ASSERT_FALSE(console_state_module.get_in_temp_input());
     ASSERT_TRUE(console_state_module.get_in_scrollback_buffer());
+}
+
+TEST(registering_current_input_must_work_appropriately, current_input)
+{
+    yli::console::TextInput current_input;
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.register_current_input(&current_input);
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
+    ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
+}
+
+TEST(registering_temp_input_must_work_appropriately, temp_input)
+{
+    yli::console::TextInput temp_input;
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.register_temp_input(&temp_input);
+    ASSERT_EQ(console_state_module.get_current_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+}
+
+TEST(registering_current_input_and_temp_input_must_work_appropriately, current_input_first_then_temp_input)
+{
+    yli::console::TextInput current_input;
+    yli::console::TextInput temp_input;
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.register_current_input(&current_input);
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
+    ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
+    console_state_module.register_temp_input(&temp_input);
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
+    ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+}
+
+TEST(registering_current_input_and_temp_input_must_work_appropriately, temp_input_first_then_current_input)
+{
+    yli::console::TextInput current_input;
+    yli::console::TextInput temp_input;
+    yli::console::ConsoleStateModule console_state_module;
+    console_state_module.register_temp_input(&temp_input);
+    ASSERT_EQ(console_state_module.get_current_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    console_state_module.register_current_input(&current_input);
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
+    ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
 }
