@@ -21,7 +21,7 @@
 // Include standard headers
 #include <cstddef>  // std::ptrdiff_t
 #include <iterator> // std::bidirectional_iterator_tag
-#include <string>   // std::u32string
+#include <string>   // std::string
 
 namespace yli::console
 {
@@ -34,7 +34,7 @@ namespace yli::console
             using pointer           = char32_t*;
             using reference         = char32_t&;
 
-            explicit TextInputIterator(std::u32string::iterator it)
+            explicit TextInputIterator(std::string::iterator it)
                 : it { it }
             {
             }
@@ -46,7 +46,7 @@ namespace yli::console
             TextInputIterator& operator=(const TextInputIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            TextInputIterator& operator=(std::u32string::iterator it)
+            TextInputIterator& operator=(std::string::iterator it)
             {
                 this->it = it;
                 return *this;
@@ -93,7 +93,7 @@ namespace yli::console
             }
 
         private:
-            std::u32string::iterator it;
+            std::string::iterator it;
     };
 }
 

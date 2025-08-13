@@ -20,8 +20,8 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>      // std::u32string
-#include <string_view> // std::u32string_view
+#include <string>      // std::string
+#include <string_view> // std::string_view
 
 namespace yli::console
 {
@@ -35,7 +35,7 @@ namespace yli::console
         return this->line != other.line;
     }
 
-    TextLine::TextLine(std::u32string_view text_line)
+    TextLine::TextLine(std::string_view text_line)
         : line { text_line }
     {
     }
@@ -55,7 +55,7 @@ namespace yli::console
     {
     }
 
-    const std::u32string& TextLine::data() const
+    const std::string& TextLine::data() const
     {
         return this->line;
     }

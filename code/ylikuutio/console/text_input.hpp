@@ -24,8 +24,8 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <string>   // std::u32string
-#include <string_view> // std::u32string_view
+#include <string>   // std::string
+#include <string_view> // std::string_view
 
 namespace yli::console
 {
@@ -69,7 +69,7 @@ namespace yli::console
                     this->cursor_it = this->input.begin() + this->cursor_index;
                 }
 
-            void add_characters(std::u32string_view char_container);
+            void add_characters(std::string_view char_container);
 
             void emplace_back(char32_t character);
             void push_back(char32_t character);
@@ -86,7 +86,7 @@ namespace yli::console
             void move_cursor_to_end_of_line();
             std::size_t size() const;
             bool empty() const;
-            const std::u32string& data() const;
+            const std::string& data() const;
 
             std::size_t get_cursor_index() const;
 
@@ -112,8 +112,8 @@ namespace yli::console
             }
 
         private:
-            std::u32string input; // This is used for actual inputs.
-            std::u32string::iterator cursor_it { this->input.begin() };
+            std::string input; // This is used for actual inputs.
+            std::string::iterator cursor_it { this->input.begin() };
             std::size_t cursor_index { 0 };
     };
 }

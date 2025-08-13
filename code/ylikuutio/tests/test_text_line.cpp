@@ -20,60 +20,60 @@
 #include "code/ylikuutio/console/text_input.hpp"
 
 // Include standard headers
-#include <string_view> // std::u32string_view
+#include <string_view> // std::string_view
 
 TEST(text_line_must_be_initialized_appropriately, empty_text_line)
 {
-    yli::console::TextLine text_line(U"");
-    ASSERT_EQ(text_line.data(), U"");
+    yli::console::TextLine text_line("");
+    ASSERT_EQ(text_line.data(), "");
     ASSERT_EQ(text_line.size(), 0);
     ASSERT_EQ(text_line.cbegin().unwrap(), text_line.data().cbegin());
 }
 
 TEST(text_line_must_be_initialized_appropriately, text_line)
 {
-    yli::console::TextLine text_line(U"abc");
-    ASSERT_EQ(text_line.data(), U"abc");
+    yli::console::TextLine text_line("abc");
+    ASSERT_EQ(text_line.data(), "abc");
     ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_must_be_initialized_appropriately, from_text_input)
 {
     yli::console::TextInput text_input;
-    text_input.add_characters(U"abc");
+    text_input.add_characters("abc");
 
     yli::console::TextLine text_line(text_input);
-    ASSERT_EQ(text_line.data(), U"abc");
+    ASSERT_EQ(text_line.data(), "abc");
     ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_must_be_initialized_appropriately, empty_string)
 {
-    std::u32string_view empty_string;
+    std::string_view empty_string;
     yli::console::TextLine text_line(empty_string);
-    ASSERT_EQ(text_line.data(), U"");
+    ASSERT_EQ(text_line.data(), "");
     ASSERT_EQ(text_line.size(), 0);
 }
 
 TEST(text_line_must_be_initialized_appropriately, a_string)
 {
-    std::u32string_view my_string { U"a" };
+    std::string_view my_string { "a" };
     yli::console::TextLine text_line(my_string);
-    ASSERT_EQ(text_line.data(), U"a");
+    ASSERT_EQ(text_line.data(), "a");
     ASSERT_EQ(text_line.size(), 1);
 }
 
 TEST(text_line_must_be_initialized_appropriately, abc_string)
 {
-    std::u32string_view my_string { U"abc" };
+    std::string_view my_string { "abc" };
     yli::console::TextLine text_line(my_string);
-    ASSERT_EQ(text_line.data(), U"abc");
+    ASSERT_EQ(text_line.data(), "abc");
     ASSERT_EQ(text_line.size(), 3);
 }
 
 TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_const_iterator)
 {
-    std::u32string_view my_string { U"abc" };
+    std::string_view my_string { "abc" };
     yli::console::TextLine text_line(my_string);
 
     auto it = text_line.cbegin();
@@ -89,7 +89,7 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
 
 TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
 {
-    std::u32string_view my_string { U"abc" };
+    std::string_view my_string { "abc" };
     yli::console::TextLine text_line(my_string);
 
     auto it = text_line.cend();

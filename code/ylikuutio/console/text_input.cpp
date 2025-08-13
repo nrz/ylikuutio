@@ -20,8 +20,8 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
-#include <string>   // std::u32string
-#include <string_view> // std::u32string_view
+#include <string>   // std::string
+#include <string_view> // std::string_view
 
 namespace yli::console
 {
@@ -38,7 +38,7 @@ namespace yli::console
         this->add_character(char32_t(character));
     }
 
-    void TextInput::add_characters(std::u32string_view char_container)
+    void TextInput::add_characters(std::string_view char_container)
     {
         this->input.insert(this->input.end(), char_container.begin(), char_container.end());
         this->cursor_index += char_container.size();
@@ -175,7 +175,7 @@ namespace yli::console
         return this->size() == 0;
     }
 
-    const std::u32string& TextInput::data() const
+    const std::string& TextInput::data() const
     {
         return this->input;
     }

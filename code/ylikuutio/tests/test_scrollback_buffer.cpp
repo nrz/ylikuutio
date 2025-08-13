@@ -24,7 +24,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::nullopt
-#include <string>   // std::u32string
+#include <string>   // std::string
 
 using yli::console::TextLine;
 
@@ -134,7 +134,7 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
-    scrollback_buffer.add_to_buffer(TextLine(U""));
+    scrollback_buffer.add_to_buffer(TextLine(""));
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
@@ -151,7 +151,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 1);
-    const yli::console::TextLine text_line(U"a");
+    const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -170,7 +170,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
-    const yli::console::TextLine text_line(U"a");
+    const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -189,7 +189,7 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
-    const yli::console::TextLine text_line(U"a");
+    const yli::console::TextLine text_line("a");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -208,7 +208,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
-    const yli::console::TextLine text_line(U"ab");
+    const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
@@ -218,9 +218,9 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_a(U"a");
+    const yli::console::TextLine expected_text_line_a("a");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
-    const yli::console::TextLine expected_text_line_b(U"b");
+    const yli::console::TextLine expected_text_line_b("b");
     ASSERT_EQ(scrollback_buffer.at(1), expected_text_line_b);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -231,7 +231,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
-    const yli::console::TextLine text_line(U"ab");
+    const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -241,7 +241,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_ab(U"ab");
+    const yli::console::TextLine expected_text_line_ab("ab");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -252,7 +252,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
-    const yli::console::TextLine text_line(U"ab");
+    const yli::console::TextLine text_line("ab");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -262,7 +262,7 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_ab(U"ab");
+    const yli::console::TextLine expected_text_line_ab("ab");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -273,7 +273,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
-    const yli::console::TextLine text_line(U"abc");
+    const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 3);
@@ -283,11 +283,11 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_a(U"a");
+    const yli::console::TextLine expected_text_line_a("a");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
-    const yli::console::TextLine expected_text_line_b(U"b");
+    const yli::console::TextLine expected_text_line_b("b");
     ASSERT_EQ(scrollback_buffer.at(1), expected_text_line_b);
-    const yli::console::TextLine expected_text_line_c(U"c");
+    const yli::console::TextLine expected_text_line_c("c");
     ASSERT_EQ(scrollback_buffer.at(2), expected_text_line_c);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -298,7 +298,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
-    const yli::console::TextLine text_line(U"abc");
+    const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 2);
@@ -308,9 +308,9 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_ab(U"ab");
+    const yli::console::TextLine expected_text_line_ab("ab");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
-    const yli::console::TextLine expected_text_line_c(U"c");
+    const yli::console::TextLine expected_text_line_c("c");
     ASSERT_EQ(scrollback_buffer.at(1), expected_text_line_c);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -321,7 +321,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
-    const yli::console::TextLine text_line(U"abc");
+    const yli::console::TextLine text_line("abc");
     scrollback_buffer.add_to_buffer(text_line);
     ASSERT_FALSE(scrollback_buffer.get_is_in_buffer());
     ASSERT_EQ(scrollback_buffer.size(), 1);
@@ -331,7 +331,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_abc(U"abc");
+    const yli::console::TextLine expected_text_line_abc("abc");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_abc);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -341,7 +341,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_1_n_rows_2_text_input_width_3)
 {
     yli::console::TextInput text_input;
-    text_input.add_characters(std::u32string(U"abc"));
+    text_input.add_characters(std::string("abc"));
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
@@ -354,11 +354,11 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_a(U"a");
+    const yli::console::TextLine expected_text_line_a("a");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_a);
-    const yli::console::TextLine expected_text_line_b(U"b");
+    const yli::console::TextLine expected_text_line_b("b");
     ASSERT_EQ(scrollback_buffer.at(1), expected_text_line_b);
-    const yli::console::TextLine expected_text_line_c(U"c");
+    const yli::console::TextLine expected_text_line_c("c");
     ASSERT_EQ(scrollback_buffer.at(2), expected_text_line_c);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -368,7 +368,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_2_n_rows_2_text_input_width_3)
 {
     yli::console::TextInput text_input;
-    text_input.add_characters(U"abc");
+    text_input.add_characters("abc");
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 2, 2);
@@ -381,9 +381,9 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_ab(U"ab");
+    const yli::console::TextLine expected_text_line_ab("ab");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_ab);
-    const yli::console::TextLine expected_text_line_c(U"c");
+    const yli::console::TextLine expected_text_line_c("c");
     ASSERT_EQ(scrollback_buffer.at(1), expected_text_line_c);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -393,7 +393,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_3_n_rows_2_text_input_width_3)
 {
     yli::console::TextInput text_input;
-    text_input.add_characters(U"abc");
+    text_input.add_characters("abc");
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
@@ -406,7 +406,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(scrollback_buffer.get(), std::nullopt);
 
-    const yli::console::TextLine expected_text_line_abc(U"abc");
+    const yli::console::TextLine expected_text_line_abc("abc");
     ASSERT_EQ(scrollback_buffer.at(0), expected_text_line_abc);
 
     ASSERT_TRUE(scrollback_buffer.enter_buffer());
@@ -415,9 +415,9 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 
 TEST(scrollback_buffer_begin_iterator_must_work_appropriately, scrollback_buffer_n_columns_3_n_rows_2_begin_iterator)
 {
-    const std::u32string abc_char_container { U"abc" };
-    const std::u32string def_char_container { U"def" };
-    const std::u32string ghi_char_container { U"ghi" };
+    const std::string abc_char_container { "abc" };
+    const std::string def_char_container { "def" };
+    const std::string ghi_char_container { "ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
@@ -449,9 +449,9 @@ TEST(scrollback_buffer_begin_iterator_must_work_appropriately, scrollback_buffer
 
 TEST(scrollback_buffer_cbegin_iterator_must_work_appropriately, scrollback_buffer_n_columns_3_n_rows_2_cbegin_iterator)
 {
-    const std::u32string abc_char_container { U"abc" };
-    const std::u32string def_char_container { U"def" };
-    const std::u32string ghi_char_container { U"ghi" };
+    const std::string abc_char_container { "abc" };
+    const std::string def_char_container { "def" };
+    const std::string ghi_char_container { "ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
@@ -483,9 +483,9 @@ TEST(scrollback_buffer_cbegin_iterator_must_work_appropriately, scrollback_buffe
 
 TEST(scrollback_buffer_end_iterator_must_work_appropriately, scrollback_buffer_n_columns_3_n_rows_2_end_iterator)
 {
-    const std::u32string abc_char_container { U"abc" };
-    const std::u32string def_char_container { U"def" };
-    const std::u32string ghi_char_container { U"ghi" };
+    const std::string abc_char_container { "abc" };
+    const std::string def_char_container { "def" };
+    const std::string ghi_char_container { "ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
@@ -517,9 +517,9 @@ TEST(scrollback_buffer_end_iterator_must_work_appropriately, scrollback_buffer_n
 
 TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_n_columns_3_n_rows_2_cend_iterator)
 {
-    const std::u32string abc_char_container { U"abc" };
-    const std::u32string def_char_container { U"def" };
-    const std::u32string ghi_char_container { U"ghi" };
+    const std::string abc_char_container { "abc" };
+    const std::string def_char_container { "def" };
+    const std::string ghi_char_container { "ghi" };
 
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 3, 2);
@@ -553,7 +553,7 @@ TEST(emplacing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
-    const yli::console::TextLine text_line(U"a");
+    const yli::console::TextLine text_line("a");
     scrollback_buffer.emplace_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());
@@ -568,7 +568,7 @@ TEST(pushing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_n_
 {
     yli::console::ConsoleStateModule console_state;
     yli::console::ScrollbackBuffer scrollback_buffer(console_state, 1, 2);
-    const yli::console::TextLine text_line(U"a");
+    const yli::console::TextLine text_line("a");
     scrollback_buffer.push_back(text_line);
     ASSERT_EQ(scrollback_buffer.size(), 1);
     ASSERT_FALSE(scrollback_buffer.empty());

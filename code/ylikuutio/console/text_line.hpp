@@ -23,8 +23,8 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>      // std::u32string
-#include <string_view> // std::u32string_view
+#include <string>      // std::string
+#include <string_view> // std::string_view
 
 namespace yli::console
 {
@@ -40,15 +40,15 @@ namespace yli::console
             bool operator==(const TextLine& other) const;
             bool operator!=(const TextLine& other) const;
 
-            explicit TextLine(std::u32string_view text_line);
+            explicit TextLine(std::string_view text_line);
 
             explicit TextLine(const TextInput& text_input);
 
-            TextLine(const typename std::u32string::const_iterator begin, const typename std::u32string::const_iterator end);
+            TextLine(const typename std::string::const_iterator begin, const typename std::string::const_iterator end);
             TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
             TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end);
 
-            const std::u32string& data() const;
+            const std::string& data() const;
 
             std::size_t size() const;
 
@@ -64,7 +64,7 @@ namespace yli::console
             }
 
         private:
-            const std::u32string line;
+            const std::string line;
     };
 }
 
