@@ -96,9 +96,9 @@ namespace yli::console
             ConsoleState exit_console();
 
         private:
-            ConsoleState state { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
-            TextInput* current_input { nullptr };
-            TextInput* temp_input    { nullptr };
+            ConsoleState state                   { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
+            TextInput* current_input             { nullptr };
+            TextInput* temp_input                { nullptr };
             TextInputHistory* text_input_history { nullptr };
 
             bool can_move_to_previous_input { false };
