@@ -26,6 +26,7 @@
 namespace yli::console
 {
     class TextInput;
+    class TextInputHistory;
 
     class ConsoleStateModule
     {
@@ -48,11 +49,13 @@ namespace yli::console
 
             void register_current_input(TextInput* const current_input);
             void register_temp_input(TextInput* const temp_input);
+            void register_text_input_history(TextInputHistory* const text_input_history);
             TextInput* edit_input();
 
             ConsoleState get() const;
             TextInput* get_current_input() const;
             TextInput* get_temp_input() const;
+            TextInputHistory* get_text_input_history() const;
 
             bool get_can_move_to_previous_input() const;
             bool get_can_move_to_next_input() const;
@@ -96,6 +99,7 @@ namespace yli::console
             ConsoleState state { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
             TextInput* current_input { nullptr };
             TextInput* temp_input    { nullptr };
+            TextInputHistory* text_input_history { nullptr };
 
             bool can_move_to_previous_input { false };
             bool can_move_to_next_input     { false };

@@ -19,6 +19,7 @@
 #include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/console_state_module.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
+#include "code/ylikuutio/console/text_input_history.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
@@ -334,6 +335,7 @@ TEST(registering_current_input_must_work_appropriately, current_input)
     console_state_module.register_current_input(&current_input);
     ASSERT_EQ(console_state_module.get_current_input(), &current_input);
     ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
 }
 
 TEST(registering_temp_input_must_work_appropriately, temp_input)
@@ -343,6 +345,7 @@ TEST(registering_temp_input_must_work_appropriately, temp_input)
     console_state_module.register_temp_input(&temp_input);
     ASSERT_EQ(console_state_module.get_current_input(), nullptr);
     ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
 }
 
 TEST(registering_current_input_and_temp_input_must_work_appropriately, current_input_first_then_temp_input)
@@ -353,9 +356,11 @@ TEST(registering_current_input_and_temp_input_must_work_appropriately, current_i
     console_state_module.register_current_input(&current_input);
     ASSERT_EQ(console_state_module.get_current_input(), &current_input);
     ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
     console_state_module.register_temp_input(&temp_input);
     ASSERT_EQ(console_state_module.get_current_input(), &current_input);
     ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
 }
 
 TEST(registering_current_input_and_temp_input_must_work_appropriately, temp_input_first_then_current_input)
@@ -366,7 +371,19 @@ TEST(registering_current_input_and_temp_input_must_work_appropriately, temp_inpu
     console_state_module.register_temp_input(&temp_input);
     ASSERT_EQ(console_state_module.get_current_input(), nullptr);
     ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
     console_state_module.register_current_input(&current_input);
     ASSERT_EQ(console_state_module.get_current_input(), &current_input);
     ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(console_state_module.get_text_input_history(), nullptr);
+}
+
+TEST(registering_text_input_history_must_work_appropriately, text_input_history)
+{
+    yli::console::ConsoleStateModule console_state_module;
+    yli::console::TextInputHistory text_input_history(console_state_module);
+    console_state_module.register_text_input_history(&text_input_history);
+    ASSERT_EQ(console_state_module.get_current_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
+    ASSERT_EQ(console_state_module.get_text_input_history(), &text_input_history);
 }
