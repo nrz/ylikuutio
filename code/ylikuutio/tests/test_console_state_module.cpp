@@ -387,3 +387,17 @@ TEST(registering_text_input_history_must_work_appropriately, text_input_history)
     ASSERT_EQ(console_state_module.get_temp_input(), nullptr);
     ASSERT_EQ(console_state_module.get_text_input_history(), &text_input_history);
 }
+
+TEST(registering_current_input_and_temp_input_and_text_input_history_must_work_appropriately, current_input_and_temp_input_and_text_input_history)
+{
+    yli::console::TextInput current_input;
+    yli::console::TextInput temp_input;
+    yli::console::ConsoleStateModule console_state_module;
+    yli::console::TextInputHistory text_input_history(console_state_module);
+    console_state_module.register_current_input(&current_input);
+    console_state_module.register_temp_input(&temp_input);
+    console_state_module.register_text_input_history(&text_input_history);
+    ASSERT_EQ(console_state_module.get_current_input(), &current_input);
+    ASSERT_EQ(console_state_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(console_state_module.get_text_input_history(), &text_input_history);
+}
