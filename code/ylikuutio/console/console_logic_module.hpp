@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_CONSOLE_CONSOLE_STATE_MODULE_HPP_INCLUDED
-#define YLIKUUTIO_CONSOLE_CONSOLE_STATE_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_CONSOLE_CONSOLE_LOGIC_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_CONSOLE_CONSOLE_LOGIC_MODULE_HPP_INCLUDED
 
 #include "code/ylikuutio/console/console_state.hpp"
 
@@ -28,7 +28,7 @@ namespace yli::console
     class TextInput;
     class TextInputHistory;
 
-    class ConsoleStateModule
+    class ConsoleLogicModule
     {
         public:
             void activate();   // This function implements all activation state changes.

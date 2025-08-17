@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "console_state_module.hpp"
+#include "console_logic_module.hpp"
 #include "console_state.hpp"
 
 // Include standard headers
@@ -103,19 +103,19 @@ namespace yli::console
     // -> 7. active, in historical input (key up or down to another historical input)
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
-    void ConsoleStateModule::activate()
+    void ConsoleLogicModule::activate()
     {
         // This function implements all activation state changes.
         this->state = ConsoleState(this->state | yli::console::active);
     }
 
-    void ConsoleStateModule::deactivate()
+    void ConsoleLogicModule::deactivate()
     {
         // This function implements all deactivation state changes.
         this->state = ConsoleState(this->state & (!yli::console::active));
     }
 
-    std::optional<ConsoleState> ConsoleStateModule::switch_to_state(const ConsoleState new_state)
+    std::optional<ConsoleState> ConsoleLogicModule::switch_to_state(const ConsoleState new_state)
     {
         if (!((this->state ^ new_state) & (~yli::console::active)))
         {
@@ -143,257 +143,257 @@ namespace yli::console
         return std::nullopt; // Transition failed.
     }
 
-    std::optional<ConsoleState> ConsoleStateModule::enter_current_input()
+    std::optional<ConsoleState> ConsoleLogicModule::enter_current_input()
     {
         return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
     }
 
-    std::optional<ConsoleState> ConsoleStateModule::enter_historical_input()
+    std::optional<ConsoleState> ConsoleLogicModule::enter_historical_input()
     {
         return this->switch_to_state(ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     }
 
-    std::optional<ConsoleState> ConsoleStateModule::enter_temp_input()
+    std::optional<ConsoleState> ConsoleLogicModule::enter_temp_input()
     {
         return this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
     }
 
-    std::optional<ConsoleState> ConsoleStateModule::enter_scrollback_buffer()
+    std::optional<ConsoleState> ConsoleLogicModule::enter_scrollback_buffer()
     {
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
-    bool ConsoleStateModule::get_active_in_console() const
+    bool ConsoleLogicModule::get_active_in_console() const
     {
         return this->state & yli::console::active;
     }
 
-    bool ConsoleStateModule::get_active_in_current_input() const
+    bool ConsoleLogicModule::get_active_in_current_input() const
     {
         return this->state == ConsoleState::ACTIVE_IN_CURRENT_INPUT;
     }
 
-    bool ConsoleStateModule::get_active_in_historical_input() const
+    bool ConsoleLogicModule::get_active_in_historical_input() const
     {
         return this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT;
     }
 
-    bool ConsoleStateModule::get_active_in_temp_input() const
+    bool ConsoleLogicModule::get_active_in_temp_input() const
     {
         return this->state == ConsoleState::ACTIVE_IN_TEMP_INPUT;
     }
 
-    bool ConsoleStateModule::get_active_in_scrollback_buffer() const
+    bool ConsoleLogicModule::get_active_in_scrollback_buffer() const
     {
         return (this->state & yli::console::active) && (this->state & yli::console::in_scrollback_buffer);
     }
 
-    void ConsoleStateModule::register_current_input(TextInput* const current_input)
+    void ConsoleLogicModule::register_current_input(TextInput* const current_input)
     {
         this->current_input = current_input;
     }
 
-    void ConsoleStateModule::register_temp_input(TextInput* const temp_input)
+    void ConsoleLogicModule::register_temp_input(TextInput* const temp_input)
     {
         this->temp_input = temp_input;
     }
 
-    void ConsoleStateModule::register_text_input_history(TextInputHistory* const text_input_history)
+    void ConsoleLogicModule::register_text_input_history(TextInputHistory* const text_input_history)
     {
         this->text_input_history = text_input_history;
     }
 
-    yli::console::ConsoleState ConsoleStateModule::get() const
+    yli::console::ConsoleState ConsoleLogicModule::get() const
     {
         return this->state;
     }
 
-    TextInput* ConsoleStateModule::get_current_input() const
+    TextInput* ConsoleLogicModule::get_current_input() const
     {
         return this->current_input;
     }
 
-    TextInput* ConsoleStateModule::get_temp_input() const
+    TextInput* ConsoleLogicModule::get_temp_input() const
     {
         return this->temp_input;
     }
 
-    TextInputHistory* ConsoleStateModule::get_text_input_history() const
+    TextInputHistory* ConsoleLogicModule::get_text_input_history() const
     {
         return this->text_input_history;
     }
 
-    bool ConsoleStateModule::get_can_move_to_previous_input() const
+    bool ConsoleLogicModule::get_can_move_to_previous_input() const
     {
         return this->can_move_to_previous_input;
     }
 
-    bool ConsoleStateModule::get_can_move_to_next_input() const
+    bool ConsoleLogicModule::get_can_move_to_next_input() const
     {
         return this->can_move_to_next_input;
     }
 
-    bool ConsoleStateModule::get_can_backspace() const
+    bool ConsoleLogicModule::get_can_backspace() const
     {
         return this->can_backspace;
     }
 
-    bool ConsoleStateModule::get_can_tab() const
+    bool ConsoleLogicModule::get_can_tab() const
     {
         return this->can_tab;
     }
 
-    bool ConsoleStateModule::get_can_enter_key() const
+    bool ConsoleLogicModule::get_can_enter_key() const
     {
         return this->can_enter_key;
     }
 
-    bool ConsoleStateModule::get_can_ctrl_c() const
+    bool ConsoleLogicModule::get_can_ctrl_c() const
     {
         return this->can_ctrl_c;
     }
 
-    bool ConsoleStateModule::get_can_ctrl_w() const
+    bool ConsoleLogicModule::get_can_ctrl_w() const
     {
         return this->can_ctrl_w;
     }
 
-    bool ConsoleStateModule::get_can_page_up() const
+    bool ConsoleLogicModule::get_can_page_up() const
     {
         return this->can_page_up;
     }
 
-    bool ConsoleStateModule::get_can_page_down() const
+    bool ConsoleLogicModule::get_can_page_down() const
     {
         return this->can_page_down;
     }
 
-    bool ConsoleStateModule::get_can_home() const
+    bool ConsoleLogicModule::get_can_home() const
     {
         return this->can_home;
     }
 
-    bool ConsoleStateModule::get_can_end() const
+    bool ConsoleLogicModule::get_can_end() const
     {
         return this->can_end;
     }
 
-    bool ConsoleStateModule::get_is_left_control_pressed() const
+    bool ConsoleLogicModule::get_is_left_control_pressed() const
     {
         return this->is_left_control_pressed;
     }
 
-    bool ConsoleStateModule::get_is_right_control_pressed() const
+    bool ConsoleLogicModule::get_is_right_control_pressed() const
     {
         return this->is_right_control_pressed;
     }
 
-    bool ConsoleStateModule::get_is_left_alt_pressed() const
+    bool ConsoleLogicModule::get_is_left_alt_pressed() const
     {
         return this->is_left_alt_pressed;
     }
 
-    bool ConsoleStateModule::get_is_right_alt_pressed() const
+    bool ConsoleLogicModule::get_is_right_alt_pressed() const
     {
         return this->is_right_alt_pressed;
     }
 
-    bool ConsoleStateModule::get_is_left_shift_pressed() const
+    bool ConsoleLogicModule::get_is_left_shift_pressed() const
     {
         return this->is_left_shift_pressed;
     }
 
-    bool ConsoleStateModule::get_is_right_shift_pressed() const
+    bool ConsoleLogicModule::get_is_right_shift_pressed() const
     {
         return this->is_right_shift_pressed;
     }
 
-    void ConsoleStateModule::set_can_move_to_previous_input(const bool can_move_to_previous_input)
+    void ConsoleLogicModule::set_can_move_to_previous_input(const bool can_move_to_previous_input)
     {
         this->can_move_to_previous_input = can_move_to_previous_input;
     }
 
-    void ConsoleStateModule::set_can_move_to_next_input(const bool can_move_to_next_input)
+    void ConsoleLogicModule::set_can_move_to_next_input(const bool can_move_to_next_input)
     {
         this->can_move_to_next_input = can_move_to_next_input;
     }
 
-    void ConsoleStateModule::set_can_backspace(const bool can_backspace)
+    void ConsoleLogicModule::set_can_backspace(const bool can_backspace)
     {
         this->can_backspace = can_backspace;
     }
 
-    void ConsoleStateModule::set_can_tab(const bool can_tab)
+    void ConsoleLogicModule::set_can_tab(const bool can_tab)
     {
         this->can_tab = can_tab;
     }
 
-    void ConsoleStateModule::set_can_enter_key(const bool can_enter_key)
+    void ConsoleLogicModule::set_can_enter_key(const bool can_enter_key)
     {
         this->can_enter_key = can_enter_key;
     }
 
-    void ConsoleStateModule::set_can_ctrl_c(const bool can_ctrl_c)
+    void ConsoleLogicModule::set_can_ctrl_c(const bool can_ctrl_c)
     {
         this->can_ctrl_c = can_ctrl_c;
     }
 
-    void ConsoleStateModule::set_can_ctrl_w(const bool can_ctrl_w)
+    void ConsoleLogicModule::set_can_ctrl_w(const bool can_ctrl_w)
     {
         this->can_ctrl_w = can_ctrl_w;
     }
 
-    void ConsoleStateModule::set_can_page_up(const bool can_page_up)
+    void ConsoleLogicModule::set_can_page_up(const bool can_page_up)
     {
         this->can_page_up = can_page_up;
     }
 
-    void ConsoleStateModule::set_can_page_down(const bool can_page_down)
+    void ConsoleLogicModule::set_can_page_down(const bool can_page_down)
     {
         this->can_page_down = can_page_down;
     }
 
-    void ConsoleStateModule::set_can_home(const bool can_home)
+    void ConsoleLogicModule::set_can_home(const bool can_home)
     {
         this->can_home = can_home;
     }
 
-    void ConsoleStateModule::set_can_end(const bool can_end)
+    void ConsoleLogicModule::set_can_end(const bool can_end)
     {
         this->can_end = can_end;
     }
 
-    void ConsoleStateModule::set_is_left_control_pressed(const bool is_left_control_pressed)
+    void ConsoleLogicModule::set_is_left_control_pressed(const bool is_left_control_pressed)
     {
         this->is_left_control_pressed = is_left_control_pressed;
     }
 
-    void ConsoleStateModule::set_is_right_control_pressed(const bool is_right_control_pressed)
+    void ConsoleLogicModule::set_is_right_control_pressed(const bool is_right_control_pressed)
     {
         this->is_right_control_pressed = is_right_control_pressed;
     }
 
-    void ConsoleStateModule::set_is_left_alt_pressed(const bool is_left_alt_pressed)
+    void ConsoleLogicModule::set_is_left_alt_pressed(const bool is_left_alt_pressed)
     {
         this->is_left_alt_pressed = is_left_alt_pressed;
     }
 
-    void ConsoleStateModule::set_is_right_alt_pressed(const bool is_right_alt_pressed)
+    void ConsoleLogicModule::set_is_right_alt_pressed(const bool is_right_alt_pressed)
     {
         this->is_right_alt_pressed = is_right_alt_pressed;
     }
 
-    void ConsoleStateModule::set_is_left_shift_pressed(const bool is_left_shift_pressed)
+    void ConsoleLogicModule::set_is_left_shift_pressed(const bool is_left_shift_pressed)
     {
         this->is_left_shift_pressed = is_left_shift_pressed;
     }
 
-    void ConsoleStateModule::set_is_right_shift_pressed(const bool is_right_shift_pressed)
+    void ConsoleLogicModule::set_is_right_shift_pressed(const bool is_right_shift_pressed)
     {
         this->is_right_shift_pressed = is_right_shift_pressed;
     }
 
-    ConsoleState ConsoleStateModule::exit_console()
+    ConsoleState ConsoleLogicModule::exit_console()
     {
         this->state = ConsoleState(this->state & (~yli::console::active));
         return this->state;

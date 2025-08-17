@@ -31,7 +31,7 @@
 
 namespace yli::console
 {
-    class ConsoleStateModule;
+    class ConsoleLogicModule;
 
     class ScrollbackBuffer
     {
@@ -40,7 +40,7 @@ namespace yli::console
             typedef ScrollbackBufferIterator      iterator;
             typedef ScrollbackBufferConstIterator const_iterator;
 
-            ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t n_columns, const uint32_t n_rows);
+            ScrollbackBuffer(ConsoleLogicModule& console_logic_module, const uint32_t n_columns, const uint32_t n_rows);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
@@ -91,7 +91,7 @@ namespace yli::console
             }
 
         private:
-            ConsoleStateModule& console_state_module;
+            ConsoleLogicModule& console_logic_module;
             std::vector<TextLine> buffer;
             const uint32_t n_columns;  // Number of columns must be at least 1.
             const uint32_t n_rows;     // Number of rows must be at least 1.

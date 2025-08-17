@@ -17,7 +17,7 @@
 
 #include "scrollback_buffer.hpp"
 #include "console_state.hpp"
-#include "console_state_module.hpp"
+#include "console_logic_module.hpp"
 #include "text_line.hpp"
 
 // Include standard headers
@@ -31,8 +31,8 @@ namespace yli::console
 {
     class TextInput;
 
-    ScrollbackBuffer::ScrollbackBuffer(ConsoleStateModule& console_state_module, const uint32_t n_columns, const uint32_t n_rows)
-        : console_state_module { console_state_module },
+    ScrollbackBuffer::ScrollbackBuffer(ConsoleLogicModule& console_logic_module, const uint32_t n_columns, const uint32_t n_rows)
+        : console_logic_module { console_logic_module },
         n_columns { (n_columns > 0 ? n_columns : 1) },
         n_rows     { (n_rows > 0 ? n_rows : 1) }
     {
@@ -75,7 +75,7 @@ namespace yli::console
         if (std::size_t buffer_size = this->buffer.size(); !this->get_is_active_in_buffer() && buffer_size > 0) [[likely]]
         {
             // If we are not in buffer and the buffer is not empty, enter the buffer.
-            this->console_state_module.enter_scrollback_buffer();
+            this->console_logic_module.enter_scrollback_buffer();
             this->buffer_index = buffer_size - 1;
             this->buffer_it = this->buffer.begin() + buffer_index;
             return true;
@@ -90,7 +90,7 @@ namespace yli::console
         if (this->get_is_active_in_buffer())
         {
             // If we are in buffer, exit the buffer.
-            this->console_state_module.enter_current_input();
+            this->console_logic_module.enter_current_input();
             this->buffer_index = std::numeric_limits<std::size_t>::max();
             this->buffer_it = this->buffer.end();
             return true;
@@ -162,7 +162,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::get_is_active_in_buffer() const
     {
-        return this->console_state_module.get_active_in_scrollback_buffer();
+        return this->console_logic_module.get_active_in_scrollback_buffer();
     }
 
     std::size_t ScrollbackBuffer::size() const
