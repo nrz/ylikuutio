@@ -32,8 +32,8 @@ using yli::console::ConsoleState;
 
 TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 {
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
     ASSERT_TRUE(text_input_history.empty());
@@ -43,8 +43,8 @@ TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
 
 TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
 {
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     ASSERT_FALSE(text_input_history.move_to_previous());
     ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
@@ -55,8 +55,8 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 {
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     ASSERT_FALSE(text_input_history.move_to_next());
     ASSERT_FALSE(text_input_history.get_is_active_in_history());
     ASSERT_EQ(text_input_history.size(), 0);
@@ -67,10 +67,10 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 
 TEST(adding_an_input_must_work_appropriately, abc)
 {
-    yli::console::ConsoleLogicModule console_state;
-    console_state.activate();
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
 
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::TextInputHistory text_input_history(console_logic_module);
 
     yli::console::TextInput text_input;
     text_input.add_characters("abc");
@@ -84,7 +84,7 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -94,29 +94,29 @@ TEST(adding_an_input_must_work_appropriately, abc)
 
 TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 {
-    yli::console::ConsoleLogicModule console_state;
-    console_state.activate();
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
 
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::TextInputHistory text_input_history(console_logic_module);
 
     yli::console::TextInput text_input;
     text_input.add_characters("abc");
 
     text_input_history.add_to_history(std::move(text_input));
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
 
     ASSERT_TRUE(text_input_history.edit_historical_input());
-    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
 
 TEST(emplacing_back_an_input_must_work_appropriately, abc)
 {
-    yli::console::ConsoleLogicModule console_state;
-    console_state.activate();
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
 
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::TextInputHistory text_input_history(console_logic_module);
 
     yli::console::TextInput text_input;
     text_input.add_characters("abc");
@@ -130,7 +130,7 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -140,10 +140,10 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
 
 TEST(pushing_back_an_input_must_work_appropriately, abc)
 {
-    yli::console::ConsoleLogicModule console_state;
-    console_state.activate();
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
 
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::TextInputHistory text_input_history(console_logic_module);
 
     yli::console::TextInput text_input;
     text_input.add_characters("abc");
@@ -157,7 +157,7 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.at(0), text_input);
 
     ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(console_state.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
     ASSERT_TRUE(input_from_history);
@@ -171,8 +171,8 @@ TEST(text_input_history_begin_iterator_must_work_appropriately, text_input_histo
     const std::string def_char_container { "def" };
     const std::string ghi_char_container { "ghi" };
 
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -205,8 +205,8 @@ TEST(text_input_history_cbegin_const_iterator_must_work_appropriately, text_inpu
     const std::string def_char_container { "def" };
     const std::string ghi_char_container { "ghi" };
 
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -239,8 +239,8 @@ TEST(text_input_history_end_iterator_must_work_appropriately, text_input_history
     const std::string def_char_container { "def" };
     const std::string ghi_char_container { "ghi" };
 
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
@@ -273,8 +273,8 @@ TEST(text_input_history_cend_iterator_must_work_appropriately, text_input_histor
     const std::string def_char_container { "def" };
     const std::string ghi_char_container { "ghi" };
 
-    yli::console::ConsoleLogicModule console_state;
-    yli::console::TextInputHistory text_input_history(console_state);
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInputHistory text_input_history(console_logic_module);
     {
         yli::console::TextInput text_input;
         text_input.add_characters(abc_char_container);
