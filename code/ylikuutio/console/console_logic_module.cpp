@@ -112,7 +112,7 @@ namespace yli::console
     void ConsoleLogicModule::deactivate()
     {
         // This function implements all deactivation state changes.
-        this->state = ConsoleState(this->state & (!yli::console::active));
+        this->state = ConsoleState(this->state & (~yli::console::active));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::switch_to_state(const ConsoleState new_state)
