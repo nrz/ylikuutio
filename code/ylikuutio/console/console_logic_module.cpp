@@ -103,15 +103,15 @@ namespace yli::console
     // -> 7. active, in historical input (key up or down to another historical input)
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
+    // State transition functions.
+
     void ConsoleLogicModule::activate()
     {
-        // This function implements all activation state changes.
         this->state = ConsoleState(this->state | yli::console::active);
     }
 
     void ConsoleLogicModule::deactivate()
     {
-        // This function implements all deactivation state changes.
         this->state = ConsoleState(this->state & (~yli::console::active));
     }
 
@@ -163,6 +163,8 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
+    // State inquiry functions.
+
     bool ConsoleLogicModule::get_active_in_console() const
     {
         return this->state & yli::console::active;
@@ -188,6 +190,8 @@ namespace yli::console
         return (this->state & yli::console::active) && (this->state & yli::console::in_scrollback_buffer);
     }
 
+    // Module registration functions.
+
     void ConsoleLogicModule::register_current_input(TextInput* const current_input)
     {
         this->current_input = current_input;
@@ -208,7 +212,10 @@ namespace yli::console
         return this->state;
     }
 
+    // Module inquiry functions.
+
     TextInput* ConsoleLogicModule::get_current_input() const
+
     {
         return this->current_input;
     }
@@ -222,6 +229,8 @@ namespace yli::console
     {
         return this->text_input_history;
     }
+
+    // Boolean state inquiry functions.
 
     bool ConsoleLogicModule::get_can_move_to_previous_input() const
     {
@@ -307,6 +316,8 @@ namespace yli::console
     {
         return this->is_right_shift_pressed;
     }
+
+    // Boolean state transitions functions.
 
     void ConsoleLogicModule::set_can_move_to_previous_input(const bool can_move_to_previous_input)
     {

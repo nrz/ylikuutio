@@ -31,8 +31,9 @@ namespace yli::console
     class ConsoleLogicModule
     {
         public:
-            void activate();   // This function implements all activation state changes.
-            void deactivate(); // This function implements all deactivation state changes.
+            // State transition functions.
+            void activate();
+            void deactivate();
             std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
             std::optional<ConsoleState> enter_current_input();
@@ -41,22 +42,27 @@ namespace yli::console
             std::optional<ConsoleState> enter_scrollback_buffer();
             std::optional<ConsoleState> exit_scrollback_buffer();
 
+            // State inquiry functions.
             bool get_active_in_console() const;
             bool get_active_in_current_input() const;
             bool get_active_in_historical_input() const;
             bool get_active_in_temp_input() const;
             bool get_active_in_scrollback_buffer() const;
 
+            // Module registration functions.
             void register_current_input(TextInput* const current_input);
             void register_temp_input(TextInput* const temp_input);
             void register_text_input_history(TextInputHistory* const text_input_history);
             TextInput* edit_input();
 
             ConsoleState get() const;
+
+            // Module inquiry functions.
             TextInput* get_current_input() const;
             TextInput* get_temp_input() const;
             TextInputHistory* get_text_input_history() const;
 
+            // Boolean state inquiry functions.
             bool get_can_move_to_previous_input() const;
             bool get_can_move_to_next_input() const;
             bool get_can_backspace() const;
@@ -75,6 +81,7 @@ namespace yli::console
             bool get_is_left_shift_pressed() const;
             bool get_is_right_shift_pressed() const;
 
+            // Boolean state transitions functions.
             void set_can_move_to_previous_input(const bool can_move_to_previous_input);
             void set_can_move_to_next_input(const bool can_move_to_next_input);
             void set_can_backspace(const bool can_backspace);
