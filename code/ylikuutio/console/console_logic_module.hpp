@@ -40,6 +40,8 @@ namespace yli::console
             std::optional<ConsoleState> enter_temp_input();
             std::optional<ConsoleState> enter_scrollback_buffer();
             std::optional<ConsoleState> exit_scrollback_buffer();
+            TextInput* edit_input();
+            ConsoleState exit_console();
 
             // State inquiry functions.
             bool get_active_in_console() const;
@@ -52,7 +54,6 @@ namespace yli::console
             void register_current_input(TextInput* const current_input);
             void register_temp_input(TextInput* const temp_input);
             void register_text_input_history(TextInputHistory* const text_input_history);
-            TextInput* edit_input();
 
             ConsoleState get() const;
 
@@ -98,8 +99,6 @@ namespace yli::console
             void set_is_right_alt_pressed(const bool is_right_alt_pressed);
             void set_is_left_shift_pressed(const bool is_left_shift_pressed);
             void set_is_right_shift_pressed(const bool is_right_shift_pressed);
-
-            ConsoleState exit_console();
 
         private:
             ConsoleState state                   { ConsoleState::INACTIVE_IN_CURRENT_INPUT };

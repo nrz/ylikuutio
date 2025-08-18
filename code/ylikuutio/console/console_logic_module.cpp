@@ -163,6 +163,12 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
+    ConsoleState ConsoleLogicModule::exit_console()
+    {
+        this->state = ConsoleState(this->state & (~yli::console::active));
+        return this->state;
+    }
+
     // State inquiry functions.
 
     bool ConsoleLogicModule::get_active_in_console() const
@@ -402,11 +408,5 @@ namespace yli::console
     void ConsoleLogicModule::set_is_right_shift_pressed(const bool is_right_shift_pressed)
     {
         this->is_right_shift_pressed = is_right_shift_pressed;
-    }
-
-    ConsoleState ConsoleLogicModule::exit_console()
-    {
-        this->state = ConsoleState(this->state & (~yli::console::active));
-        return this->state;
     }
 }
