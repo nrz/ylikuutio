@@ -163,12 +163,6 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
-    ConsoleState ConsoleLogicModule::exit_console()
-    {
-        this->state = ConsoleState(this->state & (~yli::console::active));
-        return this->state;
-    }
-
     // State inquiry functions.
 
     bool ConsoleLogicModule::get_active_in_console() const
