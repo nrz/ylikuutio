@@ -21,7 +21,6 @@
 // Include standard headers
 #include <optional> // std::optional
 #include <string>   // std::string, std::u32string
-#include <iostream>
 
 // Tests for conversion from UTF-8 to UTF-32
 
@@ -56,7 +55,6 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, tokyo_in_japanese)
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     std::optional<std::u32string> u32 = yli::string::u8_to_u32(input_string);
     std::optional<std::string> u8 = yli::string::u32_to_u8(*u32);
-    std::cout << *u8 << "\n";
     ASSERT_EQ(*result, expected);
 }
 
