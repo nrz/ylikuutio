@@ -115,34 +115,6 @@ namespace yli::console
         this->state = ConsoleState(this->state & (~yli::console::active));
     }
 
-    std::optional<ConsoleState> ConsoleLogicModule::switch_to_state(const ConsoleState new_state)
-    {
-        if (!((this->state ^ new_state) & (~yli::console::active)))
-        {
-            // If the old state and new state differ possibly only with regards to activation state,
-            // then the transition is valid.
-            this->state = new_state;
-            return new_state;
-        }
-        else if (!((this->state ^ new_state) & (~yli::console::in_scrollback_buffer)) && (this->state & yli::console::active))
-        {
-            // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
-            // and the current state in active, then the transition is valid.
-            this->state = new_state;
-            return new_state;
-        }
-        else if (const uint32_t any_input = in_current_input | in_historical_input | in_temp_input;
-                !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
-        {
-            // If the old state and new state differ possibly only with regards to which-buffer state,
-            // and the current state in active, then the transition is valid.
-            this->state = new_state;
-            return new_state;
-        }
-
-        return std::nullopt; // Transition failed.
-    }
-
     std::optional<ConsoleState> ConsoleLogicModule::enter_current_input()
     {
         return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
@@ -402,5 +374,33 @@ namespace yli::console
     void ConsoleLogicModule::set_is_right_shift_pressed(const bool is_right_shift_pressed)
     {
         this->is_right_shift_pressed = is_right_shift_pressed;
+    }
+
+    std::optional<ConsoleState> ConsoleLogicModule::switch_to_state(const ConsoleState new_state)
+    {
+        if (!((this->state ^ new_state) & (~yli::console::active)))
+        {
+            // If the old state and new state differ possibly only with regards to activation state,
+            // then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+        else if (!((this->state ^ new_state) & (~yli::console::in_scrollback_buffer)) && (this->state & yli::console::active))
+        {
+            // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
+            // and the current state in active, then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+        else if (const uint32_t any_input = in_current_input | in_historical_input | in_temp_input;
+                !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
+        {
+            // If the old state and new state differ possibly only with regards to which-buffer state,
+            // and the current state in active, then the transition is valid.
+            this->state = new_state;
+            return new_state;
+        }
+
+        return std::nullopt; // Transition failed.
     }
 }

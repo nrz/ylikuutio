@@ -34,7 +34,6 @@ namespace yli::console
             // State transition functions.
             void activate();
             void deactivate();
-            std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
             std::optional<ConsoleState> enter_current_input();
             std::optional<ConsoleState> enter_historical_input();
             std::optional<ConsoleState> enter_temp_input();
@@ -100,6 +99,8 @@ namespace yli::console
             void set_is_right_shift_pressed(const bool is_right_shift_pressed);
 
         private:
+            std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
+
             ConsoleState state                   { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
             TextInput* current_input             { nullptr };
             TextInput* temp_input                { nullptr };
