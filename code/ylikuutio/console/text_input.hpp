@@ -34,7 +34,7 @@ namespace yli::console
         // `TextInput` provides functionality for receiving text input from the user.
 
         public:
-            using value_type = char32_t;
+            using value_type = char;
 
             // Iterator typedefs.
             typedef TextInputIterator      iterator;
@@ -56,11 +56,10 @@ namespace yli::console
                 return this->input != other.input;
             }
 
-            void add_character(const char32_t character);
             void add_character(const char character);
 
             template<typename Alloc, template<typename, typename> typename Type>
-                void add_characters(const Type<char32_t, Alloc>& char_container)
+                void add_characters(const Type<char, Alloc>& char_container)
                 {
                     // Assume there is memory available.
                     // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
@@ -71,11 +70,11 @@ namespace yli::console
 
             void add_characters(std::string_view char_container);
 
-            void emplace_back(char32_t character);
-            void push_back(char32_t character);
+            void emplace_back(char character);
+            void push_back(char character);
 
-            std::optional<char32_t> get_character_at_current_index() const;
-            std::optional<char32_t> get_character_to_the_left() const;
+            std::optional<char> get_character_at_current_index() const;
+            std::optional<char> get_character_to_the_left() const;
 
             bool delete_character();
             void ctrl_w();

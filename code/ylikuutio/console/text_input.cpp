@@ -25,17 +25,12 @@
 
 namespace yli::console
 {
-    void TextInput::add_character(const char32_t character)
+    void TextInput::add_character(const char character)
     {
         // Assume there is memory available.
         // Insert a character at current index and make index grow by 1.
         this->input.insert(this->cursor_it, character);
         this->cursor_it = this->input.begin() + (++this->cursor_index);
-    }
-
-    void TextInput::add_character(const char character)
-    {
-        this->add_character(char32_t(character));
     }
 
     void TextInput::add_characters(std::string_view char_container)
@@ -45,21 +40,21 @@ namespace yli::console
         this->cursor_it = this->input.begin() + this->cursor_index;
     }
 
-    void TextInput::emplace_back(char32_t character)
+    void TextInput::emplace_back(char character)
     {
         this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.
         this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
-    void TextInput::push_back(char32_t character)
+    void TextInput::push_back(char character)
     {
         this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.
         this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
-    std::optional<char32_t> TextInput::get_character_at_current_index() const
+    std::optional<char> TextInput::get_character_at_current_index() const
     {
         if (this->cursor_it != this->input.end()) [[likely]]
         {
@@ -69,7 +64,7 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<char32_t> TextInput::get_character_to_the_left() const
+    std::optional<char> TextInput::get_character_to_the_left() const
     {
         if (this->cursor_it != this->input.begin()) [[likely]]
         {
@@ -103,13 +98,13 @@ namespace yli::console
     void TextInput::ctrl_w()
     {
         // First, remove all spaces until a non-space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() == char32_t(' '))
+        while (this->cursor_index != 0 && this->get_character_to_the_left() == ' ')
         {
             this->delete_character();
         }
 
         // Then, remove all non-spaces until a space is encountered.
-        while (this->cursor_index != 0 && this->get_character_to_the_left() != char32_t(' '))
+        while (this->cursor_index != 0 && this->get_character_to_the_left() != ' ')
         {
             this->delete_character();
         }

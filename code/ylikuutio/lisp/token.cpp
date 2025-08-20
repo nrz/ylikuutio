@@ -21,17 +21,17 @@
 // Include standard headers
 #include <cstddef>     // std::size_t
 #include <optional>    // std::optional
-#include <string_view> // std::u32string_view
+#include <string_view> // std::string_view
 
 namespace yli::lisp
 {
-    Token::Token(TokenType type, std::u32string_view lexeme)
+    Token::Token(TokenType type, std::string_view lexeme)
         : type { type },
         lexeme { lexeme }
     {
     }
 
-    Token::Token(TokenType type, std::u32string_view lexeme, std::optional<std::size_t> line_number)
+    Token::Token(TokenType type, std::string_view lexeme, std::optional<std::size_t> line_number)
         : type { type },
         lexeme { lexeme },
         line_number { line_number }
@@ -43,7 +43,7 @@ namespace yli::lisp
         return this->type;
     }
 
-    std::u32string_view Token::get_lexeme() const
+    std::string_view Token::get_lexeme() const
     {
         return this->lexeme;
     }

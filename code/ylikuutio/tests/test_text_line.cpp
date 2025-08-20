@@ -77,11 +77,11 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
     yli::console::TextLine text_line(my_string);
 
     auto it = text_line.cbegin();
-    ASSERT_EQ(*it, U'a');
+    ASSERT_EQ(*it, 'a');
     ++it;
-    ASSERT_EQ(*it, U'b');
+    ASSERT_EQ(*it, 'b');
     ++it;
-    ASSERT_EQ(*it, U'c');
+    ASSERT_EQ(*it, 'c');
     ++it;
     ASSERT_EQ(it, text_line.cend());
     ASSERT_EQ(text_line.size(), 3);
@@ -94,11 +94,11 @@ TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
 
     auto it = text_line.cend();
     --it;
-    ASSERT_EQ(*it, U'c');
+    ASSERT_EQ(*it, 'c');
     --it;
-    ASSERT_EQ(*it, U'b');
+    ASSERT_EQ(*it, 'b');
     --it;
-    ASSERT_EQ(*it, U'a');
+    ASSERT_EQ(*it, 'a');
     ASSERT_EQ(it, text_line.cbegin());
     ASSERT_EQ(text_line.size(), 3);
 }

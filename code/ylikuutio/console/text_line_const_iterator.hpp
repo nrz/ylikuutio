@@ -29,10 +29,10 @@ namespace yli::console
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = char32_t;
+            using value_type        = char;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = const char32_t*;
-            using reference         = const char32_t&;
+            using pointer           = const char*;
+            using reference         = const char&;
 
             explicit TextLineConstIterator(std::string::const_iterator it)
                 : it { it }
@@ -101,7 +101,7 @@ namespace yli::console
                 return temp;
             }
 
-            char32_t operator*()
+            char operator*()
             {
                 return *(this->it);
             }
