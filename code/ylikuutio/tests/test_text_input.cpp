@@ -33,6 +33,18 @@ TEST(text_input_must_be_initialized_appropriately, text_input)
     ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
 }
 
+TEST(text_input_must_be_initialized_appropriately, string_foo)
+{
+    yli::console::TextInput text_input("foo");
+    ASSERT_EQ(text_input.size(), 3);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_character_at_current_index(), 'f');
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.data(), "foo");
+    ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
+}
+
 TEST(one_character_must_be_added_to_the_text_input_appropriately, single_character_a)
 {
     yli::console::TextInput text_input;

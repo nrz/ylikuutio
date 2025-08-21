@@ -22,9 +22,15 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::console
 {
+    TextInput::TextInput(std::string&& string)
+    {
+        this->input = std::move(string);
+    }
+
     void TextInput::add_character(const char character)
     {
         // Assume there is memory available.
