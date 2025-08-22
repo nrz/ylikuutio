@@ -112,6 +112,11 @@ namespace yli::console
                 return const_iterator(this->input.cend());
             }
 
+            std::string::iterator get_cursor_it() const
+            {
+                return this->cursor_it;
+            }
+
         private:
             std::string input; // This is used for actual inputs.
             std::string::iterator cursor_it { this->input.begin() };
