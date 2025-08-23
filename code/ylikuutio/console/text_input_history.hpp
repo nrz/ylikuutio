@@ -19,6 +19,7 @@
 #define YLIKUUTIO_CONSOLE_TEXT_INPUT_HISTORY_HPP_INCLUDED
 
 #include "text_input_history_iterator.hpp"
+#include "text_input_history_const_iterator.hpp"
 #include "text_input.hpp"
 
 // Include standard headers
@@ -36,7 +37,7 @@ namespace yli::console
         public:
             // Iterator typedefs.
             typedef TextInputHistoryIterator       iterator;
-            typedef TextInputHistoryIterator const_iterator;
+            typedef TextInputHistoryConstIterator const_iterator;
 
             explicit TextInputHistory(ConsoleLogicModule& console_logic_module);
 
@@ -73,12 +74,12 @@ namespace yli::console
                 return iterator(this->history.end());
             }
 
-            const_iterator cbegin()
+            const_iterator cbegin() const
             {
                 return const_iterator(this->history.begin());
             }
 
-            const_iterator cend()
+            const_iterator cend() const
             {
                 return const_iterator(this->history.end());
             }
