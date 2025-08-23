@@ -36,7 +36,7 @@ namespace yli::console
     {
         public:
             // Iterator typedefs.
-            typedef TextInputHistoryIterator       iterator;
+            typedef TextInputHistoryIterator      iterator;
             typedef TextInputHistoryConstIterator const_iterator;
 
             explicit TextInputHistory(ConsoleLogicModule& console_logic_module);
