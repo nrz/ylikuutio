@@ -25,6 +25,7 @@
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <utility>  // std::move
+#include <vector>   // std::vector
 
 namespace yli::console
 {
