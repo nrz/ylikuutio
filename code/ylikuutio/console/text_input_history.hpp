@@ -85,6 +85,11 @@ namespace yli::console
                 return const_iterator(this->history.cend());
             }
 
+            std::vector<TextInput>::const_iterator get_history_it() const
+            {
+                return this->history_it;
+            }
+
         private:
             ConsoleLogicModule& console_logic_module;
             std::vector<TextInput> history;
