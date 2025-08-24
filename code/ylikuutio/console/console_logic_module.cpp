@@ -19,6 +19,7 @@
 #include "console_state.hpp"
 
 // Include standard headers
+#include <iostream> // std::cerr
 #include <optional> // std::optional
 
 namespace yli::console
@@ -401,6 +402,7 @@ namespace yli::console
             return new_state;
         }
 
+        std::cerr << "ERROR: `ConsoleLogicModule::switch_to_state`: state transition failed!\n";
         return std::nullopt; // Transition failed.
     }
 }
