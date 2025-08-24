@@ -97,6 +97,222 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(*text_input_history.get(), text_input);
 }
 
+TEST(adding_an_input_capacity_plus_1_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 1);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
+TEST(emplacing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.emplace_back(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 1);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
+TEST(pushing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.push_back(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 1);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
+TEST(adding_an_input_capacity_plus_10_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 10; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.add_to_history(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 10);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
+TEST(emplacing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 10; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.emplace_back(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 10);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
+TEST(pushing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    console_logic_module.activate();
+
+    yli::console::TextInputHistory text_input_history(console_logic_module);
+
+    const std::size_t capacity = text_input_history.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 10; i++)
+    {
+        yli::console::TextInput text_input;
+        text_input.add_characters("abc");
+
+        text_input_history.push_back(std::move(text_input));
+    }
+
+    ASSERT_FALSE(text_input_history.move_to_next());
+    ASSERT_FALSE(text_input_history.get_is_active_in_history());
+    ASSERT_EQ(text_input_history.size(), capacity + 10);
+    ASSERT_FALSE(text_input_history.empty());
+    ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().begin());
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
+    // TODO: add assertion for the content of `text_input_history`!
+
+    ASSERT_TRUE(text_input_history.enter_history());
+    ASSERT_EQ(console_logic_module.get(), ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
+    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
+    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
+    ASSERT_TRUE(input_from_history);
+
+    ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc"));
+}
+
 TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
