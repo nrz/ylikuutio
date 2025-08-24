@@ -77,12 +77,12 @@ namespace yli::console
 
             const_iterator cbegin() const
             {
-                return const_iterator(this->history.begin());
+                return const_iterator(this->history.cbegin());
             }
 
             const_iterator cend() const
             {
-                return const_iterator(this->history.end());
+                return const_iterator(this->history.cend());
             }
 
         private:
