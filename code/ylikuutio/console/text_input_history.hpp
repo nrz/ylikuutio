@@ -60,6 +60,7 @@ namespace yli::console
             bool get_is_active_in_history() const;
             std::size_t size() const;
             bool empty() const;
+            const std::vector<TextInput>& data() const;
 
             std::size_t get_history_index() const;
 

@@ -168,6 +168,11 @@ namespace yli::console
         return this->size() == 0;
     }
 
+    const std::vector<TextInput>& TextInputHistory::data() const
+    {
+        return this->history;
+    }
+
     std::size_t TextInputHistory::get_history_index() const
     {
         return this->history_index;
