@@ -52,7 +52,7 @@ namespace yli::console
 
     bool TextInputHistory::enter_history()
     {
-        if (std::size_t history_size = this->history.size(); !this->get_is_active_in_history() && history_size > 0) [[likely]]
+        if (std::size_t history_size = this->size(); !this->get_is_active_in_history() && history_size > 0) [[likely]]
         {
             // If we are not in history and the history is not empty, enter the history.
             this->console_logic_module.enter_historical_input();
