@@ -21,6 +21,7 @@
 // Include standard headers
 #include <optional> // std::nullopt
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 TEST(text_input_must_be_initialized_appropriately, text_input)
 {
@@ -804,4 +805,88 @@ TEST(one_character_must_be_pushed_back_to_the_text_input_appropriately, single_c
     ASSERT_NE(text_input.get_cursor_it(), text_input.data().begin());
     ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
     ASSERT_EQ(text_input.data(), "a");
+}
+
+TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, capacity_plus_1_characters_a)
+{
+    yli::console::TextInput text_input;
+    const std::size_t capacity = text_input.data().capacity();
+
+    std::string_view my_string { "a" };
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        text_input.add_characters(my_string);
+    }
+
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
+    ASSERT_EQ(text_input.size(), capacity + 1);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), capacity + 1);
+    ASSERT_NE(text_input.get_cursor_it(), text_input.data().begin());
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
+    ASSERT_EQ(text_input.data(), std::string(capacity + 1, 'a'));
+}
+
+TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, capacity_plus_1_times_abc)
+{
+    yli::console::TextInput text_input;
+    const std::size_t capacity = text_input.data().capacity();
+
+    std::string_view my_string { "abc" };
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        text_input.add_characters(my_string);
+    }
+
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'c');
+    ASSERT_EQ(text_input.size(), (capacity + 1) * my_string.size());
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), (capacity + 1) * my_string.size());
+    ASSERT_NE(text_input.get_cursor_it(), text_input.data().begin());
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
+    // TODO: add assertion for the content of `text_input`!
+}
+
+TEST(capacity_plus_1_characters_must_be_emplaced_back_to_the_text_input_appropriately, capacity_plus_1_characters_a)
+{
+    yli::console::TextInput text_input;
+    const std::size_t capacity = text_input.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        text_input.emplace_back('a');
+    }
+
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
+    ASSERT_EQ(text_input.size(), capacity + 1);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), capacity + 1);
+    ASSERT_NE(text_input.get_cursor_it(), text_input.data().begin());
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
+    ASSERT_EQ(text_input.data(), std::string(capacity + 1, 'a'));
+}
+
+TEST(capacity_plus_1_characters_must_be_pushed_back_to_the_text_input_appropriately, capacity_plus_1_characters_a)
+{
+    yli::console::TextInput text_input;
+    const std::size_t capacity = text_input.data().capacity();
+
+    for (std::size_t i = 0; i < capacity + 1; i++)
+    {
+        text_input.push_back('a');
+    }
+
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
+    ASSERT_EQ(text_input.size(), capacity + 1);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_cursor_index(), capacity + 1);
+    ASSERT_NE(text_input.get_cursor_it(), text_input.data().begin());
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
+    ASSERT_EQ(text_input.data(), std::string(capacity + 1, 'a'));
 }
