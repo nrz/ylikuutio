@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <utility>  // std::move
@@ -91,13 +92,21 @@ namespace yli::console
         if (std::size_t history_size = this->size(); !this->get_is_active_in_history() && history_size > 0) [[likely]]
         {
             // If we are not in history and the history is not empty, enter the history.
-            this->console_logic_module.enter_historical_input();
+            std::optional<ConsoleState> new_state = this->console_logic_module.enter_historical_input();
+            if (!new_state)
+            {
+                // Entering history failed.
+                std::cerr << "ERROR: `TextInputHistory::enter_history`: `new_state` is `std::nullopt`!\n";
+                return false;
+            }
+
             this->history_index = history_size - 1;
             this->history_it = this->history.begin() + history_index;
             return true;
         }
 
         // Otherwise, entering history failed.
+        std::cerr << "ERROR: `TextInputHistory::enter_history`: entering history failed!\n";
         return false;
     }
 
