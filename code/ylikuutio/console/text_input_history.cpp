@@ -38,6 +38,18 @@ namespace yli::console
     void TextInputHistory::add_to_history(TextInput&& text_input)
     {
         this->history.emplace_back(std::move(text_input));
+
+        // The iterator needs to be updated because `emplace_back` invalidates iterators.
+        if (this->history_index == std::numeric_limits<std::size_t>::max()) [[likely]]
+        {
+            // We are not in history. Adding input to history must keep the iterator past end.
+            this->history_it = this->history.end();
+        }
+        else
+        {
+            // We are in history. Adding input to history must keep the iterator correct.
+            this->history_it = this->history.begin() + this->history_index;
+        }
     }
 
     void TextInputHistory::emplace_back(TextInput&& text_input)
