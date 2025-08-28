@@ -39,8 +39,8 @@ TEST(console_logic_module_must_be_initialized_appropriately, console_logic_modul
 
 TEST(registering_current_input_must_work_appropriately, current_input)
 {
-    yli::console::TextInput current_input;
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
     console_logic_module.register_current_input(&current_input);
     ASSERT_EQ(console_logic_module.get_current_input(), &current_input);
     ASSERT_EQ(console_logic_module.get_temp_input(), nullptr);
@@ -49,8 +49,8 @@ TEST(registering_current_input_must_work_appropriately, current_input)
 
 TEST(registering_temp_input_must_work_appropriately, temp_input)
 {
-    yli::console::TextInput temp_input;
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput temp_input;
     console_logic_module.register_temp_input(&temp_input);
     ASSERT_EQ(console_logic_module.get_current_input(), nullptr);
     ASSERT_EQ(console_logic_module.get_temp_input(), &temp_input);
@@ -59,9 +59,9 @@ TEST(registering_temp_input_must_work_appropriately, temp_input)
 
 TEST(registering_current_input_and_temp_input_must_work_appropriately, current_input_first_then_temp_input)
 {
+    yli::console::ConsoleLogicModule console_logic_module;
     yli::console::TextInput current_input;
     yli::console::TextInput temp_input;
-    yli::console::ConsoleLogicModule console_logic_module;
     console_logic_module.register_current_input(&current_input);
     ASSERT_EQ(console_logic_module.get_current_input(), &current_input);
     ASSERT_EQ(console_logic_module.get_temp_input(), nullptr);
@@ -74,9 +74,9 @@ TEST(registering_current_input_and_temp_input_must_work_appropriately, current_i
 
 TEST(registering_current_input_and_temp_input_must_work_appropriately, temp_input_first_then_current_input)
 {
+    yli::console::ConsoleLogicModule console_logic_module;
     yli::console::TextInput current_input;
     yli::console::TextInput temp_input;
-    yli::console::ConsoleLogicModule console_logic_module;
     console_logic_module.register_temp_input(&temp_input);
     ASSERT_EQ(console_logic_module.get_current_input(), nullptr);
     ASSERT_EQ(console_logic_module.get_temp_input(), &temp_input);
@@ -99,9 +99,9 @@ TEST(registering_text_input_history_must_work_appropriately, text_input_history)
 
 TEST(registering_current_input_and_temp_input_and_text_input_history_must_work_appropriately, current_input_and_temp_input_and_text_input_history)
 {
+    yli::console::ConsoleLogicModule console_logic_module;
     yli::console::TextInput current_input;
     yli::console::TextInput temp_input;
-    yli::console::ConsoleLogicModule console_logic_module;
     yli::console::TextInputHistory text_input_history(console_logic_module);
     console_logic_module.register_current_input(&current_input);
     console_logic_module.register_temp_input(&temp_input);
