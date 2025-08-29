@@ -123,6 +123,18 @@ TEST(activation_must_fail_appropriately, no_current_input_registered)
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
 }
 
+TEST(deactivation_must_fail_appropriately, no_current_input_registered)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    ASSERT_FALSE(console_logic_module.activate());
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_logic_module.get_active_in_console());
+    ASSERT_FALSE(console_logic_module.get_active_in_current_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+}
+
 TEST(activation_must_work_appropriately, inactive_in_current_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
@@ -132,6 +144,22 @@ TEST(activation_must_work_appropriately, inactive_in_current_input)
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
     ASSERT_TRUE(console_logic_module.get_active_in_console());
     ASSERT_TRUE(console_logic_module.get_active_in_current_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+}
+
+TEST(deactivation_must_work_appropriately, active_in_current_input)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
+    console_logic_module.activate();
+    console_logic_module.enter_current_input();
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.deactivate();
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_logic_module.get_active_in_console());
+    ASSERT_FALSE(console_logic_module.get_active_in_current_input());
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());

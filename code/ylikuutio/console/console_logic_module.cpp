@@ -116,9 +116,9 @@ namespace yli::console
         return std::nullopt; // Transition failed.
     }
 
-    void ConsoleLogicModule::deactivate()
+    std::optional<ConsoleState> ConsoleLogicModule::deactivate()
     {
-        this->state = ConsoleState(this->state & (~yli::console::active));
+        return this->switch_to_state(ConsoleState(this->state & (~yli::console::active)));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_current_input()
