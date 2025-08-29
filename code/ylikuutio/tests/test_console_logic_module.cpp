@@ -111,9 +111,23 @@ TEST(registering_current_input_and_temp_input_and_text_input_history_must_work_a
     ASSERT_EQ(console_logic_module.get_text_input_history(), &text_input_history);
 }
 
+TEST(activation_must_fail_appropriately, no_current_input_registered)
+{
+    yli::console::ConsoleLogicModule console_logic_module;
+    ASSERT_FALSE(console_logic_module.activate());
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::INACTIVE_IN_CURRENT_INPUT);
+    ASSERT_FALSE(console_logic_module.get_active_in_console());
+    ASSERT_FALSE(console_logic_module.get_active_in_current_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
+    ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+}
+
 TEST(activation_must_work_appropriately, inactive_in_current_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
     ASSERT_TRUE(console_logic_module.get_active_in_console());
@@ -150,6 +164,8 @@ TEST(changing_to_historical_input_must_fail_appropriately, inactive_in_current_i
 TEST(entering_current_input_from_current_input_must_work_appropriately, no_change)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_current_input();
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_CURRENT_INPUT);
@@ -163,6 +179,8 @@ TEST(entering_current_input_from_current_input_must_work_appropriately, no_chang
 TEST(entering_historical_input_from_current_input_must_work_appropriately, historical_input_from_current_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_historical_input();
     ASSERT_TRUE(console_state);
@@ -178,6 +196,8 @@ TEST(entering_historical_input_from_current_input_must_work_appropriately, histo
 TEST(entering_scrollback_buffer_from_current_input_must_work_appropriately, scrollback_buffer_from_current_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_scrollback_buffer();
     ASSERT_TRUE(console_state);
@@ -193,6 +213,9 @@ TEST(entering_scrollback_buffer_from_current_input_must_work_appropriately, scro
 TEST(entering_current_input_from_historical_input_must_work_appropriately, current_input_from_historical_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
+    console_logic_module.activate();
     console_logic_module.enter_historical_input();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_current_input();
     ASSERT_TRUE(console_state);
@@ -208,6 +231,8 @@ TEST(entering_current_input_from_historical_input_must_work_appropriately, curre
 TEST(entering_historical_input_from_historical_input_must_work_appropriately, historical_input_from_historical_input_no_effect)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_historical_input();
@@ -224,6 +249,8 @@ TEST(entering_historical_input_from_historical_input_must_work_appropriately, hi
 TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_input_from_historical_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_temp_input();
@@ -240,6 +267,8 @@ TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_inp
 TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, scrollback_buffer_from_historical_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_scrollback_buffer();
@@ -256,6 +285,8 @@ TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, s
 TEST(entering_current_input_from_temp_input_must_work_appropriately, current_input_from_temp_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_temp_input();
@@ -273,6 +304,8 @@ TEST(entering_current_input_from_temp_input_must_work_appropriately, current_inp
 TEST(entering_historical_input_from_temp_input_must_work_appropriately, historical_input_from_temp_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_temp_input();
@@ -290,6 +323,8 @@ TEST(entering_historical_input_from_temp_input_must_work_appropriately, historic
 TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_from_temp_input_no_effect)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_temp_input();
@@ -307,6 +342,8 @@ TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_fro
 TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollback_buffer_from_temp_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_temp_input();
@@ -324,6 +361,8 @@ TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollb
 TEST(entering_current_input_from_scrollback_buffer_must_work_appropriately, current_input_from_scrollback_buffer)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_scrollback_buffer();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_current_input();
@@ -340,6 +379,8 @@ TEST(entering_current_input_from_scrollback_buffer_must_work_appropriately, curr
 TEST(entering_historical_input_from_scrollback_buffer_must_work_appropriately, historical_input_from_scrollback_buffer)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_scrollback_buffer();
     ASSERT_FALSE(console_logic_module.enter_historical_input());
@@ -354,6 +395,8 @@ TEST(entering_historical_input_from_scrollback_buffer_must_work_appropriately, h
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_current_input_no_effect)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_scrollback_buffer();
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_scrollback_buffer();
@@ -370,6 +413,8 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_historical_input_no_effect)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_scrollback_buffer();
@@ -387,6 +432,8 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_temp_input_no_effect)
 {
     yli::console::ConsoleLogicModule console_logic_module;
+    yli::console::TextInput current_input;
+    console_logic_module.register_current_input(&current_input);
     console_logic_module.activate();
     console_logic_module.enter_historical_input();
     console_logic_module.enter_temp_input();

@@ -106,9 +106,14 @@ namespace yli::console
 
     // State transition functions.
 
-    void ConsoleLogicModule::activate()
+    std::optional<ConsoleState> ConsoleLogicModule::activate()
     {
-        this->state = ConsoleState(this->state | yli::console::active);
+        if (this->current_input != nullptr)
+        {
+            return this->switch_to_state(ConsoleState(this->state | yli::console::active));
+        }
+
+        return std::nullopt; // Transition failed.
     }
 
     void ConsoleLogicModule::deactivate()
@@ -118,7 +123,12 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_current_input()
     {
-        return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+        if (this->current_input != nullptr)
+        {
+            return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+        }
+
+        return std::nullopt; // Transition failed.
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_historical_input()

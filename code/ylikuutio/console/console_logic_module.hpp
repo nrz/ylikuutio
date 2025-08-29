@@ -32,7 +32,7 @@ namespace yli::console
     {
         public:
             // State transition functions.
-            void activate();
+            std::optional<ConsoleState> activate();
             void deactivate();
             std::optional<ConsoleState> enter_current_input();
             std::optional<ConsoleState> enter_historical_input();
