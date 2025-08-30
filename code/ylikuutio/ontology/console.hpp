@@ -386,8 +386,8 @@ namespace yli::ontology
 
             // Callbacks end here.
 
-            void copy_historical_input_into_current_input();
-            std::string convert_current_input_into_string() const;
+            void copy_historical_input_into_new_input();
+            std::string convert_new_input_into_string() const;
             void delete_character();
             void move_cursor_left();
             void move_cursor_right();
@@ -398,7 +398,7 @@ namespace yli::ontology
             // Getters for unit tests and for building upon `Console`.
 
         public:
-            const std::list<char>& get_current_input() const;
+            const std::list<char>& get_new_input() const;
             const std::list<char>& get_temp_input() const;
 
             const std::string& get_prompt() const;
@@ -441,9 +441,9 @@ namespace yli::ontology
             std::vector<std::list<char>> command_history;
             std::vector<std::list<char>> console_history;
 
-            std::list<char> current_input; // This is used for actual inputs.
+            std::list<char> new_input;     // This is used for actual inputs.
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
-            std::list<char>::iterator cursor_it { this->current_input.begin() };
+            std::list<char>::iterator cursor_it { this->new_input.begin() };
 
             const std::string prompt            { "$ " };
 

@@ -116,7 +116,7 @@ namespace yli::console
         if (this->get_is_active_in_history())
         {
             // If we are in history, exit the history.
-            this->console_logic_module.enter_current_input();
+            this->console_logic_module.enter_new_input();
             this->history_index = std::numeric_limits<std::size_t>::max();
             this->history_it = this->history.end();
             return true;

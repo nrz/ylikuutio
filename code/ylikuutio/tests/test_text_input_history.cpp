@@ -74,8 +74,8 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
 TEST(adding_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -107,8 +107,8 @@ TEST(adding_an_input_must_work_appropriately, abc)
 TEST(adding_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -145,8 +145,8 @@ TEST(adding_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 TEST(emplacing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -183,8 +183,8 @@ TEST(emplacing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 TEST(pushing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -221,8 +221,8 @@ TEST(pushing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
 TEST(adding_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -259,8 +259,8 @@ TEST(adding_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 TEST(emplacing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -297,8 +297,8 @@ TEST(emplacing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 TEST(pushing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -335,8 +335,8 @@ TEST(pushing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
 TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -358,8 +358,8 @@ TEST(editing_a_historical_input_must_work_appropriately, historical_input)
 TEST(emplacing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);
@@ -389,8 +389,8 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
 TEST(pushing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::ConsoleLogicModule console_logic_module;
-    yli::console::TextInput current_input;
-    console_logic_module.register_current_input(&current_input);
+    yli::console::TextInput new_input;
+    console_logic_module.register_new_input(&new_input);
     console_logic_module.activate();
 
     yli::console::TextInputHistory text_input_history(console_logic_module);

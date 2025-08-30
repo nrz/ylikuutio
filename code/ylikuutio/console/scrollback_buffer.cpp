@@ -90,7 +90,7 @@ namespace yli::console
         if (this->get_is_active_in_buffer())
         {
             // If we are in buffer, exit the buffer.
-            this->console_logic_module.enter_current_input();
+            this->console_logic_module.enter_new_input();
             this->buffer_index = std::numeric_limits<std::size_t>::max();
             this->buffer_it = this->buffer.end();
             return true;

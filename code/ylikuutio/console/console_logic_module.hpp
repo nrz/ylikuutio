@@ -34,7 +34,7 @@ namespace yli::console
             // State transition functions.
             std::optional<ConsoleState> activate();
             std::optional<ConsoleState> deactivate();
-            std::optional<ConsoleState> enter_current_input();
+            std::optional<ConsoleState> enter_new_input();
             std::optional<ConsoleState> enter_historical_input();
             std::optional<ConsoleState> enter_temp_input();
             std::optional<ConsoleState> enter_scrollback_buffer();
@@ -43,20 +43,20 @@ namespace yli::console
 
             // State inquiry functions.
             bool get_active_in_console() const;
-            bool get_active_in_current_input() const;
+            bool get_active_in_new_input() const;
             bool get_active_in_historical_input() const;
             bool get_active_in_temp_input() const;
             bool get_active_in_scrollback_buffer() const;
 
             // Module registration functions.
-            void register_current_input(TextInput* const current_input);
+            void register_new_input(TextInput* const new_input);
             void register_temp_input(TextInput* const temp_input);
             void register_text_input_history(TextInputHistory* const text_input_history);
 
             ConsoleState get() const;
 
             // Module inquiry functions.
-            TextInput* get_current_input() const;
+            TextInput* get_new_input() const;
             TextInput* get_temp_input() const;
             TextInputHistory* get_text_input_history() const;
 
@@ -101,8 +101,8 @@ namespace yli::console
         private:
             std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
-            ConsoleState state                   { ConsoleState::INACTIVE_IN_CURRENT_INPUT };
-            TextInput* current_input             { nullptr };
+            ConsoleState state                   { ConsoleState::INACTIVE_IN_NEW_INPUT };
+            TextInput* new_input                 { nullptr };
             TextInput* temp_input                { nullptr };
             TextInputHistory* text_input_history { nullptr };
 

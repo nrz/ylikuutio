@@ -28,23 +28,23 @@ namespace yli::console
     class TextInputHistory;
 
     // console states:
-    //  0. inactive, in current input (initial state)
+    //  0. inactive, in new input (initial state)
     //  1. inactive, in historical input
     //  2. inactive, in temp input
-    //  3. inactive, in scrollback buffer while in current input
+    //  3. inactive, in scrollback buffer while in new input
     //  4. inactive, in scrollback buffer while in historical input
     //  5. inactive, in scrollback buffer while in temp input
     //
-    //  6. active, in current input
+    //  6. active, in new input
     //  7. active, in historical input
     //  8. active, in temp input
-    //  9. active, in scrollback buffer while in current input
+    //  9. active, in scrollback buffer while in new input
     // 10. active, in scrollback buffer while in historical input
     // 11. active, in scrollback buffer while in temp input
     //
-    // 0. initial state: inactive, in current input
+    // 0. initial state: inactive, in new input
     // state transitions:
-    // -> 6. active, in current input (activate console)
+    // -> 6. active, in new input (activate console)
     //
     // 1. inactive, in historical input (input index needs to keep tracked of)
     // state transitions:
@@ -54,9 +54,9 @@ namespace yli::console
     // state transitions:
     // -> 8. active, in temp input (input index needs to keep tracked of)
     //
-    //  3. inactive, in scrollback buffer while in current input (scrollback buffer line and input index need to keep tracked of)
+    //  3. inactive, in scrollback buffer while in new input (scrollback buffer line and input index need to keep tracked of)
     // state transitions:
-    // -> 9. active, in scrollback buffer while in current input (scrollback buffer line and input index need to keep tracked of)
+    // -> 9. active, in scrollback buffer while in new input (scrollback buffer line and input index need to keep tracked of)
     //
     // 4. inactive, in scrollback buffer while in historical input (scrollback buffer line and input index need to keep tracked of)
     // state transitions:
@@ -66,41 +66,41 @@ namespace yli::console
     // state transitions:
     // -> 11. active, in scrollback buffer while in temp input (scrollback buffer line and input index need to keep tracked of)
     //
-    // 6. active, in current input
+    // 6. active, in new input
     // state transitions:
-    // -> 0. inactive, in current input (deactivate)
+    // -> 0. inactive, in new input (deactivate)
     // -> 7. active, in historical input (key up to historical input)
-    // -> 9. active, in scrollback buffer while in current input (pgup to scrollback buffer)
+    // -> 9. active, in scrollback buffer while in new input (pgup to scrollback buffer)
     //
     // 7. active, in historical input
     // state transitions:
     // ->  1. inactive, in historical input (deactivate)
-    // ->  6. active, in current input (key down to current input while in last historical input)
+    // ->  6. active, in new input (key down to new input while in last historical input)
     // ->  7. active, in temp input (edit historical input, that is, copy it to temp input for editing)
     // -> 10. active, in scrollback buffer while in historical input (pgup to scrollback buffer)
     //
     // 8. active, in temp input
     // state transitions:
     // -> 2. inactive, in temp input (deactivate)
-    // -> 6. active, in current input (key down to current input while editing last historical input)
+    // -> 6. active, in new input (key down to new input while editing last historical input)
     // -> 7. active, in historical input (key up or down to another historical input)
     //
-    // 9. active, in scrollback buffer while in current input
+    // 9. active, in scrollback buffer while in new input
     // state transitions:
-    // -> 3. inactive, in scrollback buffer while in current input (deactivate)
+    // -> 3. inactive, in scrollback buffer while in new input (deactivate)
     // -> 7. active, in historical input (key up to exit scrollback buffer and to move to last historical input)
     //
     // 10. active, in scrollback buffer while in historical input
     // state transitions:
     // -> 4. inactive, in scrollback buffer while in historical input (deactivate)
-    // -> 6. active, in current input (key down to current input while in last historical input)
+    // -> 6. active, in new input (key down to new input while in last historical input)
     // -> 7. active, in historical input (key up or down to another historical input)
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
     //
     // 11. active, in scrollback buffer while in temp input
     // state transitions:
     // -> 5. inactive, in scrollback buffer while in temp input (deactivate)
-    // -> 6. active, in current input (key down to current input while editing last historical input)
+    // -> 6. active, in new input (key down to new input while editing last historical input)
     // -> 7. active, in historical input (key up or down to another historical input)
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
@@ -108,7 +108,7 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::activate()
     {
-        if (this->current_input != nullptr)
+        if (this->new_input != nullptr)
         {
             return this->switch_to_state(ConsoleState(this->state | yli::console::active));
         }
@@ -121,11 +121,11 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state & (~yli::console::active)));
     }
 
-    std::optional<ConsoleState> ConsoleLogicModule::enter_current_input()
+    std::optional<ConsoleState> ConsoleLogicModule::enter_new_input()
     {
-        if (this->current_input != nullptr)
+        if (this->new_input != nullptr)
         {
-            return this->switch_to_state(ConsoleState::ACTIVE_IN_CURRENT_INPUT);
+            return this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
         }
 
         return std::nullopt; // Transition failed.
@@ -153,9 +153,9 @@ namespace yli::console
         return this->state & yli::console::active;
     }
 
-    bool ConsoleLogicModule::get_active_in_current_input() const
+    bool ConsoleLogicModule::get_active_in_new_input() const
     {
-        return this->state == ConsoleState::ACTIVE_IN_CURRENT_INPUT;
+        return this->state == ConsoleState::ACTIVE_IN_NEW_INPUT;
     }
 
     bool ConsoleLogicModule::get_active_in_historical_input() const
@@ -175,9 +175,9 @@ namespace yli::console
 
     // Module registration functions.
 
-    void ConsoleLogicModule::register_current_input(TextInput* const current_input)
+    void ConsoleLogicModule::register_new_input(TextInput* const new_input)
     {
-        this->current_input = current_input;
+        this->new_input = new_input;
     }
 
     void ConsoleLogicModule::register_temp_input(TextInput* const temp_input)
@@ -197,10 +197,10 @@ namespace yli::console
 
     // Module inquiry functions.
 
-    TextInput* ConsoleLogicModule::get_current_input() const
+    TextInput* ConsoleLogicModule::get_new_input() const
 
     {
-        return this->current_input;
+        return this->new_input;
     }
 
     TextInput* ConsoleLogicModule::get_temp_input() const
@@ -403,7 +403,7 @@ namespace yli::console
             this->state = new_state;
             return new_state;
         }
-        else if (const uint32_t any_input = in_current_input | in_historical_input | in_temp_input;
+        else if (const uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
                 !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
         {
             // If the old state and new state differ possibly only with regards to which-buffer state,
