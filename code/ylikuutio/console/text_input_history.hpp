@@ -30,16 +30,12 @@
 
 namespace yli::console
 {
-    class ConsoleLogicModule;
-
     class TextInputHistory
     {
         public:
             // Iterator typedefs.
             typedef TextInputHistoryIterator      iterator;
             typedef TextInputHistoryConstIterator const_iterator;
-
-            explicit TextInputHistory(ConsoleLogicModule& console_logic_module);
 
             void add_to_history(TextInput&& text_input);
             void emplace_back(TextInput&& text_input);
@@ -57,7 +53,7 @@ namespace yli::console
             std::optional<TextInput> get() const;
             const TextInput& at(const std::size_t input_i) const;
 
-            bool get_is_active_in_history() const;
+            bool get_is_in_history() const;
             std::size_t size() const;
             bool empty() const;
             const std::vector<TextInput>& data() const;
@@ -91,7 +87,6 @@ namespace yli::console
             }
 
         private:
-            ConsoleLogicModule& console_logic_module;
             std::vector<TextInput> history;
             std::vector<TextInput>::iterator history_it { this->history.end() };
             std::size_t history_index { std::numeric_limits<std::size_t>::max() };

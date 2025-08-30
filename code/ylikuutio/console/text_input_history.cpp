@@ -17,7 +17,6 @@
 
 #include "text_input_history.hpp"
 #include "console_state.hpp"
-#include "console_logic_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -29,13 +28,7 @@
 
 namespace yli::console
 {
-    class ConsoleLogicModule;
     class TextInput;
-
-    TextInputHistory::TextInputHistory(ConsoleLogicModule& console_logic_module)
-        : console_logic_module { console_logic_module }
-    {
-    }
 
     void TextInputHistory::add_to_history(TextInput&& text_input)
     {
@@ -90,17 +83,9 @@ namespace yli::console
 
     bool TextInputHistory::enter_history()
     {
-        if (std::size_t history_size = this->size(); !this->get_is_active_in_history() && history_size > 0) [[likely]]
+        if (std::size_t history_size = this->size(); !this->get_is_in_history() && history_size > 0) [[likely]]
         {
             // If we are not in history and the history is not empty, enter the history.
-            std::optional<ConsoleState> new_state = this->console_logic_module.enter_historical_input();
-            if (!new_state)
-            {
-                // Entering history failed.
-                std::cerr << "ERROR: `TextInputHistory::enter_history`: `new_state` is `std::nullopt`!\n";
-                return false;
-            }
-
             this->history_index = history_size - 1;
             this->history_it = this->history.begin() + history_index;
             return true;
@@ -113,10 +98,9 @@ namespace yli::console
 
     bool TextInputHistory::exit_history()
     {
-        if (this->get_is_active_in_history())
+        if (this->get_is_in_history())
         {
             // If we are in history, exit the history.
-            this->console_logic_module.enter_new_input();
             this->history_index = std::numeric_limits<std::size_t>::max();
             this->history_it = this->history.end();
             return true;
@@ -127,11 +111,10 @@ namespace yli::console
 
     bool TextInputHistory::edit_historical_input()
     {
-        if (this->get_is_active_in_history())
+        if (this->get_is_in_history())
         {
             // If we are in history, enter temp input.
             // We still stay in the some historical index.
-            this->console_logic_module.enter_temp_input();
             return true;
         }
 
@@ -140,7 +123,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_previous()
     {
-        if (this->get_is_active_in_history() && this->history_index > 0) [[likely]]
+        if (this->get_is_in_history() && this->history_index > 0) [[likely]]
         {
             // If we are in the history and not in the oldest input, move to the previous input.
             this->history_index--;
@@ -154,7 +137,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_next()
     {
-        if (this->get_is_active_in_history() && this->history_index < this->size()) [[likely]]
+        if (this->get_is_in_history() && this->history_index < this->size()) [[likely]]
         {
             // If we are in the history and not in the newest input, move to the next input.
             this->history_index++;
@@ -168,7 +151,7 @@ namespace yli::console
 
     void TextInputHistory::move_to_first()
     {
-        if (this->size() > 0 && this->get_is_active_in_history()) [[likely]]
+        if (this->size() > 0 && this->get_is_in_history()) [[likely]]
         {
             this->history_index = 0;
             this->history_it = this->history.begin();
@@ -177,7 +160,7 @@ namespace yli::console
 
     void TextInputHistory::move_to_last()
     {
-        if (this->size() > 0 && this->get_is_active_in_history()) [[likely]]
+        if (this->size() > 0 && this->get_is_in_history()) [[likely]]
         {
             this->history_index = this->size() - 1;
             this->history_it = this->history.begin() + this->size() - 1;
@@ -199,9 +182,9 @@ namespace yli::console
         return *(this->history.begin() + input_i);
     }
 
-    bool TextInputHistory::get_is_active_in_history() const
+    bool TextInputHistory::get_is_in_history() const
     {
-        return this->console_logic_module.get() == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT;
+        return this->history_index < std::numeric_limits<std::size_t>::max();
     }
 
     std::size_t TextInputHistory::size() const

@@ -27,10 +27,17 @@ namespace yli::console
 {
     class TextInput;
     class TextInputHistory;
+    class ScrollbackBuffer;
 
     class ConsoleLogicModule
     {
         public:
+            ConsoleLogicModule(
+                    yli::console::TextInput& new_input,
+                    yli::console::TextInput& temp_input,
+                    yli::console::TextInputHistory& text_input_history,
+                    yli::console::ScrollbackBuffer& scrollback_buffer);
+
             // State transition functions.
             std::optional<ConsoleState> activate();
             std::optional<ConsoleState> deactivate();
@@ -48,17 +55,12 @@ namespace yli::console
             bool get_active_in_temp_input() const;
             bool get_active_in_scrollback_buffer() const;
 
-            // Module registration functions.
-            void register_new_input(TextInput* const new_input);
-            void register_temp_input(TextInput* const temp_input);
-            void register_text_input_history(TextInputHistory* const text_input_history);
-
             ConsoleState get() const;
 
             // Module inquiry functions.
-            TextInput* get_new_input() const;
-            TextInput* get_temp_input() const;
-            TextInputHistory* get_text_input_history() const;
+            TextInput& get_new_input() const;
+            TextInput& get_temp_input() const;
+            TextInputHistory& get_text_input_history() const;
 
             // Boolean state inquiry functions.
             bool get_can_move_to_previous_input() const;
@@ -102,9 +104,10 @@ namespace yli::console
             std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
             ConsoleState state                   { ConsoleState::INACTIVE_IN_NEW_INPUT };
-            TextInput* new_input                 { nullptr };
-            TextInput* temp_input                { nullptr };
-            TextInputHistory* text_input_history { nullptr };
+            TextInput& new_input;
+            TextInput& temp_input;
+            TextInputHistory& text_input_history;
+            ScrollbackBuffer& scrollback_buffer;
 
             bool can_move_to_previous_input { false };
             bool can_move_to_next_input     { false };

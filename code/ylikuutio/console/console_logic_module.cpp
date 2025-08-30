@@ -26,6 +26,7 @@ namespace yli::console
 {
     class TextInput;
     class TextInputHistory;
+    class ScrollbackBuffer;
 
     // console states:
     //  0. inactive, in new input (initial state)
@@ -104,16 +105,23 @@ namespace yli::console
     // -> 7. active, in historical input (key up or down to another historical input)
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
+    ConsoleLogicModule::ConsoleLogicModule(
+            yli::console::TextInput& new_input,
+            yli::console::TextInput& temp_input,
+            yli::console::TextInputHistory& text_input_history,
+            yli::console::ScrollbackBuffer& scrollback_buffer)
+        : new_input { new_input },
+        temp_input { temp_input },
+        text_input_history { text_input_history },
+        scrollback_buffer { scrollback_buffer }
+    {
+    }
+
     // State transition functions.
 
     std::optional<ConsoleState> ConsoleLogicModule::activate()
     {
-        if (this->new_input != nullptr)
-        {
-            return this->switch_to_state(ConsoleState(this->state | yli::console::active));
-        }
-
-        return std::nullopt; // Transition failed.
+        return this->switch_to_state(ConsoleState(this->state | yli::console::active));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::deactivate()
@@ -123,12 +131,7 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_new_input()
     {
-        if (this->new_input != nullptr)
-        {
-            return this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
-        }
-
-        return std::nullopt; // Transition failed.
+        return this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_historical_input()
@@ -173,23 +176,6 @@ namespace yli::console
         return (this->state & yli::console::active) && (this->state & yli::console::in_scrollback_buffer);
     }
 
-    // Module registration functions.
-
-    void ConsoleLogicModule::register_new_input(TextInput* const new_input)
-    {
-        this->new_input = new_input;
-    }
-
-    void ConsoleLogicModule::register_temp_input(TextInput* const temp_input)
-    {
-        this->temp_input = temp_input;
-    }
-
-    void ConsoleLogicModule::register_text_input_history(TextInputHistory* const text_input_history)
-    {
-        this->text_input_history = text_input_history;
-    }
-
     yli::console::ConsoleState ConsoleLogicModule::get() const
     {
         return this->state;
@@ -197,18 +183,18 @@ namespace yli::console
 
     // Module inquiry functions.
 
-    TextInput* ConsoleLogicModule::get_new_input() const
+    TextInput& ConsoleLogicModule::get_new_input() const
 
     {
         return this->new_input;
     }
 
-    TextInput* ConsoleLogicModule::get_temp_input() const
+    TextInput& ConsoleLogicModule::get_temp_input() const
     {
         return this->temp_input;
     }
 
-    TextInputHistory* ConsoleLogicModule::get_text_input_history() const
+    TextInputHistory& ConsoleLogicModule::get_text_input_history() const
     {
         return this->text_input_history;
     }
