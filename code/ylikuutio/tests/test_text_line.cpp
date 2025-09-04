@@ -18,6 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
+#include "code/ylikuutio/console/text_input_type.hpp"
 
 // Include standard headers
 #include <string_view> // std::string_view
@@ -39,7 +40,7 @@ TEST(text_line_must_be_initialized_appropriately, text_line)
 
 TEST(text_line_must_be_initialized_appropriately, from_text_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     yli::console::TextLine text_line(text_input);

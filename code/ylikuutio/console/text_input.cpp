@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "text_input.hpp"
+#include "text_input_type.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -26,7 +27,13 @@
 
 namespace yli::console
 {
-    TextInput::TextInput(std::string&& string)
+    TextInput::TextInput(const TextInputType type)
+        : type { type }
+    {
+    }
+
+    TextInput::TextInput(std::string&& string, const TextInputType type)
+        : type { type }
     {
         this->input = std::move(string);
     }
@@ -184,5 +191,10 @@ namespace yli::console
     std::size_t TextInput::get_cursor_index() const
     {
         return this->cursor_index;
+    }
+
+    TextInputType TextInput::get_type() const
+    {
+        return this->type;
     }
 }

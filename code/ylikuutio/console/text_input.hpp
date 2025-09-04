@@ -20,6 +20,7 @@
 
 #include "text_input_iterator.hpp"
 #include "text_input_const_iterator.hpp"
+#include "text_input_type.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -40,8 +41,8 @@ namespace yli::console
             typedef TextInputIterator      iterator;
             typedef TextInputConstIterator const_iterator;
 
-            TextInput() = default;
-            TextInput(std::string&& string);
+            TextInput(const TextInputType type);
+            TextInput(std::string&& string, const TextInputType type);
 
             TextInput(const TextInput&) = default;
             TextInput& operator=(const TextInput&) = default;
@@ -90,6 +91,7 @@ namespace yli::console
             const std::string& data() const;
 
             std::size_t get_cursor_index() const;
+            TextInputType get_type() const;
 
             // Iterator functions.
             iterator begin()
@@ -121,6 +123,7 @@ namespace yli::console
             std::string input; // This is used for actual inputs.
             std::string::iterator cursor_it { this->input.begin() };
             std::size_t cursor_index { 0 };
+            TextInputType type;
     };
 }
 

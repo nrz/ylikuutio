@@ -411,6 +411,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/text_input_history.hpp
     code/ylikuutio/console/text_input_history_const_iterator.hpp
     code/ylikuutio/console/text_input_history_iterator.hpp
+    code/ylikuutio/console/text_input_type.hpp
     code/ylikuutio/console/text_line.cpp
     code/ylikuutio/console/text_line.hpp
     code/ylikuutio/console/text_line_const_iterator.hpp

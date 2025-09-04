@@ -17,15 +17,17 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/text_input.hpp"
+#include "code/ylikuutio/console/text_input_type.hpp"
 
 // Include standard headers
 #include <optional> // std::nullopt
 #include <string>   // std::string
 #include <string_view> // std::string_view
 
-TEST(text_input_must_be_initialized_appropriately, text_input)
+TEST(text_input_must_be_initialized_appropriately, new_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
+    ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::NEW_INPUT);
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_TRUE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -37,9 +39,42 @@ TEST(text_input_must_be_initialized_appropriately, text_input)
     ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
 }
 
-TEST(text_input_must_be_initialized_appropriately, string_foo)
+TEST(text_input_must_be_initialized_appropriately, temp_input)
 {
-    yli::console::TextInput text_input("foo");
+    yli::console::TextInput text_input(yli::console::TextInputType::TEMP_INPUT);
+    ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::TEMP_INPUT);
+    ASSERT_EQ(text_input.size(), 0);
+    ASSERT_TRUE(text_input.empty());
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().begin());
+    ASSERT_EQ(text_input.get_cursor_it(), text_input.data().end());
+    ASSERT_EQ(text_input.data(), "");
+    ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
+}
+
+TEST(text_input_must_be_initialized_appropriately, string_foo_new_input)
+{
+    yli::console::TextInput text_input("foo", yli::console::TextInputType::NEW_INPUT);
+    ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::NEW_INPUT);
+    ASSERT_EQ(text_input.size(), 3);
+    ASSERT_FALSE(text_input.empty());
+    ASSERT_EQ(text_input.get_character_at_current_index(), 'f');
+    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
+    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    std::string::iterator it = text_input.get_cursor_it();
+    ASSERT_EQ(it, text_input.data().begin());
+    it += text_input.size();
+    ASSERT_EQ(it, text_input.data().end());
+    ASSERT_EQ(text_input.data(), "foo");
+    ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
+}
+
+TEST(text_input_must_be_initialized_appropriately, string_foo_temp_input)
+{
+    yli::console::TextInput text_input("foo", yli::console::TextInputType::TEMP_INPUT);
+    ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::TEMP_INPUT);
     ASSERT_EQ(text_input.size(), 3);
     ASSERT_FALSE(text_input.empty());
     ASSERT_EQ(text_input.get_character_at_current_index(), 'f');
@@ -55,7 +90,7 @@ TEST(text_input_must_be_initialized_appropriately, string_foo)
 
 TEST(one_character_must_be_added_to_the_text_input_appropriately, single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
@@ -69,7 +104,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, single_charact
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -84,7 +119,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
 
 TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_characters_a_b_c)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     text_input.add_character('c');
@@ -100,7 +135,7 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_char
 
 TEST(one_character_must_be_added_to_the_text_input_appropriately, single_ascii_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
@@ -114,7 +149,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, single_ascii_c
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_ascii_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -129,7 +164,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_ascii_
 
 TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_ascii_characters_a_b_c)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     text_input.add_character('c');
@@ -145,7 +180,7 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, single_asci
 
 TEST(one_character_must_be_added_to_the_text_input_appropriately, char_container_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("a");
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
@@ -159,7 +194,7 @@ TEST(one_character_must_be_added_to_the_text_input_appropriately, char_container
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_container_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("ab");
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'b');
@@ -173,7 +208,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_containe
 
 TEST(three_characters_must_be_added_to_the_text_input_appropriately, char_container_a_b_c)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'c');
@@ -187,7 +222,7 @@ TEST(three_characters_must_be_added_to_the_text_input_appropriately, char_contai
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_character_a_and_char_container_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_characters("b");
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -202,7 +237,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, single_charac
 
 TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_container_a_and_single_character_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("a");
     text_input.add_character('b');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -217,7 +252,7 @@ TEST(two_characters_must_be_added_to_the_text_input_appropriately, char_containe
 
 TEST(deleting_a_character_must_fail_appropriately_for_empty_text_input, empty_text_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     ASSERT_FALSE(text_input.delete_character());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
@@ -231,7 +266,7 @@ TEST(deleting_a_character_must_fail_appropriately_for_empty_text_input, empty_te
 
 TEST(character_must_deleted_from_the_text_input_appropriately, single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -246,7 +281,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
 
 TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("a");
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -261,7 +296,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a)
 
 TEST(character_must_deleted_from_the_text_input_appropriately, single_character_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     ASSERT_TRUE(text_input.delete_character());
@@ -287,7 +322,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, single_character_
 
 TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("ab");
     ASSERT_TRUE(text_input.delete_character());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -312,7 +347,7 @@ TEST(character_must_deleted_from_the_text_input_appropriately, char_container_a_
 
 TEST(text_input_must_be_cleared_appropriately, after_single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.clear();
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -326,7 +361,7 @@ TEST(text_input_must_be_cleared_appropriately, after_single_character_a)
 
 TEST(text_input_must_be_cleared_appropriately, after_single_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     text_input.clear();
@@ -341,7 +376,7 @@ TEST(text_input_must_be_cleared_appropriately, after_single_characters_a_b)
 
 TEST(moving_cursor_to_left_must_fail_appropriately, no_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     ASSERT_FALSE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_TRUE(text_input.empty());
@@ -355,7 +390,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, no_input)
 
 TEST(moving_cursor_to_left_must_succeed_appropriately, after_single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     ASSERT_TRUE(text_input.move_cursor_left());
     ASSERT_EQ(text_input.get_character_at_current_index(), 'a');
@@ -370,7 +405,7 @@ TEST(moving_cursor_to_left_must_succeed_appropriately, after_single_character_a)
 
 TEST(moving_cursor_to_left_must_fail_appropriately, after_single_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     ASSERT_TRUE(text_input.move_cursor_left());
@@ -388,7 +423,7 @@ TEST(moving_cursor_to_left_must_fail_appropriately, after_single_characters_a_b)
 
 TEST(moving_cursor_to_right_must_fail_appropriately, no_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
@@ -402,7 +437,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, no_input)
 
 TEST(moving_cursor_to_right_must_fail_appropriately, after_single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -417,7 +452,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_character_a)
 
 TEST(moving_cursor_to_right_must_fail_appropriately, after_single_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     ASSERT_FALSE(text_input.move_cursor_right());
@@ -433,7 +468,7 @@ TEST(moving_cursor_to_right_must_fail_appropriately, after_single_characters_a_b
 
 TEST(moving_cursor_to_right_must_succeed_appropriately, no_input_and_move_to_left)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.move_cursor_left();
     ASSERT_FALSE(text_input.move_cursor_right());
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
@@ -447,7 +482,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, no_input_and_move_to_lef
 }
 TEST(moving_cursor_to_right_must_succeed_appropriately, after_single_character_a_and_move_to_left)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.move_cursor_left();
     ASSERT_TRUE(text_input.move_cursor_right());
@@ -463,7 +498,7 @@ TEST(moving_cursor_to_right_must_succeed_appropriately, after_single_character_a
 
 TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, no_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.move_cursor_to_start_of_line();
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
@@ -477,7 +512,7 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, no_input)
 
 TEST(moving_cursor_to_end_of_line_must_succeed_appropriately, no_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.move_cursor_to_end_of_line();
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
@@ -491,7 +526,7 @@ TEST(moving_cursor_to_end_of_line_must_succeed_appropriately, no_input)
 
 TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.move_cursor_to_start_of_line();
     ASSERT_EQ(text_input.get_character_at_current_index(), 'a');
@@ -506,7 +541,7 @@ TEST(moving_cursor_to_start_of_line_must_succeed_appropriately, after_single_cha
 
 TEST(ctrl_w_must_succeed_appropriately, no_input)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
     ASSERT_TRUE(text_input.empty());
@@ -520,7 +555,7 @@ TEST(ctrl_w_must_succeed_appropriately, no_input)
 
 TEST(ctrl_w_must_succeed_appropriately, single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.ctrl_w();
     ASSERT_EQ(text_input.size(), 0);
@@ -535,7 +570,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_character_a)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character('b');
     text_input.ctrl_w();
@@ -551,7 +586,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_b)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character(' ');
     text_input.ctrl_w();
@@ -567,7 +602,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space_space)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character('a');
     text_input.add_character(' ');
     text_input.add_character(' ');
@@ -584,7 +619,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_a_space_space)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character('a');
     text_input.ctrl_w();
@@ -600,7 +635,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character('a');
     text_input.add_character('b');
@@ -617,7 +652,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_b)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_space)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character('a');
     text_input.add_character(' ');
@@ -634,7 +669,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_a_space)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character(' ');
     text_input.add_character('a');
@@ -652,7 +687,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b)
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character(' ');
     text_input.add_character('a');
@@ -674,7 +709,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d_space)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character(' ');
     text_input.add_character('a');
@@ -697,7 +732,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
 
 TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_space_c_d_space_space)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_character(' ');
     text_input.add_character(' ');
     text_input.add_character('a');
@@ -721,7 +756,7 @@ TEST(ctrl_w_must_succeed_appropriately, single_characters_space_space_a_b_space_
 
 TEST(text_input_begin_iterator_must_work_appropriately, text_input_begin_iterator)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     auto it = text_input.begin();
@@ -736,7 +771,7 @@ TEST(text_input_begin_iterator_must_work_appropriately, text_input_begin_iterato
 
 TEST(text_input_cbegin_const_iterator_must_work_appropriately, text_input_cbegin_const_iterator)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     auto it = text_input.cbegin();
@@ -751,7 +786,7 @@ TEST(text_input_cbegin_const_iterator_must_work_appropriately, text_input_cbegin
 
 TEST(text_input_end_iterator_must_work_appropriately, text_input_end_iterator)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     auto it = text_input.end();
@@ -766,7 +801,7 @@ TEST(text_input_end_iterator_must_work_appropriately, text_input_end_iterator)
 
 TEST(text_input_cend_iterator_must_work_appropriately, text_input_cend_iterator)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     auto it = text_input.cend();
@@ -781,7 +816,7 @@ TEST(text_input_cend_iterator_must_work_appropriately, text_input_cend_iterator)
 
 TEST(one_character_must_be_emplaced_back_to_the_text_input_appropriately, single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.emplace_back('a');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
@@ -795,7 +830,7 @@ TEST(one_character_must_be_emplaced_back_to_the_text_input_appropriately, single
 
 TEST(one_character_must_be_pushed_back_to_the_text_input_appropriately, single_character_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.push_back('a');
     ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
     ASSERT_EQ(text_input.get_character_to_the_left(), 'a');
@@ -809,7 +844,7 @@ TEST(one_character_must_be_pushed_back_to_the_text_input_appropriately, single_c
 
 TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, capacity_plus_1_characters_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     const std::size_t capacity = text_input.data().capacity();
 
     std::string_view my_string { "a" };
@@ -831,7 +866,7 @@ TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, c
 
 TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, capacity_plus_1_times_abc)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     const std::size_t capacity = text_input.data().capacity();
 
     std::string_view my_string { "abc" };
@@ -853,7 +888,7 @@ TEST(capacity_plus_1_characters_must_be_added_to_the_text_input_appropriately, c
 
 TEST(capacity_plus_1_characters_must_be_emplaced_back_to_the_text_input_appropriately, capacity_plus_1_characters_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     const std::size_t capacity = text_input.data().capacity();
 
     for (std::size_t i = 0; i < capacity + 1; i++)
@@ -873,7 +908,7 @@ TEST(capacity_plus_1_characters_must_be_emplaced_back_to_the_text_input_appropri
 
 TEST(capacity_plus_1_characters_must_be_pushed_back_to_the_text_input_appropriately, capacity_plus_1_characters_a)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     const std::size_t capacity = text_input.data().capacity();
 
     for (std::size_t i = 0; i < capacity + 1; i++)

@@ -322,7 +322,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_1_n_rows_2_text_input_width_3)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters(std::string("abc"));
 
     yli::console::ScrollbackBuffer scrollback_buffer(1, 2);
@@ -348,7 +348,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_2_n_rows_2_text_input_width_3)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     yli::console::ScrollbackBuffer scrollback_buffer(2, 2);
@@ -372,7 +372,7 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
 
 TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_n_columns_3_n_rows_2_text_input_width_3)
 {
-    yli::console::TextInput text_input;
+    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
     text_input.add_characters("abc");
 
     yli::console::ScrollbackBuffer scrollback_buffer(3, 2);
@@ -400,17 +400,17 @@ TEST(scrollback_buffer_begin_iterator_must_work_appropriately, scrollback_buffer
 
     yli::console::ScrollbackBuffer scrollback_buffer(3, 2);
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(abc_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(def_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(ghi_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
@@ -433,17 +433,17 @@ TEST(scrollback_buffer_cbegin_iterator_must_work_appropriately, scrollback_buffe
 
     yli::console::ScrollbackBuffer scrollback_buffer(3, 2);
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(abc_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(def_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(ghi_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
@@ -466,17 +466,17 @@ TEST(scrollback_buffer_end_iterator_must_work_appropriately, scrollback_buffer_n
 
     yli::console::ScrollbackBuffer scrollback_buffer(3, 2);
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(abc_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(def_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(ghi_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
@@ -499,17 +499,17 @@ TEST(scrollback_buffer_cend_iterator_must_work_appropriately, scrollback_buffer_
 
     yli::console::ScrollbackBuffer scrollback_buffer(3, 2);
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(abc_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(def_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
     {
-        yli::console::TextInput text_input;
+        yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
         text_input.add_characters(ghi_char_container);
         scrollback_buffer.add_to_buffer(text_input);
     }
