@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 
 // Include standard headers
