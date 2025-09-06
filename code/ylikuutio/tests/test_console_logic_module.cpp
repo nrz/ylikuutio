@@ -38,6 +38,9 @@ TEST(console_logic_module_must_be_initialized_appropriately, console_logic_modul
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_EQ(&console_logic_module.get_new_input(), &new_input);
+    ASSERT_EQ(&console_logic_module.get_temp_input(), &temp_input);
+    ASSERT_EQ(&console_logic_module.get_text_input_history(), &text_input_history);
 }
 
 TEST(activation_must_work_appropriately, inactive_in_new_input)
