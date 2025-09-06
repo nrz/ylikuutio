@@ -203,6 +203,11 @@ namespace yli::console
         return this->text_input_history;
     }
 
+    ScrollbackBuffer& ConsoleLogicModule::get_scrollback_buffer() const
+    {
+        return this->scrollback_buffer;
+    }
+
     // Boolean state inquiry functions.
 
     bool ConsoleLogicModule::get_can_move_to_previous_input() const

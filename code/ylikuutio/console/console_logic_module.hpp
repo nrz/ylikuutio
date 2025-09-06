@@ -61,6 +61,7 @@ namespace yli::console
             TextInput& get_new_input() const;
             TextInput& get_temp_input() const;
             TextInputHistory& get_text_input_history() const;
+            ScrollbackBuffer& get_scrollback_buffer() const;
 
             // Boolean state inquiry functions.
             bool get_can_move_to_previous_input() const;
