@@ -21,6 +21,7 @@
 #include "code/ylikuutio/console/console_state.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 
 namespace yli::console
@@ -36,7 +37,9 @@ namespace yli::console
                     yli::console::TextInput& new_input,
                     yli::console::TextInput& temp_input,
                     yli::console::TextInputHistory& text_input_history,
-                    yli::console::ScrollbackBuffer& scrollback_buffer);
+                    yli::console::ScrollbackBuffer& scrollback_buffer,
+                    const std::size_t n_columns = 80,
+                    const std::size_t n_rows = 24);
 
             // State transition functions.
             std::optional<ConsoleState> activate();
@@ -62,6 +65,9 @@ namespace yli::console
             TextInput& get_temp_input() const;
             TextInputHistory& get_text_input_history() const;
             ScrollbackBuffer& get_scrollback_buffer() const;
+
+            std::size_t get_n_columns() const;
+            std::size_t get_n_rows() const;
 
             // Boolean state inquiry functions.
             bool get_can_move_to_previous_input() const;
@@ -109,6 +115,9 @@ namespace yli::console
             TextInput& temp_input;
             TextInputHistory& text_input_history;
             ScrollbackBuffer& scrollback_buffer;
+
+            const std::size_t n_columns;
+            const std::size_t n_rows;
 
             bool can_move_to_previous_input { false };
             bool can_move_to_next_input     { false };

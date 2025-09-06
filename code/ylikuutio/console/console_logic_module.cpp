@@ -19,6 +19,7 @@
 #include "console_state.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
 #include <optional> // std::optional
 
@@ -109,11 +110,15 @@ namespace yli::console
             yli::console::TextInput& new_input,
             yli::console::TextInput& temp_input,
             yli::console::TextInputHistory& text_input_history,
-            yli::console::ScrollbackBuffer& scrollback_buffer)
+            yli::console::ScrollbackBuffer& scrollback_buffer,
+            const std::size_t n_columns,
+            const std::size_t n_rows)
         : new_input { new_input },
         temp_input { temp_input },
         text_input_history { text_input_history },
-        scrollback_buffer { scrollback_buffer }
+        scrollback_buffer { scrollback_buffer },
+        n_columns { n_columns },
+        n_rows { n_rows }
     {
     }
 
@@ -206,6 +211,16 @@ namespace yli::console
     ScrollbackBuffer& ConsoleLogicModule::get_scrollback_buffer() const
     {
         return this->scrollback_buffer;
+    }
+
+    std::size_t ConsoleLogicModule::get_n_columns() const
+    {
+        return this->n_columns;
+    }
+
+    std::size_t ConsoleLogicModule::get_n_rows() const
+    {
+        return this->n_rows;
     }
 
     // Boolean state inquiry functions.
