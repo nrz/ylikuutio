@@ -29,7 +29,7 @@ namespace yli::console
     class TextInputHistory;
     class ScrollbackBuffer;
 
-    // console states:
+    // console states (note: these numbers do not match `ConsoleState` enum values):
     //  0. inactive, in new input (initial state)
     //  1. inactive, in historical input
     //  2. inactive, in temp input
