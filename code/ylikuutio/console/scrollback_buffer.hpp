@@ -21,6 +21,7 @@
 #include "scrollback_buffer_iterator.hpp"
 #include "scrollback_buffer_const_iterator.hpp"
 #include "text_line.hpp"
+#include "console_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -66,6 +67,8 @@ namespace yli::console
             uint32_t get_n_rows() const;
 
             std::size_t get_buffer_index() const;
+
+            void on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()

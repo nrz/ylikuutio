@@ -185,4 +185,23 @@ namespace yli::console
     {
         return this->buffer_index;
     }
+
+    void ScrollbackBuffer::on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state)
+    {
+        if (new_state == old_state)
+        {
+            // No change.
+            return;
+        }
+
+        // Console state change.
+
+        if (new_state == ConsoleState::ACTIVE_IN_NEW_INPUT ||
+                new_state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT ||
+                new_state == ConsoleState::ACTIVE_IN_TEMP_INPUT)
+        {
+            // We exited scrollback buffer.
+            this->exit_buffer();
+        }
+    }
 }

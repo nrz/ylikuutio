@@ -206,4 +206,20 @@ namespace yli::console
     {
         return this->history_index;
     }
+
+    void TextInputHistory::on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state)
+    {
+        if (new_state == old_state)
+        {
+            // No change.
+            return;
+        }
+
+        // Console state change.
+
+        if (new_state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
+        {
+            this->enter_history();
+        }
+    }
 }

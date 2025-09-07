@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <functional> // std::reference_wrapper
 #include <optional> // std::optional
 
 namespace yli::console
@@ -49,7 +50,7 @@ namespace yli::console
             std::optional<ConsoleState> enter_temp_input();
             std::optional<ConsoleState> enter_scrollback_buffer();
             std::optional<ConsoleState> exit_scrollback_buffer();
-            TextInput* edit_input();
+            std::optional<std::reference_wrapper<TextInput>> edit_input();
 
             // State inquiry functions.
             bool get_active_in_console() const;
@@ -108,6 +109,7 @@ namespace yli::console
             void set_is_right_shift_pressed(const bool is_right_shift_pressed);
 
         private:
+            std::optional<ConsoleState> signal_state_change(const ConsoleState old_state, const ConsoleState new_state);
             std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
             ConsoleState state                   { ConsoleState::INACTIVE_IN_NEW_INPUT };

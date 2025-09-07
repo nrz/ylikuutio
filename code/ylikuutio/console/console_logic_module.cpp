@@ -17,9 +17,12 @@
 
 #include "console_logic_module.hpp"
 #include "console_state.hpp"
+#include "text_input_history.hpp"
+#include "scrollback_buffer.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <functional> // std::reference_wrapper
 #include <iostream> // std::cerr
 #include <optional> // std::optional
 
@@ -156,6 +159,42 @@ namespace yli::console
     std::optional<ConsoleState> ConsoleLogicModule::enter_scrollback_buffer()
     {
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
+    }
+
+    std::optional<std::reference_wrapper<TextInput>> ConsoleLogicModule::edit_input()
+    {
+        if (this->state == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT)
+        {
+            // If we are in current input, the new input is the active input.
+            // If we are in scrollback buffer while in current input, the new input is the active input.
+            return this->new_input;
+        }
+        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
+        {
+            // If we are in a historical input, the temp input is the active input.
+            // If we are in scrollback buffer while in historical input, the historical input is the active input.
+            std::optional<TextInput> historical_input = this->text_input_history.get();
+
+            if (historical_input)
+            {
+                // If we are in historical input or in scrollback buffer
+                // while in historical input, the current historical input becomes
+                // the new temp input, and temp input becomes the current input.
+                this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->temp_input.clear();
+                this->temp_input = *historical_input;
+                return temp_input;
+            }
+        }
+        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT)
+        {
+            // If we are in a temp input, the temp input is the active input.
+            // If we are in scrollback buffer while in temp input, the temp input is the active input.
+            return this->temp_input;
+        }
+
+        // Otherwise we have no active input.
+        return std::nullopt;
     }
 
     // State inquiry functions.
@@ -397,21 +436,34 @@ namespace yli::console
         this->is_right_shift_pressed = is_right_shift_pressed;
     }
 
+    std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state, const ConsoleState new_state)
+    {
+        // Signal the 'modules' that the state has changed.
+
+        this->new_input.on_change(old_state, new_state);
+        this->temp_input.on_change(old_state, new_state);
+        this->text_input_history.on_change(old_state, new_state);
+        this->scrollback_buffer.on_change(old_state, new_state);
+        return new_state;
+    }
+
     std::optional<ConsoleState> ConsoleLogicModule::switch_to_state(const ConsoleState new_state)
     {
+        const ConsoleState old_state = this->state;
+
         if (!((this->state ^ new_state) & (~yli::console::active)))
         {
             // If the old state and new state differ possibly only with regards to activation state,
             // then the transition is valid.
             this->state = new_state;
-            return new_state;
+            return this->signal_state_change(old_state, new_state);
         }
         else if (!((this->state ^ new_state) & (~yli::console::in_scrollback_buffer)) && (this->state & yli::console::active))
         {
             // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
             // and the current state in active, then the transition is valid.
             this->state = new_state;
-            return new_state;
+            return this->signal_state_change(old_state, new_state);
         }
         else if (const uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
                 !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
@@ -419,7 +471,7 @@ namespace yli::console
             // If the old state and new state differ possibly only with regards to which-buffer state,
             // and the current state in active, then the transition is valid.
             this->state = new_state;
-            return new_state;
+            return this->signal_state_change(old_state, new_state);
         }
 
         std::cerr << "ERROR: `ConsoleLogicModule::switch_to_state`: state transition failed!\n";

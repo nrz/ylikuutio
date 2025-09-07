@@ -21,6 +21,7 @@
 #include "text_input_history_iterator.hpp"
 #include "text_input_history_const_iterator.hpp"
 #include "text_input.hpp"
+#include "console_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -59,6 +60,8 @@ namespace yli::console
             const std::vector<TextInput>& data() const;
 
             std::size_t get_history_index() const;
+
+            void on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()

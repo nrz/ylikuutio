@@ -17,6 +17,7 @@
 
 #include "text_input.hpp"
 #include "text_input_type.hpp"
+#include "console_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -196,5 +197,16 @@ namespace yli::console
     TextInputType TextInput::get_type() const
     {
         return this->type;
+    }
+
+    void TextInput::on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state)
+    {
+        if (new_state == old_state)
+        {
+            // No change.
+            return;
+        }
+
+        // Console state change.
     }
 }

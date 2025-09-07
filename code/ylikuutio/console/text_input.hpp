@@ -21,6 +21,7 @@
 #include "text_input_iterator.hpp"
 #include "text_input_const_iterator.hpp"
 #include "text_input_type.hpp"
+#include "console_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -92,6 +93,8 @@ namespace yli::console
 
             std::size_t get_cursor_index() const;
             TextInputType get_type() const;
+
+            void on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()
