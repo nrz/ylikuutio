@@ -177,6 +177,11 @@ namespace yli::console
         return this->size() == 0;
     }
 
+    const std::vector<TextLine>& ScrollbackBuffer::data() const
+    {
+        return this->buffer;
+    }
+
     uint32_t ScrollbackBuffer::get_n_columns() const
     {
         return this->n_columns;

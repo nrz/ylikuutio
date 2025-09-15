@@ -63,6 +63,7 @@ namespace yli::console
             bool get_is_active_in_buffer() const;
             std::size_t size() const;
             bool empty() const;
+            const std::vector<TextLine>& data() const;
             uint32_t get_n_columns() const;
             uint32_t get_n_rows() const;
 
