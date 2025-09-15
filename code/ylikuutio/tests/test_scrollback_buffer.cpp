@@ -122,9 +122,9 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_n
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_TRUE(buffer_view_max_size_1->empty());
+    ASSERT_FALSE(buffer_view_max_size_1);
     std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_TRUE(buffer_view_max_size_2->empty());
+    ASSERT_FALSE(buffer_view_max_size_2);
 }
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_n_columns_1_n_rows_1)
@@ -136,9 +136,9 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_n_col
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_TRUE(buffer_view_max_size_1->empty());
+    ASSERT_FALSE(buffer_view_max_size_1);
     std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_TRUE(buffer_view_max_size_2->empty());
+    ASSERT_FALSE(buffer_view_max_size_2);
 }
 
 TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_n_rows_1_text_n_columns_0)
@@ -155,9 +155,9 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_TRUE(buffer_view_max_size_1->empty());
+    ASSERT_FALSE(buffer_view_max_size_1);
     std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_TRUE(buffer_view_max_size_2->empty());
+    ASSERT_FALSE(buffer_view_max_size_2);
 }
 
 TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_n_columns_1_n_rows_1_text_n_columns_1)
@@ -1339,9 +1339,9 @@ TEST(emplacing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 2);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_TRUE(buffer_view_max_size_1->empty());
+    ASSERT_FALSE(buffer_view_max_size_1);
     std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_TRUE(buffer_view_max_size_2->empty());
+    ASSERT_FALSE(buffer_view_max_size_2);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
 
@@ -1356,8 +1356,8 @@ TEST(pushing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_n_
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 2);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
     std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_TRUE(buffer_view_max_size_1->empty());
+    ASSERT_FALSE(buffer_view_max_size_1);
     std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_TRUE(buffer_view_max_size_2->empty());
+    ASSERT_FALSE(buffer_view_max_size_2);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
