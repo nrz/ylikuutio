@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
+#include <span>     // std::span
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -57,7 +58,10 @@ namespace yli::console
             void move_to_first();
             void move_to_last();
 
-            std::optional<TextLine> get() const;
+            std::optional<std::span<const TextLine>> get_view(const std::size_t top_index, const std::size_t max_rows) const;
+            std::optional<std::span<const TextLine>> get_view(const std::size_t max_rows) const;
+            std::optional<std::span<const TextLine>> get_view_to_last(const std::size_t max_rows) const;
+            std::span<const TextLine> get_end_view(const std::size_t max_rows) const;
             const TextLine& at(const std::size_t line_i) const;
 
             bool get_is_active_in_buffer() const;

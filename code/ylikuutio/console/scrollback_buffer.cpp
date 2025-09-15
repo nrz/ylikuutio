@@ -23,6 +23,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
+#include <span>     // std::span
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -147,14 +148,34 @@ namespace yli::console
         }
     }
 
-    std::optional<TextLine> ScrollbackBuffer::get() const
+    std::optional<std::span<const TextLine>> ScrollbackBuffer::get_view(const std::size_t top_index, const std::size_t max_rows) const
     {
-        if (this->buffer_index < this->buffer.size()) [[likely]]
+        if (top_index == std::numeric_limits<std::size_t>::max()) [[unlikely]]
         {
-            return this->buffer.at(this->buffer_index);
+            return std::nullopt;
+        }
+        else if (top_index + max_rows <= this->size()) [[likely]]
+        {
+            return std::span(&this->data()[top_index], &this->data()[top_index + max_rows]);
         }
 
-        return std::nullopt;
+        return std::span(&this->data()[top_index], &this->data()[this->size()]);
+    }
+
+    std::optional<std::span<const TextLine>> ScrollbackBuffer::get_view(const std::size_t max_rows) const
+    {
+        return this->get_view(this->buffer_index, max_rows);
+    }
+
+    std::optional<std::span<const TextLine>> ScrollbackBuffer::get_view_to_last(const std::size_t max_rows) const
+    {
+        if (this->size() > max_rows) [[likely]]
+        {
+            auto top_of_view_it = this->data().cend() - max_rows;
+            return std::span(top_of_view_it, this->data().cend());
+        }
+
+        return std::span(this->data().cbegin(), this->data().cend());
     }
 
     const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const
