@@ -70,8 +70,14 @@ namespace yli::console
 
     bool ScrollbackBuffer::enter_buffer()
     {
-        if (std::size_t buffer_size = this->buffer.size(); !this->get_is_active_in_buffer() && buffer_size > 0) [[likely]]
+        if (std::size_t buffer_size = this->buffer.size(); buffer_size > 0) [[likely]]
         {
+            if (this->get_is_active_in_buffer()) [[unlikely]]
+            {
+                // Nothing to do. This function should be idempotent.
+                return true;
+            }
+
             // If we are not in buffer and the buffer is not empty, enter the buffer.
             this->buffer_index = buffer_size - 1;
             this->buffer_it = this->buffer.begin() + buffer_index;
