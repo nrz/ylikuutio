@@ -173,7 +173,7 @@ namespace yli::console
         {
             // If we are in a historical input, the temp input is the active input.
             // If we are in scrollback buffer while in historical input, the historical input is the active input.
-            std::optional<TextInput> historical_input = this->text_input_history.get();
+            std::optional<TextInput> historical_input = (this->text_input_history.get() != nullptr ? *this->text_input_history.get() : std::optional<TextInput>(std::nullopt));
 
             if (historical_input)
             {

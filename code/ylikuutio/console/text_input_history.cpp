@@ -22,7 +22,6 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
-#include <optional> // std::optional
 #include <utility>  // std::move
 #include <vector>   // std::vector
 
@@ -174,14 +173,14 @@ namespace yli::console
         this->history_index = std::numeric_limits<std::size_t>::max();
     }
 
-    std::optional<TextInput> TextInputHistory::get() const
+    const TextInput* TextInputHistory::get() const
     {
         if (this->history_index < this->history.size()) [[likely]]
         {
-            return this->history.at(this->history_index);
+            return &this->history.at(this->history_index);
         }
 
-        return std::nullopt;
+        return nullptr;
     }
 
     const TextInput& TextInputHistory::at(const std::size_t input_i) const

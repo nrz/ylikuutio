@@ -24,7 +24,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <optional> // std::nullopt
 #include <string>   // std::string
 #include <utility>  // std::move
 
@@ -39,7 +38,7 @@ TEST(text_input_history_must_be_initialized_appropriately, text_input_history)
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
-    ASSERT_EQ(text_input_history.get(), std::nullopt);
+    ASSERT_EQ(text_input_history.get(), nullptr);
 }
 
 TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
@@ -52,7 +51,7 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_input_history)
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
-    ASSERT_EQ(text_input_history.get(), std::nullopt);
+    ASSERT_EQ(text_input_history.get(), nullptr);
 }
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
@@ -65,7 +64,7 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_input_history)
     ASSERT_EQ(text_input_history.get_history_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().end());
-    ASSERT_EQ(text_input_history.get(), std::nullopt);
+    ASSERT_EQ(text_input_history.get(), nullptr);
 }
 
 TEST(adding_an_input_must_work_appropriately, abc)
@@ -89,8 +88,8 @@ TEST(adding_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().end());
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), text_input);
 }
@@ -121,8 +120,8 @@ TEST(adding_an_input_capacity_plus_1_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -153,8 +152,8 @@ TEST(emplacing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -185,8 +184,8 @@ TEST(pushing_an_input_capacity_plus_1_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -217,8 +216,8 @@ TEST(adding_an_input_capacity_plus_10_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -249,8 +248,8 @@ TEST(emplacing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -281,8 +280,8 @@ TEST(pushing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
     ASSERT_TRUE(text_input_history.enter_history());
     ASSERT_EQ(text_input_history.get_history_index(), capacity + 9);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin() + capacity + 9);
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
@@ -322,8 +321,8 @@ TEST(emplacing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().end());
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), text_input);
 }
@@ -347,8 +346,8 @@ TEST(pushing_back_an_input_must_work_appropriately, abc)
     ASSERT_EQ(text_input_history.get_history_index(), 0);
     ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
     ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().end());
-    const std::optional<yli::console::TextInput> input_from_history = text_input_history.get();
-    ASSERT_TRUE(input_from_history);
+    const yli::console::TextInput* const input_from_history = text_input_history.get();
+    ASSERT_NE(input_from_history, nullptr);
 
     ASSERT_EQ(*text_input_history.get(), text_input);
 }

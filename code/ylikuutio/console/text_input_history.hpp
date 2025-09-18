@@ -26,7 +26,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <optional> // std::optional
 #include <vector>   // std::vector
 
 namespace yli::console
@@ -53,7 +52,7 @@ namespace yli::console
 
             void clear();
 
-            std::optional<TextInput> get() const;
+            const TextInput* get() const;
             const TextInput& at(const std::size_t input_i) const;
 
             bool get_is_in_history() const;
