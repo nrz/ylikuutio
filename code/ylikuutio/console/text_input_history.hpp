@@ -51,6 +51,8 @@ namespace yli::console
             void move_to_first();
             void move_to_last();
 
+            void clear();
+
             std::optional<TextInput> get() const;
             const TextInput& at(const std::size_t input_i) const;
 

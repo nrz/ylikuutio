@@ -167,6 +167,13 @@ namespace yli::console
         }
     }
 
+    void TextInputHistory::clear()
+    {
+        this->history.clear();
+        this->history_it = this->history.end();
+        this->history_index = std::numeric_limits<std::size_t>::max();
+    }
+
     std::optional<TextInput> TextInputHistory::get() const
     {
         if (this->history_index < this->history.size()) [[likely]]
