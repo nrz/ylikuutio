@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <functional> // std::reference_wrapper
 #include <optional> // std::optional
 
 namespace yli::console
@@ -50,7 +49,7 @@ namespace yli::console
             std::optional<ConsoleState> enter_temp_input();
             std::optional<ConsoleState> enter_scrollback_buffer();
             std::optional<ConsoleState> exit_scrollback_buffer();
-            std::optional<std::reference_wrapper<TextInput>> edit_input();
+            TextInput* edit_input();
 
             // State inquiry functions.
             bool get_active_in_console() const;

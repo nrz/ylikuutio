@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <functional> // std::reference_wrapper
 #include <iostream> // std::cerr
 #include <optional> // std::optional
 
@@ -161,21 +160,21 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
-    std::optional<std::reference_wrapper<TextInput>> ConsoleLogicModule::edit_input()
+    TextInput* ConsoleLogicModule::edit_input()
     {
         if (this->state == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT)
         {
             // If we are in current input, the new input is the active input.
             // If we are in scrollback buffer while in current input, the new input is the active input.
-            return this->new_input;
+            return &this->new_input;
         }
         else if (this->state == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
         {
             // If we are in a historical input, the temp input is the active input.
             // If we are in scrollback buffer while in historical input, the historical input is the active input.
-            std::optional<TextInput> historical_input = (this->text_input_history.get() != nullptr ? *this->text_input_history.get() : std::optional<TextInput>(std::nullopt));
+            const TextInput* const historical_input = this->text_input_history.get();
 
-            if (historical_input)
+            if (historical_input != nullptr)
             {
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
@@ -183,18 +182,18 @@ namespace yli::console
                 this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
                 this->temp_input.clear();
                 this->temp_input = *historical_input;
-                return temp_input;
+                return &this->temp_input;
             }
         }
         else if (this->state == yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT)
         {
             // If we are in a temp input, the temp input is the active input.
             // If we are in scrollback buffer while in temp input, the temp input is the active input.
-            return this->temp_input;
+            return &this->temp_input;
         }
 
         // Otherwise we have no active input.
-        return std::nullopt;
+        return nullptr;
     }
 
     // State inquiry functions.

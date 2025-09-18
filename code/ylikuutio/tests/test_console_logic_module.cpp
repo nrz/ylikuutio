@@ -23,7 +23,6 @@
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
 
 // Include standard headers
-#include <functional> // std::reference_wrapper
 #include <optional> // std::optional
 #include <utility>  // std::move
 
@@ -492,9 +491,9 @@ TEST(editing_current_input_must_work_appropriately, editing_current_input)
     yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer);
     console_logic_module.activate();
 
-    std::optional<std::reference_wrapper<yli::console::TextInput>> active_input = console_logic_module.edit_input();
-    ASSERT_TRUE(active_input);
-    ASSERT_EQ((&active_input->get()), &new_input);
+    const yli::console::TextInput* const active_input = console_logic_module.edit_input();
+    ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(active_input, &new_input);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
 }
 
@@ -512,9 +511,9 @@ TEST(editing_historical_input_must_work_appropriately, editing_historical_input)
     text_input_history.add_to_history(std::move(new_input));
     console_logic_module.enter_historical_input();
 
-    std::optional<std::reference_wrapper<yli::console::TextInput>> active_input = console_logic_module.edit_input();
-    ASSERT_TRUE(active_input);
-    ASSERT_EQ((active_input->get()), text_input_history.at(0));
+    const yli::console::TextInput* const active_input = console_logic_module.edit_input();
+    ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
 
@@ -533,8 +532,8 @@ TEST(editing_temp_input_must_work_appropriately, editing_temp_input)
     console_logic_module.enter_historical_input();
 
     console_logic_module.edit_input(); // Start editing, this changes state to `ACTIVE_IN_TEMP_INPUT`.
-    std::optional<std::reference_wrapper<yli::console::TextInput>> active_input = console_logic_module.edit_input(); // Should be idempotent.
-    ASSERT_TRUE(active_input);
-    ASSERT_EQ((active_input->get()), text_input_history.at(0));
+    const yli::console::TextInput* const active_input = console_logic_module.edit_input(); // Should be idempotent.
+    ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
