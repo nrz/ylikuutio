@@ -257,6 +257,36 @@ namespace yli::console
         return this->scrollback_buffer;
     }
 
+    const TextInput* ConsoleLogicModule::get_visible_input() const
+    {
+        // This function returns the selected (visible) input irrespective whether it's edited or not.
+        // This function returns the selected input even if we are in scrollback buffer and the
+        // input might not be visible completely or at all. The console rendering code needs to take care
+        // of rendering the right lines.
+
+        if (this->state == ConsoleState::ACTIVE_IN_NEW_INPUT || this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
+        {
+            // If we are in current input, the new input is the visible input.
+            // If we are in scrollback buffer while in current input, the new input is the visible input.
+            return &this->new_input;
+        }
+        else if (this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        {
+            // If we are in a historical input, the temp input is the visible input.
+            // If we are in scrollback buffer while in historical input, the historical input is the visible input.
+            return this->text_input_history.get();
+        }
+        else if (this->state == console::ConsoleState::ACTIVE_IN_TEMP_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        {
+            // If we are in a temp input, the temp input is the visible input.
+            // If we are in scrollback buffer while in temp input, the temp input is the visible input.
+            return &this->temp_input;
+        }
+
+        // Otherwise we have no selected visible input.
+        return nullptr;
+    }
+
     std::size_t ConsoleLogicModule::get_n_columns() const
     {
         return this->n_columns;
