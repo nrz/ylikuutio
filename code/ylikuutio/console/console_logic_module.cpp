@@ -147,6 +147,12 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_historical_input()
     {
+        // If there is no historical input, then do not enter historical input.
+        if (this->text_input_history.empty()) [[unlikely]]
+        {
+            return std::nullopt; // Transition failed.
+        }
+
         return this->switch_to_state(ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     }
 
