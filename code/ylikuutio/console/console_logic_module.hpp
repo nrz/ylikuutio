@@ -42,6 +42,16 @@ namespace yli::console
                     const std::size_t n_rows = 24);
 
             // State transition functions.
+            // `ConsoleLogicModule` keeps track of the console state.
+            // Behavior:
+            // 1. potentially ask relevant 'modules' if they are ready to change
+            //    ('modules' may also do internal changes as a result).
+            // 2. do the state change in `ConsoleLogicModule`
+            //    (if needed based on the response from relevant 'modules').
+            // 3. signal the change to relevant 'modules'.
+            //
+            // If errors are encountered if any phase, return `std::nullopt`
+            // as a sign of failed state transition, but do not roll back changes.
             std::optional<ConsoleState> activate();
             std::optional<ConsoleState> deactivate();
             std::optional<ConsoleState> enter_new_input();

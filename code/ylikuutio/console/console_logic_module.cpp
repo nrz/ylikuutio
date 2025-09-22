@@ -170,8 +170,8 @@ namespace yli::console
     {
         if (this->state == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT)
         {
-            // If we are in current input, the new input is the active input.
-            // If we are in scrollback buffer while in current input, the new input is the active input.
+            // If we are in new input, the new input is the active input.
+            // If we are in scrollback buffer while in new input, the new input is the active input.
             return &this->new_input;
         }
         else if (this->state == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
@@ -184,7 +184,7 @@ namespace yli::console
             {
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
-                // the new temp input, and temp input becomes the current input.
+                // the new temp input, and temp input becomes the active input.
                 this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
                 this->temp_input.clear();
                 this->temp_input = *historical_input;
@@ -266,8 +266,8 @@ namespace yli::console
 
         if (this->state == ConsoleState::ACTIVE_IN_NEW_INPUT || this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
         {
-            // If we are in current input, the new input is the visible input.
-            // If we are in scrollback buffer while in current input, the new input is the visible input.
+            // If we are in new input, the new input is the visible input.
+            // If we are in scrollback buffer while in new input, the new input is the visible input.
             return &this->new_input;
         }
         else if (this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
