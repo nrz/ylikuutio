@@ -41,6 +41,7 @@
 #endif
 
 // Include standard headers
+#include <algorithm> // std::count
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
 #include <stdexcept> // std::runtime_error
@@ -252,32 +253,8 @@ namespace yli::ontology
         const std::size_t length = std::get<std::string>(text_struct.text).size();
 
         // Count the number of lines.
-        std::size_t number_of_lines = 1;
-
-        std::size_t i = 0;
-
-        while (i < length)
-        {
-            char character = std::get<std::string>(text_struct.text)[i++];
-
-            if (i >= length)
-            {
-                // Backslash `\` is the last character of string.
-                // End processing to avoid buffer over-read.
-                break;
-            }
-
-            if (character == '\\')
-            {
-                // OK, this character was backslash, so read the next character.
-                character = std::get<std::string>(text_struct.text)[i++];
-
-                if (character == 'n')
-                {
-                    number_of_lines++;
-                }
-            }
-        }
+        const std::string string = std::get<std::string>(text_struct.text);
+        std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n');
 
         uint32_t current_left_x;
         uint32_t current_top_y;
@@ -322,7 +299,7 @@ namespace yli::ontology
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> UVs;
 
-        i = 0;
+        std::size_t i = 0;
 
         while (i < length)
         {
@@ -337,29 +314,16 @@ namespace yli::ontology
             uint32_t vertex_down_right_x;
             uint32_t vertex_down_right_y;
 
-            char character = std::get<std::string>(text_struct.text)[i++];
+            const char character = std::get<std::string>(text_struct.text)[i++];
 
-            if (character == '\\')
+            if (character == '\n')
             {
-                // OK, this character was backslash, so read the next character.
-                character = std::get<std::string>(text_struct.text)[i++];
-
-                if (i >= length)
-                {
-                    // Backslash `\` is the last character of string.
-                    // End processing to avoid buffer over-read.
-                    break;
-                }
-
-                if (character == 'n')
-                {
-                    // Jump to the beginning of the next line.
-                    // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
-                    // TODO: implement newline for other horizontal and vertical alignments too!
-                    current_left_x = text_struct.x;
-                    current_top_y -= text_size;
-                    continue;
-                }
+                // Jump to the beginning of the next line.
+                // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
+                // TODO: implement newline for other horizontal and vertical alignments too!
+                current_left_x = text_struct.x;
+                current_top_y -= text_size;
+                continue;
             }
 
             vertex_up_left_x = vertex_down_left_x = current_left_x;

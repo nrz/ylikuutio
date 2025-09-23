@@ -221,7 +221,7 @@ namespace yli::ontology
                         historical_text,
                         characters_for_line,
                         characters_for_line) +
-                    "\\n";
+                    "\n";
             }
         }
         else
@@ -278,7 +278,7 @@ namespace yli::ontology
                             historical_text,
                             characters_for_line,
                             characters_for_line) +
-                        "\\n";
+                        "\n";
                 }
 
                 std::get<std::string>(text_struct.text) += this->convert_new_input_into_string();
