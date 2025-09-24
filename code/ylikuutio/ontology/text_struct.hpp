@@ -42,8 +42,6 @@ namespace yli::ontology
         }
 
         Request<Font2d> font_2d_parent {};
-        std::size_t screen_width  { 0 };
-        std::size_t screen_height { 0 };
         std::size_t x             { 0 };
         std::size_t y             { 0 };
         std::size_t text_size     { 0 };

@@ -87,8 +87,6 @@ namespace yli::ontology
                 ""); // TODO: add support for `std::vector<std::string>`!
         this->horizontal_alignment = text_struct.horizontal_alignment;
         this->vertical_alignment = text_struct.vertical_alignment;
-        this->screen_height = text_struct.screen_height;
-        this->screen_width = text_struct.screen_width;
         this->x = text_struct.x;
         this->y = text_struct.y;
         this->text_size = text_struct.text_size;

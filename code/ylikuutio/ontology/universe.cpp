@@ -271,8 +271,6 @@ namespace yli::ontology
         // Create angles and cartesian coordinates text, on bottom left corner.
         TextStruct angles_and_coordinates_text_struct;
         angles_and_coordinates_text_struct.font_2d_parent = Request(font_2d);
-        angles_and_coordinates_text_struct.screen_width = this->window_width;
-        angles_and_coordinates_text_struct.screen_height = this->window_height;
         angles_and_coordinates_text_struct.x = 0;
         angles_and_coordinates_text_struct.y = 0;
         angles_and_coordinates_text_struct.text_size = this->text_size;
@@ -289,8 +287,6 @@ namespace yli::ontology
 
         // Create time data text, on top left corner.
         TextStruct time_text_struct { Request(font_2d) };
-        time_text_struct.screen_width = this->window_width;
-        time_text_struct.screen_height = this->window_height;
         time_text_struct.x = 0;
         time_text_struct.y = this->window_height;
         time_text_struct.text_size = this->text_size;
@@ -307,8 +303,6 @@ namespace yli::ontology
 
         // Create help text.
         TextStruct help_text_struct { Request(font_2d) };
-        help_text_struct.screen_width = this->window_width;
-        help_text_struct.screen_height = this->window_height;
         help_text_struct.x = 0;
         help_text_struct.y = this->window_height - (3 * this->text_size);
         help_text_struct.text_size = this->text_size;
@@ -325,8 +319,6 @@ namespace yli::ontology
 
         // Print frame rate data on top right corner.
         TextStruct frame_rate_text_struct { Request(font_2d) };
-        frame_rate_text_struct.screen_width = this->window_width;
-        frame_rate_text_struct.screen_height = this->window_height;
         frame_rate_text_struct.x = this->window_width;
         frame_rate_text_struct.y = this->window_height;
         frame_rate_text_struct.text_size = this->text_size;
