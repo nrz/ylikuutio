@@ -56,7 +56,6 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
-#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"

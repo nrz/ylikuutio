@@ -66,7 +66,6 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
-#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"

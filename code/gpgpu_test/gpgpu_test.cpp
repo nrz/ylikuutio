@@ -43,8 +43,6 @@
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
-#include "code/ylikuutio/ontology/font_struct.hpp"
-#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
