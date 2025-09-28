@@ -18,6 +18,8 @@
 #include "font_2d.hpp"
 #include "universe.hpp"
 #include "text_2d.hpp"
+#include "horizontal_alignment.hpp"
+#include "vertical_alignment.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
@@ -259,39 +261,39 @@ namespace yli::ontology
         uint32_t current_left_x;
         uint32_t current_top_y;
 
-        if (text_struct.horizontal_alignment == "left")
+        if (text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
         {
-            current_left_x = text_struct.x;
+            current_left_x = text_struct.position.x;
         }
-        else if (text_struct.horizontal_alignment == "center")
+        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
         {
-            current_left_x = text_struct.x - 0.5f * length * text_size;
+            current_left_x = text_struct.position.x - 0.5f * length * text_size;
         }
-        else if (text_struct.horizontal_alignment == "right")
+        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
         {
-            current_left_x = text_struct.x - length * text_size;
+            current_left_x = text_struct.position.x - length * text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << text_struct.horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << text_struct.position.horizontal_alignment << "\n";
             return;
         }
 
-        if (text_struct.vertical_alignment == "top")
+        if (text_struct.position.vertical_alignment == VerticalAlignment::TOP)
         {
-            current_top_y = text_struct.y;
+            current_top_y = text_struct.position.y;
         }
-        else if (text_struct.vertical_alignment == "center")
+        else if (text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
         {
-            current_top_y = text_struct.y + 0.5f * number_of_lines * text_size;
+            current_top_y = text_struct.position.y + 0.5f * number_of_lines * text_size;
         }
-        else if (text_struct.vertical_alignment == "bottom")
+        else if (text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
         {
-            current_top_y = text_struct.y + number_of_lines * text_size;
+            current_top_y = text_struct.position.y + number_of_lines * text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << text_struct.vertical_alignment << "\n";
+            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << text_struct.position.vertical_alignment << "\n";
             return;
         }
 
@@ -321,7 +323,7 @@ namespace yli::ontology
                 // Jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                 // TODO: implement newline for other horizontal and vertical alignments too!
-                current_left_x = text_struct.x;
+                current_left_x = text_struct.position.x;
                 current_top_y -= text_size;
                 continue;
             }

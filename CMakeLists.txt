@@ -648,6 +648,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
+    code/ylikuutio/ontology/horizontal_alignment.hpp
     code/ylikuutio/ontology/indexable.hpp
     code/ylikuutio/ontology/input_mode.cpp
     code/ylikuutio/ontology/input_mode.hpp
@@ -694,6 +695,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/parent_of_input_modes_module.hpp
     code/ylikuutio/ontology/parent_of_pipelines_module.cpp
     code/ylikuutio/ontology/parent_of_pipelines_module.hpp
+    code/ylikuutio/ontology/position_struct.hpp
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
     code/ylikuutio/ontology/registry.hpp
@@ -759,6 +761,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
+    code/ylikuutio/ontology/vertical_alignment.hpp
     code/ylikuutio/ontology/waypoint.cpp
     code/ylikuutio/ontology/waypoint.hpp
     code/ylikuutio/ontology/waypoint_struct.hpp

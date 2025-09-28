@@ -18,6 +18,8 @@
 #include "text_2d.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
+#include "horizontal_alignment.hpp"
+#include "vertical_alignment.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -85,10 +87,7 @@ namespace yli::ontology
         this->text = (std::holds_alternative<std::string>(text_struct.text) ?
                 std::get<std::string>(text_struct.text) :
                 ""); // TODO: add support for `std::vector<std::string>`!
-        this->horizontal_alignment = text_struct.horizontal_alignment;
-        this->vertical_alignment = text_struct.vertical_alignment;
-        this->x = text_struct.x;
-        this->y = text_struct.y;
+        this->position = text_struct.position;
         this->text_size = text_struct.text_size;
         this->font_size = text_struct.font_size;
 
@@ -199,39 +198,39 @@ namespace yli::ontology
         std::size_t current_left_x;
         std::size_t current_top_y;
 
-        if (this->horizontal_alignment == "left")
+        if (this->position.horizontal_alignment == HorizontalAlignment::LEFT)
         {
-            current_left_x = this->x;
+            current_left_x = this->position.x;
         }
-        else if (this->horizontal_alignment == "center")
+        else if (this->position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
         {
-            current_left_x = this->x - 0.5f * length * this->text_size;
+            current_left_x = this->position.x - 0.5f * length * this->text_size;
         }
-        else if (this->horizontal_alignment == "right")
+        else if (this->position.horizontal_alignment == HorizontalAlignment::RIGHT)
         {
-            current_left_x = this->x - length * this->text_size;
+            current_left_x = this->position.x - length * this->text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Text2d::render`: invalid horizontal alignment: " << horizontal_alignment << "\n";
+            std::cerr << "ERROR: `Text2d::render`: invalid horizontal alignment: " << this->position.horizontal_alignment << "\n";
             return;
         }
 
-        if (this->vertical_alignment == "top")
+        if (this->position.vertical_alignment == VerticalAlignment::TOP)
         {
-            current_top_y = this->y;
+            current_top_y = this->position.y;
         }
-        else if (this->vertical_alignment == "center")
+        else if (this->position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
         {
-            current_top_y = this->y + 0.5f * number_of_lines * this->text_size;
+            current_top_y = this->position.y + 0.5f * number_of_lines * this->text_size;
         }
-        else if (this->vertical_alignment == "bottom")
+        else if (this->position.vertical_alignment == VerticalAlignment::BOTTOM)
         {
-            current_top_y = this->y + number_of_lines * this->text_size;
+            current_top_y = this->position.y + number_of_lines * this->text_size;
         }
         else
         {
-            std::cerr << "ERROR: `Text2d::render`: invalid vertical alignment: " << this->vertical_alignment << "\n";
+            std::cerr << "ERROR: `Text2d::render`: invalid vertical alignment: " << this->position.vertical_alignment << "\n";
             return;
         }
 
@@ -273,7 +272,7 @@ namespace yli::ontology
                     // jump to the beginning of the next line.
                     // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                     // TODO: implement newline for other horizontal and vertical alignments too!
-                    current_left_x = this->x;
+                    current_left_x = this->position.x;
                     current_top_y -= this->text_size;
                     continue;
                 }
@@ -283,7 +282,7 @@ namespace yli::ontology
                 // jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                 // TODO: implement newline for other horizontal and vertical alignments too!
-                current_left_x = this->x;
+                current_left_x = this->position.x;
                 current_top_y -= this->text_size;
                 continue;
             }

@@ -20,6 +20,7 @@
 
 #include "entity_struct.hpp"
 #include "request.hpp"
+#include "position_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -42,14 +43,11 @@ namespace yli::ontology
         }
 
         Request<Font2d> font_2d_parent {};
-        std::size_t x             { 0 };
-        std::size_t y             { 0 };
+        PositionStruct position;
         std::size_t text_size     { 0 };
         std::size_t font_size     { 0 };
         std::variant<std::string, std::vector<std::string>> text;
         std::string font_texture_file_format;
-        std::string horizontal_alignment;
-        std::string vertical_alignment;
     };
 }
 

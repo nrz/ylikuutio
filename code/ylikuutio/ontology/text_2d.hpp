@@ -19,6 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_TEXT_2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "position_struct.hpp"
 #include "child_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -93,12 +94,9 @@ namespace yli::ontology
             GLint vertex_uv_id;                      // Location of the program's `vertex_uv` attribute.
 
             std::string text;
-            std::string horizontal_alignment;
-            std::string vertical_alignment;
+            PositionStruct position;
             std::size_t screen_width;
             std::size_t screen_height;
-            std::size_t x;
-            std::size_t y;
             std::size_t text_size;
             std::size_t font_size;
 

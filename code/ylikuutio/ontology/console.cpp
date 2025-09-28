@@ -20,6 +20,8 @@
 #include "universe.hpp"
 #include "font_2d.hpp"
 #include "registry.hpp"
+#include "horizontal_alignment.hpp"
+#include "vertical_alignment.hpp"
 #include "console_struct.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
@@ -201,10 +203,10 @@ namespace yli::ontology
         text_struct.font_size = this->universe.get_font_size();
         text_struct.font_texture_file_format = "png";
 
-        text_struct.x = 0;
-        text_struct.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
-        text_struct.horizontal_alignment = "left";
-        text_struct.vertical_alignment = "top";
+        text_struct.position.x = 0;
+        text_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
+        text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
+        text_struct.position.vertical_alignment = VerticalAlignment::TOP;
 
         if (this->in_history)
         {
