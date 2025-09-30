@@ -93,6 +93,8 @@ namespace yli::ontology
             Scene* get_scene() const override;
 
         private:
+            uint32_t compute_left_x(const TextStruct& text_struct) const;
+            uint32_t compute_top_y(const TextStruct& text_struct) const;
             void draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const;
 
             std::size_t get_number_of_children() const override;

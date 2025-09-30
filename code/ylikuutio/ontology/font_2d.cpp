@@ -155,6 +155,54 @@ namespace yli::ontology
         return nullptr;
     }
 
+    uint32_t Font2d::compute_left_x(const TextStruct& text_struct) const
+    {
+        // Compute string length.
+        const std::string& string = std::get<std::string>(text_struct.text);
+        const std::size_t length = string.size();
+
+        if (text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
+        {
+            return text_struct.position.x;
+        }
+        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
+        {
+            return text_struct.position.x - 0.5f * length * text_size;
+        }
+        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
+        {
+            return text_struct.position.x - length * text_size;
+        }
+        else
+        {
+            throw std::runtime_error("ERROR: `Font2d::compute_left_x`: invalid horizontal alignment!");
+        }
+    }
+
+    uint32_t Font2d::compute_top_y(const TextStruct& text_struct) const
+    {
+        // Count the number of lines.
+        const std::string& string = std::get<std::string>(text_struct.text);
+        const std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n');
+
+        if (text_struct.position.vertical_alignment == VerticalAlignment::TOP)
+        {
+            return text_struct.position.y;
+        }
+        else if (text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
+        {
+            return text_struct.position.y + 0.5f * number_of_lines * text_size;
+        }
+        else if (text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
+        {
+            return text_struct.position.y + number_of_lines * text_size;
+        }
+        else
+        {
+            throw std::runtime_error("ERROR: `Font2d::compute_top_y`: invalid vertical alignment!");
+        }
+    }
+
     void Font2d::draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const
     {
         if (this->universe.get_is_opengl_in_use())
@@ -282,48 +330,8 @@ namespace yli::ontology
         // Newlines need to be checked beforehand.
         const std::size_t length = std::get<std::string>(text_struct.text).size();
 
-        // Count the number of lines.
-        const std::string string = std::get<std::string>(text_struct.text);
-        std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n');
-
-        uint32_t current_left_x;
-        uint32_t current_top_y;
-
-        if (text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
-        {
-            current_left_x = text_struct.position.x;
-        }
-        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
-        {
-            current_left_x = text_struct.position.x - 0.5f * length * text_size;
-        }
-        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
-        {
-            current_left_x = text_struct.position.x - length * text_size;
-        }
-        else
-        {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid horizontal alignment: " << text_struct.position.horizontal_alignment << "\n";
-            return;
-        }
-
-        if (text_struct.position.vertical_alignment == VerticalAlignment::TOP)
-        {
-            current_top_y = text_struct.position.y;
-        }
-        else if (text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
-        {
-            current_top_y = text_struct.position.y + 0.5f * number_of_lines * text_size;
-        }
-        else if (text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
-        {
-            current_top_y = text_struct.position.y + number_of_lines * text_size;
-        }
-        else
-        {
-            std::cerr << "ERROR: `Font2d::print_text_2d`: invalid vertical alignment: " << text_struct.position.vertical_alignment << "\n";
-            return;
-        }
+        uint32_t current_left_x = this->compute_left_x(text_struct);
+        uint32_t current_top_y = this->compute_top_y(text_struct);
 
         // Fill buffers.
         std::vector<glm::vec2> vertices;
