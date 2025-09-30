@@ -299,7 +299,7 @@ namespace yli::ontology
 
         // Fill buffers.
         std::vector<glm::vec2> vertices;
-        std::vector<glm::vec2> UVs;
+        std::vector<glm::vec2> uvs;
 
         std::size_t i = 0;
 
@@ -371,13 +371,13 @@ namespace yli::ontology
                 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
                 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
             }
-            UVs.emplace_back(uv_up_left);
-            UVs.emplace_back(uv_down_left);
-            UVs.emplace_back(uv_up_right);
+            uvs.emplace_back(uv_up_left);
+            uvs.emplace_back(uv_down_left);
+            uvs.emplace_back(uv_up_right);
 
-            UVs.emplace_back(uv_down_right);
-            UVs.emplace_back(uv_up_right);
-            UVs.emplace_back(uv_down_left);
+            uvs.emplace_back(uv_down_right);
+            uvs.emplace_back(uv_up_right);
+            uvs.emplace_back(uv_down_left);
         }
 
         if (this->universe.get_is_opengl_in_use())
@@ -386,7 +386,7 @@ namespace yli::ontology
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-            glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);

@@ -64,17 +64,17 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     *vertex_pointer++ = northeast_height;
 
     std::vector<glm::vec3> vertices; // vertices of the object.
-    std::vector<glm::vec2> UVs;      // UVs of the object.
+    std::vector<glm::vec2> uvs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
     yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
 
-    const bool is_success = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    const bool is_success = yli::triangulation::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, uvs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 12);
-    ASSERT_EQ(UVs.size(), 12);
+    ASSERT_EQ(uvs.size(), 12);
     ASSERT_EQ(normals.size(), 12);
 
     // 1st vertex is the center vertex of the 1st triangle.

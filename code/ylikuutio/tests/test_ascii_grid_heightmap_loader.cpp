@@ -38,7 +38,7 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     heightmap_loader_struct.use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> vertices;         // vertices of the object.
-    std::vector<glm::vec2> UVs;              // UVs of the object.
+    std::vector<glm::vec2> uvs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
     uint32_t image_width;
     uint32_t image_height;
@@ -46,14 +46,14 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     bool model_loading_result = yli::load::load_ascii_grid_terrain(
             heightmap_loader_struct,
             vertices,
-            UVs,
+            uvs,
             normals,
             image_width,
             image_height);
 
     ASSERT_TRUE(model_loading_result);
     ASSERT_EQ(vertices.size(), 16 * 3);
-    ASSERT_EQ(UVs.size(), 16 * 3);
+    ASSERT_EQ(uvs.size(), 16 * 3);
     ASSERT_EQ(normals.size(), 16 * 3);
 
     //  +-------+-------+
@@ -156,117 +156,117 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     //  |/  0  \|/  4  \|
     //  +-------+-------+
 
-    ASSERT_EQ(UVs[0].x, 0.5f); // central vertex of 1st triangle.
-    ASSERT_EQ(UVs[0].y, 0.5f); // central vertex of 1st triangle.
-    ASSERT_EQ(UVs[1].x, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[1].y, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[2].x, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[2].y, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[0].x, 0.5f); // central vertex of 1st triangle.
+    ASSERT_EQ(uvs[0].y, 0.5f); // central vertex of 1st triangle.
+    ASSERT_EQ(uvs[1].x, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[1].y, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[2].x, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[2].y, 0.0f); // southwest vertex.
 
-    ASSERT_EQ(UVs[3].x, 0.5f); // central vertex of 2nd triangle.
-    ASSERT_EQ(UVs[3].y, 0.5f); // central vertex of 2nd triangle.
-    ASSERT_EQ(UVs[4].x, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[4].y, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[5].x, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[5].y, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[3].x, 0.5f); // central vertex of 2nd triangle.
+    ASSERT_EQ(uvs[3].y, 0.5f); // central vertex of 2nd triangle.
+    ASSERT_EQ(uvs[4].x, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[4].y, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[5].x, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[5].y, 1.0f); // northwest vertex.
 
-    ASSERT_EQ(UVs[6].x, 0.5f); // central vertex of 3rd triangle.
-    ASSERT_EQ(UVs[6].y, 0.5f); // central vertex of 3rd triangle.
-    ASSERT_EQ(UVs[7].x, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[7].y, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[8].x, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[8].y, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[6].x, 0.5f); // central vertex of 3rd triangle.
+    ASSERT_EQ(uvs[6].y, 0.5f); // central vertex of 3rd triangle.
+    ASSERT_EQ(uvs[7].x, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[7].y, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[8].x, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[8].y, 1.0f); // northeast vertex.
 
-    ASSERT_EQ(UVs[9].x, 0.5f);  // central vertex of 4th triangle.
-    ASSERT_EQ(UVs[9].y, 0.5f);  // central vertex of 4th triangle.
-    ASSERT_EQ(UVs[10].x, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[10].y, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[11].x, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[11].y, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[9].x, 0.5f);  // central vertex of 4th triangle.
+    ASSERT_EQ(uvs[9].y, 0.5f);  // central vertex of 4th triangle.
+    ASSERT_EQ(uvs[10].x, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[10].y, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[11].x, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[11].y, 0.0f); // southeast vertex.
 
-    ASSERT_EQ(UVs[12].x, 0.5f); // central vertex of 5th triangle.
-    ASSERT_EQ(UVs[12].y, 0.5f); // central vertex of 5th triangle.
-    ASSERT_EQ(UVs[13].x, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[13].y, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[14].x, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[14].y, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[12].x, 0.5f); // central vertex of 5th triangle.
+    ASSERT_EQ(uvs[12].y, 0.5f); // central vertex of 5th triangle.
+    ASSERT_EQ(uvs[13].x, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[13].y, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[14].x, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[14].y, 0.0f); // southwest vertex.
 
-    ASSERT_EQ(UVs[15].x, 0.5f); // central vertex of 6th triangle.
-    ASSERT_EQ(UVs[15].y, 0.5f); // central vertex of 6th triangle.
-    ASSERT_EQ(UVs[16].x, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[16].y, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[17].x, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[17].y, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[15].x, 0.5f); // central vertex of 6th triangle.
+    ASSERT_EQ(uvs[15].y, 0.5f); // central vertex of 6th triangle.
+    ASSERT_EQ(uvs[16].x, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[16].y, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[17].x, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[17].y, 1.0f); // northwest vertex.
 
-    ASSERT_EQ(UVs[18].x, 0.5f); // central vertex of 7th triangle.
-    ASSERT_EQ(UVs[18].y, 0.5f); // central vertex of 7th triangle.
-    ASSERT_EQ(UVs[19].x, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[19].y, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[20].x, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[20].y, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[18].x, 0.5f); // central vertex of 7th triangle.
+    ASSERT_EQ(uvs[18].y, 0.5f); // central vertex of 7th triangle.
+    ASSERT_EQ(uvs[19].x, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[19].y, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[20].x, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[20].y, 1.0f); // northeast vertex.
 
-    ASSERT_EQ(UVs[21].x, 0.5f); // central vertex of 8th triangle.
-    ASSERT_EQ(UVs[21].y, 0.5f); // central vertex of 8th triangle.
-    ASSERT_EQ(UVs[22].x, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[22].y, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[23].x, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[23].y, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[21].x, 0.5f); // central vertex of 8th triangle.
+    ASSERT_EQ(uvs[21].y, 0.5f); // central vertex of 8th triangle.
+    ASSERT_EQ(uvs[22].x, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[22].y, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[23].x, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[23].y, 0.0f); // southeast vertex.
 
-    ASSERT_EQ(UVs[24].x, 0.5f); // central vertex of 9th triangle.
-    ASSERT_EQ(UVs[24].y, 0.5f); // central vertex of 9th triangle.
-    ASSERT_EQ(UVs[25].x, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[25].y, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[26].x, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[26].y, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[24].x, 0.5f); // central vertex of 9th triangle.
+    ASSERT_EQ(uvs[24].y, 0.5f); // central vertex of 9th triangle.
+    ASSERT_EQ(uvs[25].x, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[25].y, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[26].x, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[26].y, 1.0f); // southwest vertex.
 
-    ASSERT_EQ(UVs[27].x, 0.5f); // central vertex of 10th triangle.
-    ASSERT_EQ(UVs[27].y, 0.5f); // central vertex of 10th triangle.
-    ASSERT_EQ(UVs[28].x, 0.0f); // southwest vertex.
-    ASSERT_EQ(UVs[28].y, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[29].x, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[29].y, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[27].x, 0.5f); // central vertex of 10th triangle.
+    ASSERT_EQ(uvs[27].y, 0.5f); // central vertex of 10th triangle.
+    ASSERT_EQ(uvs[28].x, 0.0f); // southwest vertex.
+    ASSERT_EQ(uvs[28].y, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[29].x, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[29].y, 0.0f); // northwest vertex.
 
-    ASSERT_EQ(UVs[30].x, 0.5f); // central vertex of 11th triangle.
-    ASSERT_EQ(UVs[30].y, 0.5f); // central vertex of 11th triangle.
-    ASSERT_EQ(UVs[31].x, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[31].y, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[32].x, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[32].y, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[30].x, 0.5f); // central vertex of 11th triangle.
+    ASSERT_EQ(uvs[30].y, 0.5f); // central vertex of 11th triangle.
+    ASSERT_EQ(uvs[31].x, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[31].y, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[32].x, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[32].y, 0.0f); // northeast vertex.
 
-    ASSERT_EQ(UVs[33].x, 0.5f); // central vertex of 12th triangle.
-    ASSERT_EQ(UVs[33].y, 0.5f); // central vertex of 12th triangle.
-    ASSERT_EQ(UVs[34].x, 1.0f); // northeast vertex.
-    ASSERT_EQ(UVs[34].y, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[35].x, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[35].y, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[33].x, 0.5f); // central vertex of 12th triangle.
+    ASSERT_EQ(uvs[33].y, 0.5f); // central vertex of 12th triangle.
+    ASSERT_EQ(uvs[34].x, 1.0f); // northeast vertex.
+    ASSERT_EQ(uvs[34].y, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[35].x, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[35].y, 1.0f); // southeast vertex.
 
-    ASSERT_EQ(UVs[36].x, 0.5f); // central vertex of 13th triangle.
-    ASSERT_EQ(UVs[36].y, 0.5f); // central vertex of 13th triangle.
-    ASSERT_EQ(UVs[37].x, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[37].y, 1.0f); // southeast vertex.
-    ASSERT_EQ(UVs[38].x, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[38].y, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[36].x, 0.5f); // central vertex of 13th triangle.
+    ASSERT_EQ(uvs[36].y, 0.5f); // central vertex of 13th triangle.
+    ASSERT_EQ(uvs[37].x, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[37].y, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[38].x, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[38].y, 1.0f); // southwest vertex.
 
-    ASSERT_EQ(UVs[39].x, 0.5f); // central vertex of 14th triangle.
-    ASSERT_EQ(UVs[39].y, 0.5f); // central vertex of 14th triangle.
-    ASSERT_EQ(UVs[40].x, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[40].y, 1.0f); // southwest vertex.
-    ASSERT_EQ(UVs[41].x, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[41].y, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[39].x, 0.5f); // central vertex of 14th triangle.
+    ASSERT_EQ(uvs[39].y, 0.5f); // central vertex of 14th triangle.
+    ASSERT_EQ(uvs[40].x, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[40].y, 1.0f); // southwest vertex.
+    ASSERT_EQ(uvs[41].x, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[41].y, 0.0f); // northwest vertex.
 
-    ASSERT_EQ(UVs[42].x, 0.5f); // central vertex of 15th triangle.
-    ASSERT_EQ(UVs[42].y, 0.5f); // central vertex of 15th triangle.
-    ASSERT_EQ(UVs[43].x, 1.0f); // northwest vertex.
-    ASSERT_EQ(UVs[43].y, 0.0f); // northwest vertex.
-    ASSERT_EQ(UVs[44].x, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[44].y, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[42].x, 0.5f); // central vertex of 15th triangle.
+    ASSERT_EQ(uvs[42].y, 0.5f); // central vertex of 15th triangle.
+    ASSERT_EQ(uvs[43].x, 1.0f); // northwest vertex.
+    ASSERT_EQ(uvs[43].y, 0.0f); // northwest vertex.
+    ASSERT_EQ(uvs[44].x, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[44].y, 0.0f); // northeast vertex.
 
-    ASSERT_EQ(UVs[45].x, 0.5f); // central vertex of 16th triangle.
-    ASSERT_EQ(UVs[45].y, 0.5f); // central vertex of 16th triangle.
-    ASSERT_EQ(UVs[46].x, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[46].y, 0.0f); // northeast vertex.
-    ASSERT_EQ(UVs[47].x, 0.0f); // southeast vertex.
-    ASSERT_EQ(UVs[47].y, 1.0f); // southeast vertex.
+    ASSERT_EQ(uvs[45].x, 0.5f); // central vertex of 16th triangle.
+    ASSERT_EQ(uvs[45].y, 0.5f); // central vertex of 16th triangle.
+    ASSERT_EQ(uvs[46].x, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[46].y, 0.0f); // northeast vertex.
+    ASSERT_EQ(uvs[47].x, 0.0f); // southeast vertex.
+    ASSERT_EQ(uvs[47].y, 1.0f); // southeast vertex.
 }
 
 TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_y_step_1)
@@ -279,7 +279,7 @@ TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_12
     heightmap_loader_struct.triangulate = false;
 
     std::vector<glm::vec3> vertices;         // vertices of the object.
-    std::vector<glm::vec2> UVs;              // UVs of the object.
+    std::vector<glm::vec2> uvs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
     uint32_t image_width;
     uint32_t image_height;
@@ -287,14 +287,14 @@ TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_12
     bool model_loading_result = yli::load::load_ascii_grid_terrain(
             heightmap_loader_struct,
             vertices,
-            UVs,
+            uvs,
             normals,
             image_width,
             image_height);
 
     ASSERT_TRUE(model_loading_result);
     ASSERT_EQ(vertices.size(), 9);
-    ASSERT_EQ(UVs.size(), 0);
+    ASSERT_EQ(uvs.size(), 0);
     ASSERT_EQ(normals.size(), 0);
 
     ASSERT_EQ(vertices[0].z, 0.0f);
