@@ -155,6 +155,34 @@ namespace yli::ontology
         return nullptr;
     }
 
+    void Font2d::draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const
+    {
+        if (this->universe.get_is_opengl_in_use())
+        {
+            glBindVertexArray(this->vao);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+
+            // 1st attribute buffer: vertices.
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
+
+            // 2nd attribute buffer: uvs.
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
+
+            // Draw call.
+            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+            yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
+            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
+        }
+    }
+
     std::size_t Font2d::get_number_of_children() const
     {
         return this->parent_of_text_2ds.get_number_of_children();
@@ -380,30 +408,7 @@ namespace yli::ontology
             uvs.emplace_back(uv_down_left);
         }
 
-        if (this->universe.get_is_opengl_in_use())
-        {
-            glBindVertexArray(this->vao);
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-            glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-
-            // 1st attribute buffer: vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-            glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-
-            // 2nd attribute buffer: UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-            glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
-
-            // Draw call.
-            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
-            yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
-        }
+        this->draw(vertices, uvs);
     }
 
     GenericParentModule* Font2d::get_generic_parent_module(const int type)
