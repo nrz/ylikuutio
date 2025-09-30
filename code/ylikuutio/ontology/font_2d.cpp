@@ -203,6 +203,26 @@ namespace yli::ontology
         }
     }
 
+    void Font2d::compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, uint32_t& left_x, uint32_t& top_y) const
+    {
+        const uint32_t vertex_left_x = left_x;
+        const uint32_t vertex_right_x = left_x + text_size;
+        left_x += text_size;
+
+        const glm::vec2 vertex_up_left(vertex_left_x, top_y);
+        const glm::vec2 vertex_up_right(vertex_right_x, top_y);
+        const glm::vec2 vertex_down_left(vertex_left_x, top_y - this->text_size);
+        const glm::vec2 vertex_down_right(vertex_right_x, top_y - this->text_size);
+
+        vertices.emplace_back(vertex_up_left);
+        vertices.emplace_back(vertex_down_left);
+        vertices.emplace_back(vertex_up_right);
+
+        vertices.emplace_back(vertex_down_right);
+        vertices.emplace_back(vertex_up_right);
+        vertices.emplace_back(vertex_down_left);
+    }
+
     void Font2d::draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const
     {
         if (this->universe.get_is_opengl_in_use())
@@ -343,14 +363,6 @@ namespace yli::ontology
         {
             // Print to the right side of X (so far there is no check for input length).
             // Print up of Y.
-            uint32_t vertex_up_left_x;
-            uint32_t vertex_up_left_y;
-            uint32_t vertex_up_right_x;
-            uint32_t vertex_up_right_y;
-            uint32_t vertex_down_left_x;
-            uint32_t vertex_down_left_y;
-            uint32_t vertex_down_right_x;
-            uint32_t vertex_down_right_y;
 
             const char character = std::get<std::string>(text_struct.text)[i++];
 
@@ -364,25 +376,7 @@ namespace yli::ontology
                 continue;
             }
 
-            vertex_up_left_x = vertex_down_left_x = current_left_x;
-            vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
-            current_left_x += text_size;
-
-            vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
-            vertex_up_left_y = vertex_up_right_y = current_top_y;
-
-            glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
-            glm::vec2 vertex_up_right = glm::vec2(vertex_up_right_x, vertex_up_right_y);
-            glm::vec2 vertex_down_left = glm::vec2(vertex_down_left_x, vertex_down_left_y);
-            glm::vec2 vertex_down_right = glm::vec2(vertex_down_right_x, vertex_down_right_y);
-
-            vertices.emplace_back(vertex_up_left);
-            vertices.emplace_back(vertex_down_left);
-            vertices.emplace_back(vertex_up_right);
-
-            vertices.emplace_back(vertex_down_right);
-            vertices.emplace_back(vertex_up_right);
-            vertices.emplace_back(vertex_down_left);
+            this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
 
             float uv_x = (character % text_struct.font_size) / static_cast<float>(text_struct.font_size);
             float uv_y;
