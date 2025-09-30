@@ -203,16 +203,14 @@ namespace yli::ontology
         }
     }
 
-    void Font2d::compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, uint32_t& left_x, uint32_t& top_y) const
+    void Font2d::compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, const uint32_t vertex_left_x, const uint32_t vertex_top_y) const
     {
-        const uint32_t vertex_left_x = left_x;
-        const uint32_t vertex_right_x = left_x + text_size;
-        left_x += text_size;
+        const uint32_t vertex_right_x = vertex_left_x + this->text_size;
 
-        const glm::vec2 vertex_up_left(vertex_left_x, top_y);
-        const glm::vec2 vertex_up_right(vertex_right_x, top_y);
-        const glm::vec2 vertex_down_left(vertex_left_x, top_y - this->text_size);
-        const glm::vec2 vertex_down_right(vertex_right_x, top_y - this->text_size);
+        const glm::vec2 vertex_up_left(vertex_left_x, vertex_top_y);
+        const glm::vec2 vertex_up_right(vertex_right_x, vertex_top_y);
+        const glm::vec2 vertex_down_left(vertex_left_x, vertex_top_y - this->text_size);
+        const glm::vec2 vertex_down_right(vertex_right_x, vertex_top_y - this->text_size);
 
         vertices.emplace_back(vertex_up_left);
         vertices.emplace_back(vertex_down_left);
@@ -377,6 +375,7 @@ namespace yli::ontology
             }
 
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
+            current_left_x += text_size;
 
             float uv_x = (character % text_struct.font_size) / static_cast<float>(text_struct.font_size);
             float uv_y;
