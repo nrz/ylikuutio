@@ -292,7 +292,6 @@ namespace yli_edit
         font_struct.screen_width = this->get_universe().get_window_width();
         font_struct.screen_height = this->get_universe().get_window_height();
         font_struct.text_size = this->get_universe().get_text_size();
-        font_struct.font_size = this->get_universe().get_font_size();
 
         std::cout << "Creating yli::ontology::Font2d* my_font_2d ...\n";
         yli::ontology::Font2d* const my_font_2d = this->entity_factory.create_font_2d(font_struct);

@@ -85,8 +85,7 @@ namespace yli::ontology
                 "texture"),
         screen_width  { font_struct.screen_width },
         screen_height { font_struct.screen_height },
-        text_size     { font_struct.text_size },
-        font_size     { font_struct.font_size }
+        text_size     { font_struct.text_size }
     {
         if (this->texture.get_is_texture_loaded())
         {
@@ -263,11 +262,6 @@ namespace yli::ontology
     uint32_t Font2d::get_text_size() const
     {
         return this->text_size;
-    }
-
-    uint32_t Font2d::get_font_size() const
-    {
-        return this->font_size;
     }
 
     TextureFileFormat Font2d::get_font_texture_file_format() const

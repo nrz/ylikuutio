@@ -39,7 +39,6 @@ namespace yli::ontology
         uint32_t screen_width  { 0 };
         uint32_t screen_height { 0 };
         uint32_t text_size     { 0 };
-        uint32_t font_size     { 0 };
     };
 }
 

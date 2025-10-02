@@ -67,7 +67,6 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             uint32_t get_text_size() const;
-            uint32_t get_font_size() const;
             TextureFileFormat get_font_texture_file_format() const;
             uint32_t get_program_id() const;
 
@@ -114,7 +113,6 @@ namespace yli::ontology
             uint32_t screen_width;
             uint32_t screen_height;
             uint32_t text_size;
-            uint32_t font_size;
     };
 
     template<>
