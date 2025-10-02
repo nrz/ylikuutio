@@ -20,6 +20,7 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 
 // Include standard headers
@@ -34,7 +35,7 @@ namespace yli::ontology
 TEST(font_2d_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
@@ -75,9 +76,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
 TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.texture_filename = "Holstein.png";
-    font_struct.font_texture_file_format = "PNG";
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();

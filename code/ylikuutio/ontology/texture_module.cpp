@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "texture_module.hpp"
+#include "texture_file_format.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/load/common_texture_loader.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
@@ -36,7 +37,7 @@ namespace yli::ontology
             Universe& universe,
             Registry* const /* registry */,
             const std::string& texture_filename,
-            const std::string& texture_file_format,
+            const TextureFileFormat texture_file_format,
             const yli::load::ImageLoaderStruct& image_loader_struct,
             const std::string& /* name */)
         : texture_filename { texture_filename },
@@ -54,7 +55,7 @@ namespace yli::ontology
         {
             bool is_texture_loading_successful = false;
 
-            if (texture_file_format == "png" || texture_file_format == "PNG")
+            if (texture_file_format == TextureFileFormat::PNG)
             {
                 is_texture_loading_successful = yli::load::load_common_texture(
                         this->texture_filename,
@@ -68,12 +69,12 @@ namespace yli::ontology
             }
             else
             {
-                std::cerr << "ERROR: `TextureModule::TextureModule`: unsupported texture file format: " << texture_file_format << "\n";
+                std::cerr << "ERROR: `TextureModule::TextureModule`: unsupported texture file format!\n";
             }
 
             if (!is_texture_loading_successful)
             {
-                std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
+                std::cerr << "ERROR: `TextureModule::TextureModule`: loading texture failed!\n";
             }
         }
     }
@@ -106,7 +107,7 @@ namespace yli::ontology
 
             if (!is_texture_loading_successful)
             {
-                std::cerr << "ERROR: `TextureModule::TextureModule`: loading " << texture_file_format << " texture failed!\n";
+                std::cerr << "ERROR: `TextureModule::TextureModule`: loading texture failed!\n";
             }
         }
     }
@@ -125,7 +126,7 @@ namespace yli::ontology
         return this->texture_filename;
     }
 
-    const std::string& TextureModule::get_texture_file_format() const
+    TextureFileFormat TextureModule::get_texture_file_format() const
     {
         return this->texture_file_format;
     }

@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_TEXTURE_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_TEXTURE_MODULE_HPP_INCLUDED
 
+#include "texture_file_format.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include <ofbx.h>
 
@@ -42,7 +43,7 @@ namespace yli::ontology
                     Universe& universe,
                     Registry* const registry,
                     const std::string& texture_filename,
-                    const std::string& texture_file_format,
+                    const TextureFileFormat texture_file_format,
                     const yli::load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);
 
@@ -59,7 +60,7 @@ namespace yli::ontology
             ~TextureModule();
 
             const std::string& get_texture_filename() const;
-            const std::string& get_texture_file_format() const;
+            TextureFileFormat get_texture_file_format() const;
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;
             uint32_t get_image_size() const;
@@ -69,7 +70,7 @@ namespace yli::ontology
 
         private:
             std::string texture_filename;
-            std::string texture_file_format; // Supported formats; `"png"`/`"PNG"`.
+            TextureFileFormat texture_file_format;
             const ofbx::Texture* ofbx_texture { nullptr };
             uint32_t image_width              { 0 };
             uint32_t image_height             { 0 };

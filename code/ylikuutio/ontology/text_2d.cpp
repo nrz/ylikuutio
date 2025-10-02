@@ -20,6 +20,7 @@
 #include "font_2d.hpp"
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
+#include "texture_file_format.hpp"
 #include "text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -312,15 +313,15 @@ namespace yli::ontology
 
             const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
 
-            const std::string& font_texture_file_format = font_2d_parent->get_font_texture_file_format();
+            const TextureFileFormat font_texture_file_format = font_2d_parent->get_font_texture_file_format();
 
-            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
+            if (font_texture_file_format == TextureFileFormat::PNG)
             {
                 uv_y = (character / this->font_size) / static_cast<float>(this->font_size);
             }
             else
             {
-                std::cerr << "ERROR: `Text2d::render`: invalid `font_texture_file_format`: " << font_texture_file_format << "\n";
+                std::cerr << "ERROR: `Text2d::render`: invalid `font_texture_file_format`!\n";
                 return;
             }
 
@@ -329,7 +330,7 @@ namespace yli::ontology
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
-            if (font_texture_file_format == "png" || font_texture_file_format == "PNG")
+            if (font_texture_file_format == TextureFileFormat::PNG)
             {
                 uv_down_right = glm::vec2(
                         uv_x + (1.0f / static_cast<float>(this->font_size)),

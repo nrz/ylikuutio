@@ -20,6 +20,7 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -54,8 +55,7 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
     Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
-    orange_fur_material_struct.texture_file_format = "png";
+    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);

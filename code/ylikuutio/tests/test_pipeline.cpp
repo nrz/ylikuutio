@@ -25,6 +25,7 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -749,7 +750,8 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -803,7 +805,8 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -849,7 +852,8 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -878,7 +882,8 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -930,7 +935,8 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     application.get_generic_entity_factory().create_material(
             material_struct);
 

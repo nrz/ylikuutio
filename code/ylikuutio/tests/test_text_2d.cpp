@@ -21,6 +21,7 @@
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/text_2d.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
 #include "code/ylikuutio/ontology/text_struct.hpp"
 
@@ -31,7 +32,7 @@
 TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
@@ -39,7 +40,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request(font_2d) };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request(font_2d), yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -65,7 +66,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
@@ -73,7 +74,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>(nullptr) };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>(nullptr), yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -98,7 +99,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.global_name = "foo";
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
@@ -107,7 +108,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("foo") };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("foo"), yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -133,7 +134,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
 TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     font_struct.global_name = "foo";
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
@@ -142,7 +143,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("bar") };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("bar"), yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);

@@ -21,6 +21,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 
 // Include standard headers
@@ -35,14 +36,15 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), nullptr);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }
 
@@ -55,14 +57,15 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), nullptr);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }
 
@@ -79,14 +82,15 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), pipeline);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }
 
@@ -103,14 +107,15 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), pipeline);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }
 
@@ -127,14 +132,15 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_ecosyste
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request<yli::ontology::Ecosystem>("foo"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), pipeline);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }
 
@@ -151,13 +157,14 @@ TEST(material_struct_must_be_initialized_appropriately, material_struct_scene_pa
 
     const yli::ontology::MaterialStruct test_material_struct {
             yli::ontology::Request<yli::ontology::Scene>("foo"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
 
     ASSERT_FALSE(test_material_struct.parent.valueless_by_exception());
     ASSERT_FALSE(std::holds_alternative<yli::ontology::Request<yli::ontology::Ecosystem>>(test_material_struct.parent));
     ASSERT_TRUE(std::holds_alternative<yli::ontology::Request<yli::ontology::Scene>>(test_material_struct.parent));
 
     ASSERT_EQ(std::get<yli::ontology::Pipeline*>(test_material_struct.pipeline_master.data), pipeline);
-    ASSERT_TRUE(test_material_struct.texture_file_format.empty());
+    ASSERT_EQ(test_material_struct.texture_file_format, yli::ontology::TextureFileFormat::PNG);
     ASSERT_TRUE(test_material_struct.texture_filename.empty());
 }

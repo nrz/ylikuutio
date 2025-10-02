@@ -24,6 +24,7 @@
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "texture_module.hpp"
+#include "texture_file_format.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -101,7 +102,7 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
-            const std::string& get_texture_file_format() const;
+            TextureFileFormat get_texture_file_format() const;
             const std::string& get_texture_filename() const;
             uint32_t get_image_width() const;
             uint32_t get_image_height() const;

@@ -22,6 +22,7 @@
 #include "vertical_alignment.hpp"
 #include "font_struct.hpp"
 #include "text_struct.hpp"
+#include "texture_file_format.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
@@ -269,7 +270,7 @@ namespace yli::ontology
         return this->font_size;
     }
 
-    const std::string& Font2d::get_font_texture_file_format() const
+    TextureFileFormat Font2d::get_font_texture_file_format() const
     {
         return this->texture.get_texture_file_format();
     }
@@ -380,13 +381,13 @@ namespace yli::ontology
             float uv_x = (character % text_struct.font_size) / static_cast<float>(text_struct.font_size);
             float uv_y;
 
-            if (text_struct.font_texture_file_format == "png" || text_struct.font_texture_file_format == "PNG")
+            if (text_struct.font_texture_file_format == TextureFileFormat::PNG)
             {
                 uv_y = (character / text_struct.font_size) / static_cast<float>(text_struct.font_size);
             }
             else
             {
-                std::cerr << "ERROR: `Font2d::print_text_2d`: invalid font_texture_file_format " << text_struct.font_texture_file_format << "\n";
+                std::cerr << "ERROR: `Font2d::print_text_2d`: invalid font_texture_file_format!\n";
                 return;
             }
 
@@ -395,7 +396,7 @@ namespace yli::ontology
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
-            if (text_struct.font_texture_file_format == "png" || text_struct.font_texture_file_format == "PNG")
+            if (text_struct.font_texture_file_format == TextureFileFormat::PNG)
             {
                 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
                 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));

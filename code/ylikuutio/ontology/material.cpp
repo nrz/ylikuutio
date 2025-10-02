@@ -21,6 +21,7 @@
 #include "scene.hpp"
 #include "pipeline.hpp"
 #include "material_struct.hpp"
+#include "texture_file_format.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -245,7 +246,7 @@ namespace yli::ontology
         return this->master_of_species.get_number_of_apprentices();
     }
 
-    const std::string& Material::get_texture_file_format() const
+    TextureFileFormat Material::get_texture_file_format() const
     {
         return this->texture.get_texture_file_format();
     }

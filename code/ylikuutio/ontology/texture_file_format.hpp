@@ -15,31 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_FONT_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_FONT_STRUCT_HPP_INCLUDED
-
-#include "entity_struct.hpp"
-#include "texture_file_format.hpp"
-
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#ifndef YLIKUUTIO_ONTOLOGY_TEXTURE_FILE_FORMAT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_TEXTURE_FILE_FORMAT_HPP_INCLUDED
 
 namespace yli::ontology
 {
-    struct FontStruct : public EntityStruct
+    enum class TextureFileFormat
     {
-        FontStruct(const enum TextureFileFormat font_texture_file_format)
-            : font_texture_file_format { font_texture_file_format }
-        {
-        }
-
-        std::string texture_filename;
-        const TextureFileFormat font_texture_file_format;
-        uint32_t screen_width  { 0 };
-        uint32_t screen_height { 0 };
-        uint32_t text_size     { 0 };
-        uint32_t font_size     { 0 };
+        PNG
     };
 }
 

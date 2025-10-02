@@ -20,6 +20,7 @@
 
 #include "entity_struct.hpp"
 #include "request.hpp"
+#include "texture_file_format.hpp"
 
 // Include standard headers
 #include <string>  // std::string
@@ -36,23 +37,27 @@ namespace yli::ontology
     {
         MaterialStruct(
                 Request<Ecosystem>&& ecosystem_parent,
-                Request<Pipeline>&& pipeline_master)
+                Request<Pipeline>&& pipeline_master,
+                const TextureFileFormat texture_file_format)
             : parent { std::move(ecosystem_parent) },
-            pipeline_master { std::move(pipeline_master) }
+            pipeline_master { std::move(pipeline_master) },
+            texture_file_format { texture_file_format }
         {
         }
 
         MaterialStruct(
                 Request<Scene>&& scene_parent,
-                Request<Pipeline>&& pipeline_master)
+                Request<Pipeline>&& pipeline_master,
+                const TextureFileFormat texture_file_format)
             : parent { std::move(scene_parent) },
-            pipeline_master { std::move(pipeline_master) }
+            pipeline_master { std::move(pipeline_master) },
+            texture_file_format { texture_file_format }
         {
         }
 
         std::variant<Request<Ecosystem>, Request<Scene>> parent {};
         Request<Pipeline> pipeline_master {};
-        std::string texture_file_format;     // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`.
+        const TextureFileFormat texture_file_format; // Type of the texture file.
         std::string texture_filename;        // Filename of the model file.
     };
 }

@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "request.hpp"
 #include "position_struct.hpp"
+#include "texture_file_format.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -35,10 +36,14 @@ namespace yli::ontology
 
     struct TextStruct : public EntityStruct
     {
-        TextStruct() = default;
+        TextStruct(Request<Font2d>&& font_2d_parent, const TextureFileFormat font_texture_file_format)
+            : font_2d_parent { std::move(font_2d_parent) },
+            font_texture_file_format { font_texture_file_format }
+        {
+        }
 
-        explicit TextStruct(Request<Font2d>&& font_2d_parent)
-            : font_2d_parent { std::move(font_2d_parent) }
+        explicit TextStruct(const TextureFileFormat font_texture_file_format)
+            : font_texture_file_format { font_texture_file_format }
         {
         }
 
@@ -47,7 +52,7 @@ namespace yli::ontology
         std::size_t text_size     { 0 };
         std::size_t font_size     { 0 };
         std::variant<std::string, std::vector<std::string>> text;
-        std::string font_texture_file_format;
+        const TextureFileFormat font_texture_file_format;
     };
 }
 

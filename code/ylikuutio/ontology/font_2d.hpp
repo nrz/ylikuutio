@@ -23,12 +23,12 @@
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
 #include "texture_module.hpp"
+#include "texture_file_format.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdint.h>  // uint32_t etc.
-#include <string>    // std::string
 
 namespace yli::core
 {
@@ -68,7 +68,7 @@ namespace yli::ontology
 
             uint32_t get_text_size() const;
             uint32_t get_font_size() const;
-            const std::string& get_font_texture_file_format() const;
+            TextureFileFormat get_font_texture_file_format() const;
             uint32_t get_program_id() const;
 
             void prepare_to_print() const;

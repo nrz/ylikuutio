@@ -23,6 +23,7 @@
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
 #include "console_struct.hpp"
+#include "texture_file_format.hpp"
 #include "text_struct.hpp"
 #include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
@@ -198,10 +199,9 @@ namespace yli::ontology
         const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         // Draw the console to screen using `font_2d::print_text_2d`.
-        TextStruct text_struct;
+        TextStruct text_struct { TextureFileFormat::PNG };
         text_struct.text_size = this->universe.get_text_size();
         text_struct.font_size = this->universe.get_font_size();
-        text_struct.font_texture_file_format = "png";
 
         text_struct.position.x = 0;
         text_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());

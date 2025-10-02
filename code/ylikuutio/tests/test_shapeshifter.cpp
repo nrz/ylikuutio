@@ -27,6 +27,7 @@
 #include "code/ylikuutio/ontology/shapeshifter_form.hpp"
 #include "code/ylikuutio/ontology/shapeshifter.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -58,7 +59,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -134,7 +136,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -184,7 +187,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
@@ -236,7 +240,8 @@ TEST(shapeshifter_transformation_must_be_initialized_appropriately, headless_mat
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     material_struct.global_name = "foo";
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
@@ -287,7 +292,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -346,7 +352,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -404,7 +411,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -464,7 +472,8 @@ TEST(shapeshifter_form_must_be_initialized_appropriately, headless_shapeshifter_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -523,7 +532,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -581,7 +591,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -636,7 +647,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -693,7 +705,8 @@ TEST(shapeshifter_sequence_must_be_initialized_appropriately, headless_shapeshif
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -749,7 +762,8 @@ TEST(shapeshifter_form_and_sequence_must_be_initialized_appropriately, headless)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -815,7 +829,8 @@ TEST(shapeshifter_must_be_initialized_appropriately, headless)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 

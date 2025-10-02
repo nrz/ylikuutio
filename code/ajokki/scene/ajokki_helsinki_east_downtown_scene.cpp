@@ -31,6 +31,7 @@
 #include "code/ylikuutio/ontology/brain.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -343,8 +344,7 @@ namespace ajokki
         }
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
-        helsinki_east_downtown_grass_material_struct.texture_file_format = "png";
+        MaterialStruct helsinki_east_downtown_grass_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), yli::ontology::TextureFileFormat::PNG };
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* helsinki_east_downtown_grass_material ...\n";
@@ -359,8 +359,7 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        MaterialStruct pink_geometric_tiles_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
-        pink_geometric_tiles_material_struct.texture_file_format = "png";
+        MaterialStruct pink_geometric_tiles_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), yli::ontology::TextureFileFormat::PNG };
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
         std::cout << "Creating Material* pink_geometric_tiles_material ...\n";
@@ -375,8 +374,7 @@ namespace ajokki
         pink_geometric_tiles_material->set_global_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline) };
-        orange_fur_material_struct.texture_file_format = "png";
+        MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), yli::ontology::TextureFileFormat::PNG };
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material ...\n";

@@ -35,6 +35,7 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -360,8 +361,7 @@ namespace hirvi
         }
 
         // Create the material, store it in `helsinki_grass_material`.
-        MaterialStruct helsinki_grass_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
-        helsinki_grass_material_struct.texture_file_format = "png";
+        MaterialStruct helsinki_grass_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
         helsinki_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* helsinki_grass_material ...\n";
@@ -376,8 +376,7 @@ namespace hirvi
         helsinki_grass_material->set_global_name("helsinki_grass_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
-        orange_fur_material_struct.texture_file_format = "png";
+        MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material ...\n";

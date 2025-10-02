@@ -28,6 +28,7 @@
 #include "code/ylikuutio/ontology/camera.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -89,7 +90,7 @@ TEST(console_must_be_activated_appropriately, universe_callback_with_font_2d)
 {
     mock::MockApplication application;
     application.get_generic_entity_factory().create_font_2d(
-            yli::ontology::FontStruct());
+            yli::ontology::FontStruct { yli::ontology::TextureFileFormat::PNG });
 
     const std::string console_name = "foo";
 

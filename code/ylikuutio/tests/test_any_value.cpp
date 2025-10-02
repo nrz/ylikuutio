@@ -34,6 +34,7 @@
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -468,7 +469,8 @@ TEST(any_value_must_be_initialized_appropriately, material)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -563,7 +565,7 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
 TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
     mock::MockApplication application;
-    yli::ontology::FontStruct font_struct;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
@@ -578,7 +580,7 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
     mock::MockApplication application;
-    yli::ontology::TextStruct text_struct;
+    yli::ontology::TextStruct text_struct { yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
 

@@ -38,6 +38,7 @@
 #include "request.hpp"
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
+#include "texture_file_format.hpp"
 #include "universe_struct.hpp"
 #include "variable_struct.hpp"
 #include "text_struct.hpp"
@@ -271,13 +272,12 @@ namespace yli::ontology
         }
 
         // Create angles and cartesian coordinates text, on bottom left corner.
-        TextStruct angles_and_coordinates_text_struct;
+        TextStruct angles_and_coordinates_text_struct { TextureFileFormat::PNG };
         angles_and_coordinates_text_struct.font_2d_parent = Request(font_2d);
         angles_and_coordinates_text_struct.position.x = 0;
         angles_and_coordinates_text_struct.position.y = 0;
         angles_and_coordinates_text_struct.text_size = this->text_size;
         angles_and_coordinates_text_struct.font_size = this->font_size;
-        angles_and_coordinates_text_struct.font_texture_file_format = "png";
         angles_and_coordinates_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
         angles_and_coordinates_text_struct.position.vertical_alignment = VerticalAlignment::BOTTOM;
         Text2d* angles_and_coordinates_text_2d = entity_factory.create_text_2d(angles_and_coordinates_text_struct);
@@ -288,12 +288,11 @@ namespace yli::ontology
         }
 
         // Create time data text, on top left corner.
-        TextStruct time_text_struct { Request(font_2d) };
+        TextStruct time_text_struct { Request(font_2d), TextureFileFormat::PNG };
         time_text_struct.position.x = 0;
         time_text_struct.position.y = this->window_height;
         time_text_struct.text_size = this->text_size;
         time_text_struct.font_size = this->font_size;
-        time_text_struct.font_texture_file_format = "png";
         time_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
         time_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
         Text2d* time_text_2d = entity_factory.create_text_2d(time_text_struct);
@@ -304,12 +303,11 @@ namespace yli::ontology
         }
 
         // Create help text.
-        TextStruct help_text_struct { Request(font_2d) };
+        TextStruct help_text_struct { Request(font_2d), TextureFileFormat::PNG };
         help_text_struct.position.x = 0;
         help_text_struct.position.y = this->window_height - (3 * this->text_size);
         help_text_struct.text_size = this->text_size;
         help_text_struct.font_size = this->font_size;
-        help_text_struct.font_texture_file_format = "png";
         help_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
         help_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
         Text2d* help_text_2d = entity_factory.create_text_2d(help_text_struct);
@@ -320,12 +318,11 @@ namespace yli::ontology
         }
 
         // Print frame rate data on top right corner.
-        TextStruct frame_rate_text_struct { Request(font_2d) };
+        TextStruct frame_rate_text_struct { Request(font_2d), TextureFileFormat::PNG };
         frame_rate_text_struct.position.x = this->window_width;
         frame_rate_text_struct.position.y = this->window_height;
         frame_rate_text_struct.text_size = this->text_size;
         frame_rate_text_struct.font_size = this->font_size;
-        frame_rate_text_struct.font_texture_file_format = "png";
         frame_rate_text_struct.position.horizontal_alignment = HorizontalAlignment::RIGHT;
         frame_rate_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
         Text2d* frame_rate_text_2d = entity_factory.create_text_2d(frame_rate_text_struct);

@@ -24,6 +24,7 @@
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
@@ -55,7 +56,8 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -137,7 +139,8 @@ TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -191,7 +194,8 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request<yli::ontology::Ecosystem>("foo"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -245,7 +249,8 @@ TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request<yli::ontology::Scene>("foo"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -299,7 +304,8 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request<yli::ontology::Ecosystem>("bar"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -353,7 +359,8 @@ TEST(material_must_be_initialized_and_appropriately, headless_pipeline_is_child_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request<yli::ontology::Scene>("bar"),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -406,7 +413,8 @@ TEST(material_must_be_initialized_appropriately, headless)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline) };
+            yli::ontology::Request(pipeline),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_NE(material, nullptr);
@@ -451,7 +459,8 @@ TEST(material_must_bind_to_ecosystem_appropriately, ecosystem)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_EQ(material->get_scene(), nullptr);
@@ -489,7 +498,8 @@ TEST(material_must_bind_to_scene_appropriately, scenes_no_pipelines)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
     ASSERT_EQ(material->get_scene(), scene1);
@@ -526,7 +536,8 @@ TEST(material_must_bind_to_ecosystem_appropriately_after_binding_to_scene, ecosy
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -561,7 +572,8 @@ TEST(material_must_bind_to_scene_appropriately_after_binding_to_ecosystem, scene
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -600,7 +612,8 @@ TEST(material_must_bind_to_pipeline_appropriately, master_and_apprentice)
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(pipeline1) };
+            yli::ontology::Request(pipeline1),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -634,7 +647,8 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -667,7 +681,8 @@ TEST(material_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -705,7 +720,8 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
     yli::ontology::MaterialStruct material_struct1 {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material1 = application.get_generic_entity_factory().create_material(
             material_struct1);
 
@@ -715,7 +731,8 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
     yli::ontology::MaterialStruct material_struct2 {
             yli::ontology::Request(scene2),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material2 = application.get_generic_entity_factory().create_material(
             material_struct2);
 
@@ -739,7 +756,8 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
     yli::ontology::MaterialStruct material_struct1 {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material1 = application.get_generic_entity_factory().create_material(
             material_struct1);
 
@@ -749,7 +767,8 @@ TEST(material_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 
     yli::ontology::MaterialStruct material_struct2 {
             yli::ontology::Request(scene2),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material2 = application.get_generic_entity_factory().create_material(
             material_struct2);
 
@@ -779,7 +798,8 @@ TEST(material_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
@@ -804,7 +824,8 @@ TEST(material_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
-            yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
+            yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
+            yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
