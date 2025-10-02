@@ -38,7 +38,6 @@ namespace yli::ontology
         }
 
         PositionStruct position;
-        std::size_t text_size     { 0 };
         std::size_t font_size     { 0 };
         std::variant<std::string, std::span<const yli::console::TextLine>> text;
         const TextureFileFormat font_texture_file_format;

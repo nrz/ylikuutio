@@ -200,7 +200,6 @@ namespace yli::ontology
 
         // Draw the console to screen using `font_2d::print_text_2d`.
         PrintTextStruct text_struct { TextureFileFormat::PNG };
-        text_struct.text_size = this->universe.get_text_size();
         text_struct.font_size = this->universe.get_font_size();
 
         text_struct.position.x = 0;
