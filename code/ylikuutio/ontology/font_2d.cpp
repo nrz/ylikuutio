@@ -21,7 +21,7 @@
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
 #include "font_struct.hpp"
-#include "text_struct.hpp"
+#include "print_text_struct.hpp"
 #include "texture_file_format.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -156,7 +156,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    uint32_t Font2d::compute_left_x(const TextStruct& text_struct) const
+    uint32_t Font2d::compute_left_x(const PrintTextStruct& text_struct) const
     {
         // Compute string length.
         const std::string& string = std::get<std::string>(text_struct.text);
@@ -180,7 +180,7 @@ namespace yli::ontology
         }
     }
 
-    uint32_t Font2d::compute_top_y(const TextStruct& text_struct) const
+    uint32_t Font2d::compute_top_y(const PrintTextStruct& text_struct) const
     {
         // Count the number of lines.
         const std::string& string = std::get<std::string>(text_struct.text);
@@ -325,7 +325,7 @@ namespace yli::ontology
         glDisable(GL_BLEND);
     }
 
-    void Font2d::print_text_2d(const TextStruct& text_struct) const
+    void Font2d::print_text_2d(const PrintTextStruct& text_struct) const
     {
         if (!this->should_render)
         {

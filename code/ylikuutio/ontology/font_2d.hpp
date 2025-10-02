@@ -47,7 +47,7 @@ namespace yli::ontology
     class Scene;
     class Console;
     struct FontStruct;
-    struct TextStruct;
+    struct PrintTextStruct;
 
     class Font2d final : public Entity
     {
@@ -75,7 +75,7 @@ namespace yli::ontology
 
             void render();
 
-            void print_text_2d(const TextStruct& text_struct) const;
+            void print_text_2d(const PrintTextStruct& text_struct) const;
 
             GenericParentModule* get_generic_parent_module(const int type);
 
@@ -93,8 +93,8 @@ namespace yli::ontology
             Scene* get_scene() const override;
 
         private:
-            uint32_t compute_left_x(const TextStruct& text_struct) const;
-            uint32_t compute_top_y(const TextStruct& text_struct) const;
+            uint32_t compute_left_x(const PrintTextStruct& text_struct) const;
+            uint32_t compute_top_y(const PrintTextStruct& text_struct) const;
             void compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, const uint32_t vertex_left_x, const uint32_t vertex_top_y) const;
             void draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const;
 
