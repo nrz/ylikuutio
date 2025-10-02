@@ -580,7 +580,7 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
     mock::MockApplication application;
-    yli::ontology::TextStruct text_struct { yli::ontology::TextureFileFormat::PNG };
+    yli::ontology::TextStruct text_struct;
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
 

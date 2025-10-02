@@ -39,7 +39,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request(font_2d), yli::ontology::TextureFileFormat::PNG };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request(font_2d) };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -72,7 +72,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>(nullptr), yli::ontology::TextureFileFormat::PNG };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>(nullptr) };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -105,7 +105,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("foo"), yli::ontology::TextureFileFormat::PNG };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("foo") };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
@@ -139,7 +139,7 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("bar"), yli::ontology::TextureFileFormat::PNG };
+    yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("bar") };
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
