@@ -95,7 +95,6 @@ namespace yli::ontology
             uint32_t compute_left_x(const PrintTextStruct& text_struct) const;
             uint32_t compute_top_y(const PrintTextStruct& text_struct) const;
             void compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, const uint32_t vertex_left_x, const uint32_t vertex_top_y) const;
-            void draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const;
 
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;

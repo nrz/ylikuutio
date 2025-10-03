@@ -786,6 +786,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/render/render_system.hpp
     code/ylikuutio/render/render_system_struct.hpp
     code/ylikuutio/render/render_templates.hpp
+    code/ylikuutio/render/render_text.cpp
+    code/ylikuutio/render/render_text.hpp
 
     # sdl, in alphabetical order
     code/ylikuutio/sdl/ylikuutio_sdl.cpp

@@ -30,6 +30,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
+#include "code/ylikuutio/render/render_text.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
@@ -221,34 +222,6 @@ namespace yli::ontology
         vertices.emplace_back(vertex_down_left);
     }
 
-    void Font2d::draw(std::vector<glm::vec2>& vertices, std::vector<glm::vec2>& uvs) const
-    {
-        if (this->universe.get_is_opengl_in_use())
-        {
-            glBindVertexArray(this->vao);
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
-            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-            glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
-            glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-
-            // 1st attribute buffer: vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
-            glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-
-            // 2nd attribute buffer: uvs.
-            glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
-            glVertexAttribPointer(this->vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
-
-            // Draw call.
-            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
-            yli::opengl::disable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
-            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
-        }
-    }
-
     std::size_t Font2d::get_number_of_children() const
     {
         return this->parent_of_text_2ds.get_number_of_children();
@@ -404,7 +377,14 @@ namespace yli::ontology
             uvs.emplace_back(uv_down_left);
         }
 
-        this->draw(vertices, uvs);
+        yli::render::render_text(
+                vertices,
+                uvs,
+                this->vao,
+                this->vertex_buffer,
+                this->uv_buffer,
+                this->vertex_position_in_screenspace_id,
+                this->vertex_uv_id);
     }
 
     GenericParentModule* Font2d::get_generic_parent_module(const int type)
