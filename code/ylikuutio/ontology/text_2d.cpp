@@ -22,8 +22,8 @@
 #include "vertical_alignment.hpp"
 #include "texture_file_format.hpp"
 #include "text_struct.hpp"
+#include "print_text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/render/render_text.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -137,177 +137,12 @@ namespace yli::ontology
 
     void Text2d::render()
     {
-        if (!this->should_render || !this->universe.get_is_opengl_in_use())
-        {
-            return;
-        }
-
-        if (this->get_parent() == nullptr)
-        {
-            return;
-        }
-
-        // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
-        // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
-        // then there is no need to check the text beforehand for newlines.
-        // Otherwise newlines need to be checked beforehand.
-        //
-        // If horizontal alignment is right, each line ends in the same x coordinate.
-        // Newlines need to be checked beforehand.
-        const std::size_t length = this->text.size();
-
-        // Count the number of lines.
-        std::size_t number_of_lines = 1;
-
-        std::size_t i = 0;
-
-        while (i < length)
-        {
-            const char character = text[i++];
-
-            if (character == '\n')
-            {
-                number_of_lines++;
-            }
-        }
-
-        std::size_t current_left_x;
-        std::size_t current_top_y;
-
-        if (this->position.horizontal_alignment == HorizontalAlignment::LEFT)
-        {
-            current_left_x = this->position.x;
-        }
-        else if (this->position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
-        {
-            current_left_x = this->position.x - 0.5f * length * this->text_size;
-        }
-        else if (this->position.horizontal_alignment == HorizontalAlignment::RIGHT)
-        {
-            current_left_x = this->position.x - length * this->text_size;
-        }
-        else
-        {
-            std::cerr << "ERROR: `Text2d::render`: invalid horizontal alignment: " << this->position.horizontal_alignment << "\n";
-            return;
-        }
-
-        if (this->position.vertical_alignment == VerticalAlignment::TOP)
-        {
-            current_top_y = this->position.y;
-        }
-        else if (this->position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
-        {
-            current_top_y = this->position.y + 0.5f * number_of_lines * this->text_size;
-        }
-        else if (this->position.vertical_alignment == VerticalAlignment::BOTTOM)
-        {
-            current_top_y = this->position.y + number_of_lines * this->text_size;
-        }
-        else
-        {
-            std::cerr << "ERROR: `Text2d::render`: invalid vertical alignment: " << this->position.vertical_alignment << "\n";
-            return;
-        }
-
-        // Fill buffers
-        std::vector<glm::vec2> vertices;
-        std::vector<glm::vec2> uvs;
-
-        i = 0;
-
-        while (i < length)
-        {
-            // Print to the right side of X (so far there is no check for input length).
-            // Print up of Y.
-            std::size_t vertex_up_left_x;
-            std::size_t vertex_up_left_y;
-            std::size_t vertex_up_right_x;
-            std::size_t vertex_up_right_y;
-            std::size_t vertex_down_left_x;
-            std::size_t vertex_down_left_y;
-            std::size_t vertex_down_right_x;
-            std::size_t vertex_down_right_y;
-
-            const char character = text[i++];
-
-            if (character == '\n')
-            {
-                // jump to the beginning of the next line.
-                // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
-                // TODO: implement newline for other horizontal and vertical alignments too!
-                current_left_x = this->position.x;
-                current_top_y -= this->text_size;
-                continue;
-            }
-
-            vertex_up_left_x = vertex_down_left_x = current_left_x;
-            vertex_up_right_x = vertex_down_right_x = current_left_x + this->text_size;
-            current_left_x += this->text_size;
-
-            vertex_down_left_y = vertex_down_right_y = current_top_y - this->text_size;
-            vertex_up_left_y = vertex_up_right_y = current_top_y;
-
-            glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
-            glm::vec2 vertex_up_right = glm::vec2(vertex_up_right_x, vertex_up_right_y);
-            glm::vec2 vertex_down_left = glm::vec2(vertex_down_left_x, vertex_down_left_y);
-            glm::vec2 vertex_down_right = glm::vec2(vertex_down_right_x, vertex_down_right_y);
-
-            vertices.emplace_back(vertex_up_left);
-            vertices.emplace_back(vertex_down_left);
-            vertices.emplace_back(vertex_up_right);
-
-            vertices.emplace_back(vertex_down_right);
-            vertices.emplace_back(vertex_up_right);
-            vertices.emplace_back(vertex_down_left);
-
-            float uv_x = (character % this->font_size) / static_cast<float>(this->font_size);
-            float uv_y;
-
-            const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
-
-            const TextureFileFormat font_texture_file_format = font_2d_parent->get_font_texture_file_format();
-
-            if (font_texture_file_format == TextureFileFormat::PNG)
-            {
-                uv_y = (character / this->font_size) / static_cast<float>(this->font_size);
-            }
-            else
-            {
-                std::cerr << "ERROR: `Text2d::render`: invalid `font_texture_file_format`!\n";
-                return;
-            }
-
-            glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(this->font_size)), uv_y);
-            glm::vec2 uv_down_right;
-            glm::vec2 uv_down_left;
-
-            if (font_texture_file_format == TextureFileFormat::PNG)
-            {
-                uv_down_right = glm::vec2(
-                        uv_x + (1.0f / static_cast<float>(this->font_size)),
-                        (uv_y + 1.0f / static_cast<float>(this->font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(this->font_size)));
-            }
-
-            uvs.emplace_back(uv_up_left);
-            uvs.emplace_back(uv_down_left);
-            uvs.emplace_back(uv_up_right);
-
-            uvs.emplace_back(uv_down_right);
-            uvs.emplace_back(uv_up_right);
-            uvs.emplace_back(uv_down_left);
-        }
-
-        yli::render::render_text(
-                vertices,
-                uvs,
-                this->vao,
-                this->vertex_buffer,
-                this->uv_buffer,
-                this->vertex_position_in_screenspace_id,
-                this->vertex_uv_id);
+        PrintTextStruct text_struct { TextureFileFormat::PNG };
+        text_struct.font_size = this->universe.get_font_size();
+        text_struct.text = this->text;
+        text_struct.position = this->position;
+        const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
+        font_2d_parent->print_text_2d(text_struct);
     }
 
     Entity* Text2d::get_parent() const
