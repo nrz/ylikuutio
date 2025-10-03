@@ -345,7 +345,7 @@ namespace yli::ontology
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
             current_left_x += text_size;
 
-            float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
+            const float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
             float uv_y;
 
             if (print_text_struct.font_texture_file_format == TextureFileFormat::PNG)
@@ -358,8 +358,8 @@ namespace yli::ontology
                 return;
             }
 
-            glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
+            const glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
+            const glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
