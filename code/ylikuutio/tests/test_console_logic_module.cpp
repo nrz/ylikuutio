@@ -536,6 +536,65 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
 }
 
+TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_new_input)
+{
+    // Do the necessary setup.
+    yli::console::TextInput new_input(yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput temp_input(yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInputHistory text_input_history;
+    yli::console::ScrollbackBuffer scrollback_buffer;
+    yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer, 1, 1);
+    console_logic_module.activate();
+    new_input.add_characters("a");
+    text_input_history.add_to_history(std::move(new_input));
+    scrollback_buffer.add_to_buffer(new_input);
+    console_logic_module.enter_scrollback_buffer();
+
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.exit_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+}
+
+TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_historical_input)
+{
+    // Do the necessary setup.
+    yli::console::TextInput new_input(yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput temp_input(yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInputHistory text_input_history;
+    yli::console::ScrollbackBuffer scrollback_buffer;
+    yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer);
+    console_logic_module.activate();
+    new_input.add_characters("abc");
+    text_input_history.add_to_history(std::move(new_input));
+    console_logic_module.enter_historical_input();
+    console_logic_module.enter_scrollback_buffer();
+
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.exit_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+}
+
+TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_temp_input)
+{
+    // Do the necessary setup.
+    yli::console::TextInput new_input(yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput temp_input(yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInputHistory text_input_history;
+    yli::console::ScrollbackBuffer scrollback_buffer;
+    yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer);
+    console_logic_module.activate();
+    console_logic_module.enter_historical_input();
+    console_logic_module.enter_temp_input();
+    console_logic_module.enter_scrollback_buffer();
+
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.exit_scrollback_buffer();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+}
+
 TEST(editing_current_input_must_work_appropriately, editing_current_input)
 {
     // Do the necessary setup.

@@ -166,6 +166,11 @@ namespace yli::console
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
+    std::optional<ConsoleState> ConsoleLogicModule::exit_scrollback_buffer()
+    {
+        return this->switch_to_state(ConsoleState(this->state & (~yli::console::in_scrollback_buffer)));
+    }
+
     TextInput* ConsoleLogicModule::edit_input()
     {
         if (this->state == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT)
