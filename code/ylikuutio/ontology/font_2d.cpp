@@ -96,7 +96,7 @@ namespace yli::ontology
                 glBindVertexArray(this->vao);
 
                 // Initialize VBO.
-                glGenBuffers(1, &this->vertexbuffer);
+                glGenBuffers(1, &this->vertex_buffer);
                 glGenBuffers(1, &this->uvbuffer);
 
                 // Initialize `Pipeline`.
@@ -133,7 +133,7 @@ namespace yli::ontology
         if (this->universe.get_is_opengl_in_use())
         {
             // Delete buffers.
-            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->vertex_buffer);
             glDeleteBuffers(1, &this->uvbuffer);
 
             // Delete vertex array.
@@ -226,13 +226,13 @@ namespace yli::ontology
         if (this->universe.get_is_opengl_in_use())
         {
             glBindVertexArray(this->vao);
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
             glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
             // 1st attribute buffer: vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
             glVertexAttribPointer(this->vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_in_screenspace_id);
 

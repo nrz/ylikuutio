@@ -101,7 +101,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             GLuint vao                               { 0 };
-            GLuint vertexbuffer                      { 0 }; // Buffer containing the vertices.
+            GLuint vertex_buffer                     { 0 }; // Buffer containing the vertices.
             GLuint uvbuffer                          { 0 }; // Buffer containing the UVs.
             GLuint program_id                        { 0 }; // The `program_id` of the shader used to display the text, returned by `load_shaders`.
             GLint vertex_position_in_screenspace_id  { 0 }; // Location of the program's `vertex_position_screenspace` attribute.

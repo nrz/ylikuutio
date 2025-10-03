@@ -49,7 +49,7 @@ namespace yli::load
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
             GLuint& vao,
-            GLuint& vertexbuffer,
+            GLuint& vertex_buffer,
             GLuint& uvbuffer,
             GLuint& normalbuffer,
             GLuint& elementbuffer,

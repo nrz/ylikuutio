@@ -215,7 +215,7 @@ namespace yli::ontology
             glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
 
             GLuint vao                             = mesh.get_vao();
-            GLuint vertexbuffer                    = mesh.get_vertexbuffer();
+            GLuint vertex_buffer                   = mesh.get_vertex_buffer();
             uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
             GLuint uvbuffer                        = mesh.get_uvbuffer();
             uint32_t vertex_uv_id                  = mesh.get_vertex_uv_id();
@@ -227,7 +227,7 @@ namespace yli::ontology
             glBindVertexArray(vao);
 
             // 1st attribute buffer : vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
             glVertexAttribPointer(
                     vertex_position_modelspace_id, // The attribute we want to configure
                     3,                            // size

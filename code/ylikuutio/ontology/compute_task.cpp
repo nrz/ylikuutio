@@ -185,8 +185,8 @@ namespace yli::ontology
             glGenVertexArrays(1, &this->vao);
 
             // Vertices.
-            glGenBuffers(1, &this->vertexbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glGenBuffers(1, &this->vertex_buffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
 
             // UVs.
@@ -213,7 +213,7 @@ namespace yli::ontology
         if (this->is_texture_loaded)
         {
             // Cleanup buffers and texture.
-            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->vertex_buffer);
             glDeleteBuffers(1, &this->uvbuffer);
             glDeleteTextures(1, &this->source_texture);
         }
@@ -323,7 +323,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // 1st attribute buffer: vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
 
             glVertexAttribPointer(
                     this->vertex_position_modelspace_id, // The attribute we want to configure

@@ -130,7 +130,7 @@ namespace yli::ontology
             GLint get_vertex_uv_id(const std::size_t biontID) const;
             GLint get_vertex_normal_modelspace_id(const std::size_t biontID) const;
 
-            uint32_t get_vertexbuffer(const std::size_t biontID) const;
+            uint32_t get_vertex_buffer(const std::size_t biontID) const;
             uint32_t get_uvbuffer(const std::size_t biontID) const;
             uint32_t get_normalbuffer(const std::size_t biontID) const;
             uint32_t get_elementbuffer(const std::size_t biontID) const;

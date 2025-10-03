@@ -135,7 +135,7 @@ namespace yli::ontology
             GLint iteration_i_uniform_id        { 0 }; // Some dummy value. Location of the program's iteration index uniform.
 
             GLuint vao           { 0 }; // Some dummy value.
-            GLuint vertexbuffer  { 0 }; // Some dummy value.
+            GLuint vertex_buffer { 0 }; // Some dummy value.
             GLuint uvbuffer      { 0 }; // Some dummy value.
             GLuint elementbuffer { 0 }; // Some dummy value.
 

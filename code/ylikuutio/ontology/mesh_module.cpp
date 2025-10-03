@@ -81,7 +81,7 @@ namespace yli::ontology
                     this->indexed_uvs,
                     this->indexed_normals,
                     this->vao,
-                    this->vertexbuffer,
+                    this->vertex_buffer,
                     this->uvbuffer,
                     this->normalbuffer,
                     this->elementbuffer,
@@ -96,7 +96,7 @@ namespace yli::ontology
     {
         if (this->are_opengl_buffers_initialized)
         {
-            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->vertex_buffer);
             glDeleteBuffers(1, &this->uvbuffer);
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
@@ -153,9 +153,9 @@ namespace yli::ontology
         return this->vao;
     }
 
-    GLuint MeshModule::get_vertexbuffer() const
+    GLuint MeshModule::get_vertex_buffer() const
     {
-        return this->vertexbuffer;
+        return this->vertex_buffer;
     }
 
     GLuint MeshModule::get_uvbuffer() const

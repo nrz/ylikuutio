@@ -64,7 +64,7 @@ namespace yli::ontology
             GLint get_vertex_normal_modelspace_id() const;
 
             GLuint get_vao() const;
-            GLuint get_vertexbuffer() const;
+            GLuint get_vertex_buffer() const;
             GLuint get_uvbuffer() const;
             GLuint get_normalbuffer() const;
             GLuint get_elementbuffer() const;
@@ -94,7 +94,7 @@ namespace yli::ontology
             std::vector<glm::vec3> indexed_normals;
 
             GLuint vao           { 0 }; // Dummy value.
-            GLuint vertexbuffer  { 0 }; // Dummy value.
+            GLuint vertex_buffer { 0 }; // Dummy value.
             GLuint uvbuffer      { 0 }; // Dummy value.
             GLuint normalbuffer  { 0 }; // Dummy value.
             GLuint elementbuffer { 0 }; // Dummy value.

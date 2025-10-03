@@ -234,7 +234,7 @@ namespace yli::ontology
         if (this->universe.get_is_opengl_in_use() && master_model != nullptr) [[likely]]
         {
             const GLuint vao                             = master_model->get_vao();
-            const GLuint vertexbuffer                    = master_model->get_vertexbuffer();
+            const GLuint vertex_buffer                   = master_model->get_vertex_buffer();
             const uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
             const GLuint uvbuffer                        = master_model->get_uvbuffer();
             const uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
@@ -246,7 +246,7 @@ namespace yli::ontology
             glBindVertexArray(vao);
 
             // 1st attribute buffer: vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
             glVertexAttribPointer(
                     vertex_position_modelspace_id, // The attribute we want to configure
                     3,                             // size

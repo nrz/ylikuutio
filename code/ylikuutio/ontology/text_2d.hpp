@@ -88,7 +88,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             GLuint vao;
-            GLuint vertexbuffer;                     // Buffer containing the vertices
+            GLuint vertex_buffer;                    // Buffer containing the vertices
             GLuint uvbuffer;                         // Buffer containing the UVs
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                      // Location of the program's `vertex_uv` attribute.

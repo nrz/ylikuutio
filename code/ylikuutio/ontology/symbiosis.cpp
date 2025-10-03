@@ -381,9 +381,9 @@ namespace yli::ontology
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_normal_modelspace_id();
     }
 
-    uint32_t Symbiosis::get_vertexbuffer(const std::size_t biontID) const
+    uint32_t Symbiosis::get_vertex_buffer(const std::size_t biontID) const
     {
-        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertexbuffer();
+        return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_buffer();
     }
 
     uint32_t Symbiosis::get_uvbuffer(const std::size_t biontID) const
