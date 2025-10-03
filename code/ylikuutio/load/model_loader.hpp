@@ -51,7 +51,7 @@ namespace yli::load
             GLuint& vao,
             GLuint& vertex_buffer,
             GLuint& uv_buffer,
-            GLuint& normalbuffer,
+            GLuint& normal_buffer,
             GLuint& elementbuffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode);

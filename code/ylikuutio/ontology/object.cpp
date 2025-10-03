@@ -238,7 +238,7 @@ namespace yli::ontology
             const uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
             const GLuint uv_buffer                       = master_model->get_uv_buffer();
             const uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
-            const GLuint normalbuffer                    = master_model->get_normalbuffer();
+            const GLuint normal_buffer                   = master_model->get_normal_buffer();
             const uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
             const GLuint elementbuffer                   = master_model->get_elementbuffer();
             const uint32_t indices_size                  = master_model->get_indices_size();
@@ -270,7 +270,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
 
             // 3rd attribute buffer: normals.
-            glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
             glVertexAttribPointer(
                     vertex_normal_modelspace_id, // The attribute we want to configure
                     3,                           // size
