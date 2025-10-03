@@ -91,13 +91,6 @@ namespace yli::ontology
         this->text_size = text_struct.text_size;
         this->font_size = text_struct.font_size;
 
-        // Initialize class members with some dummy values.
-        this->vao                               = 0;
-        this->vertex_buffer                     = 0;
-        this->uv_buffer                         = 0;
-        this->vertex_position_in_screenspace_id = 0;
-        this->vertex_uv_id                      = 0;
-
         // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_vertices_and_uvs =

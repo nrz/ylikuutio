@@ -87,11 +87,11 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            GLuint vao;
-            GLuint vertex_buffer;                    // Buffer containing the vertices
-            GLuint uv_buffer;                        // Buffer containing the UVs
-            GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id;                      // Location of the program's `vertex_uv` attribute.
+            GLuint vao                              { 0 };
+            GLuint vertex_buffer                    { 0 }; // Buffer containing the vertices
+            GLuint uv_buffer                        { 0 }; // Buffer containing the UVs
+            GLint vertex_position_in_screenspace_id { 0 }; // Location of the program's `vertex_position_screenspace` attribute.
+            GLint vertex_uv_id                      { 0 }; // Location of the program's `vertex_uv` attribute.
 
             std::string text;
             PositionStruct position;
