@@ -134,9 +134,9 @@ namespace yli::ontology
             GLint screen_height_uniform_id      { 0 }; // Some dummy value. Location of the program's window height uniform.
             GLint iteration_i_uniform_id        { 0 }; // Some dummy value. Location of the program's iteration index uniform.
 
-            GLuint vao           { 0 }; // Some dummy value.
-            GLuint vertex_buffer { 0 }; // Some dummy value.
-            GLuint uv_buffer     { 0 }; // Some dummy value.
+            GLuint vao            { 0 }; // Some dummy value.
+            GLuint vertex_buffer  { 0 }; // Some dummy value.
+            GLuint uv_buffer      { 0 }; // Some dummy value.
             GLuint element_buffer { 0 }; // Some dummy value.
 
             GLenum format;

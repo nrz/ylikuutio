@@ -93,10 +93,10 @@ namespace yli::ontology
             std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;
 
-            GLuint vao           { 0 }; // Dummy value.
-            GLuint vertex_buffer { 0 }; // Dummy value.
-            GLuint uv_buffer     { 0 }; // Dummy value.
-            GLuint normal_buffer { 0 }; // Dummy value.
+            GLuint vao            { 0 }; // Dummy value.
+            GLuint vertex_buffer  { 0 }; // Dummy value.
+            GLuint uv_buffer      { 0 }; // Dummy value.
+            GLuint normal_buffer  { 0 }; // Dummy value.
             GLuint element_buffer { 0 }; // Dummy value.
 
             bool use_real_texture_coordinates   { true };
