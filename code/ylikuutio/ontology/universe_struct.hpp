@@ -58,8 +58,8 @@ namespace yli::ontology
         yli::render::GraphicsApiBackend graphics_api_backend;
         bool is_silent             { false };
         bool is_physical           { true };    // Physics simulation in use.
-        bool is_fullscreen         { true };    // Windowed mode in use.
-        bool is_desktop_fullscreen { false };   // Windowed mode in use.
+        bool is_fullscreen         { true };    // Fullscreen mode in use.
+        bool is_desktop_fullscreen { false };
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
         FramebufferModuleStruct framebuffer_module_struct;
     };
