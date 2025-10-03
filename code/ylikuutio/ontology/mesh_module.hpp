@@ -65,7 +65,7 @@ namespace yli::ontology
 
             GLuint get_vao() const;
             GLuint get_vertex_buffer() const;
-            GLuint get_uvbuffer() const;
+            GLuint get_uv_buffer() const;
             GLuint get_normalbuffer() const;
             GLuint get_elementbuffer() const;
 
@@ -95,7 +95,7 @@ namespace yli::ontology
 
             GLuint vao           { 0 }; // Dummy value.
             GLuint vertex_buffer { 0 }; // Dummy value.
-            GLuint uvbuffer      { 0 }; // Dummy value.
+            GLuint uv_buffer     { 0 }; // Dummy value.
             GLuint normalbuffer  { 0 }; // Dummy value.
             GLuint elementbuffer { 0 }; // Dummy value.
 

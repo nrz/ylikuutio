@@ -190,8 +190,8 @@ namespace yli::ontology
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
 
             // UVs.
-            glGenBuffers(1, &this->uvbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glGenBuffers(1, &this->uv_buffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
             glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
             // Index buffer.
@@ -214,7 +214,7 @@ namespace yli::ontology
         {
             // Cleanup buffers and texture.
             glDeleteBuffers(1, &this->vertex_buffer);
-            glDeleteBuffers(1, &this->uvbuffer);
+            glDeleteBuffers(1, &this->uv_buffer);
             glDeleteTextures(1, &this->source_texture);
         }
 
@@ -336,7 +336,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
             glVertexAttribPointer(
                     this->vertex_uv_id, // The attribute we want to configure
                     2,                // size : U+V => 2

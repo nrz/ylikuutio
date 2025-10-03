@@ -52,7 +52,7 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_normals,
             GLuint& vao,
             GLuint& vertex_buffer,
-            GLuint& uvbuffer,
+            GLuint& uv_buffer,
             GLuint& normalbuffer,
             GLuint& elementbuffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
@@ -171,7 +171,7 @@ namespace yli::load
         {
             glGenVertexArrays(1, &vao);
             glGenBuffers(1, &vertex_buffer);
-            glGenBuffers(1, &uvbuffer);
+            glGenBuffers(1, &uv_buffer);
             glGenBuffers(1, &normalbuffer);
             glGenBuffers(1, &elementbuffer);
 
@@ -181,7 +181,7 @@ namespace yli::load
             glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
             glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);

@@ -217,7 +217,7 @@ namespace yli::ontology
             GLuint vao                             = mesh.get_vao();
             GLuint vertex_buffer                   = mesh.get_vertex_buffer();
             uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
-            GLuint uvbuffer                        = mesh.get_uvbuffer();
+            GLuint uv_buffer                       = mesh.get_uv_buffer();
             uint32_t vertex_uv_id                  = mesh.get_vertex_uv_id();
             GLuint normalbuffer                    = mesh.get_normalbuffer();
             uint32_t vertex_normal_modelspace_id   = mesh.get_vertex_normal_modelspace_id();
@@ -239,7 +239,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
             // 2nd attribute buffer : UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
             glVertexAttribPointer(
                     vertex_uv_id,                   // The attribute we want to configure
                     2,                            // size : U+V => 2

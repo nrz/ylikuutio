@@ -236,7 +236,7 @@ namespace yli::ontology
             const GLuint vao                             = master_model->get_vao();
             const GLuint vertex_buffer                   = master_model->get_vertex_buffer();
             const uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
-            const GLuint uvbuffer                        = master_model->get_uvbuffer();
+            const GLuint uv_buffer                       = master_model->get_uv_buffer();
             const uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
             const GLuint normalbuffer                    = master_model->get_normalbuffer();
             const uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
@@ -258,7 +258,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
             glVertexAttribPointer(
                     vertex_uv_id, // The attribute we want to configure
                     2,            // size : U+V => 2

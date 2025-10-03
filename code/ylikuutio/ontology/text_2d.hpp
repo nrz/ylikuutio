@@ -89,7 +89,7 @@ namespace yli::ontology
 
             GLuint vao;
             GLuint vertex_buffer;                    // Buffer containing the vertices
-            GLuint uvbuffer;                         // Buffer containing the UVs
+            GLuint uv_buffer;                        // Buffer containing the UVs
             GLint vertex_position_in_screenspace_id; // Location of the program's `vertex_position_screenspace` attribute.
             GLint vertex_uv_id;                      // Location of the program's `vertex_uv` attribute.
 

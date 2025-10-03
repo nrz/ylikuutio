@@ -50,7 +50,7 @@ namespace yli::load
             std::vector<glm::vec3>& indexed_normals,
             GLuint& vao,
             GLuint& vertex_buffer,
-            GLuint& uvbuffer,
+            GLuint& uv_buffer,
             GLuint& normalbuffer,
             GLuint& elementbuffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
