@@ -133,7 +133,7 @@ namespace yli::ontology
             uint32_t get_vertex_buffer(const std::size_t biontID) const;
             uint32_t get_uv_buffer(const std::size_t biontID) const;
             uint32_t get_normal_buffer(const std::size_t biontID) const;
-            uint32_t get_elementbuffer(const std::size_t biontID) const;
+            uint32_t get_element_buffer(const std::size_t biontID) const;
 
             std::vector<uint32_t> get_indices(const std::size_t biontID) const;
             std::size_t get_indices_size(const std::size_t biontID) const;

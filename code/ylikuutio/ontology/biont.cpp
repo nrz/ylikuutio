@@ -221,7 +221,7 @@ namespace yli::ontology
             uint32_t vertex_uv_id                  = mesh.get_vertex_uv_id();
             GLuint normal_buffer                   = mesh.get_normal_buffer();
             uint32_t vertex_normal_modelspace_id   = mesh.get_vertex_normal_modelspace_id();
-            GLuint elementbuffer                   = mesh.get_elementbuffer();
+            GLuint element_buffer                  = mesh.get_element_buffer();
             uint32_t indices_size                  = mesh.get_indices_size();
 
             glBindVertexArray(vao);
@@ -263,7 +263,7 @@ namespace yli::ontology
             yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
             // Index buffer.
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
 
             // Draw the triangles!
             glDrawElements(

@@ -195,8 +195,8 @@ namespace yli::ontology
             glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
             // Index buffer.
-            glGenBuffers(1, &this->elementbuffer);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
+            glGenBuffers(1, &this->element_buffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->element_buffer);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2, &indices[0], GL_STATIC_DRAW);
         }
 

@@ -54,7 +54,7 @@ namespace yli::load
             GLuint& vertex_buffer,
             GLuint& uv_buffer,
             GLuint& normal_buffer,
-            GLuint& elementbuffer,
+            GLuint& element_buffer,
             const yli::render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode)
     {
@@ -173,7 +173,7 @@ namespace yli::load
             glGenBuffers(1, &vertex_buffer);
             glGenBuffers(1, &uv_buffer);
             glGenBuffers(1, &normal_buffer);
-            glGenBuffers(1, &elementbuffer);
+            glGenBuffers(1, &element_buffer);
 
             glBindVertexArray(vao);
 
@@ -187,7 +187,7 @@ namespace yli::load
             glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
             glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
         }
 

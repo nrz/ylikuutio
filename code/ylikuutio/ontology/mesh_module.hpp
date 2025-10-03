@@ -67,7 +67,7 @@ namespace yli::ontology
             GLuint get_vertex_buffer() const;
             GLuint get_uv_buffer() const;
             GLuint get_normal_buffer() const;
-            GLuint get_elementbuffer() const;
+            GLuint get_element_buffer() const;
 
             void set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id);
             void set_vertex_uv_id(const GLint vertex_uv_id);
@@ -97,7 +97,7 @@ namespace yli::ontology
             GLuint vertex_buffer { 0 }; // Dummy value.
             GLuint uv_buffer     { 0 }; // Dummy value.
             GLuint normal_buffer { 0 }; // Dummy value.
-            GLuint elementbuffer { 0 }; // Dummy value.
+            GLuint element_buffer { 0 }; // Dummy value.
 
             bool use_real_texture_coordinates   { true };
             bool are_opengl_buffers_initialized { false };

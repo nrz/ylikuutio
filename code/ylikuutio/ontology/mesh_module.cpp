@@ -84,7 +84,7 @@ namespace yli::ontology
                     this->vertex_buffer,
                     this->uv_buffer,
                     this->normal_buffer,
-                    this->elementbuffer,
+                    this->element_buffer,
                     universe.get_graphics_api_backend(),
                     is_debug_mode);
 
@@ -99,7 +99,7 @@ namespace yli::ontology
             glDeleteBuffers(1, &this->vertex_buffer);
             glDeleteBuffers(1, &this->uv_buffer);
             glDeleteBuffers(1, &this->normal_buffer);
-            glDeleteBuffers(1, &this->elementbuffer);
+            glDeleteBuffers(1, &this->element_buffer);
         }
     }
 
@@ -168,9 +168,9 @@ namespace yli::ontology
         return this->normal_buffer;
     }
 
-    GLuint MeshModule::get_elementbuffer() const
+    GLuint MeshModule::get_element_buffer() const
     {
-        return this->elementbuffer;
+        return this->element_buffer;
     }
 
     void MeshModule::set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id)

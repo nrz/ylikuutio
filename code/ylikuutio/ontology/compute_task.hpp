@@ -137,7 +137,7 @@ namespace yli::ontology
             GLuint vao           { 0 }; // Some dummy value.
             GLuint vertex_buffer { 0 }; // Some dummy value.
             GLuint uv_buffer     { 0 }; // Some dummy value.
-            GLuint elementbuffer { 0 }; // Some dummy value.
+            GLuint element_buffer { 0 }; // Some dummy value.
 
             GLenum format;
             GLenum internal_format;
