@@ -156,23 +156,23 @@ namespace yli::ontology
         return nullptr;
     }
 
-    uint32_t Font2d::compute_left_x(const PrintTextStruct& text_struct) const
+    uint32_t Font2d::compute_left_x(const PrintTextStruct& print_text_struct) const
     {
         // Compute string length.
-        const std::string& string = std::get<std::string>(text_struct.text);
+        const std::string& string = std::get<std::string>(print_text_struct.text);
         const std::size_t length = string.size();
 
-        if (text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
+        if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
         {
-            return text_struct.position.x;
+            return print_text_struct.position.x;
         }
-        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
+        else if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
         {
-            return text_struct.position.x - 0.5f * length * text_size;
+            return print_text_struct.position.x - 0.5f * length * text_size;
         }
-        else if (text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
+        else if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
         {
-            return text_struct.position.x - length * text_size;
+            return print_text_struct.position.x - length * text_size;
         }
         else
         {
@@ -180,23 +180,23 @@ namespace yli::ontology
         }
     }
 
-    uint32_t Font2d::compute_top_y(const PrintTextStruct& text_struct) const
+    uint32_t Font2d::compute_top_y(const PrintTextStruct& print_text_struct) const
     {
         // Count the number of lines.
-        const std::string& string = std::get<std::string>(text_struct.text);
+        const std::string& string = std::get<std::string>(print_text_struct.text);
         const std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n');
 
-        if (text_struct.position.vertical_alignment == VerticalAlignment::TOP)
+        if (print_text_struct.position.vertical_alignment == VerticalAlignment::TOP)
         {
-            return text_struct.position.y;
+            return print_text_struct.position.y;
         }
-        else if (text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
+        else if (print_text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
         {
-            return text_struct.position.y + 0.5f * number_of_lines * text_size;
+            return print_text_struct.position.y + 0.5f * number_of_lines * text_size;
         }
-        else if (text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
+        else if (print_text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
         {
-            return text_struct.position.y + number_of_lines * text_size;
+            return print_text_struct.position.y + number_of_lines * text_size;
         }
         else
         {
@@ -292,7 +292,7 @@ namespace yli::ontology
         glDisable(GL_BLEND);
     }
 
-    void Font2d::print_text_2d(const PrintTextStruct& text_struct) const
+    void Font2d::print_text_2d(const PrintTextStruct& print_text_struct) const
     {
         if (!this->should_render)
         {
@@ -302,7 +302,7 @@ namespace yli::ontology
         this->prepare_to_print();
 
         // TODO: implement support for `std::vector<std::string>`!
-        if (!std::holds_alternative<std::string>(text_struct.text))
+        if (!std::holds_alternative<std::string>(print_text_struct.text))
         {
             return;
         }
@@ -314,10 +314,10 @@ namespace yli::ontology
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        const std::size_t length = std::get<std::string>(text_struct.text).size();
+        const std::size_t length = std::get<std::string>(print_text_struct.text).size();
 
-        uint32_t current_left_x = this->compute_left_x(text_struct);
-        uint32_t current_top_y = this->compute_top_y(text_struct);
+        uint32_t current_left_x = this->compute_left_x(print_text_struct);
+        uint32_t current_top_y = this->compute_top_y(print_text_struct);
 
         // Fill buffers.
         std::vector<glm::vec2> vertices;
@@ -330,14 +330,14 @@ namespace yli::ontology
             // Print to the right side of X (so far there is no check for input length).
             // Print up of Y.
 
-            const char character = std::get<std::string>(text_struct.text)[i++];
+            const char character = std::get<std::string>(print_text_struct.text)[i++];
 
             if (character == '\n')
             {
                 // Jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                 // TODO: implement newline for other horizontal and vertical alignments too!
-                current_left_x = text_struct.position.x;
+                current_left_x = print_text_struct.position.x;
                 current_top_y -= text_size;
                 continue;
             }
@@ -345,12 +345,12 @@ namespace yli::ontology
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
             current_left_x += text_size;
 
-            float uv_x = (character % text_struct.font_size) / static_cast<float>(text_struct.font_size);
+            float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
             float uv_y;
 
-            if (text_struct.font_texture_file_format == TextureFileFormat::PNG)
+            if (print_text_struct.font_texture_file_format == TextureFileFormat::PNG)
             {
-                uv_y = (character / text_struct.font_size) / static_cast<float>(text_struct.font_size);
+                uv_y = (character / print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
             }
             else
             {
@@ -359,14 +359,14 @@ namespace yli::ontology
             }
 
             glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), uv_y);
+            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
 
-            if (text_struct.font_texture_file_format == TextureFileFormat::PNG)
+            if (print_text_struct.font_texture_file_format == TextureFileFormat::PNG)
             {
-                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
-                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(text_struct.font_size)));
+                uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
+                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
             }
             uvs.emplace_back(uv_up_left);
             uvs.emplace_back(uv_down_left);

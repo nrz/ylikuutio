@@ -74,7 +74,7 @@ namespace yli::ontology
 
             void render();
 
-            void print_text_2d(const PrintTextStruct& text_struct) const;
+            void print_text_2d(const PrintTextStruct& print_text_struct) const;
 
             GenericParentModule* get_generic_parent_module(const int type);
 
@@ -92,8 +92,8 @@ namespace yli::ontology
             Scene* get_scene() const override;
 
         private:
-            uint32_t compute_left_x(const PrintTextStruct& text_struct) const;
-            uint32_t compute_top_y(const PrintTextStruct& text_struct) const;
+            uint32_t compute_left_x(const PrintTextStruct& print_text_struct) const;
+            uint32_t compute_top_y(const PrintTextStruct& print_text_struct) const;
             void compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, const uint32_t vertex_left_x, const uint32_t vertex_top_y) const;
 
             std::size_t get_number_of_children() const override;
