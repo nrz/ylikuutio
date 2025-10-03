@@ -170,26 +170,9 @@ namespace yli::ontology
 
         while (i < length)
         {
-            char character = text[i++];
+            const char character = text[i++];
 
-            if (i >= length)
-            {
-                // Backslash `\` is the last character of string.
-                // End processing to avoid buffer over-read.
-                break;
-            }
-
-            if (character == '\\')
-            {
-                // OK, this character was backslash, so read the next character.
-                character = text[i++];
-
-                if (character == 'n')
-                {
-                    number_of_lines++;
-                }
-            }
-            else if (character == '\n')
+            if (character == '\n')
             {
                 number_of_lines++;
             }
@@ -253,31 +236,9 @@ namespace yli::ontology
             std::size_t vertex_down_right_x;
             std::size_t vertex_down_right_y;
 
-            char character = text[i++];
+            const char character = text[i++];
 
-            if (character == '\\')
-            {
-                // OK, this character was backslash, so read the next character.
-                character = text[i++];
-
-                if (i >= length)
-                {
-                    // Backslash `\` is the last character of string.
-                    // End processing to avoid buffer over-read.
-                    break;
-                }
-
-                if (character == 'n')
-                {
-                    // jump to the beginning of the next line.
-                    // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
-                    // TODO: implement newline for other horizontal and vertical alignments too!
-                    current_left_x = this->position.x;
-                    current_top_y -= this->text_size;
-                    continue;
-                }
-            }
-            else if (character == '\n')
+            if (character == '\n')
             {
                 // jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
