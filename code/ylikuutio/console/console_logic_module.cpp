@@ -207,6 +207,48 @@ namespace yli::console
         return nullptr;
     }
 
+    std::optional<ConsoleState> ConsoleLogicModule::page_up()
+    {
+        // This function does page up action and returns the resulting console state.
+
+        if (this->get_active_in_scrollback_buffer())
+        {
+            // We are already in scrollback buffer.
+            if (this->scrollback_buffer.page_up()) [[likely]]
+            {
+                return this->state;
+            }
+            else
+            {
+                return std::nullopt; // Transition failed.
+            }
+        }
+
+        // Enter scrollback buffer and signal console state change to 'modules'.
+        return this->enter_scrollback_buffer();
+    }
+
+    std::optional<ConsoleState> ConsoleLogicModule::page_down()
+    {
+        // This function does page down action and returns the resulting console state.
+
+        if (this->get_active_in_scrollback_buffer()) [[likely]]
+        {
+            // We are in scrollback buffer.
+
+            if (!this->scrollback_buffer.page_down())
+            {
+                // No space to page down without exiting scrollback buffer.
+
+                // Exit scrollback buffer and signal console state change to 'modules'.
+                return this->exit_scrollback_buffer();
+            }
+        }
+
+        // No change in state.
+        return this->state;
+    }
+
     // State inquiry functions.
 
     bool ConsoleLogicModule::get_active_in_console() const

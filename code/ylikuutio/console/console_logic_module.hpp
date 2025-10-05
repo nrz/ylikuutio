@@ -61,6 +61,9 @@ namespace yli::console
             std::optional<ConsoleState> exit_scrollback_buffer();
             TextInput* edit_input();
 
+            std::optional<ConsoleState> page_up();
+            std::optional<ConsoleState> page_down();
+
             // State inquiry functions.
             bool get_active_in_console() const;
             bool get_active_in_new_input() const;
