@@ -722,6 +722,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/pipeline_priority_queue.cpp
     code/ylikuutio/ontology/pipeline_priority_queue.hpp
     code/ylikuutio/ontology/pipeline_struct.hpp
+    code/ylikuutio/ontology/print_console_struct.hpp
     code/ylikuutio/ontology/print_text_struct.hpp
     code/ylikuutio/ontology/shapeshifter.cpp
     code/ylikuutio/ontology/shapeshifter.hpp
