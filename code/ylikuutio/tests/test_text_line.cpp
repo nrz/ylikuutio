@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <string_view> // std::string_view
+#include <vector>      // std::vector
 
 TEST(text_line_must_be_initialized_appropriately, empty_text_line)
 {
