@@ -103,3 +103,95 @@ TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
     ASSERT_EQ(it, text_line.cbegin());
     ASSERT_EQ(text_line.size(), 3);
 }
+
+TEST(text_line_must_be_split_appropriately, empty_text_line_n_columns_1)
+{
+    std::string_view my_string { "" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(1);
+    ASSERT_TRUE(views.empty());
+}
+
+TEST(text_line_must_be_split_appropriately, empty_text_line_n_columns_2)
+{
+    std::string_view my_string { "" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(2);
+    ASSERT_TRUE(views.empty());
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_a_n_columns_1)
+{
+    std::string_view my_string { "a" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(1);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "a");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_a_n_columns_2)
+{
+    std::string_view my_string { "a" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(2);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "a");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_ab_n_columns_1)
+{
+    std::string_view my_string { "ab" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(1);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "a");
+    ASSERT_EQ(views.at(1), "b");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_ab_n_columns_2)
+{
+    std::string_view my_string { "ab" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(2);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "ab");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_ab_n_columns_3)
+{
+    std::string_view my_string { "ab" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(3);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "ab");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_abc_n_columns_1)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(1);
+    ASSERT_EQ(views.size(), 3);
+    ASSERT_EQ(views.at(0), "a");
+    ASSERT_EQ(views.at(1), "b");
+    ASSERT_EQ(views.at(2), "c");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_abc_n_columns_2)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(2);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "ab");
+    ASSERT_EQ(views.at(1), "c");
+}
+
+TEST(text_line_must_be_split_appropriately, text_line_abc_n_columns_3)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.split_into_lines(3);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "abc");
+}

@@ -24,6 +24,7 @@
 #include <cstddef> // std::size_t
 #include <string>      // std::string
 #include <string_view> // std::string_view
+#include <vector>      // std::vector
 
 namespace yli::console
 {
@@ -49,6 +50,8 @@ namespace yli::console
             TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
 
             const std::string& data() const;
+
+            std::vector<std::string_view> split_into_lines(const std::size_t n_columns) const;
 
             std::size_t size() const;
 

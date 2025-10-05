@@ -22,6 +22,7 @@
 #include <cstddef> // std::size_t
 #include <string>      // std::string
 #include <string_view> // std::string_view
+#include <vector>      // std::vector
 
 namespace yli::console
 {
@@ -53,6 +54,24 @@ namespace yli::console
     const std::string& TextLine::data() const
     {
         return this->line;
+    }
+
+    std::vector<std::string_view> TextLine::split_into_lines(const std::size_t n_columns) const
+    {
+        if (n_columns == 0)
+        {
+            throw std::runtime_error("ERROR: `TextLine::split_into_lines`: `n_columns` is 0!");
+        }
+
+        std::vector<std::string_view> views;
+
+        for (std::size_t begin_line_i = 0; begin_line_i < this->line.size(); begin_line_i += n_columns)
+        {
+            const std::size_t end_line_i = (begin_line_i + n_columns < this->line.size() ? begin_line_i + n_columns : this->line.size());
+            views.emplace_back(std::string_view(&this->line[begin_line_i], &this->line[end_line_i]));
+        }
+
+        return views;
     }
 
     std::size_t TextLine::size() const
