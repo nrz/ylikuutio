@@ -32,6 +32,8 @@ namespace yli::console
 
     class TextLine
     {
+        // This is a custom string storage class for `Console`.
+
         public:
             TextLine(const TextLine& other) = default;
             TextLine& operator=(const TextLine&) = delete;
