@@ -19,7 +19,6 @@
 #define YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 
 #include "text_line_const_iterator.hpp"
-#include "text_input.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -28,6 +27,8 @@
 
 namespace yli::console
 {
+    class TextInput;
+
     class TextLine
     {
         public:
@@ -46,7 +47,6 @@ namespace yli::console
 
             TextLine(const std::string::const_iterator begin, const std::string::const_iterator end);
             TextLine(const TextLine::const_iterator begin, const TextLine::const_iterator end);
-            TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end);
 
             const std::string& data() const;
 

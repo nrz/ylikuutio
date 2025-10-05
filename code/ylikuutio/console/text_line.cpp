@@ -50,11 +50,6 @@ namespace yli::console
     {
     }
 
-    TextLine::TextLine(const TextInput::const_iterator begin, const TextInput::const_iterator end)
-        : line(begin.unwrap(), end.unwrap())
-    {
-    }
-
     const std::string& TextLine::data() const
     {
         return this->line;
