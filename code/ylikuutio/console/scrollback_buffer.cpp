@@ -81,7 +81,7 @@ namespace yli::console
 
             // If we are not in buffer and the buffer is not empty, enter the buffer.
             this->buffer_index = buffer_size - 1;
-            this->buffer_it = this->buffer.begin() + buffer_index;
+            this->buffer_it = this->buffer.begin() + this->buffer_index;
             return true;
         }
 
