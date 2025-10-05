@@ -83,7 +83,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_left_control_pressed = false;
         }
@@ -96,7 +96,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_right_control_pressed = false;
         }
@@ -109,7 +109,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_left_alt_pressed = false;
         }
@@ -122,7 +122,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_right_alt_pressed = false;
         }
@@ -135,7 +135,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_left_shift_pressed = false;
         }
@@ -148,7 +148,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.is_right_shift_pressed = false;
         }
@@ -161,7 +161,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_move_to_previous_input = true;
         }
@@ -174,7 +174,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_move_to_next_input = true;
         }
@@ -187,7 +187,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_backspace = true;
         }
@@ -200,7 +200,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_tab = true;
         }
@@ -213,7 +213,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_enter_key = true;
         }
@@ -226,7 +226,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_ctrl_c = true;
         }
@@ -239,7 +239,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_ctrl_w = true;
         }
@@ -252,7 +252,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_page_up = true;
         }
@@ -265,7 +265,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_page_down = true;
         }
@@ -278,7 +278,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_home = true;
         }
@@ -291,7 +291,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.get_in_console())
         {
             console.can_end = true;
         }
