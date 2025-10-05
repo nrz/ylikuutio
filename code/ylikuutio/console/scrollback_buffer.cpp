@@ -236,4 +236,42 @@ namespace yli::console
             this->exit_buffer();
         }
     }
+
+    bool ScrollbackBuffer::page_up()
+    {
+        // Page up succeeds even if position does not change.
+        if (this->size() > 0 && this->get_is_active_in_buffer()) [[likely]]
+        {
+            if (this->buffer_index >= this->n_rows) [[likely]]
+            {
+                this->buffer_index -= this->n_rows;
+            }
+            else
+            {
+                this->buffer_index = 0;
+            }
+
+            this->buffer_it = this->buffer.begin() + this->buffer_index;
+            return true;
+        }
+
+        return false;
+    }
+
+    bool ScrollbackBuffer::page_down()
+    {
+        // Page down fails if page down would exit the scrollback buffer.
+        // That way it `ConsoleLogicModule` receives the information and
+        // can do appropriate state transition instead.
+        if (this->size() > 0 &&
+                this->get_is_active_in_buffer() &&
+                this->buffer_index + this->n_rows < this->size()) [[likely]]
+        {
+            this->buffer_index += this->n_rows;
+            this->buffer_it = this->buffer.begin() + this->buffer_index;
+            return true;
+        }
+
+        return false;
+    }
 }

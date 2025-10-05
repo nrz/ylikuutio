@@ -57,6 +57,8 @@ namespace yli::console
             bool move_to_next();
             void move_to_first();
             void move_to_last();
+            bool page_up();
+            bool page_down();
 
             std::optional<std::span<const TextLine>> get_view(const std::size_t top_index, const std::size_t max_rows) const;
             std::optional<std::span<const TextLine>> get_view(const std::size_t max_rows) const;
