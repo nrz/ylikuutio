@@ -137,7 +137,7 @@ namespace yli::ontology
 
     void Text2d::render()
     {
-        PrintTextStruct text_struct { TextureFileFormat::PNG };
+        PrintTextStruct text_struct;
         text_struct.position = this->position;
         text_struct.font_size = this->universe.get_font_size();
         text_struct.text = this->text;

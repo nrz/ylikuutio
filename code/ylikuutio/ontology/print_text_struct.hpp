@@ -19,28 +19,19 @@
 #define YLIKUUTIO_ONTOLOGY_PRINT_TEXT_STRUCT_HPP_INCLUDED
 
 #include "position_struct.hpp"
-#include "texture_file_format.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <span>    // std::span
 #include <string>  // std::string
-#include <variant> // std::variant
 
 namespace yli::ontology
 {
     struct PrintTextStruct
     {
-        explicit PrintTextStruct(const TextureFileFormat font_texture_file_format)
-            : font_texture_file_format { font_texture_file_format }
-        {
-        }
-
         PositionStruct position;
         std::size_t font_size     { 0 };
-        std::variant<std::string, std::span<const yli::console::TextLine>> text;
-        const TextureFileFormat font_texture_file_format;
+        std::string text;
     };
 }
 

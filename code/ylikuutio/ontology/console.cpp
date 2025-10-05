@@ -199,7 +199,7 @@ namespace yli::ontology
         const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         // Draw the console to screen using `font_2d::print_text_2d`.
-        PrintTextStruct text_struct { TextureFileFormat::PNG };
+        PrintTextStruct text_struct;
         text_struct.position.x = 0;
         text_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
         text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
@@ -215,7 +215,7 @@ namespace yli::ontology
                     history_i++)
             {
                 std::list<char> historical_text = this->console_history.at(history_i);
-                std::get<std::string>(text_struct.text) += yli::string::convert_char_container_to_std_string(
+                text_struct.text += yli::string::convert_char_container_to_std_string(
                         historical_text,
                         characters_for_line,
                         characters_for_line) +
@@ -252,7 +252,7 @@ namespace yli::ontology
                 // Print only n last lines.
                 for (std::size_t i = new_input_vector.size() - this->n_rows; i < new_input_vector.size(); i++)
                 {
-                    std::get<std::string>(text_struct.text) += new_input_vector.at(i) + "\\n";
+                    text_struct.text += new_input_vector.at(i) + "\\n";
                 }
             }
             else
@@ -272,14 +272,14 @@ namespace yli::ontology
                 for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                 {
                     const std::list<char> historical_text = this->console_history.at(history_i);
-                    std::get<std::string>(text_struct.text) += yli::string::convert_char_container_to_std_string(
+                    text_struct.text += yli::string::convert_char_container_to_std_string(
                             historical_text,
                             characters_for_line,
                             characters_for_line) +
                         "\n";
                 }
 
-                std::get<std::string>(text_struct.text) += this->convert_new_input_into_string();
+                text_struct.text += this->convert_new_input_into_string();
             }
         }
 
