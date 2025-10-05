@@ -195,3 +195,88 @@ TEST(text_line_must_be_split_appropriately, text_line_abc_n_columns_3)
     ASSERT_EQ(views.size(), 1);
     ASSERT_EQ(views.at(0), "abc");
 }
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abc_n_lines_1_n_columns_1)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(1, 1);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "c");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abc_n_lines_1_n_columns_2)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(1, 2);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "c");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abc_n_lines_2_n_columns_1)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(2, 1);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "b");
+    ASSERT_EQ(views.at(1), "c");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abc_n_lines_2_n_columns_2)
+{
+    std::string_view my_string { "abc" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(2, 2);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "ab");
+    ASSERT_EQ(views.at(1), "c");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abcd_n_lines_1_n_columns_1)
+{
+    std::string_view my_string { "abcd" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(1, 1);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "d");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abcd_n_lines_1_n_columns_2)
+{
+    std::string_view my_string { "abcd" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(1, 2);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "cd");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abcd_n_lines_1_n_columns_3)
+{
+    std::string_view my_string { "abcd" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(1, 3);
+    ASSERT_EQ(views.size(), 1);
+    ASSERT_EQ(views.at(0), "d");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abcd_n_lines_2_n_columns_1)
+{
+    std::string_view my_string { "abcd" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(2, 1);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "c");
+    ASSERT_EQ(views.at(1), "d");
+}
+
+TEST(last_lines_must_be_chosen_appropriately, text_line_abcd_n_lines_2_n_columns_2)
+{
+    std::string_view my_string { "abcd" };
+    yli::console::TextLine text_line(my_string);
+    std::vector<std::string_view> views = text_line.get_n_last_lines(2, 2);
+    ASSERT_EQ(views.size(), 2);
+    ASSERT_EQ(views.at(0), "ab");
+    ASSERT_EQ(views.at(1), "cd");
+}

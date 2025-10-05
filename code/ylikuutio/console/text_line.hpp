@@ -57,6 +57,8 @@ namespace yli::console
 
             std::size_t size() const;
 
+            std::vector<std::string_view> get_n_last_lines(const std::size_t n_lines, const std::size_t n_columns) const;
+
             // Iterator functions.
             const_iterator cbegin() const
             {

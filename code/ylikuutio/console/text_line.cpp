@@ -78,4 +78,20 @@ namespace yli::console
     {
         return this->line.size();
     }
+
+    std::vector<std::string_view> TextLine::get_n_last_lines(const std::size_t n_lines, const std::size_t n_columns) const
+    {
+        // First, get all the lines.
+        std::vector<std::string_view> views = this->split_into_lines(n_columns);
+
+        // Select only `n_lines`, the last ones.
+        if (views.size() < n_lines)
+        {
+            return views;
+        }
+        else
+        {
+            return std::vector<std::string_view>(views.end() - n_lines, views.end());
+        }
+    }
 }
