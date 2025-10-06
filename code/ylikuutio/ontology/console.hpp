@@ -489,11 +489,11 @@ namespace yli::ontology
             bool in_history                 { false };
             bool in_historical_input        { false };
 
-            TextInput new_new_input;  // This is used for new inputs.
-            TextInput new_temp_input; // This is used as copy of a unchanged historical input, for editing.
-            TextInputHistory new_command_history;
-            ScrollbackBuffer new_scrollback_buffer;
-            ConsoleLogicModule new_console_logic_module;
+            TextInput new_input;  // This is used for new inputs.
+            TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
+            TextInputHistory command_history;
+            ScrollbackBuffer scrollback_buffer;
+            ConsoleLogicModule console_logic_module;
     };
 
     template<>

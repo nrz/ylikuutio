@@ -111,11 +111,11 @@ namespace yli::ontology
         console_bottom_y { console_struct.bottom_y },
         n_columns        { this->console_right_x - this->console_left_x + 1 },
         n_rows           { this->console_top_y - this->console_bottom_y + 1 },
-        new_new_input            { TextInputType::NEW_INPUT },
-        new_temp_input           { TextInputType::TEMP_INPUT },
-        new_command_history      {},
-        new_scrollback_buffer    { this->n_columns, this->n_rows },
-        new_console_logic_module { this->new_new_input, this->new_temp_input, this->new_command_history, this->new_scrollback_buffer, this->n_columns, this->n_rows }
+        new_input            { TextInputType::NEW_INPUT },
+        temp_input           { TextInputType::TEMP_INPUT },
+        command_history      {},
+        scrollback_buffer    { this->n_columns, this->n_rows },
+        console_logic_module { this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns, this->n_rows }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
