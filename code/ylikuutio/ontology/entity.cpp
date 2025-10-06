@@ -118,6 +118,7 @@ namespace yli::ontology
         //
         // Each derivative class may override `Entity::activate`
         // to implement its own specific activation behavior.
+        // Activation functions should be idempotent.
     }
 
     void Entity::terminate()

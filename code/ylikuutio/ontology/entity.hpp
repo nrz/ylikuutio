@@ -75,7 +75,7 @@ namespace yli::ontology
             Entity(const Entity&) = delete;            // Delete copy constructor.
             Entity& operator=(const Entity&) = delete; // Delete copy assignment.
 
-            virtual void activate();
+            virtual void activate();                   // Activation functions should be idempotent.
 
             void terminate();
             yli::memory::ConstructibleModule get_constructible_module() const;
