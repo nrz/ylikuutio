@@ -23,6 +23,10 @@
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
 #include "master_of_input_modes_module.hpp"
+#include "code/ylikuutio/console/console_logic_module.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
+#include "code/ylikuutio/console/text_input_history.hpp"
+#include "code/ylikuutio/console/scrollback_buffer.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -82,6 +86,11 @@ namespace yli::ontology
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
     struct ConsoleStruct;
+
+    using yli::console::TextInput;
+    using yli::console::TextInputHistory;
+    using yli::console::ScrollbackBuffer;
+    using yli::console::ConsoleLogicModule;
 
     class Console final : public Entity
     {
@@ -479,6 +488,12 @@ namespace yli::ontology
             bool is_right_shift_pressed     { false };
             bool in_history                 { false };
             bool in_historical_input        { false };
+
+            TextInput new_new_input;  // This is used for new inputs.
+            TextInput new_temp_input; // This is used as copy of a unchanged historical input, for editing.
+            TextInputHistory new_command_history;
+            ScrollbackBuffer new_scrollback_buffer;
+            ConsoleLogicModule new_console_logic_module;
     };
 
     template<>

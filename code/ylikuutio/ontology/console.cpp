@@ -27,6 +27,9 @@
 #include "print_text_struct.hpp"
 #include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
+#include "code/ylikuutio/console/text_input_type.hpp"
+#include "code/ylikuutio/console/text_line.hpp"
+#include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -55,6 +58,10 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Scene;
+
+    using yli::console::TextLine;
+    using yli::console::TextInput;
+    using yli::console::TextInputType;
 
     std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(
             Console& console,
@@ -103,7 +110,12 @@ namespace yli::ontology
         console_top_y    { console_struct.top_y },
         console_bottom_y { console_struct.bottom_y },
         n_columns        { this->console_right_x - this->console_left_x + 1 },
-        n_rows           { this->console_top_y - this->console_bottom_y + 1 }
+        n_rows           { this->console_top_y - this->console_bottom_y + 1 },
+        new_new_input            { TextInputType::NEW_INPUT },
+        new_temp_input           { TextInputType::TEMP_INPUT },
+        new_command_history      {},
+        new_scrollback_buffer    { this->n_columns, this->n_rows },
+        new_console_logic_module { this->new_new_input, this->new_temp_input, this->new_command_history, this->new_scrollback_buffer, this->n_columns, this->n_rows }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
