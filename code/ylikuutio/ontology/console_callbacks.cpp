@@ -403,18 +403,18 @@ namespace yli::ontology
     {
         if (console.in_console && console.can_move_to_previous_input)
         {
-            if (!console.in_historical_input && !console.command_history.empty())
+            if (!console.in_historical_input && !console.old_command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
                 console.in_historical_input = true;
-                console.historical_input_i = console.command_history.size() - 1;
+                console.historical_input_i = console.old_command_history.size() - 1;
 
                 // Copy the new input into temp input.
-                console.temp_input.clear();
-                std::copy(console.new_input.begin(), console.new_input.end(), std::back_inserter(console.temp_input));
+                console.old_temp_input.clear();
+                std::copy(console.old_new_input.begin(), console.old_new_input.end(), std::back_inserter(console.old_temp_input));
 
                 // Copy the historical input into new input.
-                console.new_input.clear();
+                console.old_new_input.clear();
                 console.copy_historical_input_into_new_input();
 
                 console.move_cursor_to_end_of_line();
@@ -441,21 +441,21 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_move_to_next_input && !console.command_history.empty())
+        if (console.in_console && console.can_move_to_next_input && !console.old_command_history.empty())
         {
-            if (console.in_historical_input && console.historical_input_i == console.command_history.size() - 1)
+            if (console.in_historical_input && console.historical_input_i == console.old_command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
                 console.in_historical_input = false;
 
                 // Copy temp input into new input.
-                console.new_input.clear();
-                std::copy(console.temp_input.begin(), console.temp_input.end(), std::back_inserter(console.new_input));
+                console.old_new_input.clear();
+                std::copy(console.old_temp_input.begin(), console.old_temp_input.end(), std::back_inserter(console.old_new_input));
 
                 console.move_cursor_to_end_of_line();
                 console.can_move_to_next_input = false;
             }
-            else if (console.in_historical_input && console.historical_input_i < console.command_history.size() - 1)
+            else if (console.in_historical_input && console.historical_input_i < console.old_command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
                 console.historical_input_i++;
@@ -478,9 +478,9 @@ namespace yli::ontology
     {
         if (console.in_console &&
                 console.can_backspace &&
-                console.cursor_it != console.new_input.begin())
+                console.cursor_it != console.old_new_input.begin())
         {
-            console.cursor_it = console.new_input.erase(--console.cursor_it);
+            console.cursor_it = console.old_new_input.erase(--console.cursor_it);
             console.cursor_index--;
             console.can_backspace = false;
         }
@@ -498,7 +498,7 @@ namespace yli::ontology
         if (console.in_console && console.can_tab)
         {
             // Copy new input into a `std::string`.
-            std::string input_string(console.new_input.begin(), console.new_input.end());
+            std::string input_string(console.old_new_input.begin(), console.old_new_input.end());
 
             std::vector<std::string> parameter_vector;
             std::string command;
@@ -514,8 +514,8 @@ namespace yli::ontology
                 console.print_completions(universe.registry, command);
 
                 const std::string completion = universe.complete(command);
-                console.new_input.clear();
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console.new_input));
+                console.old_new_input.clear();
+                std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
             }
             else if (parameter_vector.empty())
             {
@@ -530,7 +530,7 @@ namespace yli::ontology
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.new_input));
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
                 }
             }
             else if (input_string.back() != ' ')
@@ -541,21 +541,21 @@ namespace yli::ontology
                 console.print_completions(universe.registry, parameter_vector.back());
 
                 const std::string completion = universe.complete(parameter_vector.back());
-                console.new_input.clear();
-                std::copy(command.begin(), command.end(), std::back_inserter(console.new_input));
-                console.new_input.emplace_back(' ');
+                console.old_new_input.clear();
+                std::copy(command.begin(), command.end(), std::back_inserter(console.old_new_input));
+                console.old_new_input.emplace_back(' ');
 
                 // Copy the old parameters except the last.
 
                 for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
                 {
-                    std::copy(parameter_vector.at(i).begin(), parameter_vector.at(i).end(), std::back_inserter(console.new_input));
+                    std::copy(parameter_vector.at(i).begin(), parameter_vector.at(i).end(), std::back_inserter(console.old_new_input));
                     console.move_cursor_to_end_of_line();
-                    console.new_input.emplace_back(' ');
+                    console.old_new_input.emplace_back(' ');
                 }
 
                 // Copy the completed parameter.
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console.new_input));
+                std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
             }
             else
             {
@@ -565,7 +565,7 @@ namespace yli::ontology
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.new_input));
+                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
                 }
             }
 
@@ -588,55 +588,55 @@ namespace yli::ontology
         }
 
         // Copy new input into a `std::string`.
-        const std::string input_string(console.new_input.begin(), console.new_input.end());
+        const std::string input_string(console.old_new_input.begin(), console.old_new_input.end());
 
         // Copy new input into the command history.
-        console.command_history.emplace_back(console.new_input);
+        console.old_command_history.emplace_back(console.old_new_input);
 
-        // Prefix new input with the prompt, for saving into `console_history`.
-        std::list<char>::iterator it = console.new_input.begin();
+        // Prefix new input with the prompt, for saving into `old_console_history`.
+        std::list<char>::iterator it = console.old_new_input.begin();
 
         for (const char& my_char : console.prompt)
         {
-            console.new_input.insert(it, my_char);
+            console.old_new_input.insert(it, my_char);
         }
 
-        std::list<char> new_input_char_list;
+        std::list<char> old_new_input_char_list;
 
-        // Split into lines, emplace_back each line into `console_history` separately.
-        for (const char& my_char : console.new_input)
+        // Split into lines, emplace_back each line into `old_console_history` separately.
+        for (const char& my_char : console.old_new_input)
         {
-            new_input_char_list.emplace_back(my_char);
+            old_new_input_char_list.emplace_back(my_char);
 
-            if (new_input_char_list.size () >= console.n_columns)
+            if (old_new_input_char_list.size () >= console.n_columns)
             {
-                console.console_history.emplace_back(new_input_char_list);
-                new_input_char_list.clear();
+                console.old_console_history.emplace_back(old_new_input_char_list);
+                old_new_input_char_list.clear();
             }
         }
 
-        if (new_input_char_list.size() > 0)
+        if (old_new_input_char_list.size() > 0)
         {
-            console.console_history.emplace_back(new_input_char_list);
+            console.old_console_history.emplace_back(old_new_input_char_list);
         }
 
         std::vector<std::string> parameter_vector;
         std::string command;
 
-        console.new_input.clear();
+        console.old_new_input.clear();
 
         if (yli::lisp::parse(input_string, command, parameter_vector))
         {
             std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
             console.in_historical_input = false;
-            console.cursor_it = console.new_input.begin();
+            console.cursor_it = console.old_new_input.begin();
             console.cursor_index = 0;
             console.can_enter_key = false;
             return any_value;
         }
 
         console.in_historical_input = false;
-        console.cursor_it = console.new_input.begin();
+        console.cursor_it = console.old_new_input.begin();
         console.cursor_index = 0;
         console.can_enter_key = false;
 
@@ -655,9 +655,9 @@ namespace yli::ontology
                 !console.is_left_alt_pressed && !console.is_right_alt_pressed &&
                 !console.is_left_shift_pressed && !console.is_right_shift_pressed)
         {
-            console.new_input.clear();
+            console.old_new_input.clear();
             console.in_historical_input = false;
-            console.cursor_it = console.new_input.begin();
+            console.cursor_it = console.old_new_input.begin();
             console.cursor_index = 0;
             console.can_ctrl_c = false;
         }
@@ -679,7 +679,7 @@ namespace yli::ontology
             console.in_historical_input = false;
 
             // First, remove all spaces until a non-space is encountered.
-            while (console.cursor_it != console.new_input.begin())
+            while (console.cursor_it != console.old_new_input.begin())
             {
                 if (*--console.cursor_it == ' ')
                 {
@@ -687,12 +687,12 @@ namespace yli::ontology
                     break;
                 }
 
-                console.cursor_it = console.new_input.erase(console.cursor_it);
+                console.cursor_it = console.old_new_input.erase(console.cursor_it);
                 console.cursor_index--;
             }
 
             // Then, remove all non-spaces until a space is encountered.
-            while (console.cursor_it != console.new_input.begin())
+            while (console.cursor_it != console.old_new_input.begin())
             {
                 if (*--console.cursor_it != ' ')
                 {
@@ -700,7 +700,7 @@ namespace yli::ontology
                     break;
                 }
 
-                console.cursor_it = console.new_input.erase(console.cursor_it);
+                console.cursor_it = console.old_new_input.erase(console.cursor_it);
                 console.cursor_index--;
             }
 
@@ -724,10 +724,10 @@ namespace yli::ontology
             else
             {
                 console.in_history = true;
-                console.history_line_i = console.console_history.size() > 2 * console.n_rows ? console.console_history.size() > 2 * console.n_rows : 0;
+                console.history_line_i = console.old_console_history.size() > 2 * console.n_rows ? console.old_console_history.size() > 2 * console.n_rows : 0;
             }
 
-            if (console.history_line_i + console.n_rows >= console.console_history.size())
+            if (console.history_line_i + console.n_rows >= console.old_console_history.size())
             {
                 console.in_history = false;
             }
@@ -750,7 +750,7 @@ namespace yli::ontology
             {
                 console.history_line_i += console.n_rows;
 
-                if (console.history_line_i + console.n_rows >= console.console_history.size())
+                if (console.history_line_i + console.n_rows >= console.old_console_history.size())
                 {
                     console.in_history = false;
                 }
@@ -771,7 +771,7 @@ namespace yli::ontology
         {
             console.history_line_i = 0;
 
-            if (console.history_line_i + console.n_rows >= console.console_history.size())
+            if (console.history_line_i + console.n_rows >= console.old_console_history.size())
             {
                 console.in_history = false;
             }

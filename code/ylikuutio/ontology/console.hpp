@@ -447,12 +447,12 @@ namespace yli::ontology
             // Getters end here.
 
         private:
-            std::vector<std::list<char>> command_history;
-            std::vector<std::list<char>> console_history;
+            std::vector<std::list<char>> old_command_history;
+            std::vector<std::list<char>> old_console_history;
 
-            std::list<char> new_input;     // This is used for actual inputs.
-            std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
-            std::list<char>::iterator cursor_it { this->new_input.begin() };
+            std::list<char> old_new_input;     // This is used for actual inputs.
+            std::list<char> old_temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
+            std::list<char>::iterator cursor_it { this->old_new_input.begin() };
 
             const std::string prompt            { "$ " };
 

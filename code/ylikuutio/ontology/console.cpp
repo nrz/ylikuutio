@@ -149,7 +149,7 @@ namespace yli::ontology
             if (my_char == '\n')
             {
                 // A newline.
-                this->console_history.emplace_back(text_char_list);
+                this->old_console_history.emplace_back(text_char_list);
                 text_char_list.clear();
                 current_line_length = 0;
             }
@@ -161,7 +161,7 @@ namespace yli::ontology
             else
             {
                 // Newline is needed due to too long line.
-                this->console_history.emplace_back(text_char_list);
+                this->old_console_history.emplace_back(text_char_list);
                 text_char_list.clear();
                 text_char_list.emplace_back(my_char);
                 current_line_length = 1;
@@ -170,7 +170,7 @@ namespace yli::ontology
 
         if (text_char_list.size() > 0)
         {
-            this->console_history.emplace_back(text_char_list);
+            this->old_console_history.emplace_back(text_char_list);
         }
     }
 
@@ -223,10 +223,10 @@ namespace yli::ontology
             const std::size_t history_end_i = history_line_i + this->n_rows;
 
             for (std::size_t history_i = history_line_i;
-                    history_i < history_end_i && history_i < this->console_history.size();
+                    history_i < history_end_i && history_i < this->old_console_history.size();
                     history_i++)
             {
-                std::list<char> historical_text = this->console_history.at(history_i);
+                std::list<char> historical_text = this->old_console_history.at(history_i);
                 text_struct.text += yli::string::convert_char_container_to_std_string(
                         historical_text,
                         characters_for_line,
@@ -236,10 +236,10 @@ namespace yli::ontology
         }
         else
         {
-            const std::size_t n_chars_on_noncomplete_line = (this->prompt.size() + this->new_input.size()) % this->n_columns;
+            const std::size_t n_chars_on_noncomplete_line = (this->prompt.size() + this->old_new_input.size()) % this->n_columns;
             const std::size_t n_lines_of_new_input = (n_chars_on_noncomplete_line > 0 ?
-                    (this->prompt.size() + this->new_input.size()) / this->n_columns + 1 :
-                    (this->prompt.size() + this->new_input.size()) / this->n_columns);
+                    (this->prompt.size() + this->old_new_input.size()) / this->n_columns + 1 :
+                    (this->prompt.size() + this->old_new_input.size()) / this->n_columns);
 
             if (n_lines_of_new_input > this->n_rows)
             {
@@ -247,43 +247,43 @@ namespace yli::ontology
 
                 // Split new input into lines and print only n last lines,
                 // where n == `this->n_rows`.
-                std::list<char> new_input_with_prompt = this->new_input;
-                std::list<char>::iterator it = new_input_with_prompt.begin();
+                std::list<char> old_new_input_with_prompt = this->old_new_input;
+                std::list<char>::iterator it = old_new_input_with_prompt.begin();
 
                 // Copy prompt into the front of the new input.
                 for (const char& my_char : this->prompt)
                 {
-                    new_input_with_prompt.insert(it, my_char);
+                    old_new_input_with_prompt.insert(it, my_char);
                 }
 
                 // Convert into a vector of lines.
-                const std::vector<std::string> new_input_vector = yli::string::convert_char_container_to_std_vector_std_string(
-                        new_input_with_prompt,
+                const std::vector<std::string> old_new_input_vector = yli::string::convert_char_container_to_std_vector_std_string(
+                        old_new_input_with_prompt,
                         this->n_columns);
 
                 // Print only n last lines.
-                for (std::size_t i = new_input_vector.size() - this->n_rows; i < new_input_vector.size(); i++)
+                for (std::size_t i = old_new_input_vector.size() - this->n_rows; i < old_new_input_vector.size(); i++)
                 {
-                    text_struct.text += new_input_vector.at(i) + "\\n";
+                    text_struct.text += old_new_input_vector.at(i) + "\\n";
                 }
             }
             else
             {
-                const std::string new_input_string = this->convert_new_input_into_string();
+                const std::string old_new_input_string = this->convert_new_input_into_string();
 
                 // Current input fits completely in the console 'window'.
                 std::size_t history_start_i { 0 }; // Assume everything does fit in the console 'window'.
 
-                if (this->console_history.size() + n_lines_of_new_input > this->n_rows)
+                if (this->old_console_history.size() + n_lines_of_new_input > this->n_rows)
                 {
                     // Everything does not fit in the console 'window'.
-                    history_start_i = this->console_history.size() - this->n_rows + n_lines_of_new_input;
+                    history_start_i = this->old_console_history.size() - this->n_rows + n_lines_of_new_input;
                 }
 
                 // We are not in history so print everything to the end of the history.
-                for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                for (std::size_t history_i = history_start_i; history_i < this->old_console_history.size(); history_i++)
                 {
-                    const std::list<char> historical_text = this->console_history.at(history_i);
+                    const std::list<char> historical_text = this->old_console_history.at(history_i);
                     text_struct.text += yli::string::convert_char_container_to_std_string(
                             historical_text,
                             characters_for_line,
@@ -397,79 +397,79 @@ namespace yli::ontology
                 switch (keyboard_char)
                 {
                     case '`':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '~');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '~');
                         break;
                     case '1':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '!');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '!');
                         break;
                     case '2':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '@');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '@');
                         break;
                     case '3':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '#');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '#');
                         break;
                     case '4':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '$');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '$');
                         break;
                     case '5':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '%');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '%');
                         break;
                     case '6':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '^');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '^');
                         break;
                     case '7':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '&');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '&');
                         break;
                     case '8':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '*');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '*');
                         break;
                     case '9':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '(');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '(');
                         break;
                     case '0':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, ')');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, ')');
                         break;
                     case '-':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '_');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '_');
                         break;
                     case '=':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '+');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '+');
                         break;
                     case '[':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '{');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '{');
                         break;
                     case ']':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '}');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '}');
                         break;
                     case '\\':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '|');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '|');
                         break;
                     case ';':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, ':');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, ':');
                         break;
                     case '\'':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '"');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '"');
                         break;
                     case ',':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '<');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '<');
                         break;
                     case '.':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '>');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '>');
                         break;
                     case '/':
-                        this->cursor_it = this->new_input.insert(this->cursor_it, '?');
+                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '?');
                         break;
                     default:
                         if (keyboard_char >= 'a' && keyboard_char <= 'z')
                         {
-                            this->cursor_it = this->new_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
+                            this->cursor_it = this->old_new_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
                         }
                         break;
                 }
             }
             else
             {
-                this->cursor_it = this->new_input.insert(this->cursor_it, keyboard_char);
+                this->cursor_it = this->old_new_input.insert(this->cursor_it, keyboard_char);
             }
 
             ++this->cursor_it;
@@ -496,10 +496,10 @@ namespace yli::ontology
         if (this->in_console)
         {
             // Copy selected historical input into new input.
-            this->new_input.clear();
-            std::copy(this->command_history.at(this->historical_input_i).begin(),
-                    this->command_history.at(this->historical_input_i).end(),
-                    std::back_inserter(this->new_input));
+            this->old_new_input.clear();
+            std::copy(this->old_command_history.at(this->historical_input_i).begin(),
+                    this->old_command_history.at(this->historical_input_i).end(),
+                    std::back_inserter(this->old_new_input));
         }
     }
 
@@ -508,7 +508,7 @@ namespace yli::ontology
         const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
 
         return this->prompt + yli::string::convert_char_container_to_std_string(
-                this->new_input,
+                this->old_new_input,
                 characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
                 characters_for_line);                      // The rest lines have full length.
     }
@@ -517,7 +517,7 @@ namespace yli::ontology
     {
         if (this->in_console)
         {
-            this->new_input.erase(this->cursor_it);
+            this->old_new_input.erase(this->cursor_it);
         }
     }
 
@@ -527,7 +527,7 @@ namespace yli::ontology
         {
             this->in_history = false;
 
-            if (this->cursor_it != this->new_input.begin())
+            if (this->cursor_it != this->old_new_input.begin())
             {
                 --this->cursor_it;
                 this->cursor_index--;
@@ -541,7 +541,7 @@ namespace yli::ontology
         {
             this->in_history = false;
 
-            if (this->cursor_it != this->new_input.end())
+            if (this->cursor_it != this->old_new_input.end())
             {
                 ++this->cursor_it;
                 this->cursor_index++;
@@ -554,7 +554,7 @@ namespace yli::ontology
         if (this->in_console)
         {
             this->in_history = false;
-            this->cursor_it = this->new_input.begin();
+            this->cursor_it = this->old_new_input.begin();
             this->cursor_index = 0;
         }
     }
@@ -564,8 +564,8 @@ namespace yli::ontology
         if (this->in_console)
         {
             this->in_history = false;
-            this->cursor_it = this->new_input.end();
-            this->cursor_index = this->new_input.size();
+            this->cursor_it = this->old_new_input.end();
+            this->cursor_index = this->old_new_input.size();
         }
     }
 
@@ -588,12 +588,12 @@ namespace yli::ontology
 
     const std::list<char>& Console::get_new_input() const
     {
-        return this->new_input;
+        return this->old_new_input;
     }
 
     const std::list<char>& Console::get_temp_input() const
     {
-        return this->temp_input;
+        return this->old_temp_input;
     }
 
     const std::string& Console::get_prompt() const
@@ -760,9 +760,9 @@ namespace yli::ontology
         console.in_historical_input = false;
         console.history_line_i = 0;
         console.historical_input_i = 0;
-        console.command_history.clear();
-        console.console_history.clear();
-        console.new_input.clear();
+        console.old_command_history.clear();
+        console.old_console_history.clear();
+        console.old_new_input.clear();
 
         const uint32_t clear_console_magic_number = CallbackMagicNumber::CLEAR_CONSOLE;
         return yli::data::AnyValue(clear_console_magic_number);
