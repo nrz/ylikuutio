@@ -84,17 +84,17 @@ TEST(console_must_be_initialized_appropriately, no_font)
     ASSERT_EQ(console->get_n_rows(), 16);          // This may change in the future.
     ASSERT_EQ(console->get_n_columns(), 40);       // This may change in the future.
     ASSERT_FALSE(console->get_in_console());
-    ASSERT_FALSE(console->get_can_move_to_previous_input());
-    ASSERT_FALSE(console->get_can_move_to_next_input());
-    ASSERT_FALSE(console->get_can_backspace());
-    ASSERT_FALSE(console->get_can_tab());
-    ASSERT_FALSE(console->get_can_enter_key());
-    ASSERT_FALSE(console->get_can_ctrl_c());
-    ASSERT_FALSE(console->get_can_ctrl_w());
-    ASSERT_FALSE(console->get_can_page_up());
-    ASSERT_FALSE(console->get_can_page_down());
-    ASSERT_FALSE(console->get_can_home());
-    ASSERT_FALSE(console->get_can_end());
+    ASSERT_TRUE(console->get_can_move_to_previous_input());
+    ASSERT_TRUE(console->get_can_move_to_next_input());
+    ASSERT_TRUE(console->get_can_backspace());
+    ASSERT_TRUE(console->get_can_tab());
+    ASSERT_TRUE(console->get_can_enter_key());
+    ASSERT_TRUE(console->get_can_ctrl_c());
+    ASSERT_TRUE(console->get_can_ctrl_w());
+    ASSERT_TRUE(console->get_can_page_up());
+    ASSERT_TRUE(console->get_can_page_down());
+    ASSERT_TRUE(console->get_can_home());
+    ASSERT_TRUE(console->get_can_end());
     ASSERT_FALSE(console->get_is_left_control_pressed());
     ASSERT_FALSE(console->get_is_right_control_pressed());
     ASSERT_FALSE(console->get_is_left_alt_pressed());
