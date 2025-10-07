@@ -353,7 +353,7 @@ namespace yli::ontology
         if (this->in_console)
         {
             // Restore previous input mode.
-            if (this->master_of_input_modes.has_current_input_mode())
+            if (this->master_of_input_modes.has_current_input_mode()) [[likely]]
             {
                 this->master_of_input_modes.deactivate_current_input_mode();
             }
