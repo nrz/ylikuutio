@@ -134,17 +134,17 @@ namespace yli::console
             const std::size_t n_columns;
             const std::size_t n_rows;
 
-            bool can_move_to_previous_input { false };
-            bool can_move_to_next_input     { false };
-            bool can_backspace              { false };
-            bool can_tab                    { false };
-            bool can_enter_key              { false };
-            bool can_ctrl_c                 { false };
-            bool can_ctrl_w                 { false };
-            bool can_page_up                { false };
-            bool can_page_down              { false };
-            bool can_home                   { false };
-            bool can_end                    { false };
+            bool can_move_to_previous_input { true };
+            bool can_move_to_next_input     { true };
+            bool can_backspace              { true };
+            bool can_tab                    { true };
+            bool can_enter_key              { true };
+            bool can_ctrl_c                 { true };
+            bool can_ctrl_w                 { true };
+            bool can_page_up                { true };
+            bool can_page_down              { true };
+            bool can_home                   { true };
+            bool can_end                    { true };
             bool is_left_control_pressed    { false };
             bool is_right_control_pressed   { false };
             bool is_left_alt_pressed        { false };
