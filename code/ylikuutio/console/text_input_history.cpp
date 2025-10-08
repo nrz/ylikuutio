@@ -22,16 +22,15 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
-#include <utility>  // std::move
 #include <vector>   // std::vector
 
 namespace yli::console
 {
     class TextInput;
 
-    void TextInputHistory::add_to_history(TextInput&& text_input)
+    void TextInputHistory::add_to_history(const TextInput& text_input)
     {
-        this->history.emplace_back(std::move(text_input));
+        this->history.emplace_back(text_input);
 
         // The iterator needs to be updated because `emplace_back` invalidates iterators.
         if (this->history_index == std::numeric_limits<std::size_t>::max()) [[likely]]
@@ -46,9 +45,9 @@ namespace yli::console
         }
     }
 
-    void TextInputHistory::emplace_back(TextInput&& text_input)
+    void TextInputHistory::emplace_back(const TextInput& text_input)
     {
-        this->history.emplace_back(std::move(text_input));
+        this->history.emplace_back(text_input);
 
         // The iterator needs to be updated because `emplace_back` invalidates iterators.
         if (this->history_index == std::numeric_limits<std::size_t>::max()) [[likely]]
@@ -63,9 +62,9 @@ namespace yli::console
         }
     }
 
-    void TextInputHistory::push_back(TextInput&& text_input)
+    void TextInputHistory::push_back(const TextInput& text_input)
     {
-        this->history.push_back(std::move(text_input));
+        this->history.push_back(text_input);
 
         // The iterator needs to be updated because `emplace_back` invalidates iterators.
         if (this->history_index == std::numeric_limits<std::size_t>::max()) [[likely]]
