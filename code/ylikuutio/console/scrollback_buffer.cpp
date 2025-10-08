@@ -22,7 +22,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <optional> // std::optional
 #include <span>     // std::span
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
