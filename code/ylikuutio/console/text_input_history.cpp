@@ -130,7 +130,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_previous()
     {
-        if (this->get_is_in_history() && this->history_index > 0) [[likely]]
+        if (this->get_is_in_history() && this->history_index > 0 && this->history_index < this->size()) [[likely]]
         {
             // If we are in the history and not in the oldest input, move to the previous input.
             this->history_index--;
@@ -144,7 +144,7 @@ namespace yli::console
 
     bool TextInputHistory::move_to_next()
     {
-        if (this->get_is_in_history() && this->history_index < this->size()) [[likely]]
+        if (this->get_is_in_history() && this->history_index < this->size() - 1) [[likely]]
         {
             // If we are in the history and not in the newest input, move to the next input.
             this->history_index++;
