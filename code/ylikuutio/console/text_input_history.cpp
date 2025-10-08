@@ -43,6 +43,9 @@ namespace yli::console
             // We are in history. Adding input to history must keep the iterator correct.
             this->history_it = this->history.begin() + this->history_index;
         }
+
+        // Set copied `TextInput` into a valid state.
+        this->history.back().move_cursor_to_end_of_line();
     }
 
     void TextInputHistory::emplace_back(const TextInput& text_input)
@@ -60,6 +63,9 @@ namespace yli::console
             // We are in history. Emplacing input to history must keep the iterator correct.
             this->history_it = this->history.begin() + this->history_index;
         }
+
+        // Set copied `TextInput` into a valid state.
+        this->history.back().move_cursor_to_end_of_line();
     }
 
     void TextInputHistory::push_back(const TextInput& text_input)
@@ -77,6 +83,9 @@ namespace yli::console
             // We are in history. Pushing input to history must keep the iterator correct.
             this->history_it = this->history.begin() + this->history_index;
         }
+
+        // Set copied `TextInput` into a valid state.
+        this->history.back().move_cursor_to_end_of_line();
     }
 
     bool TextInputHistory::enter_history()
