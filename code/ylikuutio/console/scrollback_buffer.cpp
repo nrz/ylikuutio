@@ -157,9 +157,11 @@ namespace yli::console
         }
         else if (max_rows <= this->size() && top_index <= this->size() - max_rows) [[likely]]
         {
+            // Arguments are valid and a view of requested size can be provided.
             return std::span(&this->data()[top_index], &this->data()[top_index + max_rows]);
         }
 
+        // Arguments are valid but a max-size view can not be provided due to end of data.
         return std::span(&this->data()[top_index], &this->data()[this->size()]);
     }
 
