@@ -26,8 +26,6 @@
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 #include <utility> // std::move
-#include <variant> // std::variant
-#include <vector>  // std::vector
 
 namespace yli::ontology
 {
@@ -46,7 +44,7 @@ namespace yli::ontology
         PositionStruct position;
         std::size_t text_size     { 0 };
         std::size_t font_size     { 0 };
-        std::variant<std::string, std::vector<std::string>> text;
+        std::string text;
     };
 }
 

@@ -83,9 +83,7 @@ namespace yli::ontology
         : Entity(application, universe, text_struct),
         child_of_font_2d(font_2d_parent_module, *this)
     {
-        this->text = (std::holds_alternative<std::string>(text_struct.text) ?
-                std::get<std::string>(text_struct.text) :
-                ""); // TODO: add support for `std::vector<std::string>`!
+        this->text = text_struct.text;
         this->position = text_struct.position;
         this->text_size = text_struct.text_size;
         this->font_size = text_struct.font_size;
