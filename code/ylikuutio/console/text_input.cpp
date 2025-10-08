@@ -92,18 +92,13 @@ namespace yli::console
 
     bool TextInput::delete_character()
     {
-        // If the size of the input is > 0, delete the character at the current index, and return `true` to signal success.
+        // If the size of the input is > 0, delete the character to the left, and return `true` to signal success.
         // Otherwise, return `false` to signal fail.
-        if (this->input.size() > 0) [[likely]]
+        if (this->input.size() > 0 && this->cursor_index > 0) [[likely]]
         {
-            if (this->cursor_it == this->input.end()) [[likely]]
-            {
-                // Last character, deleting the character also decrements cursor index.
-                this->cursor_index--;
-            }
-
+            // Deleting the character also decrements cursor index (backspace operation).
             this->input.erase(--this->cursor_it);
-            this->cursor_it = this->input.begin() + this->cursor_index;
+            this->cursor_it = this->input.begin() + (--this->cursor_index);
             return true;
         }
 
