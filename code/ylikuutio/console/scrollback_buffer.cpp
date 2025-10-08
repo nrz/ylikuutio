@@ -274,4 +274,11 @@ namespace yli::console
 
         return false;
     }
+
+    void ScrollbackBuffer::clear()
+    {
+        this->buffer.clear();
+        this->buffer_it = this->buffer.end();
+        this->buffer_index = std::numeric_limits<std::size_t>::max();
+    }
 }
