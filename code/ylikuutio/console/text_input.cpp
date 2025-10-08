@@ -37,6 +37,7 @@ namespace yli::console
         : type { type }
     {
         this->input = std::move(string);
+        this->move_cursor_to_end_of_line();
     }
 
     void TextInput::add_character(const char character)

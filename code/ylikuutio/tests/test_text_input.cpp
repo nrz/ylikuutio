@@ -54,37 +54,33 @@ TEST(text_input_must_be_initialized_appropriately, temp_input)
     ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
 }
 
-TEST(text_input_must_be_initialized_appropriately, string_foo_new_input)
+TEST(text_input_must_be_initialized_appropriately, string_bar_new_input)
 {
-    yli::console::TextInput text_input("foo", yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput text_input("bar", yli::console::TextInputType::NEW_INPUT);
     ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::NEW_INPUT);
     ASSERT_EQ(text_input.size(), 3);
     ASSERT_FALSE(text_input.empty());
-    ASSERT_EQ(text_input.get_character_at_current_index(), 'f');
-    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
-    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'r');
+    ASSERT_EQ(text_input.get_cursor_index(), 3);
     std::string::iterator it = text_input.get_cursor_it();
-    ASSERT_EQ(it, text_input.data().begin());
-    it += text_input.size();
     ASSERT_EQ(it, text_input.data().end());
-    ASSERT_EQ(text_input.data(), "foo");
+    ASSERT_EQ(text_input.data(), "bar");
     ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
 }
 
-TEST(text_input_must_be_initialized_appropriately, string_foo_temp_input)
+TEST(text_input_must_be_initialized_appropriately, string_bar_temp_input)
 {
-    yli::console::TextInput text_input("foo", yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInput text_input("bar", yli::console::TextInputType::TEMP_INPUT);
     ASSERT_EQ(text_input.get_type(), yli::console::TextInputType::TEMP_INPUT);
     ASSERT_EQ(text_input.size(), 3);
     ASSERT_FALSE(text_input.empty());
-    ASSERT_EQ(text_input.get_character_at_current_index(), 'f');
-    ASSERT_EQ(text_input.get_character_to_the_left(), std::nullopt);
-    ASSERT_EQ(text_input.get_cursor_index(), 0);
+    ASSERT_EQ(text_input.get_character_at_current_index(), std::nullopt);
+    ASSERT_EQ(text_input.get_character_to_the_left(), 'r');
+    ASSERT_EQ(text_input.get_cursor_index(), 3);
     std::string::iterator it = text_input.get_cursor_it();
-    ASSERT_EQ(it, text_input.data().begin());
-    it += text_input.size();
     ASSERT_EQ(it, text_input.data().end());
-    ASSERT_EQ(text_input.data(), "foo");
+    ASSERT_EQ(text_input.data(), "bar");
     ASSERT_EQ(text_input.cbegin().unwrap(), text_input.data().cbegin());
 }
 
