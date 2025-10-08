@@ -228,7 +228,13 @@ namespace yli::console
 
         // Console state change.
 
-        if (new_state == ConsoleState::ACTIVE_IN_NEW_INPUT ||
+        if (new_state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT ||
+                new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT ||
+                new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        {
+            this->enter_buffer();
+        }
+        else if (new_state == ConsoleState::ACTIVE_IN_NEW_INPUT ||
                 new_state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT ||
                 new_state == ConsoleState::ACTIVE_IN_TEMP_INPUT)
         {
