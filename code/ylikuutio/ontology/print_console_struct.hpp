@@ -24,7 +24,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <optional> // std::optional
 #include <span>     // std::span
 #include <string>   // std::string
 
@@ -33,7 +32,7 @@ namespace yli::ontology
     struct PrintConsoleStruct
     {
         PrintConsoleStruct(
-                const std::optional<std::span<const yli::console::TextLine>> buffer_text,
+                const std::span<const yli::console::TextLine> buffer_text,
                 const yli::console::TextInput* const text_input)
             : buffer_text { buffer_text },
             text_input { text_input }
@@ -42,7 +41,7 @@ namespace yli::ontology
 
         PositionStruct position;
         std::size_t font_size { 0 };
-        const std::optional<std::span<const yli::console::TextLine>> buffer_text;
+        const std::span<const yli::console::TextLine> buffer_text;
         const yli::console::TextInput* const text_input;
         std::string prompt;
     };

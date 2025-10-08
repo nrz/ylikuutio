@@ -48,6 +48,7 @@ namespace yli::ontology
     class Console;
     struct FontStruct;
     struct PrintTextStruct;
+    struct PrintConsoleStruct;
 
     class Font2d final : public Entity
     {
@@ -75,6 +76,7 @@ namespace yli::ontology
             void render();
 
             void print_text_2d(const PrintTextStruct& print_text_struct) const;
+            void print_console(const PrintConsoleStruct& print_console_struct) const;
 
             GenericParentModule* get_generic_parent_module(const int type);
 

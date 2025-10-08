@@ -22,8 +22,10 @@
 #include "vertical_alignment.hpp"
 #include "font_struct.hpp"
 #include "print_text_struct.hpp"
+#include "print_console_struct.hpp"
 #include "texture_file_format.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
@@ -48,6 +50,7 @@
 #include <algorithm> // std::count
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
+#include <span>      // std::span
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -363,6 +366,77 @@ namespace yli::ontology
                 this->uv_buffer,
                 this->vertex_position_in_screenspace_id,
                 this->vertex_uv_id);
+    }
+
+    void Font2d::print_console(const PrintConsoleStruct& print_console_struct) const
+    {
+        if (!this->should_render)
+        {
+            return;
+        }
+
+        this->prepare_to_print();
+
+        uint32_t current_left_x = print_console_struct.position.x;
+        uint32_t current_top_y = print_console_struct.position.y;
+
+        // Fill buffers.
+        std::vector<glm::vec2> vertices;
+        std::vector<glm::vec2> uvs;
+
+        const std::span<const yli::console::TextLine> view = print_console_struct.buffer_text;
+
+        // Print to the right side of X (so far there is no check for input length).
+        // Print up of Y.
+
+        for (std::span<const yli::console::TextLine>::iterator span_it = view.begin(); span_it != view.end(); ++span_it)
+        {
+            for (yli::console::TextLine::const_iterator text_line_it = span_it->cbegin(); text_line_it != span_it->cend(); ++text_line_it)
+            {
+                const char character = *text_line_it;
+
+                this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
+                current_left_x += this->text_size;
+
+                const float uv_x = (character % print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
+                const float uv_y = (character / print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
+
+                const glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
+                const glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), uv_y);
+                const glm::vec2 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
+                const glm::vec2 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
+
+                uvs.emplace_back(uv_up_left);
+                uvs.emplace_back(uv_down_left);
+                uvs.emplace_back(uv_up_right);
+
+                uvs.emplace_back(uv_down_right);
+                uvs.emplace_back(uv_up_right);
+                uvs.emplace_back(uv_down_left);
+            }
+
+            // Jump to the beginning of the next line.
+            current_left_x = print_console_struct.position.x;
+            current_top_y -= text_size;
+        }
+
+        yli::render::render_text(
+                vertices,
+                uvs,
+                this->vao,
+                this->vertex_buffer,
+                this->uv_buffer,
+                this->vertex_position_in_screenspace_id,
+                this->vertex_uv_id);
+
+        PrintTextStruct print_text_struct;
+        print_text_struct.position.x = current_left_x;
+        print_text_struct.position.y = current_top_y;
+        print_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
+        print_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        print_text_struct.font_size = print_console_struct.font_size;
+        print_text_struct.text = (print_console_struct.text_input != nullptr ? (print_console_struct.prompt + print_console_struct.text_input->data()) : "");
+        this->print_text_2d(print_text_struct);
     }
 
     GenericParentModule* Font2d::get_generic_parent_module(const int type)
