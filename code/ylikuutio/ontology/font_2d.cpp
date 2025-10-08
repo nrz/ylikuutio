@@ -334,12 +334,12 @@ namespace yli::ontology
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                 // TODO: implement newline for other horizontal and vertical alignments too!
                 current_left_x = print_text_struct.position.x;
-                current_top_y -= text_size;
+                current_top_y -= this->text_size;
                 continue;
             }
 
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
-            current_left_x += text_size;
+            current_left_x += this->text_size;
 
             const float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
             const float uv_y = (character / print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
