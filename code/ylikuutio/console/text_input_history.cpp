@@ -235,5 +235,9 @@ namespace yli::console
         {
             this->enter_history();
         }
+        else if (new_state == ConsoleState::ACTIVE_IN_NEW_INPUT)
+        {
+            this->exit_history();
+        }
     }
 }
