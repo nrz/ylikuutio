@@ -38,9 +38,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_0_n_rows_0)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_0_n_rows_1)
@@ -52,9 +53,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_0_n_rows_1)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_0)
@@ -66,9 +68,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_0)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_1)
@@ -80,9 +83,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_1_n_rows_1)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_1)
@@ -94,9 +98,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_1)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_2)
@@ -108,9 +113,10 @@ TEST(scrollback_buffer_must_be_initialized_appropriately, n_columns_2_n_rows_2)
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 2);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 2);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    ASSERT_FALSE(scrollback_buffer.get_view(0)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(1)); // Initially we are not in buffer.
-    ASSERT_FALSE(scrollback_buffer.get_view(2)); // Initially we are not in buffer.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 0).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view(0, 1).empty());      // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(0).empty()); // Initially scrollback buffer is empty.
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty()); // Initially scrollback buffer is empty.
 }
 
 TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_n_columns_1_n_rows_1)
@@ -121,10 +127,8 @@ TEST(moving_to_previous_input_must_fail_appropriately, empty_scrollback_buffer_n
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_FALSE(buffer_view_max_size_1);
-    std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_FALSE(buffer_view_max_size_2);
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty());
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(2).empty());
 }
 
 TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_n_columns_1_n_rows_1)
@@ -135,10 +139,8 @@ TEST(moving_to_next_input_must_fail_appropriately, empty_scrollback_buffer_n_col
     ASSERT_EQ(scrollback_buffer.size(), 0);
     ASSERT_TRUE(scrollback_buffer.empty());
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_FALSE(buffer_view_max_size_1);
-    std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_FALSE(buffer_view_max_size_2);
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty());
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(2).empty());
 }
 
 TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_n_rows_1_text_n_columns_0)
@@ -154,10 +156,8 @@ TEST(adding_empty_line_must_not_do_anything, scrollback_buffer_with_n_columns_1_
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 1);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_FALSE(buffer_view_max_size_1);
-    std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_FALSE(buffer_view_max_size_2);
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(1).empty());
+    ASSERT_TRUE(scrollback_buffer.get_view_to_last(2).empty());
 }
 
 TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_n_columns_1_n_rows_1_text_n_columns_1)
@@ -174,46 +174,40 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -223,18 +217,16 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -253,46 +245,40 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -302,18 +288,16 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -332,46 +316,40 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -381,18 +359,16 @@ TEST(adding_a_line_of_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -412,50 +388,44 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(1), TextLine("b"));
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("b"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
     }
     {
@@ -465,18 +435,16 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("b"));
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("b"));
     }
 }
@@ -495,46 +463,40 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -544,18 +506,16 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -574,46 +534,40 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -623,18 +577,16 @@ TEST(adding_a_line_of_n_columns_of_2_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -655,62 +607,55 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(2), TextLine("c"));
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 3 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 3);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 3);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 3);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 3);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
-        const TextLine& text_line_2_from_buffer = buffer_view_top_index_0_max_size_2->data()[2];
+        const TextLine& text_line_2_from_buffer = buffer_view_top_index_0_max_size_2.data()[2];
         ASSERT_EQ(text_line_2_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("b"));
-        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
@@ -720,18 +665,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
 }
@@ -751,66 +694,58 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(1), TextLine("c"));
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 3 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_3 = scrollback_buffer.get_view(0, 3);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_3);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_3->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_3->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_3 = scrollback_buffer.get_view(0, 3);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_3.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_3.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_3->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_3.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 3 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_3 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_3);
-        ASSERT_EQ(buffer_view_bottom_max_size_3->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_3->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_3 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_3.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_3.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
     }
     {
@@ -820,18 +755,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
 }
@@ -850,46 +783,40 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -899,18 +826,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -934,74 +859,66 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(2), TextLine("c"));
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 3 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 3);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 3);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 3);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 3);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
-        const TextLine& text_line_2_from_buffer = buffer_view_top_index_0_max_size_2->data()[2];
+        const TextLine& text_line_2_from_buffer = buffer_view_top_index_0_max_size_2.data()[2];
         ASSERT_EQ(text_line_2_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("b"));
-        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 3 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_3 = scrollback_buffer.get_view_to_last(3);
-        ASSERT_TRUE(buffer_view_bottom_max_size_3);
-        ASSERT_EQ(buffer_view_bottom_max_size_3->size(), 3);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_3->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_3 = scrollback_buffer.get_view_to_last(3);
+        ASSERT_EQ(buffer_view_bottom_max_size_3.size(), 3);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_3.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("a"));
-        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_3->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_3.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("b"));
-        const TextLine& text_line_2_from_buffer = buffer_view_bottom_max_size_3->data()[2];
+        const TextLine& text_line_2_from_buffer = buffer_view_bottom_max_size_3.data()[2];
         ASSERT_EQ(text_line_2_from_buffer, TextLine("c"));
     }
     {
@@ -1011,18 +928,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
 }
@@ -1045,50 +960,44 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(1), TextLine("c"));
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
-        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_top_index_0_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 2);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 2);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("ab"));
-        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2->data()[1];
+        const TextLine& text_line_1_from_buffer = buffer_view_bottom_max_size_2.data()[1];
         ASSERT_EQ(text_line_1_from_buffer, TextLine("c"));
     }
     {
@@ -1098,18 +1007,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, TextLine("c"));
     }
 }
@@ -1131,46 +1038,40 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
     {
         // Get view to scrollback buffer from the top (start index = 0), max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_0->empty());
+        std::span<const TextLine> buffer_view_top_index_0_max_size_0 = scrollback_buffer.get_view(0, 0);
+        ASSERT_TRUE(buffer_view_top_index_0_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_1);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_1 = scrollback_buffer.get_view(0, 1);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the top (start index = 0), max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
-        ASSERT_TRUE(buffer_view_top_index_0_max_size_2);
-        ASSERT_EQ(buffer_view_top_index_0_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_top_index_0_max_size_2 = scrollback_buffer.get_view(0, 2);
+        ASSERT_EQ(buffer_view_top_index_0_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_top_index_0_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 0 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0);
-        ASSERT_TRUE(buffer_view_bottom_max_size_0->empty());
+        std::span<const TextLine> buffer_view_bottom_max_size_0 = scrollback_buffer.get_view_to_last(0);
+        ASSERT_TRUE(buffer_view_bottom_max_size_0.empty());
     }
     {
         // Get view to scrollback buffer from the bottom, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
-        ASSERT_TRUE(buffer_view_bottom_max_size_1);
-        ASSERT_EQ(buffer_view_bottom_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_1 = scrollback_buffer.get_view_to_last(1);
+        ASSERT_EQ(buffer_view_bottom_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the bottom, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
-        ASSERT_TRUE(buffer_view_bottom_max_size_2);
-        ASSERT_EQ(buffer_view_bottom_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_bottom_max_size_2 = scrollback_buffer.get_view_to_last(2);
+        ASSERT_EQ(buffer_view_bottom_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_bottom_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
@@ -1180,18 +1081,16 @@ TEST(adding_a_line_of_n_columns_of_3_must_work_properly, scrollback_buffer_with_
     }
     {
         // Get view to scrollback buffer from the current index, max 1 line.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-        ASSERT_TRUE(buffer_view_max_size_1);
-        ASSERT_EQ(buffer_view_max_size_1->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1->data()[0];
+        std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 1);
+        ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_1.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
     {
         // Get view to scrollback buffer from the current index, max 2 lines.
-        std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-        ASSERT_TRUE(buffer_view_max_size_2);
-        ASSERT_EQ(buffer_view_max_size_2->size(), 1);
-        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2->data()[0];
+        std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view(scrollback_buffer.get_buffer_index(), 2);
+        ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+        const TextLine& text_line_0_from_buffer = buffer_view_max_size_2.data()[0];
         ASSERT_EQ(text_line_0_from_buffer, text_line);
     }
 }
@@ -1338,10 +1237,12 @@ TEST(emplacing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 2);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_FALSE(buffer_view_max_size_1);
-    std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_FALSE(buffer_view_max_size_2);
+    std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view_to_last(1);
+    ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+    ASSERT_EQ(buffer_view_max_size_1[0], text_line);
+    std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view_to_last(2);
+    ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+    ASSERT_EQ(buffer_view_max_size_2[0], text_line);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
 
@@ -1355,9 +1256,11 @@ TEST(pushing_back_a_n_columns_of_1_must_work_properly, scrollback_buffer_with_n_
     ASSERT_EQ(scrollback_buffer.get_n_columns(), 1);
     ASSERT_EQ(scrollback_buffer.get_n_rows(), 2);
     ASSERT_EQ(scrollback_buffer.get_buffer_index(), std::numeric_limits<std::size_t>::max());
-    std::optional<std::span<const TextLine>> buffer_view_max_size_1 = scrollback_buffer.get_view(1);
-    ASSERT_FALSE(buffer_view_max_size_1);
-    std::optional<std::span<const TextLine>> buffer_view_max_size_2 = scrollback_buffer.get_view(2);
-    ASSERT_FALSE(buffer_view_max_size_2);
+    std::span<const TextLine> buffer_view_max_size_1 = scrollback_buffer.get_view_to_last(1);
+    ASSERT_EQ(buffer_view_max_size_1.size(), 1);
+    ASSERT_EQ(buffer_view_max_size_1[0], text_line);
+    std::span<const TextLine> buffer_view_max_size_2 = scrollback_buffer.get_view_to_last(2);
+    ASSERT_EQ(buffer_view_max_size_2.size(), 1);
+    ASSERT_EQ(buffer_view_max_size_2[0], text_line);
     ASSERT_EQ(scrollback_buffer.at(0), text_line);
 }
