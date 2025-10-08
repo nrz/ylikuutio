@@ -20,7 +20,6 @@
 #include "font_2d.hpp"
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
-#include "texture_file_format.hpp"
 #include "text_struct.hpp"
 #include "print_text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
