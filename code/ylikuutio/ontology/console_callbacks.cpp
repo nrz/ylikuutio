@@ -19,15 +19,13 @@
 #include "universe.hpp"
 #include "lisp_function.hpp"
 #include "callback_magic_numbers.hpp"
+#include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/lisp/parser.hpp"
 #include "code/ylikuutio/lisp/executor.hpp"
 
 // Include standard headers
-#include <algorithm> // std::copy etc.
 #include <cstddef>   // std::size_t
-#include <iterator>  // std::back_inserter
-#include <list>      // std::list
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -83,9 +81,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_control_pressed = false;
+            console.console_logic_module.set_is_left_control_pressed(false);
         }
         return std::nullopt;
     }
@@ -96,9 +94,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_control_pressed = false;
+            console.console_logic_module.set_is_right_control_pressed(false);
         }
         return std::nullopt;
     }
@@ -109,9 +107,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_alt_pressed = false;
+            console.console_logic_module.set_is_left_alt_pressed(false);
         }
         return std::nullopt;
     }
@@ -122,9 +120,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_alt_pressed = false;
+            console.console_logic_module.set_is_right_alt_pressed(false);
         }
         return std::nullopt;
     }
@@ -135,9 +133,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_shift_pressed = false;
+            console.console_logic_module.set_is_left_shift_pressed(false);
         }
         return std::nullopt;
     }
@@ -148,9 +146,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_shift_pressed = false;
+            console.console_logic_module.set_is_right_shift_pressed(false);
         }
         return std::nullopt;
     }
@@ -161,9 +159,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_move_to_previous_input = true;
+            console.console_logic_module.set_can_move_to_previous_input(true);
         }
         return std::nullopt;
     }
@@ -174,9 +172,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_move_to_next_input = true;
+            console.console_logic_module.set_can_move_to_next_input(true);
         }
         return std::nullopt;
     }
@@ -187,9 +185,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_backspace = true;
+            console.console_logic_module.set_can_backspace(true);
         }
         return std::nullopt;
     }
@@ -200,9 +198,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_tab = true;
+            console.console_logic_module.set_can_tab(true);
         }
         return std::nullopt;
     }
@@ -213,9 +211,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_enter_key = true;
+            console.console_logic_module.set_can_enter_key(true);
         }
         return std::nullopt;
     }
@@ -226,9 +224,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_ctrl_c = true;
+            console.console_logic_module.set_can_ctrl_c(true);
         }
         return std::nullopt;
     }
@@ -239,9 +237,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_ctrl_w = true;
+            console.console_logic_module.set_can_ctrl_w(true);
         }
         return std::nullopt;
     }
@@ -252,9 +250,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_page_up = true;
+            console.console_logic_module.set_can_page_up(true);
         }
         return std::nullopt;
     }
@@ -265,9 +263,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_page_down = true;
+            console.console_logic_module.set_can_page_down(true);
         }
         return std::nullopt;
     }
@@ -278,9 +276,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_home = true;
+            console.console_logic_module.set_can_home(true);
         }
         return std::nullopt;
     }
@@ -291,9 +289,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.get_in_console())
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.can_end = true;
+            console.console_logic_module.set_can_end(true);
         }
         return std::nullopt;
     }
@@ -306,7 +304,7 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.exit_console())
+        if (console.console_logic_module.get_active_in_console() && console.exit_console())
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = CallbackMagicNumber::EXIT_CONSOLE;
@@ -323,9 +321,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_control_pressed = true;
+            console.console_logic_module.set_is_left_control_pressed(true);
         }
         return std::nullopt;
     }
@@ -336,9 +334,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_control_pressed = true;
+            console.console_logic_module.set_is_right_control_pressed(true);
         }
         return std::nullopt;
     }
@@ -349,9 +347,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_alt_pressed = true;
+            console.console_logic_module.set_is_left_alt_pressed(true);
         }
         return std::nullopt;
     }
@@ -362,9 +360,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_alt_pressed = true;
+            console.console_logic_module.set_is_right_alt_pressed(true);
         }
         return std::nullopt;
     }
@@ -375,9 +373,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_left_shift_pressed = true;
+            console.console_logic_module.set_is_left_shift_pressed(true);
         }
         return std::nullopt;
     }
@@ -388,9 +386,9 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console)
+        if (console.console_logic_module.get_active_in_console())
         {
-            console.is_right_shift_pressed = true;
+            console.console_logic_module.set_is_right_shift_pressed(true);
         }
         return std::nullopt;
     }
@@ -401,35 +399,30 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_move_to_previous_input)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_previous_input())
         {
-            if (!console.in_historical_input && !console.old_command_history.empty())
+            const std::size_t history_index = console.command_history.get_history_index();
+
+            if (!console.console_logic_module.get_active_in_historical_input() && !console.command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
-                console.in_historical_input = true;
-                console.historical_input_i = console.old_command_history.size() - 1;
-
-                // Copy the new input into temp input.
-                console.old_temp_input.clear();
-                std::copy(console.old_new_input.begin(), console.old_new_input.end(), std::back_inserter(console.old_temp_input));
-
-                // Copy the historical input into new input.
-                console.old_new_input.clear();
-                console.copy_historical_input_into_new_input();
-
-                console.move_cursor_to_end_of_line();
-                console.can_move_to_previous_input = false;
+                console.console_logic_module.enter_historical_input();
+                console.console_logic_module.set_can_move_to_previous_input(false);
             }
-            else if (console.in_historical_input && console.historical_input_i > 0)
+            else if (console.console_logic_module.get_active_in_historical_input() && history_index > 0)
             {
                 // OK, we moved to the previous historical input.
-                console.historical_input_i--;
-
-                // Copy the historical input into new input.
-                console.copy_historical_input_into_new_input();
+                console.command_history.move_to_previous();
+                console.console_logic_module.set_can_move_to_previous_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index > 0)
+            {
+                // OK, we moved to the previous historical input from temp input.
+                console.console_logic_module.enter_historical_input();
+                console.command_history.move_to_nth(history_index - 1);
 
                 console.move_cursor_to_end_of_line();
-                console.can_move_to_previous_input = false;
+                console.console_logic_module.set_can_move_to_previous_input(false);
             }
         }
         return std::nullopt;
@@ -441,30 +434,42 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_move_to_next_input && !console.old_command_history.empty())
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_next_input() && !console.command_history.empty())
         {
-            if (console.in_historical_input && console.historical_input_i == console.old_command_history.size() - 1)
+            const std::size_t history_index = console.command_history.get_history_index();
+
+            if (console.console_logic_module.get_active_in_historical_input() && history_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
-                console.in_historical_input = false;
-
-                // Copy temp input into new input.
-                console.old_new_input.clear();
-                std::copy(console.old_temp_input.begin(), console.old_temp_input.end(), std::back_inserter(console.old_new_input));
+                console.console_logic_module.enter_new_input();
 
                 console.move_cursor_to_end_of_line();
-                console.can_move_to_next_input = false;
+                console.console_logic_module.set_can_move_to_next_input(false);
             }
-            else if (console.in_historical_input && console.historical_input_i < console.old_command_history.size() - 1)
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index == console.command_history.size() - 1)
+            {
+                // OK, we moved from the edited last historical input (temp input) to the new input.
+                console.console_logic_module.enter_new_input();
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_historical_input() && history_index < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
-                console.historical_input_i++;
-
-                // Copy the historical input into new input.
-                console.copy_historical_input_into_new_input();
+                console.command_history.move_to_next();
 
                 console.move_cursor_to_end_of_line();
-                console.can_move_to_next_input = false;
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index < console.command_history.size() - 1)
+            {
+                // OK, we moved to the next historical input from temp input.
+                console.console_logic_module.enter_historical_input(); // Entering historical input causes history index reset to last.
+                console.command_history.move_to_nth(history_index + 1);
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
             }
         }
         return std::nullopt;
@@ -476,13 +481,17 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console &&
-                console.can_backspace &&
-                console.cursor_it != console.old_new_input.begin())
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_backspace())
         {
-            console.cursor_it = console.old_new_input.erase(--console.cursor_it);
-            console.cursor_index--;
-            console.can_backspace = false;
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+            if (active_input != nullptr)
+            {
+                active_input->delete_character();
+            }
+
+            console.console_logic_module.set_can_backspace(false);
         }
         return std::nullopt;
     }
@@ -495,10 +504,17 @@ namespace yli::ontology
     {
         Universe& universe = console.get_universe();
 
-        if (console.in_console && console.can_tab)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_tab())
         {
-            // Copy new input into a `std::string`.
-            std::string input_string(console.old_new_input.begin(), console.old_new_input.end());
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+            if (active_input == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            // Copy active input into a `std::string`.
+            std::string input_string(active_input->data());
 
             std::vector<std::string> parameter_vector;
             std::string command;
@@ -514,8 +530,8 @@ namespace yli::ontology
                 console.print_completions(universe.registry, command);
 
                 const std::string completion = universe.complete(command);
-                console.old_new_input.clear();
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
+                active_input->clear();
+                active_input->add_characters(completion);
             }
             else if (parameter_vector.empty())
             {
@@ -530,7 +546,7 @@ namespace yli::ontology
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
+                    active_input->add_characters(completion);
                 }
             }
             else if (input_string.back() != ' ')
@@ -541,21 +557,21 @@ namespace yli::ontology
                 console.print_completions(universe.registry, parameter_vector.back());
 
                 const std::string completion = universe.complete(parameter_vector.back());
-                console.old_new_input.clear();
-                std::copy(command.begin(), command.end(), std::back_inserter(console.old_new_input));
-                console.old_new_input.emplace_back(' ');
+                active_input->clear();
+                active_input->add_characters(command);
+                active_input->add_character(' ');
 
                 // Copy the old parameters except the last.
 
                 for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
                 {
-                    std::copy(parameter_vector.at(i).begin(), parameter_vector.at(i).end(), std::back_inserter(console.old_new_input));
+                    active_input->add_characters(parameter_vector.at(i));
                     console.move_cursor_to_end_of_line();
-                    console.old_new_input.emplace_back(' ');
+                    active_input->add_character(' ');
                 }
 
                 // Copy the completed parameter.
-                std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
+                active_input->add_characters(completion);
             }
             else
             {
@@ -565,13 +581,14 @@ namespace yli::ontology
 
                 if (!completion.empty())
                 {
-                    std::copy(completion.begin(), completion.end(), std::back_inserter(console.old_new_input));
+                    // Copy the completed parameter.
+                    active_input->add_characters(completion);
                 }
             }
 
             console.move_cursor_to_end_of_line();
 
-            console.can_tab = false;
+            console.console_logic_module.set_can_tab(false);
         }
         return std::nullopt;
     }
@@ -582,64 +599,46 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (!console.in_console || !console.can_enter_key)
+        if (!console.console_logic_module.get_active_in_console() || !console.console_logic_module.get_can_enter_key())
         {
             return std::nullopt;
         }
 
-        // Copy new input into a `std::string`.
-        const std::string input_string(console.old_new_input.begin(), console.old_new_input.end());
+        yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
 
-        // Copy new input into the command history.
-        console.old_command_history.emplace_back(console.old_new_input);
-
-        // Prefix new input with the prompt, for saving into `old_console_history`.
-        std::list<char>::iterator it = console.old_new_input.begin();
-
-        for (const char& my_char : console.prompt)
+        if (active_input == nullptr)
         {
-            console.old_new_input.insert(it, my_char);
+            std::cerr << "ERROR: `Console::enter_key`: `active_input` is `nullptr`!\n";
+            return std::nullopt;
         }
 
-        std::list<char> old_new_input_char_list;
+        // Copy prompt input into a `std::string`.
+        std::string input_string(console.prompt);
 
-        // Split into lines, emplace_back each line into `old_console_history` separately.
-        for (const char& my_char : console.old_new_input)
-        {
-            old_new_input_char_list.emplace_back(my_char);
+        // Append active input.
+        input_string.append(active_input->data().begin(), active_input->data().end());
 
-            if (old_new_input_char_list.size () >= console.n_columns)
-            {
-                console.old_console_history.emplace_back(old_new_input_char_list);
-                old_new_input_char_list.clear();
-            }
-        }
+        // Copy active input into the command history.
+        console.command_history.add_to_history(*active_input);
 
-        if (old_new_input_char_list.size() > 0)
-        {
-            console.old_console_history.emplace_back(old_new_input_char_list);
-        }
+        // Store new input prefixed with prompt to scrollback buffer.
+        console.scrollback_buffer.add_to_buffer(yli::console::TextLine(input_string));
 
         std::vector<std::string> parameter_vector;
         std::string command;
 
-        console.old_new_input.clear();
+        console.new_input.clear();
 
-        if (yli::lisp::parse(input_string, command, parameter_vector))
+        if (yli::lisp::parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
         {
             std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
-            console.in_historical_input = false;
-            console.cursor_it = console.old_new_input.begin();
-            console.cursor_index = 0;
-            console.can_enter_key = false;
+            console.console_logic_module.enter_new_input();
+            console.console_logic_module.set_can_enter_key(false);
             return any_value;
         }
 
-        console.in_historical_input = false;
-        console.cursor_it = console.old_new_input.begin();
-        console.cursor_index = 0;
-        console.can_enter_key = false;
-
+        console.console_logic_module.enter_new_input();
+        console.console_logic_module.set_can_enter_key(false);
         return std::nullopt;
     }
 
@@ -649,17 +648,15 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console &&
-                console.can_ctrl_c &&
-                (console.is_left_control_pressed || console.is_right_control_pressed) &&
-                !console.is_left_alt_pressed && !console.is_right_alt_pressed &&
-                !console.is_left_shift_pressed && !console.is_right_shift_pressed)
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_ctrl_c() &&
+                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
+                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
+                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
         {
-            console.old_new_input.clear();
-            console.in_historical_input = false;
-            console.cursor_it = console.old_new_input.begin();
-            console.cursor_index = 0;
-            console.can_ctrl_c = false;
+            console.new_input.clear();
+            console.console_logic_module.enter_new_input();
+            console.console_logic_module.set_can_ctrl_c(false);
         }
         return std::nullopt;
     }
@@ -670,41 +667,22 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console &&
-                console.can_ctrl_w &&
-                (console.is_left_control_pressed || console.is_right_control_pressed) &&
-                !console.is_left_alt_pressed && !console.is_right_alt_pressed &&
-                !console.is_left_shift_pressed && !console.is_right_shift_pressed)
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_ctrl_w() &&
+                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
+                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
+                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
         {
-            console.in_historical_input = false;
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
 
-            // First, remove all spaces until a non-space is encountered.
-            while (console.cursor_it != console.old_new_input.begin())
+            if (active_input == nullptr)
             {
-                if (*--console.cursor_it == ' ')
-                {
-                    ++console.cursor_it;
-                    break;
-                }
-
-                console.cursor_it = console.old_new_input.erase(console.cursor_it);
-                console.cursor_index--;
+                std::cerr << "ERROR: `Console::ctrl_w`: `active_input` is `nullptr`!\n";
+                return std::nullopt;
             }
 
-            // Then, remove all non-spaces until a space is encountered.
-            while (console.cursor_it != console.old_new_input.begin())
-            {
-                if (*--console.cursor_it != ' ')
-                {
-                    ++console.cursor_it;
-                    break;
-                }
-
-                console.cursor_it = console.old_new_input.erase(console.cursor_it);
-                console.cursor_index--;
-            }
-
-            console.can_ctrl_w = false;
+            active_input->ctrl_w();
+            console.console_logic_module.set_can_ctrl_w(false);
         }
         return std::nullopt;
     }
@@ -715,24 +693,25 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_page_up)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_up())
         {
-            if (console.in_history)
+            if (!console.console_logic_module.get_active_in_scrollback_buffer())
             {
-                console.history_line_i = console.history_line_i > console.n_rows ? console.history_line_i - console.n_rows : 0;
+                // We are not yet in scrollback buffer.
+
+                if (!console.console_logic_module.enter_scrollback_buffer())
+                {
+                    std::cerr << "ERROR: `Console::page_up`: state transition to scrollback buffer failed!\n";
+                }
+                return std::nullopt;
             }
             else
             {
-                console.in_history = true;
-                console.history_line_i = console.old_console_history.size() > 2 * console.n_rows ? console.old_console_history.size() > 2 * console.n_rows : 0;
+                // We are already in scrollback buffer.
+                console.scrollback_buffer.page_up();
             }
 
-            if (console.history_line_i + console.n_rows >= console.old_console_history.size())
-            {
-                console.in_history = false;
-            }
-
-            console.can_page_up = false;
+            console.console_logic_module.set_can_page_up(false);
         }
 
         return std::nullopt;
@@ -744,19 +723,18 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_page_down)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_down())
         {
-            if (console.in_history)
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
             {
-                console.history_line_i += console.n_rows;
-
-                if (console.history_line_i + console.n_rows >= console.old_console_history.size())
+                if (!console.scrollback_buffer.page_down())
                 {
-                    console.in_history = false;
+                    // Page down caused exit from scrollback buffer.
+                    console.console_logic_module.exit_scrollback_buffer();
                 }
             }
 
-            console.can_page_down = false;
+            console.console_logic_module.set_can_page_down(false);
         }
         return std::nullopt;
     }
@@ -767,20 +745,19 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_home)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_home())
         {
-            console.history_line_i = 0;
-
-            if (console.history_line_i + console.n_rows >= console.old_console_history.size())
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
             {
-                console.in_history = false;
+                console.scrollback_buffer.move_to_first();
             }
             else
             {
-                console.in_history = true;
+                console.console_logic_module.enter_scrollback_buffer();
+                console.scrollback_buffer.move_to_first();
             }
 
-            console.can_home = false;
+            console.console_logic_module.set_can_home(false);
         }
         return std::nullopt;
     }
@@ -791,10 +768,14 @@ namespace yli::ontology
             GenericParentModule&,
             Console& console)
     {
-        if (console.in_console && console.can_end)
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_end())
         {
-            console.in_history = false;
-            console.can_home = false;
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
+            {
+                console.console_logic_module.exit_scrollback_buffer();
+            }
+
+            console.console_logic_module.set_can_end(false);
         }
         return std::nullopt;
     }

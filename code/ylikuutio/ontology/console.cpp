@@ -25,6 +25,7 @@
 #include "console_struct.hpp"
 #include "texture_file_format.hpp"
 #include "print_text_struct.hpp"
+#include "print_console_struct.hpp"
 #include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
@@ -40,11 +41,9 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cerr
 #include <iterator>  // std::back_inserter
-#include <list>      // std::list
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
-#include <variant>   // std::get
 #include <vector>    // std::vector
 
 namespace yli::core
@@ -141,37 +140,7 @@ namespace yli::ontology
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.
-        std::list<char> text_char_list;
-        std::size_t current_line_length = 0;
-
-        for (const char& my_char : text)
-        {
-            if (my_char == '\n')
-            {
-                // A newline.
-                this->old_console_history.emplace_back(text_char_list);
-                text_char_list.clear();
-                current_line_length = 0;
-            }
-            else if (++current_line_length <= this->n_columns)
-            {
-                // Normal case.
-                text_char_list.emplace_back(my_char);
-            }
-            else
-            {
-                // Newline is needed due to too long line.
-                this->old_console_history.emplace_back(text_char_list);
-                text_char_list.clear();
-                text_char_list.emplace_back(my_char);
-                current_line_length = 1;
-            }
-        }
-
-        if (text_char_list.size() > 0)
-        {
-            this->old_console_history.emplace_back(text_char_list);
-        }
+        this->scrollback_buffer.add_to_buffer(TextLine(text));
     }
 
     void Console::print_help()
@@ -192,7 +161,7 @@ namespace yli::ontology
 
     void Console::render(const Scene* const) const
     {
-        if (!this->in_console ||
+        if (!this->console_logic_module.get_active_in_console() ||
                 !this->should_render ||
                 this->universe.get_active_console() != this)
         {
@@ -207,95 +176,33 @@ namespace yli::ontology
             return;
         }
 
-        // Convert new input into std::string.
-        const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
+        const yli::console::TextInput* const visible_input = this->console_logic_module.get_visible_input();
 
-        // Draw the console to screen using `font_2d::print_text_2d`.
-        PrintTextStruct text_struct;
-        text_struct.position.x = 0;
-        text_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
-        text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        text_struct.position.vertical_alignment = VerticalAlignment::TOP;
-        text_struct.font_size = this->universe.get_font_size();
-
-        if (this->in_history)
+        if (visible_input == nullptr)
         {
-            const std::size_t history_end_i = history_line_i + this->n_rows;
-
-            for (std::size_t history_i = history_line_i;
-                    history_i < history_end_i && history_i < this->old_console_history.size();
-                    history_i++)
-            {
-                std::list<char> historical_text = this->old_console_history.at(history_i);
-                text_struct.text += yli::string::convert_char_container_to_std_string(
-                        historical_text,
-                        characters_for_line,
-                        characters_for_line) +
-                    "\n";
-            }
-        }
-        else
-        {
-            const std::size_t n_chars_on_noncomplete_line = (this->prompt.size() + this->old_new_input.size()) % this->n_columns;
-            const std::size_t n_lines_of_new_input = (n_chars_on_noncomplete_line > 0 ?
-                    (this->prompt.size() + this->old_new_input.size()) / this->n_columns + 1 :
-                    (this->prompt.size() + this->old_new_input.size()) / this->n_columns);
-
-            if (n_lines_of_new_input > this->n_rows)
-            {
-                // Current input does not fit completely in the console 'window'.
-
-                // Split new input into lines and print only n last lines,
-                // where n == `this->n_rows`.
-                std::list<char> old_new_input_with_prompt = this->old_new_input;
-                std::list<char>::iterator it = old_new_input_with_prompt.begin();
-
-                // Copy prompt into the front of the new input.
-                for (const char& my_char : this->prompt)
-                {
-                    old_new_input_with_prompt.insert(it, my_char);
-                }
-
-                // Convert into a vector of lines.
-                const std::vector<std::string> old_new_input_vector = yli::string::convert_char_container_to_std_vector_std_string(
-                        old_new_input_with_prompt,
-                        this->n_columns);
-
-                // Print only n last lines.
-                for (std::size_t i = old_new_input_vector.size() - this->n_rows; i < old_new_input_vector.size(); i++)
-                {
-                    text_struct.text += old_new_input_vector.at(i) + "\\n";
-                }
-            }
-            else
-            {
-                const std::string old_new_input_string = this->convert_new_input_into_string();
-
-                // Current input fits completely in the console 'window'.
-                std::size_t history_start_i { 0 }; // Assume everything does fit in the console 'window'.
-
-                if (this->old_console_history.size() + n_lines_of_new_input > this->n_rows)
-                {
-                    // Everything does not fit in the console 'window'.
-                    history_start_i = this->old_console_history.size() - this->n_rows + n_lines_of_new_input;
-                }
-
-                // We are not in history so print everything to the end of the history.
-                for (std::size_t history_i = history_start_i; history_i < this->old_console_history.size(); history_i++)
-                {
-                    const std::list<char> historical_text = this->old_console_history.at(history_i);
-                    text_struct.text += yli::string::convert_char_container_to_std_string(
-                            historical_text,
-                            characters_for_line,
-                            characters_for_line) +
-                        "\n";
-                }
-
-                text_struct.text += this->convert_new_input_into_string();
-            }
+            return;
         }
 
-        font_2d->print_text_2d(text_struct);
+        // Number of lines there are in total in the input that is currently visible (not all lines might be visible).
+        const std::size_t n_lines_of_total_visible_input =
+                (visible_input->size() + this->prompt.size()) / this->n_columns + (((visible_input->size() + this->prompt.size()) % this->n_columns > 0) ? 1 : 0);
+
+        // Actual number of visible lines to be rendered can not exceed number of rows available.
+        const std::size_t n_lines_of_visible_input = (n_lines_of_total_visible_input < this->n_rows ? n_lines_of_total_visible_input : this->n_rows);
+        const std::size_t n_lines_of_scrollback_buffer_view = this->n_rows - n_lines_of_visible_input;
+
+        // Draw the console to screen using `font_2d::print_console`.
+        PrintConsoleStruct print_console_struct(
+                this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view),
+                this->console_logic_module.get_visible_input());
+        print_console_struct.position.x = 0;
+        print_console_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
+        print_console_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
+        print_console_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        print_console_struct.font_size = this->universe.get_font_size();
+        print_console_struct.prompt = this->prompt;
+
+        font_2d->print_console(print_console_struct);
     }
 
     Entity* Console::get_parent() const
@@ -329,7 +236,7 @@ namespace yli::ontology
     bool Console::enter_console()
     {
         if (this->universe.get_active_console() == this &&
-                !this->in_console &&
+                !this->console_logic_module.get_active_in_console() &&
                 this->master_of_input_modes.has_current_input_mode())
         {
             this->master_of_input_modes.activate_current_input_mode();
@@ -338,9 +245,8 @@ namespace yli::ontology
             this->universe.can_display_help_screen = false;
 
             // Mark that we're in console.
+            this->console_logic_module.activate();
             this->universe.in_console = true;
-            this->in_console = true;
-            this->in_historical_input = false;
             return true;
         }
 
@@ -350,7 +256,7 @@ namespace yli::ontology
 
     bool Console::exit_console()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
             // Restore previous input mode.
             if (this->master_of_input_modes.has_current_input_mode()) [[likely]]
@@ -363,7 +269,7 @@ namespace yli::ontology
 
             // Mark that we have exited the console.
             this->universe.in_console = false;
-            this->in_console = false;
+            this->console_logic_module.deactivate();
 
             return true;
         }
@@ -384,9 +290,14 @@ namespace yli::ontology
                 keyboard_event.keysym.sym >= 0x20 &&
                 keyboard_event.keysym.sym <= 0x7f &&
                 ((modifiers & ctrl_alt_altgr_bitmask) == 0) &&
-                this->in_console)
+                this->console_logic_module.get_active_in_console())
         {
-            this->in_history = false;
+            TextInput* const active_input = this->console_logic_module.edit_input();
+
+            if (active_input == nullptr) [[unlikely]]
+            {
+                return;
+            }
 
             const char keyboard_char = static_cast<char>(keyboard_event.keysym.sym);
 
@@ -397,83 +308,80 @@ namespace yli::ontology
                 switch (keyboard_char)
                 {
                     case '`':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '~');
+                        active_input->add_character('~');
                         break;
                     case '1':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '!');
+                        active_input->add_character('!');
                         break;
                     case '2':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '@');
+                        active_input->add_character('@');
                         break;
                     case '3':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '#');
+                        active_input->add_character('#');
                         break;
                     case '4':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '$');
+                        active_input->add_character('$');
                         break;
                     case '5':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '%');
+                        active_input->add_character('%');
                         break;
                     case '6':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '^');
+                        active_input->add_character('^');
                         break;
                     case '7':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '&');
+                        active_input->add_character('&');
                         break;
                     case '8':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '*');
+                        active_input->add_character('*');
                         break;
                     case '9':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '(');
+                        active_input->add_character('(');
                         break;
                     case '0':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, ')');
+                        active_input->add_character(')');
                         break;
                     case '-':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '_');
+                        active_input->add_character('_');
                         break;
                     case '=':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '+');
+                        active_input->add_character('+');
                         break;
                     case '[':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '{');
+                        active_input->add_character('{');
                         break;
                     case ']':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '}');
+                        active_input->add_character('}');
                         break;
                     case '\\':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '|');
+                        active_input->add_character('|');
                         break;
                     case ';':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, ':');
+                        active_input->add_character(':');
                         break;
                     case '\'':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '"');
+                        active_input->add_character('"');
                         break;
                     case ',':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '<');
+                        active_input->add_character('<');
                         break;
                     case '.':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '>');
+                        active_input->add_character('>');
                         break;
                     case '/':
-                        this->cursor_it = this->old_new_input.insert(this->cursor_it, '?');
+                        active_input->add_character('?');
                         break;
                     default:
                         if (keyboard_char >= 'a' && keyboard_char <= 'z')
                         {
-                            this->cursor_it = this->old_new_input.insert(this->cursor_it, keyboard_char - ('a' - 'A'));
+                            active_input->add_character(keyboard_char - ('a' - 'A'));
                         }
                         break;
                 }
             }
             else
             {
-                this->cursor_it = this->old_new_input.insert(this->cursor_it, keyboard_char);
+                active_input->add_character(keyboard_char);
             }
-
-            ++this->cursor_it;
-            this->cursor_index++;
         }
     }
 
@@ -491,81 +399,84 @@ namespace yli::ontology
         return nullptr;
     }
 
-    void Console::copy_historical_input_into_new_input()
+    void Console::copy_historical_input_into_temp_input()
     {
-        if (this->in_console)
+        const TextInput* const historical_input = this->command_history.get();
+
+        if (historical_input == nullptr) [[unlikely]]
         {
-            // Copy selected historical input into new input.
-            this->old_new_input.clear();
-            std::copy(this->old_command_history.at(this->historical_input_i).begin(),
-                    this->old_command_history.at(this->historical_input_i).end(),
-                    std::back_inserter(this->old_new_input));
+            return;
         }
-    }
 
-    std::string Console::convert_new_input_into_string() const
-    {
-        const std::size_t characters_for_line = this->universe.get_window_width() / this->universe.get_text_size();
-
-        return this->prompt + yli::string::convert_char_container_to_std_string(
-                this->old_new_input,
-                characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
-                characters_for_line);                      // The rest lines have full length.
+        // Copy selected historical input into temp input.
+        this->temp_input.clear();
+        std::copy(historical_input->cbegin(),
+                historical_input->cend(),
+                std::back_inserter(this->temp_input));
     }
 
     void Console::delete_character()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            this->old_new_input.erase(this->cursor_it);
+            TextInput* const active_input = this->console_logic_module.edit_input();
+
+            if (active_input != nullptr) [[likely]]
+            {
+                active_input->delete_character();
+            }
         }
     }
 
     void Console::move_cursor_left()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            this->in_history = false;
+            TextInput* const active_input = this->console_logic_module.edit_input();
 
-            if (this->cursor_it != this->old_new_input.begin())
+            if (active_input != nullptr) [[likely]]
             {
-                --this->cursor_it;
-                this->cursor_index--;
+                active_input->move_cursor_left();
             }
         }
     }
 
     void Console::move_cursor_right()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            this->in_history = false;
+            TextInput* const active_input = this->console_logic_module.edit_input();
 
-            if (this->cursor_it != this->old_new_input.end())
+            if (active_input != nullptr) [[likely]]
             {
-                ++this->cursor_it;
-                this->cursor_index++;
+                active_input->move_cursor_right();
             }
         }
     }
 
     void Console::move_cursor_to_start_of_line()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            this->in_history = false;
-            this->cursor_it = this->old_new_input.begin();
-            this->cursor_index = 0;
+            TextInput* const active_input = this->console_logic_module.edit_input();
+
+            if (active_input != nullptr) [[likely]]
+            {
+                active_input->move_cursor_to_start_of_line();
+            }
         }
     }
 
     void Console::move_cursor_to_end_of_line()
     {
-        if (this->in_console)
+        if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            this->in_history = false;
-            this->cursor_it = this->old_new_input.end();
-            this->cursor_index = this->old_new_input.size();
+            TextInput* const active_input = this->console_logic_module.edit_input();
+
+            if (active_input != nullptr) [[likely]]
+            {
+                active_input->move_cursor_to_end_of_line();
+            }
         }
     }
 
@@ -573,7 +484,14 @@ namespace yli::ontology
     {
         if (registry.get_number_of_completions(input) > 1)
         {
-            this->print_text(this->convert_new_input_into_string());
+            TextInput* const active_input = this->console_logic_module.edit_input();
+
+            if (active_input == nullptr) [[unlikely]]
+            {
+                return;
+            }
+
+            this->print_text(active_input->data());
 
             const std::vector<std::string> completions = registry.get_completions(input);
 
@@ -586,16 +504,6 @@ namespace yli::ontology
 
     // Getters for unit tests and for building upon `Console`.
 
-    const std::list<char>& Console::get_new_input() const
-    {
-        return this->old_new_input;
-    }
-
-    const std::list<char>& Console::get_temp_input() const
-    {
-        return this->old_temp_input;
-    }
-
     const std::string& Console::get_prompt() const
     {
         return this->prompt;
@@ -606,163 +514,15 @@ namespace yli::ontology
         return this->master_of_input_modes.get_current_input_mode();
     }
 
-    std::size_t Console::get_cursor_index() const
-    {
-        return this->cursor_index;
-    }
-
-    std::size_t Console::get_history_line_i() const
-    {
-        return this->history_line_i;
-    }
-
-    std::size_t Console::get_historical_input_i() const
-    {
-        return this->historical_input_i;
-    }
-
-    std::size_t Console::get_console_left_x() const
-    {
-        return this->console_left_x;
-    }
-
-    std::size_t Console::get_console_right_x() const
-    {
-        return this->console_right_x;
-    }
-
-    std::size_t Console::get_console_top_y() const
-    {
-        return this->console_top_y;
-    }
-
-    std::size_t Console::get_console_bottom_y() const
-    {
-        return this->console_bottom_y;
-    }
-
-    std::size_t Console::get_n_columns() const
-    {
-        return this->n_columns;
-    }
-
-    std::size_t Console::get_n_rows() const
-    {
-        return this->n_rows;
-    }
-
-    bool Console::get_in_console() const
-    {
-        return this->in_console;
-    }
-
-    bool Console::get_can_move_to_previous_input() const
-    {
-        return this->can_move_to_previous_input;
-    }
-
-    bool Console::get_can_move_to_next_input() const
-    {
-        return this->can_move_to_next_input;
-    }
-
-    bool Console::get_can_backspace() const
-    {
-        return this->can_backspace;
-    }
-
-    bool Console::get_can_tab() const
-    {
-        return this->can_tab;
-    }
-
-    bool Console::get_can_enter_key() const
-    {
-        return this->can_enter_key;
-    }
-
-    bool Console::get_can_ctrl_c() const
-    {
-        return this->can_ctrl_c;
-    }
-
-    bool Console::get_can_ctrl_w() const
-    {
-        return this->can_ctrl_w;
-    }
-
-    bool Console::get_can_page_up() const
-    {
-        return this->can_page_up;
-    }
-
-    bool Console::get_can_page_down() const
-    {
-        return this->can_page_down;
-    }
-
-    bool Console::get_can_home() const
-    {
-        return this->can_home;
-    }
-
-    bool Console::get_can_end() const
-    {
-        return this->can_end;
-    }
-
-    bool Console::get_is_left_control_pressed() const
-    {
-        return this->is_left_control_pressed;
-    }
-
-    bool Console::get_is_right_control_pressed() const
-    {
-        return this->is_right_control_pressed;
-    }
-
-    bool Console::get_is_left_alt_pressed() const
-    {
-        return this->is_left_alt_pressed;
-    }
-
-    bool Console::get_is_right_alt_pressed() const
-    {
-        return this->is_right_alt_pressed;
-    }
-
-    bool Console::get_is_left_shift_pressed() const
-    {
-        return this->is_left_shift_pressed;
-    }
-
-    bool Console::get_is_right_shift_pressed() const
-    {
-        return this->is_right_shift_pressed;
-    }
-
-    bool Console::get_in_history() const
-    {
-        return this->in_history;
-    }
-
-    bool Console::get_in_historical_input() const
-    {
-        return this->in_historical_input;
-    }
-
     // Console command callbacks begin here.
 
     std::optional<yli::data::AnyValue> Console::clear(
             Console& console)
     {
-        console.in_history = false;
-        console.in_historical_input = false;
-        console.history_line_i = 0;
-        console.historical_input_i = 0;
-        console.old_command_history.clear();
-        console.old_console_history.clear();
-        console.old_new_input.clear();
+        console.console_logic_module.enter_new_input();
+        console.new_input.clear();
+        console.command_history.clear();
+        console.scrollback_buffer.clear();
 
         const uint32_t clear_console_magic_number = CallbackMagicNumber::CLEAR_CONSOLE;
         return yli::data::AnyValue(clear_console_magic_number);

@@ -70,39 +70,17 @@ TEST(console_must_be_initialized_appropriately, no_font)
 
     ASSERT_NE(console->get_generic_master_module<yli::ontology::InputMode>(), nullptr);
 
-    ASSERT_TRUE(console->get_new_input().empty());
-    ASSERT_TRUE(console->get_temp_input().empty());
+    ASSERT_TRUE(console->new_input.empty());
+    ASSERT_TRUE(console->temp_input.empty());
     ASSERT_EQ(console->get_prompt(), "$ ");        // This may change in the future.
     ASSERT_EQ(console->get_input_mode(), nullptr);
-    ASSERT_EQ(console->get_cursor_index(), 0);
-    ASSERT_EQ(console->get_history_line_i(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(console->get_historical_input_i(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(console->get_console_left_x(), 0);   // This may change in the future.
-    ASSERT_EQ(console->get_console_right_x(), 39); // This may change in the future.
-    ASSERT_EQ(console->get_console_top_y(), 15);   // This may change in the future.
-    ASSERT_EQ(console->get_console_bottom_y(), 0); // This may change in the future.
-    ASSERT_EQ(console->get_n_rows(), 16);          // This may change in the future.
-    ASSERT_EQ(console->get_n_columns(), 40);       // This may change in the future.
-    ASSERT_FALSE(console->get_in_console());
-    ASSERT_TRUE(console->get_can_move_to_previous_input());
-    ASSERT_TRUE(console->get_can_move_to_next_input());
-    ASSERT_TRUE(console->get_can_backspace());
-    ASSERT_TRUE(console->get_can_tab());
-    ASSERT_TRUE(console->get_can_enter_key());
-    ASSERT_TRUE(console->get_can_ctrl_c());
-    ASSERT_TRUE(console->get_can_ctrl_w());
-    ASSERT_TRUE(console->get_can_page_up());
-    ASSERT_TRUE(console->get_can_page_down());
-    ASSERT_TRUE(console->get_can_home());
-    ASSERT_TRUE(console->get_can_end());
-    ASSERT_FALSE(console->get_is_left_control_pressed());
-    ASSERT_FALSE(console->get_is_right_control_pressed());
-    ASSERT_FALSE(console->get_is_left_alt_pressed());
-    ASSERT_FALSE(console->get_is_right_alt_pressed());
-    ASSERT_FALSE(console->get_is_left_shift_pressed());
-    ASSERT_FALSE(console->get_is_right_shift_pressed());
-    ASSERT_FALSE(console->get_in_history());
-    ASSERT_FALSE(console->get_in_historical_input());
+    ASSERT_EQ(console->console_left_x, 0);   // This may change in the future.
+    ASSERT_EQ(console->console_right_x, 39); // This may change in the future.
+    ASSERT_EQ(console->console_top_y, 15);   // This may change in the future.
+    ASSERT_EQ(console->console_bottom_y, 0); // This may change in the future.
+    ASSERT_EQ(console->n_rows, 16);          // This may change in the future.
+    ASSERT_EQ(console->n_columns, 40);       // This may change in the future.
+    ASSERT_FALSE(console->console_logic_module.get_active_in_console());
 
     ASSERT_EQ(console->apprentice_of_font_2d.get_master(), nullptr);
     ASSERT_EQ(console->apprentice_of_font_2d.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
@@ -139,7 +117,7 @@ TEST(enter_console_must_function_appropriately, no_font)
     yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(console_mode_input_mode_struct);
     console->set_input_mode(input_mode);
     console->enter_console();
-    ASSERT_TRUE(console->get_in_console());
+    ASSERT_TRUE(console->console_logic_module.get_active_in_console());
 }
 
 TEST(exit_console_must_function_appropriately, no_font)
@@ -157,5 +135,5 @@ TEST(exit_console_must_function_appropriately, no_font)
     console->set_input_mode(input_mode);
     console->enter_console();
     console->exit_console();
-    ASSERT_FALSE(console->get_in_console());
+    ASSERT_FALSE(console->console_logic_module.get_active_in_console());
 }

@@ -33,8 +33,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <limits>   // std::numeric_limits
-#include <list>     // std::list
 #include <optional> // std::optional
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -395,8 +393,7 @@ namespace yli::ontology
 
             // Callbacks end here.
 
-            void copy_historical_input_into_new_input();
-            std::string convert_new_input_into_string() const;
+            void copy_historical_input_into_temp_input();
             void delete_character();
             void move_cursor_left();
             void move_cursor_right();
@@ -407,58 +404,11 @@ namespace yli::ontology
             // Getters for unit tests and for building upon `Console`.
 
         public:
-            const std::list<char>& get_new_input() const;
-            const std::list<char>& get_temp_input() const;
-
             const std::string& get_prompt() const;
 
             InputMode* get_input_mode() const;
-            std::size_t get_cursor_index() const;
-            std::size_t get_history_line_i() const;
-            std::size_t get_historical_input_i() const;
-            std::size_t get_console_left_x() const;
-            std::size_t get_console_right_x() const;
-            std::size_t get_console_top_y() const;
-            std::size_t get_console_bottom_y() const;
-            std::size_t get_n_columns() const;
-            std::size_t get_n_rows() const;
-
-            bool get_in_console() const;
-            bool get_can_move_to_previous_input() const;
-            bool get_can_move_to_next_input() const;
-            bool get_can_backspace() const;
-            bool get_can_tab() const;
-            bool get_can_enter_key() const;
-            bool get_can_ctrl_c() const;
-            bool get_can_ctrl_w() const;
-            bool get_can_page_up() const;
-            bool get_can_page_down() const;
-            bool get_can_home() const;
-            bool get_can_end() const;
-            bool get_is_left_control_pressed() const;
-            bool get_is_right_control_pressed() const;
-            bool get_is_left_alt_pressed() const;
-            bool get_is_right_alt_pressed() const;
-            bool get_is_left_shift_pressed() const;
-            bool get_is_right_shift_pressed() const;
-            bool get_in_history() const;
-            bool get_in_historical_input() const;
 
             // Getters end here.
-
-        private:
-            std::vector<std::list<char>> old_command_history;
-            std::vector<std::list<char>> old_console_history;
-
-            std::list<char> old_new_input;     // This is used for actual inputs.
-            std::list<char> old_temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
-            std::list<char>::iterator cursor_it { this->old_new_input.begin() };
-
-            const std::string prompt            { "$ " };
-
-            std::size_t cursor_index            { 0 }; // Name `cursor_index` is chosen to distinguish from `cursor_it`.
-            std::size_t history_line_i          { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
-            std::size_t historical_input_i      { std::numeric_limits<std::size_t>::max() }; // Some dummy value.
 
             const uint32_t console_left_x;
             const uint32_t console_right_x;
@@ -468,32 +418,13 @@ namespace yli::ontology
             const uint32_t n_columns;
             const uint32_t n_rows;
 
-            bool in_console                 { false };
-            bool can_move_to_previous_input { true };
-            bool can_move_to_next_input     { true };
-            bool can_backspace              { true };
-            bool can_tab                    { true };
-            bool can_enter_key              { true };
-            bool can_ctrl_c                 { true };
-            bool can_ctrl_w                 { true };
-            bool can_page_up                { true };
-            bool can_page_down              { true };
-            bool can_home                   { true };
-            bool can_end                    { true };
-            bool is_left_control_pressed    { false };
-            bool is_right_control_pressed   { false };
-            bool is_left_alt_pressed        { false };
-            bool is_right_alt_pressed       { false };
-            bool is_left_shift_pressed      { false };
-            bool is_right_shift_pressed     { false };
-            bool in_history                 { false };
-            bool in_historical_input        { false };
-
             TextInput new_input;  // This is used for new inputs.
             TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
             TextInputHistory command_history;
             ScrollbackBuffer scrollback_buffer;
             ConsoleLogicModule console_logic_module;
+
+            const std::string prompt { "$ " };
     };
 
     template<>
