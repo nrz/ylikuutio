@@ -44,8 +44,8 @@ namespace yli::ontology
 
         std::string application_name;
         std::string window_title;
-        uint32_t window_width      { 3840 };
-        uint32_t window_height     { 2400 };
+        uint32_t window_width      { 1600 };
+        uint32_t window_height     { 900 };
         uint32_t text_size         { 40 };
         uint32_t font_size         { 16 };
         uint32_t max_fps           { 50000 };   // Default value max 50000 frames per second.
@@ -58,8 +58,8 @@ namespace yli::ontology
         yli::render::GraphicsApiBackend graphics_api_backend;
         bool is_silent             { false };
         bool is_physical           { true };    // Physics simulation in use.
-        bool is_fullscreen         { true };    // Fullscreen mode in use.
-        bool is_desktop_fullscreen { false };
+        bool is_fullscreen         { false };   // Windowed mode in use.
+        bool is_desktop_fullscreen { false };   // Windowed mode in use.
         yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
         FramebufferModuleStruct framebuffer_module_struct;
     };
