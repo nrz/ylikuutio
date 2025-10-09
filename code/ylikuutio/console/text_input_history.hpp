@@ -49,6 +49,7 @@ namespace yli::console
             bool move_to_next();
             void move_to_first();
             void move_to_last();
+            bool move_to_nth(const std::size_t new_history_index);
 
             void clear();
 

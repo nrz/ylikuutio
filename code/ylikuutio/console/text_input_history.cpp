@@ -174,6 +174,18 @@ namespace yli::console
         }
     }
 
+    bool TextInputHistory::move_to_nth(const std::size_t new_history_index)
+    {
+        if (history_index < this->size())
+        {
+            this->history_index = new_history_index;
+            this->history_it = this->history.begin() + this->history_index;
+            return true;
+        }
+
+        return false;
+    }
+
     void TextInputHistory::clear()
     {
         this->history.clear();
