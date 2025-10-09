@@ -187,6 +187,9 @@ namespace hirvi
         UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         universe_struct.application_name = "Hirvi";
         universe_struct.window_title = "Hirvi " + Universe::version + ", powered by Ylikuutio " + Universe::version;
+        universe_struct.window_width = 3840;
+        universe_struct.window_height = 2400;
+        universe_struct.is_fullscreen = true;
 
         if (this->command_line_master.is_key("silent"))
         {
