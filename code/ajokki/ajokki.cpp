@@ -163,16 +163,16 @@ namespace ajokki
                 "version",
                 "silent",
                 "fullscreen",
-                "desktop_fullscreen",
+                "desktop-fullscreen",
                 "headless",
-                "window_width",
-                "window_height",
-                "framebuffer_width",
-                "framebuffer_height",
+                "window-width",
+                "window-height",
+                "framebuffer-width",
+                "framebuffer-height",
                 "speed",
-                "turbo_factor",
-                "twin_turbo_factor",
-                "mouse_speed"
+                "turbo-factor",
+                "twin-turbo-factor",
+                "mouse-speed"
         };
     }
 
