@@ -37,10 +37,8 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <algorithm> // std::copy etc.
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cerr
-#include <iterator>  // std::back_inserter
 #include <optional>  // std::optional
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
@@ -410,9 +408,7 @@ namespace yli::ontology
 
         // Copy selected historical input into temp input.
         this->temp_input.clear();
-        std::copy(historical_input->cbegin(),
-                historical_input->cend(),
-                std::back_inserter(this->temp_input));
+        this->temp_input = *historical_input;
     }
 
     void Console::delete_character()
