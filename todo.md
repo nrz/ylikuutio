@@ -7,6 +7,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
@@ -54,7 +55,6 @@
 - [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
 - [ ] LIBRARIES/PHYSICS/EVALUATE Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
 - [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
-- [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] CONSOLE/UI Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 - [ ] CONSOLE/UI Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 - [ ] DISPLAY/UI Add support for high DPI displays.
