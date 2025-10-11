@@ -24,7 +24,6 @@
 #include "vertical_alignment.hpp"
 #include "console_struct.hpp"
 #include "texture_file_format.hpp"
-#include "print_text_struct.hpp"
 #include "print_console_struct.hpp"
 #include "family_templates.hpp"
 #include "callback_magic_numbers.hpp"
@@ -34,7 +33,6 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
