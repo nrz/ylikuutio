@@ -651,3 +651,67 @@ TEST(editing_temp_input_must_work_appropriately, editing_temp_input)
     ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
+
+TEST(editing_historical_input_and_returning_to_new_input_must_work_appropriately, editing_historical_input_and_returning_to_new_input)
+{
+    // Do the necessary setup.
+    yli::console::TextInput new_input(yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput temp_input(yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInputHistory text_input_history;
+    yli::console::ScrollbackBuffer scrollback_buffer;
+    yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer);
+    console_logic_module.activate();
+
+    new_input.add_characters("abc");
+    text_input_history.add_to_history(new_input);
+    new_input.clear();
+
+    new_input.add_characters("def");
+    console_logic_module.enter_historical_input();
+
+    const yli::console::TextInput* const active_input = console_logic_module.edit_input();
+    ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(active_input->data(), "abc");
+    ASSERT_EQ(*active_input, text_input_history.at(0));
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_new_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_EQ(new_input.data(), "def");
+}
+
+TEST(adding_x_to_historical_input_and_returning_to_new_input_must_work_appropriately, adding_x_to_historical_input_and_returning_to_new_input)
+{
+    // Do the necessary setup.
+    yli::console::TextInput new_input(yli::console::TextInputType::NEW_INPUT);
+    yli::console::TextInput temp_input(yli::console::TextInputType::TEMP_INPUT);
+    yli::console::TextInputHistory text_input_history;
+    yli::console::ScrollbackBuffer scrollback_buffer;
+    yli::console::ConsoleLogicModule console_logic_module(new_input, temp_input, text_input_history, scrollback_buffer);
+    console_logic_module.activate();
+
+    new_input.add_characters("abc");
+    text_input_history.add_to_history(new_input);
+    new_input.clear();
+
+    new_input.add_characters("def");
+    console_logic_module.enter_historical_input();
+
+    yli::console::TextInput* const active_input = console_logic_module.edit_input();
+    ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(active_input->data(), "abc");
+    ASSERT_EQ(*active_input, text_input_history.at(0));
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    active_input->add_character('x');
+    ASSERT_EQ(active_input->data(), "abcx");
+
+    std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_new_input();
+    ASSERT_TRUE(console_state);
+    ASSERT_EQ(console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_EQ(new_input.data(), "def");
+}
