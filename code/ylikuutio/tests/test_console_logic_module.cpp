@@ -647,6 +647,7 @@ TEST(editing_temp_input_must_work_appropriately, editing_temp_input)
     console_logic_module.edit_input(); // Start editing, this changes state to `ACTIVE_IN_TEMP_INPUT`.
     const yli::console::TextInput* const active_input = console_logic_module.edit_input(); // Should be idempotent.
     ASSERT_NE(active_input, nullptr);
+    ASSERT_EQ(active_input->data(), "abc");
     ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
 }
