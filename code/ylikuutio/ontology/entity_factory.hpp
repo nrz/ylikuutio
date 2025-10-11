@@ -153,7 +153,7 @@ namespace yli::ontology
             template<EntityNotUniverse ParentType>
                 GenericParentModule* get_generic_parent_module(const int child_type, const Request<ParentType>& entity_request) const
                 {
-                    ParentType* const parent = yli::ontology::resolve_request<ParentType>(entity_request, this->universe->registry);
+                    ParentType* const parent = yli::ontology::resolve_request<ParentType>(entity_request, this->get_universe().registry);
 
                     if (parent != nullptr) [[likely]]
                     {
