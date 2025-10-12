@@ -298,7 +298,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     CallbackObject, CallbackEngine, yli::memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
                             yli::data::Datatype::CALLBACK_OBJECT,
-                            yli::data::Datatype::CALLBACK_OBJECT,
                             callback_object_struct.callback_engine_parent,
                             callback_object_struct);
             }
@@ -309,7 +308,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     CallbackParameter, CallbackObject, yli::memory::CallbackParameterMemoryAllocator, CallbackParameterStruct>(
-                            yli::data::Datatype::CALLBACK_PARAMETER,
                             yli::data::Datatype::CALLBACK_PARAMETER,
                             callback_parameter_struct.callback_object_parent,
                             callback_parameter_struct,
@@ -343,7 +341,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     Brain, Scene, yli::memory::BrainMemoryAllocator, BrainStruct>(
                             yli::data::Datatype::BRAIN,
-                            yli::data::Datatype::BRAIN,
                             brain_struct.scene_parent,
                             brain_struct,
                             this->get_generic_master_module<Brain, CallbackEngine>(brain_struct.callback_engine_master));
@@ -353,7 +350,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     Waypoint, Scene, yli::memory::WaypointMemoryAllocator, WaypointStruct>(
-                            yli::data::Datatype::WAYPOINT,
                             yli::data::Datatype::WAYPOINT,
                             waypoint_struct.scene,
                             waypoint_struct,
@@ -365,7 +361,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     Camera, Scene, yli::memory::CameraMemoryAllocator, CameraStruct>(
                             yli::data::Datatype::CAMERA,
-                            yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
                             this->get_generic_master_module<Movable, Brain>(camera_struct.brain_master));
@@ -375,7 +370,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     Camera, Scene, yli::memory::CameraMemoryAllocator, CameraStruct>(
-                            yli::data::Datatype::CAMERA,
                             yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
@@ -439,7 +433,6 @@ namespace yli::ontology
                     yli::memory::SymbiontMaterialMemoryAllocator,
                     SymbiontMaterialStruct>(
                             yli::data::Datatype::SYMBIONT_MATERIAL,
-                            yli::data::Datatype::SYMBIONT_MATERIAL,
                             symbiont_material_struct.symbiosis_parent,
                             symbiont_material_struct);
             }
@@ -448,7 +441,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     SymbiontSpecies, SymbiontMaterial, yli::memory::SymbiontSpeciesMemoryAllocator, SymbiontSpeciesStruct>(
-                            yli::data::Datatype::SYMBIONT_SPECIES,
                             yli::data::Datatype::SYMBIONT_SPECIES,
                             symbiont_species_struct.symbiont_material_parent,
                             symbiont_species_struct);
@@ -483,7 +475,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     ShapeshifterTransformation, Material, yli::memory::ShapeshifterTransformationMemoryAllocator, ShapeshifterTransformationStruct>(
                             yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION,
-                            yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION,
                             shapeshifter_transformation_struct.material_parent,
                             shapeshifter_transformation_struct);
             }
@@ -493,7 +484,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     ShapeshifterSequence, ShapeshifterTransformation, yli::memory::ShapeshifterSequenceMemoryAllocator, ShapeshifterSequenceStruct>(
-                            yli::data::Datatype::SHAPESHIFTER_SEQUENCE,
                             yli::data::Datatype::SHAPESHIFTER_SEQUENCE,
                             shapeshifter_sequence_struct.shapeshifter_transformation_parent,
                             shapeshifter_sequence_struct);
@@ -505,7 +495,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     ShapeshifterForm, ShapeshifterTransformation, yli::memory::ShapeshifterFormMemoryAllocator, ShapeshifterFormStruct>(
                             yli::data::Datatype::SHAPESHIFTER_FORM,
-                            yli::data::Datatype::SHAPESHIFTER_FORM,
                             shapeshifter_form_struct.shapeshifter_transformation_parent,
                             shapeshifter_form_struct);
             }
@@ -514,7 +503,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     Shapeshifter, Scene, yli::memory::ShapeshifterMemoryAllocator, ShapeshifterStruct>(
-                            yli::data::Datatype::SHAPESHIFTER,
                             yli::data::Datatype::SHAPESHIFTER,
                             shapeshifter_struct.scene,
                             shapeshifter_struct,
@@ -538,7 +526,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     Text2d, Font2d, yli::memory::Text2dMemoryAllocator, TextStruct>(
                             yli::data::Datatype::TEXT_2D,
-                            yli::data::Datatype::TEXT_2D,
                             text_struct.font_2d_parent,
                             text_struct);
             }
@@ -548,7 +535,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     VectorFont, Material, yli::memory::VectorFontMemoryAllocator, VectorFontStruct>(
                             yli::data::Datatype::VECTOR_FONT,
-                            yli::data::Datatype::VECTOR_FONT,
                             vector_font_struct.material_parent,
                             vector_font_struct);
             }
@@ -557,7 +543,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     Glyph, VectorFont, yli::memory::GlyphMemoryAllocator, GlyphStruct>(
-                            yli::data::Datatype::GLYPH,
                             yli::data::Datatype::GLYPH,
                             glyph_struct.vector_font_parent,
                             glyph_struct,
@@ -569,7 +554,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     GlyphObject, Scene, yli::memory::GlyphObjectMemoryAllocator, GlyphObjectStruct>(
                             yli::data::Datatype::GLYPH_OBJECT,
-                            yli::data::Datatype::GLYPH_OBJECT,
                             glyph_object_struct.scene_parent,
                             glyph_object_struct,
                             this->get_generic_master_module<GlyphObject, Glyph>(glyph_object_struct.glyph_master),
@@ -580,7 +564,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     Text3d, Scene, yli::memory::Text3dMemoryAllocator, Text3dStruct>(
-                            yli::data::Datatype::TEXT_3D,
                             yli::data::Datatype::TEXT_3D,
                             text_3d_struct.scene,
                             text_3d_struct,
@@ -627,7 +610,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     ConsoleCallbackEngine, Console, yli::memory::ConsoleCallbackEngineMemoryAllocator, ConsoleCallbackEngineStruct>(
                             yli::data::Datatype::CONSOLE_CALLBACK_ENGINE,
-                            yli::data::Datatype::CONSOLE_CALLBACK_ENGINE,
                             console_callback_engine_struct.console_parent,
                             console_callback_engine_struct);
             }
@@ -637,7 +619,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     ConsoleCallbackObject, ConsoleCallbackEngine, yli::memory::ConsoleCallbackObjectMemoryAllocator, ConsoleCallbackObjectStruct>(
-                            yli::data::Datatype::CONSOLE_CALLBACK_OBJECT,
                             yli::data::Datatype::CONSOLE_CALLBACK_OBJECT,
                             console_callback_object_struct.console_callback_engine_parent,
                             console_callback_object_struct);
@@ -649,7 +630,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     ConsoleCallbackParameter, ConsoleCallbackObject, yli::memory::ConsoleCallbackParameterMemoryAllocator, ConsoleCallbackParameterStruct>(
-                            yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER,
                             yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER,
                             console_callback_parameter_struct.console_callback_object_parent,
                             console_callback_parameter_struct,
@@ -665,7 +645,6 @@ namespace yli::ontology
                 return this->create_child_of_known_parent_type<
                     ComputeTask, Pipeline, yli::memory::ComputeTaskMemoryAllocator, ComputeTaskStruct>(
                             yli::data::Datatype::COMPUTE_TASK,
-                            yli::data::Datatype::COMPUTE_TASK,
                             compute_task_struct.pipeline_parent,
                             compute_task_struct);
             }
@@ -674,7 +653,6 @@ namespace yli::ontology
             {
                 return this->create_child_of_known_parent_type<
                     LispFunction, Console, yli::memory::LispFunctionMemoryAllocator, LispFunctionStruct>(
-                            yli::data::Datatype::LISP_FUNCTION,
                             yli::data::Datatype::LISP_FUNCTION,
                             lisp_function_struct.console_parent,
                             lisp_function_struct);
@@ -741,7 +719,6 @@ namespace yli::ontology
                     return static_cast<T*>(this->create_child_of_known_parent_type<
                         Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
                                 object_derivative_type,
-                                yli::data::Datatype::OBJECT,
                                 object_struct.scene,
                                 object_struct,
                                 // `Brain` master.
@@ -761,7 +738,6 @@ namespace yli::ontology
                     return static_cast<T*>(this->create_child_of_known_parent_type<
                         Holobiont, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
                                 holobiont_derivative_type,
-                                yli::data::Datatype::HOLOBIONT,
                                 holobiont_struct.scene,
                                 holobiont_struct,
                                 this->get_generic_master_module<Movable, Brain>(holobiont_struct.brain_master),
@@ -834,7 +810,6 @@ namespace yli::ontology
             template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Types, typename... Args>
                 Type* create_child_of_known_parent_type(
                         const int allocator_type,
-                        const int parent_module_type,
                         const Request<ParentType>& parent,
                         const DataStruct& data_struct,
                         Args&&... args) const
