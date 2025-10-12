@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -29,6 +28,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Text2d;
     class Console;
 }
 
@@ -44,19 +44,8 @@ TEST(font_2d_must_be_initialized_appropriately, headless)
     ASSERT_NE(font_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(font_2d) % alignof(yli::ontology::Font2d), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = font_2d->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::TEXT_2D)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_text_2ds = font_2d->get_generic_parent_module<yli::ontology::Text2d>();
+    ASSERT_NE(parent_of_text_2ds, nullptr);
 
     ASSERT_NE(font_2d->get_generic_master_module<yli::ontology::Console>(), nullptr);
 

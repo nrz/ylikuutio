@@ -65,7 +65,8 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
@@ -82,6 +83,30 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };
+
+    template<>
+        inline GenericParentModule* Ecosystem::get_generic_parent_module<Pipeline>()
+        {
+            return &this->parent_of_pipelines;
+        }
+
+    template<>
+        inline GenericParentModule* Ecosystem::get_generic_parent_module<Material>()
+        {
+            return &this->parent_of_materials;
+        }
+
+    template<>
+        inline GenericParentModule* Ecosystem::get_generic_parent_module<Species>()
+        {
+            return &this->parent_of_species;
+        }
+
+    template<>
+        inline GenericParentModule* Ecosystem::get_generic_parent_module<Symbiosis>()
+        {
+            return &this->parent_of_symbioses;
+        }
 }
 
 #endif

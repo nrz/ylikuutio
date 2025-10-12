@@ -48,6 +48,8 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
     class Material;
+    class ShapeshifterForm;
+    class ShapeshifterSequence;
     struct ShapeshifterTransformationStruct;
 
     class ShapeshifterTransformation final : public Entity
@@ -86,7 +88,8 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -94,6 +97,18 @@ namespace yli::ontology
 
             void render(const Scene* const target_scene);
     };
+
+    template<>
+        inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterForm>()
+        {
+            return &this->parent_of_shapeshifter_forms;
+        }
+
+    template<>
+        inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterSequence>()
+        {
+            return &this->parent_of_shapeshifter_sequences;
+        }
 }
 
 #endif

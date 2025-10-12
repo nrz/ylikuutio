@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
@@ -28,6 +27,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class CallbackObject;
     class Brain;
 }
 
@@ -41,19 +41,8 @@ TEST(callback_engine_must_be_initialized_appropriately, headless_universe)
     ASSERT_NE(callback_engine, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = callback_engine->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::CALLBACK_OBJECT)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_callback_objects = callback_engine->get_generic_parent_module<yli::ontology::CallbackObject>();
+    ASSERT_NE(parent_of_callback_objects, nullptr);
 
     ASSERT_NE(callback_engine->get_generic_master_module<yli::ontology::Brain>(), nullptr);
 

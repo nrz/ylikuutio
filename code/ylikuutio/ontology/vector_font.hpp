@@ -87,8 +87,6 @@ namespace yli::ontology
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
-
             // The rest fields are created in the constructor.
 
             template<typename T1, std::size_t DataSize>
@@ -101,6 +99,9 @@ namespace yli::ontology
         public:
             Scene* get_scene() const override;
             Pipeline* get_pipeline() const;
+
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -126,6 +127,12 @@ namespace yli::ontology
 
             std::unordered_map<int32_t, Glyph*> unicode_glyph_map;
     };
+
+    template<>
+        inline GenericParentModule* VectorFont::get_generic_parent_module<Glyph>()
+        {
+            return &this->parent_of_glyphs;
+        }
 
     template<>
         inline GenericMasterModule* VectorFont::get_generic_master_module<Text3d>()

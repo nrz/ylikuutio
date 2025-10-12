@@ -94,7 +94,8 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> get_nth_return_value(const std::size_t n) const;
             std::optional<yli::data::AnyValue> get_previous_return_value() const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
@@ -115,6 +116,12 @@ namespace yli::ontology
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;
     };
+
+    template<>
+        inline GenericParentModule* CallbackEngine::get_generic_parent_module<CallbackObject>()
+        {
+            return &this->parent_of_callback_objects;
+        }
 
     template<>
         inline GenericMasterModule* CallbackEngine::get_generic_master_module<Brain>()

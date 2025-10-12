@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -32,6 +31,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class CallbackEngine;
+    class CallbackParameter;
 }
 
 TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
@@ -47,19 +47,8 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
     ASSERT_NE(callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_object) % alignof(yli::ontology::CallbackObject), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = callback_object->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::CALLBACK_PARAMETER)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_glyphs = callback_object->get_generic_parent_module<yli::ontology::CallbackParameter>();
+    ASSERT_NE(parent_of_glyphs, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -32,6 +31,8 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class InputMode;
+    class ConsoleCallbackEngine;
+    class LispFunction;
 }
 
 TEST(console_must_be_initialized_appropriately, no_font)
@@ -43,28 +44,10 @@ TEST(console_must_be_initialized_appropriately, no_font)
     ASSERT_NE(console, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console) % alignof(yli::ontology::Console), 0);
 
-    const yli::ontology::GenericParentModule* parent_of_console_callback_engines { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_lisp_functions           { nullptr };
-
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = console->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::CONSOLE_CALLBACK_ENGINE)
-        {
-            parent_of_console_callback_engines = generic_parent_module;
-            ASSERT_NE(parent_of_console_callback_engines, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::LISP_FUNCTION)
-        {
-            parent_of_lisp_functions = generic_parent_module;
-            ASSERT_NE(parent_of_lisp_functions, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_console_callback_engines = console->get_generic_parent_module<yli::ontology::ConsoleCallbackEngine>();
+    ASSERT_NE(parent_of_console_callback_engines, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_lisp_functions           = console->get_generic_parent_module<yli::ontology::LispFunction>();
+    ASSERT_NE(parent_of_lisp_functions, nullptr);
 
     ASSERT_LT(parent_of_console_callback_engines, parent_of_lisp_functions);
 

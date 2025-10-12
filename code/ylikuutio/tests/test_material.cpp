@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -40,6 +39,8 @@ namespace yli::ontology
     class GenericParentModule;
     class Species;
     class SymbiontSpecies;
+    class ShapeshifterTransformation;
+    class VectorFont;
     class Glyph;
 }
 
@@ -63,28 +64,13 @@ TEST(material_must_be_initialized_appropriately, headless_pipeline_is_child_of_e
     ASSERT_NE(material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(material) % alignof(yli::ontology::Material), 0);
 
-    const yli::ontology::GenericParentModule* parent_of_shapeshifter_transformations { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_vector_fonts                 { nullptr };
+    const yli::ontology::GenericParentModule* const parent_of_shapeshifter_transformations =
+        material->get_generic_parent_module<yli::ontology::ShapeshifterTransformation>();
+    ASSERT_NE(parent_of_shapeshifter_transformations, nullptr);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = material->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::SHAPESHIFTER_TRANSFORMATION)
-        {
-            parent_of_shapeshifter_transformations = generic_parent_module;
-            ASSERT_NE(parent_of_shapeshifter_transformations, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::VECTOR_FONT)
-        {
-            parent_of_vector_fonts = generic_parent_module;
-            ASSERT_NE(parent_of_vector_fonts, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_vector_fonts =
+        material->get_generic_parent_module<yli::ontology::VectorFont>();
+    ASSERT_NE(parent_of_vector_fonts, nullptr);
 
     ASSERT_LT(parent_of_shapeshifter_transformations, parent_of_vector_fonts);
 

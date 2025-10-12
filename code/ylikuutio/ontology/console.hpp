@@ -83,6 +83,7 @@ namespace yli::ontology
     class InputMode;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
+    class LispFunction;
     struct ConsoleStruct;
 
     using yli::console::TextInput;
@@ -124,7 +125,8 @@ namespace yli::ontology
             bool exit_console();
             void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -426,6 +428,18 @@ namespace yli::ontology
 
             const std::string prompt { "$ " };
     };
+
+    template<>
+        inline GenericParentModule* Console::get_generic_parent_module<ConsoleCallbackEngine>()
+        {
+            return &this->parent_of_console_callback_engines;
+        }
+
+    template<>
+        inline GenericParentModule* Console::get_generic_parent_module<LispFunction>()
+        {
+            return &this->parent_of_lisp_functions;
+        }
 
     template<>
         inline GenericMasterModule* Console::get_generic_master_module<InputMode>()

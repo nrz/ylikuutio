@@ -68,8 +68,18 @@ namespace yli::memory
 namespace yli::ontology
 {
     class Universe;
+    class Brain;
+    class Waypoint;
     class Camera;
+    class Pipeline;
+    class Material;
+    class Species;
+    class Object;
     class Symbiosis;
+    class Holobiont;
+    class Shapeshifter;
+    class Text3d;
+    class GlyphObject;
     class RigidBodyModule;
     struct SceneStruct;
 
@@ -123,7 +133,8 @@ namespace yli::ontology
             bool get_is_flight_mode_in_use() const;
             void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
@@ -178,6 +189,78 @@ namespace yli::ontology
 
             bool is_flight_mode_in_use;
     };
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Brain>()
+        {
+            return &this->parent_of_brains;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Waypoint>()
+        {
+            return &this->parent_of_waypoints;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Camera>()
+        {
+            return &this->parent_of_cameras;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Pipeline>()
+        {
+            return &this->parent_of_pipelines;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Material>()
+        {
+            return &this->parent_of_materials;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Species>()
+        {
+            return &this->parent_of_species;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Object>()
+        {
+            return &this->parent_of_objects;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Symbiosis>()
+        {
+            return &this->parent_of_symbioses;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Holobiont>()
+        {
+            return &this->parent_of_holobionts;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Shapeshifter>()
+        {
+            return &this->parent_of_shapeshifters;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<Text3d>()
+        {
+            return &this->parent_of_text_3ds;
+        }
+
+    template<>
+        inline GenericParentModule* Scene::get_generic_parent_module<GlyphObject>()
+        {
+            return &this->parent_of_glyph_objects;
+        }
 }
 
 #endif

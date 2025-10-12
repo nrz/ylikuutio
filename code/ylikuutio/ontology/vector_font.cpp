@@ -28,7 +28,6 @@
 #include "glyph_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -241,15 +240,5 @@ namespace yli::ontology
     std::size_t VectorFont::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector);
-    }
-
-    GenericParentModule* VectorFont::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::GLYPH)
-        {
-            return &this->parent_of_glyphs;
-        }
-
-        return nullptr;
     }
 }

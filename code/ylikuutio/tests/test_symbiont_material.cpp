@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/symbiont_material.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -32,6 +31,7 @@ namespace yli::ontology
     class Ecosystem;
     class Scene;
     class Pipeline;
+    class SymbiontSpecies;
 }
 
 TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_valid_pointer)
@@ -48,19 +48,8 @@ TEST(symbiont_material_must_be_initialized_appropriately, symbiosis_provided_as_
     ASSERT_NE(symbiont_material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiont_material) % alignof(yli::ontology::SymbiontMaterial), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = symbiont_material->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::SYMBIONT_SPECIES)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_symbiont_species = symbiont_material->get_generic_parent_module<yli::ontology::SymbiontSpecies>();
+    ASSERT_NE(parent_of_symbiont_species, nullptr);
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 1);

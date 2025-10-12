@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -28,6 +27,18 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Brain;
+    class Waypoint;
+    class Camera;
+    class Pipeline;
+    class Material;
+    class Species;
+    class Object;
+    class Symbiosis;
+    class Holobiont;
+    class Shapeshifter;
+    class Text3d;
+    class GlyphObject;
 }
 
 TEST(scene_must_be_initialized_appropriately, headless)
@@ -39,88 +50,30 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_NE(scene, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
 
-    const yli::ontology::GenericParentModule* parent_of_brains     { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_waypoints  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_cameras    { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_pipelines  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_materials  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_species    { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_objects    { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_symbioses  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_holobionts { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_shapeshifters { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_text_3ds      { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_glyph_objects { nullptr };
-
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = scene->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::BRAIN)
-        {
-            parent_of_brains = generic_parent_module;
-            ASSERT_NE(parent_of_brains, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::WAYPOINT)
-        {
-            parent_of_waypoints = generic_parent_module;
-            ASSERT_NE(parent_of_waypoints, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::CAMERA)
-        {
-            parent_of_cameras = generic_parent_module;
-            ASSERT_NE(parent_of_cameras, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::PIPELINE)
-        {
-            parent_of_pipelines = generic_parent_module;
-            ASSERT_NE(parent_of_pipelines, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::MATERIAL)
-        {
-            parent_of_materials = generic_parent_module;
-            ASSERT_NE(parent_of_materials, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::SPECIES)
-        {
-            parent_of_species = generic_parent_module;
-            ASSERT_NE(parent_of_species, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::OBJECT)
-        {
-            parent_of_objects = generic_parent_module;
-            ASSERT_NE(parent_of_objects, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::SYMBIOSIS)
-        {
-            parent_of_symbioses = generic_parent_module;
-            ASSERT_NE(parent_of_symbioses, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::HOLOBIONT)
-        {
-            parent_of_holobionts = generic_parent_module;
-            ASSERT_NE(parent_of_holobionts, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::SHAPESHIFTER)
-        {
-            parent_of_shapeshifters = generic_parent_module;
-            ASSERT_NE(parent_of_cameras, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::TEXT_3D)
-        {
-            parent_of_text_3ds = generic_parent_module;
-            ASSERT_NE(parent_of_text_3ds, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::GLYPH_OBJECT)
-        {
-            parent_of_glyph_objects = generic_parent_module;
-            ASSERT_NE(parent_of_glyph_objects, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_brains        = scene->get_generic_parent_module<yli::ontology::Brain>();
+    ASSERT_NE(parent_of_brains, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_waypoints     = scene->get_generic_parent_module<yli::ontology::Waypoint>();
+    ASSERT_NE(parent_of_waypoints, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_cameras       = scene->get_generic_parent_module<yli::ontology::Camera>();
+    ASSERT_NE(parent_of_cameras, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_pipelines     = scene->get_generic_parent_module<yli::ontology::Pipeline>();
+    ASSERT_NE(parent_of_pipelines, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_materials     = scene->get_generic_parent_module<yli::ontology::Material>();
+    ASSERT_NE(parent_of_materials, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_species       = scene->get_generic_parent_module<yli::ontology::Species>();
+    ASSERT_NE(parent_of_species, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_objects       = scene->get_generic_parent_module<yli::ontology::Object>();
+    ASSERT_NE(parent_of_objects, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_symbioses     = scene->get_generic_parent_module<yli::ontology::Symbiosis>();
+    ASSERT_NE(parent_of_symbioses, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_holobionts    = scene->get_generic_parent_module<yli::ontology::Holobiont>();
+    ASSERT_NE(parent_of_holobionts, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_shapeshifters = scene->get_generic_parent_module<yli::ontology::Shapeshifter>();
+    ASSERT_NE(parent_of_shapeshifters, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_text_3ds      = scene->get_generic_parent_module<yli::ontology::Text3d>();
+    ASSERT_NE(parent_of_text_3ds, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_glyph_objects = scene->get_generic_parent_module<yli::ontology::GlyphObject>();
+    ASSERT_NE(parent_of_glyph_objects, nullptr);
 
     ASSERT_LT(parent_of_brains, parent_of_waypoints);
     ASSERT_LT(parent_of_waypoints, parent_of_cameras);

@@ -26,7 +26,6 @@
 #include "texture_file_format.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -437,15 +436,5 @@ namespace yli::ontology
         print_text_struct.font_size = print_console_struct.font_size;
         print_text_struct.text = (print_console_struct.text_input != nullptr ? (print_console_struct.prompt + print_console_struct.text_input->data()) : "");
         this->print_text_2d(print_text_struct);
-    }
-
-    GenericParentModule* Font2d::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::TEXT_2D)
-        {
-            return &this->parent_of_text_2ds;
-        }
-
-        return nullptr;
     }
 }

@@ -30,7 +30,6 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -228,16 +227,6 @@ namespace yli::ontology
     Pipeline* Symbiosis::get_pipeline() const
     {
         return static_cast<Pipeline*>(this->apprentice_of_pipeline.get_master());
-    }
-
-    GenericParentModule* Symbiosis::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::SYMBIONT_MATERIAL)
-        {
-            return &this->parent_of_symbiont_materials;
-        }
-
-        return nullptr;
     }
 
     Scene* Symbiosis::get_scene() const

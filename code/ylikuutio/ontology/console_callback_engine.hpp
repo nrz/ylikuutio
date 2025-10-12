@@ -61,7 +61,8 @@ namespace yli::ontology
             ~ConsoleCallbackEngine() = default;
 
         public:
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ApprenticeType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             Entity* get_parent() const override;
 
@@ -87,6 +88,12 @@ namespace yli::ontology
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;
     };
+
+    template<>
+        inline GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module<ConsoleCallbackObject>()
+        {
+            return &this->parent_of_console_callback_objects;
+        }
 }
 
 #endif

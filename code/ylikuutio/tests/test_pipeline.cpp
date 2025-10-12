@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -41,6 +40,7 @@ namespace yli::ontology
     class GenericParentModule;
     class Material;
     class Symbiosis;
+    class ComputeTask;
 }
 
 TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, headless_with_ecosystem_parent_provided_as_valid_pointer)
@@ -56,19 +56,8 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     ASSERT_NE(pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(pipeline) % alignof(yli::ontology::Pipeline), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = pipeline->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::COMPUTE_TASK)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_compute_tasks = pipeline->get_generic_parent_module<yli::ontology::ComputeTask>();
+    ASSERT_NE(parent_of_compute_tasks, nullptr);
 
     yli::ontology::GenericMasterModule* const master_of_materials = pipeline->get_generic_master_module<yli::ontology::Material>();
     yli::ontology::GenericMasterModule* const master_of_symbioses = pipeline->get_generic_master_module<yli::ontology::Symbiosis>();

@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -36,6 +35,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Biont;
 }
 
 TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
@@ -63,19 +63,8 @@ TEST(holobiont_must_be_initialized_appropriately, headless_with_parent_provided_
     ASSERT_NE(holobiont, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
 
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = holobiont->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::BIONT)
-        {
-            ASSERT_NE(generic_parent_module, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_bionts = holobiont->get_generic_parent_module<yli::ontology::Biont>();
+    ASSERT_NE(parent_of_bionts, nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

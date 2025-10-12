@@ -17,7 +17,6 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
@@ -28,6 +27,10 @@
 namespace yli::ontology
 {
     class GenericParentModule;
+    class Pipeline;
+    class Material;
+    class Species;
+    class Symbiosis;
 }
 
 TEST(ecosystems_must_be_initialized_appropriately, headless)
@@ -39,40 +42,14 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_NE(ecosystem1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem1) % alignof(yli::ontology::Ecosystem), 0);
 
-    const yli::ontology::GenericParentModule* parent_of_pipelines  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_materials  { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_species    { nullptr };
-    const yli::ontology::GenericParentModule* parent_of_symbioses  { nullptr };
-
-    for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
-    {
-        const yli::ontology::GenericParentModule* const generic_parent_module = ecosystem1->get_generic_parent_module(datatype);
-
-        if (datatype == yli::data::Datatype::PIPELINE)
-        {
-            parent_of_pipelines = generic_parent_module;
-            ASSERT_NE(parent_of_pipelines, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::MATERIAL)
-        {
-            parent_of_materials = generic_parent_module;
-            ASSERT_NE(parent_of_materials, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::SPECIES)
-        {
-            parent_of_species = generic_parent_module;
-            ASSERT_NE(parent_of_species, nullptr);
-        }
-        else if (datatype == yli::data::Datatype::SYMBIOSIS)
-        {
-            parent_of_symbioses = generic_parent_module;
-            ASSERT_NE(parent_of_symbioses, nullptr);
-        }
-        else
-        {
-            ASSERT_EQ(generic_parent_module, nullptr);
-        }
-    }
+    const yli::ontology::GenericParentModule* const parent_of_pipelines = ecosystem1->get_generic_parent_module<yli::ontology::Pipeline>();
+    ASSERT_NE(parent_of_pipelines, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_materials = ecosystem1->get_generic_parent_module<yli::ontology::Material>();
+    ASSERT_NE(parent_of_materials, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_species   = ecosystem1->get_generic_parent_module<yli::ontology::Species>();
+    ASSERT_NE(parent_of_species, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_symbioses = ecosystem1->get_generic_parent_module<yli::ontology::Symbiosis>();
+    ASSERT_NE(parent_of_symbioses, nullptr);
 
     ASSERT_LT(parent_of_pipelines, parent_of_materials);
     ASSERT_LT(parent_of_materials, parent_of_species);

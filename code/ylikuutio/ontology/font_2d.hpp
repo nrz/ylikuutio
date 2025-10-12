@@ -45,6 +45,7 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
+    class Text2d;
     class Console;
     struct FontStruct;
     struct PrintTextStruct;
@@ -78,7 +79,8 @@ namespace yli::ontology
             void print_text_2d(const PrintTextStruct& print_text_struct) const;
             void print_console(const PrintConsoleStruct& print_console_struct) const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -115,6 +117,12 @@ namespace yli::ontology
             uint32_t screen_height;
             uint32_t text_size;
     };
+
+    template<>
+        inline GenericParentModule* Font2d::get_generic_parent_module<Text2d>()
+        {
+            return &this->parent_of_text_2ds;
+        }
 
     template<>
         inline GenericMasterModule* Font2d::get_generic_master_module<Console>()

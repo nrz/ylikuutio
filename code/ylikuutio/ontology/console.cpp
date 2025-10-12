@@ -31,7 +31,6 @@
 #include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
@@ -379,20 +378,6 @@ namespace yli::ontology
                 active_input->add_character(keyboard_char);
             }
         }
-    }
-
-    GenericParentModule* Console::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::CONSOLE_CALLBACK_ENGINE)
-        {
-            return &this->parent_of_console_callback_engines;
-        }
-        else if (type == yli::data::Datatype::LISP_FUNCTION)
-        {
-            return &this->parent_of_lisp_functions;
-        }
-
-        return nullptr;
     }
 
     void Console::copy_historical_input_into_temp_input()

@@ -81,7 +81,8 @@ namespace yli::ontology
             std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
             std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
@@ -103,6 +104,12 @@ namespace yli::ontology
             // execute this callback with a parameter.
             virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
     };
+
+    template<>
+        inline GenericParentModule* CallbackObject::get_generic_parent_module<CallbackParameter>()
+        {
+            return &this->parent_of_callback_parameters;
+        }
 }
 
 #endif

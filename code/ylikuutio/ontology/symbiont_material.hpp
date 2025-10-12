@@ -43,6 +43,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Pipeline;
+    class SymbiontSpecies;
     struct SymbiontMaterialStruct;
 
     class SymbiontMaterial final : public Entity
@@ -64,7 +65,8 @@ namespace yli::ontology
             Entity* get_parent() const override;
             Pipeline* get_pipeline() const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             GLint get_openGL_textureID() const;
 
@@ -82,6 +84,12 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };
+
+    template<>
+        inline GenericParentModule* SymbiontMaterial::get_generic_parent_module<SymbiontSpecies>()
+        {
+            return &this->parent_of_symbiont_species;
+        }
 }
 
 #endif

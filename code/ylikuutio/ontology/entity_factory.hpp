@@ -150,14 +150,14 @@ namespace yli::ontology
                 return const_cast<EntityFactory<TypeEnumType>&>(*this);
             }
 
-            template<EntityNotUniverse ParentType>
-                GenericParentModule* get_generic_parent_module(const int child_type, const Request<ParentType>& entity_request) const
+            template<EntityNotUniverse ChildType, EntityNotUniverse ParentType>
+                GenericParentModule* get_generic_parent_module(const Request<ParentType>& entity_request) const
                 {
                     ParentType* const parent = yli::ontology::resolve_request<ParentType>(entity_request, this->get_universe().registry);
 
                     if (parent != nullptr) [[likely]]
                     {
-                        return parent->get_generic_parent_module(child_type);
+                        return parent->template get_generic_parent_module<ChildType>();
                     }
 
                     return nullptr;
@@ -176,10 +176,10 @@ namespace yli::ontology
                     return nullptr;
                 }
 
-            template<typename... Requests>
-                GenericParentModule* get_generic_parent_module_from_variant(const int type, const std::variant<Requests...>& variant) const
+            template<typename ChildType, typename... Requests>
+                GenericParentModule* get_generic_parent_module_from_variant(const std::variant<Requests...>& variant) const
                 {
-                    auto lambda = [this, type](const auto& request){ return this->get_generic_parent_module(type, request); };
+                    auto lambda = [this](const auto& request){ return this->get_generic_parent_module<ChildType>(request); };
                     return std::visit(lambda, variant);
                 }
 
@@ -473,7 +473,7 @@ namespace yli::ontology
                         this->application,
                         this->get_universe(),
                         biont_struct,
-                        this->get_generic_parent_module<Holobiont>(static_cast<int>(yli::data::Datatype::BIONT), biont_struct.holobiont_parent),
+                        this->get_generic_parent_module<Biont, Holobiont>(biont_struct.holobiont_parent),
                         this->get_generic_master_module<Biont, SymbiontSpecies>(biont_struct.symbiont_species_master));
             }
 
@@ -738,8 +738,8 @@ namespace yli::ontology
                         const ObjectStruct& object_struct,
                         ModuleArgs&&... module_args) const
                 {
-                    return this->create_child_of_known_parent_type<
-                        T, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
+                    return static_cast<T*>(this->create_child_of_known_parent_type<
+                        Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
                                 object_derivative_type,
                                 yli::data::Datatype::OBJECT,
                                 object_struct.scene,
@@ -749,7 +749,7 @@ namespace yli::ontology
                                 // `Species` master.
                                 this->get_generic_master_module<Object, Species>(object_struct.species_master),
                                 // Skill modules.
-                                std::forward<ModuleArgs>(module_args)...);
+                                std::forward<ModuleArgs>(module_args)...));
                 }
 
             template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
@@ -758,15 +758,15 @@ namespace yli::ontology
                         const HolobiontStruct& holobiont_struct,
                         ModuleArgs&&... module_args) const
                 {
-                    return this->create_child_of_known_parent_type<
-                        T, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
+                    return static_cast<T*>(this->create_child_of_known_parent_type<
+                        Holobiont, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
                                 holobiont_derivative_type,
                                 yli::data::Datatype::HOLOBIONT,
                                 holobiont_struct.scene,
                                 holobiont_struct,
                                 this->get_generic_master_module<Movable, Brain>(holobiont_struct.brain_master),
                                 this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_struct.symbiosis_master),
-                                std::forward<ModuleArgs>(module_args)...);
+                                std::forward<ModuleArgs>(module_args)...));
                 }
 
         private:
@@ -823,7 +823,7 @@ namespace yli::ontology
                             this->application,
                             this->get_universe(),
                             data_struct,
-                            this->get_generic_parent_module_from_variant(type, data_struct.parent),
+                            this->get_generic_parent_module_from_variant<T>(data_struct.parent),
                             std::forward<Args>(args)...);
 
                     instance->set_global_name(data_struct.global_name);
@@ -852,7 +852,7 @@ namespace yli::ontology
                             this->application,
                             this->get_universe(),
                             data_struct,
-                            this->get_generic_parent_module<ParentType>(parent_module_type, parent),
+                            this->get_generic_parent_module<Type, ParentType>(parent),
                             std::forward<Args>(args)...);
 
                     instance->set_global_name(data_struct.global_name);

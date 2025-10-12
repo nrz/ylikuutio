@@ -20,7 +20,6 @@
 #include "console_callback_object_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -102,15 +101,5 @@ namespace yli::ontology
         }
 
         return std::nullopt;
-    }
-
-    GenericParentModule* ConsoleCallbackObject::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::CONSOLE_CALLBACK_PARAMETER)
-        {
-            return &this->parent_of_console_callback_parameters;
-        }
-
-        return nullptr;
     }
 }

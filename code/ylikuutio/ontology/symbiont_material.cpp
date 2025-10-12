@@ -20,7 +20,6 @@
 #include "symbiosis.hpp"
 #include "symbiont_material_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
@@ -100,16 +99,6 @@ namespace yli::ontology
         }
 
         return static_cast<Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
-    }
-
-    GenericParentModule* SymbiontMaterial::get_generic_parent_module(const int type)
-    {
-        if (type == yli::data::Datatype::SYMBIONT_SPECIES)
-        {
-            return &this->parent_of_symbiont_species;
-        }
-
-        return nullptr;
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const

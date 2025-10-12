@@ -94,7 +94,8 @@ namespace yli::ontology
 
             GLuint get_program_id() const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             MasterModule<Pipeline*>* get_master_module() const
             {
@@ -141,6 +142,12 @@ namespace yli::ontology
 
             bool is_gpgpu_pipeline;               // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
     };
+
+    template<>
+        inline GenericParentModule* Pipeline::get_generic_parent_module<ComputeTask>()
+        {
+            return &this->parent_of_compute_tasks;
+        }
 
     template<>
         inline GenericMasterModule* Pipeline::get_generic_master_module<Material>()

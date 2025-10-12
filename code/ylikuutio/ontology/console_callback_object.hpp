@@ -46,6 +46,7 @@ namespace yli::ontology
     class Scene;
     class Console;
     class ConsoleCallbackEngine;
+    class ConsoleCallbackParameter;
     struct ConsoleCallbackObjectStruct;
 
     class ConsoleCallbackObject final : public Entity
@@ -59,7 +60,8 @@ namespace yli::ontology
                     const ConsoleCallbackObjectStruct& console_callback_object_struct,
                     GenericParentModule* const console_callback_engine_parent_module);
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
@@ -83,6 +85,12 @@ namespace yli::ontology
         private:
             InputParametersToAnyValueCallbackWithConsole console_callback;
     };
+
+    template<>
+        inline GenericParentModule* ConsoleCallbackObject::get_generic_parent_module<ConsoleCallbackParameter>()
+        {
+            return &this->parent_of_console_callback_parameters;
+        }
 }
 
 #endif

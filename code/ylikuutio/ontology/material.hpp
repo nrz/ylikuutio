@@ -53,6 +53,8 @@ namespace yli::ontology
     class Pipeline;
     class Species;
     class SymbiontSpecies;
+    class ShapeshifterTransformation;
+    class VectorFont;
     class Glyph;
     struct MaterialStruct;
 
@@ -93,7 +95,8 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -133,6 +136,18 @@ namespace yli::ontology
         public:
             void render(const Scene* const target_scene);
     };
+
+    template<>
+        inline GenericParentModule* Material::get_generic_parent_module<ShapeshifterTransformation>()
+        {
+            return &this->parent_of_shapeshifter_transformations;
+        }
+
+    template<>
+        inline GenericParentModule* Material::get_generic_parent_module<VectorFont>()
+        {
+            return &this->parent_of_vector_fonts;
+        }
 
     template<>
         inline GenericMasterModule* Material::get_generic_master_module<Species>()

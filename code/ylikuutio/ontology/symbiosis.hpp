@@ -111,7 +111,8 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
-            GenericParentModule* get_generic_parent_module(const int type);
+            template<typename ChildType>
+                GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
@@ -179,6 +180,12 @@ namespace yli::ontology
             std::vector<const ofbx::Texture*> ofbx_count_texture_vector;   // currently not in use.
             std::size_t ofbx_mesh_count { 0 };                             // the value of `ofbx_mesh_count` comes from OpenFBX.
     };
+
+    template<>
+        inline GenericParentModule* Symbiosis::get_generic_parent_module<SymbiontMaterial>()
+        {
+            return &this->parent_of_symbiont_materials;
+        }
 
     template<>
         inline GenericMasterModule* Symbiosis::get_generic_master_module<Holobiont>()
