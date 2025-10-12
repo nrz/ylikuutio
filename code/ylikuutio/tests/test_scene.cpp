@@ -50,6 +50,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
     const yli::ontology::GenericParentModule* parent_of_holobionts { nullptr };
     const yli::ontology::GenericParentModule* parent_of_shapeshifters { nullptr };
     const yli::ontology::GenericParentModule* parent_of_text_3ds      { nullptr };
+    const yli::ontology::GenericParentModule* parent_of_glyph_objects { nullptr };
 
     for (int datatype = 0; datatype < yli::data::Datatype::MAX_VALUE; datatype++)
     {
@@ -110,6 +111,11 @@ TEST(scene_must_be_initialized_appropriately, headless)
             parent_of_text_3ds = generic_parent_module;
             ASSERT_NE(parent_of_text_3ds, nullptr);
         }
+        else if (datatype == yli::data::Datatype::GLYPH_OBJECT)
+        {
+            parent_of_glyph_objects = generic_parent_module;
+            ASSERT_NE(parent_of_glyph_objects, nullptr);
+        }
         else
         {
             ASSERT_EQ(generic_parent_module, nullptr);
@@ -126,6 +132,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_LT(parent_of_symbioses, parent_of_holobionts);
     ASSERT_LT(parent_of_holobionts, parent_of_shapeshifters);
     ASSERT_LT(parent_of_shapeshifters, parent_of_text_3ds);
+    ASSERT_LT(parent_of_text_3ds, parent_of_glyph_objects);
 
     // `Universe` member functions.
     ASSERT_EQ(application.get_universe().get_number_of_ecosystems(), 0);

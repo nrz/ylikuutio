@@ -109,6 +109,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "text_3ds"),
+        parent_of_glyph_objects(
+                *this,
+                this->registry,
+                "glyph_objects"),
         gravity               { scene_struct.gravity },
         light_position        { scene_struct.light_position },
         water_level           { scene_struct.water_level },
@@ -405,6 +409,10 @@ namespace yli::ontology
         else if (type == yli::data::Datatype::TEXT_3D)
         {
             return &this->parent_of_text_3ds;
+        }
+        else if (type == yli::data::Datatype::GLYPH_OBJECT)
+        {
+            return &this->parent_of_glyph_objects;
         }
 
         return nullptr;

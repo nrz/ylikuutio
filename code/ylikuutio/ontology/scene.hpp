@@ -140,6 +140,7 @@ namespace yli::ontology
             GenericParentModule parent_of_holobionts;
             GenericParentModule parent_of_shapeshifters;
             GenericParentModule parent_of_text_3ds;
+            GenericParentModule parent_of_glyph_objects;
 
             Scene* get_scene() const override;
 
