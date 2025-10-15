@@ -205,7 +205,10 @@ namespace yli::ontology
         }
     }
 
-    void Font2d::compute_and_store_glyph_vertices(std::vector<glm::vec2>& vertices, const uint32_t vertex_left_x, const uint32_t vertex_top_y) const
+    void Font2d::compute_and_store_glyph_vertices(
+            std::vector<glm::vec2>& vertices,
+            const uint32_t vertex_left_x,
+            const uint32_t vertex_top_y) const
     {
         const uint32_t vertex_right_x = vertex_left_x + this->text_size;
 
