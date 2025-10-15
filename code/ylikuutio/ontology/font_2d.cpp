@@ -185,7 +185,7 @@ namespace yli::ontology
     {
         // Count the number of lines.
         const std::string& string = print_text_struct.text;
-        const std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n');
+        const std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n') + 1;
 
         if (print_text_struct.position.vertical_alignment == VerticalAlignment::TOP)
         {
