@@ -194,34 +194,34 @@ namespace yli_edit
             universe_struct.graphics_api_backend = yli::render::GraphicsApiBackend::HEADLESS;
         }
 
-        if (this->command_line_master.is_key("window_width") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window_width")))
+        if (this->command_line_master.is_key("window-width") &&
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
         {
-            const std::string window_width = this->command_line_master.get_value("window_width");
+            const std::string window_width = this->command_line_master.get_value("window-width");
             std::size_t index = 0;
             universe_struct.window_width = yli::string::extract_value_or_throw<char, uint32_t>(window_width, index, "", "");
         }
 
-        if (this->command_line_master.is_key("window_height") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window_height")))
+        if (this->command_line_master.is_key("window-height") &&
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
         {
-            const std::string window_height = this->command_line_master.get_value("window_height");
+            const std::string window_height = this->command_line_master.get_value("window-height");
             std::size_t index = 0;
             universe_struct.window_height = yli::string::extract_value_or_throw<char, uint32_t>(window_height, index, "", "");
         }
 
-        if (this->command_line_master.is_key("framebuffer_width") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer_width")))
+        if (this->command_line_master.is_key("framebuffer-width") &&
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-width")))
         {
-            const std::string framebuffer_width = this->command_line_master.get_value("framebuffer_width");
+            const std::string framebuffer_width = this->command_line_master.get_value("framebuffer-width");
             std::size_t index = 0;
             universe_struct.framebuffer_module_struct.texture_width = yli::string::extract_value_or_throw<char, uint32_t>(framebuffer_width, index, "", "");
         }
 
-        if (this->command_line_master.is_key("framebuffer_height") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer_height")))
+        if (this->command_line_master.is_key("framebuffer-height") &&
+                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-height")))
         {
-            const std::string framebuffer_height = this->command_line_master.get_value("framebuffer_height");
+            const std::string framebuffer_height = this->command_line_master.get_value("framebuffer-height");
             std::size_t index = 0;
             universe_struct.framebuffer_module_struct.texture_height = yli::string::extract_value_or_throw<char, uint32_t>(framebuffer_height, index, "", "");
         }
@@ -234,26 +234,26 @@ namespace yli_edit
             universe_struct.speed = yli::string::extract_value_or_throw<char, float>(speed, index, "", "");
         }
 
-        if (this->command_line_master.is_key("turbo_factor") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo_factor")))
+        if (this->command_line_master.is_key("turbo-factor") &&
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo-factor")))
         {
-            const std::string turbo_factor = this->command_line_master.get_value("turbo_factor");
+            const std::string turbo_factor = this->command_line_master.get_value("turbo-factor");
             std::size_t index = 0;
             universe_struct.turbo_factor = yli::string::extract_value_or_throw<char, float>(turbo_factor, index, "", "");
         }
 
-        if (this->command_line_master.is_key("twin_turbo_factor") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin_turbo_factor")))
+        if (this->command_line_master.is_key("twin-turbo_factor") &&
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin-turbo-factor")))
         {
-            const std::string twin_turbo_factor = this->command_line_master.get_value("twin_turbo_factor");
+            const std::string twin_turbo_factor = this->command_line_master.get_value("twin-turbo-factor");
             std::size_t index = 0;
             universe_struct.twin_turbo_factor = yli::string::extract_value_or_throw<char, float>(twin_turbo_factor, index, "", "");
         }
 
-        if (this->command_line_master.is_key("mouse_speed") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse_speed")))
+        if (this->command_line_master.is_key("mouse-speed") &&
+                yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse-speed")))
         {
-            const std::string mouse_speed = this->command_line_master.get_value("mouse_speed");
+            const std::string mouse_speed = this->command_line_master.get_value("mouse-speed");
             std::size_t index = 0;
             universe_struct.mouse_speed = yli::string::extract_value_or_throw<char, float>(mouse_speed, index, "", "");
         }
