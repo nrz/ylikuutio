@@ -120,6 +120,7 @@ namespace hirvi
                 "version",
                 "silent",
                 "fullscreen",
+                "no-fullscreen",
                 "headless",
                 "window-width",
                 "window-height",
@@ -199,6 +200,11 @@ namespace hirvi
         if (this->command_line_master.is_key("fullscreen"))
         {
             universe_struct.is_fullscreen = true;
+        }
+
+        if (this->command_line_master.is_key("no-fullscreen"))
+        {
+            universe_struct.is_fullscreen = false;
         }
 
         if (this->command_line_master.is_key("headless"))
