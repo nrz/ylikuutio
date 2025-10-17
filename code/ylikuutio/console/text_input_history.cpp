@@ -107,15 +107,10 @@ namespace yli::console
 
     bool TextInputHistory::exit_history()
     {
-        if (this->get_is_in_history())
-        {
-            // If we are in history, exit the history.
-            this->history_index = std::numeric_limits<std::size_t>::max();
-            this->history_it = this->history.end();
-            return true;
-        }
-
-        return false;
+        // This is idempotent. If we are in history, exit the history.
+        this->history_index = std::numeric_limits<std::size_t>::max();
+        this->history_it = this->history.end();
+        return true;
     }
 
     bool TextInputHistory::edit_historical_input()
