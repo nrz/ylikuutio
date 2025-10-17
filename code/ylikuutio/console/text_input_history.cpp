@@ -113,18 +113,6 @@ namespace yli::console
         return true;
     }
 
-    bool TextInputHistory::edit_historical_input()
-    {
-        if (this->get_is_in_history())
-        {
-            // If we are in history, enter temp input.
-            // We still stay in the some historical index.
-            return true;
-        }
-
-        return false;
-    }
-
     bool TextInputHistory::move_to_previous()
     {
         if (this->get_is_in_history() && this->history_index > 0 && this->history_index < this->size()) [[likely]]

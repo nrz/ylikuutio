@@ -286,22 +286,6 @@ TEST(pushing_an_input_capacity_plus_10_times_must_work_appropriately, abc)
     ASSERT_EQ(*text_input_history.get(), yli::console::TextInput("abc", yli::console::TextInputType::NEW_INPUT));
 }
 
-TEST(editing_a_historical_input_must_work_appropriately, historical_input)
-{
-    yli::console::TextInputHistory text_input_history;
-
-    yli::console::TextInput text_input(yli::console::TextInputType::NEW_INPUT);
-    text_input.add_characters("abc");
-
-    text_input_history.add_to_history(std::move(text_input));
-    ASSERT_TRUE(text_input_history.enter_history());
-    ASSERT_EQ(text_input_history.get_history_index(), 0);
-    ASSERT_EQ(text_input_history.get_history_it(), text_input_history.data().begin());
-    ASSERT_NE(text_input_history.get_history_it(), text_input_history.data().end());
-
-    ASSERT_TRUE(text_input_history.edit_historical_input());
-}
-
 TEST(emplacing_back_an_input_must_work_appropriately, abc)
 {
     yli::console::TextInputHistory text_input_history;

@@ -43,7 +43,6 @@ namespace yli::console
 
             bool enter_history();
             bool exit_history();
-            bool edit_historical_input();
 
             bool move_to_previous();
             bool move_to_next();
