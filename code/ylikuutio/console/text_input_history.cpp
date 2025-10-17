@@ -90,9 +90,11 @@ namespace yli::console
 
     bool TextInputHistory::enter_history()
     {
-        if (std::size_t history_size = this->size(); !this->get_is_in_history() && history_size > 0) [[likely]]
+        // This should be idempotent. Entering history again just causes entering the last input of the history.
+
+        if (std::size_t history_size = this->size(); history_size > 0) [[likely]]
         {
-            // If we are not in history and the history is not empty, enter the history.
+            // If the history is not empty, enter the history.
             this->history_index = history_size - 1;
             this->history_it = this->history.begin() + history_index;
             return true;
