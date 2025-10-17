@@ -159,6 +159,12 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_temp_input()
     {
+        // If there is no temp input, then do not enter temp input.
+        if (this->text_input_history.empty() || this->temp_input_index == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        {
+            return std::nullopt; // Transition failed.
+        }
+
         return this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
     }
 
