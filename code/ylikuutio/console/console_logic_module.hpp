@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 
 namespace yli::console
@@ -79,6 +80,7 @@ namespace yli::console
             TextInputHistory& get_text_input_history() const;
             ScrollbackBuffer& get_scrollback_buffer() const;
             const TextInput* get_visible_input() const; // The currently selected input, can be: new input, historical input, or temp input.
+            std::size_t get_temp_input_index() const;   // Index of the current temp input, or `std::numeric_limits<std::size_t>::max()` if none.
 
             std::size_t get_n_columns() const;
             std::size_t get_n_rows() const;
@@ -133,6 +135,8 @@ namespace yli::console
 
             const std::size_t n_columns;
             const std::size_t n_rows;
+
+            std::size_t temp_input_index { std::numeric_limits<std::size_t>::max() };
 
             bool can_move_to_previous_input { true };
             bool can_move_to_next_input     { true };

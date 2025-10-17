@@ -23,6 +23,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
+#include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 
 namespace yli::console
@@ -191,6 +192,7 @@ namespace yli::console
                 // while in historical input, the current historical input becomes
                 // the new temp input, and temp input becomes the active input.
                 this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->temp_input_index = this->text_input_history.get_history_index();
                 this->temp_input.clear();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
@@ -333,6 +335,11 @@ namespace yli::console
 
         // Otherwise we have no selected visible input.
         return nullptr;
+    }
+
+    std::size_t ConsoleLogicModule::get_temp_input_index() const
+    {
+        return this->temp_input_index;
     }
 
     std::size_t ConsoleLogicModule::get_n_columns() const
