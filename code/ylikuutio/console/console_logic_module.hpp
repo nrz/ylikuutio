@@ -85,6 +85,8 @@ namespace yli::console
             std::size_t get_n_columns() const;
             std::size_t get_n_rows() const;
 
+            void invalidate_temp_input();
+
             // Boolean state inquiry functions.
             bool get_can_move_to_previous_input() const;
             bool get_can_move_to_next_input() const;

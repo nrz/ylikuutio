@@ -352,6 +352,12 @@ namespace yli::console
         return this->n_rows;
     }
 
+    void ConsoleLogicModule::invalidate_temp_input()
+    {
+        this->temp_input.clear();
+        this->temp_input_index = std::numeric_limits<std::size_t>::max();
+    }
+
     // Boolean state inquiry functions.
 
     bool ConsoleLogicModule::get_can_move_to_previous_input() const
