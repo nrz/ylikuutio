@@ -25,6 +25,7 @@
 #include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
+#include <stdint.h> // uint32_t etc.
 
 namespace yli::console
 {
