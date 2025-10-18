@@ -601,7 +601,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callback_parameter.cpp
     code/ylikuutio/ontology/console_callback_parameter.hpp
     code/ylikuutio/ontology/console_callback_parameter_struct.hpp
-    code/ylikuutio/ontology/console_callbacks.cpp
     code/ylikuutio/ontology/console_printing.cpp
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp

@@ -26,7 +26,6 @@
 #include "texture_file_format.hpp"
 #include "print_console_struct.hpp"
 #include "family_templates.hpp"
-#include "callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
@@ -492,20 +491,4 @@ namespace yli::ontology
     {
         return this->master_of_input_modes.get_current_input_mode();
     }
-
-    // Console command callbacks begin here.
-
-    std::optional<yli::data::AnyValue> Console::clear(
-            Console& console)
-    {
-        console.console_logic_module.enter_new_input();
-        console.new_input.clear();
-        console.command_history.clear();
-        console.scrollback_buffer.clear();
-
-        const uint32_t clear_console_magic_number = CallbackMagicNumber::CLEAR_CONSOLE;
-        return yli::data::AnyValue(clear_console_magic_number);
-    }
-
-    // Public callbacks end here.
 }

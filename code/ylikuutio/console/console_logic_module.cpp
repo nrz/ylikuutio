@@ -19,6 +19,12 @@
 #include "console_state.hpp"
 #include "text_input_history.hpp"
 #include "scrollback_buffer.hpp"
+#include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/lisp/parser.hpp"
+#include "code/ylikuutio/lisp/executor.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -26,6 +32,17 @@
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
+
+namespace yli::ontology
+{
+    class GenericParentModule;
+    class CallbackEngine;
+    class CallbackObject;
+    class ConsoleCallbackEngine;
+    class ConsoleCallbackObject;
+}
 
 namespace yli::console
 {
@@ -580,4 +597,761 @@ namespace yli::console
         std::cerr << "ERROR: `ConsoleLogicModule::switch_to_state`: state transition failed!\n";
         return std::nullopt; // Transition failed.
     }
+
+    // Public callbacks.
+
+    // Action mode keyrelease callbacks begin here.
+
+    // Action mode keypress callbacks begin here.
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enter_console(
+            yli::ontology::Universe& universe,
+            yli::ontology::CallbackEngine*,
+            yli::ontology::CallbackObject*,
+            yli::ontology::GenericParentModule&,
+            const yli::data::AnyValue&)
+    {
+        yli::ontology::Console* const console = universe.get_active_console();
+
+        if (console == nullptr)
+        {
+            // We did not enter the console.
+            return std::nullopt;
+        }
+
+        if (console->enter_console())
+        {
+            // Signal to caller that we have entered the console.
+            uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
+            return yli::data::AnyValue(enter_console_magic_number);
+        }
+
+        // We did not enter the console.
+        return std::nullopt;
+    }
+
+    // Console mode keyrelease callbacks begin here.
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_control_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_control_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_control_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_control_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_alt_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_alt_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_alt_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_alt_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_shift_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_shift_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_shift_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_shift_pressed(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_move_to_previous_input(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_move_to_previous_input(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_move_to_next_input(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_move_to_next_input(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_backspace(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_backspace(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_tab(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_tab(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_enter_key(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_enter_key(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_ctrl_c(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_ctrl_c(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_ctrl_w(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_ctrl_w(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_page_up(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_page_up(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_page_down(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_page_down(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_home(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_home(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enable_end(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_can_end(true);
+        }
+        return std::nullopt;
+    }
+
+    // Console mode keypress callbacks begin here.
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::exit_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.exit_console())
+        {
+            // Signal to caller that we have exited the console.
+            uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
+            return yli::data::AnyValue(exit_console_magic_number);
+        }
+
+        // We did not exit the console.
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_control_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_control_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_control_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_control_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_alt_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_alt_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_alt_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_alt_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_shift_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_left_shift_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_shift_in_console(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console())
+        {
+            console.console_logic_module.set_is_right_shift_pressed(true);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::move_to_previous_input(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_previous_input())
+        {
+            const std::size_t history_index = console.command_history.get_history_index();
+
+            if (!console.console_logic_module.get_active_in_historical_input() && !console.command_history.empty())
+            {
+                // OK, we moved from the new input to the last historical input.
+                console.console_logic_module.enter_historical_input();
+                console.console_logic_module.set_can_move_to_previous_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_historical_input() && history_index > 0)
+            {
+                // OK, we moved to the previous historical input.
+                console.command_history.move_to_previous();
+                console.console_logic_module.set_can_move_to_previous_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index > 0)
+            {
+                // OK, we moved to the previous historical input from temp input.
+                console.console_logic_module.enter_historical_input();
+                console.command_history.move_to_nth(history_index - 1);
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_previous_input(false);
+            }
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::move_to_next_input(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_next_input() && !console.command_history.empty())
+        {
+            const std::size_t history_index = console.command_history.get_history_index();
+
+            if (console.console_logic_module.get_active_in_historical_input() && history_index == console.command_history.size() - 1)
+            {
+                // OK, we moved from the last historical input to the new input.
+                console.console_logic_module.enter_new_input();
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index == console.command_history.size() - 1)
+            {
+                // OK, we moved from the edited last historical input (temp input) to the new input.
+                console.console_logic_module.enter_new_input();
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_historical_input() && history_index < console.command_history.size() - 1)
+            {
+                // OK, we moved to the next historical input.
+                console.command_history.move_to_next();
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_temp_input() && history_index < console.command_history.size() - 1)
+            {
+                // OK, we moved to the next historical input from temp input.
+                console.console_logic_module.enter_historical_input(); // Entering historical input causes history index reset to last.
+                console.command_history.move_to_nth(history_index + 1);
+
+                console.move_cursor_to_end_of_line();
+                console.console_logic_module.set_can_move_to_next_input(false);
+            }
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::backspace(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_backspace())
+        {
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+            if (active_input != nullptr)
+            {
+                active_input->delete_character();
+            }
+
+            console.console_logic_module.set_can_backspace(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::tab(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        yli::ontology::Universe& universe = console.get_universe();
+
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_tab())
+        {
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+            if (active_input == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            // Copy active input into a `std::string`.
+            std::string input_string(active_input->data());
+
+            std::vector<std::string> parameter_vector;
+            std::string command;
+
+            yli::lisp::parse(input_string, command, parameter_vector);
+
+            if (command.empty() ||
+                    (parameter_vector.empty() && input_string.back() != ' '))
+            {
+                // If `input_string` is empty, then complete the command.
+                // Also if there are no parameters and `input_string` does not end with a space, then complete the command.
+
+                console.print_completions(universe.registry, command);
+
+                const std::string completion = universe.complete(command);
+                active_input->clear();
+                active_input->add_characters(completion);
+            }
+            else if (parameter_vector.empty())
+            {
+                // If `input_string` has no parameters,
+                // then complete the parameter using the empty string.
+
+                // If `input_string` is empty, then complete the parameter.
+
+                console.print_completions(universe.registry, "");
+
+                const std::string completion = universe.complete("");
+
+                if (!completion.empty())
+                {
+                    active_input->add_characters(completion);
+                }
+            }
+            else if (input_string.back() != ' ')
+            {
+                // If `input_string` does not end with a space,
+                // then complete the current parameter.
+
+                console.print_completions(universe.registry, parameter_vector.back());
+
+                const std::string completion = universe.complete(parameter_vector.back());
+                active_input->clear();
+                active_input->add_characters(command);
+                active_input->add_character(' ');
+
+                // Copy the old parameters except the last.
+
+                for (std::size_t i = 0; i + 1 < parameter_vector.size(); i++)
+                {
+                    active_input->add_characters(parameter_vector.at(i));
+                    console.move_cursor_to_end_of_line();
+                    active_input->add_character(' ');
+                }
+
+                // Copy the completed parameter.
+                active_input->add_characters(completion);
+            }
+            else
+            {
+                // Complete the next parameter.
+
+                const std::string completion = universe.complete("");
+
+                if (!completion.empty())
+                {
+                    // Copy the completed parameter.
+                    active_input->add_characters(completion);
+                }
+            }
+
+            console.move_cursor_to_end_of_line();
+
+            console.console_logic_module.set_can_tab(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::enter_key(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (!console.console_logic_module.get_active_in_console() || !console.console_logic_module.get_can_enter_key())
+        {
+            return std::nullopt;
+        }
+
+        yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+        if (active_input == nullptr)
+        {
+            std::cerr << "ERROR: `ConsoleLogicModule::enter_key`: `active_input` is `nullptr`!\n";
+            return std::nullopt;
+        }
+
+        // Copy prompt input into a `std::string`.
+        std::string input_string(console.prompt);
+
+        // Append active input.
+        input_string.append(active_input->data().begin(), active_input->data().end());
+
+        // Copy active input into the command history.
+        console.command_history.add_to_history(*active_input);
+
+        // Store new input prefixed with prompt to scrollback buffer.
+        console.scrollback_buffer.add_to_buffer(yli::console::TextLine(input_string));
+
+        std::vector<std::string> parameter_vector;
+        std::string command;
+
+        console.new_input.clear();
+
+        if (yli::lisp::parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
+        {
+            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
+            console.console_logic_module.enter_new_input();
+            console.console_logic_module.set_can_enter_key(false);
+            return any_value;
+        }
+
+        console.console_logic_module.enter_new_input();
+        console.console_logic_module.set_can_enter_key(false);
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::ctrl_c(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_ctrl_c() &&
+                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
+                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
+                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
+        {
+            console.new_input.clear();
+            console.console_logic_module.enter_new_input();
+            console.console_logic_module.set_can_ctrl_c(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::ctrl_w(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() &&
+                console.console_logic_module.get_can_ctrl_w() &&
+                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
+                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
+                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
+        {
+            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+
+            if (active_input == nullptr)
+            {
+                std::cerr << "ERROR: `ConsoleLogicModule::ctrl_w`: `active_input` is `nullptr`!\n";
+                return std::nullopt;
+            }
+
+            active_input->ctrl_w();
+            console.console_logic_module.set_can_ctrl_w(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::page_up(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_up())
+        {
+            if (!console.console_logic_module.get_active_in_scrollback_buffer())
+            {
+                // We are not yet in scrollback buffer.
+
+                if (!console.console_logic_module.enter_scrollback_buffer())
+                {
+                    std::cerr << "ERROR: `ConsoleLogicModule::page_up`: state transition to scrollback buffer failed!\n";
+                }
+                return std::nullopt;
+            }
+            else
+            {
+                // We are already in scrollback buffer.
+                console.scrollback_buffer.page_up();
+            }
+
+            console.console_logic_module.set_can_page_up(false);
+        }
+
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::page_down(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_down())
+        {
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
+            {
+                if (!console.scrollback_buffer.page_down())
+                {
+                    // Page down caused exit from scrollback buffer.
+                    console.console_logic_module.exit_scrollback_buffer();
+                }
+            }
+
+            console.console_logic_module.set_can_page_down(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::home(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_home())
+        {
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
+            {
+                console.scrollback_buffer.move_to_first();
+            }
+            else
+            {
+                console.console_logic_module.enter_scrollback_buffer();
+                console.scrollback_buffer.move_to_first();
+            }
+
+            console.console_logic_module.set_can_home(false);
+        }
+        return std::nullopt;
+    }
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::end(
+            yli::ontology::ConsoleCallbackEngine*,
+            yli::ontology::ConsoleCallbackObject*,
+            yli::ontology::GenericParentModule&,
+            yli::ontology::Console& console)
+    {
+        if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_end())
+        {
+            if (console.console_logic_module.get_active_in_scrollback_buffer())
+            {
+                console.console_logic_module.exit_scrollback_buffer();
+            }
+
+            console.console_logic_module.set_can_end(false);
+        }
+        return std::nullopt;
+    }
+
+    // Console command callbacks begin here.
+
+    std::optional<yli::data::AnyValue> ConsoleLogicModule::clear(
+            yli::ontology::Console& console)
+    {
+        console.console_logic_module.enter_new_input();
+        console.new_input.clear();
+        console.command_history.clear();
+        console.scrollback_buffer.clear();
+
+        const uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
+        return yli::data::AnyValue(clear_console_magic_number);
+    }
+
+    // Public callbacks end here.
+
+    // Callbacks end here.
 }
