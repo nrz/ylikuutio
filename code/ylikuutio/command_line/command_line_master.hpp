@@ -18,7 +18,11 @@
 #ifndef YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
 #define YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
 
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
+
 // Include standard headers
+#include <cstddef>       // std::size_t
+#include <stdexcept>     // std::runtime_error
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -37,6 +41,18 @@ namespace yli::command_line
             std::string get_value(const std::string& key) const;
             void print_keys() const;
             void print_keys_and_values() const;
+
+            template<typename Type>
+                Type get_value_or_throw(const std::string& key) const
+                {
+                    if (this->arg_map.count(key) == 1)
+                    {
+                        std::size_t index = 0;
+                        return yli::string::extract_value_or_throw<char, Type>(this->arg_map.at(key), index, "", "");
+                    }
+
+                    throw std::runtime_error("ERROR: `CommandLineMaster::get_value_or_throw`: no value defined for the key: " + key + " !");
+                }
 
         private:
             int argc                 { 0 };     // By default there are 0 arguments.
