@@ -28,6 +28,7 @@
 #include <limits>    // std::numeric_limits
 #include <new>       // std::launder
 #include <stdexcept> // std::runtime_error
+#include <string>    // std::to_string
 #include <utility>   // std::forward
 
 namespace yli::memory
