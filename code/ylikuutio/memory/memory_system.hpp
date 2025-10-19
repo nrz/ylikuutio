@@ -27,7 +27,7 @@
 #include <cstddef>       // std::size_t
 #include <map>           // std::map
 #include <stdexcept>     // std::runtime_error
-#include <string>        // std::string
+#include <string>        // std::string, std::to_string
 #include <utility>       // std::forward
 
 namespace yli::memory
