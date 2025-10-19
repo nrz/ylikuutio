@@ -64,6 +64,7 @@
 #include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
+#include "code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
@@ -665,48 +666,11 @@ namespace yli_edit
 
         std::cout << "Defining console command callback engines.\n";
 
-        // Variable callbacks.
-        this->entity_factory.create_lisp_function_overload("variables", *my_console, &yli::ontology::Entity::print_variables0);
-        this->entity_factory.create_lisp_function_overload("variables", *my_console, &yli::ontology::Entity::print_variables1);
-        this->entity_factory.create_lisp_function_overload("create-variable", *my_console, &yli::ontology::Entity::create_variable_with_parent_name_type_value);
-        this->entity_factory.create_lisp_function_overload("set", *my_console, &yli::ontology::Variable::set_variable_const_std_string);
-        this->entity_factory.create_lisp_function_overload("copy", *my_console, &yli::ontology::Variable::set_variable_variable);
-        this->entity_factory.create_lisp_function_overload("print", *my_console, &yli::ontology::Variable::print_value1);
+        // Lisp function overloads.
+        yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
 
-        // Object callbacks.
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z_yaw_pitch);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &yli::ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch);
-
-        // Holobiont callbacks.
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z);
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch);
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &yli::ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch);
-
-        // `Entity` handling callbacks.
-        this->entity_factory.create_lisp_function_overload("entities", *my_console, &yli::ontology::Universe::print_entities);
-        this->entity_factory.create_lisp_function_overload("parent", *my_console, &yli::ontology::Universe::print_parent);
-        this->entity_factory.create_lisp_function_overload("children", *my_console, &yli::ontology::Entity::print_children);
-        this->entity_factory.create_lisp_function_overload("activate", *my_console, &yli::ontology::Universe::activate_entity);
-        this->entity_factory.create_lisp_function_overload("delete", *my_console, &yli::ontology::Universe::delete_entity);
-        this->entity_factory.create_lisp_function_overload("info", *my_console, &yli::ontology::Universe::info0);
-        this->entity_factory.create_lisp_function_overload("info", *my_console, &yli::ontology::Universe::info1);
-        this->entity_factory.create_lisp_function_overload("set-global-name", *my_console, &yli::ontology::Universe::set_global_name_for_entity);
-        this->entity_factory.create_lisp_function_overload("set-local-name", *my_console, &yli::ontology::Universe::set_local_name_for_entity);
-
-        // Exit program callbacks.
-        this->entity_factory.create_lisp_function_overload("bye", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("chau", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("ciao", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("heippa", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("quit", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("sayonara", *my_console, &yli::snippets::quit);
-
-        // Other callbacks.
-        this->entity_factory.create_lisp_function_overload("help", *my_console, &yli::snippets::help);
+        // YliEdit-specific callbacks.
         this->entity_factory.create_lisp_function_overload("version", *my_console, &yli_edit::version);
-        this->entity_factory.create_lisp_function_overload("clear", *my_console, &yli::console::ConsoleLogicModule::clear);
-        this->entity_factory.create_lisp_function_overload("screenshot", *my_console, &yli::ontology::Universe::screenshot);
 
         std::cout << "Setting up framebuffer size ...\n";
         yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());

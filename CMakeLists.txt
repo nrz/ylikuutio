@@ -844,6 +844,7 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/framebuffer_snippets.hpp
     code/ylikuutio/snippets/keyboard_callback_snippets.cpp
     code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp
     code/ylikuutio/snippets/location_and_orientation_snippets.cpp
     code/ylikuutio/snippets/location_and_orientation_snippets.hpp
     code/ylikuutio/snippets/movement_snippets.cpp

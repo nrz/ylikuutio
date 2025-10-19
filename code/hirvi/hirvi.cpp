@@ -72,6 +72,7 @@
 #include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/console_callback_snippets.hpp"
+#include "code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
@@ -708,90 +709,11 @@ namespace hirvi
 
         std::cout << "Defining console command callback engines.\n";
 
-        // Variable callbacks.
-        this->entity_factory.create_lisp_function_overload("variables", *my_console, &Entity::print_variables0);
-        this->entity_factory.create_lisp_function_overload("variables", *my_console, &Entity::print_variables1);
-        this->entity_factory.create_lisp_function_overload("create-variable", *my_console, &Entity::create_variable_with_parent_name_type_value);
-        this->entity_factory.create_lisp_function_overload("set", *my_console, &Variable::set_variable_const_std_string);
-        this->entity_factory.create_lisp_function_overload("copy", *my_console, &Variable::set_variable_variable);
-        this->entity_factory.create_lisp_function_overload("print", *my_console, &Variable::print_value1);
+        // Lisp function overloads.
+        yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
 
-        // Object callbacks.
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &Object::with_parent_name_x_y_z);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &Object::with_parent_name_x_y_z_yaw_pitch);
-        this->entity_factory.create_lisp_function_overload("create-object", *my_console, &Object::with_parent_name_x_y_z_roll_yaw_pitch);
-
-        // Holobiont callbacks.
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &Holobiont::create_holobiont_with_parent_name_x_y_z);
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch);
-        this->entity_factory.create_lisp_function_overload("create-holobiont", *my_console, &Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch);
-
-        // `Entity` handling callbacks.
-        this->entity_factory.create_lisp_function_overload("entities", *my_console, &Universe::print_entities);
-        this->entity_factory.create_lisp_function_overload("parent", *my_console, &Universe::print_parent);
-        this->entity_factory.create_lisp_function_overload("children", *my_console, &Entity::print_children);
-        this->entity_factory.create_lisp_function_overload("activate", *my_console, &Universe::activate_entity);
-        this->entity_factory.create_lisp_function_overload("delete", *my_console, &Universe::delete_entity);
-        this->entity_factory.create_lisp_function_overload("info", *my_console, &Universe::info0);
-        this->entity_factory.create_lisp_function_overload("info", *my_console, &Universe::info1);
-
-        // `Entity` binding callbacks, `Movable`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Movable::bind_to_new_brain);
-        this->entity_factory.create_lisp_function_overload("unbind-from-brain", *my_console, &Movable::unbind_from_brain);
-
-        // `Entity` binding callbacks, `Pipeline`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Pipeline::bind_to_new_ecosystem_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Pipeline::bind_to_new_scene_parent);
-
-        // `Entity` binding callbacks, `Material`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Material::bind_to_new_ecosystem_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Material::bind_to_new_scene_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Material::bind_to_new_pipeline);
-
-        // `Entity` binding callbacks, `Species`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Species::bind_to_new_ecosystem_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Species::bind_to_new_scene_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Species::bind_to_new_material);
-
-        // `Entity` binding callbacks, `Object`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Object::bind_to_new_scene_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Object::bind_to_new_species_master);
-
-        // `Entity` binding callbacks, `Symbiosis`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Symbiosis::bind_to_new_ecosystem_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Symbiosis::bind_to_new_scene_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Symbiosis::bind_to_new_pipeline);
-
-        // `Entity` binding callbacks, `ShapeshifterTransformation`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &ShapeshifterTransformation::bind_to_new_material_parent);
-
-        // `Entity` binding callbacks, `Text2d`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Text2d::bind_to_new_font_2d_parent);
-
-        // `Entity` binding callbacks, `Text3d`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Text3d::bind_to_new_scene_parent);
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Text3d::bind_to_new_vector_font_master);
-
-        // `Entity` binding callbacks, `Console`.
-        this->entity_factory.create_lisp_function_overload("bind", *my_console, &Console::bind_to_new_font_2d);
-
-        // `Entity` naming callbacks.
-        this->entity_factory.create_lisp_function_overload("set-global-name", *my_console, &Universe::set_global_name_for_entity);
-        this->entity_factory.create_lisp_function_overload("set-local-name", *my_console, &Universe::set_local_name_for_entity);
-
-        // Exit program callbacks.
-        this->entity_factory.create_lisp_function_overload("bye", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("chau", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("ciao", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("heippa", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("quit", *my_console, &yli::snippets::quit);
-        this->entity_factory.create_lisp_function_overload("sayonara", *my_console, &yli::snippets::quit);
-
-        // Other callbacks.
-        this->entity_factory.create_lisp_function_overload("help", *my_console, &yli::snippets::help);
+        // Hirvi-specific callbacks.
         this->entity_factory.create_lisp_function_overload("version", *my_console, &hirvi::version);
-        this->entity_factory.create_lisp_function_overload("clear", *my_console, &ConsoleLogicModule::clear);
-        this->entity_factory.create_lisp_function_overload("screenshot", *my_console, &Universe::screenshot);
 
         if (this->audio_system != nullptr)
         {
