@@ -945,16 +945,6 @@ add_executable(mock
     )
 target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Tulevaisuus
-add_executable(tulevaisuus
-    # tulevaisuus, in alphabetical order
-    code/tulevaisuus/tulevaisuus.cpp
-    code/tulevaisuus/tulevaisuus.hpp
-    code/tulevaisuus/tulevaisuus_console_callbacks.cpp
-    code/tulevaisuus/tulevaisuus_console_callbacks.hpp
-    )
-target_link_libraries(tulevaisuus snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
-
 # YliEdit
 add_executable(yli_edit
     # yli_edit, in alphabetical order
