@@ -27,7 +27,7 @@ jobs:
       - run: clang-17 -v && clang++-17 -v
       - run: mkdir build_native_clang
       - run: echo "Running cmake for Clang native compiler"
-      - run: CC=$(which clang-17) CXX=$(which clang++-17) cmake -G Ninja -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
+      - run: CC=$(which clang-17) CXX=$(which clang++-17) cmake -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
       - run: cmake --build build_native_clang
       - run: cd build_native_clang && ./test_ylikuutio && ./test_avaruus
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
