@@ -1,3 +1,3 @@
 #!/bin/bash
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CC=$(which clang) CXX=$(which clang++) cmake -G Ninja ${script_dir} -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true && nice -19 make -j $(($(nproc) - 1))
+CC=$(which clang) CXX=$(which clang++) cmake -G Ninja ${script_dir} -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true && nice -19 ninja -j $(($(nproc) - 1))
