@@ -64,7 +64,7 @@ jobs:
       - run: clang++ -v
       - run: mkdir build
       - run: echo "Running cmake for MSVC"
-      - run: cmake -G Ninja -Bbuild
+      - run: cmake -Bbuild
       - run: cmake --build build
   run-sonar-cloud-on-ubuntu:
     runs-on: ubuntu-22.04
