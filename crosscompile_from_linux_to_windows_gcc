@@ -1,4 +1,4 @@
 #!/bin/bash
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cmake -G Ninja -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=${script_dir}/w64.cmake ${script_dir} && nice -19 ninja -j $(($(nproc) - 1))
+cmake -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=${script_dir}/w64.cmake ${script_dir} && nice -19 make -j $(($(nproc) - 1))
 cp -v ./external/zlib/libzlib.dll zlib1.dll

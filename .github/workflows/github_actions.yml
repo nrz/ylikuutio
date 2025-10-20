@@ -36,11 +36,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - run: sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 gfortran-mingw-w64 libz-mingw-w64-dev
+      - run: sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev vulkan-validationlayers-dev zlib1g-dev g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 gfortran-mingw-w64 libz-mingw-w64-dev
       - run: x86_64-w64-mingw32-gcc -v && x86_64-w64-mingw32-g++ -v
       - run: mkdir build_crosscompile_linux_to_windows_gcc
       - run: echo "Running cmake for MinGW-w64 GCC cross compiler"
-      - run: cmake -G Ninja -Bbuild_crosscompile_linux_to_windows_gcc -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=w64.cmake
+      - run: cmake -Bbuild_crosscompile_linux_to_windows_gcc -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=w64.cmake
       - run: cmake --build build_crosscompile_linux_to_windows_gcc
   build-and-test-on-macos:
     runs-on: macos-13
