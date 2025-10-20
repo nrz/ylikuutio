@@ -67,7 +67,7 @@ jobs:
     - run: mkdir build_native_gcc
     - run: echo "Running cmake for GCC native compiler"
     - run: CC=$(which gcc) CXX=$(which g++) cmake -G Ninja -Bbuild_native_gcc -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-    - run: cmake -G Ninja --build build_native_gcc
+    - run: cmake --build build_native_gcc
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2

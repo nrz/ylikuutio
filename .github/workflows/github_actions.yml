@@ -12,7 +12,7 @@ jobs:
       - run: mkdir build_native_gcc
       - run: echo "Running cmake for GCC native compiler"
       - run: CC=$(which gcc) CXX=$(which g++) cmake -G Ninja -Bbuild_native_gcc -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-      - run: cmake -G Ninja --build build_native_gcc
+      - run: cmake --build build_native_gcc
       - run: cd build_native_gcc && ./test_ylikuutio && ./test_avaruus
   build-and-test-on-ubuntu-clang-native-compiler:
     runs-on: ubuntu-22.04
@@ -28,7 +28,7 @@ jobs:
       - run: mkdir build_native_clang
       - run: echo "Running cmake for Clang native compiler"
       - run: CC=$(which clang-17) CXX=$(which clang++-17) cmake -G Ninja -Bbuild_native_clang -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
-      - run: cmake -G Ninja --build build_native_clang
+      - run: cmake --build build_native_clang
       - run: cd build_native_clang && ./test_ylikuutio && ./test_avaruus
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
     runs-on: ubuntu-22.04
@@ -41,7 +41,7 @@ jobs:
       - run: mkdir build_crosscompile_linux_to_windows_gcc
       - run: echo "Running cmake for MinGW-w64 GCC cross compiler"
       - run: cmake -G Ninja -Bbuild_crosscompile_linux_to_windows_gcc -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=w64.cmake
-      - run: cmake -G Ninja --build build_crosscompile_linux_to_windows_gcc
+      - run: cmake --build build_crosscompile_linux_to_windows_gcc
   build-and-test-on-macos:
     runs-on: macos-13
     steps:
@@ -52,7 +52,7 @@ jobs:
       - run: mkdir build_native_clang
       - run: echo "Running cmake for Clang native compiler"
       - run: CC=$(which clang) CXX=$(which clang++) cmake -G Ninja -Bbuild_native_clang
-      - run: cmake -G Ninja --build build_native_clang
+      - run: cmake --build build_native_clang
   build-and-test-on-windows:
     runs-on: windows-2022
     steps:
@@ -65,7 +65,7 @@ jobs:
       - run: mkdir build
       - run: echo "Running cmake for MSVC"
       - run: cmake -G Ninja -Bbuild
-      - run: cmake -G Ninja --build build
+      - run: cmake --build build
   run-sonar-cloud-on-ubuntu:
     runs-on: ubuntu-22.04
     env:
@@ -87,7 +87,7 @@ jobs:
           gcc -v && g++ -v
           mkdir build
           CC=$(which gcc) CXX=$(which g++) cmake -G Ninja -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake -G Ninja --build build/ --config Release
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
