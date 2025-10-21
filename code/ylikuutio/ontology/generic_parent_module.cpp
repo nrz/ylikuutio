@@ -31,7 +31,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    [[nodiscard]] bool GenericParentModule::bind_child(Entity& child) noexcept
+    void GenericParentModule::bind_child(Entity& child) noexcept
     {
         bind_child_to_parent<Entity>(
                 child,
@@ -39,8 +39,6 @@ namespace yli::ontology
                 this->free_childID_queue,
                 this->number_of_children,
                 this->entity.registry);
-
-        return true; // Binding successful.
     }
 
     void GenericParentModule::unbind_child(const std::size_t childID) noexcept

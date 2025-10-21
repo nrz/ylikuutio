@@ -33,7 +33,7 @@ namespace yli::ontology
     class ParentOfPipelinesModule final : public GenericParentModule
     {
         public:
-            bool bind_child(Entity& pipeline_child) noexcept override;
+            void bind_child(Entity& pipeline_child) noexcept override;
             void unbind_child(const std::size_t childID) noexcept override;
 
             ParentOfPipelinesModule(
