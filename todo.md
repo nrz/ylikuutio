@@ -11,17 +11,10 @@
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
-- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
-- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
 - [ ] TEXT/UI Implement proper bitmap font rendering: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
-- [ ] GUI Add support for multiple windows.
-- [ ] GUI Add support for multiple widgets in each window.
-- [ ] ONTOLOGY/LISP/GUI Implement `create-window` built-in YliLisp function.
-- [ ] ONTOLOGY/LISP/GUI Implement `create-widget` built-in YliLisp function.
 - [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
@@ -100,6 +93,14 @@
 - [ ] TEXT/GUI Implement better font support.
 
 ## Tasks which are necessary for the fourth stage
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Window` class.
+- [ ] ONTOLOGY/GUI Implement `yli::ontology::Widget` class.
+- [ ] ONTOLOGY/CAMERA/GUI Implement `yli::ontology::CameraWidget` class that inherits `yli::ontology::Widget`.
+- [ ] GUI Add support for multiple windows.
+- [ ] GUI Add support for multiple widgets in each window.
+- [ ] ONTOLOGY/LISP/GUI Implement `create-window` built-in YliLisp function.
+- [ ] ONTOLOGY/LISP/GUI Implement `create-widget` built-in YliLisp function.
+- [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 - [ ] BUILD Use precompiled headers with `target_precompile_headers` in CMake: https://cmake.org/cmake/help/git-stage/command/target_precompile_headers.html
 - [ ] NETWORK Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 - [ ] NETWORK/LIBRARIES/EVALUATE Evaluate ZeroMQ: https://zeromq.org/
