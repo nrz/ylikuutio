@@ -341,35 +341,35 @@ namespace hirvi
         my_console->print_text("information.");
 
         /*********************************************************************
-         *  Callback engines for action mode keyreleases begin here.         *
-         *********************************************************************/
-        yli::snippets::create_action_mode_keyrelease_callbacks(this->entity_factory);
-
-        /*********************************************************************
          *  Callback engines for action mode keypresses begin here.          *
          *********************************************************************/
         yli::snippets::create_action_mode_keypress_callbacks(this->entity_factory);
 
         /*********************************************************************
-         *  Callback engines for console keyreleases begin here.             *
+         *  Callback engines for action mode keyreleases begin here.         *
          *********************************************************************/
-        yli::snippets::create_console_mode_keyrelease_callbacks(this->entity_factory);
+        yli::snippets::create_action_mode_keyrelease_callbacks(this->entity_factory);
 
         /*********************************************************************
          *  Callback engines for console keypresses begin here.              *
          *********************************************************************/
         yli::snippets::create_console_mode_keypress_callbacks(this->entity_factory);
 
+        /*********************************************************************
+         *  Callback engines for console keyreleases begin here.             *
+         *********************************************************************/
+        yli::snippets::create_console_mode_keyrelease_callbacks(this->entity_factory);
+
         // Action mode input mode.
         InputModeStruct action_mode_input_mode_struct;
         action_mode_input_mode_struct.global_name = "action_mode_input_mode";
         InputMode* const action_mode_input_mode = this->entity_factory.create_input_mode(action_mode_input_mode_struct);
 
-        // Keyrelease callbacks for action mode.
-        yli::snippets::set_action_mode_keyrelease_callback_engines_or_throw(*action_mode_input_mode);
-
         // Keypress callbacks for action mode.
         yli::snippets::set_action_mode_keypress_callback_engines_or_throw(*action_mode_input_mode);
+
+        // Keyrelease callbacks for action mode.
+        yli::snippets::set_action_mode_keyrelease_callback_engines_or_throw(*action_mode_input_mode);
 
         // Continuous keypress callbacks for action mode.
         yli::snippets::set_action_mode_continuous_keypress_callback_engines_or_throw(*action_mode_input_mode);
@@ -381,11 +381,11 @@ namespace hirvi
         my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
         InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(my_console_mode_input_mode_struct);
 
-        // Keyrelease callbacks for `my_console`.
-        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode);
-
         // Keypress callbacks for `my_console`.
         yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode);
+
+        // Keyrelease callbacks for `my_console`.
+        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode);
 
         /*********************************************************************
          * Callback engines for console commands begin here.                 *
