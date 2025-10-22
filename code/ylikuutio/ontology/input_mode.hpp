@@ -48,6 +48,9 @@ namespace yli::ontology
     class GenericCallbackEngine;
     struct InputModeStruct;
 
+    template<typename Type>
+        struct Request;
+
     class InputMode final : public Entity
     {
         private:
@@ -68,9 +71,9 @@ namespace yli::ontology
             GenericCallbackEngine* get_keyrelease_callback_engine(const uint32_t keycode) const;
             GenericCallbackEngine* get_continuous_keypress_callback_engine(const uint32_t keycode) const;
 
-            void set_keypress_callback_engine(const uint32_t keycode, GenericCallbackEngine* const callback_engine);
-            void set_keyrelease_callback_engine(const uint32_t keycode, GenericCallbackEngine* const callback_engine);
-            void set_continuous_keypress_callback_engine(const uint32_t keycode, GenericCallbackEngine* const callback_engine);
+            void set_keypress_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+            void set_keyrelease_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+            void set_continuous_keypress_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
 
             const std::vector<GenericCallbackEngine*>* get_keypress_callback_engines() const;
             const std::vector<GenericCallbackEngine*>* get_keyrelease_callback_engines() const;

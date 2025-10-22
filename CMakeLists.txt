@@ -830,6 +830,8 @@ add_library(ylikuutio STATIC
 
 add_library(snippets STATIC
     # snippets, in alphabetical order
+    code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.cpp
+    code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.hpp
     code/ylikuutio/snippets/background_color_snippets.cpp
     code/ylikuutio/snippets/background_color_snippets.hpp
     code/ylikuutio/snippets/brain_snippets.cpp
@@ -838,6 +840,8 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/callback_snippets.hpp
     code/ylikuutio/snippets/console_callback_snippets.cpp
     code/ylikuutio/snippets/console_callback_snippets.hpp
+    code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.cpp
+    code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.hpp
     code/ylikuutio/snippets/debug_snippets.cpp
     code/ylikuutio/snippets/debug_snippets.hpp
     code/ylikuutio/snippets/framebuffer_snippets.cpp

@@ -22,6 +22,7 @@
 #include "request.hpp"
 
 // Include standard headers
+#include <stdexcept> // std::runtime_error
 #include <string>  // std::string
 #include <variant> // std::holds_alternative
 
@@ -41,6 +42,29 @@ namespace yli::ontology
             }
 
             return nullptr;
+        }
+
+    template<typename Type>
+        Type* resolve_request_or_throw(const Request<Type>& entity_request, const Registry& registry)
+        {
+            if (std::holds_alternative<Type*>(entity_request.data))
+            {
+                return std::get<Type*>(entity_request.data);
+            }
+            else if (std::holds_alternative<std::string>(entity_request.data))
+            {
+                const std::string& entity_string = std::get<std::string>(entity_request.data);
+                auto* entity = dynamic_cast<Type*>(registry.get_entity(entity_string));
+
+                if (entity != nullptr) [[likely]]
+                {
+                    return entity;
+                }
+
+                throw std::runtime_error("ERROR: `yli::ontology::resolve_request_or_throw`: `entity` with global name " + entity_string + " is `nullptr`!");
+            }
+
+            throw std::runtime_error("ERROR: `yli::ontology::resolve_request_or_throw`: `entity_request.data` is invalid!");
         }
 }
 
