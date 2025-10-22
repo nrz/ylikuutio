@@ -145,7 +145,7 @@ To cross compile from GNU/Linux to Windows:
 
 Crosscompiling from GNU/Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `hirvi.exe`, `tulevaisuus.exe`,
+compiling ends before you get `hirvi.exe`,
 `ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
 
 By default compiling tests is disabled when crosscompiling from Linux
@@ -178,7 +178,7 @@ are responsible for the programming of the robots of
 the Lisp Resistance Force. Your task is write Lisp
 to control the robots reowned by humans.
 And save the human species, too.
-Tulevaisuus is a work in progress.
+Tulevaisuus is postponed for now due to focus on Hirvi.
 
 ### Ajokki
 Ajokki is sandbox demo program to check out some properties of
@@ -202,16 +202,14 @@ YliEdit is a universe editor for Ylikuutio. Work in progress.
 ### GNU/Linux
 
     $ ./hirvi
-    $ ./tulevaisuus
     $ ./ajokki
     $ ./gpgpu_test
     $ ./yli_edit
 
-`hirvi.exe`, `tulevaisuus.exe`, `ajokki.exe`, `gpgpu_test.exe`, and
+`hirvi.exe`, `ajokki.exe`, `gpgpu_test.exe`, and
 `yli_edit.exe` can also be executed in Linux, using Wine:
 
     $ wine ./hirvi.exe
-    $ wine ./tulevaisuus.exe
     $ wine ./ajokki.exe
     $ wine ./gpgpu_test.exe
     $ wine ./yli_edit.exe
@@ -219,7 +217,6 @@ YliEdit is a universe editor for Ylikuutio. Work in progress.
 ### Windows
 
     > hirvi.exe
-    > tulevaisuus.exe
     > ajokki.exe
     > gpgpu_test.exe
     > yli_edit.exe
