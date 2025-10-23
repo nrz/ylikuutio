@@ -16,6 +16,7 @@
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
 - [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
+- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
 - [ ] VULKAN/RENDERING Add Vulkan support.
 - [ ] OPENGL/RENDERING Remove OpenGL support.
@@ -37,7 +38,6 @@
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::Shapeshifter`, child of `Scene`, apprentice of `ShapeshifterSequence`.
 - [ ] BUILD Implement building on GitHub Actions Windows runner.
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
-- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
 - [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
