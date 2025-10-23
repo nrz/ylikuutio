@@ -959,28 +959,45 @@ namespace yli::console
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_previous_input())
         {
             const std::size_t history_index = console.command_history.get_history_index();
+            const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index();
 
-            if (!console.console_logic_module.get_active_in_historical_input() && !console.command_history.empty())
+            if (console.console_logic_module.get_active_in_new_input() &&
+                    !console.command_history.empty() &&
+                    temp_input_index == console.command_history.size() - 1)
+            {
+                // OK, we moved from the new input to the last historical input, which happens to be the temp input.
+                console.console_logic_module.enter_historical_input();
+                console.console_logic_module.enter_temp_input();
+                console.temp_input.move_cursor_to_end_of_line();
+            }
+            else if (console.console_logic_module.get_active_in_new_input() &&
+                    !console.command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
                 console.console_logic_module.enter_historical_input();
-                console.console_logic_module.set_can_move_to_previous_input(false);
+            }
+            else if (console.console_logic_module.get_active_in_historical_input() &&
+                    history_index > 0 &&
+                    history_index - 1 == temp_input_index)
+            {
+                // OK, we moved to the previous historical input, which happens to be the temp input.
+                console.command_history.move_to_previous();
+                console.console_logic_module.enter_temp_input();
+                console.temp_input.move_cursor_to_end_of_line();
             }
             else if (console.console_logic_module.get_active_in_historical_input() && history_index > 0)
             {
                 // OK, we moved to the previous historical input.
                 console.command_history.move_to_previous();
-                console.console_logic_module.set_can_move_to_previous_input(false);
             }
             else if (console.console_logic_module.get_active_in_temp_input() && history_index > 0)
             {
                 // OK, we moved to the previous historical input from temp input.
                 console.console_logic_module.enter_historical_input();
                 console.command_history.move_to_nth(history_index - 1);
-
-                console.move_cursor_to_end_of_line();
-                console.console_logic_module.set_can_move_to_previous_input(false);
             }
+
+            console.console_logic_module.set_can_move_to_previous_input(false);
         }
         return std::nullopt;
     }
@@ -994,40 +1011,42 @@ namespace yli::console
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_move_to_next_input() && !console.command_history.empty())
         {
             const std::size_t history_index = console.command_history.get_history_index();
+            const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index();
 
             if (console.console_logic_module.get_active_in_historical_input() && history_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
                 console.console_logic_module.enter_new_input();
-
-                console.move_cursor_to_end_of_line();
-                console.console_logic_module.set_can_move_to_next_input(false);
+                console.new_input.move_cursor_to_end_of_line();
             }
             else if (console.console_logic_module.get_active_in_temp_input() && history_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the edited last historical input (temp input) to the new input.
                 console.console_logic_module.enter_new_input();
-
-                console.move_cursor_to_end_of_line();
-                console.console_logic_module.set_can_move_to_next_input(false);
+                console.new_input.move_cursor_to_end_of_line();
+            }
+            else if (console.console_logic_module.get_active_in_historical_input() &&
+                    history_index < console.command_history.size() - 1 &&
+                    history_index + 1 == temp_input_index)
+            {
+                // OK, we moved to the next historical input which happens to be the temp input.
+                console.command_history.move_to_next();
+                console.console_logic_module.enter_temp_input();
+                console.temp_input.move_cursor_to_end_of_line();
             }
             else if (console.console_logic_module.get_active_in_historical_input() && history_index < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
                 console.command_history.move_to_next();
-
-                console.move_cursor_to_end_of_line();
-                console.console_logic_module.set_can_move_to_next_input(false);
             }
             else if (console.console_logic_module.get_active_in_temp_input() && history_index < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input from temp input.
                 console.console_logic_module.enter_historical_input(); // Entering historical input causes history index reset to last.
                 console.command_history.move_to_nth(history_index + 1);
-
-                console.move_cursor_to_end_of_line();
-                console.console_logic_module.set_can_move_to_next_input(false);
             }
+
+            console.console_logic_module.set_can_move_to_next_input(false);
         }
         return std::nullopt;
     }
@@ -1190,11 +1209,13 @@ namespace yli::console
         {
             std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
             console.console_logic_module.enter_new_input();
+            console.console_logic_module.invalidate_temp_input();
             console.console_logic_module.set_can_enter_key(false);
             return any_value;
         }
 
         console.console_logic_module.enter_new_input();
+        console.console_logic_module.invalidate_temp_input();
         console.console_logic_module.set_can_enter_key(false);
         return std::nullopt;
     }
