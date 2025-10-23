@@ -5,7 +5,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] CONSOLE/UI Keep temp input on the given history line available until either some other line is edited or a console command is executed.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
@@ -355,3 +354,4 @@
 - [x] BUG/HIRVI Esc key should exit to OS in Hirvi and Ajokki.
 - [x] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [x] BUG/LISP Fix the behavior of `std::nullopt` in YliLisp by wrapping the `std::optional<yli::data::AnyValue>` return value into a wrapper with success information.
+- [x] CONSOLE/UI Keep temp input on the given history line available until either some other line is edited or a console command is executed.
