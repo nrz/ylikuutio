@@ -16,8 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "police_train.hpp"
-#include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
 namespace yli::core
 {
@@ -29,7 +27,9 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Universe;
+    class Holobiont;
     struct HolobiontStruct;
+    struct LocomotionModuleStruct;
 }
 
 namespace hirvi

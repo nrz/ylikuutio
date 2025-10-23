@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <optional> // std::optional
-#include <string>   // std::string
 
 namespace hirvi
 {

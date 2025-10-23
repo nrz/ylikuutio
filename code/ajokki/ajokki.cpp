@@ -28,15 +28,12 @@
 #include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/memory/memory_system.hpp"
-#include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
@@ -47,29 +44,20 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
-#include "code/ylikuutio/ontology/symbiosis.hpp"
-#include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
-#include "code/ylikuutio/ontology/text_2d.hpp"
-#include "code/ylikuutio/ontology/text_3d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
-#include "code/ylikuutio/ontology/variable_struct.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
-#include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 #include "code/ylikuutio/ontology/input_mode_struct.hpp"
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/font_struct.hpp"
-#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
 #include "code/ylikuutio/snippets/background_color_snippets.hpp"
-#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/debug_snippets.hpp"
 #include "code/ylikuutio/snippets/movement_snippets.hpp"
@@ -77,7 +65,6 @@
 #include "code/ylikuutio/snippets/wireframe_snippets.hpp"
 #include "code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.hpp"
 #include "code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.hpp"
-#include "code/ylikuutio/snippets/console_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -88,7 +75,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_unique, std::unique_ptr
 #include <stdexcept> // std::logic_error
