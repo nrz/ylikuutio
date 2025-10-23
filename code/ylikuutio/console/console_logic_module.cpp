@@ -1234,6 +1234,7 @@ namespace yli::console
         {
             console.new_input.clear();
             console.console_logic_module.enter_new_input();
+            console.console_logic_module.invalidate_temp_input();
             console.console_logic_module.set_can_ctrl_c(false);
         }
         return std::nullopt;
