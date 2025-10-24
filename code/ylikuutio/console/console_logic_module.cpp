@@ -217,7 +217,6 @@ namespace yli::console
                 // the new temp input, and temp input becomes the active input.
                 this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
                 this->temp_input_index = this->text_input_history.get_history_index();
-                this->temp_input.clear();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
                 return &this->temp_input;
