@@ -13,7 +13,7 @@
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
-- [ ] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
+- [ ] TOOLS Implement initial software architecture for HirviEdit (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
@@ -355,3 +355,4 @@
 - [x] BUILD Upgrade CMake to at least 3.16 to enable support of precompiled headers directly in CMake.
 - [x] BUG/LISP Fix the behavior of `std::nullopt` in YliLisp by wrapping the `std::optional<yli::data::AnyValue>` return value into a wrapper with success information.
 - [x] CONSOLE/UI Keep temp input on the given history line available until either some other line is edited or a console command is executed.
+- [x] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
