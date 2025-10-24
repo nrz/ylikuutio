@@ -45,11 +45,16 @@ namespace yli::ontology
         }
 
     template<typename Type>
-        Type* resolve_request_or_throw(const Request<Type>& entity_request, const Registry& registry)
+        Type& resolve_request_or_throw(const Request<Type>& entity_request, const Registry& registry)
         {
             if (std::holds_alternative<Type*>(entity_request.data))
             {
-                return std::get<Type*>(entity_request.data);
+                if (Type* data = std::get<Type*>(entity_request.data); data != nullptr)
+                {
+                    return *std::get<Type*>(entity_request.data);
+                }
+
+                throw std::runtime_error("ERROR: `yli::ontology::resolve_request_or_throw`: `nullptr` requested!");
             }
             else if (std::holds_alternative<std::string>(entity_request.data))
             {
@@ -58,7 +63,7 @@ namespace yli::ontology
 
                 if (entity != nullptr) [[likely]]
                 {
-                    return entity;
+                    return *entity;
                 }
 
                 throw std::runtime_error("ERROR: `yli::ontology::resolve_request_or_throw`: `entity` with global name " + entity_string + " is `nullptr`!");
