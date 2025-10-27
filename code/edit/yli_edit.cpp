@@ -44,7 +44,6 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/snippets/framebuffer_snippets.hpp"
 #include "code/ylikuutio/snippets/background_color_snippets.hpp"
-#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/snippets/debug_snippets.hpp"
 #include "code/ylikuutio/snippets/movement_snippets.hpp"
 #include "code/ylikuutio/snippets/location_and_orientation_snippets.hpp"
