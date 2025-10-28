@@ -24,6 +24,7 @@
 #include "apprentice_module.hpp"
 #include "master_of_input_modes_module.hpp"
 #include "code/ylikuutio/console/console_logic_module.hpp"
+#include "code/ylikuutio/console/completion_module.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/console/text_input_history.hpp"
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
@@ -90,6 +91,7 @@ namespace yli::ontology
     using yli::console::TextInputHistory;
     using yli::console::ScrollbackBuffer;
     using yli::console::ConsoleLogicModule;
+    using yli::console::CompletionModule;
 
     class Console final : public Entity
     {
@@ -194,6 +196,7 @@ namespace yli::ontology
             TextInputHistory command_history;
             ScrollbackBuffer scrollback_buffer;
             ConsoleLogicModule console_logic_module;
+            CompletionModule completion_module;
 
             const std::string prompt { "$ " };
     };

@@ -322,7 +322,7 @@ namespace yli::console
                     yli::ontology::ConsoleCallbackEngine*,
                     yli::ontology::ConsoleCallbackObject*,
                     yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
+                    yli::ontology::Console&);
 
             static std::optional<yli::data::AnyValue> enter_key(
                     yli::ontology::ConsoleCallbackEngine*,

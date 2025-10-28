@@ -108,7 +108,8 @@ namespace yli::ontology
         temp_input           { TextInputType::TEMP_INPUT },
         command_history      {},
         scrollback_buffer    { this->n_columns, this->n_rows },
-        console_logic_module { this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns, this->n_rows }
+        console_logic_module { this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns, this->n_rows },
+        completion_module    { *this }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
