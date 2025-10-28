@@ -516,12 +516,12 @@ namespace ajokki
         yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
 
         // Ajokki-specific callbacks.
-        this->entity_factory.create_lisp_function_overload("version", *my_console, &ajokki::version);
+        this->entity_factory.create_lisp_function_overload("version", Request(my_console), &ajokki::version);
 
         // mini-console callbacks.
-        this->entity_factory.create_lisp_function_overload("miniactivate", *mini_console, &Universe::activate_entity);
-        this->entity_factory.create_lisp_function_overload("miniinfo", *mini_console, &Universe::info0);
-        this->entity_factory.create_lisp_function_overload("miniinfo", *mini_console, &Universe::info1);
+        this->entity_factory.create_lisp_function_overload("miniactivate", Request(mini_console), &Universe::activate_entity);
+        this->entity_factory.create_lisp_function_overload("miniinfo", Request(mini_console), &Universe::info0);
+        this->entity_factory.create_lisp_function_overload("miniinfo", Request(mini_console), &Universe::info1);
 
         if (this->audio_system != nullptr)
         {

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "code/hirvi/hirvi.hpp"
+#include "hirvi_core.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
@@ -36,7 +36,7 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Ecosystem* HirviApplication::create_earth_ecosystem()
+    Ecosystem* HirviCore::create_earth_ecosystem()
     {
         // Earth `Ecosystem` begins here.
 

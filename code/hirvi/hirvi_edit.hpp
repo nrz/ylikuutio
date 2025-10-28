@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_HIRVI_HPP_INCLUDED
-#define HIRVI_HIRVI_HPP_INCLUDED
+#ifndef HIRVI_HIRVI_EDIT_HPP_INCLUDED
+#define HIRVI_HIRVI_EDIT_HPP_INCLUDED
 
 #include "core/hirvi_core.hpp"
 #include "data/datatype.hpp"
@@ -64,12 +64,12 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    class HirviApplication final : public yli::core::Application
+    class HirviEditApplication final : public yli::core::Application
     {
         public:
-            HirviApplication(const int argc, const char* const argv[]);
+            HirviEditApplication(const int argc, const char* const argv[]);
 
-            ~HirviApplication() = default;
+            ~HirviEditApplication() = default;
 
             std::string get_name() const override;
 

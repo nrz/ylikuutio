@@ -903,6 +903,11 @@ target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Hirvi libraries
 add_library(hirvi_lib STATIC
+    code/hirvi/core/hirvi_application_callback.hpp
+    code/hirvi/core/hirvi_core.cpp
+    code/hirvi/core/hirvi_core.hpp
+    code/hirvi/core/hirvi_earth_ecosystem.cpp
+    code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
     code/hirvi/ontology/cat.cpp
     code/hirvi/ontology/cat.hpp
     code/hirvi/data/datatype.hpp
@@ -910,10 +915,6 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp
     code/hirvi/ontology/emancipation_module.hpp
-    code/hirvi/lisp/hirvi_console_callbacks.cpp
-    code/hirvi/lisp/hirvi_console_callbacks.hpp
-    code/hirvi/ecosystem/hirvi_earth_ecosystem.cpp
-    code/hirvi/scene/hirvi_helsinki_east_downtown_scene.cpp
     code/hirvi/ontology/police_car.cpp
     code/hirvi/ontology/police_car.hpp
     code/hirvi/ontology/police_dog.cpp
@@ -938,8 +939,20 @@ add_executable(hirvi
     # hirvi, in alphabetical order
     code/hirvi/hirvi.cpp
     code/hirvi/hirvi.hpp
+    code/hirvi/lisp/hirvi_console_callbacks.cpp
+    code/hirvi/lisp/hirvi_console_callbacks.hpp
     )
-target_link_libraries(hirvi hirvi_lib)
+target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
+# HirviEdit editor
+add_executable(hirvi_edit
+    # hirvi_edit, in alphabetical order
+    code/hirvi/hirvi_edit.cpp
+    code/hirvi/hirvi_edit.hpp
+    code/hirvi/lisp/hirvi_edit_console_callbacks.cpp
+    code/hirvi/lisp/hirvi_edit_console_callbacks.hpp
+    )
+target_link_libraries(hirvi_edit hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Mock
 add_executable(mock
@@ -1131,6 +1144,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # Tests for Hirvi.
         code/hirvi/hirvi.cpp
         code/hirvi/hirvi.hpp
+        code/hirvi/lisp/hirvi_console_callbacks.cpp
+        code/hirvi/lisp/hirvi_console_callbacks.hpp
         code/hirvi/tests/test_hirvi_application.cpp
         code/hirvi/tests/test_brain.cpp
         code/hirvi/tests/test_callback_engine.cpp

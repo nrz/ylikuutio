@@ -661,9 +661,17 @@ namespace yli::ontology
             template<typename... Args>
                 GenericLispFunctionOverload* create_lisp_function_overload(
                         const std::string& name,
-                        Console& console,
+                        const Request<Console>& console_request,
                         std::optional<yli::data::AnyValue>(*callback)(Args...))
                 {
+                    yli::ontology::Console* const console = yli::ontology::resolve_request<Console>(console_request, this->get_universe().registry);
+
+                    if (console == nullptr)
+                    {
+                        std::cerr << "ERROR: `yli::ontology::create_lisp_function_overload`: `console` is `nullptr`!\n";
+                        return nullptr;
+                    }
+
                     Entity* const lisp_function_entity = this->get_universe().get_entity(name);
 
                     LispFunction* lisp_function = nullptr;
@@ -671,7 +679,7 @@ namespace yli::ontology
                     if (lisp_function_entity == nullptr)
                     {
                         // There was not any `Entity` with that name.
-                        LispFunctionStruct lisp_function_struct { Request<Console>(&console) };
+                        LispFunctionStruct lisp_function_struct { Request(console) };
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)

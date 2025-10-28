@@ -22,6 +22,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
+#include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/movable_variable_activation.hpp"
 #include "code/ylikuutio/ontology/movable_variable_read.hpp"
 #include "code/ylikuutio/ontology/variable_struct.hpp"
@@ -47,7 +48,7 @@ TEST(variables_lisp_function_overload_must_function_appropriately, variables)
     const std::string lisp_function_name = "variables";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Entity::print_variables0);
 
     ASSERT_NE(lisp_function_overload, nullptr);
@@ -69,7 +70,7 @@ TEST(set_lisp_function_overload_must_function_appropriately, set)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     ASSERT_NE(lisp_function_overload, nullptr);
@@ -86,7 +87,7 @@ TEST(set_must_set_global_x, set_x)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -125,7 +126,7 @@ TEST(set_must_set_global_y, set_y)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -164,7 +165,7 @@ TEST(set_must_set_global_z, set_z)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -203,7 +204,7 @@ TEST(set_must_set_global_roll, set_roll)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -241,7 +242,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -279,7 +280,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;
@@ -317,7 +318,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     const std::string lisp_function_name = "set";
     yli::ontology::GenericLispFunctionOverload* const lisp_function_overload = application.get_entity_factory().create_lisp_function_overload(
             lisp_function_name,
-            *my_console,
+            yli::ontology::Request(my_console),
             &yli::ontology::Variable::set_variable_const_std_string);
 
     yli::ontology::SceneStruct scene_struct;

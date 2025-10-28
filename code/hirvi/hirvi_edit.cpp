@@ -19,10 +19,10 @@
 #define GLM_FORCE_RADIANS
 #endif
 
-#include "hirvi.hpp"
+#include "hirvi_edit.hpp"
 #include "core/hirvi_core.hpp"
 #include "data/datatype.hpp"
-#include "lisp/hirvi_console_callbacks.hpp"
+#include "lisp/hirvi_edit_console_callbacks.hpp"
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -73,19 +73,19 @@ namespace hirvi
     using namespace yli::console;
     using namespace yli::ontology;
 
-    HirviApplication::HirviApplication(const int argc, const char* const argv[])
+    HirviEditApplication::HirviEditApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
         core(*this, this->get_universe_struct())
     {
-        std::cout << "HirviApplication initialized!\n";
+        std::cout << "HirviEditApplication initialized!\n";
     }
 
-    std::string HirviApplication::get_name() const
+    std::string HirviEditApplication::get_name() const
     {
-        return "Hirvi";
+        return "HirviEdit";
     }
 
-    std::vector<std::string> HirviApplication::get_valid_keys() const
+    std::vector<std::string> HirviEditApplication::get_valid_keys() const
     {
         return {
             "help",
@@ -105,60 +105,60 @@ namespace hirvi
         };
     }
 
-    yli::memory::GenericMemorySystem& HirviApplication::get_generic_memory_system() const
+    yli::memory::GenericMemorySystem& HirviEditApplication::get_generic_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<hirvi::Datatype>& HirviApplication::get_memory_system() const
+    yli::memory::MemorySystem<hirvi::Datatype>& HirviEditApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& HirviApplication::get_generic_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& HirviEditApplication::get_generic_memory_allocator(const int type) const
     {
         return this->core.memory_system.get_generic_allocator(type);
     }
 
-    GenericEntityFactory& HirviApplication::get_generic_entity_factory() const
+    GenericEntityFactory& HirviEditApplication::get_generic_entity_factory() const
     {
         return this->core.entity_factory.get();
     }
 
-    yli::event::EventSystem* HirviApplication::get_event_system() const
+    yli::event::EventSystem* HirviEditApplication::get_event_system() const
     {
         return this->core.event_system;
     }
 
-    yli::input::InputSystem* HirviApplication::get_input_system() const
+    yli::input::InputSystem* HirviEditApplication::get_input_system() const
     {
         return this->core.input_system;
     }
 
-    yli::audio::AudioSystem* HirviApplication::get_audio_system() const
+    yli::audio::AudioSystem* HirviEditApplication::get_audio_system() const
     {
         return this->core.audio_system;
     }
 
-    bool HirviApplication::is_universe(Entity* entity) const
+    bool HirviEditApplication::is_universe(Entity* entity) const
     {
         return static_cast<Entity*>(this->core.universe) == entity;
     }
 
-    Universe& HirviApplication::get_universe() const
+    Universe& HirviEditApplication::get_universe() const
     {
         if (this->core.universe == nullptr) [[unlikely]]
         {
-            throw std::logic_error("ERROR: `HirviApplication::get_universe`: `this->core.universe` is `nullptr`!");
+            throw std::logic_error("ERROR: `HirviEditApplication::get_universe`: `this->core.universe` is `nullptr`!");
         }
 
         return *this->core.universe;
     }
 
-    UniverseStruct HirviApplication::get_universe_struct() const
+    UniverseStruct HirviEditApplication::get_universe_struct() const
     {
         UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
-        universe_struct.application_name = "Hirvi";
+        universe_struct.application_name = "HirviEdit";
         universe_struct.window_title = "Hirvi " + Universe::version + ", powered by Ylikuutio " + Universe::version;
         universe_struct.window_width = 3840;
         universe_struct.window_height = 2400;
@@ -235,14 +235,14 @@ namespace hirvi
         return universe_struct;
     }
 
-    bool HirviApplication::create_and_start_simulation()
+    bool HirviEditApplication::create_and_start_simulation()
     {
-        return this->core.create_and_start_simulation(&HirviApplication::customize);
+        return this->core.create_and_start_simulation(&HirviEditApplication::customize);
     }
 
-    void HirviApplication::customize(HirviCore& hirvi_core)
+    void HirviEditApplication::customize(HirviCore& hirvi_core)
     {
-        hirvi_core.entity_factory.create_lisp_function_overload("version", Request<Console>("my_console"), &hirvi::version);
+        hirvi_core.entity_factory.create_lisp_function_overload("version", Request<Console>("my_console"), &hirvi_edit::version);
     }
 }
 
@@ -250,6 +250,6 @@ namespace yli::core
 {
     std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
     {
-        return std::make_unique<hirvi::HirviApplication>(argc, argv);
+        return std::make_unique<hirvi::HirviEditApplication>(argc, argv);
     }
 }

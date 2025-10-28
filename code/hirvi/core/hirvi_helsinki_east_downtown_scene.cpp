@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "code/hirvi/hirvi.hpp"
+#include "hirvi_core.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
 #include "code/hirvi/data/datatype.hpp"
@@ -64,7 +64,7 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Scene* HirviApplication::create_helsinki_scene()
+    Scene* HirviCore::create_helsinki_scene()
     {
         // Helsinki `Scene` begins here.
 

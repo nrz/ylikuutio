@@ -341,7 +341,7 @@ namespace yli_edit
         yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
 
         // YliEdit-specific callbacks.
-        this->entity_factory.create_lisp_function_overload("version", *my_console, &yli_edit::version);
+        this->entity_factory.create_lisp_function_overload("version", Request(my_console), &yli_edit::version);
 
         std::cout << "Setting up framebuffer size ...\n";
         yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());
