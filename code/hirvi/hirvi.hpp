@@ -116,7 +116,7 @@ namespace hirvi
 
             yli::ontology::UniverseStruct get_universe_struct() const;
 
-            bool create_simulation() override;
+            bool create_and_start_simulation() override;
 
         private:
             yli::ontology::Ecosystem* create_earth_ecosystem();

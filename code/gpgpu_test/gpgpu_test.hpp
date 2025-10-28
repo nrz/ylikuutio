@@ -68,7 +68,7 @@ namespace gpgpu_test
 
             yli::ontology::UniverseStruct get_universe_struct() const;
 
-            bool create_simulation() override;
+            bool create_and_start_simulation() override;
 
         private:
             yli::ontology::Scene* create_gpgpu_test_scene();

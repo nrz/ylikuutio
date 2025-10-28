@@ -88,7 +88,7 @@ namespace yli::core
             virtual yli::ontology::Universe& get_universe() const = 0;
 
             // This method can be used e.g. to instantiate different Entities before entering the main loop.
-            virtual bool create_simulation() = 0;
+            virtual bool create_and_start_simulation() = 0;
 
             yli::command_line::CommandLineMaster command_line_master;
     };

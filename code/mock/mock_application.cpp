@@ -106,7 +106,7 @@ namespace mock
         return yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS);
     }
 
-    bool MockApplication::create_simulation()
+    bool MockApplication::create_and_start_simulation()
     {
         // Do nothing.
         return true;

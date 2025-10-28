@@ -44,7 +44,7 @@ int main(const int argc, const char* const argv[]) try
     // 2. Valid command line argument keys are requested
     //    by calling `Application::get_valid_keys`.
     // 3. `Universe` must have been created by now by the `Application`.
-    // 4. The simulation is created by running `Application::create_simulation`.
+    // 4. The simulation is created by running `Application::create_and_start_simulation`.
 
     // 1. `yli::core::Application` is created. `Application`
     //    is defined by the application that uses Ylikuutio.
@@ -119,8 +119,8 @@ int main(const int argc, const char* const argv[]) try
         return EXIT_FAILURE;
     }
 
-    // 4. The simulation is created by running `Application::create_simulation`.
-    if (!application->create_simulation())
+    // 4. The simulation is created by running `Application::create_and_start_simulation`.
+    if (!application->create_and_start_simulation())
     {
         std::cerr << "ERROR: `main`: creating the simulation failed!\n";
         return EXIT_FAILURE;

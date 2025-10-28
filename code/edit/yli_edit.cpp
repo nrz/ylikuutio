@@ -234,7 +234,7 @@ namespace yli_edit
         return universe_struct;
     }
 
-    bool YliEditApplication::create_simulation()
+    bool YliEditApplication::create_and_start_simulation()
     {
         this->get_universe().set_global_name("universe");
 

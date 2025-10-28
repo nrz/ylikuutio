@@ -256,7 +256,7 @@ namespace ajokki
         return universe_struct;
     }
 
-    bool AjokkiApplication::create_simulation()
+    bool AjokkiApplication::create_and_start_simulation()
     {
         this->get_universe().set_global_name("universe");
 

@@ -252,7 +252,7 @@ namespace hirvi
         return universe_struct;
     }
 
-    bool HirviApplication::create_simulation()
+    bool HirviApplication::create_and_start_simulation()
     {
         this->get_universe().set_global_name("universe");
 

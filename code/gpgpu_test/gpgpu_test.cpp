@@ -114,7 +114,7 @@ namespace gpgpu_test
         return universe_struct;
     }
 
-    bool GpgpuTestApplication::create_simulation()
+    bool GpgpuTestApplication::create_and_start_simulation()
     {
         this->get_universe().set_global_name("universe");
 
