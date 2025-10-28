@@ -310,7 +310,6 @@ namespace yli::console
     // Module inquiry functions.
 
     TextInput& ConsoleLogicModule::get_new_input() const
-
     {
         return this->new_input;
     }
