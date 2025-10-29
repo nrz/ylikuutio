@@ -105,7 +105,7 @@ namespace yli::ontology
                 // OK, all preconditions for a successful argument binding are met.
                 // Now, process the arguments and call.
 
-                std::size_t parameter_i = 0;                      // Start from the first parameter.
+                std::size_t parameter_i = 0;       // Start from the first parameter.
                 Entity* context = &this->universe; // `Universe` is the default context.
 
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
