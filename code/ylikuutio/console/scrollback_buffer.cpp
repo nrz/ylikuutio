@@ -32,7 +32,7 @@ namespace yli::console
 
     ScrollbackBuffer::ScrollbackBuffer(const uint32_t n_columns, const uint32_t n_rows)
         : n_columns { (n_columns > 0 ? n_columns : 1) },
-        n_rows     { (n_rows > 0 ? n_rows : 1) }
+        n_rows      { (n_rows > 0 ? n_rows : 1) }
     {
     }
 
