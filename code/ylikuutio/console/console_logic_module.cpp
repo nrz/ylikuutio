@@ -359,6 +359,18 @@ namespace yli::console
         return nullptr;
     }
 
+    std::optional<std::size_t> ConsoleLogicModule::get_n_lines_of_visible_input() const
+    {
+        const TextInput* const visible_input = this->get_visible_input();
+
+        if (visible_input == nullptr)
+        {
+            return std::nullopt;
+        }
+
+        return (visible_input->size() + this->prompt.size() + this->n_columns - 1) / this->n_columns;
+    }
+
     std::size_t ConsoleLogicModule::get_temp_input_index() const
     {
         return this->temp_input_index;

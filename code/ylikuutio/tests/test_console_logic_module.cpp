@@ -42,6 +42,7 @@ TEST(console_logic_module_must_be_initialized_appropriately, console_logic_modul
     ASSERT_EQ(&console_logic_module.get_new_input(), &new_input);
     ASSERT_EQ(&console_logic_module.get_temp_input(), &temp_input);
     ASSERT_EQ(console_logic_module.get_visible_input(), nullptr); // No visible input on deactivated console.
+    ASSERT_FALSE(console_logic_module.get_n_lines_of_visible_input());
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(&console_logic_module.get_text_input_history(), &text_input_history);
     ASSERT_EQ(&console_logic_module.get_scrollback_buffer(), &scrollback_buffer);
@@ -66,6 +67,8 @@ TEST(activation_must_work_appropriately, inactive_in_new_input)
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -90,6 +93,7 @@ TEST(deactivation_must_work_appropriately, active_in_new_input)
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), nullptr); // No visible input on deactivated console.
+    ASSERT_FALSE(console_logic_module.get_n_lines_of_visible_input());
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -107,6 +111,8 @@ TEST(editing_current_input_must_work_appropriately, editing_current_input)
     ASSERT_NE(active_input, nullptr);
     ASSERT_EQ(active_input, &new_input);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(changing_to_scrollback_buffer_must_fail_appropriately, inactive_in_new_input)
@@ -126,6 +132,7 @@ TEST(changing_to_scrollback_buffer_must_fail_appropriately, inactive_in_new_inpu
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), nullptr); // No visible input on deactivated console.
+    ASSERT_FALSE(console_logic_module.get_n_lines_of_visible_input());
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -146,6 +153,7 @@ TEST(changing_to_historical_input_must_fail_appropriately, inactive_in_new_input
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), nullptr); // No visible input on deactivated console.
+    ASSERT_FALSE(console_logic_module.get_n_lines_of_visible_input());
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -167,6 +175,7 @@ TEST(changing_to_historical_input_must_fail_appropriately, inactive_in_new_input
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_FALSE(console_logic_module.get_n_lines_of_visible_input());
 }
 
 TEST(changing_to_historical_input_must_fail_appropriately, active_in_new_input_but_no_historical_input_yet)
@@ -186,6 +195,8 @@ TEST(changing_to_historical_input_must_fail_appropriately, active_in_new_input_b
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_new_input_from_new_input_must_work_appropriately, no_change)
@@ -208,6 +219,8 @@ TEST(entering_new_input_from_new_input_must_work_appropriately, no_change)
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -233,6 +246,8 @@ TEST(entering_historical_input_from_new_input_must_work_appropriately, historica
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &text_input_history.at(0));
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -253,6 +268,8 @@ TEST(editing_historical_input_must_work_appropriately, editing_historical_input)
     ASSERT_NE(active_input, nullptr);
     ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_new_input_must_work_appropriately, scrollback_buffer_from_new_input_n_columns_1_n_rows_1_input_a)
@@ -280,6 +297,8 @@ TEST(entering_scrollback_buffer_from_new_input_must_work_appropriately, scrollba
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 3); // `"$ "` is 2 characters, `"a"` is 1 character more.
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -306,6 +325,8 @@ TEST(entering_new_input_from_historical_input_must_work_appropriately, new_input
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -332,6 +353,8 @@ TEST(entering_historical_input_from_historical_input_must_work_appropriately, hi
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &text_input_history.at(0));
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -359,6 +382,8 @@ TEST(entering_temp_input_from_historical_input_must_work_appropriately, temp_inp
     ASSERT_TRUE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &temp_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), 0);
 }
 
@@ -381,6 +406,8 @@ TEST(editing_temp_input_must_work_appropriately, editing_temp_input)
     ASSERT_EQ(active_input->data(), "abc");
     ASSERT_EQ(*active_input, text_input_history.at(0));
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, scrollback_buffer_from_historical_input)
@@ -406,6 +433,8 @@ TEST(entering_scrollback_buffer_from_historical_input_must_work_appropriately, s
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
     ASSERT_EQ(console_logic_module.get_visible_input(), &text_input_history.at(0));
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
 }
 
@@ -430,6 +459,8 @@ TEST(entering_new_input_from_temp_input_must_work_appropriately, new_input_from_
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_historical_input_from_temp_input_must_work_appropriately, historical_input_from_temp_input)
@@ -455,6 +486,8 @@ TEST(entering_historical_input_from_temp_input_must_work_appropriately, historic
     ASSERT_TRUE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_from_temp_input_no_effect)
@@ -481,6 +514,8 @@ TEST(entering_temp_input_from_temp_input_must_work_appropriately, temp_input_fro
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_TRUE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollback_buffer_from_temp_input)
@@ -507,6 +542,8 @@ TEST(entering_scrollback_buffer_from_temp_input_must_work_appropriately, scrollb
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_new_input_from_scrollback_buffer_must_work_appropriately, new_input_from_scrollback_buffer)
@@ -529,6 +566,8 @@ TEST(entering_new_input_from_scrollback_buffer_must_work_appropriately, new_inpu
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_FALSE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_historical_input_from_scrollback_buffer_must_fail_appropriately, historical_input_from_scrollback_buffer)
@@ -549,6 +588,8 @@ TEST(entering_historical_input_from_scrollback_buffer_must_fail_appropriately, h
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_new_input_no_effect)
@@ -571,6 +612,8 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_historical_input_no_effect)
@@ -596,6 +639,8 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, scrollback_buffer_from_scrollback_buffer_while_in_temp_input_no_effect)
@@ -623,6 +668,8 @@ TEST(entering_scrollback_buffer_from_scrollback_buffer_must_work_appropriately, 
     ASSERT_FALSE(console_logic_module.get_active_in_historical_input());
     ASSERT_FALSE(console_logic_module.get_active_in_temp_input());
     ASSERT_TRUE(console_logic_module.get_active_in_scrollback_buffer());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_new_input)
@@ -643,6 +690,8 @@ TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_
     ASSERT_TRUE(console_state);
     ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 3); // `"$ "` is 2 characters, `"a"` is 1 character more.
 }
 
 TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_historical_input)
@@ -663,6 +712,8 @@ TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_
     ASSERT_TRUE(console_state);
     ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_in_temp_input)
@@ -685,6 +736,8 @@ TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_
     ASSERT_TRUE(console_state);
     ASSERT_EQ(*console_state, yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }
 
 TEST(editing_historical_input_and_returning_to_new_input_must_work_appropriately, editing_historical_input_and_returning_to_new_input)
@@ -713,6 +766,8 @@ TEST(editing_historical_input_and_returning_to_new_input_must_work_appropriately
     ASSERT_EQ(console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), 0);
     ASSERT_EQ(new_input.data(), "def");
 }
@@ -745,6 +800,8 @@ TEST(adding_x_to_historical_input_and_returning_to_new_input_must_work_appropria
     ASSERT_EQ(console_state, yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
     ASSERT_EQ(console_logic_module.get(), yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
     ASSERT_EQ(console_logic_module.get_visible_input(), &new_input);
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
     ASSERT_EQ(console_logic_module.get_temp_input_index(), 0);
     ASSERT_EQ(new_input.data(), "def");
 }
@@ -766,4 +823,6 @@ TEST(invalidating_temp_input_must_clear_temp_input_and_reset_temp_input_index, t
     console_logic_module.invalidate_temp_input();
     ASSERT_TRUE(temp_input.empty());
     ASSERT_EQ(console_logic_module.get_temp_input_index(), std::numeric_limits<std::size_t>::max());
+    ASSERT_TRUE(console_logic_module.get_n_lines_of_visible_input());
+    ASSERT_EQ(*console_logic_module.get_n_lines_of_visible_input(), 1);
 }

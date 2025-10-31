@@ -97,6 +97,7 @@ namespace yli::console
             TextInputHistory& get_text_input_history() const;
             ScrollbackBuffer& get_scrollback_buffer() const;
             const TextInput* get_visible_input() const; // The currently selected input, can be: new input, historical input, or temp input.
+            std::optional<std::size_t> get_n_lines_of_visible_input() const;
             std::size_t get_temp_input_index() const;   // Index of the current temp input, or `std::numeric_limits<std::size_t>::max()` if none.
 
             std::size_t get_n_columns() const;
