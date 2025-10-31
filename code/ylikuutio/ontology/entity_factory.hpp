@@ -668,7 +668,7 @@ namespace yli::ontology
 
                     if (console == nullptr)
                     {
-                        std::cerr << "ERROR: `yli::ontology::create_lisp_function_overload`: `console` is `nullptr`!\n";
+                        std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: `console` is `nullptr`!\n";
                         return nullptr;
                     }
 
