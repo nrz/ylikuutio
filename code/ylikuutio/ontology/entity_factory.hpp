@@ -685,6 +685,7 @@ namespace yli::ontology
                         if (lisp_function == nullptr)
                         {
                             // Creating `LispFunction` failed.
+                            std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: creating `LispFunction` failed!\n";
                             return nullptr;
                         }
 
@@ -698,6 +699,7 @@ namespace yli::ontology
                         if (lisp_function == nullptr)
                         {
                             // The name is in use and the `Entity` is not a `LispFunction`.
+                            std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: referred `Entity` is not a `LispFunction`!\n";
                             return nullptr;
                         }
                     }
