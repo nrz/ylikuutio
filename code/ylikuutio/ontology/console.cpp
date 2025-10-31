@@ -180,7 +180,7 @@ namespace yli::ontology
 
         // Number of lines there are in total in the input that is currently visible (not all lines might be visible).
         const std::size_t n_lines_of_total_visible_input =
-                (visible_input->size() + this->prompt.size()) / this->n_columns + (((visible_input->size() + this->prompt.size()) % this->n_columns > 0) ? 1 : 0);
+                (visible_input->size() + this->get_prompt().size()) / this->n_columns + (((visible_input->size() + this->get_prompt().size()) % this->n_columns > 0) ? 1 : 0);
 
         // Actual number of visible lines to be rendered can not exceed number of rows available.
         const std::size_t n_lines_of_visible_input = (n_lines_of_total_visible_input < this->n_rows ? n_lines_of_total_visible_input : this->n_rows);
@@ -195,7 +195,7 @@ namespace yli::ontology
         print_console_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
         print_console_struct.position.vertical_alignment = VerticalAlignment::TOP;
         print_console_struct.font_size = this->universe.get_font_size();
-        print_console_struct.prompt = this->prompt;
+        print_console_struct.prompt = this->get_prompt();
 
         font_2d->print_console(print_console_struct);
     }
@@ -485,7 +485,7 @@ namespace yli::ontology
 
     const std::string& Console::get_prompt() const
     {
-        return this->prompt;
+        return this->console_logic_module.prompt;
     }
 
     InputMode* Console::get_input_mode() const

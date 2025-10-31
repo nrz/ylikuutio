@@ -24,6 +24,7 @@
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
+#include <string>   // std::string
 
 namespace yli::data
 {
@@ -405,6 +406,9 @@ namespace yli::console
             bool is_right_alt_pressed       { false };
             bool is_left_shift_pressed      { false };
             bool is_right_shift_pressed     { false };
+
+        public:
+            const std::string prompt        { "$ " };
     };
 }
 

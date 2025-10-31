@@ -1100,7 +1100,7 @@ namespace yli::console
         }
 
         // Copy prompt input into a `std::string`.
-        std::string input_string(console.prompt);
+        std::string input_string(console.get_prompt());
 
         // Append active input.
         input_string.append(active_input->data().begin(), active_input->data().end());

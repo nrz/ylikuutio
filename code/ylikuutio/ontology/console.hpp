@@ -197,8 +197,6 @@ namespace yli::ontology
             ScrollbackBuffer scrollback_buffer;
             ConsoleLogicModule console_logic_module;
             CompletionModule completion_module;
-
-            const std::string prompt { "$ " };
     };
 
     template<>
