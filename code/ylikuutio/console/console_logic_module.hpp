@@ -79,6 +79,8 @@ namespace yli::console
             std::optional<ConsoleState> exit_scrollback_buffer();
             TextInput* edit_input();
 
+            std::optional<ConsoleState> home();
+            std::optional<ConsoleState> end();
             std::optional<ConsoleState> page_up();
             std::optional<ConsoleState> page_down();
 

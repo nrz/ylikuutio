@@ -26,6 +26,7 @@
 #include "texture_file_format.hpp"
 #include "print_console_struct.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
 #include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
@@ -179,8 +180,14 @@ namespace yli::ontology
         }
 
         // Number of lines there are in total in the input that is currently visible (not all lines might be visible).
-        const std::size_t n_lines_of_total_visible_input =
-                (visible_input->size() + this->get_prompt().size()) / this->n_columns + (((visible_input->size() + this->get_prompt().size()) % this->n_columns > 0) ? 1 : 0);
+        const std::optional<std::size_t> maybe_n_lines_of_total_visible_input = this->console_logic_module.get_n_lines_of_visible_input();
+
+        if (!maybe_n_lines_of_total_visible_input)
+        {
+            return;
+        }
+
+        const std::size_t n_lines_of_total_visible_input = *maybe_n_lines_of_total_visible_input;
 
         // Actual number of visible lines to be rendered can not exceed number of rows available.
         const std::size_t n_lines_of_visible_input = (n_lines_of_total_visible_input < this->n_rows ? n_lines_of_total_visible_input : this->n_rows);
@@ -188,8 +195,16 @@ namespace yli::ontology
 
         // Draw the console to screen using `font_2d::print_console`.
         PrintConsoleStruct print_console_struct(
-                this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view),
-                this->console_logic_module.get_visible_input());
+                ((this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT ||
+                  this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT ||
+                  this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT) ?
+                 (this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view)) :
+                 (this->scrollback_buffer.get_view(this->scrollback_buffer.get_buffer_index(), this->n_rows))),
+                (this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT ||
+                 this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT ||
+                 this->console_logic_module.get() == yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT) ?
+                this->console_logic_module.get_visible_input() :
+                nullptr);
         print_console_struct.position.x = 0;
         print_console_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
         print_console_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;

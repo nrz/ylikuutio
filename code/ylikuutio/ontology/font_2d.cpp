@@ -431,13 +431,16 @@ namespace yli::ontology
                 this->vertex_position_in_screenspace_id,
                 this->vertex_uv_id);
 
-        PrintTextStruct print_text_struct;
-        print_text_struct.position.x = current_left_x;
-        print_text_struct.position.y = current_top_y;
-        print_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        print_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
-        print_text_struct.font_size = print_console_struct.font_size;
-        print_text_struct.text = (print_console_struct.text_input != nullptr ? (print_console_struct.prompt + print_console_struct.text_input->data()) : "");
-        this->print_text_2d(print_text_struct);
+        if (print_console_struct.text_input != nullptr)
+        {
+            PrintTextStruct print_text_struct;
+            print_text_struct.position.x = current_left_x;
+            print_text_struct.position.y = current_top_y;
+            print_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
+            print_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+            print_text_struct.font_size = print_console_struct.font_size;
+            print_text_struct.text = print_console_struct.prompt + print_console_struct.text_input->data();
+            this->print_text_2d(print_text_struct);
+        }
     }
 }

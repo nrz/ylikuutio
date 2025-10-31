@@ -188,6 +188,11 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_scrollback_buffer()
     {
+        if (!this->get_active_in_console())
+        {
+            return std::nullopt;
+        }
+
         return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
     }
 
@@ -228,30 +233,90 @@ namespace yli::console
             // If we are in scrollback buffer while in temp input, the temp input is the active input.
             return &this->temp_input;
         }
+        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
+        {
+            this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+            return &this->new_input;
+        }
+        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        {
+            const TextInput* const historical_input = this->text_input_history.get();
+
+            if (historical_input != nullptr)
+            {
+                // If we are in historical input or in scrollback buffer
+                // while in historical input, the current historical input becomes
+                // the new temp input, and temp input becomes the active input.
+                this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->temp_input_index = this->text_input_history.get_history_index();
+                this->temp_input = *historical_input;
+                this->temp_input.move_cursor_to_end_of_line();
+                return &this->temp_input;
+            }
+        }
+        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        {
+            this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+            return &this->temp_input;
+        }
 
         // Otherwise we have no active input.
         return nullptr;
+    }
+
+    std::optional<ConsoleState> ConsoleLogicModule::home()
+    {
+        if (!this->get_active_in_scrollback_buffer())
+        {
+            // This function does home action and returns the resulting console state.
+            if (!this->enter_scrollback_buffer())
+            {
+                std::cerr << "ERROR: `ConsoleLogicModule::home`: state transition to scrollback buffer failed!\n";
+                return std::nullopt;
+            }
+        }
+
+        this->scrollback_buffer.move_to_first();
+        return this->state;
+    }
+
+    std::optional<ConsoleState> ConsoleLogicModule::end()
+    {
+        if (this->get_active_in_scrollback_buffer())
+        {
+            // This function does home action and returns the resulting console state.
+            if (!this->exit_scrollback_buffer())
+            {
+                std::cerr << "ERROR: `ConsoleLogicModule::end`: exiting scrollback buffer failed!\n";
+                return std::nullopt;
+            }
+        }
+
+        // No change in state.
+        return this->state;
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::page_up()
     {
         // This function does page up action and returns the resulting console state.
 
-        if (this->get_active_in_scrollback_buffer())
+        if (!this->get_active_in_scrollback_buffer())
         {
-            // We are already in scrollback buffer.
-            if (this->scrollback_buffer.page_up()) [[likely]]
+            // Enter scrollback buffer and signal console state change to 'modules'.
+            if (!this->enter_scrollback_buffer())
             {
-                return this->state;
-            }
-            else
-            {
-                return std::nullopt; // Transition failed.
+                std::cerr << "ERROR: `ConsoleLogicModule::page_up`: state transition to scrollback buffer failed!\n";
+                return std::nullopt;
             }
         }
 
-        // Enter scrollback buffer and signal console state change to 'modules'.
-        return this->enter_scrollback_buffer();
+        if (!this->scrollback_buffer.page_up())
+        {
+            std::cerr << "ERROR: `ConsoleLogicModule::page_up`: moving page up failed!\n";
+            return std::nullopt;
+        }
+
+        return this->state;
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::page_down()
@@ -1197,22 +1262,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_up())
         {
-            if (!console.console_logic_module.get_active_in_scrollback_buffer())
-            {
-                // We are not yet in scrollback buffer.
-
-                if (!console.console_logic_module.enter_scrollback_buffer())
-                {
-                    std::cerr << "ERROR: `ConsoleLogicModule::page_up`: state transition to scrollback buffer failed!\n";
-                }
-                return std::nullopt;
-            }
-            else
-            {
-                // We are already in scrollback buffer.
-                console.scrollback_buffer.page_up();
-            }
-
+            console.console_logic_module.page_up();
             console.console_logic_module.set_can_page_up(false);
         }
 
@@ -1227,17 +1277,10 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_page_down())
         {
-            if (console.console_logic_module.get_active_in_scrollback_buffer())
-            {
-                if (!console.scrollback_buffer.page_down())
-                {
-                    // Page down caused exit from scrollback buffer.
-                    console.console_logic_module.exit_scrollback_buffer();
-                }
-            }
-
+            console.console_logic_module.page_down();
             console.console_logic_module.set_can_page_down(false);
         }
+
         return std::nullopt;
     }
 
@@ -1249,18 +1292,10 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_home())
         {
-            if (console.console_logic_module.get_active_in_scrollback_buffer())
-            {
-                console.scrollback_buffer.move_to_first();
-            }
-            else
-            {
-                console.console_logic_module.enter_scrollback_buffer();
-                console.scrollback_buffer.move_to_first();
-            }
-
+            console.console_logic_module.home();
             console.console_logic_module.set_can_home(false);
         }
+
         return std::nullopt;
     }
 
@@ -1272,13 +1307,10 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console() && console.console_logic_module.get_can_end())
         {
-            if (console.console_logic_module.get_active_in_scrollback_buffer())
-            {
-                console.console_logic_module.exit_scrollback_buffer();
-            }
-
+            console.console_logic_module.end();
             console.console_logic_module.set_can_end(false);
         }
+
         return std::nullopt;
     }
 
