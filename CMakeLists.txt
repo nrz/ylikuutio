@@ -935,6 +935,8 @@ add_library(hirvi_lib STATIC
     )
 target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
+# Game projects
+
 # Hirvi (game application)
 add_executable(hirvi
     # hirvi, in alphabetical order
@@ -944,6 +946,8 @@ add_executable(hirvi
     code/hirvi/lisp/hirvi_console_callbacks.hpp
     )
 target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
+# Editors
 
 # HirviEdit (editor for Hirvi)
 add_executable(hirvi_edit
@@ -955,14 +959,6 @@ add_executable(hirvi_edit
     )
 target_link_libraries(hirvi_edit hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Mock (for testing)
-add_executable(mock
-    # mock, in alphabetical order
-    code/mock/mock_application.cpp
-    code/mock/mock_application.hpp
-    )
-target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
-
 # YliEdit (generic editor for Ylikuutio applications)
 add_executable(yli_edit
     # yli_edit, in alphabetical order
@@ -973,23 +969,7 @@ add_executable(yli_edit
     )
 target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# future-test
-add_executable(future_test
-    code/thread_test/future_test.cpp
-    )
-target_link_libraries(future_test ${THREAD_LIBS})
-
-# thread-test
-add_executable(thread_test
-    code/thread_test/thread_test.cpp
-    )
-target_link_libraries(thread_test ${THREAD_LIBS})
-
-# dining philosophers
-add_executable(dining_philosophers
-    code/thread_test/dining_philosophers.cpp
-    )
-target_link_libraries(dining_philosophers ${THREAD_LIBS})
+# Physics simulations
 
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
     # Planetary simulation library
@@ -1018,7 +998,16 @@ if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Window
     target_link_libraries(avaruus_fortran planetary_simulation)
 endif()
 
-# Tests
+# Testing
+
+# Mock (for testing)
+add_executable(mock
+    # mock, in alphabetical order
+    code/mock/mock_application.cpp
+    code/mock/mock_application.hpp
+    )
+target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
 
@@ -1184,3 +1173,23 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include(GoogleTest)
     gtest_discover_tests(test_ylikuutio)
 endif()
+
+# Code samples for future development
+
+# future-test
+add_executable(future_test
+    code/thread_test/future_test.cpp
+    )
+target_link_libraries(future_test ${THREAD_LIBS})
+
+# thread-test
+add_executable(thread_test
+    code/thread_test/thread_test.cpp
+    )
+target_link_libraries(thread_test ${THREAD_LIBS})
+
+# dining philosophers
+add_executable(dining_philosophers
+    code/thread_test/dining_philosophers.cpp
+    )
+target_link_libraries(dining_philosophers ${THREAD_LIBS})
