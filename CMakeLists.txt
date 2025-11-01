@@ -384,6 +384,8 @@ configure_file(code/avaruus/bash/process_output_file_solar_system  process_outpu
 configure_file(code/avaruus/python/visualize_2_objects             visualize_2_objects COPYONLY)
 configure_file(code/avaruus/python/visualize_solar_system          visualize_solar_system COPYONLY)
 
+### Ylikuutio libraries ###
+
 # Ylikuutio
 add_library(ylikuutio STATIC
     # audio, in alphabetical order
@@ -823,6 +825,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.hpp
     )
 
+# Snippets (can be used by the applications but these are not core Ylikuutio functionality)
 add_library(snippets STATIC
     # snippets, in alphabetical order
     code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.cpp
@@ -870,33 +873,9 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/locomotion/swim_module.hpp
     )
 
-# Ajokki
-add_executable(ajokki
-    # ajokki, in alphabetical order
-    code/ajokki/ajokki.cpp
-    code/ajokki/ajokki.hpp
-    code/ajokki/lisp/ajokki_console_callbacks.cpp
-    code/ajokki/lisp/ajokki_console_callbacks.hpp
-    code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
-    code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
-    code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
-    )
-target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+### Hirvi libraries ###
 
-# GPGPU test
-add_executable(gpgpu_test
-    # gpgpu_test, in alphabetical order
-    code/gpgpu_test/gpgpu_test.cpp
-    code/gpgpu_test/gpgpu_test.hpp
-    code/gpgpu_test/gpgpu_test_scene.cpp
-
-    # snippets, in alphabetical order
-    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
-    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
-    )
-target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
-
-# Hirvi libraries
+# hirvi_lib (most of Hirvi code is here)
 add_library(hirvi_lib STATIC
     code/hirvi/core/hirvi_application_callback.hpp
     code/hirvi/core/hirvi_core.cpp
@@ -929,7 +908,7 @@ add_library(hirvi_lib STATIC
     )
 target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Game projects
+### Game projects ###
 
 # Hirvi (game application)
 add_executable(hirvi
@@ -941,7 +920,7 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Editors
+### Editors ###
 
 # HirviEdit (editor for Hirvi)
 add_executable(hirvi_edit
@@ -963,7 +942,7 @@ add_executable(yli_edit
     )
 target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Physics simulations
+### Physics simulations ###
 
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
     # Planetary simulation library
@@ -992,9 +971,37 @@ if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Window
     target_link_libraries(avaruus_fortran planetary_simulation)
 endif()
 
-# Testing
+### Testing ###
 
-# Mock (for testing)
+# Ajokki (sandbox application for testing Ylikuutio features)
+add_executable(ajokki
+    # ajokki, in alphabetical order
+    code/ajokki/ajokki.cpp
+    code/ajokki/ajokki.hpp
+    code/ajokki/lisp/ajokki_console_callbacks.cpp
+    code/ajokki/lisp/ajokki_console_callbacks.hpp
+    code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
+    code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
+    code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
+    )
+target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
+# GPGPU test (for testing GPGPU functionality)
+add_executable(gpgpu_test
+    # gpgpu_test, in alphabetical order
+    code/gpgpu_test/gpgpu_test.cpp
+    code/gpgpu_test/gpgpu_test.hpp
+    code/gpgpu_test/gpgpu_test_scene.cpp
+
+    # snippets, in alphabetical order
+    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+    )
+target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
+# Mock (for unit tests and integration test which need `Application` instance)
+# `mock` executable is not needed for testing but it also works to as an example
+# of the bare minimum of what is needed from an `Application` using Ylikuutio.
 add_executable(mock
     # mock, in alphabetical order
     code/mock/mock_application.cpp
@@ -1168,7 +1175,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     gtest_discover_tests(test_ylikuutio)
 endif()
 
-# Code samples for future development
+### Code samples for future development ###
 
 # future-test
 add_executable(future_test
