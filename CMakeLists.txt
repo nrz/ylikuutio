@@ -1000,7 +1000,7 @@ add_executable(mock
     code/mock/mock_application.cpp
     code/mock/mock_application.hpp
     )
-target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+target_link_libraries(mock ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
