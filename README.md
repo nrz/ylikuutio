@@ -12,10 +12,6 @@ Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2015-2025 Antti Nuortimo.
 
-An exception in licensing of Ylikuutio code are
-Asio example source code files modified by me, which have
-their original Boost Software License - Version 1.0.
-
 Data preprocessing scripts that use Blender Python API
 are not a part of Ylikuutio itself and they are under
 The GNU General Public License 2 or later (at your option),
@@ -344,7 +340,7 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) Asio, GLEW, GLM, libpng, OpenFBX, pugixml,
+   (in alphabetical order) GLEW, GLM, libpng, OpenFBX, pugixml,
    SDL, SoLoud, and zlib.
    The rest is written from scratch.
 
@@ -411,7 +407,6 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
-* [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * [libpng](http://libpng.org/pub/png/libpng.html) is licensed under [PNG Reference Library License version 2](http://www.libpng.org/pub/png/src/libpng-LICENSE.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
