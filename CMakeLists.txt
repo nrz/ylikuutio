@@ -936,7 +936,7 @@ add_library(hirvi_lib STATIC
     )
 target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Hirvi game application
+# Hirvi (game application)
 add_executable(hirvi
     # hirvi, in alphabetical order
     code/hirvi/hirvi.cpp
@@ -946,7 +946,7 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# HirviEdit editor
+# HirviEdit (editor for Hirvi)
 add_executable(hirvi_edit
     # hirvi_edit, in alphabetical order
     code/hirvi/hirvi_edit.cpp
@@ -956,7 +956,7 @@ add_executable(hirvi_edit
     )
 target_link_libraries(hirvi_edit hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Mock
+# Mock (for testing)
 add_executable(mock
     # mock, in alphabetical order
     code/mock/mock_application.cpp
@@ -964,7 +964,7 @@ add_executable(mock
     )
 target_link_libraries(mock snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# YliEdit
+# YliEdit (generic editor for Ylikuutio applications)
 add_executable(yli_edit
     # yli_edit, in alphabetical order
     code/edit/yli_edit.cpp
