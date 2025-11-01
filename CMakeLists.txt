@@ -179,7 +179,6 @@ else()
 endif()
 
 include_directories(
-    # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glm/
@@ -974,24 +973,6 @@ add_executable(yli_edit
     )
 target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-# Asio-test
-if(FALSE)
-    add_executable(asio_chat_server
-        code/asio/asio_chat_server.cpp
-        )
-    target_link_libraries(asio_chat_server ${THREAD_LIBS})
-
-    add_executable(asio_chat_client
-        code/asio/asio_chat_client.cpp
-        )
-    target_link_libraries(asio_chat_client ${THREAD_LIBS})
-
-    add_executable(asio_nslookup
-        code/asio/asio_nslookup.cpp
-        )
-    target_link_libraries(asio_nslookup ${THREAD_LIBS})
-endif()
-
 # future-test
 add_executable(future_test
     code/thread_test/future_test.cpp
@@ -1046,7 +1027,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/mock/mock_application.hpp
         code/ylikuutio/tests/test_any_value.cpp
         code/ylikuutio/tests/test_ascii_grid_heightmap_loader.cpp
-        # code/ylikuutio/tests/test_asio.cpp
         code/ylikuutio/tests/test_audio_track.cpp
         code/ylikuutio/tests/test_bilinear_interpolation.cpp
         code/ylikuutio/tests/test_brain.cpp

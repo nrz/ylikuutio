@@ -7,7 +7,6 @@ add_definitions(
     )
 
 include_directories(
-    # asio/asio/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
     glm/
@@ -37,9 +36,6 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
         ${CMAKE_DL_LIBS}
         )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-
-### ASIO ###
-# add_subdirectory(asio)
 
 ### GLEW ###
 
