@@ -825,7 +825,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.hpp
     )
 
-# Snippets (can be used by the applications but these are not core Ylikuutio functionality)
+# Snippets (can be used by applications but these are not core Ylikuutio functionality)
 add_library(snippets STATIC
     # snippets, in alphabetical order
     code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.cpp
@@ -855,6 +855,8 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/wireframe_snippets.hpp
 
     # locomotion snippets, in alphabetical order
+    # These provide different locomotion modalities.
+    # TODO: implement locomotion modules!
     code/ylikuutio/snippets/locomotion/climb_module.cpp
     code/ylikuutio/snippets/locomotion/climb_module.hpp
     code/ylikuutio/snippets/locomotion/dive_module.cpp
@@ -1177,19 +1179,20 @@ endif()
 
 ### Code samples for future development ###
 
-# future-test
+# future-test (an example of `std::async`, `std::launch`, and `std::future` use)
 add_executable(future_test
     code/thread_test/future_test.cpp
     )
 target_link_libraries(future_test ${THREAD_LIBS})
 
-# thread-test
+# thread-test (an example of `std::thread` use)
 add_executable(thread_test
     code/thread_test/thread_test.cpp
     )
 target_link_libraries(thread_test ${THREAD_LIBS})
 
-# dining philosophers
+# dining philosophers (an example of `std::mutex` and `std::scoped_lock` use)
+# https://en.wikipedia.org/wiki/Dining_philosophers_problem
 add_executable(dining_philosophers
     code/thread_test/dining_philosophers.cpp
     )
