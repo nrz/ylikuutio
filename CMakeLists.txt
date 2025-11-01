@@ -550,12 +550,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/memory/memory_system.hpp
     code/ylikuutio/memory/memory_templates.hpp
 
-    # network, in alphabetical order
-    # code/ylikuutio/network/tcp_connection.cpp
-    # code/ylikuutio/network/tcp_connection.hpp
-    # code/ylikuutio/network/tcp_server.cpp
-    # code/ylikuutio/network/tcp_server.hpp
-
     # ontology, in alphabetical order
     code/ylikuutio/ontology/activate_callback.hpp
     code/ylikuutio/ontology/apprentice_iterator.hpp
