@@ -52,13 +52,13 @@ namespace yli::core
     class ApplicationCore
     {
         public:
-            ApplicationCore(yli::core::Application& application, const yli::ontology::UniverseStruct& universe_struct);
+            ApplicationCore(Application& application, const yli::ontology::UniverseStruct& universe_struct);
 
             yli::ontology::Universe& get_universe() const;
 
             yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
-            yli::core::SystemFactory<yli::data::Datatype> system_factory;
+            SystemFactory<yli::data::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
             yli::event::EventSystem* const event_system { nullptr };
             yli::input::InputSystem* const input_system { nullptr };

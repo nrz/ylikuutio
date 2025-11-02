@@ -29,7 +29,7 @@ namespace yli::ontology
 
 namespace yli::core
 {
-    ApplicationCore::ApplicationCore(yli::core::Application& application, const yli::ontology::UniverseStruct& universe_struct)
+    ApplicationCore::ApplicationCore(Application& application, const yli::ontology::UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(universe_struct) },
