@@ -53,7 +53,7 @@ namespace gpgpu_test
         // GPGPU test `Scene` begins here.
         yli::ontology::SceneStruct scene_struct;
         std::cout << "Creating yli::ontology::Scene* gpgpu_test_scene ...\n";
-        yli::ontology::Scene* const gpgpu_test_scene = this->entity_factory.create_scene(scene_struct);
+        yli::ontology::Scene* const gpgpu_test_scene = this->core.entity_factory.create_scene(scene_struct);
 
         if (gpgpu_test_scene == nullptr)
         {
@@ -70,7 +70,7 @@ namespace gpgpu_test
         identity_pipeline_struct.fragment_shader = "identity.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* identity_pipeline ...\n";
-        yli::ontology::Pipeline* const identity_pipeline = this->entity_factory.create_pipeline(identity_pipeline_struct);
+        yli::ontology::Pipeline* const identity_pipeline = this->core.entity_factory.create_pipeline(identity_pipeline_struct);
 
         if (identity_pipeline == nullptr)
         {
@@ -86,7 +86,7 @@ namespace gpgpu_test
         identity_pipeline_png_compute_task_struct.texture_height = 512;
 
         std::cout << "Creating yli::ontology::ComputeTask* identity_pipeline_png_compute_task ...\n";
-        yli::ontology::ComputeTask* const identity_pipeline_png_compute_task = this->entity_factory.create_compute_task(identity_pipeline_png_compute_task_struct);
+        yli::ontology::ComputeTask* const identity_pipeline_png_compute_task = this->core.entity_factory.create_compute_task(identity_pipeline_png_compute_task_struct);
 
         if (identity_pipeline_png_compute_task == nullptr)
         {
@@ -105,7 +105,7 @@ namespace gpgpu_test
         identity_pipeline_csv_unsigned_short_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::ComputeTask* identity_pipeline_csv_unsigned_short_compute_task ...\n";
-        yli::ontology::ComputeTask* const identity_pipeline_csv_unsigned_short_compute_task = this->entity_factory.create_compute_task(identity_pipeline_csv_unsigned_short_compute_task_struct);
+        yli::ontology::ComputeTask* const identity_pipeline_csv_unsigned_short_compute_task = this->core.entity_factory.create_compute_task(identity_pipeline_csv_unsigned_short_compute_task_struct);
 
         if (identity_pipeline_csv_unsigned_short_compute_task == nullptr)
         {
@@ -119,7 +119,7 @@ namespace gpgpu_test
         sobel_pipeline_struct.fragment_shader = "sobel_gradient_magnitude.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* sobel_pipeline ...\n";
-        yli::ontology::Pipeline* const sobel_pipeline = this->entity_factory.create_pipeline(sobel_pipeline_struct);
+        yli::ontology::Pipeline* const sobel_pipeline = this->core.entity_factory.create_pipeline(sobel_pipeline_struct);
 
         if (sobel_pipeline == nullptr)
         {
@@ -137,7 +137,7 @@ namespace gpgpu_test
         sobel_pipeline_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::ComputeTask* sobel_pipeline_compute_task ...\n";
-        yli::ontology::ComputeTask* const sobel_pipeline_compute_task = this->entity_factory.create_compute_task(sobel_pipeline_compute_task_struct);
+        yli::ontology::ComputeTask* const sobel_pipeline_compute_task = this->core.entity_factory.create_compute_task(sobel_pipeline_compute_task_struct);
 
         if (sobel_pipeline_compute_task == nullptr)
         {
@@ -151,7 +151,7 @@ namespace gpgpu_test
         go_west_pipeline_struct.fragment_shader = "go_west.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* go_west_pipeline ...\n";
-        yli::ontology::Pipeline* const go_west_pipeline = this->entity_factory.create_pipeline(go_west_pipeline_struct);
+        yli::ontology::Pipeline* const go_west_pipeline = this->core.entity_factory.create_pipeline(go_west_pipeline_struct);
 
         if (go_west_pipeline == nullptr)
         {
@@ -169,7 +169,7 @@ namespace gpgpu_test
         go_west_pipeline_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::ComputeTask* go_west_pipeline_compute_task ...\n";
-        yli::ontology::ComputeTask* const go_west_pipeline_compute_task = this->entity_factory.create_compute_task(go_west_pipeline_compute_task_struct);
+        yli::ontology::ComputeTask* const go_west_pipeline_compute_task = this->core.entity_factory.create_compute_task(go_west_pipeline_compute_task_struct);
 
         if (go_west_pipeline_compute_task == nullptr)
         {
@@ -183,7 +183,7 @@ namespace gpgpu_test
         vanish_west_pipeline_struct.fragment_shader = "vanish_west.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* vanish_west_pipeline ...\n";
-        yli::ontology::Pipeline* const vanish_west_pipeline = this->entity_factory.create_pipeline(vanish_west_pipeline_struct);
+        yli::ontology::Pipeline* const vanish_west_pipeline = this->core.entity_factory.create_pipeline(vanish_west_pipeline_struct);
 
         if (vanish_west_pipeline == nullptr)
         {
@@ -201,7 +201,7 @@ namespace gpgpu_test
         vanish_west_pipeline_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::ComputeTask* vanish_west_pipeline_compute_task ...\n";
-        yli::ontology::ComputeTask* const vanish_west_pipeline_compute_task = this->entity_factory.create_compute_task(vanish_west_pipeline_compute_task_struct);
+        yli::ontology::ComputeTask* const vanish_west_pipeline_compute_task = this->core.entity_factory.create_compute_task(vanish_west_pipeline_compute_task_struct);
 
         if (vanish_west_pipeline_compute_task == nullptr)
         {
@@ -215,7 +215,7 @@ namespace gpgpu_test
         floyd_warshall_pipeline_struct.fragment_shader = "floyd_warshall.frag";
 
         std::cout << "Creating yli::ontology::Pipeline* floyd_warshall_pipeline ...\n";
-        yli::ontology::Pipeline* const floyd_warshall_pipeline = this->entity_factory.create_pipeline(floyd_warshall_pipeline_struct);
+        yli::ontology::Pipeline* const floyd_warshall_pipeline = this->core.entity_factory.create_pipeline(floyd_warshall_pipeline_struct);
 
         if (floyd_warshall_pipeline == nullptr)
         {
@@ -235,7 +235,7 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_pipeline_csv_unsigned_short_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_unsigned_short_compute_task = this->entity_factory.create_compute_task(floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct);
+        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_unsigned_short_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct);
 
         if (floyd_warshall_pipeline_csv_unsigned_short_compute_task == nullptr)
         {
@@ -255,7 +255,7 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_float_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_pipeline_csv_float_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_float_compute_task = this->entity_factory.create_compute_task(floyd_warshall_pipeline_csv_float_compute_task_struct);
+        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_float_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_float_compute_task_struct);
 
         if (floyd_warshall_pipeline_csv_float_compute_task == nullptr)
         {

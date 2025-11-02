@@ -57,8 +57,7 @@ namespace gpgpu_test
 {
     GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        entity_factory(*this, this->memory_system),
-        universe { this->entity_factory.create_universe(this->get_universe_struct()) }
+        core(*this, this->get_universe_struct())
     {
         std::cout << "GpgpuTestApplication initialized!\n";
     }
@@ -75,32 +74,32 @@ namespace gpgpu_test
 
     yli::memory::GenericMemorySystem& GpgpuTestApplication::get_generic_memory_system() const
     {
-        return this->memory_system.get();
+        return this->core.memory_system.get();
     }
 
     yli::memory::GenericMemoryAllocator& GpgpuTestApplication::get_generic_memory_allocator(const int type) const
     {
-        return this->memory_system.get_generic_allocator(type);
+        return this->core.memory_system.get_generic_allocator(type);
     }
 
     yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_generic_entity_factory() const
     {
-        return this->entity_factory.get();
+        return this->core.entity_factory.get();
     }
 
     bool GpgpuTestApplication::is_universe(yli::ontology::Entity* entity) const
     {
-        return static_cast<yli::ontology::Entity*>(this->universe) == entity;
+        return static_cast<yli::ontology::Entity*>(this->core.universe) == entity;
     }
 
     yli::ontology::Universe& GpgpuTestApplication::get_universe() const
     {
-        if (this->universe == nullptr) [[unlikely]]
+        if (this->core.universe == nullptr) [[unlikely]]
         {
-            throw std::logic_error("ERROR: `GpgpuTestApplication::get_universe`: `this->universe` is `nullptr`!");
+            throw std::logic_error("ERROR: `GpgpuTestApplication::get_universe`: `this->core.universe` is `nullptr`!");
         }
 
-        return *this->universe;
+        return *this->core.universe;
     }
 
     yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct() const

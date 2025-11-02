@@ -19,10 +19,7 @@
 #define GPGPU_TEST_GPGPU_TEST_HPP_INCLUDED
 
 #include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
-#include "code/ylikuutio/memory/memory_system.hpp"
-#include "code/ylikuutio/memory/memory_allocator.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/core/application_core.hpp"
 
 // Include standard headers
 #include <memory> // std::unique_ptr
@@ -73,9 +70,7 @@ namespace gpgpu_test
         private:
             yli::ontology::Scene* create_gpgpu_test_scene();
 
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
-            yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
-            yli::ontology::Universe* const universe { nullptr };
+            yli::core::ApplicationCore core;
     };
 }
 
