@@ -43,7 +43,7 @@ Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
 C++20 support is required.
-CMake 3.14 or newer is needed for the compiling process.
+CMake 3.14 or newer and Ninja are needed for building.
 
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 `master` is the branch that should be up to date and it's the one to build.
@@ -55,11 +55,11 @@ In Debian or Ubuntu it's simple.
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
 You all need these packages:
-cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev vulkan-validationlayers-dev zlib1g-dev
+cmake g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
 
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev vulkan-validationlayers-dev zlib1g-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
