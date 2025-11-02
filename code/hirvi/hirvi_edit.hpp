@@ -24,6 +24,7 @@
 #include "ontology/police_car.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
+#include "code/ylikuutio/edit/edit_core.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -117,6 +118,7 @@ namespace hirvi
 
         private:
             hirvi::HirviCore core;
+            yli::edit::EditCore edit;
     };
 }
 

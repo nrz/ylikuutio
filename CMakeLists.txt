@@ -922,6 +922,15 @@ add_executable(hirvi
     )
 target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
+### Editor libraries ###
+
+# EditLib
+add_library(edit_lib
+    code/ylikuutio/edit/edit_core.cpp
+    code/ylikuutio/edit/edit_core.hpp
+)
+target_link_libraries(edit_lib ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+
 ### Editors ###
 
 # HirviEdit (editor for Hirvi)
@@ -932,7 +941,7 @@ add_executable(hirvi_edit
     code/hirvi/lisp/hirvi_edit_console_callbacks.cpp
     code/hirvi/lisp/hirvi_edit_console_callbacks.hpp
     )
-target_link_libraries(hirvi_edit hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+target_link_libraries(hirvi_edit hirvi_lib edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # YliEdit (generic editor for Ylikuutio applications)
 add_executable(yli_edit
@@ -942,7 +951,7 @@ add_executable(yli_edit
     code/edit/yli_edit_console_callbacks.cpp
     code/edit/yli_edit_console_callbacks.hpp
     )
-target_link_libraries(yli_edit snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+target_link_libraries(yli_edit edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 ### Physics simulations ###
 

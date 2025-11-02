@@ -21,6 +21,7 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/edit/edit_core.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
@@ -100,6 +101,8 @@ namespace yli_edit
             yli::event::EventSystem* const event_system { nullptr };
             yli::input::InputSystem* const input_system { nullptr };
             yli::audio::AudioSystem* const audio_system { nullptr };
+
+            yli::edit::EditCore edit;
     };
 }
 
