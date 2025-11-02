@@ -133,6 +133,9 @@ Hydrostatics for water.
 Terrain rendering in Far Cry 5:
 https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 
+Ghost of Yōtei – tech deep dive:
+https://blog.playstation.com/2025/10/23/ghost-of-yotei-tech-deep-dive/
+
 Intel graphics research samples library:
 https://www.intel.com/content/www/us/en/developer/topic-technology/graphics-research/samples.html
 
