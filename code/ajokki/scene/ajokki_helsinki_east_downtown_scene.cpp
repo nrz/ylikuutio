@@ -72,7 +72,7 @@ namespace ajokki
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         std::cout << "Creating Scene* helsinki_east_downtown_scene ...\n";
-        Scene* const helsinki_east_downtown_scene = this->entity_factory.create_scene(scene_struct);
+        Scene* const helsinki_east_downtown_scene = this->core.entity_factory.create_scene(scene_struct);
 
         if (helsinki_east_downtown_scene == nullptr)
         {
@@ -85,63 +85,63 @@ namespace ajokki
 
         // Create the `CallbackEngine`s for the `Brain`s.
         CallbackEngineStruct rest_callback_engine_struct;
-        auto rest_callback_engine = this->entity_factory.create_callback_engine(rest_callback_engine_struct);
+        auto rest_callback_engine = this->core.entity_factory.create_callback_engine(rest_callback_engine_struct);
         rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
         CallbackEngineStruct go_east_callback_engine_struct;
-        auto go_east_callback_engine = this->entity_factory.create_callback_engine(go_east_callback_engine_struct);
+        auto go_east_callback_engine = this->core.entity_factory.create_callback_engine(go_east_callback_engine_struct);
         go_east_callback_engine->create_callback_object(&yli::snippets::go_east);
 
         CallbackEngineStruct go_west_callback_engine_struct;
-        auto go_west_callback_engine = this->entity_factory.create_callback_engine(go_west_callback_engine_struct);
+        auto go_west_callback_engine = this->core.entity_factory.create_callback_engine(go_west_callback_engine_struct);
         go_west_callback_engine->create_callback_object(&yli::snippets::go_west);
 
         CallbackEngineStruct go_north_callback_engine_struct;
-        auto go_north_callback_engine = this->entity_factory.create_callback_engine(go_north_callback_engine_struct);
+        auto go_north_callback_engine = this->core.entity_factory.create_callback_engine(go_north_callback_engine_struct);
         go_north_callback_engine->create_callback_object(&yli::snippets::go_north);
 
         CallbackEngineStruct go_south_callback_engine_struct;
-        auto go_south_callback_engine = this->entity_factory.create_callback_engine(go_south_callback_engine_struct);
+        auto go_south_callback_engine = this->core.entity_factory.create_callback_engine(go_south_callback_engine_struct);
         go_south_callback_engine->create_callback_object(&yli::snippets::go_south);
 
         CallbackEngineStruct orient_to_east_callback_engine_struct;
-        auto orient_to_east_callback_engine = this->entity_factory.create_callback_engine(orient_to_east_callback_engine_struct);
+        auto orient_to_east_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_east_callback_engine_struct);
         orient_to_east_callback_engine->create_callback_object(&yli::snippets::orient_to_east);
 
         CallbackEngineStruct orient_to_west_callback_engine_struct;
-        auto orient_to_west_callback_engine = this->entity_factory.create_callback_engine(orient_to_west_callback_engine_struct);
+        auto orient_to_west_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_west_callback_engine_struct);
         orient_to_west_callback_engine->create_callback_object(&yli::snippets::orient_to_west);
 
         CallbackEngineStruct orient_to_north_callback_engine_struct;
-        auto orient_to_north_callback_engine = this->entity_factory.create_callback_engine(orient_to_north_callback_engine_struct);
+        auto orient_to_north_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_north_callback_engine_struct);
         orient_to_north_callback_engine->create_callback_object(&yli::snippets::orient_to_north);
 
         CallbackEngineStruct orient_to_south_callback_engine_struct;
-        auto orient_to_south_callback_engine = this->entity_factory.create_callback_engine(orient_to_south_callback_engine_struct);
+        auto orient_to_south_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_south_callback_engine_struct);
         orient_to_south_callback_engine->create_callback_object(&yli::snippets::orient_to_south);
 
         CallbackEngineStruct orient_and_go_east_callback_engine_struct;
-        auto orient_and_go_east_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_east_callback_engine_struct);
+        auto orient_and_go_east_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_east_callback_engine_struct);
         orient_and_go_east_callback_engine->create_callback_object(&yli::snippets::orient_and_go_east);
 
         CallbackEngineStruct orient_and_go_west_callback_engine_struct;
-        auto orient_and_go_west_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_west_callback_engine_struct);
+        auto orient_and_go_west_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_west_callback_engine_struct);
         orient_and_go_west_callback_engine->create_callback_object(&yli::snippets::orient_and_go_west);
 
         CallbackEngineStruct orient_and_go_north_callback_engine_struct;
-        auto orient_and_go_north_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_north_callback_engine_struct);
+        auto orient_and_go_north_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_north_callback_engine_struct);
         orient_and_go_north_callback_engine->create_callback_object(&yli::snippets::orient_and_go_north);
 
         CallbackEngineStruct orient_and_go_south_callback_engine_struct;
-        auto orient_and_go_south_callback_engine = this->entity_factory.create_callback_engine(orient_and_go_south_callback_engine_struct);
+        auto orient_and_go_south_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_south_callback_engine_struct);
         orient_and_go_south_callback_engine->create_callback_object(&yli::snippets::orient_and_go_south);
 
         CallbackEngineStruct rotate_clockwise_callback_engine_struct;
-        auto rotate_clockwise_callback_engine = this->entity_factory.create_callback_engine(rotate_clockwise_callback_engine_struct);
+        auto rotate_clockwise_callback_engine = this->core.entity_factory.create_callback_engine(rotate_clockwise_callback_engine_struct);
         rotate_clockwise_callback_engine->create_callback_object(&yli::snippets::rotate_clockwise);
 
         CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
-        auto rotate_counterclockwise_callback_engine = this->entity_factory.create_callback_engine(rotate_counterclockwise_callback_engine_struct);
+        auto rotate_counterclockwise_callback_engine = this->core.entity_factory.create_callback_engine(rotate_counterclockwise_callback_engine_struct);
         rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
         // Create the `Brain`s.
@@ -151,7 +151,7 @@ namespace ajokki
         rest_brain_struct.global_name = "rest_brain";
         rest_brain_struct.local_name = "rest";
         std::cout << "Creating Brain* rest_brain ...\n";
-        Brain* const rest_brain = this->entity_factory.create_brain(rest_brain_struct);
+        Brain* const rest_brain = this->core.entity_factory.create_brain(rest_brain_struct);
 
         if (rest_brain == nullptr)
         {
@@ -164,7 +164,7 @@ namespace ajokki
         go_east_brain_struct.global_name = "go_east_brain";
         go_east_brain_struct.local_name = "go_east";
         std::cout << "Creating Brain* go_east_brain ...\n";
-        if (this->entity_factory.create_brain(go_east_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(go_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -175,7 +175,7 @@ namespace ajokki
         go_west_brain_struct.global_name = "go_west_brain";
         go_west_brain_struct.local_name = "go_west";
         std::cout << "Creating Brain* go_west_brain ...\n";
-        if (this->entity_factory.create_brain(go_west_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(go_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -186,7 +186,7 @@ namespace ajokki
         go_north_brain_struct.global_name = "go_north_brain";
         go_north_brain_struct.local_name = "go_north";
         std::cout << "Creating Brain* go_north_brain ...\n";
-        if (this->entity_factory.create_brain(go_north_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(go_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -197,7 +197,7 @@ namespace ajokki
         go_south_brain_struct.global_name = "go_south_brain";
         go_south_brain_struct.local_name = "go_south";
         std::cout << "Creating Brain* go_south_brain ...\n";
-        if (this->entity_factory.create_brain(go_south_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(go_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -208,7 +208,7 @@ namespace ajokki
         orient_to_east_brain_struct.global_name = "orient_to_east_brain";
         orient_to_east_brain_struct.local_name = "orient_to_east";
         std::cout << "Creating Brain* orient_to_east_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_east_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_to_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -219,7 +219,7 @@ namespace ajokki
         orient_to_west_brain_struct.global_name = "orient_to_west_brain";
         orient_to_west_brain_struct.local_name = "orient_to_west";
         std::cout << "Creating Brain* orient_to_west_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_west_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_to_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -230,7 +230,7 @@ namespace ajokki
         orient_to_north_brain_struct.global_name = "orient_to_north_brain";
         orient_to_north_brain_struct.local_name = "orient_to_north";
         std::cout << "Creating Brain* orient_to_north_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_north_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_to_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -241,7 +241,7 @@ namespace ajokki
         orient_to_south_brain_struct.global_name = "orient_to_south_brain";
         orient_to_south_brain_struct.local_name = "orient_to_south";
         std::cout << "Creating Brain* orient_to_south_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_south_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_to_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -252,7 +252,7 @@ namespace ajokki
         rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
         rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
         std::cout << "Creating Brain* rotate_clockwise_brain ...\n";
-        if (this->entity_factory.create_brain(rotate_clockwise_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(rotate_clockwise_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -263,7 +263,7 @@ namespace ajokki
         orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
         orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
         std::cout << "Creating Brain* orient_and_go_east_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_east_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_and_go_east_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -274,7 +274,7 @@ namespace ajokki
         orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
         orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
         std::cout << "Creating Brain* orient_and_go_west_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_west_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_and_go_west_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -285,7 +285,7 @@ namespace ajokki
         orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
         orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
         std::cout << "Creating Brain* orient_and_go_north_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_north_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_and_go_north_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -296,7 +296,7 @@ namespace ajokki
         orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
         orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
         std::cout << "Creating Brain* orient_and_go_south_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_south_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(orient_and_go_south_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -307,7 +307,7 @@ namespace ajokki
         rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
         rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating Brain* rotate_counterclockwise_brain ...\n";
-        if (this->entity_factory.create_brain(rotate_counterclockwise_brain_struct) == nullptr)
+        if (this->core.entity_factory.create_brain(rotate_counterclockwise_brain_struct) == nullptr)
         {
             std::cerr << "Failed to create Brain.\n";
             return nullptr;
@@ -321,7 +321,7 @@ namespace ajokki
         helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* helsinki_east_downtown_pipeline ...\n";
-        Pipeline* const helsinki_east_downtown_pipeline = this->entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+        Pipeline* const helsinki_east_downtown_pipeline = this->core.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
 
         if (helsinki_east_downtown_pipeline == nullptr)
         {
@@ -337,7 +337,7 @@ namespace ajokki
         helsinki_east_downtown_grayscale_pipeline_struct.fragment_shader = "grayscale_standard_shading.frag";
 
         std::cout << "Creating Pipeline* helsinki_east_downtown_grayscale_pipeline ...\n";
-        if (this->entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct) == nullptr)
+        if (this->core.entity_factory.create_pipeline(helsinki_east_downtown_grayscale_pipeline_struct) == nullptr)
         {
             std::cerr << "Failed to create Pipeline.\n";
             return nullptr;
@@ -348,7 +348,7 @@ namespace ajokki
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* helsinki_east_downtown_grass_material ...\n";
-        Material* const helsinki_east_downtown_grass_material = this->entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
+        Material* const helsinki_east_downtown_grass_material = this->core.entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
 
         if (helsinki_east_downtown_grass_material == nullptr)
         {
@@ -363,7 +363,7 @@ namespace ajokki
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
         std::cout << "Creating Material* pink_geometric_tiles_material ...\n";
-        Material* const pink_geometric_tiles_material = this->entity_factory.create_material(pink_geometric_tiles_material_struct);
+        Material* const pink_geometric_tiles_material = this->core.entity_factory.create_material(pink_geometric_tiles_material_struct);
 
         if (pink_geometric_tiles_material == nullptr)
         {
@@ -378,7 +378,7 @@ namespace ajokki
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material ...\n";
-        Material* const orange_fur_material = this->entity_factory.create_material(orange_fur_material_struct);
+        Material* const orange_fur_material = this->core.entity_factory.create_material(orange_fur_material_struct);
 
         if (orange_fur_material == nullptr)
         {
@@ -394,7 +394,7 @@ namespace ajokki
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating Species* helsinki_east_downtown_terrain_species ...\n";
-        Species* const helsinki_east_downtown_terrain_species = this->entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
+        Species* const helsinki_east_downtown_terrain_species = this->core.entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
 
         if (helsinki_east_downtown_terrain_species == nullptr)
         {
@@ -408,7 +408,7 @@ namespace ajokki
         ObjectStruct helsinki_east_downtown_struct { Request(helsinki_east_downtown_scene) };
         helsinki_east_downtown_struct.species_master = Request(helsinki_east_downtown_terrain_species);
         helsinki_east_downtown_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
-        this->entity_factory.create_object(helsinki_east_downtown_struct);
+        this->core.entity_factory.create_object(helsinki_east_downtown_struct);
 
         SpeciesStruct cat_species_struct { Request(helsinki_east_downtown_scene), Request(orange_fur_material) };
         cat_species_struct.global_name = "cat_species";
@@ -417,7 +417,7 @@ namespace ajokki
         cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
 
         std::cout << "Creating Species* cat_species ...\n";
-        Species* const cat_species = this->entity_factory.create_species(cat_species_struct);
+        Species* const cat_species = this->core.entity_factory.create_species(cat_species_struct);
 
         if (cat_species == nullptr)
         {
@@ -458,7 +458,7 @@ namespace ajokki
                         first_cat_x + static_cast<float>(i) * translation_x,
                         first_cat_y + static_cast<float>(j) * translation_y,
                         first_cat_z + static_cast<float>(j) * translation_z);
-                if (this->entity_factory.create_object(cat_object_struct1) == nullptr)
+                if (this->core.entity_factory.create_object(cat_object_struct1) == nullptr)
                 {
                     std::cerr << "Failed to create cat1 Object.\n";
                     return nullptr;
@@ -482,7 +482,7 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct1.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -160.00f, 30.00f);
 
             std::cout << "Creating Holobiont* turbo_polizei_png1 ...\n";
-            Holobiont* const turbo_polizei_png1 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
+            Holobiont* const turbo_polizei_png1 = this->core.entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
 
             if (turbo_polizei_png1 == nullptr)
             {
@@ -501,7 +501,7 @@ namespace ajokki
             turbo_polizei_png_holobiont_struct2.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -175.00f, 30.00f);
 
             std::cout << "Creating Holobiont* turbo_polizei_png2 ...\n";
-            Holobiont* const turbo_polizei_png2 = this->entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
+            Holobiont* const turbo_polizei_png2 = this->core.entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
 
             if (turbo_polizei_png2 == nullptr)
             {
@@ -520,7 +520,7 @@ namespace ajokki
         cat_camera_struct.orientation.pitch = -1.00f;
 
         std::cout << "Creating Camera* cat_camera ...\n";
-        Camera* const cat_camera = this->entity_factory.create_camera(cat_camera_struct);
+        Camera* const cat_camera = this->core.entity_factory.create_camera(cat_camera_struct);
 
         if (cat_camera == nullptr)
         {
@@ -537,7 +537,7 @@ namespace ajokki
         turbo_polizei_camera_struct.orientation.pitch = -0.05f;
 
         std::cout << "Creating Camera* turbo_polizei_camera ...\n";
-        Camera* const turbo_polizei_camera = this->entity_factory.create_camera(turbo_polizei_camera_struct);
+        Camera* const turbo_polizei_camera = this->core.entity_factory.create_camera(turbo_polizei_camera_struct);
 
         if (turbo_polizei_camera == nullptr)
         {

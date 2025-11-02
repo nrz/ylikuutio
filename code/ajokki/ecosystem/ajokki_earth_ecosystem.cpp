@@ -44,7 +44,7 @@ namespace ajokki
         EcosystemStruct earth_ecosystem_struct;
         earth_ecosystem_struct.global_name = "earth_ecosystem";
         std::cout << "Creating Ecosystem* earth_ecosystem ...\n";
-        Ecosystem* const earth_ecosystem = this->entity_factory.create_ecosystem(earth_ecosystem_struct);
+        Ecosystem* const earth_ecosystem = this->core.entity_factory.create_ecosystem(earth_ecosystem_struct);
 
         if (earth_ecosystem == nullptr)
         {
@@ -59,7 +59,7 @@ namespace ajokki
         earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* earth_pipeline ...\n";
-        Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
+        Pipeline* const earth_pipeline = this->core.entity_factory.create_pipeline(earth_pipeline_struct);
 
         if (earth_pipeline == nullptr)
         {
@@ -72,7 +72,7 @@ namespace ajokki
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
         std::cout << "Creating Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
+        Symbiosis* const turbo_polizei_png_symbiosis = this->core.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {

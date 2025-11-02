@@ -63,7 +63,7 @@ namespace ajokki
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 77.0f;
         std::cout << "Creating Scene* joensuu_center_west_scene ...\n";
-        Scene* const joensuu_center_west_scene = this->entity_factory.create_scene(scene_struct);
+        Scene* const joensuu_center_west_scene = this->core.entity_factory.create_scene(scene_struct);
 
         if (joensuu_center_west_scene == nullptr)
         {
@@ -87,7 +87,7 @@ namespace ajokki
         joensuu_center_west_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* joensuu_center_west_pipeline ...\n";
-        Pipeline* const joensuu_center_west_pipeline = this->entity_factory.create_pipeline(joensuu_center_west_pipeline_struct);
+        Pipeline* const joensuu_center_west_pipeline = this->core.entity_factory.create_pipeline(joensuu_center_west_pipeline_struct);
 
         if (joensuu_center_west_pipeline == nullptr)
         {
@@ -102,7 +102,7 @@ namespace ajokki
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* joensuu_center_west_grass_material ...\n";
-        Material* const joensuu_center_west_grass_material = this->entity_factory.create_material(joensuu_center_west_grass_material_struct);
+        Material* const joensuu_center_west_grass_material = this->core.entity_factory.create_material(joensuu_center_west_grass_material_struct);
 
         if (joensuu_center_west_grass_material == nullptr)
         {
@@ -118,7 +118,7 @@ namespace ajokki
         joensuu_center_west_terrain_species_struct.model_loader_struct.x_step = 4;
         joensuu_center_west_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating Species* joensuu_center_west_terrain_species ...\n";
-        Species* const joensuu_center_west_terrain_species = this->entity_factory.create_species(joensuu_center_west_terrain_species_struct);
+        Species* const joensuu_center_west_terrain_species = this->core.entity_factory.create_species(joensuu_center_west_terrain_species_struct);
 
         if (joensuu_center_west_terrain_species == nullptr)
         {
@@ -132,14 +132,14 @@ namespace ajokki
         ObjectStruct joensuu_center_west_struct { Request(joensuu_center_west_scene) };
         joensuu_center_west_struct.species_master = Request(joensuu_center_west_terrain_species);
         joensuu_center_west_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
-        this->entity_factory.create_object(joensuu_center_west_struct);
+        this->core.entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
         MaterialStruct orange_fur_material_joensuu_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline), yli::ontology::TextureFileFormat::PNG };
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material_joensuu ...\n";
-        Material* const orange_fur_material_joensuu = this->entity_factory.create_material(orange_fur_material_joensuu_struct);
+        Material* const orange_fur_material_joensuu = this->core.entity_factory.create_material(orange_fur_material_joensuu_struct);
 
         if (orange_fur_material_joensuu == nullptr)
         {
@@ -154,7 +154,7 @@ namespace ajokki
         horse_species_struct.model_loader_struct.model_filename = "horse.fbx";
 
         std::cout << "Creating Species* horse_species ...\n";
-        Species* const horse_species = this->entity_factory.create_species(horse_species_struct);
+        Species* const horse_species = this->core.entity_factory.create_species(horse_species_struct);
 
         if (horse_species == nullptr)
         {
@@ -170,7 +170,7 @@ namespace ajokki
         horse_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = CartesianCoordinatesModule(2150.00f, -1990.00f, 200.00f);
-        Entity* const horse1_entity = this->entity_factory.create_object(horse_object_struct1);
+        Entity* const horse1_entity = this->core.entity_factory.create_object(horse_object_struct1);
         auto const horse1 = dynamic_cast<Object*>(horse1_entity);
 
         if (horse1 == nullptr)
@@ -188,7 +188,7 @@ namespace ajokki
         horse_camera_struct.orientation.pitch = -0.18f;
 
         std::cout << "Creating Camera* horse_camera ...\n";
-        Camera* const horse_camera = this->entity_factory.create_camera(horse_camera_struct);
+        Camera* const horse_camera = this->core.entity_factory.create_camera(horse_camera_struct);
 
         if (horse_camera == nullptr)
         {

@@ -83,12 +83,7 @@ namespace yli_edit
 
     YliEditApplication::YliEditApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
-        entity_factory(*this, this->memory_system),
-        system_factory(this->memory_system),
-        universe { this->entity_factory.create_universe(this->get_universe_struct()) },
-        event_system { this->system_factory.create_event_system(this->get_universe()) },
-        input_system { this->system_factory.create_input_system(this->get_universe()) },
-        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
+        core(*this, this->get_universe_struct())
     {
         std::cout << "YliEditApplication initialized!\n";
     }
@@ -100,17 +95,17 @@ namespace yli_edit
 
     yli::event::EventSystem* YliEditApplication::get_event_system() const
     {
-        return this->event_system;
+        return this->core.event_system;
     }
 
     yli::input::InputSystem* YliEditApplication::get_input_system() const
     {
-        return this->input_system;
+        return this->core.input_system;
     }
 
     yli::audio::AudioSystem* YliEditApplication::get_audio_system() const
     {
-        return this->audio_system;
+        return this->core.audio_system;
     }
 
     std::vector<std::string> YliEditApplication::get_valid_keys() const
@@ -134,32 +129,32 @@ namespace yli_edit
 
     yli::memory::GenericMemorySystem& YliEditApplication::get_generic_memory_system() const
     {
-        return this->memory_system.get();
+        return this->core.memory_system.get();
     }
 
     yli::memory::GenericMemoryAllocator& YliEditApplication::get_generic_memory_allocator(const int type) const
     {
-        return this->memory_system.get_generic_allocator(type);
+        return this->core.memory_system.get_generic_allocator(type);
     }
 
     yli::ontology::GenericEntityFactory& YliEditApplication::get_generic_entity_factory() const
     {
-        return this->entity_factory.get();
+        return this->core.entity_factory.get();
     }
 
     bool YliEditApplication::is_universe(yli::ontology::Entity* entity) const
     {
-        return static_cast<yli::ontology::Entity*>(this->universe) == entity;
+        return static_cast<yli::ontology::Entity*>(this->core.universe) == entity;
     }
 
     yli::ontology::Universe& YliEditApplication::get_universe() const
     {
-        if (this->universe == nullptr) [[unlikely]]
+        if (this->core.universe == nullptr) [[unlikely]]
         {
-            throw std::logic_error("ERROR: `YliEditApplication::get_universe`: `this->universe` is `nullptr`!");
+            throw std::logic_error("ERROR: `YliEditApplication::get_universe`: `this->core.universe` is `nullptr`!");
         }
 
-        return *this->universe;
+        return *this->core.universe;
     }
 
     yli::ontology::UniverseStruct YliEditApplication::get_universe_struct() const
@@ -249,7 +244,7 @@ namespace yli_edit
         yli::ontology::ConsoleStruct my_console_struct(0, 39, 15, 0);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating yli::ontology::Console* my_console ...\n";
-        yli::ontology::Console* const my_console = this->entity_factory.create_console(my_console_struct);
+        yli::ontology::Console* const my_console = this->core.entity_factory.create_console(my_console_struct);
 
         if (my_console == nullptr)
         {
@@ -267,7 +262,7 @@ namespace yli_edit
         font_struct.text_size = this->get_universe().get_text_size();
 
         std::cout << "Creating yli::ontology::Font2d* my_font_2d ...\n";
-        yli::ontology::Font2d* const my_font_2d = this->entity_factory.create_font_2d(font_struct);
+        yli::ontology::Font2d* const my_font_2d = this->core.entity_factory.create_font_2d(font_struct);
 
         if (my_font_2d == nullptr)
         {
@@ -285,27 +280,27 @@ namespace yli_edit
         /*********************************************************************
          *  Callback engines for action mode keypresses begin here.          *
          *********************************************************************/
-        yli::snippets::create_action_mode_keypress_callbacks(this->entity_factory);
+        yli::snippets::create_action_mode_keypress_callbacks(this->core.entity_factory);
 
         /*********************************************************************
          *  Callback engines for action mode keyreleases begin here.         *
          *********************************************************************/
-        yli::snippets::create_action_mode_keyrelease_callbacks(this->entity_factory);
+        yli::snippets::create_action_mode_keyrelease_callbacks(this->core.entity_factory);
 
         /*********************************************************************
          *  Callback engines for console keypresses begin here.              *
          *********************************************************************/
-        yli::snippets::create_console_mode_keypress_callbacks(this->entity_factory);
+        yli::snippets::create_console_mode_keypress_callbacks(this->core.entity_factory);
 
         /*********************************************************************
          *  Callback engines for console keyreleases begin here.             *
          *********************************************************************/
-        yli::snippets::create_console_mode_keyrelease_callbacks(this->entity_factory);
+        yli::snippets::create_console_mode_keyrelease_callbacks(this->core.entity_factory);
 
         // Action mode input mode.
         InputModeStruct action_mode_input_mode_struct;
         action_mode_input_mode_struct.global_name = "action_mode_input_mode";
-        InputMode* const action_mode_input_mode = this->entity_factory.create_input_mode(action_mode_input_mode_struct);
+        InputMode* const action_mode_input_mode = this->core.entity_factory.create_input_mode(action_mode_input_mode_struct);
 
         // Keypress callbacks for action mode.
         yli::snippets::set_action_mode_keypress_callback_engines_or_throw(*action_mode_input_mode);
@@ -321,7 +316,7 @@ namespace yli_edit
         InputModeStruct my_console_mode_input_mode_struct;
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
         my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
-        InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(my_console_mode_input_mode_struct);
+        InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(my_console_mode_input_mode_struct);
 
         // Keypress callbacks for `my_console`.
         yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode);
@@ -338,10 +333,10 @@ namespace yli_edit
         std::cout << "Defining console command callback engines.\n";
 
         // Lisp function overloads.
-        yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
+        yli::snippets::create_all_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
 
         // YliEdit-specific callbacks.
-        this->entity_factory.create_lisp_function_overload("version", Request(my_console), &yli_edit::version);
+        this->core.entity_factory.create_lisp_function_overload("version", Request(my_console), &yli_edit::version);
 
         std::cout << "Setting up framebuffer size ...\n";
         yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());

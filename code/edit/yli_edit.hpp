@@ -19,12 +19,8 @@
 #define YLI_EDIT_YLI_EDIT_HPP_INCLUDED
 
 #include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/core/system_factory.hpp"
-#include "code/ylikuutio/data/datatype.hpp"
+#include "code/ylikuutio/core/application_core.hpp"
 #include "code/ylikuutio/edit/edit_core.hpp"
-#include "code/ylikuutio/memory/memory_system.hpp"
-#include "code/ylikuutio/memory/memory_allocator.hpp"
-#include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include standard headers
 #include <memory> // std::unique_ptr
@@ -94,14 +90,7 @@ namespace yli_edit
             bool create_and_start_simulation() override;
 
         private:
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
-            yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
-            yli::core::SystemFactory<yli::data::Datatype> system_factory;
-            yli::ontology::Universe* const universe     { nullptr };
-            yli::event::EventSystem* const event_system { nullptr };
-            yli::input::InputSystem* const input_system { nullptr };
-            yli::audio::AudioSystem* const audio_system { nullptr };
-
+            yli::core::ApplicationCore core;
             yli::edit::EditCore edit;
     };
 }
