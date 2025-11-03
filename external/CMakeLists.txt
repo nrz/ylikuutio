@@ -218,7 +218,6 @@ if (COMPILE_SDL_FROM_SOURCE)
 		soloud/src/core/soloud_core_3d.cpp
 		soloud/src/c_api/soloud_c.cpp
 	)
-	target_link_libraries(soloud SDL2-static)
 	set_property(TARGET soloud PROPERTY CMAKE_POSITION_INDEPENDENT_CODE ON)
 	set_property(TARGET soloud PROPERTY COMPILE_FLAGS "-DWITH_MINIAUDIO")
     set_target_properties(soloud PROPERTIES
