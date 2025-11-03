@@ -66,7 +66,7 @@ namespace yli::sdl
 
         if (n_displays < 0)
         {
-            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + n_displays);
+            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + std::to_string(n_displays));
         }
 
         if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
