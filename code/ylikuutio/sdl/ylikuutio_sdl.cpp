@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cerr
-#include <string>    // std::string
+#include <string>    // std::to_string
 #include <stdexcept> // std::runtime_error
 
 namespace yli::sdl
