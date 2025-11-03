@@ -285,17 +285,17 @@ namespace yli::ontology
 
     void Console::process_key_event(const SDL_KeyboardEvent& keyboard_event)
     {
-        const uint16_t modifiers = keyboard_event.keysym.mod;
-        const uint16_t shift_bitmask = KMOD_LSHIFT | KMOD_RSHIFT;
-        const uint16_t ctrl_alt_altgr_bitmask = KMOD_LCTRL | KMOD_RCTRL | KMOD_LALT | KMOD_RALT | KMOD_MODE;
+        const uint16_t modifiers = keyboard_event.mod;
+        const uint16_t shift_bitmask = SDL_KMOD_LSHIFT | SDL_KMOD_RSHIFT;
+        const uint16_t ctrl_alt_altgr_bitmask = SDL_KMOD_LCTRL | SDL_KMOD_RCTRL | SDL_KMOD_LALT | SDL_KMOD_RALT | SDL_KMOD_MODE;
 
-        if (keyboard_event.state == SDL_PRESSED &&
-                keyboard_event.keysym.scancode != SDL_SCANCODE_GRAVE &&
-                keyboard_event.keysym.sym != SDLK_UNKNOWN &&
-                keyboard_event.keysym.sym != SDLK_RETURN &&
-                keyboard_event.keysym.sym != SDLK_KP_ENTER &&
-                keyboard_event.keysym.sym >= 0x20 &&
-                keyboard_event.keysym.sym <= 0x7f &&
+        if (keyboard_event.down &&
+                keyboard_event.scancode != SDL_SCANCODE_GRAVE &&
+                keyboard_event.key != SDLK_UNKNOWN &&
+                keyboard_event.key != SDLK_RETURN &&
+                keyboard_event.key != SDLK_KP_ENTER &&
+                keyboard_event.key >= 0x20 &&
+                keyboard_event.key <= 0x7f &&
                 ((modifiers & ctrl_alt_altgr_bitmask) == 0) &&
                 this->console_logic_module.get_active_in_console())
         {
@@ -306,7 +306,7 @@ namespace yli::ontology
                 return;
             }
 
-            const char keyboard_char = static_cast<char>(keyboard_event.keysym.sym);
+            const char keyboard_char = static_cast<char>(keyboard_event.key);
 
             if ((modifiers & shift_bitmask) != 0)
             {

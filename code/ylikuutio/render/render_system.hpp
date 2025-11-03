@@ -18,13 +18,13 @@
 #ifndef YLIKUUTIO_RENDER_RENDER_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_RENDER_RENDER_SYSTEM_HPP_INCLUDED
 
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 struct SDL_Window;
-
-typedef void* SDL_GLContext;
 
 namespace yli::ontology
 {

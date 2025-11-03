@@ -40,14 +40,14 @@ namespace yli::event
 
         while (SDL_PollEvent(&sdl_event))
         {
-            if (sdl_event.type == SDL_MOUSEMOTION)
+            if (sdl_event.type == SDL_EVENT_MOUSE_MOTION)
             {
                 this->universe.update_mouse_x(sdl_event.motion.xrel);
                 this->universe.update_mouse_y(sdl_event.motion.yrel);
             }
-            else if (sdl_event.type == SDL_KEYDOWN)
+            else if (sdl_event.type == SDL_EVENT_KEY_DOWN)
             {
-                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
+                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
 
@@ -70,9 +70,9 @@ namespace yli::event
                     active_console->process_key_event(sdl_event.key);
                 }
             }
-            else if (sdl_event.type == SDL_KEYUP)
+            else if (sdl_event.type == SDL_EVENT_KEY_UP)
             {
-                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
+                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
 
@@ -90,18 +90,15 @@ namespace yli::event
                     this->universe.request_exit();
                 }
             }
-            else if (sdl_event.type == SDL_WINDOWEVENT)
+            else if (sdl_event.type == SDL_EVENT_WINDOW_FOCUS_GAINED)
             {
-                if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-                {
-                    this->universe.gain_focus();
-                }
-                else if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
-                {
-                    this->universe.lose_focus();
-                }
+                this->universe.gain_focus();
             }
-            else if (sdl_event.type == SDL_QUIT)
+            else if (sdl_event.type == SDL_EVENT_WINDOW_FOCUS_LOST)
+            {
+                this->universe.lose_focus();
+            }
+            else if (sdl_event.type == SDL_EVENT_QUIT)
             {
                 this->universe.request_exit();
             }

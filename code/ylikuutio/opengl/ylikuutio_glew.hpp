@@ -25,8 +25,8 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 #else
-#include "SDL.h"
-#include "SDL_opengles2.h"
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_opengles2.h>
 #endif
 
 #endif

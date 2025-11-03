@@ -206,6 +206,7 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
+            std::optional<SDL_DisplayMode> get_preferred_display_mode() const;
             [[nodiscard]] bool create_window();
             [[nodiscard]] bool setup_context();
             [[nodiscard]] bool create_window_and_setup_context();
@@ -379,10 +380,14 @@ namespace yli::ontology
             const yli::render::GraphicsApiBackend graphics_api_backend;
             const std::vector<SDL_DisplayMode> display_modes;
             const uint32_t n_displays;
+
+        public:
+            const std::optional<SDL_DisplayMode> display_mode;
+
+        private:
             const bool is_silent;
             const bool is_physical;
             bool is_fullscreen;
-            bool is_desktop_fullscreen;
 
             // variables related to the window.
             SDL_Window* window { nullptr };

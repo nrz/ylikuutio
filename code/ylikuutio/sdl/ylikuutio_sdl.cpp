@@ -20,6 +20,7 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
+#include <cstddef>   // std::size_t
 #include <iostream>  // std::cout, std::cerr
 #include <string>    // std::to_string
 #include <stdexcept> // std::runtime_error
@@ -32,7 +33,7 @@ namespace yli::sdl
         {
             // Initialize SDL.
 
-            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) [[unlikely]]
+            if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) [[unlikely]]
             {
                 print_sdl_error();
                 throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: failed to initialize SDL.");
@@ -62,7 +63,19 @@ namespace yli::sdl
             return display_modes;
         }
 
-        const int n_displays = SDL_GetNumVideoDisplays();
+        int n_displays { 0 };
+
+        const SDL_DisplayID* const display_ids = SDL_GetDisplays(&n_displays);
+
+        if (display_ids == nullptr)
+        {
+            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `SDL_GetDisplays` failed!");
+        }
+
+        if (n_displays == 0)
+        {
+            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is 0!");
+        }
 
         if (n_displays < 0)
         {
@@ -73,9 +86,16 @@ namespace yli::sdl
         {
             display_modes.resize(n_displays);
 
-            for (int i = 0; i < n_displays; i++)
+            for (std::size_t i = 0; display_ids[i] != 0; i++)
             {
-                SDL_GetCurrentDisplayMode(i, &display_modes[i]);
+                const SDL_DisplayMode* display_mode_ptr = SDL_GetCurrentDisplayMode(display_ids[i]);
+
+                if (display_mode_ptr == nullptr)
+                {
+                    throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `SDL_GetCurrentDisplayMode` failed!");
+                }
+
+                display_modes.at(i) = *display_mode_ptr;
             }
         }
 
@@ -83,23 +103,19 @@ namespace yli::sdl
     }
 
     [[nodiscard]] SDL_Window* create_window(
-            const int /* x */,
-            const int /* y */,
+            const SDL_DisplayID display_id,
             const int window_width,
             const int window_height,
             const char* const title,
-            const Uint32 flags)
+            const SDL_WindowFlags flags)
     {
-        const int display_i = 0; // Primary display.
         SDL_Rect bounds;
         SDL_Window* window = nullptr;
 
         if (flags & SDL_WINDOW_FULLSCREEN)
         {
             // Fullscreen.
-            int success = SDL_GetDisplayBounds(display_i, &bounds);
-
-            if (success != 0)
+            if (!SDL_GetDisplayBounds(display_id, &bounds))
             {
                 print_sdl_error();
                 throw std::runtime_error("ERROR: `yli::sdl::create_window`: getting usable display bounds failed!");
@@ -107,8 +123,6 @@ namespace yli::sdl
 
             window = SDL_CreateWindow(
                     title,
-                    0,
-                    0,
                     bounds.w,
                     bounds.h,
                     flags);
@@ -116,9 +130,7 @@ namespace yli::sdl
         else
         {
             // Windowed.
-            int success = SDL_GetDisplayUsableBounds(display_i, &bounds);
-
-            if (success != 0)
+            if (!SDL_GetDisplayUsableBounds(display_id, &bounds))
             {
                 print_sdl_error();
                 throw std::runtime_error("ERROR: `yli::sdl::create_window`: getting display bounds failed!");
@@ -126,8 +138,6 @@ namespace yli::sdl
 
             window = SDL_CreateWindow(
                     title,
-                    0,
-                    0,
                     (window_width < bounds.w ? window_width : bounds.w),
                     (window_height < bounds.h ? window_height : bounds.h),
                     flags);
@@ -143,24 +153,7 @@ namespace yli::sdl
         throw std::runtime_error("ERROR: `yli::sdl::create_window`: creating window failed!");
     }
 
-    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags)
-    {
-        return create_window(0, 0, window_width, window_height, title, flags);
-    }
-
-    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
-    {
-        Uint32 flags = SDL_WINDOW_OPENGL; // `Uint32` is a SDL datatype.
-
-        if (is_fullscreen)
-        {
-            flags |= SDL_WINDOW_FULLSCREEN;
-        }
-
-        return create_window(window_width, window_height, title, flags);
-    }
-
-    [[nodiscard]] SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
+    [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
     {
         Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN; // `Uint32` is a SDL datatype.
 
@@ -169,7 +162,7 @@ namespace yli::sdl
             flags |= SDL_WINDOW_FULLSCREEN;
         }
 
-        return create_window(0, 0, window_width, window_height, title, flags);
+        return create_window(display_id, window_width, window_height, title, flags);
     }
 
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
@@ -193,9 +186,7 @@ namespace yli::sdl
 
     [[nodiscard]] bool set_window_windowed(SDL_Window* window)
     {
-        int success = SDL_SetWindowFullscreen(window, 0);
-
-        if (success == 0)
+        if (SDL_SetWindowFullscreen(window, 0))
         {
             std::cout << "Window set to windowed successfully.\n";
             return true; // Success.
@@ -207,9 +198,7 @@ namespace yli::sdl
 
     [[nodiscard]] bool make_context_current(SDL_Window* window, SDL_GLContext context)
     {
-        const int success = SDL_GL_MakeCurrent(window, context);
-
-        if (success == 0)
+        if (SDL_GL_MakeCurrent(window, context))
         {
             std::cout << "OpenGL context made current successfully.\n";
             return true; // Success.
@@ -221,9 +210,7 @@ namespace yli::sdl
 
     [[nodiscard]] bool set_swap_interval(const int interval)
     {
-        int success = SDL_GL_SetSwapInterval(interval);
-
-        if (success == 0)
+        if (SDL_GL_SetSwapInterval(interval))
         {
             std::cout << "Swap interval set successfully.\n";
             return true; // Success.

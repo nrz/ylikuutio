@@ -185,11 +185,6 @@ if (COMPILE_SDL_FROM_SOURCE)
 		soloud/src/backend/winmm/soloud_winmm.cpp
 		soloud/src/backend/alsa/soloud_alsa.cpp
 		soloud/src/backend/xaudio2/soloud_xaudio2.cpp
-		soloud/src/backend/sdl/soloud_sdl2_dll.c
-		soloud/src/backend/sdl/soloud_sdl2.cpp
-		soloud/src/backend/sdl/soloud_sdl1.cpp
-		soloud/src/backend/sdl/soloud_sdl1_dll.c
-		soloud/src/backend/sdl2_static/soloud_sdl2_static.cpp
 		soloud/src/backend/portaudio/soloud_portaudio.cpp
 		soloud/src/backend/portaudio/soloud_portaudio_dll.c
 		soloud/src/backend/oss/soloud_oss.cpp

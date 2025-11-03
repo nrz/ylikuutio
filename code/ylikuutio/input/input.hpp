@@ -34,7 +34,7 @@ namespace yli::input
     void disable_cursor();
     void set_sticky_keys(SDL_Window* window);
     void set_cursor_position(SDL_Window* window, float xpos, float ypos);
-    void enable_relative_mouse_mode();
+    void enable_relative_mouse_mode(SDL_Window* window);
 }
 
 #endif

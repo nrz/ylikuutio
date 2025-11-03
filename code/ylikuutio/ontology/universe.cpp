@@ -87,7 +87,7 @@
 #include <iostream>  // std::cout, std::cerr
 #include <limits>    // std::numeric_limits
 #include <numbers>   // std::numbers::pi
-#include <optional>  // std::optional
+#include <optional>  // std::nullopt, std::optional
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
@@ -169,10 +169,10 @@ namespace yli::ontology
         graphics_api_backend  { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
         display_modes         { yli::sdl::get_display_modes(this->graphics_api_backend) },
         n_displays            { static_cast<uint32_t>(this->display_modes.size()) },
+        display_mode          { this->get_preferred_display_mode() },
         is_silent             { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
         is_physical           { universe_struct.is_physical },
         is_fullscreen         { universe_struct.is_fullscreen },
-        is_desktop_fullscreen { universe_struct.is_desktop_fullscreen },
         window_width          { universe_struct.window_width },
         window_height         { universe_struct.window_height },
         window_title          { universe_struct.window_title },
@@ -1037,31 +1037,60 @@ namespace yli::ontology
             yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
     }
 
+    std::optional<SDL_DisplayMode> Universe::get_preferred_display_mode() const
+    {
+        std::optional<SDL_DisplayMode> preferred_display_mode = std::nullopt;
+
+        std::size_t max_resolution = 0;
+
+        for (std::size_t i = 0; i < this->display_modes.size(); i++)
+        {
+            const SDL_DisplayMode current_display_mode = this->display_modes.at(i);
+
+            if (current_display_mode.w < 0 || current_display_mode.h < 0)
+            {
+                continue;
+            }
+
+            if ((!preferred_display_mode) ||
+                    static_cast<std::size_t>(
+                        static_cast<float>(current_display_mode.w) *
+                        static_cast<float>(current_display_mode.h *
+                            current_display_mode.pixel_density))
+                    > max_resolution)
+            {
+                preferred_display_mode = current_display_mode;
+                max_resolution = static_cast<float>(current_display_mode.w) * static_cast<float>(current_display_mode.h * current_display_mode.pixel_density);
+            }
+        }
+
+        return preferred_display_mode;
+    }
+
     [[nodiscard]] bool Universe::create_window()
     {
+        if (!this->display_mode)
+        {
+            return false;
+        }
+
         // Create the window only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
-            Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI;
+            SDL_WindowFlags flags = SDL_WINDOW_HIGH_PIXEL_DENSITY;
 
             if (this->is_fullscreen)
             {
                 flags |= SDL_WINDOW_FULLSCREEN;
             }
 
-            if (this->is_desktop_fullscreen)
-            {
-                flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-            }
-
             if (this->get_is_opengl_in_use()) [[likely]]
             {
                 // Create a window.
                 this->window = yli::sdl::create_window(
-                        0,
-                        0,
-                        static_cast<int>(this->window_width),
-                        static_cast<int>(this->window_height),
+                        this->display_mode->displayID,
+                        static_cast<int>(this->display_mode->pixel_density * this->window_width),
+                        static_cast<int>(this->display_mode->pixel_density * this->window_height),
                         this->window_title.c_str(),
                         flags | SDL_WINDOW_OPENGL);
             }
@@ -1069,22 +1098,20 @@ namespace yli::ontology
             {
                 // Create a window.
                 this->window = yli::sdl::create_window(
-                        0,
-                        0,
-                        static_cast<int>(this->window_width),
-                        static_cast<int>(this->window_height),
+                        this->display_mode->displayID,
+                        static_cast<int>(this->display_mode->pixel_density * this->window_width),
+                        static_cast<int>(this->display_mode->pixel_density * this->window_height),
                         this->window_title.c_str(),
                         flags | SDL_WINDOW_VULKAN);
             }
 
-            if (this->window != nullptr) [[likely]]
+            if (this->window == nullptr) [[unlikely]]
             {
-                std::cout << "SDL Window created successfully.\n";
-                return true;
+                std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
+                return false;
             }
 
-            std::cerr << "ERROR: `Universe::create_window`: SDL Window could not be created!\n";
-            return false;
+            std::cout << "SDL Window created successfully.\n";
         }
 
         return true;
@@ -1167,7 +1194,7 @@ namespace yli::ontology
         if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
                 this->window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
-            glViewport(0, 0, this->window_width, this->window_height);
+            glViewport(0, 0, this->display_mode->pixel_density * this->window_width, this->display_mode->pixel_density * this->window_height);
         }
     }
 

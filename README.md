@@ -411,7 +411,7 @@ A: YliLisp scripting language is a work in progress. See [YliLisp design notes](
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
-* [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
+* [SDL3](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [SoLoud](https://solhsa.com/soloud/) is licensed under [the zlib license](https://solhsa.com/soloud/legal.html).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 * [zlib](https://zlib.net/) is licensed under [the zlib license](https://zlib.net/zlib_license.html).

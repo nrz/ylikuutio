@@ -190,11 +190,6 @@ namespace ajokki
             universe_struct.is_fullscreen = true;
         }
 
-        if (this->command_line_master.is_key("desktop-fullscreen"))
-        {
-            universe_struct.is_desktop_fullscreen = true;
-        }
-
         if (this->command_line_master.is_key("headless"))
         {
             universe_struct.graphics_api_backend = yli::render::GraphicsApiBackend::HEADLESS;

@@ -63,6 +63,7 @@ namespace yli::render
         std::cout << "Opening a window and creating its OpenGL context...\n";
 
         this->hidden_sdl_window = yli::sdl::create_hidden_window(
+                universe->display_mode->displayID,
                 static_cast<int>(this->hidden_window_width),
                 static_cast<int>(this->hidden_window_height),
                 this->hidden_window_title.c_str(),
@@ -82,7 +83,6 @@ namespace yli::render
             yli::opengl::init_glew();
 
             yli::input::disable_cursor();
-            yli::input::enable_relative_mouse_mode();
 
             // Enable depth test.
             yli::opengl::enable_depth_test();

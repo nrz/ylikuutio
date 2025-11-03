@@ -37,7 +37,8 @@ namespace yli::input
 
     void InputSystem::process_keys(const InputMethod& input_method, const yli::ontology::InputMode& input_mode)
     {
-        const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
+        int array_size;
+        const bool* const current_key_states = SDL_GetKeyboardState(&array_size);
         const std::vector<yli::ontology::GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode.get_continuous_keypress_callback_engines();
         if (continuous_keypress_callback_engines == nullptr)
         {
@@ -51,7 +52,7 @@ namespace yli::input
 
             if (input_method == yli::input::InputMethod::KEYBOARD)
             {
-                if (current_key_states[i] == 1) // 1 = pressed, 0 = not pressed.
+                if (current_key_states[i]) // `true` = pressed, `false` = not pressed.
                 {
                     is_pressed = true;
                 }

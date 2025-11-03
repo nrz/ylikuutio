@@ -27,7 +27,7 @@ endif()
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 # Modify the below line to control whether to compile SDL from source on Linux.
-set(COMPILE_SDL_FROM_SOURCE false)
+set(COMPILE_SDL_FROM_SOURCE true)
 
 # Modify the below line to control whether to compile libpng from source on Linux.
 set(COMPILE_LIBPNG_FROM_SOURCE false)
@@ -98,7 +98,7 @@ endif()
 # When doing a regular build on Linux, SDL can be linked either statically or dynamically.
 if(NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-    find_package(SDL2 REQUIRED)
+    find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
 endif()
 
 # Compile external dependencies
@@ -133,10 +133,6 @@ endif()
 if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
         external/SDL/include/
-        )
-else()
-    include_directories(
-        ${SDL2_INCLUDE_DIRS}
         )
 endif()
 
@@ -225,12 +221,11 @@ set(ALL_LIBS
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
         ${ALL_LIBS}
-        SDL2-static
+        SDL3-static
         )
 else()
     set(ALL_LIBS
         ${ALL_LIBS}
-        ${SDL2_LIBRARIES}
         )
 endif()
 
@@ -1177,11 +1172,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
     else()
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL2 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
     endif()
 
     include(GoogleTest)

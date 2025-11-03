@@ -22,7 +22,7 @@ namespace yli::input
 {
     void disable_cursor()
     {
-        SDL_ShowCursor(SDL_DISABLE);
+        SDL_HideCursor();
     }
 
     void set_cursor_position(SDL_Window* window, float xpos, float ypos)
@@ -30,8 +30,8 @@ namespace yli::input
         SDL_WarpMouseInWindow(window, static_cast<int>(xpos), static_cast<int>(ypos));
     }
 
-    void enable_relative_mouse_mode()
+    void enable_relative_mouse_mode(SDL_Window* window)
     {
-        SDL_SetRelativeMouseMode(SDL_TRUE);
+        SDL_SetWindowRelativeMouseMode(window, true);
     }
 }

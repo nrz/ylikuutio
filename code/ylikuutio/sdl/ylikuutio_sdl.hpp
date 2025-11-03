@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_SDL_YLIKUUTIO_SDL_HPP_INCLUDED
 #define YLIKUUTIO_SDL_YLIKUUTIO_SDL_HPP_INCLUDED
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 
 #define SDL_main main
 
@@ -36,16 +36,13 @@ namespace yli::sdl
     [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend);
 
     [[nodiscard]] SDL_Window* create_window(
-            const int x,
-            const int y,
+            const SDL_DisplayID displayid,
             const int window_width,
             const int window_height,
             const char* const title,
-            const Uint32 flags);
+            const SDL_WindowFlags flags);
 
-    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const Uint32 flags);
-    [[nodiscard]] SDL_Window* create_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
-    [[nodiscard]] SDL_Window* create_hidden_window(const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
+    [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, const int window_width, const int window_height, const char* const title, const bool is_fullscreen);
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window);
     void set_window_size(SDL_Window* window, const int window_width, const int window_height);
     [[nodiscard]] bool set_window_windowed(SDL_Window* window);
