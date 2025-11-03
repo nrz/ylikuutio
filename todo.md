@@ -5,6 +5,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
 - [ ] LIBRARIES/UI Update SDL2 to SDL3.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
