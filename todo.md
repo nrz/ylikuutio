@@ -6,7 +6,6 @@
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
-- [ ] LIBRARIES/UI Update SDL2 to SDL3.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
@@ -358,3 +357,4 @@
 - [x] CONSOLE/UI Keep temp input on the given history line available until either some other line is edited or a console command is executed.
 - [x] TOOLS Design initial software architecture for YliEdit and HirviEdit editors (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [x] TOOLS Implement initial software architecture for HirviEdit (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
+- [x] LIBRARIES/UI Update SDL2 to SDL3.
