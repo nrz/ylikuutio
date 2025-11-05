@@ -62,6 +62,18 @@ namespace yli::render
         // Open a window and create its OpenGL context.
         std::cout << "Opening a window and creating its OpenGL context...\n";
 
+        if (universe == nullptr)
+        {
+            std::cerr << "ERROR: `RenderSystem::RenderSystem`: `universe` is `nullptr`!\n";
+            return;
+        }
+
+        if (!universe->display_mode)
+        {
+            std::cerr << "ERROR: `RenderSystem::RenderSystem`: `!universe->display_mode` is `std::nullopt`!\n";
+            return;
+        }
+
         this->hidden_sdl_window = yli::sdl::create_hidden_window(
                 universe->display_mode->displayID,
                 static_cast<int>(this->hidden_window_width),
