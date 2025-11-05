@@ -64,8 +64,6 @@ namespace ajokki
         public:
             AjokkiApplication(const int argc, const char* const argv[]);
 
-            ~AjokkiApplication() = default;
-
             std::string get_name() const override;
 
             std::vector<std::string> get_valid_keys() const override;

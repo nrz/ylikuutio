@@ -69,8 +69,6 @@ namespace hirvi
         public:
             HirviApplication(const int argc, const char* const argv[]);
 
-            ~HirviApplication() = default;
-
             std::string get_name() const override;
 
             std::vector<std::string> get_valid_keys() const override;

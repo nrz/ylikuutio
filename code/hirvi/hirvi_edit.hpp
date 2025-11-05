@@ -70,8 +70,6 @@ namespace hirvi
         public:
             HirviEditApplication(const int argc, const char* const argv[]);
 
-            ~HirviEditApplication() = default;
-
             std::string get_name() const override;
 
             std::vector<std::string> get_valid_keys() const override;

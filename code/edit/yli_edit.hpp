@@ -63,8 +63,6 @@ namespace yli_edit
         public:
             YliEditApplication(const int argc, const char* const argv[]);
 
-            ~YliEditApplication() = default;
-
             std::string get_name() const override;
 
             std::vector<std::string> get_valid_keys() const override;
