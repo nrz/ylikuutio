@@ -55,7 +55,7 @@ namespace yli::ontology
         {
             std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string<char>(text_pointer);
 
-            if (!unicode_value)
+            if (!unicode_value.has_value())
             {
                 throw std::runtime_error("ERROR: `create_glyph_objects`: exctracting Unicode value failed!");
             }
