@@ -225,7 +225,7 @@ namespace yli::load
                             " \n",
                             std::string_view(""));
 
-                    if (!z_coordinate)
+                    if (!z_coordinate.has_value())
                     {
                         std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting z-coordinate failed!\n";
                         return false;
