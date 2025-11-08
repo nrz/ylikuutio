@@ -19,46 +19,12 @@
 #define YLIKUUTIO_LISP_PARSER_HPP_INCLUDED
 
 // Include standard headers
-#include <string>  // std::getline
-#include <sstream> // std::istringstream
+#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::lisp
 {
-    template<typename StringType>
-        bool parse(const StringType& input_string, StringType& command, std::vector<StringType>& parameter_vector)
-        {
-            bool is_command = false;
-
-            StringType token;
-            std::istringstream input_stringstream(input_string);
-
-            // The reader begins here.
-
-            while (std::getline(input_stringstream, token, ' '))
-            {
-                if (token.empty())
-                {
-                    continue;
-                }
-
-                if (!is_command)
-                {
-                    // First non-empty token is the command.
-                    command = token;
-                    is_command = true;
-                }
-                else
-                {
-                    // The rest non-empty tokens are the parameters.
-                    parameter_vector.emplace_back(token);
-                }
-            }
-
-            // The reader ends here.
-
-            return is_command;
-        }
+    bool parse(const std::string& input_string, std::string& command, std::vector<std::string>& parameter_vector);
 }
 
 #endif
