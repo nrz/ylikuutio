@@ -35,7 +35,7 @@ namespace yli::ontology
     {
         TextStruct() = default;
 
-        TextStruct(Request<Font2d>&& font_2d_parent)
+        explicit TextStruct(Request<Font2d>&& font_2d_parent)
             : font_2d_parent { std::move(font_2d_parent) }
         {
         }

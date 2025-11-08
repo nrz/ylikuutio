@@ -29,7 +29,7 @@ namespace yli::ontology
 {
     struct FontStruct : public EntityStruct
     {
-        FontStruct(const enum TextureFileFormat font_texture_file_format)
+        explicit FontStruct(const enum TextureFileFormat font_texture_file_format)
             : font_texture_file_format { font_texture_file_format }
         {
         }
