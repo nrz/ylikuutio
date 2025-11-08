@@ -182,7 +182,7 @@ namespace yli::ontology
         // Number of lines there are in total in the input that is currently visible (not all lines might be visible).
         const std::optional<std::size_t> maybe_n_lines_of_total_visible_input = this->console_logic_module.get_n_lines_of_visible_input();
 
-        if (!maybe_n_lines_of_total_visible_input)
+        if (!maybe_n_lines_of_total_visible_input.has_value())
         {
             return;
         }
