@@ -110,7 +110,7 @@ namespace yli::load
                 " \n",
                 "ncols");
 
-        if (!image_width_int32_t)
+        if (!image_width_int32_t.has_value())
         {
             std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting image width failed!\n";
             return false;
@@ -127,7 +127,7 @@ namespace yli::load
                 " \n",
                 "nrows");
 
-        if (!image_height_int32_t)
+        if (!image_height_int32_t.has_value())
         {
             std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: extracting image height failed!\n";
             return false;
