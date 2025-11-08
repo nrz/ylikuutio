@@ -42,7 +42,7 @@ namespace yli::console
             typedef TextInputIterator      iterator;
             typedef TextInputConstIterator const_iterator;
 
-            TextInput(const TextInputType type);
+            explicit TextInput(const TextInputType type);
             TextInput(std::string&& string, const TextInputType type);
 
             TextInput(const TextInput&) = default;

@@ -39,7 +39,7 @@ namespace yli::console
             typedef ScrollbackBufferIterator      iterator;
             typedef ScrollbackBufferConstIterator const_iterator;
 
-            ScrollbackBuffer(const uint32_t n_columns = 80, const uint32_t n_rows = 24);
+            explicit ScrollbackBuffer(const uint32_t n_columns = 80, const uint32_t n_rows = 24);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
