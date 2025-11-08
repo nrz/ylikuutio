@@ -5,11 +5,10 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
-- [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
+- [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
 - [ ] TEXT/UI Implement proper bitmap font rendering: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
@@ -29,6 +28,7 @@
 - [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 
 ## Tasks which are necessary for the second stage (Hirvi prototype)
+- [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
 - [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
 - [ ] ONTOLOGY/SHAPESHIFTERS Implement `yli::ontology::ShapeshifterTransformation`, whose children are `ShapeshifterForm`s and `ShapeshifterSequence`s.
