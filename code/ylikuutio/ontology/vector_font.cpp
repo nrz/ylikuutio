@@ -141,7 +141,7 @@ namespace yli::ontology
 
                 std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
 
-                if (!unicode_value)
+                if (!unicode_value.has_value())
                 {
                     std::cerr << "ERROR: `VectorFont::VectorFont`: exctracting Unicode value failed!\n";
                     continue;
