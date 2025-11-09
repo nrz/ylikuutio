@@ -18,6 +18,7 @@
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
 - [ ] VULKAN/RENDERING Add Vulkan support.
 - [ ] OPENGL/RENDERING Remove OpenGL support.
+- [ ] CONSOLE/UI Add visible cursor in console.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
 - [ ] MATH/RENDERING Implement shadows.
