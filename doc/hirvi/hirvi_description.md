@@ -6,7 +6,7 @@ besonders ein Begegnung mit der Polizei kann fatal für Hirvi sein,
 obwohl die Elche wohlbekannte Pazifisten sind.
 
 In Hirvi gibt es Missionen in verschiedenen Finnische Städten,
-wenigstens Helsinki, Espoo, Vantaa, Oulu, und Turku.
+wenigstens Helsinki.
 Die Szenen sind mit die freie 3D-Stadtmodellen implementiert (TODO).
 
 Hirvi will Linux, Windows, und MacOS, alle mit 64 bits unterstüzen.
@@ -21,7 +21,7 @@ even through elks are well-known pasifists.
 "hirvi" means an elk in Finnish.
 
 In Hirvi there are missions in different cities of Finland,
-at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
+at least in Helsinki.
 The scenes in which the missions take place are implemented
 using free 3D city models (TODO).
 
@@ -37,7 +37,7 @@ even through moose are well-known pasifists.
 "hirvi" means a moose in Finnish.
 
 In Hirvi there are missions in different cities of Finland,
-at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
+at least in Helsinki.
 The scenes in which the missions take place are implemented
 using free 3D city models (TODO).
 
@@ -52,7 +52,7 @@ kohtaaminen poliisin kanssa voi olla kohtalokas Hirvelle,
 vaikka hirvet ovatkin tunnetusti pasifisteja.
 
 Hirvi-pelissä on tehtäviä eri kaupungeissa Suomessa,
-ainakin Helsingissä, Espoossa, Vantaalla, Oulussa, ja Turussa.
+ainakin Helsingissä.
 Näyttämöt joissa tehtävät saavat paikkansa on toteutettu
 käyttämällä avoimia 3D-kaupunkimalleja (TODO).
 
@@ -68,7 +68,7 @@ se puede resultar mortal para Hirvi, a pesar de que lxs alces
 son pasifistas ilustres. "hirvi" significa unx alce en finés.
 
 En Hirvi hay misiones en diferentes ciudas de Finland,
-al menos en Helsinki, Espoo, Vantaa, Oulu, y Turku.
+al menos en Helsinki.
 Las escenas en las cuales las misiones se dan se las implementa
 usando modelos 3D libres (TODO).
 

@@ -15,7 +15,7 @@ even through elks are well-known pasifists.
 "hirvi" means an elk in Finnish.
 
 In Hirvi there are missions in different cities of Finland,
-at least in Helsinki, Espoo, Vantaa, Oulu, and Turku.
+at least in Helsinki.
 The scenes in which the missions take place are implemented
 using free 3D city models.
 
