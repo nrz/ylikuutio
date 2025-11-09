@@ -37,7 +37,7 @@ namespace yli::console
     {
         yli::ontology::Universe& universe = this->console.get_universe();
 
-        if (this->console.console_logic_module.get_active_in_console() && this->console.console_logic_module.get_can_tab())
+        if (this->console.console_logic_module.get_active_in_console())
         {
             yli::console::TextInput* const active_input = this->console.console_logic_module.edit_input();
 
@@ -120,8 +120,6 @@ namespace yli::console
             }
 
             this->console.move_cursor_to_end_of_line();
-
-            this->console.console_logic_module.set_can_tab(false);
         }
     }
 }

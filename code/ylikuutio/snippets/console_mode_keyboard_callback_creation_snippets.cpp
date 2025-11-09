@@ -211,83 +211,6 @@ namespace yli::snippets
             auto my_release_right_shift_in_console_callback_engine = entity_factory.create_console_callback_engine(my_release_right_shift_in_console_callback_engine_struct);
             my_release_right_shift_in_console_callback_engine->create_console_callback_object(&ConsoleLogicModule::release_right_shift_in_console);
         }
-        {
-            // Callback code for key up release: enable move to previous input.
-            ConsoleCallbackEngineStruct my_enable_move_to_previous_input_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_move_to_previous_input_callback_engine_struct.global_name = "my_enable_move_to_previous_input_callback_engine";
-            auto my_enable_move_to_previous_input_callback_engine = entity_factory.create_console_callback_engine(my_enable_move_to_previous_input_callback_engine_struct);
-            my_enable_move_to_previous_input_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_move_to_previous_input);
-        }
-        {
-            // Callback code for key down release: enable move to next input.
-            ConsoleCallbackEngineStruct my_enable_move_to_next_input_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_move_to_next_input_callback_engine_struct.global_name = "my_enable_move_to_next_input_callback_engine";
-            auto my_enable_move_to_next_input_callback_engine = entity_factory.create_console_callback_engine(my_enable_move_to_next_input_callback_engine_struct);
-            my_enable_move_to_next_input_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_move_to_next_input);
-        }
-        {
-            // Callback code for backspace release: enable backspace.
-            ConsoleCallbackEngineStruct my_enable_backspace_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_backspace_callback_engine_struct.global_name = "my_enable_backspace_callback_engine";
-            auto my_enable_backspace_callback_engine = entity_factory.create_console_callback_engine(my_enable_backspace_callback_engine_struct);
-            my_enable_backspace_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_backspace);
-        }
-        {
-            // Callback code for Tab release: enable Tab.
-            ConsoleCallbackEngineStruct my_enable_tab_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_tab_callback_engine_struct.global_name = "my_enable_tab_callback_engine";
-            auto my_enable_tab_callback_engine = entity_factory.create_console_callback_engine(my_enable_tab_callback_engine_struct);
-            my_enable_tab_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_tab);
-        }
-        {
-            // Callback code for enter release: enable Enter key.
-            ConsoleCallbackEngineStruct my_enable_enter_key_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_enter_key_callback_engine_struct.global_name = "my_enable_enter_key_callback_engine";
-            auto my_enable_enter_key_callback_engine = entity_factory.create_console_callback_engine(my_enable_enter_key_callback_engine_struct);
-            my_enable_enter_key_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_enter_key);
-        }
-        {
-            // Callback code for C release: enable Control-C.
-            ConsoleCallbackEngineStruct my_enable_ctrl_c_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_ctrl_c_callback_engine_struct.global_name = "my_enable_ctrl_c_callback_engine";
-            auto my_enable_ctrl_c_callback_engine = entity_factory.create_console_callback_engine(my_enable_ctrl_c_callback_engine_struct);
-            my_enable_ctrl_c_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_ctrl_c);
-        }
-        {
-            // Callback code for W release: enable Control-W.
-            ConsoleCallbackEngineStruct my_enable_ctrl_w_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_ctrl_w_callback_engine_struct.global_name = "my_enable_ctrl_w_callback_engine";
-            auto my_enable_ctrl_w_callback_engine = entity_factory.create_console_callback_engine(my_enable_ctrl_w_callback_engine_struct);
-            my_enable_ctrl_w_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_ctrl_w);
-        }
-        {
-            // Callback code for PgUp release: enable PgUp.
-            ConsoleCallbackEngineStruct my_enable_page_up_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_page_up_callback_engine_struct.global_name = "my_enable_page_up_callback_engine";
-            auto my_enable_page_up_callback_engine = entity_factory.create_console_callback_engine(my_enable_page_up_callback_engine_struct);
-            my_enable_page_up_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_page_up);
-        }
-        {
-            // Callback code for PgDn release: enable PgDn.
-            ConsoleCallbackEngineStruct my_enable_page_down_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_page_down_callback_engine_struct.global_name = "my_enable_page_down_callback_engine";
-            auto my_enable_page_down_callback_engine = entity_factory.create_console_callback_engine(my_enable_page_down_callback_engine_struct);
-            my_enable_page_down_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_page_down);
-        }
-        {
-            // Callback code for Home release: enable Home.
-            ConsoleCallbackEngineStruct my_enable_home_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_home_callback_engine_struct.global_name = "my_enable_home_callback_engine";
-            auto my_enable_home_callback_engine = entity_factory.create_console_callback_engine(my_enable_home_callback_engine_struct);
-            my_enable_home_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_home);
-        }
-        {
-            // Callback code for End release: enable End.
-            ConsoleCallbackEngineStruct my_enable_end_callback_engine_struct { Request<Console>("my_console") };
-            my_enable_end_callback_engine_struct.global_name = "my_enable_end_callback_engine";
-            auto my_enable_end_callback_engine = entity_factory.create_console_callback_engine(my_enable_end_callback_engine_struct);
-            my_enable_end_callback_engine->create_console_callback_object(&ConsoleLogicModule::enable_end);
-        }
     }
 
     void set_console_mode_keypress_callback_engines_or_throw(yli::ontology::InputMode& console_mode_input_mode)
@@ -323,16 +246,5 @@ namespace yli::snippets
         console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RALT, Request<GenericCallbackEngine>("my_release_right_alt_in_console_callback_engine"));
         console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LSHIFT, Request<GenericCallbackEngine>("my_release_left_shift_in_console_callback_engine"));
         console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RSHIFT, Request<GenericCallbackEngine>("my_release_right_shift_in_console_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_UP, Request<GenericCallbackEngine>("my_enable_move_to_previous_input_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_DOWN, Request<GenericCallbackEngine>("my_enable_move_to_next_input_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_BACKSPACE, Request<GenericCallbackEngine>("my_enable_backspace_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_TAB, Request<GenericCallbackEngine>("my_enable_tab_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RETURN, Request<GenericCallbackEngine>("my_enable_enter_key_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_C, Request<GenericCallbackEngine>("my_enable_ctrl_c_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_W, Request<GenericCallbackEngine>("my_enable_ctrl_w_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_PAGEUP, Request<GenericCallbackEngine>("my_enable_page_up_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_PAGEDOWN, Request<GenericCallbackEngine>("my_enable_page_down_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_HOME, Request<GenericCallbackEngine>("my_enable_home_callback_engine"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_END, Request<GenericCallbackEngine>("my_enable_end_callback_engine"));
     }
 }

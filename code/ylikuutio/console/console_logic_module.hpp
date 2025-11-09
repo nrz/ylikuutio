@@ -108,17 +108,6 @@ namespace yli::console
             void invalidate_temp_input();
 
             // Boolean state inquiry functions.
-            bool get_can_move_to_previous_input() const;
-            bool get_can_move_to_next_input() const;
-            bool get_can_backspace() const;
-            bool get_can_tab() const;
-            bool get_can_enter_key() const;
-            bool get_can_ctrl_c() const;
-            bool get_can_ctrl_w() const;
-            bool get_can_page_up() const;
-            bool get_can_page_down() const;
-            bool get_can_home() const;
-            bool get_can_end() const;
             bool get_is_left_control_pressed() const;
             bool get_is_right_control_pressed() const;
             bool get_is_left_alt_pressed() const;
@@ -127,17 +116,6 @@ namespace yli::console
             bool get_is_right_shift_pressed() const;
 
             // Boolean state transitions functions.
-            void set_can_move_to_previous_input(const bool can_move_to_previous_input);
-            void set_can_move_to_next_input(const bool can_move_to_next_input);
-            void set_can_backspace(const bool can_backspace);
-            void set_can_tab(const bool can_tab);
-            void set_can_enter_key(const bool can_enter_key);
-            void set_can_ctrl_c(const bool can_ctrl_c);
-            void set_can_ctrl_w(const bool can_ctrl_w);
-            void set_can_page_up(const bool can_page_up);
-            void set_can_page_down(const bool can_page_down);
-            void set_can_home(const bool can_home);
-            void set_can_end(const bool can_end);
             void set_is_left_control_pressed(const bool is_left_control_pressed);
             void set_is_right_control_pressed(const bool is_right_control_pressed);
             void set_is_left_alt_pressed(const bool is_left_alt_pressed);
@@ -189,72 +167,6 @@ namespace yli::console
                     yli::ontology::Console& console);
 
             static std::optional<yli::data::AnyValue> release_right_shift_in_console(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_move_to_previous_input(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_move_to_next_input(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_backspace(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_tab(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_enter_key(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_ctrl_c(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_ctrl_w(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_page_up(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_page_down(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_home(
-                    yli::ontology::ConsoleCallbackEngine*,
-                    yli::ontology::ConsoleCallbackObject*,
-                    yli::ontology::GenericParentModule&,
-                    yli::ontology::Console& console);
-
-            static std::optional<yli::data::AnyValue> enable_end(
                     yli::ontology::ConsoleCallbackEngine*,
                     yli::ontology::ConsoleCallbackObject*,
                     yli::ontology::GenericParentModule&,
@@ -392,17 +304,6 @@ namespace yli::console
 
             std::size_t temp_input_index { std::numeric_limits<std::size_t>::max() };
 
-            bool can_move_to_previous_input { true };
-            bool can_move_to_next_input     { true };
-            bool can_backspace              { true };
-            bool can_tab                    { true };
-            bool can_enter_key              { true };
-            bool can_ctrl_c                 { true };
-            bool can_ctrl_w                 { true };
-            bool can_page_up                { true };
-            bool can_page_down              { true };
-            bool can_home                   { true };
-            bool can_end                    { true };
             bool is_left_control_pressed    { false };
             bool is_right_control_pressed   { false };
             bool is_left_alt_pressed        { false };
