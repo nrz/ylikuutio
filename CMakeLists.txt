@@ -425,6 +425,7 @@ add_library(ylikuutio STATIC
     # data, in alphabetical order
     code/ylikuutio/data/any_value.cpp
     code/ylikuutio/data/any_value.hpp
+    code/ylikuutio/data/codepoint.hpp
     code/ylikuutio/data/data_templates.hpp
     code/ylikuutio/data/datatype.hpp
     code/ylikuutio/data/queue.hpp
