@@ -607,6 +607,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_control_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -620,6 +621,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_control_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -633,6 +635,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_alt_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -646,6 +649,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_alt_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -659,6 +663,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_shift_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -672,6 +677,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_shift_pressed(false);
         }
+
         return std::nullopt;
     }
 
@@ -704,6 +710,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_control_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -717,6 +724,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_control_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -730,6 +738,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_alt_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -743,6 +752,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_alt_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -756,6 +766,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_left_shift_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -769,6 +780,7 @@ namespace yli::console
         {
             console.console_logic_module.set_is_right_shift_pressed(true);
         }
+
         return std::nullopt;
     }
 
@@ -819,6 +831,7 @@ namespace yli::console
                 console.command_history.move_to_nth(history_index - 1);
             }
         }
+
         return std::nullopt;
     }
 
@@ -866,6 +879,7 @@ namespace yli::console
                 console.command_history.move_to_nth(history_index + 1);
             }
         }
+
         return std::nullopt;
     }
 
@@ -884,6 +898,7 @@ namespace yli::console
                 active_input->delete_character();
             }
         }
+
         return std::nullopt;
     }
 
@@ -961,6 +976,7 @@ namespace yli::console
             console.console_logic_module.enter_new_input();
             console.console_logic_module.invalidate_temp_input();
         }
+
         return std::nullopt;
     }
 
@@ -985,6 +1001,7 @@ namespace yli::console
 
             active_input->ctrl_w();
         }
+
         return std::nullopt;
     }
 
