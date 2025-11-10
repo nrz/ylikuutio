@@ -153,7 +153,7 @@ namespace yli::ontology
             template<EntityNotUniverse ChildType, EntityNotUniverse ParentType>
                 GenericParentModule* get_generic_parent_module(const Request<ParentType>& entity_request) const
                 {
-                    ParentType* const parent = yli::ontology::resolve_request<ParentType>(entity_request, this->get_universe().registry);
+                    ParentType* const parent = resolve_request<ParentType>(entity_request, this->get_universe().registry);
 
                     if (parent != nullptr) [[likely]]
                     {
@@ -166,7 +166,7 @@ namespace yli::ontology
             template<EntityNotUniverse ApprenticeType, EntityNotUniverse MasterType>
                 GenericMasterModule* get_generic_master_module(const Request<MasterType>& entity_request) const
                 {
-                    MasterType* const master = yli::ontology::resolve_request<MasterType>(entity_request, this->get_universe().registry);
+                    MasterType* const master = resolve_request<MasterType>(entity_request, this->get_universe().registry);
 
                     if (master != nullptr) [[likely]]
                     {
@@ -664,7 +664,7 @@ namespace yli::ontology
                         const Request<Console>& console_request,
                         std::optional<yli::data::AnyValue>(*callback)(Args...))
                 {
-                    yli::ontology::Console* const console = yli::ontology::resolve_request<Console>(console_request, this->get_universe().registry);
+                    Console* const console = resolve_request<Console>(console_request, this->get_universe().registry);
 
                     if (console == nullptr)
                     {
