@@ -53,10 +53,10 @@ namespace yli::console
     {
         public:
             ConsoleLogicModule(
-                    yli::console::TextInput& new_input,
-                    yli::console::TextInput& temp_input,
-                    yli::console::TextInputHistory& text_input_history,
-                    yli::console::ScrollbackBuffer& scrollback_buffer,
+                    TextInput& new_input,
+                    TextInput& temp_input,
+                    TextInputHistory& text_input_history,
+                    ScrollbackBuffer& scrollback_buffer,
                     const std::size_t n_columns = 80,
                     const std::size_t n_rows = 24);
 

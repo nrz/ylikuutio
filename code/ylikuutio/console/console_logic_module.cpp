@@ -129,10 +129,10 @@ namespace yli::console
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
     ConsoleLogicModule::ConsoleLogicModule(
-            yli::console::TextInput& new_input,
-            yli::console::TextInput& temp_input,
-            yli::console::TextInputHistory& text_input_history,
-            yli::console::ScrollbackBuffer& scrollback_buffer,
+            TextInput& new_input,
+            TextInput& temp_input,
+            TextInputHistory& text_input_history,
+            ScrollbackBuffer& scrollback_buffer,
             const std::size_t n_columns,
             const std::size_t n_rows)
         : new_input { new_input },
@@ -150,14 +150,14 @@ namespace yli::console
     {
         // Activation is not reported to 'modules' because they don't need to know.
         // Activation always returns to the same state in which deactivate was run.
-        return this->switch_to_state(ConsoleState(this->state | yli::console::active));
+        return this->switch_to_state(ConsoleState(this->state | active));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::deactivate()
     {
         // Deactivation is not reported to 'modules' because they don't need to know.
         // Deactivation always returns to the last active state.
-        return this->switch_to_state(ConsoleState(this->state & (~yli::console::active)));
+        return this->switch_to_state(ConsoleState(this->state & (~active)));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_new_input()
@@ -194,23 +194,23 @@ namespace yli::console
             return std::nullopt;
         }
 
-        return this->switch_to_state(ConsoleState(this->state | yli::console::in_scrollback_buffer));
+        return this->switch_to_state(ConsoleState(this->state | in_scrollback_buffer));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::exit_scrollback_buffer()
     {
-        return this->switch_to_state(ConsoleState(this->state & (~yli::console::in_scrollback_buffer)));
+        return this->switch_to_state(ConsoleState(this->state & (~in_scrollback_buffer)));
     }
 
     TextInput* ConsoleLogicModule::edit_input()
     {
-        if (this->state == yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT)
+        if (this->state == ConsoleState::ACTIVE_IN_NEW_INPUT)
         {
             // If we are in new input, the new input is the active input.
             // If we are in scrollback buffer while in new input, the new input is the active input.
             return &this->new_input;
         }
-        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
+        else if (this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
         {
             // If we are in a historical input, the temp input is the active input.
             // If we are in scrollback buffer while in historical input, the historical input is the active input.
@@ -221,25 +221,25 @@ namespace yli::console
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
                 // the new temp input, and temp input becomes the active input.
-                this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
                 this->temp_input_index = this->text_input_history.get_history_index();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
                 return &this->temp_input;
             }
         }
-        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT)
+        else if (this->state == ConsoleState::ACTIVE_IN_TEMP_INPUT)
         {
             // If we are in a temp input, the temp input is the active input.
             // If we are in scrollback buffer while in temp input, the temp input is the active input.
             return &this->temp_input;
         }
-        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
+        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
         {
-            this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_NEW_INPUT);
+            this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
             return &this->new_input;
         }
-        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
         {
             const TextInput* const historical_input = this->text_input_history.get();
 
@@ -248,16 +248,16 @@ namespace yli::console
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
                 // the new temp input, and temp input becomes the active input.
-                this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
                 this->temp_input_index = this->text_input_history.get_history_index();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
                 return &this->temp_input;
             }
         }
-        else if (this->state == yli::console::ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
         {
-            this->switch_to_state(yli::console::ConsoleState::ACTIVE_IN_TEMP_INPUT);
+            this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
             return &this->temp_input;
         }
 
@@ -345,7 +345,7 @@ namespace yli::console
 
     bool ConsoleLogicModule::get_active_in_console() const
     {
-        return this->state & yli::console::active;
+        return this->state & active;
     }
 
     bool ConsoleLogicModule::get_active_in_new_input() const
@@ -365,10 +365,10 @@ namespace yli::console
 
     bool ConsoleLogicModule::get_active_in_scrollback_buffer() const
     {
-        return (this->state & yli::console::active) && (this->state & yli::console::in_scrollback_buffer);
+        return (this->state & active) && (this->state & in_scrollback_buffer);
     }
 
-    yli::console::ConsoleState ConsoleLogicModule::get() const
+    ConsoleState ConsoleLogicModule::get() const
     {
         return this->state;
     }
@@ -473,14 +473,14 @@ namespace yli::console
     {
         const ConsoleState old_state = this->state;
 
-        if (!((this->state ^ new_state) & (~yli::console::active)))
+        if (!((this->state ^ new_state) & (~active)))
         {
             // If the old state and new state differ possibly only with regards to activation state,
             // then the transition is valid.
             this->state = new_state;
             return this->signal_state_change(old_state, new_state);
         }
-        else if (!((this->state ^ new_state) & (~yli::console::in_scrollback_buffer)) && (this->state & yli::console::active))
+        else if (!((this->state ^ new_state) & (~in_scrollback_buffer)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
             // and the current state in active, then the transition is valid.
@@ -488,7 +488,7 @@ namespace yli::console
             return this->signal_state_change(old_state, new_state);
         }
         else if (const uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
-                !((this->state ^ new_state) & (~any_input)) && (this->state & yli::console::active))
+                !((this->state ^ new_state) & (~any_input)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to which-buffer state,
             // and the current state in active, then the transition is valid.
@@ -542,7 +542,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_ctrl_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -556,7 +556,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_ctrl_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -570,7 +570,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_alt_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_alt_pressed));
         }
 
         return std::nullopt;
@@ -584,7 +584,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_alt_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_alt_pressed));
         }
 
         return std::nullopt;
@@ -598,7 +598,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_shift_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_shift_pressed));
         }
 
         return std::nullopt;
@@ -612,7 +612,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_shift_pressed));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_shift_pressed));
         }
 
         return std::nullopt;
@@ -645,7 +645,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_ctrl_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -659,7 +659,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_ctrl_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -673,7 +673,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_alt_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_alt_pressed);
         }
 
         return std::nullopt;
@@ -687,7 +687,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_alt_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_alt_pressed);
         }
 
         return std::nullopt;
@@ -701,7 +701,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_shift_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_shift_pressed);
         }
 
         return std::nullopt;
@@ -715,7 +715,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_shift_pressed);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_shift_pressed);
         }
 
         return std::nullopt;
@@ -828,7 +828,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+            TextInput* const active_input = console.console_logic_module.edit_input();
 
             if (active_input != nullptr)
             {
@@ -860,7 +860,7 @@ namespace yli::console
             return std::nullopt;
         }
 
-        yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+        TextInput* const active_input = console.console_logic_module.edit_input();
 
         if (active_input == nullptr)
         {
@@ -878,7 +878,7 @@ namespace yli::console
         console.command_history.add_to_history(*active_input);
 
         // Store new input prefixed with prompt to scrollback buffer.
-        console.scrollback_buffer.add_to_buffer(yli::console::TextLine(input_string));
+        console.scrollback_buffer.add_to_buffer(TextLine(input_string));
 
         std::vector<std::string> parameter_vector;
         std::string command;
@@ -905,8 +905,8 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)) &&
-                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)))))
+                (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
+                (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
         {
             console.new_input.clear();
             console.console_logic_module.enter_new_input();
@@ -923,10 +923,10 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)) &&
-                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)))))
+                (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
+                (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
         {
-            yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
+            TextInput* const active_input = console.console_logic_module.edit_input();
 
             if (active_input == nullptr)
             {
