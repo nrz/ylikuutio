@@ -17,6 +17,7 @@
 
 #include "console_logic_module.hpp"
 #include "console_state.hpp"
+#include "modifier_state.hpp"
 #include "text_input_history.hpp"
 #include "scrollback_buffer.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -457,70 +458,6 @@ namespace yli::console
         this->temp_input_index = std::numeric_limits<std::size_t>::max();
     }
 
-    // Boolean state inquiry functions.
-
-    bool ConsoleLogicModule::get_is_left_control_pressed() const
-    {
-        return this->is_left_control_pressed;
-    }
-
-    bool ConsoleLogicModule::get_is_right_control_pressed() const
-    {
-        return this->is_right_control_pressed;
-    }
-
-    bool ConsoleLogicModule::get_is_left_alt_pressed() const
-    {
-        return this->is_left_alt_pressed;
-    }
-
-    bool ConsoleLogicModule::get_is_right_alt_pressed() const
-    {
-        return this->is_right_alt_pressed;
-    }
-
-    bool ConsoleLogicModule::get_is_left_shift_pressed() const
-    {
-        return this->is_left_shift_pressed;
-    }
-
-    bool ConsoleLogicModule::get_is_right_shift_pressed() const
-    {
-        return this->is_right_shift_pressed;
-    }
-
-    // Boolean state transitions functions.
-
-    void ConsoleLogicModule::set_is_left_control_pressed(const bool is_left_control_pressed)
-    {
-        this->is_left_control_pressed = is_left_control_pressed;
-    }
-
-    void ConsoleLogicModule::set_is_right_control_pressed(const bool is_right_control_pressed)
-    {
-        this->is_right_control_pressed = is_right_control_pressed;
-    }
-
-    void ConsoleLogicModule::set_is_left_alt_pressed(const bool is_left_alt_pressed)
-    {
-        this->is_left_alt_pressed = is_left_alt_pressed;
-    }
-
-    void ConsoleLogicModule::set_is_right_alt_pressed(const bool is_right_alt_pressed)
-    {
-        this->is_right_alt_pressed = is_right_alt_pressed;
-    }
-
-    void ConsoleLogicModule::set_is_left_shift_pressed(const bool is_left_shift_pressed)
-    {
-        this->is_left_shift_pressed = is_left_shift_pressed;
-    }
-
-    void ConsoleLogicModule::set_is_right_shift_pressed(const bool is_right_shift_pressed)
-    {
-        this->is_right_shift_pressed = is_right_shift_pressed;
-    }
-
     std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state, const ConsoleState new_state)
     {
         // Signal the 'modules' that the state has changed.
@@ -605,7 +542,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_control_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_ctrl));
         }
 
         return std::nullopt;
@@ -619,7 +556,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_control_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_ctrl));
         }
 
         return std::nullopt;
@@ -633,7 +570,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_alt_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_alt));
         }
 
         return std::nullopt;
@@ -647,7 +584,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_alt_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_alt));
         }
 
         return std::nullopt;
@@ -661,7 +598,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_shift_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_shift));
         }
 
         return std::nullopt;
@@ -675,7 +612,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_shift_pressed(false);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_shift));
         }
 
         return std::nullopt;
@@ -708,7 +645,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_control_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_ctrl);
         }
 
         return std::nullopt;
@@ -722,7 +659,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_control_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_ctrl);
         }
 
         return std::nullopt;
@@ -736,7 +673,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_alt_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_alt);
         }
 
         return std::nullopt;
@@ -750,7 +687,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_alt_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_alt);
         }
 
         return std::nullopt;
@@ -764,7 +701,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_left_shift_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_shift);
         }
 
         return std::nullopt;
@@ -778,7 +715,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.set_is_right_shift_pressed(true);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_shift);
         }
 
         return std::nullopt;
@@ -968,9 +905,8 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
-                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
-                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
+                (console.console_logic_module.modifier_state & (yli::console::left_ctrl | yli::console::right_ctrl)) &&
+                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl | yli::console::right_ctrl)))))
         {
             console.new_input.clear();
             console.console_logic_module.enter_new_input();
@@ -987,9 +923,8 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.get_is_left_control_pressed() || console.console_logic_module.get_is_right_control_pressed()) &&
-                !console.console_logic_module.get_is_left_alt_pressed() && !console.console_logic_module.get_is_right_alt_pressed() &&
-                !console.console_logic_module.get_is_left_shift_pressed() && !console.console_logic_module.get_is_right_shift_pressed())
+                (console.console_logic_module.modifier_state & (yli::console::left_ctrl | yli::console::right_ctrl)) &&
+                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl | yli::console::right_ctrl)))))
         {
             yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
 

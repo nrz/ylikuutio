@@ -19,6 +19,7 @@
 #define YLIKUUTIO_CONSOLE_CONSOLE_LOGIC_MODULE_HPP_INCLUDED
 
 #include "console_state.hpp"
+#include "modifier_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -106,22 +107,6 @@ namespace yli::console
             std::size_t get_n_rows() const;
 
             void invalidate_temp_input();
-
-            // Boolean state inquiry functions.
-            bool get_is_left_control_pressed() const;
-            bool get_is_right_control_pressed() const;
-            bool get_is_left_alt_pressed() const;
-            bool get_is_right_alt_pressed() const;
-            bool get_is_left_shift_pressed() const;
-            bool get_is_right_shift_pressed() const;
-
-            // Boolean state transitions functions.
-            void set_is_left_control_pressed(const bool is_left_control_pressed);
-            void set_is_right_control_pressed(const bool is_right_control_pressed);
-            void set_is_left_alt_pressed(const bool is_left_alt_pressed);
-            void set_is_right_alt_pressed(const bool is_right_alt_pressed);
-            void set_is_left_shift_pressed(const bool is_left_shift_pressed);
-            void set_is_right_shift_pressed(const bool is_right_shift_pressed);
 
             // Public callbacks.
 
@@ -304,12 +289,7 @@ namespace yli::console
 
             std::size_t temp_input_index { std::numeric_limits<std::size_t>::max() };
 
-            bool is_left_control_pressed    { false };
-            bool is_right_control_pressed   { false };
-            bool is_left_alt_pressed        { false };
-            bool is_right_alt_pressed       { false };
-            bool is_left_shift_pressed      { false };
-            bool is_right_shift_pressed     { false };
+            ModifierState modifier_state;
 
         public:
             const std::string prompt        { "$ " };
