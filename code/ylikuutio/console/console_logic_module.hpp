@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_CONSOLE_CONSOLE_LOGIC_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_CONSOLE_LOGIC_MODULE_HPP_INCLUDED
 
-#include "code/ylikuutio/console/console_state.hpp"
+#include "console_state.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
