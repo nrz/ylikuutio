@@ -195,7 +195,7 @@ namespace yli::console
         return this->type;
     }
 
-    void TextInput::on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state)
+    void TextInput::on_change(const ConsoleState old_state, const ConsoleState new_state)
     {
         if (new_state == old_state)
         {

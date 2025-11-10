@@ -39,7 +39,7 @@ namespace yli::console
 
         if (this->console.console_logic_module.get_active_in_console())
         {
-            yli::console::TextInput* const active_input = this->console.console_logic_module.edit_input();
+            TextInput* const active_input = this->console.console_logic_module.edit_input();
 
             if (active_input == nullptr)
             {

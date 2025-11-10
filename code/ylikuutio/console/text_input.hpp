@@ -94,7 +94,7 @@ namespace yli::console
             std::size_t get_cursor_index() const;
             TextInputType get_type() const;
 
-            void on_change(const yli::console::ConsoleState old_state, const yli::console::ConsoleState new_state);
+            void on_change(const ConsoleState old_state, const ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()

@@ -31,12 +31,12 @@ namespace yli::console
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = yli::console::TextLine;
+            using value_type        = TextLine;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = const yli::console::TextLine*;
-            using reference         = const yli::console::TextLine&;
+            using pointer           = const TextLine*;
+            using reference         = const TextLine&;
 
-            explicit ScrollbackBufferConstIterator(std::vector<yli::console::TextLine>::const_iterator it)
+            explicit ScrollbackBufferConstIterator(std::vector<TextLine>::const_iterator it)
                 : it { it }
             {
             }
@@ -48,7 +48,7 @@ namespace yli::console
             ScrollbackBufferConstIterator& operator=(const ScrollbackBufferConstIterator&) = default;
 
             // assignment of `std::vector` const_iterator.
-            ScrollbackBufferConstIterator& operator=(std::vector<yli::console::TextLine>::const_iterator it)
+            ScrollbackBufferConstIterator& operator=(std::vector<TextLine>::const_iterator it)
             {
                 this->it = it;
                 return *this;
@@ -89,13 +89,13 @@ namespace yli::console
                 return temp;
             }
 
-            yli::console::TextLine operator*()
+            TextLine operator*()
             {
                 return *(this->it);
             }
 
         private:
-            std::vector<yli::console::TextLine>::const_iterator it;
+            std::vector<TextLine>::const_iterator it;
     };
 }
 
