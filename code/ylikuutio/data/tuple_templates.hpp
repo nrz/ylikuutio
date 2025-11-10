@@ -43,7 +43,7 @@ namespace yli::data
         auto rest(std::tuple<Types...>& my_tuple)
         {
             // Inspired by https://stackoverflow.com/questions/10626856/how-to-split-a-tuple
-            return yli::data::rest_impl(std::make_index_sequence<sizeof...(Types) - 1u>(), my_tuple);
+            return rest_impl(std::make_index_sequence<sizeof...(Types) - 1u>(), my_tuple);
         }
 
     template<typename TupleType, typename FunctionType, std::size_t... Is>

@@ -238,7 +238,7 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<yli::data::AnyValue> data)
+        std::string get_type_string(std::shared_ptr<AnyValue> data)
         {
             return "std::shared_ptr<yli::data::AnyValue>";
         }

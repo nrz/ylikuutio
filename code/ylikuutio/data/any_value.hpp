@@ -58,9 +58,9 @@ namespace yli::data
     class AnyValue final
     {
         public:
-            bool operator==(const yli::data::AnyValue& rhs) const noexcept;
-            bool operator!=(const yli::data::AnyValue& rhs) const = default;
-            yli::data::AnyValue& operator=(const yli::data::AnyValue& other) = default;
+            bool operator==(const AnyValue& rhs) const noexcept;
+            bool operator!=(const AnyValue& rhs) const = default;
+            AnyValue& operator=(const AnyValue& other) = default;
             std::string get_datatype() const noexcept;
             std::string get_string() const;
             const std::string& get_const_std_string_ref() const;
@@ -73,10 +73,10 @@ namespace yli::data
             bool set_new_value(const std::string& value_string);
 
             // copy constructor.
-            AnyValue(const yli::data::AnyValue& original) = default;
+            AnyValue(const AnyValue& original) = default;
 
             // constructor for optional `AnyValue`.
-            explicit AnyValue(const std::optional<yli::data::AnyValue> original);
+            explicit AnyValue(const std::optional<AnyValue> original);
 
             // common constructors.
 

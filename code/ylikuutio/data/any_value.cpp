@@ -60,7 +60,7 @@
 
 namespace yli::data
 {
-    bool AnyValue::operator==(const yli::data::AnyValue& rhs) const noexcept
+    bool AnyValue::operator==(const AnyValue& rhs) const noexcept
     {
         if (this->get_datatype() != rhs.get_datatype())
         {
@@ -882,7 +882,7 @@ namespace yli::data
         return false;
     }
 
-    AnyValue::AnyValue(const std::optional<yli::data::AnyValue> original)
+    AnyValue::AnyValue(const std::optional<AnyValue> original)
     {
         // constructor for optional `AnyValue`.
 
@@ -893,7 +893,7 @@ namespace yli::data
     }
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
-        : data(yli::data::get_variant<
+        : data(get_variant<
                 std::monostate,
                 // Fundamental types.
                 bool,
