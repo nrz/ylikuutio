@@ -23,21 +23,21 @@
 
 namespace yli::console
 {
-    static const uint32_t left_ctrl   = 1;
-    static const uint32_t right_ctrl  = 1 << 1;
-    static const uint32_t left_alt    = 1 << 2;
-    static const uint32_t right_alt   = 1 << 3;
-    static const uint32_t left_shift  = 1 << 4;
-    static const uint32_t right_shift = 1 << 5;
+    static const uint32_t left_ctrl_pressed   = 1;
+    static const uint32_t right_ctrl_pressed  = 1 << 1;
+    static const uint32_t left_alt_pressed    = 1 << 2;
+    static const uint32_t right_alt_pressed   = 1 << 3;
+    static const uint32_t left_shift_pressed  = 1 << 4;
+    static const uint32_t right_shift_pressed = 1 << 5;
 
     enum ModifierState : uint32_t
     {
-        LEFT_CTRL = left_ctrl,
-        RIGHT_CTRL = right_ctrl,
-        LEFT_ALT = left_alt,
-        RIGHT_ALT = right_alt,
-        LEFT_SHIFT = left_shift,
-        RIGHT_SHIFT = right_shift,
+        LEFT_CTRL = left_ctrl_pressed,
+        RIGHT_CTRL = right_ctrl_pressed,
+        LEFT_ALT = left_alt_pressed,
+        RIGHT_ALT = right_alt_pressed,
+        LEFT_SHIFT = left_shift_pressed,
+        RIGHT_SHIFT = right_shift_pressed,
     };
 }
 

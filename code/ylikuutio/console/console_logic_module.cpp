@@ -542,7 +542,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_ctrl));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -556,7 +556,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_ctrl));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -570,7 +570,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_alt));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_alt_pressed));
         }
 
         return std::nullopt;
@@ -584,7 +584,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_alt));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_alt_pressed));
         }
 
         return std::nullopt;
@@ -598,7 +598,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_shift));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::left_shift_pressed));
         }
 
         return std::nullopt;
@@ -612,7 +612,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_shift));
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~yli::console::right_shift_pressed));
         }
 
         return std::nullopt;
@@ -645,7 +645,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_ctrl);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -659,7 +659,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_ctrl);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -673,7 +673,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_alt);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_alt_pressed);
         }
 
         return std::nullopt;
@@ -687,7 +687,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_alt);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_alt_pressed);
         }
 
         return std::nullopt;
@@ -701,7 +701,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_shift);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::left_shift_pressed);
         }
 
         return std::nullopt;
@@ -715,7 +715,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_shift);
+            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | yli::console::right_shift_pressed);
         }
 
         return std::nullopt;
@@ -905,8 +905,8 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (yli::console::left_ctrl | yli::console::right_ctrl)) &&
-                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl | yli::console::right_ctrl)))))
+                (console.console_logic_module.modifier_state & (yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)) &&
+                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)))))
         {
             console.new_input.clear();
             console.console_logic_module.enter_new_input();
@@ -923,8 +923,8 @@ namespace yli::console
             yli::ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (yli::console::left_ctrl | yli::console::right_ctrl)) &&
-                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl | yli::console::right_ctrl)))))
+                (console.console_logic_module.modifier_state & (yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)) &&
+                (!(console.console_logic_module.modifier_state & (~(yli::console::left_ctrl_pressed | yli::console::right_ctrl_pressed)))))
         {
             yli::console::TextInput* const active_input = console.console_logic_module.edit_input();
 
