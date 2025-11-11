@@ -97,7 +97,7 @@ namespace yli::ontology
     {
         if (this->generic_master_module != nullptr)
         {
-            return this->generic_master_module->get_generic_master();
+            return &this->generic_master_module->get_generic_master();
         }
 
         return nullptr;

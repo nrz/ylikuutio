@@ -92,7 +92,7 @@ namespace yli::ontology
         }
     }
 
-    GenericMasterModule::GenericMasterModule(Entity* const generic_master, Registry* const registry, const std::string& name) noexcept
+    GenericMasterModule::GenericMasterModule(Entity& generic_master, Registry* const registry, const std::string& name) noexcept
         : generic_master { generic_master }
     {
         registry->add_indexable(*this, name);
@@ -112,7 +112,7 @@ namespace yli::ontology
         }
     }
 
-    Entity* GenericMasterModule::get_generic_master() const noexcept
+    Entity& GenericMasterModule::get_generic_master() const noexcept
     {
         return this->generic_master;
     }

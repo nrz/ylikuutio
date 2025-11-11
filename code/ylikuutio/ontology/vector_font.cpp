@@ -97,7 +97,7 @@ namespace yli::ontology
                 this->registry,
                 "glyphs"),
         master_of_text_3ds(
-                this,
+                *this,
                 &this->registry,
                 "text_3ds"),
         font_file_format      { vector_font_struct.font_file_format },

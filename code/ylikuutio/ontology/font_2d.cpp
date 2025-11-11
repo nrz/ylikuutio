@@ -77,7 +77,7 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "text_2ds"),
-        master_of_consoles(this, &this->registry, "consoles"),
+        master_of_consoles(*this, &this->registry, "consoles"),
         texture(
                 universe,
                 &this->registry,

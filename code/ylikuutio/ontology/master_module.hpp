@@ -56,7 +56,7 @@ namespace yli::ontology
     {
         public:
             MasterModule(
-                    M const master,
+                    M& master,
                     Registry* const registry,
                     const std::string& name,
                     std::function<void (const M&, Entity*)> unbind_callback)
@@ -82,9 +82,9 @@ namespace yli::ontology
                 }
             }
 
-            M get_master() const
+            M& get_master() const
             {
-                return this->master;
+                return this->get_generic_master();
             }
 
             friend class ApprenticeModule;

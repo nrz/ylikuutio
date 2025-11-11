@@ -155,9 +155,9 @@ namespace yli::ontology
                 this->registry,
                 "vector_fonts"),
         apprentice_of_pipeline(pipeline_master_module, this),
-        master_of_species(this, &this->registry, "species"),
-        master_of_symbiont_species(this, &this->registry, "symbiont_species"),
-        master_of_glyphs(this, &this->registry, "glyphs"),
+        master_of_species(*this, &this->registry, "species"),
+        master_of_symbiont_species(*this, &this->registry, "symbiont_species"),
+        master_of_glyphs(*this, &this->registry, "glyphs"),
         texture(
                 universe,
                 &this->registry,

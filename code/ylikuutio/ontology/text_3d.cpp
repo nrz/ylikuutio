@@ -113,7 +113,7 @@ namespace yli::ontology
                 brain_master_module),
         child_of_scene(scene_parent_module, *this),
         apprentice_of_vector_font(vector_font_master_module, this),
-        master_of_glyph_objects(this, &this->registry, "glyph_objects")
+        master_of_glyph_objects(*this, &this->registry, "glyph_objects")
     {
         // TODO: `Text3d` constructor also creates each `GlyphObject`,
         // and binds each to its corresponding `Glyph` for rendering hierarchy,

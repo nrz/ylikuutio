@@ -48,7 +48,7 @@ namespace yli::ontology
         : Entity(application, universe, brain_struct),
         child_of_scene(scene_parent_module, *this),
         apprentice_of_callback_engine(callback_engine_master_module, this),
-        master_of_movables(this, &this->registry, "movables")
+        master_of_movables(*this, &this->registry, "movables")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Brain*";

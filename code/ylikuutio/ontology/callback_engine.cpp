@@ -47,7 +47,7 @@ namespace yli::ontology
                 this->registry,
                 "callback_objects"),
         master_of_brains(
-                this,
+                *this,
                 &this->registry,
                 "brains")
     {

@@ -143,7 +143,7 @@ namespace yli::ontology
             GenericMasterModule* const material_master_module)
         : Entity(application, universe, species_struct),
         child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
-        master_of_objects(this, &this->registry, "objects"),
+        master_of_objects(*this, &this->registry, "objects"),
         apprentice_of_material(material_master_module, this),
         mesh(universe, species_struct, this->get_pipeline())
     {

@@ -37,7 +37,7 @@ namespace yli::ontology
             // Make the `InputMode` of this `InputModeApprenticeModule`
             // the input mode of the `Console`.
             Console* const console = static_cast<Console*>(
-                    master_of_input_modes_module->get_generic_master());
+                    &master_of_input_modes_module->get_generic_master());
 
             if (console == nullptr) [[unlikely]]
             {

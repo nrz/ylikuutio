@@ -135,8 +135,10 @@ TEST(generic_parent_module_must_bind_to_registry_appropriately, generic_parent_m
 
 TEST(generic_master_module_must_bind_to_registry_appropriately, generic_master_module_foo)
 {
+    mock::MockApplication application;
+
     yli::ontology::Registry registry;
-    yli::ontology::GenericMasterModule generic_master_module(nullptr, &registry, "foo");
+    yli::ontology::GenericMasterModule generic_master_module(application.get_universe(), &registry, "foo");
 
     ASSERT_TRUE(registry.is_name("foo"));
     ASSERT_FALSE(registry.is_name("bar"));

@@ -164,7 +164,7 @@ namespace yli::ontology
                 this->registry,
                 "symbiont_materials"),
         apprentice_of_pipeline(pipeline_master_module, this),
-        master_of_holobionts(this, &this->registry, "holobionts"),
+        master_of_holobionts(*this, &this->registry, "holobionts"),
         model_filename     { symbiosis_struct.model_filename },
         model_file_format  { symbiosis_struct.model_file_format }
     {

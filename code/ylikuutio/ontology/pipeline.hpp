@@ -97,9 +97,9 @@ namespace yli::ontology
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;
 
-            MasterModule<Pipeline*>* get_master_module() const
+            MasterModule<Pipeline>* get_master_module() const
             {
-                return const_cast<MasterModule<Pipeline*>*>(&this->master_of_materials);
+                return const_cast<MasterModule<Pipeline>*>(&this->master_of_materials);
             }
 
             template<typename ApprenticeType>
@@ -115,7 +115,7 @@ namespace yli::ontology
 
             ChildModule child_of_ecosystem_or_scene;
             GenericParentModule parent_of_compute_tasks;
-            MasterModule<Pipeline*> master_of_materials;
+            MasterModule<Pipeline> master_of_materials;
             GenericMasterModule master_of_symbioses;
             GenericMasterModule master_of_shapeshifter_forms;
             GenericMasterModule master_of_glyphs;

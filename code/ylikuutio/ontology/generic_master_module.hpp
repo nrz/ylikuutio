@@ -65,14 +65,14 @@ namespace yli::ontology
             void unbind_apprentice_module(const std::size_t apprenticeID) noexcept;
             void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* const scene) noexcept;
 
-            GenericMasterModule(Entity* const generic_master, Registry* const registry, const std::string& name) noexcept;
+            GenericMasterModule(Entity& generic_master, Registry* const registry, const std::string& name) noexcept;
 
             GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
             GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
 
             virtual ~GenericMasterModule();
 
-            Entity* get_generic_master() const noexcept;
+            Entity& get_generic_master() const noexcept;
 
             std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
             const std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
@@ -103,7 +103,7 @@ namespace yli::ontology
             }
 
         private:
-            Entity* const generic_master; // The `Entity` that owns this `GenericMasterModule`.
+            Entity& generic_master; // The `Entity` that owns this `GenericMasterModule`.
 
         protected:
             std::vector<ApprenticeModule*> apprentice_module_pointer_vector;

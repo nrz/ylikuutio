@@ -34,7 +34,7 @@ namespace yli::ontology
     {
         public:
             MasterOfInputModesModule(
-                    Entity* const generic_master,
+                    Entity& generic_master,
                     Registry* const registry,
                     const std::string& name) noexcept;
 

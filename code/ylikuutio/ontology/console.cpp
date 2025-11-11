@@ -98,7 +98,7 @@ namespace yli::ontology
                 this->registry,
                 "lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
-        master_of_input_modes(this, &this->registry, "input_modes"),
+        master_of_input_modes(*this, &this->registry, "input_modes"),
         console_left_x   { console_struct.left_x },
         console_right_x  { console_struct.right_x },
         console_top_y    { console_struct.top_y },

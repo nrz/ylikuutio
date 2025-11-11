@@ -42,7 +42,7 @@ namespace yli::ontology
             GenericParentModule* const symbiont_material_parent_module)
         : Entity(application, universe, symbiont_species_struct),
         child_of_symbiont_material(symbiont_material_parent_module, *this),
-        master_of_bionts(this, &this->registry, "bionts"),
+        master_of_bionts(*this, &this->registry, "bionts"),
         mesh(universe, symbiont_species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.

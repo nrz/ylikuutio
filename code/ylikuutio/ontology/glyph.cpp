@@ -48,7 +48,7 @@ namespace yli::ontology
         : Entity(application, universe, glyph_struct),
         child_of_vector_font(vector_font_parent_module, *this),
         apprentice_of_material(material_master_module, this),
-        master_of_glyph_objects(this, &this->registry, "glyph_objects"),
+        master_of_glyph_objects(*this, &this->registry, "glyph_objects"),
         mesh(universe, glyph_struct, this->get_pipeline()),
         glyph_vertex_data    { glyph_struct.glyph_vertex_data },
         glyph_name_pointer   { glyph_struct.glyph_name_pointer },
