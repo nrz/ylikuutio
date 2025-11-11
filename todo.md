@@ -5,6 +5,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] CONSOLE/UI Use SDL3 text input for console input.
 - [ ] YLILISP Implement abstract syntax tree (AST) creation code for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
