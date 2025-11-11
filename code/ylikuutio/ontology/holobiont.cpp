@@ -99,15 +99,10 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Holobiont::render`: `render_system` is `nullptr`!");
-        }
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
         // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
-        render_system->render_bionts(this->parent_of_bionts);
+        render_system.render_bionts(this->parent_of_bionts);
     }
 
     void Holobiont::create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector)

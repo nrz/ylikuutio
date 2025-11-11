@@ -189,12 +189,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Scene::render`: `render_system` is `nullptr`!");
-        }
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
         if (this->universe.get_is_opengl_in_use())
         {
@@ -211,8 +206,8 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Scene::render`: Vulkan is not supported yet!");
         }
 
-        render_system->render_pipelines_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
-        render_system->render_pipelines(this->parent_of_pipelines, this);
+        render_system.render_pipelines_of_ecosystems(this->universe.get_parent_of_ecosystems(), this);
+        render_system.render_pipelines(this->parent_of_pipelines, this);
     }
 
     Camera* Scene::get_default_camera() const

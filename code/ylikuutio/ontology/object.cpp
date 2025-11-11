@@ -169,11 +169,6 @@ namespace yli::ontology
 
     void Object::render_this_object(Pipeline* const pipeline)
     {
-        if (this->universe.get_render_system() == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Object::render_this_object`: `this->universe.get_render_system()` is `nullptr`!");
-        }
-
         if (pipeline == nullptr) [[unlikely]]
         {
             return;

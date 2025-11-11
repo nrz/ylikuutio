@@ -184,19 +184,14 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Pipeline::render`: `render_system` is `nullptr`!");
-        }
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
         // [Re]bind `program_id` program.
         glUseProgram(this->program_id);
 
-        render_system->render_compute_tasks(this->parent_of_compute_tasks, new_target_scene);
-        render_system->render_materials(this->master_of_materials, new_target_scene);
-        render_system->render_symbioses(this->master_of_symbioses, new_target_scene);
+        render_system.render_compute_tasks(this->parent_of_compute_tasks, new_target_scene);
+        render_system.render_materials(this->master_of_materials, new_target_scene);
+        render_system.render_symbioses(this->master_of_symbioses, new_target_scene);
     }
 
     Scene* Pipeline::get_scene() const

@@ -195,12 +195,7 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Material::render`: `render_system` is `nullptr`!");
-        }
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
@@ -209,8 +204,8 @@ namespace yli::ontology
         // Set our "texture_sampler" sampler to use Texture Unit 0.
         yli::opengl::uniform_1i(this->opengl_texture_id, 0);
 
-        render_system->render_species(this->master_of_species, new_target_scene);
-        render_system->render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
+        render_system.render_species(this->master_of_species, new_target_scene);
+        render_system.render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
     }
 
     Entity* Material::get_parent() const

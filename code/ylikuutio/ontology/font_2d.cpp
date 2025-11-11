@@ -283,16 +283,11 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
-
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Font2d::render`: `render_system` is `nullptr`!");
-        }
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
         this->prepare_to_print();
-        render_system->render_text_2ds(this->parent_of_text_2ds);
-        render_system->render_consoles(this->master_of_consoles);
+        render_system.render_text_2ds(this->parent_of_text_2ds);
+        render_system.render_consoles(this->master_of_consoles);
         glDisable(GL_BLEND);
     }
 

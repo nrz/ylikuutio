@@ -124,14 +124,9 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem* const render_system = this->universe.get_render_system();
+        yli::render::RenderSystem& render_system = this->universe.get_render_system();
 
-        if (render_system == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Glyph::render`: `render_system` is `nullptr`!");
-        }
-
-        render_system->render_glyph(this, new_target_scene);
+        render_system.render_glyph(this, new_target_scene);
     }
 
     GenericMasterModule* Glyph::get_renderables_container()

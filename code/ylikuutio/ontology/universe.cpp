@@ -586,7 +586,7 @@ namespace yli::ontology
                 std::cerr << "ERROR: `Universe::render`: Vulkan is not supported yet!\n";
             }
 
-            this->render_system->render(render_struct);
+            this->get_render_system().render(render_struct);
         }
 
         yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
@@ -1122,7 +1122,7 @@ namespace yli::ontology
         // Setup graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
-            if (!this->render_system->setup_context(this->window)) [[unlikely]]
+            if (!this->get_render_system().setup_context(this->window)) [[unlikely]]
             {
                 // Setting up context failed.
                 return false;
@@ -1323,14 +1323,14 @@ namespace yli::ontology
         throw std::runtime_error("ERROR: `Universe::get_input_system`: `input_system` is `nullptr`!");
     }
 
-    yli::render::RenderSystem* Universe::get_render_system() const
+    yli::render::RenderSystem& Universe::get_render_system() const
     {
         if (this->render_system == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Universe::get_render_system`: `this->render_system` is `nullptr`!");
         }
 
-        return this->render_system.get();
+        return *this->render_system.get();
     }
 
     yli::audio::AudioSystem* Universe::get_audio_system() const

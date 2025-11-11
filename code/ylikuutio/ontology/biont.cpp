@@ -127,11 +127,6 @@ namespace yli::ontology
         // `this->holobiont_parent` must not be `nullptr`.
         // `this->symbiont_species` must not be `nullptr`.
 
-        if (this->universe.get_render_system() == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `Biont::render_this_biont`: `this->universe.get_render_system()` is `nullptr`!");
-        }
-
         const Holobiont* const holobiont_parent = static_cast<Holobiont*>(this->get_parent());
 
         if (holobiont_parent == nullptr) [[unlikely]]

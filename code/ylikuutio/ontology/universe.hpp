@@ -194,7 +194,7 @@ namespace yli::ontology
 
             yli::event::EventSystem& get_event_system() const;
             yli::input::InputSystem& get_input_system() const;
-            yli::render::RenderSystem* get_render_system() const;
+            yli::render::RenderSystem& get_render_system() const;
             yli::audio::AudioSystem* get_audio_system() const;
 
             GenericParentModule& get_parent_of_ecosystems();
