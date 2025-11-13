@@ -74,11 +74,11 @@ Then, to compile with GCC, in Ylikuutio install directory:
     $ mkdir build
     $ cd build
     $ cmake ..
-    $ make
+    $ ninja
 
 To make compiling faster you probably want to use several threads:
 
-    $ make -j $(($(nproc) - 1))
+    $ ninja -j $(($(nproc) - 1))
 
 Or, to compile with Clang, again in Ylikuutio install directory:
 
@@ -87,7 +87,7 @@ Or, to compile with Clang, again in Ylikuutio install directory:
     $ export CC="$(which clang)"
     $ export CXX="(which clang++)"
     $ cmake ..
-    $ make
+    $ ninja
 
 If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
@@ -106,7 +106,7 @@ Install command line building tools:
 
 Proceed with the opening pop-up install menu.
 
-You should now be able to run `gcc`, `clang`, `g++`, `clang++`, and `make`.
+You should now be able to run `gcc`, `clang`, `g++`, `clang++`, and `ninja`.
 
 Download CMake binary from https://cmake.org/download/ .
 
@@ -121,7 +121,7 @@ You can build like on Debian or Ubuntu:
     $ mkdir build
     $ cd build
     $ cmake ..
-    $ make
+    $ ninja
 
 Building unit tests does not currently work on MacOS,
 so by default they are not built MacOS.
@@ -137,10 +137,10 @@ To cross compile from GNU/Linux to Windows:
     $ mkdir build_windows
     $ cd build_windows
     $ cmake -DDIRECTX=FALSE -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
-    $ make
+    $ ninja
 
 Crosscompiling from GNU/Linux to Windows fails to compile tests.
-This is a known bug in Google Test. Just run `make` *again* if
+This is a known bug in Google Test. Just run `ninja` *again* if
 compiling ends before you get `hirvi.exe`,
 `ajokki.exe`, `gpgpu_test.exe`, and `yli_edit.exe`.
 
