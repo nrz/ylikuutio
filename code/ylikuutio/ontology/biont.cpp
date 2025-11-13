@@ -51,7 +51,6 @@
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 #include <stdint.h>  // uint32_t etc.
-#include <string>    // std::string
 
 namespace yli::core
 {
@@ -150,8 +149,6 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::mat4(1.0f);
-
-        const std::string model_file_format = symbiosis_master_of_holobiont->get_model_file_format();
 
         if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
         {
