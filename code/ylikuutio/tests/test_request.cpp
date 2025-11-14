@@ -50,3 +50,12 @@ TEST(request_must_be_initialized_appropriately, string)
     std::string baz_string = std::get<std::string>(request.data);
     ASSERT_EQ(baz_string, "baz");
 }
+
+TEST(request_must_be_initialized_appropriately, const_string)
+{
+    const std::string baz_const_string { "baz" };
+    yli::ontology::Request<foo::Bar> request(baz_const_string);
+    ASSERT_TRUE(std::holds_alternative<std::string>(request.data));
+    std::string baz_string = std::get<std::string>(request.data);
+    ASSERT_EQ(baz_string, "baz");
+}

@@ -40,6 +40,11 @@ namespace yli::ontology
             {
             }
 
+            explicit Request(const std::string& name)
+                : data { name }
+            {
+            }
+
             std::variant<std::monostate, Type*, std::string> data;
         };
 }
