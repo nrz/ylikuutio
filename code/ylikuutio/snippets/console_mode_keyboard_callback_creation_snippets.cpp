@@ -32,12 +32,14 @@ namespace yli::ontology
 namespace yli::snippets
 {
     using yli::console::ConsoleLogicModule;
+    using yli::ontology::InputMode;
     using yli::ontology::Console;
     using yli::ontology::ConsoleCallbackEngineStruct;
     using yli::ontology::GenericCallbackEngine;
     using yli::ontology::Request;
+    using yli::ontology::GenericEntityFactory;
 
-    void create_console_mode_keypress_callbacks(yli::ontology::GenericEntityFactory& entity_factory)
+    void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory)
     {
         {
             // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
@@ -167,7 +169,7 @@ namespace yli::snippets
         }
     }
 
-    void create_console_mode_keyrelease_callbacks(yli::ontology::GenericEntityFactory& entity_factory)
+    void create_console_mode_keyrelease_callbacks(GenericEntityFactory& entity_factory)
     {
         {
             // Callback code for left Control release.
@@ -213,7 +215,7 @@ namespace yli::snippets
         }
     }
 
-    void set_console_mode_keypress_callback_engines_or_throw(yli::ontology::InputMode& console_mode_input_mode)
+    void set_console_mode_keypress_callback_engines_or_throw(InputMode& console_mode_input_mode)
     {
         // Keypress callbacks for `my_console`.
         // Keypresses are checked in the order of this struct.
@@ -237,7 +239,7 @@ namespace yli::snippets
         console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_END, Request<GenericCallbackEngine>("my_end_callback_engine"));
     }
 
-    void set_console_mode_keyrelease_callback_engines_or_throw(yli::ontology::InputMode& console_mode_input_mode)
+    void set_console_mode_keyrelease_callback_engines_or_throw(InputMode& console_mode_input_mode)
     {
         // Keyrelease callbacks for `my_console`.
         console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<GenericCallbackEngine>("my_release_left_control_in_console_callback_engine"));
