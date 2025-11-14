@@ -475,6 +475,7 @@ namespace ajokki
         InputModeStruct my_console_mode_input_mode_struct;
         my_console_mode_input_mode_struct.console_master = Request(my_console);
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
+        my_console_mode_input_mode_struct.is_text_input_mode = true;
         InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(my_console_mode_input_mode_struct);
 
         // Keypress callbacks for `my_console`.
@@ -486,6 +487,7 @@ namespace ajokki
         InputModeStruct mini_console_mode_input_mode_struct;
         mini_console_mode_input_mode_struct.console_master = Request(mini_console);
         mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
+        mini_console_mode_input_mode_struct.is_text_input_mode = true;
         InputMode* const mini_console_mode_input_mode = this->core.entity_factory.create_input_mode(mini_console_mode_input_mode_struct);
 
         // Keypress callbacks for `mini_console`.

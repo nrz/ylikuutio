@@ -125,7 +125,7 @@ namespace yli::ontology
 
             bool enter_console();
             bool exit_console();
-            void process_key_event(const SDL_KeyboardEvent& keyboard_event);
+            void process_text_input(const SDL_TextInputEvent& text_input_event);
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;

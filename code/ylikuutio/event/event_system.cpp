@@ -62,13 +62,6 @@ namespace yli::event
                         this->universe.request_exit();
                     }
                 }
-
-                yli::ontology::Console* const active_console = this->universe.get_active_console();
-
-                if (active_console != nullptr)
-                {
-                    active_console->process_key_event(sdl_event.key);
-                }
             }
             else if (sdl_event.type == SDL_EVENT_KEY_UP)
             {
@@ -88,6 +81,15 @@ namespace yli::event
                         std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
+                }
+            }
+            else if (sdl_event.type == SDL_EVENT_TEXT_INPUT)
+            {
+                yli::ontology::Console* const active_console = this->universe.get_active_console();
+
+                if (active_console != nullptr && sdl_event.text.text != nullptr)
+                {
+                    active_console->process_text_input(sdl_event.text);
                 }
             }
             else if (sdl_event.type == SDL_EVENT_WINDOW_FOCUS_GAINED)

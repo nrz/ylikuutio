@@ -283,22 +283,8 @@ namespace yli::ontology
         return false;
     }
 
-    void Console::process_key_event(const SDL_KeyboardEvent& keyboard_event)
+    void Console::process_text_input(const SDL_TextInputEvent& text_input_event)
     {
-        const uint16_t modifiers = keyboard_event.mod;
-        const uint16_t shift_bitmask = SDL_KMOD_LSHIFT | SDL_KMOD_RSHIFT;
-        const uint16_t ctrl_alt_altgr_bitmask = SDL_KMOD_LCTRL | SDL_KMOD_RCTRL | SDL_KMOD_LALT | SDL_KMOD_RALT | SDL_KMOD_MODE;
-
-        if (keyboard_event.down &&
-                keyboard_event.scancode != SDL_SCANCODE_GRAVE &&
-                keyboard_event.key != SDLK_UNKNOWN &&
-                keyboard_event.key != SDLK_RETURN &&
-                keyboard_event.key != SDLK_KP_ENTER &&
-                keyboard_event.key >= 0x20 &&
-                keyboard_event.key <= 0x7f &&
-                ((modifiers & ctrl_alt_altgr_bitmask) == 0) &&
-                this->console_logic_module.get_active_in_console())
-        {
             TextInput* const active_input = this->console_logic_module.edit_input();
 
             if (active_input == nullptr) [[unlikely]]
@@ -306,90 +292,8 @@ namespace yli::ontology
                 return;
             }
 
-            const char keyboard_char = static_cast<char>(keyboard_event.key);
-
-            if ((modifiers & shift_bitmask) != 0)
-            {
-                // Before a support for different keyboard layouts in implemented,
-                // use US QWERTY layout as reference.
-                switch (keyboard_char)
-                {
-                    case '`':
-                        active_input->add_character('~');
-                        break;
-                    case '1':
-                        active_input->add_character('!');
-                        break;
-                    case '2':
-                        active_input->add_character('@');
-                        break;
-                    case '3':
-                        active_input->add_character('#');
-                        break;
-                    case '4':
-                        active_input->add_character('$');
-                        break;
-                    case '5':
-                        active_input->add_character('%');
-                        break;
-                    case '6':
-                        active_input->add_character('^');
-                        break;
-                    case '7':
-                        active_input->add_character('&');
-                        break;
-                    case '8':
-                        active_input->add_character('*');
-                        break;
-                    case '9':
-                        active_input->add_character('(');
-                        break;
-                    case '0':
-                        active_input->add_character(')');
-                        break;
-                    case '-':
-                        active_input->add_character('_');
-                        break;
-                    case '=':
-                        active_input->add_character('+');
-                        break;
-                    case '[':
-                        active_input->add_character('{');
-                        break;
-                    case ']':
-                        active_input->add_character('}');
-                        break;
-                    case '\\':
-                        active_input->add_character('|');
-                        break;
-                    case ';':
-                        active_input->add_character(':');
-                        break;
-                    case '\'':
-                        active_input->add_character('"');
-                        break;
-                    case ',':
-                        active_input->add_character('<');
-                        break;
-                    case '.':
-                        active_input->add_character('>');
-                        break;
-                    case '/':
-                        active_input->add_character('?');
-                        break;
-                    default:
-                        if (keyboard_char >= 'a' && keyboard_char <= 'z')
-                        {
-                            active_input->add_character(keyboard_char - ('a' - 'A'));
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                active_input->add_character(keyboard_char);
-            }
-        }
+            const std::string input = text_input_event.text;
+            active_input->add_characters(input);
     }
 
     void Console::copy_historical_input_into_temp_input()

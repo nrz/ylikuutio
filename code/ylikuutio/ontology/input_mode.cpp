@@ -22,6 +22,7 @@
 #include "generic_callback_engine.hpp"
 #include "request_resolver.hpp"
 #include "input_mode_struct.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -46,7 +47,8 @@ namespace yli::ontology
             GenericMasterModule* const console_master_module)
         : Entity(application, universe, input_mode_struct),
         child_of_universe(parent_module, *this),
-        apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this)
+        apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this),
+        is_text_input_mode { input_mode_struct.is_text_input_mode }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::InputMode*";
@@ -55,6 +57,11 @@ namespace yli::ontology
     void InputMode::activate()
     {
         this->universe.parent_of_input_modes.set_active_input_mode(this);
+
+        if (this->is_text_input_mode)
+        {
+            SDL_StartTextInput(universe.get_window());
+        }
     }
 
     void InputMode::deactivate()
@@ -64,6 +71,11 @@ namespace yli::ontology
         if (this->universe.parent_of_input_modes.get_active_input_mode() == this)
         {
             this->universe.parent_of_input_modes.pop_input_mode();
+
+            if (this->is_text_input_mode)
+            {
+                SDL_StopTextInput(universe.get_window());
+            }
         }
     }
 

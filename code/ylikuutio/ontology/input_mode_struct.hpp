@@ -28,6 +28,7 @@ namespace yli::ontology
     struct InputModeStruct : public EntityStruct
     {
         Request<Console> console_master {};
+        bool is_text_input_mode { false };
     };
 }
 

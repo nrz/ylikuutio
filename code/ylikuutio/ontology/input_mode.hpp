@@ -97,6 +97,8 @@ namespace yli::ontology
             std::vector<GenericCallbackEngine*> keypress_callback_engines;
             std::vector<GenericCallbackEngine*> keyrelease_callback_engines;
             std::vector<GenericCallbackEngine*> continuous_keypress_callback_engines;
+
+            const bool is_text_input_mode;
     };
 }
 
