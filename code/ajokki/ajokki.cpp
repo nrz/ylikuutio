@@ -439,12 +439,14 @@ namespace ajokki
         /*********************************************************************
          *  Callback engines for console keypresses begin here.              *
          *********************************************************************/
-        yli::snippets::create_console_mode_keypress_callbacks(this->core.entity_factory);
+        yli::snippets::create_console_mode_keypress_callbacks(this->core.entity_factory, "my_console");
+        yli::snippets::create_console_mode_keypress_callbacks(this->core.entity_factory, "mini_console");
 
         /*********************************************************************
          *  Callback engines for console keyreleases begin here.             *
          *********************************************************************/
-        yli::snippets::create_console_mode_keyrelease_callbacks(this->core.entity_factory);
+        yli::snippets::create_console_mode_keyrelease_callbacks(this->core.entity_factory, "my_console");
+        yli::snippets::create_console_mode_keyrelease_callbacks(this->core.entity_factory, "mini_console");
 
         // Action mode input mode.
         InputModeStruct action_mode_input_mode_struct;
@@ -476,10 +478,10 @@ namespace ajokki
         InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(my_console_mode_input_mode_struct);
 
         // Keypress callbacks for `my_console`.
-        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode);
+        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode, "my_console");
 
         // Keyrelease callbacks for `my_console`.
-        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode);
+        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode, "my_console");
 
         InputModeStruct mini_console_mode_input_mode_struct;
         mini_console_mode_input_mode_struct.console_master = Request(mini_console);
@@ -487,10 +489,10 @@ namespace ajokki
         InputMode* const mini_console_mode_input_mode = this->core.entity_factory.create_input_mode(mini_console_mode_input_mode_struct);
 
         // Keypress callbacks for `mini_console`.
-        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*mini_console_mode_input_mode);
+        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*mini_console_mode_input_mode, "mini_console");
 
         // Keyrelease callbacks for `mini_console`.
-        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*mini_console_mode_input_mode);
+        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*mini_console_mode_input_mode, "mini_console");
 
         /*********************************************************************
          * Callback engines for console commands begin here.                 *

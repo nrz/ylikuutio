@@ -18,6 +18,9 @@
 #ifndef YLIKUUTIO_SNIPPETS_CONSOLE_MODE_KEYBOARD_CALLBACK_CREATION_SNIPPETS_HPP_INCLUDED
 #define YLIKUUTIO_SNIPPETS_CONSOLE_MODE_KEYBOARD_CALLBACK_CREATION_SNIPPETS_HPP_INCLUDED
 
+// Include standard headers
+#include <string> // std::string
+
 namespace yli::ontology
 {
     class InputMode;
@@ -29,10 +32,10 @@ namespace yli::snippets
     using yli::ontology::InputMode;
     using yli::ontology::GenericEntityFactory;
 
-    void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory);
-    void create_console_mode_keyrelease_callbacks(GenericEntityFactory& entity_factory);
-    void set_console_mode_keypress_callback_engines_or_throw(InputMode& console_mode_input_mode);
-    void set_console_mode_keyrelease_callback_engines_or_throw(InputMode& console_mode_input_mode);
+    void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name);
+    void create_console_mode_keyrelease_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name);
+    void set_console_mode_keypress_callback_engines_or_throw(InputMode& console_mode_input_mode, const std::string& console_global_name);
+    void set_console_mode_keyrelease_callback_engines_or_throw(InputMode& console_mode_input_mode, const std::string& console_global_name);
 }
 
 #endif
