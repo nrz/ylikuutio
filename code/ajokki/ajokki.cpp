@@ -481,8 +481,6 @@ namespace ajokki
         // Keyrelease callbacks for `my_console`.
         yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode);
 
-        // Keyrelease callbacks for `mini_console`.
-        // Key releases are checked in the order of this struct.
         InputModeStruct mini_console_mode_input_mode_struct;
         mini_console_mode_input_mode_struct.console_master = Request(mini_console);
         mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
