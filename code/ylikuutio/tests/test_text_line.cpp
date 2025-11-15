@@ -89,7 +89,7 @@ TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_c
     ASSERT_EQ(text_line.size(), 3);
 }
 
-TEST(text_line_cend_iterator_must_work_appropriately, text_line_cend_iterator)
+TEST(text_line_cend_const_iterator_must_work_appropriately, text_line_cend_const_iterator)
 {
     std::string_view my_string { "abc" };
     yli::console::TextLine text_line(my_string);
