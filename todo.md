@@ -2,6 +2,8 @@
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 ## Fixes needed
+- [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
+- [ ] BUG/CONSOLE/RENDERING/UI Text input beyond what fits on the first line of `Console` is not rendered on the following lines as it should.
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
@@ -9,6 +11,8 @@
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
+- [ ] VULKAN/RENDERING Add Vulkan support.
+- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] TEXT/UI Implement proper bitmap font rendering: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
@@ -16,8 +20,6 @@
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
-- [ ] VULKAN/RENDERING Add Vulkan support.
-- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] CONSOLE/UI Add visible cursor in console.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
