@@ -20,9 +20,9 @@
 #include "console_state.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <optional> // std::optional
-#include <string>   // std::string
+#include <cstddef>     // std::size_t
+#include <optional>    // std::optional
+#include <string>      // std::string
 #include <string_view> // std::string_view
 #include <utility>     // std::move
 

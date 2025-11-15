@@ -19,7 +19,7 @@
 #include "text_input.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <cstddef>     // std::size_t
 #include <stdexcept>   // std::runtime_error
 #include <string>      // std::string
 #include <string_view> // std::string_view
