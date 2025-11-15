@@ -413,6 +413,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/text_line.cpp
     code/ylikuutio/console/text_line.hpp
     code/ylikuutio/console/text_line_const_iterator.hpp
+    code/ylikuutio/console/text_line_iterator.hpp
 
     # core, in alphabetical order
     code/ylikuutio/core/application.cpp
