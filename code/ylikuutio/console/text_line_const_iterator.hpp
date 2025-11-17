@@ -55,7 +55,6 @@ namespace yli::console
             ~TextLineConstIterator() = default;
 
             bool operator==(const TextLineConstIterator& other_it) const = default;
-
             bool operator!=(const TextLineConstIterator& other_it) const = default;
 
             TextLineConstIterator& operator++()
