@@ -32,6 +32,8 @@
 
 namespace yli::console
 {
+    class TextInput;
+
     class ScrollbackBuffer
     {
         public:
