@@ -379,7 +379,7 @@ namespace yli::ontology
                 // Clear the screen.
                 if (this->graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
                 {
-                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                    this->get_render_system().clear_color_and_depth_buffers();
                 }
 
                 this->compute_delta_time();

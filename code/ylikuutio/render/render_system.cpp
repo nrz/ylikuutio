@@ -153,6 +153,11 @@ namespace yli::render
         }
     }
 
+    void RenderSystem::clear_color_and_depth_buffers() const
+    {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
     void RenderSystem::restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const
     {
         // Bind the default framebuffer for on-screen rendering.
