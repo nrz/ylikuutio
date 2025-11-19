@@ -73,38 +73,6 @@ TEST(text_line_must_be_initialized_appropriately, abc_string)
     ASSERT_EQ(text_line.size(), 3);
 }
 
-TEST(text_line_begin_iterator_must_work_appropriately, text_line_begin_iterator)
-{
-    std::string_view my_string { "abc" };
-    yli::console::TextLine text_line(my_string);
-
-    auto it = text_line.begin();
-    ASSERT_EQ(*it, 'a');
-    ++it;
-    ASSERT_EQ(*it, 'b');
-    ++it;
-    ASSERT_EQ(*it, 'c');
-    ++it;
-    ASSERT_EQ(it, text_line.end());
-    ASSERT_EQ(text_line.size(), 3);
-}
-
-TEST(text_line_end_iterator_must_work_appropriately, text_line_end_iterator)
-{
-    std::string_view my_string { "abc" };
-    yli::console::TextLine text_line(my_string);
-
-    auto it = text_line.end();
-    --it;
-    ASSERT_EQ(*it, 'c');
-    --it;
-    ASSERT_EQ(*it, 'b');
-    --it;
-    ASSERT_EQ(*it, 'a');
-    ASSERT_EQ(it, text_line.begin());
-    ASSERT_EQ(text_line.size(), 3);
-}
-
 TEST(text_line_cbegin_const_iterator_must_work_appropriately, text_line_cbegin_const_iterator)
 {
     std::string_view my_string { "abc" };

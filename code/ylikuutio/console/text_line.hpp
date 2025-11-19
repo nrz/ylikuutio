@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_TEXT_LINE_HPP_INCLUDED
 
-#include "text_line_iterator.hpp"
 #include "text_line_const_iterator.hpp"
 
 // Include standard headers
@@ -40,7 +39,6 @@ namespace yli::console
             TextLine& operator=(const TextLine&) = delete;
 
             // Iterator typedefs.
-            typedef TextLineIterator      iterator;
             typedef TextLineConstIterator const_iterator;
 
             bool operator==(const TextLine& other) const;
@@ -62,16 +60,6 @@ namespace yli::console
             std::vector<std::string_view> get_n_last_lines(const std::size_t n_lines, const std::size_t n_columns) const;
 
             // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->line.begin());
-            }
-
-            iterator end()
-            {
-                return iterator(this->line.end());
-            }
-
             const_iterator cbegin() const
             {
                 return const_iterator(this->line.cbegin());
@@ -83,7 +71,7 @@ namespace yli::console
             }
 
         private:
-            std::string line;
+            const std::string line;
     };
 }
 
