@@ -54,7 +54,11 @@ namespace yli::console
 
             ~TextLineIterator() = default;
 
-            bool operator==(const TextLineIterator& other_it) const = default;
+            bool operator==(const TextLineIterator& other_it) const noexcept
+            {
+                return this->it == other_it.it;
+            }
+
             bool operator!=(const TextLineIterator& other_it) const = default;
 
             TextLineIterator& operator++()
