@@ -24,14 +24,6 @@
 #include <string_view> // std::string_view
 #include <vector>      // std::vector
 
-TEST(text_line_must_be_initialized_appropriately, default_constructor)
-{
-    yli::console::TextLine text_line;
-    ASSERT_EQ(text_line.data(), "");
-    ASSERT_EQ(text_line.size(), 0);
-    ASSERT_EQ(text_line.cbegin().unwrap(), text_line.data().cbegin());
-}
-
 TEST(text_line_must_be_initialized_appropriately, empty_text_line)
 {
     yli::console::TextLine text_line("");
