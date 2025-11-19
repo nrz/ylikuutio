@@ -25,8 +25,6 @@
 
 namespace yli::console
 {
-    class TextLineConstIterator;
-
     class TextLineIterator
     {
         public:
@@ -58,9 +56,6 @@ namespace yli::console
 
             bool operator==(const TextLineIterator& other_it) const = default;
             bool operator!=(const TextLineIterator& other_it) const = default;
-
-            bool operator==(const TextLineConstIterator& other_it) const;
-            bool operator!=(const TextLineConstIterator& other_it) const;
 
             TextLineIterator& operator++()
             {
@@ -111,8 +106,6 @@ namespace yli::console
             {
                 return this->it;
             }
-
-            friend class TextLineConstIterator;
 
         private:
             std::string::iterator it;
