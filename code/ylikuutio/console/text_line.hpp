@@ -37,7 +37,7 @@ namespace yli::console
 
         public:
             TextLine(const TextLine& other) = default;
-            TextLine& operator=(const TextLine&) = default;
+            TextLine& operator=(const TextLine&) = delete;
 
             // Iterator typedefs.
             typedef TextLineIterator      iterator;
