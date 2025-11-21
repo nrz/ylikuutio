@@ -19,7 +19,6 @@
 #define YLIKUUTIO_ONTOLOGY_PRINT_TEXT_STRUCT_HPP_INCLUDED
 
 #include "position_struct.hpp"
-#include "code/ylikuutio/console/text_line.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
