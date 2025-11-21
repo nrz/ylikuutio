@@ -17,53 +17,44 @@
 
 #include "scrollback_buffer.hpp"
 #include "console_state.hpp"
-#include "text_line.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <span>     // std::span
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::console
 {
-    class TextInput;
-
     ScrollbackBuffer::ScrollbackBuffer(const uint32_t n_columns, const uint32_t n_rows)
         : n_columns { (n_columns > 0 ? n_columns : 1) },
         n_rows      { (n_rows > 0 ? n_rows : 1) }
     {
     }
 
-    void ScrollbackBuffer::add_to_buffer(const TextInput& text)
-    {
-        this->add_to_buffer(TextLine(text));
-    }
-
-    void ScrollbackBuffer::add_to_buffer(const TextLine& text)
+    void ScrollbackBuffer::add_to_buffer(const std::string& text)
     {
         for (std::size_t text_i = 0; text_i < text.size(); text_i += this->n_columns)
         {
             if (text_i + this->n_columns <= text.size())
             {
-                TextLine text_line(text.cbegin() + text_i, text.cbegin() + text_i + this->n_columns);
-                this->buffer.emplace_back(text_line);
+                this->buffer.emplace_back(text.cbegin() + text_i, text.cbegin() + text_i + this->n_columns);
             }
             else
             {
-                TextLine text_line(text.cbegin() + text_i, text.cend());
-                this->buffer.emplace_back(text_line);
+                this->buffer.emplace_back(text.cbegin() + text_i, text.end());
             }
         }
     }
 
-    void ScrollbackBuffer::emplace_back(const TextLine& text)
+    void ScrollbackBuffer::emplace_back(const std::string& text)
     {
         this->buffer.emplace_back(text);
     }
 
-    void ScrollbackBuffer::push_back(const TextLine& text)
+    void ScrollbackBuffer::push_back(const std::string& text)
     {
         this->buffer.push_back(text);
     }
@@ -147,7 +138,7 @@ namespace yli::console
         }
     }
 
-    std::span<const TextLine> ScrollbackBuffer::get_view(const std::size_t top_index, const std::size_t max_rows) const
+    std::span<const std::string> ScrollbackBuffer::get_view(const std::size_t top_index, const std::size_t max_rows) const
     {
         if (top_index >= this->size()) [[unlikely]]
         {
@@ -164,7 +155,7 @@ namespace yli::console
         return std::span(&this->data()[top_index], &this->data()[this->size()]);
     }
 
-    std::span<const TextLine> ScrollbackBuffer::get_view_to_last(const std::size_t max_rows) const
+    std::span<const std::string> ScrollbackBuffer::get_view_to_last(const std::size_t max_rows) const
     {
         if (this->size() > max_rows) [[likely]]
         {
@@ -175,7 +166,7 @@ namespace yli::console
         return std::span(this->data().cbegin(), this->data().cend());
     }
 
-    const TextLine& ScrollbackBuffer::at(const std::size_t line_i) const
+    const std::string& ScrollbackBuffer::at(const std::size_t line_i) const
     {
         return *(this->buffer.begin() + line_i);
     }
@@ -195,7 +186,7 @@ namespace yli::console
         return this->size() == 0;
     }
 
-    const std::vector<TextLine>& ScrollbackBuffer::data() const
+    const std::vector<std::string>& ScrollbackBuffer::data() const
     {
         return this->buffer;
     }

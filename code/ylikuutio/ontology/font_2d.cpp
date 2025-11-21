@@ -25,7 +25,6 @@
 #include "print_console_struct.hpp"
 #include "texture_file_format.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
@@ -381,14 +380,14 @@ namespace yli::ontology
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> uvs;
 
-        const std::span<const yli::console::TextLine> view = print_console_struct.buffer_text;
+        const std::span<const std::string> view = print_console_struct.buffer_text;
 
         // Print to the right side of X (so far there is no check for input length).
         // Print up of Y.
 
-        for (std::span<const yli::console::TextLine>::iterator span_it = view.begin(); span_it != view.end(); ++span_it)
+        for (std::span<const std::string>::iterator span_it = view.begin(); span_it != view.end(); ++span_it)
         {
-            for (yli::console::TextLine::const_iterator text_line_it = span_it->cbegin(); text_line_it != span_it->cend(); ++text_line_it)
+            for (std::string::const_iterator text_line_it = span_it->cbegin(); text_line_it != span_it->cend(); ++text_line_it)
             {
                 const char character = *text_line_it;
 

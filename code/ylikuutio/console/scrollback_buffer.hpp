@@ -20,7 +20,6 @@
 
 #include "scrollback_buffer_iterator.hpp"
 #include "scrollback_buffer_const_iterator.hpp"
-#include "text_line.hpp"
 #include "console_state.hpp"
 
 // Include standard headers
@@ -28,12 +27,11 @@
 #include <limits>   // std::numeric_limits
 #include <span>     // std::span
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::console
 {
-    class TextInput;
-
     class ScrollbackBuffer
     {
         public:
@@ -46,10 +44,9 @@ namespace yli::console
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
 
-            void add_to_buffer(const TextInput& input);
-            void add_to_buffer(const TextLine& text);
-            void emplace_back(const TextLine& text);
-            void push_back(const TextLine& text);
+            void add_to_buffer(const std::string& text);
+            void emplace_back(const std::string& text);
+            void push_back(const std::string& text);
 
             bool enter_buffer();
             bool exit_buffer();
@@ -63,15 +60,15 @@ namespace yli::console
 
             void clear();
 
-            std::span<const TextLine> get_view(const std::size_t top_index, const std::size_t max_rows) const;
-            std::span<const TextLine> get_view_to_last(const std::size_t max_rows) const;
-            std::span<const TextLine> get_end_view(const std::size_t max_rows) const;
-            const TextLine& at(const std::size_t line_i) const;
+            std::span<const std::string> get_view(const std::size_t top_index, const std::size_t max_rows) const;
+            std::span<const std::string> get_view_to_last(const std::size_t max_rows) const;
+            std::span<const std::string> get_end_view(const std::size_t max_rows) const;
+            const std::string& at(const std::size_t line_i) const;
 
             bool get_is_active_in_buffer() const;
             std::size_t size() const;
             bool empty() const;
-            const std::vector<TextLine>& data() const;
+            const std::vector<std::string>& data() const;
             uint32_t get_n_columns() const;
             uint32_t get_n_rows() const;
 
@@ -101,10 +98,10 @@ namespace yli::console
             }
 
         private:
-            std::vector<TextLine> buffer;
+            std::vector<std::string> buffer;
             const uint32_t n_columns;  // Number of columns must be at least 1.
             const uint32_t n_rows;     // Number of rows must be at least 1.
-            std::vector<TextLine>::iterator buffer_it { this->buffer.end() };
+            std::vector<std::string>::iterator buffer_it { this->buffer.end() };
             std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
     };
 }

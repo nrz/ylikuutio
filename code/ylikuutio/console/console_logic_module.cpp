@@ -878,7 +878,7 @@ namespace yli::console
         console.command_history.add_to_history(*active_input);
 
         // Store new input prefixed with prompt to scrollback buffer.
-        console.scrollback_buffer.add_to_buffer(TextLine(input_string));
+        console.scrollback_buffer.add_to_buffer(input_string);
 
         std::vector<std::string> parameter_vector;
         std::string command;

@@ -18,11 +18,10 @@
 #ifndef YLIKUUTIO_CONSOLE_SCROLLBACK_BUFFER_CONST_ITERATOR_HPP_INCLUDED
 #define YLIKUUTIO_CONSOLE_SCROLLBACK_BUFFER_CONST_ITERATOR_HPP_INCLUDED
 
-#include "text_line.hpp"
-
 // Include standard headers
 #include <cstddef>  // std::ptrdiff_t
 #include <iterator> // std::bidirectional_iterator_tag
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::console
@@ -31,12 +30,12 @@ namespace yli::console
     {
         public:
             using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = TextLine;
+            using value_type        = std::string;
             using difference_type   = std::ptrdiff_t;
-            using pointer           = const TextLine*;
-            using reference         = const TextLine&;
+            using pointer           = const std::string*;
+            using reference         = const std::string&;
 
-            explicit ScrollbackBufferConstIterator(std::vector<TextLine>::const_iterator it)
+            explicit ScrollbackBufferConstIterator(std::vector<std::string>::const_iterator it)
                 : it { it }
             {
             }
@@ -48,7 +47,7 @@ namespace yli::console
             ScrollbackBufferConstIterator& operator=(const ScrollbackBufferConstIterator&) = default;
 
             // assignment of `std::vector` const_iterator.
-            ScrollbackBufferConstIterator& operator=(std::vector<TextLine>::const_iterator it)
+            ScrollbackBufferConstIterator& operator=(std::vector<std::string>::const_iterator it)
             {
                 this->it = it;
                 return *this;
@@ -89,13 +88,13 @@ namespace yli::console
                 return temp;
             }
 
-            TextLine operator*()
+            std::string operator*()
             {
                 return *(this->it);
             }
 
         private:
-            std::vector<TextLine>::const_iterator it;
+            std::vector<std::string>::const_iterator it;
     };
 }
 

@@ -19,7 +19,6 @@
 #define YLIKUUTIO_ONTOLOGY_PRINT_CONSOLE_STRUCT_HPP_INCLUDED
 
 #include "position_struct.hpp"
-#include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 
 // Include standard headers
@@ -32,7 +31,7 @@ namespace yli::ontology
     struct PrintConsoleStruct
     {
         PrintConsoleStruct(
-                const std::span<const yli::console::TextLine> buffer_text,
+                const std::span<const std::string> buffer_text,
                 const yli::console::TextInput* const text_input)
             : buffer_text { buffer_text },
             text_input { text_input }
@@ -41,7 +40,7 @@ namespace yli::ontology
 
         PositionStruct position;
         std::size_t font_size { 0 };
-        const std::span<const yli::console::TextLine> buffer_text;
+        const std::span<const std::string> buffer_text;
         const yli::console::TextInput* const text_input;
         std::string prompt;
     };

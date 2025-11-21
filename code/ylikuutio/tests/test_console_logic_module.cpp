@@ -283,9 +283,9 @@ TEST(entering_scrollback_buffer_from_new_input_must_work_appropriately, scrollba
     console_logic_module.activate();
     new_input.add_characters("a");
     text_input_history.add_to_history(new_input);
-    scrollback_buffer.add_to_buffer(new_input);
+    scrollback_buffer.add_to_buffer(new_input.data());
     ASSERT_EQ(text_input_history.at(0).data(), "a");
-    ASSERT_EQ(scrollback_buffer.at(0).data(), "a");
+    ASSERT_EQ(scrollback_buffer.at(0), "a");
 
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.enter_scrollback_buffer();
     ASSERT_TRUE(console_state);
@@ -683,7 +683,7 @@ TEST(exiting_scrollback_buffer_must_work_appropriately, scrollback_buffer_while_
     console_logic_module.activate();
     new_input.add_characters("a");
     text_input_history.add_to_history(new_input);
-    scrollback_buffer.add_to_buffer(new_input);
+    scrollback_buffer.add_to_buffer(new_input.data());
     console_logic_module.enter_scrollback_buffer();
 
     std::optional<yli::console::ConsoleState> console_state = console_logic_module.exit_scrollback_buffer();

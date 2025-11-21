@@ -28,7 +28,6 @@
 #include "family_templates.hpp"
 #include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
-#include "code/ylikuutio/console/text_line.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -53,7 +52,6 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    using yli::console::TextLine;
     using yli::console::TextInput;
     using yli::console::TextInputType;
 
@@ -136,7 +134,7 @@ namespace yli::ontology
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.
-        this->scrollback_buffer.add_to_buffer(TextLine(text));
+        this->scrollback_buffer.add_to_buffer(text);
     }
 
     void Console::print_help()
