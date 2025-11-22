@@ -24,6 +24,7 @@
 
 namespace yli::string
 {
+    std::optional<char32_t> read_codepoint(std::string::const_iterator& it, std::string::const_iterator end);
     std::optional<std::u32string> u8_to_u32(const std::string& my_string);
     std::optional<std::string> u32_to_u8(const std::u32string& my_string);
 }

@@ -24,6 +24,69 @@
 
 // Tests for conversion from UTF-8 to UTF-32
 
+TEST(utf8_must_be_read_appropriately, a)
+{
+    std::string input_string { "a" };
+    std::string::const_iterator it = input_string.cbegin();
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'a');
+    }
+    ASSERT_EQ(it, input_string.cend());
+}
+
+TEST(utf8_must_be_read_appropriately, ab)
+{
+    std::string input_string { "ab" };
+    std::string::const_iterator it = input_string.cbegin();
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'a');
+    }
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'b');
+    }
+    ASSERT_EQ(it, input_string.cend());
+}
+
+TEST(utf8_must_be_read_appropriately, o_with_dots)
+{
+    std::string input_string { "ö" };
+    std::string::const_iterator it = input_string.cbegin();
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'ö');
+    }
+    ASSERT_EQ(it, input_string.cend());
+}
+
+TEST(utf8_must_be_read_appropriately, tokyo_in_japanese)
+{
+    std::string input_string { "東京" };
+    std::string::const_iterator it = input_string.cbegin();
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'東');
+    }
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'京');
+    }
+    ASSERT_EQ(it, input_string.cend());
+}
+
+TEST(utf8_must_be_read_appropriately, mayan_zero)
+{
+    std::string input_string { "𝋠" };
+    std::string::const_iterator it = input_string.cbegin();
+    {
+        std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
+        ASSERT_EQ(codepoint, U'𝋠');
+    }
+    ASSERT_EQ(it, input_string.cend());
+}
+
 TEST(utf8_must_be_converted_to_utf32_appropriately, a)
 {
     std::string input_string { "a" };

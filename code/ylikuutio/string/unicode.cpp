@@ -18,92 +18,143 @@
 #include "unicode.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string, std::u32string
+
+std::optional<char32_t> yli::string::read_codepoint(std::string::const_iterator& it, std::string::const_iterator cend)
+{
+    if (it == cend)
+    {
+        return std::nullopt;
+    }
+
+    // Read a codepoint and advance the iterator.
+    // If the codepoint is invalid, return `std::nullopt`.
+
+    const unsigned char byte1 = *it++;
+
+    if (byte1 < 0b1000'0000)
+    {
+        // ASCII.
+        return static_cast<char32_t>(byte1);
+    }
+    else if (byte1 < 0b1110'0000)
+    {
+        // 2 bytes.
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte2 = *it++;
+        if ((byte2 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0001'1111) << 6) |
+            (static_cast<char32_t>(byte2) & 0b0011'1111);
+        return codepoint;
+    }
+    else if (byte1 < 0b1111'0000)
+    {
+        // 3 bytes.
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte2 = *it++;
+        if ((byte2 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte3 = *it++;
+        if ((byte3 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0000'1111) << 12) |
+            ((static_cast<char32_t>(byte2) & 0b0011'1111) << 6) |
+            (static_cast<char32_t>(byte3) & 0b0011'1111);
+        return codepoint;
+    }
+    else if (byte1 < 0b1111'1000)
+    {
+        // 4 bytes.
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte2 = *it++;
+        if ((byte2 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte3 = *it++;
+        if ((byte3 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        if (it == cend)
+        {
+            return std::nullopt;
+        }
+
+        const unsigned char byte4 = *it++;
+        if ((byte4 & 0b1100'0000) != 0b1000'0000)
+        {
+            // Invalid codepoint.
+            return std::nullopt;
+        }
+
+        const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0000'0111) << 18) |
+            ((static_cast<char32_t>(byte2) & 0b0011'1111) << 12) |
+            ((static_cast<char32_t>(byte3) & 0b0011'1111) << 6) |
+            (static_cast<char32_t>(byte4) & 0b0011'1111);
+        return codepoint;
+    }
+    else
+    {
+        // Invalid codepoint.
+        return std::nullopt;
+    }
+}
 
 std::optional<std::u32string> yli::string::u8_to_u32(const std::string& my_string)
 {
     std::u32string u32_string;
 
-    for (std::size_t index = 0; index < my_string.size(); )
+    for (std::string::const_iterator it = my_string.cbegin(); it != my_string.cend(); )
     {
-        const unsigned char byte1 = my_string.at(index++);
+        std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend());
 
-        if (byte1 < 0b1000'0000)
+        if (codepoint.has_value())
         {
-            // ASCII.
-            u32_string.push_back(static_cast<char32_t>(byte1));
-        }
-        else if (byte1 < 0b1110'0000)
-        {
-            // 2 bytes.
-            const unsigned char byte2 = my_string.at(index++);
-            if ((byte2 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0001'1111) << 6) |
-                (static_cast<char32_t>(byte2) & 0b0011'1111);
-            u32_string.push_back(codepoint);
-        }
-        else if (byte1 < 0b1111'0000)
-        {
-            // 3 bytes.
-            const unsigned char byte2 = my_string.at(index++);
-            if ((byte2 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const unsigned char byte3 = my_string.at(index++);
-            if ((byte3 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0000'1111) << 12) |
-                ((static_cast<char32_t>(byte2) & 0b0011'1111) << 6) |
-                (static_cast<char32_t>(byte3) & 0b0011'1111);
-            u32_string.push_back(codepoint);
-        }
-        else if (byte1 < 0b1111'1000)
-        {
-            // 4 bytes.
-            const unsigned char byte2 = my_string.at(index++);
-            if ((byte2 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const unsigned char byte3 = my_string.at(index++);
-            if ((byte3 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const unsigned char byte4 = my_string.at(index++);
-            if ((byte4 & 0b1100'0000) != 0b1000'0000)
-            {
-                // Invalid codepoint.
-                return std::nullopt;
-            }
-
-            const char32_t codepoint = ((static_cast<char32_t>(byte1) & 0b0000'0111) << 18) |
-                ((static_cast<char32_t>(byte2) & 0b0011'1111) << 12) |
-                ((static_cast<char32_t>(byte3) & 0b0011'1111) << 6) |
-                (static_cast<char32_t>(byte4) & 0b0011'1111);
-            u32_string.push_back(codepoint);
+            u32_string.push_back(static_cast<char32_t>(codepoint.value()));
         }
         else
         {
-            // Invalid codepoint.
             return std::nullopt;
         }
     }
