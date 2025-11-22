@@ -18,6 +18,7 @@
 #include "unicode.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string, std::u32string
 
