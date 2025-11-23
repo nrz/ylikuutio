@@ -278,7 +278,7 @@ namespace yli::console
             std::optional<ConsoleState> signal_state_change(const ConsoleState old_state, const ConsoleState new_state);
             std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
-            ConsoleState state                   { ConsoleState::INACTIVE_IN_NEW_INPUT };
+            ConsoleState state { ConsoleState::INACTIVE_IN_NEW_INPUT };
             TextInput& new_input;
             TextInput& temp_input;
             TextInputHistory& text_input_history;
@@ -292,7 +292,7 @@ namespace yli::console
             ModifierState modifier_state;
 
         public:
-            const std::string prompt        { "$ " };
+            const std::string prompt { "$ " };
     };
 }
 
