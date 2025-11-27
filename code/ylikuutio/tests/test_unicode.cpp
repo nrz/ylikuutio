@@ -21,13 +21,14 @@
 // Include standard headers
 #include <optional> // std::optional
 #include <string>   // std::string, std::u32string
+#include <string_view> // std::string_view
 
 // Tests for conversion from UTF-8 to UTF-32
 
 TEST(utf8_must_be_read_appropriately, a)
 {
-    std::string input_string { "a" };
-    std::string::const_iterator it = input_string.cbegin();
+    std::string_view input_string { "a" };
+    std::string_view::const_iterator it = input_string.cbegin();
     {
         std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
         ASSERT_EQ(codepoint, U'a');
@@ -37,8 +38,8 @@ TEST(utf8_must_be_read_appropriately, a)
 
 TEST(utf8_must_be_read_appropriately, ab)
 {
-    std::string input_string { "ab" };
-    std::string::const_iterator it = input_string.cbegin();
+    std::string_view input_string { "ab" };
+    std::string_view::const_iterator it = input_string.cbegin();
     {
         std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
         ASSERT_EQ(codepoint, U'a');
@@ -52,8 +53,8 @@ TEST(utf8_must_be_read_appropriately, ab)
 
 TEST(utf8_must_be_read_appropriately, o_with_dots)
 {
-    std::string input_string { "ö" };
-    std::string::const_iterator it = input_string.cbegin();
+    std::string_view input_string { "ö" };
+    std::string_view::const_iterator it = input_string.cbegin();
     {
         std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
         ASSERT_EQ(codepoint, U'ö');
@@ -63,8 +64,8 @@ TEST(utf8_must_be_read_appropriately, o_with_dots)
 
 TEST(utf8_must_be_read_appropriately, tokyo_in_japanese)
 {
-    std::string input_string { "東京" };
-    std::string::const_iterator it = input_string.cbegin();
+    std::string_view input_string { "東京" };
+    std::string_view::const_iterator it = input_string.cbegin();
     {
         std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
         ASSERT_EQ(codepoint, U'東');
@@ -78,8 +79,8 @@ TEST(utf8_must_be_read_appropriately, tokyo_in_japanese)
 
 TEST(utf8_must_be_read_appropriately, mayan_zero)
 {
-    std::string input_string { "𝋠" };
-    std::string::const_iterator it = input_string.cbegin();
+    std::string_view input_string { "𝋠" };
+    std::string_view::const_iterator it = input_string.cbegin();
     {
         std::optional<char32_t> codepoint = yli::string::read_codepoint(it, input_string.cend());
         ASSERT_EQ(codepoint, U'𝋠');
@@ -89,7 +90,7 @@ TEST(utf8_must_be_read_appropriately, mayan_zero)
 
 TEST(utf8_must_be_converted_to_utf32_appropriately, a)
 {
-    std::string input_string { "a" };
+    std::string_view input_string { "a" };
     std::u32string expected { U"a" };
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     ASSERT_EQ(*result, expected);
@@ -97,7 +98,7 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, a)
 
 TEST(utf8_must_be_converted_to_utf32_appropriately, ab)
 {
-    std::string input_string { "ab" };
+    std::string_view input_string { "ab" };
     std::u32string expected { U"ab" };
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     ASSERT_EQ(*result, expected);
@@ -105,7 +106,7 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, ab)
 
 TEST(utf8_must_be_converted_to_utf32_appropriately, o_with_dots)
 {
-    std::string input_string { "ö" };
+    std::string_view input_string { "ö" };
     std::u32string expected { U"ö" };
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     ASSERT_EQ(*result, expected);
@@ -113,7 +114,7 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, o_with_dots)
 
 TEST(utf8_must_be_converted_to_utf32_appropriately, tokyo_in_japanese)
 {
-    std::string input_string { "東京" }; // e6 9d b1 e4 ba ac (2 3-byte codepoints)
+    std::string_view input_string { "東京" }; // e6 9d b1 e4 ba ac (2 3-byte codepoints)
     std::u32string expected { U"東京" }; // 0x6771 0x4eac
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     std::optional<std::u32string> u32 = yli::string::u8_to_u32(input_string);
@@ -123,7 +124,7 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, tokyo_in_japanese)
 
 TEST(utf8_must_be_converted_to_utf32_appropriately, mayan_zero)
 {
-    std::string input_string { "𝋠" }; // f0 9d 8b a0 (1 4-byte codepoint)
+    std::string_view input_string { "𝋠" }; // f0 9d 8b a0 (1 4-byte codepoint)
     std::u32string expected { U"𝋠" }; // 0x1d2e0
     std::optional<std::u32string> result = yli::string::u8_to_u32(input_string);
     ASSERT_EQ(result, expected);
@@ -134,7 +135,7 @@ TEST(utf8_must_be_converted_to_utf32_appropriately, mayan_zero)
 TEST(utf32_must_be_converted_to_utf8_appropriately, a)
 {
     std::u32string input_string { U"a" };
-    std::string expected { "a" };
+    std::string_view expected { "a" };
     std::optional<std::string> result = yli::string::u32_to_u8(input_string);
     ASSERT_EQ(result, expected);
 }
@@ -142,7 +143,7 @@ TEST(utf32_must_be_converted_to_utf8_appropriately, a)
 TEST(utf32_must_be_converted_to_utf8_appropriately, ab)
 {
     std::u32string input_string { U"ab" };
-    std::string expected { "ab" };
+    std::string_view expected { "ab" };
     std::optional<std::string> result = yli::string::u32_to_u8(input_string);
     ASSERT_EQ(result, expected);
 }
@@ -150,7 +151,7 @@ TEST(utf32_must_be_converted_to_utf8_appropriately, ab)
 TEST(utf32_must_be_converted_to_utf8_appropriately, o_with_dots)
 {
     std::u32string input_string { U"ö" };
-    std::string expected { "ö" };
+    std::string_view expected { "ö" };
     std::optional<std::string> result = yli::string::u32_to_u8(input_string);
     ASSERT_EQ(result, expected);
 }
@@ -158,7 +159,7 @@ TEST(utf32_must_be_converted_to_utf8_appropriately, o_with_dots)
 TEST(utf32_must_be_converted_to_utf8_appropriately, tokyo_in_japanese)
 {
     std::u32string input_string { U"東京" }; // 0x6771 0x4eac
-    std::string expected { "東京" }; // e6 9d b1 e4 ba ac (2 3-byte codepoints)
+    std::string_view expected { "東京" }; // e6 9d b1 e4 ba ac (2 3-byte codepoints)
     std::optional<std::string> result = yli::string::u32_to_u8(input_string);
     ASSERT_EQ(result, expected);
 }
@@ -166,7 +167,7 @@ TEST(utf32_must_be_converted_to_utf8_appropriately, tokyo_in_japanese)
 TEST(utf32_must_be_converted_to_utf8_appropriately, mayan_zero)
 {
     std::u32string input_string { U"𝋠" }; // 0x1d2e0
-    std::string expected { "𝋠" };         // f0 9d 8b a0 (1 4-byte codepoint)
+    std::string_view expected { "𝋠" };         // f0 9d 8b a0 (1 4-byte codepoint)
     std::optional<std::string> result = yli::string::u32_to_u8(input_string);
     ASSERT_EQ(result, expected);
 }
