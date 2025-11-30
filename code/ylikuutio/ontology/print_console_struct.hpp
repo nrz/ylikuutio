@@ -22,8 +22,8 @@
 #include "code/ylikuutio/console/text_input.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <span>     // std::span
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -39,7 +39,7 @@ namespace yli::ontology
         }
 
         PositionStruct position;
-        std::size_t font_size { 0 };
+        uint32_t font_size { 0 };
         const std::span<const std::string> buffer_text;
         const yli::console::TextInput* const text_input;
         std::string prompt;
