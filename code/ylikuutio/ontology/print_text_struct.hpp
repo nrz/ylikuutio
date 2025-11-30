@@ -21,7 +21,7 @@
 #include "position_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>  // std::string
 
 namespace yli::ontology
@@ -29,7 +29,7 @@ namespace yli::ontology
     struct PrintTextStruct
     {
         PositionStruct position;
-        std::size_t font_size     { 0 };
+        uint32_t font_size { 0 };
         std::string text;
     };
 }
