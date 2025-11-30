@@ -38,12 +38,12 @@ namespace yli::ontology
         {
         }
 
-        PositionStruct position;
-        uint32_t font_size { 0 };
-        uint32_t n_columns { 0 };
         const std::span<const std::string> buffer_text;
         const yli::console::TextInput* const text_input;
         std::string prompt;
+        PositionStruct position;
+        uint32_t font_size { 0 };
+        uint32_t n_columns { 0 };
     };
 }
 
