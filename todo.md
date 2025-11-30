@@ -3,7 +3,6 @@
 
 ## Fixes needed
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
-- [ ] BUG/CONSOLE/RENDERING/UI Text input beyond what fits on the first line of `Console` is not rendered on the following lines as it should.
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
@@ -362,3 +361,4 @@
 - [x] TOOLS Implement initial software architecture for HirviEdit (HirviEdit is a specialization of YliEdit for Hirvi and Hirvi-Demo).
 - [x] LIBRARIES/UI Update SDL2 to SDL3.
 - [x] CONSOLE/UI Use SDL3 text input for console input.
+- [x] BUG/CONSOLE/RENDERING/UI Text input beyond what fits on the first line of `Console` is not rendered on the following lines as it should.
