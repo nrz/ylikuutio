@@ -316,6 +316,7 @@ namespace yli::ontology
         std::vector<glm::vec2> uvs;
 
         std::size_t i = 0;
+        uint32_t column_i = 0;
 
         while (i < length)
         {
@@ -324,15 +325,21 @@ namespace yli::ontology
 
             const char character = print_text_struct.text[i++];
 
-            if (character == '\n')
+            if (character == '\n' || column_i >= print_text_struct.n_columns)
             {
                 // Jump to the beginning of the next line.
                 // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
                 // TODO: implement newline for other horizontal and vertical alignments too!
                 current_left_x = print_text_struct.position.x;
                 current_top_y -= this->text_size;
-                continue;
+                column_i = 0;
+
+                if (character == '\n' )
+                {
+                    continue;
+                }
             }
+
 
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
             current_left_x += this->text_size;
@@ -352,6 +359,8 @@ namespace yli::ontology
             uvs.emplace_back(uv_down_right);
             uvs.emplace_back(uv_up_right);
             uvs.emplace_back(uv_down_left);
+
+            column_i++;
         }
 
         yli::render::render_text(
@@ -427,12 +436,11 @@ namespace yli::ontology
 
         if (print_console_struct.text_input != nullptr)
         {
-            PrintTextStruct print_text_struct;
+            PrintTextStruct print_text_struct { print_console_struct.font_size, this->universe.get_window_width() / this->text_size };
             print_text_struct.position.x = current_left_x;
             print_text_struct.position.y = current_top_y;
             print_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
             print_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
-            print_text_struct.font_size = print_console_struct.font_size;
             print_text_struct.text = print_console_struct.prompt + print_console_struct.text_input->data();
             this->print_text_2d(print_text_struct);
         }

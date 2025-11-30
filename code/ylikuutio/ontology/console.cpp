@@ -199,12 +199,13 @@ namespace yli::ontology
                  (this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view))),
                 (is_in_scrollback_buffer ?
                  nullptr :
-                 this->console_logic_module.get_visible_input()));
+                 this->console_logic_module.get_visible_input()),
+                this->universe.get_font_size(),
+                this->n_columns);
         print_console_struct.position.x = 0;
         print_console_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
         print_console_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
         print_console_struct.position.vertical_alignment = VerticalAlignment::TOP;
-        print_console_struct.font_size = this->universe.get_font_size();
         print_console_struct.prompt = this->get_prompt();
 
         font_2d->print_console(print_console_struct);
