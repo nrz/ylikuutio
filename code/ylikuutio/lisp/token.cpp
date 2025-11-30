@@ -22,20 +22,33 @@
 #include <cstddef>     // std::size_t
 #include <optional>    // std::optional
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::lisp
 {
-    Token::Token(TokenType type, std::string_view lexeme)
+    Token::Token(TokenType type, std::string&& lexeme)
         : type { type },
-        lexeme { lexeme }
+        lexeme { std::move(lexeme) }
     {
     }
 
-    Token::Token(TokenType type, std::string_view lexeme, std::optional<std::size_t> line_number)
+    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number)
         : type { type },
-        lexeme { lexeme },
+        lexeme { std::move(lexeme) },
         line_number { line_number }
     {
+    }
+
+    bool Token::operator==(const Token& other) const
+    {
+        // Equal `Token`s have identical type and identical lexeme.
+        // Line numbers may differ.
+        return this->type == other.type && this->lexeme == other.lexeme;
+    }
+
+    bool Token::operator!=(const Token& other) const
+    {
+        return !this->operator==(other);
     }
 
     TokenType Token::get_type() const

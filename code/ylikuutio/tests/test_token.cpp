@@ -21,7 +21,6 @@
 
 // Include standard headers
 #include <optional>    // std::nullopt
-#include <string_view> // std::string_view
 
 using yli::lisp::TokenType;
 

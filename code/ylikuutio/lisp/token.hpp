@@ -23,18 +23,19 @@
 // Include standard headers
 #include <cstddef>     // std::size_t
 #include <optional>    // std::optional
+#include <string>      // std::string
 #include <string_view> // std::string_view
 
 namespace yli::lisp
 {
     class Token
     {
-        // The lexeme provided for the constructor must outlive the use of `Token`.
-        // The string containing the lexeme can be owned e.g. by `yli::ontology::Console`.
-
         public:
-            Token(TokenType type, std::string_view lexeme);
-            Token(TokenType type, std::string_view lexeme, std::optional<std::size_t> line_number);
+            Token(TokenType type, std::string&& lexeme);
+            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number);
+
+            bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
+            bool operator!=(const Token& other) const; // Line numbers may differ.
 
             TokenType get_type() const;
             std::string_view get_lexeme() const;
@@ -42,7 +43,8 @@ namespace yli::lisp
 
         private:
             TokenType type;
-            std::string_view lexeme;
+            std::string lexeme;
+
             std::optional<std::size_t> line_number;
     };
 }
