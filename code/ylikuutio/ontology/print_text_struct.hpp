@@ -28,10 +28,10 @@ namespace yli::ontology
 {
     struct PrintTextStruct
     {
+        std::string text;
         PositionStruct position;
         uint32_t font_size { 0 };
         uint32_t n_columns { 0 };
-        std::string text;
     };
 }
 
