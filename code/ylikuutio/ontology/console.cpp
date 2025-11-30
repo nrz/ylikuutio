@@ -283,15 +283,15 @@ namespace yli::ontology
 
     void Console::process_text_input(const SDL_TextInputEvent& text_input_event)
     {
-            TextInput* const active_input = this->console_logic_module.edit_input();
+        TextInput* const active_input = this->console_logic_module.edit_input();
 
-            if (active_input == nullptr) [[unlikely]]
-            {
-                return;
-            }
+        if (active_input == nullptr) [[unlikely]]
+        {
+            return;
+        }
 
-            const std::string input = text_input_event.text;
-            active_input->add_characters(input);
+        const std::string input = text_input_event.text;
+        active_input->add_characters(input);
     }
 
     void Console::copy_historical_input_into_temp_input()
