@@ -205,7 +205,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_signed_integer(std::string_view string)
         {
-            int32_t value = std::strtol(std::string(string).c_str(), nullptr, 10); // base 10.
+            const int32_t value = std::strtol(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value < std::numeric_limits<T>::min())
             {
@@ -224,7 +224,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_unsigned_integer(std::string_view string)
         {
-            uint32_t value = std::strtoul(std::string(string).c_str(), nullptr, 10); // base 10.
+            const uint32_t value = std::strtoul(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value > std::numeric_limits<T>::max())
             {
