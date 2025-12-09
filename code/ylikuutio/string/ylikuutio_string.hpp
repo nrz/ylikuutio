@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
-#include <cstdlib>     // std::strtod, std::strtof, std::strtol, std::strtoul
+#include <cstdlib>     // std::strtod, std::strtof, std::strtoll, std::strtoull
 #include <iomanip>     // std::setfill, std::setw
 #include <ios>         // std::hex
 #include <iostream>    // std::cout, std::cerr
@@ -205,7 +205,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_signed_integer(std::string_view string)
         {
-            const int32_t value = std::strtol(std::string(string).c_str(), nullptr, 10); // base 10.
+            const int64_t value = std::strtoll(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value < std::numeric_limits<T>::min())
             {
@@ -224,7 +224,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_unsigned_integer(std::string_view string)
         {
-            const uint32_t value = std::strtoul(std::string(string).c_str(), nullptr, 10); // base 10.
+            const uint64_t value = std::strtoull(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value > std::numeric_limits<T>::max())
             {
