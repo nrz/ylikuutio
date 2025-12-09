@@ -357,6 +357,104 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_string().c_str(), "4294967295"), 0);
 }
 
+TEST(any_value_must_be_initialized_appropriately, int64_t_zero)
+{
+    int64_t int64_t_zero = 0;
+    yli::data::AnyValue int64_t_zero_value = yli::data::AnyValue(int64_t_zero);
+    ASSERT_TRUE(std::holds_alternative<int64_t>(int64_t_zero_value.data));
+    ASSERT_EQ(std::get<int64_t>(int64_t_zero_value.data), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("int64_t"));
+    ASSERT_EQ(std::strcmp(int64_t_zero_value.get_datatype().c_str(), "int64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_zero_value.get_string().c_str()), std::char_traits<char>::length("0"));
+    ASSERT_EQ(std::strcmp(int64_t_zero_value.get_string().c_str(), "0"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, int64_t_plus_1)
+{
+    int64_t int64_t_plus_1 = 1;
+    yli::data::AnyValue int64_t_plus_1_value = yli::data::AnyValue(int64_t_plus_1);
+    ASSERT_TRUE(std::holds_alternative<int64_t>(int64_t_plus_1_value.data));
+    ASSERT_EQ(std::get<int64_t>(int64_t_plus_1_value.data), 1);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("int64_t"));
+    ASSERT_EQ(std::strcmp(int64_t_plus_1_value.get_datatype().c_str(), "int64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_plus_1_value.get_string().c_str()), std::char_traits<char>::length("1"));
+    ASSERT_EQ(std::strcmp(int64_t_plus_1_value.get_string().c_str(), "1"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, int64_t_minus_1)
+{
+    int64_t int64_t_minus_1 = -1;
+    yli::data::AnyValue int64_t_minus_1_value = yli::data::AnyValue(int64_t_minus_1);
+    ASSERT_TRUE(std::holds_alternative<int64_t>(int64_t_minus_1_value.data));
+    ASSERT_EQ(std::get<int64_t>(int64_t_minus_1_value.data), -1);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_minus_1_value.get_datatype().c_str()), std::char_traits<char>::length("int64_t"));
+    ASSERT_EQ(std::strcmp(int64_t_minus_1_value.get_datatype().c_str(), "int64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_minus_1_value.get_string().c_str()), std::char_traits<char>::length("-1"));
+    ASSERT_EQ(std::strcmp(int64_t_minus_1_value.get_string().c_str(), "-1"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, int64_t_max)
+{
+    int64_t int64_t_max = std::numeric_limits<int64_t>::max();
+    yli::data::AnyValue int64_t_max_value = yli::data::AnyValue(int64_t_max);
+    ASSERT_TRUE(std::holds_alternative<int64_t>(int64_t_max_value.data));
+    ASSERT_EQ(std::get<int64_t>(int64_t_max_value.data), 9223372036854775807);
+    ASSERT_EQ(std::get<int64_t>(int64_t_max_value.data), std::numeric_limits<int64_t>::max());
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_max_value.get_datatype().c_str()), std::char_traits<char>::length("int64_t"));
+    ASSERT_EQ(std::strcmp(int64_t_max_value.get_datatype().c_str(), "int64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_max_value.get_string().c_str()), std::char_traits<char>::length("9223372036854775807"));
+    ASSERT_EQ(std::strcmp(int64_t_max_value.get_string().c_str(), "9223372036854775807"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, int64_t_min)
+{
+    int64_t int64_t_min = std::numeric_limits<int64_t>::min();
+    yli::data::AnyValue int64_t_min_value = yli::data::AnyValue(int64_t_min);
+    ASSERT_TRUE(std::holds_alternative<int64_t>(int64_t_min_value.data));
+    ASSERT_EQ(std::get<int64_t>(int64_t_min_value.data), -9223372036854775808);
+    ASSERT_EQ(std::get<int64_t>(int64_t_min_value.data), std::numeric_limits<int64_t>::min());
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_min_value.get_datatype().c_str()), std::char_traits<char>::length("int64_t"));
+    ASSERT_EQ(std::strcmp(int64_t_min_value.get_datatype().c_str(), "int64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(int64_t_min_value.get_string().c_str()), std::char_traits<char>::length("-9223372036854775808"));
+    ASSERT_EQ(std::strcmp(int64_t_min_value.get_string().c_str(), "-9223372036854775808"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, uint64_t_zero)
+{
+    uint64_t uint64_t_zero = 0;
+    yli::data::AnyValue uint64_t_zero_value = yli::data::AnyValue(uint64_t_zero);
+    ASSERT_TRUE(std::holds_alternative<uint64_t>(uint64_t_zero_value.data));
+    ASSERT_EQ(std::get<uint64_t>(uint64_t_zero_value.data), 0);
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("uint64_t"));
+    ASSERT_EQ(std::strcmp(uint64_t_zero_value.get_datatype().c_str(), "uint64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_zero_value.get_string().c_str()), std::char_traits<char>::length("0"));
+    ASSERT_EQ(std::strcmp(uint64_t_zero_value.get_string().c_str(), "0"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, uint64_t_plus_1)
+{
+    uint64_t uint64_t_plus_1 = 1;
+    yli::data::AnyValue uint64_t_plus_1_value = yli::data::AnyValue(uint64_t_plus_1);
+    ASSERT_TRUE(std::holds_alternative<uint64_t>(uint64_t_plus_1_value.data));
+    ASSERT_EQ(std::get<uint64_t>(uint64_t_plus_1_value.data), 1);
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("uint64_t"));
+    ASSERT_EQ(std::strcmp(uint64_t_plus_1_value.get_datatype().c_str(), "uint64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_plus_1_value.get_string().c_str()), std::char_traits<char>::length("1"));
+    ASSERT_EQ(std::strcmp(uint64_t_plus_1_value.get_string().c_str(), "1"), 0);
+}
+
+TEST(any_value_must_be_initialized_appropriately, uint64_t_max)
+{
+    uint64_t uint64_t_max = std::numeric_limits<uint64_t>::max();
+    yli::data::AnyValue uint64_t_max_value = yli::data::AnyValue(uint64_t_max);
+    ASSERT_TRUE(std::holds_alternative<uint64_t>(uint64_t_max_value.data));
+    ASSERT_EQ(std::get<uint64_t>(uint64_t_max_value.data), std::numeric_limits<uint64_t>::max());
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_max_value.get_datatype().c_str()), std::char_traits<char>::length("uint64_t"));
+    ASSERT_EQ(std::strcmp(uint64_t_max_value.get_datatype().c_str(), "uint64_t"), 0);
+    ASSERT_EQ(std::char_traits<char>::length(uint64_t_max_value.get_string().c_str()), std::char_traits<char>::length("18446744073709551615"));
+    ASSERT_EQ(std::strcmp(uint64_t_max_value.get_string().c_str(), "18446744073709551615"), 0);
+}
+
 TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 {
     mock::MockApplication application;

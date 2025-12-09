@@ -89,6 +89,8 @@ namespace yli::data
             explicit AnyValue(const double double_value);
             explicit AnyValue(const int32_t int32_t_value);
             explicit AnyValue(const uint32_t uint32_t_value);
+            explicit AnyValue(const int64_t int64_t_value);
+            explicit AnyValue(const uint64_t uint64_t_value);
             // Strings.
             explicit AnyValue(std::string& std_string_ref);
             explicit AnyValue(const std::string& const_std_string_ref);
@@ -99,6 +101,8 @@ namespace yli::data
             explicit AnyValue(std::vector<uint16_t>& std_vector_uint16_t_ref);
             explicit AnyValue(std::vector<int32_t>& std_vector_int32_t_ref);
             explicit AnyValue(std::vector<uint32_t>& std_vector_uint32_t_ref);
+            explicit AnyValue(std::vector<int64_t>& std_vector_int64_t_ref);
+            explicit AnyValue(std::vector<uint64_t>& std_vector_uint64_t_ref);
             explicit AnyValue(std::vector<float>& std_vector_float_ref);
             // Fixed-size vectors.
             explicit AnyValue(glm::vec3& glm_vec3_ref);
@@ -135,6 +139,8 @@ namespace yli::data
                 double,
                 int32_t,
                 uint32_t,
+                int64_t,
+                uint64_t,
                 // Strings.
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>,
@@ -145,6 +151,8 @@ namespace yli::data
                 std::reference_wrapper<std::vector<uint16_t>>,
                 std::reference_wrapper<std::vector<int32_t>>,
                 std::reference_wrapper<std::vector<uint32_t>>,
+                std::reference_wrapper<std::vector<int64_t>>,
+                std::reference_wrapper<std::vector<uint64_t>>,
                 std::reference_wrapper<std::vector<float>>,
                 // Fixed-size vectors.
                 std::reference_wrapper<glm::vec3>,

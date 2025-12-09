@@ -92,6 +92,14 @@ namespace yli::data
         {
             return std::get<uint32_t>(this->data) == std::get<uint32_t>(rhs.data);
         }
+        else if (std::holds_alternative<int64_t>(this->data) && std::holds_alternative<int64_t>(rhs.data))
+        {
+            return std::get<int64_t>(this->data) == std::get<int64_t>(rhs.data);
+        }
+        else if (std::holds_alternative<uint64_t>(this->data) && std::holds_alternative<uint64_t>(rhs.data))
+        {
+            return std::get<uint64_t>(this->data) == std::get<uint64_t>(rhs.data);
+        }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<std::string>>(rhs.data))
@@ -141,6 +149,18 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<std::vector<uint32_t>>>(this->data).get() ==
                 std::get<std::reference_wrapper<std::vector<uint32_t>>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<std::vector<int64_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<int64_t>>>(rhs.data).get();
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(rhs.data))
+        {
+            return std::get<std::reference_wrapper<std::vector<uint64_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<uint64_t>>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<std::vector<float>>>(rhs.data))
@@ -313,6 +333,14 @@ namespace yli::data
         {
             return "uint32_t";
         }
+        else if (std::holds_alternative<int64_t>(this->data))
+        {
+            return "int64_t";
+        }
+        else if (std::holds_alternative<uint64_t>(this->data))
+        {
+            return "uint64_t";
+        }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
@@ -346,6 +374,14 @@ namespace yli::data
         else if (std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(this->data))
         {
             return "std::vector<uint32_t>&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data))
+        {
+            return "std::vector<int64_t>&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data))
+        {
+            return "std::vector<uint64_t>&";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data))
         {
@@ -479,6 +515,14 @@ namespace yli::data
             // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
             any_value_stringstream << std::get<uint32_t>(this->data);
         }
+        else if (std::holds_alternative<int64_t>(this->data))
+        {
+            any_value_stringstream << std::get<int64_t>(this->data);
+        }
+        else if (std::holds_alternative<uint64_t>(this->data))
+        {
+            any_value_stringstream << std::get<uint64_t>(this->data);
+        }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
         {
@@ -512,6 +556,14 @@ namespace yli::data
         else if (std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(this->data))
         {
             any_value_stringstream << "std::vector<uint32_t>&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data))
+        {
+            any_value_stringstream << "std::vector<int64_t>&";
+        }
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data))
+        {
+            any_value_stringstream << "std::vector<uint64_t>&";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data))
         {
@@ -878,6 +930,32 @@ namespace yli::data
             this->data = uint32_t_value;
             return true;
         }
+        else if (std::holds_alternative<int64_t>(this->data))
+        {
+            if (!yli::string::check_if_signed_integer_string<char>(value_string))
+            {
+                return false;
+            }
+
+            int64_t int64_t_value;
+            value_stringstream << value_string;
+            value_stringstream >> int64_t_value;
+            this->data = int64_t_value;
+            return true;
+        }
+        else if (std::holds_alternative<uint64_t>(this->data))
+        {
+            if (!yli::string::check_if_unsigned_integer_string<char>(value_string))
+            {
+                return false;
+            }
+
+            uint64_t uint64_t_value;
+            value_stringstream << value_string;
+            value_stringstream >> uint64_t_value;
+            this->data = uint64_t_value;
+            return true;
+        }
 
         return false;
     }
@@ -902,6 +980,8 @@ namespace yli::data
                 double,
                 int32_t,
                 uint32_t,
+                int64_t,
+                uint64_t,
                 // Strings.
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>,
@@ -912,6 +992,8 @@ namespace yli::data
                 std::reference_wrapper<std::vector<uint16_t>>,
                 std::reference_wrapper<std::vector<int32_t>>,
                 std::reference_wrapper<std::vector<uint32_t>>,
+                std::reference_wrapper<std::vector<int64_t>>,
+                std::reference_wrapper<std::vector<uint64_t>>,
                 std::reference_wrapper<std::vector<float>>,
                 // Fixed-size vectors.
                 std::reference_wrapper<glm::vec3>,
@@ -972,6 +1054,16 @@ namespace yli::data
     {
     }
 
+    AnyValue::AnyValue(const int64_t int64_t_value)
+        : data(int64_t_value)
+    {
+    }
+
+    AnyValue::AnyValue(const uint64_t uint64_t_value)
+        : data(uint64_t_value)
+    {
+    }
+
     // Strings.
 
     AnyValue::AnyValue(std::string& std_string_ref)
@@ -1013,6 +1105,16 @@ namespace yli::data
 
     AnyValue::AnyValue(std::vector<uint32_t>& std_vector_uint32_t_ref)
         : data(std::reference_wrapper<std::vector<uint32_t>>(std_vector_uint32_t_ref))
+    {
+    }
+
+    AnyValue::AnyValue(std::vector<int64_t>& std_vector_int64_t_ref)
+        : data(std::reference_wrapper<std::vector<int64_t>>(std_vector_int64_t_ref))
+    {
+    }
+
+    AnyValue::AnyValue(std::vector<uint64_t>& std_vector_uint64_t_ref)
+        : data(std::reference_wrapper<std::vector<uint64_t>>(std_vector_uint64_t_ref))
     {
     }
 
