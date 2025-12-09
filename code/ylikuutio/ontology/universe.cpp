@@ -80,7 +80,6 @@
 #endif
 
 // Include standard headers
-#include <cmath>     // sqrt
 #include <cstddef>   // std::size_t
 #include <iomanip>   // std::setprecision
 #include <ios>       // std::fixed
@@ -93,7 +92,6 @@
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <utility>   // std::move
-#include <variant>   // std::holds_alternative
 #include <vector>    // std::vector
 
 namespace yli::memory
