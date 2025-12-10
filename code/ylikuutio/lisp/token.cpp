@@ -21,6 +21,7 @@
 // Include standard headers
 #include <cstddef>     // std::size_t
 #include <optional>    // std::optional
+#include <stdint.h>    // int64_t, uint64_t
 #include <string_view> // std::string_view
 #include <utility>     // std::move
 
@@ -33,9 +34,33 @@ namespace yli::lisp
     }
 
     Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number)
-        : type { type },
-        lexeme { std::move(lexeme) },
+        : type      { type },
+        lexeme      { std::move(lexeme) },
         line_number { line_number }
+    {
+    }
+
+    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const int64_t value)
+        : type        { type },
+        lexeme        { std::move(lexeme) },
+        line_number   { line_number },
+        numeric_value { value }
+    {
+    }
+
+    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const uint64_t value)
+        : type        { type },
+        lexeme        { std::move(lexeme) },
+        line_number   { line_number },
+        numeric_value { value }
+    {
+    }
+
+    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const double value)
+        : type        { type },
+        lexeme        { std::move(lexeme) },
+        line_number   { line_number },
+        numeric_value { value }
     {
     }
 
@@ -43,7 +68,7 @@ namespace yli::lisp
     {
         // Equal `Token`s have identical type and identical lexeme.
         // Line numbers may differ.
-        return this->type == other.type && this->lexeme == other.lexeme;
+        return this->type == other.type && this->lexeme == other.lexeme && this->numeric_value == other.numeric_value;
     }
 
     bool Token::operator!=(const Token& other) const
@@ -64,5 +89,10 @@ namespace yli::lisp
     std::optional<std::size_t> Token::get_line_number() const
     {
         return this->line_number;
+    }
+
+    std::size_t Token::size() const
+    {
+        return this->lexeme.size();
     }
 }

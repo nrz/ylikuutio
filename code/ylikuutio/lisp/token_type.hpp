@@ -32,7 +32,9 @@ namespace yli::lisp
         // n-character token types.
         IDENTIFIER,        // Identifiers for function names, and variable names.
         STRING,            // A Unicode string starting and ending with double quotes.
-        NUMBER             // Consisting of Arabic numerals (0-9), may contain one dot as well.
+        UNSIGNED_INTEGER,  // Consisting of Arabic numerals (0-9).
+        SIGNED_INTEGER,    // Consisting of Arabic numerals (0-9) and exactly one minus sign.
+        FLOATING_POINT     // Consisting of Arabic numerals (0-9), exactly one dot as well, and may also have one minus sign as well.
     };
 }
 #endif

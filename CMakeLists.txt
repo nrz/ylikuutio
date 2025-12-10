@@ -490,14 +490,30 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # lisp, in alphabetical order.
+    code/ylikuutio/lisp/error.cpp
+    code/ylikuutio/lisp/error.hpp
+    code/ylikuutio/lisp/error_log.cpp
+    code/ylikuutio/lisp/error_log.hpp
     code/ylikuutio/lisp/executor.cpp
     code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/function_arg_extractor.hpp
+    code/ylikuutio/lisp/identifier.cpp
+    code/ylikuutio/lisp/identifier.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
+    code/ylikuutio/lisp/number_literal.cpp
+    code/ylikuutio/lisp/number_literal.hpp
     code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp
+    code/ylikuutio/lisp/scanner.cpp
+    code/ylikuutio/lisp/scanner.hpp
+    code/ylikuutio/lisp/string_literal.cpp
+    code/ylikuutio/lisp/string_literal.hpp
+    code/ylikuutio/lisp/text_position.cpp
+    code/ylikuutio/lisp/text_position.hpp
     code/ylikuutio/lisp/token.cpp
     code/ylikuutio/lisp/token.hpp
+    code/ylikuutio/lisp/token_list.cpp
+    code/ylikuutio/lisp/token_list.hpp
     code/ylikuutio/lisp/token_type.hpp
 
     # load, in alphabetical order.
@@ -1092,6 +1108,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_scene.cpp
         code/ylikuutio/tests/test_pipeline.cpp
         code/ylikuutio/tests/test_pipeline_struct.cpp
+        code/ylikuutio/tests/test_scanner.cpp
         code/ylikuutio/tests/test_scrollback_buffer.cpp
         code/ylikuutio/tests/test_shapeshifter.cpp
         code/ylikuutio/tests/test_species.cpp
@@ -1105,6 +1122,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_text_3d.cpp
         code/ylikuutio/tests/test_text_input.cpp
         code/ylikuutio/tests/test_text_input_history.cpp
+        code/ylikuutio/tests/test_text_position.cpp
         code/ylikuutio/tests/test_token.cpp
         code/ylikuutio/tests/test_triangulation.cpp
         code/ylikuutio/tests/test_unicode.cpp

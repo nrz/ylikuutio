@@ -22,9 +22,11 @@
 
 // Include standard headers
 #include <cstddef>     // std::size_t
-#include <optional>    // std::optional
+#include <optional>    // std::nullopt, std::optional
+#include <stdint.h>    // int64_t, uint64_t
 #include <string>      // std::string
 #include <string_view> // std::string_view
+#include <variant>     // std::holds_alternative, std::monostate, std::variant
 
 namespace yli::lisp
 {
@@ -33,6 +35,9 @@ namespace yli::lisp
         public:
             Token(TokenType type, std::string&& lexeme);
             Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number);
+            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const int64_t value);
+            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const uint64_t value);
+            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const double value);
 
             bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
             bool operator!=(const Token& other) const; // Line numbers may differ.
@@ -41,11 +46,28 @@ namespace yli::lisp
             std::string_view get_lexeme() const;
             std::optional<std::size_t> get_line_number() const;
 
+            template<typename T>
+                std::optional<T> get_numeric_value() const
+                {
+                    if (std::holds_alternative<T>(this->numeric_value)) [[likely]]
+                    {
+                        return std::get<T>(this->numeric_value);
+                    }
+
+                    return std::nullopt;
+                }
+
+            std::size_t size() const;
+
         private:
             TokenType type;
             std::string lexeme;
-
             std::optional<std::size_t> line_number;
+            std::variant<
+                std::monostate, // Uninitialized state.
+                int64_t,
+                uint64_t,
+                double> numeric_value;
     };
 }
 

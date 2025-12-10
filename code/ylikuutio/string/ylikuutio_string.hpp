@@ -275,6 +275,18 @@ namespace yli::string
         }
 
     template<>
+        inline std::optional<int64_t> convert_string_to_value<int64_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_signed_integer<int64_t>(string);
+        }
+
+    template<>
+        inline std::optional<uint64_t> convert_string_to_value<uint64_t>(std::string_view string)
+        {
+            return yli::string::convert_string_to_unsigned_integer<uint64_t>(string);
+        }
+
+    template<>
         inline std::optional<float> convert_string_to_value<float>(std::string_view string)
         {
             return std::strtof(std::string(string).c_str(), nullptr);
