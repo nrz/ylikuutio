@@ -93,7 +93,6 @@ namespace yli::lisp
                         {
                             // ERROR: Invalid character after `\` escape.
                             error_log.add_error(text_position);
-                            return std::nullopt;
                         }
 
                         break;
