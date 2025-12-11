@@ -18,6 +18,9 @@
 #include "error_log.hpp"
 #include "error.hpp"
 
+// Include standard headers
+#include <cstddef> // std::size_t
+
 namespace yli::lisp
 {
     class TextPosition;
@@ -30,5 +33,10 @@ namespace yli::lisp
     bool ErrorLog::empty() const
     {
         return this->errors.empty();
+    }
+
+    std::size_t ErrorLog::size() const
+    {
+        return this->errors.size();
     }
 }
