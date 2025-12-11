@@ -54,7 +54,6 @@ namespace yli::lisp
                     {
                         // End of string.
                         return Token(TokenType::STRING, std::move(current_string));
-                        break;
                     }
                 case U'\\':
                     {

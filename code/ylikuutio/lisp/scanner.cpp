@@ -174,13 +174,9 @@ namespace yli::lisp
                             Token token = maybe_token.value();
                             return Token(std::move(token));
                         }
-                        else
-                        {
-                            this->add_error();
-                            return std::nullopt;
-                        }
 
-                        break;
+                        this->add_error();
+                        return std::nullopt;
                     }
                 default:
                     {
