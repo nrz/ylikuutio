@@ -99,6 +99,12 @@ namespace yli::lisp
                     }
                 default:
                     {
+                        if (codepoint < 0x20) [[unlikely]]
+                        {
+                            // Invalid codepoint. Report an error.
+                            error_log.add_error(text_position);
+                        }
+
                         // This codepoint is a part of the string. Advance to the next codepoint.
                         current_string.push_back(codepoint);
                     }

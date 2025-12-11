@@ -44,7 +44,7 @@ namespace yli::lisp
 
             const char32_t codepoint = maybe_codepoint.value();
 
-            if (reserved_codepoints.contains(codepoint)) [[unlikely]]
+            if (reserved_codepoints.contains(codepoint) || codepoint < 0x20) [[unlikely]]
             {
                 // Reserved codepoint. End of number literal.
                 return convert_string_to_value(text_position, error_log, reserved_codepoints);

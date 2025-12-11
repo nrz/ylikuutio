@@ -42,7 +42,7 @@ namespace yli::lisp
 
             const char32_t codepoint = maybe_codepoint.value();
 
-            if (reserved_codepoints.contains(codepoint)) [[unlikely]]
+            if (reserved_codepoints.contains(codepoint) || codepoint < 0x20) [[unlikely]]
             {
                 // Reserved codepoint. End of identifier.
                 std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());

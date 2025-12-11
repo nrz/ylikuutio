@@ -184,6 +184,8 @@ namespace yli::lisp
                         {
                             // Codepoints below 0x20 (32) except the ones already processed are invalid in YliLisp.
                             this->add_error();
+                            this->text_position.next();
+                            this->text_position.advance_to_next_token();
                             return std::nullopt;
                         }
                         else if (this->get_is_digit_or_dot_or_minus())
