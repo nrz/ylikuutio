@@ -34,6 +34,8 @@ using yli::lisp::TokenList;
 using yli::lisp::Token;
 using yli::lisp::TokenType;
 
+// Successful scans.
+
 TEST(string_must_be_scanned_appropriately, empty_string)
 {
     const std::string empty_string { "" };
