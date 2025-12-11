@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/lisp/scanner.hpp"
+#include "code/ylikuutio/lisp/error_log.hpp"
 #include "code/ylikuutio/lisp/token_list.hpp"
 #include "code/ylikuutio/lisp/token.hpp"
 #include "code/ylikuutio/lisp/token_type.hpp"
@@ -28,6 +29,7 @@
 #include <vector>   // std::vector
 
 using yli::lisp::Scanner;
+using yli::lisp::ErrorLog;
 using yli::lisp::TokenList;
 using yli::lisp::Token;
 using yli::lisp::TokenType;
@@ -39,6 +41,8 @@ TEST(string_must_be_scanned_appropriately, empty_string)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, left_parenthesis)
@@ -49,6 +53,8 @@ TEST(string_must_be_scanned_appropriately, left_parenthesis)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, right_parenthesis)
@@ -59,6 +65,8 @@ TEST(string_must_be_scanned_appropriately, right_parenthesis)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, quote)
@@ -69,6 +77,8 @@ TEST(string_must_be_scanned_appropriately, quote)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::QUOTE, "'"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, dot)
@@ -79,6 +89,8 @@ TEST(string_must_be_scanned_appropriately, dot)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::DOT, "."));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, semicolon)
@@ -88,6 +100,8 @@ TEST(string_must_be_scanned_appropriately, semicolon)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, space)
@@ -97,6 +111,8 @@ TEST(string_must_be_scanned_appropriately, space)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, carriage_return)
@@ -106,6 +122,8 @@ TEST(string_must_be_scanned_appropriately, carriage_return)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, tab)
@@ -115,6 +133,8 @@ TEST(string_must_be_scanned_appropriately, tab)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, newline)
@@ -124,6 +144,8 @@ TEST(string_must_be_scanned_appropriately, newline)
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, foo_string_literal)
@@ -133,6 +155,8 @@ TEST(string_must_be_scanned_appropriately, foo_string_literal)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
@@ -143,6 +167,8 @@ TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
     ASSERT_EQ(token_list.size(), 2);
     ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo"));
     ASSERT_EQ(token_list.at(1), Token(TokenType::STRING, "bar"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
@@ -152,6 +178,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", std::nullopt, static_cast<uint64_t>(0)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
@@ -161,6 +189,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", std::nullopt, static_cast<uint64_t>(1)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
@@ -170,6 +200,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", std::nullopt, static_cast<int64_t>(-1)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073709551615)
@@ -179,6 +211,8 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", std::nullopt, static_cast<uint64_t>(18446744073709551615)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372036854775808)
@@ -188,6 +222,8 @@ TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", std::nullopt, static_cast<int64_t>(-9223372036854775808)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_0_dot_0)
@@ -197,6 +233,8 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", std::nullopt, static_cast<double>(0.0)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_minus_0_dot_0)
@@ -206,6 +244,8 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", std::nullopt, static_cast<double>(0.0)));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, foo_identifier)
@@ -215,6 +255,8 @@ TEST(string_must_be_scanned_appropriately, foo_identifier)
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
@@ -225,6 +267,8 @@ TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
     ASSERT_EQ(token_list.size(), 2);
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
@@ -236,6 +280,8 @@ TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "baz"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block)
@@ -246,6 +292,8 @@ TEST(string_must_be_scanned_appropriately, empty_block)
     ASSERT_EQ(token_list.size(), 2);
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
@@ -258,6 +306,8 @@ TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
     ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
@@ -270,6 +320,8 @@ TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
     ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo)
@@ -281,6 +333,8 @@ TEST(string_must_be_scanned_appropriately, block_foo)
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_space_foo)
@@ -292,6 +346,8 @@ TEST(string_must_be_scanned_appropriately, block_space_foo)
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo_space)
@@ -303,6 +359,8 @@ TEST(string_must_be_scanned_appropriately, block_foo_space)
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_space_foo_space)
@@ -314,6 +372,8 @@ TEST(string_must_be_scanned_appropriately, block_space_foo_space)
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
@@ -326,6 +386,8 @@ TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
     ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
@@ -340,6 +402,8 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
     ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
@@ -354,6 +418,8 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
     ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_space_block_baz)
@@ -371,6 +437,8 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_s
     ASSERT_EQ(token_list.at(6), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(7), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     ASSERT_EQ(token_list.at(8), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
@@ -385,6 +453,8 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
     ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
@@ -399,4 +469,6 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
     ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "("));
     ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar"));
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
 }
