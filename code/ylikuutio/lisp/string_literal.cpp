@@ -91,7 +91,7 @@ namespace yli::lisp
                         }
                         else
                         {
-                            // ERROR: Invalid character after `\` escape.
+                            // ERROR: Invalid character after `\` escape. Report an error.
                             error_log.add_error(text_position);
                         }
 
