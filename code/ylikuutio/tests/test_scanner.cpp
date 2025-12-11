@@ -472,3 +472,63 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
 }
+
+// Failing scans.
+
+TEST(scanning_must_fail_appropriately, audible_bell)
+{
+    const std::string audible_bell_string { "\a" };
+    const Scanner scanner(audible_bell_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+}
+
+TEST(scanning_must_fail_appropriately, audible_bell_three_times)
+{
+    const std::string audible_bell_three_times_string { "\a\a\a" };
+    const Scanner scanner(audible_bell_three_times_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 3);
+}
+
+TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
+{
+    const std::string audible_bell_and_a_string { "\aa" };
+    const Scanner scanner(audible_bell_and_a_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "a"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+}
+
+TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
+{
+    const std::string audible_bell_and_foo_string { "\afoo" };
+    const Scanner scanner(audible_bell_and_foo_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+}
+
+TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
+{
+    const std::string foo_identifier_and_audible_bell_string { "foo\a" };
+    const Scanner scanner(foo_identifier_and_audible_bell_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+}
