@@ -44,7 +44,7 @@ namespace yli::lisp
 
             if (reserved_codepoints.contains(codepoint)) [[unlikely]]
             {
-                // Reserved codepoint. End of string literal.
+                // Reserved codepoint. End of identifier.
                 std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
                 return Token(TokenType::IDENTIFIER, std::move(identifier_string));
             }
@@ -52,7 +52,7 @@ namespace yli::lisp
             text_position.next();
         }
 
-        // End of source. End of string literal.
+        // End of source. End of identifier.
         std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
         return Token(TokenType::IDENTIFIER, std::move(identifier_string));
     }
