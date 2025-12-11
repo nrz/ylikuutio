@@ -24,6 +24,7 @@
 #include <optional>      // std::optional, std::nullopt
 #include <string>        // std::string
 #include <unordered_set> // std::unordered_set
+#include <utility>       // std::move
 
 namespace yli::lisp
 {
