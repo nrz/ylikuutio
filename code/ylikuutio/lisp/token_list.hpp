@@ -38,7 +38,6 @@ namespace yli::lisp
 
             const std::vector<Token>& data() const;
 
-            const Token& at() const;
             bool empty() const;
             std::size_t size() const;
 
