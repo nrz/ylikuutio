@@ -30,6 +30,11 @@ namespace yli::lisp
         this->errors.emplace_back(Error(text_position));
     }
 
+    const Error& ErrorLog::at(const std::size_t index) const
+    {
+        return this->errors.at(index);
+    }
+
     bool ErrorLog::empty() const
     {
         return this->errors.empty();
