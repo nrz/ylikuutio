@@ -34,12 +34,14 @@ namespace yli::lisp
 
             std::optional<char32_t> peek_codepoint() const;
             std::optional<char32_t> scan_codepoint_and_advance();
+
+            void update_line_and_column(const char32_t codepoint);
             void next_line();
             void next_column();
 
             std::string_view get_filename() const;
 
-            std::string_view::const_iterator next();
+            std::string_view::const_iterator next(const char32_t codepoint);
             std::string_view::const_iterator get_token_start_it() const;
             std::string_view::const_iterator get_it() const;
             std::string_view::const_iterator get_cend() const;

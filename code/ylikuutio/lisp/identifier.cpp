@@ -49,7 +49,7 @@ namespace yli::lisp
                 return Token(TokenType::IDENTIFIER, std::move(identifier_string));
             }
 
-            text_position.next();
+            text_position.next(codepoint);
         }
 
         // End of source. End of identifier.

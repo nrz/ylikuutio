@@ -101,36 +101,27 @@ namespace yli::lisp
 
             const char32_t codepoint = maybe_codepoint.value();
 
-            if (codepoint == U'\n') [[unlikely]]
-            {
-                this->text_position.next_line();
-            }
-            else
-            {
-                this->text_position.next_column();
-            }
-
             switch (codepoint)
             {
                 case U'(':
                     {
                         // Left parenthesis is a token on its own, used for grouping.
-                        return Token(TokenType::LEFT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next()));
+                        return Token(TokenType::LEFT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
                     }
                 case U')':
                     {
                         // Right parenthesis is a token on its own, used for grouping.
-                        return Token(TokenType::RIGHT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next()));
+                        return Token(TokenType::RIGHT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
                     }
                 case U'\'':
                     {
                         // Quote is a token on its own, used for quoting.
-                        return Token(TokenType::QUOTE, std::string(this->text_position.get_token_start_it(), this->text_position.next()));
+                        return Token(TokenType::QUOTE, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
                     }
                 case U'.':
                     {
                         // Dot is a token on its own, used for member access.
-                        return Token(TokenType::DOT, std::string(this->text_position.get_token_start_it(), this->text_position.next()));
+                        return Token(TokenType::DOT, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
                     }
                 case U';':
                     {
@@ -158,20 +149,19 @@ namespace yli::lisp
                 case U'\t':
                     {
                         // Ignore whitespace.
-                        this->text_position.next();
+                        this->text_position.next(codepoint);
                         this->text_position.advance_to_next_token();
                         break;
                     }
                 case U'\n':
                     {
                         // Next line.
-                        this->text_position.next();
-                        this->text_position.next_line();
+                        this->text_position.next(codepoint);
                         break;
                     }
                 case U'"':
                     {
-                        this->text_position.next();
+                        this->text_position.next(codepoint);
                         std::optional<Token> maybe_token = yli::lisp::scan_string_literal(this->text_position, this->error_log);
 
                         if (maybe_token.has_value()) [[likely]]
@@ -189,7 +179,7 @@ namespace yli::lisp
                         {
                             // Codepoints below 0x20 (32) except the ones already processed are invalid in YliLisp.
                             this->add_error();
-                            this->text_position.next();
+                            this->text_position.next(codepoint);
                             this->text_position.advance_to_next_token();
                             return std::nullopt;
                         }

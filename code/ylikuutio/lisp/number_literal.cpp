@@ -50,7 +50,7 @@ namespace yli::lisp
                 return convert_string_to_value(text_position, error_log, reserved_codepoints);
             }
 
-            text_position.next();
+            text_position.next(codepoint);
         }
 
         // End of source. End of number literal.

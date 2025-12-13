@@ -63,6 +63,13 @@ namespace yli::lisp
 
         const char32_t codepoint = maybe_codepoint.value();
 
+        this->update_line_and_column(codepoint);
+
+        return codepoint;
+    }
+
+    void TextPosition::update_line_and_column(const char32_t codepoint)
+    {
         if (codepoint == U'\n') [[unlikely]]
         {
             this->next_line();
@@ -71,8 +78,6 @@ namespace yli::lisp
         {
             this->column++;
         }
-
-        return codepoint;
     }
 
     void TextPosition::next_line()
@@ -91,8 +96,9 @@ namespace yli::lisp
         return this->filename;
     }
 
-    std::string_view::const_iterator TextPosition::next()
+    std::string_view::const_iterator TextPosition::next(const char32_t codepoint)
     {
+        this->update_line_and_column(codepoint);
         return ++this->current_it;
     }
 
