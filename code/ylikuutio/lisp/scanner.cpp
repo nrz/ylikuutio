@@ -95,6 +95,7 @@ namespace yli::lisp
 
             if (!maybe_codepoint.has_value())
             {
+                // Scanning failed. End scanning now.
                 this->add_error();
                 return std::nullopt;
             }
