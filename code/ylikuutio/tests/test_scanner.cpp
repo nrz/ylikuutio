@@ -18,9 +18,11 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/lisp/scanner.hpp"
 #include "code/ylikuutio/lisp/error_log.hpp"
+#include "code/ylikuutio/lisp/error.hpp"
 #include "code/ylikuutio/lisp/token_list.hpp"
 #include "code/ylikuutio/lisp/token.hpp"
 #include "code/ylikuutio/lisp/token_type.hpp"
+#include "code/ylikuutio/lisp/text_position.hpp"
 
 // Include standard headers
 #include <optional> // std::nullopt, std::optional
@@ -30,9 +32,11 @@
 
 using yli::lisp::Scanner;
 using yli::lisp::ErrorLog;
+using yli::lisp::Error;
 using yli::lisp::TokenList;
 using yli::lisp::Token;
 using yli::lisp::TokenType;
+using yli::lisp::TextPosition;
 
 // Successful scans.
 
@@ -45,6 +49,9 @@ TEST(string_must_be_scanned_appropriately, empty_string)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 1); // 1 is the leftmost column and for empty input it is already past end.
 }
 
 TEST(string_must_be_scanned_appropriately, left_parenthesis)
@@ -57,6 +64,9 @@ TEST(string_must_be_scanned_appropriately, left_parenthesis)
     ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, right_parenthesis)
@@ -69,6 +79,9 @@ TEST(string_must_be_scanned_appropriately, right_parenthesis)
     ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, quote)
@@ -81,6 +94,9 @@ TEST(string_must_be_scanned_appropriately, quote)
     ASSERT_EQ(token_list.at(0), Token(TokenType::QUOTE, "'"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, dot)
@@ -93,6 +109,9 @@ TEST(string_must_be_scanned_appropriately, dot)
     ASSERT_EQ(token_list.at(0), Token(TokenType::DOT, "."));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, semicolon)
@@ -104,6 +123,9 @@ TEST(string_must_be_scanned_appropriately, semicolon)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, space)
@@ -115,6 +137,9 @@ TEST(string_must_be_scanned_appropriately, space)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, carriage_return)
@@ -126,6 +151,9 @@ TEST(string_must_be_scanned_appropriately, carriage_return)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, tab)
@@ -137,6 +165,9 @@ TEST(string_must_be_scanned_appropriately, tab)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, newline)
@@ -148,6 +179,9 @@ TEST(string_must_be_scanned_appropriately, newline)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 2);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 1); // 2 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, foo_string_literal)
@@ -159,6 +193,9 @@ TEST(string_must_be_scanned_appropriately, foo_string_literal)
     ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 6); // 6 is past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
@@ -171,6 +208,9 @@ TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
     ASSERT_EQ(token_list.at(1), Token(TokenType::STRING, "bar"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);    // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 12); // 12 is past end here.
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
@@ -182,6 +222,9 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", std::nullopt, static_cast<uint64_t>(0)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
@@ -193,6 +236,9 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", std::nullopt, static_cast<uint64_t>(1)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
@@ -204,6 +250,9 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
     ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", std::nullopt, static_cast<int64_t>(-1)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 3); // 3 is past end here.
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073709551615)
@@ -215,6 +264,9 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
     ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", std::nullopt, static_cast<uint64_t>(18446744073709551615)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                          // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (integer_literal_18446744073709551615_string.size() + 1)); // Past end here.
 }
 
 TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372036854775808)
@@ -226,6 +278,9 @@ TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372
     ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", std::nullopt, static_cast<int64_t>(-9223372036854775808)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                               // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (integer_literal_minus_9223372036854775808_string.size() + 1)); // Past end here.
 }
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_0_dot_0)
@@ -237,6 +292,9 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", std::nullopt, static_cast<double>(0.0)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                    // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (floating_point_literal_0_dot_0_string.size() + 1)); // Past end here.
 }
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_minus_0_dot_0)
@@ -248,6 +306,9 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", std::nullopt, static_cast<double>(0.0)));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                          // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (floating_point_literal_minus_0_dot_0_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, foo_identifier)
@@ -259,6 +320,9 @@ TEST(string_must_be_scanned_appropriately, foo_identifier)
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                         // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (foo_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
@@ -271,6 +335,9 @@ TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
     ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (foo_space_bar_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
@@ -284,6 +351,9 @@ TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
     ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "baz"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                             // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (foo_space_bar_space_baz_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block)
@@ -296,6 +366,9 @@ TEST(string_must_be_scanned_appropriately, empty_block)
     ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                 // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (empty_block_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
@@ -310,6 +383,9 @@ TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                             // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (empty_block_empty_block_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
@@ -324,6 +400,9 @@ TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (empty_block_space_empty_block_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo)
@@ -337,6 +416,9 @@ TEST(string_must_be_scanned_appropriately, block_foo)
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                    // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_space_foo)
@@ -350,6 +432,9 @@ TEST(string_must_be_scanned_appropriately, block_space_foo)
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                          // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_space_foo_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo_space)
@@ -363,6 +448,9 @@ TEST(string_must_be_scanned_appropriately, block_foo_space)
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                          // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_space_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_space_foo_space)
@@ -376,6 +464,9 @@ TEST(string_must_be_scanned_appropriately, block_space_foo_space)
     ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_space_foo_space_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
@@ -390,6 +481,9 @@ TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
     ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                              // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_space_bar_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
@@ -406,6 +500,9 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_with_block_bar_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
@@ -422,6 +519,9 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                    // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_space_block_bar_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_space_block_baz)
@@ -441,6 +541,9 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_s
     ASSERT_EQ(token_list.at(8), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                                         // Line indices start from 1.
+    ASSERT_EQ(text_position.get_column(), (block_with_foo_space_block_with_bar_space_block_baz_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
@@ -457,6 +560,9 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                         // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_foo_block_bar_string.size() + 1)); // Past end here.
 }
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
@@ -473,6 +579,9 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
     ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                               // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (block_foo_space_block_bar_string.size() + 1)); // Past end here.
 }
 
 // Failing scans.
@@ -486,6 +595,13 @@ TEST(scanning_must_fail_appropriately, audible_bell)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 1);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (audible_bell_string.size() + 1)); // Past end here.
 }
 
 TEST(scanning_must_fail_appropriately, audible_bell_three_times)
@@ -497,6 +613,29 @@ TEST(scanning_must_fail_appropriately, audible_bell_three_times)
     ASSERT_TRUE(token_list.empty());
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 3);
+
+    {
+        const Error& error = error_log.at(0);
+        ASSERT_EQ(error.get_filename(), "");
+        ASSERT_EQ(error.get_line(), 1);
+        ASSERT_EQ(error.get_column(), 1);
+    }
+    {
+        const Error& error = error_log.at(1);
+        ASSERT_EQ(error.get_filename(), "");
+        ASSERT_EQ(error.get_line(), 1);
+        ASSERT_EQ(error.get_column(), 2);
+    }
+    {
+        const Error& error = error_log.at(2);
+        ASSERT_EQ(error.get_filename(), "");
+        ASSERT_EQ(error.get_line(), 1);
+        ASSERT_EQ(error.get_column(), 3);
+    }
+
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                              // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (audible_bell_three_times_string.size() + 1)); // Past end here.
 }
 
 TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
@@ -509,6 +648,13 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "a"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 1);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                        // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (audible_bell_and_a_string.size() + 1)); // Past end here.
 }
 
 TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
@@ -521,6 +667,13 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 1);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                          // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (audible_bell_and_foo_string.size() + 1)); // Past end here.
 }
 
 TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
@@ -533,4 +686,29 @@ TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
     ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 4);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                                     // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (foo_identifier_and_audible_bell_string.size() + 1)); // Past end here.
+}
+
+TEST(string_must_be_scanned_appropriately, audible_bell_string_literal)
+{
+    const std::string audible_bell_string { "\"\a\"" };
+    const Scanner scanner(audible_bell_string);
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "\a"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 3);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (audible_bell_string.size() + 1)); // Past end here.
 }
