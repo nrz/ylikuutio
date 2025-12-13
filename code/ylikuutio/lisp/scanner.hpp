@@ -39,6 +39,7 @@ namespace yli::lisp
 
             const TokenList& get_token_list() const;
             const ErrorLog& get_error_log() const;
+            const TextPosition& get_text_position() const;
 
             bool get_is_success() const;
 

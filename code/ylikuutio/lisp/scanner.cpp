@@ -54,6 +54,11 @@ namespace yli::lisp
         return this->error_log;
     }
 
+    const TextPosition& Scanner::get_text_position() const
+    {
+        return this->text_position;
+    }
+
     bool Scanner::get_is_success() const
     {
         return this->is_success;
