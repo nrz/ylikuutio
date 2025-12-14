@@ -22,7 +22,6 @@
 #include "identifier.hpp"
 #include "number_literal.hpp"
 #include "string_literal.hpp"
-#include "code/ylikuutio/data/codepoint.hpp"
 #include "code/ylikuutio/string/unicode.hpp"
 
 // Include standard headers
