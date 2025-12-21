@@ -150,14 +150,13 @@ namespace yli::lisp
                     {
                         // Ignore whitespace.
                         this->text_position.next(codepoint);
-                        this->text_position.advance_to_next_token();
-                        break;
+                        return std::nullopt;
                     }
                 case U'\n':
                     {
                         // Next line.
                         this->text_position.next(codepoint);
-                        break;
+                        return std::nullopt;
                     }
                 case U'"':
                     {
