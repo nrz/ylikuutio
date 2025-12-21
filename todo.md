@@ -6,6 +6,10 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
+- [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
+- [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
+- [ ] CONSOLE/RENDERING Add support of filling lines shorter than `n\_columns` in `Console`.
 - [ ] YLILISP Implement parser for YliLisp.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
