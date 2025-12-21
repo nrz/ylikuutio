@@ -88,7 +88,7 @@ namespace yli::lisp
 
     std::optional<Token> Scanner::scan_token()
     {
-        while (this->text_position.get_it() != this->string.cend())
+        while (this->text_position.get_it() != this->text_position.get_cend())
         {
             std::optional<char32_t> maybe_codepoint = this->text_position.peek_codepoint();
 
