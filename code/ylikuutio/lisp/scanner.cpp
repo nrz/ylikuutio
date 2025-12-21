@@ -145,16 +145,11 @@ namespace yli::lisp
                         break;
                     }
                 case U' ':
+                case U'\n':
                 case U'\r':
                 case U'\t':
                     {
                         // Ignore whitespace.
-                        this->text_position.next(codepoint);
-                        return std::nullopt;
-                    }
-                case U'\n':
-                    {
-                        // Next line.
                         this->text_position.next(codepoint);
                         return std::nullopt;
                     }
