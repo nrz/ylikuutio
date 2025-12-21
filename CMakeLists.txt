@@ -494,6 +494,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/error.hpp
     code/ylikuutio/lisp/error_log.cpp
     code/ylikuutio/lisp/error_log.hpp
+    code/ylikuutio/lisp/error_type.hpp
     code/ylikuutio/lisp/executor.cpp
     code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/function_arg_extractor.hpp

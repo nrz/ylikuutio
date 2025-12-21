@@ -20,6 +20,7 @@
 
 #include "token.hpp"
 #include "error_log.hpp"
+#include "error_type.hpp"
 #include "token_list.hpp"
 #include "token_type.hpp"
 #include "text_position.hpp"
@@ -48,7 +49,7 @@ namespace yli::lisp
 
             std::optional<Token> scan_token();
 
-            void add_error();
+            void add_error(ErrorType error_type);
 
             bool get_is_digit_or_dot_or_minus() const;
 

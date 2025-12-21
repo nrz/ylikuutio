@@ -18,6 +18,7 @@
 #include "number_literal.hpp"
 #include "text_position.hpp"
 #include "error_log.hpp"
+#include "error_type.hpp"
 #include "token.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -38,7 +39,7 @@ namespace yli::lisp
 
             if (!maybe_codepoint.has_value()) [[unlikely]]
             {
-                error_log.add_error(text_position);
+                error_log.add_error(text_position, ErrorType::INVALID_UNICODE);
                 return std::nullopt;
             }
 
@@ -75,7 +76,7 @@ namespace yli::lisp
                         maybe_uint64_t.value());
             }
 
-            error_log.add_error(text_position);
+            error_log.add_error(text_position, ErrorType::INVALID_UNSIGNED_INTEGER_LITERAL);
             return std::nullopt;
         }
         else if (const bool is_int64_t_string = yli::string::check_if_signed_integer_string(std::string_view(text_position.get_token_start_it(), text_position.get_it()));
@@ -94,7 +95,7 @@ namespace yli::lisp
                         maybe_int64_t.value());
             }
 
-            error_log.add_error(text_position);
+            error_log.add_error(text_position, ErrorType::INVALID_SIGNED_INTEGER_LITERAL);
             return std::nullopt;
         }
         else if (const bool is_double_string = yli::string::check_if_double_string(std::string_view(text_position.get_token_start_it(), text_position.get_it()));
@@ -113,11 +114,11 @@ namespace yli::lisp
                         maybe_double.value());
             }
 
-            error_log.add_error(text_position);
+            error_log.add_error(text_position, ErrorType::INVALID_FLOATING_POINT_LITERAL);
             return std::nullopt;
         }
 
-        error_log.add_error(text_position);
+        error_log.add_error(text_position, ErrorType::SYNTAX_ERROR);
         return std::nullopt;
     }
 }

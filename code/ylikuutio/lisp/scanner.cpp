@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "scanner.hpp"
-#include "error.hpp"
+#include "error_type.hpp"
 #include "token.hpp"
 #include "token_type.hpp"
 #include "identifier.hpp"
@@ -95,7 +95,7 @@ namespace yli::lisp
             if (!maybe_codepoint.has_value())
             {
                 // Scanning failed. End scanning now.
-                this->add_error();
+                this->add_error(ErrorType::INVALID_UNICODE);
                 return std::nullopt;
             }
 
@@ -132,7 +132,7 @@ namespace yli::lisp
 
                             if (!maybe_codepoint.has_value()) [[unlikely]]
                             {
-                                this->add_error();
+                                this->add_error(ErrorType::INVALID_UNICODE);
                                 break;
                             }
 
@@ -170,7 +170,6 @@ namespace yli::lisp
                             return Token(std::move(token));
                         }
 
-                        this->add_error();
                         return std::nullopt;
                     }
                 default:
@@ -178,7 +177,7 @@ namespace yli::lisp
                         if (codepoint < 0x20) [[unlikely]]
                         {
                             // Codepoints below 0x20 (32) except the ones already processed are invalid in YliLisp.
-                            this->add_error();
+                            this->add_error(ErrorType::INVALID_CODEPOINT);
                             this->text_position.next(codepoint);
                             this->text_position.advance_to_next_token();
                             return std::nullopt;
@@ -193,11 +192,8 @@ namespace yli::lisp
                                 Token token = maybe_token.value();
                                 return Token(std::move(token));
                             }
-                            else
-                            {
-                                this->add_error();
-                                return std::nullopt;
-                            }
+
+                            return std::nullopt;
                         }
                         else [[likely]]
                         {
@@ -209,10 +205,8 @@ namespace yli::lisp
                                 Token token = maybe_token.value();
                                 return Token(std::move(token));
                             }
-                            else
-                            {
-                                this->add_error();
-                            }
+
+                            return std::nullopt;
                         }
 
                         break;
@@ -223,9 +217,9 @@ namespace yli::lisp
         return std::nullopt;
     }
 
-    void Scanner::add_error()
+    void Scanner::add_error(ErrorType error_type)
     {
-        this->error_log.add_error(this->text_position);
+        this->error_log.add_error(this->text_position, error_type);
     }
 
     bool Scanner::get_is_digit_or_dot_or_minus() const

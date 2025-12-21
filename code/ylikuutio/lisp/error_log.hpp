@@ -19,6 +19,7 @@
 #define YLIKUUTIO_LISP_ERROR_LOG_HPP_INCLUDED
 
 #include "error.hpp"
+#include "error_type.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -31,7 +32,7 @@ namespace yli::lisp
     class ErrorLog
     {
         public:
-            void add_error(const TextPosition& text_position);
+            void add_error(const TextPosition& text_position, ErrorType error_type);
 
             const Error& at(const std::size_t index) const;
 

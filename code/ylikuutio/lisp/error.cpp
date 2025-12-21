@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "error.hpp"
+#include "error_type.hpp"
 #include "text_position.hpp"
 
 // Include standard headers
@@ -24,10 +25,11 @@
 
 namespace yli::lisp
 {
-    Error::Error(const TextPosition& text_position)
+    Error::Error(const TextPosition& text_position, ErrorType error_type)
         : filename { text_position.get_filename() },
         line       { text_position.get_line() },
-        column     { text_position.get_column() }
+        column     { text_position.get_column() },
+        type       { error_type }
     {
     }
 
@@ -44,5 +46,10 @@ namespace yli::lisp
     std::size_t Error::get_column() const
     {
         return this->column;
+    }
+
+    ErrorType Error::get_type() const
+    {
+        return this->type;
     }
 }

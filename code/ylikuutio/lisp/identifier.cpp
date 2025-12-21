@@ -18,6 +18,7 @@
 #include "identifier.hpp"
 #include "text_position.hpp"
 #include "error_log.hpp"
+#include "error_type.hpp"
 #include "token.hpp"
 
 // Include standard headers
@@ -36,7 +37,7 @@ namespace yli::lisp
 
             if (!maybe_codepoint.has_value()) [[unlikely]]
             {
-                error_log.add_error(text_position);
+                error_log.add_error(text_position, ErrorType::INVALID_UNICODE);
                 return std::nullopt;
             }
 

@@ -42,7 +42,7 @@ namespace yli::lisp
 
             if (!maybe_codepoint.has_value()) [[unlikely]]
             {
-                error_log.add_error(text_position);
+                error_log.add_error(text_position, ErrorType::INVALID_UNICODE);
                 return std::nullopt;
             }
 
@@ -63,7 +63,7 @@ namespace yli::lisp
                         if (!maybe_second_codepoint.has_value())
                         {
                             // Scanning failed.
-                            error_log.add_error(text_position);
+                            error_log.add_error(text_position, ErrorType::INVALID_UNICODE);
                             return std::nullopt;
                         }
 
@@ -92,7 +92,7 @@ namespace yli::lisp
                         else
                         {
                             // ERROR: Invalid character after `\` escape. Report an error.
-                            error_log.add_error(text_position);
+                            error_log.add_error(text_position, ErrorType::INVALID_ESCAPE_SEQUENCE);
                         }
 
                         break;
@@ -102,7 +102,7 @@ namespace yli::lisp
                         if (codepoint < 0x20) [[unlikely]]
                         {
                             // Invalid codepoint. Report an error.
-                            error_log.add_error(text_position);
+                            error_log.add_error(text_position, ErrorType::INVALID_CODEPOINT);
                         }
 
                         // This codepoint is a part of the string. Advance to the next codepoint.
@@ -113,6 +113,9 @@ namespace yli::lisp
 
         // No closing double quote was found.
 
+        // Invalid codepoint. Report an error.
+        TextPosition opening_double_quote_position(text_position.get_token_start_it(), text_position.get_it());
+        error_log.add_error(opening_double_quote_position, ErrorType::CLOSING_DOUBLE_QUOTE_MISSING);
         return std::nullopt;
     }
 }

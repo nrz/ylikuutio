@@ -15,33 +15,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "error_log.hpp"
-#include "error.hpp"
-
-// Include standard headers
-#include <cstddef> // std::size_t
+#ifndef YLIKUUTIO_LISP_ERROR_TYPE_HPP_INCLUDED
+#define YLIKUUTIO_LISP_ERROR_TYPE_HPP_INCLUDED
 
 namespace yli::lisp
 {
-    class TextPosition;
-
-    void ErrorLog::add_error(const TextPosition& text_position, ErrorType error_type)
+    enum class ErrorType
     {
-        this->errors.emplace_back(Error(text_position, error_type));
-    }
-
-    const Error& ErrorLog::at(const std::size_t index) const
-    {
-        return this->errors.at(index);
-    }
-
-    bool ErrorLog::empty() const
-    {
-        return this->errors.empty();
-    }
-
-    std::size_t ErrorLog::size() const
-    {
-        return this->errors.size();
-    }
+        CLOSING_DOUBLE_QUOTE_MISSING,
+        INVALID_UNICODE,
+        INVALID_CODEPOINT,
+        INVALID_ESCAPE_SEQUENCE,
+        INVALID_UNSIGNED_INTEGER_LITERAL,
+        INVALID_SIGNED_INTEGER_LITERAL,
+        INVALID_FLOATING_POINT_LITERAL,
+        SYNTAX_ERROR
+    };
 }
+#endif

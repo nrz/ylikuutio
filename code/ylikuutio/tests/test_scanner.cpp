@@ -19,6 +19,7 @@
 #include "code/ylikuutio/lisp/scanner.hpp"
 #include "code/ylikuutio/lisp/error_log.hpp"
 #include "code/ylikuutio/lisp/error.hpp"
+#include "code/ylikuutio/lisp/error_type.hpp"
 #include "code/ylikuutio/lisp/token_list.hpp"
 #include "code/ylikuutio/lisp/token.hpp"
 #include "code/ylikuutio/lisp/token_type.hpp"
@@ -33,6 +34,7 @@
 using yli::lisp::Scanner;
 using yli::lisp::ErrorLog;
 using yli::lisp::Error;
+using yli::lisp::ErrorType;
 using yli::lisp::TokenList;
 using yli::lisp::Token;
 using yli::lisp::TokenType;
@@ -619,18 +621,21 @@ TEST(scanning_must_fail_appropriately, audible_bell_three_times)
         ASSERT_EQ(error.get_filename(), "");
         ASSERT_EQ(error.get_line(), 1);
         ASSERT_EQ(error.get_column(), 1);
+        ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     }
     {
         const Error& error = error_log.at(1);
         ASSERT_EQ(error.get_filename(), "");
         ASSERT_EQ(error.get_line(), 1);
         ASSERT_EQ(error.get_column(), 2);
+        ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     }
     {
         const Error& error = error_log.at(2);
         ASSERT_EQ(error.get_filename(), "");
         ASSERT_EQ(error.get_line(), 1);
         ASSERT_EQ(error.get_column(), 3);
+        ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     }
 
     const TextPosition& text_position = scanner.get_text_position();
@@ -652,6 +657,7 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 1);
+    ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                        // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (audible_bell_and_a_string.size() + 1)); // Past end here.
@@ -671,6 +677,7 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 1);
+    ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                          // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (audible_bell_and_foo_string.size() + 1)); // Past end here.
@@ -690,6 +697,7 @@ TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 4);
+    ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                                     // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (foo_identifier_and_audible_bell_string.size() + 1)); // Past end here.
@@ -708,6 +716,7 @@ TEST(string_must_be_scanned_appropriately, audible_bell_string_literal)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 3);
+    ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (audible_bell_string.size() + 1)); // Past end here.

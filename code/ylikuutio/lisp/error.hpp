@@ -18,6 +18,8 @@
 #ifndef YLIKUUTIO_LISP_ERROR_HPP_INCLUDED
 #define YLIKUUTIO_LISP_ERROR_HPP_INCLUDED
 
+#include "error_type.hpp"
+
 // Include standard headers
 #include <cstddef>     // std::size_t
 #include <string_view> // std::string_view
@@ -29,16 +31,18 @@ namespace yli::lisp
     class Error
     {
         public:
-            Error(const TextPosition& text_position);
+            Error(const TextPosition& text_position, ErrorType error_type);
 
             std::string_view get_filename() const;
             std::size_t get_line() const;
             std::size_t get_column() const;
+            ErrorType get_type() const;
 
         private:
             std::string_view filename;
             const std::size_t line;
             const std::size_t column;
+            ErrorType type;
     };
 }
 
