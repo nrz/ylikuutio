@@ -6,6 +6,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] MATH/TERRAIN Add bicubic interpolation.
 - [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
@@ -167,7 +168,6 @@
 - [ ] Add support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
 - [ ] Add support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 - [ ] Use TinySpline.
-- [ ] Add bicubic interpolation.
 - [ ] Add spline interpolation.
 - [ ] Add Lanczos interpolation.
 - [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
