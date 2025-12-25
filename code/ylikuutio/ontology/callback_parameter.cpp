@@ -23,6 +23,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
+#include <utility>  // std::move
 
 namespace yli::core
 {
@@ -49,7 +50,7 @@ namespace yli::ontology
             yli::data::AnyValue&& any_value)
         : Entity(application, universe, callback_parameter_struct),
         child_of_callback_object(callback_object_parent_module, *this),
-        any_value { any_value }
+        any_value { std::move(any_value) }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackParameter*";
