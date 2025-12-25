@@ -113,7 +113,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const auto callback_parameter = static_cast<CallbackParameter*>(
+        const CallbackParameter* const callback_parameter = static_cast<CallbackParameter*>(
                 this->parent_of_callback_parameters.child_pointer_vector.at(arg_i));
 
         if (callback_parameter == nullptr)
