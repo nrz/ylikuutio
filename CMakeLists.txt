@@ -111,7 +111,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type -Werror=nonnull")
     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DNOMINMAX")
 endif()
 
 # set(CMAKE_COLOR_MAKEFILE ON)
