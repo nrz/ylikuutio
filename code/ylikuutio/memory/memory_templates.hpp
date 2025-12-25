@@ -108,7 +108,7 @@ namespace yli::memory
             // We need as many iterations as far as `start_i` is from array index 0.
             for (std::size_t iteration_i = 0, iteration_start_i = start_i; iteration_i < start_i; iteration_i++, iteration_start_i--)
             {
-                if (const std::size_t max_value = std::numeric_limits<std::size_t>::max(); iteration_start_i == max_value) [[unlikely]]
+                if (iteration_start_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
                 {
                     // Overflow. Adjust appropriately.
                     iteration_start_i = buffer_size - 1;
