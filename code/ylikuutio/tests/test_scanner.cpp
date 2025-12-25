@@ -200,6 +200,20 @@ TEST(string_must_be_scanned_appropriately, foo_string_literal)
     ASSERT_EQ(text_position.get_column(), 6); // 6 is past end here.
 }
 
+TEST(string_must_be_scanned_appropriately, backslash_backslash)
+{
+    const std::string backslash_backslash_string { R"("\\")" };
+    const Scanner scanner(backslash_backslash_string);
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, R"(\)"));
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 5); // 5 is past end here.
+}
+
 TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
 {
     const std::string foo_bar_string { R"("foo" "bar")" };
@@ -587,6 +601,60 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
 }
 
 // Failing scans.
+
+TEST(scanning_must_fail_appropriately, missing_closing_double_quote)
+{
+    const std::string double_quote_string { "\"" };
+    const Scanner scanner(double_quote_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 1);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (double_quote_string.size() + 1)); // Past end here.
+}
+
+TEST(scanning_must_fail_appropriately, missing_closing_double_quote_with_space)
+{
+    const std::string double_quote_with_space_string { "\" " };
+    const Scanner scanner(double_quote_with_space_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 1);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                             // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (double_quote_with_space_string.size() + 1)); // Past end here.
+}
+
+TEST(scanning_must_fail_appropriately, space_missing_closing_double_quote)
+{
+    const std::string space_double_quote_string { " \"" };
+    const Scanner scanner(space_double_quote_string);
+    ASSERT_FALSE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_TRUE(token_list.empty());
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_EQ(error_log.size(), 1);
+    const Error& error = error_log.at(0);
+    ASSERT_EQ(error.get_filename(), "");
+    ASSERT_EQ(error.get_line(), 1);
+    ASSERT_EQ(error.get_column(), 2);
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);                                        // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), (space_double_quote_string.size() + 1)); // Past end here.
+}
 
 TEST(scanning_must_fail_appropriately, audible_bell)
 {
