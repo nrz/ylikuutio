@@ -30,6 +30,13 @@ namespace yli::lisp
         public:
             TextPosition(std::string_view::const_iterator cbegin, std::string_view::const_iterator cend);
 
+            TextPosition(
+                    std::string_view::const_iterator cbegin,
+                    std::string_view::const_iterator cend,
+                    const std::size_t offset,
+                    const std::size_t line,
+                    const std::size_t column);
+
             void advance_to_next_token();
 
             std::optional<char32_t> peek_codepoint() const;
@@ -44,6 +51,7 @@ namespace yli::lisp
             std::string_view::const_iterator next(const char32_t codepoint);
             std::string_view::const_iterator get_token_start_it() const;
             std::string_view::const_iterator get_it() const;
+            std::string_view::const_iterator get_cbegin() const;
             std::string_view::const_iterator get_cend() const;
             std::size_t get_offset() const;
             std::size_t get_line() const;
@@ -53,6 +61,7 @@ namespace yli::lisp
             std::string_view filename;
             std::string_view::const_iterator token_start_it;
             std::string_view::const_iterator current_it;
+            const std::string_view::const_iterator begin_it;
             const std::string_view::const_iterator end_it;
             std::size_t offset { 0 };
             std::size_t line   { 1 };

@@ -27,7 +27,24 @@ namespace yli::lisp
     TextPosition::TextPosition(std::string_view::const_iterator cbegin, std::string_view::const_iterator cend)
         : token_start_it { cbegin },
         current_it { cbegin },
+        begin_it { cbegin },
         end_it { cend }
+    {
+    }
+
+    TextPosition::TextPosition(
+            std::string_view::const_iterator cbegin,
+            std::string_view::const_iterator cend,
+            const std::size_t offset,
+            const std::size_t line,
+            const std::size_t column)
+        : token_start_it { cbegin },
+        current_it { cbegin },
+        begin_it { cbegin },
+        end_it { cend },
+        offset { offset },
+        line   { line },
+        column { column }
     {
     }
 
@@ -110,6 +127,11 @@ namespace yli::lisp
     std::string_view::const_iterator TextPosition::get_it() const
     {
         return this->current_it;
+    }
+
+    std::string_view::const_iterator TextPosition::get_cbegin() const
+    {
+        return this->begin_it;
     }
 
     std::string_view::const_iterator TextPosition::get_cend() const

@@ -113,8 +113,13 @@ namespace yli::lisp
 
         // No closing double quote was found.
 
-        // Invalid codepoint. Report an error.
-        TextPosition opening_double_quote_position(text_position.get_token_start_it(), text_position.get_it());
+        // Invalid codepoint. Report an error with the text position of the opening double parenthesis.
+        TextPosition opening_double_quote_position(
+                text_position.get_token_start_it(),
+                text_position.get_it(),
+                text_position.get_offset(),
+                text_position.get_line(),
+                text_position.get_token_start_it() - text_position.get_cbegin() + 1);
         error_log.add_error(opening_double_quote_position, ErrorType::CLOSING_DOUBLE_QUOTE_MISSING);
         return std::nullopt;
     }
