@@ -21,6 +21,7 @@
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
+- [ ] TOOLS Make YliEdit and HirviEdit editors start with an empty scene.
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
