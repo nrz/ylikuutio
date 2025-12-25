@@ -65,7 +65,7 @@ jobs:
       - run: CC=$(which clang) CXX=$(which clang++) cmake -G Ninja -Bbuild_native_clang
       - run: cmake --build build_native_clang
   build-and-test-on-windows:
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
         with:
