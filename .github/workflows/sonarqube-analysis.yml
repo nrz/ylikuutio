@@ -1,14 +1,10 @@
-# Trigger analysis when pushing to your main branches, and when creating a pull request.
+name: SonarQube
+on:
   push:
     branches:
-      - main
       - master
-      - develop
-      - 'releases/**'
-  pull_request:
+    pull_request:
       types: [opened, synchronize, reopened]
-
-name: Main Workflow
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
