@@ -45,8 +45,8 @@ Cross compiling from Linux® to Windows using MinGW-w64 works fine.
 C++20 support is required.
 CMake 3.14 or newer and Ninja are needed for building.
 
-Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
-`master` is the branch that should be up to date and it's the one to build.
+In Ylikuutio GitHub repository in GitHub, `master` is the branch that should be
+up to date and it's the one to build.
 
 ### Native compiling
 #### Debian or Ubuntu
