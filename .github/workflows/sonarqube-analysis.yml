@@ -1,0 +1,38 @@
+# Trigger analysis when pushing to your main branches, and when creating a pull request.
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - 'releases/**'
+  pull_request:
+      types: [opened, synchronize, reopened]
+
+name: Main Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: Install Build Wrapper
+      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v4
+    - name: Run Build Wrapper
+      run: |
+        sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
+        gcc -v && g++ -v
+        mkdir build
+        CC=$(which gcc) CXX=$(which g++) cmake -G Ninja -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
+        build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v4
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        # Consult https://docs.sonarsource.com/sonarqube-server/latest/analyzing-source-code/scanners/sonarscanner/ for more information and options
+        args: >
+          --define "sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json" 
