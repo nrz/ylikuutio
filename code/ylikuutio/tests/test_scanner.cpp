@@ -615,6 +615,7 @@ TEST(scanning_must_fail_appropriately, missing_closing_double_quote)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 1);
+    ASSERT_EQ(error.get_type(), ErrorType::CLOSING_DOUBLE_QUOTE_MISSING);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (double_quote_string.size() + 1)); // Past end here.
@@ -633,6 +634,7 @@ TEST(scanning_must_fail_appropriately, missing_closing_double_quote_with_space)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 1);
+    ASSERT_EQ(error.get_type(), ErrorType::CLOSING_DOUBLE_QUOTE_MISSING);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                             // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (double_quote_with_space_string.size() + 1)); // Past end here.
@@ -651,6 +653,7 @@ TEST(scanning_must_fail_appropriately, space_missing_closing_double_quote)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 2);
+    ASSERT_EQ(error.get_type(), ErrorType::CLOSING_DOUBLE_QUOTE_MISSING);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                        // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (space_double_quote_string.size() + 1)); // Past end here.
@@ -669,6 +672,7 @@ TEST(scanning_must_fail_appropriately, audible_bell)
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
     ASSERT_EQ(error.get_column(), 1);
+    ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.
     ASSERT_EQ(text_position.get_column(), (audible_bell_string.size() + 1)); // Past end here.
