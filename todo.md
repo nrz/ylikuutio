@@ -12,6 +12,12 @@
 - [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
 - [ ] CONSOLE/RENDERING Add support of filling lines shorter than `n\_columns` in `Console`.
 - [ ] YLILISP Implement parser for YliLisp.
+- [ ] YLILISP Implement semantic analyzer for YliLisp.
+- [ ] YLILISP Implement intermediate code generator for YliLisp.
+- [ ] YLILISP Implement intermediate code optimizer for YliLisp.
+- [ ] YLILISP/RISCV Implement RISC-V assembly code generator for YliLisp.
+- [ ] RISCV Implement RISC-V assembler.
+- [ ] RISCV Implement RISC-V disassembler.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
