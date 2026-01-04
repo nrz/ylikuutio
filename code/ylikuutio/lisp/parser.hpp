@@ -24,7 +24,7 @@
 
 namespace yli::lisp
 {
-    bool parse(const std::string& input_string, std::string& command, std::vector<std::string>& parameter_vector);
+    bool legacy_parse(const std::string& input_string, std::string& command, std::vector<std::string>& parameter_vector);
 }
 
 #endif

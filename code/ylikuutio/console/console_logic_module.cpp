@@ -885,7 +885,7 @@ namespace yli::console
 
         console.new_input.clear();
 
-        if (yli::lisp::parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
+        if (yli::lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
         {
             std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
             console.console_logic_module.enter_new_input();

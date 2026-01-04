@@ -52,7 +52,7 @@ namespace yli::console
             std::vector<std::string> parameter_vector;
             std::string command;
 
-            yli::lisp::parse(input_string, command, parameter_vector);
+            yli::lisp::legacy_parse(input_string, command, parameter_vector);
 
             if (command.empty() ||
                     (parameter_vector.empty() && input_string.back() != ' '))
