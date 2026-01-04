@@ -21,7 +21,7 @@
 #include "text_input_history.hpp"
 #include "scrollback_buffer.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/lisp/parser.hpp"
+#include "code/ylikuutio/lisp/legacy_parser.hpp"
 #include "code/ylikuutio/lisp/executor.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"

@@ -17,7 +17,7 @@
 
 #include "completion_module.hpp"
 #include "text_input.hpp"
-#include "code/ylikuutio/lisp/parser.hpp"
+#include "code/ylikuutio/lisp/legacy_parser.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 

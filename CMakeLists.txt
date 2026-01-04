@@ -502,11 +502,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/function_arg_extractor.hpp
     code/ylikuutio/lisp/identifier.cpp
     code/ylikuutio/lisp/identifier.hpp
+    code/ylikuutio/lisp/legacy_parser.cpp
+    code/ylikuutio/lisp/legacy_parser.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/number_literal.cpp
     code/ylikuutio/lisp/number_literal.hpp
-    code/ylikuutio/lisp/parser.cpp
-    code/ylikuutio/lisp/parser.hpp
     code/ylikuutio/lisp/scanner.cpp
     code/ylikuutio/lisp/scanner.hpp
     code/ylikuutio/lisp/string_literal.cpp

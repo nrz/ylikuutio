@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "parser.hpp"
+#include "legacy_parser.hpp"
 
 // Include standard headers
 #include <string>  // std::getline, std::string
