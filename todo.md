@@ -6,11 +6,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] MATH/TERRAIN Add bicubic interpolation.
-- [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
-- [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
-- [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
-- [ ] CONSOLE/RENDERING Add support of filling lines shorter than `n\_columns` in `Console`.
+- [ ] CONSOLE/UI Add visible cursor in console.
 - [ ] YLILISP Implement parser for YliLisp.
 - [ ] YLILISP Implement semantic analyzer for YliLisp.
 - [ ] YLILISP Implement intermediate code generator for YliLisp.
@@ -31,8 +27,12 @@
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
-- [ ] CONSOLE/UI Add visible cursor in console.
+- [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
+- [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
+- [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
+- [ ] CONSOLE/RENDERING Add support of filling lines shorter than `n\_columns` in `Console`.
 - [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
+- [ ] MATH/TERRAIN Add bicubic interpolation.
 - [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
 - [ ] MATH/RENDERING Implement shadows.
 - [ ] RENDERING Implement skybox.
