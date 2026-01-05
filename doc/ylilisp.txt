@@ -1,6 +1,6 @@
 YliLisp is the scripting language of Ylikuutio.
-YliLisp is influenced by Scheme, Common Lisp, C++,
-AngelScript, and Rust.
+YliLisp is influenced by Scheme, Common Lisp, Clojure,
+C++, Java, AngelScript, and Rust.
 
 Use cases:
 * Defining physics simulations.
@@ -13,7 +13,8 @@ Use cases:
 
 General features:
 * Lexically scoped.
-* Variables and functions in the same namespace (Lisp-1).
+* Variables and functions in the same namespace (Lisp-1),
+  like Scheme and Clojure.
 * Mutators marked with `!` like in Scheme, e.g. `set!`.
 * Predicates marked with `?` like in Scheme, e.g. `null?`.
 * Common function names follow names used by Scheme.
@@ -32,6 +33,8 @@ Numeric types:
 
 Integer types:
 * Statically typed: `(define my-number 'uint64 123)`.
+* Without explicit type: `(define my-number 123)` is `uint64`.
+* Without explicit type: `(define my-number 3.14)` is `double`.
 * Type conversion must be explicit: `(as 'uint64 my-number)`.
 * `cast` can only be used for converting into wider variables
   where the value always fits in the new type.
@@ -90,11 +93,25 @@ Indexing:
 * Indexing syntax (syntactic sugar): `foo[bar]`.
   (whitespace around square bracket operators is free).
 
+Dynamically scoped variables:
+* Syntax like is Scheme:
+  * `(define pi 3.14)`
+  * Dynamic variable definition in other Lisps:
+    * Scheme:      `(define pi 3.14)`
+    * Common Lisp: `(defparameter pi 3.14)`
+    * Clojure:     `(def pi 3.14)`
+
 Functions:
 * Functions are first-class citizens.
 * Functions can be overloaded.
 * Member functions/methods are supported as well:
   `(foo.bar)`, `(foo.bar baz)`, etc.
+* Function syntax like is Scheme:
+  * `(define (square x) (* x x))`
+  * Function definition in other Lisps:
+    * Scheme:      `(define (square x) (* x x))`
+    * Common Lisp: `(defun square (x) (* x x))`
+    * Clojure:     `(defn square [x] (* x x))`
 
 References and borrowing:
 * Reference syntax: `(ref foo)`.
@@ -103,7 +120,8 @@ References and borrowing:
 * Mutable reference syntax (syntactic sugar): `&mut foo`.
 
 Pointers:
-* `null` is a null pointer.
+* `null` is a null pointer (like in Java).
+* Dereferencing a null pointer causes an YliLisp exception.
 
 Literals:
 * Underscore `_` can be used for readability in numeric literals.
