@@ -41,8 +41,8 @@ Integer types:
 * When overflow, precision loss or truncation could occur
   `try-cast` needs to be used: `(try-as 'int8 my-number)`.
 * If number does not fit in the type, `try-as` will throw.
-* The default type for integer literals is `int32`.
-* An integer literal that does not fit in `int32` causes
+* The default type for integer literals is `int64`.
+* An integer literal that does not fit in `int64` causes
   a compiler error.
 * Different types for integer literals for can be given:
   `'int64 123`.
