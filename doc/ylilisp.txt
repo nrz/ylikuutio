@@ -108,10 +108,20 @@ Functions:
   `(foo.bar)`, `(foo.bar baz)`, etc.
 * Function syntax like is Scheme:
   * `(define (square x) (* x x))`
+  * In YliLisp this is a generic function.
   * Function definition in other Lisps:
     * Scheme:      `(define (square x) (* x x))`
     * Common Lisp: `(defun square (x) (* x x))`
     * Clojure:     `(defn square [x] (* x x))`
+* Functions can have explicit parameter types:
+  * `(define (square 'uint64 x) (* x x))`
+* Functions can have explicit return value type:
+  * `(define 'uint64 (square x) (* x x))`
+  * `(define 'uint64 (square 'uint64 x) (* x x))`
+* Used `'void` for no return value.
+  * `(define 'void (square-but-return-void 'uint64 x) (* x x))`
+* If a function is generic then the actual function instantiation
+  will be resolved in compile-time.
 
 References and borrowing:
 * Reference syntax: `(ref foo)`.
