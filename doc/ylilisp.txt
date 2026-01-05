@@ -20,6 +20,13 @@ General features:
   (generic functions).
 * Both functions and function templates are first-class
   citizens.
+* An identifier may refer to one of the following:
+  * A variable.
+  * A function.
+  * A function template.
+  * A built-in function (written in C++ and initialized for
+    the context which is usually a `yli::ontology::Console`
+    instance).
 * Common function names follow names used by Scheme.
 * All objects, both variables and functions,
   are `yli::ontology::Entity` entities.
