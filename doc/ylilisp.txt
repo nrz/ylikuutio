@@ -12,11 +12,14 @@ Use cases:
 * Game modding.
 
 General features:
+* Statically typed.
 * Lexically scoped.
 * Variables and functions in the same namespace (Lisp-1),
   like Scheme and Clojure.
-* Mutators marked with `!` like in Scheme, e.g. `set!`.
-* Predicates marked with `?` like in Scheme, e.g. `null?`.
+* In addition to functions, there are function templates
+  (generic functions).
+* Both functions and function templates are first-class
+  citizens.
 * Common function names follow names used by Scheme.
 * All objects, both variables and functions,
   are `yli::ontology::Entity` entities.
@@ -24,6 +27,10 @@ General features:
   are global YliLisp variables with the same name.
 * YliLisp syntax follows Scheme syntax when possible
   considering other YliLisp design goals.
+
+Conventions:
+* Mutators marked with `!` like in Scheme, e.g. `set!`.
+* Predicates marked with `?` like in Scheme, e.g. `null?`.
 
 Numeric types:
 * Test if variable is a number: `(number? 1)`         -> `#t`
@@ -48,12 +55,26 @@ Integer types:
   `'int64 123`.
 * Integer variable types: `int8`, `int16`, `int32`, `int64`,
   `uint8`, `uint16`, `uint32`, `uint64`.
+* Ylikuutio types:
+  * `yli::lisp::Int8`
+  * `yli::lisp::Uint8`
+  * `yli::lisp::Int16`
+  * `yli::lisp::Uint16`
+  * `yli::lisp::Int32`
+  * `yli::lisp::Uint32`
+  * `yli::lisp::Int64`
+  * `yli::lisp::Uint64`
 
 Floating point types:
 * `float`, `double`.
+* Ylikuutio types:
+  * `yli::lisp::Float`
+  * `yli::lisp::Double`
 
 Boolean types:
 * `bool`.
+* Ylikuutio type:
+  * `yli::lisp::Bool`
 
 Lists:
 * List syntax: `(list 1 2 3)`.
@@ -61,6 +82,8 @@ Lists:
 * Test if variable is a list: `(list? 'foo)`      -> `#f`
 * Test if variable is a list: `(list? '(1 2 3))`  -> `#t`
 * Test if variable is a list: `(list? '#(1 2 3))` -> `#f`
+* Ylikuutio type:
+  * `yli::lisp::List`
 
 Vectors:
 * Vector syntax: `(vector 1 2 3)`.
@@ -68,6 +91,8 @@ Vectors:
 * Test if variable is a vector: `(vector? 'foo)`      -> `#f`
 * Test if variable is a vector: `(vector? '(1 2 3))`  -> `#f`
 * Test if variable is a vector: `(vector? '#(1 2 3))` -> `#t`
+* Ylikuutio type:
+  * `yli::lisp::Vector`
 
 Structs:
 * Struct syntax: `(struct foo)`.
@@ -77,6 +102,8 @@ Structs:
   (whitespace around dot operators is free).
 * Generic setter can be used for struct members as well:
   `(set! (member foo bar) 123)`.
+* Ylikuutio type:
+  * `yli::lisp::Struct`
 
 Parents and children:
 * `(child (child foo 'bar) 'baz)`.
@@ -102,44 +129,50 @@ Dynamically scoped variables:
     * Clojure:     `(def pi 3.14)`
 
 Functions:
+* Functions are non-generic thus the function signature
+  must have type for all parameters (otherwise it will be
+  a function template, see below).
 * Functions are first-class citizens.
 * Functions can be overloaded.
-* Member functions/methods are supported as well:
-  `(foo.bar)`, `(foo.bar baz)`, etc.
-* Function syntax like is Scheme:
-  * `(define (square x) (* x x))`
-  * In YliLisp this is a generic function.
-  * Function definition in other Lisps:
-    * Scheme:      `(define (square x) (* x x))`
-    * Common Lisp: `(defun square (x) (* x x))`
-    * Clojure:     `(defn square [x] (* x x))`
-* Functions can have explicit parameter types:
-  * `(define (square 'uint64 x) (* x x))`
 * Functions can have explicit return value type:
-  * `(define 'uint64 (square x) (* x x))`
   * `(define 'uint64 (square 'uint64 x) (* x x))`
 * Used `'void` for no return value.
   * `(define 'void (square-but-return-void 'uint64 x) (* x x))`
-* If a function is generic then the actual function instantiation
-  will be resolved in compile-time.
+* Return type can be left out to be inferred automatically:
+  * `(define (square 'uint64 x) (* x x))`
+* Member functions/methods are supported as well:
+  `(foo.bar)`, `(foo.bar baz)`, etc.
+* Ylikuutio type:
+  * `yli::lisp::LispFunction`
 
-References and borrowing:
-* Reference syntax: `(ref foo)`.
-* Reference syntax (syntactic sugar): `&foo`.
-* Mutable reference syntax: `(mut-ref foo)`.
-* Mutable reference syntax (syntactic sugar): `&mut foo`.
+Function templates:
+* If function signature lacks the type of one or more parameters
+  or if it lacks the type of the return value, then that is
+  a function template.
+* Function template syntax:
+  * `(define (square x) (* x x))`
+  * Consider function definition in other Lisps:
+    * Scheme:      `(define (square x) (* x x))`
+    * Common Lisp: `(defun square (x) (* x x))`
+    * Clojure:     `(defn square [x] (* x x))`
+* Function templates can have explicit parameter types
+  for some of the parameters:
+  * `(define (multiply 'uint64 x y) (* x y))`
+* Function templates can have explicit return value type:
+  * `(define 'uint64 (square x) (* x x))`
+* For function templates the actual function instantiation
+  will be resolved in compile-time.
+* There cannot be both a function and a function template
+  in the same namespace with the same identifier.
+* Ylikuutio type:
+  * `yli::lisp::LispFunctionTemplate`
 
 Pointers:
 * `null` is a null pointer (like in Java).
 * Dereferencing a null pointer causes an YliLisp exception.
 
-Literals:
-* Underscore `_` can be used for readability in numeric literals.
-
 Comments:
 * `;` starts a comment until end of line.
-* `//` also starts a comment until end of line.
-* `/*` ... `*/` can be used for block comments.
 
 Planned implementation details:
 * Functions are `yli::ontology::LispFunction`,
@@ -148,21 +181,17 @@ Planned implementation details:
   class template `yli::ontology::LispFunctionOverload`,
   which inherits `yli::ontology::GenericLispFunctionOverload`,
   a non-template class.
+* Function templates are `yli::ontology::LispFunctionTemplate`,
+  which inherits `yli::ontology::Entity`.
 * `yli::ontology::GenericLispFunctionOverload` inherits
   `yli::ontology::Entity`.
 * Lambda expressions are `yli::ontology::Lambda`,
   which inherits `yli::ontology::Entity`.
-* S-expressions are `yli::ontology::Sexp`,
-  which inherits `yli::ontology::Entity`.
 * Each `yli::ontology::Console` may register
   YliLisp functions into its local context,
   similarly to AngelScript.
-* All variables are always available in all contexts.
-* Ylikuutio uses a C++ exception handler to handle
+* Ylikuutio does not use a C++ exception handler to handle
   exceptions triggered by execution of YliLisp code.
-* When an exception occurs, the effects caused by already
-  executed YliLisp code are undone by setting and
-  activating the old values stored on each change.
 
 Command examples:
 * `(define my-uint16 'uint64 123)`.
