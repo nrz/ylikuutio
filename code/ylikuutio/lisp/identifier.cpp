@@ -47,7 +47,7 @@ namespace yli::lisp
             {
                 // Reserved codepoint. End of identifier.
                 std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
-                return Token(TokenType::IDENTIFIER, std::move(identifier_string));
+                return Token(TokenType::IDENTIFIER, std::move(identifier_string), text_position);
             }
 
             text_position.next(codepoint);
@@ -55,6 +55,6 @@ namespace yli::lisp
 
         // End of source. End of identifier.
         std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
-        return Token(TokenType::IDENTIFIER, std::move(identifier_string));
+        return Token(TokenType::IDENTIFIER, std::move(identifier_string), text_position);
     }
 }

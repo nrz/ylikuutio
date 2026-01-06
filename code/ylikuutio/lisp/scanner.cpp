@@ -106,22 +106,22 @@ namespace yli::lisp
                 case U'(':
                     {
                         // Left parenthesis is a token on its own, used for grouping.
-                        return Token(TokenType::LEFT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
+                        return Token(TokenType::LEFT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), this->text_position);
                     }
                 case U')':
                     {
                         // Right parenthesis is a token on its own, used for grouping.
-                        return Token(TokenType::RIGHT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
+                        return Token(TokenType::RIGHT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), this->text_position);
                     }
                 case U'\'':
                     {
                         // Quote is a token on its own, used for quoting.
-                        return Token(TokenType::QUOTE, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
+                        return Token(TokenType::QUOTE, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), this->text_position);
                     }
                 case U'.':
                     {
                         // Dot is a token on its own, used for member access.
-                        return Token(TokenType::DOT, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)));
+                        return Token(TokenType::DOT, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), this->text_position);
                     }
                 case U';':
                     {

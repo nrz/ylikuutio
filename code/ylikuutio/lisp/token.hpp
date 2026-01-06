@@ -19,6 +19,7 @@
 #define YLIKUUTIO_LISP_TOKEN_HPP_INCLUDED
 
 #include "token_type.hpp"
+#include "text_position.hpp"
 
 // Include standard headers
 #include <cstddef>     // std::size_t
@@ -33,18 +34,17 @@ namespace yli::lisp
     class Token
     {
         public:
-            Token(TokenType type, std::string&& lexeme);
-            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number);
-            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const int64_t value);
-            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const uint64_t value);
-            Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const double value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const int64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const uint64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value);
 
             bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
             bool operator!=(const Token& other) const; // Line numbers may differ.
 
             TokenType get_type() const;
             std::string_view get_lexeme() const;
-            std::optional<std::size_t> get_line_number() const;
+            const TextPosition& get_text_position() const;
 
             template<typename T>
                 std::optional<T> get_numeric_value() const
@@ -62,7 +62,7 @@ namespace yli::lisp
         private:
             TokenType type;
             std::string lexeme;
-            std::optional<std::size_t> line_number;
+            const TextPosition text_position;
             std::variant<
                 std::monostate, // Uninitialized state.
                 int64_t,

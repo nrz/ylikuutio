@@ -53,7 +53,7 @@ namespace yli::lisp
                 case U'"':
                     {
                         // End of string.
-                        return Token(TokenType::STRING, std::move(current_string));
+                        return Token(TokenType::STRING, std::move(current_string), text_position);
                     }
                 case U'\\':
                     {

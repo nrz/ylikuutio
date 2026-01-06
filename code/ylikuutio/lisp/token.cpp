@@ -20,46 +20,41 @@
 
 // Include standard headers
 #include <cstddef>     // std::size_t
-#include <optional>    // std::optional
 #include <stdint.h>    // int64_t, uint64_t
 #include <string_view> // std::string_view
 #include <utility>     // std::move
 
 namespace yli::lisp
 {
-    Token::Token(TokenType type, std::string&& lexeme)
-        : type { type },
-        lexeme { std::move(lexeme) }
-    {
-    }
+    class TextPosition;
 
-    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number)
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position)
         : type      { type },
         lexeme      { std::move(lexeme) },
-        line_number { line_number }
+        text_position { text_position }
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const int64_t value)
-        : type        { type },
-        lexeme        { std::move(lexeme) },
-        line_number   { line_number },
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const int64_t value)
+        : type      { type },
+        lexeme      { std::move(lexeme) },
+        text_position { text_position },
         numeric_value { value }
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const uint64_t value)
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const uint64_t value)
         : type        { type },
         lexeme        { std::move(lexeme) },
-        line_number   { line_number },
+        text_position { text_position },
         numeric_value { value }
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, std::optional<std::size_t> line_number, const double value)
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value)
         : type        { type },
         lexeme        { std::move(lexeme) },
-        line_number   { line_number },
+        text_position { text_position },
         numeric_value { value }
     {
     }
@@ -86,9 +81,9 @@ namespace yli::lisp
         return this->lexeme;
     }
 
-    std::optional<std::size_t> Token::get_line_number() const
+    const TextPosition& Token::get_text_position() const
     {
-        return this->line_number;
+        return this->text_position;
     }
 
     std::size_t Token::size() const

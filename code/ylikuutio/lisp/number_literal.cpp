@@ -72,7 +72,7 @@ namespace yli::lisp
                 return Token(
                         TokenType::UNSIGNED_INTEGER,
                         std::string(text_position.get_token_start_it(), text_position.get_it()),
-                        std::nullopt,
+                        text_position,
                         maybe_uint64_t.value());
             }
 
@@ -91,7 +91,7 @@ namespace yli::lisp
                 return Token(
                         TokenType::SIGNED_INTEGER,
                         std::string(text_position.get_token_start_it(), text_position.get_it()),
-                        std::nullopt,
+                        text_position,
                         maybe_int64_t.value());
             }
 
@@ -110,7 +110,7 @@ namespace yli::lisp
                 return Token(
                         TokenType::FLOATING_POINT,
                         std::string(text_position.get_token_start_it(), text_position.get_it()),
-                        std::nullopt,
+                        text_position,
                         maybe_double.value());
             }
 

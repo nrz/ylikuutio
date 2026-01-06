@@ -23,7 +23,6 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>  // std::string
 #include <vector>  // std::vector
 
 namespace yli::lisp
@@ -32,7 +31,6 @@ namespace yli::lisp
     {
         public:
             void add_token(Token&& token);
-            void add_token(TokenType token_type, std::string&& lexeme);
 
             const Token& at(const std::size_t index) const;
 

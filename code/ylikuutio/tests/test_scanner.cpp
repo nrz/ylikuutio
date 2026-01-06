@@ -27,7 +27,7 @@
 
 // Include standard headers
 #include <optional> // std::nullopt, std::optional
-#include <string>   // std::string
+#include <string_view> // std::string_view
 #include <utility>  // std::move
 #include <vector>   // std::vector
 
@@ -44,7 +44,7 @@ using yli::lisp::TextPosition;
 
 TEST(string_must_be_scanned_appropriately, empty_string)
 {
-    const std::string empty_string { "" };
+    const std::string_view empty_string { "" };
     const Scanner scanner(empty_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -58,12 +58,17 @@ TEST(string_must_be_scanned_appropriately, empty_string)
 
 TEST(string_must_be_scanned_appropriately, left_parenthesis)
 {
-    const std::string left_parenthesis_string { "(" };
+    std::string_view left_parenthesis_string { "(" };
     const Scanner scanner(left_parenthesis_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
+
+    {
+        TextPosition text_position(left_parenthesis_string.cbegin(), left_parenthesis_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -73,12 +78,17 @@ TEST(string_must_be_scanned_appropriately, left_parenthesis)
 
 TEST(string_must_be_scanned_appropriately, right_parenthesis)
 {
-    const std::string right_parenthesis_string { ")" };
+    const std::string_view right_parenthesis_string { ")" };
     const Scanner scanner(right_parenthesis_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(right_parenthesis_string.cbegin(), right_parenthesis_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -88,12 +98,17 @@ TEST(string_must_be_scanned_appropriately, right_parenthesis)
 
 TEST(string_must_be_scanned_appropriately, quote)
 {
-    const std::string quote_string { "'" };
+    const std::string_view quote_string { "'" };
     const Scanner scanner(quote_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::QUOTE, "'"));
+
+    {
+        TextPosition text_position(quote_string.cbegin(), quote_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::QUOTE, "'", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -103,12 +118,17 @@ TEST(string_must_be_scanned_appropriately, quote)
 
 TEST(string_must_be_scanned_appropriately, dot)
 {
-    const std::string dot_string { "." };
+    const std::string_view dot_string { "." };
     const Scanner scanner(dot_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::DOT, "."));
+
+    {
+        TextPosition text_position(dot_string.cbegin(), dot_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::DOT, ".", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -118,7 +138,7 @@ TEST(string_must_be_scanned_appropriately, dot)
 
 TEST(string_must_be_scanned_appropriately, semicolon)
 {
-    const std::string semicolon_string { ";" };
+    const std::string_view semicolon_string { ";" };
     const Scanner scanner(semicolon_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -132,7 +152,7 @@ TEST(string_must_be_scanned_appropriately, semicolon)
 
 TEST(string_must_be_scanned_appropriately, space)
 {
-    const std::string space_string { " " };
+    const std::string_view space_string { " " };
     const Scanner scanner(space_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -146,7 +166,7 @@ TEST(string_must_be_scanned_appropriately, space)
 
 TEST(string_must_be_scanned_appropriately, carriage_return)
 {
-    const std::string carriage_return_string { "\r" };
+    const std::string_view carriage_return_string { "\r" };
     const Scanner scanner(carriage_return_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -160,7 +180,7 @@ TEST(string_must_be_scanned_appropriately, carriage_return)
 
 TEST(string_must_be_scanned_appropriately, tab)
 {
-    const std::string tab_string { "\t" };
+    const std::string_view tab_string { "\t" };
     const Scanner scanner(tab_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -174,7 +194,7 @@ TEST(string_must_be_scanned_appropriately, tab)
 
 TEST(string_must_be_scanned_appropriately, newline)
 {
-    const std::string newline_string { "\n" };
+    const std::string_view newline_string { "\n" };
     const Scanner scanner(newline_string);
     ASSERT_TRUE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -188,11 +208,16 @@ TEST(string_must_be_scanned_appropriately, newline)
 
 TEST(string_must_be_scanned_appropriately, foo_string_literal)
 {
-    const std::string foo_string { R"("foo")" };
+    const std::string_view foo_string { R"("foo")" };
     const Scanner scanner(foo_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo"));
+
+    {
+        TextPosition text_position(foo_string.cbegin(), foo_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -202,11 +227,16 @@ TEST(string_must_be_scanned_appropriately, foo_string_literal)
 
 TEST(string_must_be_scanned_appropriately, backslash_backslash)
 {
-    const std::string backslash_backslash_string { R"("\\")" };
+    const std::string_view backslash_backslash_string { R"("\\")" };
     const Scanner scanner(backslash_backslash_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, R"(\)"));
+
+    {
+        TextPosition text_position(backslash_backslash_string.cbegin(), backslash_backslash_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, R"(\)", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -216,12 +246,20 @@ TEST(string_must_be_scanned_appropriately, backslash_backslash)
 
 TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
 {
-    const std::string foo_bar_string { R"("foo" "bar")" };
+    const std::string_view foo_bar_string { R"("foo" "bar")" };
     const Scanner scanner(foo_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 2);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo"));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::STRING, "bar"));
+
+    {
+        TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo", text_position));
+    }
+    {
+        TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::STRING, "bar", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -231,11 +269,16 @@ TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
 {
-    const std::string integer_literal_0_string { "0" };
+    const std::string_view integer_literal_0_string { "0" };
     const yli::lisp::Scanner scanner(integer_literal_0_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", std::nullopt, static_cast<uint64_t>(0)));
+
+    {
+        TextPosition text_position(integer_literal_0_string.cbegin(), integer_literal_0_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", text_position, static_cast<uint64_t>(0)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -245,11 +288,16 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
 {
-    const std::string integer_literal_1_string { "1" };
+    const std::string_view integer_literal_1_string { "1" };
     const yli::lisp::Scanner scanner(integer_literal_1_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", std::nullopt, static_cast<uint64_t>(1)));
+
+    {
+        TextPosition text_position(integer_literal_1_string.cbegin(), integer_literal_1_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", text_position, static_cast<uint64_t>(1)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -259,11 +307,16 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
 
 TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
 {
-    const std::string integer_literal_minus_1_string { "-1" };
+    const std::string_view integer_literal_minus_1_string { "-1" };
     const yli::lisp::Scanner scanner(integer_literal_minus_1_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", std::nullopt, static_cast<int64_t>(-1)));
+
+    {
+        TextPosition text_position(integer_literal_minus_1_string.cbegin(), integer_literal_minus_1_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", text_position, static_cast<int64_t>(-1)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -273,11 +326,16 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
 
 TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073709551615)
 {
-    const std::string integer_literal_18446744073709551615_string { "18446744073709551615" };
+    const std::string_view integer_literal_18446744073709551615_string { "18446744073709551615" };
     const yli::lisp::Scanner scanner(integer_literal_18446744073709551615_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", std::nullopt, static_cast<uint64_t>(18446744073709551615)));
+
+    {
+        TextPosition text_position(integer_literal_18446744073709551615_string.cbegin(), integer_literal_18446744073709551615_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, static_cast<uint64_t>(18446744073709551615)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -287,11 +345,16 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
 
 TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372036854775808)
 {
-    const std::string integer_literal_minus_9223372036854775808_string { "-9223372036854775808" };
+    const std::string_view integer_literal_minus_9223372036854775808_string { "-9223372036854775808" };
     const yli::lisp::Scanner scanner(integer_literal_minus_9223372036854775808_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", std::nullopt, static_cast<int64_t>(-9223372036854775808)));
+
+    {
+        TextPosition text_position(integer_literal_minus_9223372036854775808_string.cbegin(), integer_literal_minus_9223372036854775808_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", text_position, static_cast<int64_t>(-9223372036854775808)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -301,11 +364,16 @@ TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_0_dot_0)
 {
-    const std::string floating_point_literal_0_dot_0_string { "0.0" };
+    const std::string_view floating_point_literal_0_dot_0_string { "0.0" };
     const yli::lisp::Scanner scanner(floating_point_literal_0_dot_0_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", std::nullopt, static_cast<double>(0.0)));
+
+    {
+        TextPosition text_position(floating_point_literal_0_dot_0_string.cbegin(), floating_point_literal_0_dot_0_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", text_position, static_cast<double>(0.0)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -315,11 +383,16 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
 
 TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_literal_minus_0_dot_0)
 {
-    const std::string floating_point_literal_minus_0_dot_0_string { "-0.0" };
+    const std::string_view floating_point_literal_minus_0_dot_0_string { "-0.0" };
     const yli::lisp::Scanner scanner(floating_point_literal_minus_0_dot_0_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", std::nullopt, static_cast<double>(0.0)));
+
+    {
+        TextPosition text_position(floating_point_literal_minus_0_dot_0_string.cbegin(), floating_point_literal_minus_0_dot_0_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", text_position, static_cast<double>(0.0)));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -329,11 +402,16 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
 
 TEST(string_must_be_scanned_appropriately, foo_identifier)
 {
-    const std::string foo_string { "foo" };
+    const std::string_view foo_string { "foo" };
     const Scanner scanner(foo_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+
+    {
+        TextPosition text_position(foo_string.cbegin(), foo_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -343,12 +421,20 @@ TEST(string_must_be_scanned_appropriately, foo_identifier)
 
 TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
 {
-    const std::string foo_space_bar_string { "foo bar" };
+    const std::string_view foo_space_bar_string { "foo bar" };
     const yli::lisp::Scanner scanner(foo_space_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 2);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar"));
+
+    {
+        TextPosition text_position(foo_space_bar_string.cbegin(), foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(foo_space_bar_string.cbegin(), foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -358,13 +444,24 @@ TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
 
 TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
 {
-    const std::string foo_space_bar_space_baz_string { "foo bar baz" };
+    const std::string_view foo_space_bar_space_baz_string { "foo bar baz" };
     const yli::lisp::Scanner scanner(foo_space_bar_space_baz_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 3);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "baz"));
+
+    {
+        TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "baz", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -374,12 +471,20 @@ TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
 
 TEST(string_must_be_scanned_appropriately, empty_block)
 {
-    const std::string empty_block_string { "()" };
+    const std::string_view empty_block_string { "()" };
     const yli::lisp::Scanner scanner(empty_block_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 2);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(empty_block_string.cbegin(), empty_block_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_string.cbegin(), empty_block_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -389,14 +494,28 @@ TEST(string_must_be_scanned_appropriately, empty_block)
 
 TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
 {
-    const std::string empty_block_empty_block_string { "()()" };
+    const std::string_view empty_block_empty_block_string { "()()" };
     const yli::lisp::Scanner scanner(empty_block_empty_block_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 4);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -406,14 +525,28 @@ TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
 
 TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
 {
-    const std::string empty_block_space_empty_block_string { "() ()" };
+    const std::string_view empty_block_space_empty_block_string { "() ()" };
     const yli::lisp::Scanner scanner(empty_block_space_empty_block_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 4);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -423,13 +556,24 @@ TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
 
 TEST(string_must_be_scanned_appropriately, block_foo)
 {
-    const std::string block_with_foo_string { "(foo)" };
+    const std::string_view block_with_foo_string { "(foo)" };
     const yli::lisp::Scanner scanner(block_with_foo_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 3);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -439,13 +583,24 @@ TEST(string_must_be_scanned_appropriately, block_foo)
 
 TEST(string_must_be_scanned_appropriately, block_space_foo)
 {
-    const std::string block_with_space_foo_string { "( foo)" };
+    const std::string_view block_with_space_foo_string { "( foo)" };
     const yli::lisp::Scanner scanner(block_with_space_foo_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 3);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -455,13 +610,24 @@ TEST(string_must_be_scanned_appropriately, block_space_foo)
 
 TEST(string_must_be_scanned_appropriately, block_foo_space)
 {
-    const std::string block_with_foo_space_string { "(foo )" };
+    const std::string_view block_with_foo_space_string { "(foo )" };
     const yli::lisp::Scanner scanner(block_with_foo_space_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 3);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -471,13 +637,24 @@ TEST(string_must_be_scanned_appropriately, block_foo_space)
 
 TEST(string_must_be_scanned_appropriately, block_space_foo_space)
 {
-    const std::string block_with_space_foo_space_string { "( foo )" };
+    const std::string_view block_with_space_foo_space_string { "( foo )" };
     const yli::lisp::Scanner scanner(block_with_space_foo_space_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 3);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -487,14 +664,28 @@ TEST(string_must_be_scanned_appropriately, block_space_foo_space)
 
 TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
 {
-    const std::string block_with_foo_space_bar_string { "(foo bar)" };
+    const std::string_view block_with_foo_space_bar_string { "(foo bar)" };
     const yli::lisp::Scanner scanner(block_with_foo_space_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 4);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -504,16 +695,36 @@ TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
 {
-    const std::string block_with_foo_with_block_bar_string { "(foo(bar))" };
+    const std::string_view block_with_foo_with_block_bar_string { "(foo(bar))" };
     const yli::lisp::Scanner scanner(block_with_foo_with_block_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 6);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -523,16 +734,36 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
 {
-    const std::string block_with_foo_space_block_bar_string { "(foo (bar))" };
+    const std::string_view block_with_foo_space_block_bar_string { "(foo (bar))" };
     const yli::lisp::Scanner scanner(block_with_foo_space_block_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 6);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -542,19 +773,48 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
 
 TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_space_block_baz)
 {
-    const std::string block_with_foo_space_block_with_bar_space_block_baz_string { "(foo (bar (baz)))" };
+    const std::string_view block_with_foo_space_block_with_bar_space_block_baz_string { "(foo (bar (baz)))" };
     const yli::lisp::Scanner scanner(block_with_foo_space_block_with_bar_space_block_baz_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 9);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(4), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(5), Token(TokenType::IDENTIFIER, "baz"));
-    ASSERT_EQ(token_list.at(6), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(7), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(8), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(4), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(5), Token(TokenType::IDENTIFIER, "baz", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(6), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(7), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
+        ASSERT_EQ(token_list.at(8), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -564,16 +824,36 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_s
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
 {
-    const std::string block_foo_block_bar_string { "(foo)(bar)" };
+    const std::string_view block_foo_block_bar_string { "(foo)(bar)" };
     const yli::lisp::Scanner scanner(block_foo_block_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 6);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -583,16 +863,36 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
 
 TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
 {
-    const std::string block_foo_space_block_bar_string { "(foo) (bar)" };
+    const std::string_view block_foo_space_block_bar_string { "(foo) (bar)" };
     const yli::lisp::Scanner scanner(block_foo_space_block_bar_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 6);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo"));
-    ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")"));
-    ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "("));
-    ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar"));
-    ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")"));
+
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar", text_position));
+    }
+    {
+        TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
+        ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_TRUE(error_log.empty());
     const TextPosition& text_position = scanner.get_text_position();
@@ -604,7 +904,7 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
 
 TEST(scanning_must_fail_appropriately, missing_closing_double_quote)
 {
-    const std::string double_quote_string { "\"" };
+    const std::string_view double_quote_string { "\"" };
     const Scanner scanner(double_quote_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -623,7 +923,7 @@ TEST(scanning_must_fail_appropriately, missing_closing_double_quote)
 
 TEST(scanning_must_fail_appropriately, missing_closing_double_quote_with_space)
 {
-    const std::string double_quote_with_space_string { "\" " };
+    const std::string_view double_quote_with_space_string { "\" " };
     const Scanner scanner(double_quote_with_space_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -642,7 +942,7 @@ TEST(scanning_must_fail_appropriately, missing_closing_double_quote_with_space)
 
 TEST(scanning_must_fail_appropriately, space_missing_closing_double_quote)
 {
-    const std::string space_double_quote_string { " \"" };
+    const std::string_view space_double_quote_string { " \"" };
     const Scanner scanner(space_double_quote_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -661,7 +961,7 @@ TEST(scanning_must_fail_appropriately, space_missing_closing_double_quote)
 
 TEST(scanning_must_fail_appropriately, audible_bell)
 {
-    const std::string audible_bell_string { "\a" };
+    const std::string_view audible_bell_string { "\a" };
     const Scanner scanner(audible_bell_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -680,7 +980,7 @@ TEST(scanning_must_fail_appropriately, audible_bell)
 
 TEST(scanning_must_fail_appropriately, audible_bell_three_times)
 {
-    const std::string audible_bell_three_times_string { "\a\a\a" };
+    const std::string_view audible_bell_three_times_string { "\a\a\a" };
     const Scanner scanner(audible_bell_three_times_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
@@ -717,12 +1017,17 @@ TEST(scanning_must_fail_appropriately, audible_bell_three_times)
 
 TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
 {
-    const std::string audible_bell_and_a_string { "\aa" };
+    const std::string_view audible_bell_and_a_string { "\aa" };
     const Scanner scanner(audible_bell_and_a_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "a"));
+
+    {
+        TextPosition text_position(audible_bell_and_a_string.cbegin(), audible_bell_and_a_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "a", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
     const Error& error = error_log.at(0);
@@ -737,12 +1042,17 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
 
 TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
 {
-    const std::string audible_bell_and_foo_string { "\afoo" };
+    const std::string_view audible_bell_and_foo_string { "\afoo" };
     const Scanner scanner(audible_bell_and_foo_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+
+    {
+        TextPosition text_position(audible_bell_and_foo_string.cbegin(), audible_bell_and_foo_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
     const Error& error = error_log.at(0);
@@ -757,12 +1067,17 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
 
 TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
 {
-    const std::string foo_identifier_and_audible_bell_string { "foo\a" };
+    const std::string_view foo_identifier_and_audible_bell_string { "foo\a" };
     const Scanner scanner(foo_identifier_and_audible_bell_string);
     ASSERT_FALSE(scanner.get_is_success());
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo"));
+
+    {
+        TextPosition text_position(foo_identifier_and_audible_bell_string.cbegin(), foo_identifier_and_audible_bell_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
     const Error& error = error_log.at(0);
@@ -777,11 +1092,16 @@ TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
 
 TEST(string_must_be_scanned_appropriately, audible_bell_string_literal)
 {
-    const std::string audible_bell_string { "\"\a\"" };
+    const std::string_view audible_bell_string { "\"\a\"" };
     const Scanner scanner(audible_bell_string);
     const TokenList& token_list = scanner.get_token_list();
     ASSERT_EQ(token_list.size(), 1);
-    ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "\a"));
+
+    {
+        TextPosition text_position(audible_bell_string.cbegin(), audible_bell_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "\a", text_position));
+    }
+
     const ErrorLog& error_log = scanner.get_error_log();
     ASSERT_EQ(error_log.size(), 1);
     const Error& error = error_log.at(0);

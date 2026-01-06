@@ -19,7 +19,6 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <string>  // std::string
 #include <utility> // std::move
 #include <vector>  // std::vector
 
@@ -28,11 +27,6 @@ namespace yli::lisp
     void TokenList::add_token(Token&& token)
     {
         this->tokens.emplace_back(std::move(token));
-    }
-
-    void TokenList::add_token(TokenType token_type, std::string&& lexeme)
-    {
-        this->tokens.emplace_back(Token(token_type, std::move(lexeme)));
     }
 
     const Token& TokenList::at(const std::size_t index) const
