@@ -86,6 +86,16 @@ namespace yli::lisp
         return this->text_position;
     }
 
+    std::size_t Token::get_line() const
+    {
+        return this->text_position.get_line();
+    }
+
+    std::size_t Token::get_column() const
+    {
+        return this->text_position.get_column();
+    }
+
     std::size_t Token::size() const
     {
         return this->lexeme.size();

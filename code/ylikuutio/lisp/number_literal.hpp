@@ -31,7 +31,7 @@ namespace yli::lisp
     class ErrorLog;
 
     std::optional<Token> scan_number_literal(TextPosition& text_position, ErrorLog& error_log, const std::unordered_set<char32_t>& reserved_codepoints);
-    std::optional<Token> convert_string_to_value(TextPosition& text_position, ErrorLog& error_log, const std::unordered_set<char32_t>& reserved_codepoints);
+    std::optional<Token> convert_string_to_value(const TextPosition& start_position, const TextPosition& text_position, ErrorLog& error_log, const std::unordered_set<char32_t>& reserved_codepoints);
 }
 
 #endif

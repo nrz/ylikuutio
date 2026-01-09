@@ -67,6 +67,8 @@ TEST(string_must_be_scanned_appropriately, left_parenthesis)
     {
         TextPosition text_position(left_parenthesis_string.cbegin(), left_parenthesis_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -87,6 +89,8 @@ TEST(string_must_be_scanned_appropriately, right_parenthesis)
     {
         TextPosition text_position(right_parenthesis_string.cbegin(), right_parenthesis_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -107,6 +111,8 @@ TEST(string_must_be_scanned_appropriately, quote)
     {
         TextPosition text_position(quote_string.cbegin(), quote_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::QUOTE, "'", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -127,6 +133,8 @@ TEST(string_must_be_scanned_appropriately, dot)
     {
         TextPosition text_position(dot_string.cbegin(), dot_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::DOT, ".", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -216,6 +224,8 @@ TEST(string_must_be_scanned_appropriately, foo_string_literal)
     {
         TextPosition text_position(foo_string.cbegin(), foo_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -235,6 +245,8 @@ TEST(string_must_be_scanned_appropriately, backslash_backslash)
     {
         TextPosition text_position(backslash_backslash_string.cbegin(), backslash_backslash_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, R"(\)", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -254,10 +266,14 @@ TEST(string_must_be_scanned_appropriately, foo_bar_string_literals)
     {
         TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::STRING, "bar", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 7);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -277,6 +293,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
     {
         TextPosition text_position(integer_literal_0_string.cbegin(), integer_literal_0_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", text_position, static_cast<uint64_t>(0)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -296,6 +314,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
     {
         TextPosition text_position(integer_literal_1_string.cbegin(), integer_literal_1_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", text_position, static_cast<uint64_t>(1)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -315,6 +335,8 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
     {
         TextPosition text_position(integer_literal_minus_1_string.cbegin(), integer_literal_minus_1_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", text_position, static_cast<int64_t>(-1)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -334,6 +356,8 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
     {
         TextPosition text_position(integer_literal_18446744073709551615_string.cbegin(), integer_literal_18446744073709551615_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, static_cast<uint64_t>(18446744073709551615)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -353,6 +377,8 @@ TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372
     {
         TextPosition text_position(integer_literal_minus_9223372036854775808_string.cbegin(), integer_literal_minus_9223372036854775808_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", text_position, static_cast<int64_t>(-9223372036854775808)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -372,6 +398,8 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     {
         TextPosition text_position(floating_point_literal_0_dot_0_string.cbegin(), floating_point_literal_0_dot_0_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", text_position, static_cast<double>(0.0)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -391,6 +419,8 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
     {
         TextPosition text_position(floating_point_literal_minus_0_dot_0_string.cbegin(), floating_point_literal_minus_0_dot_0_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", text_position, static_cast<double>(0.0)));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -410,6 +440,8 @@ TEST(string_must_be_scanned_appropriately, foo_identifier)
     {
         TextPosition text_position(foo_string.cbegin(), foo_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -429,10 +461,14 @@ TEST(string_must_be_scanned_appropriately, foo_bar_identifiers)
     {
         TextPosition text_position(foo_space_bar_string.cbegin(), foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(foo_space_bar_string.cbegin(), foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 5);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -452,14 +488,20 @@ TEST(string_must_be_scanned_appropriately, foo_bar_baz_identifiers)
     {
         TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 5);
     }
     {
         TextPosition text_position(foo_space_bar_space_baz_string.cbegin(), foo_space_bar_space_baz_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "baz", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 9);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -479,10 +521,14 @@ TEST(string_must_be_scanned_appropriately, empty_block)
     {
         TextPosition text_position(empty_block_string.cbegin(), empty_block_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(empty_block_string.cbegin(), empty_block_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -502,18 +548,26 @@ TEST(string_must_be_scanned_appropriately, empty_block_empty_block)
     {
         TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 3);
     }
     {
         TextPosition text_position(empty_block_empty_block_string.cbegin(), empty_block_empty_block_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 4);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -533,18 +587,26 @@ TEST(string_must_be_scanned_appropriately, empty_block_space_empty_block)
     {
         TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 4);
     }
     {
         TextPosition text_position(empty_block_space_empty_block_string.cbegin(), empty_block_space_empty_block_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 5);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -564,14 +626,20 @@ TEST(string_must_be_scanned_appropriately, block_foo)
     {
         TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_string.cbegin(), block_with_foo_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 5);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -591,14 +659,20 @@ TEST(string_must_be_scanned_appropriately, block_space_foo)
     {
         TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 3);
     }
     {
         TextPosition text_position(block_with_space_foo_string.cbegin(), block_with_space_foo_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 6);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -618,14 +692,20 @@ TEST(string_must_be_scanned_appropriately, block_foo_space)
     {
         TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_space_string.cbegin(), block_with_foo_space_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 6);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -645,14 +725,20 @@ TEST(string_must_be_scanned_appropriately, block_space_foo_space)
     {
         TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 3);
     }
     {
         TextPosition text_position(block_with_space_foo_space_string.cbegin(), block_with_space_foo_space_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 7);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -672,18 +758,26 @@ TEST(string_must_be_scanned_appropriately, block_foo_space_bar)
     {
         TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 6);
     }
     {
         TextPosition text_position(block_with_foo_space_bar_string.cbegin(), block_with_foo_space_bar_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 9);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -703,26 +797,38 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_block_bar)
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 5);
     }
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 6);
     }
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(4).get_line(), 1);
+        ASSERT_EQ(token_list.at(4).get_column(), 9);
     }
     {
         TextPosition text_position(block_with_foo_with_block_bar_string.cbegin(), block_with_foo_with_block_bar_string.cend());
         ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(5).get_line(), 1);
+        ASSERT_EQ(token_list.at(5).get_column(), 10);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -742,26 +848,38 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_bar)
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 6);
     }
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 7);
     }
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(4), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(4).get_line(), 1);
+        ASSERT_EQ(token_list.at(4).get_column(), 10);
     }
     {
         TextPosition text_position(block_with_foo_space_block_bar_string.cbegin(), block_with_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(5).get_line(), 1);
+        ASSERT_EQ(token_list.at(5).get_column(), 11);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -781,38 +899,56 @@ TEST(string_must_be_scanned_appropriately, block_with_foo_space_block_with_bar_s
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 6);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 7);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(4), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(4).get_line(), 1);
+        ASSERT_EQ(token_list.at(4).get_column(), 11);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(5), Token(TokenType::IDENTIFIER, "baz", text_position));
+        ASSERT_EQ(token_list.at(5).get_line(), 1);
+        ASSERT_EQ(token_list.at(5).get_column(), 12);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(6), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(6).get_line(), 1);
+        ASSERT_EQ(token_list.at(6).get_column(), 15);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(7), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(7).get_line(), 1);
+        ASSERT_EQ(token_list.at(7).get_column(), 16);
     }
     {
         TextPosition text_position(block_with_foo_space_block_with_bar_space_block_baz_string.cbegin(), block_with_foo_space_block_with_bar_space_block_baz_string.cend());
         ASSERT_EQ(token_list.at(8), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(8).get_line(), 1);
+        ASSERT_EQ(token_list.at(8).get_column(), 17);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -832,26 +968,38 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_block_bar)
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 5);
     }
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 6);
     }
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(4).get_line(), 1);
+        ASSERT_EQ(token_list.at(4).get_column(), 7);
     }
     {
         TextPosition text_position(block_foo_block_bar_string.cbegin(), block_foo_block_bar_string.cend());
         ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(5).get_line(), 1);
+        ASSERT_EQ(token_list.at(5).get_column(), 10);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -871,26 +1019,38 @@ TEST(string_must_be_scanned_appropriately, two_blocks_block_foo_space_block_bar)
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(1), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(1).get_line(), 1);
+        ASSERT_EQ(token_list.at(1).get_column(), 2);
     }
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(2), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(2).get_line(), 1);
+        ASSERT_EQ(token_list.at(2).get_column(), 5);
     }
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(3), Token(TokenType::LEFT_PARENTHESIS, "(", text_position));
+        ASSERT_EQ(token_list.at(3).get_line(), 1);
+        ASSERT_EQ(token_list.at(3).get_column(), 7);
     }
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(4), Token(TokenType::IDENTIFIER, "bar", text_position));
+        ASSERT_EQ(token_list.at(4).get_line(), 1);
+        ASSERT_EQ(token_list.at(4).get_column(), 8);
     }
     {
         TextPosition text_position(block_foo_space_block_bar_string.cbegin(), block_foo_space_block_bar_string.cend());
         ASSERT_EQ(token_list.at(5), Token(TokenType::RIGHT_PARENTHESIS, ")", text_position));
+        ASSERT_EQ(token_list.at(5).get_line(), 1);
+        ASSERT_EQ(token_list.at(5).get_column(), 11);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -1026,6 +1186,8 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_a_identifier)
     {
         TextPosition text_position(audible_bell_and_a_string.cbegin(), audible_bell_and_a_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "a", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 2);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -1051,6 +1213,8 @@ TEST(scanning_must_fail_appropriately, audible_bell_and_foo_identifier)
     {
         TextPosition text_position(audible_bell_and_foo_string.cbegin(), audible_bell_and_foo_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 2);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -1076,6 +1240,8 @@ TEST(scanning_must_fail_appropriately, foo_identifier_and_audible_bell)
     {
         TextPosition text_position(foo_identifier_and_audible_bell_string.cbegin(), foo_identifier_and_audible_bell_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::IDENTIFIER, "foo", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -1100,6 +1266,8 @@ TEST(string_must_be_scanned_appropriately, audible_bell_string_literal)
     {
         TextPosition text_position(audible_bell_string.cbegin(), audible_bell_string.cend());
         ASSERT_EQ(token_list.at(0), Token(TokenType::STRING, "\a", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
     }
 
     const ErrorLog& error_log = scanner.get_error_log();
@@ -1107,7 +1275,7 @@ TEST(string_must_be_scanned_appropriately, audible_bell_string_literal)
     const Error& error = error_log.at(0);
     ASSERT_EQ(error.get_filename(), "");
     ASSERT_EQ(error.get_line(), 1);
-    ASSERT_EQ(error.get_column(), 3);
+    ASSERT_EQ(error.get_column(), 2);
     ASSERT_EQ(error.get_type(), ErrorType::INVALID_CODEPOINT);
     const TextPosition& text_position = scanner.get_text_position();
     ASSERT_EQ(text_position.get_line(), 1);                                  // Line indices start from 1 and we have not changed line.

@@ -31,6 +31,8 @@ namespace yli::lisp
 {
     std::optional<Token> scan_identifier(TextPosition& text_position, ErrorLog& error_log, const std::unordered_set<char32_t>& reserved_codepoints)
     {
+        const TextPosition start_position = text_position;
+
         while (text_position.get_it() != text_position.get_cend())
         {
             std::optional<char32_t> maybe_codepoint = text_position.peek_codepoint();
@@ -47,7 +49,7 @@ namespace yli::lisp
             {
                 // Reserved codepoint. End of identifier.
                 std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
-                return Token(TokenType::IDENTIFIER, std::move(identifier_string), text_position);
+                return Token(TokenType::IDENTIFIER, std::move(identifier_string), start_position);
             }
 
             text_position.next(codepoint);
@@ -55,6 +57,6 @@ namespace yli::lisp
 
         // End of source. End of identifier.
         std::string identifier_string(text_position.get_token_start_it(), text_position.get_it());
-        return Token(TokenType::IDENTIFIER, std::move(identifier_string), text_position);
+        return Token(TokenType::IDENTIFIER, std::move(identifier_string), start_position);
     }
 }

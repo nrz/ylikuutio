@@ -45,6 +45,8 @@ namespace yli::lisp
             TokenType get_type() const;
             std::string_view get_lexeme() const;
             const TextPosition& get_text_position() const;
+            std::size_t get_line() const;
+            std::size_t get_column() const;
 
             template<typename T>
                 std::optional<T> get_numeric_value() const

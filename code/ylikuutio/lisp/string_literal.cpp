@@ -36,9 +36,12 @@ namespace yli::lisp
 
         std::string current_string;
 
+        const TextPosition start_position = text_position;
+        text_position.next(U'"');
+
         while (text_position.get_it() != text_position.get_cend())
         {
-            std::optional<char32_t> maybe_codepoint = text_position.scan_codepoint_and_advance();
+            std::optional<char32_t> maybe_codepoint = text_position.peek_codepoint();
 
             if (!maybe_codepoint.has_value()) [[unlikely]]
             {
@@ -48,12 +51,20 @@ namespace yli::lisp
 
             const char32_t codepoint = maybe_codepoint.value();
 
+            if (codepoint < 0x20) [[unlikely]]
+            {
+                // Invalid codepoint. Report an error.
+                error_log.add_error(text_position, ErrorType::INVALID_CODEPOINT);
+            }
+
+            text_position.next(codepoint);
+
             switch (codepoint)
             {
                 case U'"':
                     {
                         // End of string.
-                        return Token(TokenType::STRING, std::move(current_string), text_position);
+                        return Token(TokenType::STRING, std::move(current_string), start_position);
                     }
                 case U'\\':
                     {
@@ -99,12 +110,6 @@ namespace yli::lisp
                     }
                 default:
                     {
-                        if (codepoint < 0x20) [[unlikely]]
-                        {
-                            // Invalid codepoint. Report an error.
-                            error_log.add_error(text_position, ErrorType::INVALID_CODEPOINT);
-                        }
-
                         // This codepoint is a part of the string. Advance to the next codepoint.
                         current_string.push_back(codepoint);
                     }
