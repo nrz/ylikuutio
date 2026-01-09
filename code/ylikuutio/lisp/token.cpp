@@ -62,7 +62,7 @@ namespace yli::lisp
     bool Token::operator==(const Token& other) const
     {
         // Equal `Token`s have identical type and identical lexeme.
-        // Line numbers may differ.
+        // Lines and columns do not matter for `Token` equality.
         return this->type == other.type && this->lexeme == other.lexeme && this->numeric_value == other.numeric_value;
     }
 
