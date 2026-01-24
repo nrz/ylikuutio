@@ -114,6 +114,26 @@ namespace yli::lisp
                         // Right parenthesis is a token on its own, used for grouping.
                         return Token(TokenType::RIGHT_PARENTHESIS, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), start_position);
                     }
+                case U'[':
+                    {
+                        // Left square bracket is a token on its own, used for horizontal concatenation.
+                        return Token(TokenType::LEFT_SQUARE_BRACKET, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), start_position);
+                    }
+                case U']':
+                    {
+                        // Right square bracket is a token on its own, used for horizontal concatenation.
+                        return Token(TokenType::RIGHT_SQUARE_BRACKET, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), start_position);
+                    }
+                case U'{':
+                    {
+                        // Left curly brace is a token on its own, used for vertical concatenation.
+                        return Token(TokenType::LEFT_CURLY_BRACE, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), start_position);
+                    }
+                case U'}':
+                    {
+                        // Left curly brace is a token on its own, used for vertical concatenation.
+                        return Token(TokenType::RIGHT_CURLY_BRACE, std::string(this->text_position.get_token_start_it(), this->text_position.next(codepoint)), start_position);
+                    }
                 case U'\'':
                     {
                         // Quote is a token on its own, used for quoting.

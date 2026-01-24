@@ -25,6 +25,10 @@ namespace yli::lisp
         // Parentheses.
         LEFT_PARENTHESIS,  // ( ... used in grouping.
         RIGHT_PARENTHESIS, // ) ... used in grouping.
+        LEFT_SQUARE_BRACKET,  // [ ... used in horizontal concatenation.
+        RIGHT_SQUARE_BRACKET, // ] ... used in horizontal concatenation.
+        LEFT_CURLY_BRACE,     // { ... used in vertical concatenation.
+        RIGHT_CURLY_BRACE,    // } ... used in vertical concatenation.
         // Other single-character token types in ASCII order.
         QUOTE,             // ' ... used in quoting.
         DOT,               // . ... used in member access.

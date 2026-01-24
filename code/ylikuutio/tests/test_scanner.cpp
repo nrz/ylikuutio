@@ -100,6 +100,94 @@ TEST(string_must_be_scanned_appropriately, right_parenthesis)
     ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
 }
 
+TEST(string_must_be_scanned_appropriately, left_square_bracket)
+{
+    std::string_view left_square_bracket_string { "[" };
+    const Scanner scanner(left_square_bracket_string);
+    ASSERT_TRUE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+
+    {
+        TextPosition text_position(left_square_bracket_string.cbegin(), left_square_bracket_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_SQUARE_BRACKET, "[", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
+    }
+
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
+}
+
+TEST(string_must_be_scanned_appropriately, right_square_bracket)
+{
+    const std::string_view right_square_bracket_string { "]" };
+    const Scanner scanner(right_square_bracket_string);
+    ASSERT_TRUE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+
+    {
+        TextPosition text_position(right_square_bracket_string.cbegin(), right_square_bracket_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_SQUARE_BRACKET, "]", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
+    }
+
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
+}
+
+TEST(string_must_be_scanned_appropriately, left_curly_brace)
+{
+    std::string_view left_curly_brace_string { "{" };
+    const Scanner scanner(left_curly_brace_string);
+    ASSERT_TRUE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+
+    {
+        TextPosition text_position(left_curly_brace_string.cbegin(), left_curly_brace_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::LEFT_CURLY_BRACE, "{", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
+    }
+
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
+}
+
+TEST(string_must_be_scanned_appropriately, right_curly_brace)
+{
+    const std::string_view right_curly_brace_string { "}" };
+    const Scanner scanner(right_curly_brace_string);
+    ASSERT_TRUE(scanner.get_is_success());
+    const TokenList& token_list = scanner.get_token_list();
+    ASSERT_EQ(token_list.size(), 1);
+
+    {
+        TextPosition text_position(right_curly_brace_string.cbegin(), right_curly_brace_string.cend());
+        ASSERT_EQ(token_list.at(0), Token(TokenType::RIGHT_CURLY_BRACE, "}", text_position));
+        ASSERT_EQ(token_list.at(0).get_line(), 1);
+        ASSERT_EQ(token_list.at(0).get_column(), 1);
+    }
+
+    const ErrorLog& error_log = scanner.get_error_log();
+    ASSERT_TRUE(error_log.empty());
+    const TextPosition& text_position = scanner.get_text_position();
+    ASSERT_EQ(text_position.get_line(), 1);   // Line indices start from 1 and we have not changed line.
+    ASSERT_EQ(text_position.get_column(), 2); // 2 is past end here.
+}
+
 TEST(string_must_be_scanned_appropriately, quote)
 {
     const std::string_view quote_string { "'" };
