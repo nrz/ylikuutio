@@ -93,13 +93,27 @@ Lists:
   * `yli::lisp::List`
 
 Vectors:
-* Vector syntax: `(vector 1 2 3)`.
-* Vector syntax (syntactic sugar): `#(1 2 3)`.
+* Row vector syntax: `(row-vector 1 2 3)`.
+* Row vector syntax (syntactic sugar): `[1 2 3]`.
+* Column vector syntax: `(column-vector 1 2 3)`.
+* Column vector syntax (syntactic sugar): `{1 2 3}`.
 * Test if variable is a vector: `(vector? 'foo)`      -> `#f`
 * Test if variable is a vector: `(vector? '(1 2 3))`  -> `#f`
 * Test if variable is a vector: `(vector? '#(1 2 3))` -> `#t`
+* Test if variable is a row vector: `(row-vector? 'foo)`       -> `#f`
+* Test if variable is a column vector: `(column-vector? 'foo)` -> `#f`
 * Ylikuutio type:
   * `yli::lisp::Vector`
+
+Matrices:
+* Can be constructed from row vectors by using vertical concatenation:
+  `{ [ 1 2 ] [ 3 4 ] }`
+-> 1 2
+   3 4
+* Can be constructed from column vectors by using horizontal concatenation:
+  `[ { 1 2 } { 3 4 } ]`
+-> 1 3
+   2 4
 
 Structs:
 * Struct syntax: `(struct foo)`.
