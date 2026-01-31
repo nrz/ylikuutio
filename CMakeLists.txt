@@ -499,6 +499,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/error_type.hpp
     code/ylikuutio/lisp/executor.cpp
     code/ylikuutio/lisp/executor.hpp
+    code/ylikuutio/lisp/expr.cpp
+    code/ylikuutio/lisp/expr.hpp
+    code/ylikuutio/lisp/expr_type.hpp
     code/ylikuutio/lisp/function_arg_extractor.hpp
     code/ylikuutio/lisp/identifier.cpp
     code/ylikuutio/lisp/identifier.hpp
@@ -507,10 +510,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/lisp_templates.hpp
     code/ylikuutio/lisp/number_literal.cpp
     code/ylikuutio/lisp/number_literal.hpp
+    code/ylikuutio/lisp/parser.cpp
+    code/ylikuutio/lisp/parser.hpp
     code/ylikuutio/lisp/scanner.cpp
     code/ylikuutio/lisp/scanner.hpp
     code/ylikuutio/lisp/string_literal.cpp
     code/ylikuutio/lisp/string_literal.hpp
+    code/ylikuutio/lisp/syntax_tree_list.cpp
+    code/ylikuutio/lisp/syntax_tree_list.hpp
     code/ylikuutio/lisp/text_position.cpp
     code/ylikuutio/lisp/text_position.hpp
     code/ylikuutio/lisp/token.cpp
@@ -1101,6 +1108,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_object.cpp
         code/ylikuutio/tests/test_object_struct.cpp
         code/ylikuutio/tests/test_orientation_module.cpp
+        code/ylikuutio/tests/test_parser.cpp
         code/ylikuutio/tests/test_png_heightmap_loader.cpp
         code/ylikuutio/tests/test_png_loader.cpp
         code/ylikuutio/tests/test_pugixml.cpp

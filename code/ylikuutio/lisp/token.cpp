@@ -76,6 +76,11 @@ namespace yli::lisp
         return this->type;
     }
 
+    void Token::set_type(TokenType new_type)
+    {
+        this->type = new_type;
+    }
+
     std::string_view Token::get_lexeme() const
     {
         return this->lexeme;

@@ -38,7 +38,8 @@ namespace yli::lisp
         STRING,            // A Unicode string starting and ending with double quotes.
         UNSIGNED_INTEGER,  // Consisting of Arabic numerals (0-9).
         SIGNED_INTEGER,    // Consisting of Arabic numerals (0-9) and exactly one minus sign.
-        FLOATING_POINT     // Consisting of Arabic numerals (0-9), exactly one dot as well, and may also have one minus sign as well.
+        FLOATING_POINT,    // Consisting of Arabic numerals (0-9), exactly one dot as well, and may also have one minus sign as well.
+        FUNCTION_CALL
     };
 }
 #endif
