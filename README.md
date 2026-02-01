@@ -10,7 +10,7 @@ A hobby project of mine. Work in progress.
 ## License
 Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
-All my code copyright (C) 2015-2025 Antti Nuortimo.
+All my code copyright (C) 2015-2026 Antti Nuortimo.
 
 Data preprocessing scripts that use Blender Python API
 are not a part of Ylikuutio itself and they are under
