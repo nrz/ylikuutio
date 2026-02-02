@@ -27,8 +27,6 @@
 #include <stack>   // std::stack
 #include <utility> // std::move
 
-#include <iostream>
-
 namespace yli::lisp
 {
     class ErrorLog;
