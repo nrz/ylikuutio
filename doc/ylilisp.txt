@@ -1,6 +1,6 @@
 YliLisp is the scripting language of Ylikuutio.
 YliLisp is influenced by Scheme, Common Lisp, Clojure,
-C++, Java, AngelScript, and Rust.
+C++, Java, AngelScript, Rust, and MATLAB.
 
 Use cases:
 * Defining physics simulations.
@@ -106,6 +106,8 @@ Vectors:
   * `yli::lisp::Vector`
 
 Matrices:
+* Matrix is a datatype with a built-in support.
+* `(matrix (number-of-rows-expr number-of-columns-expr cell-datatype))`
 * Can be constructed from row vectors by using vertical concatenation:
   `{ [ 1 2 ] [ 3 4 ] }`
 -> 1 2
@@ -156,11 +158,11 @@ Functions:
 * Functions are first-class citizens.
 * Functions can be overloaded.
 * Functions can have explicit return value type:
-  * `(define 'uint64 (square 'uint64 x) (* x x))`
+  * `(defun square ((x 'uint64)) 'uint64 (* x x))`
 * Used `'void` for no return value.
-  * `(define 'void (square-but-return-void 'uint64 x) (* x x))`
-* Return type can be left out to be inferred automatically:
-  * `(define (square 'uint64 x) (* x x))`
+  * `(defun square-but-return-void ((x 'uint64)) 'void (* x x))`
+* Return type can be `auto` to be inferred automatically:
+  * `(defun square ((x 'uint64)) 'auto (* x x))`
 * Member functions/methods are supported as well:
   `(foo.bar)`, `(foo.bar baz)`, etc.
 * Ylikuutio type:
@@ -171,16 +173,16 @@ Function templates:
   or if it lacks the type of the return value, then that is
   a function template.
 * Function template syntax:
-  * `(define (square x) (* x x))`
+  * `(defun square (x) 'auto (* x x))`
   * Consider function definition in other Lisps:
     * Scheme:      `(define (square x) (* x x))`
     * Common Lisp: `(defun square (x) (* x x))`
     * Clojure:     `(defn square [x] (* x x))`
 * Function templates can have explicit parameter types
   for some of the parameters:
-  * `(define (multiply 'uint64 x y) (* x y))`
+  * `(defun multiply ((x 'uint64) y) 'auto (* x y))`
 * Function templates can have explicit return value type:
-  * `(define 'uint64 (square x) (* x x))`
+  * `(defun square (x) 'uint64 (* x x))`
 * For function templates the actual function instantiation
   will be resolved in compile-time.
 * There cannot be both a function and a function template
