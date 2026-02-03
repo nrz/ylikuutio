@@ -20,6 +20,22 @@ General features:
   (generic functions).
 * Both functions and function templates are first-class
   citizens.
+* Hygienic macros.
+* Common function names follow names used by Scheme.
+* All objects, both variables and functions,
+  are `yli::ontology::Entity` entities.
+* The set of built-in functions is defined by
+  the execution context.
+* `yli::ontology::Entity` entities with global names
+  are global YliLisp variables with the same name.
+* YliLisp syntax follows Scheme syntax when reasonable
+  considering other YliLisp design goals.
+
+Conventions:
+* Mutators marked with `!` like in Scheme, e.g. `set!`.
+* Predicates marked with `?` like in Scheme, e.g. `null?`.
+
+Identifiers:
 * An identifier may refer to one of the following:
   * A variable.
   * A function.
@@ -27,17 +43,6 @@ General features:
   * A built-in function (written in C++ and initialized for
     the context which is usually a `yli::ontology::Console`
     instance).
-* Common function names follow names used by Scheme.
-* All objects, both variables and functions,
-  are `yli::ontology::Entity` entities.
-* `yli::ontology::Entity` entities with global names
-  are global YliLisp variables with the same name.
-* YliLisp syntax follows Scheme syntax when possible
-  considering other YliLisp design goals.
-
-Conventions:
-* Mutators marked with `!` like in Scheme, e.g. `set!`.
-* Predicates marked with `?` like in Scheme, e.g. `null?`.
 
 Numeric types:
 * Test if variable is a number: `(number? 1)`         -> `#t`
@@ -47,45 +52,63 @@ Numeric types:
 
 Integer types:
 * Statically typed: `(define my-number 'uint64 123)`.
-* Without explicit type: `(define my-number 123)` is `uint64`.
+* Without explicit type: `(define my-number 123)` is `int64`.
 * Without explicit type: `(define my-number 3.14)` is `double`.
 * Type conversion must be explicit: `(as 'uint64 my-number)`.
-* `cast` can only be used for converting into wider variables
+* `as` can only be used for converting into wider variables
   where the value always fits in the new type.
 * When overflow, precision loss or truncation could occur
-  `try-cast` needs to be used: `(try-as 'int8 my-number)`.
+  `try-as` needs to be used: `(try-as 'i8 my-number)`.
 * If number does not fit in the type, `try-as` will throw.
 * The default type for integer literals is `int64`.
 * An integer literal that does not fit in `int64` causes
   a compiler error.
 * Different types for integer literals for can be given:
   `'int64 123`.
-* Integer variable types: `int8`, `int16`, `int32`, `int64`,
-  `uint8`, `uint16`, `uint32`, `uint64`.
+* Integer variable types: `i8`, `i16`, `i32`, `i64`,
+  `u8`, `u16`, `u32`, `u64`.
 * Ylikuutio types:
-  * `yli::lisp::Int8`
-  * `yli::lisp::Uint8`
-  * `yli::lisp::Int16`
-  * `yli::lisp::Uint16`
-  * `yli::lisp::Int32`
-  * `yli::lisp::Uint32`
-  * `yli::lisp::Int64`
-  * `yli::lisp::Uint64`
+  * `yli::lisp::I8`
+  * `yli::lisp::U8`
+  * `yli::lisp::I6`
+  * `yli::lisp::U16`
+  * `yli::lisp::I32`
+  * `yli::lisp::U32`
+  * `yli::lisp::I64`
+  * `yli::lisp::U64`
 
 Floating point types:
-* `float`, `double`.
+* `f32`, `f64`.
 * Ylikuutio types:
-  * `yli::lisp::Float`
-  * `yli::lisp::Double`
+  * `yli::lisp::F32`
+  * `yli::lisp::F64`
+
+Complex number types:
+* `(complex type-expr)`
+  * Example: `(complex 'f64)`
+* Syntactic sugar: `ci8`, `ci16`, `ci32`, `ci64`,
+  `cu8`, `cu16`, `cu32`, `cu64`,
+  `cf32`, `cf64`.
+* Ylikuutio types:
+  * `yli::lisp::CI8`
+  * `yli::lisp::CU8`
+  * `yli::lisp::CI16`
+  * `yli::lisp::CU16`
+  * `yli::lisp::CI32`
+  * `yli::lisp::CU32`
+  * `yli::lisp::CI64`
+  * `yli::lisp::CU64`
+  * `yli::lisp::CF32`
+  * `yli::lisp::CF64`
 
 Boolean types:
 * `bool`.
+* Values: `#t` (true), `#f` (false)
 * Ylikuutio type:
   * `yli::lisp::Bool`
 
 Lists:
-* List syntax: `(list 1 2 3)`.
-* List syntax (syntactic sugar): `'(1 2 3)`.
+* List syntax: `(list type-expr 1 2 3)`.
 * Test if variable is a list: `(list? 'foo)`      -> `#f`
 * Test if variable is a list: `(list? '(1 2 3))`  -> `#t`
 * Test if variable is a list: `(list? '#(1 2 3))` -> `#f`
@@ -93,10 +116,10 @@ Lists:
   * `yli::lisp::List`
 
 Vectors:
-* Row vector syntax: `(row-vector 1 2 3)`.
-* Row vector syntax (syntactic sugar): `[1 2 3]`.
-* Column vector syntax: `(column-vector 1 2 3)`.
-* Column vector syntax (syntactic sugar): `{1 2 3}`.
+* Row vector syntax: `(row-vector type-expr 1 2 3)`.
+  * Example: `(row-vector 'double 1 2 3)`.
+* Column vector syntax: `(column-vector type-expr 1 2 3)`.
+  * Example: `(column-vector 'double 1 2 3)`.
 * Test if variable is a vector: `(vector? 'foo)`      -> `#f`
 * Test if variable is a vector: `(vector? '(1 2 3))`  -> `#f`
 * Test if variable is a vector: `(vector? '#(1 2 3))` -> `#t`
@@ -107,7 +130,10 @@ Vectors:
 
 Matrices:
 * Matrix is a datatype with a built-in support.
-* `(matrix (number-of-rows-expr number-of-columns-expr cell-datatype))`
+* `(matrix type-expr matrix-data)`
+  * Example: `(matrix 'f64 { [ 1 2 3 ]
+                             [ 4 5 6 ]
+                             [ 7 8 9 ] })
 * Can be constructed from row vectors by using vertical concatenation:
   `{ [ 1 2 ] [ 3 4 ] }`
 -> 1 2
@@ -158,11 +184,11 @@ Functions:
 * Functions are first-class citizens.
 * Functions can be overloaded.
 * Functions can have explicit return value type:
-  * `(defun square ((x 'uint64)) 'uint64 (* x x))`
+  * `(defun square ((x 'u64)) 'u64 (* x x))`
 * Used `'void` for no return value.
-  * `(defun square-but-return-void ((x 'uint64)) 'void (* x x))`
+  * `(defun square-but-return-void ((x 'u64)) 'void (* x x))`
 * Return type can be `auto` to be inferred automatically:
-  * `(defun square ((x 'uint64)) 'auto (* x x))`
+  * `(defun square ((x 'u64)) 'auto (* x x))`
 * Member functions/methods are supported as well:
   `(foo.bar)`, `(foo.bar baz)`, etc.
 * Ylikuutio type:
@@ -180,9 +206,9 @@ Function templates:
     * Clojure:     `(defn square [x] (* x x))`
 * Function templates can have explicit parameter types
   for some of the parameters:
-  * `(defun multiply ((x 'uint64) y) 'auto (* x y))`
+  * `(defun multiply ((x 'u64) y) 'auto (* x y))`
 * Function templates can have explicit return value type:
-  * `(defun square (x) 'uint64 (* x x))`
+  * `(defun square (x) 'u64 (* x x))`
 * For function templates the actual function instantiation
   will be resolved in compile-time.
 * There cannot be both a function and a function template
@@ -217,12 +243,12 @@ Planned implementation details:
   exceptions triggered by execution of YliLisp code.
 
 Command examples:
-* `(define my-uint16 'uint64 123)`.
-* `(define my-int32 (cast my-uint64 'int8))`.
+* `(define my-uint16 'u16 123)`.
+* `(define my-int32 (as 'i32 my-uint16))`.
 * `(define my-uint64 'uint64 123)`.
-* `(define my-int8 (try-cast my-uint64 'int8))`.
-* `(define my-float 'float 3.14)`.
-* `(define my-double (cast my-float 'double))`.
+* `(define my-int8 (try-as 'i8 my-uint64))`.
+* `(define my-float 'f32 3.14)`.
+* `(define my-double (as 'f64 my-float))`.
 
 Links:
 * https://compilers.iecc.com/crenshaw/
