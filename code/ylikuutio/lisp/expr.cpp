@@ -18,7 +18,6 @@
 #include "expr.hpp"
 
 // Include standard headers
-#include <deque>     // std::deque
 #include <stdexcept> // std::runtime_error
 #include <utility>   // std::move
 #include <variant>   // std::holds_alternative, std::monostate
@@ -51,11 +50,6 @@ namespace yli::lisp
     const Token& Expr::get_token() const
     {
         return this->token;
-    }
-
-    void Expr::bind_children(std::deque<Expr>&& expressions)
-    {
-        this->children = std::move(expressions);
     }
 
     std::size_t Expr::get_number_of_children() const

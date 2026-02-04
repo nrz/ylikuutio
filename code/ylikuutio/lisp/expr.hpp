@@ -87,7 +87,6 @@ namespace yli::lisp
             const Expr& at(const std::size_t index) const;
             Expr& last();
 
-            void bind_children(std::deque<Expr>&& expressions);
             std::size_t get_number_of_children() const;
 
             void emplace_back(Expr&& expr);
