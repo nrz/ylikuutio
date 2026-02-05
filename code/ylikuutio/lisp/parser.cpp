@@ -23,7 +23,6 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <deque>   // std::deque
 #include <stack>   // std::stack
 #include <utility> // std::move
 
