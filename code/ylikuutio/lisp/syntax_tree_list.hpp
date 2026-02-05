@@ -22,7 +22,8 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <deque>   // std::deque
+#include <memory>  // std::unique_ptr
+#include <vector>  // std::vector
 
 namespace yli::lisp
 {
@@ -31,18 +32,18 @@ namespace yli::lisp
         public:
             SyntaxTreeList();
 
-            const std::deque<Expr>& data() const;
+            const std::vector<std::unique_ptr<Expr>>& data() const;
 
             const Expr& at(const std::size_t i) const;
-            Expr* last();
+            Expr& last();
 
             bool empty() const;
             std::size_t size() const;
 
-            void emplace_back(Expr&& expr);
+            void emplace_back(std::unique_ptr<Expr> expr);
 
         private:
-            std::deque<Expr> syntax_trees; // We want to keep expressions in stable memory addresses thus `std::vector` won't do.
+            std::vector<std::unique_ptr<Expr>> syntax_trees;
     };
 }
 

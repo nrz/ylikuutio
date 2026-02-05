@@ -23,8 +23,9 @@
 #include "code/ylikuutio/data/codepoint.hpp"
 
 // Include standard headers
-#include <deque>   // std::deque
+#include <memory>  // std::unique_ptr
 #include <variant> // std::monostate, std::variant
+#include <vector>  // std::vector
 
 namespace yli::lisp
 {
@@ -84,14 +85,14 @@ namespace yli::lisp
 
             std::size_t get_number_of_children() const;
 
-            void emplace_back(Expr&& expr);
+            void emplace_back(std::unique_ptr<Expr> expr);
 
         private:
             ExprType type;
             Token token;
 
             // Every expression may either terminal expressions or it may consist of subexpressions (children `Expr` instances).
-            std::deque<Expr> children;
+            std::vector<std::unique_ptr<Expr>> children;
     };
 }
 

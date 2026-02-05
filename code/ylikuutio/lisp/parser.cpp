@@ -23,8 +23,8 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <memory>  // std::make_unique
 #include <stack>   // std::stack
-#include <utility> // std::move
 
 namespace yli::lisp
 {
@@ -193,15 +193,15 @@ namespace yli::lisp
             else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr && paren_token_stack.empty())
             {
                 // This is a top-level identifier evaluation.
-                this->syntax_tree_list.emplace_back(Expr(token));
+                this->syntax_tree_list.emplace_back(std::make_unique<Expr>(token));
             }
             else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr && paren_token_stack.size() == 1)
             {
                 // This is a top-level function call.
                 Token function_call = token;
                 function_call.set_type(TokenType::FUNCTION_CALL);
-                this->syntax_tree_list.emplace_back(Expr(function_call));
-                current_parent = this->syntax_tree_list.last();
+                this->syntax_tree_list.emplace_back(std::make_unique<Expr>(function_call));
+                current_parent = &this->syntax_tree_list.last();
             }
             else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr)
             {
@@ -210,7 +210,7 @@ namespace yli::lisp
 
                 Token function_call = token;
                 function_call.set_type(TokenType::FUNCTION_CALL);
-                parent_expr->emplace_back(Expr(function_call));
+                parent_expr->emplace_back(std::make_unique<Expr>(function_call));
                 current_parent = &parent_expr->last();
             }
             else if (!paren_token_stack.empty() && current_parent == nullptr)
@@ -222,7 +222,7 @@ namespace yli::lisp
             else if (token.get_type() == TokenType::IDENTIFIER && !paren_token_stack.empty())
             {
                 // This is an identifier given as argument.
-                current_parent->emplace_back(Expr(token));
+                current_parent->emplace_back(std::make_unique<Expr>(token));
             }
             else if (token.get_type() == TokenType::QUOTE)
             {
@@ -235,27 +235,27 @@ namespace yli::lisp
             else if (token.get_type() == TokenType::STRING && current_parent != nullptr)
             {
                 // String argument.
-                current_parent->emplace_back(Expr(token));
+                current_parent->emplace_back(std::make_unique<Expr>(token));
             }
             else if (token.get_type() == TokenType::UNSIGNED_INTEGER && current_parent != nullptr)
             {
                 // Unsigned integer argument.
-                current_parent->emplace_back(Expr(token));
+                current_parent->emplace_back(std::make_unique<Expr>(token));
             }
             else if (token.get_type() == TokenType::SIGNED_INTEGER && current_parent != nullptr)
             {
                 // Signed integer argument.
-                current_parent->emplace_back(Expr(token));
+                current_parent->emplace_back(std::make_unique<Expr>(token));
             }
             else if (token.get_type() == TokenType::FLOATING_POINT && current_parent != nullptr)
             {
                 // Floating point number argument.
-                current_parent->emplace_back(Expr(token));
+                current_parent->emplace_back(std::make_unique<Expr>(token));
             }
             else if (paren_token_stack.empty())
             {
                 // This is a non-parenthesized expression.
-                this->syntax_tree_list.emplace_back(Expr(token));
+                this->syntax_tree_list.emplace_back(std::make_unique<Expr>(token));
             }
         }
 

@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <stdexcept> // std::runtime_error
+#include <memory>    // std::make_unique
 #include <utility>   // std::move
 #include <variant>   // std::holds_alternative, std::monostate
 
@@ -59,15 +60,15 @@ namespace yli::lisp
 
     const Expr& Expr::at(const std::size_t index) const
     {
-        return this->children.at(index);
+        return *this->children.at(index);
     }
 
     Expr& Expr::last()
     {
-        return this->children.back();
+        return *this->children.back();
     }
 
-    void Expr::emplace_back(Expr&& expr)
+    void Expr::emplace_back(std::unique_ptr<Expr> expr)
     {
         this->children.emplace_back(std::move(expr));
     }

@@ -19,8 +19,9 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <deque>   // std::deque
+#include <memory>  // std::unique_ptr
 #include <utility> // std::move
+#include <vector>  // std::vector
 
 namespace yli::lisp
 {
@@ -30,24 +31,19 @@ namespace yli::lisp
     {
     }
 
-    const std::deque<Expr>& SyntaxTreeList::data() const
+    const std::vector<std::unique_ptr<Expr>>& SyntaxTreeList::data() const
     {
         return this->syntax_trees;
     }
 
     const Expr& SyntaxTreeList::at(const std::size_t i) const
     {
-        return this->syntax_trees.at(i);
+        return *this->syntax_trees.at(i);
     }
 
-    Expr* SyntaxTreeList::last()
+    Expr& SyntaxTreeList::last()
     {
-        if (this->syntax_trees.empty()) [[unlikely]]
-        {
-            return nullptr;
-        }
-
-        return &this->syntax_trees.back();
+        return *this->syntax_trees.back();
     }
 
     bool SyntaxTreeList::empty() const
@@ -60,7 +56,7 @@ namespace yli::lisp
         return this->syntax_trees.size();
     }
 
-    void SyntaxTreeList::emplace_back(Expr&& expr)
+    void SyntaxTreeList::emplace_back(std::unique_ptr<Expr> expr)
     {
         this->syntax_trees.emplace_back(std::move(expr));
     }
