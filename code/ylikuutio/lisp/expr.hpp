@@ -71,11 +71,6 @@ namespace yli::lisp
         // strings     -> STRING
 
         public:
-            // So that `Expr` can be known we need to know the offset of the matching closing parenthesis `)`.
-            // This means that the expressions (`Expr` instances) are built bottom-up and then placed into
-            // their parent expression.
-            // explicit Expr(std::deque<Expr>&& expressions);
-
             // Terminal expression.
             explicit Expr(const Token& expr);
 
