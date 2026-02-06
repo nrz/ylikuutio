@@ -84,11 +84,11 @@ namespace yli::ontology
                     const MovableStruct& movable_struct,
                     GenericMasterModule* const brain_master_module);
 
-            virtual ~Movable() = default;
-
         public:
             Movable(const Movable&) = delete;            // Delete copy constructor.
             Movable& operator=(const Movable&) = delete; // Delete copy assignment.
+
+            virtual ~Movable() = default;
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);

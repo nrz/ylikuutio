@@ -61,11 +61,11 @@ namespace yli::ontology
                     GenericMasterModule* const brain_master_module,
                     GenericMasterModule* const symbiosis_master_module);
 
-            virtual ~Holobiont() = default;
-
         public:
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
             Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
+
+            virtual ~Holobiont() = default;
 
             Entity* get_parent() const final;
 

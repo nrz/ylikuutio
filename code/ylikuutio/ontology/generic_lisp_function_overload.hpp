@@ -53,11 +53,11 @@ namespace yli::ontology
                     Universe& universe,
                     GenericParentModule* const lisp_function_parent_module);
 
-            virtual ~GenericLispFunctionOverload() = default;
-
         public:
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
+
+            virtual ~GenericLispFunctionOverload() = default;
 
             Entity* get_parent() const override;
 
