@@ -145,6 +145,8 @@ namespace yli::ontology
             {
             }
 
+            virtual ~EntityFactory() = default;
+
             EntityFactory<TypeEnumType>& get() const
             {
                 return const_cast<EntityFactory<TypeEnumType>&>(*this);
