@@ -34,6 +34,7 @@ namespace yli::lisp
         // YliLisp expression grammar:
         //
         // expression  -> atom
+        //             -> defun-expr
         //             -> fun-call
         //             -> matrix
         //             -> string-cat
@@ -70,6 +71,30 @@ namespace yli::lisp
         // string-cat  -> "{" strings "}"
         // strings     -> STRING strings
         // strings     -> STRING
+        //
+        // defun-expr       -> "(" "defun" arg-exprs return-values body ")"
+        //
+        // arg-exprs        -> "(" more-arg-exprs ")"
+        //
+        // more-arg-exps    -> arg-expr more-arg-exps
+        // more-arg-exps    -> ""
+        //
+        // arg-expr         -> IDENTIFIER
+        // arg-expr         -> "(" type-expr IDENTIFIER ")"
+        //
+        // type-expr        -> TYPE
+        // type-expr        -> "(" "typeof" typed-expr ")"
+        //
+        // typed-expr       -> IDENTIFIER
+        //
+        // return-values    -> "auto"
+        // return-values    -> "void"
+        // return-values    -> type-expr
+        //
+        // body             -> "(" expression more-expressions ")"
+        //
+        // more-expressions -> expression more-expressions
+        // more-expressions -> ""
 
         public:
             // Terminal expression.
