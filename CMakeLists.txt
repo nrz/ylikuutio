@@ -88,8 +88,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Native compiling on Windows must compile libpng from source.
     set(COMPILE_LIBPNG_FROM_SOURCE true)
 
-    # Native compiling on Windows must compile zlib from source.
-    set(COMPILE_ZLIB_FROM_SOURCE true)
+    # Native compiling on Windows must not compile zlib from source.
+    set(COMPILE_ZLIB_FROM_SOURCE false)
 
     # Do not compile unit tests when building on Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -161,7 +161,7 @@ if(COMPILE_ZLIB_FROM_SOURCE)
     include_directories(
         external/zlib/
         )
-else()
+elseif(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING))
     # Use zlib shipped with the GNU/Linux distribution.
     find_package(ZLIB REQUIRED)
 
