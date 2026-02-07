@@ -241,12 +241,17 @@ else()
         set(ALL_LIBS
             ${ALL_LIBS}
             ${ZLIB_LIBRARIES}
-            )
-    else()
+        )
+    elseif (DEFINED "ZLIB_LIBRARY")
         set(ALL_LIBS
             ${ALL_LIBS}
             ${ZLIB_LIBRARY}
-            )
+        )
+    else()
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            ZLIB:ZLIB
+        )
     endif()
 endif()
 
