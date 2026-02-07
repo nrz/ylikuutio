@@ -50,7 +50,13 @@ target_link_libraries(GLEW_200
 if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
 else()
-    find_package(ZLIB)
+    include(FetchContent)
+    FetchContent_Declare(
+        zlib
+        URL https://zlib.net/zlib-1.3.1.tar.gz)
+    FetchContent_MakeAvailable(zlib)
+    add_library(ZLIB:ZLIB ALIAS zlibstatic)
+    target_include_directories(zlibstatic INTERFACE ${zlib_BINARY_DIR} ${zlib_SOURCE_DIR})
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
