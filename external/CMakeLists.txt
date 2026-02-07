@@ -50,7 +50,6 @@ target_link_libraries(GLEW_200
 if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
 else()
-    # https://github.com/madler/zlib/issues/759#issuecomment-1384244323
     include(FetchContent)
     FetchContent_Declare(
         zlib
@@ -58,13 +57,6 @@ else()
     FetchContent_MakeAvailable(zlib)
     add_library(ZLIB:ZLIB ALIAS zlibstatic)
     target_include_directories(zlibstatic INTERFACE ${zlib_BINARY_DIR} ${zlib_SOURCE_DIR})
-
-    set(ZLIB_FOUND ON PARENT_SCOPE)
-    set(ZLIB_LIBRARY ZLIB::ZLIB PARENT_SCOPE)
-    set(ZLIB_LIBRARIES ZLIB::ZLIB PARENT_SCOPE)
-    set(ZLIB_INCLUDE_DIR ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR} PARENT_SCOPE)
-    set(ZLIB_INCLUDE_DIRS ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR} PARENT_SCOPE)
-    set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_LIST_DIR}/CMake" PARENT_SCOPE)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
