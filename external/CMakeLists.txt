@@ -49,8 +49,15 @@ target_link_libraries(GLEW_200
 
 if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
-else()
-    find_package(ZLIB)
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+    # https://github.com/carla-simulator/carla/issues/6976
+    set(ZLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/zlib")
+    set(ZLIB_LIBRARY "zlib/Release")
+    find_package(ZLIB REQUIRED)
+    set(ZLIB_FOUND TRUE)
+    set(ZLIB_VERSION 1.3.1)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
