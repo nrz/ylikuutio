@@ -929,8 +929,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_tram.hpp
     code/hirvi/ontology/train.cpp
     code/hirvi/ontology/train.hpp
-    )
-target_link_libraries(hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(hirvi_lib PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 ### Game projects ###
 
@@ -941,8 +941,8 @@ add_executable(hirvi
     code/hirvi/hirvi.hpp
     code/hirvi/lisp/hirvi_console_callbacks.cpp
     code/hirvi/lisp/hirvi_console_callbacks.hpp
-    )
-target_link_libraries(hirvi hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(hirvi PRIVATE hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 ### Editor libraries ###
 
@@ -951,7 +951,7 @@ add_library(edit_lib
     code/ylikuutio/edit/edit_core.cpp
     code/ylikuutio/edit/edit_core.hpp
 )
-target_link_libraries(edit_lib ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+target_link_libraries(edit_lib PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 ### Editors ###
 
@@ -962,8 +962,8 @@ add_executable(hirvi_edit
     code/hirvi/hirvi_edit.hpp
     code/hirvi/lisp/hirvi_edit_console_callbacks.cpp
     code/hirvi/lisp/hirvi_edit_console_callbacks.hpp
-    )
-target_link_libraries(hirvi_edit hirvi_lib edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(hirvi_edit PRIVATE hirvi_lib edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # YliEdit (generic editor for Ylikuutio applications)
 add_executable(yli_edit
@@ -972,8 +972,8 @@ add_executable(yli_edit
     code/edit/yli_edit.hpp
     code/edit/yli_edit_console_callbacks.cpp
     code/edit/yli_edit_console_callbacks.hpp
-    )
-target_link_libraries(yli_edit edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(yli_edit PRIVATE edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 ### Physics simulations ###
 
@@ -1001,7 +1001,7 @@ if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Window
     add_executable(avaruus_fortran
         code/avaruus/fortran/avaruus.f90
     )
-    target_link_libraries(avaruus_fortran planetary_simulation)
+    target_link_libraries(avaruus_fortran PRIVATE planetary_simulation)
 endif()
 
 ### Testing ###
@@ -1016,8 +1016,8 @@ add_executable(ajokki
     code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
     code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
-    )
-target_link_libraries(ajokki snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(ajokki PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # GPGPU test (for testing GPGPU functionality)
 add_executable(gpgpu_test
@@ -1029,8 +1029,8 @@ add_executable(gpgpu_test
     # snippets, in alphabetical order
     code/ylikuutio/snippets/keyboard_callback_snippets.cpp
     code/ylikuutio/snippets/keyboard_callback_snippets.hpp
-    )
-target_link_libraries(gpgpu_test ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(gpgpu_test PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # Mock (for unit tests and integration test which need `Application` instance)
 # `mock` executable is not needed for testing but it also works to as an example
@@ -1039,8 +1039,8 @@ add_executable(mock
     # mock, in alphabetical order
     code/mock/mock_application.cpp
     code/mock/mock_application.hpp
-    )
-target_link_libraries(mock ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
+)
+target_link_libraries(mock PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
@@ -1195,15 +1195,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
         target_compile_features(test_avaruus PUBLIC cxx_std_20)
         set_target_properties(test_avaruus PROPERTIES CXX_EXTENSIONS OFF)
-        target_link_libraries(test_avaruus gtest_main planetary_simulation)
+        target_link_libraries(test_avaruus PRIVATE gtest_main planetary_simulation)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
     else()
-        target_link_libraries(test_ylikuutio gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
     endif()
 
     include(GoogleTest)
@@ -1216,17 +1216,17 @@ endif()
 add_executable(future_test
     code/thread_test/future_test.cpp
     )
-target_link_libraries(future_test ${THREAD_LIBS})
+target_link_libraries(future_test PRIVATE ${THREAD_LIBS})
 
 # thread-test (an example of `std::thread` use)
 add_executable(thread_test
     code/thread_test/thread_test.cpp
     )
-target_link_libraries(thread_test ${THREAD_LIBS})
+target_link_libraries(thread_test PRIVATE ${THREAD_LIBS})
 
 # dining philosophers (an example of `std::mutex` and `std::scoped_lock` use)
 # https://en.wikipedia.org/wiki/Dining_philosophers_problem
 add_executable(dining_philosophers
     code/thread_test/dining_philosophers.cpp
     )
-target_link_libraries(dining_philosophers ${THREAD_LIBS})
+target_link_libraries(dining_philosophers PRIVATE ${THREAD_LIBS})
