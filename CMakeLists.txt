@@ -266,11 +266,6 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-# zlib.
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
-    configure_file("${CMAKE_SOURCE_DIR}/external/zlib/zconf.h.included" "${CMAKE_SOURCE_DIR}/external/zlib/zconf.h" COPYONLY)
-endif()
-
 # Shaders.
 configure_file(code/ylikuutio/shaders/floyd_warshall.frag floyd_warshall.frag COPYONLY)
 configure_file(code/ylikuutio/shaders/go_west.frag go_west.frag COPYONLY)
