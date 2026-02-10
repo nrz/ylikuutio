@@ -109,9 +109,6 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DNOMINMAX")
 endif()
 
-# set(CMAKE_COLOR_MAKEFILE ON)
-# set(CMAKE_VERBOSE_MAKEFILE ON)
-
 if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
     message(FATAL_ERROR "ERROR: in-source builds are not supported! Please create a build directory and build from there!")
 endif()
