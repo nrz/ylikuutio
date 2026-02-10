@@ -154,7 +154,7 @@ if(COMPILE_LIBPNG_FROM_SOURCE)
         external/libpng-1.6.44/
         )
 else()
-    # Use libsdl shipped with the GNU/Linux distribution.
+    # Use libpng shipped with the GNU/Linux distribution.
     find_package(PNG REQUIRED)
 
     if (DEFINED "PNG_INCLUDE_DIRS")
