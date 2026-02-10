@@ -264,7 +264,6 @@ endif()
 add_definitions(
     -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS
-    -DPNG_NO_SETJMP
     )
 
 # zlib.
