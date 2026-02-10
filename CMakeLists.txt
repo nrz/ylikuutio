@@ -21,11 +21,6 @@ endif()
 # the options part intended to be modified begins here. |
 #-------------------------------------------------------+
 
-# http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
-# SET(GCC_COVERAGE_LINK_FLAGS "-ldl")
-# SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-
 # Modify the below line to control whether to compile SDL from source on Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
