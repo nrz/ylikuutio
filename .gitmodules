@@ -23,5 +23,5 @@
 	path = external/fastgltf
 	url = https://github.com/spnda/fastgltf
 [submodule "libpng"]
-	path = libpng
-	url = ./external/libpng
+	path = external/libpng
+	url = https://github.com/pnggroup/libpng
