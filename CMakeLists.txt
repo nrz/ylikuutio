@@ -133,8 +133,8 @@ endif()
 if(COMPILE_ZLIB_FROM_SOURCE)
     include_directories(
         external/zlib/
-        )
-elseif(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING))
+    )
+else()
     # Use zlib shipped with the GNU/Linux distribution.
     find_package(ZLIB REQUIRED)
 
