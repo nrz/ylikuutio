@@ -24,11 +24,11 @@ endif()
 # Modify the below line to control whether to compile SDL from source on Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
-# Modify the below line to control whether to compile libpng from source on Linux.
-set(COMPILE_LIBPNG_FROM_SOURCE false)
-
 # Modify the below line to control whether to compile zlib from source on Linux.
 set(COMPILE_ZLIB_FROM_SOURCE false)
+
+# Modify the below line to control whether to compile libpng from source on Linux.
+set(COMPILE_LIBPNG_FROM_SOURCE false)
 
 #-------------------------------------------------------+
 # the options part intended to be modified ends here.   |
@@ -56,11 +56,11 @@ elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # Crosscompiling from Linux to Windows must compile libpng from source.
-    set(COMPILE_LIBPNG_FROM_SOURCE true)
-
     # Crosscompiling from Linux to Windows must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
+
+    # Crosscompiling from Linux to Windows must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
 
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -68,11 +68,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # Native compiling on MacOS must compile libpng from source.
-    set(COMPILE_LIBPNG_FROM_SOURCE true)
-
     # Native compiling on MacOS must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
+
+    # Native compiling on MacOS must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
 
     # Do not compile unit tests when building on MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -80,11 +80,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Native compiling on Windows must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
 
-    # Native compiling on Windows must compile libpng from source.
-    set(COMPILE_LIBPNG_FROM_SOURCE true)
-
     # Native compiling on Windows must not compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE false)
+
+    # Native compiling on Windows must compile libpng from source.
+    set(COMPILE_LIBPNG_FROM_SOURCE true)
 
     # Do not compile unit tests when building on Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
@@ -133,25 +133,6 @@ if(COMPILE_SDL_FROM_SOURCE)
         )
 endif()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
-    include_directories(
-        external/libpng-1.6.44/
-        )
-else()
-    # Use libsdl shipped with the GNU/Linux distribution.
-    find_package(PNG REQUIRED)
-
-    if (DEFINED "PNG_INCLUDE_DIRS")
-        include_directories(
-            ${PNG_INCLUDE_DIRS}
-            )
-    else()
-        include_directories(
-            ${PNG_INCLUDE_DIR}
-            )
-    endif()
-endif()
-
 if(COMPILE_ZLIB_FROM_SOURCE)
     include_directories(
         external/zlib/
@@ -167,6 +148,25 @@ elseif(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING))
     else()
         include_directories(
             ${ZLIB_INCLUDE_DIR}
+            )
+    endif()
+endif()
+
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(
+        external/libpng-1.6.44/
+        )
+else()
+    # Use libsdl shipped with the GNU/Linux distribution.
+    find_package(PNG REQUIRED)
+
+    if (DEFINED "PNG_INCLUDE_DIRS")
+        include_directories(
+            ${PNG_INCLUDE_DIRS}
+            )
+    else()
+        include_directories(
+            ${PNG_INCLUDE_DIR}
             )
     endif()
 endif()
