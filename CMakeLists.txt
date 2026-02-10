@@ -9,6 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(ylikuutio VERSION 0.0.10)
 
+# Set the build type if it isn't already
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     project(ylikuutio LANGUAGES C CXX)
 else()
@@ -117,11 +122,6 @@ if(CMAKE_SOURCE_DIR MATCHES " ")
 endif()
 if(CMAKE_BINARY_DIR MATCHES " ")
     message("WARNING: Your build directory contains spaces. If you experience problems when compiling, this can be the cause.")
-endif()
-
-# Set the build type if it isn't already
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
 endif()
 
 if(COMPILE_SDL_FROM_SOURCE)
