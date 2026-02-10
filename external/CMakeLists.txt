@@ -7,11 +7,11 @@ include_directories(
     FastNoiseSIMD/
     glew-2.0.0/include/
     glm/
-    zlib/
-    libpng/
+    libpng-1.6.44/
     OpenFBX/src/
     pugixml/src/
     soloud/include/
+    zlib/
     )
 
 # Compile external dependencies
@@ -64,9 +64,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
 	set(PNG_SHARED CACHE INTERNAL OFF)
 	set(PNG_TESTS CACHE INTERNAL OFF)
 	set(PNG_TOOLS CACHE INTERNAL OFF)
-    add_subdirectory(libpng)
+    add_subdirectory(libpng-1.6.44)
 elseif(COMPILE_LIBPNG_FROM_SOURCE)
-    add_subdirectory(libpng)
+    add_subdirectory(libpng-1.6.44)
 endif()
 
 add_library(miniz STATIC

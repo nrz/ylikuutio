@@ -151,7 +151,7 @@ endif()
 
 if(COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(
-        external/libpng/
+        external/libpng-1.6.44/
         )
 else()
     # Use libpng shipped with the GNU/Linux distribution.
