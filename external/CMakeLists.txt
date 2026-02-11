@@ -4,14 +4,14 @@ add_definitions(
     )
 
 include_directories(
-    FastNoiseSIMD/
+    SDL/include/
     glew-2.0.0/include/
     glm/
+    zlib/
     libpng-1.6.44/
-    OpenFBX/src/
     pugixml/src/
     soloud/include/
-    zlib/
+    OpenFBX/src/
     )
 
 # Compile external dependencies
