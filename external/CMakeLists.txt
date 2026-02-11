@@ -45,6 +45,15 @@ target_link_libraries(GLEW_200
 )
 
 if(COMPILE_ZLIB_FROM_SOURCE)
+    # Make the ALIAS that libpng expects, if necessary
+    if(NOT TARGET ZLIB::ZLIB)
+        if(TARGET zlibstatic)
+            add_library(ZLIB::ZLIB ALIAS zlibstatic)
+        elseif(TARGET zlib)
+            add_library(ZLIB::ZLIB ALIAS zlib)
+        endif()
+    endif()
+
     add_subdirectory(zlib)
 endif()
 
