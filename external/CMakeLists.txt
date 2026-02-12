@@ -45,8 +45,6 @@ target_link_libraries(GLEW_200
 )
 
 if(COMPILE_ZLIB_FROM_SOURCE)
-    add_subdirectory(zlib)
-
     # Make the ALIAS that libpng expects, if necessary
     if(NOT TARGET ZLIB::ZLIB)
         if(TARGET zlibstatic)
@@ -55,13 +53,28 @@ if(COMPILE_ZLIB_FROM_SOURCE)
             add_library(ZLIB::ZLIB ALIAS zlib)
         endif()
     endif()
+
+    add_subdirectory(zlib)
 endif()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+    include(FetchContent)
+    set(ZLIB_BUILD_TESTING CACHE INTERNAL OFF)
+    set(ZLIB_INSTALL_COMPAT_DLL CACHE INTERNAL OFF)
+    set(ZLIB_CONF_WRITTEN FALSE)
+    FetchContent_Declare(
+        zlib
+        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/zlib
+        OVERRIDE_FIND_PACKAGE
+    )
+    FetchContent_MakeAvailable(zlib)
+
     set(PNG_TOOLS CACHE INTERNAL OFF)
     set(PNG_SHARED CACHE INTERNAL OFF)
     set(PNG_TESTS CACHE INTERNAL OFF)
     set(PNG_TOOLS CACHE INTERNAL OFF)
+    add_subdirectory(libpng-1.6.44)
+elseif(COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.44)
 endif()
 
