@@ -65,14 +65,13 @@ namespace yli::lisp
         // numbers     -> NUMBER
         //
         // string-cat  -> "[" strings "]"
-        // strings     -> STRING strings
-        // strings     -> STRING
-        //
         // string-cat  -> "{" strings "}"
+        //
         // strings     -> STRING strings
         // strings     -> STRING
         //
-        // defun-expr       -> "(" "defun" arg-exprs return-values body ")"
+        // defun-expr       -> "(" "defun" IDENTIFIER arg-exprs return-values body ")"
+        // lambda-expr      -> "(" "lambda" arg-exprs return-values body ")"
         //
         // arg-exprs        -> "(" more-arg-exprs ")"
         //
@@ -86,6 +85,7 @@ namespace yli::lisp
         // type-expr        -> "(" "typeof" typed-expr ")"
         //
         // typed-expr       -> IDENTIFIER
+        // typed-expr       -> lambda-expr
         //
         // return-values    -> "auto"
         // return-values    -> "void"
