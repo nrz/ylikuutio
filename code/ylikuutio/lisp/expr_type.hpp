@@ -23,7 +23,9 @@ namespace yli::lisp
     enum class ExprType
     {
         ATOM,
-        FUNCTION_CALL
+        FUNCTION_CALL,
+        DEFUN,
+        LAMBDA
     };
 }
 #endif
