@@ -33,42 +33,42 @@ namespace yli::lisp
     {
         // YliLisp expression grammar:
         //
-        // expression  -> atom
-        //             -> defun-expr
-        //             -> fun-call
-        //             -> matrix
-        //             -> string-cat
+        // expression       -> atom
+        //                  -> defun-expr
+        //                  -> fun-call
+        //                  -> matrix
+        //                  -> string-cat
         //
-        // atom        -> IDENTIFIER
-        //             -> STRING
-        //             -> NUMBER
-        //             -> #t
-        //             -> #f
-        //             -> null
+        // atom             -> IDENTIFIER
+        //                  -> STRING
+        //                  -> NUMBER
+        //                  -> #t
+        //                  -> #f
+        //                  -> null
         //
-        // fun-call    -> "(" IDENTIFIER ")"
-        // fun-call    -> "(" IDENTIFIER expression ")"
+        // fun-call         -> "(" IDENTIFIER ")"
+        // fun-call         -> "(" IDENTIFIER expression ")"
         //
-        // matrix      -> horiz-cat
-        // matrix      -> vert-cat
+        // matrix           -> horiz-cat
+        // matrix           -> vert-cat
         //
-        // horiz-cat   -> "[" numbers  "]"
-        // horiz-cat   -> "[" matrices "]"
+        // horiz-cat        -> "[" numbers  "]"
+        // horiz-cat        -> "[" matrices "]"
         //
-        // vert-cat    -> "{" numbers  "}"
-        // vert-cat    -> "{" matrices "}"
+        // vert-cat         -> "{" numbers  "}"
+        // vert-cat         -> "{" matrices "}"
         //
-        // matrices    -> matrix matrices
-        // matrices    -> matrix
+        // matrices         -> matrix matrices
+        // matrices         -> matrix
         //
-        // numbers     -> NUMBER numbers
-        // numbers     -> NUMBER
+        // numbers          -> NUMBER numbers
+        // numbers          -> NUMBER
         //
-        // string-cat  -> "[" strings "]"
-        // string-cat  -> "{" strings "}"
+        // string-cat       -> "[" strings "]"
+        // string-cat       -> "{" strings "}"
         //
-        // strings     -> STRING strings
-        // strings     -> STRING
+        // strings          -> STRING strings
+        // strings          -> STRING
         //
         // defun-expr       -> "(" "defun" IDENTIFIER arg-exprs return-values body ")"
         // lambda-expr      -> "(" "lambda" arg-exprs return-values body ")"
