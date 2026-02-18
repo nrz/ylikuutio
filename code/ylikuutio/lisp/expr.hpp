@@ -102,6 +102,8 @@ namespace yli::lisp
             // Terminal expression.
             explicit Expr(const Token& expr);
 
+            virtual ~Expr() = default;
+
             bool operator==(const Expr& other) const; // Equal `Expr`s have identical data.
             bool operator!=(const Expr& other) const;
 
