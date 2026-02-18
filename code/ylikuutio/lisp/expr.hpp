@@ -40,11 +40,13 @@ namespace yli::lisp
         //                  -> string-cat
         //
         // atom             -> IDENTIFIER
-        //                  -> STRING
+        //                  -> literal
+        //
+        // literal          -> STRING
         //                  -> NUMBER
         //                  -> #t
         //                  -> #f
-        //                  -> null
+        //                  -> NULL
         //
         // fun-call         -> "(" IDENTIFIER ")"
         // fun-call         -> "(" IDENTIFIER expression ")"
