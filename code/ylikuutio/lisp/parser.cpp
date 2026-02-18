@@ -18,6 +18,7 @@
 #include "parser.hpp"
 #include "token_list.hpp"
 #include "token.hpp"
+#include "expr.hpp"
 #include "text_position.hpp"
 #include "error_type.hpp"
 
