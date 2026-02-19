@@ -28,9 +28,7 @@
 #include "code/ylikuutio/lisp/text_position.hpp"
 
 // Include standard headers
-#include <deque>       // std::deque
 #include <optional>    // std::nullopt
-#include <string>      // std::string
 #include <string_view> // std::string_view
 #include <variant>     // std::holds_alternative
 
