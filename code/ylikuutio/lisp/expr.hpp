@@ -29,6 +29,8 @@
 
 namespace yli::lisp
 {
+    class ExprVisitor;
+
     class Expr
     {
         // YliLisp expression grammar:
@@ -100,7 +102,7 @@ namespace yli::lisp
 
         public:
             // Terminal expression.
-            explicit Expr(const Token& expr);
+            explicit Expr(const Token& expr, const ExprType expr_type);
 
             virtual ~Expr() = default;
 
@@ -116,9 +118,11 @@ namespace yli::lisp
 
             void emplace_back(std::unique_ptr<Expr> expr);
 
+            virtual void accept(ExprVisitor& visitor) = 0;
+
         private:
-            ExprType type;
-            Token token;
+            const Token token;
+            const ExprType type;
 
             // Every expression may either terminal expressions or it may consist of subexpressions (children `Expr` instances).
             std::vector<std::unique_ptr<Expr>> children;

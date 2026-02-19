@@ -15,19 +15,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
-#define YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
+#include "signed_integer_expr.hpp"
+#include "number_expr.hpp"
 
 namespace yli::lisp
 {
-    enum class ExprType
-    {
-        IDENTIFIER,
-        LITERAL,
-        FUNCTION_CALL,
-        DEFUN,
-        LAMBDA
-    };
-}
-#endif
+    class Token;
 
+    SignedIntegerExpr::SignedIntegerExpr(const Token& token)
+        : NumberExpr(token)
+    {
+    }
+}

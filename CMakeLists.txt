@@ -475,6 +475,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/vector_functions.hpp
 
     # lisp, in alphabetical order.
+    code/ylikuutio/lisp/bool_expr.cpp
+    code/ylikuutio/lisp/bool_expr.hpp
+    code/ylikuutio/lisp/defun_expr.cpp
+    code/ylikuutio/lisp/defun_expr.hpp
     code/ylikuutio/lisp/error.cpp
     code/ylikuutio/lisp/error.hpp
     code/ylikuutio/lisp/error_log.cpp
@@ -485,18 +489,35 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/expr.cpp
     code/ylikuutio/lisp/expr.hpp
     code/ylikuutio/lisp/expr_type.hpp
+    code/ylikuutio/lisp/expr_visitor.hpp
+    code/ylikuutio/lisp/floating_point_expr.cpp
+    code/ylikuutio/lisp/floating_point_expr.hpp
     code/ylikuutio/lisp/function_arg_extractor.hpp
+    code/ylikuutio/lisp/function_call_expr.cpp
+    code/ylikuutio/lisp/function_call_expr.hpp
     code/ylikuutio/lisp/identifier.cpp
     code/ylikuutio/lisp/identifier.hpp
+    code/ylikuutio/lisp/identifier_expr.cpp
+    code/ylikuutio/lisp/identifier_expr.hpp
+    code/ylikuutio/lisp/lambda_expr.cpp
+    code/ylikuutio/lisp/lambda_expr.hpp
     code/ylikuutio/lisp/legacy_parser.cpp
     code/ylikuutio/lisp/legacy_parser.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
+    code/ylikuutio/lisp/literal_expr.cpp
+    code/ylikuutio/lisp/literal_expr.hpp
+    code/ylikuutio/lisp/number_expr.cpp
+    code/ylikuutio/lisp/number_expr.hpp
     code/ylikuutio/lisp/number_literal.cpp
     code/ylikuutio/lisp/number_literal.hpp
     code/ylikuutio/lisp/parser.cpp
     code/ylikuutio/lisp/parser.hpp
     code/ylikuutio/lisp/scanner.cpp
     code/ylikuutio/lisp/scanner.hpp
+    code/ylikuutio/lisp/signed_integer_expr.cpp
+    code/ylikuutio/lisp/signed_integer_expr.hpp
+    code/ylikuutio/lisp/string_expr.cpp
+    code/ylikuutio/lisp/string_expr.hpp
     code/ylikuutio/lisp/string_literal.cpp
     code/ylikuutio/lisp/string_literal.hpp
     code/ylikuutio/lisp/syntax_tree_list.cpp
@@ -508,6 +529,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/token_list.cpp
     code/ylikuutio/lisp/token_list.hpp
     code/ylikuutio/lisp/token_type.hpp
+    code/ylikuutio/lisp/unsigned_integer_expr.cpp
+    code/ylikuutio/lisp/unsigned_integer_expr.hpp
 
     # load, in alphabetical order.
     code/ylikuutio/load/ascii_grid_heightmap_loader.cpp

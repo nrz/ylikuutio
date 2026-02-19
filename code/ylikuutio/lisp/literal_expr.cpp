@@ -15,19 +15,22 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
-#define YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
+#include "literal_expr.hpp"
+#include "expr.hpp"
+#include "expr_type.hpp"
+#include "expr_visitor.hpp"
 
 namespace yli::lisp
 {
-    enum class ExprType
-    {
-        IDENTIFIER,
-        LITERAL,
-        FUNCTION_CALL,
-        DEFUN,
-        LAMBDA
-    };
-}
-#endif
+    class Token;
 
+    LiteralExpr::LiteralExpr(const Token& token)
+        : Expr(token, ExprType::LITERAL)
+    {
+    }
+
+    void LiteralExpr::accept(ExprVisitor& visitor)
+    {
+        visitor.visit_literal_expr(*this);
+    }
+}

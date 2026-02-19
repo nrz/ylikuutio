@@ -27,8 +27,9 @@ namespace yli::lisp
 {
     class Token;
 
-    Expr::Expr(const Token& token)
-        : token { token }
+    Expr::Expr(const Token& token, const ExprType expr_type)
+        : token { token },
+        type    { expr_type }
     {
     }
 

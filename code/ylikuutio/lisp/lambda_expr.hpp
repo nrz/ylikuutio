@@ -15,19 +15,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
-#define YLIKUUTIO_LISP_EXPR_TYPE_HPP_INCLUDED
+#ifndef YLIKUUTIO_LISP_LAMBDA_EXPR_HPP_INCLUDED
+#define YLIKUUTIO_LISP_LAMBDA_EXPR_HPP_INCLUDED
+
+#include "expr.hpp"
 
 namespace yli::lisp
 {
-    enum class ExprType
+    class ExprVisitor;
+
+    class LambdaExpr final : public Expr
     {
-        IDENTIFIER,
-        LITERAL,
-        FUNCTION_CALL,
-        DEFUN,
-        LAMBDA
+        public:
+            void accept(ExprVisitor& visitor) override;
     };
 }
-#endif
 
+#endif

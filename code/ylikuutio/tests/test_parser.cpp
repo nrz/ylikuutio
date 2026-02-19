@@ -23,14 +23,14 @@
 #include "code/ylikuutio/lisp/error.hpp"
 #include "code/ylikuutio/lisp/error_type.hpp"
 #include "code/ylikuutio/lisp/expr.hpp"
+#include "code/ylikuutio/lisp/expr_type.hpp"
 #include "code/ylikuutio/lisp/token.hpp"
 #include "code/ylikuutio/lisp/token_type.hpp"
-#include "code/ylikuutio/lisp/text_position.hpp"
 
 // Include standard headers
+#include <stdint.h>    // int64_t, uint64_t
 #include <optional>    // std::nullopt
 #include <string_view> // std::string_view
-#include <variant>     // std::holds_alternative
 
 using yli::lisp::Scanner;
 using yli::lisp::Parser;
@@ -39,9 +39,9 @@ using yli::lisp::ErrorLog;
 using yli::lisp::Error;
 using yli::lisp::ErrorType;
 using yli::lisp::Expr;
+using yli::lisp::ExprType;
 using yli::lisp::Token;
 using yli::lisp::TokenType;
-using yli::lisp::TextPosition;
 
 TEST(string_must_be_parsed_appropriately, empty_string)
 {
@@ -66,11 +66,11 @@ TEST(string_must_be_parsed_appropriately, foo_string_literal)
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::LITERAL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_string.cbegin(), foo_string.cend());
-        const Token expected_token(TokenType::STRING, "foo", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::STRING);
+        ASSERT_EQ(parsed_token.get_lexeme(), "foo");
     }
 
     const ErrorLog& error_log = parser.get_error_log();
@@ -88,19 +88,19 @@ TEST(string_must_be_parsed_appropriately, foo_bar_string_literals)
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::LITERAL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
-        const Token expected_token(TokenType::STRING, "foo", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::STRING);
+        ASSERT_EQ(parsed_token.get_lexeme(), "foo");
     }
     {
         const Expr& expr = syntax_tree_list.at(1);
+        ASSERT_EQ(expr.get_type(), ExprType::LITERAL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_bar_string.cbegin(), foo_bar_string.cend());
-        const Token expected_token(TokenType::STRING, "bar", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::STRING);
+        ASSERT_EQ(parsed_token.get_lexeme(), "bar");
     }
 
     const ErrorLog& error_log = parser.get_error_log();
@@ -118,11 +118,11 @@ TEST(string_must_be_parsed_appropriately, foo_identifier)
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::IDENTIFIER);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_identifier_string.cbegin(), foo_identifier_string.cend());
-        const Token expected_token(TokenType::IDENTIFIER, "foo", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::IDENTIFIER);
+        ASSERT_EQ(parsed_token.get_lexeme(), "foo");
     }
 
     const ErrorLog& error_log = parser.get_error_log();
@@ -140,23 +140,67 @@ TEST(string_must_be_parsed_appropriately, foo_bar_identifiers)
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::IDENTIFIER);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_bar_identifiers_string.cbegin(), foo_bar_identifiers_string.cend());
-        const Token expected_token(TokenType::IDENTIFIER, "foo", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::IDENTIFIER);
+        ASSERT_EQ(parsed_token.get_lexeme(), "foo");
     }
     {
         const Expr& expr = syntax_tree_list.at(1);
+        ASSERT_EQ(expr.get_type(), ExprType::IDENTIFIER);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& parsed_token = expr.get_token();
-        TextPosition text_position(foo_bar_identifiers_string.cbegin(), foo_bar_identifiers_string.cend());
-        const Token expected_token(TokenType::IDENTIFIER, "bar", text_position);
-        ASSERT_EQ(parsed_token, expected_token);
+        ASSERT_EQ(parsed_token.get_type(), TokenType::IDENTIFIER);
+        ASSERT_EQ(parsed_token.get_lexeme(), "bar");
     }
 
     const ErrorLog& error_log = parser.get_error_log();
     ASSERT_TRUE(error_log.empty());
+}
+
+TEST(unsigned_integer_must_be_parsed_appropriately, unsigned_integer_123)
+{
+    const std::string_view unsigned_integer_123_string { "123" };
+    const Scanner scanner(unsigned_integer_123_string);
+    const Parser parser(scanner.get_token_list());
+    ASSERT_TRUE(parser.get_is_success());
+    const SyntaxTreeList& syntax_tree_list = parser.get_syntax_tree_list();
+    ASSERT_EQ(syntax_tree_list.size(), 1);
+
+    {
+        const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::LITERAL);
+        ASSERT_EQ(expr.get_number_of_children(), 0);
+        const Token& parsed_token = expr.get_token();
+        ASSERT_EQ(parsed_token.get_type(), TokenType::UNSIGNED_INTEGER);
+        ASSERT_EQ(parsed_token.get_lexeme(), "123");
+        std::optional<uint64_t> maybe_numeric_value = parsed_token.get_numeric_value<uint64_t>();
+        ASSERT_TRUE(maybe_numeric_value.has_value());
+        ASSERT_EQ(maybe_numeric_value.value(), 123);
+    }
+}
+
+TEST(signed_integer_must_be_parsed_appropriately, signed_integer_minus_123)
+{
+    const std::string_view signed_integer_minus_123_string { "-123" };
+    const Scanner scanner(signed_integer_minus_123_string);
+    const Parser parser(scanner.get_token_list());
+    ASSERT_TRUE(parser.get_is_success());
+    const SyntaxTreeList& syntax_tree_list = parser.get_syntax_tree_list();
+    ASSERT_EQ(syntax_tree_list.size(), 1);
+
+    {
+        const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::LITERAL);
+        ASSERT_EQ(expr.get_number_of_children(), 0);
+        const Token& parsed_token = expr.get_token();
+        ASSERT_EQ(parsed_token.get_type(), TokenType::SIGNED_INTEGER);
+        ASSERT_EQ(parsed_token.get_lexeme(), "-123");
+        std::optional<int64_t> maybe_numeric_value = parsed_token.get_numeric_value<int64_t>();
+        ASSERT_TRUE(maybe_numeric_value.has_value());
+        ASSERT_EQ(maybe_numeric_value.value(), -123);
+    }
 }
 
 TEST(string_must_be_parsed_appropriately, block_with_foo_identifier)
@@ -170,6 +214,7 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_identifier)
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& token = expr.get_token();
         ASSERT_EQ(token.get_type(), TokenType::FUNCTION_CALL);
@@ -191,6 +236,7 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_identifier_and_block_wi
 
     {
         const Expr& expr = syntax_tree_list.at(0);
+        ASSERT_EQ(expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& token = expr.get_token();
         ASSERT_EQ(token.get_type(), TokenType::FUNCTION_CALL);
@@ -198,6 +244,7 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_identifier_and_block_wi
     }
     {
         const Expr& expr = syntax_tree_list.at(1);
+        ASSERT_EQ(expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(expr.get_number_of_children(), 0);
         const Token& token = expr.get_token();
         ASSERT_EQ(token.get_type(), TokenType::FUNCTION_CALL);
@@ -219,12 +266,14 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_bar_identifiers)
 
     {
         const Expr& foo_expr = syntax_tree_list.at(0);
+        ASSERT_EQ(foo_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(foo_expr.get_number_of_children(), 1);
         const Token& foo_token = foo_expr.get_token();
         ASSERT_EQ(foo_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(foo_token.get_lexeme(), "foo");
 
         const Expr& bar_expr = foo_expr.at(0);
+        ASSERT_EQ(bar_expr.get_type(), ExprType::IDENTIFIER);
         ASSERT_EQ(bar_expr.get_number_of_children(), 0);
         const Token& bar_token = bar_expr.get_token();
         ASSERT_EQ(bar_token.get_type(), TokenType::IDENTIFIER);
@@ -246,22 +295,28 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_bar_baz_identifiers)
 
     {
         const Expr& foo_expr = syntax_tree_list.at(0);
+        ASSERT_EQ(foo_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(foo_expr.get_number_of_children(), 2);
         const Token& foo_token = foo_expr.get_token();
         ASSERT_EQ(foo_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(foo_token.get_lexeme(), "foo");
 
-        const Expr& bar_expr = foo_expr.at(0);
-        ASSERT_EQ(bar_expr.get_number_of_children(), 0);
-        const Token& bar_token = bar_expr.get_token();
-        ASSERT_EQ(bar_token.get_type(), TokenType::IDENTIFIER);
-        ASSERT_EQ(bar_token.get_lexeme(), "bar");
-
-        const Expr& baz_expr = foo_expr.at(1);
-        ASSERT_EQ(baz_expr.get_number_of_children(), 0);
-        const Token& baz_token = baz_expr.get_token();
-        ASSERT_EQ(baz_token.get_type(), TokenType::IDENTIFIER);
-        ASSERT_EQ(baz_token.get_lexeme(), "baz");
+        {
+            const Expr& bar_expr = foo_expr.at(0);
+            ASSERT_EQ(bar_expr.get_type(), ExprType::IDENTIFIER);
+            ASSERT_EQ(bar_expr.get_number_of_children(), 0);
+            const Token& bar_token = bar_expr.get_token();
+            ASSERT_EQ(bar_token.get_type(), TokenType::IDENTIFIER);
+            ASSERT_EQ(bar_token.get_lexeme(), "bar");
+        }
+        {
+            const Expr& baz_expr = foo_expr.at(1);
+            ASSERT_EQ(baz_expr.get_type(), ExprType::IDENTIFIER);
+            ASSERT_EQ(baz_expr.get_number_of_children(), 0);
+            const Token& baz_token = baz_expr.get_token();
+            ASSERT_EQ(baz_token.get_type(), TokenType::IDENTIFIER);
+            ASSERT_EQ(baz_token.get_lexeme(), "baz");
+        }
     }
 
     const ErrorLog& error_log = parser.get_error_log();
@@ -279,12 +334,14 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_with_block_with_bar_ide
 
     {
         const Expr& foo_expr = syntax_tree_list.at(0);
+        ASSERT_EQ(foo_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(foo_expr.get_number_of_children(), 1);
         const Token& foo_token = foo_expr.get_token();
         ASSERT_EQ(foo_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(foo_token.get_lexeme(), "foo");
 
         const Expr& bar_expr = foo_expr.at(0);
+        ASSERT_EQ(bar_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(bar_expr.get_number_of_children(), 0);
         const Token& bar_token = bar_expr.get_token();
         ASSERT_EQ(bar_token.get_type(), TokenType::FUNCTION_CALL);
@@ -306,18 +363,21 @@ TEST(string_must_be_parsed_appropriately, block_with_foo_with_block_with_bar_wit
 
     {
         const Expr& foo_expr = syntax_tree_list.at(0);
+        ASSERT_EQ(foo_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(foo_expr.get_number_of_children(), 1);
         const Token& foo_token = foo_expr.get_token();
         ASSERT_EQ(foo_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(foo_token.get_lexeme(), "foo");
 
         const Expr& bar_expr = foo_expr.at(0);
+        ASSERT_EQ(bar_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(bar_expr.get_number_of_children(), 1);
         const Token& bar_token = bar_expr.get_token();
         ASSERT_EQ(bar_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(bar_token.get_lexeme(), "bar");
 
         const Expr& baz_expr = bar_expr.at(0);
+        ASSERT_EQ(baz_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(baz_expr.get_number_of_children(), 0);
         const Token& baz_token = baz_expr.get_token();
         ASSERT_EQ(baz_token.get_type(), TokenType::FUNCTION_CALL);
@@ -339,22 +399,36 @@ TEST(string_must_be_parsed_appropriately, one_plus_two)
 
     {
         const Expr& plus_expr = syntax_tree_list.at(0);
+        ASSERT_EQ(plus_expr.get_type(), ExprType::FUNCTION_CALL);
         ASSERT_EQ(plus_expr.get_number_of_children(), 2);
         const Token& plus_token = plus_expr.get_token();
         ASSERT_EQ(plus_token.get_type(), TokenType::FUNCTION_CALL);
         ASSERT_EQ(plus_token.get_lexeme(), "+");
 
-        const Expr& one_expr = plus_expr.at(0);
-        ASSERT_EQ(one_expr.get_number_of_children(), 0);
-        const Token& one_token = one_expr.get_token();
-        ASSERT_EQ(one_token.get_type(), TokenType::UNSIGNED_INTEGER);
-        ASSERT_EQ(one_token.get_lexeme(), "1");
+        {
+            const Expr& one_expr = plus_expr.at(0);
+            ASSERT_EQ(one_expr.get_type(), ExprType::LITERAL);
+            ASSERT_EQ(one_expr.get_number_of_children(), 0);
+            const Token& one_token = one_expr.get_token();
+            ASSERT_EQ(one_token.get_type(), TokenType::UNSIGNED_INTEGER);
+            ASSERT_EQ(one_token.get_lexeme(), "1");
 
-        const Expr& two_expr = plus_expr.at(1);
-        ASSERT_EQ(two_expr.get_number_of_children(), 0);
-        const Token& two_token = two_expr.get_token();
-        ASSERT_EQ(two_token.get_type(), TokenType::UNSIGNED_INTEGER);
-        ASSERT_EQ(two_token.get_lexeme(), "2");
+            std::optional<uint64_t> maybe_numeric_value = one_token.get_numeric_value<uint64_t>();
+            ASSERT_TRUE(maybe_numeric_value.has_value());
+            ASSERT_EQ(maybe_numeric_value.value(), 1);
+        }
+        {
+            const Expr& two_expr = plus_expr.at(1);
+            ASSERT_EQ(two_expr.get_type(), ExprType::LITERAL);
+            ASSERT_EQ(two_expr.get_number_of_children(), 0);
+            const Token& two_token = two_expr.get_token();
+            ASSERT_EQ(two_token.get_type(), TokenType::UNSIGNED_INTEGER);
+            ASSERT_EQ(two_token.get_lexeme(), "2");
+
+            std::optional<uint64_t> maybe_numeric_value = two_token.get_numeric_value<uint64_t>();
+            ASSERT_TRUE(maybe_numeric_value.has_value());
+            ASSERT_EQ(maybe_numeric_value.value(), 2);
+        }
     }
 
     const ErrorLog& error_log = parser.get_error_log();
@@ -374,6 +448,7 @@ TEST(string_must_be_parsed_appropriately, pi_times_r_squared)
         const Expr& outer_multiplication_expr = syntax_tree_list.at(0);
         {
             ASSERT_EQ(outer_multiplication_expr.get_number_of_children(), 2);
+            ASSERT_EQ(outer_multiplication_expr.get_type(), ExprType::FUNCTION_CALL);
             const Token& outer_multiplication_token = outer_multiplication_expr.get_token();
             ASSERT_EQ(outer_multiplication_token.get_type(), TokenType::FUNCTION_CALL);
             ASSERT_EQ(outer_multiplication_token.get_lexeme(), "*");
@@ -382,14 +457,20 @@ TEST(string_must_be_parsed_appropriately, pi_times_r_squared)
         const Expr& pi_expr = outer_multiplication_expr.at(0);
         {
             ASSERT_EQ(pi_expr.get_number_of_children(), 0);
+            ASSERT_EQ(pi_expr.get_type(), ExprType::LITERAL);
             const Token& pi_token = pi_expr.get_token();
             ASSERT_EQ(pi_token.get_type(), TokenType::FLOATING_POINT);
             ASSERT_EQ(pi_token.get_lexeme(), "3.14");
+
+            std::optional<double> maybe_numeric_value = pi_token.get_numeric_value<double>();
+            ASSERT_TRUE(maybe_numeric_value.has_value());
+            ASSERT_EQ(maybe_numeric_value.value(), 3.14);
         }
 
         const Expr& inner_multiplication_expr = outer_multiplication_expr.at(1);
         {
             ASSERT_EQ(inner_multiplication_expr.get_number_of_children(), 2);
+            ASSERT_EQ(inner_multiplication_expr.get_type(), ExprType::FUNCTION_CALL);
             const Token& inner_multiplication_token = inner_multiplication_expr.get_token();
             ASSERT_EQ(inner_multiplication_token.get_type(), TokenType::FUNCTION_CALL);
             ASSERT_EQ(inner_multiplication_token.get_lexeme(), "*");
@@ -398,6 +479,7 @@ TEST(string_must_be_parsed_appropriately, pi_times_r_squared)
         const Expr& first_r_expr = inner_multiplication_expr.at(0);
         {
             ASSERT_EQ(first_r_expr.get_number_of_children(), 0);
+            ASSERT_EQ(first_r_expr.get_type(), ExprType::IDENTIFIER);
             const Token& first_r_token = first_r_expr.get_token();
             ASSERT_EQ(first_r_token.get_type(), TokenType::IDENTIFIER);
             ASSERT_EQ(first_r_token.get_lexeme(), "r");
@@ -406,6 +488,7 @@ TEST(string_must_be_parsed_appropriately, pi_times_r_squared)
         const Expr& second_r_expr = inner_multiplication_expr.at(1);
         {
             ASSERT_EQ(second_r_expr.get_number_of_children(), 0);
+            ASSERT_EQ(second_r_expr.get_type(), ExprType::IDENTIFIER);
             const Token& second_r_token = second_r_expr.get_token();
             ASSERT_EQ(second_r_token.get_type(), TokenType::IDENTIFIER);
             ASSERT_EQ(second_r_token.get_lexeme(), "r");
