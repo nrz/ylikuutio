@@ -22,7 +22,7 @@
 #include "scrollback_buffer.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/lisp/legacy_parser.hpp"
-#include "code/ylikuutio/lisp/executor.hpp"
+#include "code/ylikuutio/lisp/legacy_executor.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/callback_magic_numbers.hpp"

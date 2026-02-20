@@ -484,8 +484,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/error_log.cpp
     code/ylikuutio/lisp/error_log.hpp
     code/ylikuutio/lisp/error_type.hpp
-    code/ylikuutio/lisp/executor.cpp
-    code/ylikuutio/lisp/executor.hpp
     code/ylikuutio/lisp/expr.cpp
     code/ylikuutio/lisp/expr.hpp
     code/ylikuutio/lisp/expr_type.hpp
@@ -501,6 +499,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/lisp/identifier_expr.hpp
     code/ylikuutio/lisp/lambda_expr.cpp
     code/ylikuutio/lisp/lambda_expr.hpp
+    code/ylikuutio/lisp/legacy_executor.cpp
+    code/ylikuutio/lisp/legacy_executor.hpp
     code/ylikuutio/lisp/legacy_parser.cpp
     code/ylikuutio/lisp/legacy_parser.hpp
     code/ylikuutio/lisp/lisp_templates.hpp
