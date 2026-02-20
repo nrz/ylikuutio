@@ -24,8 +24,12 @@
 #include "error_log.hpp"
 #include "error_type.hpp"
 
+// Include standard headers
+#include <memory> // std::unique_ptr
+
 namespace yli::lisp
 {
+    class Expr;
     class TextPosition;
 
     class Parser
@@ -59,6 +63,9 @@ namespace yli::lisp
 
         private:
             bool parse();
+
+            // If there is a parent `Expr` bind to it, otherwise start a new syntax tree by becoming its root `Expr`.
+            Expr* bind_to_parent_or_become_root(Expr* current_parent, std::unique_ptr<Expr> expr);
 
             void add_error(ErrorType error_type, const TextPosition& text_position);
 

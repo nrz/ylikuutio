@@ -19,7 +19,7 @@
 
 // Include standard headers
 #include <stdexcept> // std::runtime_error
-#include <memory>    // std::make_unique
+#include <memory>    // std::make_unique, std::unique_ptr
 #include <utility>   // std::move
 #include <variant>   // std::holds_alternative, std::monostate
 

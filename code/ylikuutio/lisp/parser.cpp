@@ -18,6 +18,7 @@
 #include "parser.hpp"
 #include "token_list.hpp"
 #include "token.hpp"
+#include "expr.hpp"
 #include "identifier_expr.hpp"
 #include "string_expr.hpp"
 #include "unsigned_integer_expr.hpp"
@@ -29,12 +30,12 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
-#include <memory>  // std::make_unique
+#include <memory>  // std::make_unique, std::unique_ptr
 #include <stack>   // std::stack
+#include <utility> // std::move
 
 namespace yli::lisp
 {
-    class Expr;
     class ErrorLog;
 
     Parser::Parser(const TokenList& token_list)
@@ -197,39 +198,30 @@ namespace yli::lisp
                 const TextPosition text_position = token.get_text_position();
                 this->error_log.add_error(text_position, ErrorType::MATCHING_LEFT_PARENTHESIS_MISSING);
             }
-            else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr && paren_token_stack.empty())
+            else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr && paren_token_stack.size() > 1)
             {
-                // This is a top-level identifier evaluation.
-                this->syntax_tree_list.emplace_back(std::make_unique<IdentifierExpr>(token));
+                // This is a function call (not top level).
+                Token function_call = token;
+                function_call.set_type(TokenType::FUNCTION_CALL);
+                current_parent = this->bind_to_parent_or_become_root(parent_stack.top(), std::make_unique<FunctionCallExpr>(function_call));
             }
             else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr && paren_token_stack.size() == 1)
             {
                 // This is a top-level function call.
                 Token function_call = token;
                 function_call.set_type(TokenType::FUNCTION_CALL);
-                this->syntax_tree_list.emplace_back(std::make_unique<FunctionCallExpr>(function_call));
-                current_parent = &this->syntax_tree_list.last();
+                current_parent = this->bind_to_parent_or_become_root(current_parent, std::make_unique<FunctionCallExpr>(function_call));
             }
-            else if (token.get_type() == TokenType::IDENTIFIER && current_parent == nullptr)
+            else if (token.get_type() == TokenType::IDENTIFIER)
             {
-                // This is a function call (not top level).
-                Expr* parent_expr = parent_stack.top();
-
-                Token function_call = token;
-                function_call.set_type(TokenType::FUNCTION_CALL);
-                parent_expr->emplace_back(std::make_unique<FunctionCallExpr>(function_call));
-                current_parent = &parent_expr->last();
+                // This is a top-level identifier evaluation, or an identifier given as argument.
+                this->bind_to_parent_or_become_root(current_parent, std::make_unique<IdentifierExpr>(token));
             }
             else if (!paren_token_stack.empty() && current_parent == nullptr)
             {
                 // Syntax error: an identifier is expected after opening parenthesis.
                 const TextPosition text_position = token.get_text_position();
                 this->error_log.add_error(text_position, ErrorType::FUNCTION_CALL_EXPECTED);
-            }
-            else if (token.get_type() == TokenType::IDENTIFIER && !paren_token_stack.empty())
-            {
-                // This is an identifier given as argument.
-                current_parent->emplace_back(std::make_unique<IdentifierExpr>(token));
             }
             else if (token.get_type() == TokenType::QUOTE)
             {
@@ -239,50 +231,25 @@ namespace yli::lisp
             {
                 // TODO: implement member access!
             }
-            else if (token.get_type() == TokenType::STRING && current_parent != nullptr)
+            else if (token.get_type() == TokenType::STRING)
             {
                 // String argument.
-                current_parent->emplace_back(std::make_unique<StringExpr>(token));
+                this->bind_to_parent_or_become_root(current_parent, std::make_unique<StringExpr>(token));
             }
-            else if (token.get_type() == TokenType::UNSIGNED_INTEGER && current_parent != nullptr)
+            else if (token.get_type() == TokenType::UNSIGNED_INTEGER)
             {
                 // Unsigned integer argument.
-                current_parent->emplace_back(std::make_unique<UnsignedIntegerExpr>(token));
+                this->bind_to_parent_or_become_root(current_parent, std::make_unique<UnsignedIntegerExpr>(token));
             }
-            else if (token.get_type() == TokenType::SIGNED_INTEGER && current_parent != nullptr)
+            else if (token.get_type() == TokenType::SIGNED_INTEGER)
             {
                 // Signed integer argument.
-                current_parent->emplace_back(std::make_unique<SignedIntegerExpr>(token));
+                this->bind_to_parent_or_become_root(current_parent, std::make_unique<SignedIntegerExpr>(token));
             }
-            else if (token.get_type() == TokenType::FLOATING_POINT && current_parent != nullptr)
+            else if (token.get_type() == TokenType::FLOATING_POINT)
             {
                 // Floating point number argument.
-                current_parent->emplace_back(std::make_unique<FloatingPointExpr>(token));
-            }
-            else if (token.get_type() == TokenType::IDENTIFIER && paren_token_stack.empty())
-            {
-                // Identifier.
-                this->syntax_tree_list.emplace_back(std::make_unique<IdentifierExpr>(token));
-            }
-            else if (token.get_type() == TokenType::STRING && paren_token_stack.empty())
-            {
-                // String.
-                this->syntax_tree_list.emplace_back(std::make_unique<StringExpr>(token));
-            }
-            else if (token.get_type() == TokenType::UNSIGNED_INTEGER && paren_token_stack.empty())
-            {
-                // Unsigned integer.
-                this->syntax_tree_list.emplace_back(std::make_unique<UnsignedIntegerExpr>(token));
-            }
-            else if (token.get_type() == TokenType::SIGNED_INTEGER && paren_token_stack.empty())
-            {
-                // Signed integer.
-                this->syntax_tree_list.emplace_back(std::make_unique<SignedIntegerExpr>(token));
-            }
-            else if (token.get_type() == TokenType::FLOATING_POINT && paren_token_stack.empty())
-            {
-                // Floating point number.
-                this->syntax_tree_list.emplace_back(std::make_unique<FloatingPointExpr>(token));
+                this->bind_to_parent_or_become_root(current_parent, std::make_unique<FloatingPointExpr>(token));
             }
         }
 
@@ -295,6 +262,23 @@ namespace yli::lisp
         }
 
         return this->error_log.empty();
+    }
+
+    Expr* Parser::bind_to_parent_or_become_root(Expr* current_parent, std::unique_ptr<Expr> expr)
+    {
+        if (current_parent != nullptr) [[likely]]
+        {
+            // There is a parent `Expr`, so bind to it.
+            current_parent->emplace_back(std::move(expr));
+            return &current_parent->last();
+        }
+        else
+        {
+            // There is no parent `Expr`, so start
+            // a new syntax tree by becoming its root `Expr`.
+            this->syntax_tree_list.emplace_back(std::move(expr));
+            return &syntax_tree_list.last();
+        }
     }
 
     void Parser::add_error(ErrorType error_type, const TextPosition& text_position)
