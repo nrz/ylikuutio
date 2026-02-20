@@ -80,7 +80,7 @@ namespace yli::lisp
         std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
-                yli::ontology::Entity*&, // context.
+                yli::ontology::Entity*&,         // context.
                 const std::vector<std::string>&, // parameter vector.
                 std::size_t&) = delete;          // parameter_i.
 
