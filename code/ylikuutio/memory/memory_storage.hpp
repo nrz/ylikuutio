@@ -78,7 +78,7 @@ namespace yli::memory
                         {
                             if (*left_it > *right_it)
                             {
-                                std::size_t temp = *left_it;
+                                const std::size_t temp = *left_it;
                                 *left_it = *right_it;
                                 *right_it = temp;
                             }
