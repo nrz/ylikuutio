@@ -266,6 +266,11 @@ namespace yli::lisp
 
     Expr* Parser::bind_to_parent_or_become_root(Expr* current_parent, std::unique_ptr<Expr> expr)
     {
+        // Bind `expr` to current parent expression (`current_parent`),
+        // unless `current_parent` is `nullptr`, in which case start a new
+        // syntax tree. In either case return a pointer to the newly bound
+        // expression.
+
         if (current_parent != nullptr) [[likely]]
         {
             // There is a parent `Expr`, so bind to it.
