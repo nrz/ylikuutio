@@ -1,6 +1,6 @@
 YliLisp is the scripting language of Ylikuutio.
 YliLisp is influenced by Scheme, Common Lisp, Clojure,
-C++, Java, AngelScript, Rust, and MATLAB.
+C++, Java, AngelScript, Rust, MATLAB, and Zig.
 
 Use cases:
 * Defining physics simulations.
@@ -30,6 +30,12 @@ General features:
   are global YliLisp variables with the same name.
 * YliLisp syntax follows Scheme syntax when reasonable
   considering other YliLisp design goals.
+
+Special characters:
+* Comma `,` is whitespace just like space (Unicode 0x20) and
+  Tab (Unicode 0x04), just like in Clojure.
+* `?` prefix in type makes it optional, just like in Zig.
+* `?` after type is a predicate function to check for the type.
 
 Conventions:
 * Mutators marked with `!` like in Scheme, e.g. `set!`.
@@ -63,10 +69,14 @@ Integer types:
 * The default type for integer literals is `int64`.
 * An integer literal that does not fit in `int64` causes
   a compiler error.
+* Integer overflow causes an exception by default for both
+  signed and unsigned types.
 * Different types for integer literals for can be given:
   `'int64 123`.
 * Integer variable types: `i8`, `i16`, `i32`, `i64`,
   `u8`, `u16`, `u32`, `u64`.
+* Overflowing variable types: `oi8`, `oi16`, `oi32`, `oi64`,
+  `ou8`, `ou16`, `ou32`, `ou64`.
 * Ylikuutio types:
   * `yli::lisp::I8`
   * `yli::lisp::U8`
@@ -236,9 +246,15 @@ Planned implementation details:
   `yli::ontology::Entity`.
 * Lambda expressions are `yli::ontology::Lambda`,
   which inherits `yli::ontology::Entity`.
-* Each `yli::ontology::Console` may register
+* Different execution contexts are `yli::ontology::Context`,
+  and e.g. `yli::ontology::Console` inherits
+  `yli::ontology::Context`.
+* Each `yli::ontology::Context` may register built-in
   YliLisp functions into its local context,
   similarly to AngelScript.
+* Each built-in must be registered to be able to be used.
+  This enables creating precisely featured execution contexts.
+  Common built-ins' registration snippets will be provided.
 * Ylikuutio does not use a C++ exception handler to handle
   exceptions triggered by execution of YliLisp code.
 
