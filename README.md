@@ -351,6 +351,11 @@ A: Ylikuutio uses right-handed world coordinates,
 Q: Is there a scripting language in Ylikuutio?
 A: YliLisp scripting language is a work in progress. See [YliLisp design notes](doc/ylilisp.txt).
 
+Q: Why the scripting language of Ylikuutio is called YliLisp and not YLisp?
+A: YLisp does not clearly communicate that the language is related to Ylikuutio
+   game engine and also that it is simultaneously a Lisp-inspired language.
+   Additionally, YLISP already exists for HP-95LX palmtop.
+
 ## Implemented functionality
 * 3D rendering
 * 2D text
