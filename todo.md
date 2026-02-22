@@ -7,7 +7,6 @@
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] CONSOLE/UI Add visible cursor in console.
-- [ ] YLILISP Implement parser for YliLisp.
 - [ ] YLILISP Implement semantic analyzer for YliLisp.
 - [ ] YLILISP Implement intermediate code generator for YliLisp.
 - [ ] YLILISP Implement intermediate code optimizer for YliLisp.
@@ -379,3 +378,4 @@
 - [x] DATA Add support for `uint64_t` in `yli::string::convert_string_to_unsigned_integer`.
 - [x] YLILISP Implement scanner for YliLisp.
 - [x] YLILISP Improve error reporting of YliLisp scanner.
+- [x] YLILISP Implement parser for YliLisp.
