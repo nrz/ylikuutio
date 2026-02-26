@@ -53,6 +53,7 @@
 #include "glyph_object.hpp"
 #include "input_mode.hpp"
 #include "audio_track.hpp"
+#include "lisp_context.hpp"
 #include "console.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
@@ -654,23 +655,23 @@ namespace yli::ontology
             LispFunction* create_lisp_function(const LispFunctionStruct& lisp_function_struct) const final
             {
                 return this->create_child_of_known_parent_type<
-                    LispFunction, Console, yli::memory::LispFunctionMemoryAllocator, LispFunctionStruct>(
+                    LispFunction, LispContext, yli::memory::LispFunctionMemoryAllocator, LispFunctionStruct>(
                             yli::data::Datatype::LISP_FUNCTION,
-                            lisp_function_struct.console_parent,
+                            lisp_function_struct.lisp_context_parent,
                             lisp_function_struct);
             }
 
             template<typename... Args>
                 GenericLispFunctionOverload* create_lisp_function_overload(
                         const std::string& name,
-                        const Request<Console>& console_request,
+                        const Request<LispContext>& context_request,
                         std::optional<yli::data::AnyValue>(*callback)(Args...))
                 {
-                    Console* const console = resolve_request<Console>(console_request, this->get_universe().registry);
+                    LispContext* const context = resolve_request<LispContext>(context_request, this->get_universe().registry);
 
-                    if (console == nullptr)
+                    if (context == nullptr)
                     {
-                        std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: `console` is `nullptr`!\n";
+                        std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: `context` is `nullptr`!\n";
                         return nullptr;
                     }
 
@@ -681,7 +682,7 @@ namespace yli::ontology
                     if (lisp_function_entity == nullptr)
                     {
                         // There was not any `Entity` with that name.
-                        LispFunctionStruct lisp_function_struct { Request(console) };
+                        LispFunctionStruct lisp_function_struct { Request(context) };
                         lisp_function = this->create_lisp_function(lisp_function_struct);
 
                         if (lisp_function == nullptr)

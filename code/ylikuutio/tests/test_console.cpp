@@ -46,10 +46,6 @@ TEST(console_must_be_initialized_appropriately, no_font)
 
     const yli::ontology::GenericParentModule* const parent_of_console_callback_engines = console->get_generic_parent_module<yli::ontology::ConsoleCallbackEngine>();
     ASSERT_NE(parent_of_console_callback_engines, nullptr);
-    const yli::ontology::GenericParentModule* const parent_of_lisp_functions           = console->get_generic_parent_module<yli::ontology::LispFunction>();
-    ASSERT_NE(parent_of_lisp_functions, nullptr);
-
-    ASSERT_LT(parent_of_console_callback_engines, parent_of_lisp_functions);
 
     ASSERT_NE(console->get_generic_master_module<yli::ontology::InputMode>(), nullptr);
 

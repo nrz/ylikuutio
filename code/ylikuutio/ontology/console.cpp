@@ -19,6 +19,7 @@
 #include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
+#include "lisp_context.hpp"
 #include "registry.hpp"
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
@@ -85,16 +86,12 @@ namespace yli::ontology
             const ConsoleStruct& console_struct,
             GenericParentModule* const universe_parent_module,
             GenericMasterModule* const font_2d_master_module)
-        : Entity(application, universe, console_struct),
+        : LispContext(application, universe, console_struct),
         child_of_universe(universe_parent_module, *this),
         parent_of_console_callback_engines(
                 *this,
                 this->registry,
                 "console_callback_engines"),
-        parent_of_lisp_functions(
-                *this,
-                this->registry,
-                "lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(*this, &this->registry, "input_modes"),
         console_left_x   { console_struct.left_x },
@@ -230,13 +227,13 @@ namespace yli::ontology
     std::size_t Console::get_number_of_children() const
     {
         return this->parent_of_console_callback_engines.get_number_of_children() +
-            this->parent_of_lisp_functions.get_number_of_children();
+            LispContext::get_number_of_children();
     }
 
     std::size_t Console::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_lisp_functions.child_pointer_vector);
+            LispContext::get_number_of_descendants();
     }
 
     bool Console::enter_console()

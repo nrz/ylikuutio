@@ -39,6 +39,7 @@
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/lisp_context.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -242,7 +243,7 @@ namespace hirvi
 
     void HirviApplication::customize(HirviCore& hirvi_core)
     {
-        hirvi_core.entity_factory.create_lisp_function_overload("version", Request<Console>("my_console"), &hirvi::version);
+        hirvi_core.entity_factory.create_lisp_function_overload("version", Request<LispContext>("my_console"), &hirvi::version);
     }
 }
 

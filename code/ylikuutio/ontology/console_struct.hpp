@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_STRUCT_HPP_INCLUDED
 
-#include "entity_struct.hpp"
+#include "lisp_context_struct.hpp"
 #include "request.hpp"
 
 // Include standard headers
@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Font2d;
 
-    struct ConsoleStruct : public EntityStruct
+    struct ConsoleStruct : public LispContextStruct
     {
         ConsoleStruct(const uint32_t left_x, const uint32_t right_x, const uint32_t top_y, const uint32_t bottom_y)
         : left_x   { left_x },

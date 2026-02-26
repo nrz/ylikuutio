@@ -19,7 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "generic_lisp_function_overload.hpp"
-#include "console.hpp"
+#include "lisp_context.hpp"
 #include "lisp_function.hpp"
 #include "result.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -61,7 +61,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class Console;
+    class LispContext;
     class GenericParentModule;
 
     template<typename... Types>
@@ -95,25 +95,25 @@ namespace yli::ontology
                     throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
                 }
 
-                Console* const console_parent_of_lisp_function = static_cast<Console*>(lisp_function_parent->get_parent());
+                LispContext* const context_parent_of_lisp_function = static_cast<LispContext*>(lisp_function_parent->get_parent());
 
-                if (console_parent_of_lisp_function == nullptr) [[unlikely]]
+                if (context_parent_of_lisp_function == nullptr) [[unlikely]]
                 {
-                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `console_parent_of_lisp_function` is `nullptr`!");
+                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `context_parent_of_lisp_function` is `nullptr`!");
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
                 // Now, process the arguments and call.
 
                 std::size_t parameter_i = 0;       // Start from the first parameter.
-                Entity* context = &this->universe; // `Universe` is the default context.
+                Entity* environment = &this->universe; // `Universe` is the default environment.
 
                 std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
                             std::size_t {},
                             this->universe,
-                            *console_parent_of_lisp_function,
-                            context,
+                            *context_parent_of_lisp_function,
+                            environment,
                             parameter_vector,
                             parameter_i);
 
@@ -130,7 +130,7 @@ namespace yli::ontology
                 std::optional<std::tuple<>> process_args(
                         std::size_t,
                         Universe&,
-                        Console&,
+                        LispContext&,
                         Entity*&,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
@@ -152,13 +152,13 @@ namespace yli::ontology
                 std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
                         std::size_t tag,
                         Universe& universe,
-                        Console& console,
-                        Entity*& context,
+                        LispContext& context,
+                        Entity*& environment,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
                 {
                     std::optional<typename yli::data::WrapAllButStrings<T1>::type> value = yli::lisp::convert_string_to_value_and_advance_index<T1>(
-                        universe, console, context, parameter_vector, parameter_i);
+                        universe, context, environment, parameter_vector, parameter_i);
 
                     if (!value)
                     {
@@ -171,7 +171,7 @@ namespace yli::ontology
 
                     std::optional<std::tuple<typename yli::data::WrapAllButStrings<RestTypes>::type...>> arg_tuple = this->process_args<
                         std::size_t, RestTypes...>(
-                                tag, universe, console, context, parameter_vector, parameter_i);
+                                tag, universe, context, environment, parameter_vector, parameter_i);
 
                     if (arg_tuple)
                     {

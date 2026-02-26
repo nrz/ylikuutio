@@ -24,25 +24,25 @@
 
 namespace yli::ontology
 {
-    class Console;
+    class LispContext;
 }
 
 TEST(lisp_function_struct_must_be_initialized_appropriately, lisp_function_struct_parent_provided_as_nullptr)
 {
-    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
+    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::LispContext>(nullptr) };
 
-    ASSERT_FALSE(test_lisp_function_struct.console_parent.data.valueless_by_exception());
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Console*>(test_lisp_function_struct.console_parent.data));
-    ASSERT_FALSE(std::holds_alternative<std::string>(test_lisp_function_struct.console_parent.data));
-    ASSERT_EQ(std::get<yli::ontology::Console*>(test_lisp_function_struct.console_parent.data), nullptr);
+    ASSERT_FALSE(test_lisp_function_struct.lisp_context_parent.data.valueless_by_exception());
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::LispContext*>(test_lisp_function_struct.lisp_context_parent.data));
+    ASSERT_FALSE(std::holds_alternative<std::string>(test_lisp_function_struct.lisp_context_parent.data));
+    ASSERT_EQ(std::get<yli::ontology::LispContext*>(test_lisp_function_struct.lisp_context_parent.data), nullptr);
 }
 
 TEST(lisp_function_struct_must_be_initialized_appropriately, lisp_function_struct_parent_provided_as_global_name)
 {
-    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::Console>("foo") };
+    const yli::ontology::LispFunctionStruct test_lisp_function_struct { yli::ontology::Request<yli::ontology::LispContext>("foo") };
 
-    ASSERT_FALSE(test_lisp_function_struct.console_parent.data.valueless_by_exception());
-    ASSERT_FALSE(std::holds_alternative<yli::ontology::Console*>(test_lisp_function_struct.console_parent.data));
-    ASSERT_TRUE(std::holds_alternative<std::string>(test_lisp_function_struct.console_parent.data));
-    ASSERT_EQ(std::get<std::string>(test_lisp_function_struct.console_parent.data), "foo");
+    ASSERT_FALSE(test_lisp_function_struct.lisp_context_parent.data.valueless_by_exception());
+    ASSERT_FALSE(std::holds_alternative<yli::ontology::LispContext*>(test_lisp_function_struct.lisp_context_parent.data));
+    ASSERT_TRUE(std::holds_alternative<std::string>(test_lisp_function_struct.lisp_context_parent.data));
+    ASSERT_EQ(std::get<std::string>(test_lisp_function_struct.lisp_context_parent.data), "foo");
 }

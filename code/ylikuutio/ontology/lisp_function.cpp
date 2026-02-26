@@ -44,9 +44,9 @@ namespace yli::ontology
             yli::core::Application& application,
             Universe& universe,
             const LispFunctionStruct& lisp_function_struct,
-            GenericParentModule* const console_parent_module)
+            GenericParentModule* const context_parent_module)
         : Entity(application, universe, lisp_function_struct),
-        child_of_console(console_parent_module, *this),
+        child_of_lisp_context(context_parent_module, *this),
         parent_of_generic_lisp_function_overloads(
                 *this,
                 this->registry,
@@ -58,7 +58,7 @@ namespace yli::ontology
 
     Entity* LispFunction::get_parent() const
     {
-        return this->child_of_console.get_parent();
+        return this->child_of_lisp_context.get_parent();
     }
 
     Scene* LispFunction::get_scene() const

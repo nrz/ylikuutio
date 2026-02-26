@@ -683,6 +683,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/input_mode_struct.hpp
     code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp
     code/ylikuutio/ontology/input_parameters_to_any_value_callback_with_console.hpp
+    code/ylikuutio/ontology/lisp_context.cpp
+    code/ylikuutio/ontology/lisp_context.hpp
+    code/ylikuutio/ontology/lisp_context_struct.hpp
     code/ylikuutio/ontology/lisp_function.cpp
     code/ylikuutio/ontology/lisp_function.hpp
     code/ylikuutio/ontology/lisp_function_overload.hpp

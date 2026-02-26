@@ -44,7 +44,6 @@ namespace yli::ontology
 {
     class Universe;
     class Scene;
-    class Console;
     struct LispFunctionStruct;
 
     class LispFunction final : public Entity
@@ -54,7 +53,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const LispFunctionStruct& lisp_function_struct,
-                    GenericParentModule* const console_parent_module);
+                    GenericParentModule* const context_parent_module);
 
             ~LispFunction() = default;
 
@@ -69,7 +68,7 @@ namespace yli::ontology
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
-            ChildModule child_of_console;
+            ChildModule child_of_lisp_context;
             GenericParentModule parent_of_generic_lisp_function_overloads;
 
             Scene* get_scene() const override;

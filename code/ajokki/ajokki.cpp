@@ -46,6 +46,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
+#include "code/ylikuutio/ontology/lisp_context.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -473,7 +474,7 @@ namespace ajokki
         action_mode_input_mode->activate();
 
         InputModeStruct my_console_mode_input_mode_struct;
-        my_console_mode_input_mode_struct.console_master = Request(my_console);
+        my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
         my_console_mode_input_mode_struct.is_text_input_mode = true;
         InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(my_console_mode_input_mode_struct);
@@ -485,7 +486,7 @@ namespace ajokki
         yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*my_console_mode_input_mode, "my_console");
 
         InputModeStruct mini_console_mode_input_mode_struct;
-        mini_console_mode_input_mode_struct.console_master = Request(mini_console);
+        mini_console_mode_input_mode_struct.console_master = Request<Console>("mini_console");
         mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
         mini_console_mode_input_mode_struct.is_text_input_mode = true;
         InputMode* const mini_console_mode_input_mode = this->core.entity_factory.create_input_mode(mini_console_mode_input_mode_struct);
@@ -508,12 +509,12 @@ namespace ajokki
         yli::snippets::create_all_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
 
         // Ajokki-specific callbacks.
-        this->core.entity_factory.create_lisp_function_overload("version", Request(my_console), &ajokki::version);
+        this->core.entity_factory.create_lisp_function_overload("version", Request<LispContext>("my_console"), &ajokki::version);
 
         // mini-console callbacks.
-        this->core.entity_factory.create_lisp_function_overload("miniactivate", Request(mini_console), &Universe::activate_entity);
-        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request(mini_console), &Universe::info0);
-        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request(mini_console), &Universe::info1);
+        this->core.entity_factory.create_lisp_function_overload("miniactivate", Request<LispContext>("mini_console"), &Universe::activate_entity);
+        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request<LispContext>("mini_console"), &Universe::info0);
+        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request<LispContext>("mini_console"), &Universe::info1);
 
         if (this->core.audio_system != nullptr)
         {

@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "lisp_context.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "apprentice_module.hpp"
@@ -84,7 +84,6 @@ namespace yli::ontology
     class InputMode;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
-    class LispFunction;
     struct ConsoleStruct;
 
     using yli::console::TextInput;
@@ -93,7 +92,7 @@ namespace yli::ontology
     using yli::console::ConsoleLogicModule;
     using yli::console::CompletionModule;
 
-    class Console final : public Entity
+    class Console final : public LispContext
     {
         public:
             // Set pointer to `console` to `nullptr`, set font according to the input,
@@ -138,7 +137,6 @@ namespace yli::ontology
 
             ChildModule child_of_universe;
             GenericParentModule parent_of_console_callback_engines;
-            GenericParentModule parent_of_lisp_functions;
             ApprenticeModule apprentice_of_font_2d;
             MasterOfInputModesModule master_of_input_modes;
 
@@ -203,12 +201,6 @@ namespace yli::ontology
         inline GenericParentModule* Console::get_generic_parent_module<ConsoleCallbackEngine>()
         {
             return &this->parent_of_console_callback_engines;
-        }
-
-    template<>
-        inline GenericParentModule* Console::get_generic_parent_module<LispFunction>()
-        {
-            return &this->parent_of_lisp_functions;
         }
 
     template<>

@@ -15,27 +15,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_LISP_CONTEXT_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_LISP_CONTEXT_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
-#include "request.hpp"
-
-// Include standard headers
-#include <utility> // std::move
 
 namespace yli::ontology
 {
-    class LispContext;
-
-    struct LispFunctionStruct : public EntityStruct
+    struct LispContextStruct : public EntityStruct
     {
-        explicit LispFunctionStruct(Request<LispContext>&& lisp_context_parent)
-            : lisp_context_parent { std::move(lisp_context_parent) }
+        LispContextStruct()
         {
+            // constructor.
         }
-
-        Request<LispContext> lisp_context_parent {};
     };
 }
 
