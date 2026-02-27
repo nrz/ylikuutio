@@ -117,11 +117,12 @@ namespace hirvi
         PLAYLIST                    = 240,
         // `yli::ontology` datatypes, 'audio' path.
         AUDIO_TRACK                 = 250,
-        // `yli::ontology` datatypes, 'console' path.
-        CONSOLE                     = 260,
-        CONSOLE_CALLBACK_ENGINE     = 261,
-        CONSOLE_CALLBACK_OBJECT     = 262,
-        CONSOLE_CALLBACK_PARAMETER  = 263,
+        // `yli::ontology` datatypes, 'context' path.
+        LISP_CONTEXT                = 260,
+        CONSOLE                     = 261,
+        CONSOLE_CALLBACK_ENGINE     = 262,
+        CONSOLE_CALLBACK_OBJECT     = 263,
+        CONSOLE_CALLBACK_PARAMETER  = 264,
         // `yli::ontology` datatypes, 'graph' path.
         GRAPH                       = 270,
         NODE                        = 271,
