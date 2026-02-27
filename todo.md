@@ -6,6 +6,12 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] CONSOLE/YLILISP Implement `yli::ontology::ConsoleLispFunction`, inherits `LispFunction`.
+- [ ] CONSOLE/YLILISP Implement `yli::ontology::GenericConsoleLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
+- [ ] CONSOLE/YLILISP Implement `yli::ontology::ConsoleLispFunctionOverload`, inherits `GenericConsoleLispFunctionOverload`.
+- [ ] BRAIN/YLILISP Implement `yli::ontology::BrainLispFunction`, inherits `LispFunction`.
+- [ ] BRAIN/YLILISP Implement `yli::ontology::GenericBrainLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
+- [ ] BRAIN/YLILISP Implement `yli::ontology::BrainLispFunctionOverload`, inherits `GenericBrainLispFunctionOverload`.
 - [ ] CONSOLE/UI Add visible cursor in console.
 - [ ] YLILISP Implement semantic analyzer for YliLisp.
 - [ ] YLILISP Implement intermediate code generator for YliLisp.
