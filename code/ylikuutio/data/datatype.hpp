@@ -57,8 +57,10 @@ namespace yli::data
         // `yli::ontology` datatypes, interfaces.
         ENTITY              = 110,
         LISP_CONTEXT        = 111,
-        MESH_PROVIDER       = 112,
-        MOVABLE             = 113,
+        LISP_FUNCTION                  = 112,
+        GENERIC_LISP_FUNCTION_OVERLOAD = 113,
+        MESH_PROVIDER       = 116,
+        MOVABLE             = 117,
         // `yli::ontology` datatypes, 'universe' path.
         UNIVERSE            = 119,
         // `yli::ontology` datatypes, 'variable' path.
@@ -79,18 +81,21 @@ namespace yli::data
         SCENE                 = 160,
         // `yli::ontology` datatypes, 'brain' path.
         BRAIN                 = 161,
-        WAYPOINT              = 162,
+        BRAIN_LISP_FUNCTION                  = 162,
+        GENERIC_BRAIN_LISP_FUNCTION_OVERLOAD = 163,
+        BRAIN_LISP_FUNCTION_OVERLOAD         = 164,
+        WAYPOINT                             = 165,
         // `yli::ontology` datatypes, 'camera' path.
-        CAMERA                = 163,
-        CAMERA_WIDGET         = 164,
+        CAMERA                = 166,
+        CAMERA_WIDGET         = 167,
         // `yli::ontology` datatypes, 'simple' path.
-        PIPELINE              = 165,
-        MATERIAL              = 166,
-        SPECIES               = 167,
-        OBJECT                = 168,
+        PIPELINE              = 170,
+        MATERIAL              = 171,
+        SPECIES               = 172,
+        OBJECT                = 173,
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP             = 170,
-        HEIGHTMAP_SHEET       = 171,
+        HEIGHTMAP             = 175,
+        HEIGHTMAP_SHEET       = 176,
         // `yli::ontology` datatypes, 'symbiont' path.
         SYMBIOSIS             = 180,
         SYMBIONT_MATERIAL     = 181,
@@ -123,16 +128,15 @@ namespace yli::data
         CONSOLE_CALLBACK_ENGINE     = 262,
         CONSOLE_CALLBACK_OBJECT     = 263,
         CONSOLE_CALLBACK_PARAMETER  = 264,
+        CONSOLE_LISP_FUNCTION                  = 265,
+        GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD = 266,
+        CONSOLE_LISP_FUNCTION_OVERLOAD         = 267,
         // `yli::ontology` datatypes, 'graph' path.
         GRAPH                       = 270,
         NODE                        = 271,
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTE_TASK                = 280,
-        // `yli::ontology` datatypes, 'lisp' path.
-        LISP_FUNCTION                  = 290,
-        GENERIC_LISP_FUNCTION_OVERLOAD = 291,
-        LISP_FUNCTION_OVERLOAD         = 292,
-        MAX_VALUE                      = LISP_FUNCTION_OVERLOAD + 1
+        MAX_VALUE                   = COMPUTE_TASK + 1
     };
 }
 
