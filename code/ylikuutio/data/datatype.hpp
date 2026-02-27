@@ -56,8 +56,9 @@ namespace yli::data
         AUDIO_SYSTEM        = 50,
         // `yli::ontology` datatypes, interfaces.
         ENTITY              = 110,
-        MESH_PROVIDER       = 111,
-        MOVABLE             = 112,
+        LISP_CONTEXT        = 111,
+        MESH_PROVIDER       = 112,
+        MOVABLE             = 113,
         // `yli::ontology` datatypes, 'universe' path.
         UNIVERSE            = 119,
         // `yli::ontology` datatypes, 'variable' path.
@@ -117,8 +118,7 @@ namespace yli::data
         PLAYLIST                    = 240,
         // `yli::ontology` datatypes, 'audio' path.
         AUDIO_TRACK                 = 250,
-        // `yli::ontology` datatypes, 'context' path.
-        LISP_CONTEXT                = 260,
+        // `yli::ontology` datatypes, 'console' path.
         CONSOLE                     = 261,
         CONSOLE_CALLBACK_ENGINE     = 262,
         CONSOLE_CALLBACK_OBJECT     = 263,
