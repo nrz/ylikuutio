@@ -629,6 +629,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_lisp_function.cpp
     code/ylikuutio/ontology/console_lisp_function.hpp
     code/ylikuutio/ontology/console_lisp_function_overload.hpp
+    code/ylikuutio/ontology/console_lisp_function_struct.hpp
     code/ylikuutio/ontology/console_printing.cpp
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
