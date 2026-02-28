@@ -53,7 +53,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const LispFunctionStruct& lisp_function_struct,
-                    GenericParentModule* const context_parent_module);
+                    GenericParentModule* const lisp_context_parent_module);
 
             ~LispFunction() = default;
 
