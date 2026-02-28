@@ -16,7 +16,7 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
     - name: Install Build Wrapper
-      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v4
+      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v6
     - name: Run Build Wrapper
       run: |
         sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
@@ -25,7 +25,7 @@ jobs:
         CC=$(which gcc) CXX=$(which g++) cmake -G Ninja -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
         build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
     - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v4
+      uses: SonarSource/sonarqube-scan-action@v6
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
