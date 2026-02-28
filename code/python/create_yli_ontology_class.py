@@ -70,6 +70,11 @@ for arg in sys.argv:
         print(usage)
         sys.exit()
 
+if class_name == "":
+    print("ERROR: the name of the new class name must not be an empty string!\n")
+    print(usage)
+    sys.exit()
+
 copyright_notice = \
 "// Ylikuutio - A 3D game and simulation engine.\n"\
 "//\n"\
