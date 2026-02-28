@@ -21,7 +21,7 @@
 #include "generic_memory_allocator.hpp"
 #include "memory_storage.hpp"
 #include "constructible_module.hpp"
-#include "code/ylikuutio/ontology/lisp_function_overload.hpp"
+#include "code/ylikuutio/ontology/console_lisp_function_overload.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::byte, std::size_t
@@ -35,7 +35,7 @@
 
 namespace yli::ontology
 {
-    class GenericLispFunctionOverload;
+    class GenericConsoleLispFunctionOverload;
 }
 
 namespace yli::memory
@@ -166,7 +166,7 @@ namespace yli::memory
         };
 
     template<std::size_t DataSize>
-        class MemoryAllocator<yli::ontology::GenericLispFunctionOverload, DataSize> : public yli::memory::GenericMemoryAllocator
+        class MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize> : public yli::memory::GenericMemoryAllocator
         {
             public:
                 explicit MemoryAllocator(const int datatype)
@@ -186,10 +186,10 @@ namespace yli::memory
                 MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
 
                 template<typename... Args>
-                    yli::ontology::GenericLispFunctionOverload* build_in(Args&&... args)
+                    yli::ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
                     {
-                        yli::ontology::GenericLispFunctionOverload* function_overload =
-                            new yli::ontology::LispFunctionOverload(std::forward<Args>(args)...);
+                        yli::ontology::GenericConsoleLispFunctionOverload* function_overload =
+                            new yli::ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
 
                         if (this->free_storageID_queue.empty())
                         {
@@ -222,9 +222,9 @@ namespace yli::memory
                     return this->instances.size();
                 }
 
-                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<yli::ontology::GenericLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
+                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
                 {
-                    std::cerr << "ERROR: `MemoryAllocator<yli::ontology::GenericLispFunctionOverload, DataSize>::get_storage`: " <<
+                    std::cerr << "ERROR: `MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>::get_storage`: " <<
                         "this function is not implemented for this specialization!\n";
                     return std::nullopt;
                 }
@@ -238,7 +238,7 @@ namespace yli::memory
 
             private:
                 const int datatype;
-                std::vector<yli::ontology::GenericLispFunctionOverload*> instances;
+                std::vector<yli::ontology::GenericConsoleLispFunctionOverload*> instances;
                 std::queue<std::size_t> free_storageID_queue;
         };
 }

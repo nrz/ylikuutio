@@ -62,7 +62,7 @@ namespace yli::ontology
     class ConsoleCallbackObject;
     class ConsoleCallbackParameter;
     class ComputeTask;
-    class LispFunction;
+    class ConsoleLispFunction;
     struct CallbackEngineStruct;
     struct CallbackObjectStruct;
     struct VariableStruct;
@@ -96,7 +96,7 @@ namespace yli::ontology
     struct ConsoleCallbackParameterStruct;
     struct FontStruct;
     struct TextStruct;
-    struct LispFunctionStruct;
+    struct ConsoleLispFunctionStruct;
     struct CallbackParameterStruct;
     struct ComputeTaskStruct;
 
@@ -156,7 +156,7 @@ namespace yli::ontology
             virtual ConsoleCallbackParameter* create_console_callback_parameter(
                     const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
                     const yli::data::AnyValue& any_value) const = 0;
-            virtual LispFunction* create_lisp_function(const LispFunctionStruct& lisp_function_struct) const = 0;
+            virtual ConsoleLispFunction* create_console_lisp_function(const ConsoleLispFunctionStruct& console_lisp_function_struct) const = 0;
             virtual ComputeTask* create_compute_task(const ComputeTaskStruct& compute_task_struct) const = 0;
     };
 }

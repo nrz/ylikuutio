@@ -15,12 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
-#include "generic_lisp_function_overload.hpp"
-#include "lisp_context.hpp"
-#include "lisp_function.hpp"
+#include "generic_console_lisp_function_overload.hpp"
+#include "console.hpp"
+#include "console_lisp_function.hpp"
 #include "result.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/wrap.hpp"
@@ -61,45 +61,45 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class LispContext;
+    class Console;
     class GenericParentModule;
 
     template<typename... Types>
-        class LispFunctionOverload final : public GenericLispFunctionOverload
+        class ConsoleLispFunctionOverload final : public GenericConsoleLispFunctionOverload
     {
         private:
-            LispFunctionOverload(
+            ConsoleLispFunctionOverload(
                     yli::core::Application& application,
                     Universe& universe,
-                    GenericParentModule* const lisp_function_parent_module,
+                    GenericParentModule* const console_lisp_function_parent_module,
                     std::optional<yli::data::AnyValue>(*callback)(Types...))
-                : GenericLispFunctionOverload(application, universe, lisp_function_parent_module),
+                : GenericConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
                 callback(callback)
             {
                 // `Entity` member variables begin here.
-                this->type_string = "yli::ontology::LispFunctionOverload*";
+                this->type_string = "yli::ontology::ConsoleLispFunctionOverload*";
             }
 
-            ~LispFunctionOverload() = default;
+            ~ConsoleLispFunctionOverload() = default;
 
         public:
-            LispFunctionOverload(const LispFunctionOverload&) = delete;            // Delete copy constructor.
-            LispFunctionOverload& operator=(const LispFunctionOverload&) = delete; // Delete copy assignment.
+            ConsoleLispFunctionOverload(const ConsoleLispFunctionOverload&) = delete;            // Delete copy constructor.
+            ConsoleLispFunctionOverload& operator=(const ConsoleLispFunctionOverload&) = delete; // Delete copy assignment.
 
             Result execute(const std::vector<std::string>& parameter_vector) override
             {
-                LispFunction* const lisp_function_parent = static_cast<LispFunction*>(this->get_parent());
+                ConsoleLispFunction* const console_lisp_function_parent = static_cast<ConsoleLispFunction*>(this->get_parent());
 
-                if (lisp_function_parent == nullptr) [[unlikely]]
+                if (console_lisp_function_parent == nullptr) [[unlikely]]
                 {
-                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
+                    throw std::runtime_error("ERROR: `ConsoleLispFunctionOverload::execute`: `console_lisp_function_parent` is `nullptr`!");
                 }
 
-                LispContext* const lisp_context_parent_of_lisp_function = static_cast<LispContext*>(lisp_function_parent->get_parent());
+                Console* const console_parent_of_lisp_function = static_cast<Console*>(console_lisp_function_parent->get_parent());
 
-                if (lisp_context_parent_of_lisp_function == nullptr) [[unlikely]]
+                if (console_parent_of_lisp_function == nullptr) [[unlikely]]
                 {
-                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_context_parent_of_lisp_function` is `nullptr`!");
+                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `console_parent_of_lisp_function` is `nullptr`!");
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
@@ -112,7 +112,7 @@ namespace yli::ontology
                     std::size_t, Types...>(
                             std::size_t {},
                             this->universe,
-                            *lisp_context_parent_of_lisp_function,
+                            *console_parent_of_lisp_function,
                             environment,
                             parameter_vector,
                             parameter_i);
@@ -130,7 +130,7 @@ namespace yli::ontology
                 std::optional<std::tuple<>> process_args(
                         std::size_t,
                         Universe&,
-                        LispContext&,
+                        Console&,
                         Entity*&,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
@@ -152,7 +152,7 @@ namespace yli::ontology
                 std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
                         std::size_t tag,
                         Universe& universe,
-                        LispContext& context,
+                        Console& context,
                         Entity*& environment,
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)

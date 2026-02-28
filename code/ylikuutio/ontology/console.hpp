@@ -81,6 +81,7 @@ namespace yli::ontology
     class CallbackParameter;
     class Scene;
     class Font2d;
+    class ConsoleLispFunction;
     class InputMode;
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
@@ -137,6 +138,7 @@ namespace yli::ontology
 
             ChildModule child_of_universe;
             GenericParentModule parent_of_console_callback_engines;
+            GenericParentModule parent_of_console_lisp_functions;
             ApprenticeModule apprentice_of_font_2d;
             MasterOfInputModesModule master_of_input_modes;
 
@@ -153,9 +155,9 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
         public:
-            Scene* get_scene() const override;
-
             std::size_t get_number_of_apprentices() const;
+
+            Scene* get_scene() const override;
 
         private:
             std::size_t get_number_of_children() const override;
@@ -201,6 +203,12 @@ namespace yli::ontology
         inline GenericParentModule* Console::get_generic_parent_module<ConsoleCallbackEngine>()
         {
             return &this->parent_of_console_callback_engines;
+        }
+
+    template<>
+        inline GenericParentModule* Console::get_generic_parent_module<ConsoleLispFunction>()
+        {
+            return &this->parent_of_console_lisp_functions;
         }
 
     template<>

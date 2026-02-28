@@ -24,7 +24,6 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <cstddef>    // std::size_t
 #include <optional>   // std::optional
 #include <string>     // std::string
 #include <vector>     // std::vector
@@ -36,80 +35,15 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    class GenericParentModule;
     class Entity;
-    class Scene;
 
     LispFunction::LispFunction(
             yli::core::Application& application,
             Universe& universe,
-            const LispFunctionStruct& lisp_function_struct,
-            GenericParentModule* const lisp_context_parent_module)
-        : Entity(application, universe, lisp_function_struct),
-        child_of_lisp_context(lisp_context_parent_module, *this),
-        parent_of_generic_lisp_function_overloads(
-                *this,
-                this->registry,
-                "generic_lisp_function_overloads")
+            const LispFunctionStruct& lisp_function_struct)
+        : Entity(application, universe, lisp_function_struct)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::LispFunction*";
-    }
-
-    Entity* LispFunction::get_parent() const
-    {
-        return this->child_of_lisp_context.get_parent();
-    }
-
-    Scene* LispFunction::get_scene() const
-    {
-        // `LispFunction` does not belong in any `Scene`.
-        return nullptr;
-    }
-
-    std::size_t LispFunction::get_number_of_children() const
-    {
-        return this->parent_of_generic_lisp_function_overloads.get_number_of_children();
-    }
-
-    std::size_t LispFunction::get_number_of_descendants() const
-    {
-        return yli::ontology::get_number_of_descendants(this->parent_of_generic_lisp_function_overloads.child_pointer_vector);
-    }
-
-    std::optional<yli::data::AnyValue> LispFunction::execute(const std::vector<std::string>& parameter_vector)
-    {
-        // The execution of a `LispFunction` proceeds as follows:
-        // The execution of `GenericLispFunctionOverload` children of
-        // this `LispFunction` is attempted in ID order, in
-        // the order of the child pointer vector.
-        //
-        // If the variable binding succeeds, then that
-        // `GenericLispFunctionOverload` is called and its return value
-        // is returned.
-        //
-        // If the variable binding fails, then next
-        // `GenericLispFunctionOverload` in attempted etc.
-        //
-        // If variable binding fails for all `GenericLispFunctionOverload`s,
-        // then `std::nullopt` is returned.
-        //
-        // If there are no `GenericLispFunctionOverload`s,
-        // then `std::nullopt` is returned as well.
-
-        for (std::vector<Entity*>::const_iterator it = this->parent_of_generic_lisp_function_overloads.child_pointer_vector.begin();
-                it != this->parent_of_generic_lisp_function_overloads.child_pointer_vector.end();
-                ++it)
-        {
-            Result result =
-                static_cast<GenericLispFunctionOverload*>(*it)->execute(parameter_vector);
-
-            if (result)
-            {
-                return std::get<std::optional<yli::data::AnyValue>>(result.data);
-            }
-        }
-
-        return std::nullopt;
     }
 }

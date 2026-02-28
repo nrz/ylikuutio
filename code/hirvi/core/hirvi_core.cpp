@@ -193,7 +193,7 @@ namespace hirvi
         std::cout << "Defining console command callback engines.\n";
 
         // Lisp function overloads.
-        yli::snippets::create_all_lisp_function_builtin_overloads(this->entity_factory, *my_console);
+        yli::snippets::create_all_console_lisp_function_builtin_overloads(this->entity_factory, *my_console);
 
         if (this->audio_system != nullptr)
         {

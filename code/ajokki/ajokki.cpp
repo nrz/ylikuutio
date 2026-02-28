@@ -46,7 +46,6 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
-#include "code/ylikuutio/ontology/lisp_context.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -506,15 +505,15 @@ namespace ajokki
         std::cout << "Defining console command callback engines.\n";
 
         // Lisp function overloads.
-        yli::snippets::create_all_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
+        yli::snippets::create_all_console_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
 
         // Ajokki-specific callbacks.
-        this->core.entity_factory.create_lisp_function_overload("version", Request<LispContext>("my_console"), &ajokki::version);
+        this->core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"), &ajokki::version);
 
         // mini-console callbacks.
-        this->core.entity_factory.create_lisp_function_overload("miniactivate", Request<LispContext>("mini_console"), &Universe::activate_entity);
-        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request<LispContext>("mini_console"), &Universe::info0);
-        this->core.entity_factory.create_lisp_function_overload("miniinfo", Request<LispContext>("mini_console"), &Universe::info1);
+        this->core.entity_factory.create_console_lisp_function_overload("miniactivate", Request<Console>("mini_console"), &Universe::activate_entity);
+        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"), &Universe::info0);
+        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"), &Universe::info1);
 
         if (this->core.audio_system != nullptr)
         {

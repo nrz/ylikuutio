@@ -19,63 +19,32 @@
 #define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "child_module.hpp"
-#include "generic_parent_module.hpp"
-#include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
 #include <cstddef>    // std::size_t
-#include <optional>   // std::optional
-#include <string>     // std::string
-#include <vector>     // std::vector
 
 namespace yli::core
 {
     class Application;
 }
 
-namespace yli::memory
-{
-    template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
-}
-
 namespace yli::ontology
 {
     class Universe;
-    class Scene;
     struct LispFunctionStruct;
 
-    class LispFunction final : public Entity
+    class LispFunction : public Entity
     {
-        private:
+        public:
             LispFunction(
                     yli::core::Application& application,
                     Universe& universe,
-                    const LispFunctionStruct& lisp_function_struct,
-                    GenericParentModule* const lisp_context_parent_module);
+                    const LispFunctionStruct& lisp_function_struct);
 
-            ~LispFunction() = default;
+            virtual ~LispFunction() = default;
 
-        public:
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.
-
-            Entity* get_parent() const override;
-
-            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
-
-            template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
-
-            ChildModule child_of_lisp_context;
-            GenericParentModule parent_of_generic_lisp_function_overloads;
-
-            Scene* get_scene() const override;
-
-        private:
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
     };
 }
 

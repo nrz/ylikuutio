@@ -626,6 +626,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/console_callback_parameter.cpp
     code/ylikuutio/ontology/console_callback_parameter.hpp
     code/ylikuutio/ontology/console_callback_parameter_struct.hpp
+    code/ylikuutio/ontology/console_lisp_function.cpp
+    code/ylikuutio/ontology/console_lisp_function.hpp
+    code/ylikuutio/ontology/console_lisp_function_overload.hpp
     code/ylikuutio/ontology/console_printing.cpp
     code/ylikuutio/ontology/console_printing.hpp
     code/ylikuutio/ontology/console_struct.hpp
@@ -651,6 +654,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/generic_callback_engine.cpp
     code/ylikuutio/ontology/generic_callback_engine.hpp
     code/ylikuutio/ontology/generic_callback_engine_struct.hpp
+    code/ylikuutio/ontology/generic_console_lisp_function_overload.cpp
+    code/ylikuutio/ontology/generic_console_lisp_function_overload.hpp
     code/ylikuutio/ontology/generic_entity_factory.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
     code/ylikuutio/ontology/generic_lisp_function_overload.hpp
@@ -688,7 +693,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/lisp_context_struct.hpp
     code/ylikuutio/ontology/lisp_function.cpp
     code/ylikuutio/ontology/lisp_function.hpp
-    code/ylikuutio/ontology/lisp_function_overload.hpp
     code/ylikuutio/ontology/lisp_function_struct.hpp
     code/ylikuutio/ontology/locomotion_environment.hpp
     code/ylikuutio/ontology/locomotion_module.cpp
@@ -1082,6 +1086,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_console_callback_object_struct.cpp
         code/ylikuutio/tests/test_console_callback_parameter.cpp
         code/ylikuutio/tests/test_console_callback_parameter_struct.cpp
+        code/ylikuutio/tests/test_console_lisp_function.cpp
+        code/ylikuutio/tests/test_console_lisp_function_overload.cpp
+        code/ylikuutio/tests/test_console_lisp_function_struct.cpp
         code/ylikuutio/tests/test_console_logic_module.cpp
         code/ylikuutio/tests/test_constructible_module.cpp
         code/ylikuutio/tests/test_csv_loader.cpp
@@ -1102,9 +1109,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_line_2d.cpp
         code/ylikuutio/tests/test_line_line_intersection.cpp
         code/ylikuutio/tests/test_line_segment_line_segment_intersection.cpp
-        code/ylikuutio/tests/test_lisp_function.cpp
-        code/ylikuutio/tests/test_lisp_function_overload.cpp
-        code/ylikuutio/tests/test_lisp_function_struct.cpp
         code/ylikuutio/tests/test_linear_algebra.cpp
         code/ylikuutio/tests/test_material.cpp
         code/ylikuutio/tests/test_material_struct.cpp

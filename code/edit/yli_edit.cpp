@@ -35,7 +35,6 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
-#include "code/ylikuutio/ontology/lisp_context.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
@@ -335,10 +334,10 @@ namespace yli_edit
         std::cout << "Defining console command callback engines.\n";
 
         // Lisp function overloads.
-        yli::snippets::create_all_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
+        yli::snippets::create_all_console_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
 
         // YliEdit-specific callbacks.
-        this->core.entity_factory.create_lisp_function_overload("version", Request<LispContext>("my_console"), &yli_edit::version);
+        this->core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"), &yli_edit::version);
 
         std::cout << "Setting up framebuffer size ...\n";
         yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());

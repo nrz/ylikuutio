@@ -20,7 +20,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
-#include "code/ylikuutio/ontology/lisp_function.hpp"
+#include "code/ylikuutio/ontology/console_lisp_function.hpp"
 
 // Include standard headers
 #include <optional> // std::optional
@@ -34,22 +34,22 @@ namespace yli::lisp
             const std::string& command,
             const std::vector<std::string>& parameter_vector)
     {
-        // Call the corresponding `yli::ontology::LispFunction`, if there is one.
-        // `LispFunction` itself takes care of resolving the correct overload
+        // Call the corresponding `yli::ontology::ConsoleLispFunction`, if there is one.
+        // `ConsoleLispFunction` itself takes care of resolving the correct overload
         // and binding the arguments and calling the overload with the arguments.
 
         yli::ontology::Universe& universe = console.get_application().get_universe();
 
-        yli::ontology::Entity* const lisp_function_entity = universe.get_entity(command);
+        yli::ontology::Entity* const console_lisp_function_entity = universe.get_entity(command);
 
-        if (lisp_function_entity != nullptr && lisp_function_entity->get_parent() == &console)
+        if (console_lisp_function_entity != nullptr && console_lisp_function_entity->get_parent() == &console)
         {
-            yli::ontology::LispFunction* const lisp_function =
-                dynamic_cast<yli::ontology::LispFunction*>(lisp_function_entity);
+            yli::ontology::ConsoleLispFunction* const console_lisp_function =
+                dynamic_cast<yli::ontology::ConsoleLispFunction*>(console_lisp_function_entity);
 
-            if (lisp_function != nullptr)
+            if (console_lisp_function != nullptr)
             {
-                return lisp_function->execute(parameter_vector);
+                return console_lisp_function->execute(parameter_vector);
             }
         }
 

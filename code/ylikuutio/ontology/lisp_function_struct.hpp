@@ -19,23 +19,11 @@
 #define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
-#include "request.hpp"
-
-// Include standard headers
-#include <utility> // std::move
 
 namespace yli::ontology
 {
-    class LispContext;
-
     struct LispFunctionStruct : public EntityStruct
     {
-        explicit LispFunctionStruct(Request<LispContext>&& lisp_context_parent)
-            : lisp_context_parent { std::move(lisp_context_parent) }
-        {
-        }
-
-        Request<LispContext> lisp_context_parent {};
     };
 }
 

@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_ONTOLOGY_LISP_CONTEXT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_LISP_CONTEXT_HPP_INCLUDED
 
-#include "generic_parent_module.hpp"
 #include "entity.hpp"
 
 // Include standard headers
@@ -31,7 +30,6 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    class GenericParentModule;
     class Universe;
     class Scene;
     class LispFunction;
@@ -49,24 +47,7 @@ namespace yli::ontology
             LispContext &operator=(const LispContext&) = delete; // Delete copy assignment.
 
             virtual ~LispContext() = default;
-
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
-
-            Scene* get_scene() const override;
-
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
-
-            GenericParentModule parent_of_lisp_functions;
     };
-
-    template<>
-        inline GenericParentModule* LispContext::get_generic_parent_module<LispFunction>()
-        {
-            return &this->parent_of_lisp_functions;
-        }
 }
 
 #endif

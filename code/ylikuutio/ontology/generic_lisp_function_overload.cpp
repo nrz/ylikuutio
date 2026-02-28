@@ -18,55 +18,21 @@
 #include "generic_lisp_function_overload.hpp"
 #include "entity.hpp"
 #include "entity_struct.hpp"
-#include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
-// Include standard headers
-#include <cstddef> // std::size_t
-#include <stdexcept> // std::runtime_error
+namespace yli::core
+{
+    class Application;
+}
 
 namespace yli::ontology
 {
-    class GenericParentModule;
-    class Entity;
     class Universe;
-    class Scene;
 
-    GenericLispFunctionOverload::GenericLispFunctionOverload(
-            yli::core::Application& application,
-            Universe& universe,
-            GenericParentModule* const lisp_function_parent_module)
-        : Entity(application, universe, EntityStruct()),
-        child_of_lisp_function(lisp_function_parent_module, *this)
+    GenericLispFunctionOverload::GenericLispFunctionOverload(yli::core::Application& application, Universe& universe)
+        : Entity(application, universe, EntityStruct())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::GenericLispFunctionOverload*";
-    }
-
-    Entity* GenericLispFunctionOverload::get_parent() const
-    {
-        return this->child_of_lisp_function.get_parent();
-    }
-
-    Scene* GenericLispFunctionOverload::get_scene() const
-    {
-        const Entity* const lisp_function_parent = this->get_parent();
-
-        if (lisp_function_parent == nullptr) [[unlikely]]
-        {
-            throw std::runtime_error("ERROR: `GenericLispFunctionOverload::get_scene`: `lisp_function_parent` is `nullptr`!");
-        }
-
-        return lisp_function_parent->get_scene();
-    }
-
-    std::size_t GenericLispFunctionOverload::get_number_of_children() const
-    {
-        return 0; // `GenericLispFunctionOverload` has no children.
-    }
-
-    std::size_t GenericLispFunctionOverload::get_number_of_descendants() const
-    {
-        return 0; // `GenericLispFunctionOverload` has no children.
     }
 }

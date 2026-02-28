@@ -19,7 +19,6 @@
 #define YLIKUUTIO_ONTOLOGY_GENERIC_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "child_module.hpp"
 #include "result.hpp"
 
 // Include standard headers
@@ -32,26 +31,14 @@ namespace yli::core
     class Application;
 }
 
-namespace yli::memory
-{
-    template<typename T1, std::size_t DataSize>
-        class MemoryAllocator;
-}
-
 namespace yli::ontology
 {
-    class GenericParentModule;
     class Universe;
-    class Scene;
-    class Console;
 
     class GenericLispFunctionOverload : public Entity
     {
         protected:
-            GenericLispFunctionOverload(
-                    yli::core::Application& application,
-                    Universe& universe,
-                    GenericParentModule* const lisp_function_parent_module);
+            GenericLispFunctionOverload(yli::core::Application& application, Universe& universe);
 
         public:
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
@@ -59,19 +46,7 @@ namespace yli::ontology
 
             virtual ~GenericLispFunctionOverload() = default;
 
-            Entity* get_parent() const override;
-
             virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
-
-            template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryAllocator;
-
-            ChildModule child_of_lisp_function;
-
-        private:
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
     };
 }
 

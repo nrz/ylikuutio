@@ -54,8 +54,8 @@
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
 #include "code/ylikuutio/ontology/console_callback_parameter.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
-#include "code/ylikuutio/ontology/lisp_function.hpp"
-#include "code/ylikuutio/ontology/generic_lisp_function_overload.hpp"
+#include "code/ylikuutio/ontology/console_lisp_function.hpp"
+#include "code/ylikuutio/ontology/generic_console_lisp_function_overload.hpp"
 
 namespace yli::memory
 {
@@ -95,8 +95,8 @@ namespace yli::memory
     using ConsoleCallbackObjectMemoryAllocator       = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackObject, 256>;
     using ConsoleCallbackParameterMemoryAllocator    = yli::memory::MemoryAllocator<yli::ontology::ConsoleCallbackParameter, 256>;
     using ComputeTaskMemoryAllocator                 = yli::memory::MemoryAllocator<yli::ontology::ComputeTask, 256>;
-    using LispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::LispFunction, 256>;
-    using GenericLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericLispFunctionOverload, 256>;
+    using ConsoleLispFunctionMemoryAllocator                = yli::memory::MemoryAllocator<yli::ontology::ConsoleLispFunction, 256>;
+    using GenericConsoleLispFunctionOverloadMemoryAllocator = yli::memory::MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, 256>;
 }
 
 #endif

@@ -53,15 +53,14 @@
 #include "glyph_object.hpp"
 #include "input_mode.hpp"
 #include "audio_track.hpp"
-#include "lisp_context.hpp"
 #include "console.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object.hpp"
 #include "console_callback_parameter.hpp"
 #include "compute_task.hpp"
-#include "lisp_function.hpp"
-#include "generic_lisp_function_overload.hpp"
-#include "lisp_function_overload.hpp"
+#include "console_lisp_function.hpp"
+#include "generic_console_lisp_function_overload.hpp"
+#include "console_lisp_function_overload.hpp"
 #include "request.hpp"
 #include "request_resolver.hpp"
 #include "variable_struct.hpp"
@@ -99,7 +98,7 @@
 #include "console_callback_object_struct.hpp"
 #include "console_callback_parameter_struct.hpp"
 #include "compute_task_struct.hpp"
-#include "lisp_function_struct.hpp"
+#include "console_lisp_function_struct.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -652,75 +651,75 @@ namespace yli::ontology
                             compute_task_struct);
             }
 
-            LispFunction* create_lisp_function(const LispFunctionStruct& lisp_function_struct) const final
+            ConsoleLispFunction* create_console_lisp_function(const ConsoleLispFunctionStruct& console_lisp_function_struct) const final
             {
                 return this->create_child_of_known_parent_type<
-                    LispFunction, LispContext, yli::memory::LispFunctionMemoryAllocator, LispFunctionStruct>(
-                            yli::data::Datatype::LISP_FUNCTION,
-                            lisp_function_struct.lisp_context_parent,
-                            lisp_function_struct);
+                    ConsoleLispFunction, Console, yli::memory::ConsoleLispFunctionMemoryAllocator, ConsoleLispFunctionStruct>(
+                            yli::data::Datatype::CONSOLE_LISP_FUNCTION,
+                            console_lisp_function_struct.console_parent,
+                            console_lisp_function_struct);
             }
 
             template<typename... Args>
-                GenericLispFunctionOverload* create_lisp_function_overload(
+                GenericConsoleLispFunctionOverload* create_console_lisp_function_overload(
                         const std::string& name,
-                        const Request<LispContext>& context_request,
+                        const Request<Console>& console_request,
                         std::optional<yli::data::AnyValue>(*callback)(Args...))
                 {
-                    LispContext* const context = resolve_request<LispContext>(context_request, this->get_universe().registry);
+                    Console* const console = resolve_request<Console>(console_request, this->get_universe().registry);
 
-                    if (context == nullptr)
+                    if (console == nullptr)
                     {
-                        std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: `context` is `nullptr`!\n";
+                        std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: `console` is `nullptr`!\n";
                         return nullptr;
                     }
 
-                    Entity* const lisp_function_entity = this->get_universe().get_entity(name);
+                    Entity* const console_lisp_function_entity = this->get_universe().get_entity(name);
 
-                    LispFunction* lisp_function = nullptr;
+                    ConsoleLispFunction* console_lisp_function = nullptr;
 
-                    if (lisp_function_entity == nullptr)
+                    if (console_lisp_function_entity == nullptr)
                     {
                         // There was not any `Entity` with that name.
-                        LispFunctionStruct lisp_function_struct { Request(context) };
-                        lisp_function = this->create_lisp_function(lisp_function_struct);
+                        ConsoleLispFunctionStruct console_lisp_function_struct { Request(console) };
+                        console_lisp_function = this->create_console_lisp_function(console_lisp_function_struct);
 
-                        if (lisp_function == nullptr)
+                        if (console_lisp_function == nullptr)
                         {
-                            // Creating `LispFunction` failed.
-                            std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: creating `LispFunction` failed!\n";
+                            // Creating `ConsoleLispFunction` failed.
+                            std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: creating `ConsoleLispFunction` failed!\n";
                             return nullptr;
                         }
 
-                        // OK, set a name for the newly created `LispFunction`.
-                        lisp_function->set_global_name(name);
+                        // OK, set a name for the newly created `ConsoleLispFunction`.
+                        console_lisp_function->set_global_name(name);
                     }
                     else
                     {
-                        lisp_function = dynamic_cast<LispFunction*>(lisp_function_entity);
+                        console_lisp_function = dynamic_cast<ConsoleLispFunction*>(console_lisp_function_entity);
 
-                        if (lisp_function == nullptr)
+                        if (console_lisp_function == nullptr)
                         {
-                            // The name is in use and the `Entity` is not a `LispFunction`.
-                            std::cerr << "ERROR: `EntityFactory::create_lisp_function_overload`: referred `Entity` is not a `LispFunction`!\n";
+                            // The name is in use and the `Entity` is not a `ConsoleLispFunction`.
+                            std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: referred `Entity` is not a `ConsoleLispFunction`!\n";
                             return nullptr;
                         }
                     }
 
                     yli::memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<yli::memory::GenericLispFunctionOverloadMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::GENERIC_LISP_FUNCTION_OVERLOAD));
+                        this->memory_system.template get_or_create_allocator<yli::memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
+                                static_cast<int>(yli::data::Datatype::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD));
 
                     auto& allocator =
-                        static_cast<yli::memory::GenericLispFunctionOverloadMemoryAllocator&>(generic_allocator);
+                        static_cast<yli::memory::GenericConsoleLispFunctionOverloadMemoryAllocator&>(generic_allocator);
 
-                    GenericLispFunctionOverload* const generic_lisp_function_overload = allocator.build_in(
+                    GenericConsoleLispFunctionOverload* const generic_console_lisp_function_overload = allocator.build_in(
                             this->application,
                             this->get_universe(),
-                            &lisp_function->parent_of_generic_lisp_function_overloads,
+                            &console_lisp_function->parent_of_generic_console_lisp_function_overloads,
                             callback);
-                    generic_lisp_function_overload->set_global_name(name);
-                    return generic_lisp_function_overload;
+                    generic_console_lisp_function_overload->set_global_name(name);
+                    return generic_console_lisp_function_overload;
                 }
 
             template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>

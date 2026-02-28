@@ -92,6 +92,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "console_callback_engines"),
+        parent_of_console_lisp_functions(
+                *this,
+                this->registry,
+                "console_lisp_functions"),
         apprentice_of_font_2d(font_2d_master_module, this),
         master_of_input_modes(*this, &this->registry, "input_modes"),
         console_left_x   { console_struct.left_x },
@@ -227,13 +231,13 @@ namespace yli::ontology
     std::size_t Console::get_number_of_children() const
     {
         return this->parent_of_console_callback_engines.get_number_of_children() +
-            LispContext::get_number_of_children();
+            this->parent_of_console_lisp_functions.get_number_of_children();
     }
 
     std::size_t Console::get_number_of_descendants() const
     {
         return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
-            LispContext::get_number_of_descendants();
+            yli::ontology::get_number_of_descendants(this->parent_of_console_lisp_functions.child_pointer_vector);
     }
 
     bool Console::enter_console()
