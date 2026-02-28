@@ -95,11 +95,11 @@ namespace yli::ontology
                     throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_function_parent` is `nullptr`!");
                 }
 
-                LispContext* const context_parent_of_lisp_function = static_cast<LispContext*>(lisp_function_parent->get_parent());
+                LispContext* const lisp_context_parent_of_lisp_function = static_cast<LispContext*>(lisp_function_parent->get_parent());
 
-                if (context_parent_of_lisp_function == nullptr) [[unlikely]]
+                if (lisp_context_parent_of_lisp_function == nullptr) [[unlikely]]
                 {
-                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `context_parent_of_lisp_function` is `nullptr`!");
+                    throw std::runtime_error("ERROR: `LispFunctionOverload::execute`: `lisp_context_parent_of_lisp_function` is `nullptr`!");
                 }
 
                 // OK, all preconditions for a successful argument binding are met.
@@ -112,7 +112,7 @@ namespace yli::ontology
                     std::size_t, Types...>(
                             std::size_t {},
                             this->universe,
-                            *context_parent_of_lisp_function,
+                            *lisp_context_parent_of_lisp_function,
                             environment,
                             parameter_vector,
                             parameter_i);
