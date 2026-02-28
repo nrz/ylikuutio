@@ -33,7 +33,7 @@ n_command_line_args = len(sys.argv)
 
 usage = \
 "usage:\n"\
-"create_yli_ontology_class.py <class name> [parent class name] [base class]\n"\
+"create_yli_ontology_class.py <class name> [parent class name] [base class name]\n"\
 "create_yli_ontology_class.py --no-inherit <class name> [parent class name]"
 
 # print usage if too little arguments are given.
