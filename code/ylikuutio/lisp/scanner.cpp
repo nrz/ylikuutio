@@ -166,11 +166,13 @@ namespace yli::lisp
                         break;
                     }
                 case U' ':
+                case U',':
                 case U'\n':
                 case U'\r':
                 case U'\t':
                     {
                         // Ignore whitespace.
+                        // Comma `,` counts as whitespace, too.
                         this->text_position.next(codepoint);
                         return std::nullopt;
                     }
