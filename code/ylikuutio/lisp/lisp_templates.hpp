@@ -191,6 +191,60 @@ namespace yli::lisp
         }
 
     template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<int64_t>::type> convert_string_to_value_and_advance_index<int64_t>(
+                yli::ontology::Universe&,
+                yli::ontology::Console&,
+                yli::ontology::Entity*&, // environment.
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            if (!yli::string::check_if_signed_integer_string<char>(my_string))
+            {
+                return std::nullopt;
+            }
+
+            int64_t value;
+            std::stringstream my_stringstream;
+            my_stringstream << my_string;
+            my_stringstream >> value;
+            return yli::data::WrapAllButStrings<int64_t>::type(value);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<uint64_t>::type> convert_string_to_value_and_advance_index<uint64_t>(
+                yli::ontology::Universe&,
+                yli::ontology::Console&,
+                yli::ontology::Entity*&, // environment.
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            if (!yli::string::check_if_unsigned_integer_string<char>(my_string))
+            {
+                return std::nullopt;
+            }
+
+            uint64_t value;
+            std::stringstream my_stringstream;
+            my_stringstream << my_string;
+            my_stringstream >> value;
+            return yli::data::WrapAllButStrings<uint64_t>::type(value);
+        }
+
+    template<>
         inline std::optional<typename yli::data::WrapAllButStrings<int32_t>::type> convert_string_to_value_and_advance_index<int32_t>(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
