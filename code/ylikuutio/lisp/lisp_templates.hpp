@@ -299,6 +299,22 @@ namespace yli::lisp
         }
 
     template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<const std::string&>::type> convert_string_to_value_and_advance_index<const std::string&>(
+                yli::ontology::Universe&,
+                yli::ontology::Console&,
+                yli::ontology::Entity*&, // environment.
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            return parameter_vector.at(parameter_i++);
+        }
+
+    template<>
         inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Entity&>::type> convert_string_to_value_and_advance_index<yli::ontology::Entity&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
@@ -322,32 +338,6 @@ namespace yli::lisp
 
             environment = value;
             return yli::data::WrapAllButStrings<yli::ontology::Entity&>::type(*value);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Entity&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Entity&>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return std::nullopt;
-            }
-
-            const std::string& my_string = parameter_vector.at(parameter_i++);
-
-            yli::ontology::Entity* const value = universe.get_entity(my_string);
-
-            if (value == nullptr)
-            {
-                return std::nullopt;
-            }
-
-            environment = value;
-            return yli::data::WrapAllButStrings<const yli::ontology::Entity&>::type(*value);
         }
 
     template<>
@@ -377,82 +367,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe&>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe&>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            // Note: this specialization returns the `yli::ontology::Universe&` provided as an argument,
-            // and does not do a lookup.
-
-            environment = &universe;
-            return yli::data::WrapAllButStrings<yli::ontology::Universe&>::type(universe);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Universe&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Universe&>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            // Note: this specialization returns the `yli::ontology::Universe&` provided as an argument,
-            // and does not do a lookup.
-
-            environment = &universe;
-            return yli::data::WrapAllButStrings<const yli::ontology::Universe&>::type(universe);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe*>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe*>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
-            // and does not do a lookup.
-
-            environment = &universe;
-            return &universe;
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console&>::type> convert_string_to_value_and_advance_index<yli::ontology::Console&>(
-                yli::ontology::Universe&,
-                yli::ontology::Console& context,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            // Note: this specialization returns the `yli::ontology::Console&` provided as an argument,
-            // and does not do a lookup.
-
-            environment = &context;
-            return yli::data::WrapAllButStrings<yli::ontology::Console&>::type(context);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console*>::type> convert_string_to_value_and_advance_index<yli::ontology::Console*>(
-                yli::ontology::Universe&,
-                yli::ontology::Console& context,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>&, // parameter vector.
-                std::size_t&)                    // parameter_i.
-        {
-            // Note: this specialization returns the `yli::ontology::Console&` provided as an argument,
-            // and does not do a lookup.
-
-            environment = &context;
-            return yli::data::WrapAllButStrings<yli::ontology::Console*>::type(&context);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Variable&>::type> convert_string_to_value_and_advance_index<yli::ontology::Variable&>(
+        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Entity&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Entity&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
                 yli::ontology::Entity*& environment,
@@ -466,7 +381,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            yli::ontology::Variable* const value = dynamic_cast<yli::ontology::Variable*>(universe.get_entity(my_string));
+            yli::ontology::Entity* const value = universe.get_entity(my_string);
 
             if (value == nullptr)
             {
@@ -474,33 +389,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return yli::data::WrapAllButStrings<yli::ontology::Variable&>::type(*value);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Brain&>::type> convert_string_to_value_and_advance_index<yli::ontology::Brain&>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return std::nullopt;
-            }
-
-            const std::string& my_string = parameter_vector.at(parameter_i++);
-
-            yli::ontology::Brain* const value = dynamic_cast<yli::ontology::Brain*>(universe.get_entity(my_string));
-
-            if (value == nullptr)
-            {
-                return std::nullopt;
-            }
-
-            environment = value;
-            return yli::data::WrapAllButStrings<yli::ontology::Brain&>::type(*value);
+            return yli::data::WrapAllButStrings<const yli::ontology::Entity&>::type(*value);
         }
 
     template<>
@@ -530,7 +419,52 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Variable&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Variable&>(
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe&>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe&>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>&, // parameter vector.
+                std::size_t&)                    // parameter_i.
+        {
+            // Note: this specialization returns the `yli::ontology::Universe&` provided as an argument,
+            // and does not do a lookup.
+
+            environment = &universe;
+            return yli::data::WrapAllButStrings<yli::ontology::Universe&>::type(universe);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Universe*>::type> convert_string_to_value_and_advance_index<yli::ontology::Universe*>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>&, // parameter vector.
+                std::size_t&)                    // parameter_i.
+        {
+            // Note: this specialization returns the `yli::ontology::Universe*` provided as an argument,
+            // and does not do a lookup.
+
+            environment = &universe;
+            return &universe;
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Universe&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Universe&>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>&, // parameter vector.
+                std::size_t&)                    // parameter_i.
+        {
+            // Note: this specialization returns the `yli::ontology::Universe&` provided as an argument,
+            // and does not do a lookup.
+
+            environment = &universe;
+            return yli::data::WrapAllButStrings<const yli::ontology::Universe&>::type(universe);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Variable&>::type> convert_string_to_value_and_advance_index<yli::ontology::Variable&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
                 yli::ontology::Entity*& environment,
@@ -552,7 +486,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return yli::data::WrapAllButStrings<const yli::ontology::Variable&>::type(*value);
+            return yli::data::WrapAllButStrings<yli::ontology::Variable&>::type(*value);
         }
 
     template<>
@@ -579,6 +513,32 @@ namespace yli::lisp
 
             environment = value;
             return yli::data::WrapAllButStrings<yli::ontology::Variable*>::type(value);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<const yli::ontology::Variable&>::type> convert_string_to_value_and_advance_index<const yli::ontology::Variable&>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Variable* const value = dynamic_cast<yli::ontology::Variable*>(universe.get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            environment = value;
+            return yli::data::WrapAllButStrings<const yli::ontology::Variable&>::type(*value);
         }
 
     template<>
@@ -631,6 +591,32 @@ namespace yli::lisp
 
             environment = value;
             return yli::data::WrapAllButStrings<yli::ontology::Scene&>::type(*value);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Brain&>::type> convert_string_to_value_and_advance_index<yli::ontology::Brain&>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Brain* const value = dynamic_cast<yli::ontology::Brain*>(universe.get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            environment = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Brain&>::type(*value);
         }
 
     template<>
@@ -790,6 +776,32 @@ namespace yli::lisp
         }
 
     template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type> convert_string_to_value_and_advance_index<yli::ontology::Symbiosis*>(
+                yli::ontology::Universe& universe,
+                yli::ontology::Console&,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>& parameter_vector,
+                std::size_t& parameter_i)
+        {
+            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
+            {
+                return std::nullopt;
+            }
+
+            const std::string& my_string = parameter_vector.at(parameter_i++);
+
+            yli::ontology::Symbiosis* const value = dynamic_cast<yli::ontology::Symbiosis*>(universe.get_entity(my_string));
+
+            if (value == nullptr)
+            {
+                return std::nullopt;
+            }
+
+            environment = value;
+            return yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type(value);
+        }
+
+    template<>
         inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::ShapeshifterTransformation&>::type> convert_string_to_value_and_advance_index<yli::ontology::ShapeshifterTransformation&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
@@ -839,32 +851,6 @@ namespace yli::lisp
 
             environment = value;
             return yli::data::WrapAllButStrings<yli::ontology::ShapeshifterSequence&>::type(*value);
-        }
-
-    template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type> convert_string_to_value_and_advance_index<yli::ontology::Symbiosis*>(
-                yli::ontology::Universe& universe,
-                yli::ontology::Console&,
-                yli::ontology::Entity*& environment,
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i)
-        {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return std::nullopt;
-            }
-
-            const std::string& my_string = parameter_vector.at(parameter_i++);
-
-            yli::ontology::Symbiosis* const value = dynamic_cast<yli::ontology::Symbiosis*>(universe.get_entity(my_string));
-
-            if (value == nullptr)
-            {
-                return std::nullopt;
-            }
-
-            environment = value;
-            return yli::data::WrapAllButStrings<yli::ontology::Symbiosis*>::type(value);
         }
 
     template<>
@@ -972,19 +958,33 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<const std::string&>::type> convert_string_to_value_and_advance_index<const std::string&>(
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console&>::type> convert_string_to_value_and_advance_index<yli::ontology::Console&>(
                 yli::ontology::Universe&,
-                yli::ontology::Console&,
-                yli::ontology::Entity*&, // environment.
-                const std::vector<std::string>& parameter_vector,
-                std::size_t& parameter_i)
+                yli::ontology::Console& context,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>&, // parameter vector.
+                std::size_t&)                    // parameter_i.
         {
-            if (parameter_i >= parameter_vector.size()) // No argument left to consume.
-            {
-                return std::nullopt;
-            }
+            // Note: this specialization returns the `yli::ontology::Console&` provided as an argument,
+            // and does not do a lookup.
 
-            return parameter_vector.at(parameter_i++);
+            environment = &context;
+            return yli::data::WrapAllButStrings<yli::ontology::Console&>::type(context);
+        }
+
+    template<>
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Console*>::type> convert_string_to_value_and_advance_index<yli::ontology::Console*>(
+                yli::ontology::Universe&,
+                yli::ontology::Console& context,
+                yli::ontology::Entity*& environment,
+                const std::vector<std::string>&, // parameter vector.
+                std::size_t&)                    // parameter_i.
+        {
+            // Note: this specialization returns the `yli::ontology::Console&` provided as an argument,
+            // and does not do a lookup.
+
+            environment = &context;
+            return yli::data::WrapAllButStrings<yli::ontology::Console*>::type(&context);
         }
 }
 
