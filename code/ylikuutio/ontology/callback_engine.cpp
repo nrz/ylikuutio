@@ -46,10 +46,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "callback_objects"),
-        master_of_brains(
+        master_of_movable_controllers(
                 *this,
                 &this->registry,
-                "brains")
+                "movable_controllers")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";

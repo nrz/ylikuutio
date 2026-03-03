@@ -33,7 +33,7 @@ namespace yli::ontology
     class CallbackParameter;
     class Ecosystem;
     class Scene;
-    class Brain;
+    class MovableController;
     class Waypoint;
     class Camera;
     class Pipeline;
@@ -68,7 +68,7 @@ namespace yli::ontology
     struct VariableStruct;
     struct EcosystemStruct;
     struct SceneStruct;
-    struct BrainStruct;
+    struct MovableControllerStruct;
     struct WaypointStruct;
     struct CameraStruct;
     struct PipelineStruct;
@@ -119,7 +119,7 @@ namespace yli::ontology
 
             virtual Ecosystem* create_ecosystem(const EcosystemStruct& ecosystem_struct) const = 0;
             virtual Scene* create_scene(const SceneStruct& scene_struct) const = 0;
-            virtual Brain* create_brain(const BrainStruct& brain_struct) const = 0;
+            virtual MovableController* create_movable_controller(const MovableControllerStruct& movable_controller_struct) const = 0;
             virtual Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const = 0;
             virtual Camera* create_camera(const CameraStruct& camera_struct) const = 0;
             virtual Camera* create_default_camera(const CameraStruct& camera_struct) const = 0;

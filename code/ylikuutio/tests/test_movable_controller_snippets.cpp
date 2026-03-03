@@ -21,13 +21,13 @@
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
@@ -38,7 +38,7 @@
 // Include standard headers
 #include <numbers> // std::numbers::pi
 
-TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
+TEST(rest_movable_controller_must_not_change_location_or_orientation, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -53,15 +53,15 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
 
     rest_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rest_brain_struct {
+    yli::ontology::MovableControllerStruct rest_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rest_callback_engine) };
-    yli::ontology::Brain* const rest_brain = application.get_generic_entity_factory().create_brain(
-            rest_brain_struct);
+    yli::ontology::MovableController* const rest_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rest_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rest_brain) };
+            yli::ontology::Request(rest_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -74,13 +74,13 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_1)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    rest_brain->update();
+    rest_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_2)
+TEST(rest_movable_controller_must_not_change_location_or_orientation, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -95,15 +95,15 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_2)
 
     rest_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rest_brain_struct {
+    yli::ontology::MovableControllerStruct rest_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rest_callback_engine) };
-    yli::ontology::Brain* const rest_brain = application.get_generic_entity_factory().create_brain(
-            rest_brain_struct);
+    yli::ontology::MovableController* const rest_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rest_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rest_brain) };
+            yli::ontology::Request(rest_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -116,13 +116,13 @@ TEST(rest_brain_must_not_change_location_or_orientation, object_with_speed_2)
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 
-    rest_brain->update();
+    rest_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_east_brain_must_go_east, object_with_speed_1)
+TEST(go_east_movable_controller_must_go_east, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -137,15 +137,15 @@ TEST(go_east_brain_must_go_east, object_with_speed_1)
 
     go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_east_brain_struct {
+    yli::ontology::MovableControllerStruct go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_east_callback_engine) };
-    yli::ontology::Brain* const go_east_brain = application.get_generic_entity_factory().create_brain(
-            go_east_brain_struct);
+    yli::ontology::MovableController* const go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_east_brain) };
+            yli::ontology::Request(go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -160,13 +160,13 @@ TEST(go_east_brain_must_go_east, object_with_speed_1)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(1.0f, 0.0f, 0.0f) };
 
-    go_east_brain->update();
+    go_east_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_east_brain_must_go_east, object_with_speed_2)
+TEST(go_east_movable_controller_must_go_east, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -181,15 +181,15 @@ TEST(go_east_brain_must_go_east, object_with_speed_2)
 
     go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_east_brain_struct {
+    yli::ontology::MovableControllerStruct go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_east_callback_engine) };
-    yli::ontology::Brain* const go_east_brain = application.get_generic_entity_factory().create_brain(
-            go_east_brain_struct);
+    yli::ontology::MovableController* const go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_east_brain) };
+            yli::ontology::Request(go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -204,13 +204,13 @@ TEST(go_east_brain_must_go_east, object_with_speed_2)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(2.0f, 0.0f, 0.0f) };
 
-    go_east_brain->update();
+    go_east_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_west_brain_must_go_west, object_with_speed_1)
+TEST(go_west_movable_controller_must_go_west, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -225,15 +225,15 @@ TEST(go_west_brain_must_go_west, object_with_speed_1)
 
     go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_west_brain_struct {
+    yli::ontology::MovableControllerStruct go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_west_callback_engine) };
-    yli::ontology::Brain* const go_west_brain = application.get_generic_entity_factory().create_brain(
-            go_west_brain_struct);
+    yli::ontology::MovableController* const go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_west_brain) };
+            yli::ontology::Request(go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -248,13 +248,13 @@ TEST(go_west_brain_must_go_west, object_with_speed_1)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-1.0f, 0.0f, 0.0f) };
 
-    go_west_brain->update();
+    go_west_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_west_brain_must_go_west, object_with_speed_2)
+TEST(go_west_movable_controller_must_go_west, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -269,15 +269,15 @@ TEST(go_west_brain_must_go_west, object_with_speed_2)
 
     go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_west_brain_struct {
+    yli::ontology::MovableControllerStruct go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_west_callback_engine) };
-    yli::ontology::Brain* const go_west_brain = application.get_generic_entity_factory().create_brain(
-            go_west_brain_struct);
+    yli::ontology::MovableController* const go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_west_brain) };
+            yli::ontology::Request(go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -292,13 +292,13 @@ TEST(go_west_brain_must_go_west, object_with_speed_2)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-2.0f, 0.0f, 0.0f) };
 
-    go_west_brain->update();
+    go_west_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_north_brain_must_go_north, object_with_speed_1)
+TEST(go_north_movable_controller_must_go_north, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -313,15 +313,15 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
 
     go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_north_brain_struct {
+    yli::ontology::MovableControllerStruct go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_north_callback_engine) };
-    yli::ontology::Brain* const go_north_brain = application.get_generic_entity_factory().create_brain(
-            go_north_brain_struct);
+    yli::ontology::MovableController* const go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_north_brain) };
+            yli::ontology::Request(go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -336,13 +336,13 @@ TEST(go_north_brain_must_go_north, object_with_speed_1)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 1.0f, 0.0f) };
 
-    go_north_brain->update();
+    go_north_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_north_brain_must_go_north, object_with_speed_2)
+TEST(go_north_movable_controller_must_go_north, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -357,15 +357,15 @@ TEST(go_north_brain_must_go_north, object_with_speed_2)
 
     go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_north_brain_struct {
+    yli::ontology::MovableControllerStruct go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_north_callback_engine) };
-    yli::ontology::Brain* const go_north_brain = application.get_generic_entity_factory().create_brain(
-            go_north_brain_struct);
+    yli::ontology::MovableController* const go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_north_brain) };
+            yli::ontology::Request(go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -380,13 +380,13 @@ TEST(go_north_brain_must_go_north, object_with_speed_2)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 2.0f, 0.0f) };
 
-    go_north_brain->update();
+    go_north_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_south_brain_must_go_south, object_with_speed_1)
+TEST(go_south_movable_controller_must_go_south, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -401,15 +401,15 @@ TEST(go_south_brain_must_go_south, object_with_speed_1)
 
     go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_south_brain_struct {
+    yli::ontology::MovableControllerStruct go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_south_callback_engine) };
-    yli::ontology::Brain* const go_south_brain = application.get_generic_entity_factory().create_brain(
-            go_south_brain_struct);
+    yli::ontology::MovableController* const go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_south_brain) };
+            yli::ontology::Request(go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -424,13 +424,13 @@ TEST(go_south_brain_must_go_south, object_with_speed_1)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -1.0f, 0.0f) };
 
-    go_south_brain->update();
+    go_south_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(go_south_brain_must_go_south, object_with_speed_2)
+TEST(go_south_movable_controller_must_go_south, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -445,15 +445,15 @@ TEST(go_south_brain_must_go_south, object_with_speed_2)
 
     go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct go_south_brain_struct {
+    yli::ontology::MovableControllerStruct go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_south_callback_engine) };
-    yli::ontology::Brain* const go_south_brain = application.get_generic_entity_factory().create_brain(
-            go_south_brain_struct);
+    yli::ontology::MovableController* const go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(go_south_brain) };
+            yli::ontology::Request(go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -468,13 +468,13 @@ TEST(go_south_brain_must_go_south, object_with_speed_2)
 
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -2.0f, 0.0f) };
 
-    go_south_brain->update();
+    go_south_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation, original_orientation);
 }
 
-TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_1)
+TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -489,15 +489,15 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_1)
 
     orient_to_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_east_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_east_callback_engine) };
-    yli::ontology::Brain* const orient_to_east_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_east_brain_struct);
+    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_east_brain) };
+            yli::ontology::Request(orient_to_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -512,13 +512,13 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_1)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.0f, object_struct.orientation.pitch) };
 
-    orient_to_east_brain->update();
+    orient_to_east_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_2)
+TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -533,15 +533,15 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_2)
 
     orient_to_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_east_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_east_callback_engine) };
-    yli::ontology::Brain* const orient_to_east_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_east_brain_struct);
+    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_east_brain) };
+            yli::ontology::Request(orient_to_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -556,13 +556,13 @@ TEST(orient_to_east_brain_must_orient_to_east, object_with_speed_2)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.0f, object_struct.orientation.pitch) };
 
-    orient_to_east_brain->update();
+    orient_to_east_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
+TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -577,15 +577,15 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
 
     orient_to_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_west_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_west_callback_engine) };
-    yli::ontology::Brain* const orient_to_west_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_west_brain_struct);
+    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_west_brain) };
+            yli::ontology::Request(orient_to_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -600,13 +600,13 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_1)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_west_brain->update();
+    orient_to_west_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
+TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -621,15 +621,15 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
 
     orient_to_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_west_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_west_callback_engine) };
-    yli::ontology::Brain* const orient_to_west_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_west_brain_struct);
+    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_west_brain) };
+            yli::ontology::Request(orient_to_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -644,13 +644,13 @@ TEST(orient_to_west_brain_must_orient_to_west, object_with_speed_2)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_west_brain->update();
+    orient_to_west_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
+TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -665,15 +665,15 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
 
     orient_to_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_north_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_north_callback_engine) };
-    yli::ontology::Brain* const orient_to_north_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_north_brain_struct);
+    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_north_brain) };
+            yli::ontology::Request(orient_to_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -688,13 +688,13 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_1)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_north_brain->update();
+    orient_to_north_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
+TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -709,15 +709,15 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
 
     orient_to_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_north_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_north_callback_engine) };
-    yli::ontology::Brain* const orient_to_north_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_north_brain_struct);
+    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_north_brain) };
+            yli::ontology::Request(orient_to_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -732,13 +732,13 @@ TEST(orient_to_north_brain_must_orient_to_north, object_with_speed_2)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_north_brain->update();
+    orient_to_north_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
+TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -753,15 +753,15 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
 
     orient_to_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_south_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_south_callback_engine) };
-    yli::ontology::Brain* const orient_to_south_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_south_brain_struct);
+    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_south_brain) };
+            yli::ontology::Request(orient_to_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -776,13 +776,13 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_1)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_south_brain->update();
+    orient_to_south_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
+TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -797,15 +797,15 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
 
     orient_to_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_to_south_brain_struct {
+    yli::ontology::MovableControllerStruct orient_to_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_south_callback_engine) };
-    yli::ontology::Brain* const orient_to_south_brain = application.get_generic_entity_factory().create_brain(
-            orient_to_south_brain_struct);
+    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_to_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_to_south_brain) };
+            yli::ontology::Request(orient_to_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -820,13 +820,13 @@ TEST(orient_to_south_brain_must_orient_to_south, object_with_speed_2)
 
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_to_south_brain->update();
+    orient_to_south_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
+TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -841,15 +841,15 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_east_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_east_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_east_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_east_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_east_brain) };
+            yli::ontology::Request(orient_and_go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -865,13 +865,13 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_1)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(1.0f, 0.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.0f, object_struct.orientation.pitch) };
 
-    orient_and_go_east_brain->update();
+    orient_and_go_east_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_2)
+TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -886,15 +886,15 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_2)
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_east_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_east_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_east_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_east_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_east_brain) };
+            yli::ontology::Request(orient_and_go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -910,13 +910,13 @@ TEST(orient_and_go_east_brain_must_orient_and_go_east, object_with_speed_2)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(2.0f, 0.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.0f, object_struct.orientation.pitch) };
 
-    orient_and_go_east_brain->update();
+    orient_and_go_east_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
+TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -931,15 +931,15 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_west_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_west_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_west_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_west_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_west_brain) };
+            yli::ontology::Request(orient_and_go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -955,13 +955,13 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_1)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-1.0f, 0.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_west_brain->update();
+    orient_and_go_west_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
+TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -976,15 +976,15 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_west_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_west_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_west_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_west_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_west_brain) };
+            yli::ontology::Request(orient_and_go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1000,13 +1000,13 @@ TEST(orient_and_go_west_brain_must_orient_and_go_west, object_with_speed_2)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(-2.0f, 0.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_west_brain->update();
+    orient_and_go_west_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
+TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1021,15 +1021,15 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_north_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_north_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_north_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_north_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_north_brain) };
+            yli::ontology::Request(orient_and_go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1045,13 +1045,13 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_1)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 1.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_north_brain->update();
+    orient_and_go_north_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
+TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1066,15 +1066,15 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_north_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_north_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_north_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_north_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_north_brain) };
+            yli::ontology::Request(orient_and_go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1090,13 +1090,13 @@ TEST(orient_and_go_north_brain_must_orient_and_go_north, object_with_speed_2)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, 2.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, 0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_north_brain->update();
+    orient_and_go_north_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
+TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1111,15 +1111,15 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_south_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_south_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_south_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_south_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_south_brain) };
+            yli::ontology::Request(orient_and_go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1135,13 +1135,13 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_1)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -1.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_south_brain->update();
+    orient_and_go_south_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
+TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1156,15 +1156,15 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct orient_and_go_south_brain_struct {
+    yli::ontology::MovableControllerStruct orient_and_go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_south_callback_engine) };
-    yli::ontology::Brain* const orient_and_go_south_brain = application.get_generic_entity_factory().create_brain(
-            orient_and_go_south_brain_struct);
+    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            orient_and_go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(orient_and_go_south_brain) };
+            yli::ontology::Request(orient_and_go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1180,13 +1180,13 @@ TEST(orient_and_go_south_brain_must_orient_and_go_south, object_with_speed_2)
     glm::vec3 expected_coordinates { object->location.xyz + glm::vec3(0.0f, -2.0f, 0.0f) };
     glm::vec3 expected_orientation { glm::vec3(object_struct.orientation.roll, -0.5f * static_cast<float>(std::numbers::pi), object_struct.orientation.pitch) };
 
-    orient_and_go_south_brain->update();
+    orient_and_go_south_movable_controller->update();
 
     ASSERT_EQ(object->location.xyz, expected_coordinates);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
+TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1201,15 +1201,15 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_clockwise_brain_struct {
+    yli::ontology::MovableControllerStruct rotate_clockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_clockwise_callback_engine) };
-    yli::ontology::Brain* const rotate_clockwise_brain = application.get_generic_entity_factory().create_brain(
-            rotate_clockwise_brain_struct);
+    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rotate_clockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rotate_clockwise_brain) };
+            yli::ontology::Request(rotate_clockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1228,13 +1228,13 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_1)
                 object_struct.orientation.yaw - 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
-    rotate_clockwise_brain->update();
+    rotate_clockwise_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
+TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1249,15 +1249,15 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_clockwise_brain_struct {
+    yli::ontology::MovableControllerStruct rotate_clockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_clockwise_callback_engine) };
-    yli::ontology::Brain* const rotate_clockwise_brain = application.get_generic_entity_factory().create_brain(
-            rotate_clockwise_brain_struct);
+    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rotate_clockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rotate_clockwise_brain) };
+            yli::ontology::Request(rotate_clockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1276,13 +1276,13 @@ TEST(rotate_clockwise_brain_must_rotate_clockwise, object_with_speed_2)
                 object_struct.orientation.yaw - 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
-    rotate_clockwise_brain->update();
+    rotate_clockwise_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_speed_1)
+TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1297,15 +1297,15 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct {
+    yli::ontology::MovableControllerStruct rotate_counterclockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_counterclockwise_callback_engine) };
-    yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
-            rotate_counterclockwise_brain_struct);
+    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rotate_counterclockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rotate_counterclockwise_brain) };
+            yli::ontology::Request(rotate_counterclockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1324,13 +1324,13 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
                 object_struct.orientation.yaw + 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
-    rotate_counterclockwise_brain->update();
+    rotate_counterclockwise_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);
 }
 
-TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_speed_2)
+TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -1345,15 +1345,15 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
 
-    yli::ontology::BrainStruct rotate_counterclockwise_brain_struct {
+    yli::ontology::MovableControllerStruct rotate_counterclockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_counterclockwise_callback_engine) };
-    yli::ontology::Brain* const rotate_counterclockwise_brain = application.get_generic_entity_factory().create_brain(
-            rotate_counterclockwise_brain_struct);
+    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            rotate_counterclockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
             yli::ontology::Request(scene),
-            yli::ontology::Request(rotate_counterclockwise_brain) };
+            yli::ontology::Request(rotate_counterclockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
@@ -1372,7 +1372,7 @@ TEST(rotate_counterclockwise_brain_must_rotate_counterclockwise, object_with_spe
                 object_struct.orientation.yaw + 0.1f * static_cast<float>(std::numbers::pi),
                 object_struct.orientation.pitch) };
 
-    rotate_counterclockwise_brain->update();
+    rotate_counterclockwise_movable_controller->update();
 
     ASSERT_EQ(object->location, original_location);
     ASSERT_EQ(object->orientation.get(), expected_orientation);

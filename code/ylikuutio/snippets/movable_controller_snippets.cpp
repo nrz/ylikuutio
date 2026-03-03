@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "brain_snippets.hpp"
+#include "movable_controller_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/object.hpp"

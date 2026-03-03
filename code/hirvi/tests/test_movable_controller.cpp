@@ -18,12 +18,12 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/ontology/cat.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
 // Include standard headers
@@ -34,7 +34,7 @@ namespace yli::ontology
     class Scene;
 }
 
-TEST(brain_must_be_initialized_appropriately, hirvi_brain)
+TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_controller)
 {
     using namespace yli::ontology;
 
@@ -52,14 +52,14 @@ TEST(brain_must_be_initialized_appropriately, hirvi_brain)
     auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
-    rest_brain_struct.global_name = "rest_brain";
-    rest_brain_struct.local_name = "rest";
-    Brain* const rest_brain = hirvi_application.get_entity_factory().create_brain(rest_brain_struct);
-    ASSERT_NE(rest_brain, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_brain) % alignof(Brain), 0);
-    yli::memory::ConstructibleModule brain_constructible_module = rest_brain->get_constructible_module();
-    ASSERT_EQ(brain_constructible_module.storage_i, 0);
-    ASSERT_EQ(brain_constructible_module.slot_i, 0);
-    ASSERT_EQ(brain_constructible_module.alive, true);
+    MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
+    rest_movable_controller_struct.global_name = "rest_movable_controller";
+    rest_movable_controller_struct.local_name = "rest";
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(rest_movable_controller_struct);
+    ASSERT_NE(rest_movable_controller, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_movable_controller) % alignof(MovableController), 0);
+    yli::memory::ConstructibleModule movable_controller_constructible_module = rest_movable_controller->get_constructible_module();
+    ASSERT_EQ(movable_controller_constructible_module.storage_i, 0);
+    ASSERT_EQ(movable_controller_constructible_module.slot_i, 0);
+    ASSERT_EQ(movable_controller_constructible_module.alive, true);
 }

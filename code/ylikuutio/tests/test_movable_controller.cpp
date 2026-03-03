@@ -17,13 +17,12 @@
 
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/movable_controller.hpp"
-#include "code/ylikuutio/ontology/waypoint.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/waypoint.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
-#include "code/ylikuutio/ontology/waypoint_struct.hpp"
 
 // Include standard headers
 #include <limits>  // std::numeric_limits
@@ -31,10 +30,11 @@
 
 namespace yli::ontology
 {
+    class Movable;
     class CallbackEngine;
 }
 
-TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
+TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_pointer)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -46,14 +46,10 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
             movable_controller_struct);
+    ASSERT_NE(movable_controller, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
 
-    yli::ontology::WaypointStruct waypoint_struct {
-            yli::ontology::Request(scene),
-            yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
-            waypoint_struct);
-    ASSERT_NE(waypoint, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
+    ASSERT_NE(movable_controller->get_generic_master_module<yli::ontology::Movable>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -61,18 +57,21 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `MovableController`, `Waypoint`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);
+
+    // `MovableController` member functions.
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(waypoint->get_childID(), 0);
-    ASSERT_EQ(waypoint->get_type(), "yli::ontology::Waypoint*");
-    ASSERT_TRUE(waypoint->get_can_be_erased());
-    ASSERT_EQ(waypoint->get_scene(), scene);
-    ASSERT_EQ(waypoint->get_parent(), scene);
-    ASSERT_EQ(waypoint->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(movable_controller->get_childID(), 0);
+    ASSERT_EQ(movable_controller->get_type(), "yli::ontology::MovableController*");
+    ASSERT_TRUE(movable_controller->get_can_be_erased());
+    ASSERT_EQ(movable_controller->get_scene(), scene);
+    ASSERT_EQ(movable_controller->get_parent(), scene);
+    ASSERT_EQ(movable_controller->get_number_of_non_variable_children(), 0);
 }
 
-TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
+TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_provided_as_nullptr)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -80,18 +79,12 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
-            yli::ontology::Request(scene),
-            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
-            movable_controller_struct);
-
-    yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request<yli::ontology::Scene>(nullptr),
-            yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
-            waypoint_struct);
-    ASSERT_NE(waypoint, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
+    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            movable_controller_struct);
+    ASSERT_NE(movable_controller, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -99,18 +92,21 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `MovableController`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    // `MovableController` member functions.
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(waypoint->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(waypoint->get_type(), "yli::ontology::Waypoint*");
-    ASSERT_TRUE(waypoint->get_can_be_erased());
-    ASSERT_EQ(waypoint->get_scene(), nullptr);
-    ASSERT_EQ(waypoint->get_parent(), nullptr);
-    ASSERT_EQ(waypoint->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(movable_controller->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(movable_controller->get_type(), "yli::ontology::MovableController*");
+    ASSERT_TRUE(movable_controller->get_can_be_erased());
+    ASSERT_EQ(movable_controller->get_scene(), nullptr);
+    ASSERT_EQ(movable_controller->get_parent(), nullptr);
+    ASSERT_EQ(movable_controller->get_number_of_non_variable_children(), 0);
 }
 
-TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_global_name)
+TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_provided_as_valid_global_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -119,18 +115,12 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
-            yli::ontology::Request(scene),
-            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
-            movable_controller_struct);
-
-    yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request<yli::ontology::Scene>("foo"),
-            yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
-            waypoint_struct);
-    ASSERT_NE(waypoint, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
+            yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
+    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            movable_controller_struct);
+    ASSERT_NE(movable_controller, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -138,18 +128,21 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `MovableController`, `Waypoint`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2);
+
+    // `MovableController` member functions.
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(waypoint->get_childID(), 0);
-    ASSERT_EQ(waypoint->get_type(), "yli::ontology::Waypoint*");
-    ASSERT_TRUE(waypoint->get_can_be_erased());
-    ASSERT_EQ(waypoint->get_scene(), scene);
-    ASSERT_EQ(waypoint->get_parent(), scene);
-    ASSERT_EQ(waypoint->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(movable_controller->get_childID(), 0);
+    ASSERT_EQ(movable_controller->get_type(), "yli::ontology::MovableController*");
+    ASSERT_TRUE(movable_controller->get_can_be_erased());
+    ASSERT_EQ(movable_controller->get_scene(), scene);
+    ASSERT_EQ(movable_controller->get_parent(), scene);
+    ASSERT_EQ(movable_controller->get_number_of_non_variable_children(), 0);
 }
 
-TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_as_invalid_global_name)
+TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
@@ -158,18 +151,12 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
-            yli::ontology::Request(scene),
+            yli::ontology::Request<yli::ontology::Scene>("bar"),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
     yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
             movable_controller_struct);
-
-    yli::ontology::WaypointStruct waypoint_struct {
-            yli::ontology::Request<yli::ontology::Scene>("bar"),
-            yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
-            waypoint_struct);
-    ASSERT_NE(waypoint, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
+    ASSERT_NE(movable_controller, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -177,13 +164,16 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(scene->get_scene(), scene);
-    ASSERT_EQ(scene->get_number_of_non_variable_children(), 2); // Default `Camera`, `MovableController`.
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 1); // Default `Camera`.
+
+    // `MovableController` member functions.
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(waypoint->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(waypoint->get_type(), "yli::ontology::Waypoint*");
-    ASSERT_TRUE(waypoint->get_can_be_erased());
-    ASSERT_EQ(waypoint->get_scene(), nullptr);
-    ASSERT_EQ(waypoint->get_parent(), nullptr);
-    ASSERT_EQ(waypoint->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(movable_controller->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(movable_controller->get_type(), "yli::ontology::MovableController*");
+    ASSERT_TRUE(movable_controller->get_can_be_erased());
+    ASSERT_EQ(movable_controller->get_scene(), nullptr);
+    ASSERT_EQ(movable_controller->get_parent(), nullptr);
+    ASSERT_EQ(movable_controller->get_number_of_non_variable_children(), 0);
 }

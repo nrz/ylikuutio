@@ -28,7 +28,7 @@
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
+    class MovableController;
     class Symbiosis;
 
     struct HolobiontStruct : public MovableStruct
@@ -43,9 +43,9 @@ namespace yli::ontology
 
         HolobiontStruct(
                 Request<Scene>&& scene_parent,
-                Request<Brain>&& brain_master,
+                Request<MovableController>&& movable_controller_master,
                 Request<Symbiosis>&& symbiosis_master)
-            : MovableStruct(std::move(scene_parent), std::move(brain_master)),
+            : MovableStruct(std::move(scene_parent), std::move(movable_controller_master)),
             symbiosis_master { std::move(symbiosis_master) }
         {
         }

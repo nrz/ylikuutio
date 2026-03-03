@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_BRAIN_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_MOVABLE_CONTROLLER_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_MOVABLE_CONTROLLER_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 #include "request.hpp"
@@ -29,9 +29,9 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
 
-    struct BrainStruct : public EntityStruct
+    struct MovableControllerStruct : public EntityStruct
     {
-        BrainStruct(
+        MovableControllerStruct(
                 Request<Scene>&& scene_parent,
                 Request<CallbackEngine>&& callback_engine_master)
             : scene_parent { std::move(scene_parent) },
@@ -39,7 +39,7 @@ namespace yli::ontology
         {
         }
 
-        // `Scene` is before `CallbackEngine` because `Scene` is parent of `Brain`.
+        // `Scene` is before `CallbackEngine` because `Scene` is parent of `MovableController`.
         Request<Scene> scene_parent                    {};
         Request<CallbackEngine> callback_engine_master {};
     };

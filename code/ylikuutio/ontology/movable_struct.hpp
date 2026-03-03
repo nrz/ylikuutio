@@ -41,7 +41,7 @@
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
+    class MovableController;
 
     struct MovableStruct : public EntityStruct
     {
@@ -57,28 +57,28 @@ namespace yli::ontology
 
         MovableStruct(
                 Request<Scene>&& scene,
-                Request<Brain>&& brain_master)
+                Request<MovableController>&& movable_controller_master)
             : scene { std::move(scene) },
-            brain_master { std::move(brain_master) }
+            movable_controller_master { std::move(movable_controller_master) }
         {
         }
 
         MovableStruct(
                 Request<Scene>&& scene,
-                Request<Brain>&& brain_master,
+                Request<MovableController>&& movable_controller_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
                 const float pitch)
             : scene { std::move(scene) },
-            brain_master { std::move(brain_master) },
+            movable_controller_master { std::move(movable_controller_master) },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
         }
 
         MovableStruct(
-                Request<Brain>&& brain_master,
+                Request<MovableController>&& movable_controller_master,
                 const glm::vec3& cartesian_coordinates,
                 const float roll,
                 const float yaw,
@@ -86,7 +86,7 @@ namespace yli::ontology
                 const std::string& global_name,
                 const std::string& local_name)
             : EntityStruct(global_name, local_name),
-            brain_master { std::move(brain_master) },
+            movable_controller_master { std::move(movable_controller_master) },
             cartesian_coordinates { cartesian_coordinates },
             orientation(roll, yaw, pitch)
         {
@@ -94,7 +94,7 @@ namespace yli::ontology
 
         yli::input::InputMethod input_method { yli::input::InputMethod::AI };
         Request<Scene> scene        {};
-        Request<Brain> brain_master {};
+        Request<MovableController> movable_controller_master {};
 
         std::vector<glm::vec3> initial_rotate_vectors;
         std::vector<float> initial_rotate_angles;

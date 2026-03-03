@@ -19,14 +19,14 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/hirvi/ontology/cat.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -46,7 +46,7 @@
 
 namespace yli::ontology
 {
-    class Brain;
+    class MovableController;
     class Scene;
     class Pipeline;
     class Material;
@@ -71,10 +71,10 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
-    rest_brain_struct.global_name = "rest_brain";
-    rest_brain_struct.local_name = "rest";
-    Brain* const rest_brain = hirvi_application.get_entity_factory().create_brain(rest_brain_struct);
+    MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
+    rest_movable_controller_struct.global_name = "rest_movable_controller";
+    rest_movable_controller_struct.local_name = "rest";
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
@@ -94,7 +94,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
     Species* const cat_species = hirvi_application.get_entity_factory().create_species(cat_species_struct);
 
-    ObjectStruct cat1_object_struct { Request(helsinki_scene), Request(rest_brain), Request(cat_species) };
+    ObjectStruct cat1_object_struct { Request(helsinki_scene), Request(rest_movable_controller), Request(cat_species) };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };

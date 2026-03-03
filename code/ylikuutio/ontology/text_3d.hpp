@@ -75,7 +75,7 @@ namespace yli::ontology
                     Universe& universe,
                     const Text3dStruct& text_3d_struct,
                     GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const brain_master_module,
+                    GenericMasterModule* const movable_controller_master_module,
                     GenericMasterModule* const vector_font_master_module);
 
             ~Text3d() = default;

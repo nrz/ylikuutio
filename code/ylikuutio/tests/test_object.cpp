@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -26,7 +26,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -97,8 +97,8 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
-    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), nullptr); // No `MovableController`.
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(object->apprentice_of_species.get_master(), species);
     ASSERT_EQ(object->apprentice_of_species.get_apprenticeID(), 0);
 
@@ -166,8 +166,8 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
-    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), nullptr); // No `MovableController`.
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(object->apprentice_of_species.get_master(), species);
     ASSERT_EQ(object->apprentice_of_species.get_apprenticeID(), 0);
 
@@ -236,8 +236,8 @@ TEST(object_must_be_initialized_appropriately, headless_with_parent_provided_as_
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
-    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), nullptr); // No `MovableController`.
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(object->apprentice_of_species.get_master(), species);
     ASSERT_EQ(object->apprentice_of_species.get_apprenticeID(), 0);
 
@@ -306,8 +306,8 @@ TEST(object_must_be_initialized_appropriately, headless_with_scene_parent_provid
     ASSERT_EQ(species->get_scene(), scene);
     ASSERT_EQ(species->get_number_of_non_variable_children(), 0);
 
-    ASSERT_EQ(object->apprentice_of_brain.get_master(), nullptr); // No `Brain`.
-    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), nullptr); // No `MovableController`.
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
     ASSERT_EQ(object->apprentice_of_species.get_master(), species);
     ASSERT_EQ(object->apprentice_of_species.get_apprenticeID(), 0);
 
@@ -356,18 +356,18 @@ TEST(object_must_bind_to_scene_appropriately, headless_with_parent_provided_as_v
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2);
 }
 
-TEST(object_must_bind_to_brain_appropriately, headless_with_parent_provided_as_valid_pointer_master_and_apprentice)
+TEST(object_must_bind_to_movable_controller_appropriately, headless_with_parent_provided_as_valid_pointer_master_and_apprentice)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::BrainStruct brain_struct {
+    yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::Brain* const brain = application.get_generic_entity_factory().create_brain(
-            brain_struct);
+    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+            movable_controller_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
@@ -391,12 +391,12 @@ TEST(object_must_bind_to_brain_appropriately, headless_with_parent_provided_as_v
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
 
-    ASSERT_EQ(brain->get_number_of_apprentices(), 0);
-    yli::ontology::Movable::bind_to_new_brain(*object, *brain);
-    ASSERT_EQ(brain->get_number_of_apprentices(), 1);
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
+    yli::ontology::Movable::bind_to_new_movable_controller(*object, *movable_controller);
+    ASSERT_EQ(movable_controller->get_number_of_apprentices(), 1);
 
-    ASSERT_EQ(object->apprentice_of_brain.get_master(), brain);
-    ASSERT_EQ(object->apprentice_of_brain.get_apprenticeID(), 0);
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), movable_controller);
+    ASSERT_EQ(object->apprentice_of_movable_controller.get_apprenticeID(), 0);
 }
 
 TEST(object_must_bind_to_species_appropriately, headless_with_parent_provided_as_valid_pointer_master_and_apprentice)

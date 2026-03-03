@@ -25,7 +25,7 @@
 #include "pipeline.hpp"
 #include "material.hpp"
 #include "camera.hpp"
-#include "brain.hpp"
+#include "movable_controller.hpp"
 #include "generic_entity_factory.hpp"
 #include "request.hpp"
 #include "scene_struct.hpp"
@@ -64,10 +64,10 @@ namespace yli::ontology
             GenericParentModule* const universe_parent_module)
     : Entity(application, universe, scene_struct),
         child_of_universe(universe_parent_module, *this),
-        parent_of_brains(
+        parent_of_movable_controllers(
                 *this,
                 this->registry,
-                "brains"),
+                "movable_controllers"),
         parent_of_waypoints(
                 *this,
                 this->registry,
@@ -163,13 +163,13 @@ namespace yli::ontology
     {
         // Intentional actors (AIs and keyboard controlled ones).
 
-        for (Entity* const brain_entity : this->parent_of_brains.child_pointer_vector)
+        for (Entity* const movable_controller_entity : this->parent_of_movable_controllers.child_pointer_vector)
         {
-            Brain* const brain = static_cast<Brain*>(brain_entity);
+            MovableController* const movable_controller = static_cast<MovableController*>(movable_controller_entity);
 
-            if (brain != nullptr)
+            if (movable_controller != nullptr)
             {
-                brain->update();
+                movable_controller->update();
             }
         }
     }
@@ -255,7 +255,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_children() const
     {
-        return this->parent_of_brains.get_number_of_children() +
+        return this->parent_of_movable_controllers.get_number_of_children() +
             this->parent_of_waypoints.get_number_of_children() +
             this->parent_of_cameras.get_number_of_children() +
             this->parent_of_pipelines.get_number_of_children() +
@@ -270,7 +270,7 @@ namespace yli::ontology
 
     std::size_t Scene::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_brains.child_pointer_vector) +
+        return yli::ontology::get_number_of_descendants(this->parent_of_movable_controllers.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
             yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +

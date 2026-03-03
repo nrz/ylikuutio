@@ -55,13 +55,13 @@ namespace yli::ontology
             Universe& universe,
             const HolobiontStruct& holobiont_struct,
             GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const brain_master_module,
+            GenericMasterModule* const movable_controller_master_module,
             GenericMasterModule* const symbiosis_master_module)
         : Movable(
                 application,
                 universe,
                 holobiont_struct,
-                brain_master_module),
+                movable_controller_master_module),
         child_of_scene(scene_parent_module, *this),
         parent_of_bionts(
                 *this,

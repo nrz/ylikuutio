@@ -68,7 +68,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class Universe;
-    class Brain;
+    class MovableController;
     class Waypoint;
     class Camera;
     class Pipeline;
@@ -140,7 +140,7 @@ namespace yli::ontology
                 friend class yli::memory::MemoryStorage;
 
             ChildModule child_of_universe;
-            GenericParentModule parent_of_brains;
+            GenericParentModule parent_of_movable_controllers;
             GenericParentModule parent_of_waypoints;
             GenericParentModule parent_of_cameras;
             ParentOfPipelinesModule parent_of_pipelines;
@@ -191,9 +191,9 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Brain>()
+        inline GenericParentModule* Scene::get_generic_parent_module<MovableController>()
         {
-            return &this->parent_of_brains;
+            return &this->parent_of_movable_controllers;
         }
 
     template<>

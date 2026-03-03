@@ -71,7 +71,7 @@ namespace yli::ontology
                     Universe& universe,
                     const ObjectStruct& object_struct,
                     GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const brain_master_module,
+                    GenericMasterModule* const movable_controller_master_module,
                     GenericMasterModule* const species_master_module);
 
             virtual ~Object() = default;

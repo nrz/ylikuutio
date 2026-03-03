@@ -27,7 +27,7 @@
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
+    class MovableController;
 
     struct CameraStruct : public MovableStruct
     {
@@ -41,8 +41,8 @@ namespace yli::ontology
 
         CameraStruct(
                 Request<Scene>&& parent,
-                Request<Brain>&& brain)
-            : MovableStruct(std::move(parent), std::move(brain))
+                Request<MovableController>&& movable_controller)
+            : MovableStruct(std::move(parent), std::move(movable_controller))
         {
         }
     };

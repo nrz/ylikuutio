@@ -591,9 +591,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
-    code/ylikuutio/ontology/brain.cpp
-    code/ylikuutio/ontology/brain.hpp
-    code/ylikuutio/ontology/brain_struct.hpp
     code/ylikuutio/ontology/callback_engine.cpp
     code/ylikuutio/ontology/callback_engine.hpp
     code/ylikuutio/ontology/callback_engine_struct.hpp
@@ -713,6 +710,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/mission_struct.hpp
     code/ylikuutio/ontology/movable.cpp
     code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/movable_controller.cpp
+    code/ylikuutio/ontology/movable_controller.hpp
+    code/ylikuutio/ontology/movable_controller_struct.hpp
     code/ylikuutio/ontology/movable_struct.hpp
     code/ylikuutio/ontology/movable_variable_activation.cpp
     code/ylikuutio/ontology/movable_variable_activation.hpp
@@ -868,8 +868,6 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.hpp
     code/ylikuutio/snippets/background_color_snippets.cpp
     code/ylikuutio/snippets/background_color_snippets.hpp
-    code/ylikuutio/snippets/brain_snippets.cpp
-    code/ylikuutio/snippets/brain_snippets.hpp
     code/ylikuutio/snippets/callback_snippets.cpp
     code/ylikuutio/snippets/callback_snippets.hpp
     code/ylikuutio/snippets/console_callback_snippets.cpp
@@ -885,6 +883,8 @@ add_library(snippets STATIC
     code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp
     code/ylikuutio/snippets/location_and_orientation_snippets.cpp
     code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+    code/ylikuutio/snippets/movable_controller_snippets.cpp
+    code/ylikuutio/snippets/movable_controller_snippets.hpp
     code/ylikuutio/snippets/movement_snippets.cpp
     code/ylikuutio/snippets/movement_snippets.hpp
     code/ylikuutio/snippets/wireframe_snippets.cpp
@@ -1066,9 +1066,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_ascii_grid_heightmap_loader.cpp
         code/ylikuutio/tests/test_audio_track.cpp
         code/ylikuutio/tests/test_bilinear_interpolation.cpp
-        code/ylikuutio/tests/test_brain.cpp
-        code/ylikuutio/tests/test_brain_snippets.cpp
-        code/ylikuutio/tests/test_brain_struct.cpp
         code/ylikuutio/tests/test_callback_engine.cpp
         code/ylikuutio/tests/test_callback_object.cpp
         code/ylikuutio/tests/test_callback_object_struct.cpp
@@ -1118,6 +1115,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_memory_system.cpp
         code/ylikuutio/tests/test_memory_templates.cpp
         code/ylikuutio/tests/test_model_struct.cpp
+        code/ylikuutio/tests/test_movable_controller.cpp
+        code/ylikuutio/tests/test_movable_controller_snippets.cpp
+        code/ylikuutio/tests/test_movable_controller_struct.cpp
         code/ylikuutio/tests/test_obj_loader.cpp
         code/ylikuutio/tests/test_object.cpp
         code/ylikuutio/tests/test_object_struct.cpp
@@ -1168,12 +1168,12 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/lisp/hirvi_console_callbacks.cpp
         code/hirvi/lisp/hirvi_console_callbacks.hpp
         code/hirvi/tests/test_hirvi_application.cpp
-        code/hirvi/tests/test_brain.cpp
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
         code/hirvi/tests/test_ecosystem.cpp
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
+        code/hirvi/tests/test_movable_controller.cpp
         code/hirvi/tests/test_pipeline.cpp
         code/hirvi/tests/test_police_car.cpp
         code/hirvi/tests/test_scene.cpp

@@ -44,12 +44,12 @@ namespace yli::ontology
             Universe& universe,
             const WaypointStruct& waypoint_struct,
             GenericParentModule* const parent_module,
-            GenericMasterModule* const brain_master_module)
+            GenericMasterModule* const movable_controller_master_module)
         : Movable(
                 application,
                 universe,
                 waypoint_struct,
-                brain_master_module),
+                movable_controller_master_module),
         child_of_scene(parent_module, *this)
     {
         // `Entity` member variables begin here.

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_BRAIN_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_BRAIN_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_MOVABLE_CONTROLLER_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_MOVABLE_CONTROLLER_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "child_module.hpp"
@@ -27,28 +27,28 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-// `Brain` is a general purpose AI and controller class for `Movable`s.
-// Each `Brain` instance may do some actions for the `Movable`s bound to the `Brain`.
-// The actions the defined by the `CallbackEngine` master to which `Brain` binds itself
+// `MovableController` is a general purpose AI and controller class for `Movable`s.
+// Each `MovableController` instance may do some actions for the `Movable`s bound to the `MovableController`.
+// The actions the defined by the `CallbackEngine` master to which `MovableController` binds itself
 // with its `apprentice_of_callback_engine`.
 //
-// There are some callback snippets for `Brain` in `code/ylikuutio/brain_snippets.hpp`.
+// There are some callback snippets for `MovableController` in `code/ylikuutio/movable_controller_snippets.hpp`.
 // In the future, some of the callbacks will process YliLisp, with an API offered
 // to the YliLisp scripts. The API still needs to be defined.
 //
-// `Brain` does not own the `Movable`s it controls.
-// Therefore, `Brain`-`Movable` relationship is not a parent-child relationship.
-// Instead, `Brain`-`Movable` relationship is a master-apprentice relationship.
+// `MovableController` does not own the `Movable`s it controls.
+// Therefore, `MovableController`-`Movable` relationship is not a parent-child relationship.
+// Instead, `MovableController`-`Movable` relationship is a master-apprentice relationship.
 // Therefore, binding is done using `yli::hierarchy::bind_apprentice_to_master`.
 //
-// Each `Brain` acts upon its `Movable`s immediately after the physics simulation,
+// Each `MovableController` acts upon its `Movable`s immediately after the physics simulation,
 // still before rendering, on each frame.
 //
-// `Brain` actions should not be considered limited to the actions of living or
-// conscious beings. For example, a planet `Movable` in a solar system may have a `Brain`
-// that makes it orbit its host star, and likewise a moon `Movable` may have a `Brain` that
+// `MovableController` actions should not be considered limited to the actions of living or
+// conscious beings. For example, a planet `Movable` in a solar system may have a `MovableController`
+// that makes it orbit its host star, and likewise a moon `Movable` may have a `MovableController` that
 // makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
-// may have a `Brain` that defines how it processes its inputs and what kind of output it sends.
+// may have a `MovableController` that defines how it processes its inputs and what kind of output it sends.
 
 namespace yli::core
 {
@@ -68,20 +68,20 @@ namespace yli::ontology
     class Universe;
     class CallbackEngine;
     class Scene;
-    struct BrainStruct;
+    struct MovableControllerStruct;
     class GenericMasterModule;
 
-    class Brain final : public Entity
+    class MovableController final : public Entity
     {
         private:
-            Brain(
+            MovableController(
                     yli::core::Application& application,
                     Universe& universe,
-                    const BrainStruct& brain_struct,
+                    const MovableControllerStruct& movable_controller_struct,
                     GenericParentModule* const scene_parent_module,
                     GenericMasterModule* const callback_engine_master_module);
 
-            ~Brain() = default;
+            ~MovableController() = default;
 
         public:
             Entity* get_parent() const override;
@@ -110,7 +110,7 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericMasterModule* Brain::get_generic_master_module<Movable>()
+        inline GenericMasterModule* MovableController::get_generic_master_module<Movable>()
         {
             return &this->master_of_movables;
         }

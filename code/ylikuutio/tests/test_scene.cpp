@@ -27,7 +27,7 @@
 namespace yli::ontology
 {
     class GenericParentModule;
-    class Brain;
+    class MovableController;
     class Waypoint;
     class Camera;
     class Pipeline;
@@ -50,8 +50,8 @@ TEST(scene_must_be_initialized_appropriately, headless)
     ASSERT_NE(scene, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
 
-    const yli::ontology::GenericParentModule* const parent_of_brains        = scene->get_generic_parent_module<yli::ontology::Brain>();
-    ASSERT_NE(parent_of_brains, nullptr);
+    const yli::ontology::GenericParentModule* const parent_of_movable_controllers = scene->get_generic_parent_module<yli::ontology::MovableController>();
+    ASSERT_NE(parent_of_movable_controllers, nullptr);
     const yli::ontology::GenericParentModule* const parent_of_waypoints     = scene->get_generic_parent_module<yli::ontology::Waypoint>();
     ASSERT_NE(parent_of_waypoints, nullptr);
     const yli::ontology::GenericParentModule* const parent_of_cameras       = scene->get_generic_parent_module<yli::ontology::Camera>();
@@ -75,7 +75,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
     const yli::ontology::GenericParentModule* const parent_of_glyph_objects = scene->get_generic_parent_module<yli::ontology::GlyphObject>();
     ASSERT_NE(parent_of_glyph_objects, nullptr);
 
-    ASSERT_LT(parent_of_brains, parent_of_waypoints);
+    ASSERT_LT(parent_of_movable_controllers, parent_of_waypoints);
     ASSERT_LT(parent_of_waypoints, parent_of_cameras);
     ASSERT_LT(parent_of_cameras, parent_of_pipelines);
     ASSERT_LT(parent_of_pipelines, parent_of_materials);

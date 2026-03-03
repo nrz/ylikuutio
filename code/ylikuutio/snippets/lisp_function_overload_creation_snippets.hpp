@@ -106,8 +106,8 @@ namespace yli::snippets
         void create_console_lisp_function_overloads_for_entity_binding(EntityFactoryType& entity_factory, Console& console)
         {
             // `Entity` binding callbacks, `Movable`.
-            entity_factory.create_console_lisp_function_overload("bind", Request(&console), &Movable::bind_to_new_brain);
-            entity_factory.create_console_lisp_function_overload("unbind-from-brain", Request(&console), &Movable::unbind_from_brain);
+            entity_factory.create_console_lisp_function_overload("bind", Request(&console), &Movable::bind_to_new_movable_controller);
+            entity_factory.create_console_lisp_function_overload("unbind-from-movable-controller", Request(&console), &Movable::unbind_from_movable_controller);
 
             // `Entity` binding callbacks, `Pipeline`.
             entity_factory.create_console_lisp_function_overload("bind", Request(&console), &Pipeline::bind_to_new_ecosystem_parent);

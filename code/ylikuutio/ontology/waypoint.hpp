@@ -46,7 +46,7 @@ namespace yli::ontology
                     Universe& universe,
                     const WaypointStruct& waypoint_struct,
                     GenericParentModule* const parent_module,
-                    GenericMasterModule* const brain_master_module);
+                    GenericMasterModule* const movable_controller_master_module);
 
             Waypoint(const Waypoint&) = delete;            // Delete copy constructor.
             Waypoint &operator=(const Waypoint&) = delete; // Delete copy assignment.

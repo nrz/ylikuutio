@@ -29,7 +29,7 @@
 #include "callback_parameter.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
-#include "brain.hpp"
+#include "movable_controller.hpp"
 #include "waypoint.hpp"
 #include "camera.hpp"
 #include "pipeline.hpp"
@@ -69,7 +69,7 @@
 #include "callback_parameter_struct.hpp"
 #include "ecosystem_struct.hpp"
 #include "scene_struct.hpp"
-#include "brain_struct.hpp"
+#include "movable_controller_struct.hpp"
 #include "waypoint_struct.hpp"
 #include "camera_struct.hpp"
 #include "pipeline_struct.hpp"
@@ -338,14 +338,14 @@ namespace yli::ontology
                             &this->get_universe().parent_of_scenes);
             }
 
-            Brain* create_brain(const BrainStruct& brain_struct) const final
+            MovableController* create_movable_controller(const MovableControllerStruct& movable_controller_struct) const final
             {
                 return this->create_child_of_known_parent_type<
-                    Brain, Scene, yli::memory::BrainMemoryAllocator, BrainStruct>(
-                            yli::data::Datatype::BRAIN,
-                            brain_struct.scene_parent,
-                            brain_struct,
-                            this->get_generic_master_module<Brain, CallbackEngine>(brain_struct.callback_engine_master));
+                    MovableController, Scene, yli::memory::MovableControllerMemoryAllocator, MovableControllerStruct>(
+                            yli::data::Datatype::MOVABLE_CONTROLLER,
+                            movable_controller_struct.scene_parent,
+                            movable_controller_struct,
+                            this->get_generic_master_module<MovableController, CallbackEngine>(movable_controller_struct.callback_engine_master));
             }
 
             Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const final
@@ -355,7 +355,7 @@ namespace yli::ontology
                             yli::data::Datatype::WAYPOINT,
                             waypoint_struct.scene,
                             waypoint_struct,
-                            this->get_generic_master_module<Movable, Brain>(waypoint_struct.brain_master));
+                            this->get_generic_master_module<Movable, MovableController>(waypoint_struct.movable_controller_master));
             }
 
             Camera* create_camera(const CameraStruct& camera_struct) const final
@@ -365,7 +365,7 @@ namespace yli::ontology
                             yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
-                            this->get_generic_master_module<Movable, Brain>(camera_struct.brain_master));
+                            this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
             }
 
             Camera* create_default_camera(const CameraStruct& camera_struct) const final
@@ -375,7 +375,7 @@ namespace yli::ontology
                             yli::data::Datatype::CAMERA,
                             camera_struct.scene,
                             camera_struct,
-                            this->get_generic_master_module<Movable, Brain>(camera_struct.brain_master));
+                            this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
             }
 
             // TODO: implement `create_camera_widget` here!
@@ -508,8 +508,8 @@ namespace yli::ontology
                             yli::data::Datatype::SHAPESHIFTER,
                             shapeshifter_struct.scene,
                             shapeshifter_struct,
-                            // `Brain` master.
-                            this->get_generic_master_module<Movable, Brain>(shapeshifter_struct.brain_master),
+                            // `MovableController` master.
+                            this->get_generic_master_module<Movable, MovableController>(shapeshifter_struct.movable_controller_master),
                             // `ShapeshifterSequence` master.
                             this->get_generic_master_module<Shapeshifter, ShapeshifterSequence>(shapeshifter_struct.shapeshifter_sequence_master));
             }
@@ -569,7 +569,7 @@ namespace yli::ontology
                             yli::data::Datatype::TEXT_3D,
                             text_3d_struct.scene,
                             text_3d_struct,
-                            this->get_generic_master_module<Movable, Brain>(text_3d_struct.brain_master),
+                            this->get_generic_master_module<Movable, MovableController>(text_3d_struct.movable_controller_master),
                             this->get_generic_master_module<Text3d, VectorFont>(text_3d_struct.vector_font_master));
             }
 
@@ -733,8 +733,8 @@ namespace yli::ontology
                                 object_derivative_type,
                                 object_struct.scene,
                                 object_struct,
-                                // `Brain` master.
-                                this->get_generic_master_module<Movable, Brain>(object_struct.brain_master),
+                                // `MovableController` master.
+                                this->get_generic_master_module<Movable, MovableController>(object_struct.movable_controller_master),
                                 // `Species` master.
                                 this->get_generic_master_module<Object, Species>(object_struct.species_master),
                                 // Skill modules.
@@ -752,7 +752,7 @@ namespace yli::ontology
                                 holobiont_derivative_type,
                                 holobiont_struct.scene,
                                 holobiont_struct,
-                                this->get_generic_master_module<Movable, Brain>(holobiont_struct.brain_master),
+                                this->get_generic_master_module<Movable, MovableController>(holobiont_struct.movable_controller_master),
                                 this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_struct.symbiosis_master),
                                 std::forward<ModuleArgs>(module_args)...));
                 }

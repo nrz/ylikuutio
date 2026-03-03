@@ -19,7 +19,7 @@
 #include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "variable.hpp"
-#include "brain.hpp"
+#include "movable_controller.hpp"
 #include "scene.hpp"
 #include "movable_variable_activation.hpp"
 #include "movable_variable_read.hpp"
@@ -49,33 +49,33 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Movable::bind_to_new_brain(
+    std::optional<yli::data::AnyValue> Movable::bind_to_new_movable_controller(
             Movable& movable,
-            Brain& new_brain) noexcept
+            MovableController& new_movable_controller) noexcept
     {
-        // Set pointer to `movable` to `nullptr`, set brain according to the input,
-        // and request a new apprenticeID from `new_brain`.
+        // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
+        // and request a new apprenticeID from `new_movable_controller`.
 
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
-        if (movable.get_scene() == new_brain.get_scene() ||
+        if (movable.get_scene() == new_movable_controller.get_scene() ||
                 movable.get_scene() == nullptr ||
-                new_brain.get_scene() == nullptr)
+                new_movable_controller.get_scene() == nullptr)
         {
-            movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(
-                    &new_brain.master_of_movables);
+            movable.apprentice_of_movable_controller.unbind_and_bind_to_new_generic_master_module(
+                    &new_movable_controller.master_of_movables);
         }
         else
         {
-            std::cerr << "ERROR: `Movable::bind_to_new_brain`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr << "ERROR: `Movable::bind_to_new_movable_controller`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Movable::unbind_from_brain(Movable& movable) noexcept
+    std::optional<yli::data::AnyValue> Movable::unbind_from_movable_controller(Movable& movable) noexcept
     {
-        movable.apprentice_of_brain.unbind_and_bind_to_new_generic_master_module(nullptr);
+        movable.apprentice_of_movable_controller.unbind_and_bind_to_new_generic_master_module(nullptr);
         return std::nullopt;
     }
 
@@ -83,9 +83,9 @@ namespace yli::ontology
             yli::core::Application& application,
             Universe& universe,
             const MovableStruct& movable_struct,
-            GenericMasterModule* const brain_master_module)
+            GenericMasterModule* const movable_controller_master_module)
         : Entity(application, universe, movable_struct),
-        apprentice_of_brain(brain_master_module, this),
+        apprentice_of_movable_controller(movable_controller_master_module, this),
         rigid_body_module(
                 movable_struct.rigid_body_module_struct,
                 resolve_request(movable_struct.scene, universe.registry),
@@ -109,7 +109,7 @@ namespace yli::ontology
         }
 
         // Initialize speed, angular speed and maximum speed variables.
-        // These are to be used from the `Brain` callbacks.
+        // These are to be used from the `MovableController` callbacks.
 
         this->create_coordinate_and_angle_variables();
 

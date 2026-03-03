@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "brain.hpp"
+#include "movable_controller.hpp"
 #include "movable.hpp"
 #include "universe.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
 #include "request_resolver.hpp"
-#include "brain_struct.hpp"
+#include "movable_controller_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
@@ -39,53 +39,53 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
 
-    Brain::Brain(
+    MovableController::MovableController(
             yli::core::Application& application,
             Universe& universe,
-            const BrainStruct& brain_struct,
+            const MovableControllerStruct& movable_controller_struct,
             GenericParentModule* const scene_parent_module,
             GenericMasterModule* const callback_engine_master_module)
-        : Entity(application, universe, brain_struct),
+        : Entity(application, universe, movable_controller_struct),
         child_of_scene(scene_parent_module, *this),
         apprentice_of_callback_engine(callback_engine_master_module, this),
         master_of_movables(*this, &this->registry, "movables")
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Brain*";
+        this->type_string = "yli::ontology::MovableController*";
         this->can_be_erased = true;
     }
 
-    Entity* Brain::get_parent() const
+    Entity* MovableController::get_parent() const
     {
         return this->child_of_scene.get_parent();
     }
 
-    CallbackEngine* Brain::get_callback_engine_master() const
+    CallbackEngine* MovableController::get_callback_engine_master() const
     {
         return static_cast<CallbackEngine*>(this->apprentice_of_callback_engine.get_master());
     }
 
-    std::size_t Brain::get_number_of_children() const
+    std::size_t MovableController::get_number_of_children() const
     {
-        return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+        return 0; // `MovableController` has no children. `Movable`s controlled by `MovableController` are not its children.
     }
 
-    std::size_t Brain::get_number_of_descendants() const
+    std::size_t MovableController::get_number_of_descendants() const
     {
-        return 0; // `Brain` has no children. `Movable`s controlled by `Brain` are not its children.
+        return 0; // `MovableController` has no children. `Movable`s controlled by `MovableController` are not its children.
     }
 
-    Scene* Brain::get_scene() const
+    Scene* MovableController::get_scene() const
     {
         return static_cast<Scene*>(this->get_parent());
     }
 
-    std::size_t Brain::get_number_of_apprentices() const
+    std::size_t MovableController::get_number_of_apprentices() const
     {
-        return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `Brain` are its apprentices.
+        return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `MovableController` are its apprentices.
     }
 
-    void Brain::update()
+    void MovableController::update()
     {
         CallbackEngine* const callback_engine_master = this->get_callback_engine_master();
 

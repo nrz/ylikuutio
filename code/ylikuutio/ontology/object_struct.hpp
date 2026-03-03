@@ -27,7 +27,7 @@
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
+    class MovableController;
     class Species;
 
     struct ObjectStruct : public MovableStruct
@@ -39,8 +39,8 @@ namespace yli::ontology
 
         ObjectStruct(
                 Request<Scene>&& scene_parent,
-                Request<Brain>&& brain_master)
-            : MovableStruct(std::move(scene_parent), std::move(brain_master))
+                Request<MovableController>&& movable_controller_master)
+            : MovableStruct(std::move(scene_parent), std::move(movable_controller_master))
         {
         }
 
@@ -54,9 +54,9 @@ namespace yli::ontology
 
         ObjectStruct(
                 Request<Scene>&& scene_parent,
-                Request<Brain>&& brain_master,
+                Request<MovableController>&& movable_controller_master,
                 Request<Species>&& species_master)
-            : MovableStruct(std::move(scene_parent), std::move(brain_master)),
+            : MovableStruct(std::move(scene_parent), std::move(movable_controller_master)),
             species_master { std::move(species_master) }
         {
         }

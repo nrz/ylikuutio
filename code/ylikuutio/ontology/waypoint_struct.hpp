@@ -27,14 +27,14 @@
 namespace yli::ontology
 {
     class Scene;
-    class Brain;
+    class MovableController;
 
     struct WaypointStruct final : public MovableStruct
     {
         WaypointStruct(
                 Request<Scene>&& scene_parent,
-                Request<Brain>&& brain_master)
-            : MovableStruct(std::move(scene_parent), std::move(brain_master))
+                Request<MovableController>&& movable_controller_master)
+            : MovableStruct(std::move(scene_parent), std::move(movable_controller_master))
         {
         }
     };

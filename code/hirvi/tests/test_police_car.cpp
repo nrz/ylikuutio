@@ -20,9 +20,9 @@
 #include "code/hirvi/data/datatype.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -31,7 +31,7 @@
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
@@ -67,10 +67,10 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    BrainStruct rest_brain_struct { Request(helsinki_scene), Request(rest_callback_engine) };
-    rest_brain_struct.global_name = "rest_brain";
-    rest_brain_struct.local_name = "rest";
-    Brain* const rest_brain = hirvi_application.get_entity_factory().create_brain(rest_brain_struct);
+    MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
+    rest_movable_controller_struct.global_name = "rest_movable_controller";
+    rest_movable_controller_struct.local_name = "rest";
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
@@ -84,7 +84,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
-    HolobiontStruct turbo_polizei_png_police_car_struct1 { Request(helsinki_scene), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
+    HolobiontStruct turbo_polizei_png_police_car_struct1 { Request(helsinki_scene), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis) };
     turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
     turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
     turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);

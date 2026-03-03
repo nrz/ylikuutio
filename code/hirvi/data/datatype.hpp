@@ -81,8 +81,8 @@ namespace hirvi
         ECOSYSTEM             = 150,
         // `yli::ontology` datatypes, 'scene' path.
         SCENE                 = 160,
-        // `yli::ontology` datatypes, 'brain' path.
-        BRAIN                 = 161,
+        // `yli::ontology` datatypes, 'movable_controller' path.
+        MOVABLE_CONTROLLER                   = 161,
         BRAIN_LISP_FUNCTION                  = 162,
         GENERIC_BRAIN_LISP_FUNCTION_OVERLOAD = 163,
         BRAIN_LISP_FUNCTION_OVERLOAD         = 164,

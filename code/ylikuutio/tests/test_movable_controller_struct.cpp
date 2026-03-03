@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/request.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 
 // Include standard headers
 #include <variant> // std::holds_alternative
@@ -28,15 +28,15 @@ namespace yli::ontology
     class Scene;
 }
 
-TEST(brain_struct_must_be_initialized_appropriately, brain_struct)
+TEST(movable_controller_struct_must_be_initialized_appropriately, movable_controller_struct)
 {
-    const yli::ontology::BrainStruct test_brain_struct {
+    const yli::ontology::MovableControllerStruct test_movable_controller_struct {
             yli::ontology::Request<yli::ontology::Scene>(nullptr),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
 
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_brain_struct.scene_parent.data));
-    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_brain_struct.scene_parent.data), nullptr);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::Scene*>(test_movable_controller_struct.scene_parent.data));
+    ASSERT_EQ(std::get<yli::ontology::Scene*>(test_movable_controller_struct.scene_parent.data), nullptr);
 
-    ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_brain_struct.callback_engine_master.data));
-    ASSERT_EQ(std::get<yli::ontology::CallbackEngine*>(test_brain_struct.callback_engine_master.data), nullptr);
+    ASSERT_TRUE(std::holds_alternative<yli::ontology::CallbackEngine*>(test_movable_controller_struct.callback_engine_master.data));
+    ASSERT_EQ(std::get<yli::ontology::CallbackEngine*>(test_movable_controller_struct.callback_engine_master.data), nullptr);
 }

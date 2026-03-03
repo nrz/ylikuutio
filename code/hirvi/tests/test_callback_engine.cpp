@@ -17,7 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 

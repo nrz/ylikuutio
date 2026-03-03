@@ -19,13 +19,13 @@
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/snippets/brain_snippets.hpp"
+#include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
@@ -43,7 +43,7 @@
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
-#include "code/ylikuutio/ontology/brain_struct.hpp"
+#include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -85,7 +85,7 @@ namespace hirvi
         helsinki_scene->set_turbo_factor(5.0f);
         helsinki_scene->set_twin_turbo_factor(100.0f);
 
-        // Create the `CallbackEngine`s for the `Brain`s.
+        // Create the `CallbackEngine`s for the `MovableController`s.
         CallbackEngineStruct rest_callback_engine_struct;
         rest_callback_engine_struct.global_name = "rest_callback_engine";
         auto rest_callback_engine = this->entity_factory.create_callback_engine(rest_callback_engine_struct);
@@ -161,172 +161,172 @@ namespace hirvi
         auto rotate_counterclockwise_callback_engine = this->entity_factory.create_callback_engine(rotate_counterclockwise_callback_engine_struct);
         rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
-        // Create the `Brain`s.
+        // Create the `MovableController`s.
 
-        // `rest_brain`.
-        BrainStruct rest_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rest_callback_engine") };
-        rest_brain_struct.global_name = "rest_brain";
-        rest_brain_struct.local_name = "rest";
-        std::cout << "Creating Brain* rest_brain ...\n";
-        Brain* const rest_brain = this->entity_factory.create_brain(rest_brain_struct);
+        // `rest_movable_controller`.
+        MovableControllerStruct rest_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rest_callback_engine") };
+        rest_movable_controller_struct.global_name = "rest_movable_controller";
+        rest_movable_controller_struct.local_name = "rest";
+        std::cout << "Creating MovableController* rest_movable_controller ...\n";
+        MovableController* const rest_movable_controller = this->entity_factory.create_movable_controller(rest_movable_controller_struct);
 
-        if (rest_brain == nullptr)
+        if (rest_movable_controller == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `go_east_brain`.
-        BrainStruct go_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_east_callback_engine") };
-        go_east_brain_struct.global_name = "go_east_brain";
-        go_east_brain_struct.local_name = "go_east";
-        std::cout << "Creating Brain* go_east_brain ...\n";
-        if (this->entity_factory.create_brain(go_east_brain_struct) == nullptr)
+        // `go_east_movable_controller`.
+        MovableControllerStruct go_east_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_east_callback_engine") };
+        go_east_movable_controller_struct.global_name = "go_east_movable_controller";
+        go_east_movable_controller_struct.local_name = "go_east";
+        std::cout << "Creating MovableController* go_east_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(go_east_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `go_west_brain`.
-        BrainStruct go_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_west_callback_engine") };
-        go_west_brain_struct.global_name = "go_west_brain";
-        go_west_brain_struct.local_name = "go_west";
-        std::cout << "Creating Brain* go_west_brain ...\n";
-        if (this->entity_factory.create_brain(go_west_brain_struct) == nullptr)
+        // `go_west_movable_controller`.
+        MovableControllerStruct go_west_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_west_callback_engine") };
+        go_west_movable_controller_struct.global_name = "go_west_movable_controller";
+        go_west_movable_controller_struct.local_name = "go_west";
+        std::cout << "Creating MovableController* go_west_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(go_west_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `go_north_brain`.
-        BrainStruct go_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_north_callback_engine") };
-        go_north_brain_struct.global_name = "go_north_brain";
-        go_north_brain_struct.local_name = "go_north";
-        std::cout << "Creating Brain* go_north_brain ...\n";
-        if (this->entity_factory.create_brain(go_north_brain_struct) == nullptr)
+        // `go_north_movable_controller`.
+        MovableControllerStruct go_north_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_north_callback_engine") };
+        go_north_movable_controller_struct.global_name = "go_north_movable_controller";
+        go_north_movable_controller_struct.local_name = "go_north";
+        std::cout << "Creating MovableController* go_north_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(go_north_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `go_south_brain`.
-        BrainStruct go_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_south_callback_engine") };
-        go_south_brain_struct.global_name = "go_south_brain";
-        go_south_brain_struct.local_name = "go_south";
-        std::cout << "Creating Brain* go_south_brain ...\n";
-        if (this->entity_factory.create_brain(go_south_brain_struct) == nullptr)
+        // `go_south_movable_controller`.
+        MovableControllerStruct go_south_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("go_south_callback_engine") };
+        go_south_movable_controller_struct.global_name = "go_south_movable_controller";
+        go_south_movable_controller_struct.local_name = "go_south";
+        std::cout << "Creating MovableController* go_south_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(go_south_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_to_east_brain`.
-        BrainStruct orient_to_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_east_callback_engine") };
-        orient_to_east_brain_struct.global_name = "orient_to_east_brain";
-        orient_to_east_brain_struct.local_name = "orient_to_east";
-        std::cout << "Creating Brain* orient_to_east_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_east_brain_struct) == nullptr)
+        // `orient_to_east_movable_controller`.
+        MovableControllerStruct orient_to_east_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_east_callback_engine") };
+        orient_to_east_movable_controller_struct.global_name = "orient_to_east_movable_controller";
+        orient_to_east_movable_controller_struct.local_name = "orient_to_east";
+        std::cout << "Creating MovableController* orient_to_east_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_to_east_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_to_west_brain`.
-        BrainStruct orient_to_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_west_callback_engine") };
-        orient_to_west_brain_struct.global_name = "orient_to_west_brain";
-        orient_to_west_brain_struct.local_name = "orient_to_west";
-        std::cout << "Creating Brain* orient_to_west_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_west_brain_struct) == nullptr)
+        // `orient_to_west_movable_controller`.
+        MovableControllerStruct orient_to_west_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_west_callback_engine") };
+        orient_to_west_movable_controller_struct.global_name = "orient_to_west_movable_controller";
+        orient_to_west_movable_controller_struct.local_name = "orient_to_west";
+        std::cout << "Creating MovableController* orient_to_west_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_to_west_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_to_north_brain`.
-        BrainStruct orient_to_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_north_callback_engine") };
-        orient_to_north_brain_struct.global_name = "orient_to_north_brain";
-        orient_to_north_brain_struct.local_name = "orient_to_north";
-        std::cout << "Creating Brain* orient_to_north_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_north_brain_struct) == nullptr)
+        // `orient_to_north_movable_controller`.
+        MovableControllerStruct orient_to_north_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_north_callback_engine") };
+        orient_to_north_movable_controller_struct.global_name = "orient_to_north_movable_controller";
+        orient_to_north_movable_controller_struct.local_name = "orient_to_north";
+        std::cout << "Creating MovableController* orient_to_north_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_to_north_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_to_south_brain`.
-        BrainStruct orient_to_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_south_callback_engine") };
-        orient_to_south_brain_struct.global_name = "orient_to_south_brain";
-        orient_to_south_brain_struct.local_name = "orient_to_south";
-        std::cout << "Creating Brain* orient_to_south_brain ...\n";
-        if (this->entity_factory.create_brain(orient_to_south_brain_struct) == nullptr)
+        // `orient_to_south_movable_controller`.
+        MovableControllerStruct orient_to_south_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_to_south_callback_engine") };
+        orient_to_south_movable_controller_struct.global_name = "orient_to_south_movable_controller";
+        orient_to_south_movable_controller_struct.local_name = "orient_to_south";
+        std::cout << "Creating MovableController* orient_to_south_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_to_south_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `rotate_clockwise_brain`.
-        BrainStruct rotate_clockwise_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_clockwise_callback_engine") };
-        rotate_clockwise_brain_struct.global_name = "rotate_clockwise_brain";
-        rotate_clockwise_brain_struct.local_name = "rotate_clockwise";
-        std::cout << "Creating Brain* rotate_clockwise_brain ...\n";
-        if (this->entity_factory.create_brain(rotate_clockwise_brain_struct) == nullptr)
+        // `rotate_clockwise_movable_controller`.
+        MovableControllerStruct rotate_clockwise_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_clockwise_callback_engine") };
+        rotate_clockwise_movable_controller_struct.global_name = "rotate_clockwise_movable_controller";
+        rotate_clockwise_movable_controller_struct.local_name = "rotate_clockwise";
+        std::cout << "Creating MovableController* rotate_clockwise_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(rotate_clockwise_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_and_go_east_brain`.
-        BrainStruct orient_and_go_east_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_east_callback_engine") };
-        orient_and_go_east_brain_struct.global_name = "orient_and_go_east_brain";
-        orient_and_go_east_brain_struct.local_name = "orient_and_go_east";
-        std::cout << "Creating Brain* orient_and_go_east_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_east_brain_struct) == nullptr)
+        // `orient_and_go_east_movable_controller`.
+        MovableControllerStruct orient_and_go_east_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_east_callback_engine") };
+        orient_and_go_east_movable_controller_struct.global_name = "orient_and_go_east_movable_controller";
+        orient_and_go_east_movable_controller_struct.local_name = "orient_and_go_east";
+        std::cout << "Creating MovableController* orient_and_go_east_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_and_go_east_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_and_go_west_brain`.
-        BrainStruct orient_and_go_west_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_west_callback_engine") };
-        orient_and_go_west_brain_struct.global_name = "orient_and_go_west_brain";
-        orient_and_go_west_brain_struct.local_name = "orient_and_go_west";
-        std::cout << "Creating Brain* orient_and_go_west_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_west_brain_struct) == nullptr)
+        // `orient_and_go_west_movable_controller`.
+        MovableControllerStruct orient_and_go_west_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_west_callback_engine") };
+        orient_and_go_west_movable_controller_struct.global_name = "orient_and_go_west_movable_controller";
+        orient_and_go_west_movable_controller_struct.local_name = "orient_and_go_west";
+        std::cout << "Creating MovableController* orient_and_go_west_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_and_go_west_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_and_go_north_brain`.
-        BrainStruct orient_and_go_north_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_north_callback_engine") };
-        orient_and_go_north_brain_struct.global_name = "orient_and_go_north_brain";
-        orient_and_go_north_brain_struct.local_name = "orient_and_go_north";
-        std::cout << "Creating Brain* orient_and_go_north_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_north_brain_struct) == nullptr)
+        // `orient_and_go_north_movable_controller`.
+        MovableControllerStruct orient_and_go_north_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_north_callback_engine") };
+        orient_and_go_north_movable_controller_struct.global_name = "orient_and_go_north_movable_controller";
+        orient_and_go_north_movable_controller_struct.local_name = "orient_and_go_north";
+        std::cout << "Creating MovableController* orient_and_go_north_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_and_go_north_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `orient_and_go_south_brain`.
-        BrainStruct orient_and_go_south_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_south_callback_engine") };
-        orient_and_go_south_brain_struct.global_name = "orient_and_go_south_brain";
-        orient_and_go_south_brain_struct.local_name = "orient_and_go_south";
-        std::cout << "Creating Brain* orient_and_go_south_brain ...\n";
-        if (this->entity_factory.create_brain(orient_and_go_south_brain_struct) == nullptr)
+        // `orient_and_go_south_movable_controller`.
+        MovableControllerStruct orient_and_go_south_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("orient_and_go_south_callback_engine") };
+        orient_and_go_south_movable_controller_struct.global_name = "orient_and_go_south_movable_controller";
+        orient_and_go_south_movable_controller_struct.local_name = "orient_and_go_south";
+        std::cout << "Creating MovableController* orient_and_go_south_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(orient_and_go_south_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
-        // `rotate_counterclockwise_brain`.
-        BrainStruct rotate_counterclockwise_brain_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_counterclockwise_callback_engine") };
-        rotate_counterclockwise_brain_struct.global_name = "rotate_counterclockwise_brain";
-        rotate_counterclockwise_brain_struct.local_name = "rotate_counterclockwise";
-        std::cout << "Creating Brain* rotate_counterclockwise_brain ...\n";
-        if (this->entity_factory.create_brain(rotate_counterclockwise_brain_struct) == nullptr)
+        // `rotate_counterclockwise_movable_controller`.
+        MovableControllerStruct rotate_counterclockwise_movable_controller_struct { Request<Scene>("helsinki_scene"), Request<CallbackEngine>("rotate_counterclockwise_callback_engine") };
+        rotate_counterclockwise_movable_controller_struct.global_name = "rotate_counterclockwise_movable_controller";
+        rotate_counterclockwise_movable_controller_struct.local_name = "rotate_counterclockwise";
+        std::cout << "Creating MovableController* rotate_counterclockwise_movable_controller ...\n";
+        if (this->entity_factory.create_movable_controller(rotate_counterclockwise_movable_controller_struct) == nullptr)
         {
-            std::cerr << "Failed to create Brain.\n";
+            std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
@@ -456,10 +456,10 @@ namespace hirvi
             return nullptr;
         }
 
-        ObjectStruct cat2_object_struct { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(cat_species) };
+        ObjectStruct cat2_object_struct { Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(cat_species) };
         cat2_object_struct.global_name = "cat2";
         cat2_object_struct.local_name = "kissa2";
-        cat2_object_struct.brain_master = Request(rest_brain);
+        cat2_object_struct.movable_controller_master = Request(rest_movable_controller);
         cat2_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         cat2_object_struct.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
@@ -498,7 +498,7 @@ namespace hirvi
             return nullptr;
         }
 
-        HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
+        HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -523,7 +523,7 @@ namespace hirvi
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
         turbo_polizei_png1->set_local_name("sinivuokko1");
 
-        HolobiontStruct turbo_polizei_png_police_car_struct2 { Request<Scene>("helsinki_scene"), Request(rest_brain), Request(turbo_polizei_png_symbiosis) };
+        HolobiontStruct turbo_polizei_png_police_car_struct2 { Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);

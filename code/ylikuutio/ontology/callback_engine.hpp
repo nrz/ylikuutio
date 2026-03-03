@@ -46,7 +46,7 @@ namespace yli::ontology
     class Universe;
     class CallbackObject;
     class Scene;
-    class Brain;
+    class MovableController;
     struct CallbackEngineStruct;
 
     class CallbackEngine : public GenericCallbackEngine
@@ -111,7 +111,7 @@ namespace yli::ontology
 
             ChildModule child_of_entity;
             GenericParentModule parent_of_callback_objects;
-            GenericMasterModule master_of_brains;
+            GenericMasterModule master_of_movable_controllers;
 
         private:
             std::vector<std::optional<yli::data::AnyValue>> return_values;
@@ -124,9 +124,9 @@ namespace yli::ontology
         }
 
     template<>
-        inline GenericMasterModule* CallbackEngine::get_generic_master_module<Brain>()
+        inline GenericMasterModule* CallbackEngine::get_generic_master_module<MovableController>()
         {
-            return &this->master_of_brains;
+            return &this->master_of_movable_controllers;
         }
 }
 

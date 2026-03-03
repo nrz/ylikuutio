@@ -63,18 +63,18 @@ namespace yli::ontology
 {
     class GenericMasterModule;
     class Universe;
-    class Brain;
+    class MovableController;
 
     class Movable : public Entity
     {
         public:
-            // Set pointer to `movable` to `nullptr`, set brain according to the input,
-            // and request a new apprenticeID from `new_brain`.
-            static std::optional<yli::data::AnyValue> bind_to_new_brain(
+            // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
+            // and request a new apprenticeID from `new_movable_controller`.
+            static std::optional<yli::data::AnyValue> bind_to_new_movable_controller(
                     Movable& movable,
-                    Brain& new_brain) noexcept;
+                    MovableController& new_movable_controller) noexcept;
 
-            static std::optional<yli::data::AnyValue> unbind_from_brain(
+            static std::optional<yli::data::AnyValue> unbind_from_movable_controller(
                     Movable& movable) noexcept;
 
         protected:
@@ -82,7 +82,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const MovableStruct& movable_struct,
-                    GenericMasterModule* const brain_master_module);
+                    GenericMasterModule* const movable_controller_master_module);
 
         public:
             Movable(const Movable&) = delete;            // Delete copy constructor.
@@ -390,7 +390,7 @@ namespace yli::ontology
             void create_coordinate_and_angle_variables();
 
         public:
-            ApprenticeModule apprentice_of_brain;
+            ApprenticeModule apprentice_of_movable_controller;
 
         private:
             RigidBodyModule rigid_body_module;
@@ -424,7 +424,7 @@ namespace yli::ontology
             GLuint movable_uniform_block { 0 };
 
             yli::input::InputMethod input_method;                  // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
-                                                                   // If `input_method` is `AI`, then the chosen `Brain` controls this `Movable`.
+                                                                   // If `input_method` is `AI`, then the chosen `MovableController` controls this `Movable`.
     };
 }
 

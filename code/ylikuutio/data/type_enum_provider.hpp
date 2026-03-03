@@ -21,7 +21,7 @@
 #include "datatype.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -69,9 +69,9 @@ namespace yli::data
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Brain>()
+        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::MovableController>()
         {
-            return Datatype::BRAIN;
+            return Datatype::MOVABLE_CONTROLLER;
         }
 
     template<>

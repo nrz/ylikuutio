@@ -22,7 +22,7 @@
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
-#include "code/ylikuutio/ontology/brain.hpp"
+#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -594,7 +594,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::Brain&>::type> convert_string_to_value_and_advance_index<yli::ontology::Brain&>(
+        inline std::optional<typename yli::data::WrapAllButStrings<yli::ontology::MovableController&>::type> convert_string_to_value_and_advance_index<yli::ontology::MovableController&>(
                 yli::ontology::Universe& universe,
                 yli::ontology::Console&,
                 yli::ontology::Entity*& environment,
@@ -608,7 +608,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            yli::ontology::Brain* const value = dynamic_cast<yli::ontology::Brain*>(universe.get_entity(my_string));
+            yli::ontology::MovableController* const value = dynamic_cast<yli::ontology::MovableController*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -616,7 +616,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return yli::data::WrapAllButStrings<yli::ontology::Brain&>::type(*value);
+            return yli::data::WrapAllButStrings<yli::ontology::MovableController&>::type(*value);
         }
 
     template<>
