@@ -26,7 +26,8 @@ namespace yli::input
     {
         KEYBOARD,                 // regular keyboard input.
         INPUT_FILE,               // input from file (TODO: implement).
-        AI,                       // AI input (TODO: implement).
+        MOVABLE_CONTROLLER,       // controller.
+        BRAIN,                    // AI input (TODO: implement).
         INPUT_FILE_THEN_KEYBOARD, // input from file, then regular keyboard input (TODO: implement).
         INPUT_FILE_THEN_AI        // input from file, then AI input (TODO: implement).
     };

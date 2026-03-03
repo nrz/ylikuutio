@@ -92,7 +92,7 @@ namespace yli::ontology
         {
         }
 
-        yli::input::InputMethod input_method { yli::input::InputMethod::AI };
+        yli::input::InputMethod input_method { yli::input::InputMethod::MOVABLE_CONTROLLER };
         Request<Scene> scene        {};
         Request<MovableController> movable_controller_master {};
 
