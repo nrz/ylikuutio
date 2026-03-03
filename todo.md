@@ -6,7 +6,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] AI/CONTROLLER Rename `Brain` class to `MovableController`.
 - [ ] AI/YLILISP Implement new `Brain` class that supports YliLisp and depends of `Movable`'s available abilities.
 - [ ] AI/YLILISP Implement `yli::ontology::BrainLispFunction`, inherits `LispFunction`.
 - [ ] AI/YLILISP Implement `yli::ontology::GenericBrainLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
@@ -388,3 +387,4 @@
 - [x] CONSOLE/YLILISP Implement `yli::ontology::ConsoleLispFunction`, inherits `LispFunction`.
 - [x] CONSOLE/YLILISP Implement `yli::ontology::GenericConsoleLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
 - [x] CONSOLE/YLILISP Implement `yli::ontology::ConsoleLispFunctionOverload`, inherits `GenericConsoleLispFunctionOverload`.
+- [x] AI/CONTROLLER Rename `Brain` class to `MovableController`.
