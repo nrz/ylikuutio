@@ -6,7 +6,10 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] AI/YLILISP Implement new `Brain` class that supports YliLisp and depends of `Movable`'s available abilities.
+- [ ] AI/YLILISP Implement new `BrainModule` class that supports YliLisp and can be composited into `Console` and into derived types of `Movable`.
+- [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
+- [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
+- [ ] AI/NAVIGATION Implement navigation mesh (navmesh) generation using Recast. https://github.com/recastnavigation/recastnavigation
 - [ ] AI/YLILISP Implement `yli::ontology::BrainLispFunction`, inherits `LispFunction`.
 - [ ] AI/YLILISP Implement `yli::ontology::GenericBrainLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
 - [ ] AI/YLILISP Implement `yli::ontology::BrainLispFunctionOverload`, inherits `GenericBrainLispFunctionOverload`.
@@ -14,9 +17,6 @@
 - [ ] YLILISP Implement semantic analyzer for YliLisp.
 - [ ] YLILISP Implement intermediate code generator for YliLisp.
 - [ ] YLILISP Implement intermediate code optimizer for YliLisp.
-- [ ] YLILISP/RISCV Implement RISC-V assembly code generator for YliLisp.
-- [ ] RISCV Implement RISC-V assembler.
-- [ ] RISCV Implement RISC-V disassembler.
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
@@ -45,6 +45,9 @@
 - [ ] MATH/RENDERING Implement L-system trees. https://en.wikipedia.org/wiki/L-system
 
 ## Tasks which are necessary for the second stage (Hirvi prototype)
+- [ ] YLILISP/RISCV Implement RISC-V assembly code generator for YliLisp.
+- [ ] RISCV Implement RISC-V assembler.
+- [ ] RISCV Implement RISC-V disassembler.
 - [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
 - [ ] BUILD/LIBRARIES Make GLEW a Git Submodule: https://github.com/nigels-com/glew
 - [ ] BUILD/LIBRARIES Make libpng a Git Submodule: https://git.code.sf.net/p/libpng/code
@@ -60,9 +63,6 @@
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 - [ ] UI/TESTS Write unit tests for keyboard callback snippets.
-- [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
-- [ ] LIBRARIES/PHYSICS/EVALUATE Evaluate Jolt. https://github.com/jrouwe/JoltPhysics
-- [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
 - [ ] CONSOLE/UI Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 - [ ] CONSOLE/UI Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 - [ ] DISPLAY/UI Add support for high DPI displays.
