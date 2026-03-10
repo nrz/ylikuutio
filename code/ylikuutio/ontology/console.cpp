@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "console.hpp"
-#include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
 #include "lisp_context.hpp"
@@ -24,10 +23,8 @@
 #include "horizontal_alignment.hpp"
 #include "vertical_alignment.hpp"
 #include "console_struct.hpp"
-#include "texture_file_format.hpp"
 #include "print_console_struct.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/console/console_state.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
