@@ -163,8 +163,6 @@ namespace yli::ontology
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-            // Callbacks end here.
-
         public:
             void copy_historical_input_into_temp_input();
             void delete_character();
