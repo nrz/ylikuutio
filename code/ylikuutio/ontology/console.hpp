@@ -76,15 +76,11 @@ namespace yli::ontology
     class Registry;
     class GenericMasterModule;
     class Universe;
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
     class Scene;
     class Font2d;
     class ConsoleLispFunction;
     class InputMode;
     class ConsoleCallbackEngine;
-    class ConsoleCallbackObject;
     struct ConsoleStruct;
 
     using yli::console::TextInput;
