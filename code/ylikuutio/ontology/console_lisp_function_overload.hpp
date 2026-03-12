@@ -160,7 +160,7 @@ namespace yli::ontology
                     std::optional<typename yli::data::WrapAllButStrings<T1>::type> value = yli::lisp::convert_string_to_value_and_advance_index<T1>(
                         universe, context, environment, parameter_vector, parameter_i);
 
-                    if (!value)
+                    if (!value.has_value())
                     {
                         // Binding failed.
                         return std::nullopt;
@@ -173,7 +173,7 @@ namespace yli::ontology
                         std::size_t, RestTypes...>(
                                 tag, universe, context, environment, parameter_vector, parameter_i);
 
-                    if (arg_tuple)
+                    if (arg_tuple.has_value())
                     {
                         return std::tuple_cat(std::make_tuple(*value), *arg_tuple); // success.
                     }
