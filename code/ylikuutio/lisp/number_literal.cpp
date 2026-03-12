@@ -120,7 +120,7 @@ namespace yli::lisp
             return std::nullopt;
         }
 
-        error_log.add_error(start_position, ErrorType::SYNTAX_ERROR);
+        error_log.add_error(start_position, ErrorType::INVALID_NUMBER_LITERAL);
         return std::nullopt;
     }
 }
