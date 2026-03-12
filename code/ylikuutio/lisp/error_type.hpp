@@ -22,6 +22,7 @@ namespace yli::lisp
 {
     enum class ErrorType
     {
+        // Scanner errors.
         CLOSING_DOUBLE_QUOTE_MISSING,
         INVALID_UNICODE,
         INVALID_CODEPOINT,
@@ -30,6 +31,7 @@ namespace yli::lisp
         INVALID_SIGNED_INTEGER_LITERAL,
         INVALID_FLOATING_POINT_LITERAL,
         INVALID_NUMBER_LITERAL,
+        // Parser errors.
         FUNCTION_CALL_EXPECTED,
         MATCHING_LEFT_PARENTHESIS_MISSING,
         MATCHING_RIGHT_PARENTHESIS_MISSING,
