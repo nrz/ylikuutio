@@ -6,7 +6,12 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] AI/YLILISP Implement new `BrainModule` class that supports YliLisp and can be composited into `Console` and into derived types of `Movable`.
+- [ ] AI Implement module class `ParentOfSkillsModule` that inherits `GenericParentModule` and can be composited into different derived classes of `Entity`.
+- [ ] AI Implement abstract `Skill` class that inherits `Entity`.
+- [ ] AI Replace `LocomotionModule` instances with derived classes of `Skill`.
+- [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
+- [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
+- [ ] AI/YLILISP Implement new `BrainLispModule` class, inherits `GenericLispModule`, knows `ParentOfSkillsModule`, can be composited into derived types of `Movable`.
 - [ ] PHYSICS Implement `yli::ontology::RigidBodyModule` class (to be used as a component of `Movable`) to be used for Jolt Physics.
 - [ ] LIBRARIES/PHYSICS Implement rigid body physics using using Jolt. https://github.com/jrouwe/JoltPhysics
 - [ ] AI/NAVIGATION Implement navigation mesh (navmesh) generation using Recast. https://github.com/recastnavigation/recastnavigation
