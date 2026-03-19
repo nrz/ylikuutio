@@ -727,6 +727,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/parent_of_input_modes_module.hpp
     code/ylikuutio/ontology/parent_of_pipelines_module.cpp
     code/ylikuutio/ontology/parent_of_pipelines_module.hpp
+    code/ylikuutio/ontology/parent_of_skills_module.cpp
+    code/ylikuutio/ontology/parent_of_skills_module.hpp
     code/ylikuutio/ontology/position_struct.hpp
     code/ylikuutio/ontology/read_callback.hpp
     code/ylikuutio/ontology/registry.cpp
