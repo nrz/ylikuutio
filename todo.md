@@ -6,7 +6,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] AI Implement module class `ParentOfSkillsModule` that inherits `GenericParentModule` and can be composited into different derived classes of `Entity`.
 - [ ] AI Implement abstract `Skill` class that inherits `Entity`.
 - [ ] AI Replace `LocomotionModule` instances with derived classes of `Skill`.
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
@@ -393,3 +392,4 @@
 - [x] CONSOLE/YLILISP Implement `yli::ontology::GenericConsoleLispFunctionOverload`, inherits `GenericLispFunctionOverload`.
 - [x] CONSOLE/YLILISP Implement `yli::ontology::ConsoleLispFunctionOverload`, inherits `GenericConsoleLispFunctionOverload`.
 - [x] AI/CONTROLLER Rename `Brain` class to `MovableController`.
+- [x] AI Implement module class `ParentOfSkillsModule` that inherits `GenericParentModule` and can be composited into different derived classes of `Entity`.
