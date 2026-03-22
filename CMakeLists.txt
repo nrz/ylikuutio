@@ -745,6 +745,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/scene_struct.hpp
+    code/ylikuutio/ontology/skill.cpp
+    code/ylikuutio/ontology/skill.hpp
+    code/ylikuutio/ontology/skill_struct.hpp
     code/ylikuutio/ontology/terrain.cpp
     code/ylikuutio/ontology/terrain.hpp
     code/ylikuutio/ontology/texture_file_format.hpp
