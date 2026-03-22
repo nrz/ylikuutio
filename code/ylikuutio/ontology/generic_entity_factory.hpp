@@ -45,6 +45,7 @@ namespace yli::ontology
     class SymbiontSpecies;
     class Holobiont;
     class Biont;
+    class Skill;
     class ShapeshifterTransformation;
     class ShapeshifterSequence;
     class ShapeshifterForm;
@@ -80,6 +81,7 @@ namespace yli::ontology
     struct SymbiontSpeciesStruct;
     struct HolobiontStruct;
     struct BiontStruct;
+    struct SkillStruct;
     struct ShapeshifterTransformationStruct;
     struct ShapeshifterSequenceStruct;
     struct ShapeshifterFormStruct;
@@ -132,6 +134,7 @@ namespace yli::ontology
             virtual SymbiontSpecies* create_symbiont_species(const SymbiontSpeciesStruct& symbiont_species_struct) const = 0;
             virtual Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const = 0;
             virtual Biont* create_biont(const BiontStruct& biont_struct) const = 0;
+            virtual Skill* create_skill(const SkillStruct& skill_struct) const = 0;
             virtual ShapeshifterTransformation* create_shapeshifter_transformation(
                     const ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const = 0;
             virtual ShapeshifterSequence* create_shapeshifter_sequence(

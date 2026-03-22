@@ -41,6 +41,7 @@
 #include "symbiont_species.hpp"
 #include "holobiont.hpp"
 #include "biont.hpp"
+#include "skill.hpp"
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "shapeshifter_form.hpp"
@@ -81,6 +82,7 @@
 #include "symbiont_species_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
+#include "skill_struct.hpp"
 #include "shapeshifter_transformation_struct.hpp"
 #include "shapeshifter_sequence_struct.hpp"
 #include "shapeshifter_form_struct.hpp"
@@ -469,6 +471,20 @@ namespace yli::ontology
                         biont_struct,
                         this->get_generic_parent_module<Biont, Holobiont>(biont_struct.holobiont_parent),
                         this->get_generic_master_module<Biont, SymbiontSpecies>(biont_struct.symbiont_species_master));
+            }
+
+            Skill* create_skill(const SkillStruct& skill_struct) const final
+            {
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<yli::memory::SkillMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::SKILL));
+                auto& allocator = static_cast<yli::memory::SkillMemoryAllocator&>(generic_allocator);
+
+                return allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        skill_struct,
+                        this->get_generic_parent_module<Skill, Holobiont>(skill_struct.holobiont_parent));
             }
 
             ShapeshifterTransformation* create_shapeshifter_transformation(

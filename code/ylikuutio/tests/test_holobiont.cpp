@@ -244,3 +244,53 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
     ASSERT_EQ(holobiont->get_parent(), scene);
     ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 5);     // 5 `Biont`s.
 }
+
+TEST(adding_skills_to_holobiont_must_work_properly, headless_turbo_polizei)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    yli::ontology::HolobiontStruct holobiont_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(symbiosis) };
+    yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
+            holobiont_struct);
+    ASSERT_NE(holobiont, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(holobiont) % alignof(yli::ontology::Holobiont), 0);
+
+    yli::ontology::Holobiont::create_skill(*holobiont, "transmit-on-radio");
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 4); // Default `Camera`, `pipeline`, `symbiosis`, `holobiont`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    // `Entity` member functions of `Symbiosis`.
+    ASSERT_EQ(symbiosis->get_scene(), scene);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);     // 2 `SymbiontMaterial`s.
+
+    // `Entity` member functions.
+    ASSERT_EQ(holobiont->get_childID(), 0);
+    ASSERT_EQ(holobiont->get_type(), "yli::ontology::Holobiont*");
+    ASSERT_TRUE(holobiont->get_can_be_erased());
+    ASSERT_EQ(holobiont->get_scene(), scene);
+    ASSERT_EQ(holobiont->get_parent(), scene);
+    ASSERT_EQ(holobiont->get_number_of_non_variable_children(), 6);     // 5 `Biont`s and 1 `Skill`.
+}

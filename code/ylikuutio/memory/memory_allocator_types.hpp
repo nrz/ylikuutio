@@ -37,6 +37,7 @@
 #include "code/ylikuutio/ontology/symbiont_species.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
+#include "code/ylikuutio/ontology/skill.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_transformation.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_form.hpp"
@@ -78,6 +79,7 @@ namespace yli::memory
     using SymbiontSpeciesMemoryAllocator             = yli::memory::MemoryAllocator<yli::ontology::SymbiontSpecies, 256>;
     using HolobiontMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Holobiont, 256>;
     using BiontMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Biont, 1024>;
+    using SkillMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Skill, 256>;
     using ShapeshifterTransformationMemoryAllocator  = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterTransformation, 1024>;
     using ShapeshifterSequenceMemoryAllocator        = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterSequence, 1024>;
     using ShapeshifterFormMemoryAllocator            = yli::memory::MemoryAllocator<yli::ontology::ShapeshifterForm, 1024>;

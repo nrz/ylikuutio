@@ -32,11 +32,11 @@ namespace yli::ontology
     {
         explicit SkillStruct(Request<Holobiont>&& holobiont_parent)
             : CapabilityStruct(),
-            holobiont { std::move(holobiont_parent) }
+            holobiont_parent { std::move(holobiont_parent) }
         {
         }
 
-        Request<Holobiont> holobiont {};
+        Request<Holobiont> holobiont_parent {};
     };
 }
 

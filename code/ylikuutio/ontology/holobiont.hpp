@@ -48,7 +48,9 @@ namespace yli::ontology
     class Scene;
     class Symbiosis;
     class Biont;
+    class Skill;
     struct HolobiontStruct;
+    struct SkillStruct;
 
     class Holobiont : public Movable
     {
@@ -111,6 +113,7 @@ namespace yli::ontology
 
             ChildModule child_of_scene;
             GenericParentModule parent_of_bionts;
+            GenericParentModule parent_of_skills;
             ApprenticeModule apprentice_of_symbiosis;
 
             template<typename ChildType>
@@ -128,6 +131,8 @@ namespace yli::ontology
             // this method renders this `Holobiont`.
             void render(const Scene* const target_scene);
 
+            static void create_skill(Holobiont& holobiont, const std::string& skill_name);
+
         private:
             static void create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
     };
@@ -136,6 +141,12 @@ namespace yli::ontology
         inline GenericParentModule* Holobiont::get_generic_parent_module<Biont>()
         {
             return &this->parent_of_bionts;
+        }
+
+    template<>
+        inline GenericParentModule* Holobiont::get_generic_parent_module<Skill>()
+        {
+            return &this->parent_of_skills;
         }
 }
 

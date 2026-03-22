@@ -22,11 +22,13 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"
+#include "skill.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "generic_entity_factory.hpp"
 #include "request.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
+#include "skill_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -67,6 +69,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "bionts"),
+        parent_of_skills(
+                *this,
+                this->registry,
+                "skills"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {
         if (this->Holobiont::get_parent() != nullptr && this->Holobiont::get_symbiosis() != nullptr)
@@ -103,6 +109,15 @@ namespace yli::ontology
 
         // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
         render_system.render_bionts(this->parent_of_bionts);
+    }
+
+    void Holobiont::create_skill(Holobiont& holobiont, const std::string& skill_name)
+    {
+        SkillStruct skill_struct { Request(&holobiont) };
+        skill_struct.local_name = skill_name;
+
+        GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
+        entity_factory.create_skill(skill_struct);
     }
 
     void Holobiont::create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector)
@@ -231,12 +246,14 @@ namespace yli::ontology
 
     std::size_t Holobiont::get_number_of_children() const
     {
-        return this->parent_of_bionts.get_number_of_children();
+        return this->parent_of_bionts.get_number_of_children() +
+            this->parent_of_skills.get_number_of_children();
     }
 
     std::size_t Holobiont::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_skills.child_pointer_vector);
     }
 
     // Public callbacks.
