@@ -108,6 +108,8 @@ namespace yli::data
         // `yli::ontology` datatypes, 'holobiont' path.
         HOLOBIONT             = 190,
         BIONT                 = 191,
+        // `yli::ontology` datatypes, 'skill' path.
+        SKILL                 = 195,
         // `yli::ontology` datatypes, 'shapeshifter' path.
         SHAPESHIFTER_TRANSFORMATION = 200,
         SHAPESHIFTER_SEQUENCE       = 201,
