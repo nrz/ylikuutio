@@ -30,7 +30,7 @@ namespace yli::ontology
     class Universe;
     struct CapabilityStruct;
 
-    class Capability final : public Entity
+    class Capability : public Entity
     {
         public:
             Capability(
