@@ -581,6 +581,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/memory/memory_templates.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/ability.cpp
+    code/ylikuutio/ontology/ability.hpp
+    code/ylikuutio/ontology/ability_struct.hpp
     code/ylikuutio/ontology/activate_callback.hpp
     code/ylikuutio/ontology/apprentice_iterator.hpp
     code/ylikuutio/ontology/apprentice_module.cpp
