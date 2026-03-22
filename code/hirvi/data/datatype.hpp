@@ -61,6 +61,7 @@ namespace hirvi
         LISP_CONTEXT        = 111,
         LISP_FUNCTION                  = 112,
         GENERIC_LISP_FUNCTION_OVERLOAD = 113,
+        CAPABILITY                     = 114,
         MESH_PROVIDER       = 116,
         MOVABLE             = 117,
         // `yli::ontology` datatypes, 'universe' path.
