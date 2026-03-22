@@ -103,6 +103,8 @@ namespace yli::data
         SYMBIOSIS             = 180,
         SYMBIONT_MATERIAL     = 181,
         SYMBIONT_SPECIES      = 182,
+        // `yli::ontology` datatypes, 'ability' path.
+        ABILITY               = 185,
         // `yli::ontology` datatypes, 'holobiont' path.
         HOLOBIONT             = 190,
         BIONT                 = 191,
