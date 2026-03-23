@@ -27,6 +27,7 @@
 #include "symbiosis_struct.hpp"
 #include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
+#include "ability_struct.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -163,6 +164,10 @@ namespace yli::ontology
                 *this,
                 this->registry,
                 "symbiont_materials"),
+        parent_of_abilities(
+                *this,
+                this->registry,
+                "abilities"),
         apprentice_of_pipeline(pipeline_master_module, this),
         master_of_holobionts(*this, &this->registry, "holobionts"),
         model_filename     { symbiosis_struct.model_filename },
@@ -231,12 +236,14 @@ namespace yli::ontology
 
     std::size_t Symbiosis::get_number_of_children() const
     {
-        return this->parent_of_symbiont_materials.get_number_of_children();
+        return this->parent_of_symbiont_materials.get_number_of_children() +
+            this->parent_of_abilities.get_number_of_children();
     }
 
     std::size_t Symbiosis::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector);
+        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
+            yli::ontology::get_number_of_descendants(this->parent_of_abilities.child_pointer_vector);
     }
 
     const std::string& Symbiosis::get_model_file_format() const
@@ -348,6 +355,15 @@ namespace yli::ontology
         }
 
         return this->biontID_symbiont_species_vector.at(biontID);
+    }
+
+    void Symbiosis::create_ability(Symbiosis& symbiosis, const std::string& ability_name)
+    {
+        AbilityStruct ability_struct { Request(&symbiosis) };
+        ability_struct.local_name = ability_name;
+
+        GenericEntityFactory& entity_factory = symbiosis.get_application().get_generic_entity_factory();
+        entity_factory.create_ability(ability_struct);
     }
 
     GLint Symbiosis::get_vertex_position_modelspace_id(const std::size_t biontID) const

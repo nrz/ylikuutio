@@ -35,6 +35,7 @@
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/symbiont_material.hpp"
 #include "code/ylikuutio/ontology/symbiont_species.hpp"
+#include "code/ylikuutio/ontology/ability.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/skill.hpp"
@@ -77,6 +78,7 @@ namespace yli::memory
     using SymbiosisMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Symbiosis, 256>;
     using SymbiontMaterialMemoryAllocator            = yli::memory::MemoryAllocator<yli::ontology::SymbiontMaterial, 256>;
     using SymbiontSpeciesMemoryAllocator             = yli::memory::MemoryAllocator<yli::ontology::SymbiontSpecies, 256>;
+    using AbilityMemoryAllocator                     = yli::memory::MemoryAllocator<yli::ontology::Ability, 256>;
     using HolobiontMemoryAllocator                   = yli::memory::MemoryAllocator<yli::ontology::Holobiont, 256>;
     using BiontMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Biont, 1024>;
     using SkillMemoryAllocator                       = yli::memory::MemoryAllocator<yli::ontology::Skill, 256>;

@@ -19,15 +19,22 @@
 #define YLIKUUTIO_ONTOLOGY_ABILITY_STRUCT_HPP_INCLUDED
 
 #include "capability_struct.hpp"
+#include "request.hpp"
+
+// Include standard headers
+#include <utility> // std::move
 
 namespace yli::ontology
 {
     struct AbilityStruct final : public CapabilityStruct
     {
-        AbilityStruct()
+        explicit AbilityStruct(Request<Symbiosis>&& symbiosis_parent)
+            : CapabilityStruct(),
+            symbiosis_parent { std::move(symbiosis_parent) }
         {
-            // constructor.
         }
+
+        Request<Symbiosis> symbiosis_parent {};
     };
 }
 

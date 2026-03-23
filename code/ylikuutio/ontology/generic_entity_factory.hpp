@@ -43,6 +43,7 @@ namespace yli::ontology
     class Symbiosis;
     class SymbiontMaterial;
     class SymbiontSpecies;
+    class Ability;
     class Holobiont;
     class Biont;
     class Skill;
@@ -79,6 +80,7 @@ namespace yli::ontology
     struct SymbiosisStruct;
     struct SymbiontMaterialStruct;
     struct SymbiontSpeciesStruct;
+    struct AbilityStruct;
     struct HolobiontStruct;
     struct BiontStruct;
     struct SkillStruct;
@@ -132,6 +134,7 @@ namespace yli::ontology
             virtual Symbiosis* create_symbiosis(const SymbiosisStruct& symbiosis_struct) const = 0;
             virtual SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const = 0;
             virtual SymbiontSpecies* create_symbiont_species(const SymbiontSpeciesStruct& symbiont_species_struct) const = 0;
+            virtual Ability* create_ability(const AbilityStruct& ability_struct) const = 0;
             virtual Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const = 0;
             virtual Biont* create_biont(const BiontStruct& biont_struct) const = 0;
             virtual Skill* create_skill(const SkillStruct& skill_struct) const = 0;

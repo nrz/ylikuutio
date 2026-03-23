@@ -69,6 +69,7 @@ namespace yli::ontology
     class Pipeline;
     class SymbiontMaterial;
     class SymbiontSpecies;
+    class Ability;
     class Holobiont;
     struct SymbiosisStruct;
 
@@ -143,11 +144,14 @@ namespace yli::ontology
             uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
+            static void create_ability(Symbiosis& symbiosis, const std::string& ability_name);
+
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;
 
             ChildModule child_of_ecosystem_or_scene;
             GenericParentModule parent_of_symbiont_materials;
+            GenericParentModule parent_of_abilities;
             ApprenticeModule apprentice_of_pipeline;
             GenericMasterModule master_of_holobionts;
 
@@ -185,6 +189,12 @@ namespace yli::ontology
         inline GenericParentModule* Symbiosis::get_generic_parent_module<SymbiontMaterial>()
         {
             return &this->parent_of_symbiont_materials;
+        }
+
+    template<>
+        inline GenericParentModule* Symbiosis::get_generic_parent_module<Ability>()
+        {
+            return &this->parent_of_abilities;
         }
 
     template<>

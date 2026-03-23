@@ -39,6 +39,7 @@
 #include "symbiosis.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
+#include "ability.hpp"
 #include "holobiont.hpp"
 #include "biont.hpp"
 #include "skill.hpp"
@@ -80,6 +81,7 @@
 #include "symbiosis_struct.hpp"
 #include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
+#include "ability_struct.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "skill_struct.hpp"
@@ -448,6 +450,20 @@ namespace yli::ontology
                             yli::data::Datatype::SYMBIONT_SPECIES,
                             symbiont_species_struct.symbiont_material_parent,
                             symbiont_species_struct);
+            }
+
+            Ability* create_ability(const AbilityStruct& ability_struct) const final
+            {
+                yli::memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<yli::memory::AbilityMemoryAllocator>(
+                            static_cast<int>(yli::data::Datatype::ABILITY));
+                auto& allocator = static_cast<yli::memory::AbilityMemoryAllocator&>(generic_allocator);
+
+                return allocator.build_in(
+                        this->application,
+                        this->get_universe(),
+                        ability_struct,
+                        this->get_generic_parent_module<Ability, Symbiosis>(ability_struct.symbiosis_parent));
             }
 
             Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const final

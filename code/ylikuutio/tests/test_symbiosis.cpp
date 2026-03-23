@@ -345,6 +345,51 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_p
     ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);    // 2 `SymbiontMaterial`s.
 }
 
+TEST(adding_abilities_to_symbiosis_must_work_properly, headless_turbo_polizei_scene_provided_as_valid_pointer)
+{
+    mock::MockApplication application;
+    yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+            scene_struct);
+
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::SymbiosisStruct symbiosis_struct {
+            yli::ontology::Request(scene),
+            yli::ontology::Request(pipeline) };
+    symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    symbiosis_struct.model_file_format = "FBX";
+    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+            symbiosis_struct);
+
+    yli::ontology::Symbiosis::create_ability(*symbiosis, "transmit-on-radio");
+
+    // `Entity` member functions of `Universe`.
+    ASSERT_EQ(application.get_universe().get_scene(), nullptr);
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1);
+
+    // `Entity` member functions of `Scene`.
+    ASSERT_EQ(scene->get_scene(), scene);
+    ASSERT_EQ(scene->get_number_of_non_variable_children(), 3); // Default `Camera`, `pipeline`, `symbiosis`.
+
+    // `Entity` member functions of `Pipeline`.
+    ASSERT_EQ(pipeline->get_scene(), scene);
+    ASSERT_EQ(pipeline->get_number_of_non_variable_children(), 0);
+
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_master(), pipeline);
+    ASSERT_EQ(symbiosis->apprentice_of_pipeline.get_apprenticeID(), 0);
+
+    // `Entity` member functions.
+    ASSERT_EQ(symbiosis->get_childID(), 0);
+    ASSERT_EQ(symbiosis->get_type(), "yli::ontology::Symbiosis*");
+    ASSERT_TRUE(symbiosis->get_can_be_erased());
+    ASSERT_EQ(symbiosis->get_scene(), scene);
+    ASSERT_EQ(symbiosis->get_parent(), scene);
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 3);    // 2 `SymbiontMaterial`s and 1 `Ability`.
+}
+
 TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem_provided_as_valid_pointer)
 {
     mock::MockApplication application;
