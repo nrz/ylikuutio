@@ -6,15 +6,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] HIRVI/NPC Implement `hirvi::CatSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::ElkSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceCarSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceDogSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceHelicopterSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceHorseSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceTrainSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::PoliceTramSymbiosis` class that inherits `Symbiosis`.
-- [ ] HIRVI/NPC Implement `hirvi::TrainSymbiosis` class that inherits `Symbiosis`.
 - [ ] HIRVI/AI Implement `hirvi::RunAbility` class that inherits `Ability`.
 - [ ] HIRVI/AI Implement `hirvi::JumpAbility` class that inherits `Ability`.
 - [ ] HIRVI/AI Implement `hirvi::ClimbAbility` class that inherits `Ability`.
