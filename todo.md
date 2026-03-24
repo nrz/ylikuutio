@@ -6,11 +6,11 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] HIRVI/AI Implement `hirvi::RunAbility` class that inherits `Ability`.
-- [ ] HIRVI/AI Implement `hirvi::JumpAbility` class that inherits `Ability`.
-- [ ] HIRVI/AI Implement `hirvi::ClimbAbility` class that inherits `Ability`.
-- [ ] HIRVI/AI Implement `hirvi::SwimAbility` class that inherits `Ability`.
-- [ ] HIRVI/AI Implement `hirvi::FlyAbility` class that inherits `Ability`.
+- [ ] HIRVI/AI Implement `hirvi::RunAbility` placeholder class that inherits `Ability`.
+- [ ] HIRVI/AI Implement `hirvi::JumpAbility` placeholder class that inherits `Ability`.
+- [ ] HIRVI/AI Implement `hirvi::ClimbAbility` placeholder class that inherits `Ability`.
+- [ ] HIRVI/AI Implement `hirvi::SwimAbility` placeholder class that inherits `Ability`.
+- [ ] HIRVI/AI Implement `hirvi::FlyAbility` placeholder class that inherits `Ability`.
 - [ ] HIRVI/AI Replace `LocomotionModule` instances with instances of derived classes of `Skill`.
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
