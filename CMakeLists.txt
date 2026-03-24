@@ -958,6 +958,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_tram.hpp
     code/hirvi/ontology/run_ability.cpp
     code/hirvi/ontology/run_ability.hpp
+    code/hirvi/ontology/swim_ability.cpp
+    code/hirvi/ontology/swim_ability.hpp
     code/hirvi/ontology/train.cpp
     code/hirvi/ontology/train.hpp
 )
