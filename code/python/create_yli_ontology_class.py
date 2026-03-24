@@ -174,7 +174,9 @@ struct_test_filename = "test_" + struct_name + ".cpp"
 # base class needs to be #include'd always because it is inherited.
 if base_class_name != "":
     base_class_hpp = snake_case_base_class_name + ".hpp"
-    base_class_include_line = include_space_double_quote + base_class_hpp + "\""
+    base_class_hpp_from_project_root = ontology_path_with_slash_from_project_root + base_class_hpp
+    base_class_hpp_from_project_root_if_needed = base_class_hpp if same_namespace else base_class_hpp_from_project_root
+    base_class_include_line = include_space_double_quote + base_class_hpp_from_project_root_if_needed + "\""
 
 # include line for `yli::ontology::ChildModule`.
 child_module_filename = "child_module.hpp"
