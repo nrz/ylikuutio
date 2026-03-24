@@ -26,6 +26,8 @@
 
 namespace yli::ontology
 {
+    class Symbiosis;
+
     struct AbilityStruct final : public CapabilityStruct
     {
         explicit AbilityStruct(Request<Symbiosis>&& symbiosis_parent)
