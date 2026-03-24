@@ -93,13 +93,13 @@ copyright_notice = \
 "// You should have received a copy of the GNU Affero General Public License\n"\
 "// along with this program.  If not, see <https://www.gnu.org/licenses/>."
 
-namespace = "yli::ontology"
-fully_qualified_class_name = namespace + "::" + class_name
+yli_ontology_namespace = "yli::ontology"
+fully_qualified_class_name = yli_ontology_namespace + "::" + class_name
 
 if parent_class_name != "":
     parent_struct_type = parent_class_name + "Struct"
-    fully_qualified_parent_class_name = namespace + "::" + parent_class_name
-    fully_qualified_parent_struct_name = namespace + "::" + parent_struct_type
+    fully_qualified_parent_class_name = yli_ontology_namespace + "::" + parent_class_name
+    fully_qualified_parent_struct_name = yli_ontology_namespace + "::" + parent_struct_type
 else:
     parent_struct_type = ""
     fully_qualified_parent_class_name = ""
@@ -137,7 +137,7 @@ class_include_line = include_space_double_quote + class_filename_hpp + "\""
 
 # struct variable type and name.
 struct_variable_type = class_name + "Struct"
-fully_qualified_struct_variable_type = namespace + "::" + struct_variable_type
+fully_qualified_struct_variable_type = yli_ontology_namespace + "::" + struct_variable_type
 const_struct_reference_variable_type = "const " + struct_variable_type + "&"
 struct_name = snake_case_class_name + "_struct"
 
