@@ -94,7 +94,22 @@ copyright_notice = \
 "// along with this program.  If not, see <https://www.gnu.org/licenses/>."
 
 yli_ontology_namespace = "yli::ontology"
-fully_qualified_class_name = yli_ontology_namespace + "::" + class_name
+
+fully_qualified_base_class_name = yli_ontology_namespace + "::" + base_class_name
+
+if ":" in class_name:
+    namespace_re_object = re.compile("(.*::)*(.*)")
+    new_class_namespace = namespace_re_object.match(class_name).group(1)[0:-2]
+    class_name = namespace_re_object.match(class_name).group(2)
+else:
+    new_class_namespace = yli_ontology_namespace
+
+if new_class_namespace == yli_ontology_namespace:
+    same_namespace = True
+else:
+    same_namespace = False
+
+fully_qualified_class_name = new_class_namespace + "::" + class_name
 
 if parent_class_name != "":
     parent_struct_type = parent_class_name + "Struct"
@@ -121,13 +136,18 @@ include_space_double_quote = include_space + "\""
 include_space_smaller_than = include_space + "<"
 endif_line = "#endif"
 
+ontology_path_with_slash_from_project_root = "code/ylikuutio/ontology/"
+snake_case_parent_class_name_from_project_root = ontology_path_with_slash_from_project_root + snake_case_parent_class_name
+snake_case_parent_class_name_from_project_root_if_needed = snake_case_parent_class_name if same_namespace else snake_case_parent_class_name_from_project_root
 if parent_class_name != "":
-    parent_class_include_line = include_space_double_quote + snake_case_parent_class_name + ".hpp\""
+    parent_class_include_line = include_space_double_quote + snake_case_parent_class_name_from_project_root_if_needed + ".hpp\""
 else:
     parent_class_include_line = ""
 
+snake_case_base_class_name_from_project_root = ontology_path_with_slash_from_project_root + snake_case_base_class_name
+snake_case_base_class_name_from_project_root_if_needed = snake_case_base_class_name if same_namespace else snake_case_base_class_name_from_project_root
 if base_class_name != "":
-    entity_struct_include_line = include_space_double_quote + snake_case_base_class_name + "_struct.hpp\""
+    entity_struct_include_line = include_space_double_quote + snake_case_base_class_name_from_project_root_if_needed + "_struct.hpp\""
 
 # class filenames.
 class_filename_hpp = snake_case_class_name + ".hpp"
@@ -157,7 +177,10 @@ if base_class_name != "":
     base_class_include_line = include_space_double_quote + base_class_hpp + "\""
 
 # include line for `yli::ontology::ChildModule`.
-child_module_include_line = "#include \"child_module.hpp\""
+child_module_filename = "child_module.hpp"
+child_module_filename_from_project_root = ontology_path_with_slash_from_project_root + child_module_filename
+child_module_filename_from_project_root_if_needed = child_module_filename if same_namespace else child_module_filename_from_project_root
+child_module_include_line = "#include \"" + child_module_filename_from_project_root_if_needed + "\""
 
 # child module variable name.
 child_module_variable_name = "child_of_" + snake_case_parent_class_name
@@ -185,8 +208,12 @@ core_namespace_forward_declarations = \
 "    class Application;\n"\
 "}"
 
-# namespace
-begin_namespace_lines = \
+# namespaces
+begin_new_class_namespace_lines = \
+"namespace " + new_class_namespace + "\n"\
+"{"\
+
+begin_yli_ontology_namespace_lines = \
 "namespace yli::ontology\n"\
 "{"\
 
@@ -207,9 +234,10 @@ parent_module_forward_declaration = \
 
 four_spaces_class_space = "    class "
 newline = "\n"
+base_class_name_fully_qualified_if_needed = base_class_name if same_namespace else fully_qualified_base_class_name
 if base_class_name != "":
     begin_class_definition = \
-    four_spaces_class_space + class_name + " final : public " + base_class_name + newline + \
+    four_spaces_class_space + class_name + " final : public " + base_class_name_fully_qualified_if_needed + newline + \
     "    {"
 else:
     begin_class_definition = \
@@ -233,19 +261,22 @@ def get_function_name(class_name, function_name, is_for_header):
     else:
         return class_name + "::" + function_name
 
+universe_class_name = "Universe"
+universe_class_name_fully_qualified_if_needed = universe_class_name if same_namespace else yli_ontology_namespace + "::" + universe_class_name
+parent_module_type_and_name_fully_qualified_if_needed = parent_module_type_and_name if same_namespace else yli_ontology_namespace + "::" + parent_module_type_and_name
 def get_class_constructor_signature(parent_class_name, n_leading_whitespace, is_for_header):
     if parent_class_name != "":
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
-                (' ' * (n_leading_whitespace + 8)) + "Universe& universe,\n" + \
+                (' ' * (n_leading_whitespace + 8)) + universe_class_name_fully_qualified_if_needed + "& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ",\n" + \
-                (' ' * (n_leading_whitespace + 8)) + parent_module_type_and_name + ")"
+                (' ' * (n_leading_whitespace + 8)) + parent_module_type_and_name_fully_qualified_if_needed + ")"
     else:
         return \
                 (' ' * n_leading_whitespace) + get_function_name(class_name, class_name, is_for_header) + "(\n" + \
                 (' ' * (n_leading_whitespace + 8)) + "yli::core::Application& application,\n" + \
-                (' ' * (n_leading_whitespace + 8)) + "Universe& universe,\n" + \
+                (' ' * (n_leading_whitespace + 8)) + universe_class_name_fully_qualified_if_needed + "& universe,\n" + \
                 (' ' * (n_leading_whitespace + 8)) + const_struct_reference_variable_type + " " + struct_name + ")"
 
 class_constructor_child_module_line = \
@@ -263,11 +294,17 @@ else:
     "        // constructor.\n"\
     "    }"
 
+namespace_boundaries = "::"
+
+new_files_directory_with_slash = ontology_path_with_slash_from_project_root if same_namespace else \
+        ("code/" + re.sub(namespace_boundaries, '/', new_class_namespace) + "/")
+
 # Lines specific to the `.hpp` file.
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-class_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(class_name_word_boundaries, '_', class_name).upper() + "_HPP_INCLUDED"
+class_include_guard_macro_name = (re.sub(namespace_boundaries, '_', new_class_namespace) + "_" + \
+        re.sub(class_name_word_boundaries, '_', class_name)).upper() + "_HPP_INCLUDED"
 class_ifndef_line = "#ifndef " + class_include_guard_macro_name
 class_define_line = "#define " + class_include_guard_macro_name
 
@@ -282,11 +319,13 @@ delete_copy_assignment_line = \
 destructor_declaration_lines = \
 "            virtual ~" + class_name + "() = default;"
 
+parent_class_name_fully_qualified_if_needed = parent_class_name if same_namespace else yli_ontology_namespace + "::" + parent_class_name
 get_static_cast_parent_declaration = \
-"            " + parent_class_name + "* get_" + snake_case_parent_class_name + "() const;"
+"            " + parent_class_name_fully_qualified_if_needed + "* get_" + snake_case_parent_class_name + "() const;"
 
+entity_class_name_fully_qualified_if_needed = "Entity" if same_namespace else yli_ontology_namespace + "::Entity"
 get_parent_const_override_line = \
-"            Entity* get_parent() const override;"
+"            " + entity_class_name_fully_qualified_if_needed + "* get_parent() const override;"
 
 get_number_of_children_const_override_line = \
 "            std::size_t get_number_of_children() const override;"
@@ -294,38 +333,40 @@ get_number_of_children_const_override_line = \
 get_number_of_descendants_const_override_line = \
 "            std::size_t get_number_of_descendants() const override;"
 
+scene_class_name_fully_qualified_if_needed = "Scene" if same_namespace else yli_ontology_namespace + "::Scene"
 get_scene_const_override_line = \
-"            Scene* get_scene() const override;"
+"            " + scene_class_name_fully_qualified_if_needed + "* get_scene() const override;"
 
+child_module_name_fully_qualified_if_needed = "ChildModule" if same_namespace else yli_ontology_namespace + "::ChildModule"
 child_module_lines = \
-"            ChildModule " + child_module_variable_name + ";"
+"            " + child_module_name_fully_qualified_if_needed + " " + child_module_variable_name + ";"
 
 # Lines specific to the `.cpp` file.
 if base_class_name != "":
     if parent_class_name != "":
         class_constructor_base_initialization = \
-        "        : " + base_class_name + "(application, universe, " + struct_name + "),"
+        "        : " + base_class_name_fully_qualified_if_needed + "(application, universe, " + struct_name + "),"
     else:
         class_constructor_base_initialization = \
-        "        : " + base_class_name + "(application, universe, " + struct_name + ")"
+        "        : " + base_class_name_fully_qualified_if_needed + "(application, universe, " + struct_name + ")"
 
 if parent_class_name != "":
     get_parent_function_lines = \
-            "    Entity* " + class_name + "::get_parent() const\n"\
+            "    " + entity_class_name_fully_qualified_if_needed + "* " + class_name + "::get_parent() const\n"\
             "    {\n"\
             "        return this->" + child_module_variable_name + ".get_parent();\n"\
             "    }"
 else:
         get_parent_function_lines = \
-                "    Entity* " + class_name + "::get_parent() const\n"\
+                "    " + entity_class_name_fully_qualified_if_needed + "* " + class_name + "::get_parent() const\n"\
                 "    {\n"\
                 "        return nullptr;\n"\
                 "    }"
 
 get_static_cast_parent_function_lines = \
-"    " + parent_class_name + "* " + class_name + "::get_" + snake_case_parent_class_name + "() const\n"\
+"    " + parent_class_name_fully_qualified_if_needed + "* " + class_name + "::get_" + snake_case_parent_class_name + "() const\n"\
 "    {\n"\
-"        return static_cast<" + parent_class_name + "*>(this->get_parent());\n"\
+"        return static_cast<" + parent_class_name_fully_qualified_if_needed + "*>(this->get_parent());\n"\
 "    }"
 
 get_number_of_children_lines = \
@@ -342,13 +383,13 @@ get_number_of_descendants_lines = \
 
 if parent_class_name != "":
     get_scene_lines = \
-            "    Scene* " + class_name + "::get_scene() const\n"\
+            "    " + scene_class_name_fully_qualified_if_needed + "* " + class_name + "::get_scene() const\n"\
             "    {\n"\
             "        return this->" + child_module_variable_name + ".get_scene(); // TODO: modify this line if needed!\n"\
             "    }"
 else:
     get_scene_lines = \
-            "    Scene* " + class_name + "::get_scene() const\n"\
+            "    " + scene_class_name_fully_qualified_if_needed + "* " + class_name + "::get_scene() const\n"\
             "    {\n"\
             "        return nullptr; // TODO: modify this line if needed!\n"\
             "    }"
@@ -357,14 +398,18 @@ else:
 
 # include guard generation.
 # include guard macro names follow Ylikuutio coding guidelines.
-struct_include_guard_macro_name = "YLIKUUTIO_ONTOLOGY_" + re.sub(class_name_word_boundaries, '_', class_name).upper() + "_STRUCT_HPP_INCLUDED"
+struct_include_guard_macro_name = (re.sub(namespace_boundaries, '_', new_class_namespace) + "_" + \
+        re.sub(class_name_word_boundaries, '_', class_name)).upper() + "_STRUCT_HPP_INCLUDED"
 struct_ifndef_line = "#ifndef " + struct_include_guard_macro_name
 struct_define_line = "#define " + struct_include_guard_macro_name
+
+base_class_struct_variable_type_fully_qualified = yli_ontology_namespace + "::" + base_class_struct_variable_type
+base_class_struct_variable_type_fully_qualified_if_needed = base_class_struct_variable_type if same_namespace else base_class_struct_variable_type_fully_qualified
 
 four_spaces_struct_space = "    struct "
 if base_class_name != "":
     begin_struct_definition = \
-    four_spaces_struct_space + struct_variable_type + " final : public " + base_class_struct_variable_type + newline + \
+    four_spaces_struct_space + struct_variable_type + " final : public " + base_class_struct_variable_type_fully_qualified_if_needed + newline + \
     "    {"
 else:
     begin_struct_definition = \
@@ -389,9 +434,8 @@ struct_constructor_lines = \
 # test file specific lines.
 gtest_include_line = include_space_double_quote + "gtest/gtest.h\""
 mock_application_include_line = include_space_double_quote + "code/mock/mock_application.hpp\""
-ontology_path_with_slash_from_project_root = "code/ylikuutio/ontology/"
-class_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + class_filename_hpp + "\""
-struct_file_include_line_from_project_root = include_space_double_quote + ontology_path_with_slash_from_project_root + struct_filename + "\""
+class_file_include_line_from_project_root = include_space_double_quote + new_files_directory_with_slash + class_filename_hpp + "\""
+struct_file_include_line_from_project_root = include_space_double_quote + new_files_directory_with_slash + struct_filename + "\""
 test_opening_parenthesis = "TEST("
 init_appropriately = "_must_be_initialized_appropriately"
 as_valid_ptr = "_provided_as_valid_pointer)"
@@ -478,7 +522,7 @@ with open(class_filename_hpp, 'w') as f:
     print(file = f)
     print(core_namespace_forward_declarations, file = f)
     print(file = f)
-    print(begin_namespace_lines, file = f)
+    print(begin_yli_ontology_namespace_lines, file = f)
     if parent_class_name != "":
         print(parent_module_forward_declaration, file = f)
     if base_class_name != "" and base_class_name != "Entity":
@@ -488,6 +532,10 @@ with open(class_filename_hpp, 'w') as f:
         print(scene_forward_declaration, file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(parent_class_forward_declaration, file = f)
+    if not same_namespace:
+        print(end_namespace_lines, file = f)
+        print(file = f)
+        print(begin_new_class_namespace_lines, file = f)
     print(struct_forward_declaration, file = f)
     print(file = f)
     print(begin_class_definition, file = f)
@@ -528,7 +576,7 @@ with open(class_filename_cpp, 'w') as f:
     print(file = f)
     print(core_namespace_forward_declarations, file = f)
     print(file = f)
-    print(begin_namespace_lines, file = f)
+    print(begin_yli_ontology_namespace_lines, file = f)
     if parent_class_name != "":
         print(parent_module_forward_declaration, file = f)
     print(entity_forward_declaration, file = f)
@@ -536,7 +584,12 @@ with open(class_filename_cpp, 'w') as f:
         print(universe_forward_declaration, file = f)
     if parent_class_name != "Scene":
         print(scene_forward_declaration, file = f)
-    print(file = f)
+    if not same_namespace:
+        print(end_namespace_lines, file = f)
+        print(file = f)
+        print(begin_new_class_namespace_lines, file = f)
+    else:
+        print(file = f)
     if parent_class_name != "" and parent_class_name != "Universe":
         print(get_static_cast_parent_function_lines, file = f)
         print(file = f)
@@ -566,7 +619,7 @@ with open(struct_filename, 'w') as f:
     if base_class_name != "":
         print(entity_struct_include_line, file = f)
         print(file = f)
-    print(begin_namespace_lines, file = f)
+    print(begin_yli_ontology_namespace_lines, file = f)
     print(begin_struct_definition, file = f)
     print(struct_constructor_lines, file = f)
     print(end_struct_definition, file = f)
