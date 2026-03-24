@@ -933,6 +933,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
     code/hirvi/ontology/cat.cpp
     code/hirvi/ontology/cat.hpp
+    code/hirvi/ontology/climb_ability.cpp
+    code/hirvi/ontology/climb_ability.hpp
     code/hirvi/data/datatype.hpp
     code/hirvi/ontology/elk.cpp
     code/hirvi/ontology/elk.hpp
