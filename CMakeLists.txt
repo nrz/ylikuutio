@@ -940,6 +940,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp
     code/hirvi/ontology/emancipation_module.hpp
+    code/hirvi/ontology/fly_ability.cpp
+    code/hirvi/ontology/fly_ability.hpp
     code/hirvi/ontology/jump_ability.cpp
     code/hirvi/ontology/jump_ability.hpp
     code/hirvi/ontology/police_car.cpp
