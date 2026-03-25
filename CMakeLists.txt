@@ -944,6 +944,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/fly_ability.hpp
     code/hirvi/ontology/jump_ability.cpp
     code/hirvi/ontology/jump_ability.hpp
+    code/hirvi/ontology/moo_ability.cpp
+    code/hirvi/ontology/moo_ability.hpp
     code/hirvi/ontology/police_car.cpp
     code/hirvi/ontology/police_car.hpp
     code/hirvi/ontology/police_dog.cpp
