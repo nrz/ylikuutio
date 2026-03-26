@@ -16,12 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "hirvi_core.hpp"
-#include "code/hirvi/ontology/cat.hpp"
-#include "code/hirvi/ontology/police_car.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
-#include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
@@ -435,22 +432,7 @@ namespace hirvi
         cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
         cat1_object_struct.cartesian_coordinates = CartesianCoordinatesModule(500.00f, -1000.00f, 100.00f);
 
-        LocomotionModuleStruct cat1_walk_struct(1.0f); // 3.6 km/h.
-        LocomotionModuleStruct cat1_trot_struct(5.0f);
-        LocomotionModuleStruct cat1_canter_struct(10.0f);
-        LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
-        LocomotionModuleStruct cat1_climb_struct;
-
-        if (this->entity_factory.create_object_derivative<
-                hirvi::Cat,
-                CatMemoryAllocator>(
-                    hirvi::Datatype::CAT,
-                    cat1_object_struct,
-                    cat1_walk_struct,
-                    cat1_trot_struct,
-                    cat1_canter_struct,
-                    cat1_gallop_struct,
-                    cat1_climb_struct) == nullptr)
+        if (this->entity_factory.create_object(cat1_object_struct) == nullptr)
         {
             std::cerr << "Failed to create cat1.\n";
             return nullptr;
@@ -465,24 +447,7 @@ namespace hirvi
         cat2_object_struct.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
         cat2_object_struct.cartesian_coordinates = CartesianCoordinatesModule(700.00f, -1200.00f, 100.00f);
 
-        LocomotionModuleStruct cat2_walk_struct(1.0f); // 3.6 km/h.
-        LocomotionModuleStruct cat2_trot_struct(5.0f);
-        LocomotionModuleStruct cat2_canter_struct(10.0f);
-        LocomotionModuleStruct cat2_gallop_struct(12.5f); // 45 km/h.
-        LocomotionModuleStruct cat2_climb_struct;
-
-        hirvi::Cat* const cat2 = this->entity_factory.create_object_derivative<
-            hirvi::Cat,
-            CatMemoryAllocator>(
-                    hirvi::Datatype::CAT,
-                    cat2_object_struct,
-                    cat2_walk_struct,
-                    cat2_trot_struct,
-                    cat2_canter_struct,
-                    cat2_gallop_struct,
-                    cat2_climb_struct);
-
-        if (cat2 == nullptr)
+        if (this->entity_factory.create_object(cat2_object_struct) == nullptr)
         {
             std::cerr << "Failed to create cat2.\n";
             return nullptr;
@@ -504,15 +469,8 @@ namespace hirvi
         turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_police_car_struct1.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -160.00f, 30.00f);
 
-        LocomotionModuleStruct road_vehicle_struct1;
-
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png1 ...\n";
-        hirvi::PoliceCar* const turbo_polizei_png1 = this->entity_factory.create_holobiont_derivative<
-            hirvi::PoliceCar,
-            PoliceCarMemoryAllocator>(
-                    hirvi::Datatype::POLICE_CAR,
-                    turbo_polizei_png_police_car_struct1,
-                    road_vehicle_struct1);
+        yli::ontology::Holobiont* const turbo_polizei_png1 = this->entity_factory.create_holobiont(turbo_polizei_png_police_car_struct1);
 
         if (turbo_polizei_png1 == nullptr)
         {
@@ -529,15 +487,8 @@ namespace hirvi
         turbo_polizei_png_police_car_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_png_police_car_struct2.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -175.00f, 30.00f);
 
-        LocomotionModuleStruct road_vehicle_struct2;
-
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png2 ...\n";
-        hirvi::PoliceCar* const turbo_polizei_png2 = this->entity_factory.create_holobiont_derivative<
-            hirvi::PoliceCar,
-            PoliceCarMemoryAllocator>(
-                    hirvi::Datatype::POLICE_CAR,
-                    turbo_polizei_png_police_car_struct2,
-                    road_vehicle_struct2);
+        yli::ontology::Holobiont* const turbo_polizei_png2 = this->entity_factory.create_holobiont(turbo_polizei_png_police_car_struct2);
 
         if (turbo_polizei_png2 == nullptr)
         {

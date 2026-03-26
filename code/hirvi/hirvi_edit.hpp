@@ -20,8 +20,6 @@
 
 #include "core/hirvi_core.hpp"
 #include "data/datatype.hpp"
-#include "ontology/cat.hpp"
-#include "ontology/police_car.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/edit/edit_core.hpp"

@@ -931,13 +931,9 @@ add_library(hirvi_lib STATIC
     code/hirvi/core/hirvi_core.hpp
     code/hirvi/core/hirvi_earth_ecosystem.cpp
     code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
-    code/hirvi/ontology/cat.cpp
-    code/hirvi/ontology/cat.hpp
     code/hirvi/ontology/climb_ability.cpp
     code/hirvi/ontology/climb_ability.hpp
     code/hirvi/data/datatype.hpp
-    code/hirvi/ontology/elk.cpp
-    code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp
     code/hirvi/ontology/emancipation_module.hpp
     code/hirvi/ontology/fly_ability.cpp
@@ -946,26 +942,12 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/jump_ability.hpp
     code/hirvi/ontology/moo_ability.cpp
     code/hirvi/ontology/moo_ability.hpp
-    code/hirvi/ontology/police_car.cpp
-    code/hirvi/ontology/police_car.hpp
-    code/hirvi/ontology/police_dog.cpp
-    code/hirvi/ontology/police_dog.hpp
-    code/hirvi/ontology/police_helicopter.cpp
-    code/hirvi/ontology/police_helicopter.hpp
-    code/hirvi/ontology/police_horse.cpp
-    code/hirvi/ontology/police_horse.hpp
     code/hirvi/ontology/police_module.cpp
     code/hirvi/ontology/police_module.hpp
-    code/hirvi/ontology/police_train.cpp
-    code/hirvi/ontology/police_train.hpp
-    code/hirvi/ontology/police_tram.cpp
-    code/hirvi/ontology/police_tram.hpp
     code/hirvi/ontology/run_ability.cpp
     code/hirvi/ontology/run_ability.hpp
     code/hirvi/ontology/swim_ability.cpp
     code/hirvi/ontology/swim_ability.hpp
-    code/hirvi/ontology/train.cpp
-    code/hirvi/ontology/train.hpp
 )
 target_link_libraries(hirvi_lib PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1192,13 +1174,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/lisp/hirvi_console_callbacks.hpp
         code/hirvi/tests/test_hirvi_application.cpp
         code/hirvi/tests/test_callback_engine.cpp
-        code/hirvi/tests/test_cat.cpp
         code/hirvi/tests/test_ecosystem.cpp
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_movable_controller.cpp
         code/hirvi/tests/test_pipeline.cpp
-        code/hirvi/tests/test_police_car.cpp
         code/hirvi/tests/test_scene.cpp
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
