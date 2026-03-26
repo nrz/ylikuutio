@@ -463,6 +463,12 @@ namespace hirvi
             return nullptr;
         }
 
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "drive-forward");
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "drive-backward");
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "steer");
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "use-handbreak");
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "tx-on-radio");
+
         HolobiontStruct turbo_polizei_png_police_car_struct1 { Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis) };
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
