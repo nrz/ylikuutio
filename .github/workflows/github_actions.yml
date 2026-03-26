@@ -4,7 +4,7 @@ jobs:
   build-and-test-on-ubuntu-gcc-native-compiler:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - run: sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
@@ -17,7 +17,7 @@ jobs:
   build-and-test-on-ubuntu-clang-native-compiler:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - run: sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev
@@ -33,7 +33,7 @@ jobs:
   build-and-test-on-ubuntu-mingw-w64-gcc-crosscompiler:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - run: sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libsdl2-dev libvulkan-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev ninja-build vulkan-validationlayers-dev zlib1g-dev g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64 gfortran-mingw-w64 libz-mingw-w64-dev
@@ -45,7 +45,7 @@ jobs:
   build-and-test-on-macos-intel:
     runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - run: clang -v && clang++ -v
@@ -56,7 +56,7 @@ jobs:
   build-and-test-on-macos-arm64:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - run: clang -v && clang++ -v
@@ -67,7 +67,7 @@ jobs:
   build-and-test-on-windows:
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - uses: ilammy/msvc-dev-cmd@v1.4.1
