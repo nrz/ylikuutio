@@ -26,7 +26,7 @@ jobs:
         CC=$(which gcc) CXX=$(which g++) cmake -S . -B build -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=false
         build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
     - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v4
+      uses: SonarSource/sonarqube-scan-action@v7
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
