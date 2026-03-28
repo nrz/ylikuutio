@@ -16,7 +16,7 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
     - name: Install Build Wrapper
-      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v4
+      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v7
     - name: Run Build Wrapper
       run: |
         sudo apt-get update
