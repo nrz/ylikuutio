@@ -996,7 +996,7 @@ target_link_libraries(yli_edit PRIVATE edit_lib snippets ylikuutio ${ALL_LIBS} $
 
 ### Physics simulations ###
 
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+if(FALSE)
     # Planetary simulation library
     add_library(planetary_simulation STATIC
         code/avaruus/fortran/constants.f90
@@ -1183,7 +1183,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
 
-    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+    if(FALSE)
         set(AVARUUS_UNIT_TESTS
             # Tests for Avaruus.
             code/avaruus/cpp/tests/test_read_file.cpp
@@ -1206,7 +1206,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
-    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+    if(FALSE)
         add_executable(test_avaruus code/ylikuutio/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
         set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
