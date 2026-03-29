@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "expr.hpp"
+#include "expr_type.hpp"
 
 // Include standard headers
 #include <stdexcept> // std::runtime_error
