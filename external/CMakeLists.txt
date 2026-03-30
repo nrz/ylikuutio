@@ -57,10 +57,7 @@ if(COMPILE_ZLIB_FROM_SOURCE)
     add_subdirectory(zlib)
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
-    set(ZLIB_ROOT zlib)
-    add_subdirectory(libpng-1.6.44)
-elseif(COMPILE_LIBPNG_FROM_SOURCE)
+if(COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.44)
 endif()
 
