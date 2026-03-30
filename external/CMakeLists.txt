@@ -65,7 +65,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
         if (ZLIB_VERSION)
             set_target_properties(ZLIB::ZLIB PROPERTIES VERSION "${ZLIB_VERSION}")
         endif()
-        set_target_properties(ZLIB::ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_LIBRARIES} LINK_LIBRARIES ${ZLIB_LIBRARIES})
+        set_target_properties(ZLIB::ZLIB PROPERTIES IMPORTED_LOCATION "${ZLIB_LIBRARIES}" LINK_LIBRARIES "${ZLIB_LIBRARIES}")
         add_dependencies(ZLIB::ZLIB zlib)
     endif()
 
