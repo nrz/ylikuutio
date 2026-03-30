@@ -44,7 +44,21 @@ target_link_libraries(GLEW_200
     ${EXTRA_LIBS}
 )
 
-if(COMPILE_ZLIB_FROM_SOURCE)
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+    # Make the ALIAS that libpng expects, if necessary
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
+        set_target_properties(ZLIB::ZLIB PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${ZLIB_INCLUDE_DIRS})
+
+        if (ZLIB_VERSION)
+            set_target_properties(ZLIB::ZLIB PROPERTIES VERSION "${ZLIB_VERSION}")
+        endif()
+        set_target_properties(ZLIB::ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_LIBRARIES} LINK_LIBRARIES ${ZLIB_LIBRARIES})
+        add_dependencies(ZLIB::ZLIB zlib)
+    endif()
+
+    add_subdirectory(zlib)
+elseif(COMPILE_ZLIB_FROM_SOURCE)
     # Make the ALIAS that libpng expects, if necessary
     if(NOT TARGET ZLIB::ZLIB)
         if(TARGET zlibstatic)
