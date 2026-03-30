@@ -60,7 +60,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     if(NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
         set_target_properties(ZLIB::ZLIB PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
-            ${ZLIB_INCLUDE_DIRS})
+            "${ZLIB_INCLUDE_DIRS}")
 
         if (ZLIB_VERSION)
             set_target_properties(ZLIB::ZLIB PROPERTIES VERSION "${ZLIB_VERSION}")
