@@ -45,8 +45,6 @@ target_link_libraries(GLEW_200
 )
 
 if(COMPILE_ZLIB_FROM_SOURCE)
-    add_subdirectory(zlib)
-
     # Make the ALIAS that libpng expects, if necessary
     if(NOT TARGET ZLIB::ZLIB)
         if(TARGET zlibstatic)
@@ -55,6 +53,8 @@ if(COMPILE_ZLIB_FROM_SOURCE)
             add_library(ZLIB::ZLIB ALIAS zlib)
         endif()
     endif()
+
+    add_subdirectory(zlib)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
