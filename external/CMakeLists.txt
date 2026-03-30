@@ -69,6 +69,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
         add_dependencies(ZLIB::ZLIB zlib)
     endif()
 
+    set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:zlib/lib/pkgconfig")
+
     set(PNG_SHARED CACHE INTERNAL OFF)
     set(PNG_TESTS CACHE INTERNAL OFF)
     set(PNG_TOOLS CACHE INTERNAL OFF)
