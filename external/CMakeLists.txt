@@ -59,6 +59,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     # Make the ALIAS that libpng expects, if necessary
     if(NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
+        set(ZLIB_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/zlib)
         set_target_properties(ZLIB::ZLIB PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
             "${ZLIB_INCLUDE_DIRS}")
 
