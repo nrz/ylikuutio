@@ -174,7 +174,6 @@ include_directories(
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
-    external/soloud/include/
     .
     )
 
@@ -209,7 +208,6 @@ set(ALL_LIBS
     pugixml
     miniz
     OpenFBX
-    soloud
     )
 
 if (COMPILE_SDL_FROM_SOURCE)
@@ -1216,11 +1214,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
     else()
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio soloud SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
     endif()
 
     include(GoogleTest)

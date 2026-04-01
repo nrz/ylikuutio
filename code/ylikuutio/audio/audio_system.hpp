@@ -20,9 +20,6 @@
 
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
-#include "soloud.h"
-#include "soloud_wavstream.h"
-
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <list>          // std::list
@@ -71,11 +68,6 @@ namespace yli::audio
             yli::memory::ConstructibleModule constructible_module;
 
             yli::ontology::Universe& universe;
-
-            SoLoud::Soloud soloud;        // SoLoud engine.
-            SoLoud::WavStream wav_stream; // Audio stream (from a file).
-
-            int sound_handle { 0 };
 
             std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
             std::string current_playlist;                                         // name of current playlist.

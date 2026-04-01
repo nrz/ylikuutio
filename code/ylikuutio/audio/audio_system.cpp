@@ -18,11 +18,7 @@
 #include "audio_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
-#include "soloud.h"
-#include "soloud_wavstream.h"
-
 // Include standard headers
-#include <iostream> // std::cerr
 #include <list>     // std::list
 #include <string>   // std::string
 
@@ -31,8 +27,6 @@ namespace yli::audio
     AudioSystem::AudioSystem(yli::ontology::Universe& universe)
         : universe { universe }
     {
-        this->soloud.init();
-
         this->current_playlist = ""; // no current playlist.
         this->loop = true;           // loop playlist.
     }
@@ -43,7 +37,7 @@ namespace yli::audio
 
         if (!this->universe.get_is_silent())
         {
-            this->soloud.deinit();
+            // TODO: Deinit if needed!
         }
     }
 
@@ -57,16 +51,7 @@ namespace yli::audio
         // There's no sound with that filename loaded yet, so load it now.
         if (!this->universe.get_is_silent())
         {
-            SoLoud::result loaded = this->wav_stream.load(audio_file.c_str());
-
-            if (loaded != SoLoud::SO_NO_ERROR)
-            {
-                // Loading the sound failed.
-                std::cerr << "Loading WAV file " << audio_file << " failed.\n";
-                return false;
-            }
-
-            this->sound_handle = soloud.play(this->wav_stream);
+            // TODO: load and play the file!
         }
 
         return true;
@@ -118,11 +103,9 @@ namespace yli::audio
             // This function checks if a playlist is running.
             // if yes, then if the the previous sound has ended,
             // its memory gets freed and a new sound gets started.
-            if (this->current_playlist.size() > 0 &&
-                    this->soloud.getVoiceCount() == 0)
+            if (this->current_playlist.size() > 0) // TODO: check also if any voice is playing!
             {
                 // OK, there is a sound which might be playing, so let's check its status.
-                this->soloud.stop(this->sound_handle);
 
                 // play the next sound.
 
