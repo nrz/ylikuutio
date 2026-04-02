@@ -20,7 +20,7 @@
 // Include standard headers
 #include <fstream>  // std::ifstream
 #include <ios>      // std::ios
-#include <iostream> // std::cout, std::cerr
+#include <iostream> // std::cout
 #include <iterator> // std::istream_iterator
 #include <optional> // std::optional
 #include <sstream>  // std::stringstream

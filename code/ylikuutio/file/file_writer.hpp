@@ -21,7 +21,7 @@
 // Include standard headers
 #include <fstream>  // std::ifstream
 #include <ios>      // std::ios
-#include <iostream> // std::cout, std::cerr
+#include <iostream> // std::cout
 #include <string>   // std::string
 #include <vector>   // std::vector
 
