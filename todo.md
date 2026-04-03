@@ -6,7 +6,6 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] LIBRARIES/AUDIO Replace SoLoud with SDL3 audio. https://examples.libsdl.org/SDL3/audio/
 - [ ] LIBRARIES/AUDIO Use Steam Audio for 3D audio. https://valvesoftware.github.io/steam-audio/
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
@@ -401,3 +400,4 @@
 - [x] HIRVI/AI Implement `hirvi::MooAbility` placeholder class that inherits `Ability`.
 - [x] HIRVI Replace `Cat`/`Elk`/`PoliceCar`/`PoliceDog`/`PoliceHelicopter`/`PoliceHorse`/`PoliceTrain`/`PoliceTram`/`Train` instances with `Holobiont` instances.
 - [x] HIRVI/AI Replace `LocomotionModule` instances with instances of derived classes of `Ability`.
+- [x] LIBRARIES/AUDIO Replace SoLoud with SDL3 audio. https://examples.libsdl.org/SDL3/audio/
