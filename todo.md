@@ -6,7 +6,8 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] LIBRARIES/AUDIO Replace SoLoud with Steam Audio. https://valvesoftware.github.io/steam-audio/
+- [ ] LIBRARIES/AUDIO Replace SoLoud with SDL3 audio. https://examples.libsdl.org/SDL3/audio/
+- [ ] LIBRARIES/AUDIO Use Steam Audio for 3D audio. https://valvesoftware.github.io/steam-audio/
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
 - [ ] AI/YLILISP Implement new `BrainLispModule` class, inherits `GenericLispModule`, knows `ParentOfSkillsModule`, can be composited into derived types of `Movable`.
