@@ -20,9 +20,12 @@
 
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
+#include <SDL3/SDL.h>
+
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <list>          // std::list
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
@@ -56,6 +59,7 @@ namespace yli::audio
             void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
             void play_playlist(const std::string& playlist);
             void update();
+            void next_song_from_playlist();
             void pause();
             void continue_after_pause();
             void clear_playlist(const std::string& playlist);
@@ -69,9 +73,15 @@ namespace yli::audio
 
             yli::ontology::Universe& universe;
 
+            SDL_AudioSpec spec;
+            SDL_AudioStream* stream { nullptr };
+            Uint8* wav_data         { nullptr };
+            Uint32 wav_data_len     { 0 };
+
             std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
             std::string current_playlist;                                         // name of current playlist.
             std::list<std::string>::iterator current_playlist_sound_iterator;
+            Uint32 bytes_put { 0 };
             bool loop { false };
     };
 }

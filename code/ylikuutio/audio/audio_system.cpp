@@ -18,7 +18,10 @@
 #include "audio_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 
+#include <SDL3/SDL.h>
+
 // Include standard headers
+#include <iostream> // std::cerr
 #include <list>     // std::list
 #include <string>   // std::string
 
@@ -51,7 +54,23 @@ namespace yli::audio
         // There's no sound with that filename loaded yet, so load it now.
         if (!this->universe.get_is_silent())
         {
-            // TODO: load and play the file!
+            char* wav_path = nullptr;
+            SDL_asprintf(&wav_path, "%s%s", SDL_GetBasePath(), audio_file.c_str());
+            if (!SDL_LoadWAV(wav_path, &this->spec, &this->wav_data, &this->wav_data_len))
+            {
+                std::cerr << "ERROR: `AudioSystem::load_and_play`: loading WAV file " << std::string(wav_path) << " failed!\n";
+                return false;
+            }
+
+            this->stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &this->spec, nullptr, nullptr);
+            if (this->stream == nullptr)
+            {
+                std::cerr << "ERROR: `AudioSystem::load_and_play`: creating audio stream for file " << std::string(wav_path) << " failed!\n";
+                return false;
+            }
+
+            // Start playing the stream.
+            SDL_ResumeAudioStreamDevice(this->stream);
         }
 
         return true;
@@ -98,36 +117,61 @@ namespace yli::audio
 
     void AudioSystem::update()
     {
-        if (!this->universe.get_is_silent())
+        if (!this->universe.get_is_silent() && this->current_playlist.size() > 0)
         {
             // This function checks if a playlist is running.
             // if yes, then if the the previous sound has ended,
             // its memory gets freed and a new sound gets started.
-            if (this->current_playlist.size() > 0) // TODO: check also if any voice is playing!
+
+            const int bytes_queued = SDL_GetAudioStreamQueued(this->stream);
+
+            if (bytes_queued == 0 && this->bytes_put == this->wav_data_len) [[unlikely]]
             {
-                // OK, there is a sound which might be playing, so let's check its status.
+                // Song ended.
+                SDL_FlushAudioStream(this->stream);
+                SDL_ClearAudioStream(this->stream);
+                this->bytes_put = 0;
 
-                // play the next sound.
+                // Release memory.
+                SDL_free(this->wav_data);
 
-                if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
-                {
-                    // Next sound.
-                    this->load_and_play(*this->current_playlist_sound_iterator);
-                }
-                else
-                {
-                    // The previous sound was the last sound.
-                    if (this->loop)
-                    {
-                        // Start from the first.
-                        this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
-                        this->load_and_play(*this->current_playlist_sound_iterator);
-                    }
-                    else
-                    {
-                        this->current_playlist = ""; // no current playlist.
-                    }
-                }
+                this->next_song_from_playlist();
+            }
+            else if (bytes_queued == -1) [[unlikely]]
+            {
+                // ERROR!
+                // TODO: log the error!
+            }
+            else if (bytes_queued < static_cast<int>(this->wav_data_len))
+            {
+                // Feed more data to the stream.
+                SDL_PutAudioStreamData(this->stream, this->wav_data, this->wav_data_len - this->bytes_put);
+                this->bytes_put = this->wav_data_len;
+            }
+        }
+    }
+
+    void AudioSystem::next_song_from_playlist()
+    {
+        // Next song from the playlist.
+
+        if (++this->current_playlist_sound_iterator != this->playlist_map[this->current_playlist].end())
+        {
+            // Next sound.
+            this->load_and_play(*this->current_playlist_sound_iterator);
+        }
+        else
+        {
+            // The previous sound was the last sound.
+            if (this->loop)
+            {
+                // Start from the first.
+                this->current_playlist_sound_iterator = this->playlist_map[this->current_playlist].begin();
+                this->load_and_play(*this->current_playlist_sound_iterator);
+            }
+            else
+            {
+                this->current_playlist = ""; // no current playlist.
             }
         }
     }
