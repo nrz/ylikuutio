@@ -366,10 +366,11 @@ A: YLisp does not clearly communicate that the language is related to Ylikuutio
 * multiple scenes in the same `Universe` (`activate` console command)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 * GPGPU using `yli::ontology::ComputeTask` class (see also [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) for an article in Finnish).
+* full support for different keyboard layouts in console
+* audio with SDL.
 
 ## Future developments underway
-* audio with Steam Audio.
-* full support for different keyboard layouts in console
+* 3D audio with Steam Audio.
 * custom keyboard mappings
 * command to read console command input from file
 * command to record gameplay
@@ -380,16 +381,10 @@ A: YLisp does not clearly communicate that the language is related to Ylikuutio
 * partially transparent 2D text
 * 3D text
 * partially transparent 3D text
-* coordinates relative to other objects, not only to `Universe` object
-* practically infinite voxel worlds (limited by `float` precision)
 * collision detection between objects
 * octree space partitioning
 * possibility to create scenes with different spatial scales
 * background loading of `Scene`s
-* objects (`Species` in Ylikuutio terminology) with modifiable vertices
-* making holes in objects
-* splitting of objects into 2 or more pieces
-* cementing of 2 or more objects into one
 * morphing between objects (`Species` in Ylikuutio terminology)
 * morphing between objects (`Species`) and 3D text (`Glyph`s)
 * ray casting for vertex selection and vertex modifications
@@ -406,9 +401,8 @@ A: YLisp does not clearly communicate that the language is related to Ylikuutio
 * more physics
 * artificial intelligence (AI) creatures
 * A\* and Theta\* pathfinding
-* visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
-* Network gaming
+* network gaming
 
 ### Libraries currently in use
 * The source code from [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](https://www.opengl-tutorial.org/download/).
