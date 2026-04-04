@@ -215,10 +215,6 @@ if (COMPILE_SDL_FROM_SOURCE)
         ${ALL_LIBS}
         SDL3-static
         )
-else()
-    set(ALL_LIBS
-        ${ALL_LIBS}
-        )
 endif()
 
 if (COMPILE_ZLIB_FROM_SOURCE)
