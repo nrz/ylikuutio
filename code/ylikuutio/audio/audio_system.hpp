@@ -21,6 +21,7 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
 #include <SDL3/SDL.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -52,6 +53,7 @@ namespace yli::audio
 
             ~AudioSystem();
 
+            bool init();
             void terminate();
 
             bool load_and_play(const std::string& audio_file);
@@ -73,10 +75,8 @@ namespace yli::audio
 
             yli::ontology::Universe& universe;
 
-            SDL_AudioSpec spec;
-            SDL_AudioStream* stream { nullptr };
-            Uint8* wav_data         { nullptr };
-            Uint32 wav_data_len     { 0 };
+            MIX_Mixer* mixer        { nullptr };
+            MIX_Track* music_track  { nullptr };
 
             std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
             std::string current_playlist;                                         // name of current playlist.

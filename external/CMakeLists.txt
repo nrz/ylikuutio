@@ -5,6 +5,7 @@ add_definitions(
 
 include_directories(
     SDL/include/
+    SDL_mixer/include/
     glew-2.0.0/include/
     glm/
     zlib/
@@ -107,4 +108,8 @@ if(COMPILE_SDL_FROM_SOURCE)
     set(BUILD_SHARED_LIBS OFF)
     set(SDL_X11_XTEST OFF)
     add_subdirectory(SDL)
+endif()
+
+if(COMPILE_SDL_MIXER_FROM_SOURCE)
+    add_subdirectory(SDL_mixer)
 endif()

@@ -197,6 +197,7 @@ namespace hirvi
 
         if (this->audio_system != nullptr)
         {
+            this->audio_system->add_to_playlist("Hirvi_playlist", "414269__jpmusic82__arp-bass-loop-128-bpm.mp3");
             this->audio_system->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
             this->audio_system->add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
             this->audio_system->play_playlist("Hirvi_playlist");

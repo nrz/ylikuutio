@@ -29,6 +29,9 @@ endif()
 # Modify the below line to control whether to compile SDL from source on Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
 
+# Modify the below line to control whether to compile SDL mixer from source on Linux.
+set(COMPILE_SDL_MIXER_FROM_SOURCE true)
+
 # Modify the below line to control whether to compile zlib from source on Linux.
 set(COMPILE_ZLIB_FROM_SOURCE false)
 
@@ -60,6 +63,7 @@ elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Crosscompiling from Linux to Windows must compile SDL and libpng from source.
     # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
+    set(COMPILE_SDL_MIXER_FROM_SOURCE true)
 
     # Crosscompiling from Linux to Windows must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
@@ -72,6 +76,7 @@ elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
+    set(COMPILE_SDL_MIXER_FROM_SOURCE true)
 
     # Native compiling on MacOS must compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE true)
@@ -84,6 +89,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Native compiling on Windows must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
+    set(COMPILE_SDL_MIXER_FROM_SOURCE true)
 
     # Native compiling on Windows must not compile zlib from source.
     set(COMPILE_ZLIB_FROM_SOURCE false)
@@ -128,6 +134,12 @@ if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
         external/SDL/include/
         )
+endif()
+
+if(COMPILE_SDL_MIXER_FROM_SOURCE)
+    include_directories(
+        external/SDL_mixer/include/
+    )
 endif()
 
 if(COMPILE_ZLIB_FROM_SOURCE)
@@ -209,6 +221,13 @@ set(ALL_LIBS
     miniz
     OpenFBX
     )
+
+if (COMPILE_SDL_MIXER_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        SDL3_mixer-static
+        )
+endif()
 
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
@@ -1210,11 +1229,11 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
     else()
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
     endif()
 
     include(GoogleTest)

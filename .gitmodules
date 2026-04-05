@@ -22,3 +22,6 @@
 [submodule "external/libpng"]
 	path = external/libpng
 	url = https://github.com/pnggroup/libpng
+[submodule "external/SDL_mixer"]
+	path = external/SDL_mixer
+	url = https://github.com/libsdl-org/SDL_mixer

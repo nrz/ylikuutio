@@ -17,8 +17,10 @@
 
 #include "audio_system.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 #include <SDL3/SDL.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 // Include standard headers
 #include <iostream> // std::cerr
@@ -30,6 +32,7 @@ namespace yli::audio
     AudioSystem::AudioSystem(yli::ontology::Universe& universe)
         : universe { universe }
     {
+        this->init();
         this->current_playlist = ""; // no current playlist.
         this->loop = true;           // loop playlist.
     }
@@ -44,6 +47,36 @@ namespace yli::audio
         }
     }
 
+    bool AudioSystem::init()
+    {
+        if (!MIX_Init())
+        {
+            std::cerr << "ERROR: `AudioSystem::init`: initializing SDL_mixer library failed!\n";
+            yli::sdl::print_sdl_error();
+            return false;
+        }
+
+        this->mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
+
+        if (this->mixer == nullptr)
+        {
+            std::cerr << "ERROR: `AudioSystem::init`: creating mixer failed!\n";
+            yli::sdl::print_sdl_error();
+            return false;
+        }
+
+        this->music_track = MIX_CreateTrack(this->mixer);
+
+        if (this->music_track == nullptr)
+        {
+            std::cerr << "ERROR: `AudioSystem::init`: creating music track failed!\n";
+            yli::sdl::print_sdl_error();
+            return false;
+        }
+
+        return true;
+    }
+
     void AudioSystem::terminate()
     {
         this->constructible_module.alive = false;
@@ -54,23 +87,20 @@ namespace yli::audio
         // There's no sound with that filename loaded yet, so load it now.
         if (!this->universe.get_is_silent())
         {
-            char* wav_path = nullptr;
-            SDL_asprintf(&wav_path, "%s%s", SDL_GetBasePath(), audio_file.c_str());
-            if (!SDL_LoadWAV(wav_path, &this->spec, &this->wav_data, &this->wav_data_len))
+            char* audio_file_path = nullptr;
+            SDL_asprintf(&audio_file_path, "%s%s", SDL_GetBasePath(), audio_file.c_str());
+            MIX_Audio* const audio = MIX_LoadAudio(this->mixer, audio_file_path, false);
+            if (audio == nullptr)
             {
-                std::cerr << "ERROR: `AudioSystem::load_and_play`: loading WAV file " << std::string(wav_path) << " failed!\n";
+                std::cerr << "ERROR: `AudioSystem::load_and_play`: loading audio file " << std::string(audio_file_path) << " failed!\n";
+                yli::sdl::print_sdl_error();
                 return false;
             }
 
-            this->stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &this->spec, nullptr, nullptr);
-            if (this->stream == nullptr)
-            {
-                std::cerr << "ERROR: `AudioSystem::load_and_play`: creating audio stream for file " << std::string(wav_path) << " failed!\n";
-                return false;
-            }
+            SDL_free(audio_file_path);
 
-            // Start playing the stream.
-            SDL_ResumeAudioStreamDevice(this->stream);
+            MIX_SetTrackAudio(this->music_track, audio);
+            MIX_PlayTrack(this->music_track, 0); // Play the track!
         }
 
         return true;
@@ -123,30 +153,10 @@ namespace yli::audio
             // if yes, then if the the previous sound has ended,
             // its memory gets freed and a new sound gets started.
 
-            const int bytes_queued = SDL_GetAudioStreamQueued(this->stream);
-
-            if (bytes_queued == 0 && this->bytes_put == this->wav_data_len) [[unlikely]]
+            if (!MIX_TrackPlaying(this->music_track))
             {
                 // Song ended.
-                SDL_FlushAudioStream(this->stream);
-                SDL_ClearAudioStream(this->stream);
-                this->bytes_put = 0;
-
-                // Release memory.
-                SDL_free(this->wav_data);
-
                 this->next_song_from_playlist();
-            }
-            else if (bytes_queued == -1) [[unlikely]]
-            {
-                // ERROR!
-                // TODO: log the error!
-            }
-            else if (bytes_queued < static_cast<int>(this->wav_data_len))
-            {
-                // Feed more data to the stream.
-                SDL_PutAudioStreamData(this->stream, this->wav_data, this->wav_data_len - this->bytes_put);
-                this->bytes_put = this->wav_data_len;
             }
         }
     }
