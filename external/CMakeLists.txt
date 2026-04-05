@@ -104,5 +104,7 @@ target_link_libraries(OpenFBX miniz)
 set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")
 
 if(COMPILE_SDL_FROM_SOURCE)
+    set(BUILD_SHARED_LIBS OFF)
+    set(SDL_X11_XTEST OFF)
     add_subdirectory(SDL)
 endif()
