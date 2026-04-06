@@ -6,6 +6,7 @@
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
 - [ ] AI/YLILISP Implement new `BrainLispModule` class, inherits `GenericLispModule`, knows `ParentOfSkillsModule`, can be composited into derived types of `Movable`.
@@ -30,7 +31,6 @@
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
 - [ ] TOOLS Make YliEdit and HirviEdit editors start with an empty scene.
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
-- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
 - [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
