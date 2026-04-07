@@ -13,6 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v6
       with:
+        submodules: recursive
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
     - name: Install Build Wrapper
