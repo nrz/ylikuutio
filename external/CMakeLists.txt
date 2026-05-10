@@ -3,13 +3,25 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(SDL/include/)
+endif()
+
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(SDL_mixer/include/)
+endif()
+
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(zlib/)
+endif()
+
+if(COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(libpng-1.6.44/)
+endif()
+
 include_directories(
-    SDL/include/
-    SDL_mixer/include/
     glew-2.0.0/include/
     glm/
-    zlib/
-    libpng-1.6.44/
     pugixml/src/
     OpenFBX/src/
     )

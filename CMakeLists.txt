@@ -234,6 +234,11 @@ if (COMPILE_SDL_FROM_SOURCE)
         ${ALL_LIBS}
         SDL3-static
         )
+    else()
+        set(ALL_LIBS
+            ${ALL_LIBS}
+            SDL3
+        )
 endif()
 
 if (COMPILE_ZLIB_FROM_SOURCE)
@@ -1229,11 +1234,21 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     endif()
 
     if (DEFINED "PNG_LIBRARIES")
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        if(COMPILE_SDL_FROM_SOURCE)
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        else()
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+        endif()
     else()
-        target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        if(COMPILE_SDL_FROM_SOURCE)
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        else()
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+        endif()
     endif()
 
     include(GoogleTest)
