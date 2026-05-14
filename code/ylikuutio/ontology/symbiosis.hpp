@@ -102,7 +102,7 @@ namespace yli::ontology
                     GenericParentModule* const ecosystem_or_scene_parent_module,
                     GenericMasterModule* const pipeline_master_module);
 
-            ~Symbiosis() = default;
+            ~Symbiosis() override = default;
 
         public:
             Symbiosis(const Symbiosis&) = delete;            // Delete copy constructor.

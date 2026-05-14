@@ -40,7 +40,7 @@ namespace yli::ontology
             ParentOfSkillsModule(const ParentOfSkillsModule&) = delete;            // Delete copy constructor.
             ParentOfSkillsModule& operator=(const ParentOfSkillsModule&) = delete; // Delete copy assignment.
 
-            ~ParentOfSkillsModule() = default;
+            ~ParentOfSkillsModule() override = default;
     };
 }
 

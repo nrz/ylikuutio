@@ -99,7 +99,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     const UniverseStruct& universe_struct);
 
-            ~Universe();
+            ~Universe() override;
 
         public:
             Universe(const Universe&) = delete;            // Delete copy constructor.

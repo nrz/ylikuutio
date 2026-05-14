@@ -43,7 +43,7 @@ namespace yli::ontology
                     GenericMasterModule* const species_master_module,
                     GenericMasterModule* const /* movable_controller_master_module */);
 
-            ~Terrain() = default;
+            ~Terrain() override = default;
 
             Terrain(const Terrain&) = delete;            // Delete copy constructor.
             Terrain &operator=(const Terrain&) = delete; // Delete copy assignment.

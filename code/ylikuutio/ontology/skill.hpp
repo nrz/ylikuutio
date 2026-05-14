@@ -50,7 +50,7 @@ namespace yli::ontology
             Skill(const Skill&) = delete;            // Delete copy constructor.
             Skill &operator=(const Skill&) = delete; // Delete copy assignment.
 
-            virtual ~Skill() = default;
+            ~Skill() override = default;
 
             Holobiont* get_holobiont() const;
 

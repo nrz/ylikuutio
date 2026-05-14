@@ -49,7 +49,7 @@ namespace hirvi
             RunAbility(const RunAbility&) = delete;            // Delete copy constructor.
             RunAbility &operator=(const RunAbility&) = delete; // Delete copy assignment.
 
-            virtual ~RunAbility() = default;
+            ~RunAbility() override = default;
     };
 }
 

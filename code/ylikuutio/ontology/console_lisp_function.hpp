@@ -60,7 +60,7 @@ namespace yli::ontology
             ConsoleLispFunction(const ConsoleLispFunction&) = delete;            // Delete copy constructor.
             ConsoleLispFunction &operator=(const ConsoleLispFunction&) = delete; // Delete copy assignment.
 
-            virtual ~ConsoleLispFunction() = default;
+            ~ConsoleLispFunction() override = default;
 
             Console* get_console() const;
 

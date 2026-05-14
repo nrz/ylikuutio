@@ -54,7 +54,7 @@ namespace yli::ontology
                     GenericParentModule* const callback_object_parent_module,
                     yli::data::AnyValue&& any_value);
 
-            ~CallbackParameter() = default;
+            ~CallbackParameter() override = default;
 
         public:
             const yli::data::AnyValue& get_any_value() const;

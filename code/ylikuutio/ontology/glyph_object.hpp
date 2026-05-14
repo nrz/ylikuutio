@@ -53,7 +53,7 @@ namespace yli::ontology
             GlyphObject(const GlyphObject&) = delete;            // Delete copy constructor.
             GlyphObject &operator=(const GlyphObject&) = delete; // Delete copy assignment.
 
-            virtual ~GlyphObject() = default;
+            ~GlyphObject() override = default;
 
             Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

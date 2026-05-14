@@ -106,7 +106,7 @@ namespace yli::ontology
                     GenericParentModule* const universe_parent_module,
                     GenericMasterModule* const font_2d_master_module);
 
-            ~Console();
+            ~Console() override;
 
         public:
             Console(const Console&) = delete;            // Delete copy constructor.

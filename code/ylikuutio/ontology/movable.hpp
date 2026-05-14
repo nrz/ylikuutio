@@ -88,7 +88,7 @@ namespace yli::ontology
             Movable(const Movable&) = delete;            // Delete copy constructor.
             Movable& operator=(const Movable&) = delete; // Delete copy assignment.
 
-            virtual ~Movable() = default;
+            ~Movable() override = default;
 
             const glm::vec3& get_cartesian_coordinates() const;
             void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);

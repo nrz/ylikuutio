@@ -53,7 +53,7 @@ namespace yli::ontology
             GenericConsoleLispFunctionOverload(const GenericConsoleLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericConsoleLispFunctionOverload &operator=(const GenericConsoleLispFunctionOverload&) = delete; // Delete copy assignment.
 
-            virtual ~GenericConsoleLispFunctionOverload() = default;
+            ~GenericConsoleLispFunctionOverload() override = default;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryAllocator;

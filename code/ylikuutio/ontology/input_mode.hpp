@@ -61,7 +61,7 @@ namespace yli::ontology
                     ParentOfInputModesModule* const parent_module,
                     GenericMasterModule* const console_master_module);
 
-            ~InputMode() = default;
+            ~InputMode() override = default;
 
         public:
             void activate() override;

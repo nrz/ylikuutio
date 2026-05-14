@@ -67,7 +67,7 @@ namespace yli::ontology
                     GenericMasterModule* const material_master_module);
 
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
-            ~Glyph() = default;
+            ~Glyph() override = default;
 
         public:
             Entity* get_parent() const override;

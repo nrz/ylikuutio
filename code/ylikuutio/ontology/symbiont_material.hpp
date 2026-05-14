@@ -55,7 +55,7 @@ namespace yli::ontology
                     const SymbiontMaterialStruct& symbiont_material_struct,
                     GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
 
-            ~SymbiontMaterial() = default;
+            ~SymbiontMaterial() override = default;
 
         public:
             SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.

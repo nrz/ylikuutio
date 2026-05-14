@@ -67,8 +67,7 @@ namespace yli::ontology
                     const CallbackObjectStruct& callback_object_struct,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
                     GenericParentModule* const callback_engine_parent_module);
-
-            virtual ~CallbackObject() = default;
+            ~CallbackObject() override = default;
 
         public:
             CallbackParameter* create_callback_parameter(

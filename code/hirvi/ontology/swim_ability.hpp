@@ -49,7 +49,7 @@ namespace hirvi
             SwimAbility(const SwimAbility&) = delete;            // Delete copy constructor.
             SwimAbility &operator=(const SwimAbility&) = delete; // Delete copy assignment.
 
-            virtual ~SwimAbility() = default;
+            ~SwimAbility() override = default;
     };
 }
 

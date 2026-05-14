@@ -81,7 +81,7 @@ namespace yli::ontology
                     GenericParentModule* const ecosystem_or_scene_parent_module,
                     GenericMasterModule* const material_master_module);
 
-            ~Species() = default;
+            ~Species() override = default;
 
         public:
             Species(const Species&) = delete;            // Delete copy constructor.

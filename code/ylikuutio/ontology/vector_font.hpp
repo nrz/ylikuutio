@@ -75,7 +75,7 @@ namespace yli::ontology
                     const VectorFontStruct& vector_font_struct,
                     GenericParentModule* const material_parent_module);
 
-            ~VectorFont() = default;
+            ~VectorFont() override = default;
 
         public:
             VectorFont(const VectorFont&) = delete;            // Delete copy constructor.

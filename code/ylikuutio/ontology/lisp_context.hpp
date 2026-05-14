@@ -46,7 +46,7 @@ namespace yli::ontology
             LispContext(const LispContext&) = delete;            // Delete copy constructor.
             LispContext &operator=(const LispContext&) = delete; // Delete copy assignment.
 
-            virtual ~LispContext() = default;
+            ~LispContext() override = default;
     };
 }
 

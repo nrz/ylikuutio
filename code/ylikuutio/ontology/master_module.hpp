@@ -68,7 +68,7 @@ namespace yli::ontology
             MasterModule(const MasterModule&) = delete;            // Delete copy constructor.
             MasterModule& operator=(const MasterModule&) = delete; // Delete copy assignment.
 
-            ~MasterModule()
+            ~MasterModule() override
             {
                 for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
                 {

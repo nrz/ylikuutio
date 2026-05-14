@@ -51,7 +51,7 @@ namespace yli::ontology
             GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
             GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
 
-            virtual ~GenericParentModule();
+            ~GenericParentModule() override;
 
             // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
             GenericParentModule* get() const noexcept;

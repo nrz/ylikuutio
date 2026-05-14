@@ -49,7 +49,7 @@ namespace hirvi
             FlyAbility(const FlyAbility&) = delete;            // Delete copy constructor.
             FlyAbility &operator=(const FlyAbility&) = delete; // Delete copy assignment.
 
-            virtual ~FlyAbility() = default;
+            ~FlyAbility() override = default;
     };
 }
 

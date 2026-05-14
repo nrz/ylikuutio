@@ -81,7 +81,7 @@ namespace yli::ontology
                     GenericParentModule* const scene_parent_module,
                     GenericMasterModule* const callback_engine_master_module);
 
-            ~MovableController() = default;
+            ~MovableController() override = default;
 
         public:
             Entity* get_parent() const override;

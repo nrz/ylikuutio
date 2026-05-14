@@ -71,7 +71,7 @@ namespace yli::ontology
                     const ComputeTaskStruct& compute_task_struct,
                     GenericParentModule* const pipeline_parent_module);
 
-            ~ComputeTask();
+            ~ComputeTask() override;
 
         public:
             ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.

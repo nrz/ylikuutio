@@ -68,7 +68,7 @@ namespace yli::ontology
                     const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
                     GenericParentModule* const material_parent_module);
 
-            ~ShapeshifterTransformation() = default;
+            ~ShapeshifterTransformation() override = default;
 
         public:
             Entity* get_parent() const override;

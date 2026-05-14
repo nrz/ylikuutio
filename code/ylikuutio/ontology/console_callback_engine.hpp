@@ -58,7 +58,7 @@ namespace yli::ontology
                     const ConsoleCallbackEngineStruct&,
                     GenericParentModule* const console_parent_module);
 
-            ~ConsoleCallbackEngine() = default;
+            ~ConsoleCallbackEngine() override = default;
 
         public:
             template<typename ApprenticeType>

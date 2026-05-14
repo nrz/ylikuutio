@@ -74,7 +74,7 @@ namespace yli::ontology
                     GenericParentModule* const entity_parent_module,
                     yli::data::AnyValue&& any_value);
 
-            ~Variable() = default;
+            ~Variable() override = default;
 
         public:
             Variable(const Variable&) = delete;            // Delete copy constructor.

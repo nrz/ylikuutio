@@ -80,7 +80,7 @@ namespace yli::ontology
                 this->type_string = "yli::ontology::ConsoleLispFunctionOverload*";
             }
 
-            ~ConsoleLispFunctionOverload() = default;
+            ~ConsoleLispFunctionOverload() override = default;
 
         public:
             ConsoleLispFunctionOverload(const ConsoleLispFunctionOverload&) = delete;            // Delete copy constructor.

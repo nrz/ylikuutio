@@ -49,7 +49,7 @@ namespace hirvi
             ClimbAbility(const ClimbAbility&) = delete;            // Delete copy constructor.
             ClimbAbility &operator=(const ClimbAbility&) = delete; // Delete copy assignment.
 
-            virtual ~ClimbAbility() = default;
+            ~ClimbAbility() override = default;
     };
 }
 

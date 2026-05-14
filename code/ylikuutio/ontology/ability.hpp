@@ -50,7 +50,7 @@ namespace yli::ontology
             Ability(const Ability&) = delete;            // Delete copy constructor.
             Ability &operator=(const Ability&) = delete; // Delete copy assignment.
 
-            virtual ~Ability() = default;
+            ~Ability() override = default;
 
             Symbiosis* get_symbiosis() const;
 

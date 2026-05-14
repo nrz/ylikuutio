@@ -49,7 +49,7 @@ namespace yli::ontology
             AudioTrack(const AudioTrack&) = delete;            // Delete copy constructor.
             AudioTrack &operator=(const AudioTrack&) = delete; // Delete copy assignment.
 
-            virtual ~AudioTrack() = default;
+            ~AudioTrack() override = default;
 
             const std::string& get_filename() const;
 

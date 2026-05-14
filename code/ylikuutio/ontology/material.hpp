@@ -87,7 +87,7 @@ namespace yli::ontology
                     GenericParentModule* const ecosystem_or_scene_parent_module,
                     GenericMasterModule* const pipeline_master_module);
 
-            ~Material() = default;
+            ~Material() override = default;
 
         public:
             Material(const Material&) = delete;            // Delete copy constructor.

@@ -49,7 +49,7 @@ namespace hirvi
             JumpAbility(const JumpAbility&) = delete;            // Delete copy constructor.
             JumpAbility &operator=(const JumpAbility&) = delete; // Delete copy assignment.
 
-            virtual ~JumpAbility() = default;
+            ~JumpAbility() override = default;
     };
 }
 

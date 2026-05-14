@@ -60,7 +60,7 @@ namespace yli::ontology
                     const FontStruct& font_struct,
                     GenericParentModule* const universe_parent_module);
 
-            ~Font2d();
+            ~Font2d() override;
 
         public:
             Font2d(const Font2d&) = delete;            // Delete copy constructor.

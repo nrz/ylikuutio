@@ -41,7 +41,7 @@ namespace yli::ontology
             MasterOfInputModesModule(const MasterOfInputModesModule&) = delete;            // Delete copy constructor.
             MasterOfInputModesModule& operator=(const MasterOfInputModesModule&) = delete; // Delete copy assignment.
 
-            ~MasterOfInputModesModule() = default;
+            ~MasterOfInputModesModule() override = default;
 
             bool has_current_input_mode() const;
             void set_current_input_mode(InputMode* const input_mode);

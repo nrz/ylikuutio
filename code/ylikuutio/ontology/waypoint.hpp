@@ -51,7 +51,7 @@ namespace yli::ontology
             Waypoint(const Waypoint&) = delete;            // Delete copy constructor.
             Waypoint &operator=(const Waypoint&) = delete; // Delete copy assignment.
 
-            virtual ~Waypoint() = default;
+            ~Waypoint() override = default;
 
             Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

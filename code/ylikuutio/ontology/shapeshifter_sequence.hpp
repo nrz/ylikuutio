@@ -61,7 +61,7 @@ namespace yli::ontology
                     const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
                     GenericParentModule* const shapeshifter_transformation_parent_module);
 
-            ~ShapeshifterSequence() = default;
+            ~ShapeshifterSequence() override = default;
 
         public:
             Entity* get_parent() const override;

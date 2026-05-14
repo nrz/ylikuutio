@@ -92,7 +92,7 @@ namespace yli::ontology
                     const SceneStruct& scene_struct,
                     GenericParentModule* const universe_parent_module);
 
-            ~Scene();
+            ~Scene() override;
 
         public:
             Scene(const Scene&) = delete;            // Delete copy constructor.

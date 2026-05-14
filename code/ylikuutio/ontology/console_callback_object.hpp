@@ -52,7 +52,7 @@ namespace yli::ontology
     class ConsoleCallbackObject final : public Entity
     {
         public:
-            ~ConsoleCallbackObject() = default;
+            ~ConsoleCallbackObject() override = default;
 
             ConsoleCallbackObject(
                     yli::core::Application& application,

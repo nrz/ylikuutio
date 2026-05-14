@@ -96,7 +96,7 @@ namespace yli::ontology
                     GenericParentModule* const scene_parent_module,
                     GenericMasterModule* const movable_controller_master_module);
 
-            ~Camera() = default;
+            ~Camera() override = default;
 
         public:
             Camera(const Camera&) = delete;            // Delete copy constructor.

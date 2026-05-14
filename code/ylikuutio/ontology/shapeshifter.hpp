@@ -53,7 +53,7 @@ namespace yli::ontology
             Shapeshifter(const Shapeshifter&) = delete;            // Delete copy constructor.
             Shapeshifter &operator=(const Shapeshifter&) = delete; // Delete copy assignment.
 
-            virtual ~Shapeshifter() = default;
+            ~Shapeshifter() override = default;
 
             Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

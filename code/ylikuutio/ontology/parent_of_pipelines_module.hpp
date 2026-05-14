@@ -44,7 +44,7 @@ namespace yli::ontology
             ParentOfPipelinesModule(const ParentOfPipelinesModule&) = delete;            // Delete copy constructor.
             ParentOfPipelinesModule& operator=(const ParentOfPipelinesModule&) = delete; // Delete copy assignment.
 
-            ~ParentOfPipelinesModule() = default;
+            ~ParentOfPipelinesModule() override = default;
 
         private:
             // `PipelinePriorityQueue` is a priority queue for `Pipeline`s.

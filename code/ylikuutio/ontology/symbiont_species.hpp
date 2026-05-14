@@ -60,7 +60,7 @@ namespace yli::ontology
                     const SymbiontSpeciesStruct& symbiont_species_struct,
                     GenericParentModule* const symbiont_material_parent_module);
 
-            ~SymbiontSpecies() = default;
+            ~SymbiontSpecies() override = default;
 
         public:
             SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.

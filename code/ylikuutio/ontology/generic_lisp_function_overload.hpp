@@ -44,7 +44,7 @@ namespace yli::ontology
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
-            virtual ~GenericLispFunctionOverload() = default;
+            ~GenericLispFunctionOverload() override = default;
 
             virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
     };

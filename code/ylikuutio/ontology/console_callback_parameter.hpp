@@ -54,7 +54,7 @@ namespace yli::ontology
                     GenericParentModule* const console_callback_object_parent_module,
                     const yli::data::AnyValue& any_value);
 
-            ~ConsoleCallbackParameter() = default;
+            ~ConsoleCallbackParameter() override = default;
 
         public:
             const yli::data::AnyValue& get_any_value() const;

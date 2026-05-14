@@ -49,7 +49,7 @@ namespace hirvi
             MooAbility(const MooAbility&) = delete;            // Delete copy constructor.
             MooAbility &operator=(const MooAbility&) = delete; // Delete copy assignment.
 
-            virtual ~MooAbility() = default;
+            ~MooAbility() override = default;
     };
 }
 

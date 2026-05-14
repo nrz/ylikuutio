@@ -45,7 +45,7 @@ namespace yli::ontology
             GenericCallbackEngine(const GenericCallbackEngine&) = delete;            // Delete copy constructor.
             GenericCallbackEngine &operator=(const GenericCallbackEngine&) = delete; // Delete copy assignment.
 
-            virtual ~GenericCallbackEngine() = default;
+            ~GenericCallbackEngine() override = default;
 
             // execute all callbacks with a parameter.
             virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) = 0;

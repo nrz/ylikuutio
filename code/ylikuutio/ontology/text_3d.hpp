@@ -78,7 +78,7 @@ namespace yli::ontology
                     GenericMasterModule* const movable_controller_master_module,
                     GenericMasterModule* const vector_font_master_module);
 
-            ~Text3d() = default;
+            ~Text3d() override = default;
 
             Text3d(const Text3d&) = delete;            // Delete copy constructor.
             Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.

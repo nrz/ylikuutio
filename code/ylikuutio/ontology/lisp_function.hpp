@@ -41,7 +41,7 @@ namespace yli::ontology
                     Universe& universe,
                     const LispFunctionStruct& lisp_function_struct);
 
-            virtual ~LispFunction() = default;
+            ~LispFunction() override = default;
 
             LispFunction(const LispFunction&) = delete;            // Delete copy constructor.
             LispFunction& operator=(const LispFunction&) = delete; // Delete copy assignment.

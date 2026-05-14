@@ -64,7 +64,7 @@ namespace yli::ontology
                     const TextStruct& text_struct,
                     GenericParentModule* const font_2d_parent_module);
 
-            ~Text2d();
+            ~Text2d() override;
 
         public:
             Text2d(const Text2d&) = delete;            // Delete copy constructor.

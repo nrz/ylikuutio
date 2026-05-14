@@ -57,7 +57,7 @@ namespace yli::ontology
                     const EcosystemStruct& ecosystem_struct,
                     GenericParentModule* const universe_parent_module);
 
-            ~Ecosystem() = default;
+            ~Ecosystem() override = default;
 
         public:
             Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.

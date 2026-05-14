@@ -81,7 +81,7 @@ namespace yli::ontology
                     const PipelineStruct& pipeline_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module);
 
-            ~Pipeline();
+            ~Pipeline() override;
 
         public:
             Pipeline(const Pipeline&) = delete;            // Delete copy constructor.

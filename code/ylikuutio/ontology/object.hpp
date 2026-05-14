@@ -74,7 +74,7 @@ namespace yli::ontology
                     GenericMasterModule* const movable_controller_master_module,
                     GenericMasterModule* const species_master_module);
 
-            virtual ~Object() = default;
+            ~Object() override = default;
 
         public:
             Object(const Object&) = delete;            // Delete copy constructor.

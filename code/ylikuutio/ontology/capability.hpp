@@ -41,7 +41,7 @@ namespace yli::ontology
             Capability(const Capability&) = delete;            // Delete copy constructor.
             Capability &operator=(const Capability&) = delete; // Delete copy assignment.
 
-            virtual ~Capability() = default;
+            ~Capability() override = default;
     };
 }
 

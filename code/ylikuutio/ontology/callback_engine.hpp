@@ -79,8 +79,7 @@ namespace yli::ontology
                     Universe& universe,
                     const CallbackEngineStruct&,
                     GenericParentModule* const entity_parent_module);
-
-            virtual ~CallbackEngine() = default;
+            ~CallbackEngine() override = default;
 
         public:
             CallbackObject* create_callback_object();
