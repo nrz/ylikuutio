@@ -1037,32 +1037,42 @@ namespace yli::ontology
 
     std::optional<SDL_DisplayMode> Universe::get_preferred_display_mode() const
     {
-        std::optional<SDL_DisplayMode> preferred_display_mode = std::nullopt;
+        std::optional<std::size_t> preferred_display_mode_i = std::nullopt;
 
         std::size_t max_resolution = 0;
 
         for (std::size_t i = 0; i < this->display_modes.size(); i++)
         {
             const SDL_DisplayMode current_display_mode = this->display_modes.at(i);
+            std::cout << "Display mode:  " << i << "\n";
+            std::cout << "Width:         " << current_display_mode.w << "\n";
+            std::cout << "Height:        " << current_display_mode.h << "\n";
+            std::cout << "Pixel density: " << current_display_mode.pixel_density << "\n";
 
-            if (current_display_mode.w < 0 || current_display_mode.h < 0)
+            if (current_display_mode.w <= 0 || current_display_mode.h <= 0 || current_display_mode.pixel_density <= 0.0f)
             {
                 continue;
             }
 
-            if ((!preferred_display_mode) ||
-                    static_cast<std::size_t>(
-                        static_cast<float>(current_display_mode.w) *
-                        static_cast<float>(current_display_mode.h *
-                            current_display_mode.pixel_density))
-                    > max_resolution)
+            std::size_t resolution = static_cast<std::size_t>((current_display_mode.pixel_density * current_display_mode.w) *
+                        (current_display_mode.pixel_density * current_display_mode.h));
+                std::cout << "Resolution:    " << resolution << "\n";
+
+            if ((!preferred_display_mode_i.has_value()) || resolution > max_resolution)
             {
-                preferred_display_mode = current_display_mode;
-                max_resolution = static_cast<float>(current_display_mode.w) * static_cast<float>(current_display_mode.h * current_display_mode.pixel_density);
+                preferred_display_mode_i = i;
+                max_resolution = resolution;
             }
         }
 
-        return preferred_display_mode;
+        if (preferred_display_mode_i.has_value()) [[likely]]
+        {
+            std::cout << "Preferred display mode: " << preferred_display_mode_i.value() << "\n";
+            return this->display_modes.at(preferred_display_mode_i.value());
+        }
+
+        std::cerr << "ERROR: `Universe::get_preferred_display_mode`: no preferred display mode found!\n";
+        return std::nullopt;
     }
 
     [[nodiscard]] bool Universe::create_window()
