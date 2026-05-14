@@ -55,8 +55,8 @@ namespace yli::render
             ~RenderSystem() = default;
 
             void create_context_and_make_it_current();
-            [[nodiscard]] bool setup_context(SDL_Window* window);
-            [[nodiscard]] bool setup_context();
+            [[nodiscard]] bool setup_context(SDL_Window* window) const;
+            [[nodiscard]] bool setup_context() const;
             void set_swap_interval(const int32_t interval);
             void clear_color_and_depth_buffers() const;
             void restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const;

@@ -116,7 +116,7 @@ namespace yli::render
         this->context = yli::sdl::create_context(this->hidden_sdl_window);
     }
 
-    [[nodiscard]] bool RenderSystem::setup_context(SDL_Window* window)
+    [[nodiscard]] bool RenderSystem::setup_context(SDL_Window* window) const
     {
         if (this->context != nullptr)
         {
@@ -135,7 +135,7 @@ namespace yli::render
         return false; // Fail.
     }
 
-    [[nodiscard]] bool RenderSystem::setup_context()
+    [[nodiscard]] bool RenderSystem::setup_context() const
     {
         if (this->context != nullptr)
         {
