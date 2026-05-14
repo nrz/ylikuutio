@@ -117,13 +117,13 @@ namespace yli::ontology
             void request_exit();
 
             // This method processes the physics.
-            void do_physics();
+            void do_physics() const;
 
             // Intentional actors (AIs and keyboard controlled ones).
-            void update();
+            void update() const;
 
             // This method renders according to the data given in `render_struct`.
-            void render(const yli::render::RenderStruct& render_struct);
+            void render(const yli::render::RenderStruct& render_struct) const;
 
             // This method renders the active `Scene` of this `Universe`.
             void render();
@@ -141,37 +141,37 @@ namespace yli::ontology
             void set_active_camera(Camera* const camera) const;
 
             const glm::vec3& get_xyz() const;
-            void set_xyz(glm::vec3&& xyz);
-            void update_xyz(const glm::vec3& xyz);
+            void set_xyz(glm::vec3&& xyz) const;
+            void update_xyz(const glm::vec3& xyz) const;
 
             float get_x() const;
-            void set_x(const float x);
+            void set_x(const float x) const;
 
             float get_y() const;
-            void set_y(const float y);
+            void set_y(const float y) const;
 
             float get_z() const;
-            void set_z(const float z);
+            void set_z(const float z) const;
 
             const glm::vec3& get_direction() const;
-            void set_direction(glm::vec3&& direction);
+            void set_direction(glm::vec3&& direction) const;
 
             const glm::vec3& get_right() const;
-            void set_right(glm::vec3&& right);
+            void set_right(glm::vec3&& right) const;
 
             const glm::vec3& get_up() const;
-            void set_up(glm::vec3&& up);
+            void set_up(glm::vec3&& up) const;
 
             float get_roll() const;
-            void set_roll(const float roll);
+            void set_roll(const float roll) const;
 
             float get_yaw() const;
-            void set_yaw(const float yaw);
-            void update_yaw(const float x_position);
+            void set_yaw(const float yaw) const;
+            void update_yaw(const float x_position) const;
 
             float get_pitch() const;
-            void set_pitch(const float pitch);
-            void update_pitch(const float y_position);
+            void set_pitch(const float pitch) const;
+            void update_pitch(const float y_position) const;
 
             float get_azimuth() const;
 
@@ -208,7 +208,7 @@ namespace yli::ontology
 
             std::optional<SDL_DisplayMode> get_preferred_display_mode() const;
             [[nodiscard]] bool create_window();
-            [[nodiscard]] bool setup_context();
+            [[nodiscard]] bool setup_context() const;
             [[nodiscard]] bool create_window_and_setup_context();
             void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;
@@ -253,10 +253,10 @@ namespace yli::ontology
             void reset_number_of_frames();
 
             const glm::mat4& get_projection_matrix() const;
-            void set_projection_matrix(glm::mat4&& projection_matrix);
+            void set_projection_matrix(glm::mat4&& projection_matrix) const;
 
             const glm::mat4& get_view_matrix() const;
-            void set_view_matrix(glm::mat4&& view_matrix);
+            void set_view_matrix(glm::mat4&& view_matrix) const;
 
             float get_aspect_ratio() const;
             float get_initial_fov() const;

@@ -224,7 +224,7 @@ namespace yli::ontology
         }
     }
 
-    void Universe::do_physics()
+    void Universe::do_physics() const
     {
         if (this->active_scene != nullptr)
         {
@@ -241,7 +241,7 @@ namespace yli::ontology
         camera->compute_and_update_matrices_from_inputs(this->initial_fov, this->aspect_ratio, this->znear, this->zfar);
     }
 
-    void Universe::update()
+    void Universe::update() const
     {
         if (this->active_scene != nullptr)
         {
@@ -547,7 +547,7 @@ namespace yli::ontology
         this->is_exit_requested = true;
     }
 
-    void Universe::render(const yli::render::RenderStruct& render_struct)
+    void Universe::render(const yli::render::RenderStruct& render_struct) const
     {
         // Used `RenderSystem` rendering implementation depends of the graphics API.
         // Software rendering renders to a CPU memory region or to file.
@@ -656,7 +656,7 @@ namespace yli::ontology
         return camera->location.xyz;
     }
 
-    void Universe::set_xyz(glm::vec3&& xyz)
+    void Universe::set_xyz(glm::vec3&& xyz) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -668,7 +668,7 @@ namespace yli::ontology
         camera->location.xyz = std::move(xyz);
     }
 
-    void Universe::update_xyz(const glm::vec3& xyz)
+    void Universe::update_xyz(const glm::vec3& xyz) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -692,7 +692,7 @@ namespace yli::ontology
         return camera->location.xyz.x;
     }
 
-    void Universe::set_x(const float x)
+    void Universe::set_x(const float x) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -716,7 +716,7 @@ namespace yli::ontology
         return camera->location.xyz.y;
     }
 
-    void Universe::set_y(const float y)
+    void Universe::set_y(const float y) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -740,7 +740,7 @@ namespace yli::ontology
         return camera->location.xyz.z;
     }
 
-    void Universe::set_z(const float z)
+    void Universe::set_z(const float z) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -764,7 +764,7 @@ namespace yli::ontology
         return camera->direction;
     }
 
-    void Universe::set_direction(glm::vec3&& direction)
+    void Universe::set_direction(glm::vec3&& direction) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -788,7 +788,7 @@ namespace yli::ontology
         return camera->right;
     }
 
-    void Universe::set_right(glm::vec3&& right)
+    void Universe::set_right(glm::vec3&& right) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -812,7 +812,7 @@ namespace yli::ontology
         return camera->up;
     }
 
-    void Universe::set_up(glm::vec3&& up)
+    void Universe::set_up(glm::vec3&& up) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -836,7 +836,7 @@ namespace yli::ontology
         return camera->get_roll();
     }
 
-    void Universe::set_roll(const float roll)
+    void Universe::set_roll(const float roll) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -860,7 +860,7 @@ namespace yli::ontology
         return camera->get_yaw();
     }
 
-    void Universe::set_yaw(const float yaw)
+    void Universe::set_yaw(const float yaw) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -872,7 +872,7 @@ namespace yli::ontology
         camera->set_yaw(yaw);
     }
 
-    void Universe::update_yaw(const float x_position)
+    void Universe::update_yaw(const float x_position) const
     {
         const float temp_yaw = this->get_yaw() +
 			this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
@@ -891,7 +891,7 @@ namespace yli::ontology
         return camera->get_pitch();
     }
 
-    void Universe::set_pitch(const float pitch)
+    void Universe::set_pitch(const float pitch) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -903,7 +903,7 @@ namespace yli::ontology
         camera->set_pitch(pitch);
     }
 
-    void Universe::update_pitch(const float y_position)
+    void Universe::update_pitch(const float y_position) const
     {
         const float temp_pitch = (this->is_invert_mouse_in_use) ?
             (this->get_pitch() - this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position)) :
@@ -1125,7 +1125,7 @@ namespace yli::ontology
         return true;
     }
 
-    [[nodiscard]] bool Universe::setup_context()
+    [[nodiscard]] bool Universe::setup_context() const
     {
         // Setup graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
@@ -1363,7 +1363,7 @@ namespace yli::ontology
         return camera->get_projection_matrix();
     }
 
-    void Universe::set_projection_matrix(glm::mat4&& projection_matrix)
+    void Universe::set_projection_matrix(glm::mat4&& projection_matrix) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -1387,7 +1387,7 @@ namespace yli::ontology
         return camera->get_view_matrix();
     }
 
-    void Universe::set_view_matrix(glm::mat4&& view_matrix)
+    void Universe::set_view_matrix(glm::mat4&& view_matrix) const
     {
         Camera* const camera = this->get_active_camera();
 
