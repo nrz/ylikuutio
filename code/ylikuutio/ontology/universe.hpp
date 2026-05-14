@@ -138,7 +138,7 @@ namespace yli::ontology
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
-            void set_active_camera(Camera* const camera) const;
+            static void set_active_camera(Camera* const camera);
 
             const glm::vec3& get_xyz() const;
             void set_xyz(glm::vec3&& xyz) const;
@@ -188,7 +188,7 @@ namespace yli::ontology
             bool get_is_silent() const;
             bool get_is_physical() const;
 
-            std::string eval_string(const std::string& my_string) const;
+            static std::string eval_string(const std::string& my_string);
 
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const;
 
@@ -210,7 +210,8 @@ namespace yli::ontology
             [[nodiscard]] bool create_window();
             [[nodiscard]] bool setup_context() const;
             [[nodiscard]] bool create_window_and_setup_context();
-            void set_swap_interval(const int32_t interval);
+
+            static void set_swap_interval(const int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;
             void adjust_opengl_viewport() const;

@@ -630,7 +630,7 @@ namespace yli::ontology
         return nullptr; // No active `Scene`, so no active `Camera` either.
     }
 
-    void Universe::set_active_camera(Camera* const camera) const
+    void Universe::set_active_camera(Camera* const camera)
     {
         // Changing the active `Camera` does not change the active `Scene`!
 
@@ -1301,7 +1301,7 @@ namespace yli::ontology
         this->number_of_frames = 0;
     }
 
-    std::string Universe::eval_string(const std::string& /* my_string */) const
+    std::string Universe::eval_string(const std::string& /* my_string */)
     {
         return "TODO: eval";
     }
