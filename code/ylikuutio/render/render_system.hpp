@@ -57,59 +57,65 @@ namespace yli::render
             void create_context_and_make_it_current();
             [[nodiscard]] bool setup_context(SDL_Window* window) const;
             [[nodiscard]] bool setup_context() const;
-            void set_swap_interval(const int32_t interval);
-            void clear_color_and_depth_buffers() const;
+
+            static void set_swap_interval(const int32_t interval);
+
+            static void clear_color_and_depth_buffers();
             void restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const;
             void set_opengl_background_color() const;
-            void adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height) const;
+
+            static void adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height);
 
             // This function renders everything.
-            void render(const yli::render::RenderStruct& render_struct) const;
+            static void render(const yli::render::RenderStruct& render_struct);
 
             void render_pipelines_of_ecosystems(yli::ontology::GenericParentModule& parent, const yli::ontology::Scene* const scene) const;
-            void render_pipelines_of_an_ecosystem(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const;
-            void render_pipelines(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene) const;
 
-            void render_materials(
+            static void render_pipelines_of_an_ecosystem(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene);
+
+            static void render_pipelines(yli::ontology::ParentOfPipelinesModule& parent, const yli::ontology::Scene* const scene);
+
+            static void render_materials(
                     yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_species(
+            static void render_species(
                     yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_symbioses(
+            static void render_symbioses(
                     yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_holobionts(
+            static void render_holobionts(
                     yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_bionts(yli::ontology::GenericParentModule& parent) const;
+            static void render_bionts(yli::ontology::GenericParentModule& parent);
 
-            void render_shapeshifter_sequences(
+            static void render_shapeshifter_sequences(
                     yli::ontology::GenericParentModule& parent,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_text_2ds(yli::ontology::GenericParentModule& parent) const;
-            void render_consoles(yli::ontology::GenericMasterModule& master) const;
+            static void render_text_2ds(yli::ontology::GenericParentModule& parent);
 
-            void render_vector_fonts(
+            static void render_consoles(yli::ontology::GenericMasterModule& master);
+
+            static void render_vector_fonts(
                     yli::ontology::GenericParentModule& parent,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_glyph(
+            static void render_glyph(
                     yli::ontology::Glyph* const glyph,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_glyphs(
+            static void render_glyphs(
                     yli::ontology::GenericParentModule& parent,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
-            void render_compute_tasks(
+            static void render_compute_tasks(
                     yli::ontology::GenericParentModule& parent,
-                    const yli::ontology::Scene* const scene) const;
+                    const yli::ontology::Scene* const scene);
 
         private:
             yli::ontology::Universe* const universe { nullptr };
