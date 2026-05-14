@@ -184,7 +184,7 @@ namespace yli::ontology
             bool can_be_erased { false };
             const bool is_universe;
 
-        private:
+        public:
             virtual std::size_t get_number_of_children() const = 0;
             virtual std::size_t get_number_of_descendants() const = 0;
     };
