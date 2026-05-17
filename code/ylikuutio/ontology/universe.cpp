@@ -80,6 +80,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>     // std::cos, std::sin
 #include <cstddef>   // std::size_t
 #include <iomanip>   // std::setprecision
 #include <ios>       // std::fixed
@@ -424,12 +425,12 @@ namespace yli::ontology
                     const float pitch = this->get_pitch();
 
                     glm::vec3 direction = glm::vec3(
-                            cos(pitch) * cos(yaw),
-                            cos(pitch) * sin(yaw),
-                            sin(pitch));
+                            std::cos(pitch) * std::cos(yaw),
+                            std::cos(pitch) * std::sin(yaw),
+                            std::sin(pitch));
 
                     const float neg_roll = -roll;
-                    auto right = glm::vec3(sin(yaw) * cos(neg_roll), -1.0f * cos(yaw) * cos(neg_roll), sin(neg_roll));
+                    auto right = glm::vec3(std::sin(yaw) * std::cos(neg_roll), -1.0f * std::cos(yaw) * std::cos(neg_roll), std::sin(neg_roll));
 
                     // Up vector.
                     this->set_up(glm::cross(right, direction));
