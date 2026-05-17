@@ -120,14 +120,14 @@ namespace yli::ontology
         // get `entityID` from `Universe` and set pointer to `entity`.
 
         // `entity` must not be `nullptr` (use `this` as the first argument).
-        entity->entityID = yli::hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
+        entity->entityID = hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        yli::hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
+        hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
     }
 
     void Universe::unbind_entity(const std::size_t entityID) noexcept
     {
-        yli::hierarchy::unbind_child_from_parent(
+        hierarchy::unbind_child_from_parent(
                 entityID,
                 this->entity_pointer_vector,
                 this->free_entityID_queue,
@@ -135,7 +135,7 @@ namespace yli::ontology
     }
 
     Universe::Universe(
-            yli::core::Application& application,
+            core::Application& application,
             const UniverseStruct& universe_struct)
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
         parent_of_ecosystems(
@@ -164,8 +164,8 @@ namespace yli::ontology
                 "consoles"),
         framebuffer_module(universe_struct.framebuffer_module_struct),
         application_name      { universe_struct.application_name },
-        graphics_api_backend  { yli::sdl::init_sdl(universe_struct.graphics_api_backend) },
-        display_modes         { yli::sdl::get_display_modes(this->graphics_api_backend) },
+        graphics_api_backend  { sdl::init_sdl(universe_struct.graphics_api_backend) },
+        display_modes         { sdl::get_display_modes(this->graphics_api_backend) },
         n_displays            { static_cast<uint32_t>(this->display_modes.size()) },
         display_mode          { this->get_preferred_display_mode() },
         is_silent             { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
@@ -192,19 +192,19 @@ namespace yli::ontology
 
         if (this->window_title.empty())
         {
-            this->window_title = "Ylikuutio " + Universe::version;
+            this->window_title = "Ylikuutio " + version;
         }
 
         this->create_should_render_variable();
 
-        if (this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS)
+        if (this->graphics_api_backend == render::GraphicsApiBackend::HEADLESS)
         {
             this->is_exit_requested = true;
         }
         else
         {
-            yli::render::RenderSystemStruct render_system_struct;
-            this->render_system = std::make_unique<yli::render::RenderSystem>(this, render_system_struct);
+            render::RenderSystemStruct render_system_struct;
+            this->render_system = std::make_unique<render::RenderSystem>(this, render_system_struct);
         }
 
         // `Entity` member variables begin here.
@@ -259,7 +259,7 @@ namespace yli::ontology
         GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         Font2d* const font_2d = static_cast<Font2d*>(
-                yli::hierarchy::get_first_child(
+                hierarchy::get_first_child(
                     this->parent_of_font_2ds.child_pointer_vector,
                     this->parent_of_font_2ds.get_number_of_children()));
 
@@ -275,8 +275,8 @@ namespace yli::ontology
         angles_and_coordinates_text_struct.position.y = 0;
         angles_and_coordinates_text_struct.text_size = this->text_size;
         angles_and_coordinates_text_struct.font_size = this->font_size;
-        angles_and_coordinates_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        angles_and_coordinates_text_struct.position.vertical_alignment = VerticalAlignment::BOTTOM;
+        angles_and_coordinates_text_struct.position.horizontal_alignment = LEFT;
+        angles_and_coordinates_text_struct.position.vertical_alignment = BOTTOM;
         Text2d* angles_and_coordinates_text_2d = entity_factory.create_text_2d(angles_and_coordinates_text_struct);
 
         if (angles_and_coordinates_text_2d == nullptr)
@@ -290,8 +290,8 @@ namespace yli::ontology
         time_text_struct.position.y = this->window_height;
         time_text_struct.text_size = this->text_size;
         time_text_struct.font_size = this->font_size;
-        time_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        time_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        time_text_struct.position.horizontal_alignment = LEFT;
+        time_text_struct.position.vertical_alignment = TOP;
         Text2d* time_text_2d = entity_factory.create_text_2d(time_text_struct);
 
         if (time_text_2d == nullptr)
@@ -305,8 +305,8 @@ namespace yli::ontology
         help_text_struct.position.y = this->window_height - (3 * this->text_size);
         help_text_struct.text_size = this->text_size;
         help_text_struct.font_size = this->font_size;
-        help_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        help_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        help_text_struct.position.horizontal_alignment = LEFT;
+        help_text_struct.position.vertical_alignment = TOP;
         Text2d* help_text_2d = entity_factory.create_text_2d(help_text_struct);
 
         if (help_text_2d == nullptr)
@@ -320,8 +320,8 @@ namespace yli::ontology
         frame_rate_text_struct.position.y = this->window_height;
         frame_rate_text_struct.text_size = this->text_size;
         frame_rate_text_struct.font_size = this->font_size;
-        frame_rate_text_struct.position.horizontal_alignment = HorizontalAlignment::RIGHT;
-        frame_rate_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        frame_rate_text_struct.position.horizontal_alignment = RIGHT;
+        frame_rate_text_struct.position.vertical_alignment = TOP;
         Text2d* frame_rate_text_2d = entity_factory.create_text_2d(frame_rate_text_struct);
 
         if (frame_rate_text_2d == nullptr)
@@ -329,7 +329,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::sdl::flush_sdl_event_queue();
+        sdl::flush_sdl_event_queue();
 
         // This method contains the main simulation loop.
 
@@ -368,14 +368,14 @@ namespace yli::ontology
                     this->increment_last_time_to_display_fps();
 
                     // Update audio also (in case the sound has reached the end).
-                    if (yli::audio::AudioSystem* const audio_system = this->get_audio_system(); audio_system != nullptr)
+                    if (audio::AudioSystem* const audio_system = this->get_audio_system(); audio_system != nullptr)
                     {
                         audio_system->update();
                     }
                 }
 
                 // Clear the screen.
-                if (this->graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+                if (this->graphics_api_backend == render::GraphicsApiBackend::OPENGL)
                 {
                     this->get_render_system().clear_color_and_depth_buffers();
                 }
@@ -488,7 +488,7 @@ namespace yli::ontology
                     {
                         Scene* const scene = this->active_scene;
                         const std::string help_text_string =
-                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + Universe::version + "\n"
+                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + version + "\n"
                             "\n"
                             "arrow keys\n"
                             "space jump\n"
@@ -587,12 +587,12 @@ namespace yli::ontology
             this->get_render_system().render(render_struct);
         }
 
-        yli::opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
+        opengl::print_opengl_errors("ERROR: `Universe::render`: OpenGL error detected!\n");
     }
 
     void Universe::render()
     {
-        yli::render::RenderStruct render_struct;
+        render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
@@ -601,7 +601,7 @@ namespace yli::ontology
 
     void Universe::render_without_changing_depth_test()
     {
-        yli::render::RenderStruct render_struct;
+        render::RenderStruct render_struct;
         render_struct.scene = this->active_scene;
         render_struct.parent_of_font_2ds = &this->parent_of_font_2ds;
         render_struct.window = this->window;
@@ -941,12 +941,12 @@ namespace yli::ontology
         this->active_console = console;
     }
 
-    yli::input::InputMethod Universe::get_input_method() const
+    input::InputMethod Universe::get_input_method() const
     {
         return this->parent_of_input_modes.get_input_method();
     }
 
-    yli::render::GraphicsApiBackend Universe::get_graphics_api_backend() const
+    render::GraphicsApiBackend Universe::get_graphics_api_backend() const
     {
         return this->graphics_api_backend;
     }
@@ -1026,13 +1026,13 @@ namespace yli::ontology
 
     std::size_t Universe::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_callback_engines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_callback_engines.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
     }
 
     std::optional<SDL_DisplayMode> Universe::get_preferred_display_mode() const
@@ -1095,7 +1095,7 @@ namespace yli::ontology
             if (this->get_is_opengl_in_use()) [[likely]]
             {
                 // Create a window.
-                this->window = yli::sdl::create_window(
+                this->window = sdl::create_window(
                         this->display_mode->displayID,
                         static_cast<int>(this->display_mode->pixel_density * this->window_width),
                         static_cast<int>(this->display_mode->pixel_density * this->window_height),
@@ -1105,7 +1105,7 @@ namespace yli::ontology
             else if (this->get_is_vulkan_in_use())
             {
                 // Create a window.
-                this->window = yli::sdl::create_window(
+                this->window = sdl::create_window(
                         this->display_mode->displayID,
                         static_cast<int>(this->display_mode->pixel_density * this->window_width),
                         static_cast<int>(this->display_mode->pixel_density * this->window_height),
@@ -1167,7 +1167,7 @@ namespace yli::ontology
 
     void Universe::set_swap_interval(const int32_t interval)
     {
-        if (!yli::sdl::set_swap_interval(static_cast<int>(interval))) [[unlikely]]
+        if (!sdl::set_swap_interval(interval)) [[unlikely]]
         {
             std::cerr << "ERROR: `Universe::set_swap_interval`: setting swap interval failed!\n";
         }
@@ -1176,7 +1176,7 @@ namespace yli::ontology
     void Universe::restore_onscreen_rendering() const
     {
         // Bind the default framebuffer for on-screen rendering.
-        yli::opengl::bind_gl_framebuffer(0);
+        opengl::bind_gl_framebuffer(0);
 
         // Set background color for the default framebuffer.
         this->set_opengl_background_color();
@@ -1190,7 +1190,7 @@ namespace yli::ontology
 
     void Universe::set_opengl_background_color() const
     {
-        yli::opengl::set_background_color(
+        opengl::set_background_color(
                 this->background_red,
                 this->background_green,
                 this->background_blue,
@@ -1288,7 +1288,7 @@ namespace yli::ontology
 
     void Universe::update_last_time_for_display_sync()
     {
-        this->last_time_for_display_sync = yli::time::get_time();
+        this->last_time_for_display_sync = time::get_time();
     }
 
     void Universe::increment_number_of_frames()
@@ -1306,14 +1306,14 @@ namespace yli::ontology
         return "TODO: eval";
     }
 
-    yli::memory::GenericMemoryAllocator& Universe::get_generic_memory_allocator(const int type) const
+    memory::GenericMemoryAllocator& Universe::get_generic_memory_allocator(const int type) const
     {
         return this->application.get_generic_memory_allocator(type);
     }
 
-    yli::event::EventSystem& Universe::get_event_system() const
+    event::EventSystem& Universe::get_event_system() const
     {
-        if (yli::event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[likely]]
+        if (event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[likely]]
         {
             return event_system->get();
         }
@@ -1321,9 +1321,9 @@ namespace yli::ontology
         throw std::runtime_error("ERROR: `Universe::get_event_system`: `event_system` is `nullptr`!");
     }
 
-    yli::input::InputSystem& Universe::get_input_system() const
+    input::InputSystem& Universe::get_input_system() const
     {
-        if (yli::input::InputSystem* const input_system = this->application.get_input_system(); input_system != nullptr) [[likely]]
+        if (input::InputSystem* const input_system = this->application.get_input_system(); input_system != nullptr) [[likely]]
         {
             return input_system->get();
         }
@@ -1331,7 +1331,7 @@ namespace yli::ontology
         throw std::runtime_error("ERROR: `Universe::get_input_system`: `input_system` is `nullptr`!");
     }
 
-    yli::render::RenderSystem& Universe::get_render_system() const
+    render::RenderSystem& Universe::get_render_system() const
     {
         if (this->render_system == nullptr) [[unlikely]]
         {
@@ -1341,9 +1341,9 @@ namespace yli::ontology
         return *this->render_system.get();
     }
 
-    yli::audio::AudioSystem* Universe::get_audio_system() const
+    audio::AudioSystem* Universe::get_audio_system() const
     {
-        if (yli::audio::AudioSystem* const audio_system = this->application.get_audio_system(); audio_system != nullptr) [[likely]]
+        if (audio::AudioSystem* const audio_system = this->application.get_audio_system(); audio_system != nullptr) [[likely]]
         {
             return audio_system;
         }
