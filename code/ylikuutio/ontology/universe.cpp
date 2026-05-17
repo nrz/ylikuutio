@@ -634,7 +634,7 @@ namespace yli::ontology
     {
         // Changing the active `Camera` does not change the active `Scene`!
 
-        Scene* const scene_parent_of_camera = static_cast<Scene*>(camera->get_parent());
+        const auto scene_parent_of_camera = static_cast<Scene*>(camera->get_parent());
 
         if (scene_parent_of_camera == nullptr) [[unlikely]]
         {
@@ -646,7 +646,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_xyz() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -682,7 +682,7 @@ namespace yli::ontology
 
     float Universe::get_x() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -706,7 +706,7 @@ namespace yli::ontology
 
     float Universe::get_y() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -730,7 +730,7 @@ namespace yli::ontology
 
     float Universe::get_z() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -754,7 +754,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_direction() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -778,7 +778,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_right() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -802,7 +802,7 @@ namespace yli::ontology
 
     const glm::vec3& Universe::get_up() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -826,7 +826,7 @@ namespace yli::ontology
 
     float Universe::get_roll() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -850,7 +850,7 @@ namespace yli::ontology
 
     float Universe::get_yaw() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -881,7 +881,7 @@ namespace yli::ontology
 
     float Universe::get_pitch() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -913,7 +913,7 @@ namespace yli::ontology
 
     float Universe::get_azimuth() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -925,7 +925,7 @@ namespace yli::ontology
 
     Console* Universe::get_active_console() const
     {
-        for (Entity* console : this->parent_of_consoles.child_pointer_vector)
+        for (const Entity* const console : this->parent_of_consoles.child_pointer_vector)
         {
             if (console == this->active_console)
             {
@@ -1054,7 +1054,7 @@ namespace yli::ontology
                 continue;
             }
 
-            std::size_t resolution = static_cast<std::size_t>((current_display_mode.pixel_density * current_display_mode.w) *
+            const std::size_t resolution = static_cast<std::size_t>((current_display_mode.pixel_density * current_display_mode.w) *
                         (current_display_mode.pixel_density * current_display_mode.h));
                 std::cout << "Resolution:    " << resolution << "\n";
 
@@ -1353,7 +1353,7 @@ namespace yli::ontology
 
     const glm::mat4& Universe::get_projection_matrix() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
@@ -1377,7 +1377,7 @@ namespace yli::ontology
 
     const glm::mat4& Universe::get_view_matrix() const
     {
-        Camera* const camera = this->get_active_camera();
+        const Camera* const camera = this->get_active_camera();
 
         if (camera == nullptr) [[unlikely]]
         {
