@@ -875,7 +875,7 @@ namespace yli::ontology
     void Universe::update_yaw(const float x_position) const
     {
         const float temp_yaw = this->get_yaw() +
-            this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
+            this->mouse_speed * (this->window_width / 2 - x_position);
         this->set_yaw(remainder(temp_yaw, (2.0f * static_cast<float>(std::numbers::pi))));
     }
 
@@ -1054,8 +1054,8 @@ namespace yli::ontology
                 continue;
             }
 
-            const std::size_t resolution = static_cast<std::size_t>((current_display_mode.pixel_density * current_display_mode.w) *
-                        (current_display_mode.pixel_density * current_display_mode.h));
+            const std::size_t resolution = current_display_mode.pixel_density * current_display_mode.w *
+                                           (current_display_mode.pixel_density * current_display_mode.h);
                 std::cout << "Resolution:    " << resolution << "\n";
 
             if ((!preferred_display_mode_i.has_value()) || resolution > max_resolution)
