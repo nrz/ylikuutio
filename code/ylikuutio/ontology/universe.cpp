@@ -1127,7 +1127,7 @@ namespace yli::ontology
 
     [[nodiscard]] bool Universe::setup_context() const
     {
-        // Setup graphics context only when OpenGL or Vulkan is in use.
+        // Set up graphics context only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
             if (!this->get_render_system().setup_context(this->window)) [[unlikely]]
