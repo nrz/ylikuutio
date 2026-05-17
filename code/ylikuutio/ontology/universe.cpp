@@ -1139,7 +1139,7 @@ namespace yli::ontology
             return true;
         }
 
-        // No need to setup context.
+        // No need to set up context.
         return true;
     }
 
@@ -1161,7 +1161,7 @@ namespace yli::ontology
             return false;
         }
 
-        // No need to create a window or to setup a context.
+        // No need to create a window or to set up a context.
         return true;
     }
 
