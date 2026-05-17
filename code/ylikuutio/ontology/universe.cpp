@@ -74,11 +74,6 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #endif
 
-#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#include <glm/gtc/matrix_transform.hpp>
-#endif
-
 // Include standard headers
 #include <cmath>     // std::cos, std::sin
 #include <cstddef>   // std::size_t
