@@ -875,7 +875,7 @@ namespace yli::ontology
     void Universe::update_yaw(const float x_position) const
     {
         const float temp_yaw = this->get_yaw() +
-			this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
+            this->mouse_speed * static_cast<float>(this->window_width / 2 - x_position);
         this->set_yaw(remainder(temp_yaw, (2.0f * static_cast<float>(std::numbers::pi))));
     }
 
