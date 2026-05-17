@@ -875,8 +875,8 @@ namespace yli::ontology
     void Universe::update_yaw(const float x_position) const
     {
         const float temp_yaw = this->get_yaw() +
-            this->mouse_speed * (this->window_width / 2 - x_position);
-        this->set_yaw(remainder(temp_yaw, (2.0f * static_cast<float>(std::numbers::pi))));
+            (this->mouse_speed * (static_cast<float>(this->window_width) / 2 - x_position));
+        this->set_yaw(static_cast<float>(remainder(temp_yaw, (2.0f * std::numbers::pi))));
     }
 
     float Universe::get_pitch() const
@@ -906,9 +906,9 @@ namespace yli::ontology
     void Universe::update_pitch(const float y_position) const
     {
         const float temp_pitch = (this->is_invert_mouse_in_use) ?
-            (this->get_pitch() - this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position)) :
-            (this->get_pitch() + this->mouse_speed * static_cast<float>(this->window_height / 2 - y_position));
-        this->set_pitch(remainder(temp_pitch, (2.0f * static_cast<float>(std::numbers::pi))));
+            (this->get_pitch() - this->mouse_speed * (static_cast<float>(this->window_height) / 2 - y_position)) :
+            (this->get_pitch() + this->mouse_speed * (static_cast<float>(this->window_height) / 2 - y_position));
+        this->set_pitch(static_cast<float>(remainder(temp_pitch, (2.0f * std::numbers::pi))));
     }
 
     float Universe::get_azimuth() const
@@ -1202,7 +1202,10 @@ namespace yli::ontology
         if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
                 this->window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
-            glViewport(0, 0, this->display_mode->pixel_density * this->window_width, this->display_mode->pixel_density * this->window_height);
+            glViewport(0,
+                0,
+                static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->window_width)),
+                static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->window_height)));
         }
     }
 
