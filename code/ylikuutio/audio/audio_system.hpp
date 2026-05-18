@@ -26,7 +26,6 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <list>          // std::list
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 

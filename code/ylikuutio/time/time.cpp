@@ -18,9 +18,6 @@
 #include "time.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
-
 namespace yli::time
 {
     double get_time()
