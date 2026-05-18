@@ -57,7 +57,7 @@ namespace yli::triangulation
             const std::size_t y_step = triangulate_quads_struct.y_step;
 
             // Input vertices (`T1* input_vertex_pointer`)
-            // can be `float`, `int32_t` or `uint32_t`.
+            // can be `float`, `std::int32_t` or `std::uint32_t`.
 
             if (input_vertex_pointer == nullptr)
             {
