@@ -19,14 +19,14 @@
 #define YLIKUUTIO_DATA_CODEPOINT_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t
+#include <cstdint> // std::uint32_t
 
 namespace yli::data
 {
     struct Codepoint
     {
         explicit Codepoint(const char codepoint)
-            : codepoint { static_cast<uint32_t>(codepoint) }
+            : codepoint { static_cast<std::uint32_t>(codepoint) }
         {
         }
 
@@ -45,7 +45,7 @@ namespace yli::data
             return this->codepoint != other.codepoint;
         }
 
-        uint32_t codepoint;
+        std::uint32_t codepoint;
     };
 }
 

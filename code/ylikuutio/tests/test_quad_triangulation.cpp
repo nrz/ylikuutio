@@ -28,7 +28,7 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
 TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
@@ -43,9 +43,9 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     const std::size_t image_height = 2;
     const std::size_t terrain_size = image_width * image_height;
 
-    uint32_t* const vertex_data = new uint32_t[terrain_size];
+    std::uint32_t* const vertex_data = new std::uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
-    uint32_t* vertex_pointer = vertex_data;
+    std::uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
     const std::size_t southwest_height = 1;
     const std::size_t southeast_height = 2;

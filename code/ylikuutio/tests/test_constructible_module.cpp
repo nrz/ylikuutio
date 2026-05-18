@@ -20,13 +20,16 @@
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 
+// Include standard headers
+#include <cstdint> // std::uint32_t
+
 TEST(constructible_module_must_be_initialized_appropriately, constructible_module)
 {
     yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
 
     // Some arbitrary values.
-    const uint32_t storage_i = 2002;
-    const uint32_t slot_i = 3003;
+    const std::uint32_t storage_i = 2002;
+    const std::uint32_t slot_i = 3003;
 
     yli::memory::ConstructibleModule constructible_module(memory_allocator, storage_i, slot_i);
     ASSERT_EQ(constructible_module.storage_i, storage_i);

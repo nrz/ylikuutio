@@ -34,11 +34,11 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint32_t
 #include <iomanip>   // std::setfill, std::setw
 #include <iostream>  // std::cerr
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <utility>   // std::swap etc.
 #include <vector>    // std::vector
 
@@ -98,7 +98,7 @@ namespace yli::ontology
         // Load the source texture, just like in `Material` constructor.
         if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
-            uint32_t n_color_channels = 0;
+            std::uint32_t n_color_channels = 0;
 
             if (!yli::load::load_common_texture(
                         this->texture_filename,

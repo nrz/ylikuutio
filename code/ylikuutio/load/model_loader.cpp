@@ -35,8 +35,8 @@
 #endif
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::load
@@ -46,7 +46,7 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            std::vector<uint32_t>& indices,
+            std::vector<std::uint32_t>& indices,
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_uvs,
             std::vector<glm::vec3>& indexed_normals,
@@ -188,7 +188,7 @@ namespace yli::load
             glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(std::uint32_t), &indices[0], GL_STATIC_DRAW);
         }
 
         return model_loading_result;

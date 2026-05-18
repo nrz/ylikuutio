@@ -20,21 +20,21 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint8_t, std::uint32_t
 #include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 TEST(grayscale_8_bit_png_files_must_be_loaded_approriately_as_grayscale, test3x3_png)
 {
     const std::string image_path = "test3x3.png";
-    uint32_t image_width;
-    uint32_t image_height;
-    uint32_t image_size;
-    uint32_t n_color_channels;
+    std::uint32_t image_width;
+    std::uint32_t image_height;
+    std::uint32_t image_size;
+    std::uint32_t n_color_channels;
 
     yli::load::ImageLoaderStruct image_loader_struct;
-    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
+    std::shared_ptr<std::vector<std::uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
     ASSERT_NE(image_data, nullptr);
     ASSERT_EQ(image_data->size(), 9);
     ASSERT_EQ(image_width, 3);
@@ -55,14 +55,14 @@ TEST(grayscale_8_bit_png_files_must_be_loaded_approriately_as_grayscale, test3x3
 TEST(grayscale_8_bit_png_files_must_be_loaded_approriately_as_rgb, test3x3_png)
 {
     const std::string image_path = "test3x3.png";
-    uint32_t image_width;
-    uint32_t image_height;
-    uint32_t image_size;
-    uint32_t n_color_channels;
+    std::uint32_t image_width;
+    std::uint32_t image_height;
+    std::uint32_t image_size;
+    std::uint32_t n_color_channels;
 
     yli::load::ImageLoaderStruct image_loader_struct;
     image_loader_struct.should_convert_grayscale_to_rgb = true;
-    std::shared_ptr<std::vector<uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
+    std::shared_ptr<std::vector<std::uint8_t>> image_data = yli::load::load_image_file(image_path, image_loader_struct, image_width, image_height, image_size, n_color_channels);
     ASSERT_NE(image_data, nullptr);
     ASSERT_EQ(image_data->size(), 27);
     ASSERT_EQ(image_width, 3);

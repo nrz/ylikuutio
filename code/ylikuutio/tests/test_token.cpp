@@ -21,9 +21,9 @@
 #include "code/ylikuutio/lisp/text_position.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::int64_t, std::uint64_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::nullopt
-#include <stdint.h> // int64_t, uint64_t
 #include <string>   // std::string
 #include <string_view> // std::string_view
 
@@ -134,12 +134,12 @@ TEST(token_must_be_initialized_appropriately, unsigned_integer_0)
 {
     std::string_view integer_0 { "0" };
     TextPosition text_position(integer_0.cbegin(), integer_0.cend());
-    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_0), text_position, static_cast<uint64_t>(0u));
+    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_0), text_position, static_cast<std::uint64_t>(0u));
     ASSERT_EQ(token.get_type(), TokenType::UNSIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "0");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<uint64_t> maybe_value = token.get_numeric_value<uint64_t>();
+    std::optional<std::uint64_t> maybe_value = token.get_numeric_value<std::uint64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 0u);
 }
@@ -148,12 +148,12 @@ TEST(token_must_be_initialized_appropriately, unsigned_integer_1)
 {
     std::string_view integer_1 { "1" };
     TextPosition text_position(integer_1.cbegin(), integer_1.cend());
-    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_1), text_position, static_cast<uint64_t>(1u));
+    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_1), text_position, static_cast<std::uint64_t>(1u));
     ASSERT_EQ(token.get_type(), TokenType::UNSIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "1");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<uint64_t> maybe_value = token.get_numeric_value<uint64_t>();
+    std::optional<std::uint64_t> maybe_value = token.get_numeric_value<std::uint64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 1u);
 }
@@ -162,12 +162,12 @@ TEST(token_must_be_initialized_appropriately, unsigned_integer_18446744073709551
 {
     std::string_view integer_18446744073709551615 { "18446744073709551615" };
     TextPosition text_position(integer_18446744073709551615.cbegin(), integer_18446744073709551615.cend());
-    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_18446744073709551615), text_position, static_cast<uint64_t>(18446744073709551615u));
+    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_18446744073709551615), text_position, static_cast<std::uint64_t>(18446744073709551615u));
     ASSERT_EQ(token.get_type(), TokenType::UNSIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "18446744073709551615");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<uint64_t> maybe_value = token.get_numeric_value<uint64_t>();
+    std::optional<std::uint64_t> maybe_value = token.get_numeric_value<std::uint64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 18446744073709551615u);
 }
@@ -176,12 +176,12 @@ TEST(token_must_be_initialized_appropriately, signed_integer_0)
 {
     std::string_view integer_0 { "0" };
     TextPosition text_position(integer_0.cbegin(), integer_0.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_0), text_position, static_cast<int64_t>(0));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_0), text_position, static_cast<std::int64_t>(0));
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "0");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<int64_t> maybe_value = token.get_numeric_value<int64_t>();
+    std::optional<std::int64_t> maybe_value = token.get_numeric_value<std::int64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 0);
 }
@@ -190,12 +190,12 @@ TEST(token_must_be_initialized_appropriately, signed_integer_1)
 {
     std::string_view integer_1 { "1" };
     TextPosition text_position(integer_1.cbegin(), integer_1.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_1), text_position, static_cast<int64_t>(1));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_1), text_position, static_cast<std::int64_t>(1));
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "1");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<int64_t> maybe_value = token.get_numeric_value<int64_t>();
+    std::optional<std::int64_t> maybe_value = token.get_numeric_value<std::int64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 1);
 }
@@ -204,12 +204,12 @@ TEST(token_must_be_initialized_appropriately, signed_integer_minus_1)
 {
     std::string_view integer_minus_1 { "-1" };
     TextPosition text_position(integer_minus_1.cbegin(), integer_minus_1.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_minus_1), text_position, static_cast<int64_t>(-1));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_minus_1), text_position, static_cast<std::int64_t>(-1));
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "-1");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<int64_t> maybe_value = token.get_numeric_value<int64_t>();
+    std::optional<std::int64_t> maybe_value = token.get_numeric_value<std::int64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), -1);
 }
@@ -218,12 +218,12 @@ TEST(token_must_be_initialized_appropriately, signed_integer_9223372036854775807
 {
     std::string_view integer_9223372036854775807 { "9223372036854775807" };
     TextPosition text_position(integer_9223372036854775807.cbegin(), integer_9223372036854775807.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_9223372036854775807), text_position, static_cast<int64_t>(9223372036854775807));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_9223372036854775807), text_position, static_cast<std::int64_t>(9223372036854775807));
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "9223372036854775807");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<int64_t> maybe_value = token.get_numeric_value<int64_t>();
+    std::optional<std::int64_t> maybe_value = token.get_numeric_value<std::int64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), 9223372036854775807);
 }
@@ -232,12 +232,12 @@ TEST(token_must_be_initialized_appropriately, signed_integer_minus_9223372036854
 {
     std::string_view integer_minus_9223372036854775808 { "-9223372036854775808" };
     TextPosition text_position(integer_minus_9223372036854775808.cbegin(), integer_minus_9223372036854775808.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_minus_9223372036854775808), text_position, static_cast<int64_t>(-9223372036854775808));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_minus_9223372036854775808), text_position, static_cast<std::int64_t>(-9223372036854775808));
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "-9223372036854775808");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
     ASSERT_EQ(token.get_text_position().get_column(), 1);
-    std::optional<int64_t> maybe_value = token.get_numeric_value<int64_t>();
+    std::optional<std::int64_t> maybe_value = token.get_numeric_value<std::int64_t>();
     ASSERT_TRUE(maybe_value.has_value());
     ASSERT_EQ(maybe_value.value(), -9223372036854775808);
 }

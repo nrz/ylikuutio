@@ -45,14 +45,13 @@
 #endif
 
 // Include standard headers
-#include <cstdint>   // std::uintptr_t
+#include <cstdint>   // std::uint32_t, std::uintptr_t
 #include <cstddef>   // std::size_t
 #include <ios>       // std::hex
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -381,27 +380,27 @@ namespace yli::ontology
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_normal_modelspace_id();
     }
 
-    uint32_t Symbiosis::get_vertex_buffer(const std::size_t biontID) const
+    std::uint32_t Symbiosis::get_vertex_buffer(const std::size_t biontID) const
     {
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_vertex_buffer();
     }
 
-    uint32_t Symbiosis::get_uv_buffer(const std::size_t biontID) const
+    std::uint32_t Symbiosis::get_uv_buffer(const std::size_t biontID) const
     {
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_uv_buffer();
     }
 
-    uint32_t Symbiosis::get_normal_buffer(const std::size_t biontID) const
+    std::uint32_t Symbiosis::get_normal_buffer(const std::size_t biontID) const
     {
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_normal_buffer();
     }
 
-    uint32_t Symbiosis::get_element_buffer(const std::size_t biontID) const
+    std::uint32_t Symbiosis::get_element_buffer(const std::size_t biontID) const
     {
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_element_buffer();
     }
 
-    std::vector<uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
+    std::vector<std::uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
     {
         return this->biontID_symbiont_species_vector.at(biontID)->mesh.get_indices();
         // return this->indices.at(biontID);
@@ -434,7 +433,7 @@ namespace yli::ontology
         return true;
     }
 
-    uint32_t Symbiosis::get_texture(const std::size_t biontID) const
+    std::uint32_t Symbiosis::get_texture(const std::size_t biontID) const
     {
         SymbiontMaterial* const symbiont_material = this->biontID_symbiont_material_vector.at(biontID);
         return symbiont_material->texture.get_texture();

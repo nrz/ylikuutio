@@ -22,10 +22,10 @@
 #include <algorithm> // std::copy
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint8_t
 #include <iostream>  // std::cerr
 #include <iterator>  // std::back_inserter
 #include <limits>    // std::numeric_limits
-#include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
 
 namespace yli::memory
@@ -33,7 +33,7 @@ namespace yli::memory
     template<typename T1, typename T2>
         T2 read_nonaligned_32_bit(T1* src_data, const std::size_t offset)
         {
-            uint8_t* src_data_uint8_t = (uint8_t*) src_data;
+            std::uint8_t* src_data_uint8_t = (std::uint8_t*) src_data;
             T2 value_32_bit = static_cast<T2>(src_data_uint8_t[offset + 3]);
             value_32_bit = value_32_bit << 8 | static_cast<T2>(src_data_uint8_t[offset + 2]);
             value_32_bit = value_32_bit << 8 | static_cast<T2>(src_data_uint8_t[offset + 1]);

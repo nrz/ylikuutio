@@ -21,7 +21,7 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 
 namespace yli::load
@@ -40,10 +40,10 @@ namespace yli::load
     bool load_common_texture(
             const std::string& filename,
             const yli::load::ImageLoaderStruct& image_loader_struct,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
+            std::uint32_t& n_color_channels,
             GLuint& textureID,
             const yli::render::GraphicsApiBackend graphics_api_backend);
 }

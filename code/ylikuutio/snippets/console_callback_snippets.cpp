@@ -21,8 +21,8 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::ontology
 {
@@ -33,7 +33,7 @@ namespace yli::snippets
 {
     std::optional<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
     {
-        uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
+        std::uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
         return yli::data::AnyValue(exit_program_magic_number);
     }
 

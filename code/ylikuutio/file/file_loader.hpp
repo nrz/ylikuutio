@@ -19,15 +19,15 @@
 #define YLIKUUTIO_FILE_FILE_LOADER_HPP_INCLUDED
 
 // Include standard headers
+#include <cstdint>  // std::uint8_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::file
 {
     std::optional<std::string> slurp(const std::string& file_path);
-    std::optional<std::vector<uint8_t>> binary_slurp(const std::string& file_path);
+    std::optional<std::vector<std::uint8_t>> binary_slurp(const std::string& file_path);
 }
 
 #endif

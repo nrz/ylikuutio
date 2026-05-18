@@ -19,7 +19,7 @@
 #include "code/ylikuutio/data/queue.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 TEST(queue_must_be_initialized_appropriately, queue_of_size_1)
 {
@@ -102,7 +102,7 @@ TEST(popping_after_pushing_once_must_give_the_pushed_value, queue_of_size_1)
 {
     yli::data::Queue<1> queue;
     queue.push(0xdeadbeef);
-    uint32_t value = queue.pop();
+    std::uint32_t value = queue.pop();
     ASSERT_EQ(value, 0xdeadbeef);
 
     ASSERT_EQ(queue.size(), 0);
@@ -116,7 +116,7 @@ TEST(popping_after_pushing_twice_must_give_the_last_pushed_value, queue_of_size_
     yli::data::Queue<2> queue;
     queue.push(0xdeadbeef);
     queue.push(0xbadf00d);
-    uint32_t first = queue.pop();
+    std::uint32_t first = queue.pop();
     ASSERT_EQ(first, 0xdeadbeef);
 
     ASSERT_EQ(queue.size(), 1);
@@ -130,8 +130,8 @@ TEST(popping_twice_after_pushing_twice_must_give_the_pushed_values_in_same_order
     yli::data::Queue<2> queue;
     queue.push(0xdeadbeef);
     queue.push(0xbadf00d);
-    uint32_t first = queue.pop();
-    uint32_t second = queue.pop();
+    std::uint32_t first = queue.pop();
+    std::uint32_t second = queue.pop();
     ASSERT_EQ(first, 0xdeadbeef);
     ASSERT_EQ(second, 0xbadf00d);
 
@@ -146,8 +146,8 @@ TEST(popping_twice_after_pushing_twice_must_give_the_pushed_values_in_same_order
     yli::data::Queue<3> queue;
     queue.push(0xdeadbeef);
     queue.push(0xbadf00d);
-    uint32_t first = queue.pop();
-    uint32_t second = queue.pop();
+    std::uint32_t first = queue.pop();
+    std::uint32_t second = queue.pop();
     ASSERT_EQ(first, 0xdeadbeef);
     ASSERT_EQ(second, 0xbadf00d);
 
@@ -165,7 +165,7 @@ TEST(pushing_twice_popping_once_pushing_once_popping_once_must_work_appropriatel
     queue.pop();
 
     queue.push(0xfeedca7);
-    uint32_t second = queue.pop();
+    std::uint32_t second = queue.pop();
     ASSERT_EQ(second, 0xbadf00d);
 
     ASSERT_EQ(queue.size(), 1);
@@ -184,7 +184,7 @@ TEST(pushing_twice_popping_once_pushing_once_popping_twice_must_work_appropriate
     queue.push(0xfeedca7);
     queue.pop();
 
-    uint32_t third = queue.pop();
+    std::uint32_t third = queue.pop();
     ASSERT_EQ(third, 0xfeedca7);
 
     ASSERT_EQ(queue.size(), 0);

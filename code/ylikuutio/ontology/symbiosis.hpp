@@ -43,8 +43,8 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <cstdint>       // std::int32_t, std::uint32_t
 #include <optional>      // std::optional
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -132,16 +132,16 @@ namespace yli::ontology
             GLint get_vertex_uv_id(const std::size_t biontID) const;
             GLint get_vertex_normal_modelspace_id(const std::size_t biontID) const;
 
-            uint32_t get_vertex_buffer(const std::size_t biontID) const;
-            uint32_t get_uv_buffer(const std::size_t biontID) const;
-            uint32_t get_normal_buffer(const std::size_t biontID) const;
-            uint32_t get_element_buffer(const std::size_t biontID) const;
+            std::uint32_t get_vertex_buffer(const std::size_t biontID) const;
+            std::uint32_t get_uv_buffer(const std::size_t biontID) const;
+            std::uint32_t get_normal_buffer(const std::size_t biontID) const;
+            std::uint32_t get_element_buffer(const std::size_t biontID) const;
 
-            std::vector<uint32_t> get_indices(const std::size_t biontID) const;
+            std::vector<std::uint32_t> get_indices(const std::size_t biontID) const;
             std::size_t get_indices_size(const std::size_t biontID) const;
             std::size_t get_number_of_ofbx_meshes() const;
             bool has_texture(const std::size_t biontID) const;
-            uint32_t get_texture(const std::size_t biontID) const;
+            std::uint32_t get_texture(const std::size_t biontID) const;
             GLint get_openGL_textureID(const std::size_t biontID) const;
 
             static void create_ability(Symbiosis& symbiosis, const std::string& ability_name);
@@ -170,12 +170,12 @@ namespace yli::ontology
             std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
             std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
 
-            std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+            std::vector<std::vector<std::uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
             std::vector<std::vector<glm::vec3>> indexed_vertices;
             std::vector<std::vector<glm::vec2>> indexed_uvs;
             std::vector<std::vector<glm::vec3>> indexed_normals;
 
-            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>> ofbx_diffuse_texture_mesh_map;
+            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>> ofbx_diffuse_texture_mesh_map;
             std::vector<SymbiontMaterial*> biontID_symbiont_material_vector;
             std::vector<SymbiontSpecies*> biontID_symbiont_species_vector;
             std::vector<const ofbx::Mesh*> ofbx_meshes;

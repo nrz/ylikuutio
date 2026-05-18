@@ -29,10 +29,10 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -487,7 +487,7 @@ namespace yli::console
             this->state = new_state;
             return this->signal_state_change(old_state, new_state);
         }
-        else if (const uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
+        else if (const std::uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
                 !((this->state ^ new_state) & (~any_input)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to which-buffer state,
@@ -524,7 +524,7 @@ namespace yli::console
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
-            uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
+            std::uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
             return yli::data::AnyValue(enter_console_magic_number);
         }
 
@@ -629,7 +629,7 @@ namespace yli::console
         if (console.console_logic_module.get_active_in_console() && console.exit_console())
         {
             // Signal to caller that we have exited the console.
-            uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
+            std::uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
             return yli::data::AnyValue(exit_console_magic_number);
         }
 
@@ -1006,7 +1006,7 @@ namespace yli::console
         console.command_history.clear();
         console.scrollback_buffer.clear();
 
-        const uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
+        const std::uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
         return yli::data::AnyValue(clear_console_magic_number);
     }
 

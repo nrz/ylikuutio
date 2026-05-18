@@ -42,7 +42,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::int32_t, std::int64_t, std::uint32_t, std::uint64_t
 #include <sstream>  // std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -72,9 +72,9 @@ namespace yli::lisp
     //
     // 6. If the callback has `double` as an argument, then the string will be converted into that.
     //
-    // 7. If the callback has `int32_t` as an argument, then the string will be converted into that.
+    // 7. If the callback has `std::int32_t` as an argument, then the string will be converted into that.
     //
-    // 8. If the callback has `uint32_t` as an argument, then the string will be converted into that.
+    // 8. If the callback has `std::uint32_t` as an argument, then the string will be converted into that.
 
     template<typename T1>
         std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
@@ -191,7 +191,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<int32_t>::type> convert_string_to_value_and_advance_index<int32_t>(
+        inline std::optional<typename yli::data::WrapAllButStrings<std::int32_t>::type> convert_string_to_value_and_advance_index<std::int32_t>(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
                 yli::ontology::Entity*&, // environment.
@@ -210,15 +210,15 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            int32_t value;
+            std::int32_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return yli::data::WrapAllButStrings<int32_t>::type(value);
+            return yli::data::WrapAllButStrings<std::int32_t>::type(value);
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<uint32_t>::type> convert_string_to_value_and_advance_index<uint32_t>(
+        inline std::optional<typename yli::data::WrapAllButStrings<std::uint32_t>::type> convert_string_to_value_and_advance_index<std::uint32_t>(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
                 yli::ontology::Entity*&, // environment.
@@ -237,15 +237,15 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            uint32_t value;
+            std::uint32_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return yli::data::WrapAllButStrings<uint32_t>::type(value);
+            return yli::data::WrapAllButStrings<std::uint32_t>::type(value);
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<int64_t>::type> convert_string_to_value_and_advance_index<int64_t>(
+        inline std::optional<typename yli::data::WrapAllButStrings<std::int64_t>::type> convert_string_to_value_and_advance_index<std::int64_t>(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
                 yli::ontology::Entity*&, // environment.
@@ -264,15 +264,15 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            int64_t value;
+            std::int64_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return yli::data::WrapAllButStrings<int64_t>::type(value);
+            return yli::data::WrapAllButStrings<std::int64_t>::type(value);
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<uint64_t>::type> convert_string_to_value_and_advance_index<uint64_t>(
+        inline std::optional<typename yli::data::WrapAllButStrings<std::uint64_t>::type> convert_string_to_value_and_advance_index<std::uint64_t>(
                 yli::ontology::Universe&,
                 yli::ontology::Console&,
                 yli::ontology::Entity*&, // environment.
@@ -291,11 +291,11 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            uint64_t value;
+            std::uint64_t value;
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return yli::data::WrapAllButStrings<uint64_t>::type(value);
+            return yli::data::WrapAllButStrings<std::uint64_t>::type(value);
         }
 
     template<>

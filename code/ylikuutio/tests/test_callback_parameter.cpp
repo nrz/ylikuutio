@@ -26,8 +26,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t, uintptr_t
+#include <cstdint>  // std::int32_t
 #include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t etc.
 #include <utility>  // std::move
 
 namespace yli::ontology
@@ -42,7 +42,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
-    const int32_t zero = 0;
+    const std::int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
     const yli::ontology::CallbackParameterStruct callback_parameter_struct { yli::ontology::Request(callback_object) };
@@ -76,7 +76,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, headless_with_parent_
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
-    const int32_t zero = 0;
+    const std::int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
     const yli::ontology::CallbackParameterStruct callback_parameter_struct { yli::ontology::Request<yli::ontology::CallbackObject>(nullptr) };
@@ -111,7 +111,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_va
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
-    const int32_t zero = 0;
+    const std::int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
     const yli::ontology::CallbackParameterStruct callback_parameter_struct(yli::ontology::Request<yli::ontology::CallbackObject>("foo"));
@@ -146,7 +146,7 @@ TEST(callback_parameter_must_be_initialized_appropriately, parent_provided_as_in
     yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
             callback_object_struct);
 
-    const int32_t zero = 0;
+    const std::int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
 
     const yli::ontology::CallbackParameterStruct callback_parameter_struct(yli::ontology::Request<yli::ontology::CallbackObject>("bar"));

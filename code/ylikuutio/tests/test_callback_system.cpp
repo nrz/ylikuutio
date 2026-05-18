@@ -28,8 +28,8 @@
 #include "code/ylikuutio/snippets/callback_snippets.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <utility>  // std::move
 #include <variant>  // std::holds_alternative
 
@@ -64,8 +64,8 @@ TEST(callback_engine_must_function_properly, return_uint32_t_deadbeef)
     callback_object->set_new_callback(&yli::snippets::return_uint32_t_deadbeef);
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 0xdeadbeef);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 0xdeadbeef);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
@@ -77,14 +77,14 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
-    const int32_t zero = 0;
+    const std::int32_t zero = 0;
     yli::data::AnyValue zero_value(zero);
     callback_object->create_callback_parameter("", std::move(zero_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), 0);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_one)
@@ -96,14 +96,14 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
-    const int32_t one = 1;
+    const std::int32_t one = 1;
     yli::data::AnyValue one_value(one);
     callback_object->create_callback_parameter("", std::move(one_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), -1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), -1);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_two)
@@ -115,14 +115,14 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
-    const int32_t two = 2;
+    const std::int32_t two = 2;
     yli::data::AnyValue two_value(two);
     callback_object->create_callback_parameter("", std::move(two_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), -2);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), -2);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_one)
@@ -134,14 +134,14 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
-    const int32_t minus_one = -1;
+    const std::int32_t minus_one = -1;
     yli::data::AnyValue minus_one_value(minus_one);
     callback_object->create_callback_parameter("", std::move(minus_one_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), 1);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_two)
@@ -153,14 +153,14 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::neg);
 
-    const int32_t minus_two = -2;
+    const std::int32_t minus_two = -2;
     yli::data::AnyValue minus_two_value(minus_two);
     callback_object->create_callback_parameter("", std::move(minus_two_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), 2);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), 2);
 }
 
 TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
@@ -172,14 +172,14 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::square);
 
-    const int32_t three = 3;
+    const std::int32_t three = 3;
     yli::data::AnyValue three_value(three);
     callback_object->create_callback_parameter("foo", std::move(three_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<int32_t>((*result).data));
-    ASSERT_EQ(std::get<int32_t>((*result).data), 9);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>((*result).data));
+    ASSERT_EQ(std::get<std::int32_t>((*result).data), 9);
 }
 
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
@@ -191,14 +191,14 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::square);
 
-    const uint32_t three = 3;
+    const std::uint32_t three = 3;
     yli::data::AnyValue three_value(three);
     callback_object->create_callback_parameter("foo", std::move(three_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 9);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 9);
 }
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
@@ -210,18 +210,18 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::expt);
 
-    const uint32_t five = 5;
+    const std::uint32_t five = 5;
     yli::data::AnyValue five_value(five);
     callback_object->create_callback_parameter("foo", std::move(five_value));
 
-    const uint32_t seven = 7;
+    const std::uint32_t seven = 7;
     yli::data::AnyValue seven_value(seven);
     callback_object->create_callback_parameter("foo", std::move(seven_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 78125);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 78125);
 }
 
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with_named_inputs)
@@ -233,20 +233,20 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     yli::ontology::CallbackObject* callback_object = callback_engine->create_callback_object();
     callback_object->set_new_callback(&yli::snippets::expt_with_named_inputs);
 
-    const uint32_t five = 5;
+    const std::uint32_t five = 5;
     yli::data::AnyValue five_value(five);
     callback_object->create_callback_parameter("base", std::move(five_value));
     std::optional<yli::data::AnyValue> anyvalue_base = callback_object->get_any_value("base");
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*anyvalue_base).data));
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*anyvalue_base).data));
 
-    const uint32_t seven = 7;
+    const std::uint32_t seven = 7;
     yli::data::AnyValue seven_value(seven);
     callback_object->create_callback_parameter("exponent", std::move(seven_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 78125);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 78125);
 }
 
 TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equals_282475249)
@@ -260,18 +260,18 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
     yli::ontology::CallbackObject* callback_object_square_last = callback_engine->create_callback_object();
     callback_object_square_last->set_new_callback(&yli::snippets::square_last);
 
-    const uint32_t seven = 7;
+    const std::uint32_t seven = 7;
     yli::data::AnyValue seven_value(seven);
     callback_object_expt->create_callback_parameter("", std::move(seven_value));
 
-    const uint32_t five = 5;
+    const std::uint32_t five = 5;
     yli::data::AnyValue five_value(five);
     callback_object_expt->create_callback_parameter("", std::move(five_value));
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 282475249);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 282475249);
 }
 
 TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536)
@@ -283,7 +283,7 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     yli::ontology::CallbackObject* callback_object_1st_square = callback_engine->create_callback_object();
     callback_object_1st_square->set_new_callback(&yli::snippets::square);
 
-    const uint32_t two = 2;
+    const std::uint32_t two = 2;
     yli::data::AnyValue two_value(two);
     callback_object_1st_square->create_callback_parameter("", std::move(two_value));
 
@@ -296,6 +296,6 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
 
     std::optional<yli::data::AnyValue> result = callback_engine->execute(yli::data::AnyValue());
     ASSERT_TRUE(result);
-    ASSERT_TRUE(std::holds_alternative<uint32_t>((*result).data));
-    ASSERT_EQ(std::get<uint32_t>((*result).data), 65536);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>((*result).data));
+    ASSERT_EQ(std::get<std::uint32_t>((*result).data), 65536);
 }

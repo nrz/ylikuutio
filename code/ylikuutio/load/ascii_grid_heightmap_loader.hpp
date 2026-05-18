@@ -27,7 +27,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -38,8 +38,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t& image_width,
-            uint32_t& image_height);
+            std::uint32_t& image_width,
+            std::uint32_t& image_height);
 }
 
 #endif

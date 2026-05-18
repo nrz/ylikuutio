@@ -25,7 +25,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::int32_t
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -40,8 +40,8 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_TRUE(result);
 
     // note: `load_obj` only loads the OBJ file. `load_obj` does not remove duplicate vertices.
-    const int32_t number_of_faces = 968;
-    const int32_t number_of_vertices_in_triangle = 3;
+    const std::int32_t number_of_faces = 968;
+    const std::int32_t number_of_vertices_in_triangle = 3;
     ASSERT_EQ(out_vertices.size(), number_of_faces * number_of_vertices_in_triangle);
     ASSERT_EQ(out_uvs.size(), number_of_faces * number_of_vertices_in_triangle);
     ASSERT_EQ(out_normals.size(), number_of_faces * number_of_vertices_in_triangle);

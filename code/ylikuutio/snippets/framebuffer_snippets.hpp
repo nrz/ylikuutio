@@ -19,7 +19,7 @@
 #define YLIKUUTIO_SNIPPETS_FRAMEBUFFER_SNIPPETS_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::ontology
 {
@@ -28,7 +28,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void set_framebuffer_size(yli::ontology::Universe* universe, const uint32_t framebuffer_width, const uint32_t framebuffer_height);
+    void set_framebuffer_size(yli::ontology::Universe* universe, const std::uint32_t framebuffer_width, const std::uint32_t framebuffer_height);
 }
 
 #endif

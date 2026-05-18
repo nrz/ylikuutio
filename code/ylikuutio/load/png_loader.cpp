@@ -25,21 +25,21 @@
 #include <algorithm> // std::copy
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint8_t, std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <memory>    // std::make_shared, std::shared_ptr
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
 namespace yli::load
 {
-    std::shared_ptr<std::vector<uint8_t>> load_png_file(
+    std::shared_ptr<std::vector<std::uint8_t>> load_png_file(
             const std::string& filename,
             const yli::load::ImageLoaderStruct& image_loader_struct,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels)
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
+            std::uint32_t& n_color_channels)
     {
         std::cout << "Loading PNG file " << filename << " ...\n";
 
@@ -80,7 +80,7 @@ namespace yli::load
         // Check for magic number of the PNG file.
 
         constexpr std::size_t header_size_in_bytes { 4 };
-        std::array<uint8_t, header_size_in_bytes> header  { 0x49, 'P', 'N', 'G' };
+        std::array<std::uint8_t, header_size_in_bytes> header  { 0x49, 'P', 'N', 'G' };
         if (fread(header.data(), 1, header_size_in_bytes, fp) != header_size_in_bytes)
         {
             std::cerr << filename << "ERROR: `yli::load::load_png_file`: reading header of " << filename << " failed!\n";
@@ -124,14 +124,14 @@ namespace yli::load
 
         png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
 
-        std::shared_ptr<std::vector<uint8_t>> image_data = std::make_shared<std::vector<uint8_t>>();
+        std::shared_ptr<std::vector<std::uint8_t>> image_data = std::make_shared<std::vector<std::uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
         n_color_channels = (image_data->size() / image_size);
-        uint8_t* image_data_pointer = &(*image_data)[0];
+        std::uint8_t* image_data_pointer = &(*image_data)[0];
 
-        for (uint32_t row_i = 0; row_i < image_height; row_i++)
+        for (std::uint32_t row_i = 0; row_i < image_height; row_i++)
         {
-            uint8_t* row_pointer = row_pointers[row_i];
+            std::uint8_t* row_pointer = row_pointers[row_i];
 
             if (row_pointer == nullptr)
             {

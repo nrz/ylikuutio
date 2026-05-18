@@ -32,8 +32,8 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <cstdint>       // std::int32_t
 #include <optional>      // std::optional
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
@@ -85,7 +85,7 @@ namespace yli::ontology
 
             // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            Glyph* get_glyph_pointer(const int32_t unicode_value) const;
+            Glyph* get_glyph_pointer(const std::int32_t unicode_value) const;
 
             // The rest fields are created in the constructor.
 
@@ -125,7 +125,7 @@ namespace yli::ontology
             std::vector<std::string> glyph_names;
             std::vector<std::string> unicode_strings;
 
-            std::unordered_map<int32_t, Glyph*> unicode_glyph_map;
+            std::unordered_map<std::int32_t, Glyph*> unicode_glyph_map;
     };
 
     template<>

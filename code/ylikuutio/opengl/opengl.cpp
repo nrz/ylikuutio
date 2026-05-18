@@ -22,11 +22,11 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::int8_t, std::int16_t, std::int32_t, std::uint8_t, std::int16_t, std::uint32_t
 #include <iomanip>   // std::setfill, std::setw
 #include <iostream>  // std::cout, std::cerr
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -268,7 +268,7 @@ namespace yli::opengl
 
         if (type == GL_BYTE)
         {
-            std::vector<int8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int8_t>(
+            std::vector<std::int8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int8_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,
@@ -279,7 +279,7 @@ namespace yli::opengl
         }
         else if (type == GL_UNSIGNED_BYTE)
         {
-            std::vector<uint8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint8_t>(
+            std::vector<std::uint8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint8_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,
@@ -290,7 +290,7 @@ namespace yli::opengl
         }
         else if (type == GL_SHORT)
         {
-            std::vector<int16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int16_t>(
+            std::vector<std::int16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int16_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,
@@ -301,7 +301,7 @@ namespace yli::opengl
         }
         else if (type == GL_UNSIGNED_SHORT)
         {
-            std::vector<uint16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint16_t>(
+            std::vector<std::uint16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint16_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,
@@ -312,7 +312,7 @@ namespace yli::opengl
         }
         else if (type == GL_INT)
         {
-            std::vector<int32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<int32_t>(
+            std::vector<std::int32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int32_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,
@@ -323,7 +323,7 @@ namespace yli::opengl
         }
         else if (type == GL_UNSIGNED_INT)
         {
-            std::vector<uint32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<uint32_t>(
+            std::vector<std::uint32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint32_t>(
                     yli::opengl::get_base_format(format),
                     type,
                     texture_width,

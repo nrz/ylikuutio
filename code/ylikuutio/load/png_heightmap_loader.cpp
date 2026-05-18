@@ -35,9 +35,9 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint8_t, std::uint32_t, std::uint64_t
 #include <iostream> // std::cout, std::cerr
 #include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -48,8 +48,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t& image_width,
-            uint32_t& image_height,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
             const std::string& color_channel)
     {
         if (heightmap_loader_struct.x_step < 1)
@@ -64,10 +64,10 @@ namespace yli::load
             return false;
         }
 
-        uint32_t image_size = 0;
-        uint32_t n_color_channels = 0;
+        std::uint32_t image_size = 0;
+        std::uint32_t n_color_channels = 0;
 
-        std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
+        std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
                 heightmap_loader_struct.filename,
                 yli::load::ImageLoaderStruct(),
                 image_width,
@@ -93,7 +93,7 @@ namespace yli::load
             return false;
         }
 
-        if (static_cast<uint64_t>(image_size) != static_cast<uint64_t>(image_width) * static_cast<uint64_t>(image_height))
+        if (static_cast<std::uint64_t>(image_size) != static_cast<std::uint64_t>(image_width) * static_cast<std::uint64_t>(image_height))
         {
             std::cerr << "ERROR: `yli::load::load_png_terrain`: image size does not match image dimensions!\n";
             return false;
@@ -125,7 +125,7 @@ namespace yli::load
         // start processing image_data.
         for (std::size_t y = 0; y < image_height; y++)
         {
-            const uint8_t* image_pointer = &(*image_data)[0] + y * line_size_in_bytes;
+            const std::uint8_t* image_pointer = &(*image_data)[0] + y * line_size_in_bytes;
 
             for (std::size_t x = 0; x < image_width; x++)
             {

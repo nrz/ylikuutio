@@ -22,11 +22,11 @@
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::snippets
 {
-    void set_framebuffer_size(yli::ontology::Universe* universe, const uint32_t framebuffer_width, const uint32_t framebuffer_height)
+    void set_framebuffer_size(yli::ontology::Universe* universe, const std::uint32_t framebuffer_width, const std::uint32_t framebuffer_height)
     {
         yli::ontology::VariableStruct framebuffer_width_variable_struct(*universe, universe);
         framebuffer_width_variable_struct.local_name = "framebuffer_width";

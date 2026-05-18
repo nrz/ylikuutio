@@ -22,8 +22,8 @@
 #include "code/ylikuutio/console/text_input.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <span>     // std::span
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -33,8 +33,8 @@ namespace yli::ontology
         PrintConsoleStruct(
                 const std::span<const std::string> buffer_text,
                 const yli::console::TextInput* const text_input,
-                const uint32_t font_size,
-                const uint32_t n_columns)
+                const std::uint32_t font_size,
+                const std::uint32_t n_columns)
             : buffer_text { buffer_text },
             text_input { text_input },
             font_size { font_size },
@@ -46,8 +46,8 @@ namespace yli::ontology
         const yli::console::TextInput* const text_input;
         std::string prompt;
         PositionStruct position;
-        uint32_t font_size;
-        uint32_t n_columns;
+        std::uint32_t font_size;
+        std::uint32_t n_columns;
     };
 }
 

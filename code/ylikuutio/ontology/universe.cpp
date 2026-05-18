@@ -77,6 +77,7 @@
 // Include standard headers
 #include <cmath>     // std::cos, std::sin
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::int32_t, std::uint32_t
 #include <iomanip>   // std::setprecision
 #include <ios>       // std::fixed
 #include <iostream>  // std::cout, std::cerr
@@ -85,7 +86,6 @@
 #include <optional>  // std::nullopt, std::optional
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <utility>   // std::move
 #include <vector>    // std::vector
@@ -162,7 +162,7 @@ namespace yli::ontology
         application_name      { universe_struct.application_name },
         graphics_api_backend  { sdl::init_sdl(universe_struct.graphics_api_backend) },
         display_modes         { sdl::get_display_modes(this->graphics_api_backend) },
-        n_displays            { static_cast<uint32_t>(this->display_modes.size()) },
+        n_displays            { static_cast<std::uint32_t>(this->display_modes.size()) },
         display_mode          { this->get_preferred_display_mode() },
         is_silent             { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
         is_physical           { universe_struct.is_physical },
@@ -170,8 +170,8 @@ namespace yli::ontology
         window_width          { universe_struct.window_width },
         window_height         { universe_struct.window_height },
         window_title          { universe_struct.window_title },
-        mouse_x               { static_cast<int32_t>(this->window_width / 2) },
-        mouse_y               { static_cast<int32_t>(this->window_height / 2) },
+        mouse_x               { static_cast<std::int32_t>(this->window_width / 2) },
+        mouse_y               { static_cast<std::int32_t>(this->window_height / 2) },
         speed                 { universe_struct.speed },
         turbo_factor          { universe_struct.turbo_factor },
         twin_turbo_factor     { universe_struct.twin_turbo_factor },
@@ -518,12 +518,12 @@ namespace yli::ontology
         }
     }
 
-    void Universe::update_mouse_x(const int32_t x_change)
+    void Universe::update_mouse_x(const std::int32_t x_change)
     {
         this->mouse_x += x_change; // horizontal motion relative to screen center.
     }
 
-    void Universe::update_mouse_y(const int32_t y_change)
+    void Universe::update_mouse_y(const std::int32_t y_change)
     {
         this->mouse_y += y_change; // vertical motion relative to screen center.
     }
@@ -1161,7 +1161,7 @@ namespace yli::ontology
         return true;
     }
 
-    void Universe::set_swap_interval(const int32_t interval)
+    void Universe::set_swap_interval(const std::int32_t interval)
     {
         if (!sdl::set_swap_interval(interval)) [[unlikely]]
         {
@@ -1215,22 +1215,22 @@ namespace yli::ontology
         return this->window;
     }
 
-    uint32_t Universe::get_window_width() const
+    std::uint32_t Universe::get_window_width() const
     {
         return this->window_width;
     }
 
-    uint32_t Universe::get_window_height() const
+    std::uint32_t Universe::get_window_height() const
     {
         return this->window_height;
     }
 
-    uint32_t Universe::get_text_size() const
+    std::uint32_t Universe::get_text_size() const
     {
         return this->text_size;
     }
 
-    uint32_t Universe::get_font_size() const
+    std::uint32_t Universe::get_font_size() const
     {
         return this->font_size;
     }
@@ -1238,7 +1238,7 @@ namespace yli::ontology
     double Universe::compute_delta_time()
     {
         // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-        if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max()) [[unlikely]]
+        if (this->last_time_before_reading_keyboard == std::numeric_limits<std::uint32_t>::max()) [[unlikely]]
         {
             // `SDL_GetTicks()` is called here only once, the first time this function is called.
             this->last_time_before_reading_keyboard = SDL_GetTicks();
@@ -1260,7 +1260,7 @@ namespace yli::ontology
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
-    uint32_t Universe::get_max_fps() const
+    std::uint32_t Universe::get_max_fps() const
     {
         return this->max_fps;
     }
@@ -1275,7 +1275,7 @@ namespace yli::ontology
         return this->last_time_for_display_sync;
     }
 
-    int32_t Universe::get_number_of_frames() const
+    std::int32_t Universe::get_number_of_frames() const
     {
         return this->number_of_frames;
     }

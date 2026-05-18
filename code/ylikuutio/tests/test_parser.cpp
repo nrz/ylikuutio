@@ -28,7 +28,7 @@
 #include "code/ylikuutio/lisp/token_type.hpp"
 
 // Include standard headers
-#include <stdint.h>    // int64_t, uint64_t
+#include <cstdint>     // std::int64_t, std::uint64_t
 #include <optional>    // std::nullopt
 #include <string_view> // std::string_view
 
@@ -175,7 +175,7 @@ TEST(unsigned_integer_must_be_parsed_appropriately, unsigned_integer_123)
         const Token& parsed_token = expr.get_token();
         ASSERT_EQ(parsed_token.get_type(), TokenType::UNSIGNED_INTEGER);
         ASSERT_EQ(parsed_token.get_lexeme(), "123");
-        std::optional<uint64_t> maybe_numeric_value = parsed_token.get_numeric_value<uint64_t>();
+        std::optional<std::uint64_t> maybe_numeric_value = parsed_token.get_numeric_value<std::uint64_t>();
         ASSERT_TRUE(maybe_numeric_value.has_value());
         ASSERT_EQ(maybe_numeric_value.value(), 123);
     }
@@ -197,7 +197,7 @@ TEST(signed_integer_must_be_parsed_appropriately, signed_integer_minus_123)
         const Token& parsed_token = expr.get_token();
         ASSERT_EQ(parsed_token.get_type(), TokenType::SIGNED_INTEGER);
         ASSERT_EQ(parsed_token.get_lexeme(), "-123");
-        std::optional<int64_t> maybe_numeric_value = parsed_token.get_numeric_value<int64_t>();
+        std::optional<std::int64_t> maybe_numeric_value = parsed_token.get_numeric_value<std::int64_t>();
         ASSERT_TRUE(maybe_numeric_value.has_value());
         ASSERT_EQ(maybe_numeric_value.value(), -123);
     }
@@ -413,7 +413,7 @@ TEST(string_must_be_parsed_appropriately, one_plus_two)
             ASSERT_EQ(one_token.get_type(), TokenType::UNSIGNED_INTEGER);
             ASSERT_EQ(one_token.get_lexeme(), "1");
 
-            std::optional<uint64_t> maybe_numeric_value = one_token.get_numeric_value<uint64_t>();
+            std::optional<std::uint64_t> maybe_numeric_value = one_token.get_numeric_value<std::uint64_t>();
             ASSERT_TRUE(maybe_numeric_value.has_value());
             ASSERT_EQ(maybe_numeric_value.value(), 1);
         }
@@ -425,7 +425,7 @@ TEST(string_must_be_parsed_appropriately, one_plus_two)
             ASSERT_EQ(two_token.get_type(), TokenType::UNSIGNED_INTEGER);
             ASSERT_EQ(two_token.get_lexeme(), "2");
 
-            std::optional<uint64_t> maybe_numeric_value = two_token.get_numeric_value<uint64_t>();
+            std::optional<std::uint64_t> maybe_numeric_value = two_token.get_numeric_value<std::uint64_t>();
             ASSERT_TRUE(maybe_numeric_value.has_value());
             ASSERT_EQ(maybe_numeric_value.value(), 2);
         }

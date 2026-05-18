@@ -19,17 +19,17 @@
 #define YLIKUUTIO_CONSOLE_STATE_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::console
 {
-    static const uint32_t active               = 1;
-    static const uint32_t in_scrollback_buffer = 1 << 1;
-    static const uint32_t in_new_input         = 1 << 2;
-    static const uint32_t in_historical_input  = 1 << 3;
-    static const uint32_t in_temp_input        = 1 << 4;
+    static const std::uint32_t active               = 1;
+    static const std::uint32_t in_scrollback_buffer = 1 << 1;
+    static const std::uint32_t in_new_input         = 1 << 2;
+    static const std::uint32_t in_historical_input  = 1 << 3;
+    static const std::uint32_t in_temp_input        = 1 << 4;
 
-    enum ConsoleState : uint32_t
+    enum ConsoleState : std::uint32_t
     {
         INACTIVE_IN_NEW_INPUT = in_new_input,                    // initial state: can activate -> new input
         INACTIVE_IN_HISTORICAL_INPUT = in_historical_input,      // can activate -> historical input

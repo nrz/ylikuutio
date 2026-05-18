@@ -19,10 +19,10 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
+#include <cstdint>     // std::uint8_t, std::uint32_t
 #include <iomanip>     // std::setfill, std::setw
 #include <ios>         // std::dec, std::hex
 #include <iostream>    // std::cout, std::cerr
-#include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
 #include <sstream>     // std::stringstream
 #include <string_view> // std::string_view
@@ -38,11 +38,11 @@ namespace yli::string
 
         for (const std::byte* data_pointer = start_address; data_pointer < end_address; data_pointer++)
         {
-            const uint8_t data_byte = static_cast<uint8_t>(*data_pointer);
+            const std::uint8_t data_byte = static_cast<std::uint8_t>(*data_pointer);
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
             current_line_ascii += data_char;
 
-            const uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+            const std::uint32_t data_32_bit = static_cast<std::uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
             std::stringstream my_stream;
             my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
             current_line_hex += my_stream.str();

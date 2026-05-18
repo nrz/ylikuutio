@@ -24,9 +24,9 @@
 
 // Include standard headers
 #include <cmath>    // std::pow
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <variant>  // std::holds_alternative
 
 namespace yli::ontology
@@ -51,18 +51,18 @@ namespace yli::snippets
 
         const yli::data::AnyValue& any_value = static_cast<yli::ontology::CallbackParameter*>(input_parameters.get(0))->get_any_value();
 
-        if (std::holds_alternative<int32_t>(any_value.data))
+        if (std::holds_alternative<std::int32_t>(any_value.data))
         {
-            const int32_t factor = std::get<int32_t>(any_value.data);
-            const int32_t squared = factor * factor;
-            std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
+            const std::int32_t factor = std::get<std::int32_t>(any_value.data);
+            const std::int32_t squared = factor * factor;
+            std::cout << "Square of (std::int32_t) " << factor << " is " << squared << ".\n";
             return yli::data::AnyValue(squared);
         }
-        else if (std::holds_alternative<uint32_t>(any_value.data))
+        else if (std::holds_alternative<std::uint32_t>(any_value.data))
         {
-            const uint32_t factor = std::get<uint32_t>(any_value.data);
-            const uint32_t squared = factor * factor;
-            std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
+            const std::uint32_t factor = std::get<std::uint32_t>(any_value.data);
+            const std::uint32_t squared = factor * factor;
+            std::cout << "Square of (std::uint32_t) " << factor << " is " << squared << ".\n";
             return yli::data::AnyValue(squared);
         }
         else if (std::holds_alternative<float>(any_value.data))
@@ -103,18 +103,18 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (std::holds_alternative<int32_t>((*return_value_any_value).data))
+        if (std::holds_alternative<std::int32_t>((*return_value_any_value).data))
         {
-            const int32_t factor = std::get<int32_t>((*return_value_any_value).data);
-            const int32_t squared = factor * factor;
-            std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
+            const std::int32_t factor = std::get<std::int32_t>((*return_value_any_value).data);
+            const std::int32_t squared = factor * factor;
+            std::cout << "Square of (std::int32_t) " << factor << " is " << squared << ".\n";
             return yli::data::AnyValue(squared);
         }
-        else if (std::holds_alternative<uint32_t>((*return_value_any_value).data))
+        else if (std::holds_alternative<std::uint32_t>((*return_value_any_value).data))
         {
-            const uint32_t factor = std::get<uint32_t>((*return_value_any_value).data);
-            const uint32_t squared = factor * factor;
-            std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
+            const std::uint32_t factor = std::get<std::uint32_t>((*return_value_any_value).data);
+            const std::uint32_t squared = factor * factor;
+            std::cout << "Square of (std::uint32_t) " << factor << " is " << squared << ".\n";
             return yli::data::AnyValue(squared);
         }
         else if (std::holds_alternative<float>((*return_value_any_value).data))
@@ -150,16 +150,16 @@ namespace yli::snippets
         const yli::data::AnyValue& base = static_cast<yli::ontology::CallbackParameter*>(input_parameters.get(0))->get_any_value();
         const yli::data::AnyValue& exponent = static_cast<yli::ontology::CallbackParameter*>(input_parameters.get(1))->get_any_value();
 
-        if (std::holds_alternative<int32_t>(base.data) && std::holds_alternative<int32_t>(exponent.data))
+        if (std::holds_alternative<std::int32_t>(base.data) && std::holds_alternative<std::int32_t>(exponent.data))
         {
-            const int32_t power = std::pow(std::get<int32_t>(base.data), std::get<int32_t>(exponent.data));
-            std::cout << "(int32_t) " << std::get<int32_t>(base.data) << "^" << std::get<int32_t>(exponent.data) << " is " << power << ".\n";
+            const std::int32_t power = std::pow(std::get<std::int32_t>(base.data), std::get<std::int32_t>(exponent.data));
+            std::cout << "(std::int32_t) " << std::get<std::int32_t>(base.data) << "^" << std::get<std::int32_t>(exponent.data) << " is " << power << ".\n";
             return yli::data::AnyValue(power);
         }
-        else if (std::holds_alternative<uint32_t>(base.data) && std::holds_alternative<uint32_t>(exponent.data))
+        else if (std::holds_alternative<std::uint32_t>(base.data) && std::holds_alternative<std::uint32_t>(exponent.data))
         {
-            const uint32_t power = std::pow(std::get<uint32_t>(base.data), std::get<uint32_t>(exponent.data));
-            std::cout << "(uint32_t) " << std::get<uint32_t>(base.data) << "^" << std::get<uint32_t>(exponent.data) << " is " << power << ".\n";
+            const std::uint32_t power = std::pow(std::get<std::uint32_t>(base.data), std::get<std::uint32_t>(exponent.data));
+            std::cout << "(std::uint32_t) " << std::get<std::uint32_t>(base.data) << "^" << std::get<std::uint32_t>(exponent.data) << " is " << power << ".\n";
             return yli::data::AnyValue(power);
         }
         else if (std::holds_alternative<float>(base.data) && std::holds_alternative<float>(exponent.data))
@@ -202,16 +202,16 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (std::holds_alternative<int32_t>((*base).data) && std::holds_alternative<int32_t>((*exponent).data))
+        if (std::holds_alternative<std::int32_t>((*base).data) && std::holds_alternative<std::int32_t>((*exponent).data))
         {
-            const int32_t power = std::pow(std::get<int32_t>((*base).data), std::get<int32_t>((*exponent).data));
-            std::cout << "(int32_t) " << std::get<int32_t>((*base).data) << "^" << std::get<int32_t>((*exponent).data) << " is " << power << ".\n";
+            const std::int32_t power = std::pow(std::get<std::int32_t>((*base).data), std::get<std::int32_t>((*exponent).data));
+            std::cout << "(std::int32_t) " << std::get<std::int32_t>((*base).data) << "^" << std::get<std::int32_t>((*exponent).data) << " is " << power << ".\n";
             return yli::data::AnyValue(power);
         }
-        else if (std::holds_alternative<uint32_t>((*base).data) && std::holds_alternative<uint32_t>((*exponent).data))
+        else if (std::holds_alternative<std::uint32_t>((*base).data) && std::holds_alternative<std::uint32_t>((*exponent).data))
         {
-            const uint32_t power = std::pow(std::get<uint32_t>((*base).data), std::get<uint32_t>((*exponent).data));
-            std::cout << "(uint32_t) " << std::get<uint32_t>((*base).data) << "^" << std::get<uint32_t>((*exponent).data) << " is " << power << ".\n";
+            const std::uint32_t power = std::pow(std::get<std::uint32_t>((*base).data), std::get<std::uint32_t>((*exponent).data));
+            std::cout << "(std::uint32_t) " << std::get<std::uint32_t>((*base).data) << "^" << std::get<std::uint32_t>((*exponent).data) << " is " << power << ".\n";
             return yli::data::AnyValue(power);
         }
         else if (std::holds_alternative<float>((*base).data) && std::holds_alternative<float>((*exponent).data))
@@ -244,10 +244,10 @@ namespace yli::snippets
 
         const yli::data::AnyValue& any_value = static_cast<yli::ontology::CallbackParameter*>(input_parameters.get(0))->get_any_value();
 
-        if (std::holds_alternative<int32_t>(any_value.data))
+        if (std::holds_alternative<std::int32_t>(any_value.data))
         {
-            const int32_t product = -1 * std::get<int32_t>(any_value.data);
-            std::cout << "-1 * (int32_t) " << std::get<int32_t>(any_value.data) << " is " << product << ".\n";
+            const std::int32_t product = -1 * std::get<std::int32_t>(any_value.data);
+            std::cout << "-1 * (std::int32_t) " << std::get<std::int32_t>(any_value.data) << " is " << product << ".\n";
             return yli::data::AnyValue(product);
         }
         else if (std::holds_alternative<float>(any_value.data))
@@ -282,7 +282,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule& /* input_parameters */,
             const yli::data::AnyValue&)
     {
-        uint32_t deadbeef { 0xdeadbeef };
+        std::uint32_t deadbeef { 0xdeadbeef };
         return yli::data::AnyValue(deadbeef);
     }
 }

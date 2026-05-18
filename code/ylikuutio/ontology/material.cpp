@@ -32,10 +32,10 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 
 namespace yli::core
@@ -250,17 +250,17 @@ namespace yli::ontology
         return this->texture.get_texture_filename();
     }
 
-    uint32_t Material::get_image_width() const
+    std::uint32_t Material::get_image_width() const
     {
         return this->texture.get_image_width();
     }
 
-    uint32_t Material::get_image_height() const
+    std::uint32_t Material::get_image_height() const
     {
         return this->texture.get_image_height();
     }
 
-    uint32_t Material::get_image_size() const
+    std::uint32_t Material::get_image_size() const
     {
         return this->texture.get_image_size();
     }

@@ -46,6 +46,7 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
 #include <memory>   // std::make_unique, std::unique_ptr
 #include <stdexcept> // std::logic_error
@@ -187,25 +188,25 @@ namespace hirvi
         if (this->command_line_master.is_key("window-width") &&
                 yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
         {
-            universe_struct.window_width = this->command_line_master.get_value_or_throw<uint32_t>("window-width");
+            universe_struct.window_width = this->command_line_master.get_value_or_throw<std::uint32_t>("window-width");
         }
 
         if (this->command_line_master.is_key("window-height") &&
                 yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
         {
-            universe_struct.window_height = this->command_line_master.get_value_or_throw<uint32_t>("window-height");
+            universe_struct.window_height = this->command_line_master.get_value_or_throw<std::uint32_t>("window-height");
         }
 
         if (this->command_line_master.is_key("framebuffer-width") &&
                 yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-width")))
         {
-            universe_struct.framebuffer_module_struct.texture_width = this->command_line_master.get_value_or_throw<uint32_t>("framebuffer-width");
+            universe_struct.framebuffer_module_struct.texture_width = this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-width");
         }
 
         if (this->command_line_master.is_key("framebuffer-height") &&
                 yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-height")))
         {
-            universe_struct.framebuffer_module_struct.texture_height = this->command_line_master.get_value_or_throw<uint32_t>("framebuffer-height");
+            universe_struct.framebuffer_module_struct.texture_height = this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-height");
         }
 
         if (this->command_line_master.is_key("speed") &&

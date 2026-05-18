@@ -22,7 +22,7 @@
 #include "request.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::ontology
 {
@@ -30,7 +30,7 @@ namespace yli::ontology
 
     struct ConsoleStruct : public LispContextStruct
     {
-        ConsoleStruct(const uint32_t left_x, const uint32_t right_x, const uint32_t top_y, const uint32_t bottom_y)
+        ConsoleStruct(const std::uint32_t left_x, const std::uint32_t right_x, const std::uint32_t top_y, const std::uint32_t bottom_y)
         : left_x   { left_x },
         right_x  { right_x },
         top_y  { top_y },
@@ -39,10 +39,10 @@ namespace yli::ontology
         }
 
         Request<Font2d> font_2d_master {};
-        uint32_t left_x;
-        uint32_t right_x;
-        uint32_t top_y;
-        uint32_t bottom_y;
+        std::uint32_t left_x;
+        std::uint32_t right_x;
+        std::uint32_t top_y;
+        std::uint32_t bottom_y;
     };
 }
 

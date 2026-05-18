@@ -24,9 +24,9 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <limits>   // std::numeric_limits
 #include <span>     // std::span
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -39,7 +39,7 @@ namespace yli::console
             typedef ScrollbackBufferIterator      iterator;
             typedef ScrollbackBufferConstIterator const_iterator;
 
-            explicit ScrollbackBuffer(const uint32_t n_columns = 80, const uint32_t n_rows = 24);
+            explicit ScrollbackBuffer(const std::uint32_t n_columns = 80, const std::uint32_t n_rows = 24);
 
             ScrollbackBuffer(const ScrollbackBuffer&) = delete;
             ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
@@ -69,8 +69,8 @@ namespace yli::console
             std::size_t size() const;
             bool empty() const;
             const std::vector<std::string>& data() const;
-            uint32_t get_n_columns() const;
-            uint32_t get_n_rows() const;
+            std::uint32_t get_n_columns() const;
+            std::uint32_t get_n_rows() const;
 
             std::size_t get_buffer_index() const;
 
@@ -99,8 +99,8 @@ namespace yli::console
 
         private:
             std::vector<std::string> buffer;
-            const uint32_t n_columns;  // Number of columns must be at least 1.
-            const uint32_t n_rows;     // Number of rows must be at least 1.
+            const std::uint32_t n_columns;  // Number of columns must be at least 1.
+            const std::uint32_t n_rows;     // Number of rows must be at least 1.
             std::vector<std::string>::iterator buffer_it { this->buffer.end() };
             std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
     };

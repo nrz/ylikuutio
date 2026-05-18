@@ -28,8 +28,8 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <cstdint>       // std::int32_t
 #include <iostream>      // std::cout, std::cerr
-#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -40,7 +40,7 @@ namespace yli::load
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
+            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>>& ofbx_diffuse_texture_mesh_map,
             std::vector<const ofbx::Mesh*>& ofbx_meshes,
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,

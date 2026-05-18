@@ -25,7 +25,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <stdint.h>      // uint32_t etc.
+#include <cstdint>       // std::uint32_t
 #include <variant>       // std::holds_alternative
 
 namespace yli::ontology
@@ -37,12 +37,12 @@ namespace yli::ontology
         // framebuffer width.
         const yli::data::AnyValue& framebuffer_width_any_value = variable.variable_value;
 
-        if (!std::holds_alternative<uint32_t>(framebuffer_width_any_value.data))
+        if (!std::holds_alternative<std::uint32_t>(framebuffer_width_any_value.data))
         {
             return std::nullopt;
         }
 
-        const uint32_t framebuffer_width = std::get<uint32_t>(framebuffer_width_any_value.data);
+        const std::uint32_t framebuffer_width = std::get<std::uint32_t>(framebuffer_width_any_value.data);
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
@@ -63,12 +63,12 @@ namespace yli::ontology
         // framebuffer height.
         const yli::data::AnyValue& framebuffer_height_any_value = variable.variable_value;
 
-        if (!std::holds_alternative<uint32_t>(framebuffer_height_any_value.data))
+        if (!std::holds_alternative<std::uint32_t>(framebuffer_height_any_value.data))
         {
             return std::nullopt;
         }
 
-        const uint32_t framebuffer_height = std::get<uint32_t>(framebuffer_height_any_value.data);
+        const std::uint32_t framebuffer_height = std::get<std::uint32_t>(framebuffer_height_any_value.data);
 
         Universe* universe = dynamic_cast<Universe*>(&entity);
 

@@ -20,13 +20,13 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
+#include <cstdint>     // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
 #include <cstdlib>     // std::strtod, std::strtof, std::strtoll, std::strtoull
 #include <iomanip>     // std::setfill, std::setw
 #include <ios>         // std::hex
 #include <iostream>    // std::cout, std::cerr
 #include <limits>      // std::numeric_limits
 #include <optional>    // std::nullopt, std::optional
-#include <stdint.h>    // uint32_t etc.
 #include <string>      // std::basic_string, std::string
 #include <sstream>     // std::stringstream
 #include <string_view> // std::basic_string_view, std::string_view
@@ -143,7 +143,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline std::optional<int32_t> extract_unicode_value_from_string(const CharType*& unicode_char_pointer)
+        inline std::optional<std::int32_t> extract_unicode_value_from_string(const CharType*& unicode_char_pointer)
         {
             if (*unicode_char_pointer == '\0')
             {
@@ -156,7 +156,7 @@ namespace yli::string
             {
                 // it's just a character, so return its value,
                 // and advance to the next character.
-                return (int32_t) *unicode_char_pointer++;
+                return (std::int32_t) *unicode_char_pointer++;
             }
 
             if (*++unicode_char_pointer != '#')
@@ -195,7 +195,7 @@ namespace yli::string
 
             // convert hexadecimal string to signed integer.
             // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499
-            uint32_t unicode_value;
+            std::uint32_t unicode_value;
             std::stringstream unicode_stringstream;
             unicode_stringstream << std::hex << hex_string;
             unicode_stringstream >> unicode_value;
@@ -205,7 +205,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_signed_integer(std::string_view string)
         {
-            const int64_t value = std::strtoll(std::string(string).c_str(), nullptr, 10); // base 10.
+            const std::int64_t value = std::strtoll(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value < std::numeric_limits<T>::min())
             {
@@ -224,7 +224,7 @@ namespace yli::string
     template<typename T>
         std::optional<T> convert_string_to_unsigned_integer(std::string_view string)
         {
-            const uint64_t value = std::strtoull(std::string(string).c_str(), nullptr, 10); // base 10.
+            const std::uint64_t value = std::strtoull(std::string(string).c_str(), nullptr, 10); // base 10.
 
             if (value > std::numeric_limits<T>::max())
             {
@@ -239,51 +239,51 @@ namespace yli::string
         std::optional<T> convert_string_to_value(std::string_view string) = delete;
 
     template<>
-        inline std::optional<int8_t> convert_string_to_value<int8_t>(std::string_view string)
+        inline std::optional<std::int8_t> convert_string_to_value<std::int8_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_signed_integer<int8_t>(string);
+            return yli::string::convert_string_to_signed_integer<std::int8_t>(string);
         }
 
     template<>
-        inline std::optional<uint8_t> convert_string_to_value<uint8_t>(std::string_view string)
+        inline std::optional<std::uint8_t> convert_string_to_value<std::uint8_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_unsigned_integer<uint8_t>(string);
+            return yli::string::convert_string_to_unsigned_integer<std::uint8_t>(string);
         }
 
     template<>
-        inline std::optional<int16_t> convert_string_to_value<int16_t>(std::string_view string)
+        inline std::optional<std::int16_t> convert_string_to_value<std::int16_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_signed_integer<int16_t>(string);
+            return yli::string::convert_string_to_signed_integer<std::int16_t>(string);
         }
 
     template<>
-        inline std::optional<uint16_t> convert_string_to_value<uint16_t>(std::string_view string)
+        inline std::optional<std::uint16_t> convert_string_to_value<std::uint16_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_unsigned_integer<uint16_t>(string);
+            return yli::string::convert_string_to_unsigned_integer<std::uint16_t>(string);
         }
 
     template<>
-        inline std::optional<int32_t> convert_string_to_value<int32_t>(std::string_view string)
+        inline std::optional<std::int32_t> convert_string_to_value<std::int32_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_signed_integer<int32_t>(string);
+            return yli::string::convert_string_to_signed_integer<std::int32_t>(string);
         }
 
     template<>
-        inline std::optional<uint32_t> convert_string_to_value<uint32_t>(std::string_view string)
+        inline std::optional<std::uint32_t> convert_string_to_value<std::uint32_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_unsigned_integer<uint32_t>(string);
+            return yli::string::convert_string_to_unsigned_integer<std::uint32_t>(string);
         }
 
     template<>
-        inline std::optional<int64_t> convert_string_to_value<int64_t>(std::string_view string)
+        inline std::optional<std::int64_t> convert_string_to_value<std::int64_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_signed_integer<int64_t>(string);
+            return yli::string::convert_string_to_signed_integer<std::int64_t>(string);
         }
 
     template<>
-        inline std::optional<uint64_t> convert_string_to_value<uint64_t>(std::string_view string)
+        inline std::optional<std::uint64_t> convert_string_to_value<std::uint64_t>(std::string_view string)
         {
-            return yli::string::convert_string_to_unsigned_integer<uint64_t>(string);
+            return yli::string::convert_string_to_unsigned_integer<std::uint64_t>(string);
         }
 
     template<>
@@ -539,7 +539,7 @@ namespace yli::string
                 const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
                 current_line_ascii += data_char;
 
-                const uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+                const std::uint32_t data_32_bit = static_cast<std::uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
                 std::stringstream my_stream;
                 my_stream << std::setfill('0') << std::setw(sizeof(CharType) / 4) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
                 current_line_hex += my_stream.str();

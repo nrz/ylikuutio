@@ -34,8 +34,8 @@
 #endif
 
 // Include standard headers
+#include <cstdint>  // std::int32_t, std::uint8_t, std::uint64_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -44,7 +44,7 @@ typedef unsigned char u8;
 TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 {
     const std::string filename = "cat.fbx";
-    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    std::optional<std::vector<std::uint8_t>> data_vector = yli::file::binary_slurp(filename);
     ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 1373356);                                // size of `cat.fbx` in bytes.
 
@@ -54,7 +54,7 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
     const int size = data_vector->size();
     ASSERT_EQ(size, 1373356);                                             // size of `cat.fbx` in bytes.
 
-    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
@@ -165,7 +165,7 @@ TEST(openfbx_must_function_appropriately, rigged_and_animated_cat)
 TEST(openfbx_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei_png_textures.fbx";
-    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    std::optional<std::vector<std::uint8_t>> data_vector = yli::file::binary_slurp(filename);
     ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 365180);                              // size of `turbo_polizei_png_textures.fbx` in bytes.
 
@@ -175,7 +175,7 @@ TEST(openfbx_must_function_appropriately, turbo_polizei)
     const int size = data_vector->size();
     ASSERT_EQ(size, 365180);                                             // size of `turbo_polizei_png_textures.fbx` in bytes.
 
-    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 
@@ -285,7 +285,7 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
     std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
 
-    const int32_t mesh_i = 0;
+    const std::int32_t mesh_i = 0;
 
     const bool is_debug_mode = false; // Travis fails for too much output.
 
@@ -296,7 +296,7 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 TEST(openfbx_must_function_appropriately, freight_train)
 {
     const std::string filename = "freight_train.fbx";
-    std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+    std::optional<std::vector<std::uint8_t>> data_vector = yli::file::binary_slurp(filename);
     ASSERT_TRUE(data_vector);
     ASSERT_EQ(data_vector->size(), 426124);                                // size of `freight_train.fbx` in bytes.
 
@@ -306,7 +306,7 @@ TEST(openfbx_must_function_appropriately, freight_train)
     const int size = data_vector->size();
     ASSERT_EQ(size, 426124);                                             // size of `freight_train.fbx` in bytes.
 
-    const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+    const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
     const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
     ASSERT_NE(ofbx_iscene, nullptr);
 

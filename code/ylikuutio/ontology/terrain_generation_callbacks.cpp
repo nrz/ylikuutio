@@ -19,11 +19,11 @@
 #include "FastNoiseSIMD/FastNoiseSIMD.h"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::int32_t
 
 namespace yli::ontology
 {
-    float* get_noise(int32_t x_start, int32_t y_start, int32_t z_start, int32_t x_size, int32_t y_size, int32_t z_size, float scale_modifier)
+    float* get_noise(std::int32_t x_start, std::int32_t y_start, std::int32_t z_start, std::int32_t x_size, std::int32_t y_size, std::int32_t z_size, float scale_modifier)
     {
         FastNoiseSIMD* myNoise = FastNoiseSIMD::NewFastNoiseSIMD();
 

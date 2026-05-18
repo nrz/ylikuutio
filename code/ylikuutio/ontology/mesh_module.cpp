@@ -31,8 +31,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <variant>  // std::holds_alternative
 #include <vector>   // std::vector
 
@@ -122,7 +122,7 @@ namespace yli::ontology
         return this->normals;
     }
 
-    const std::vector<uint32_t>& MeshModule::get_indices() const
+    const std::vector<std::uint32_t>& MeshModule::get_indices() const
     {
         return this->indices;
     }

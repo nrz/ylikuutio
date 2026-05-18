@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cstddef>     // std::size_t
-#include <stdint.h>    // int64_t, uint64_t
+#include <cstdint>     // std::int64_t, std::uint64_t
 #include <string_view> // std::string_view
 #include <utility>     // std::move
 
@@ -35,7 +35,7 @@ namespace yli::lisp
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const int64_t value)
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::int64_t value)
         : type      { type },
         lexeme      { std::move(lexeme) },
         text_position { text_position },
@@ -43,7 +43,7 @@ namespace yli::lisp
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const uint64_t value)
+    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::uint64_t value)
         : type        { type },
         lexeme        { std::move(lexeme) },
         text_position { text_position },

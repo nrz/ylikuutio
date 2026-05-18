@@ -24,9 +24,9 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <limits>   // std::numeric_limits
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -67,13 +67,13 @@ namespace yli::ontology
             void activate() override;
             void deactivate();
 
-            GenericCallbackEngine* get_keypress_callback_engine(const uint32_t keycode) const;
-            GenericCallbackEngine* get_keyrelease_callback_engine(const uint32_t keycode) const;
-            GenericCallbackEngine* get_continuous_keypress_callback_engine(const uint32_t keycode) const;
+            GenericCallbackEngine* get_keypress_callback_engine(const std::uint32_t keycode) const;
+            GenericCallbackEngine* get_keyrelease_callback_engine(const std::uint32_t keycode) const;
+            GenericCallbackEngine* get_continuous_keypress_callback_engine(const std::uint32_t keycode) const;
 
-            void set_keypress_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
-            void set_keyrelease_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
-            void set_continuous_keypress_callback_engine(const uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+            void set_keypress_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+            void set_keyrelease_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+            void set_continuous_keypress_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
 
             const std::vector<GenericCallbackEngine*>* get_keypress_callback_engines() const;
             const std::vector<GenericCallbackEngine*>* get_keyrelease_callback_engines() const;

@@ -34,9 +34,9 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -177,13 +177,13 @@ namespace yli::ontology
 
             // Getters end here.
 
-            const uint32_t console_left_x;
-            const uint32_t console_right_x;
-            const uint32_t console_top_y;
-            const uint32_t console_bottom_y;
+            const std::uint32_t console_left_x;
+            const std::uint32_t console_right_x;
+            const std::uint32_t console_top_y;
+            const std::uint32_t console_bottom_y;
 
-            const uint32_t n_columns;
-            const uint32_t n_rows;
+            const std::uint32_t n_columns;
+            const std::uint32_t n_rows;
 
             TextInput new_input;  // This is used for new inputs.
             TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.

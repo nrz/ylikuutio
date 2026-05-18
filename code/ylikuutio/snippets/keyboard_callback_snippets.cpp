@@ -34,10 +34,10 @@
 #endif
 
 // Include standard headers
+#include <cstdint>    // std::uint32_t
 #include <functional> // std::reference_wrapper
 #include <iostream>   // std::cerr
 #include <optional>   // std::optional
-#include <stdint.h>   // uint32_t etc.
 #include <string>     // std::string
 #include <variant>    // std::holds_alternative
 
@@ -181,7 +181,7 @@ namespace yli::snippets
             yli::ontology::GenericParentModule&,
             const yli::data::AnyValue&)
     {
-        const uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
+        const std::uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
         return yli::data::AnyValue(exit_program_magic_number);
     }
 

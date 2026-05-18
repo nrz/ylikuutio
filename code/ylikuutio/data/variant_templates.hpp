@@ -22,7 +22,7 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <string>   // std::string
 #include <sstream>  // std::stringstream
 #include <variant>  // std::holds_alternative, std::variant
@@ -74,21 +74,21 @@ namespace yli::data
                     my_variant = double_value;
                 }
             }
-            else if (type == "int32_t")
+            else if (type == "std::int32_t")
             {
                 if (yli::string::check_if_signed_integer_string<char>(value_string))
                 {
-                    int32_t int32_t_value;
+                    std::int32_t int32_t_value;
                     value_stringstream << value_string;
                     value_stringstream >> int32_t_value;
                     my_variant = int32_t_value;
                 }
             }
-            else if (type == "uint32_t")
+            else if (type == "std::uint32_t")
             {
                 if (yli::string::check_if_unsigned_integer_string<char>(value_string))
                 {
-                    uint32_t uint32_t_value;
+                    std::uint32_t uint32_t_value;
                     value_stringstream << value_string;
                     value_stringstream >> uint32_t_value;
                     my_variant = uint32_t_value;

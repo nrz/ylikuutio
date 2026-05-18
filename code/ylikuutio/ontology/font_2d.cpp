@@ -47,10 +47,10 @@
 // Include standard headers
 #include <algorithm> // std::count
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <span>      // std::span
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <utility>   // std::pair
 #include <vector>    // std::vector
@@ -156,7 +156,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    uint32_t Font2d::compute_left_x(const PrintTextStruct& print_text_struct) const
+    std::uint32_t Font2d::compute_left_x(const PrintTextStruct& print_text_struct) const
     {
         // Compute string length.
         const std::string& string = print_text_struct.text;
@@ -180,7 +180,7 @@ namespace yli::ontology
         }
     }
 
-    uint32_t Font2d::compute_top_y(const PrintTextStruct& print_text_struct) const
+    std::uint32_t Font2d::compute_top_y(const PrintTextStruct& print_text_struct) const
     {
         // Count the number of lines.
         const std::string& string = print_text_struct.text;
@@ -206,10 +206,10 @@ namespace yli::ontology
 
     void Font2d::compute_and_store_glyph_vertices(
             std::vector<glm::vec2>& vertices,
-            const uint32_t vertex_left_x,
-            const uint32_t vertex_top_y) const
+            const std::uint32_t vertex_left_x,
+            const std::uint32_t vertex_top_y) const
     {
-        const uint32_t vertex_right_x = vertex_left_x + this->text_size;
+        const std::uint32_t vertex_right_x = vertex_left_x + this->text_size;
 
         const glm::vec2 vertex_up_left(vertex_left_x, vertex_top_y);
         const glm::vec2 vertex_up_right(vertex_right_x, vertex_top_y);
@@ -235,7 +235,7 @@ namespace yli::ontology
         return yli::ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
     }
 
-    uint32_t Font2d::get_text_size() const
+    std::uint32_t Font2d::get_text_size() const
     {
         return this->text_size;
     }
@@ -245,7 +245,7 @@ namespace yli::ontology
         return this->texture.get_texture_file_format();
     }
 
-    uint32_t Font2d::get_program_id() const
+    std::uint32_t Font2d::get_program_id() const
     {
         return this->program_id;
     }
@@ -308,15 +308,15 @@ namespace yli::ontology
         // Newlines need to be checked beforehand.
         const std::size_t length = print_text_struct.text.size();
 
-        uint32_t current_left_x = this->compute_left_x(print_text_struct);
-        uint32_t current_top_y = this->compute_top_y(print_text_struct);
+        std::uint32_t current_left_x = this->compute_left_x(print_text_struct);
+        std::uint32_t current_top_y = this->compute_top_y(print_text_struct);
 
         // Fill buffers.
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> uvs;
 
         std::size_t i = 0;
-        uint32_t column_i = 0;
+        std::uint32_t column_i = 0;
 
         while (i < length)
         {
@@ -382,8 +382,8 @@ namespace yli::ontology
 
         this->prepare_to_print();
 
-        uint32_t current_left_x = print_console_struct.position.x;
-        uint32_t current_top_y = print_console_struct.position.y;
+        std::uint32_t current_left_x = print_console_struct.position.x;
+        std::uint32_t current_top_y = print_console_struct.position.y;
 
         // Fill buffers.
         std::vector<glm::vec2> vertices;

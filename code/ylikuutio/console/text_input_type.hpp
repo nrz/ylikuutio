@@ -21,11 +21,11 @@
 #include "console_state.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::console
 {
-    enum TextInputType : uint32_t
+    enum TextInputType : std::uint32_t
     {
         NEW_INPUT = in_new_input,
         TEMP_INPUT = in_temp_input

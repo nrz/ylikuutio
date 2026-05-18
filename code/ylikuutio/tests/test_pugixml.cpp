@@ -22,9 +22,9 @@
 #include "pugixml.cpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
 {
@@ -35,7 +35,7 @@ TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
 
     const pugi::xpath_node_set restaurants = doc.select_nodes("/osm/node/tag[@v='Unicafe']");
 
-    uint32_t n_restaurants = 0;
+    std::uint32_t n_restaurants = 0;
     for (pugi::xpath_node_set::const_iterator it = restaurants.begin(); it != restaurants.end(); ++it)
     {
         n_restaurants++;
@@ -59,7 +59,7 @@ TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
 
     const pugi::xpath_node_set buildings = doc.select_nodes("/osm/way/tag[@k='building']");
 
-    uint32_t n_buildings = 0;
+    std::uint32_t n_buildings = 0;
     for (pugi::xpath_node_set::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
         n_buildings++;

@@ -34,11 +34,11 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::int32_t
 #include <ios>       // std::dec
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 
 namespace yli::ontology
@@ -74,7 +74,7 @@ namespace yli::ontology
 
     // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
     // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-    Glyph* VectorFont::get_glyph_pointer(const int32_t unicode_value) const
+    Glyph* VectorFont::get_glyph_pointer(const std::int32_t unicode_value) const
     {
         if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
@@ -139,7 +139,7 @@ namespace yli::ontology
                 const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                 const char* temp_unicode_char_pointer = unicode_char_pointer;
 
-                std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
+                std::optional<std::int32_t> unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
 
                 if (!unicode_value.has_value())
                 {

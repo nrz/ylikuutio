@@ -20,55 +20,55 @@
 
 // Include standard headers
 #include <array>    // std::array
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint8_t, std::uint32_t
 
 TEST(read_nonaligned_32_bit_read_must_function_properly, offset_0)
 {
-    uint8_t bytes[] = { 0xef, 0xbe, 0xad, 0xde };
-    uint32_t value = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(bytes, 0);
+    std::uint8_t bytes[] = { 0xef, 0xbe, 0xad, 0xde };
+    std::uint32_t value = yli::memory::read_nonaligned_32_bit<std::uint8_t, std::uint32_t>(bytes, 0);
     ASSERT_EQ(value, 0xdeadbeef);
 }
 
 TEST(read_nonaligned_32_bit_read_must_function_properly, offset_1)
 {
-    uint8_t bytes[] = { 0x00, 0xef, 0xbe, 0xad, 0xde };
-    uint32_t value = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(bytes, 1);
+    std::uint8_t bytes[] = { 0x00, 0xef, 0xbe, 0xad, 0xde };
+    std::uint32_t value = yli::memory::read_nonaligned_32_bit<std::uint8_t, std::uint32_t>(bytes, 1);
     ASSERT_EQ(value, 0xdeadbeef);
 }
 
 TEST(read_nonaligned_32_bit_read_must_function_properly, offset_2)
 {
-    uint8_t bytes[] = { 0x00, 0x00, 0xef, 0xbe, 0xad, 0xde };
-    uint32_t value = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(bytes, 2);
+    std::uint8_t bytes[] = { 0x00, 0x00, 0xef, 0xbe, 0xad, 0xde };
+    std::uint32_t value = yli::memory::read_nonaligned_32_bit<std::uint8_t, std::uint32_t>(bytes, 2);
     ASSERT_EQ(value, 0xdeadbeef);
 }
 
 TEST(read_nonaligned_32_bit_read_must_function_properly, offset_3)
 {
-    uint8_t bytes[] = { 0x00, 0x00, 0x00, 0xef, 0xbe, 0xad, 0xde };
-    uint32_t value = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(bytes, 3);
+    std::uint8_t bytes[] = { 0x00, 0x00, 0x00, 0xef, 0xbe, 0xad, 0xde };
+    std::uint32_t value = yli::memory::read_nonaligned_32_bit<std::uint8_t, std::uint32_t>(bytes, 3);
     ASSERT_EQ(value, 0xdeadbeef);
 }
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_0)
 {
-    const std::array<uint32_t, 0> buffer {};
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 0);
+    const std::array<std::uint32_t, 0> buffer {};
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 0);
     ASSERT_EQ(copy.size(), 0);
 }
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_1)
 {
-    const std::array<uint32_t, 1> buffer { 10 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 1);
+    const std::array<std::uint32_t, 1> buffer { 10 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 1);
     ASSERT_EQ(copy.size(), 1);
     ASSERT_EQ(copy.at(0), 10);
 }
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_2)
 {
-    const std::array<uint32_t, 2> buffer { 10, 20 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 2);
+    const std::array<std::uint32_t, 2> buffer { 10, 20 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 2);
     ASSERT_EQ(copy.size(), 2);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -76,8 +76,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_2)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_2)
 {
-    const std::array<uint32_t, 2> buffer { 20, 10 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 2);
+    const std::array<std::uint32_t, 2> buffer { 20, 10 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 2);
     ASSERT_EQ(copy.size(), 2);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -85,8 +85,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_2)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_3)
 {
-    const std::array<uint32_t, 3> buffer { 10, 20, 30 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 3);
+    const std::array<std::uint32_t, 3> buffer { 10, 20, 30 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 3);
     ASSERT_EQ(copy.size(), 3);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -95,8 +95,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_3)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_3)
 {
-    const std::array<uint32_t, 3> buffer { 30, 10, 20 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 3);
+    const std::array<std::uint32_t, 3> buffer { 30, 10, 20 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 3);
     ASSERT_EQ(copy.size(), 3);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -105,8 +105,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_3)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_2_size_3)
 {
-    const std::array<uint32_t, 3> buffer { 20, 30, 10 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 2, 3);
+    const std::array<std::uint32_t, 3> buffer { 20, 30, 10 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 2, 3);
     ASSERT_EQ(copy.size(), 3);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -115,8 +115,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_2_size_3)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_4)
 {
-    const std::array<uint32_t, 4> buffer { 10, 20, 30, 40 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 4);
+    const std::array<std::uint32_t, 4> buffer { 10, 20, 30, 40 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 0, 4);
     ASSERT_EQ(copy.size(), 4);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -126,8 +126,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_0_size_4)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_4)
 {
-    const std::array<uint32_t, 4> buffer { 40, 10, 20, 30 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 4);
+    const std::array<std::uint32_t, 4> buffer { 40, 10, 20, 30 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 1, 4);
     ASSERT_EQ(copy.size(), 4);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -137,8 +137,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_1_size_4)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_2_size_4)
 {
-    const std::array<uint32_t, 4> buffer { 30, 40, 10, 20 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 2, 4);
+    const std::array<std::uint32_t, 4> buffer { 30, 40, 10, 20 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 2, 4);
     ASSERT_EQ(copy.size(), 4);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -148,8 +148,8 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_2_size_4)
 
 TEST(copy_circular_buffer_into_vector_must_function_properly, offset_3_size_4)
 {
-    const std::array<uint32_t, 4> buffer { 20, 30, 40, 10 };
-    std::vector<uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 3, 4);
+    const std::array<std::uint32_t, 4> buffer { 20, 30, 40, 10 };
+    std::vector<std::uint32_t> copy = yli::memory::copy_circular_buffer_into_vector(buffer, 3, 4);
     ASSERT_EQ(copy.size(), 4);
     ASSERT_EQ(copy.at(0), 10);
     ASSERT_EQ(copy.at(1), 20);
@@ -159,20 +159,20 @@ TEST(copy_circular_buffer_into_vector_must_function_properly, offset_3_size_4)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_0)
 {
-    std::array<uint32_t, 0> buffer {};
+    std::array<std::uint32_t, 0> buffer {};
     yli::memory::copy_circular_buffer_into_begin(buffer, 0, 0);
 }
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_1)
 {
-    std::array<uint32_t, 1> buffer { 10 };
+    std::array<std::uint32_t, 1> buffer { 10 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 0, 1);
     ASSERT_EQ(buffer.at(0), 10);
 }
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_2)
 {
-    std::array<uint32_t, 2> buffer { 10, 20 };
+    std::array<std::uint32_t, 2> buffer { 10, 20 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 0, 2);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -180,7 +180,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_2)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_2)
 {
-    std::array<uint32_t, 2> buffer { 20, 10 };
+    std::array<std::uint32_t, 2> buffer { 20, 10 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 1, 2);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -188,7 +188,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_2)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_3)
 {
-    std::array<uint32_t, 3> buffer { 10, 20, 30 };
+    std::array<std::uint32_t, 3> buffer { 10, 20, 30 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 0, 3);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -197,7 +197,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_3)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_3)
 {
-    std::array<uint32_t, 3> buffer { 30, 10, 20 };
+    std::array<std::uint32_t, 3> buffer { 30, 10, 20 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 1, 3);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -206,7 +206,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_3)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_2_size_3)
 {
-    std::array<uint32_t, 3> buffer { 20, 30, 10 };
+    std::array<std::uint32_t, 3> buffer { 20, 30, 10 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 2, 3);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -215,7 +215,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_2_size_3)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_4)
 {
-    std::array<uint32_t, 4> buffer { 10, 20, 30, 40 };
+    std::array<std::uint32_t, 4> buffer { 10, 20, 30, 40 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 0, 4);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -225,7 +225,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_0_size_4)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_4)
 {
-    std::array<uint32_t, 4> buffer { 40, 10, 20, 30 };
+    std::array<std::uint32_t, 4> buffer { 40, 10, 20, 30 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 1, 4);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -235,7 +235,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_1_size_4)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_2_size_4)
 {
-    std::array<uint32_t, 4> buffer { 30, 40, 10, 20 };
+    std::array<std::uint32_t, 4> buffer { 30, 40, 10, 20 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 2, 4);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);
@@ -245,7 +245,7 @@ TEST(copy_circular_buffer_into_begin_must_function_properly, offset_2_size_4)
 
 TEST(copy_circular_buffer_into_begin_must_function_properly, offset_3_size_4)
 {
-    std::array<uint32_t, 4> buffer { 20, 30, 40, 10 };
+    std::array<std::uint32_t, 4> buffer { 20, 30, 40, 10 };
     yli::memory::copy_circular_buffer_into_begin(buffer, 3, 4);
     ASSERT_EQ(buffer.at(0), 10);
     ASSERT_EQ(buffer.at(1), 20);

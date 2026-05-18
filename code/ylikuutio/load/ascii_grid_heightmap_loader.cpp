@@ -35,9 +35,9 @@
 // Include standard headers
 #include <cmath>       // floor
 #include <cstddef>     // std::size_t
+#include <cstdint>     // std::int32_t, std::uint32_t
 #include <iostream>    // std::cout, std::cerr
 #include <optional>    // std::optional
-#include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
 #include <string_view> // std::string_view
 #include <vector>      // std::vector
@@ -49,8 +49,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t& image_width,
-            uint32_t& image_height)
+            std::uint32_t& image_width,
+            std::uint32_t& image_height)
     {
         // Beginning of `L4133D.asc`.
         //
@@ -104,7 +104,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<int32_t> image_width_int32_t = yli::string::extract_value_from_string<char, int32_t>(
+        std::optional<std::int32_t> image_width_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -121,7 +121,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, int32_t>(
+        std::optional<std::int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -189,8 +189,8 @@ namespace yli::load
             return false;
         }
 
-        image_width = static_cast<uint32_t>(*image_width_int32_t);
-        image_height = static_cast<uint32_t>(*image_height_int32_t);
+        image_width = static_cast<std::uint32_t>(*image_width_int32_t);
+        image_height = static_cast<std::uint32_t>(*image_height_int32_t);
 
         std::vector<float> vertex_data;
         vertex_data.reserve(static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height));
@@ -199,12 +199,12 @@ namespace yli::load
         std::cout << "Processing image data.\n";
 
         {
-            int32_t last_percent = -1;
+            std::int32_t last_percent = -1;
 
-            for (uint32_t y = 0; y < image_height; y++)
+            for (std::uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
+                std::int32_t current_percent = static_cast<std::int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -212,7 +212,7 @@ namespace yli::load
                     last_percent = current_percent;
                 }
 
-                for (uint32_t x = 0; x < image_width; x++)
+                for (std::uint32_t x = 0; x < image_width; x++)
                 {
                     while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
                     {
@@ -259,7 +259,7 @@ namespace yli::load
         {
             const float scene_y = -1.0f * static_cast<float>(y);
 
-            for (uint32_t x = 0; x < image_width; x++)
+            for (std::uint32_t x = 0; x < image_width; x++)
             {
                 glm::vec3 vertex { static_cast<float>(x), scene_y, vertex_data[i++] };
                 out_vertices.emplace_back(vertex);

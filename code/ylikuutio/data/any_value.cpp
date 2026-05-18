@@ -48,13 +48,13 @@
 #endif
 
 // Include standard headers
+#include <cstdint>    // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
 #include <functional> // std::reference_wrapper
 #include <ios>        // std::boolalpha, std::dec, std::fixed, std::hex
 #include <optional>   // std::optional
 #include <sstream>    // std::stringstream
 #include <string>     // std::string
 #include <stdexcept>  // std::runtime_error
-#include <stdint.h>   // uint32_t etc.
 #include <variant>    // std::holds_alternative, std::monostate
 #include <vector>     // std::vector
 
@@ -84,21 +84,21 @@ namespace yli::data
         {
             return std::get<double>(this->data) == std::get<double>(rhs.data);
         }
-        else if (std::holds_alternative<int32_t>(this->data) && std::holds_alternative<int32_t>(rhs.data))
+        else if (std::holds_alternative<std::int32_t>(this->data) && std::holds_alternative<std::int32_t>(rhs.data))
         {
-            return std::get<int32_t>(this->data) == std::get<int32_t>(rhs.data);
+            return std::get<std::int32_t>(this->data) == std::get<std::int32_t>(rhs.data);
         }
-        else if (std::holds_alternative<uint32_t>(this->data) && std::holds_alternative<uint32_t>(rhs.data))
+        else if (std::holds_alternative<std::uint32_t>(this->data) && std::holds_alternative<std::uint32_t>(rhs.data))
         {
-            return std::get<uint32_t>(this->data) == std::get<uint32_t>(rhs.data);
+            return std::get<std::uint32_t>(this->data) == std::get<std::uint32_t>(rhs.data);
         }
-        else if (std::holds_alternative<int64_t>(this->data) && std::holds_alternative<int64_t>(rhs.data))
+        else if (std::holds_alternative<std::int64_t>(this->data) && std::holds_alternative<std::int64_t>(rhs.data))
         {
-            return std::get<int64_t>(this->data) == std::get<int64_t>(rhs.data);
+            return std::get<std::int64_t>(this->data) == std::get<std::int64_t>(rhs.data);
         }
-        else if (std::holds_alternative<uint64_t>(this->data) && std::holds_alternative<uint64_t>(rhs.data))
+        else if (std::holds_alternative<std::uint64_t>(this->data) && std::holds_alternative<std::uint64_t>(rhs.data))
         {
-            return std::get<uint64_t>(this->data) == std::get<uint64_t>(rhs.data);
+            return std::get<std::uint64_t>(this->data) == std::get<std::uint64_t>(rhs.data);
         }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data) &&
@@ -114,53 +114,53 @@ namespace yli::data
                 std::get<std::reference_wrapper<const std::string>>(rhs.data).get();
         }
         // Variable-size vectors.
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int8_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::int8_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<int8_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<int8_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::int8_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::int8_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint8_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::uint8_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<uint8_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<uint8_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::uint8_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::uint8_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int16_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::int16_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<int16_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<int16_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::int16_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::int16_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint16_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::uint16_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<uint16_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<uint16_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::uint16_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::uint16_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int32_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::int32_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<int32_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<int32_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::int32_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::int32_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint32_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::uint32_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<uint32_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<uint32_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::uint32_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::uint32_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int64_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::int64_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<int64_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<int64_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::int64_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::int64_t>>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint64_t>>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<std::vector<std::uint64_t>>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<std::vector<uint64_t>>>(this->data).get() ==
-                std::get<std::reference_wrapper<std::vector<uint64_t>>>(rhs.data).get();
+            return std::get<std::reference_wrapper<std::vector<std::uint64_t>>>(this->data).get() ==
+                std::get<std::reference_wrapper<std::vector<std::uint64_t>>>(rhs.data).get();
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data) &&
                 std::holds_alternative<std::reference_wrapper<std::vector<float>>>(rhs.data))
@@ -325,21 +325,21 @@ namespace yli::data
         {
             return "double";
         }
-        else if (std::holds_alternative<int32_t>(this->data))
+        else if (std::holds_alternative<std::int32_t>(this->data))
         {
-            return "int32_t";
+            return "std::int32_t";
         }
-        else if (std::holds_alternative<uint32_t>(this->data))
+        else if (std::holds_alternative<std::uint32_t>(this->data))
         {
-            return "uint32_t";
+            return "std::uint32_t";
         }
-        else if (std::holds_alternative<int64_t>(this->data))
+        else if (std::holds_alternative<std::int64_t>(this->data))
         {
-            return "int64_t";
+            return "std::int64_t";
         }
-        else if (std::holds_alternative<uint64_t>(this->data))
+        else if (std::holds_alternative<std::uint64_t>(this->data))
         {
-            return "uint64_t";
+            return "std::uint64_t";
         }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
@@ -351,37 +351,37 @@ namespace yli::data
             return "const std::string&";
         }
         // Variable-size vectors.
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int8_t>>>(this->data))
         {
-            return "std::vector<int8_t>&";
+            return "std::vector<std::int8_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint8_t>>>(this->data))
         {
-            return "std::vector<uint8_t>&";
+            return "std::vector<std::uint8_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int16_t>>>(this->data))
         {
-            return "std::vector<int16_t>&";
+            return "std::vector<std::int16_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint16_t>>>(this->data))
         {
-            return "std::vector<uint16_t>&";
+            return "std::vector<std::uint16_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int32_t>>>(this->data))
         {
-            return "std::vector<int32_t>&";
+            return "std::vector<std::int32_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint32_t>>>(this->data))
         {
-            return "std::vector<uint32_t>&";
+            return "std::vector<std::uint32_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int64_t>>>(this->data))
         {
-            return "std::vector<int64_t>&";
+            return "std::vector<std::int64_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint64_t>>>(this->data))
         {
-            return "std::vector<uint64_t>&";
+            return "std::vector<std::uint64_t>&";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data))
         {
@@ -503,25 +503,25 @@ namespace yli::data
         {
             any_value_stringstream << std::fixed << std::get<double>(this->data);
         }
-        else if (std::holds_alternative<int32_t>(this->data))
+        else if (std::holds_alternative<std::int32_t>(this->data))
         {
             // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
             // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-            any_value_stringstream << std::get<int32_t>(this->data);
+            any_value_stringstream << std::get<std::int32_t>(this->data);
         }
-        else if (std::holds_alternative<uint32_t>(this->data))
+        else if (std::holds_alternative<std::uint32_t>(this->data))
         {
             // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
             // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-            any_value_stringstream << std::get<uint32_t>(this->data);
+            any_value_stringstream << std::get<std::uint32_t>(this->data);
         }
-        else if (std::holds_alternative<int64_t>(this->data))
+        else if (std::holds_alternative<std::int64_t>(this->data))
         {
-            any_value_stringstream << std::get<int64_t>(this->data);
+            any_value_stringstream << std::get<std::int64_t>(this->data);
         }
-        else if (std::holds_alternative<uint64_t>(this->data))
+        else if (std::holds_alternative<std::uint64_t>(this->data))
         {
-            any_value_stringstream << std::get<uint64_t>(this->data);
+            any_value_stringstream << std::get<std::uint64_t>(this->data);
         }
         // Strings.
         else if (std::holds_alternative<std::reference_wrapper<std::string>>(this->data))
@@ -533,37 +533,37 @@ namespace yli::data
             any_value_stringstream << std::get<std::reference_wrapper<const std::string>>(this->data).get();
         }
         // Variable-size vectors.
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int8_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int8_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<int8_t>&";
+            any_value_stringstream << "std::vector<std::int8_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint8_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint8_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<uint8_t>&";
+            any_value_stringstream << "std::vector<std::uint8_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int16_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int16_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<int16_t>&";
+            any_value_stringstream << "std::vector<std::int16_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint16_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint16_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<uint16_t>&";
+            any_value_stringstream << "std::vector<std::uint16_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int32_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int32_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<int32_t>&";
+            any_value_stringstream << "std::vector<std::int32_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint32_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint32_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<uint32_t>&";
+            any_value_stringstream << "std::vector<std::uint32_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<int64_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::int64_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<int64_t>&";
+            any_value_stringstream << "std::vector<std::int64_t>&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<std::vector<uint64_t>>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<std::vector<std::uint64_t>>>(this->data))
         {
-            any_value_stringstream << "std::vector<uint64_t>&";
+            any_value_stringstream << "std::vector<std::uint64_t>&";
         }
         else if (std::holds_alternative<std::reference_wrapper<std::vector<float>>>(this->data))
         {
@@ -611,75 +611,75 @@ namespace yli::data
         // Ontology.
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Entity>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Entity>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Universe>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Universe>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Material>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Material>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Species>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Species>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Object>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Object>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text2d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::Console>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Console>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data))
         {
-            any_value_stringstream << std::hex << (uint64_t) &std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data) << std::dec;
         }
         else
         {
@@ -904,53 +904,53 @@ namespace yli::data
             this->data = double_value;
             return true;
         }
-        else if (std::holds_alternative<int32_t>(this->data))
+        else if (std::holds_alternative<std::int32_t>(this->data))
         {
             if (!yli::string::check_if_signed_integer_string<char>(value_string))
             {
                 return false;
             }
 
-            int32_t int32_t_value;
+            std::int32_t int32_t_value;
             value_stringstream << value_string;
             value_stringstream >> int32_t_value;
             this->data = int32_t_value;
             return true;
         }
-        else if (std::holds_alternative<uint32_t>(this->data))
+        else if (std::holds_alternative<std::uint32_t>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string<char>(value_string))
             {
                 return false;
             }
 
-            uint32_t uint32_t_value;
+            std::uint32_t uint32_t_value;
             value_stringstream << value_string;
             value_stringstream >> uint32_t_value;
             this->data = uint32_t_value;
             return true;
         }
-        else if (std::holds_alternative<int64_t>(this->data))
+        else if (std::holds_alternative<std::int64_t>(this->data))
         {
             if (!yli::string::check_if_signed_integer_string<char>(value_string))
             {
                 return false;
             }
 
-            int64_t int64_t_value;
+            std::int64_t int64_t_value;
             value_stringstream << value_string;
             value_stringstream >> int64_t_value;
             this->data = int64_t_value;
             return true;
         }
-        else if (std::holds_alternative<uint64_t>(this->data))
+        else if (std::holds_alternative<std::uint64_t>(this->data))
         {
             if (!yli::string::check_if_unsigned_integer_string<char>(value_string))
             {
                 return false;
             }
 
-            uint64_t uint64_t_value;
+            std::uint64_t uint64_t_value;
             value_stringstream << value_string;
             value_stringstream >> uint64_t_value;
             this->data = uint64_t_value;
@@ -978,22 +978,22 @@ namespace yli::data
                 char,
                 float,
                 double,
-                int32_t,
-                uint32_t,
-                int64_t,
-                uint64_t,
+                std::int32_t,
+                std::uint32_t,
+                std::int64_t,
+                std::uint64_t,
                 // Strings.
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>,
                 // Variable-size vectors.
-                std::reference_wrapper<std::vector<int8_t>>,
-                std::reference_wrapper<std::vector<uint8_t>>,
-                std::reference_wrapper<std::vector<int16_t>>,
-                std::reference_wrapper<std::vector<uint16_t>>,
-                std::reference_wrapper<std::vector<int32_t>>,
-                std::reference_wrapper<std::vector<uint32_t>>,
-                std::reference_wrapper<std::vector<int64_t>>,
-                std::reference_wrapper<std::vector<uint64_t>>,
+                std::reference_wrapper<std::vector<std::int8_t>>,
+                std::reference_wrapper<std::vector<std::uint8_t>>,
+                std::reference_wrapper<std::vector<std::int16_t>>,
+                std::reference_wrapper<std::vector<std::uint16_t>>,
+                std::reference_wrapper<std::vector<std::int32_t>>,
+                std::reference_wrapper<std::vector<std::uint32_t>>,
+                std::reference_wrapper<std::vector<std::int64_t>>,
+                std::reference_wrapper<std::vector<std::uint64_t>>,
                 std::reference_wrapper<std::vector<float>>,
                 // Fixed-size vectors.
                 std::reference_wrapper<glm::vec3>,
@@ -1044,22 +1044,22 @@ namespace yli::data
     {
     }
 
-    AnyValue::AnyValue(const int32_t int32_t_value)
+    AnyValue::AnyValue(const std::int32_t int32_t_value)
         : data(int32_t_value)
     {
     }
 
-    AnyValue::AnyValue(const uint32_t uint32_t_value)
+    AnyValue::AnyValue(const std::uint32_t uint32_t_value)
         : data(uint32_t_value)
     {
     }
 
-    AnyValue::AnyValue(const int64_t int64_t_value)
+    AnyValue::AnyValue(const std::int64_t int64_t_value)
         : data(int64_t_value)
     {
     }
 
-    AnyValue::AnyValue(const uint64_t uint64_t_value)
+    AnyValue::AnyValue(const std::uint64_t uint64_t_value)
         : data(uint64_t_value)
     {
     }
@@ -1078,43 +1078,43 @@ namespace yli::data
 
     // Variable-size vectors.
 
-    AnyValue::AnyValue(std::vector<int8_t>& std_vector_int8_t_ref)
-        : data(std::reference_wrapper<std::vector<int8_t>>(std_vector_int8_t_ref))
+    AnyValue::AnyValue(std::vector<std::int8_t>& std_vector_int8_t_ref)
+        : data(std::reference_wrapper<std::vector<std::int8_t>>(std_vector_int8_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<uint8_t>& std_vector_uint8_t_ref)
-        : data(std::reference_wrapper<std::vector<uint8_t>>(std_vector_uint8_t_ref))
+    AnyValue::AnyValue(std::vector<std::uint8_t>& std_vector_uint8_t_ref)
+        : data(std::reference_wrapper<std::vector<std::uint8_t>>(std_vector_uint8_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<int16_t>& std_vector_int16_t_ref)
-        : data(std::reference_wrapper<std::vector<int16_t>>(std_vector_int16_t_ref))
+    AnyValue::AnyValue(std::vector<std::int16_t>& std_vector_int16_t_ref)
+        : data(std::reference_wrapper<std::vector<std::int16_t>>(std_vector_int16_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<uint16_t>& std_vector_uint16_t_ref)
-        : data(std::reference_wrapper<std::vector<uint16_t>>(std_vector_uint16_t_ref))
+    AnyValue::AnyValue(std::vector<std::uint16_t>& std_vector_uint16_t_ref)
+        : data(std::reference_wrapper<std::vector<std::uint16_t>>(std_vector_uint16_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<int32_t>& std_vector_int32_t_ref)
-        : data(std::reference_wrapper<std::vector<int32_t>>(std_vector_int32_t_ref))
+    AnyValue::AnyValue(std::vector<std::int32_t>& std_vector_int32_t_ref)
+        : data(std::reference_wrapper<std::vector<std::int32_t>>(std_vector_int32_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<uint32_t>& std_vector_uint32_t_ref)
-        : data(std::reference_wrapper<std::vector<uint32_t>>(std_vector_uint32_t_ref))
+    AnyValue::AnyValue(std::vector<std::uint32_t>& std_vector_uint32_t_ref)
+        : data(std::reference_wrapper<std::vector<std::uint32_t>>(std_vector_uint32_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<int64_t>& std_vector_int64_t_ref)
-        : data(std::reference_wrapper<std::vector<int64_t>>(std_vector_int64_t_ref))
+    AnyValue::AnyValue(std::vector<std::int64_t>& std_vector_int64_t_ref)
+        : data(std::reference_wrapper<std::vector<std::int64_t>>(std_vector_int64_t_ref))
     {
     }
 
-    AnyValue::AnyValue(std::vector<uint64_t>& std_vector_uint64_t_ref)
-        : data(std::reference_wrapper<std::vector<uint64_t>>(std_vector_uint64_t_ref))
+    AnyValue::AnyValue(std::vector<std::uint64_t>& std_vector_uint64_t_ref)
+        : data(std::reference_wrapper<std::vector<std::uint64_t>>(std_vector_uint64_t_ref))
     {
     }
 

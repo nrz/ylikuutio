@@ -25,8 +25,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <utility>  // std::move
 
@@ -49,9 +49,9 @@ namespace yli::ontology
         yli::data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
-        uint32_t texture_width         { 0 };
-        uint32_t texture_height        { 0 };
-        uint32_t n_index_characters    { 4 }; // For intermediate results' filenames.
+        std::uint32_t texture_width      { 0 };
+        std::uint32_t texture_height     { 0 };
+        std::uint32_t n_index_characters { 4 }; // For intermediate results' filenames.
         GLenum format                  { GL_RGB };
         GLenum internal_format         { GL_INVALID_ENUM };
         GLenum output_format           { GL_INVALID_ENUM };

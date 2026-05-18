@@ -28,10 +28,10 @@
 // Include standard headers
 #include <algorithm> // std::replace
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::int32_t
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <sstream>   // std::stringstream
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -54,7 +54,7 @@ namespace yli::load
             return false;
         }
 
-        std::vector<int32_t> vertex_indices, uv_indices, normal_indices;
+        std::vector<std::int32_t> vertex_indices, uv_indices, normal_indices;
         std::vector<glm::vec3> temp_vertices;
         std::vector<glm::vec2> temp_uvs;
         std::vector<glm::vec3> temp_normals;
@@ -137,15 +137,15 @@ namespace yli::load
                 // This line specifies a face.
                 // Example:
                 // f 5/1/1 1/2/1 4/3/1
-                int32_t vertex_i1;
-                int32_t vertex_i2;
-                int32_t vertex_i3;
-                int32_t uv_i1;
-                int32_t uv_i2;
-                int32_t uv_i3;
-                int32_t normal_i1;
-                int32_t normal_i2;
-                int32_t normal_i3;
+                std::int32_t vertex_i1;
+                std::int32_t vertex_i2;
+                std::int32_t vertex_i3;
+                std::int32_t uv_i1;
+                std::int32_t uv_i2;
+                std::int32_t uv_i3;
+                std::int32_t normal_i1;
+                std::int32_t normal_i2;
+                std::int32_t normal_i3;
                 current_line_stringstream >> prefix >> vertex_i1 >> uv_i1 >> normal_i1 >> vertex_i2 >> uv_i2 >> normal_i2 >> vertex_i3 >> uv_i3 >> normal_i3;
                 vertex_indices.emplace_back(vertex_i1);
                 vertex_indices.emplace_back(vertex_i2);
@@ -195,9 +195,9 @@ namespace yli::load
         for (std::size_t i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
-            int32_t vertex_index = vertex_indices[i];
-            int32_t uv_index = uv_indices[i];
-            int32_t normal_index = normal_indices[i];
+            std::int32_t vertex_index = vertex_indices[i];
+            std::int32_t uv_index = uv_indices[i];
+            std::int32_t normal_index = normal_indices[i];
 
             // Get the attributes thanks to the index
             glm::vec3 vertex = temp_vertices[vertex_index - 1];

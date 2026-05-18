@@ -23,8 +23,8 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cstdint>       // std::int64_t, std::uint64_t
 #include <optional>      // std::optional, std::nullopt
-#include <stdint.h>      // int64_t
 #include <string>        // std::string
 #include <string_view>   // std::string_view
 #include <unordered_set> // std::unordered_set
@@ -66,7 +66,7 @@ namespace yli::lisp
                 is_uint64_t_string)
         {
             // OK, so this is a unsigned integer string.
-            std::optional<uint64_t> maybe_uint64_t = yli::string::convert_string_to_value<uint64_t>(
+            std::optional<std::uint64_t> maybe_uint64_t = yli::string::convert_string_to_value<std::uint64_t>(
                     std::string_view(text_position.get_token_start_it(), text_position.get_it()));
 
             if (maybe_uint64_t.has_value()) [[likely]]
@@ -85,7 +85,7 @@ namespace yli::lisp
                 is_int64_t_string)
         {
             // OK, so this is a signed integer string.
-            std::optional<int64_t> maybe_int64_t = yli::string::convert_string_to_value<int64_t>(
+            std::optional<std::int64_t> maybe_int64_t = yli::string::convert_string_to_value<std::int64_t>(
                     std::string_view(text_position.get_token_start_it(), text_position.get_it()));
 
             if (maybe_int64_t.has_value()) [[likely]]

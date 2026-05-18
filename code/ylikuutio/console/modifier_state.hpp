@@ -19,18 +19,18 @@
 #define YLIKUUTIO_MODIFIER_STATE_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::console
 {
-    static const uint32_t left_ctrl_pressed   = 1;
-    static const uint32_t right_ctrl_pressed  = 1 << 1;
-    static const uint32_t left_alt_pressed    = 1 << 2;
-    static const uint32_t right_alt_pressed   = 1 << 3;
-    static const uint32_t left_shift_pressed  = 1 << 4;
-    static const uint32_t right_shift_pressed = 1 << 5;
+    static const std::uint32_t left_ctrl_pressed   = 1;
+    static const std::uint32_t right_ctrl_pressed  = 1 << 1;
+    static const std::uint32_t left_alt_pressed    = 1 << 2;
+    static const std::uint32_t right_alt_pressed   = 1 << 3;
+    static const std::uint32_t left_shift_pressed  = 1 << 4;
+    static const std::uint32_t right_shift_pressed = 1 << 5;
 
-    enum ModifierState : uint32_t
+    enum ModifierState : std::uint32_t
     {
         LEFT_CTRL = left_ctrl_pressed,
         RIGHT_CTRL = right_ctrl_pressed,

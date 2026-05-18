@@ -26,7 +26,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
 TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_y_step_1)
@@ -40,8 +40,8 @@ TEST(an_ascii_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     std::vector<glm::vec3> vertices;         // vertices of the object.
     std::vector<glm::vec2> uvs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
-    uint32_t image_width;
-    uint32_t image_height;
+    std::uint32_t image_width;
+    std::uint32_t image_height;
 
     bool model_loading_result = yli::load::load_ascii_grid_terrain(
             heightmap_loader_struct,
@@ -281,8 +281,8 @@ TEST(an_ascii_grid_must_be_defined_appropriately, test_3x3_0_1_2_4_8_16_32_64_12
     std::vector<glm::vec3> vertices;         // vertices of the object.
     std::vector<glm::vec2> uvs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
-    uint32_t image_width;
-    uint32_t image_height;
+    std::uint32_t image_width;
+    std::uint32_t image_height;
 
     bool model_loading_result = yli::load::load_ascii_grid_terrain(
             heightmap_loader_struct,

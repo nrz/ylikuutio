@@ -15,24 +15,25 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+// Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <future>   // std::async, std::launch, std::future
 #include <iostream> // std::cout
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-uint32_t square(const uint32_t number)
+std::uint32_t square(const std::uint32_t number)
 {
     return number * number;
 }
 
 int main()
 {
-    const std::vector<uint32_t> inputs { 1, 5, 2, 7, 9 };
-    const uint32_t n_inputs = inputs.size();
-    std::vector<std::future<uint32_t>> future_results;
+    const std::vector<std::uint32_t> inputs { 1, 5, 2, 7, 9 };
+    const std::uint32_t n_inputs = inputs.size();
+    std::vector<std::future<std::uint32_t>> future_results;
     future_results.resize(n_inputs);
 
-    for (uint32_t i = 0; i < n_inputs; i++)
+    for (std::uint32_t i = 0; i < n_inputs; i++)
     {
         future_results.at(i) = std::async(std::launch::async, square, inputs.at(i));
     }

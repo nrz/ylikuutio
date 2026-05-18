@@ -49,8 +49,8 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint32_t
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 
 namespace yli::core
 {
@@ -208,13 +208,13 @@ namespace yli::ontology
 
             GLuint vao                             = mesh.get_vao();
             GLuint vertex_buffer                   = mesh.get_vertex_buffer();
-            uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
+            std::uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
             GLuint uv_buffer                       = mesh.get_uv_buffer();
-            uint32_t vertex_uv_id                  = mesh.get_vertex_uv_id();
+            std::uint32_t vertex_uv_id             = mesh.get_vertex_uv_id();
             GLuint normal_buffer                   = mesh.get_normal_buffer();
-            uint32_t vertex_normal_modelspace_id   = mesh.get_vertex_normal_modelspace_id();
+            std::uint32_t vertex_normal_modelspace_id = mesh.get_vertex_normal_modelspace_id();
             GLuint element_buffer                  = mesh.get_element_buffer();
-            uint32_t indices_size                  = mesh.get_indices_size();
+            std::uint32_t indices_size             = mesh.get_indices_size();
 
             glBindVertexArray(vao);
 

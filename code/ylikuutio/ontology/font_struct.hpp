@@ -22,7 +22,7 @@
 #include "texture_file_format.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -36,9 +36,9 @@ namespace yli::ontology
 
         std::string texture_filename;
         const TextureFileFormat font_texture_file_format;
-        uint32_t screen_width  { 0 };
-        uint32_t screen_height { 0 };
-        uint32_t text_size     { 0 };
+        std::uint32_t screen_width  { 0 };
+        std::uint32_t screen_height { 0 };
+        std::uint32_t text_size     { 0 };
     };
 }
 

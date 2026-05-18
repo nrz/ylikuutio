@@ -15,11 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+// Include standard headers
 #include <chrono>   // std::chrono
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout
 #include <mutex>    // std::mutex, std::scoped_lock
 #include <random>   // std::mt19937, std::random_device
-#include <stdint.h> // uint32_t etc.
 #include <thread>   // std::thread
 #include <vector>   // std::vector
 
@@ -61,7 +62,7 @@ class Fork
 class Philosopher
 {
     public:
-        Philosopher(Messenger& messenger, Random& random, const uint32_t id, Fork& left_fork, Fork& right_fork)
+        Philosopher(Messenger& messenger, Random& random, const std::uint32_t id, Fork& left_fork, Fork& right_fork)
             : messenger { messenger },
             random { random },
             left_fork { left_fork },
@@ -115,13 +116,13 @@ class Philosopher
         Random& random;
         Fork& left_fork;
         Fork& right_fork;
-        const uint32_t id;
+        const std::uint32_t id;
 };
 
 class Table
 {
     public:
-        Table(const uint32_t n_philosophers, Messenger& messenger, Random& random)
+        Table(const std::uint32_t n_philosophers, Messenger& messenger, Random& random)
             : n_philosophers { n_philosophers },
             messenger { messenger },
             random { random },
@@ -134,7 +135,7 @@ class Table
                 this->philosophers.emplace_back(this->messenger, this->random, 0, this->forks.back(), this->forks.front());
             }
 
-            for (uint32_t id = 1; id < this->n_philosophers; id++)
+            for (std::uint32_t id = 1; id < this->n_philosophers; id++)
             {
                 this->philosophers.emplace_back(this->messenger, this->random, id, this->forks.at(id - 1), this->forks.at(id));
             }
@@ -144,7 +145,7 @@ class Table
 
         void dine()
         {
-            for (uint32_t i = 0; i < this->n_philosophers; i++)
+            for (std::uint32_t i = 0; i < this->n_philosophers; i++)
             {
                 this->threads.at(i) = std::thread { &Philosopher::philosophize, this->philosophers.at(i) };
             }
@@ -158,7 +159,7 @@ class Table
             }
         }
 
-        const uint32_t n_philosophers;
+        const std::uint32_t n_philosophers;
         Messenger& messenger;
         Random& random;
         std::vector<Fork> forks;

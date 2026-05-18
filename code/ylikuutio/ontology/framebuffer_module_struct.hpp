@@ -19,14 +19,14 @@
 #define YLIKUUTIO_ONTOLOGY_FRAMEBUFFER_MODULE_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::ontology
 {
     struct FramebufferModuleStruct
     {
-        uint32_t texture_width  { 800 };
-        uint32_t texture_height { 450 };
+        std::uint32_t texture_width  { 800 };
+        std::uint32_t texture_height { 450 };
         bool in_use             { true };
     };
 }

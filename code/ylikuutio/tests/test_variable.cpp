@@ -36,9 +36,9 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan
 #include <cstddef>  // uintptr_t
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <variant>  // std::holds_alternative
 
 TEST(is_variable_must_return_false_for_nonexisting_variables, headless_universe)
@@ -456,7 +456,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -467,7 +467,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -481,15 +481,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -500,7 +500,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -514,15 +514,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_minus_1 = -1;
+    std::int32_t int32_t_minus_1 = -1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -533,7 +533,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    int32_t int32_t_minus_1 = -1;
+    std::int32_t int32_t_minus_1 = -1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_minus_1));
@@ -547,15 +547,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), -1);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_max_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_max = std::numeric_limits<int32_t>::max();
+    std::int32_t int32_t_max = std::numeric_limits<std::int32_t>::max();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -566,7 +566,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    int32_t int32_t_max = std::numeric_limits<int32_t>::max();
+    std::int32_t int32_t_max = std::numeric_limits<std::int32_t>::max();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_max));
@@ -580,15 +580,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), std::numeric_limits<int32_t>::max());
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), std::numeric_limits<std::int32_t>::max());
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_int32_t_min_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_min = std::numeric_limits<int32_t>::min();
+    std::int32_t int32_t_min = std::numeric_limits<std::int32_t>::min();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -599,7 +599,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    int32_t int32_t_min = std::numeric_limits<int32_t>::min();
+    std::int32_t int32_t_min = std::numeric_limits<std::int32_t>::min();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_min));
@@ -613,15 +613,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), std::numeric_limits<int32_t>::min());
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), std::numeric_limits<std::int32_t>::min());
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -632,7 +632,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -646,15 +646,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -665,7 +665,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -679,15 +679,15 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_uint32_t_max_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
+    std::uint32_t uint32_t_max = std::numeric_limits<std::uint32_t>::max();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
     ASSERT_FALSE(application.get_universe().has_variable("foo"));
@@ -698,7 +698,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
+    std::uint32_t uint32_t_max = std::numeric_limits<std::uint32_t>::max();
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_max));
@@ -712,8 +712,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), std::numeric_limits<uint32_t>::max());
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), std::numeric_limits<std::uint32_t>::max());
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_variable_universe_x_float_1234_dot_25_with_activate_callback_and_read_callback)
@@ -1977,7 +1977,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -1987,15 +1987,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2005,15 +2005,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2023,15 +2023,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), -1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2041,15 +2041,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2059,15 +2059,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2077,15 +2077,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_0_new_value_foo_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_zero = 0;
+    std::int32_t int32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_zero));
@@ -2095,15 +2095,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2113,15 +2113,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2131,15 +2131,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_int32_t_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2149,15 +2149,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), -1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), -1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2167,15 +2167,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2185,15 +2185,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_int32_t_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    int32_t int32_t_plus_1 = 1;
+    std::int32_t int32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(int32_t_plus_1));
@@ -2203,15 +2203,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<int32_t>(variable_value->data));
-    ASSERT_EQ(std::get<int32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::int32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::int32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_0_new_value_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2221,15 +2221,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_0_new_value_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2239,15 +2239,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2257,15 +2257,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2275,15 +2275,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2293,15 +2293,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_minus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2311,15 +2311,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_0_new_value_foo_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_zero = 0;
+    std::uint32_t uint32_t_zero = 0;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_zero));
@@ -2329,15 +2329,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2347,15 +2347,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 0);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 0);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_plus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2365,15 +2365,15 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_named_vari
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_minus_1_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2383,15 +2383,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_0_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2401,15 +2401,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_plus_1_dot_0_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2419,15 +2419,15 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_named_variable_originally_uint32_t_plus_1_new_value_foo_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
-    uint32_t uint32_t_plus_1 = 1;
+    std::uint32_t uint32_t_plus_1 = 1;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
     variable_struct.local_name = "foo";
     application.get_universe().create_variable(variable_struct, yli::data::AnyValue(uint32_t_plus_1));
@@ -2437,8 +2437,8 @@ TEST(variable_value_must_not_be_modified_for_invalid_value, headless_universe_na
     ASSERT_NE(variable->get(), std::nullopt);
     ASSERT_EQ(variable->variable_value, *variable->get());
     std::optional<yli::data::AnyValue> variable_value = variable->get();
-    ASSERT_TRUE(std::holds_alternative<uint32_t>(variable_value->data));
-    ASSERT_EQ(std::get<uint32_t>(variable_value->data), 1);
+    ASSERT_TRUE(std::holds_alternative<std::uint32_t>(variable_value->data));
+    ASSERT_EQ(std::get<std::uint32_t>(variable_value->data), 1);
 }
 
 TEST(variable_value_must_be_modified_appropriately, headless_universe_named_variable_originally_bool_true_copy_value_true_no_activate_callback_no_read_callback)

@@ -21,8 +21,8 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::ontology
 {
@@ -100,22 +100,22 @@ namespace yli::ontology
         return this->is_initialized;
     }
 
-    uint32_t FramebufferModule::get_texture_width() const
+    std::uint32_t FramebufferModule::get_texture_width() const
     {
         return this->texture_width;
     }
 
-    void FramebufferModule::set_texture_width(const uint32_t texture_width)
+    void FramebufferModule::set_texture_width(const std::uint32_t texture_width)
     {
         this->texture_width = texture_width;
     }
 
-    uint32_t FramebufferModule::get_texture_height() const
+    std::uint32_t FramebufferModule::get_texture_height() const
     {
         return this->texture_height;
     }
 
-    void FramebufferModule::set_texture_height(const uint32_t texture_height)
+    void FramebufferModule::set_texture_height(const std::uint32_t texture_height)
     {
         this->texture_height = texture_height;
     }

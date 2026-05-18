@@ -21,7 +21,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <string>   // std::string
 
 struct SDL_Window;
@@ -58,13 +58,13 @@ namespace yli::render
             [[nodiscard]] bool setup_context(SDL_Window* window) const;
             [[nodiscard]] bool setup_context() const;
 
-            static void set_swap_interval(const int32_t interval);
+            static void set_swap_interval(const std::int32_t interval);
 
             static void clear_color_and_depth_buffers();
-            void restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const;
+            void restore_onscreen_rendering(const std::uint32_t window_width, const std::uint32_t window_height) const;
             void set_opengl_background_color() const;
 
-            static void adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height);
+            static void adjust_opengl_viewport(const std::uint32_t window_width, const std::uint32_t window_height);
 
             // This function renders everything.
             static void render(const yli::render::RenderStruct& render_struct);
@@ -123,8 +123,8 @@ namespace yli::render
             SDL_GLContext context                   { nullptr };
             SDL_Window* hidden_sdl_window           { nullptr };
             std::string hidden_window_title;
-            uint32_t hidden_window_width     { 0 };
-            uint32_t hidden_window_height    { 0 };
+            std::uint32_t hidden_window_width  { 0 };
+            std::uint32_t hidden_window_height { 0 };
             bool is_hidden_window_fullscreen { false };
 
             float background_red   { 0.0f };

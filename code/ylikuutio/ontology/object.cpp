@@ -55,10 +55,10 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
+#include <cstdint>   // std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 
 namespace yli::ontology
@@ -230,13 +230,13 @@ namespace yli::ontology
         {
             const GLuint vao                             = master_model->get_vao();
             const GLuint vertex_buffer                   = master_model->get_vertex_buffer();
-            const uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
+            const std::uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
             const GLuint uv_buffer                       = master_model->get_uv_buffer();
-            const uint32_t vertex_uv_id                  = master_model->get_vertex_uv_id();
+            const std::uint32_t vertex_uv_id             = master_model->get_vertex_uv_id();
             const GLuint normal_buffer                   = master_model->get_normal_buffer();
-            const uint32_t vertex_normal_modelspace_id   = master_model->get_vertex_normal_modelspace_id();
+            const std::uint32_t vertex_normal_modelspace_id = master_model->get_vertex_normal_modelspace_id();
             const GLuint element_buffer                  = master_model->get_element_buffer();
-            const uint32_t indices_size                  = master_model->get_indices_size();
+            const std::uint32_t indices_size             = master_model->get_indices_size();
 
             glBindVertexArray(vao);
 

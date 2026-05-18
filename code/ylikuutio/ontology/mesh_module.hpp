@@ -28,7 +28,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -55,7 +55,7 @@ namespace yli::ontology
             const std::vector<glm::vec3>& get_vertices() const;
             const std::vector<glm::vec2>& get_uvs() const;
             const std::vector<glm::vec3>& get_normals() const;
-            const std::vector<uint32_t>& get_indices() const;
+            const std::vector<std::uint32_t>& get_indices() const;
 
             std::size_t get_indices_size() const;
 
@@ -74,8 +74,8 @@ namespace yli::ontology
             void set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id);
 
         public:
-            uint32_t image_width  { 0 };
-            uint32_t image_height { 0 };
+            std::uint32_t image_width  { 0 };
+            std::uint32_t image_height { 0 };
 
         private:
             std::vector<glm::vec3> vertices; // Vertices of the `MeshModule`.
@@ -88,7 +88,7 @@ namespace yli::ontology
             GLint vertex_normal_modelspace_id   { 0 }; // Dummy value.
 
         private:
-            std::vector<uint32_t> indices;
+            std::vector<std::uint32_t> indices;
             std::vector<glm::vec3> indexed_vertices;
             std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;

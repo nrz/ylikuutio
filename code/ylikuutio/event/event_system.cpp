@@ -25,7 +25,7 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint> // std::uint32_t
 
 namespace yli::event
 {
@@ -47,7 +47,7 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_KEY_DOWN)
             {
-                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
+                const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
 
@@ -56,8 +56,8 @@ namespace yli::event
                     const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                     if (any_value &&
-                            std::holds_alternative<uint32_t>(any_value->data) &&
-                            std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                            std::holds_alternative<std::uint32_t>(any_value->data) &&
+                            std::get<std::uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                     {
                         this->universe.request_exit();
                     }
@@ -65,7 +65,7 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_KEY_UP)
             {
-                const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
+                const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
 
@@ -77,8 +77,8 @@ namespace yli::event
                 const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                 if (any_value &&
-                        std::holds_alternative<uint32_t>(any_value->data) &&
-                        std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                        std::holds_alternative<std::uint32_t>(any_value->data) &&
+                        std::get<std::uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
                 }

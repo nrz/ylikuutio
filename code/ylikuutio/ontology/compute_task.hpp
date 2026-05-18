@@ -25,8 +25,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint8_t, std::uint32_t
 #include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -103,21 +103,21 @@ namespace yli::ontology
             yli::data::AnyValue left_filler_vector_any_value;
             yli::data::AnyValue right_filler_vector_any_value;
 
-            std::shared_ptr<std::vector<uint8_t>> result_vector { nullptr };
+            std::shared_ptr<std::vector<std::uint8_t>> result_vector { nullptr };
 
             // This is the maximum number of iterations.
             std::size_t n_max_iterations;
 
             std::size_t compute_taskID;
 
-            uint32_t texture_width;
-            uint32_t texture_height;
-            uint32_t texture_size { 0 }; // Some dummy value.
+            std::uint32_t texture_width;
+            std::uint32_t texture_height;
+            std::uint32_t texture_size { 0 }; // Some dummy value.
 
-            uint32_t n_index_characters; // For intermediate results' filenames.
+            std::uint32_t n_index_characters; // For intermediate results' filenames.
 
-            uint32_t vertices_size { 0 };
-            uint32_t uvs_size      { 0 };
+            std::uint32_t vertices_size { 0 };
+            std::uint32_t uvs_size      { 0 };
 
             // variables related to the framebuffer.
             GLuint framebuffer              { 0 }; // Some dummy value.

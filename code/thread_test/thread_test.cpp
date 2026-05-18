@@ -15,27 +15,28 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+// Include standard headers
+#include <cstdint>    // std::uint32_t
 #include <functional> // std::ref
 #include <iostream>   // std::cout
-#include <stdint.h>   // uint32_t etc.
 #include <thread>     // std::thread
 #include <vector>     // std::vector
 
-void square(const uint32_t number, std::vector<uint32_t>& results, const uint32_t index)
+void square(const std::uint32_t number, std::vector<std::uint32_t>& results, const std::uint32_t index)
 {
     results.at(index) = number * number;
 }
 
 int main()
 {
-    const std::vector<uint32_t> inputs { 1, 5, 2, 7, 9 };
-    const uint32_t n_inputs = inputs.size();
+    const std::vector<std::uint32_t> inputs { 1, 5, 2, 7, 9 };
+    const std::uint32_t n_inputs = inputs.size();
     std::vector<std::thread> threads;
-    std::vector<uint32_t> results;
+    std::vector<std::uint32_t> results;
     threads.resize(n_inputs);
     results.resize(n_inputs);
 
-    for (uint32_t i = 0; i < n_inputs; i++)
+    for (std::uint32_t i = 0; i < n_inputs; i++)
     {
         threads.at(i) = std::thread { &square, inputs.at(i), std::ref(results), i };
     }
@@ -45,7 +46,7 @@ int main()
         my_thread.join();
     }
 
-    for (uint32_t& result : results)
+    for (std::uint32_t& result : results)
     {
         std::cout << result << "\n";
     }

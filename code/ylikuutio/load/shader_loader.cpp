@@ -23,9 +23,9 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
+#include <cstdint>   // std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -64,8 +64,8 @@ namespace yli::load
         }
 
         // Create the shaders.
-        const uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
-        const uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
+        const std::uint32_t vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
+        const std::uint32_t fragment_shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
         GLint result = GL_FALSE;
         int info_log_length;

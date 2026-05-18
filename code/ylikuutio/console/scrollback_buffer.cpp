@@ -20,15 +20,15 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <limits>   // std::numeric_limits
 #include <span>     // std::span
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::console
 {
-    ScrollbackBuffer::ScrollbackBuffer(const uint32_t n_columns, const uint32_t n_rows)
+    ScrollbackBuffer::ScrollbackBuffer(const std::uint32_t n_columns, const std::uint32_t n_rows)
         : n_columns { (n_columns > 0 ? n_columns : 1) },
         n_rows      { (n_rows > 0 ? n_rows : 1) }
     {
@@ -191,12 +191,12 @@ namespace yli::console
         return this->buffer;
     }
 
-    uint32_t ScrollbackBuffer::get_n_columns() const
+    std::uint32_t ScrollbackBuffer::get_n_columns() const
     {
         return this->n_columns;
     }
 
-    uint32_t ScrollbackBuffer::get_n_rows() const
+    std::uint32_t ScrollbackBuffer::get_n_rows() const
     {
         return this->n_rows;
     }

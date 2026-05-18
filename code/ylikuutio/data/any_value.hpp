@@ -25,10 +25,10 @@
 #endif
 
 // Include standard headers
+#include <cstdint>    // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
 #include <functional> // std::reference_wrapper
 #include <optional> // std::optional
 #include <string>   // std::string
-#include <stdint.h> // uint32_t etc.
 #include <variant>  // std::holds_alternative, std::monostate, std::variant
 #include <vector>   // std::vector
 
@@ -87,22 +87,22 @@ namespace yli::data
             explicit AnyValue(const char char_value);
             explicit AnyValue(const float float_value);
             explicit AnyValue(const double double_value);
-            explicit AnyValue(const int32_t int32_t_value);
-            explicit AnyValue(const uint32_t uint32_t_value);
-            explicit AnyValue(const int64_t int64_t_value);
-            explicit AnyValue(const uint64_t uint64_t_value);
+            explicit AnyValue(const std::int32_t int32_t_value);
+            explicit AnyValue(const std::uint32_t uint32_t_value);
+            explicit AnyValue(const std::int64_t int64_t_value);
+            explicit AnyValue(const std::uint64_t uint64_t_value);
             // Strings.
             explicit AnyValue(std::string& std_string_ref);
             explicit AnyValue(const std::string& const_std_string_ref);
             // Variable-size vectors.
-            explicit AnyValue(std::vector<int8_t>& std_vector_int8_t_ref);
-            explicit AnyValue(std::vector<uint8_t>& std_vector_uint8_t_ref);
-            explicit AnyValue(std::vector<int16_t>& std_vector_int16_t_ref);
-            explicit AnyValue(std::vector<uint16_t>& std_vector_uint16_t_ref);
-            explicit AnyValue(std::vector<int32_t>& std_vector_int32_t_ref);
-            explicit AnyValue(std::vector<uint32_t>& std_vector_uint32_t_ref);
-            explicit AnyValue(std::vector<int64_t>& std_vector_int64_t_ref);
-            explicit AnyValue(std::vector<uint64_t>& std_vector_uint64_t_ref);
+            explicit AnyValue(std::vector<std::int8_t>& std_vector_int8_t_ref);
+            explicit AnyValue(std::vector<std::uint8_t>& std_vector_uint8_t_ref);
+            explicit AnyValue(std::vector<std::int16_t>& std_vector_int16_t_ref);
+            explicit AnyValue(std::vector<std::uint16_t>& std_vector_uint16_t_ref);
+            explicit AnyValue(std::vector<std::int32_t>& std_vector_int32_t_ref);
+            explicit AnyValue(std::vector<std::uint32_t>& std_vector_uint32_t_ref);
+            explicit AnyValue(std::vector<std::int64_t>& std_vector_int64_t_ref);
+            explicit AnyValue(std::vector<std::uint64_t>& std_vector_uint64_t_ref);
             explicit AnyValue(std::vector<float>& std_vector_float_ref);
             // Fixed-size vectors.
             explicit AnyValue(glm::vec3& glm_vec3_ref);
@@ -137,22 +137,22 @@ namespace yli::data
                 char,
                 float,
                 double,
-                int32_t,
-                uint32_t,
-                int64_t,
-                uint64_t,
+                std::int32_t,
+                std::uint32_t,
+                std::int64_t,
+                std::uint64_t,
                 // Strings.
                 std::reference_wrapper<std::string>,
                 std::reference_wrapper<const std::string>,
                 // Variable-size vectors.
-                std::reference_wrapper<std::vector<int8_t>>,
-                std::reference_wrapper<std::vector<uint8_t>>,
-                std::reference_wrapper<std::vector<int16_t>>,
-                std::reference_wrapper<std::vector<uint16_t>>,
-                std::reference_wrapper<std::vector<int32_t>>,
-                std::reference_wrapper<std::vector<uint32_t>>,
-                std::reference_wrapper<std::vector<int64_t>>,
-                std::reference_wrapper<std::vector<uint64_t>>,
+                std::reference_wrapper<std::vector<std::int8_t>>,
+                std::reference_wrapper<std::vector<std::uint8_t>>,
+                std::reference_wrapper<std::vector<std::int16_t>>,
+                std::reference_wrapper<std::vector<std::uint16_t>>,
+                std::reference_wrapper<std::vector<std::int32_t>>,
+                std::reference_wrapper<std::vector<std::uint32_t>>,
+                std::reference_wrapper<std::vector<std::int64_t>>,
+                std::reference_wrapper<std::vector<std::uint64_t>>,
                 std::reference_wrapper<std::vector<float>>,
                 // Fixed-size vectors.
                 std::reference_wrapper<glm::vec3>,

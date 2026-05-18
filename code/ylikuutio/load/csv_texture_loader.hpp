@@ -21,7 +21,7 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 
 namespace yli::data
@@ -41,9 +41,9 @@ namespace yli::load
             const GLenum type,
             const yli::data::AnyValue* const left_filler_vector_any_value,
             const yli::data::AnyValue* const right_filler_vector_any_value,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
             GLuint& textureID);
 
     // Load a .CSV file using our custom loader.
@@ -52,9 +52,9 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
             GLuint& textureID);
 }
 

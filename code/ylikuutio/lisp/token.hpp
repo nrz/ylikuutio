@@ -22,9 +22,9 @@
 #include "text_position.hpp"
 
 // Include standard headers
+#include <cstdint>     // std::int64_t, std::uint64_t
 #include <cstddef>     // std::size_t
 #include <optional>    // std::nullopt, std::optional
-#include <stdint.h>    // int64_t, uint64_t
 #include <string>      // std::string
 #include <string_view> // std::string_view
 #include <variant>     // std::holds_alternative, std::monostate, std::variant
@@ -35,8 +35,8 @@ namespace yli::lisp
     {
         public:
             Token(TokenType type, std::string&& lexeme, const TextPosition& text_position);
-            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const int64_t value);
-            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const uint64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::int64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::uint64_t value);
             Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value);
 
             bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
@@ -68,8 +68,8 @@ namespace yli::lisp
             const TextPosition text_position;
             std::variant<
                 std::monostate, // Uninitialized state.
-                int64_t,
-                uint64_t,
+                std::int64_t,
+                std::uint64_t,
                 double> numeric_value;
     };
 }

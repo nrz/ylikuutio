@@ -28,7 +28,7 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <stdint.h>  // uint32_t etc.
+#include <cstdint>   // std::uint32_t
 
 namespace yli::core
 {
@@ -68,9 +68,9 @@ namespace yli::ontology
 
             Entity* get_parent() const override;
 
-            uint32_t get_text_size() const;
+            std::uint32_t get_text_size() const;
             TextureFileFormat get_font_texture_file_format() const;
-            uint32_t get_program_id() const;
+            std::uint32_t get_program_id() const;
 
             void prepare_to_print() const;
 
@@ -96,12 +96,12 @@ namespace yli::ontology
             Scene* get_scene() const override;
 
         private:
-            uint32_t compute_left_x(const PrintTextStruct& print_text_struct) const;
-            uint32_t compute_top_y(const PrintTextStruct& print_text_struct) const;
+            std::uint32_t compute_left_x(const PrintTextStruct& print_text_struct) const;
+            std::uint32_t compute_top_y(const PrintTextStruct& print_text_struct) const;
             void compute_and_store_glyph_vertices(
                     std::vector<glm::vec2>& vertices,
-                    const uint32_t vertex_left_x,
-                    const uint32_t vertex_top_y) const;
+                    const std::uint32_t vertex_left_x,
+                    const std::uint32_t vertex_top_y) const;
 
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
@@ -116,9 +116,9 @@ namespace yli::ontology
             GLint screen_width_uniform_id            { 0 }; // Location of the program's window width uniform.
             GLint screen_height_uniform_id           { 0 }; // Location of the program's window height uniform.
 
-            uint32_t screen_width;
-            uint32_t screen_height;
-            uint32_t text_size;
+            std::uint32_t screen_width;
+            std::uint32_t screen_height;
+            std::uint32_t text_size;
     };
 
     template<>

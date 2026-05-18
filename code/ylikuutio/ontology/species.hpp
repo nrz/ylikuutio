@@ -27,8 +27,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::core
 {
@@ -91,8 +91,8 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            uint32_t get_image_width() const;
-            uint32_t get_image_height() const;
+            std::uint32_t get_image_width() const;
+            std::uint32_t get_image_height() const;
 
             void render(const Scene* const target_scene);
 

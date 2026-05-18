@@ -30,9 +30,9 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint64_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -75,7 +75,7 @@ namespace yli::load
             std::cout << "Loaded FBX data vector size: " << size << "\n";
         }
 
-        const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+        const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
         ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
 
         if (ofbx_iscene == nullptr)

@@ -30,9 +30,9 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <cstdint>       // std::int32_t, std::int64_t, std::uint8_t, std::uint64_t
 #include <ios>           // std::dec, std::hex
 #include <iostream>      // std::cout, std::cerr
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -44,7 +44,7 @@ namespace yli::load
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
+            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>>& ofbx_diffuse_texture_mesh_map,
             std::vector<const ofbx::Mesh*>& ofbx_meshes,
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
@@ -64,7 +64,7 @@ namespace yli::load
         // };
         //
         // IScene* load(const u8* data, int size)
-        const std::optional<std::vector<uint8_t>> data_vector = yli::file::binary_slurp(filename);
+        const std::optional<std::vector<std::uint8_t>> data_vector = yli::file::binary_slurp(filename);
 
         if (!data_vector || data_vector->empty())
         {
@@ -74,14 +74,14 @@ namespace yli::load
 
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector->data());
-        const int64_t size = data_vector->size();
+        const std::int64_t size = data_vector->size();
 
         if (is_debug_mode)
         {
             std::cout << "Loaded FBX data vector size: " << size << "\n";
         }
 
-        const uint64_t flags = (uint64_t) ofbx::LoadFlags::TRIANGULATE;
+        const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
         const ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
 
         if (ofbx_iscene == nullptr)
@@ -173,7 +173,7 @@ namespace yli::load
                     if (ofbx_diffuse_texture_mesh_map.count(diffuse_texture) != 1)
                     {
                         // This `const ofbx::Material*` is not in `ofbx_diffuse_texture_mesh_map` yet.
-                        ofbx_diffuse_texture_mesh_map[diffuse_texture] = std::vector<int32_t>();
+                        ofbx_diffuse_texture_mesh_map[diffuse_texture] = std::vector<std::int32_t>();
                     }
 
                     if (is_debug_mode)

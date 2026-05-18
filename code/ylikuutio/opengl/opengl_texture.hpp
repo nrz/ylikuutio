@@ -21,15 +21,15 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
+#include <cstdint>  // std::uint8_t
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::opengl
 {
     // Load texture from memory.
     bool prepare_opengl_texture(
-            const std::vector<uint8_t>& image_data,
+            const std::vector<std::uint8_t>& image_data,
             const std::size_t image_width,
             const std::size_t image_height,
             GLuint& textureID);

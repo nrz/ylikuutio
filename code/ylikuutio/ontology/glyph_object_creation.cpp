@@ -27,11 +27,11 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cstdint>   // std::int32_t
 #include <ios>       // std::dec, std::hex
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 
 namespace yli::ontology
@@ -53,7 +53,7 @@ namespace yli::ontology
 
         while (*text_pointer != '\0')
         {
-            std::optional<int32_t> unicode_value = yli::string::extract_unicode_value_from_string<char>(text_pointer);
+            std::optional<std::int32_t> unicode_value = yli::string::extract_unicode_value_from_string<char>(text_pointer);
 
             if (!unicode_value.has_value())
             {

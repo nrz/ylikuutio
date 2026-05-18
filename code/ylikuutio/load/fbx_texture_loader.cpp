@@ -26,8 +26,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::render
@@ -40,10 +40,10 @@ namespace yli::load
     // Load texture from memory.
     bool load_fbx_texture(
             const ofbx::Texture* const ofbx_texture,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
+            std::uint32_t& n_color_channels,
             GLuint& textureID,
             const yli::render::GraphicsApiBackend graphics_api_backend)
     {

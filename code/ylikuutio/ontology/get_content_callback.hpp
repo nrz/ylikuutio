@@ -19,8 +19,8 @@
 #define YLIKUUTIO_ONTOLOGY_GET_CONTENT_CALLBACK_HPP_INCLUDED
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::data
@@ -39,11 +39,11 @@ typedef std::shared_ptr<yli::data::AnyValue> (*GetContentCallback) (
         CallbackEngine*,
         CallbackObject*,
         std::vector<CallbackParameter*>&,
-        uint32_t x_start,
-        uint32_t y_start,
-        uint32_t z_start,
-        uint32_t x_size,
-        uint32_t y_size,
-        uint32_t z_size);
+        std::uint32_t x_start,
+        std::uint32_t y_start,
+        std::uint32_t z_start,
+        std::uint32_t x_size,
+        std::uint32_t y_size,
+        std::uint32_t z_size);
 
 #endif

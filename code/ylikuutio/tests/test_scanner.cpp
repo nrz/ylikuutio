@@ -26,6 +26,7 @@
 #include "code/ylikuutio/lisp/text_position.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::int64_t, std::uint64_t
 #include <optional> // std::nullopt, std::optional
 #include <string_view> // std::string_view
 #include <utility>  // std::move
@@ -380,7 +381,7 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_0)
 
     {
         TextPosition text_position(integer_literal_0_string.cbegin(), integer_literal_0_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", text_position, static_cast<uint64_t>(0u)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "0", text_position, static_cast<std::uint64_t>(0u)));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -401,7 +402,7 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_1)
 
     {
         TextPosition text_position(integer_literal_1_string.cbegin(), integer_literal_1_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", text_position, static_cast<uint64_t>(1u)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "1", text_position, static_cast<std::uint64_t>(1u)));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -422,7 +423,7 @@ TEST(integer_literal_must_be_scanned_appropriately, integer_literal_minus_1)
 
     {
         TextPosition text_position(integer_literal_minus_1_string.cbegin(), integer_literal_minus_1_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", text_position, static_cast<int64_t>(-1)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-1", text_position, static_cast<std::int64_t>(-1)));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -443,7 +444,7 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
 
     {
         TextPosition text_position(integer_literal_18446744073709551615_string.cbegin(), integer_literal_18446744073709551615_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, static_cast<uint64_t>(18446744073709551615u)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, static_cast<std::uint64_t>(18446744073709551615u)));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -464,7 +465,7 @@ TEST(integer_literal_must_be_scanned_appropriately, signed_integer_minus_9223372
 
     {
         TextPosition text_position(integer_literal_minus_9223372036854775808_string.cbegin(), integer_literal_minus_9223372036854775808_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", text_position, static_cast<int64_t>(-9223372036854775808u)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::SIGNED_INTEGER, "-9223372036854775808", text_position, static_cast<std::int64_t>(-9223372036854775808u)));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }

@@ -23,9 +23,9 @@
 
 // Include standard headers
 #include <cstddef>     // std::size_t
+#include <cstdint>     // std::uint32_t
 #include <iostream>    // std::cout, std::cerr
 #include <optional>    // std::optional
-#include <stdint.h>    // uint32_t etc.
 #include <string>      // std::string
 #include <string_view> // std::string_view
 #include <vector>      // std::vector
@@ -35,9 +35,9 @@ namespace yli::load
     template<typename T1>
         std::optional<std::vector<T1>> load_csv_file(
                 const std::string& filename,
-                uint32_t& data_width,
-                uint32_t& data_height,
-                uint32_t& data_size)
+                std::uint32_t& data_width,
+                std::uint32_t& data_height,
+                std::uint32_t& data_size)
         {
             // Open the file
             const std::optional<std::string> file_content = yli::file::slurp(filename);
@@ -66,9 +66,9 @@ namespace yli::load
             data_size = 0;
 
             std::size_t file_content_i = 0;
-            uint32_t n_lines = 0;
-            uint32_t n_elements_in_first_line = 0;
-            uint32_t n_elements_in_current_line = 0;
+            std::uint32_t n_lines = 0;
+            std::uint32_t n_elements_in_first_line = 0;
+            std::uint32_t n_elements_in_current_line = 0;
             const char* const char_end_string = ", \n";
 
             std::vector<T1> data_vector;

@@ -21,20 +21,20 @@
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint8_t, std::uint32_t
 #include <memory>   // std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::load
 {
-    std::shared_ptr<std::vector<uint8_t>> load_image_file(
+    std::shared_ptr<std::vector<std::uint8_t>> load_image_file(
             const std::string& filename,
             const yli::load::ImageLoaderStruct& image_loader_struct,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels);
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
+            std::uint32_t& n_color_channels);
 }
 
 #endif

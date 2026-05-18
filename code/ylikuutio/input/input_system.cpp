@@ -25,6 +25,7 @@
 #include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cerr
 #include <vector>   // std::vector
 
@@ -82,8 +83,8 @@ namespace yli::input
                 const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
 
                 if (any_value &&
-                        std::holds_alternative<uint32_t>(any_value->data) &&
-                        std::get<uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                        std::holds_alternative<std::uint32_t>(any_value->data) &&
+                        std::get<std::uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
                 }

@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 
 namespace yli::load
@@ -32,8 +32,8 @@ namespace yli::load
         float latitude      { NAN };
         float longitude     { NAN };
         float divisor       { NAN };
-        uint32_t x_step     { 1 };
-        uint32_t y_step     { 1 };
+        std::uint32_t x_step { 1 };
+        std::uint32_t y_step { 1 };
         bool use_real_texture_coordinates { true };
         bool triangulate                  { true };
     };

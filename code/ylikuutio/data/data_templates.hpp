@@ -19,7 +19,7 @@
 #define YLIKUUTIO_DATA_DATA_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::int8_t, std::int16_t, std::int32_t, std::uint8_t, std::uint16_t, std::uint32_t
 #include <memory>   // std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -58,15 +58,15 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(int32_t data)
+        std::string get_type_string(std::int32_t data)
         {
-            return "int32_t";
+            return "std::int32_t";
         }
 
     template<>
-        std::string get_type_string(uint32_t data)
+        std::string get_type_string(std::uint32_t data)
         {
-            return "uint32_t";
+            return "std::uint32_t";
         }
 
     template<>
@@ -94,15 +94,15 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(int32_t* data)
+        std::string get_type_string(std::int32_t* data)
         {
-            return "int32_t*";
+            return "std::int32_t*";
         }
 
     template<>
-        std::string get_type_string(uint32_t* data)
+        std::string get_type_string(std::uint32_t* data)
         {
-            return "uint32_t*";
+            return "std::uint32_t*";
         }
 
     template<>
@@ -256,39 +256,39 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<int8_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::int8_t>> data)
         {
-            return "std::shared_ptr<std::vector<int8_t>>";
+            return "std::shared_ptr<std::vector<std::int8_t>>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<uint8_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::uint8_t>> data)
         {
-            return "std::shared_ptr<std::vector<uint8_t>>";
+            return "std::shared_ptr<std::vector<std::uint8_t>>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<int16_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::int16_t>> data)
         {
-            return "std::shared_ptr<std::vector<int16_t>>";
+            return "std::shared_ptr<std::vector<std::int16_t>>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<uint16_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::uint16_t>> data)
         {
-            return "std::shared_ptr<std::vector<uint16_t>>";
+            return "std::shared_ptr<std::vector<std::uint16_t>>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<int32_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::int32_t>> data)
         {
-            return "std::shared_ptr<std::vector<int32_t>>";
+            return "std::shared_ptr<std::vector<std::int32_t>>";
         }
 
     template<>
-        std::string get_type_string(std::shared_ptr<std::vector<uint32_t>> data)
+        std::string get_type_string(std::shared_ptr<std::vector<std::uint32_t>> data)
         {
-            return "std::shared_ptr<std::vector<uint32_t>>";
+            return "std::shared_ptr<std::vector<std::uint32_t>>";
         }
 
     template<>

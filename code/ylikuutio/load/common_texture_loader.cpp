@@ -23,9 +23,9 @@
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include standard headers
+#include <cstdint>   // std::uint8_t, std::uint32_t
 #include <iostream>  // std::cerr
 #include <memory>    // std::shared_ptr
-#include <stdint.h>  // uint32_t etc.
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -35,14 +35,14 @@ namespace yli::load
     bool load_common_texture(
             const std::string& filename,
             const yli::load::ImageLoaderStruct& image_loader_struct,
-            uint32_t& image_width,
-            uint32_t& image_height,
-            uint32_t& image_size,
-            uint32_t& n_color_channels,
+            std::uint32_t& image_width,
+            std::uint32_t& image_height,
+            std::uint32_t& image_size,
+            std::uint32_t& n_color_channels,
             GLuint& textureID,
             const yli::render::GraphicsApiBackend graphics_api_backend)
     {
-        const std::shared_ptr<std::vector<uint8_t>> image_data = load_image_file(
+        const std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
                 filename,
                 image_loader_struct,
                 image_width,

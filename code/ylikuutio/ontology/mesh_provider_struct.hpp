@@ -29,8 +29,8 @@
 #endif
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -47,7 +47,7 @@ namespace yli::ontology
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<glm::vec3> normals;
-        uint32_t vertex_count { std::numeric_limits<uint32_t>::max() };
+        std::uint32_t vertex_count { std::numeric_limits<std::uint32_t>::max() };
     };
 }
 

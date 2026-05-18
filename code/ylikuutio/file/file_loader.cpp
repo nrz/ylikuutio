@@ -18,13 +18,13 @@
 #include "file_loader.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::uint8_t
 #include <fstream>  // std::ifstream
 #include <ios>      // std::ios
 #include <iostream> // std::cout
 #include <iterator> // std::istream_iterator
 #include <optional> // std::optional
 #include <sstream>  // std::stringstream
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -47,7 +47,7 @@ namespace yli::file
         return file_buffer.str();
     }
 
-    std::optional<std::vector<uint8_t>> binary_slurp(const std::string& file_path)
+    std::optional<std::vector<std::uint8_t>> binary_slurp(const std::string& file_path)
     {
         std::cout << "Loading binary file " << file_path << " into memory.\n";
 
@@ -62,12 +62,12 @@ namespace yli::file
         file_stream.seekg(0, std::ios::end);
         std::streampos file_size = file_stream.tellg();
         file_stream.seekg(0, std::ios::beg);
-        std::vector<uint8_t> data_vector;
+        std::vector<std::uint8_t> data_vector;
         data_vector.reserve(file_size);
         data_vector.insert(
                 data_vector.begin(),
-                std::istream_iterator<uint8_t>(file_stream),
-                std::istream_iterator<uint8_t>());
+                std::istream_iterator<std::uint8_t>(file_stream),
+                std::istream_iterator<std::uint8_t>());
         return data_vector;
     }
 }

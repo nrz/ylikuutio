@@ -36,11 +36,11 @@
 // Include standard headers
 #include <cmath>         // NAN
 #include <cstddef>       // std::size_t
+#include <cstdint>       // std::int32_t, std::uint32_t
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::unique_ptr
 #include <optional>      // std::optional
 #include <queue>         // std::queue
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -108,8 +108,8 @@ namespace yli::ontology
             // This method contains the main loop.
             void start_simulation();
 
-            void update_mouse_x(const int32_t x_change);
-            void update_mouse_y(const int32_t y_change);
+            void update_mouse_x(const std::int32_t x_change);
+            void update_mouse_y(const std::int32_t y_change);
             void gain_focus();
             void lose_focus();
 
@@ -211,7 +211,7 @@ namespace yli::ontology
             [[nodiscard]] bool setup_context() const;
             [[nodiscard]] bool create_window_and_setup_context();
 
-            static void set_swap_interval(const int32_t interval);
+            static void set_swap_interval(const std::int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;
             void adjust_opengl_viewport() const;
@@ -222,16 +222,16 @@ namespace yli::ontology
             SDL_Window* get_window() const;
 
             // This method returns current `window_width`.
-            uint32_t get_window_width() const;
+            std::uint32_t get_window_width() const;
 
             // This method returns current `window_height`.
-            uint32_t get_window_height() const;
+            std::uint32_t get_window_height() const;
 
             // This method returns current `text_size`.
-            uint32_t get_text_size() const;
+            std::uint32_t get_text_size() const;
 
             // This method returns current `font_size`.
-            uint32_t get_font_size() const;
+            std::uint32_t get_font_size() const;
 
             // This method computes the new delta time and returns it.
             double compute_delta_time();
@@ -243,10 +243,10 @@ namespace yli::ontology
             void finalize_delta_time_loop();
 
             // This method returns current `max_fps`.
-            uint32_t get_max_fps() const;
+            std::uint32_t get_max_fps() const;
             double get_last_time_to_display_fps() const;
             double get_last_time_for_display_sync() const;
-            int32_t get_number_of_frames() const;
+            std::int32_t get_number_of_frames() const;
 
             void increment_last_time_to_display_fps();
             void update_last_time_for_display_sync();
@@ -380,7 +380,7 @@ namespace yli::ontology
 
             const yli::render::GraphicsApiBackend graphics_api_backend;
             const std::vector<SDL_DisplayMode> display_modes;
-            const uint32_t n_displays;
+            const std::uint32_t n_displays;
 
         public:
             const std::optional<SDL_DisplayMode> display_mode;
@@ -392,13 +392,13 @@ namespace yli::ontology
 
             // variables related to the window.
             SDL_Window* window { nullptr };
-            uint32_t window_width;
-            uint32_t window_height;
+            std::uint32_t window_width;
+            std::uint32_t window_height;
             std::string window_title { "Ylikuutio " + Universe::version };
 
             bool has_mouse_focus { true };
-            int32_t mouse_x;
-            int32_t mouse_y;
+            std::int32_t mouse_x;
+            std::int32_t mouse_y;
 
         public:
             float speed;
@@ -418,21 +418,21 @@ namespace yli::ontology
             float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
 
             // variables related to the fonts and texts used.
-            uint32_t text_size;
-            uint32_t font_size;
+            std::uint32_t text_size;
+            std::uint32_t font_size;
 
             // variables related to timing of events.
-            uint32_t max_fps;
+            std::uint32_t max_fps;
             double last_time_to_display_fps   { yli::time::get_time() };
             double last_time_for_display_sync { yli::time::get_time() };
             double delta_time                 { NAN };
-            int32_t number_of_frames          { 0 };
+            std::int32_t number_of_frames          { 0 };
 
             // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-            uint32_t last_time_before_reading_keyboard    { std::numeric_limits<uint32_t>::max() };
+            std::uint32_t last_time_before_reading_keyboard    { std::numeric_limits<std::uint32_t>::max() };
 
             // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
-            uint32_t current_time_before_reading_keyboard { std::numeric_limits<uint32_t>::max() };
+            std::uint32_t current_time_before_reading_keyboard { std::numeric_limits<std::uint32_t>::max() };
     };
 }
 

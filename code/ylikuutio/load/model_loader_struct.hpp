@@ -19,7 +19,7 @@
 #define YLIKUUTIO_LOAD_MODEL_LOADER_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstdint>  // std::uint32_t
 #include <string>   // std::string
 
 namespace yli::load
@@ -37,13 +37,13 @@ namespace yli::load
         float divisor       { 1.0f };  // Value by which SRTM values are divided to convert them to kilometers.
         float latitude      { 0.0f };  // In degrees, for SRTM model files.
         float longitude     { 0.0f };  // In degrees, for SRTM model files.
-        uint32_t mesh_i     { 0 };     // For FBX.
-        uint32_t x_step     { 1 };     // Step in x-dimension for input data (set to 1 to load all data points/measurements).
-        uint32_t y_step     { 1 };     // Step in y-dimension for input data (set to 1 to load all data points/measurements).
+        std::uint32_t mesh_i { 0 };    // For FBX.
+        std::uint32_t x_step { 1 };    // Step in x-dimension for input data (set to 1 to load all data points/measurements).
+        std::uint32_t y_step { 1 };    // Step in y-dimension for input data (set to 1 to load all data points/measurements).
         bool use_real_texture_coordinates { true };
 
-        uint32_t* image_width_pointer  { nullptr };
-        uint32_t* image_height_pointer { nullptr };
+        std::uint32_t* image_width_pointer  { nullptr };
+        std::uint32_t* image_height_pointer { nullptr };
     };
 }
 

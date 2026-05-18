@@ -26,10 +26,10 @@
 #include "code/ylikuutio/render/render_model.hpp"
 
 // Include standard headers
+#include <cstdint>   // std::uint32_t
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
-#include <stdint.h>  // uint32_t etc.
 
 namespace yli::core
 {
@@ -183,12 +183,12 @@ namespace yli::ontology
                 this->mesh, this->master_of_objects, new_target_scene);
     }
 
-    uint32_t Species::get_image_width() const
+    std::uint32_t Species::get_image_width() const
     {
         return this->mesh.image_width;
     }
 
-    uint32_t Species::get_image_height() const
+    std::uint32_t Species::get_image_height() const
     {
         return this->mesh.image_height;
     }

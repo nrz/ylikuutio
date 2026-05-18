@@ -30,8 +30,8 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::core
@@ -107,9 +107,9 @@ namespace yli::ontology
 
             TextureFileFormat get_texture_file_format() const;
             const std::string& get_texture_filename() const;
-            uint32_t get_image_width() const;
-            uint32_t get_image_height() const;
-            uint32_t get_image_size() const;
+            std::uint32_t get_image_width() const;
+            std::uint32_t get_image_height() const;
+            std::uint32_t get_image_size() const;
 
             template<typename T1, std::size_t DataSize>
                 friend class yli::memory::MemoryStorage;

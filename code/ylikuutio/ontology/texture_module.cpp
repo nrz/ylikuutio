@@ -25,8 +25,8 @@
 #include <ofbx.h>
 
 // Include standard headers
+#include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli::ontology
@@ -131,22 +131,22 @@ namespace yli::ontology
         return this->texture_file_format;
     }
 
-    uint32_t TextureModule::get_image_width() const
+    std::uint32_t TextureModule::get_image_width() const
     {
         return this->image_width;
     }
 
-    uint32_t TextureModule::get_image_height() const
+    std::uint32_t TextureModule::get_image_height() const
     {
         return this->image_height;
     }
 
-    uint32_t TextureModule::get_image_size() const
+    std::uint32_t TextureModule::get_image_size() const
     {
         return this->image_size;
     }
 
-    uint32_t TextureModule::get_n_color_channels() const
+    std::uint32_t TextureModule::get_n_color_channels() const
     {
         return this->n_color_channels;
     }

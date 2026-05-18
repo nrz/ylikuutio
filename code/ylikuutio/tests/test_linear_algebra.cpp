@@ -22,6 +22,7 @@
 #include "code/ylikuutio/linear_algebra/vector_functions.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::int32_t
 #include <vector>   // std::vector
 
 TEST(matrices_must_function_as_expected, matrices)
@@ -120,16 +121,16 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // determinants.
 
-    int32_t det_identity3x3 = identity3x3.det();
+    std::int32_t det_identity3x3 = identity3x3.det();
     ASSERT_EQ(det_identity3x3, 1);
 
-    int32_t det_zeros3x3 = zeros3x3.det();
+    std::int32_t det_zeros3x3 = zeros3x3.det();
     ASSERT_EQ(det_zeros3x3, 0);
 
-    int32_t det_ones3x3 = ones3x3.det();
+    std::int32_t det_ones3x3 = ones3x3.det();
     ASSERT_EQ(det_ones3x3, 0);
 
-    int32_t det_magic3x3 = magic3x3.det();
+    std::int32_t det_magic3x3 = magic3x3.det();
     ASSERT_EQ(det_magic3x3, -360);
 
     // matrix equality, increment, and decrement.

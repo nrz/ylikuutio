@@ -33,11 +33,11 @@
 
 // Include standard headers
 #include <cmath>    // std::isnan
+#include <cstdint>  // std::int16_t, std::int32_t, std::uint8_t, std::uint32_t
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <sstream>  // std::stringstream
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -49,8 +49,8 @@ namespace yli::load
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t& image_width,
-            uint32_t& image_height)
+            std::uint32_t& image_width,
+            std::uint32_t& image_height)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.
         // The SRTM filenames contain always the southwest coordinate of the block.
@@ -73,8 +73,8 @@ namespace yli::load
             return false;
         }
 
-        const int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
-        const int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
+        const std::int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
+        const std::int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
 
         std::string south_north_char;
         std::string west_east_char;
@@ -119,7 +119,7 @@ namespace yli::load
 
         std::cout << "Loading SRTM file " << abs_filename << " ...\n";
 
-        const std::optional<std::vector<uint8_t>> file_content = yli::file::binary_slurp(abs_filename);
+        const std::optional<std::vector<std::uint8_t>> file_content = yli::file::binary_slurp(abs_filename);
 
         if (!file_content || file_content->empty())
         {
@@ -127,14 +127,14 @@ namespace yli::load
             return false;
         }
 
-        const uint32_t true_image_width = 1201; // true image height is 1201 as well.
+        const std::uint32_t true_image_width = 1201; // true image height is 1201 as well.
         image_width = 1200;  // rightmost column is not used (it is duplicated in the next SRTM file to the east).
         image_height = 1200; // bottom row is not used (it us duplicated in the next SRTM file to the south).
 
         std::vector<float> vertex_data;
         vertex_data.reserve(image_width * image_height);
 
-        const uint8_t* image_pointer = &(*file_content)[0]; // start from northwestern corner.
+        const std::uint8_t* image_pointer = &(*file_content)[0]; // start from northwestern corner.
 
         // start processing heightmap data.
         // 90 meters is for equator.
@@ -142,12 +142,12 @@ namespace yli::load
         std::cout << "Processing SRTM heightmap data.\n";
 
         {
-            int32_t last_percent = -1;
+            std::int32_t last_percent = -1;
 
-            for (uint32_t y = 0; y < image_height; y++)
+            for (std::uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                int32_t current_percent = static_cast<int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
+                std::int32_t current_percent = static_cast<std::int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -155,14 +155,14 @@ namespace yli::load
                     last_percent = current_percent;
                 }
 
-                for (uint32_t x = 0; x < image_width; x++)
+                for (std::uint32_t x = 0; x < image_width; x++)
                 {
-                    uint32_t z = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
+                    std::uint32_t z = static_cast<std::uint32_t>(*image_pointer) << 8 | static_cast<std::uint32_t>(*(image_pointer + 1));
 
-                    image_pointer += sizeof(int16_t);
+                    image_pointer += sizeof(std::int16_t);
                     vertex_data.emplace_back(static_cast<float>(z) / heightmap_loader_struct.divisor);
                 }
-                image_pointer += sizeof(int16_t) * (true_image_width - image_width);
+                image_pointer += sizeof(std::int16_t) * (true_image_width - image_width);
             }
         }
 

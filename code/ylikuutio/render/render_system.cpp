@@ -47,8 +47,8 @@
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
+#include <cstdint>  // std::int32_t, std::uint32_t
 #include <iostream> // std::cout, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli::render
 {
@@ -145,7 +145,7 @@ namespace yli::render
         return false; // Fail.
     }
 
-    void RenderSystem::set_swap_interval(const int32_t interval)
+    void RenderSystem::set_swap_interval(const std::int32_t interval)
     {
         if (!yli::sdl::set_swap_interval(static_cast<int>(interval)))
         {
@@ -158,7 +158,7 @@ namespace yli::render
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void RenderSystem::restore_onscreen_rendering(const uint32_t window_width, const uint32_t window_height) const
+    void RenderSystem::restore_onscreen_rendering(const std::uint32_t window_width, const std::uint32_t window_height) const
     {
         // Bind the default framebuffer for on-screen rendering.
         yli::opengl::bind_gl_framebuffer(0);
@@ -182,7 +182,7 @@ namespace yli::render
                 this->background_alpha);
     }
 
-    void RenderSystem::adjust_opengl_viewport(const uint32_t window_width, const uint32_t window_height)
+    void RenderSystem::adjust_opengl_viewport(const std::uint32_t window_width, const std::uint32_t window_height)
     {
         if (window_width <= std::numeric_limits<GLsizei>::max() &&
                 window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
