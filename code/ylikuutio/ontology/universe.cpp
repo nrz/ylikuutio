@@ -254,7 +254,7 @@ namespace yli::ontology
 
         GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
-        Font2d* const font_2d = static_cast<Font2d*>(
+        auto* const font_2d = static_cast<Font2d*>(
                 hierarchy::get_first_child(
                     this->parent_of_font_2ds.child_pointer_vector,
                     this->parent_of_font_2ds.get_number_of_children()));
