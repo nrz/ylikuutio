@@ -91,8 +91,8 @@ namespace yli::ontology
     class Universe final : public Entity
     {
         public:
-            void bind_entity(Entity* const entity) noexcept;
-            void unbind_entity(const std::size_t entityID) noexcept;
+            void bind_entity(Entity* entity) noexcept;
+            void unbind_entity(std::size_t entityID) noexcept;
 
         private:
             Universe(
@@ -132,26 +132,26 @@ namespace yli::ontology
             void render_without_changing_depth_test();
 
             // This method sets the active `Scene`.
-            void set_active_scene(Scene* const scene);
+            void set_active_scene(Scene* scene);
 
             Camera* get_active_camera() const;
 
             // This method sets the active `Camera`.
             // Setting the active `Camera` does not change the active `Scene`!
-            static void set_active_camera(Camera* const camera);
+            static void set_active_camera(Camera* camera);
 
             const glm::vec3& get_xyz() const;
             void set_xyz(glm::vec3&& xyz) const;
             void update_xyz(const glm::vec3& xyz) const;
 
             float get_x() const;
-            void set_x(const float x) const;
+            void set_x(float x) const;
 
             float get_y() const;
-            void set_y(const float y) const;
+            void set_y(float y) const;
 
             float get_z() const;
-            void set_z(const float z) const;
+            void set_z(float z) const;
 
             const glm::vec3& get_direction() const;
             void set_direction(glm::vec3&& direction) const;
@@ -163,20 +163,20 @@ namespace yli::ontology
             void set_up(glm::vec3&& up) const;
 
             float get_roll() const;
-            void set_roll(const float roll) const;
+            void set_roll(float roll) const;
 
             float get_yaw() const;
-            void set_yaw(const float yaw) const;
-            void update_yaw(const float x_position) const;
+            void set_yaw(float yaw) const;
+            void update_yaw(float x_position) const;
 
             float get_pitch() const;
-            void set_pitch(const float pitch) const;
-            void update_pitch(const float y_position) const;
+            void set_pitch(float pitch) const;
+            void update_pitch(float y_position) const;
 
             float get_azimuth() const;
 
             Console* get_active_console() const;
-            void set_active_console(Console* const console);
+            void set_active_console(Console* console);
 
             yli::input::InputMethod get_input_method() const;
 
@@ -190,7 +190,7 @@ namespace yli::ontology
 
             static std::string eval_string(const std::string& my_string);
 
-            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const;
+            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
 
             yli::event::EventSystem& get_event_system() const;
             yli::input::InputSystem& get_input_system() const;
@@ -211,7 +211,7 @@ namespace yli::ontology
             [[nodiscard]] bool setup_context() const;
             [[nodiscard]] bool create_window_and_setup_context();
 
-            static void set_swap_interval(const std::int32_t interval);
+            static void set_swap_interval(std::int32_t interval);
             void restore_onscreen_rendering() const;
             void set_opengl_background_color() const;
             void adjust_opengl_viewport() const;
