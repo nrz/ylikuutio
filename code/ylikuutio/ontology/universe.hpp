@@ -361,10 +361,10 @@ namespace yli::ontology
 
             FramebufferModule framebuffer_module;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             void create_should_render_variable();
 
             std::vector<Entity*> entity_pointer_vector;
