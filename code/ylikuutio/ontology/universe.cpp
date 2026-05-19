@@ -337,7 +337,7 @@ namespace yli::ontology
             // 3. Process physics.
             // 4. Update information about current location and orientation (for rendering).
             // 5. Render.
-            const double current_time_in_main_loop = yli::time::get_time();
+            const double current_time_in_main_loop = time::get_time();
 
             if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0 / this->max_fps))
             {
@@ -568,7 +568,7 @@ namespace yli::ontology
                 glBindBuffer(GL_UNIFORM_BUFFER, this->get_active_camera()->get_camera_uniform_block());
                 glBufferSubData(
                         GL_UNIFORM_BUFFER,
-                        yli::opengl::camera_ubo::CameraUboBlockOffsets::V,
+                        opengl::camera_ubo::CameraUboBlockOffsets::V,
                         sizeof(glm::mat4),
                         glm::value_ptr(this->get_view_matrix())); // mat4
                 glBindBuffer(GL_UNIFORM_BUFFER, 0);
@@ -949,22 +949,22 @@ namespace yli::ontology
 
     bool Universe::get_is_opengl_in_use() const
     {
-        return this->graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL;
+        return this->graphics_api_backend == render::GraphicsApiBackend::OPENGL;
     }
 
     bool Universe::get_is_vulkan_in_use() const
     {
-        return this->graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN;
+        return this->graphics_api_backend == render::GraphicsApiBackend::VULKAN;
     }
 
     bool Universe::get_is_software_rendering_in_use() const
     {
-        return this->graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE;
+        return this->graphics_api_backend == render::GraphicsApiBackend::SOFTWARE;
     }
 
     bool Universe::get_is_headless() const
     {
-        return this->graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS;
+        return this->graphics_api_backend == render::GraphicsApiBackend::HEADLESS;
     }
 
     bool Universe::get_is_silent() const
@@ -1421,6 +1421,6 @@ namespace yli::ontology
         should_render_variable_struct.read_callback = &read_should_render;
         should_render_variable_struct.should_call_activate_callback_now = true;
         std::cout << "Executing `this->create_variable(should_render_variable_struct);` ...\n";
-        this->create_variable(should_render_variable_struct, yli::data::AnyValue(this->should_render));
+        this->create_variable(should_render_variable_struct, data::AnyValue(this->should_render));
     }
 }
