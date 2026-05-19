@@ -41,7 +41,7 @@ namespace yli::ontology
 namespace yli::memory
 {
     template<typename T1 = std::byte, std::size_t DataSize = 1>
-        class MemoryAllocator : public yli::memory::GenericMemoryAllocator
+        class MemoryAllocator : public GenericMemoryAllocator
         {
             // Each class instance takes care of the memory storage
             // management for some given storable datatype.
@@ -105,7 +105,7 @@ namespace yli::memory
                     return DataSize;
                 }
 
-                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<T1, DataSize>>> get_storage(const std::size_t storage_i) const noexcept
+                std::optional<std::reference_wrapper<MemoryStorage<T1, DataSize>>> get_storage(const std::size_t storage_i) const noexcept
                 {
                     if (storage_i == std::numeric_limits<std::size_t>::max())
                     {
@@ -131,7 +131,7 @@ namespace yli::memory
                     return *raw_storage_pointer;
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& constructible_module) noexcept override
+                void destroy(const ConstructibleModule& constructible_module) noexcept override
                 {
                     if (constructible_module.storage_i == std::numeric_limits<std::size_t>::max())
                     {
@@ -162,11 +162,11 @@ namespace yli::memory
 
             private:
                 const int datatype;
-                std::vector<std::unique_ptr<yli::memory::MemoryStorage<T1, DataSize>>> storages;
+                std::vector<std::unique_ptr<MemoryStorage<T1, DataSize>>> storages;
         };
 
     template<std::size_t DataSize>
-        class MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize> : public yli::memory::GenericMemoryAllocator
+        class MemoryAllocator<ontology::GenericConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
         {
             public:
                 explicit MemoryAllocator(const int datatype)
@@ -186,10 +186,10 @@ namespace yli::memory
                 MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
 
                 template<typename... Args>
-                    yli::ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
+                    ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
                     {
-                        yli::ontology::GenericConsoleLispFunctionOverload* function_overload =
-                            new yli::ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
+                        ontology::GenericConsoleLispFunctionOverload* function_overload =
+                            new ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
 
                         if (this->free_storageID_queue.empty())
                         {
@@ -200,7 +200,7 @@ namespace yli::memory
                         {
                             const std::size_t storage_i = this->free_storageID_queue.front();
                             this->free_storageID_queue.pop();
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(*this, storage_i, 0);
+                            function_overload->constructible_module = ConstructibleModule(*this, storage_i, 0);
                             this->instances.at(storage_i) = function_overload;
                         }
 
@@ -222,14 +222,14 @@ namespace yli::memory
                     return this->instances.size();
                 }
 
-                std::optional<std::reference_wrapper<yli::memory::MemoryStorage<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
+                std::optional<std::reference_wrapper<MemoryStorage<ontology::GenericConsoleLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
                 {
                     std::cerr << "ERROR: `MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>::get_storage`: " <<
                         "this function is not implemented for this specialization!\n";
                     return std::nullopt;
                 }
 
-                void destroy(const yli::memory::ConstructibleModule& constructible_module) noexcept override
+                void destroy(const ConstructibleModule& constructible_module) noexcept override
                 {
                     delete this->instances.at(constructible_module.storage_i);
                     this->instances.at(constructible_module.storage_i) = nullptr;
@@ -238,7 +238,7 @@ namespace yli::memory
 
             private:
                 const int datatype;
-                std::vector<yli::ontology::GenericConsoleLispFunctionOverload*> instances;
+                std::vector<ontology::GenericConsoleLispFunctionOverload*> instances;
                 std::queue<std::size_t> free_storageID_queue;
         };
 }

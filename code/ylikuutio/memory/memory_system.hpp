@@ -35,8 +35,8 @@ namespace yli::memory
     struct ConstructibleModule;
 
     // `GetTypeEnumFunction` is a function template that return `TypeEnumType` values for different types.
-    template<typename TypeEnumType = yli::data::Datatype>
-        class MemorySystem final : public yli::memory::GenericMemorySystem
+    template<typename TypeEnumType = data::Datatype>
+        class MemorySystem final : public GenericMemorySystem
         {
             // Each class instance takes care of memory
             // management for a given application.
@@ -93,7 +93,7 @@ namespace yli::memory
 
                 yli::memory::MemorySystem<TypeEnumType>& get() const
                 {
-                    return const_cast<yli::memory::MemorySystem<TypeEnumType>&>(*this);
+                    return const_cast<MemorySystem<TypeEnumType>&>(*this);
                 }
 
                 std::size_t get_number_of_allocators() const override
@@ -116,7 +116,7 @@ namespace yli::memory
                 }
 
                 // TODO: use `TypeEnumType` instead of `int`!
-                yli::memory::GenericMemoryAllocator& get_generic_allocator(const int type) const override
+                GenericMemoryAllocator& get_generic_allocator(const int type) const override
                 {
                     if (this->has_allocator(type)) [[likely]]
                     {
@@ -128,7 +128,7 @@ namespace yli::memory
 
                 template<typename T1, typename... Args>
                     // TODO: use `TypeEnumType` instead of `int`!
-                    yli::memory::MemoryAllocator<T1>& get_allocator(const int type) const
+                    MemoryAllocator<T1>& get_allocator(const int type) const
                     {
                         if (this->has_allocator(type)) [[likely]]
                         {
@@ -138,18 +138,18 @@ namespace yli::memory
                         throw std::runtime_error("ERROR: `MemorySystem::get_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
                     }
 
-                virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) override
+                virtual void destroy(const ConstructibleModule& constructible_module) override
                 {
                     if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
                     {
-                        yli::memory::GenericMemoryAllocator& allocator = *constructible_module.generic_allocator;
+                        GenericMemoryAllocator& allocator = *constructible_module.generic_allocator;
                         allocator.destroy(constructible_module);
                     }
                 }
 
                 template<typename T1, typename... Args>
                     // TODO: use `TypeEnumType` instead of `int`!
-                    yli::memory::GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
+                    GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
                     {
                         if (this->has_allocator(type))
                         {
@@ -163,7 +163,7 @@ namespace yli::memory
             private:
                 // Allocators need to be created elsewhere and only stored here.
                 // TODO: use `TypeEnumType` as the key type instead of `int`!
-                std::map<int, yli::memory::GenericMemoryAllocator*> memory_allocators;
+                std::map<int, GenericMemoryAllocator*> memory_allocators;
                 const TypeEnumType universe_datatype;
         };
 }

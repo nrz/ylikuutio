@@ -41,7 +41,7 @@ namespace yli::memory
             // `MemoryStorage` instance takes care of single memory storage.
 
             public:
-                MemoryStorage(yli::memory::GenericMemoryAllocator& allocator, const std::size_t storage_i)
+                MemoryStorage(GenericMemoryAllocator& allocator, const std::size_t storage_i)
                     : allocator { allocator },
                     storage_i { storage_i }
                 {
@@ -67,11 +67,11 @@ namespace yli::memory
 
                     // Sort.
                     for (
-                            typename yli::data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
+                            typename data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
                             left_it != this->free_slot_id_queue.last();
                             ++left_it)
                     {
-                        typename yli::data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
+                        typename data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
                         ++right_it;
 
                         for ( ; right_it != this->free_slot_id_queue.last(); ++right_it)
@@ -85,7 +85,7 @@ namespace yli::memory
                         }
                     }
 
-                    typename yli::data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
+                    typename data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
 
                     for (
                             std::size_t slot_i = 0, count = 0;
@@ -135,7 +135,7 @@ namespace yli::memory
                         }
 
                         T1* instance = new (this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
-                        instance->constructible_module = yli::memory::ConstructibleModule(this->allocator, this->storage_i, slot_i);
+                        instance->constructible_module = ConstructibleModule(this->allocator, this->storage_i, slot_i);
                         this->number_of_instances++;
                         return instance;
                     }
@@ -176,9 +176,9 @@ namespace yli::memory
                 }
 
             private:
-                yli::memory::GenericMemoryAllocator& allocator;
+                GenericMemoryAllocator& allocator;
                 alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
-                yli::data::Queue<DataSize> free_slot_id_queue;
+                data::Queue<DataSize> free_slot_id_queue;
                 const std::size_t storage_i;
                 std::size_t number_of_instances { 0 };
         };

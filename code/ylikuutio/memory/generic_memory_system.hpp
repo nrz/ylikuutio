@@ -40,9 +40,9 @@ namespace yli::memory
             virtual bool has_allocator(const int type) const = 0;
 
             // TODO: use `TypeEnumType` instead of `int`!
-            virtual yli::memory::GenericMemoryAllocator& get_generic_allocator(const int type) const = 0;
+            virtual GenericMemoryAllocator& get_generic_allocator(const int type) const = 0;
 
-            virtual void destroy(const yli::memory::ConstructibleModule& constructible_module) = 0;
+            virtual void destroy(const ConstructibleModule& constructible_module) = 0;
     };
 }
 
