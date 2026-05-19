@@ -96,7 +96,7 @@ namespace yli::ontology
 
         private:
             Universe(
-                    yli::core::Application& application,
+                    core::Application& application,
                     const UniverseStruct& universe_struct);
 
             ~Universe() override;
@@ -178,9 +178,9 @@ namespace yli::ontology
             Console* get_active_console() const;
             void set_active_console(Console* console);
 
-            yli::input::InputMethod get_input_method() const;
+            input::InputMethod get_input_method() const;
 
-            yli::render::GraphicsApiBackend get_graphics_api_backend() const;
+            render::GraphicsApiBackend get_graphics_api_backend() const;
             bool get_is_opengl_in_use() const;
             bool get_is_vulkan_in_use() const;
             bool get_is_software_rendering_in_use() const;
@@ -190,12 +190,12 @@ namespace yli::ontology
 
             static std::string eval_string(const std::string& my_string);
 
-            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
+            memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
 
-            yli::event::EventSystem& get_event_system() const;
-            yli::input::InputSystem& get_input_system() const;
-            yli::render::RenderSystem& get_render_system() const;
-            yli::audio::AudioSystem* get_audio_system() const;
+            event::EventSystem& get_event_system() const;
+            input::InputSystem& get_input_system() const;
+            render::RenderSystem& get_render_system() const;
+            audio::AudioSystem* get_audio_system() const;
 
             GenericParentModule& get_parent_of_ecosystems();
             Scene* get_scene() const override;
@@ -268,61 +268,61 @@ namespace yli::ontology
 
             // Public `Entity` delete callbacks.
 
-            static std::optional<yli::data::AnyValue> delete_entity(
+            static std::optional<data::AnyValue> delete_entity(
                     Universe& universe,
                     Entity& entity);
 
             // Public `Entity` naming callbacks.
 
-            static std::optional<yli::data::AnyValue> set_global_name_for_entity(
+            static std::optional<data::AnyValue> set_global_name_for_entity(
                     Entity& entity,
                     const std::string& new_value);
 
-            static std::optional<yli::data::AnyValue> set_local_name_for_entity(
+            static std::optional<data::AnyValue> set_local_name_for_entity(
                     Entity& entity,
                     const std::string& new_value);
 
             // Public `Entity` activate callbacks.
 
-            static std::optional<yli::data::AnyValue> activate_entity(Entity& entity);
+            static std::optional<data::AnyValue> activate_entity(Entity& entity);
 
             // Public YliLisp-related callbacks.
 
-            static std::optional<yli::data::AnyValue> eval(
+            static std::optional<data::AnyValue> eval(
                     Console& console,
                     Universe& universe,
                     const std::vector<std::string>& command_parameters);
 
             // Public data printing callbacks.
 
-            static std::optional<yli::data::AnyValue> info0(
+            static std::optional<data::AnyValue> info0(
                     const Universe& universe,
                     Console& console);
 
-            static std::optional<yli::data::AnyValue> info1(
+            static std::optional<data::AnyValue> info1(
                     const Universe& universe,
                     Console& console,
                     const Entity& entity);
 
-            static std::optional<yli::data::AnyValue> print_entities(
+            static std::optional<data::AnyValue> print_entities(
                     const Universe& universe,
                     Console& console);
 
-            static std::optional<yli::data::AnyValue> print_parent(
+            static std::optional<data::AnyValue> print_parent(
                     const Universe&,
                     Console& console,
                     const Entity& entity);
 
             // Other public callbacks.
 
-            static std::optional<yli::data::AnyValue> screenshot(
+            static std::optional<data::AnyValue> screenshot(
                     Universe& universe,
                     const std::string& filename);
 
             // Public callbacks end here.
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             // Ylikuutio version.
             static const std::string version;
@@ -374,11 +374,11 @@ namespace yli::ontology
             Scene* active_scene     { nullptr };
             Console* active_console { nullptr };
 
-            std::unique_ptr<yli::render::RenderSystem> render_system { nullptr };
+            std::unique_ptr<render::RenderSystem> render_system { nullptr };
 
             const std::string application_name;
 
-            const yli::render::GraphicsApiBackend graphics_api_backend;
+            const render::GraphicsApiBackend graphics_api_backend;
             const std::vector<SDL_DisplayMode> display_modes;
             const std::uint32_t n_displays;
 
@@ -394,7 +394,7 @@ namespace yli::ontology
             SDL_Window* window { nullptr };
             std::uint32_t window_width;
             std::uint32_t window_height;
-            std::string window_title { "Ylikuutio " + Universe::version };
+            std::string window_title { "Ylikuutio " + version };
 
             bool has_mouse_focus { true };
             std::int32_t mouse_x;
@@ -423,8 +423,8 @@ namespace yli::ontology
 
             // variables related to timing of events.
             std::uint32_t max_fps;
-            double last_time_to_display_fps   { yli::time::get_time() };
-            double last_time_for_display_sync { yli::time::get_time() };
+            double last_time_to_display_fps   { time::get_time() };
+            double last_time_for_display_sync { time::get_time() };
             double delta_time                 { NAN };
             std::int32_t number_of_frames          { 0 };
 
