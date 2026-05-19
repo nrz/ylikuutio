@@ -23,11 +23,11 @@
 
 namespace yli::console
 {
-    static const std::uint32_t active               = 1;
-    static const std::uint32_t in_scrollback_buffer = 1 << 1;
-    static const std::uint32_t in_new_input         = 1 << 2;
-    static const std::uint32_t in_historical_input  = 1 << 3;
-    static const std::uint32_t in_temp_input        = 1 << 4;
+    static constexpr std::uint32_t active               = 1;
+    static constexpr std::uint32_t in_scrollback_buffer = 1 << 1;
+    static constexpr std::uint32_t in_new_input         = 1 << 2;
+    static constexpr std::uint32_t in_historical_input  = 1 << 3;
+    static constexpr std::uint32_t in_temp_input        = 1 << 4;
 
     enum ConsoleState : std::uint32_t
     {
