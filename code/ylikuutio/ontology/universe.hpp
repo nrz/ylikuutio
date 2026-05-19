@@ -108,8 +108,8 @@ namespace yli::ontology
             // This method contains the main loop.
             void start_simulation();
 
-            void update_mouse_x(const std::int32_t x_change);
-            void update_mouse_y(const std::int32_t y_change);
+            void update_mouse_x(std::int32_t x_change);
+            void update_mouse_y(std::int32_t y_change);
             void gain_focus();
             void lose_focus();
 
