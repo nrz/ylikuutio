@@ -48,17 +48,17 @@ namespace yli::render
         // 1st attribute buffer: vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
         glVertexAttribPointer(vertex_position_in_screenspace_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-        yli::opengl::enable_vertex_attrib_array(vertex_position_in_screenspace_id);
+        opengl::enable_vertex_attrib_array(vertex_position_in_screenspace_id);
 
         // 2nd attribute buffer: uvs.
         glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
         glVertexAttribPointer(vertex_uv_id, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-        yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
+        opengl::enable_vertex_attrib_array(vertex_uv_id);
 
         // Draw call.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-        yli::opengl::disable_vertex_attrib_array(vertex_position_in_screenspace_id);
-        yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
+        opengl::disable_vertex_attrib_array(vertex_position_in_screenspace_id);
+        opengl::disable_vertex_attrib_array(vertex_uv_id);
     }
 }

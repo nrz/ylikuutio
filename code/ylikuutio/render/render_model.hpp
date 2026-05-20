@@ -32,24 +32,24 @@ namespace yli::render
     // ContainerType = container type, CastType = type in which to cast the stored type into.
     template<typename ContainerType, typename CastType>
         void render_model(
-                const yli::ontology::MeshModule& mesh,
+                const ontology::MeshModule& mesh,
                 ContainerType& renderables_container,
-                const yli::ontology::Scene* const scene)
+                const ontology::Scene* const scene)
         {
             // 1st attribute buffer: vertices.
-            yli::opengl::enable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
+            opengl::enable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(mesh.vertex_uv_id);
+            opengl::enable_vertex_attrib_array(mesh.vertex_uv_id);
 
             // 3rd attribute buffer: normals.
-            yli::opengl::enable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
+            opengl::enable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
 
             // Render this `Species` or `Glyph` by calling `render` function of each `Object`.
-            yli::render::render_children_of_given_scene_or_of_all_scenes<ContainerType&, CastType>(renderables_container, scene);
+            render::render_children_of_given_scene_or_of_all_scenes<ContainerType&, CastType>(renderables_container, scene);
 
-            yli::opengl::disable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(mesh.vertex_uv_id);
+            opengl::disable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
+            opengl::disable_vertex_attrib_array(mesh.vertex_uv_id);
             yli::opengl::disable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
         }
 }

@@ -50,7 +50,7 @@ namespace yli::render
     template<typename ContainerType, typename CastType>
         void render_children_of_given_scene_or_of_all_scenes(
                 ContainerType& child_container,
-                const yli::ontology::Scene* const scene)
+                const ontology::Scene* const scene)
         {
             for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
             {
@@ -58,7 +58,7 @@ namespace yli::render
 
                 if (child_pointer != nullptr && child_pointer->should_render)
                 {
-                    yli::ontology::Scene* const scene_of_child = child_pointer->get_scene();
+                    ontology::Scene* const scene_of_child = child_pointer->get_scene();
 
                     if (scene_of_child == scene || scene == nullptr)
                     {
@@ -86,7 +86,7 @@ namespace yli::render
 
                     if (apprentice_pointer != nullptr && apprentice_pointer->should_render)
                     {
-                        yli::ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
+                        ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
 
                         if (scene_of_apprentice == scene || scene == nullptr)
                         {
