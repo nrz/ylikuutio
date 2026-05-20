@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/apprentice_module.hpp"
 
 // Include standard headers
-#include <type_traits> // std::decay
+#include <type_traits> // std::decay_t
 
 namespace yli::ontology
 {
@@ -31,14 +31,14 @@ namespace yli::ontology
 namespace yli::render
 {
     template<typename T>
-        using SomeIterator = typename std::decay<T>::type::iterator;
+        using SomeIterator = std::decay_t<T>::iterator;
 
     template<typename ContainerType, typename CastType>
         void render_children(ContainerType& child_container)
         {
             for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
             {
-                CastType child_pointer = static_cast<CastType>(*it);
+                auto child_pointer = static_cast<CastType>(*it);
 
                 if (child_pointer != nullptr && child_pointer->should_render)
                 {
@@ -54,13 +54,12 @@ namespace yli::render
         {
             for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
             {
-                CastType child_pointer = static_cast<CastType>(*it);
+                auto child_pointer = static_cast<CastType>(*it);
 
                 if (child_pointer != nullptr && child_pointer->should_render)
                 {
-                    ontology::Scene* const scene_of_child = child_pointer->get_scene();
-
-                    if (scene_of_child == scene || scene == nullptr)
+                    if (ontology::Scene* const scene_of_child = child_pointer->get_scene();
+                        scene_of_child == scene || scene == nullptr)
                     {
                         // Set `Scene` of the child as the chosen `Scene`.
                         child_pointer->render(scene_of_child);
@@ -82,13 +81,12 @@ namespace yli::render
             {
                 if (*it != nullptr)
                 {
-                    CastType apprentice_pointer = static_cast<CastType>(*it);
+                    auto apprentice_pointer = static_cast<CastType>(*it);
 
                     if (apprentice_pointer != nullptr && apprentice_pointer->should_render)
                     {
-                        ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
-
-                        if (scene_of_apprentice == scene || scene == nullptr)
+                        if (ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
+                            scene_of_apprentice == scene || scene == nullptr)
                         {
                             // Set `Scene` of the apprentice as the chosen `Scene`.
                             apprentice_pointer->render(scene_of_apprentice);
