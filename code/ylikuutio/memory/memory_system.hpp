@@ -91,7 +91,7 @@ namespace yli::memory
                     return this->universe_datatype;
                 }
 
-                [[nodiscard]] yli::memory::MemorySystem<TypeEnumType>& get() const
+                [[nodiscard]] MemorySystem<TypeEnumType>& get() const
                 {
                     return const_cast<MemorySystem<TypeEnumType>&>(*this);
                 }
@@ -132,7 +132,7 @@ namespace yli::memory
                     {
                         if (this->has_allocator(type)) [[likely]]
                         {
-                            return static_cast<yli::memory::MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
+                            return static_cast<MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
                         }
 
                         throw std::runtime_error("ERROR: `MemorySystem::get_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
