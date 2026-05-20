@@ -47,7 +47,7 @@ namespace yli::render
     class RenderSystem final
     {
         public:
-            RenderSystem(ontology::Universe* const universe, const RenderSystemStruct& render_system_struct);
+            RenderSystem(ontology::Universe* universe, const RenderSystemStruct& render_system_struct);
 
             RenderSystem(const RenderSystem&) = delete;            // Delete copy constructor.
             RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
@@ -58,44 +58,44 @@ namespace yli::render
             [[nodiscard]] bool setup_context(SDL_Window* window) const;
             [[nodiscard]] bool setup_context() const;
 
-            static void set_swap_interval(const std::int32_t interval);
+            static void set_swap_interval(std::int32_t interval);
 
             static void clear_color_and_depth_buffers();
-            void restore_onscreen_rendering(const std::uint32_t window_width, const std::uint32_t window_height) const;
+            void restore_onscreen_rendering(std::uint32_t window_width, std::uint32_t window_height) const;
             void set_opengl_background_color() const;
 
-            static void adjust_opengl_viewport(const std::uint32_t window_width, const std::uint32_t window_height);
+            static void adjust_opengl_viewport(std::uint32_t window_width, std::uint32_t window_height);
 
             // This function renders everything.
             static void render(const RenderStruct& render_struct);
 
-            void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent, const ontology::Scene* const scene) const;
+            void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent, const ontology::Scene* scene) const;
 
-            static void render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* const scene);
+            static void render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* scene);
 
-            static void render_pipelines(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* const scene);
+            static void render_pipelines(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* scene);
 
             static void render_materials(
                     ontology::GenericMasterModule& master,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_species(
                     ontology::GenericMasterModule& master,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_symbioses(
                     ontology::GenericMasterModule& master,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_holobionts(
                     yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* const scene);
+                    const yli::ontology::Scene* scene);
 
             static void render_bionts(ontology::GenericParentModule& parent);
 
             static void render_shapeshifter_sequences(
                     ontology::GenericParentModule& parent,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_text_2ds(ontology::GenericParentModule& parent);
 
@@ -103,19 +103,19 @@ namespace yli::render
 
             static void render_vector_fonts(
                     ontology::GenericParentModule& parent,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_glyph(
-                    ontology::Glyph* const glyph,
-                    const ontology::Scene* const scene);
+                    ontology::Glyph* glyph,
+                    const ontology::Scene* scene);
 
             static void render_glyphs(
                     ontology::GenericParentModule& parent,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
             static void render_compute_tasks(
                     ontology::GenericParentModule& parent,
-                    const ontology::Scene* const scene);
+                    const ontology::Scene* scene);
 
         private:
             ontology::Universe* const universe      { nullptr };
