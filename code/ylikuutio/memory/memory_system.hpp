@@ -86,17 +86,17 @@ namespace yli::memory
                 MemorySystem(const MemorySystem&) = delete;            // Delete copy constructor.
                 MemorySystem& operator=(const MemorySystem&) = delete; // Delete copy assignment.
 
-                TypeEnumType get_universe_datatype() const
+                [[nodiscard]] TypeEnumType get_universe_datatype() const
                 {
                     return this->universe_datatype;
                 }
 
-                yli::memory::MemorySystem<TypeEnumType>& get() const
+                [[nodiscard]] yli::memory::MemorySystem<TypeEnumType>& get() const
                 {
                     return const_cast<MemorySystem<TypeEnumType>&>(*this);
                 }
 
-                std::size_t get_number_of_allocators() const override
+                [[nodiscard]] std::size_t get_number_of_allocators() const override
                 {
                     return this->memory_allocators.size();
                 }
@@ -110,13 +110,13 @@ namespace yli::memory
                     }
 
                 // TODO: use `TypeEnumType` instead of `int`!
-                bool has_allocator(const int type) const override
+                [[nodiscard]] bool has_allocator(const int type) const override
                 {
                     return this->memory_allocators.contains(type);
                 }
 
                 // TODO: use `TypeEnumType` instead of `int`!
-                GenericMemoryAllocator& get_generic_allocator(const int type) const override
+                [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const int type) const override
                 {
                     if (this->has_allocator(type)) [[likely]]
                     {
@@ -128,7 +128,7 @@ namespace yli::memory
 
                 template<typename T1, typename... Args>
                     // TODO: use `TypeEnumType` instead of `int`!
-                    MemoryAllocator<T1>& get_allocator(const int type) const
+                    [[nodiscard]] MemoryAllocator<T1>& get_allocator(const int type) const
                     {
                         if (this->has_allocator(type)) [[likely]]
                         {
@@ -149,7 +149,7 @@ namespace yli::memory
 
                 template<typename T1, typename... Args>
                     // TODO: use `TypeEnumType` instead of `int`!
-                    GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
+                    [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
                     {
                         if (this->has_allocator(type))
                         {

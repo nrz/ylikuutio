@@ -165,12 +165,12 @@ namespace yli::memory
                     this->number_of_instances--;
                 }
 
-                std::size_t get_storage_id() const
+                [[nodiscard]] std::size_t get_storage_id() const
                 {
                     return this->storage_i;
                 }
 
-                std::size_t get_number_of_instances() const
+                [[nodiscard]] std::size_t get_number_of_instances() const
                 {
                     return this->number_of_instances;
                 }

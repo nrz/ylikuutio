@@ -35,9 +35,9 @@ namespace yli::memory
         public:
             virtual ~GenericMemoryAllocator() = default;
 
-            virtual std::size_t get_datatype() const = 0;
-            virtual std::size_t get_number_of_storages() const = 0;
-            virtual std::size_t get_number_of_instances() const = 0;
+            [[nodiscard]] virtual std::size_t get_datatype() const = 0;
+            [[nodiscard]] virtual std::size_t get_number_of_storages() const = 0;
+            [[nodiscard]] virtual std::size_t get_number_of_instances() const = 0;
 
             virtual void destroy(const ConstructibleModule& constructible_module) noexcept = 0;
     };

@@ -78,17 +78,17 @@ namespace yli::memory
                         return this->storages.back()->build_in(std::forward<Args>(args)...);
                     }
 
-                std::size_t get_datatype() const override
+                [[nodiscard]] std::size_t get_datatype() const override
                 {
                     return this->datatype;
                 }
 
-                std::size_t get_number_of_storages() const override
+                [[nodiscard]] std::size_t get_number_of_storages() const override
                 {
                     return this->storages.size();
                 }
 
-                std::size_t get_number_of_instances() const override
+                [[nodiscard]] std::size_t get_number_of_instances() const override
                 {
                     std::size_t count { 0 };
 
@@ -100,7 +100,7 @@ namespace yli::memory
                     return count;
                 }
 
-                std::size_t get_data_size() const
+                [[nodiscard]] std::size_t get_data_size() const
                 {
                     return DataSize;
                 }
@@ -207,17 +207,17 @@ namespace yli::memory
                         return function_overload;
                     }
 
-                std::size_t get_datatype() const override
+                [[nodiscard]] std::size_t get_datatype() const override
                 {
                     return this->datatype;
                 }
 
-                std::size_t get_number_of_storages() const override
+                [[nodiscard]] std::size_t get_number_of_storages() const override
                 {
                     return this->instances.size();
                 }
 
-                std::size_t get_number_of_instances() const override
+                [[nodiscard]] std::size_t get_number_of_instances() const override
                 {
                     return this->instances.size();
                 }
