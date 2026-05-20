@@ -75,7 +75,7 @@ namespace yli::render
         }
 
     template<typename ContainerType, typename CastType>
-        void render_apprentices(ContainerType& apprentice_container, const yli::ontology::Scene* const scene)
+        void render_apprentices(ContainerType& apprentice_container, const ontology::Scene* const scene)
         {
             // Render apprentices of the given `Scene` (`scene`) or of all `Scene`s.
             for (SomeIterator<ContainerType&> it = apprentice_container.begin(); it != apprentice_container.end(); ++it)
