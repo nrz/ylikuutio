@@ -37,10 +37,10 @@ namespace yli::memory
             [[nodiscard]] virtual std::size_t get_number_of_allocators() const = 0;
 
             // TODO: use `TypeEnumType` instead of `int`!
-            [[nodiscard]] virtual bool has_allocator(const int type) const = 0;
+            [[nodiscard]] virtual bool has_allocator(int type) const = 0;
 
             // TODO: use `TypeEnumType` instead of `int`!
-            [[nodiscard]] virtual GenericMemoryAllocator& get_generic_allocator(const int type) const = 0;
+            [[nodiscard]] virtual GenericMemoryAllocator& get_generic_allocator(int type) const = 0;
 
             virtual void destroy(const ConstructibleModule& constructible_module) = 0;
     };
