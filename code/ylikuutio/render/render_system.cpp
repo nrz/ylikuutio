@@ -89,7 +89,7 @@ namespace yli::render
 
             // Disable vertical sync.
             // TODO: add option to enable/disable vsync in the console.
-            this->set_swap_interval(0);
+            set_swap_interval(0);
 
             // Initialize GLEW.
             opengl::init_glew();
@@ -170,7 +170,7 @@ namespace yli::render
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Adjust viewport for the default framebuffer.
-        this->adjust_opengl_viewport(window_width, window_height);
+        adjust_opengl_viewport(window_width, window_height);
     }
 
     void RenderSystem::set_opengl_background_color() const
@@ -225,7 +225,7 @@ namespace yli::render
 
             if (ecosystem != nullptr && ecosystem->should_render) [[likely]]
             {
-                this->render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
+                render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
             }
         }
     }
