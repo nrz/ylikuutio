@@ -118,14 +118,14 @@ namespace yli::render
                     const ontology::Scene* scene);
 
         private:
-            ontology::Universe* const universe      { nullptr };
+            ontology::Universe* const universe { nullptr };
 
-            SDL_GLContext context                   { nullptr };
-            SDL_Window* hidden_sdl_window           { nullptr };
+            SDL_GLContext context              { nullptr };
+            SDL_Window* hidden_sdl_window      { nullptr };
             std::string hidden_window_title;
             std::uint32_t hidden_window_width  { 0 };
             std::uint32_t hidden_window_height { 0 };
-            bool is_hidden_window_fullscreen { false };
+            bool is_hidden_window_fullscreen   { false };
 
             float background_red   { 0.0f };
             float background_green { 0.0f };
