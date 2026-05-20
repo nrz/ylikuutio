@@ -426,7 +426,7 @@ namespace yli::ontology
             double last_time_to_display_fps   { time::get_time() };
             double last_time_for_display_sync { time::get_time() };
             double delta_time                 { NAN };
-            std::int32_t number_of_frames          { 0 };
+            std::int32_t number_of_frames     { 0 };
 
             // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
             std::uint32_t last_time_before_reading_keyboard    { std::numeric_limits<std::uint32_t>::max() };
