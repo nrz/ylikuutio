@@ -50,7 +50,7 @@ namespace yli::render
 
             opengl::disable_vertex_attrib_array(mesh.vertex_position_modelspace_id);
             opengl::disable_vertex_attrib_array(mesh.vertex_uv_id);
-            yli::opengl::disable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
+            opengl::disable_vertex_attrib_array(mesh.vertex_normal_modelspace_id);
         }
 }
 
