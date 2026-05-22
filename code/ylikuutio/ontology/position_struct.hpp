@@ -25,8 +25,8 @@ namespace yli::ontology
 {
     struct PositionStruct
     {
-        HorizontalAlignment horizontal_alignment { HorizontalAlignment::HORIZONTAL_CENTER };
-        VerticalAlignment vertical_alignment     { VerticalAlignment::VERTICAL_CENTER };
+        HorizontalAlignment horizontal_alignment { HORIZONTAL_CENTER };
+        VerticalAlignment vertical_alignment     { VERTICAL_CENTER };
         float x                                  { 0 };
         float y                                  { 0 };
     };

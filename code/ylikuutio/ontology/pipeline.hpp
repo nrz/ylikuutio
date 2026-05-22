@@ -64,13 +64,13 @@ namespace yli::ontology
         public:
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
                     Pipeline& pipeline,
                     Ecosystem& new_parent);
 
             // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Pipeline& pipeline,
                     Scene& new_parent);
 

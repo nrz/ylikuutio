@@ -55,7 +55,7 @@ namespace yli::ontology
     {
         private:
             InputMode(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const InputModeStruct& input_mode_struct,
                     ParentOfInputModesModule* parent_module,
