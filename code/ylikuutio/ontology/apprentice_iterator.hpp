@@ -38,7 +38,7 @@ namespace yli::ontology
             using pointer           = Entity**;
             using reference         = Entity*&;
 
-            explicit ApprenticeIterator(std::vector<ApprenticeModule*>::iterator it)
+            explicit ApprenticeIterator(const std::vector<ApprenticeModule*>::iterator it)
                 : it { it }
             {
             }
@@ -50,7 +50,7 @@ namespace yli::ontology
             ApprenticeIterator& operator=(const ApprenticeIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            ApprenticeIterator& operator=(std::vector<ApprenticeModule*>::iterator it)
+            ApprenticeIterator& operator=(const std::vector<ApprenticeModule*>::iterator it)
             {
                 this->it = it;
                 return *this;
